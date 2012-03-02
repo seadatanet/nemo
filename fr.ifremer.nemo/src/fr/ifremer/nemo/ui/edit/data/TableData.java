@@ -2,16 +2,11 @@ package fr.ifremer.nemo.ui.edit.data;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.TableEditor;
-import org.eclipse.swt.events.SelectionAdapter;
-import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.Rectangle;
-import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Menu;
@@ -181,23 +176,27 @@ public class TableData
         
         col =
             new TableDataColumn(COL_IS_STRING, colNbById.get(COL_IS_STRING),
-                    Messages.table_label_is_string, 25, isCheckBoxWritable(), false);
-        
+                Messages.table_label_is_string, 25, true,
+                false);
+
         columnsMap.put(col.pos, col);
         col =
                 new TableDataColumn(COL_CODE, colNbById.get(COL_CODE),
                         Messages.table_label_code, 100, false, true);
         columnsMap.put(col.pos, col);
         col =
-				new TableDataColumn(COL_USERLABEL, colNbById.get(COL_USERLABEL),
-						Messages.table_label_userlabel, 100, isLabelWritable(), false);
+                new TableDataColumn(COL_USERLABEL,
+                    colNbById.get(COL_USERLABEL),
+                        Messages.table_label_userlabel, 100, isLabelWritable(),
+                    false);
         columnsMap.put(col.pos, col);
         col =
                 new TableDataColumn(COL_UNIT, colNbById.get(COL_UNIT),
                         Messages.table_label_unit, 90, false, true);
         columnsMap.put(col.pos, col);
         col =
-				new TableDataColumn(COL_CONVERSION, colNbById.get(COL_CONVERSION),
+                new TableDataColumn(COL_CONVERSION, colNbById
+                    .get(COL_CONVERSION),
                         Messages.label_conversion, 70, true, false);
         columnsMap.put(col.pos, col);
         col =
@@ -221,8 +220,10 @@ public class TableData
                         Messages.table_label_valueIn, 50, true, false);
         columnsMap.put(col.pos, col);
         col =
-				new TableDataColumn(COL_VALUE_OUT, colNbById.get(COL_VALUE_OUT),
-						Messages.table_label_valueOut, 50, isValueOutWritable(), false);
+                new TableDataColumn(COL_VALUE_OUT,
+                    colNbById.get(COL_VALUE_OUT),
+                        Messages.table_label_valueOut, 50,
+                    isValueOutWritable(), false);
         columnsMap.put(col.pos, col);
         col =
                 new TableDataColumn(COL_TEST_IN, colNbById.get(COL_TEST_IN),
@@ -233,7 +234,8 @@ public class TableData
                         Messages.table_label_testOut, 50, false, false);
         columnsMap.put(col.pos, col);
         col =
-				new TableDataColumn(COL_START_FLAG, colNbById.get(COL_START_FLAG),
+                new TableDataColumn(COL_START_FLAG, colNbById
+                    .get(COL_START_FLAG),
                         Messages.table_label_startFlag, 50, false, false);
         columnsMap.put(col.pos, col);
         col =
@@ -241,7 +243,8 @@ public class TableData
                         Messages.table_label_endFlag, 50, false, false);
         columnsMap.put(col.pos, col);
         col =
-				new TableDataColumn(COL_UNIT_CODE, colNbById.get(COL_UNIT_CODE),
+                new TableDataColumn(COL_UNIT_CODE,
+                    colNbById.get(COL_UNIT_CODE),
                         Global.EMPTY_STRING, 0, false, false);
         columnsMap.put(col.pos, col);
     }
@@ -303,9 +306,12 @@ public class TableData
      */
     public void creationTable()
     {
+        // TODO BGT test check ici
         myTable =
                 new Table(Nemo.getInstance().getViewMain().getEditDataForm()
-                        .getCompositeData(), SWT.FULL_SELECTION | SWT.H_SCROLL | SWT.H_SCROLL);
+                        .getCompositeData(), SWT.CHECK | SWT.FULL_SELECTION
+                        | SWT.H_SCROLL
+                        | SWT.H_SCROLL);
 
         myTable.setHeaderVisible(true);
         myTable.setLinesVisible(true);
@@ -315,19 +321,16 @@ public class TableData
             TableColumn tableColumn = new TableColumn(myTable, SWT.NONE);
             tableColumn.setWidth(columnsMap.get(i).width);
             tableColumn.setText(columnsMap.get(i).label.toUpperCase());
-            
+
             if (columnsMap.get(i).id.equals(COL_USERLABEL))
             {
-                // columnsMap.get(i).setWritable(isLabelWritable());
                 columnsMap.get(i).enable(isLabelWritable());
             }
-            if(columnsMap.get(i).id.equals(COL_IS_STRING))
+            if (columnsMap.get(i).id.equals(COL_IS_STRING))
             {
-                columnsMap.get(i).enable(isCheckBoxWritable());
+                tableColumn.setToolTipText(Messages.table_checkColumn_tooltip);
             }
-            
-            
-            
+
             if (columnsMap.get(i).id.equals(COL_VALUE_OUT))
             {
                 // columnsMap.get(i).setWritable(isLabelWritable());
@@ -363,7 +366,8 @@ public class TableData
 
         {
             iniTypesWSP091();
-		} else
+        }
+        else
 
         {
             iniTypesWSP021();
@@ -482,7 +486,50 @@ public class TableData
 
         Point size = table.computeSize(SWT.DEFAULT, SWT.DEFAULT);
         table.setSize(size);
-
+        /**
+         * listener pour la case a cocher 10755
+         */
+        table.addListener(SWT.Selection, new Listener() {
+            public void handleEvent(Event event)
+            {
+               
+                if (event.detail == SWT.CHECK)
+                {
+                    if (((TableItem) event.item).getChecked())
+                {
+                    Utils.messageOK(Messages.edit_data_parameterIsText);
+                  
+                    ((TableItem) event.item).setData(COL_CONVERSION,
+                        ((TableItem) event.item).getText(colNbById
+                            .get(COL_CONVERSION)));
+                    ((TableItem) event.item).setData(COL_UNIT,
+                        ((TableItem) event.item).getText(colNbById
+                            .get(COL_UNIT)));
+                    ((TableItem) event.item).setData(COL_FORMAT,
+                        ((TableItem) event.item).getText(colNbById
+                            .get(COL_FORMAT)));
+                    ((TableItem) event.item).setText(colNbById
+                        .get(COL_CONVERSION), "");
+                    ((TableItem) event.item).setText(colNbById.get(COL_UNIT),
+                        "");
+                    ((TableItem) event.item).setText(colNbById.get(COL_FORMAT),
+                        "");
+                }
+                else
+                {
+                    Utils.messageOK(Messages.edit_data_parameterIsNumeric);
+                  
+                    ((TableItem) event.item).setText(colNbById
+                        .get(COL_CONVERSION), (String) ((TableItem) event.item)
+                        .getData(COL_CONVERSION));
+                    ((TableItem) event.item).setText(colNbById.get(COL_UNIT),
+                        (String) ((TableItem) event.item).getData(COL_UNIT));
+                    ((TableItem) event.item).setText(colNbById.get(COL_FORMAT),
+                        (String) ((TableItem) event.item).getData(COL_FORMAT));
+                }
+            }
+        }
+        });
         /**
          * Listener pour le clic sur la table les colonnes modifiables sont
          * format entree sortie conversion
@@ -504,12 +551,14 @@ public class TableData
                 if (event.button == 1)
                 {
                     int indice = myTable.getSelectionIndex();
-                    if(indice>=0)
+                    if (indice >= 0)
                     {
                         selectInViewFile(
-                                Integer.valueOf(myTable.getItem(indice).getText(
+                                Integer.valueOf(myTable.getItem(indice)
+                                    .getText(
                                         colNbById.get(COL_START))),
-                                Integer.valueOf(myTable.getItem(indice).getText(
+                                Integer.valueOf(myTable.getItem(indice)
+                                    .getText(
                                         colNbById.get(COL_END))));
                     }
                 }
@@ -529,22 +578,27 @@ public class TableData
 
                 while (index < table.getItemCount())
                 {
+
                     boolean visible = false;
                     final TableItem itemTmp = table.getItem(index);
-
+                    System.out.println(itemTmp.getText(1));
+                    System.out.println(itemTmp.getChecked());
                     for (int colNumber = 0; colNumber < table.getColumnCount(); colNumber++)
                     {
                         // edition des colonnes autorisées en écriture
                         // uniquement
 
-                        if (columnsMap.get(colNumber).writable)
+                        if (isCellWritable(colNumber, itemTmp))
                         {
                             Rectangle rect = itemTmp.getBounds(colNumber);
                             if (rect.contains(pt))
                             {
+                                System.out.println(itemTmp.getText());
+                                System.out.println(itemTmp.getChecked());
                                 final int column = colNumber;
                                 final Text text = new Text(table, SWT.NONE);
                                 text.setText(itemTmp.getText(colNumber));
+                                System.out.println(itemTmp.getText());
 
                                 /**
                                  * Listener sur le texte d'une cellule
@@ -611,7 +665,8 @@ public class TableData
         {
             public void handleEvent(Event event)
             {
-				if (event.keyCode == SWT.ARROW_DOWN || event.keyCode == SWT.ARROW_UP)
+                if (event.keyCode == SWT.ARROW_DOWN
+                        || event.keyCode == SWT.ARROW_UP)
                 {
                     int indice = myTable.getSelectionIndex();
                     selectInViewFile(
@@ -622,7 +677,7 @@ public class TableData
                 }
             }
         });
-        
+
         /**
          * *********************************************************************
          * ******* creation du menu
@@ -783,7 +838,8 @@ public class TableData
                 table.forceFocus();
                 Utils.injectData(Nemo.getInstance().getViewMain()
                         .getEditDataForm().getTextAreaData(),
-						colNbById.get(COL_START_FLAG), colNbById.get(COL_END_FLAG));
+                        colNbById.get(COL_START_FLAG), colNbById
+                            .get(COL_END_FLAG));
 
                 Utils.invalidEtapes();
             }
@@ -831,7 +887,7 @@ public class TableData
         Utils.forceMenu(table, menu);
 
         // agrandissement de la table
-       Nemo.getInstance().getViewMain().getEditDataForm().getCompositeData()
+        Nemo.getInstance().getViewMain().getEditDataForm().getCompositeData()
                 .getParent().layout(true, true);
         /*table.setLayout(new FillLayout());*/
         table.redraw();
@@ -868,7 +924,7 @@ public class TableData
         // nouvelle creation des items
         for (int i = 0; i < types.size(); i++)
         {
-            
+
             final TableItem item = new TableItem(myTable, SWT.NONE);
             String code;
             String label = "";
@@ -879,7 +935,8 @@ public class TableData
                         types.get(i).getEntryKeyP011() + Global.SEP
                                 + types.get(i).getEntryTermP011();
 
-			} else
+            }
+            else
             {
                 code = types.get(i).getFormattedCodeAndName();
             }
@@ -895,12 +952,12 @@ public class TableData
                     if (userLabel != null)
                     {
                         label = userLabel;
-					}
-				}
-			} 
+                    }
+                }
+            }
 
             item.setText(new String[]
-            {null,code, label, types.get(i).getUnite(),
+            {null, code, label, types.get(i).getUnite(),
                     types.get(i).getConversion(), types.get(i).getTest(),
                     String.valueOf(types.get(i).getDebut()),
                     String.valueOf(types.get(i).getFin()),
@@ -910,64 +967,8 @@ public class TableData
                     types.get(i).getFinFlag(),
                     // FAE 6542
                     types.get(i).getUniteCode()});
-            
-            //FAE 10755 ajout d'un check box 
-            //pour definir si le parametre et un chaine ou une valeur numerique
-            final TableEditor editorCheck = new TableEditor(myTable);
-            final Button check= new Button (myTable, SWT.CHECK);
-            if (types.get(i).isText())
-                check.setToolTipText(Messages.table_tooltip_1);
-            else
-                check.setToolTipText(Messages.table_tooltip_3);
-            check.setSelection(types.get(i).isText());
-            check.pack();
-            
-            final int index =i;
-            check.addSelectionListener( new SelectionAdapter()
-            {
-                @Override
-                public void widgetSelected(SelectionEvent g)
-                {
-                    Button checkButton = (Button)g.widget;
-                    if(checkButton.getSelection())
-                    {
-                      checkButton.setToolTipText(Messages.table_tooltip_1);
-                      Utils.messageOK(Messages.table_tooltip_2);
-                      
-                      //TODO : a voir pour desactivation du champs ou autre
-                      item.setText(colNbById.get(COL_UNIT), "");
-                      item.setText(colNbById.get(COL_CONVERSION), "");
-                      item.setText(colNbById.get(COL_FORMAT), "");
-                    }
-                    else
-                    {
-                        checkButton.setToolTipText(Messages.table_tooltip_3);
-                        Utils.messageOK(Messages.table_tooltip_4);
-                        
-                        //TODO : a voir pour activation du champs ou autre
-                        //recuperation du paramatre dans la liste pour restauré les valeurs
-                        for (int i = 0; i < typesWS.size(); i++)
-                        {
-                            
-                            
-                            String regexp = "^.*" + types.get(index).getUniteCode() + ".*$"; //$NON-NLS-1$ //$NON-NLS-2$
-                            Pattern p = Pattern.compile(regexp, Pattern.CASE_INSENSITIVE);
-                            Matcher m = p.matcher(typesWS.get(i).getFormattedCodeAndName());
-                            if (m.matches())
-                            {
-                                item.setText(colNbById.get(COL_UNIT), typesWS.get(i).getUnite());
-                                item.setText(colNbById.get(COL_CONVERSION), typesWS.get(i).getConversion());
-                                item.setText(colNbById.get(COL_FORMAT), typesWS.get(i).getFormat());
-                            }
-                        }
-                    }
-                        
-                }
-            });
-            editorCheck.minimumWidth = check.getSize().x;
-            editorCheck.horizontalAlignment = SWT.LEFT;
-            editorCheck.setEditor(check,item, colNbById.get(COL_IS_STRING));
-            editorCheck.getEditor().setVisible(isCheckBoxWritable());
+
+            item.setChecked(types.get(i).isText());
         }
 
     }
@@ -1276,7 +1277,8 @@ public class TableData
                                             colNbById.get(COL_START))) - 1,
                                     Integer.valueOf(myTable.getItem(i).getText(
                                             colNbById.get(COL_END)))).trim();
-				} catch (Exception e)
+                }
+                catch (Exception e)
                 {
                     System.out.println("erreur substring "
                             + myTable.getItem(i).getText(
@@ -1292,7 +1294,8 @@ public class TableData
                 try
                 {
                     String formatString =
-							myTable.getItem(i).getText(colNbById.get(COL_FORMAT));
+                            myTable.getItem(i).getText(
+                                colNbById.get(COL_FORMAT));
                     String type =
                             formatString.substring(formatString.length() - 1);
 
@@ -1310,50 +1313,60 @@ public class TableData
                         // Float ou Decimal ?
                         if (type.equals("f") || type.equals("F")) { //$NON-NLS-1$//$NON-NLS-2$
                             fmOut =
-									String.format(java.util.Locale.US,
+                                    String
+                                        .format(java.util.Locale.US,
                                             formatString,
-											Float.parseFloat(outputDefaultValue));
-						} else if (type.equals("d") || type.equals("D")) { //$NON-NLS-1$ //$NON-NLS-2$
+                                            Float
+                                                .parseFloat(outputDefaultValue));
+                        }
+                        else if (type.equals("d") || type.equals("D")) { //$NON-NLS-1$ //$NON-NLS-2$
                             fmOut =
                                     String.format(java.util.Locale.US,
                                             formatString,
-											Integer.parseInt(outputDefaultValue));
+                                            Integer
+                                                .parseInt(outputDefaultValue));
                         }
 
                         if (fmOut.equals(outputDefaultValue))
                         {
                             // ok
                             resultat = fmOut;
-						} else
+                        }
+                        else
                         {
                             // erreur
                             ok = false;
                             resultat = Messages.error;
                         }
 
-					} else
+                    }
+                    else
                     {
                         // valeur normale, on applique la formule puis formatage
                         org.nfunk.jep.JEP parser = new org.nfunk.jep.JEP();
                         parser.addStandardFunctions();
                         parser.addStandardConstants();
                         // FAE 11354
-                        String defaultValue = myTable.getItem(i).getText(colNbById.get(COL_VALUE_OUT));
-                        Float selectionValue = Float.valueOf(defaultValue.trim());
+                        String defaultValue =
+                            myTable.getItem(i).getText(
+                                colNbById.get(COL_VALUE_OUT));
+                        Float selectionValue =
+                            Float.valueOf(defaultValue.trim());
                         try
                         {
                             selectionValue = Float.valueOf(selection);
                         }
                         catch (NumberFormatException e)
                         {
-                            //FAE 10755 - on leve une exception si la chaine n'est pas une valeur ou vide.
-                            if(defaultValue.trim().length()>0)
+                            // FAE 10755 - on leve une exception si la chaine
+// n'est pas une valeur ou vide.
+                            if (defaultValue.trim().length() > 0)
                             {
                                 ok = false;
                                 Utils.messageErreur(Messages.Etape_133);
                                 throw new NumberFormatException();
                             }
-                                
+
                         }
                         parser.addVariable("x", selectionValue); //$NON-NLS-1$
                         parser.parseExpression(myTable.getItem(i).getText(
@@ -1364,47 +1377,52 @@ public class TableData
                             resultat =
                                     String.format(
                                             myTable.getItem(i).getText(
-													colNbById.get(COL_FORMAT)), new Float(
+                                                    colNbById.get(COL_FORMAT)),
+                                        new Float(
                                                     resultJEP));
-						} else if (type.equals("d") || type.equals("D")) { //$NON-NLS-1$ //$NON-NLS-2$
+                        }
+                        else if (type.equals("d") || type.equals("D")) { //$NON-NLS-1$ //$NON-NLS-2$
                             resultat =
                                     String.format(
                                             myTable.getItem(i).getText(
                                                     colNbById.get(COL_FORMAT)),
-											(Double.valueOf(resultJEP)).intValue());
-						} else
+                                            (Double.valueOf(resultJEP))
+                                                .intValue());
+                        }
+                        else
                         {
                             // error
                             ok = false;
                             resultat = Messages.error;
                         }
                     }
-				} catch (Exception e)
+                }
+                catch (Exception e)
                 {
                     ok = false;
                     resultat = Messages.error;
-                    
-                    //e.printStackTrace();
-                } 
+
+                    // e.printStackTrace();
+                }
             }
             else
             {
-                //FAE 10755 - gestion de la chaine de charactere
+                // FAE 10755 - gestion de la chaine de charactere
                 MediaDomain mediaDomain =
                     Nemo.getInstance().getDomain().getMedia();
                 ligne = Utils.lignesBrutes.get(mediaDomain.getModel()
                             .getFileHeader()
                             + mediaDomain.getStationHeaderNumberLines());
-                
+
                 resultat = ligne.substring(
                     Integer.valueOf(myTable.getItem(i).getText(
                         colNbById.get(COL_START))) - 1,
-                Integer.valueOf(myTable.getItem(i).getText(
+                    Integer.valueOf(myTable.getItem(i).getText(
                         colNbById.get(COL_END)))).trim();
             }
-            
+
             types.get(i).setTest(resultat);
-            
+
             if ((!myTable.getItem(i).getText(colNbById.get(COL_START_FLAG))
                     .equals(Global.EMPTY_STRING))
                     && (!myTable.getItem(i)
@@ -1415,9 +1433,11 @@ public class TableData
                 MediaDomain mediaDomain =
                         Nemo.getInstance().getDomain().getMedia();
                 ligne =
-						Utils.lignesBrutes.get(mediaDomain.getModel()
+                        Utils.lignesBrutes
+                            .get(mediaDomain.getModel()
                                 .getFileHeader()
-								+ mediaDomain.getStationHeaderNumberLines() + 1);
+                                    + mediaDomain.getStationHeaderNumberLines()
+                                    + 1);
 
                 selection =
                         ligne.substring(
@@ -1439,14 +1459,16 @@ public class TableData
                             .equals(types.get(i).getTestIn()))
                     {
                         flagSDN =
-								fr.ifremer.nemo.util.Utils.extraitCode(flags.get(j)
+                                fr.ifremer.nemo.util.Utils.extraitCode(flags
+                                    .get(j)
                                         .getSdn());
                         break;
                     }
                 }
 
                 types.get(i).setTestOut(flagSDN);
-			} else
+            }
+            else
             {
                 types.get(i).setTestIn(Global.EMPTY_STRING);
                 types.get(i).setTestOut(Global.EMPTY_STRING);
@@ -1511,21 +1533,27 @@ public class TableData
                             .equals(Global.EMPTY_STRING))
             {
                 types.get(i).setDebutFlag(
-						myTable.getItem(i).getText(colNbById.get(COL_START_FLAG)));
-				types.get(i).setFinFlag(
+                        myTable.getItem(i).getText(
+                            colNbById.get(COL_START_FLAG)));
+                types
+                    .get(i)
+                    .setFinFlag(
                         myTable.getItem(i).getText(colNbById.get(COL_END_FLAG)));
             }
             // FAE 6542
             types.get(i).setUniteCode(
                     myTable.getItem(i).getText(colNbById.get(COL_UNIT_CODE)));
-            
+
             types.get(i).setIsText(isSelected(i));
-            
+            System.out.println(types.get(i).getEntryKey() + "set is text: "
+                    + isSelected(i));
+
         }
     }
+
     public boolean isSelected(int index)
     {
-        return ((Button) myTable.getChildren()[index]).getSelection();
+        return myTable.getItem(index).getChecked();
     }
 
     public ArrayList<TypeData> getTypesWS()
@@ -1548,9 +1576,11 @@ public class TableData
         if (myParameterFilteredTable == null)
         {
             FilteredTableFactory filteredFactory =
-					Nemo.getInstance().getViewMain().getMyFilteredTableFactory();
+                    Nemo.getInstance().getViewMain()
+                        .getMyFilteredTableFactory();
             myParameterFilteredTable =
-					(ParameterFilteredTable) filteredFactory.go(Nemo.getInstance()
+                    (ParameterFilteredTable) filteredFactory.go(Nemo
+                        .getInstance()
                             .getViewMain().getEditDataForm().getCompositeData()
                             .getParent(), Global.PARAMETER, null);
         }
@@ -1626,4 +1656,27 @@ public class TableData
                 .setSelection(debut - 1, fin);
     }
 
+    private boolean isCellWritable(int colNumber, TableItem itemTmp)
+    {
+        boolean isWritable = false;
+        if (columnsMap.get(colNumber).writable)
+        {
+            // case where parameter is type string
+            if (itemTmp.getChecked())
+            {
+                isWritable =
+                    !
+                    (columnsMap.get(colNumber).id.equals(COL_FORMAT)
+                            || columnsMap.get(colNumber).id
+                                .equals(COL_CONVERSION)
+                         || columnsMap.get(colNumber).id.equals(COL_UNIT));
+            }
+            else
+            {
+                isWritable = true;
+            }
+        }
+
+        return isWritable;
+    }
 }
