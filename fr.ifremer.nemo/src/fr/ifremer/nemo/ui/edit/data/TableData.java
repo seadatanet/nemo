@@ -1421,7 +1421,7 @@ public class TableData
                         String defaultValue =
                             myTable.getItem(i).getText(
                                 colNbById.get(COL_VALUE_OUT));
-                        Float selectionValue = (float) 0.0;
+                        Float selectionValue = Float.valueOf(defaultValue);
 // =
 // Float.valueOf(defaultValue.trim());
                         try
@@ -1430,14 +1430,9 @@ public class TableData
                         }
                         catch (NumberFormatException e)
                         {
-                            // FAE 10755 - on leve une exception si la chaine
-// n'est pas une valeur ou vide.
-                            if (defaultValue.trim().length() > 0)
-                            {
-                                ok = false;
-                                Utils.messageErreur(Messages.Etape_133);
-                                throw new NumberFormatException();
-                            }
+                            // FAE 10755 - on met la valeur par defaut si la
+// valeur selectionnee est vide
+                            selectionValue = Float.valueOf(defaultValue);
 
                         }
                         parser.addVariable("x", selectionValue); //$NON-NLS-1$
