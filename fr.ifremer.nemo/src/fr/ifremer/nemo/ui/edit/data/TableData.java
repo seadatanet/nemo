@@ -349,6 +349,7 @@ public class TableData
             if (columnsMap.get(i).id.equals(COL_IS_STRING))
             {
                 tableColumn.setToolTipText(Messages.table_checkColumn_tooltip);
+                tableColumn.setResizable(false);
             }
 
             if (columnsMap.get(i).id.equals(COL_VALUE_OUT))
@@ -563,15 +564,19 @@ public class TableData
                 // clic 3e bouton (=clic droit): comportement par defaut
                 if (event.button == 3)
                 {
-                    Point pt = new Point(event.x, event.y);
-                    TableItem itemTmp = table.getItem(pt);
-                    table.getMenu()
-                        .getItem(menuMap.get(MENU_ITEM_SELECTFORMAT))
-                        .setEnabled(
-                            itemTmp.getChecked());
-                    table.getMenu().getItem(
-                        menuMap.get(MENU_ITEM_SELECTUNIT)).setEnabled(
-                            itemTmp.getChecked());
+                    if (Nemo.getInstance().getViewMain().getMyRulesManager()
+                            .getMyDataListType() == DataListTypeEnum.P011_VIA_P021)
+                    {
+                        Point pt = new Point(event.x, event.y);
+                        TableItem itemTmp = table.getItem(pt);
+                        table.getMenu()
+                            .getItem(menuMap.get(MENU_ITEM_SELECTFORMAT))
+                            .setEnabled(
+                                !itemTmp.getChecked());
+                        table.getMenu().getItem(
+                            menuMap.get(MENU_ITEM_SELECTUNIT)).setEnabled(
+                            !itemTmp.getChecked());
+                    }
                     return;
                 }
 
