@@ -517,38 +517,38 @@ public class TableData
                 if (event.detail == SWT.CHECK)
                 {
                     if (((TableItem) event.item).getChecked())
-                {
-                    Utils.messageOK(Messages.edit_data_parameterIsText);
-
-                    ((TableItem) event.item).setData(COL_CONVERSION,
-                        ((TableItem) event.item).getText(colNbById
-                            .get(COL_CONVERSION)));
-                    ((TableItem) event.item).setData(COL_UNIT,
-                        ((TableItem) event.item).getText(colNbById
-                            .get(COL_UNIT)));
-                    ((TableItem) event.item).setData(COL_FORMAT,
-                        ((TableItem) event.item).getText(colNbById
-                            .get(COL_FORMAT)));
-                    ((TableItem) event.item).setText(colNbById
-                        .get(COL_CONVERSION), "");
-                    ((TableItem) event.item).setText(colNbById.get(COL_UNIT),
-                        "");
-                    ((TableItem) event.item).setText(colNbById.get(COL_FORMAT),
-                        "");
+                    {
+                        Utils.messageOK(Messages.edit_data_parameterIsText);
+    
+                        ((TableItem) event.item).setData(COL_CONVERSION,
+                            ((TableItem) event.item).getText(colNbById
+                                .get(COL_CONVERSION)));
+                        ((TableItem) event.item).setData(COL_UNIT,
+                            ((TableItem) event.item).getText(colNbById
+                                .get(COL_UNIT)));
+                        ((TableItem) event.item).setData(COL_FORMAT,
+                            ((TableItem) event.item).getText(colNbById
+                                .get(COL_FORMAT)));
+                        ((TableItem) event.item).setText(colNbById
+                            .get(COL_CONVERSION), "");
+                        ((TableItem) event.item).setText(colNbById.get(COL_UNIT),
+                            "");
+                        ((TableItem) event.item).setText(colNbById.get(COL_FORMAT),
+                            "");
+                    }
+                    else
+                    {
+                        Utils.messageOK(Messages.edit_data_parameterIsNumeric);
+    
+                        ((TableItem) event.item).setText(colNbById
+                            .get(COL_CONVERSION), (String) ((TableItem) event.item)
+                            .getData(COL_CONVERSION));
+                        ((TableItem) event.item).setText(colNbById.get(COL_UNIT),
+                            (String) ((TableItem) event.item).getData(COL_UNIT));
+                        ((TableItem) event.item).setText(colNbById.get(COL_FORMAT),
+                            (String) ((TableItem) event.item).getData(COL_FORMAT));
+                    }
                 }
-                else
-                {
-                    Utils.messageOK(Messages.edit_data_parameterIsNumeric);
-
-                    ((TableItem) event.item).setText(colNbById
-                        .get(COL_CONVERSION), (String) ((TableItem) event.item)
-                        .getData(COL_CONVERSION));
-                    ((TableItem) event.item).setText(colNbById.get(COL_UNIT),
-                        (String) ((TableItem) event.item).getData(COL_UNIT));
-                    ((TableItem) event.item).setText(colNbById.get(COL_FORMAT),
-                        (String) ((TableItem) event.item).getData(COL_FORMAT));
-                }
-            }
         }
         });
         /**
@@ -1029,7 +1029,7 @@ public class TableData
 
             item.setText(new String[]
             {null, code, label, types.get(i).getUnite(),
-                    types.get(i).getConversion(), types.get(i).getTest(),
+                    (types.get(i).isText()? null: types.get(i).getConversion()), types.get(i).getTest(),
                     String.valueOf(types.get(i).getDebut()),
                     String.valueOf(types.get(i).getFin()),
                     types.get(i).getFormat(), types.get(i).getEntree(),
