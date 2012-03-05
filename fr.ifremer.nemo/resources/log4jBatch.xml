@@ -34,6 +34,18 @@
 		</layout>
 	</appender>
 	
+	<appender name="guiFile" class="org.apache.log4j.RollingFileAppender">
+		<!--  Nom du fichier -->
+		<param name="File" value="./Logs/nemoGui.log" />
+		<!-- Taille max pour ce fichier -->
+		<param name="MaxFileSize" value="512KB" />
+		<!-- Nombre max de fichiers de logs. -->
+		<param name="MaxBackupIndex" value="5" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d [%t] %-5p %c / %m%n"  />
+		</layout>
+	</appender>
+	
 	<appender name="junits" class="org.apache.log4j.ConsoleAppender">
 		<!-- Format des traces <param name="ConversionPattern" value=" ___ %C{1} %M   " />-->
 		<layout class="org.apache.log4j.PatternLayout">
@@ -44,6 +56,10 @@
 	<logger name="nemoJunits" additivity="true">
 		<appender-ref ref="junits" />
 		<appender-ref ref="junitsFile" />
+	</logger>
+	
+	<logger name="nemoGui" additivity="true">
+		<appender-ref ref="guiFile" />
 	</logger>
 	
 	<logger name="nemoBatch" additivity="true">
