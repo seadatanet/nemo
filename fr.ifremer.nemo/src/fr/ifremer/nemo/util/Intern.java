@@ -145,6 +145,7 @@ public class Intern extends NLS {
     public static String DURATION;
     public static String DISTANCETOBOTTOM;
 	
+    public static String TEXT;
 	static {
 		// initialize resource bundle
 		NLS.initializeMessages(BUNDLE_NAME, Intern.class);

@@ -517,13 +517,13 @@ public class Parameter extends AbstractModel
 		_unit = x;
 	}
 
-	public String getOutputCode(Conversion c, boolean lastParam)
+	public String getOutputCode(Conversion c, boolean lastParam, Integer parameterSize, Boolean isText)
 	{
 		String code = null;
 		switch (c)
 		{
 		case ODV:
-			code = getOutputOdvCode(lastParam);
+			code = getOutputOdvCode(lastParam, parameterSize, isText);
 			break;
 		case MEDATLAS:
 			code = getOutputMedatlasCode();
@@ -542,21 +542,38 @@ public class Parameter extends AbstractModel
 		return Formatter.getSingleton().padString(_code, len);
 	}
 
-	private String getOutputOdvCode(boolean lastParam)
+	private String getOutputOdvCode(boolean lastParam, Integer parameterSize, Boolean isText)
 	{
 		StringBuffer paramHeader = new StringBuffer();
 		String code;
         // on ne fabrique le code qu'à un seul endroit comme ca on sera sur que c'est le meme!!!!
 		code = getLocalCode();
+		
+		if(!isText)
+		{
+    		paramHeader.append(code);
+    		paramHeader.append(Global.SPACE);
+    		paramHeader.append('[');
+    		paramHeader.append(_unit);
+    		paramHeader.append(']');
+    		
 
-		paramHeader.append(code);
-		paramHeader.append(Global.SPACE);
-		paramHeader.append('[');
-		paramHeader.append(_unit);
-		paramHeader.append(']');
+		}
+		else
+		{
+		    //FAE 10755
+		    paramHeader.append(code);
+		    paramHeader.append(Global.DBL_PT);
+		    paramHeader.append(Intern.TEXT);
+		    paramHeader.append(Global.DBL_PT);
+		    if(parameterSize != null && parameterSize >=2)
+		        paramHeader.append((parameterSize+1));
+		    else
+		        paramHeader.append(2);
+		}
+		
 		paramHeader.append(Global.TAB);
-
-		paramHeader.append("QV:SEADATANET"); //$NON-NLS-1$
+        paramHeader.append("QV:SEADATANET"); //$NON-NLS-1$
 
 		if (!lastParam)
 			paramHeader.append(Global.TAB);

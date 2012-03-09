@@ -82,14 +82,15 @@ public class DataDomain {
 		for (ParameterModel pModel : myParameterManager.getAddedParameterModels(c)) {
 			cptParam++;
 			Parameter param = pModel.getParameter();
-			dataHeader.append(param.getOutputCode(c, (cptParam == nbParamTot)));
+			dataHeader.append(param.getOutputCode(c, (cptParam == nbParamTot),null,null));
 		}
 
 		// paramètres mesurés
 		for (ParameterModel pModel : _model.getParameterModels()) {
 			cptParam++;
-			Parameter param = pModel.getParameter();
-			dataHeader.append(param.getOutputCode(c, (cptParam == nbParamTot)));
+			Parameter param = pModel.getParameter(); 
+			int parameterSize = pModel.getFragment().getLastCharOffset() - pModel.getFragment().getFirstCharOffset();
+			dataHeader.append(param.getOutputCode(c, (cptParam == nbParamTot), parameterSize, pModel.isText()));
 		}
 		return dataHeader;
 	}
@@ -287,20 +288,20 @@ public class DataDomain {
 		}
 
 		for (ParameterModel param : myParameterManager.getAddedParameterModels(c)) {
-			sdnParams.append(parameterMap(c.getDebut(), param.getParameter(), c));
+			sdnParams.append(parameterMap(c.getDebut(), param.getParameter(), c, param.isText()));
 		}
 
 		/**
 		 * parameters
 		 */
 		for (ParameterModel param : _model.getParameterModels()) {
-			sdnParams.append(parameterMap(c.getDebut(), param.getParameter(), c));
+			sdnParams.append(parameterMap(c.getDebut(), param.getParameter(), c, param.isText()));
 		}
 
 		return sdnParams;
 	}
 
-	private StringBuffer parameterMap(String start, Parameter param, Conversion c) {
+	private StringBuffer parameterMap(String start, Parameter param, Conversion c,boolean isText) {
 		String code = param.getCode();
 		StringBuffer sdnMapping = new StringBuffer();
 		sdnMapping.append(start);
@@ -321,7 +322,7 @@ public class DataDomain {
 			 * subject
 			 */
 			// FAE 4045 getLocalCode
-			sdnMapping.append(getURNSyntaxe(URNtype.subject, param.getLocalCode(), null, null));
+			sdnMapping.append(getURNSyntaxe(URNtype.subject, param.getLocalCode(), null, null, null));
 			/**
 			 * -----------------------------------------------------
 			 * object
@@ -331,9 +332,9 @@ public class DataDomain {
 			 * correspondants au P091
 			 */
 			if (param.isP011()) {
-				sdnMapping.append(getURNSyntaxe(URNtype.object, param.getCodeP011(), null, Intern.mapping_objet));
+				sdnMapping.append(getURNSyntaxe(URNtype.object, param.getCodeP011(), null, Intern.mapping_objet, isText));
 			} else {
-				sdnMapping.append(getURNSyntaxe(URNtype.object, param.getCode(), Intern.mapping_subject, Intern.mapping_objet));
+				sdnMapping.append(getURNSyntaxe(URNtype.object, param.getCode(), Intern.mapping_subject, Intern.mapping_objet, isText));
 			}
 
 			/**
@@ -352,18 +353,20 @@ public class DataDomain {
 			 * sinon, on prend sa valeur qui a été renseignée quen l'utilisateur
 			 * a choisi l'unité dans la liste des P061
 			 */
+			
+			//TODO :  a modifier pour les parametre texte
 			if (param.getUnitCode() == null || param.getUnitCode().equals(Global.EMPTY_STRING)) {
-				sdnMapping.append(getURNSyntaxe(URNtype.units, param.getCode(), Intern.mapping_subject, Intern.mapping_unit));
+				sdnMapping.append(getURNSyntaxe(URNtype.units, param.getCode(), Intern.mapping_subject, Intern.mapping_unit, isText));
 			} else {
 				// FAE 6542
-				sdnMapping.append(getURNSyntaxe(URNtype.units, param.getUnitCode(), null, Intern.mapping_unit));
+				sdnMapping.append(getURNSyntaxe(URNtype.units, param.getUnitCode(), null, Intern.mapping_unit, isText));
 			}
 		}
 		sdnMapping.append(Global.RN);
 		return sdnMapping;
 	}
 
-	private static StringBuffer getURNSyntaxe(URNtype type, String code, String list1, String list2) {
+	private static StringBuffer getURNSyntaxe(URNtype type, String code, String list1, String list2,Boolean isText) {
 		StringBuffer urnSyntaxe = new StringBuffer();
 
 		urnSyntaxe.append(Intern.xml_tag_start);
@@ -380,16 +383,30 @@ public class DataDomain {
 			urnSyntaxe.append(code);
 			break;
 		case object:
+		    urnSyntaxe.append(list2);
+            urnSyntaxe.append(Global.DBL_PT);
+            urnSyntaxe.append(Global.DBL_PT);
+            String pdvCodeobject;
+            if (list1 != null)
+                pdvCodeobject = fr.ifremer.nemo.util.Utils.extraitCodeURN(NemoLists.getVocabMatch(list1, list2, code, Intern.NemoLists_unknown));
+            else
+                pdvCodeobject = code;
+            urnSyntaxe.append(pdvCodeobject);
+            break;
 		case units:
 			urnSyntaxe.append(list2);
 			urnSyntaxe.append(Global.DBL_PT);
 			urnSyntaxe.append(Global.DBL_PT);
-			String pdvCode;
-			if (list1 != null)
-				pdvCode = fr.ifremer.nemo.util.Utils.extraitCodeURN(NemoLists.getVocabMatch(list1, list2, code, Intern.NemoLists_unknown));
+			String pdvCodeunits;
+			if (list1 != null || isText)
+				pdvCodeunits = fr.ifremer.nemo.util.Utils.extraitCodeURN(NemoLists.getVocabMatch(list1, list2, code, Intern.NemoLists_unknown));
 			else
-				pdvCode = code;
-			urnSyntaxe.append(pdvCode);
+				pdvCodeunits = code;
+			//FAE 10755
+			if(isText)
+			    urnSyntaxe.append(Intern.NemoLists_unknown);
+			else
+			    urnSyntaxe.append(pdvCodeunits);
 			break;
 		}
 
