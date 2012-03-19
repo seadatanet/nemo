@@ -519,7 +519,7 @@ public class TableData
                     if (((TableItem) event.item).getChecked())
                     {
                         Utils.messageOK(Messages.edit_data_parameterIsText);
-    
+
                         ((TableItem) event.item).setData(COL_CONVERSION,
                             ((TableItem) event.item).getText(colNbById
                                 .get(COL_CONVERSION)));
@@ -531,25 +531,32 @@ public class TableData
                                 .get(COL_FORMAT)));
                         ((TableItem) event.item).setText(colNbById
                             .get(COL_CONVERSION), "");
-                        ((TableItem) event.item).setText(colNbById.get(COL_UNIT),
+                        ((TableItem) event.item).setText(colNbById
+                            .get(COL_UNIT),
                             "");
-                        ((TableItem) event.item).setText(colNbById.get(COL_FORMAT),
+                        ((TableItem) event.item).setText(colNbById
+                            .get(COL_FORMAT),
                             "");
                     }
                     else
                     {
                         Utils.messageOK(Messages.edit_data_parameterIsNumeric);
-    
+
                         ((TableItem) event.item).setText(colNbById
-                            .get(COL_CONVERSION), (String) ((TableItem) event.item)
-                            .getData(COL_CONVERSION));
-                        ((TableItem) event.item).setText(colNbById.get(COL_UNIT),
-                            (String) ((TableItem) event.item).getData(COL_UNIT));
-                        ((TableItem) event.item).setText(colNbById.get(COL_FORMAT),
-                            (String) ((TableItem) event.item).getData(COL_FORMAT));
+                            .get(COL_CONVERSION),
+                            (String) ((TableItem) event.item)
+                                .getData(COL_CONVERSION));
+                        ((TableItem) event.item)
+                            .setText(colNbById.get(COL_UNIT),
+                                (String) ((TableItem) event.item)
+                                    .getData(COL_UNIT));
+                        ((TableItem) event.item).setText(colNbById
+                            .get(COL_FORMAT),
+                            (String) ((TableItem) event.item)
+                                .getData(COL_FORMAT));
                     }
                 }
-        }
+            }
         });
         /**
          * Listener pour le clic sur la table les colonnes modifiables sont
@@ -1028,8 +1035,13 @@ public class TableData
             }
 
             item.setText(new String[]
-            {null, code, label, types.get(i).getUnite(),
-                    (types.get(i).isText()? null: types.get(i).getConversion()), types.get(i).getTest(),
+            {
+                    null,
+                    code,
+                    label,
+                    types.get(i).getUnite(),
+                    (types.get(i).isText() ? null : types.get(i)
+                        .getConversion()), types.get(i).getTest(),
                     String.valueOf(types.get(i).getDebut()),
                     String.valueOf(types.get(i).getFin()),
                     types.get(i).getFormat(), types.get(i).getEntree(),
@@ -1307,6 +1319,51 @@ public class TableData
 
     }
 
+    private boolean isNumericField(int index)
+    {
+        return !isSelected(index);
+    }
+
+    /**
+     * complete if start is set
+     * 
+     * @param index
+     * @return
+     */
+    private boolean isNonNumericFieldParamsComplete(int index)
+    {
+        return (!myTable.getItem(index).getText(colNbById.get(COL_START))
+                .equals(Global.EMPTY_STRING));
+    }
+
+    /**
+     * complete if start and conversion are set
+     * 
+     * @param index
+     * @return
+     */
+    private boolean isNumericFieldParamsComplete(int index)
+    {
+        return (!myTable.getItem(index).getText(colNbById.get(COL_START))
+            .equals(Global.EMPTY_STRING))
+                && (!myTable.getItem(index).getText(
+                    colNbById.get(COL_CONVERSION)).equals(Global.EMPTY_STRING));
+    }
+
+    private boolean isParameterReady(int index)
+    {
+        return (isNumericField(index) && isNumericFieldParamsComplete(index))
+                || (!isNumericField(index) && isNonNumericFieldParamsComplete(index));
+
+    }
+
+    private boolean isSelectedValueEqualsToDefaultIn(int index, String selection)
+    {
+        return selection.equals(myTable.getItem(index).getText(
+            colNbById.get(COL_VALUE_IN)).trim());
+
+    }
+
     public boolean majChampTest()
     {
 
@@ -1317,43 +1374,35 @@ public class TableData
 
         int nbre;
         String selection = "";
-        String ligne, resultat;
+        String ligne, resultat = "";
+        String defaultValue = "";
         double resultJEP;
 
         nbre = myTable.getItemCount();
+        MediaDomain mediaDomain = Nemo.getInstance().getDomain().getMedia();
+        ligne = Utils.lignesBrutes.get(mediaDomain.getModel().getFileHeader()
+                    + mediaDomain.getStationHeaderNumberLines());
+
         for (int i = 0; i < nbre; i++)
         {
 
-            if ((!myTable.getItem(i).getText(colNbById.get(COL_START))
-                    .equals(Global.EMPTY_STRING))
-                    && (!myTable.getItem(i)
-                            .getText(colNbById.get(COL_CONVERSION))
-                            .equals(Global.EMPTY_STRING)) && !isSelected(i))
+            if (isParameterReady(i))
             {
-                // on a selectionne un debut et une fin et il y a une conversion
-                // e faire
-
-                MediaDomain mediaDomain =
-                        Nemo.getInstance().getDomain().getMedia();
-                ligne =
-                        Utils.lignesBrutes.get(mediaDomain.getModel()
-                                .getFileHeader()
-                                + mediaDomain.getStationHeaderNumberLines());
-
                 try
                 {
                     selection =
-                            ligne.substring(
+                        ligne.substring(
+                            Integer.valueOf(myTable.getItem(i).getText(
+                                colNbById.get(COL_START))) - 1,
                                     Integer.valueOf(myTable.getItem(i).getText(
-                                            colNbById.get(COL_START))) - 1,
-                                    Integer.valueOf(myTable.getItem(i).getText(
-                                            colNbById.get(COL_END)))).trim();
+                                        colNbById.get(COL_END)))).trim();
+
                 }
                 catch (Exception e)
                 {
                     System.out.println("erreur substring "
                             + myTable.getItem(i).getText(
-                                    colNbById.get(COL_CODE)));
+                                colNbById.get(COL_CODE)));
                     ok = false;
                     Utils.messageErreurAppend(Messages.Etape_98
                             + " "
@@ -1361,25 +1410,36 @@ public class TableData
                                     colNbById.get(COL_CODE)));
                     break;
                 }
+                defaultValue =
+                    myTable.getItem(i).getText(
+                        colNbById.get(COL_VALUE_OUT));
+            }
+
+            /**
+             * Parametres numeriques
+             */
+            if (isNumericField(i) && isNumericFieldParamsComplete(i))
+            {
+                // on a selectionne un debut et une fin et il y a une conversion
+                // e faire
+
                 // on formate puis on reaffiche la liste
                 try
                 {
                     String formatString =
-                            myTable.getItem(i).getText(
-                                colNbById.get(COL_FORMAT));
+                        myTable.getItem(i).getText(colNbById.get(COL_FORMAT));
                     String type =
-                            formatString.substring(formatString.length() - 1);
+                        formatString.substring(formatString.length() - 1);
 
-                    if (selection.equals(myTable.getItem(i).getText(
-                            colNbById.get(COL_VALUE_IN))))
+                    if (isSelectedValueEqualsToDefaultIn(i, selection))
                     {
 
                         // entree par defaut, le test est la valeur de sortie
                         // par defaut formatee
                         String fmOut = Global.EMPTY_STRING;
                         String outputDefaultValue =
-                                myTable.getItem(i).getText(
-                                        colNbById.get(COL_VALUE_OUT));
+                            myTable.getItem(i).getText(
+                                colNbById.get(COL_VALUE_OUT));
 
                         // Float ou Decimal ?
                         if (type.equals("f") || type.equals("F")) { //$NON-NLS-1$//$NON-NLS-2$
@@ -1411,28 +1471,30 @@ public class TableData
                         }
 
                     }
+                    // selection n'est pas la valeur par defaut
                     else
                     {
                         // valeur normale, on applique la formule puis formatage
                         org.nfunk.jep.JEP parser = new org.nfunk.jep.JEP();
                         parser.addStandardFunctions();
                         parser.addStandardConstants();
-                        // FAE 11354
-                        String defaultValue =
-                            myTable.getItem(i).getText(
-                                colNbById.get(COL_VALUE_OUT));
+
                         Float selectionValue = Float.valueOf(defaultValue);
-// =
-// Float.valueOf(defaultValue.trim());
                         try
                         {
                             selectionValue = Float.valueOf(selection);
                         }
                         catch (NumberFormatException e)
                         {
-                            // FAE 10755 - on met la valeur par defaut si la
-// valeur selectionnee est vide
-                            selectionValue = Float.valueOf(defaultValue);
+                            System.out.println("erreur conversion "
+                                    + myTable.getItem(i).getText(
+                                        colNbById.get(COL_CODE)));
+                            ok = false;
+                            Utils.messageErreurAppend(Messages.ParameterModel_1
+                                    + " "
+                                    + myTable.getItem(i).getText(
+                                        colNbById.get(COL_CODE)));
+                            break;
 
                         }
                         parser.addVariable("x", selectionValue); //$NON-NLS-1$
@@ -1472,24 +1534,27 @@ public class TableData
                     // e.printStackTrace();
                 }
             }
-            else
+            /**
+             * Parametres non numeriques
+             */
+            else if (!isNumericField(i) && isNonNumericFieldParamsComplete(i))
             {
                 // FAE 10755 - gestion de la chaine de charactere
-                MediaDomain mediaDomain =
-                    Nemo.getInstance().getDomain().getMedia();
-                ligne = Utils.lignesBrutes.get(mediaDomain.getModel()
-                            .getFileHeader()
-                            + mediaDomain.getStationHeaderNumberLines());
-
-                resultat = ligne.substring(
-                    Integer.valueOf(myTable.getItem(i).getText(
-                        colNbById.get(COL_START))) - 1,
-                    Integer.valueOf(myTable.getItem(i).getText(
-                        colNbById.get(COL_END)))).trim();
+                if (isSelectedValueEqualsToDefaultIn(i, selection))
+                {
+                    resultat = defaultValue;
+                }
+                else
+                {
+                    resultat = selection;
+                }
             }
 
             types.get(i).setTest(resultat);
 
+            /**
+             * FLAGS
+             */
             if ((!myTable.getItem(i).getText(colNbById.get(COL_START_FLAG))
                     .equals(Global.EMPTY_STRING))
                     && (!myTable.getItem(i)
@@ -1497,8 +1562,6 @@ public class TableData
                             .equals(Global.EMPTY_STRING)))
             {
 
-                MediaDomain mediaDomain =
-                        Nemo.getInstance().getDomain().getMedia();
                 ligne =
                         Utils.lignesBrutes
                             .get(mediaDomain.getModel()
