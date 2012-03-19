@@ -96,7 +96,8 @@ public class DataDomain
             cptParam++;
             Parameter param = pModel.getParameter();
             dataHeader.append(param.getOutputCode(c, (cptParam == nbParamTot),
-                null, null));
+                null, false));
+
         }
 
         // paramètres mesurés
