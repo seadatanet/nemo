@@ -350,6 +350,7 @@ public class TableData
             {
                 tableColumn.setToolTipText(Messages.table_checkColumn_tooltip);
                 tableColumn.setResizable(false);
+                columnsMap.get(i).enable(isCheckBoxWritable());
             }
 
             if (columnsMap.get(i).id.equals(COL_VALUE_OUT))
@@ -1486,7 +1487,7 @@ public class TableData
                         }
                         catch (NumberFormatException e)
                         {
-                            System.out.println("erreur conversion "
+                            System.out.println("erreur conversion on parameter"
                                     + myTable.getItem(i).getText(
                                         colNbById.get(COL_CODE)));
                             ok = false;
