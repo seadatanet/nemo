@@ -2,390 +2,418 @@ package fr.ifremer.nemo.ui.edit.data;
 
 import java.util.regex.Pattern;
 
+import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.input.LineFragment;
 import fr.ifremer.nemo.input.parameters.Parameter;
 import fr.ifremer.nemo.input.parameters.ParameterModel;
 import fr.ifremer.nemo.util.Global;
+import fr.ifremer.nemo.util.Global.E_TypeConversion;
 import fr.ifremer.nemo.ws.WSParameter;
 import fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType;
 
 public class TypeData extends Object
 {
 
-	// code P091 ou P021
-	private String entryKey; // le vrai entryKey
-	private String entryTerm; // l'ancien attribut nom
-	private String entryTermAbbr;
+    // code P091 ou P021
+    private String entryKey; // le vrai entryKey
+    private String entryTerm; // l'ancien attribut nom
+    private String entryTermAbbr;
 
+    private String unite;
+    private String uniteCode;
+    private String conversion;
+    private String format;
+    private String entree;
+    private String sortie;
+    private String test;
 
+    private int position, debut, fin;
 
-	private String unite;
-	private String uniteCode;
-	private String conversion;
-	private String format;
-	private String entree;
-	private String sortie;
-	private String test;
+    private String debutFlag, finFlag, testIn, testOut;
 
-	private int position, debut, fin;
+    private Boolean sensor;
+    /**
+     * Definie si la valeur du parametre est du texte ou non.
+     */
+    private Boolean isText;
 
-	private String debutFlag, finFlag, testIn, testOut;
+    public static final String DEFAULT_CONVERT = "x*1"; //$NON-NLS-1$
 
-	private Boolean sensor;
-	/**
-	 * Definie si la valeur du parametre est du texte ou non.
-	 */
-	private Boolean isText;
+    /**
+     * valeurs pour P011
+     */
+    private String entryKeyP011;
+    private String entryTermP011;
+    private boolean isP011;
 
-	public static final String DEFAULT_CONVERT = "x*1"; //$NON-NLS-1$
+    public Boolean getSensor()
+    {
+        return sensor;
+    }
 
-	/**
-	 * valeurs pour P011
-	 */
-	private String entryKeyP011;
-	private String entryTermP011;
-	private boolean isP011;
+    public void setSensor(Boolean sensor)
+    {
+        this.sensor = sensor;
+    }
 
-	public Boolean getSensor()
-	{
-		return sensor;
-	}
+    public TypeData(TypeData typeData)
+    {
+        this.setConversion(typeData.conversion);
+        this.setEntree(typeData.entree);
+        this.setFormat(typeData.format);
+        // 11976
+        if (isODV())
+        {
+            this.setSortie("");
+        }
+        else
+        {
+            this.setSortie(typeData.sortie);
+        }
+        this.setUnite(typeData.unite);
+        this.setEntryKey(typeData.getEntryKey());
+        this.setEntryTerm(typeData.getEntryTerm());
+        this.setEntryTermP011(typeData.entryTermP011);
+        this.setEntryKeyP011(typeData.entryKeyP011);
+        this.setEntryTermAbbr(typeData.entryTermAbbr);
+        this.setIsP011(typeData.isP011);
+        this.setIsText(typeData.isText());
+    }
 
-	public void setSensor(Boolean sensor)
-	{
-		this.sensor = sensor;
-	}
+    public TypeData(WSParameter wsParameter)
+    {
+        setEntryKey(wsParameter.getCode());
+        setEntryTerm(wsParameter.getName());
+        setUnite(wsParameter.getUnit());
+        setFormat(wsParameter.getFormat());
+        setEntree(Global.EMPTY_STRING);
+        setSortie(wsParameter.getDefaultValue());
+        setConversion(DEFAULT_CONVERT);
+        this.setIsText(false);
+    }
 
-	public TypeData(TypeData typeData)
-	{
-		this.setConversion(typeData.conversion);
-		this.setEntree(typeData.entree);
-		this.setFormat(typeData.format);
-		this.setSortie(typeData.sortie);
-		this.setUnite(typeData.unite);
-		this.setEntryKey(typeData.getEntryKey());
-		this.setEntryTerm(typeData.getEntryTerm());
-		this.setEntryTermP011(typeData.entryTermP011);
-		this.setEntryKeyP011(typeData.entryKeyP011);
-		this.setEntryTermAbbr(typeData.entryTermAbbr);
-		this.setIsP011(typeData.isP011);
-		this.setIsText(typeData.isText());
-	}
+    public TypeData(ParameterModel parameterModel)
+    {
+        Parameter parameter = parameterModel.getParameter();
+        LineFragment frag = parameterModel.getFragment();
+        LineFragment flag = parameterModel.getFlag();
+        setIsText(parameterModel.isText());
 
-	public TypeData(WSParameter wsParameter)
-	{
-		setEntryKey(wsParameter.getCode());
-		setEntryTerm(wsParameter.getName());
-		setUnite(wsParameter.getUnit());
-		setFormat(wsParameter.getFormat());
-		setEntree(Global.EMPTY_STRING);
-		setSortie(wsParameter.getDefaultValue());
-		setConversion(DEFAULT_CONVERT);
-		this.setIsText(false);
-	}
+        setEntryKey(parameter.getCode());
+        setEntryTerm(parameter.getFullName());
 
-	public TypeData(ParameterModel parameterModel)
-	{
-		Parameter parameter = parameterModel.getParameter();
-		LineFragment frag = parameterModel.getFragment();
-		LineFragment flag = parameterModel.getFlag();
-		setIsText(parameterModel.isText());
-		
-		
-		setEntryKey(parameter.getCode());
-		setEntryTerm(parameter.getFullName());
+        if (parameterModel.getConversionFormula().equals(Global.EMPTY_STRING))
+        {
+            setConversion(TypeData.DEFAULT_CONVERT);
+        }
+        else
+        {
+            setConversion(parameterModel.getConversionFormula());
+        }
+        setDebut(frag.getFirstCharOffset());
+        setFin(frag.getLastCharOffset());
+        if (flag != null)
+        {
+            setDebutFlag(String.valueOf(flag.getFirstCharOffset()));
+            setFinFlag(String.valueOf(flag.getLastCharOffset()));
+        }
 
-		if (parameterModel.getConversionFormula().equals(Global.EMPTY_STRING))
-		{
-			setConversion(TypeData.DEFAULT_CONVERT);
-		} else
-		{
-			setConversion(parameterModel.getConversionFormula());
-		}
-		setDebut(frag.getFirstCharOffset());
-		setFin(frag.getLastCharOffset());
-		if (flag != null)
-		{
-			setDebutFlag(String.valueOf(flag.getFirstCharOffset()));
-			setFinFlag(String.valueOf(flag.getLastCharOffset()));
-		}
+        String inputDefault = parameterModel.getInputDefault();
+        if (inputDefault == null || inputDefault.equals("null"))inputDefault = Global.EMPTY_STRING; //$NON-NLS-1$
+        setEntree(inputDefault);
 
-		String inputDefault = parameterModel.getInputDefault();
-		if (inputDefault == null || inputDefault.equals("null"))inputDefault = Global.EMPTY_STRING; //$NON-NLS-1$
-		setEntree(inputDefault);
+        setUnite(parameter.getUnit());
+        setUniteCode(parameter.getUnitCode());
+        setFormat(parameter.getFormat());
+        // 11976
+        if (isODV())
+        {
+            setSortie("");
+        }
+        else
+        {
+            setSortie(parameter.getDefault());
+        }
+        setEntryKeyP011(parameter.getCodeP011());
+        setEntryTermP011(parameter.getNameP011());
+        setIsP011(parameter.isP011());
 
-		setUnite(parameter.getUnit());
-		setUniteCode(parameter.getUnitCode());
-		setFormat(parameter.getFormat());
-		setSortie(parameter.getDefault());
-		setEntryKeyP011(parameter.getCodeP011());
-		setEntryTermP011(parameter.getNameP011());
-		setIsP011(parameter.isP011());
-		
-	}
+    }
 
-	public TypeData()
-	{
+    public TypeData()
+    {
 
-		//		this.setCode("Code"); //$NON-NLS-1$
-		this.setConversion(DEFAULT_CONVERT);
-		this.setEntree("Entree"); //$NON-NLS-1$
-		this.setFormat("Format"); //$NON-NLS-1$
-		this.setSortie("Sortie"); //$NON-NLS-1$
-		this.setUnite("Unite"); //$NON-NLS-1$
-		this.setTest(Global.EMPTY_STRING);
-		// this.setFullname(Global.EMPTY_STRING);
-		this.setEntryKey(Global.EMPTY_STRING);
-		this.setEntryTerm(Global.EMPTY_STRING);
-		this.setEntryTermP011(Global.EMPTY_STRING);
-		this.setEntryKeyP011(Global.EMPTY_STRING);
-		this.setEntryTermAbbr(Global.EMPTY_STRING);
-		this.setIsP011(false);
-		this.setIsText(false);
-	}
+        //		this.setCode("Code"); //$NON-NLS-1$
+        this.setConversion(DEFAULT_CONVERT);
+        this.setEntree("Entree"); //$NON-NLS-1$
+        this.setFormat("Format"); //$NON-NLS-1$
+        this.setSortie("Sortie"); //$NON-NLS-1$
+        this.setUnite("Unite"); //$NON-NLS-1$
+        this.setTest(Global.EMPTY_STRING);
+        // this.setFullname(Global.EMPTY_STRING);
+        this.setEntryKey(Global.EMPTY_STRING);
+        this.setEntryTerm(Global.EMPTY_STRING);
+        this.setEntryTermP011(Global.EMPTY_STRING);
+        this.setEntryKeyP011(Global.EMPTY_STRING);
+        this.setEntryTermAbbr(Global.EMPTY_STRING);
+        this.setIsP011(false);
+        this.setIsText(false);
+    }
 
-	public TypeData(CodeTableRecordType record)
-	{
-		String entryKeyFullURL = record.getEntryKey();
-		String[] entryKeyFullURLSplit = entryKeyFullURL.split("/"); //$NON-NLS-1$
-		String rEntryKey = entryKeyFullURLSplit[entryKeyFullURLSplit.length - 1];
+    public TypeData(CodeTableRecordType record)
+    {
+        String entryKeyFullURL = record.getEntryKey();
+        String[] entryKeyFullURLSplit = entryKeyFullURL.split("/"); //$NON-NLS-1$
+        String rEntryKey =
+            entryKeyFullURLSplit[entryKeyFullURLSplit.length - 1];
 
-		setEntryTerm(record.getEntryTerm());
-		// setIsP011(false);
-		setEntryKey(rEntryKey);
-		// setCode(rEntryKey + Global.SEP + record.getEntryTerm());
-		setEntryTerm(record.getEntryTerm());
-		setEntryTermAbbr(record.getEntryTermAbbr());
+        setEntryTerm(record.getEntryTerm());
+        // setIsP011(false);
+        setEntryKey(rEntryKey);
+        // setCode(rEntryKey + Global.SEP + record.getEntryTerm());
+        setEntryTerm(record.getEntryTerm());
+        setEntryTermAbbr(record.getEntryTermAbbr());
 
-		setFormat(Global.EMPTY_STRING);
-		setEntree(Global.EMPTY_STRING);
-		setSortie(Global.EMPTY_STRING);
-		setUnite(Global.EMPTY_STRING);
-		setConversion(DEFAULT_CONVERT);
-		setIsText(false);
-	}
+        setFormat(Global.EMPTY_STRING);
+        setEntree(Global.EMPTY_STRING);
+        setSortie(Global.EMPTY_STRING);
+        setUnite(Global.EMPTY_STRING);
+        setConversion(DEFAULT_CONVERT);
+        setIsText(false);
+    }
 
-	public String getFormattedCodeAndName()
-	{
-		return entryKey + Global.SEP + entryTerm;
-	}
+    private boolean isODV()
+    {
 
-	public void setEntryKeyAndEntryTerm(String formattedCodeAndName)
-	{
-		Pattern p = Pattern.compile(Global.SEP);
-		String mots[] = p.split(formattedCodeAndName);
-		setEntryKey(mots[0]);
-		setEntryTerm(mots[1]);
-	}
+        E_TypeConversion conv =
+            Nemo.getInstance().getDomain().getConversion().getModel()
+                .getOutputFormat();
+        return (conv == E_TypeConversion.ODV_MONOSTATION || conv == E_TypeConversion.ODV_MULTISTATIONS);
 
-	// FAE 6537
-	public String getCodeToUse()
-	{
-		String code;
-		if (isP011())
-		{
-			code = getEntryKeyP011();
-		} else
-		{
-			// code = getFormattedCodeAndName();//P021 ou P091 selon le contexte
-			// d'utilisation
-			code = getEntryKey();
-		}
-		return code;
-	}
+    }
 
-	// public void setCode(String code) {
-	// this.code = code;
-	// }
+    public String getFormattedCodeAndName()
+    {
+        return entryKey + Global.SEP + entryTerm;
+    }
 
-	public String getConversion()
-	{
-		return conversion;
-	}
+    public void setEntryKeyAndEntryTerm(String formattedCodeAndName)
+    {
+        Pattern p = Pattern.compile(Global.SEP);
+        String mots[] = p.split(formattedCodeAndName);
+        setEntryKey(mots[0]);
+        setEntryTerm(mots[1]);
+    }
 
-	public void setConversion(String conversion)
-	{
-		this.conversion = conversion;
-	}
+    // FAE 6537
+    public String getCodeToUse()
+    {
+        String code;
+        if (isP011())
+        {
+            code = getEntryKeyP011();
+        }
+        else
+        {
+            // code = getFormattedCodeAndName();//P021 ou P091 selon le contexte
+            // d'utilisation
+            code = getEntryKey();
+        }
+        return code;
+    }
 
-	public int getDebut()
-	{
-		return debut;
-	}
+    // public void setCode(String code) {
+    // this.code = code;
+    // }
 
-	public void setDebut(int debut)
-	{
-		this.debut = debut;
-	}
+    public String getConversion()
+    {
+        return conversion;
+    }
 
-	public String getEntree()
-	{
-		return entree;
-	}
+    public void setConversion(String conversion)
+    {
+        this.conversion = conversion;
+    }
 
-	public void setEntree(String entree)
-	{
-		this.entree = entree;
-	}
+    public int getDebut()
+    {
+        return debut;
+    }
 
-	public int getFin()
-	{
-		return fin;
-	}
+    public void setDebut(int debut)
+    {
+        this.debut = debut;
+    }
 
-	public void setFin(int fin)
-	{
-		this.fin = fin;
-	}
+    public String getEntree()
+    {
+        return entree;
+    }
 
-	public String getFormat()
-	{
-		return format;
-	}
+    public void setEntree(String entree)
+    {
+        this.entree = entree;
+    }
 
-	public void setFormat(String format)
-	{
-		this.format = format;
-	}
+    public int getFin()
+    {
+        return fin;
+    }
 
-	public int getPosition()
-	{
-		return position;
-	}
+    public void setFin(int fin)
+    {
+        this.fin = fin;
+    }
 
-	public void setPosition(int position)
-	{
-		this.position = position;
-	}
+    public String getFormat()
+    {
+        return format;
+    }
 
-	public String getSortie()
-	{
-		return sortie;
-	}
+    public void setFormat(String format)
+    {
+        this.format = format;
+    }
 
-	public void setSortie(String sortie)
-	{
-		this.sortie = sortie;
-	}
+    public int getPosition()
+    {
+        return position;
+    }
 
-	public String getUnite()
-	{
-		return unite;
-	}
+    public void setPosition(int position)
+    {
+        this.position = position;
+    }
 
-	public void setUnite(String unite)
-	{
-		this.unite = unite;
-	}
+    public String getSortie()
+    {
+        return sortie;
+    }
 
-	public String getTest()
-	{
-		return test;
-	}
+    public void setSortie(String sortie)
+    {
+        this.sortie = sortie;
+    }
 
-	public void setTest(String test)
-	{
-		this.test = test;
-	}
+    public String getUnite()
+    {
+        return unite;
+    }
 
-	// public String getFullname() {
-	// return fullname;
-	// }
-	//
-	// public void setFullname(String nom) {
-	// this.fullname = nom;
-	// }
+    public void setUnite(String unite)
+    {
+        this.unite = unite;
+    }
 
-	public String getDebutFlag()
-	{
-		if (debutFlag == null)
-		{
-			return Global.EMPTY_STRING;
-		}
-		return debutFlag;
-	}
+    public String getTest()
+    {
+        return test;
+    }
 
-	public void setDebutFlag(String debutFlag)
-	{
-		this.debutFlag = debutFlag;
-	}
+    public void setTest(String test)
+    {
+        this.test = test;
+    }
 
-	public String getFinFlag()
-	{
-		if (finFlag == null)
-		{
-			return Global.EMPTY_STRING;
-		}
-		return finFlag;
-	}
+    // public String getFullname() {
+    // return fullname;
+    // }
+    //
+    // public void setFullname(String nom) {
+    // this.fullname = nom;
+    // }
 
-	public void setFinFlag(String finFlag)
-	{
-		this.finFlag = finFlag;
-	}
+    public String getDebutFlag()
+    {
+        if (debutFlag == null)
+        {
+            return Global.EMPTY_STRING;
+        }
+        return debutFlag;
+    }
 
-	public String getTestIn()
-	{
-		return testIn;
-	}
+    public void setDebutFlag(String debutFlag)
+    {
+        this.debutFlag = debutFlag;
+    }
 
-	public void setTestIn(String testIn)
-	{
-		this.testIn = testIn;
-	}
+    public String getFinFlag()
+    {
+        if (finFlag == null)
+        {
+            return Global.EMPTY_STRING;
+        }
+        return finFlag;
+    }
 
-	public String getTestOut()
-	{
-		return testOut;
-	}
+    public void setFinFlag(String finFlag)
+    {
+        this.finFlag = finFlag;
+    }
 
-	public void setTestOut(String testOut)
-	{
-		this.testOut = testOut;
-	}
+    public String getTestIn()
+    {
+        return testIn;
+    }
 
-	public String getEntryTermAbbr()
-	{
-		return entryTermAbbr;
-	}
+    public void setTestIn(String testIn)
+    {
+        this.testIn = testIn;
+    }
 
-	public void setEntryTermAbbr(String abbr)
-	{
-		this.entryTermAbbr = abbr;
-	}
+    public String getTestOut()
+    {
+        return testOut;
+    }
 
-	// P011************************************************
-	public String getEntryKeyP011()
-	{
-		return entryKeyP011;
-	}
+    public void setTestOut(String testOut)
+    {
+        this.testOut = testOut;
+    }
 
-	public void setEntryKeyP011(String codeP011)
-	{
-		this.entryKeyP011 = codeP011;
-	}
+    public String getEntryTermAbbr()
+    {
+        return entryTermAbbr;
+    }
 
-	public String getEntryTermP011()
-	{
-		return entryTermP011;
-	}
+    public void setEntryTermAbbr(String abbr)
+    {
+        this.entryTermAbbr = abbr;
+    }
 
-	public void setEntryTermP011(String nomP011)
-	{
-		this.entryTermP011 = nomP011;
-	}
+    // P011************************************************
+    public String getEntryKeyP011()
+    {
+        return entryKeyP011;
+    }
 
-	public boolean isP011()
-	{
-		return isP011;
-	}
+    public void setEntryKeyP011(String codeP011)
+    {
+        this.entryKeyP011 = codeP011;
+    }
 
-	public void setIsP011(boolean isP011)
-	{
-		this.isP011 = isP011;
-	}
-	
-	public boolean isText()
+    public String getEntryTermP011()
+    {
+        return entryTermP011;
+    }
+
+    public void setEntryTermP011(String nomP011)
+    {
+        this.entryTermP011 = nomP011;
+    }
+
+    public boolean isP011()
+    {
+        return isP011;
+    }
+
+    public void setIsP011(boolean isP011)
+    {
+        this.isP011 = isP011;
+    }
+
+    public boolean isText()
     {
         return isText;
     }
@@ -394,37 +422,36 @@ public class TypeData extends Object
     {
         this.isText = isText;
     }
-	
 
-	// FAE 6542
-	public String getUniteCode()
-	{
-		return uniteCode;
-	}
+    // FAE 6542
+    public String getUniteCode()
+    {
+        return uniteCode;
+    }
 
-	public void setUniteCode(String uniteCode)
-	{
-		this.uniteCode = uniteCode;
-	}
+    public void setUniteCode(String uniteCode)
+    {
+        this.uniteCode = uniteCode;
+    }
 
-	public String getEntryKey()
-	{
-		return entryKey;
-	}
+    public String getEntryKey()
+    {
+        return entryKey;
+    }
 
-	public void setEntryKey(String entryKey)
-	{
-		this.entryKey = entryKey;
-	}
+    public void setEntryKey(String entryKey)
+    {
+        this.entryKey = entryKey;
+    }
 
-	public String getEntryTerm()
-	{
-		return entryTerm;
-	}
+    public String getEntryTerm()
+    {
+        return entryTerm;
+    }
 
-	public void setEntryTerm(String entryTerm)
-	{
-		this.entryTerm = entryTerm;
-	}
+    public void setEntryTerm(String entryTerm)
+    {
+        this.entryTerm = entryTerm;
+    }
 
 }

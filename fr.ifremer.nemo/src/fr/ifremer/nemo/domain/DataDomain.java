@@ -178,11 +178,16 @@ public class DataDomain
             pModel.computeParameterValue(inputLine);
 
             String defaultValue = pModel.getParameter().getDefault();
-            String stringValue =
-                Formatter.getSingleton().formatParameter(
-                    pModel.getParameter().getFormat(),
-                    pModel.getLineValue().getValue());
+            // 11976
+            String stringValue = "";
+            if (!pModel.getLineValue().getValue().equals(""))
+            {
 
+                stringValue =
+                    Formatter.getSingleton().formatParameter(
+                        pModel.getParameter().getFormat(),
+                        pModel.getLineValue().getValue());
+            }
             // odvDataLine.append(Global.TAB);
             if (!stringValue.equals(defaultValue))
                 odvDataLine.append(stringValue);

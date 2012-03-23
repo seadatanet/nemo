@@ -1480,7 +1480,8 @@ public class TableData
                         parser.addStandardFunctions();
                         parser.addStandardConstants();
 
-                        Float selectionValue = Float.valueOf(defaultValue);
+                        // 11976
+                        Float selectionValue = null;
                         try
                         {
                             selectionValue = Float.valueOf(selection);
