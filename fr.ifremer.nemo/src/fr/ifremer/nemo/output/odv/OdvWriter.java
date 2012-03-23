@@ -19,6 +19,7 @@ import fr.ifremer.nemo.output.GenerationException;
 import fr.ifremer.nemo.output.NemoWriter;
 import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Global;
+import fr.ifremer.nemo.util.Global.E_EndData;
 import fr.ifremer.nemo.util.Global.E_InputType;
 import fr.ifremer.nemo.util.Intern;
 
@@ -28,245 +29,287 @@ import fr.ifremer.nemo.util.Intern;
 public class OdvWriter extends NemoWriter
 {
 
-	int indexRecord;
+    int indexRecord;
 
-	public OdvWriter()
-	{
-		super();
-		myConversion = Conversion.ODV;
-	}
+    public OdvWriter()
+    {
+        super();
+        myConversion = Conversion.ODV;
+    }
 
-	@Override
-	protected String getOutputFileName(String inputFilePath)
-	{
-		outputFileName = iDomain.getMedia().getOutputFileName();
-		if (isProcessType_CollectionDir)
-		{
-			cruiseDomain.setDataSetRef(new File(inputFilePath).getName());
-			outputFileName += File.separator + cruiseDomain.getDataSetRef();
-		}
-		return outputFileName;
-	}
+    @Override
+    protected String getOutputFileName(String inputFilePath)
+    {
+        outputFileName = iDomain.getMedia().getOutputFileName();
+        if (isProcessType_CollectionDir)
+        {
+            cruiseDomain.setDataSetRef(new File(inputFilePath).getName());
+            outputFileName += File.separator + cruiseDomain.getDataSetRef();
+        }
+        return outputFileName;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see fr.ifremer.nemo.output.NemoWriter#writeFile()
-	 */
-	@Override
-	public final void writeFile(String inputFilePath) throws GenerationException
-	{
-		try
-		{
-			stationDomain.updateRef();
-			outputFileName = getOutputFileName(inputFilePath);
+    /*
+     * (non-Javadoc)
+     * 
+     * @see fr.ifremer.nemo.output.NemoWriter#writeFile()
+     */
+    @Override
+    public final void writeFile(String inputFilePath)
+            throws GenerationException
+    {
+        try
+        {
+            stationDomain.updateRef();
+            outputFileName = getOutputFileName(inputFilePath);
 
-			if (isConversionTo_ODVMonostation)
-			{
-				// Conversion ODV - fichiers monostation => N fichiers de sortie
-			    Integer ref = 0;
+            if (isConversionTo_ODVMonostation)
+            {
+                // Conversion ODV - fichiers monostation => N fichiers de sortie
+                Integer ref = 0;
 
-				for (Station st : stationDomain.getStations(inputFilePath))
-				{
+                for (Station st : stationDomain.getStations(inputFilePath))
+                {
 
-					if (isProcessType_CollectionDir)
-					{
-						new File(outputFileName).mkdir();
-					}
-					
-					if (isInputType_Trajectory)
-					{
-					    ref++;
-					    st.setReference(ref.toString());
-					}
+                    if (isProcessType_CollectionDir)
+                    {
+                        new File(outputFileName).mkdir();
+                    }
 
-					
-					
-					// FAE 6143
-					String localCdiId = stationDomain.getAndCheckLocalCDI(cruiseDomain, Conversion.ODV, st.getReference());
-					
-					
-					
-					String mOutputFileName = outputFileName + File.separator + localCdiId + Conversion.ODV.getExt();
-					// outputFileWriter = new PrintWriter(new BufferedWriter(new
-					// FileWriter(mOutputFileName)));
-					outputFileWriter = new PrintWriter(new BufferedWriter(new OutputStreamWriter(new FileOutputStream(mOutputFileName), Global.NEMO_ENCODING)));
+                    if (isInputType_Trajectory)
+                    {
+                        ref++;
+                        st.setReference(ref.toString());
+                    }
 
-					// écriture de l'entête campagne
-					printCruiseHeader();
+                    // FAE 6143
+                    String localCdiId =
+                        stationDomain.getAndCheckLocalCDI(cruiseDomain,
+                            Conversion.ODV, st.getReference());
 
-					if (isProcessType_CruiseFile)
-					{
-						iDomain.getStation().updateRef();
-					}
-					writeStation(st, inputFilePath, mOutputFileName);
+                    String mOutputFileName =
+                        outputFileName + File.separator + localCdiId
+                                + Conversion.ODV.getExt();
+                    // outputFileWriter = new PrintWriter(new BufferedWriter(new
+                    // FileWriter(mOutputFileName)));
+                    outputFileWriter =
+                        new PrintWriter(new BufferedWriter(
+                            new OutputStreamWriter(new FileOutputStream(
+                                mOutputFileName), Global.NEMO_ENCODING)));
 
-					outputFileWriter.close();
-				}
-			} else
-			{
-				// conversion ODV multistations => 1 fichier de sortie
+                    // écriture de l'entête campagne
+                    printCruiseHeader();
 
-				if (isProcessType_CollectionDir)
-				{
-					outputFileName += Conversion.ODV.getExt();
-					iDomain.getStation().updateRef();
-				}
-				// outputFileWriter = new PrintWriter(new BufferedWriter(new
-				// FileWriter(outputFileName)));
-				outputFileWriter = new PrintWriter(new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outputFileName), Global.NEMO_ENCODING)));
+                    if (isProcessType_CruiseFile)
+                    {
+                        iDomain.getStation().updateRef();
+                    }
+                    writeStation(st, inputFilePath, mOutputFileName);
 
-				// écriture de l'entête campagne
-				printCruiseHeader();
+                    outputFileWriter.close();
+                }
+            }
+            else
+            {
+                // conversion ODV multistations => 1 fichier de sortie
 
-				for (Station st : stationDomain.getStations(inputFilePath))
-				{
-					// FAE 6087 reinitialisation de la reference à lecture le
-					// fichier entree (car pour ecrire une station on lit tout
-					// le fichier)
-					// 07/12/2010: 6087 ajout du if CRUISE_FILE, sinon erreur
-					// dans le cas cruise dir
-					if (isProcessType_CruiseFile)
-					{
-						iDomain.getStation().updateRef();
-					}
-					writeStation(st, inputFilePath, outputFileName);
-				}
+                if (isProcessType_CollectionDir)
+                {
+                    outputFileName += Conversion.ODV.getExt();
+                    iDomain.getStation().updateRef();
+                }
+                // outputFileWriter = new PrintWriter(new BufferedWriter(new
+                // FileWriter(outputFileName)));
+                outputFileWriter =
+                    new PrintWriter(new BufferedWriter(new OutputStreamWriter(
+                        new FileOutputStream(outputFileName),
+                        Global.NEMO_ENCODING)));
 
-				outputFileWriter.close();
+                // écriture de l'entête campagne
+                printCruiseHeader();
 
-			}
-		} catch (Exception e)
-		{
-			throw new GenerationException(e);
-		}
+                for (Station st : stationDomain.getStations(inputFilePath))
+                {
+                    // FAE 6087 reinitialisation de la reference à lecture le
+                    // fichier entree (car pour ecrire une station on lit tout
+                    // le fichier)
+                    // 07/12/2010: 6087 ajout du if CRUISE_FILE, sinon erreur
+                    // dans le cas cruise dir
+                    if (isProcessType_CruiseFile)
+                    {
+                        iDomain.getStation().updateRef();
+                    }
+                    writeStation(st, inputFilePath, outputFileName);
+                }
 
-	}
+                outputFileWriter.close();
 
-	private void writeDataLine(StringBuffer stationHeader, Station currentStation, String line) throws Exception
-	{
-		DataDomain data = iDomain.getData();
+            }
+        }
+        catch (Exception e)
+        {
+            throw new GenerationException(e);
+        }
 
-		StringBuffer dataLine = new StringBuffer();
-		if (indexRecord == 0)
-		{
-			dataLine.append(stationHeader);
-		} else if (isInputType_Trajectory)
-		{
-			dataLine.append(iDomain.getStation().getOdvTrajectoryHeader(currentStation, line, indexRecord));
-		} else
-		{
-			dataLine.append(iDomain.getStation().getOdvEmptyStationHeader());
-		}
-		dataLine.append(data.getDataLine(myConversion, currentStation, line, indexRecord));
+    }
 
-		if (iDomain.getConversion().isSortData())
-		{
-			// préparation des données pour le tri
-			String key;
-			if (isInputType_Profile)
-			{
-				ParameterModel keyParam = data.getModel().getParameterModels()[0];
-				keyParam.computeParameterValue(line);
-				key = keyParam.getLineValue().getValue();
-			} else
-			{
-			    key = Long.valueOf(DateTimeUtils.getCurrentDate(currentStation, indexRecord)).toString();
-			    //FAE 11356
-			    if(Nemo.getInstance().getDomain().getMedia().getModel().getInputType() == E_InputType.TIMESERIES 
-			            && Nemo.getInstance().getDomain().getStation().getModel().getProperty(Intern.S_DATE).isInData())
-			        key = Long.valueOf(DateTimeUtils.convertTimestamp(line)).toString();
-			}
+    private void writeDataLine(StringBuffer stationHeader,
+            Station currentStation, String line) throws Exception
+    {
+        DataDomain data = iDomain.getData();
 
-			stationDatas.put(key, dataLine.toString());
+        StringBuffer dataLine = new StringBuffer();
+        if (indexRecord == 0)
+        {
+            dataLine.append(stationHeader);
+        }
+        else if (isInputType_Trajectory)
+        {
+            dataLine.append(iDomain.getStation().getOdvTrajectoryHeader(
+                currentStation, line, indexRecord));
+        }
+        else
+        {
+            dataLine.append(iDomain.getStation().getOdvEmptyStationHeader());
+        }
+        dataLine.append(data.getDataLine(myConversion, currentStation, line,
+            indexRecord));
 
-		} else
-		{
-			// écriture directe
-			outputFileWriter.println(dataLine);
-		}
-		indexRecord++;
-	}
+        if (iDomain.getConversion().isSortData())
+        {
+            // préparation des données pour le tri
+            String key;
+            if (isInputType_Profile)
+            {
+                ParameterModel keyParam =
+                    data.getModel().getParameterModels()[0];
+                keyParam.computeParameterValue(line);
+                key = keyParam.getLineValue().getValue();
+            }
+            else
+            {
+                key =
+                    Long.valueOf(
+                        DateTimeUtils.getCurrentDate(currentStation,
+                            indexRecord)).toString();
+                // FAE 11356
+                if (Nemo.getInstance().getDomain().getMedia().getModel()
+                    .getInputType() == E_InputType.TIMESERIES
+                        && Nemo.getInstance().getDomain().getStation()
+                            .getModel().getProperty(Intern.S_DATE).isInData())
+                    key =
+                        Long.valueOf(DateTimeUtils.convertTimestamp(line))
+                            .toString();
+            }
 
-	private void writeStation(Station currentStation, String inputFilePath, String outputFileName) throws Exception
-	{
+            stationDatas.put(key, dataLine.toString());
 
-		StationDomain station = iDomain.getStation();
+        }
+        else
+        {
+            // écriture directe
+            outputFileWriter.println(dataLine);
+        }
+        indexRecord++;
+    }
 
-		bufferedReader = getBufferReader(inputFilePath, currentStation);
-		StringBuffer stationHeader = station.getOdvEmptyStationHeader();
-		boolean stationWrited = false;
-		indexRecord = 0;
-		stationDatas.clear();
+    private void writeStation(Station currentStation, String inputFilePath,
+            String outputFileName) throws Exception
+    {
 
-		// scan the InputFile line by line
-		while ((readedLine = bufferedReader.readLine()) != null)
-		{
-			incrementLine();
-			if (inFileHeader())
-			{
-				continue;
-			}
-			if (isStartStationHeader())
-			{
-				String[] inputStationHeader = consumeStationHeader(mediaModel.getStationHeader() > 0);
+        StationDomain station = iDomain.getStation();
 
-				String stRef = null;
-				// si inputStationHeader est null, c'est qu'on a terminé la
-				// derniere station
-				if (inputStationHeader != null)
-				{
-				    if(isInputType_Trajectory)
-				        stRef = currentStation.getReference();
-				    else
-				        stRef = iDomain.getStation().getReference(currentStation.getFileName(), inputStationHeader, true);
-				}
+        bufferedReader = getBufferReader(inputFilePath, currentStation);
+        StringBuffer stationHeader = station.getOdvEmptyStationHeader();
+        boolean stationWrited = false;
+        indexRecord = 0;
+        stationDatas.clear();
 
-				if (inputStationHeader != null && currentStation.getReference().equals(stRef))
-				{
+        // scan the InputFile line by line
+        while ((readedLine = bufferedReader.readLine()) != null)
+        {
+            incrementLine();
+            if (inFileHeader())
+            {
+                continue;
+            }
+            if (isStartStationHeader())
+            {
+                String[] inputStationHeader =
+                    consumeStationHeader(mediaModel.getStationHeader() > 0);
 
-					stationHeader = iDomain.getStation().getHeader(myConversion, currentStation, inputStationHeader);
+                String stRef = null;
+                // si inputStationHeader est null, c'est qu'on a terminé la
+                // derniere station
+                if (inputStationHeader != null)
+                {
+                    if (isInputType_Trajectory)
+                        stRef = currentStation.getReference();
+                    else
+                        stRef =
+                            iDomain.getStation().getReference(
+                                currentStation.getFileName(),
+                                inputStationHeader, true);
+                }
 
-					// FAE 4673 Pb si une seule ligne données et pas d'entête
-					// station
-					if (!isEndData())
-					{
-						writeDataLine(stationHeader, currentStation, readedLine);
-						stationHeader = station.getOdvEmptyStationHeader();
-					}
+                if (inputStationHeader != null
+                        && currentStation.getReference().equals(stRef))
+                {
 
-					stationWrited = true;
-				} else if (stationWrited || inputStationHeader == null)
-				{
-					break;
-				}
-			} else if (stationWrited)
-			{
-				// ligne de données : à ne prendre en compte qua si on est sur
-				// la bonne station
-				writeDataLine(stationHeader, currentStation, readedLine);
-				stationHeader = station.getOdvEmptyStationHeader();
-			}
-		}
+                    stationHeader =
+                        iDomain.getStation().getHeader(myConversion,
+                            currentStation, inputStationHeader);
 
-		if (stationWrited)
-		{
-			if (iDomain.getConversion().isSortData())
-			{
-				// écriture des données après tri
-				List<String> keys = new ArrayList<String>();
-				keys.addAll(stationDatas.keySet());
-				Collections.sort(keys);
-				for (String key : keys)
-				{
-					outputFileWriter.println(stationDatas.get(key));
-				}
-			}
-			// enregistrement de la station
-			iDomain.getMedia().addStationInOutput(outputFileName, currentStation.getReference());
-		}
+                    // FAE 4673 Pb si une seule ligne données et pas d'entête
+                    // station
+                    if (!isEndData()
+                    )
+                    {
+                        writeDataLine(stationHeader, currentStation, readedLine);
+                        stationHeader = station.getOdvEmptyStationHeader();
+                    }
+                    // FAE 11978 - cas des fichiers ODV en entree
+                    if (mediaModel.getEndData() == E_EndData.NEXT_START_WITH
+                            && mediaModel.getStationHeader() == 0)
+                    {
+                        writeDataLine(stationHeader, currentStation, readedLine);
+                        stationHeader = station.getOdvEmptyStationHeader();
+                    }
+                    stationWrited = true;
+                }
+                else if (stationWrited || inputStationHeader == null)
+                {
+                    break;
+                }
+            }
+            else if (stationWrited)
+            {
+                // ligne de données : à ne prendre en compte qua si on est sur
+                // la bonne station
+                writeDataLine(stationHeader, currentStation, readedLine);
+                stationHeader = station.getOdvEmptyStationHeader();
+            }
+        }
 
-		numLine = 0;
-	}
+        if (stationWrited)
+        {
+            if (iDomain.getConversion().isSortData())
+            {
+                // écriture des données après tri
+                List<String> keys = new ArrayList<String>();
+                keys.addAll(stationDatas.keySet());
+                Collections.sort(keys);
+                for (String key : keys)
+                {
+                    outputFileWriter.println(stationDatas.get(key));
+                }
+            }
+            // enregistrement de la station
+            iDomain.getMedia().addStationInOutput(outputFileName,
+                currentStation.getReference());
+        }
+
+        numLine = 0;
+    }
 
 }
