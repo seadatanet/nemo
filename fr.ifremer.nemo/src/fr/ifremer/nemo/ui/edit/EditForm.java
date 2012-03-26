@@ -60,11 +60,12 @@ public abstract class EditForm
         Utils.messageErreur(Global.EMPTY_STRING);
 
         // de base les sections sont refermees
-        if (!listeSections.isEmpty())
-        {
-            expand = true;
-            expandSections();
-        }
+        // FAE 11977 test
+        // if (!listeSections.isEmpty())
+        // {
+        // expand = true;
+        // expandSections();
+        // }
 
         okApresReset = true;
         filled = false;

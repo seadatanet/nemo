@@ -1375,89 +1375,96 @@ public class StationSection extends NemoSection
 
                 PropertyModel propertyModel =
                         stationModel.getProperty(propertyName);
-                // getPropertyModel(stationModel, tagXml);
-                ExternalizableFormat format = propertyModel.getFormat();
-
-                // gestion des flags qualite
-                String propertyCode = name;
-                if (name.equals(Intern.S_TIME) || name.equals(Intern.S_DATE))
-                    propertyCode = Intern.DATETIME;
-                myForm.qcFlags.setFlagFragment(propertyModel
-                        .getFlag(), propertyCode, Messages.getString(
-                    propertyCode)
-                        .trim());
-
-                // gestion des converters
-                if (converter != null)
+                if (propertyModel != null)
                 {
-                    String formule = Global.EMPTY_STRING;
-                    switch (cType)
+                    // getPropertyModel(stationModel, tagXml);
+                    ExternalizableFormat format = propertyModel.getFormat();
+
+                    // gestion des flags qualite
+                    String propertyCode = name;
+                    if (name.equals(Intern.S_TIME)
+                            || name.equals(Intern.S_DATE))
+                        propertyCode = Intern.DATETIME;
+                    myForm.qcFlags.setFlagFragment(propertyModel
+                            .getFlag(), propertyCode, Messages.getString(
+                        propertyCode)
+                            .trim());
+
+                    // gestion des converters
+                    if (converter != null)
                     {
-                        case FRQ:
-                            formule = propertyModel.getConversionFormula();
-                            if (formule.equals(Global.EMPTY_STRING))
-                                formule = "*1"; //$NON-NLS-1$ 
-                        break;
-                        case TIME:
-                        case DATE:
-                            // if (inputType != E_InputType.PROFILE &&
-                            // Nemo.getInstance().getDomain().getCruise().getStation().isComputed())
-                            // formule =
-                            // ((DateTimeFormat)propertyModel.getFormat()).getFormatString();
-                            // else
-                            formule =
-                                ((DateTimeFormat) format).getFormatString();
-                        break;
-                        case LAT:
-                            formule =
-                                ((LatitudeFormat) format).getFormatString();
-                        break;
-                        case LON:
-                            formule =
-                                ((LongitudeFormat) format).getFormatString();
-                        break;
-                        default:
-                        break;
+                        String formule = Global.EMPTY_STRING;
+                        switch (cType)
+                        {
+                            case FRQ:
+                                formule = propertyModel.getConversionFormula();
+                                if (formule.equals(Global.EMPTY_STRING))
+                                    formule = "*1"; //$NON-NLS-1$ 
+                            break;
+                            case TIME:
+                            case DATE:
+                                // if (inputType != E_InputType.PROFILE &&
+                                // Nemo.getInstance().getDomain().getCruise().getStation().isComputed())
+                                // formule =
+                                // ((DateTimeFormat)propertyModel.getFormat()).getFormatString();
+                                // else
+                                formule =
+                                    ((DateTimeFormat) format).getFormatString();
+                            break;
+                            case LAT:
+                                formule =
+                                    ((LatitudeFormat) format).getFormatString();
+                            break;
+                            case LON:
+                                formule =
+                                    ((LongitudeFormat) format)
+                                        .getFormatString();
+                            break;
+                            default:
+                            break;
+                        }
+                        converter.setText(formule);
                     }
-                    converter.setText(formule);
-                }
 
-                // gestion des valeurs saisies
-                if (propertyModel.isUserProvided())
-                {
-                    /*
-                     * String value = Global.EMPTY_STRING; if
-                     * (isTimeSeriesInfo()) value =
-                     * station.getTimeSeriesInformation().get(tagXml, format);
-                     * else value = station.get(tagXml, format);
-                     */
-                    String value = propertyModel.getUserValue();
-                    if (value.equals("NaN"))value = Global.EMPTY_STRING; //$NON-NLS-1$
-                    setManualValueInput(value, i);
-                }
-                else
-                {
-                    // position dans fichier
-                    boolean fillVariPos = (autoInput.getButtonVari() != null);
-                    boolean offset = false;
-                    if (name.equals(Intern.S_COMMENT))
-                        offset = true;
-
-                    if ((i > 0) && propertyModel.isUserProvided())
+                    // gestion des valeurs saisies
+                    if (propertyModel.isUserProvided())
                     {
-                        // on a rentre que la ligne 1 donc les valeurs de
-                        // ligne 2 sont vides
-                        setAutoValueInput(Global.EMPTY_STRING,
-                                Global.EMPTY_STRING, Global.EMPTY_STRING, i);
+                        /*
+                         * String value = Global.EMPTY_STRING; if
+                         * (isTimeSeriesInfo()) value =
+                         * station.getTimeSeriesInformation().get(tagXml, format);
+                         * else value = station.get(tagXml, format);
+                         */
+                        String value = propertyModel.getUserValue();
+                        if (value.equals("NaN"))value = Global.EMPTY_STRING; //$NON-NLS-1$
+                        setManualValueInput(value, i);
                     }
                     else
                     {
-                        if (autoInput.getLines().get(i).getCursor() != null)
-                            Utils.calculPosxPosy(propertyModel.getFragment(),
-                                    getCursor(i));
-                        setAutoValueInput(propertyModel, null, fillVariPos,
-                                offset, i);
+                        // position dans fichier
+                        boolean fillVariPos =
+                            (autoInput.getButtonVari() != null);
+                        boolean offset = false;
+                        if (name.equals(Intern.S_COMMENT))
+                            offset = true;
 
+                        if ((i > 0) && propertyModel.isUserProvided())
+                        {
+                            // on a rentre que la ligne 1 donc les valeurs de
+                            // ligne 2 sont vides
+                            setAutoValueInput(Global.EMPTY_STRING,
+                                    Global.EMPTY_STRING, Global.EMPTY_STRING, i);
+                        }
+                        else
+                        {
+                            if (autoInput.getLines().get(i).getCursor() != null)
+                                Utils.calculPosxPosy(propertyModel
+                                    .getFragment(),
+                                        getCursor(i));
+                            setAutoValueInput(propertyModel, null, fillVariPos,
+                                    offset, i);
+
+                        }
                     }
                 }
 
