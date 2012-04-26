@@ -237,7 +237,10 @@ when the parameter is not measured), and the format in which the parameter will 
        
     ODV format (all parameter lists), in the sediment:
        Depth below sea bed is mandatory : DPSF if P091, COREDIST if P011 via P091 or P011 via P021
-
+	
+	NEMO accepts non-numeric parameters for ODV format. 
+	Click on the checkbox to specify the parameter is not numeric.
+	
   - For time series, date and time of measurements will be automatically put in output files,
     they do not need to be described in the measurement description.
 
@@ -274,11 +277,11 @@ when the parameter is not measured), and the format in which the parameter will 
       
 - Select a P061 unit:
    To select the unit of the parameter in P061 list.
-   This choice is only available if P011 via P021 list of parameters is used.
-
+   This choice is only available for numeric values if P011 via P021 list of parameters is used.
+   
 - Move current parameter up:
    To move up a parameter in the table of measured parameters.
-  The order of parameters in the table defines the order of parameters in the output file.
+   The order of parameters in the table defines the order of parameters in the output file.
 
 - Move current parameter down:
    To move down a parameter in the table of measured parameters.
@@ -306,7 +309,7 @@ The mandatory fields are highlighted by a '*'.
 
 - Unit: MEDATLAS Unit of the parameter
 
-- Conversion: to input a conversion formula which should be like x*1000+3; with x the value read in the input file(s).
+- Conversion: to input a conversion formula which should be like x*1000+3; with x the value read in the input file(s) (numeric parameter only).
 
 - Test: This field displays the value as it will be written in the output file.
      To input value in this field, right click in the table and choose "Update test" in the menu;
@@ -315,7 +318,7 @@ The mandatory fields are highlighted by a '*'.
 - Start - End: These fields indicate the start character and the end character of the parameter in the data line.
      To input the values in these fields, you have to select the measured parameter value on the first line of measurement, then right click in the table and choose "Set start/end".
 
-- Format: This field describes the output format (in the output file) of the measured parameter.
+- Format: This field describes the output format (in the output file) of the measured parameter (numeric parameter only).
      Examples of valid format: %3d for 150, %+4d for +150 or -150, %6.3f for 12.124, %+7.5f for +1.12345 or -1.12345
 
 - Input def. value: This field describes the values found in the input file where the parameter is not measured.

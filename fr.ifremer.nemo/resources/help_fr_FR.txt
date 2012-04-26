@@ -222,6 +222,8 @@ Pour plus de détails, se référer au manuel utilisateur de NEMO.
 Cette étape permet d'indiquer à NEMO où trouver les valeurs des paramètres mesurés dans les fichiers en entrée.
 Cette information concerne le nom, l'unité, les valeurs par défaut en entrée et en sortie et le format de sortie des paramètres mesurés 
 
+
+
 + Avant de commencer la saisie des paramètres dans le tableau, il est nécessaire de sélectionner la liste de paramètres que l'on souhaite utiliser, dans la partie droite de l'écran : P091, P011 via P091 ou P011 via P021.
   Si le format MEDATLAS est choisi, la liste P011 via P021 ne peut pas être sélectionnée.
 + Ensuite, choisir s'il s'agit de données mesurées dans la colonne d'eau ou dans le sédiment (pour les carottes sédimentaires).
@@ -241,7 +243,10 @@ Cette information concerne le nom, l'unité, les valeurs par défaut en entrée 
   
     Au format ODV (pour toutes listes de paramètres), dans le sédiment:
        La profondeur sous le fond est obligatoire : DPSF si P091, COREDIST si P011 via P091 ou P011 via P021     
-  
+  	
+  	Nemo accepte les parametres non numeriques pour le format ODV.
+  	Cliquer sur la case à cocher pour specifier que le paramètre est non numérique.
+  	
   - Pour les séries temporelles, la date et l'heure des mesures sont ajoutées automatiquement dans les fichiers de sortie,
     il ne faut pas les décrire dans la description des données.
 
@@ -277,7 +282,7 @@ Cette information concerne le nom, l'unité, les valeurs par défaut en entrée 
 
 - Sélectionner une unité P061:
    Pour choisir l'unité du paramètre dans la liste P061. 
-   Ce choix apparaît seulement si la liste de paramètres utilisée est P011 via P021.
+   Ce choix apparaît seulement pour les paramètres non numeriques si la liste de paramètres utilisée est P011 via P021.
 
 - Monter paramètre sélectionné:
    Pour déplacer un paramètre vers le haut, dans le tableau des paramètres mesurés. 
@@ -309,7 +314,7 @@ Les colonnes obligatoires sont marquées par une '*'.
 
 - Unité : unité MEDATLAS du paramètre
 
-- Conversion : pour insérer une formule de conversion qui doit être de la forme : x*1000+3; où x est la valeur lue dans le fichier en entrée.
+- Conversion : pour insérer une formule de conversion qui doit être de la forme : x*1000+3; où x est la valeur lue dans le fichier en entrée (uniquement pour paramètres numeriques).
 
 - Test : Ce champ affiche la valeur telle qu'elle sera écrite dans le fichier en sortie.
          Pour rentrer des valeurs dans ce champ, clic droit dans le tableau et choisir "Maj. champ test" dans le menu;
@@ -318,7 +323,7 @@ Les colonnes obligatoires sont marquées par une '*'.
 - Début - Fin : Ces champs indiquent les caractères début et fin du paramètre sur la ligne de données du fichier en entrée.
                 Pour rentrer des valeurs dans ces champs, surligner la valeur du paramètre dans le fichier en entrée, puis clic droit dans le tableau et choisir "Injecter début/fin" dans le menu.
 
-- Format : Ce champ décrit le format de sortie du paramètre mesuré.
+- Format : Ce champ décrit le format de sortie du paramètre mesuré (uniquement pour les paramètres numeriques).
            Exemples de formats corrects : %3d pour 150, %+4d pour +150 ou -150, %6.3f pour 12.124, %+7.5f pour +1.12345 ou -1.12345
 
 - Val. def entrée : Ce champ décrit la valeur que l'on trouve dans les fichiers en entrée quand le paramètre n'est pas mesuré.
