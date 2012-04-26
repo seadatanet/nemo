@@ -22,7 +22,7 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.widgets.ScrolledForm;
 
 import fr.ifremer.nemo.Nemo;
-import fr.ifremer.nemo.config.NemoLists;
+import fr.ifremer.nemo.config.ManageLists;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
@@ -125,12 +125,12 @@ public class TableDataSurvey
         types = new ArrayList<TypeSurvey>();
         typesWS = new ArrayList<TypeSurvey>();
 
-        int taille = NemoLists.getDataTypes().length;
+        int taille = ManageLists.getDataTypes().length;
 
         for (int i = 0; i < taille; i++)
         {
             WSDataType wsDatatype = new WSDataType();
-            wsDatatype = NemoLists.getDataTypes()[i];
+            wsDatatype = ManageLists.getDataTypes()[i];
 
             // new type
             TypeSurvey type = new TypeSurvey();

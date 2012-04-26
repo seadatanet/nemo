@@ -83,13 +83,13 @@ public abstract class EditForm
     {
         // raz message erreur
         Utils.messageErreur(Global.EMPTY_STRING);
-
-        if (!listeSections.isEmpty())
-        {
-            expand = true;
-            // test 11977
-// expandSections();
-        }
+        
+        // FAE 11977
+        //if (!listeSections.isEmpty())
+        //{
+        //    expand = true;
+        //    expandSections();
+        //}
 
         // refresh global
         formEdition.reflow(true);

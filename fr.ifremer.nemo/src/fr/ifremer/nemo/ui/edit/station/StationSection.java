@@ -24,7 +24,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
 
 import fr.ifremer.nemo.Nemo;
-import fr.ifremer.nemo.config.NemoLists;
+import fr.ifremer.nemo.config.ManageLists;
 import fr.ifremer.nemo.input.DataType;
 import fr.ifremer.nemo.input.Fragment;
 import fr.ifremer.nemo.input.PropertyModel;
@@ -1506,7 +1506,7 @@ public class StationSection extends NemoSection
         combo.removeAll();
         combo.add(Global.EMPTY_STRING);
 
-        WSDataType[] dataTypeList = NemoLists.getDataTypesIsSensor();
+        WSDataType[] dataTypeList = ManageLists.getDataTypesIsSensor();
         for (WSDataType dataType : dataTypeList)
         {
             // ajout dans la combo (on affiche le libelle qui sera

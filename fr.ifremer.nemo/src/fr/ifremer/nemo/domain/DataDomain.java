@@ -15,7 +15,7 @@ import java.text.ParseException;
 import java.util.MissingResourceException;
 
 import fr.ifremer.nemo.Nemo;
-import fr.ifremer.nemo.config.NemoLists;
+import fr.ifremer.nemo.config.VocabLists;
 import fr.ifremer.nemo.input.DataModel;
 import fr.ifremer.nemo.input.InputModel;
 import fr.ifremer.nemo.input.parameters.Parameter;
@@ -484,10 +484,9 @@ public class DataDomain
                 urnSyntaxe.append(Global.DBL_PT);
                 String pdvCodeobject;
                 if (list1 != null)
-                    pdvCodeobject =
-                        fr.ifremer.nemo.util.Utils.extraitCodeURN(NemoLists
+                    pdvCodeobject = VocabLists
                             .getVocabMatch(list1, list2, code,
-                                Intern.NemoLists_unknown));
+                                Intern.NemoLists_unknown);
                 else
                     pdvCodeobject = code;
                 urnSyntaxe.append(pdvCodeobject);
@@ -498,10 +497,9 @@ public class DataDomain
                 urnSyntaxe.append(Global.DBL_PT);
                 String pdvCodeunits;
                 if (list1 != null || isText)
-                    pdvCodeunits =
-                        fr.ifremer.nemo.util.Utils.extraitCodeURN(NemoLists
+                    pdvCodeunits = VocabLists
                             .getVocabMatch(list1, list2, code,
-                                Intern.NemoLists_unknown));
+                                Intern.NemoLists_unknown);
                 else
                     pdvCodeunits = code;
                 // FAE 10755

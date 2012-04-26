@@ -14,7 +14,7 @@ import org.eclipse.swt.widgets.Shell;
 
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.config.Configuration;
-import fr.ifremer.nemo.config.NemoLists;
+import fr.ifremer.nemo.config.VocabLists;
 import fr.ifremer.nemo.domain.CruiseDomain;
 import fr.ifremer.nemo.domain.DataDomain;
 import fr.ifremer.nemo.domain.DateTimeUtils;
@@ -194,11 +194,10 @@ public class CDIResumeWriter
 							// si on est en P091 ou P011viaP091, on map code
 							// P091 -> P021
 							// 6542
-							pdvCode =
-									fr.ifremer.nemo.util.Utils.extraitCodeURN(NemoLists.getVocabMatch(
+							pdvCode = VocabLists.getVocabMatch(
 											Intern.mapping_subject, Intern.list_BODCpdv,
 											param.getParameter().getCode(),
-											Intern.NemoLists_unknown));
+											Intern.NemoLists_unknown);
 						}
 						writer.write(sep + pdvCode + Global.EMPTY_STRING);
 

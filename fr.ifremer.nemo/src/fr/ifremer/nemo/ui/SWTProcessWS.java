@@ -10,14 +10,15 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 
 import fr.ifremer.nemo.Nemo;
+import fr.ifremer.nemo.config.ManageLists;
 import fr.ifremer.nemo.config.NemoLists;
 import fr.ifremer.nemo.config.UpdateBean;
 import fr.ifremer.nemo.config.UpdateBean.EtatUpdate;
+import fr.ifremer.nemo.config.VocabLists;
 import fr.ifremer.nemo.input.CruiseModel;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.ws.NemoWS;
-import fr.ifremer.nemo.wsVocab.VocabStub;
 
 public class SWTProcessWS implements IRunnableWithProgress
 {
@@ -36,14 +37,14 @@ public class SWTProcessWS implements IRunnableWithProgress
 		if (fichiersConstantes)
 		{
 			// mise e jour fichiers constantes
-			NemoLists.resetUpdatedLists();
+			ManageLists.resetUpdatedLists();
 
 			if (!monitor.isCanceled())
 			{
 				// appel au WebService NEMO
 				monitor.subTask(Messages.connect_nemo);
 				NemoWS service = NemoLists.callNemoWS();
-				UpdateBean updateNemo = NemoLists.getUpdate(Intern.id_nemo);
+				UpdateBean updateNemo = ManageLists.getUpdate(Intern.id_nemo);
 				updateNemo.setNbTot(Integer.parseInt(Intern.nbnemolists));
 
 				if (!monitor.isCanceled())
@@ -71,21 +72,20 @@ public class SWTProcessWS implements IRunnableWithProgress
 			{
 				monitor.subTask(Messages.connect_vocab);
 				// VocabSoapBindingStub vocabService = NemoLists.connectVocab();
-				VocabStub vocabService = NemoLists.connectVocabAxis2();
 
 				if (!monitor.isCanceled())
 				{
 					monitor.subTask(Messages.getString(Intern.id_lists));
-					NemoLists.updateVocabListsAxis2(vocabService, monitor);
+					VocabLists.updateVocabLists(monitor);
 				}
 
 				if (!monitor.isCanceled())
 				{
 					monitor.subTask(Messages.getString(Intern.id_maps));
-					NemoLists.updateVocabMaps(vocabService, monitor);
+					VocabLists.updateMapLists(monitor);
 				}
 
-				NemoLists.updateDataTypes();
+				ManageLists.updateDataTypes();
 			}
 
 			if (!monitor.isCanceled())

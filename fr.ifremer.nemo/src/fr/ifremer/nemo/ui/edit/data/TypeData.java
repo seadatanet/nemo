@@ -2,6 +2,7 @@ package fr.ifremer.nemo.ui.edit.data;
 
 import java.util.regex.Pattern;
 
+import sdn.vocabulary.interfaces.IElement;
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.input.LineFragment;
 import fr.ifremer.nemo.input.parameters.Parameter;
@@ -9,7 +10,6 @@ import fr.ifremer.nemo.input.parameters.ParameterModel;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Global.E_TypeConversion;
 import fr.ifremer.nemo.ws.WSParameter;
-import fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType;
 
 public class TypeData extends Object
 {
@@ -17,7 +17,6 @@ public class TypeData extends Object
     // code P091 ou P021
     private String entryKey; // le vrai entryKey
     private String entryTerm; // l'ancien attribut nom
-    private String entryTermAbbr;
 
     private String unite;
     private String uniteCode;
@@ -75,10 +74,10 @@ public class TypeData extends Object
         this.setEntryTerm(typeData.getEntryTerm());
         this.setEntryTermP011(typeData.entryTermP011);
         this.setEntryKeyP011(typeData.entryKeyP011);
-        this.setEntryTermAbbr(typeData.entryTermAbbr);
         this.setIsP011(typeData.isP011);
         this.setIsText(typeData.isText());
     }
+    
 
     public TypeData(WSParameter wsParameter)
     {
@@ -155,24 +154,14 @@ public class TypeData extends Object
         this.setEntryTerm(Global.EMPTY_STRING);
         this.setEntryTermP011(Global.EMPTY_STRING);
         this.setEntryKeyP011(Global.EMPTY_STRING);
-        this.setEntryTermAbbr(Global.EMPTY_STRING);
         this.setIsP011(false);
         this.setIsText(false);
     }
 
-    public TypeData(CodeTableRecordType record)
+    public TypeData(IElement record)
     {
-        String entryKeyFullURL = record.getEntryKey();
-        String[] entryKeyFullURLSplit = entryKeyFullURL.split("/"); //$NON-NLS-1$
-        String rEntryKey =
-            entryKeyFullURLSplit[entryKeyFullURLSplit.length - 1];
-
-        setEntryTerm(record.getEntryTerm());
-        // setIsP011(false);
-        setEntryKey(rEntryKey);
-        // setCode(rEntryKey + Global.SEP + record.getEntryTerm());
-        setEntryTerm(record.getEntryTerm());
-        setEntryTermAbbr(record.getEntryTermAbbr());
+        setEntryTerm(record.getLabel());
+        setEntryKey(record.getKey());
 
         setFormat(Global.EMPTY_STRING);
         setEntree(Global.EMPTY_STRING);
@@ -372,15 +361,6 @@ public class TypeData extends Object
         this.testOut = testOut;
     }
 
-    public String getEntryTermAbbr()
-    {
-        return entryTermAbbr;
-    }
-
-    public void setEntryTermAbbr(String abbr)
-    {
-        this.entryTermAbbr = abbr;
-    }
 
     // P011************************************************
     public String getEntryKeyP011()

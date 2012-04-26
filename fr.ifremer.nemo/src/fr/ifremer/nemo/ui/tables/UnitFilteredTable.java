@@ -39,7 +39,7 @@ public class UnitFilteredTable extends AbstractFilteredTable
 	/**
      *  reference sur la tableData (de l'onglet data) depuis laquelle cette table a été ouverte
 	 */
-    private TableData myTableDataRef;
+    private final TableData myTableDataRef;
 
 	/**
 	 * copie de la liste des parametres typesWS pouvant être filtrée
@@ -81,10 +81,6 @@ public class UnitFilteredTable extends AbstractFilteredTable
 		tableColumn.setWidth(200);
 		tableColumn.setText(Messages.unitTable_label_unit);
 
-		TableColumn tableColumn2 = new TableColumn(myFiltreTable, SWT.NONE);
-		tableColumn2.setWidth(81);
-		tableColumn2.setText(Messages.unitTable_label_unitAbbr);
-
 		TableColumn tableColumn3 = new TableColumn(myFiltreTable, SWT.NONE);
 		tableColumn3.setWidth(200);
 		tableColumn3.setText(Messages.unitTable_label_unitDef);
@@ -94,7 +90,6 @@ public class UnitFilteredTable extends AbstractFilteredTable
 			TableItem item = new TableItem(myFiltreTable, SWT.NONE);
             item.setText(new String[] {
 					listeFiltree.get(i).getTerm(),
-					listeFiltree.get(i).getTermAbbr(),
 					listeFiltree.get(i).getUntiDef()
 					});
 		}

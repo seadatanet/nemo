@@ -7,7 +7,7 @@ import com.ago.xml.SAXConsumer;
 import com.ago.xml.XMLOutputWriter;
 
 import fr.ifremer.nemo.Nemo;
-import fr.ifremer.nemo.config.NemoLists;
+import fr.ifremer.nemo.config.VocabLists;
 import fr.ifremer.nemo.domain.LabelParameterManager;
 import fr.ifremer.nemo.input.AbstractModel;
 import fr.ifremer.nemo.input.Fragment;
@@ -303,9 +303,9 @@ public class Parameter extends AbstractModel
 			if (getCodeP011() == null
 					|| getCodeP011().equals(""))
 			{
-				setCodeP011(fr.ifremer.nemo.util.Utils.extraitCodeURN(NemoLists.getVocabMatch(
+				setCodeP011(VocabLists.getVocabMatch(
 						Intern.mapping_subject, Intern.mapping_objet, getCode(),
-						Intern.NemoLists_unknown)));
+						Intern.NemoLists_unknown));
 			}
 			codeToUse = getCodeP011();
 

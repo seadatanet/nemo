@@ -1,6 +1,7 @@
 package fr.ifremer.nemo.ui.edit.data;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 
 import org.eclipse.swt.SWT;
@@ -16,9 +17,11 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 
+import sdn.vocabulary.interfaces.IElement;
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.config.Flag;
 import fr.ifremer.nemo.config.NemoLists;
+import fr.ifremer.nemo.config.VocabLists;
 import fr.ifremer.nemo.domain.LabelParameterManager;
 import fr.ifremer.nemo.domain.MediaDomain;
 import fr.ifremer.nemo.ui.FilteredTableFactory;
@@ -31,7 +34,6 @@ import fr.ifremer.nemo.util.Global.DataListTypeEnum;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.ws.WSParameter;
-import fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType;
 
 public class TableData
 {
@@ -417,11 +419,10 @@ public class TableData
     private void iniTypesWSP021()
     {
         // init des données a partir du fichier P021 p021.xml
-        CodeTableRecordType[] listP021 =
-                NemoLists.getVocabList(Intern.list_BODCpdv);
+        Collection<IElement> listP021 = VocabLists.getVocabList(Intern.list_BODCpdv).getElements();
         TypeData type;
 
-        for (CodeTableRecordType record : listP021)
+        for (IElement record : listP021)
         {
             type = new TypeData(record);
             type.setIsP011(false);
@@ -439,10 +440,9 @@ public class TableData
         {
             typesP061 = new ArrayList<TypeUnit>();
             // init des données a partir du fichier P021 p021.xml
-            CodeTableRecordType[] listP061 =
-                    NemoLists.getVocabList(Intern.list_P061);
+            Collection<IElement> listP061 = VocabLists.getVocabList(Intern.list_P061).getElements();
             TypeUnit typeUnit;
-            for (CodeTableRecordType record : listP061)
+            for (IElement record : listP061)
             {
                 typeUnit = new TypeUnit(record);
                 typesP061.add(typeUnit);
@@ -577,13 +577,14 @@ public class TableData
                     {
                         Point pt = new Point(event.x, event.y);
                         TableItem itemTmp = table.getItem(pt);
-                        table.getMenu()
-                            .getItem(menuMap.get(MENU_ITEM_SELECTFORMAT))
-                            .setEnabled(
+                        if(itemTmp != null){
+                            table.getMenu()
+                                .getItem(menuMap.get(MENU_ITEM_SELECTFORMAT))
+                                .setEnabled(!itemTmp.getChecked());
+                            table.getMenu().getItem(
+                                menuMap.get(MENU_ITEM_SELECTUNIT)).setEnabled(
                                 !itemTmp.getChecked());
-                        table.getMenu().getItem(
-                            menuMap.get(MENU_ITEM_SELECTUNIT)).setEnabled(
-                            !itemTmp.getChecked());
+                        }
                     }
                     return;
                 }

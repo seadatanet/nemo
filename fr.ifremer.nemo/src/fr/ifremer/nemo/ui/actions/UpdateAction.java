@@ -11,7 +11,7 @@ import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.actions.ActionFactory;
 
-import fr.ifremer.nemo.config.NemoLists;
+import fr.ifremer.nemo.config.ManageLists;
 import fr.ifremer.nemo.config.UpdateBean;
 import fr.ifremer.nemo.config.UpdateBean.EtatUpdate;
 import fr.ifremer.nemo.ui.SWTProcessWS;
@@ -75,7 +75,7 @@ public class UpdateAction extends Action implements ISelectionListener,
         }
 
         // affichage du resultats des mises a jour
-        ArrayList<UpdateBean> updatedLists = NemoLists.getUpdatedLists();
+        ArrayList<UpdateBean> updatedLists = ManageLists.getUpdatedLists();
         for (UpdateBean list : updatedLists)
         {
             if (list.getEtat().compareTo(EtatUpdate.LOCAL) > 0)

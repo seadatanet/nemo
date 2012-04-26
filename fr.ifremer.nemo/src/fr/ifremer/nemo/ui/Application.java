@@ -17,6 +17,7 @@ import org.eclipse.ui.PlatformUI;
 
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.NemoShell;
+import fr.ifremer.nemo.config.ManageLists;
 import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Global.E_TypeConversion;
@@ -223,7 +224,8 @@ public class Application implements IPlatformRunnable
                 guiLogger.setLevel(Level.DEBUG);
                 try
                 {
-                    // Utils.initConfig();
+                     
+                    ManageLists.initLists();
                     Nemo.getInstance();
 
                     int returnCode =

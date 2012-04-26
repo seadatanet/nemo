@@ -1,8 +1,10 @@
 package fr.ifremer.nemo.config;
 
+import java.util.Collection;
 import java.util.Map.Entry;
 import java.util.TreeMap;
 
+import sdn.vocabulary.interfaces.IElement;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Intern;
 
@@ -71,15 +73,14 @@ public class Flag
 	 */
 	public static String[] flagSDN()
 	{
-		fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType[] flags = NemoLists.getVocabList(Intern.list_flagsSDN);
-		String[] listFlags = new String[flags.length];
+		Collection<IElement> flags = VocabLists.getVocabList(Intern.list_flagsSDN).getElements();
+		String[] listFlags = new String[flags.size()];
 
 		TreeMap<String, String> treeFlags = new TreeMap<String, String>();
 
-		for (fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType record : flags)
+		for (IElement record : flags)
 		{
-			treeFlags.put(fr.ifremer.nemo.util.Utils.extraitCodeURN(record.getEntryKey()), record
-					.getEntryTerm());
+			treeFlags.put(record.getKey(), record.getLabel());
 		}
 
 		int i = 0;

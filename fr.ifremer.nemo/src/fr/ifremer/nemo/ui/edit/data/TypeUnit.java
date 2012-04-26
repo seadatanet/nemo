@@ -1,28 +1,27 @@
 package fr.ifremer.nemo.ui.edit.data;
 
-import fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType;
+import sdn.vocabulary.interfaces.IElement;
 
 public class TypeUnit extends Object {
 
     
-    private String term, termAbbr, untiDef, unitKey;
+    private String term, untiDef, unitKey;
 
-	public TypeUnit(String term, String termAbbr, String untiDef, String unitKey) {
+	public TypeUnit(String term, String untiDef, String unitKey) {
         this.setTerm(term);
-        this.setTermAbbr(termAbbr);
         this.setUntiDef(untiDef);
         // FAE 6542
         this.setUnitKey(unitKey);
 	}
-    public TypeUnit(CodeTableRecordType record)
+
+    /**
+     * @param record
+     */
+    public TypeUnit(IElement record)
     {
-        // FAE 6542
-        String entryKey = record.getEntryKey();
-        String[] entryKeySplit = entryKey.split("/"); //$NON-NLS-1$
-        this.unitKey = entryKeySplit[entryKeySplit.length - 1];
-        this.term = record.getEntryTerm();
-        this.termAbbr = record.getEntryTermAbbr();
-        this.untiDef = record.getEntryTermDef();
+        this.unitKey = record.getKey();
+        this.term = record.getLabel();
+        this.untiDef = "";
     }
     public String getTerm()
     {
@@ -32,16 +31,6 @@ public class TypeUnit extends Object {
     public void setTerm(String term)
     {
         this.term = term;
-    }
-
-    public String getTermAbbr()
-    {
-        return termAbbr;
-    }
-
-    public void setTermAbbr(String termAbbr)
-    {
-        this.termAbbr = termAbbr;
     }
 
     public String getUntiDef()

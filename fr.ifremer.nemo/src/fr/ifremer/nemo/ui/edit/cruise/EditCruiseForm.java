@@ -19,7 +19,7 @@ import org.eclipse.swt.widgets.Text;
 import com.ibm.icu.text.SimpleDateFormat;
 
 import fr.ifremer.nemo.Nemo;
-import fr.ifremer.nemo.config.NemoLists;
+import fr.ifremer.nemo.config.ManageLists;
 import fr.ifremer.nemo.domain.CruiseDomain;
 import fr.ifremer.nemo.input.CruiseModel;
 import fr.ifremer.nemo.ui.SWTProcessWS;
@@ -308,7 +308,7 @@ public class EditCruiseForm extends EditForm
 		// Liste des capteurs
 		ArrayList<String> listSensor = new ArrayList<String>();
 
-		WSDataType[] listWSDT = NemoLists.getDataTypes();
+		WSDataType[] listWSDT = ManageLists.getDataTypes();
 		for (int i = 0; i < listWSDT.length; i++)
 		{
 			if (listWSDT[i].isSensor())

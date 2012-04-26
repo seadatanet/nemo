@@ -8,20 +8,22 @@
 package fr.ifremer.nemo.ui.edit;
 
 import java.util.ArrayList;
-import java.util.TreeMap;
+import java.util.Collection;
 import java.util.Map.Entry;
+import java.util.TreeMap;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 
+import sdn.vocabulary.interfaces.IElement;
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.config.NemoLists;
+import fr.ifremer.nemo.config.VocabLists;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.cruise.TableDataSurvey;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Intern;
-import fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType;
 
 /**
  * Description: enumération des types de Combo possibles
@@ -138,16 +140,14 @@ public enum ComboType
                 }
             break;
             case SHIP:
-                CodeTableRecordType[] navires =
-                    NemoLists.getVocabList(Intern.list_ship);
+                Collection<IElement> navires = VocabLists.getVocabList(Intern.list_ship).getElements();
 
                 TreeMap<String, String> treeNavire =
                     new TreeMap<String, String>();
 
-                for (CodeTableRecordType record : navires)
+                for (IElement record : navires)
                 {
-                    treeNavire.put(record.getEntryTerm(), fr.ifremer.nemo.util.Utils
-                        .extraitCodeURN(record.getEntryKey()));
+                    treeNavire.put(record.getLabel(), record.getKey());
                 }
 
                 NemoLists.listeNavire = new ArrayList<String>();
@@ -164,16 +164,14 @@ public enum ComboType
             break;
             case REGION:
                 NemoLists.listeRegion = new ArrayList<String>();
-                CodeTableRecordType[] regions =
-                    NemoLists.getVocabList(Intern.list_regions);
+                Collection<IElement> regions = VocabLists.getVocabList(Intern.list_regions).getElements();
 
                 TreeMap<String, String> treeRegion =
                     new TreeMap<String, String>();
 
-                for (CodeTableRecordType record : regions)
+                for (IElement record : regions)
                 {
-                    treeRegion.put(record.getEntryTerm(), fr.ifremer.nemo.util.Utils
-                        .extraitCodeURN(record.getEntryKey()));
+                    treeRegion.put(record.getLabel(), record.getKey());
                 }
 
                 temp = Global.EMPTY_STRING;
@@ -188,16 +186,14 @@ public enum ComboType
                 Utils.createSearchMenu(valueCombo, Global.REGION);
             break;
             case COUNTRY:
-                CodeTableRecordType[] records =
-                    NemoLists.getVocabList(Intern.list_countries);
+                Collection<IElement> records = VocabLists.getVocabList(Intern.list_countries).getElements();
 
                 TreeMap<String, String> treePays =
                     new TreeMap<String, String>();
 
-                for (CodeTableRecordType record : records)
+                for (IElement record : records)
                 {
-                    treePays.put(record.getEntryTerm(), fr.ifremer.nemo.util.Utils
-                        .extraitCodeURN(record.getEntryKey()));
+                    treePays.put(record.getLabel(), record.getKey());
                 }
 
                 for (Entry<String, String> currentEntry : treePays.entrySet())
@@ -207,16 +203,16 @@ public enum ComboType
                 }
             break;
             case DATACENTER:
-                CodeTableRecordType[] centres =
-                    NemoLists.getVocabList(Intern.list_dataCenter);
+                Collection<IElement> centres =
+                    VocabLists.getVocabList(Intern.list_dataCenter).getElements();
 
                 TreeMap<String, String> treeCentre =
                     new TreeMap<String, String>();
 
-                for (CodeTableRecordType record : centres)
+                for (IElement record : centres)
                 {
-                    treeCentre.put(fr.ifremer.nemo.util.Utils.extraitCodeURN(record.getEntryKey()),
-                        record.getEntryTerm());
+                    treeCentre.put(record.getKey(),
+                        record.getLabel());
                 }
 
                 NemoLists.listeCentreDonnees = new ArrayList<String>();

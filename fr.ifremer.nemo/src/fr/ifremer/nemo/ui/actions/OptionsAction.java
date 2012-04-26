@@ -1,10 +1,11 @@
 package fr.ifremer.nemo.ui.actions;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Map.Entry;
 import java.util.TreeMap;
 import java.util.TreeSet;
-import java.util.Map.Entry;
 
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -51,6 +52,7 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.ScrolledForm;
 import org.eclipse.ui.forms.widgets.Section;
 
+import sdn.vocabulary.interfaces.IElement;
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.config.BODCList;
 import fr.ifremer.nemo.config.Configuration;
@@ -59,6 +61,7 @@ import fr.ifremer.nemo.config.Flag;
 import fr.ifremer.nemo.config.FlagTable;
 import fr.ifremer.nemo.config.NemoLists;
 import fr.ifremer.nemo.config.Proxy;
+import fr.ifremer.nemo.config.VocabLists;
 import fr.ifremer.nemo.domain.CruiseDomain;
 import fr.ifremer.nemo.domain.InputDomain;
 import fr.ifremer.nemo.domain.StationDomain;
@@ -71,10 +74,9 @@ import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.view.ViewLog;
 import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Global;
+import fr.ifremer.nemo.util.Global.E_TypeConversion;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
-import fr.ifremer.nemo.util.Global.E_TypeConversion;
-import fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType;
 
 public class OptionsAction extends Action implements ISelectionListener,
         ActionFactory.IWorkbenchAction
@@ -196,13 +198,11 @@ public class OptionsAction extends Action implements ISelectionListener,
     {
 
         // CENTRES DE DONNEES
-        CodeTableRecordType[] centres =
-            NemoLists.getVocabList(Intern.list_dataCenter);
+        Collection<IElement> centres = VocabLists.getVocabList(Intern.list_dataCenter).getElements();
         TreeMap<String, String> treeCentre = new TreeMap<String, String>();
-        for (CodeTableRecordType record : centres)
+        for (IElement record : centres)
         {
-            treeCentre.put(fr.ifremer.nemo.util.Utils.extraitCodeURN(record.getEntryKey()), record
-                .getEntryTerm());
+            treeCentre.put(record.getKey(), record.getLabel());
         }
         NemoLists.listeCentreDonnees = new ArrayList<String>();
         String temp = Global.EMPTY_STRING;
@@ -215,16 +215,11 @@ public class OptionsAction extends Action implements ISelectionListener,
 
         // CDI
         // FAE 58 CDL 09/04/08
-        CodeTableRecordType[] records =
-            NemoLists.getVocabList(Intern.list_methodCDI);
+        Collection<IElement> records = VocabLists.getVocabList(Intern.list_methodCDI).getElements();
         TreeSet<String> champsMethodesCdi = new TreeSet<String>();
-        for (CodeTableRecordType record : records)
+        for (IElement record : records)
         {
-            String champCombo = Global.EMPTY_STRING;
-            String contenuCleDecoup[] =
-                record.getEntryKey().split(Global.SLASH);
-            champCombo += contenuCleDecoup[contenuCleDecoup.length - 1];
-            champCombo += Global.SEP + record.getEntryTerm();
+            String champCombo = record.getKey()+ Global.SEP + record.getLabel();
             champsMethodesCdi.add(champCombo);
         }
         for (String champ : champsMethodesCdi)
@@ -232,29 +227,21 @@ public class OptionsAction extends Action implements ISelectionListener,
             comboMethodeCdi.add(champ);
         }
 
-        records = NemoLists.getVocabList(Intern.list_typePlatform);
+        records = VocabLists.getVocabList(Intern.list_typePlatform).getElements();
         champsMethodesCdi = new TreeSet<String>();
-        for (CodeTableRecordType record : records)
+        for (IElement record : records)
         {
-            String champCombo = Global.EMPTY_STRING;
-            String contenuCleDecoup[] =
-                record.getEntryKey().split(Global.SLASH);
-            champCombo += contenuCleDecoup[contenuCleDecoup.length - 1];
-            champCombo += Global.SEP + record.getEntryTerm();
+            String champCombo = record.getKey() + Global.SEP + record.getLabel();
             champsMethodesCdi.add(champCombo);
         }
         for (String champ : champsMethodesCdi)
             comboTypePlateForme.add(champ);
 
-        records = NemoLists.getVocabList(Intern.list_accesDonnees);
+        records = VocabLists.getVocabList(Intern.list_accesDonnees).getElements();
         champsMethodesCdi = new TreeSet<String>();
-        for (CodeTableRecordType record : records)
+        for (IElement record : records)
         {
-            String champCombo = Global.EMPTY_STRING;
-            String contenuCleDecoup[] =
-                record.getEntryKey().split(Global.SLASH);
-            champCombo += contenuCleDecoup[contenuCleDecoup.length - 1];
-            champCombo += Global.SEP + record.getEntryTerm();
+            String champCombo = record.getKey() + Global.SEP + record.getLabel();
             champsMethodesCdi.add(champCombo);
         }
         for (String champ : champsMethodesCdi)
