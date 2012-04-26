@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vocabulary list="SDN:L07:1:"  version="1"  date="2007-02-16T16:59:36.000"  title="SeaDataNet data access mechanisms" >
+   <keyword SDNIdent="SDN:L07::CDIMTH01" >web data access</keyword>
+   <keyword SDNIdent="SDN:L07::CDIMTH02" >web data access with registration</keyword>
+   <keyword SDNIdent="SDN:L07::CDIMTH05" >universal resource locator</keyword>
+   <keyword SDNIdent="SDN:L07::CDIMTH03" >data request order</keyword>
+   <keyword SDNIdent="SDN:L07::CDIMTH04" >delayed online access</keyword>
+</vocabulary>
