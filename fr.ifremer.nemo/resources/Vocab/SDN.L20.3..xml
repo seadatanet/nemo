@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vocabulary list="SDN:L20:3:"  version="3"  date="2009-05-13T01:00:03.000"  title="SeaDataNet measurand qualifier flags" >
+   <keyword SDNIdent="SDN:L20::3"  smallLabel="probably_bad" >probably bad value</keyword>
+   <keyword SDNIdent="SDN:L20::2"  smallLabel="probably_good" >probably good value</keyword>
+   <keyword SDNIdent="SDN:L20::1"  smallLabel="good" >good value</keyword>
+   <keyword SDNIdent="SDN:L20::0"  smallLabel="none" >no quality control</keyword>
+   <keyword SDNIdent="SDN:L20::7"  smallLabel="excess" >value in excess</keyword>
+   <keyword SDNIdent="SDN:L20::A"  smallLabel="ID_uncertain" >value phenomenon uncertain</keyword>
+   <keyword SDNIdent="SDN:L20::6"  smallLabel="BD" >value below detection</keyword>
+   <keyword SDNIdent="SDN:L20::5"  smallLabel="changed" >changed value</keyword>
+   <keyword SDNIdent="SDN:L20::4"  smallLabel="bad" >bad value</keyword>
+   <keyword SDNIdent="SDN:L20::9"  smallLabel="missing" >missing value</keyword>
+   <keyword SDNIdent="SDN:L20::8"  smallLabel="interpolated" >interpolated value</keyword>
+</vocabulary>

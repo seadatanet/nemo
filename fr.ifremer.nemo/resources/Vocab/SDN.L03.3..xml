@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vocabulary list="SDN:L03:3:"  version="3"  date="2011-08-27T01:00:05.000"  title="SeaDataNet Measurement Periodicity Categories" >
+   <keyword SDNIdent="SDN:L03::3"  smallLabel="minute2hour" >minute to sub-hour</keyword>
+   <keyword SDNIdent="SDN:L03::98"  smallLabel="NA" >inapplicable</keyword>
+   <keyword SDNIdent="SDN:L03::2"  smallLabel="second2minute" >second to sub-minute</keyword>
+   <keyword SDNIdent="SDN:L03::1"  smallLabel="sub-second" >sub-second</keyword>
+   <keyword SDNIdent="SDN:L03::0"  smallLabel="indeterminate" >indeterminate</keyword>
+   <keyword SDNIdent="SDN:L03::7"  smallLabel="month2year" >month to sub-year</keyword>
+   <keyword SDNIdent="SDN:L03::6"  smallLabel="week2month" >week to sub-month</keyword>
+   <keyword SDNIdent="SDN:L03::5"  smallLabel="day2week" >day to sub-week</keyword>
+   <keyword SDNIdent="SDN:L03::4"  smallLabel="hour2day" >hour to sub-day</keyword>
+   <keyword SDNIdent="SDN:L03::15"  smallLabel="decadal" >decadal</keyword>
+   <keyword SDNIdent="SDN:L03::13"  smallLabel="annual" >year to sub-decade</keyword>
+   <keyword SDNIdent="SDN:L03::99"  smallLabel="unknown" >unknown</keyword>
+</vocabulary>
