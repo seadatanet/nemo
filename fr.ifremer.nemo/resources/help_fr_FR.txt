@@ -1,4 +1,4 @@
-Pour plus de détails, se référer au manuel utilisateur de NEMO.
+﻿Pour plus de détails, se référer au manuel utilisateur de NEMO.
 
 ==MODELE============================
 
@@ -245,7 +245,7 @@ Cette information concerne le nom, l'unité, les valeurs par défaut en entrée 
        La profondeur sous le fond est obligatoire : DPSF si P091, COREDIST si P011 via P091 ou P011 via P021     
   	
   	Nemo accepte les parametres non numeriques pour le format ODV.
-  	Cliquer sur la case à cocher pour specifier que le paramètre est non numérique.
+  	Cliquer sur la case à cocher, dans la colonne de gauche, pour specifier que le paramètre est non numérique.
   	
   - Pour les séries temporelles, la date et l'heure des mesures sont ajoutées automatiquement dans les fichiers de sortie,
     il ne faut pas les décrire dans la description des données.
@@ -309,6 +309,8 @@ Cette information concerne le nom, l'unité, les valeurs par défaut en entrée 
 ==Le tableau des paramètres mesurés contient les colonnes suivantes :
 =====================================================================
 Les colonnes obligatoires sont marquées par une '*'.
+
+- Case à cocher seulement pour les paramètres non numériques
 
 - Code : code MEDATLAS du paramètre
 

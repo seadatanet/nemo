@@ -239,7 +239,7 @@ when the parameter is not measured), and the format in which the parameter will 
        Depth below sea bed is mandatory : DPSF if P091, COREDIST if P011 via P091 or P011 via P021
 	
 	NEMO accepts non-numeric parameters for ODV format. 
-	Click on the checkbox to specify the parameter is not numeric.
+	Click on the checkbox, in the left column, to specify the parameter is not numeric.
 	
   - For time series, date and time of measurements will be automatically put in output files,
     they do not need to be described in the measurement description.
@@ -304,6 +304,8 @@ when the parameter is not measured), and the format in which the parameter will 
 ==The table of measured parameters contains the following columns :
 ===================================================================
 The mandatory fields are highlighted by a '*'.
+
+- Checkbox, to be chacked only if the parameter is not numerical
 
 - Code: MEDATLAS code of the parameter
 
