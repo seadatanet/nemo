@@ -681,16 +681,43 @@ public class NemoBashTest
                     identical = outputLine.equals(refFileLine);
                     // depuis le 17/01/2012, le mapping BODC a changé : PRESPS02
                     // remplace par PRESPR01
+                    Pattern p;
+                    Matcher m;
                     if (!identical)
                     {
-                        Pattern p = Pattern.compile("PRESPS02");
-                        Matcher m = p.matcher(refFileLine);
+                        p = Pattern.compile("PRESPS02");
+                        m = p.matcher(refFileLine);
                         if (m.find())
                         {
-                            newRefLine = m.replaceAll("PRESPR01");
-                            identical = outputLine.equals(newRefLine);
+                            refFileLine = m.replaceAll("PRESPR01");
+                            identical = outputLine.equals(refFileLine);
                         }
                     }
+                    // depuisles vocab v2, le mapping BODC a changé : P011
+                    // remplace par P01
+                    if (!identical)
+                    {
+                        p = Pattern.compile("P011");
+                        m = p.matcher(refFileLine);
+                        if (m.find())
+                        {
+                            refFileLine = m.replaceAll("P01");
+                            identical = outputLine.equals(refFileLine);
+                        }
+                    }
+                    // depuisles vocab v2, le mapping BODC a changé : P061
+                    // remplace par P06
+                    if (!identical)
+                    {
+                        p = Pattern.compile("P061");
+                        m = p.matcher(refFileLine);
+                        if (m.find())
+                        {
+                            refFileLine = m.replaceAll("P06");
+                            identical = outputLine.equals(refFileLine);
+                        }
+                    }
+                    
                 }
             }
             return identical;

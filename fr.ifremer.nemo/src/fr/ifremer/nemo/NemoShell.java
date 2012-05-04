@@ -16,6 +16,7 @@ import java.util.Date;
 
 import org.apache.log4j.Logger;
 
+import fr.ifremer.nemo.config.ManageLists;
 import fr.ifremer.nemo.domain.CruiseDomain;
 import fr.ifremer.nemo.domain.InputDomain;
 import fr.ifremer.nemo.domain.Station;
@@ -52,9 +53,8 @@ public class NemoShell
 
         try
         {
-
+            ManageLists.initLists();
             Nemo nemo = Nemo.getInstance();
-
             if (!new File(inputFile).exists())
             {
                 logger.error("Input file not found");
