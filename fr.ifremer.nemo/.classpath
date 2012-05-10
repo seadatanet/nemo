@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry excluding="fr/ifremer/nemo/input/CopyOfFragment.java" kind="src" path="src"/>
-	<classpathentry kind="src" path="testsrc"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
 	<classpathentry kind="lib" path="lib/activation.jar"/>
@@ -51,5 +50,6 @@
 	<classpathentry kind="lib" path="axis2-1.5.4/lib/httpcore-4.0.jar"/>
 	<classpathentry kind="lib" path="axis2-1.5.4/lib/neethi-2.0.4.jar"/>
 	<classpathentry kind="lib" path="axis2-1.5.4/lib/XmlSchema-1.4.3.jar"/>
+	<classpathentry kind="lib" path="lib/SdnVocabulary.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
