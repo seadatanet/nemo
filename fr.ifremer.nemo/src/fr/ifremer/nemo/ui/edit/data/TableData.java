@@ -1564,13 +1564,13 @@ public class TableData
                             .getText(colNbById.get(COL_END_FLAG))
                             .equals(Global.EMPTY_STRING)))
             {
-
-                ligne =
-                        Utils.lignesBrutes
-                            .get(mediaDomain.getModel()
-                                .getFileHeader()
-                                    + mediaDomain.getStationHeaderNumberLines()
-                                    + 1);
+              //FAE 12631
+//                ligne =
+//                        Utils.lignesBrutes
+//                            .get(mediaDomain.getModel()
+//                                .getFileHeader()
+//                                    + mediaDomain.getStationHeaderNumberLines()
+//                                    + 1);
 
                 selection =
                         ligne.substring(
