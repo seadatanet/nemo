@@ -305,7 +305,7 @@ when the parameter is not measured), and the format in which the parameter will 
 ===================================================================
 The mandatory fields are highlighted by a '*'.
 
-- Checkbox, to be chacked only if the parameter is not numerical
+- Checkbox, to be checked only if the parameter is not numerical
 
 - Code: MEDATLAS code of the parameter
 
