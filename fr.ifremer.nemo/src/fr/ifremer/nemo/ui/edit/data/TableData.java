@@ -1444,7 +1444,7 @@ public class TableData
                                 colNbById.get(COL_VALUE_OUT));
 
                         // Float ou Decimal ?
-                        if (type.equals("f") || type.equals("F")) { //$NON-NLS-1$//$NON-NLS-2$
+                        if ((type.equals("f") || type.equals("F")) && outputDefaultValue.trim().isEmpty()) { //$NON-NLS-1$//$NON-NLS-2$
                             fmOut =
                                     String
                                         .format(java.util.Locale.US,
@@ -1452,7 +1452,7 @@ public class TableData
                                             Float
                                                 .parseFloat(outputDefaultValue));
                         }
-                        else if (type.equals("d") || type.equals("D")) { //$NON-NLS-1$ //$NON-NLS-2$
+                        else if ((type.equals("d") || type.equals("D")) && outputDefaultValue.trim().isEmpty()) { //$NON-NLS-1$ //$NON-NLS-2$
                             fmOut =
                                     String.format(java.util.Locale.US,
                                             formatString,
