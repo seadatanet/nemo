@@ -21,9 +21,9 @@ import fr.ifremer.nemo.output.NemoWriterFactory;
 import fr.ifremer.nemo.output.ProgressNotification;
 import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Global;
-import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.util.Global.E_ProcessType;
 import fr.ifremer.nemo.util.Global.E_TypeConversion;
+import fr.ifremer.nemo.util.Messages;
 
 public class SWTProcess implements IRunnableWithProgress
 {
@@ -76,23 +76,22 @@ public class SWTProcess implements IRunnableWithProgress
                             StringBuffer filename = new StringBuffer();
                             filename.append(iDomain.getConversion().getNomMappingHorsPrefix());
                             
-                            if (iDomain.getMedia().getModel().getProcessType() == E_ProcessType.CRUISE_DIR){
-                                if (!filename.equals(Global.EMPTY_STRING))
+                            if (iDomain.getMedia().getModel().getProcessType() == E_ProcessType.CRUISE_DIR) {
+                                if (!filename.toString().equals(Global.EMPTY_STRING))
                                     filename.append(File.separator);
-                                if (iDomain.getConversion().getCurrent() == E_TypeConversion.ODV_MONOSTATION){
+                                if (iDomain.getConversion().getCurrent() == E_TypeConversion.ODV_MONOSTATION) {
                                     filename.append(outputFile.getParentFile().getName());
                                     filename.append(File.separator);
                                     modus = Mapping.MODUS_MONOSTATION;
                                 }
                                 filename.append(outputFile.getName());
-                            }
-                            else{
-                                if (iDomain.getConversion().getCurrent() == E_TypeConversion.ODV_MONOSTATION){
-                                    if (!filename.equals(Global.EMPTY_STRING))
+                            } else {
+                                if (iDomain.getConversion().getCurrent() == E_TypeConversion.ODV_MONOSTATION) {
+                                    if (!filename.toString().equals(Global.EMPTY_STRING))
                                         filename.append(File.separator);
-                                    filename.append(outputFile.getName());
                                     modus = Mapping.MODUS_MONOSTATION;
                                 }
+                                filename.append(outputFile.getName());
                             }
                             
                             mapping.setFilename(filename.toString());
