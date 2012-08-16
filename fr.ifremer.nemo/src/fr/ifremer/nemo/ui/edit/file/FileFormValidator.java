@@ -10,6 +10,8 @@
  */
 package fr.ifremer.nemo.ui.edit.file;
 
+import java.io.File;
+
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.FormValidator;
@@ -91,6 +93,12 @@ public class FileFormValidator extends FormValidator
                                 .radNextStationSelected())
                     {
                         editFileForm.addSpaceBeforeDataTerminator();
+                    }
+                    
+                    // 13196
+                    if (!Preformat.isPreformat()) {
+                        ok = ok && false;
+                        Utils.messageErreur(Messages.error_preformat_impossible + " " + editFileForm.getNomFichier().replace(editFileForm.getNomRepertoire(), "").replace(File.separator, ""));
                     }
 
                 }

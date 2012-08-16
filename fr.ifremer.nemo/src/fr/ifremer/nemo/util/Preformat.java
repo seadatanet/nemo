@@ -147,57 +147,66 @@ public class Preformat
         isCollectionGroupedByCruise = false;
 		EditFileForm editFileForm = Nemo.getInstance().getViewMain().getEditFileForm();
 
-        if (editFileForm.isCruiseIsAFile())
-        {
+		if (editFileForm.isCruiseIsAFile()) {
             File ficEntree = new File(editFileForm.nomFichier);
             File ficSortie = run(ficEntree);
-            editFileForm.nomFichier = ficSortie.getAbsolutePath();
-            editFileForm.setFileLoaded(true);
-			Utils.insertTextFich(editFileForm.nomFichier, Nemo.getInstance().getViewMain().getEditCruiseForm().getTextAreaCruise(), false);
-            editFileForm.getTextAreaFile().setText(Utils.texteBrut);
-
-		} else if (editFileForm.isCruiseIsADir())
-        {
-            File repertoire = new File(editFileForm.nomRepertoire);
-
-            File ficSortie = run(repertoire);
-            editFileForm.nomRepertoire = ficSortie.getAbsolutePath();
-            editFileForm.setFileLoaded(true);
-            if (Utils.findFiles(editFileForm.nomRepertoire, false))
-            {
+            if (_nbColonne != 0) {
+                editFileForm.nomFichier = ficSortie.getAbsolutePath();
+                editFileForm.setFileLoaded(true);
+                Utils.insertTextFich(editFileForm.nomFichier, Nemo.getInstance().getViewMain().getEditCruiseForm().getTextAreaCruise(), false);
                 editFileForm.getTextAreaFile().setText(Utils.texteBrut);
             }
 
-		} else if (editFileForm.isCollectionGroupedByCruise())
-        {
+        } else if (editFileForm.isCruiseIsADir()) {
+            File repertoire = new File(editFileForm.nomRepertoire);
+            File ficSortie = run(repertoire);
+            if (_nbColonne != 0) {
+                editFileForm.nomRepertoire = ficSortie.getAbsolutePath();
+                editFileForm.setFileLoaded(true);
+                if (Utils.findFiles(editFileForm.nomRepertoire, false)) {
+                    editFileForm.getTextAreaFile().setText(Utils.texteBrut);
+                }
+            } else {
+                Utils.deleteDir(ficSortie);
+            }
+
+        } else if (editFileForm.isCollectionGroupedByCruise()) {
             isCollectionGroupedByCruise = true;
             File repCollection = new File(editFileForm.nomRepertoire);
             File ficSortie = run(repCollection);
-            editFileForm.nomRepertoire = ficSortie.getAbsolutePath();
-            editFileForm.setFileLoaded(true);
-            if (Utils.findFilesCollectCas1(ficSortie.getAbsolutePath(), false))
-            {
-                editFileForm.getTextAreaFile().setText(Utils.texteBrut);
+            if (_nbColonne != 0) {
+                editFileForm.nomRepertoire = ficSortie.getAbsolutePath();
+                editFileForm.setFileLoaded(true);
+                if (Utils.findFilesCollectCas1(ficSortie.getAbsolutePath(), false)) {
+                    editFileForm.getTextAreaFile().setText(Utils.texteBrut);
+                }
+            } else {
+                Utils.deleteDir(ficSortie);
             }
         }
 
-        else if (editFileForm.isCollectionNotGroupedByCruise())
-        {
+        else if (editFileForm.isCollectionNotGroupedByCruise()) {
 
             File repertoire = new File(editFileForm.nomRepertoire);
             File ficSortie = run(repertoire);
-            editFileForm.nomRepertoire = ficSortie.getAbsolutePath();
-            editFileForm.setFileLoaded(true);
-            if (Utils.findFiles(editFileForm.nomRepertoire, false))
-            {
-                editFileForm.getTextAreaFile().setText(Utils.texteBrut);
+            if (_nbColonne != 0) {
+                editFileForm.nomRepertoire = ficSortie.getAbsolutePath();
+                editFileForm.setFileLoaded(true);
+                if (Utils.findFiles(editFileForm.nomRepertoire, false)) {
+                    editFileForm.getTextAreaFile().setText(Utils.texteBrut);
+                }
+            } else {
+                Utils.deleteDir(ficSortie);
             }
 
-		} else
-        {
-			System.out.println("pb runGUI: on auait du passer dans un des cas precedents");
+        } else {
+            System.out.println("pb runGUI: on aurait du passer dans un des cas precedents");
         }
-        setPreformat(true);
+        if (_nbColonne == 0)
+            setPreformat(false);
+        else
+            setPreformat(true);
+    
     }
 
     public static File run(File inputFile) throws IOException
