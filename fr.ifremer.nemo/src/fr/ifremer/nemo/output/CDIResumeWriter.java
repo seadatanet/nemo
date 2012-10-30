@@ -248,7 +248,7 @@ public class CDIResumeWriter
 
 						// data size
 						float datasize = outputFile.length() / 1024f / 1024f;
-						if (iDomain.getConversion().getCurrent() != E_TypeConversion.ODV_MONOSTATION)
+						if (iDomain.getConversion().getCurrent() != E_TypeConversion.ODV_MONOSTATION && iDomain.getConversion().getCurrent() != E_TypeConversion.NETCDF_MONOSTATION)
 						{
 							datasize =
 									datasize

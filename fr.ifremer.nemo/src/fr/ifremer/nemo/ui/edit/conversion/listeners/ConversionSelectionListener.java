@@ -16,9 +16,9 @@ import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.conversion.EditConversionForm;
 import fr.ifremer.nemo.ui.edit.file.EditFileForm;
 import fr.ifremer.nemo.util.Global;
-import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.util.Global.E_ProcessType;
 import fr.ifremer.nemo.util.Global.E_TypeConversion;
+import fr.ifremer.nemo.util.Messages;
 
 /**
  * Description: Listener sur le type de conversion
@@ -97,7 +97,7 @@ public class ConversionSelectionListener implements SelectionListener
 
                 boolean okChoixSortie=false;
                 
-                if (currentConversion == E_TypeConversion.ODV_MONOSTATION)
+                if (currentConversion == E_TypeConversion.ODV_MONOSTATION || currentConversion == E_TypeConversion.NETCDF_MONOSTATION)
                 {
                     okChoixSortie = convForm.choixDossierSortie();
                 }
@@ -105,7 +105,7 @@ public class ConversionSelectionListener implements SelectionListener
                 {
                     okChoixSortie = convForm.choixFichierSortie();
                 }
-                else if(currentConversion == E_TypeConversion.ODV_MULTISTATIONS)
+                else if(currentConversion == E_TypeConversion.ODV_MULTISTATIONS || currentConversion == E_TypeConversion.NETCDF_MULTISTATIONS)
                 {
                     if(Nemo.getInstance().getViewMain().getMyRulesManager().isProcessCollectionDir())
                     {

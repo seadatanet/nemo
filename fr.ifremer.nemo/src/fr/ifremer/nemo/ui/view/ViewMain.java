@@ -42,10 +42,10 @@ public class ViewMain extends ViewPart
 	public static final String ID = "fr.ifremer.nemo.ui.view.ViewMain"; //$NON-NLS-1$
 
 	// Formulaires d'édition
-    private  EditFileForm editFileForm;
-    private  EditCruiseForm editCruiseForm;
-    private  EditStationForm editStationForm;
-    private  EditDataForm editDataForm;
+    private final  EditFileForm editFileForm;
+    private final  EditCruiseForm editCruiseForm;
+    private final  EditStationForm editStationForm;
+    private final  EditDataForm editDataForm;
 	private EditConversionForm editConversionForm;
 
 	// tabs
@@ -59,10 +59,10 @@ public class ViewMain extends ViewPart
 
 	private TabFolder tabFolder;
 
-    private FilteredTableFactory myFilteredTableFactory;
+    private final FilteredTableFactory myFilteredTableFactory;
 
 	// manager pour la gestion de l'IHM en fonction des règles
-    private RulesManager myRulesManager;
+    private final RulesManager myRulesManager;
     
 
 	public ViewMain()

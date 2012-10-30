@@ -9,7 +9,6 @@ import com.ago.xml.Element2Field;
 import com.ago.xml.SAXConsumer;
 import com.ago.xml.XMLOutputWriter;
 
-import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.util.Global.E_TypeConversion;
 
 /**
@@ -266,7 +265,16 @@ public class ConversionModel extends AbstractModel
         else if(outputFormat.equals(E_TypeConversion.ODV_MULTISTATIONS.toString()))
         {
             setOutputFormat(E_TypeConversion.ODV_MULTISTATIONS);
-        }else
+        }
+        else if(outputFormat.equals(E_TypeConversion.NETCDF_MONOSTATION.toString()))
+        {
+            setOutputFormat(E_TypeConversion.NETCDF_MONOSTATION);
+        }
+        else if(outputFormat.equals(E_TypeConversion.NETCDF_MULTISTATIONS.toString()))
+        {
+            setOutputFormat(E_TypeConversion.NETCDF_MULTISTATIONS);
+        }
+        else
         {
             setOutputFormat(E_TypeConversion.UNKNOWN);
         }

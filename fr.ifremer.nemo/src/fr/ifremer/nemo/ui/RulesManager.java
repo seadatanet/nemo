@@ -56,7 +56,10 @@ public class RulesManager
 	private boolean medatlasEnabled;
 	private boolean odvMonostationEnabled;
 	private boolean odvMultistationEnabled;
+	private boolean netCDFMonostationEnabled;
+    private boolean netCDFMultistationEnabled;
 	private boolean dataList_P011viaP021_Enabled = false;
+	private boolean dataList_P091_Enabled = false;
 
 	private boolean p_depthBSSurf_enabled;
 	private boolean p_depthBSBed_enabled;
@@ -69,7 +72,10 @@ public class RulesManager
 	public static boolean DEFAULT_MEDATLAS_ENABLED = true;
 	public static boolean DEFAULT_ODVMONOSTATION_ENABLED = true;
 	public static boolean DEFAULT_ODVMULTISTATION_ENABLED = true;
+	public static boolean DEFAULT_NETCDFMONOSTATION_ENABLED = true;
+    public static boolean DEFAULT_NETCDFMULTISTATION_ENABLED = true;
 	public static boolean DEFAULT_DATALIST_P011viaP021_ENABLED = false;
+	public static boolean DEFAULT_DATALIST_P91_ENABLED = false;
 
 	public static E_ProcessType DEFAULT_PROCESSTYPE = E_ProcessType.CRUISE_FILE;
 	public static E_TypeConversion DEFAULT_CONVERSIONTYPE =
@@ -179,6 +185,9 @@ public class RulesManager
 		medatlasEnabled = DEFAULT_MEDATLAS_ENABLED;
 		odvMonostationEnabled = DEFAULT_ODVMONOSTATION_ENABLED;
 		odvMultistationEnabled = DEFAULT_ODVMULTISTATION_ENABLED;
+
+		netCDFMonostationEnabled = DEFAULT_NETCDFMONOSTATION_ENABLED;
+		netCDFMultistationEnabled = DEFAULT_NETCDFMULTISTATION_ENABLED;
 		// en dernier, on recupère la conversion choisie dans les settings
 		// on l'applique si elle est compatible avec les autres parametres,
 		// sinon on la met à UNKNOWN
@@ -186,7 +195,8 @@ public class RulesManager
 		// FAE 6739
 		cruiseEnabled = !isConversionToODV();
 		myDataListType = DEFAULT_DATALIST;
-		dataList_P011viaP021_Enabled = isConversionToODV();
+		dataList_P011viaP021_Enabled = isConversionToODV() || isConversionToNetCDF();
+		dataList_P091_Enabled = !isConversionToNetCDF();
 		myVerticalParametersList = new VerticalParametersList();
 		myMesureType = DEFAULT_MESURETYPE;
 		rule_mesureType();
@@ -216,7 +226,8 @@ public class RulesManager
 
 		myDataListType = DEFAULT_DATALIST;
 		myEditDataForm.selectDataList(myDataListType);
-		dataList_P011viaP021_Enabled = isConversionToODV();
+		dataList_P011viaP021_Enabled = isConversionToODV()|| isConversionToNetCDF();
+		dataList_P091_Enabled = !isConversionToNetCDF();
 		myMesureType = DEFAULT_MESURETYPE;
 		myEditDataForm.selectMesureType(myMesureType);
 		rule_mesureType();
@@ -230,7 +241,7 @@ public class RulesManager
 	 * calcule la conversion a utiliser d'après la conversion choisie dans les
 	 * settings et les choix effectués pour process et fileType
 	 * 
-	 * @return la configuration des ettings si compatible avec les règles, sinon
+	 * @return la configuration des settings si compatible avec les règles, sinon
 	 *         E_TypeConversion.UNKNOWN
 	 */
 	private E_TypeConversion getDefaultConversionTypeWithRules()
@@ -258,7 +269,9 @@ public class RulesManager
 
 		if ((!odvMonostationEnabled && conv == E_TypeConversion.ODV_MONOSTATION)
 				|| (!odvMonostationEnabled && conv == E_TypeConversion.ODV_MONOSTATION)
-				|| (!medatlasEnabled && conv == E_TypeConversion.MEDATLAS))
+				|| (!medatlasEnabled && conv == E_TypeConversion.MEDATLAS)
+		        || (!netCDFMonostationEnabled && conv == E_TypeConversion.NETCDF_MONOSTATION)
+                || (!netCDFMonostationEnabled && conv == E_TypeConversion.NETCDF_MONOSTATION))
 		{
 			applicableConv = E_TypeConversion.UNKNOWN;
 			messageLog +=
@@ -275,6 +288,8 @@ public class RulesManager
 		medatlasEnabled = DEFAULT_MEDATLAS_ENABLED;
 		odvMonostationEnabled = DEFAULT_ODVMONOSTATION_ENABLED;
 		odvMultistationEnabled = DEFAULT_ODVMULTISTATION_ENABLED;
+		netCDFMonostationEnabled = DEFAULT_NETCDFMONOSTATION_ENABLED;
+		netCDFMultistationEnabled = DEFAULT_NETCDFMULTISTATION_ENABLED;
 	}
 
 	/**
@@ -298,7 +313,9 @@ public class RulesManager
 		myEditFileForm.selectConversion(myConversionType);
 		Nemo.getInstance().getViewMain().enableCruiseTab(isCruiseEnabled());
 		Nemo.getInstance().getViewMain().getEditDataForm()
-				.enableP011viaP021(isConversionToODV());
+				.enableP011viaP021(isConversionToODV() || isConversionToNetCDF());
+		Nemo.getInstance().getViewMain().getEditDataForm()
+        .enableP091(!isConversionToNetCDF());
 		ViewLog.styledTextLogErreurs.setText(messageLog);
 		resetDataForm();
 	}
@@ -312,6 +329,8 @@ public class RulesManager
 		medatlasEnabled = DEFAULT_MEDATLAS_ENABLED;
 		odvMonostationEnabled = DEFAULT_ODVMONOSTATION_ENABLED;
 		odvMultistationEnabled = DEFAULT_ODVMULTISTATION_ENABLED;
+		netCDFMonostationEnabled = DEFAULT_NETCDFMONOSTATION_ENABLED;
+        netCDFMultistationEnabled = DEFAULT_NETCDFMULTISTATION_ENABLED;
 
 		myFileType = fileType;
 		reinitRules();
@@ -324,7 +343,9 @@ public class RulesManager
 		myEditFileForm.selectConversion(myConversionType);
 		Nemo.getInstance().getViewMain().enableCruiseTab(isCruiseEnabled());
 		Nemo.getInstance().getViewMain().getEditDataForm()
-				.enableP011viaP021(isConversionToODV());
+				.enableP011viaP021(isConversionToODV() || isConversionToNetCDF());
+		Nemo.getInstance().getViewMain().getEditDataForm()
+                .enableP091(!isConversionToNetCDF());
 		ViewLog.styledTextLogErreurs.setText(messageLog);
 
 		rule_mesureType();
@@ -342,6 +363,8 @@ public class RulesManager
 		medatlasEnabled = DEFAULT_MEDATLAS_ENABLED;
 		odvMonostationEnabled = DEFAULT_ODVMONOSTATION_ENABLED;
 		odvMultistationEnabled = DEFAULT_ODVMULTISTATION_ENABLED;
+		netCDFMonostationEnabled = DEFAULT_NETCDFMONOSTATION_ENABLED;
+        netCDFMultistationEnabled = DEFAULT_NETCDFMULTISTATION_ENABLED;
 
 		myFileType = fileType;
 		reinitRules();
@@ -356,7 +379,9 @@ public class RulesManager
 		myEditFileForm.selectConversion(myConversionType);
 		Nemo.getInstance().getViewMain().enableCruiseTab(isCruiseEnabled());
 		Nemo.getInstance().getViewMain().getEditDataForm()
-				.enableP011viaP021(isConversionToODV());
+				.enableP011viaP021(isConversionToODV() || isConversionToNetCDF());
+		Nemo.getInstance().getViewMain().getEditDataForm()
+                .enableP091(!isConversionToNetCDF());
 		ViewLog.styledTextLogErreurs.setText(messageLog);
 	}
 
@@ -397,9 +422,12 @@ public class RulesManager
 				rule_conversionType(true);
 				Nemo.getInstance().getViewMain()
 						.enableCruiseTab(isCruiseEnabled());
-				dataList_P011viaP021_Enabled = isConversionToODV();
+				dataList_P011viaP021_Enabled = isConversionToODV() || isConversionToNetCDF();
 				Nemo.getInstance().getViewMain().getEditDataForm()
 						.enableP011viaP021(dataList_P011viaP021_Enabled);
+				dataList_P091_Enabled = !isConversionToNetCDF();
+				Nemo.getInstance().getViewMain().getEditDataForm()
+                        .enableP091(dataList_P091_Enabled);
 
 				// ensuite on selectionne si necessaire
 				if (mustReinitDataForm || mustChangeDatalist)
@@ -446,7 +474,9 @@ public class RulesManager
 
 		Nemo.getInstance().getViewMain().enableCruiseTab(isCruiseEnabled());
 		Nemo.getInstance().getViewMain().getEditDataForm()
-				.enableP011viaP021(isConversionToODV());
+				.enableP011viaP021(isConversionToODV()|| isConversionToNetCDF());
+		Nemo.getInstance().getViewMain().getEditDataForm()
+                .enableP091(!isConversionToNetCDF());
 		ViewLog.styledTextLogErreurs.setText(messageLog);
 
 	}
@@ -492,7 +522,9 @@ public class RulesManager
 		myEditFileForm.selectConversion(myConversionType);
 		Nemo.getInstance().getViewMain().enableCruiseTab(isCruiseEnabled());
 		Nemo.getInstance().getViewMain().getEditDataForm()
-				.enableP011viaP021(isConversionToODV());
+				.enableP011viaP021(isConversionToODV() || isConversionToNetCDF());
+		Nemo.getInstance().getViewMain().getEditDataForm()
+        .enableP091(!isConversionToNetCDF());
 		myDataListType = DEFAULT_DATALIST;
 		Nemo.getInstance().getViewMain().getEditDataForm()
 				.selectDataList(DataListTypeEnum.UNKNOWN);
@@ -545,7 +577,9 @@ public class RulesManager
 
 		myDataListType = dataListType;
 		Nemo.getInstance().getViewMain().getEditDataForm()
-				.enableP011viaP021(isConversionToODV());
+				.enableP011viaP021(isConversionToODV() || isConversionToNetCDF());
+		Nemo.getInstance().getViewMain().getEditDataForm()
+                .enableP091(!isConversionToNetCDF());
 		Nemo.getInstance().getViewMain().getEditDataForm()
 				.selectDataList(dataListType);
 		ViewLog.styledTextLogErreurs.setText(messageLog);
@@ -606,7 +640,7 @@ public class RulesManager
 		boolean p_depthBSSurf =
 				(isProfile() && myMesureType == E_MesureType.BSSURF)
 						|| ((isTimeSeries() || isTrajectory())
-								&& isConversionToODV() && myMesureType == E_MesureType.BSSURF);
+								&& (isConversionToODV() || isConversionToNetCDF()) && myMesureType == E_MesureType.BSSURF);
 
 		boolean p_pressure = isProfile() && myMesureType == E_MesureType.BSSURF;
 
@@ -674,6 +708,16 @@ public class RulesManager
 				messageLog +=
 						Messages.edit_file_info_P011viaP021_disabled + Global.RN;
 			}
+		} else if(myConversionType == E_TypeConversion.NETCDF_MONOSTATION
+                || myConversionType == E_TypeConversion.NETCDF_MULTISTATIONS)
+		{
+		    cruiseEnabled = true;
+            dataList_P011viaP021_Enabled = true;
+            dataList_P091_Enabled = false;
+		    if (addToLog)
+            {
+                messageLog += Messages.edit_file_info_P091disabled + Global.RN;
+            }
 		}
 	}
 
@@ -710,6 +754,11 @@ public class RulesManager
 	{
 		return (myConversionType == E_TypeConversion.ODV_MONOSTATION || myConversionType == E_TypeConversion.ODV_MULTISTATIONS);
 	}
+
+    public boolean isConversionToNetCDF()
+    {
+        return (myConversionType == E_TypeConversion.NETCDF_MONOSTATION || myConversionType == E_TypeConversion.NETCDF_MULTISTATIONS);
+    }
 
 	public boolean isDataListTypeP011viaP021()
 	{
@@ -776,6 +825,16 @@ public class RulesManager
 	{
 		return myConversionType == E_TypeConversion.ODV_MULTISTATIONS;
 	}
+	
+	public boolean isConversionToNetCDFMonoStation()
+    {
+        return myConversionType == E_TypeConversion.NETCDF_MONOSTATION;
+    }
+
+    public boolean isConversionToNetCDFMultiStation()
+    {
+        return myConversionType == E_TypeConversion.NETCDF_MULTISTATIONS;
+    }
 
 	public boolean isConversionToMedatlas()
 	{
@@ -792,15 +851,25 @@ public class RulesManager
 		return medatlasEnabled;
 	}
 
-	public boolean isOdvMonostationEnabled()
+	public boolean isNetCDFMonostationEnabled()
 	{
-		return odvMonostationEnabled;
+		return netCDFMonostationEnabled;
 	}
 
-	public boolean isOdvMultistationEnabled()
+	public boolean isNetCDFMultistationEnabled()
 	{
-		return odvMultistationEnabled;
+		return netCDFMultistationEnabled;
 	}
+	
+	public boolean isOdvMonostationEnabled()
+    {
+        return odvMonostationEnabled;
+    }
+
+    public boolean isOdvMultistationEnabled()
+    {
+        return odvMultistationEnabled;
+    }
 
 	// CRUISE
 	public boolean isCruiseEnabled()
@@ -812,6 +881,11 @@ public class RulesManager
 	{
 		return dataList_P011viaP021_Enabled;
 	}
+	
+	public boolean isDataList_P091_Enabled()
+    {
+        return dataList_P091_Enabled;
+    }
 
 	public DataListTypeEnum getMyDataListType()
 	{

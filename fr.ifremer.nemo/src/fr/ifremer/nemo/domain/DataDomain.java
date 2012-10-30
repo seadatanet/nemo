@@ -517,6 +517,8 @@ public class DataDomain
 
         return urnSyntaxe;
     }
+    
+    
 
     /**
      * Getter pour model.

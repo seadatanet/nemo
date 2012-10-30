@@ -79,6 +79,9 @@ public abstract class NemoWriter
 	protected Conversion myConversion;
 	protected boolean isConversionTo_ODVMonostation = false;
 	protected boolean isConversionTo_ODVMultistations = false;
+	protected boolean isConversionTo_NetCDFMonostation = false;
+    protected boolean isConversionTo_NetCDFMultistations = false;
+	
 	protected boolean isRefIncremented = false;
 
 	protected String beginningOfPreviousLine = Global.NO_VALUE;
@@ -102,6 +105,8 @@ public abstract class NemoWriter
 		E_TypeConversion selectedConversion = iDomain.getConversion().getCurrent();
 		isConversionTo_ODVMonostation = (selectedConversion == E_TypeConversion.ODV_MONOSTATION);
 		isConversionTo_ODVMultistations = (selectedConversion == E_TypeConversion.ODV_MULTISTATIONS);
+		isConversionTo_NetCDFMonostation = (selectedConversion == E_TypeConversion.NETCDF_MONOSTATION); 
+        isConversionTo_NetCDFMultistations = (selectedConversion == E_TypeConversion.NETCDF_MULTISTATIONS);
 
 		E_InputType inputType = iDomain.getMedia().getModel().getInputType();
 		isInputType_Trajectory = inputType == E_InputType.TRAJECTORY;

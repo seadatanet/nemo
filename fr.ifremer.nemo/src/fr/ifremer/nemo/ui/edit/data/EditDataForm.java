@@ -245,6 +245,11 @@ public class EditDataForm extends EditForm
 	{
 		button_P011viaP021.setEnabled(enabled);
 	}
+	 
+    public void enableP091(boolean enabled)
+    {
+        button_P091.setEnabled(enabled);
+    }
 
 	public void selectDataList(DataListTypeEnum theDataList)
 	{
@@ -462,5 +467,7 @@ public class EditDataForm extends EditForm
 	{
 		return myGroupeVerticalParameters;
 	}
+
+   
 
 }

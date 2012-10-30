@@ -96,7 +96,7 @@ public class DataFormValidator extends FormValidator
                  * FAE 7241: pas de test pour ODV (outputDef optionelle car ne
                  * sert pas en ODV)
                  */
-                if (!rm.isConversionToODV())
+                if (!(rm.isConversionToODV() || rm.isConversionToNetCDF()))
                 {
                     ok = ok && checkDefaultAndOutputCompatibility(typeCourant);
                 }
@@ -176,7 +176,7 @@ public class DataFormValidator extends FormValidator
                         }
                     }
                 }
-                else if (rm.isTrajectory() && rm.isConversionToODV())
+                else if (rm.isTrajectory() && (rm.isConversionToODV() || rm.isConversionToNetCDF()))
                 {
                     /**
                      * data80/data85 traj parametre de reference verticale en
@@ -524,8 +524,7 @@ public class DataFormValidator extends FormValidator
 								Integer.parseInt(typeCourant.getSortie()));
 			}
 
-			if ((fmOut.equals(typeCourant.getSortie()))
-					&& (typeCourant.getSortie().length() == totLength))
+			if ((fmOut.equals(typeCourant.getSortie())) && (typeCourant.getSortie().length() == totLength))
 			{
 				// ok
 				okRes = true;
@@ -535,8 +534,7 @@ public class DataFormValidator extends FormValidator
 			{
 				// erreur
 				okRes = false;
-				Utils
-						.messageErreurAppend(Messages.Etape_106
+				Utils.messageErreurAppend(Messages.Etape_106
 								+ " " + typeCourant.getCodeToUse() + " : " + Messages.Etape_106b); //$NON-NLS-1$ //$NON-NLS-2$
 			}
 
@@ -545,8 +543,7 @@ public class DataFormValidator extends FormValidator
 		{
 			// erreur
 			okRes = false;
-			Utils
-					.messageErreurAppend(Messages.Etape_106
+			Utils.messageErreurAppend(Messages.Etape_106
 							+ " " + typeCourant.getCodeToUse() + " : " + Messages.Etape_106b); //$NON-NLS-1$ //$NON-NLS-2$
 			System.out.print(e.getMessage());
 		}

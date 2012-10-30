@@ -75,6 +75,8 @@ public class EditFileForm extends EditForm
 	// choix du format d'export
 	private Button radMedatlas;
 	private Button radODV;
+	private Button radNetCDF;
+	// MonoFichier et MonoStation pour ODV et NETCDF
 	private Button radODVMonoFichier;
 	private Button radODVMonoStation;
 	private Button chkForcerTri = null;
@@ -142,8 +144,9 @@ public class EditFileForm extends EditForm
 		RulesManager rulesMgr = Nemo.getInstance().getViewMain().getMyRulesManager();
 		radMedatlas.setEnabled(rulesMgr.DEFAULT_MEDATLAS_ENABLED);
 		radODV.setEnabled(rulesMgr.DEFAULT_ODVMULTISTATION_ENABLED || rulesMgr.DEFAULT_ODVMULTISTATION_ENABLED);
-		radODVMonoFichier.setEnabled(rulesMgr.DEFAULT_ODVMULTISTATION_ENABLED);
-		radODVMonoStation.setEnabled(rulesMgr.DEFAULT_ODVMONOSTATION_ENABLED);
+		radNetCDF.setEnabled(rulesMgr.DEFAULT_NETCDFMULTISTATION_ENABLED || rulesMgr.DEFAULT_NETCDFMULTISTATION_ENABLED);
+		radODVMonoFichier.setEnabled(rulesMgr.DEFAULT_ODVMULTISTATION_ENABLED || rulesMgr.DEFAULT_ODVMULTISTATION_ENABLED);
+		radODVMonoStation.setEnabled(rulesMgr.DEFAULT_ODVMONOSTATION_ENABLED || rulesMgr.DEFAULT_NETCDFMULTISTATION_ENABLED);
 	}
 
 	public void updateEnableConversionTypes()
@@ -151,14 +154,17 @@ public class EditFileForm extends EditForm
 		RulesManager rulesMgr = Nemo.getInstance().getViewMain().getMyRulesManager();
 		radMedatlas.setEnabled(rulesMgr.isMedatlasEnabled());
 		radODV.setEnabled(rulesMgr.isOdvMonostationEnabled() || rulesMgr.isOdvMultistationEnabled());
-		radODVMonoFichier.setEnabled(rulesMgr.isOdvMultistationEnabled());
-		radODVMonoStation.setEnabled(rulesMgr.isOdvMonostationEnabled());
+		radNetCDF.setEnabled(rulesMgr.isNetCDFMonostationEnabled() || rulesMgr.isNetCDFMultistationEnabled());
+		radODVMonoFichier.setEnabled(rulesMgr.isOdvMultistationEnabled() || rulesMgr.isNetCDFMultistationEnabled());
+		radODVMonoStation.setEnabled(rulesMgr.isOdvMonostationEnabled() || rulesMgr.isNetCDFMonostationEnabled());
+		
 	}
 
 	public void selectConversion(E_TypeConversion conversionType)
 	{
 		radMedatlas.setSelection(false);
 		radODV.setSelection(false);
+		radNetCDF.setSelection(false);
 		radODVMonoFichier.setSelection(false);
 		radODVMonoStation.setSelection(false);
 		if (conversionType == E_TypeConversion.MEDATLAS)
@@ -172,7 +178,17 @@ public class EditFileForm extends EditForm
 		{
 			radODV.setSelection(true);
 			radODVMonoFichier.setSelection(true);
+		} else if (conversionType == E_TypeConversion.NETCDF_MONOSTATION)
+        {
+            radNetCDF.setSelection(true);
+            radODVMonoStation.setSelection(true);
+        }
+		else if (conversionType == E_TypeConversion.NETCDF_MULTISTATIONS)
+		{
+		    radNetCDF.setSelection(true);
+		    radODVMonoFichier.setSelection(true);
 		}
+		
 		// else, conversion=UNKNOWN
 		afficheGrpODV();
 	}
@@ -236,9 +252,10 @@ public class EditFileForm extends EditForm
 
 		// output
 		createGroupOutputParameters(formViewFile.getBody());
-
+		
+		//en pourcentage defini la taille de formViewFile
 		((SashForm) parent).setWeights(new int[]
-		{ 38, 62 });
+		{ 35, 65 });
 
 	}
 
@@ -528,7 +545,7 @@ public class EditFileForm extends EditForm
 		mainFormatGroup.setLayoutData(gridData);
 
 		// ****************************************************************************************
-		// MEDATLAS/ODV
+		// MEDATLAS/ODV/NETCDF
 
 		OutputFormatRadioSelectionListener outputFormatRadioSelectionListener = new OutputFormatRadioSelectionListener(this);
 		GridData medOrOdvgridData = new GridData();
@@ -552,6 +569,11 @@ public class EditFileForm extends EditForm
 		radODV.setText(Conversion.ODV.getName());
 		radODV.setSelection(false);
 		radODV.addSelectionListener(outputFormatRadioSelectionListener);
+		
+		radNetCDF= new Button(medOrOdvGroup, SWT.RADIO);
+		radNetCDF.setText(Conversion.NETCDF.getName());
+		radNetCDF.setSelection(false);
+		radNetCDF.addSelectionListener(outputFormatRadioSelectionListener);
 
 		// ****************************************************************************************
 		// ODV type
@@ -570,10 +592,11 @@ public class EditFileForm extends EditForm
 		radODVMonoStation = new Button(grpODV, SWT.RADIO);
 		radODVMonoStation.setText(Messages.view_convert_monoStation);
 		radODVMonoStation.setSelection(false);
-
 		radODVMonoStation.addSelectionListener(outputFormatRadioSelectionListener);
+		
 		radODVMonoFichier = new Button(grpODV, SWT.RADIO);
 		radODVMonoFichier.setText(Messages.view_convert_monoFichier);
+		radODVMonoFichier.setSelection(false);
 		radODVMonoFichier.addSelectionListener(outputFormatRadioSelectionListener);
 
 		afficheGrpODV();
@@ -872,7 +895,7 @@ public class EditFileForm extends EditForm
 
 	public void afficheGrpODV()
 	{
-		grpODV.setVisible(radODV.getSelection());
+		grpODV.setVisible((radODV.getSelection() || radNetCDF.getSelection()));
 	}
 
 	public void enableMedatlas(boolean enable)
@@ -1188,7 +1211,12 @@ public class EditFileForm extends EditForm
 	{
 		return radODV;
 	}
-
+	
+	public Button getRadNetCDF()
+    {
+        return radNetCDF;
+    }
+	
 	public Button getRadODVMonoFichier()
 	{
 		return radODVMonoFichier;

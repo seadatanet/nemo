@@ -144,6 +144,12 @@ public class Application implements IPlatformRunnable
                                     convOdv =
                                         E_TypeConversion.ODV_MULTISTATIONS;
                             break;
+                            case NETCDF:
+                                convOdv = E_TypeConversion.NETCDF_MONOSTATION;
+                                if (cl.hasOption(optOdvMulti))
+                                    convOdv =
+                                        E_TypeConversion.NETCDF_MULTISTATIONS;
+                            break;
                         }
 
                     }

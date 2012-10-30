@@ -159,26 +159,23 @@ public class TableData
     }
 
     /**
-     * @return true if conversion is not ODV
+     * @return true if conversion is Medatlas
      */
     private boolean isValueOutWritable()
     {
-        return !Nemo.getInstance().getViewMain().getMyRulesManager()
-            .isConversionToODV();
+        return Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToMedatlas();
     }
 
     private boolean isLabelWritable()
     {
-        return Nemo.getInstance().getViewMain().getMyRulesManager()
-                .isConversionToODV()
-                && !Nemo.getInstance().getViewMain().getMyRulesManager()
-                        .isDataListTypeP091();
+        return (Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToODV()
+                ||Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToNetCDF())
+                && !Nemo.getInstance().getViewMain().getMyRulesManager().isDataListTypeP091();
     }
 
     private boolean isCheckBoxWritable()
     {
-        return !Nemo.getInstance().getViewMain().getMyRulesManager()
-            .isConversionToMedatlas();
+        return !Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToMedatlas();
     }
 
     /**
@@ -624,8 +621,6 @@ public class TableData
 
                     boolean visible = false;
                     final TableItem itemTmp = table.getItem(index);
-                    System.out.println(itemTmp.getText(1));
-                    System.out.println(itemTmp.getChecked());
                     for (int colNumber = 0; colNumber < table.getColumnCount(); colNumber++)
                     {
                         // edition des colonnes autorisées en écriture
@@ -636,12 +631,9 @@ public class TableData
                             Rectangle rect = itemTmp.getBounds(colNumber);
                             if (rect.contains(pt))
                             {
-                                System.out.println(itemTmp.getText());
-                                System.out.println(itemTmp.getChecked());
                                 final int column = colNumber;
                                 final Text text = new Text(table, SWT.NONE);
                                 text.setText(itemTmp.getText(colNumber));
-                                System.out.println(itemTmp.getText());
 
                                 /**
                                  * Listener sur le texte d'une cellule
@@ -1023,8 +1015,8 @@ public class TableData
 
             if (types.get(i).isP011())
             {
-                if (Nemo.getInstance().getViewMain().getMyRulesManager()
-                        .isConversionToODV())
+                if (Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToODV() 
+                        || Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToNetCDF())
                 {
                     String userLabel =
                             LabelParameterManager.getInstance().getUserLabel(
@@ -1279,7 +1271,6 @@ public class TableData
 
     public void supprAllEltTableData()
     {
-        System.out.println("suppr tout");
         // majTypeData();
         types.clear();
         myGroupVerticalParameters.removeAllToAllCombos();

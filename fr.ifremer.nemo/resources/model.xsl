@@ -237,6 +237,7 @@
                 <xsl:for-each select="StationModel/parameters/ParameterModel">
                   <ParameterModel>
                     <conversionFormula><xsl:value-of select="conversionFormula"/></conversionFormula>
+                    <isText><xsl:value-of select="isText"/></isText>
                     <inputDefault><xsl:value-of select="inputDefault"/></inputDefault>
                     <LineFragment>
                       <xsl:attribute name="firstCharOffset"><xsl:value-of select="LineFragment/@firstCharOffset"/></xsl:attribute>

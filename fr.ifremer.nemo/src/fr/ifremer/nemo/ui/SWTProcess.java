@@ -46,8 +46,14 @@ public class SWTProcess implements IRunnableWithProgress
         Configuration config = Nemo.getInstance().getConfig();
         
         Conversion formatConversion = Conversion.MEDATLAS;
-        if (iDomain.getConversion().getCurrent() != E_TypeConversion.MEDATLAS)
+        
+        if (iDomain.getConversion().getCurrent() == E_TypeConversion.ODV_MONOSTATION 
+                || iDomain.getConversion().getCurrent() == E_TypeConversion.ODV_MULTISTATIONS)
             formatConversion = Conversion.ODV;
+        
+        if (iDomain.getConversion().getCurrent() == E_TypeConversion.NETCDF_MONOSTATION 
+                || iDomain.getConversion().getCurrent() == E_TypeConversion.NETCDF_MULTISTATIONS)
+            formatConversion = Conversion.NETCDF;
 
         try
         {
@@ -79,14 +85,16 @@ public class SWTProcess implements IRunnableWithProgress
                             if (iDomain.getMedia().getModel().getProcessType() == E_ProcessType.CRUISE_DIR) {
                                 if (!filename.toString().equals(Global.EMPTY_STRING))
                                     filename.append(File.separator);
-                                if (iDomain.getConversion().getCurrent() == E_TypeConversion.ODV_MONOSTATION) {
+                                if (iDomain.getConversion().getCurrent() == E_TypeConversion.ODV_MONOSTATION 
+                                        || iDomain.getConversion().getCurrent() == E_TypeConversion.NETCDF_MONOSTATION) {
                                     filename.append(outputFile.getParentFile().getName());
                                     filename.append(File.separator);
                                     modus = Mapping.MODUS_MONOSTATION;
                                 }
                                 filename.append(outputFile.getName());
                             } else {
-                                if (iDomain.getConversion().getCurrent() == E_TypeConversion.ODV_MONOSTATION) {
+                                if (iDomain.getConversion().getCurrent() == E_TypeConversion.ODV_MONOSTATION
+                                        || iDomain.getConversion().getCurrent() == E_TypeConversion.NETCDF_MONOSTATION) {
                                     if (!filename.toString().equals(Global.EMPTY_STRING))
                                         filename.append(File.separator);
                                     modus = Mapping.MODUS_MONOSTATION;

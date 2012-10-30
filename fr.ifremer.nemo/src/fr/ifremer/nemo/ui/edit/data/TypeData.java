@@ -61,7 +61,7 @@ public class TypeData extends Object
         this.setEntree(typeData.entree);
         this.setFormat(typeData.format);
         // 11976
-        if (isODV())
+        if (isODV() || isNetCDF())
         {
             this.setSortie("");
         }
@@ -125,7 +125,7 @@ public class TypeData extends Object
         setUniteCode(parameter.getUnitCode());
         setFormat(parameter.getFormat());
         // 11976
-        if (isODV())
+        if (isODV()|| isNetCDF())
         {
             setSortie("");
         }
@@ -178,6 +178,16 @@ public class TypeData extends Object
             Nemo.getInstance().getDomain().getConversion().getModel()
                 .getOutputFormat();
         return (conv == E_TypeConversion.ODV_MONOSTATION || conv == E_TypeConversion.ODV_MULTISTATIONS);
+
+    }
+    
+    private boolean isNetCDF()
+    {
+
+        E_TypeConversion conv =
+            Nemo.getInstance().getDomain().getConversion().getModel()
+                .getOutputFormat();
+        return (conv == E_TypeConversion.NETCDF_MONOSTATION || conv == E_TypeConversion.NETCDF_MULTISTATIONS);
 
     }
 

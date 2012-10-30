@@ -51,5 +51,10 @@
 	<classpathentry kind="lib" path="axis2-1.5.4/lib/neethi-2.0.4.jar"/>
 	<classpathentry kind="lib" path="axis2-1.5.4/lib/XmlSchema-1.4.3.jar"/>
 	<classpathentry kind="lib" path="lib/SdnVocabulary.jar"/>
+	<classpathentry kind="lib" path="lib/fr.ifremer.sdnNetCDF.0.5.jar" sourcepath="/sdnNetCDF/src"/>
+	<classpathentry kind="lib" path="lib/netcdf-4.2.jar"/>
+	<classpathentry kind="lib" path="lib/slf4j-api-1.5.6.jar"/>
+	<classpathentry kind="lib" path="lib/slf4j-jdk14-1.5.6.jar"/>
+	<classpathentry kind="lib" path="lib/slf4j-log4j12-1.5.6.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -46,6 +46,17 @@ public class OutputFormatRadioSelectionListener implements SelectionListener
         {
             currentConv = E_TypeConversion.MEDATLAS;
         }
+        else if(g.getSource().equals(myEditFileForm.getRadNetCDF())){
+            if (myEditFileForm.getRadODVMonoFichier().getSelection())
+            {
+                currentConv = E_TypeConversion.NETCDF_MULTISTATIONS;
+            }else if(myEditFileForm.getRadODVMonoStation().getSelection())
+            {
+                currentConv = E_TypeConversion.NETCDF_MONOSTATION;
+            }else{
+                currentConv =E_TypeConversion.UNKNOWN;
+            }
+        }
         else if(g.getSource().equals(myEditFileForm.getRadODV()))
         {
             if (myEditFileForm.getRadODVMonoFichier().getSelection())
@@ -60,11 +71,26 @@ public class OutputFormatRadioSelectionListener implements SelectionListener
         }
         else if(g.getSource().equals(myEditFileForm.getRadODVMonoFichier()))
         {
-            currentConv = E_TypeConversion.ODV_MULTISTATIONS;
+            if (myEditFileForm.getRadODV().getSelection())
+            {
+                currentConv = E_TypeConversion.ODV_MULTISTATIONS;
+            }
+            else
+            {
+                currentConv = E_TypeConversion.NETCDF_MULTISTATIONS;
+            }
         }
         else if(g.getSource().equals(myEditFileForm.getRadODVMonoStation()))
         {
-            currentConv = E_TypeConversion.ODV_MONOSTATION;
+            
+            if (myEditFileForm.getRadODV().getSelection())
+            {
+                currentConv = E_TypeConversion.ODV_MONOSTATION;
+            }
+            else
+            {
+                currentConv = E_TypeConversion.NETCDF_MONOSTATION;
+            }
         }
         
         rulesMgr.defineSectionMandatory();

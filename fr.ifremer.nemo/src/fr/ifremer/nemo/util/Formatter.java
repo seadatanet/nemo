@@ -370,7 +370,8 @@ public class Formatter implements Cloneable
 		if (conv == E_TypeConversion.MEDATLAS)
 		{
 			res = padZero(stNumber, StationNumberLength_MEDATLAS);
-		} else if (conv == E_TypeConversion.ODV_MONOSTATION || conv == E_TypeConversion.ODV_MULTISTATIONS)
+		} else if (conv == E_TypeConversion.ODV_MONOSTATION || conv == E_TypeConversion.ODV_MULTISTATIONS
+		        || conv == E_TypeConversion.NETCDF_MONOSTATION || conv == E_TypeConversion.NETCDF_MULTISTATIONS)
 		{
 			if (res.length() > StationNumberLength_ODV)
 			{

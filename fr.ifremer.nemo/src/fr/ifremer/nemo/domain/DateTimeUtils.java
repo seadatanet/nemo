@@ -179,6 +179,51 @@ public class DateTimeUtils {
 		cal.setTimeInMillis(date);
 		return cal.get(Calendar.YEAR);
 	}
+	
+	public static double getJulianDay(long date)
+	{
+	    TimeZone tz = TimeZone.getTimeZone(DateTimeFormat.GMT);
+        Calendar cal = Calendar.getInstance(tz);
+	    int year = cal.get(Calendar.YEAR);
+	    int month = cal.get(Calendar.MONTH) + 1;
+	    int day = cal.get(Calendar.DAY_OF_MONTH);
+	    double hour = cal.get(Calendar.HOUR_OF_DAY);
+	    double minute = cal.get(Calendar.MINUTE);
+	    double second = cal.get(Calendar.SECOND);
+	    int isGregorianCal = 1;
+	    int A;
+	    int B;
+	    int C;
+	    int D;
+	    double fraction = day + ((hour + (minute / 60) + (second / 60 / 60)) / 24);
+	         
+	    if (year < 1582)
+	       isGregorianCal = 0;
+	         
+	    if (month < 3)
+	    {
+	       year = year - 1;
+	       month = month + 12;
+	    }
+
+	    A = year / 100;
+	    B = (2 - A + (A / 4)) * isGregorianCal;
+	         
+	    if (year < 0)
+	    {
+	       C = (int)((365.25 * year) - 0.75);
+	    }
+	    else
+	    {
+	       C = (int)(365.25 * year);
+	    }
+	         
+	    D = (int)(30.6001 * (month + 1));
+	    return B + C + D + 1720994.5 + fraction;
+
+
+	}
+
 
 	public static String getVariantDateTime(long currentDate) throws ParseException, UnsupportedEncodingException {
 		StringBuffer value = new StringBuffer();

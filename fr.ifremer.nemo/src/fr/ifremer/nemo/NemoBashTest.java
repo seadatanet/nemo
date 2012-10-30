@@ -41,26 +41,19 @@ import fr.ifremer.nemo.util.Global.E_TypeConversion;
 import fr.ifremer.nemo.util.Intern;
 
 /**
- * Description: classe de tests
- * - generation auto en appelant le mode batch
- * - comparaison avec des fichiers de référence
- * Structure des repertoires:
- * dataRootPath/xxxx/versionDirName/dataList/conversion/tyyy
- * où
- * - xxx est un nom representant le type de données (ex: diapalis,...) - choix
- * libre
- * - yyy est un nom quelconque, nb de char quelconque
- * pour xxx: si le repertoire commence par "_", il est ignoré
- * pour tyyy: si ce répertoire commence par "t", il est considéré comme un test.
- * S'il commence par "_", il est considéré comme un test désactivé.
- * S'il commence par un autre caractère, il est ignoré.
- * Pour ne lancer les tests que sur un répertoire, utiliser testDirAlone
- * ex: public static String[] testDirAlone={"cruiseFile_trajectory_6959"}; ne
- * lancera les tests que sur cruiseFile_trajectory_6959
- * utiliser
- * - time ODV = ISO
- * Le EDMO code est forcé automatiquement à 486 (code IFREMER utilisé dans les
- * fichiers reference)
+ * Description: classe de tests - generation auto en appelant le mode batch -
+ * comparaison avec des fichiers de référence Structure des repertoires:
+ * dataRootPath/xxxx/versionDirName/dataList/conversion/tyyy où - xxx est un nom
+ * representant le type de données (ex: diapalis,...) - choix libre - yyy est un
+ * nom quelconque, nb de char quelconque pour xxx: si le repertoire commence par
+ * "_", il est ignoré pour tyyy: si ce répertoire commence par "t", il est
+ * considéré comme un test. S'il commence par "_", il est considéré comme un
+ * test désactivé. S'il commence par un autre caractère, il est ignoré. Pour ne
+ * lancer les tests que sur un répertoire, utiliser testDirAlone ex: public
+ * static String[] testDirAlone={"cruiseFile_trajectory_6959"}; ne lancera les
+ * tests que sur cruiseFile_trajectory_6959 utiliser - time ODV = ISO Le EDMO
+ * code est forcé automatiquement à 486 (code IFREMER utilisé dans les fichiers
+ * reference)
  * 
  * @author sbregent
  */
@@ -78,8 +71,7 @@ public class NemoBashTest
     // comparer les fichiers manuels (output_eclipse) aux fichiers REFERENCE
     public static boolean compareManualFiles = false;
 
-    public static String[] testDirAlone =
-        {};
+    public static String[] testDirAlone = {};
 
     public String inputName = "input";
     public String outputName = "output_junit";
@@ -102,6 +94,9 @@ public class NemoBashTest
     public static int nbTotalTests = 0;
     public static int nbTotalFailed = 0;
     public static int nbTotalSuccess = 0;
+
+    public static boolean isVocabV2Param = true;
+    public static boolean isVocabV2 = false;
 
     public Message message;
 
@@ -167,14 +162,24 @@ public class NemoBashTest
     @AfterClass
     public static void tearDownAfterClass() throws Exception
     {
+        testLogger
+            .info("\r\n\r\n\r\n\r\n___________________________isVocabV2_____________________________\r\n\r\n\r\n\r\n");
+        if (isVocabV2Param == true)
+        {
+            Assert.assertTrue(isVocabV2);
+            testLogger.info("is vocab v2");
+        }
+        else
+        {
+            Assert.assertFalse(isVocabV2);
+            testLogger.info("is vocab v1");
+        }
 
         testLogger
             .info("\r\n\r\n"
                     + "TOTAL ====================================================================================="
-                    + "\r\n"
-                    + nbTotalSuccess + " tests succeed on " + nbTotalTests
-                    + "\r\n"
-                    + nbTotalFailed + " tests failed");
+                    + "\r\n" + nbTotalSuccess + " tests succeed on "
+                    + nbTotalTests + "\r\n" + nbTotalFailed + " tests failed");
 
         testLogger.info("batchCommands" + Global.RN);
         testLogger.info(batchCommands);
@@ -268,20 +273,20 @@ public class NemoBashTest
     public final void inValidated_model()
     {
         testLogger
-                .info("\r\n\r\n\r\n\r\n_______________________________unValidated_model________________________________\r\n\r\n\r\n\r\n");
+            .info("\r\n\r\n\r\n\r\n_______________________________unValidated_model________________________________\r\n\r\n\r\n\r\n");
         message = new Message();
         message.testName = "invalidated model in batch mod";
         File root = new File(dataRootPath);
         String inputAbsolutePath =
-                root.getAbsolutePath()
-                        + "\\_9656_collectionGroupByCruise_withSeparator_unvalidated_model\\"
-                        + inputName;
+            root.getAbsolutePath()
+                    + "\\_9656_collectionGroupByCruise_withSeparator_unvalidated_model\\"
+                    + inputName;
         String outputAbsolutePath =
-                root.getAbsolutePath()
-                        + "\\_9656_collectionGroupByCruise_withSeparator_unvalidated_model\\P091\\ODV_MULTISTATIONS\\";
+            root.getAbsolutePath()
+                    + "\\_9656_collectionGroupByCruise_withSeparator_unvalidated_model\\P091\\ODV_MULTISTATIONS\\";
         Assert.assertFalse(convertWithNemoBatch(Conversion.ODV,
-                E_TypeConversion.ODV_MULTISTATIONS, inputAbsolutePath,
-                outputAbsolutePath));
+            E_TypeConversion.ODV_MULTISTATIONS, inputAbsolutePath,
+            outputAbsolutePath));
     }
 
     /**
@@ -293,7 +298,7 @@ public class NemoBashTest
     public final void checkEmptyProxyTest()
     {
         testLogger
-                .info("\r\n\r\n\r\n\r\n_______________________________emptyProxyTest________________________________\r\n\r\n\r\n\r\n");
+            .info("\r\n\r\n\r\n\r\n_______________________________emptyProxyTest________________________________\r\n\r\n\r\n\r\n");
         message = new Message();
         message.testName = "empty Proxy test";
 
@@ -305,7 +310,7 @@ public class NemoBashTest
     public final void checkEmptyProxyTestInit()
     {
         testLogger
-                .info("\r\n\r\n\r\n\r\n_______________________________emptyProxyTest________________________________\r\n\r\n\r\n\r\n");
+            .info("\r\n\r\n\r\n\r\n_______________________________emptyProxyTest________________________________\r\n\r\n\r\n\r\n");
         message = new Message();
         message.testName = "empty Proxy test";
 
@@ -317,7 +322,7 @@ public class NemoBashTest
     public final void checkDefaultLanguageTest()
     {
         testLogger
-                .info("\r\n\r\n\r\n\r\n_______________________________emptyProxyTest________________________________\r\n\r\n\r\n\r\n");
+            .info("\r\n\r\n\r\n\r\n_______________________________emptyProxyTest________________________________\r\n\r\n\r\n\r\n");
         message = new Message();
         message.testName = "empty Proxy test";
         Configuration config = new Configuration();
@@ -329,7 +334,7 @@ public class NemoBashTest
     public final void checkDefaultLanguageInitTest()
     {
         testLogger
-                .info("\r\n\r\n\r\n\r\n_______________________________emptyProxyTest________________________________\r\n\r\n\r\n\r\n");
+            .info("\r\n\r\n\r\n\r\n_______________________________emptyProxyTest________________________________\r\n\r\n\r\n\r\n");
         message = new Message();
         message.testName = "empty Proxy test";
         Configuration config = new Configuration(true);
@@ -347,7 +352,7 @@ public class NemoBashTest
     {
         boolean res = false;
         testLogger
-                .info("\r\n\r\n\r\n\r\n__________________________userParemetersLabelsEmpty___________________________\r\n\r\n\r\n\r\n");
+            .info("\r\n\r\n\r\n\r\n__________________________userParemetersLabelsEmpty___________________________\r\n\r\n\r\n\r\n");
         message = new Message();
         message.testName = " Empty userParemetersLabels";
         org.w3c.dom.Document document;
@@ -516,9 +521,7 @@ public class NemoBashTest
         }
         testLogger.info("\r\n========================================="
                 + cptFail + " failed /" + cptTests + " tested"
-                + "========================================="
-                + "\r\n"
-                );
+                + "=========================================" + "\r\n");
 
         return nbTotalFailed == 0;
     }
@@ -570,11 +573,10 @@ public class NemoBashTest
             Nemo.getInstance().setBatchMode(true);
             try
             {
-                res = shell.main(inputAbsolutePath, output, model,
-                        conversion, sortDatas, odvConv, datasetRef,
-                        cdiSummaryFile,
-                        couplingTableUpdate, couplingTablePrefix,
-                        batchLogger);
+                res =
+                    shell.main(inputAbsolutePath, output, model, conversion,
+                        sortDatas, odvConv, datasetRef, cdiSummaryFile,
+                        couplingTableUpdate, couplingTablePrefix, batchLogger);
             }
             catch (Exception e)
             {
@@ -703,6 +705,7 @@ public class NemoBashTest
                         {
                             refFileLine = m.replaceAll("P01");
                             identical = outputLine.equals(refFileLine);
+                            isVocabV2 = true;
                         }
                     }
                     // depuisles vocab v2, le mapping BODC a changé : P061
@@ -715,9 +718,10 @@ public class NemoBashTest
                         {
                             refFileLine = m.replaceAll("P06");
                             identical = outputLine.equals(refFileLine);
+                            isVocabV2 = true;
                         }
                     }
-                    
+
                 }
             }
             return identical;

@@ -282,7 +282,8 @@ public class StationDomain {
 			// Station
 			errorMessage = "station reference";
 			if (Nemo.getInstance().getDomain().getMedia().getModel().getInputType() == E_InputType.TRAJECTORY) {
-				if(Nemo.getInstance().getDomain().getConversion().getCurrent() != E_TypeConversion.ODV_MULTISTATIONS)
+				if(Nemo.getInstance().getDomain().getConversion().getCurrent() != E_TypeConversion.ODV_MULTISTATIONS
+				        || Nemo.getInstance().getDomain().getConversion().getCurrent() != E_TypeConversion.NETCDF_MULTISTATIONS)
 				    _ref = 1;
 				odvStationHeader.append(form.limitString(getRef(true), 20));
 			} else {

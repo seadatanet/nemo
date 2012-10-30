@@ -236,6 +236,7 @@ public class ParameterManager
 
 		boolean isMedatlas = getConversionType() == E_TypeConversion.MEDATLAS;
 		boolean isODV = getConversionType() == E_TypeConversion.ODV_MONOSTATION || getConversionType() == E_TypeConversion.ODV_MULTISTATIONS;
+		boolean isNetCDF = getConversionType() == E_TypeConversion.NETCDF_MONOSTATION || getConversionType() == E_TypeConversion.NETCDF_MULTISTATIONS;
 
 		DataModel dataModel = Nemo.getInstance().getDomain().getData().getModel();
 		// recuperation des parametres verticaux
@@ -567,6 +568,13 @@ public class ParameterManager
 		_odvParameterModels.toArray(v);
 		return v;
 	}
+	
+	public ParameterModel[] getNetCDFParameterModels()
+    {
+        ParameterModel[] v = new ParameterModel[_odvParameterModels.size()];
+        _odvParameterModels.toArray(v);
+        return v;
+    }
 
 	public void addMedParameterModel(ParameterModel x)
 	{

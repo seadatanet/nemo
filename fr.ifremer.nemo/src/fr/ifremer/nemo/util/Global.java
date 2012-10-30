@@ -4,7 +4,7 @@ public interface Global
 {
 	public static final String NEMO_ENCODING = "ISO-8859-15";
 	public static final int SIZE_SECTION = 270;
-
+	public static final String SDN = "SDN"; //$NON-NLS-1$
 	public static final String ZERO = "0"; //$NON-NLS-1$
 	public static final String DEFAULT_FLAG = "9"; //$NON-NLS-1$
 	public static final String WORSE_FLAG = "Z"; //$NON-NLS-1$
@@ -34,6 +34,7 @@ public interface Global
 	public static final String POURCENT_S = "%s"; //$NON-NLS-1$
 	public static final String EXT_XML = ".xml"; //$NON-NLS-1$
 	public static final String EXT_TXT = ".txt"; //$NON-NLS-1$
+	public static final String EXT_NC = ".nc"; //$NON-NLS-1$
 
 	// Séparateurs
 	public static final String TAB = "\t"; //$NON-NLS-1$
@@ -114,7 +115,7 @@ public interface Global
 	}
 
 	public enum E_TypeConversion {
-		MEDATLAS, ODV_MULTISTATIONS, ODV_MONOSTATION, UNKNOWN;
+		MEDATLAS, ODV_MULTISTATIONS, ODV_MONOSTATION, UNKNOWN, NETCDF_MONOSTATION, NETCDF_MULTISTATIONS;
 	}
 
 	public enum DataListTypeEnum {

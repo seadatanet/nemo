@@ -5,6 +5,7 @@ import fr.ifremer.nemo.domain.CruiseDomain;
 import fr.ifremer.nemo.domain.InputDomain;
 import fr.ifremer.nemo.domain.StationDomain;
 import fr.ifremer.nemo.output.medatlas.MedatlasWriter;
+import fr.ifremer.nemo.output.netCDF.NetCDFWriter;
 import fr.ifremer.nemo.output.odv.OdvWriter;
 import fr.ifremer.nemo.util.Conversion;
 
@@ -41,6 +42,8 @@ public final class NemoWriterFactory {
                 return new MedatlasWriter(); 
             case ODV : 
                 return new OdvWriter(); 
+            case NETCDF :
+                return new NetCDFWriter(); 
         }
         return null;
 	}

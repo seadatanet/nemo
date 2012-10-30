@@ -192,8 +192,8 @@ public class EditConversionForm extends EditForm
         dialog.setText(Messages.edit_convert_outputFilename);
 
         // FAE090
-        if (Nemo.getInstance().getViewMain().getMyRulesManager()
-            .isConversionToODV())
+        if (Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToODV() 
+                || Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToNetCDF())
         {
             String[] extensions = new String[1];
             extensions[0] = Global.STAR + Global.EXT_TXT;
@@ -381,6 +381,11 @@ public class EditConversionForm extends EditForm
                 .isConversionToODV())
             {
                 Utils.messageOK(Messages.edit_convert_endODV);
+            }
+            else if (Nemo.getInstance().getViewMain().getMyRulesManager()
+                    .isConversionToNetCDF())
+            {
+                Utils.messageOK(Messages.edit_convert_endNETCDF);
             }
             else
             {
@@ -696,8 +701,12 @@ public class EditConversionForm extends EditForm
         {
             command += Conversion.ODV.toString();
         }
+        if (rm.isConversionToNetCDF())
+        {
+            command += Conversion.NETCDF.toString();
+        }
 
-        if (rm.isConversionToODVMultiStation())
+        if (rm.isConversionToODVMultiStation() || rm.isConversionToNetCDFMultiStation())
         {
             command += Global.SPACE;
             command += Global.SPACE;
@@ -817,14 +826,14 @@ public class EditConversionForm extends EditForm
         summary +=
             Messages.view_convert_summary_outputFormatLabel + Global.DBL_PT
                     + Global.RN + rm.getMyConversionType();
-        if (rm.isConversionToODV())
+        if (rm.isConversionToODV() || rm.isConversionToNetCDF())
         {
             summary += Global.COMMA + Global.SPACE;
-            if (rm.isConversionToODVMonoStation())
+            if (rm.isConversionToODVMonoStation() || rm.isConversionToNetCDFMonoStation())
             {
                 summary += Messages.view_convert_monoStation;
             }
-            if (rm.isConversionToODVMultiStation())
+            if (rm.isConversionToODVMultiStation() || rm.isConversionToNetCDFMultiStation())
             {
                 summary += Messages.view_convert_monoFichier;
             }

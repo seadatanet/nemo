@@ -8,7 +8,7 @@ package fr.ifremer.nemo.util;
  */
 public enum Conversion
 {
-    MEDATLAS, ODV;
+    MEDATLAS, ODV, NETCDF;
 
     
     public String getName(){
@@ -16,6 +16,9 @@ public enum Conversion
         switch (this){
             case MEDATLAS :
                 name = "Medatlas";//$NON-NLS-1$
+                break;
+            case NETCDF :
+                name = "NetCDF";//$NON-NLS-1$
                 break;
             default :
                 name = this.toString();
@@ -42,6 +45,9 @@ public enum Conversion
         switch (this){
             case ODV :
                 ext = Global.EXT_TXT;
+                break;
+            case NETCDF :
+                ext = Global.EXT_NC;
                 break;
             default:
                 ext = ".*";//$NON-NLS-1$

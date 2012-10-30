@@ -199,7 +199,7 @@ public class NemoShell
                 .setAddedParameterModel();
             File repertory = null;
 
-            if (odvConv.equals(E_TypeConversion.ODV_MONOSTATION))
+            if (odvConv.equals(E_TypeConversion.ODV_MONOSTATION) || odvConv.equals(E_TypeConversion.NETCDF_MONOSTATION))
             {
                 repertory = new File(outputFile);
             }
@@ -304,7 +304,8 @@ public class NemoShell
                     {
                         if (!filename.equals(Global.EMPTY_STRING))
                             filename.append(File.separator);
-                        if (inputDomain.getConversion().getCurrent() == E_TypeConversion.ODV_MONOSTATION)
+                        if (inputDomain.getConversion().getCurrent() == E_TypeConversion.ODV_MONOSTATION
+                                ||inputDomain.getConversion().getCurrent() == E_TypeConversion.NETCDF_MONOSTATION)
                         {
                             filename.append(outputFile.getParentFile()
                                 .getName());
@@ -315,7 +316,8 @@ public class NemoShell
                     }
                     else
                     {
-                        if (inputDomain.getConversion().getCurrent() == E_TypeConversion.ODV_MONOSTATION)
+                        if (inputDomain.getConversion().getCurrent() == E_TypeConversion.ODV_MONOSTATION 
+                                || inputDomain.getConversion().getCurrent() == E_TypeConversion.NETCDF_MONOSTATION)
                         {
                             if (!filename.equals(Global.EMPTY_STRING))
                                 filename.append(File.separator);

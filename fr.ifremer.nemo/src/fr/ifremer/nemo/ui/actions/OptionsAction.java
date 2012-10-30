@@ -127,6 +127,7 @@ public class OptionsAction extends Action implements ISelectionListener,
     private Group group, group01, group02;
     // choix du format d'export
     private  Button radMedatlas;
+    private  Button radNetCDF;
     private  Button radODV;
     private  Button radODVMonoFichier;
     private  Button radODVMonoStation ;
@@ -346,6 +347,7 @@ public class OptionsAction extends Action implements ISelectionListener,
         // convert type
         radMedatlas.setSelection(false);
         radODV.setSelection(false);
+        radNetCDF.setSelection(false);
         radODVMonoStation.setSelection(false);
         radODVMonoFichier.setSelection(false);
         switch (config.getDefaultConversionType())
@@ -359,6 +361,14 @@ public class OptionsAction extends Action implements ISelectionListener,
                 break;
             case ODV_MULTISTATIONS:
                 radODV.setSelection(true);
+                radODVMonoFichier.setSelection(true);
+                break;
+            case NETCDF_MONOSTATION:
+                radNetCDF.setSelection(true);
+                radODVMonoStation.setSelection(true);
+                break;
+            case NETCDF_MULTISTATIONS:
+                radNetCDF.setSelection(true);
                 radODVMonoFichier.setSelection(true);
                 break;
             case UNKNOWN:
@@ -925,6 +935,11 @@ public class OptionsAction extends Action implements ISelectionListener,
         radODV.setSelection(false);
         addRadConvertListener(radODV);
         
+        radNetCDF = new Button(medOrOdvGroup, SWT.RADIO);
+        radNetCDF.setText(Conversion.NETCDF.getName());
+        radNetCDF.setSelection(false);
+        addRadConvertListener(radNetCDF);
+        
         //****************************************************************************************
         // ODV type
         GridData odvTypegridData = new GridData();
@@ -984,7 +999,20 @@ public class OptionsAction extends Action implements ISelectionListener,
             }else{
                // on laisse null, ce qui provoquera une alerte au check
             }
-        }else{
+        }
+        else if (radNetCDF.getSelection())
+        {
+            if (radODVMonoStation.getSelection())
+            {
+                selected = E_TypeConversion.NETCDF_MONOSTATION;
+            }else if (radODVMonoFichier.getSelection())
+            {
+                selected = E_TypeConversion.NETCDF_MULTISTATIONS;
+            }else{
+               // on laisse null, ce qui provoquera une alerte au check
+            }
+        }
+        else{
             selected = E_TypeConversion.UNKNOWN;
         }
         

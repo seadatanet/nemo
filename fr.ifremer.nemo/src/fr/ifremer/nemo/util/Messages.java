@@ -251,6 +251,7 @@ public class Messages
     // CONVERSION
     public static String edit_convert_title;
     public static String edit_convert_endODV;
+    public static String edit_convert_endNETCDF;
     public static String edit_convert_endMED;
     public static String edit_convert_outputFilename;
     public static String edit_convert_outputDir;
@@ -262,6 +263,7 @@ public class Messages
     public static String edit_file_info_cruiseDisabledBecauseODV;
     public static String edit_file_info_conversionNotApplicable;
     public static String edit_file_info_P011viaP021_disabled;
+    public static String edit_file_info_P091disabled;
     // RESULTATS
     public static String error_preformat_impossible;
     public static String success_file_preformat;
