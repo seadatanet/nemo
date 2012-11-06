@@ -103,6 +103,9 @@ public class RulesManager
 		EditCruiseForm myEditCruiseForm = Nemo.getInstance().getViewMain().getEditCruiseForm();
 		EditStationForm myEditStationForm = Nemo.getInstance().getViewMain().getEditStationForm();
 
+		boolean isMandatory= !isConversionToNetCDF();
+
+		
 		// mandatory File Section
 		if (myEditFileForm.sectionFileHeader != null)
 		{
@@ -120,18 +123,18 @@ public class RulesManager
 			{
 				myEditCruiseForm.sectionReference.getItems().get(i).setMandatory(true);
 			}
-			myEditCruiseForm.sectionLocalisation.setMandatory(true);
+			myEditCruiseForm.sectionLocalisation.setMandatory(isMandatory);
 			for (int i = 0; i < myEditCruiseForm.sectionLocalisation.getItems().size(); i++)
 			{
-				myEditCruiseForm.sectionLocalisation.getItems().get(i).setMandatory(true);
+				myEditCruiseForm.sectionLocalisation.getItems().get(i).setMandatory(isMandatory);
 			}
-			myEditCruiseForm.sectionSource.setMandatory(true);
-			myEditCruiseForm.sectionSource.getItems().get(0).setMandatory(true);
-			myEditCruiseForm.sectionSource.getItems().get(2).setMandatory(true);
+			myEditCruiseForm.sectionSource.setMandatory(isMandatory);
+			myEditCruiseForm.sectionSource.getItems().get(0).setMandatory(isMandatory);
+			myEditCruiseForm.sectionSource.getItems().get(2).setMandatory(isMandatory);
 
-			myEditCruiseForm.sectionCentre.setMandatory(true);
-			myEditCruiseForm.sectionCentre.getItems().get(0).setMandatory(true);
-			myEditCruiseForm.sectionCentre.getItems().get(1).setMandatory(true);
+			myEditCruiseForm.sectionCentre.setMandatory(isMandatory);
+			myEditCruiseForm.sectionCentre.getItems().get(0).setMandatory(isMandatory);
+			myEditCruiseForm.sectionCentre.getItems().get(1).setMandatory(isMandatory);
 
 			myEditCruiseForm.sectionType.setMandatory(true);
 

@@ -152,8 +152,9 @@ public class CruiseFormValidator extends FormValidator
 			}
 
 		}
-
-		ok = ok & editCruiseForm.sectionType.chekMandatory();
+		
+		if(editCruiseForm.sectionType.isMandatory())
+		    ok = ok & editCruiseForm.sectionType.chekMandatory();
 
 		// FAE 1143 : la référence campagne doit être == 13 caractères pour
 		// MEDATLAS

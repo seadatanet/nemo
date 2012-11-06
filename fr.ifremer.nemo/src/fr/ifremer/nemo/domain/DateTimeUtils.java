@@ -184,6 +184,7 @@ public class DateTimeUtils {
 	{
 	    TimeZone tz = TimeZone.getTimeZone(DateTimeFormat.GMT);
         Calendar cal = Calendar.getInstance(tz);
+        cal.setTimeInMillis(date);
 	    int year = cal.get(Calendar.YEAR);
 	    int month = cal.get(Calendar.MONTH) + 1;
 	    int day = cal.get(Calendar.DAY_OF_MONTH);

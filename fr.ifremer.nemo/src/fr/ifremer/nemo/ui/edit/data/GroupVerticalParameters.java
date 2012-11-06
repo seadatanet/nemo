@@ -11,6 +11,8 @@ package fr.ifremer.nemo.ui.edit.data;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
@@ -68,6 +70,23 @@ public class GroupVerticalParameters
 		labelP.setText(Messages.edit_data_verticalParameters_pressure);
 		comboP = new Combo(group, SWT.BORDER | SWT.READ_ONLY);
 
+		SelectionListener selectionListener = new SelectionListener() {
+            @Override
+            public void widgetSelected(SelectionEvent e)
+            {
+                controlNetCDFSelection((Combo)e.widget);
+            }
+
+            @Override
+            public void widgetDefaultSelected(SelectionEvent e)
+            {
+                controlNetCDFSelection((Combo)e.widget);
+            }
+         };
+		
+		comboDBSSurf.addSelectionListener(selectionListener);
+		comboDBSBed.addSelectionListener(selectionListener);
+		comboP.addSelectionListener(selectionListener);
 		init();
 	}
 
@@ -194,5 +213,20 @@ public class GroupVerticalParameters
 				comboP.select(i);
 			}
 		}
+	}
+	
+	public void controlNetCDFSelection(Combo current)
+	{
+	    if(Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToNetCDF())
+	    {
+    	    if(!current.equals(comboDBSSurf))
+    	        comboDBSSurf.select(0);
+    	    
+    	    if(!current.equals(comboDBSBed))
+    	        comboDBSBed.select(0);
+    	    
+    	    if(!current.equals(comboP))
+    	        comboP.select(0);
+	    }
 	}
 }

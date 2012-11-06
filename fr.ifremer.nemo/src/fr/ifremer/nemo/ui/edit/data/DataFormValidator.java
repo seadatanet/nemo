@@ -617,8 +617,7 @@ public class DataFormValidator extends FormValidator
 				&& rm.getMyVerticalParametersList().getP_depthBSBed()
 						.equals(Global.EMPTY_STRING))
 		{
-			Utils
-					.messageErreurAppend(Messages.edit_data_verticalParameters_info_chooseDepthBSBed
+			Utils.messageErreurAppend(Messages.edit_data_verticalParameters_info_chooseDepthBSBed
 							+ Global.SPACE
 							+ "("
 							+ myParameterManager.getP_depthBSBedCode() + ")");
