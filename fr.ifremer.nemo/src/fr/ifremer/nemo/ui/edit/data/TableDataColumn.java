@@ -35,10 +35,10 @@ public class TableDataColumn
 		this.writable = writable;
 		isMandatory= mandatory;
 		if (label!=null){
-            if(isMandatory && !label.startsWith("* "))
-                this.label="* "+ label;
+            if(isMandatory && !label.startsWith("* ")) //$NON-NLS-1$
+                this.label="* "+ label;//$NON-NLS-1$
             
-            if(!isMandatory && label.startsWith("* "))
+            if(!isMandatory && label.startsWith("* "))//$NON-NLS-1$
                 this.label= label.substring(2, label.length()-1);
         }
 	}
@@ -74,10 +74,10 @@ public class TableDataColumn
 	{
 	    isMandatory=mandatory;
 	    if (label!=null){
-	        if(isMandatory && !label.startsWith("* "))
-	            label="* "+ label;
+	        if(isMandatory && !label.startsWith("* "))//$NON-NLS-1$
+	            label="* "+ label;//$NON-NLS-1$
 	        
-	        if(!isMandatory && label.startsWith("* "))
+	        if(!isMandatory && label.startsWith("* "))//$NON-NLS-1$
 	            label= label.substring(2, label.length()-1);
 	    }
 	}

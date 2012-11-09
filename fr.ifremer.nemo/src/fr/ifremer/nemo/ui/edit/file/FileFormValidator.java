@@ -138,6 +138,7 @@ public class FileFormValidator extends FormValidator
                 Nemo.getInstance().getDomain().getMedia()
                     .buildInputFilesNames();
             }
+            Nemo.getInstance().getViewMain().getMyRulesManager().defineSectionMandatory();
 
         }
         catch (Exception e)

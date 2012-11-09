@@ -160,10 +160,11 @@ public class RulesManager
 			myEditStationForm.latitude.setMandatory(true);
 			myEditStationForm.longitude.setMandatory(true);
 			myEditStationForm.depth.setMandatory(false);
+			    
 
 			if (myEditStationForm.sensorDepth.getSection() != null && !myEditStationForm.sensorDepth.getSection().isDisposed())
 			{
-				if (myEditFileForm.getRadSerieTempo().getSelection())
+				if (myEditFileForm.getRadSerieTempo().getSelection() || isConversionToNetCDF())
 					myEditStationForm.sensorDepth.setMandatory(true);
 				else
 					myEditStationForm.sensorDepth.setMandatory(false);

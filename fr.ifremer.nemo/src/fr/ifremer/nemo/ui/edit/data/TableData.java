@@ -163,7 +163,12 @@ public class TableData
      */
     private boolean isValueOutWritable()
     {
-        return Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToMedatlas();
+        return (Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToMedatlas() || Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToNetCDF());
+    }
+    
+    private boolean isValueOutMandatory()
+    {
+        return Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToMedatlas() ;
     }
 
     private boolean isLabelWritable()
@@ -356,7 +361,7 @@ public class TableData
             {
                 // columnsMap.get(i).setWritable(isLabelWritable());
                 columnsMap.get(i).enable(isValueOutWritable());
-                columnsMap.get(i).setMandatory(isValueOutWritable());
+                columnsMap.get(i).setMandatory(isValueOutMandatory());
             }
 
             // tableColumn.setAlignment(SWT.RIGHT);

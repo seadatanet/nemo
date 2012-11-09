@@ -196,7 +196,11 @@ public class EditConversionForm extends EditForm
                 || Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToNetCDF())
         {
             String[] extensions = new String[1];
-            extensions[0] = Global.STAR + Global.EXT_TXT;
+            String extenstionString = Global.EXT_TXT;
+            if(Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToNetCDF())
+                extenstionString = Global.EXT_NC;
+            extensions[0] = Global.STAR + extenstionString;
+            
             dialog.setFilterExtensions(extensions);
 
             CruiseModel cruiseModel =

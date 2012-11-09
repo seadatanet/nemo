@@ -30,6 +30,7 @@ import fr.ifremer.nemo.config.VocabLists;
 import fr.ifremer.nemo.domain.DateTimeUtils;
 import fr.ifremer.nemo.domain.Station;
 import fr.ifremer.nemo.domain.StationDomain;
+import fr.ifremer.nemo.input.ModelDescription;
 import fr.ifremer.nemo.input.parameters.Parameter;
 import fr.ifremer.nemo.input.parameters.ParameterModel;
 import fr.ifremer.nemo.output.GenerationException;
@@ -259,6 +260,7 @@ public class NetCDFWriter extends NemoWriter
 
                     stationHeader = iDomain.getStation().getHeader(myConversion, currentStation, inputStationHeader);
                     
+                    
                     // FAE 4673 Pb si une seule ligne données et pas d'entête
                     // station
                     if (!isEndData() || (mediaModel.getEndData() == E_EndData.NEXT_START_WITH && mediaModel.getStationHeader() == 0))
@@ -363,6 +365,8 @@ public class NetCDFWriter extends NemoWriter
         numLine = 0;
     }
     
+
+
     public void setDataValue(int indiceStation, String stringValue, String variableName, String qcValue){
         ISdnVariable var =  variables.get(variableName);
         Object[][] paramData = stationData.get(variableName);
@@ -414,11 +418,17 @@ public class NetCDFWriter extends NemoWriter
 
             String defaultValue = pModel.getParameter().getDefault().trim();
             String stringValue = pModel.getLineValue().getValue().trim();
-            
-            if(!stringValue.equals(defaultValue))
+            String inputDefaultValue = pModel.getInputDefault().trim();
+            if(!stringValue.equals(inputDefaultValue))
                 setDataValue(indiceStation, stringValue, varName, pModel.getLineValue().getQc());
             else
-                setDataValue(indiceStation, null, varName, pModel.getLineValue().getQc());
+            {
+                if(defaultValue != null && !defaultValue.isEmpty())
+                    setDataValue(indiceStation, defaultValue, varName, pModel.getLineValue().getQc());
+                else
+                    setDataValue(indiceStation, null, varName, pModel.getLineValue().getQc());
+            }
+                
         }
 
         // paramètres mesurés
@@ -432,7 +442,7 @@ public class NetCDFWriter extends NemoWriter
                 paramData = new Object[nbStations][dims.getDimMax().getLength()];
             
             pModel.computeParameterValue(inputLine);
-
+            String inputDefaultValue = pModel.getInputDefault().trim();
             String defaultValue = pModel.getParameter().getDefault();
             // 11976
             String stringValue = "";
@@ -441,15 +451,21 @@ public class NetCDFWriter extends NemoWriter
                 stringValue =
                     Formatter.getSingleton().formatParameter(
                         pModel.getParameter().getFormat(),
-                        pModel.getLineValue().getValue());
+                        pModel.getLineValue().getValue()).trim();
             }
 
             String ancillaryName= null;
             
-            if(!stringValue.equals(defaultValue))
+            if(!stringValue.equals(inputDefaultValue))
                 setDataValue(indiceStation, stringValue, varName, pModel.getLineValue().getQc());
             else
-                setDataValue(indiceStation, null, varName, pModel.getLineValue().getQc()); 
+            {
+                if(defaultValue != null && !defaultValue.isEmpty())
+                    setDataValue(indiceStation, defaultValue, varName, pModel.getLineValue().getQc());
+                else
+                    setDataValue(indiceStation, null, varName, pModel.getLineValue().getQc());
+            }
+               
         }
         indexRecord++;
     }
@@ -530,7 +546,7 @@ public class NetCDFWriter extends NemoWriter
         String varName = getZVarName();
         String standardName = getZStandardName();
         String longName = zParameterModel.getParameter().getFullName(); //entryTerm P091 ou P21
-        String unit=zParameterModel.getParameter().getUnit().toLowerCase().replace(" ", "_"); //TODO CPT ajouter l'unité pour Z
+        String unit=zParameterModel.getParameter().getUnit().toLowerCase(); //TODO CPT ajouter l'unité pour Z
         String sdnParameterUrn  = getURNSyntaxe(URNtype.object, zParameterModel.getParameter()
                 .getCodeP011(), null, Intern.mapping_objet, zParameterModel.isText()); 
         String sdnParameterName = zParameterModel.getParameter().getNameP011(); 
@@ -578,8 +594,9 @@ public class NetCDFWriter extends NemoWriter
         }
 
      // add default value if existe
-        if(!zParameterModel.getInputDefault().isEmpty())
-            z.addVariableAttAttribute(ParameterNames.FILLVALUE, convertValue(DataType.FLOAT, zParameterModel.getInputDefault()));
+        if(/*!zParameterModel.getInputDefault().isEmpty()*/ !zParameterModel.getParameter().getDefault().isEmpty())
+            z.addVariableAttAttribute(ParameterNames.FILLVALUE, convertValue(DataType.FLOAT, zParameterModel.getParameter().getDefault()));
+        
         variables.put(longitude.getVarName(), longitude);
         variables.put(latitude.getVarName(), latitude);
         variables.put(time.getVarName(), time);
@@ -593,8 +610,11 @@ public class NetCDFWriter extends NemoWriter
         variables.put(SdnBotDepth.getVarName(), SdnBotDepth);
         
         SdnCruiseVariable sdnCruise = new SdnCruiseVariable(sdnDim,"à definir" ); // value cruiseDomain.getModel().getName()
+        //ajout des champs facultatif de l'onglet Cruise
+        addCruiseOptionalAttribute(sdnCruise);
         variables.put(sdnCruise.getVarName(), sdnCruise);
-        SdnStationVariable sdnStation = new SdnStationVariable(sdnDim,"à definir");
+        
+        SdnStationVariable sdnStation = new SdnStationVariable(sdnDim, "à definir");   
         variables.put(sdnStation.getVarName(), sdnStation);
         SdnLocalCdiIdVariable SdnLocalCdi = new SdnLocalCdiIdVariable(sdnDim, getFeatureType()+"_id");
         variables.put(SdnLocalCdi.getVarName(), SdnLocalCdi);
@@ -606,7 +626,7 @@ public class NetCDFWriter extends NemoWriter
         }
         
         
-        //Geophycal variable
+        //Geophysical variable
         ParameterModel[] paramAdded = dataDomain.getMyParameterManager().getNetCDFParameterModels();
         ParameterModel[] paramMesured = dataDomain.getModel().getParameterModels();
         // concaténation 
@@ -640,15 +660,18 @@ public class NetCDFWriter extends NemoWriter
             //TODO CPT ajouter l'unité pour Les variable geophysical
             unit=getUnitDB(param.getParameter());
             if(unit == null)
-                unit=param.getParameter().getUnit().toLowerCase().replace(" ", "_"); 
+                unit=param.getParameter().getUnit().toLowerCase(); 
             
             
             if(!sdnParameterUrn.equals(z.getSdnParameterUrn())){
                 GeophysicalVariable current = new GeophysicalVariable(varName, getUnits(param.getParameter().getFormat()), geoDim, longName, coordinates, unit, sdnParameterUrn, sdnParameterName, sdnUomUrn, sdnUomName);
-
+                
                 // add default value if existe
-                if(!param.getInputDefault().isEmpty())
-                    current.addVariableAttAttribute(ParameterNames.FILLVALUE, convertValue(current.getDataType(), param.getInputDefault()));
+                if(/*!zParameterModel.getInputDefault().isEmpty()*/ !param.getParameter().getDefault().isEmpty())
+                    current.addVariableAttAttribute(ParameterNames.FILLVALUE, convertValue(DataType.FLOAT, param.getParameter().getDefault()));
+            
+//                if(!param.getInputDefault().isEmpty())
+//                    current.addVariableAttAttribute(ParameterNames.FILLVALUE, convertValue(current.getDataType(), param.getInputDefault()));
                 
                 variables.put(current.getVarName(), current);
 
@@ -669,6 +692,49 @@ public class NetCDFWriter extends NemoWriter
         }
         variables.putAll(AncillaryVariables);
         
+    }
+
+    /**
+     * @param sdnCruise
+     */
+    private void addCruiseOptionalAttribute(SdnCruiseVariable sdnCruise)
+    {
+      //sous onglet Reference
+        if(cruiseDomain.getModel().getShipCode() != null && !cruiseDomain.getModel().getShipCode().isEmpty())
+            sdnCruise.addVariableAttAttribute(ModelDescription.node_shipcode, cruiseDomain.getModel().getShipCode());
+        if(cruiseDomain.getModel().getShipName() != null && !cruiseDomain.getModel().getShipName().isEmpty())
+            sdnCruise.addVariableAttAttribute(ModelDescription.node_shipname, cruiseDomain.getModel().getShipName());
+        
+        //sous onglet Location
+        try{
+            sdnCruise.addVariableAttAttribute(ModelDescription.node_startdate, DateTimeUtils.getVariantDateTime(cruiseDomain.getModel().getStartDate()));
+        }catch (Exception e){}
+        try{
+            sdnCruise.addVariableAttAttribute(ModelDescription.node_startdate, DateTimeUtils.getVariantDateTime(cruiseDomain.getModel().getEndDate()) );
+        }catch (Exception e){}
+        if(cruiseDomain.getModel().getRegionName() != null)
+            sdnCruise.addVariableAttAttribute(ModelDescription.node_region, cruiseDomain.getModel().getRegionName());
+        
+        //date source
+        if(cruiseDomain.getModel().getCountryCode() != null)
+            sdnCruise.addVariableAttAttribute(ModelDescription.node_country, cruiseDomain.getModel().getCountryCode());
+        if(cruiseDomain.getModel().getLaboratories() != null)
+            sdnCruise.addVariableAttAttribute(ModelDescription.node_laboratories, cruiseDomain.getModel().getLaboratories());
+        if(cruiseDomain.getModel().getChiefScientist() != null)
+            sdnCruise.addVariableAttAttribute(ModelDescription.node_chief, cruiseDomain.getModel().getChiefScientist());
+        if(cruiseDomain.getModel().getProjectName() != null)
+            sdnCruise.addVariableAttAttribute(ModelDescription.node_project, cruiseDomain.getModel().getProjectName());
+        
+        
+        //archive center
+        if(cruiseDomain.getModel().getDataCentre() != null)
+            sdnCruise.addVariableAttAttribute(ModelDescription.node_datacenter, cruiseDomain.getModel().getDataCentre());
+        if(cruiseDomain.getModel().getAvailability() != null)
+            sdnCruise.addVariableAttAttribute(ModelDescription.node_availability, cruiseDomain.getModel().getAvailability().name());
+        
+        //Comment
+        if(cruiseDomain.getModel().getComment() != null)
+            sdnCruise.addVariableAttAttribute(ModelDescription.node_comment, cruiseDomain.getModel().getComment());
     }
 
     private String getFeatureType(){
