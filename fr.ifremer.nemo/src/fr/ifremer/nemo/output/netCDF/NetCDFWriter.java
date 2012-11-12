@@ -33,6 +33,8 @@ import fr.ifremer.nemo.domain.StationDomain;
 import fr.ifremer.nemo.input.ModelDescription;
 import fr.ifremer.nemo.input.parameters.Parameter;
 import fr.ifremer.nemo.input.parameters.ParameterModel;
+import fr.ifremer.nemo.input.parameters.addedParameters.AP_ADEPZZ01;
+import fr.ifremer.nemo.input.parameters.addedParameters.AP_DEPHPR01;
 import fr.ifremer.nemo.output.GenerationException;
 import fr.ifremer.nemo.output.NemoWriter;
 import fr.ifremer.nemo.util.Conversion;
@@ -551,7 +553,7 @@ public class NetCDFWriter extends NemoWriter
         String varName = getZVarName(zParameterModel);
         String standardName = getZStandardName(zParameterModel);
         String longName = zParameterModel.getParameter().getFullName(); //entryTerm P091 ou P21
-        String unit=zParameterModel.getParameter().getUnit().toLowerCase(); //TODO CPT ajouter l'unité pour Z
+        String unit=zParameterModel.getParameter().getUnit().toLowerCase();
         String sdnParameterUrn  = getURNSyntaxe(URNtype.object, zParameterModel.getParameter()
                 .getCodeP011(), null, Intern.mapping_objet, zParameterModel.isText()); 
         String sdnParameterName = zParameterModel.getParameter().getNameP011(); 
@@ -577,7 +579,6 @@ public class NetCDFWriter extends NemoWriter
             longitude = new SdnX(geoDim);
             latitude = new SdnY(geoDim);
             time = new SdnT(geoDim);
-            //  TODO CPT GERE LE CAS DE Z
             z= new SdnZ(varName, geoDim, longName, standardName, unit, sdnParameterUrn, sdnParameterName, sdnUomUrn, sdnUomName);
         }
         else if (mediaModel.getInputType() == E_InputType.PROFILE)
@@ -585,7 +586,6 @@ public class NetCDFWriter extends NemoWriter
             longitude = new SdnX(instanceDim);
             latitude = new SdnY(instanceDim);
             time = new SdnT(instanceDim);
-            //  TODO CPT GERE LE CAS DE Z
             z= new SdnZ(varName, geoDim, longName, standardName, unit, sdnParameterUrn, sdnParameterName, sdnUomUrn, sdnUomName);
         }
         else
@@ -593,7 +593,6 @@ public class NetCDFWriter extends NemoWriter
             longitude = new SdnX(instanceDim);
             latitude = new SdnY(instanceDim);
             time = new SdnT(geoDim);
-            //  TODO CPT GERE LE CAS DE Z
             z= new SdnZ(varName, instanceDim, longName, standardName, unit, sdnParameterUrn, sdnParameterName, sdnUomUrn, sdnUomName);
 
         }
@@ -613,13 +612,13 @@ public class NetCDFWriter extends NemoWriter
         
         SdnBotDepthVariable SdnBotDepth = new SdnBotDepthVariable(instanceDim);
         variables.put(SdnBotDepth.getVarName(), SdnBotDepth);
-        
-        SdnCruiseVariable sdnCruise = new SdnCruiseVariable(sdnDim,"à definir" ); // value cruiseDomain.getModel().getName()
+        //TODO CPT ajouter long_name pour sdnCruise
+        SdnCruiseVariable sdnCruise = new SdnCruiseVariable(sdnDim,"à définir" ); // value cruiseDomain.getModel().getName()
         //ajout des champs facultatif de l'onglet Cruise
         addCruiseOptionalAttribute(sdnCruise);
         variables.put(sdnCruise.getVarName(), sdnCruise);
-        
-        SdnStationVariable sdnStation = new SdnStationVariable(sdnDim, "à definir");   
+      //TODO CPT ajouter long_name pour sdnStation
+        SdnStationVariable sdnStation = new SdnStationVariable(sdnDim, "à définir");   
         variables.put(sdnStation.getVarName(), sdnStation);
         SdnLocalCdiIdVariable SdnLocalCdi = new SdnLocalCdiIdVariable(sdnDim, getFeatureType()+"_id");
         variables.put(SdnLocalCdi.getVarName(), SdnLocalCdi);
@@ -663,7 +662,7 @@ public class NetCDFWriter extends NemoWriter
             sdnUomName = param.getParameter().getUnit();
             
             //TODO CPT ajouter l'unité pour Les variable geophysical
-            unit=getUnitDB(param.getParameter());
+            unit=param.getParameter().getUnit().toLowerCase();
             if(unit == null)
                 unit=param.getParameter().getUnit().toLowerCase(); 
             
@@ -786,7 +785,12 @@ public class NetCDFWriter extends NemoWriter
         if(!dataDomain.getModel().getVerticalParametersList().getP_pressure().isEmpty())
             return ParameterNames.PRESS;
         
-        if("ADEPZZ01".equals(zParameterModel.getParameter().getCode()))
+        AP_ADEPZZ01 zADEPZZ01 = new AP_ADEPZZ01();    
+        if(zADEPZZ01.getCode().equals(zParameterModel.getParameter().getCode()))
+            return ParameterNames.DEPTH;
+        
+        AP_DEPHPR01 zDEPHPR01 = new AP_DEPHPR01();
+        if(zDEPHPR01.getCode().equals(zParameterModel.getParameter().getCode()))
             return ParameterNames.DEPTH;
         
         return null;
@@ -800,7 +804,15 @@ public class NetCDFWriter extends NemoWriter
         if(!dataDomain.getModel().getVerticalParametersList().getP_depthBSSurf().isEmpty())
             return ParameterValues.Z_DEPTH;
         
-        if("ADEPZZ01".equals(zParameterModel.getParameter().getCode()))
+        if(!dataDomain.getModel().getVerticalParametersList().getP_depthBSBed().isEmpty())
+            return ParameterValues.Z_DEPTH;
+        
+        AP_ADEPZZ01 zADEPZZ01 = new AP_ADEPZZ01();    
+        if(zADEPZZ01.getCode().equals(zParameterModel.getParameter().getCode()))
+            return ParameterValues.Z_DEPTH;
+        
+        AP_DEPHPR01 zDEPHPR01 = new AP_DEPHPR01();
+        if(zDEPHPR01.getCode().equals(zParameterModel.getParameter().getCode()))
             return ParameterValues.Z_DEPTH;
         
         return null;
