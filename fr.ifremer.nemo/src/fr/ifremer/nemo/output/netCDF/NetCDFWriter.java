@@ -542,9 +542,14 @@ public class NetCDFWriter extends NemoWriter
         SdnZ z=null;
         //z Variable
         ParameterModel zParameterModel = dataDomain.getModel().getParameterModelByP011(getZLocalName());
+        if(zParameterModel == null)
+        {
+            zParameterModel = dataDomain.getMyParameterManager().getNetCDFParameterModels()[0];
+        }
         
-        String varName = getZVarName();
-        String standardName = getZStandardName();
+        
+        String varName = getZVarName(zParameterModel);
+        String standardName = getZStandardName(zParameterModel);
         String longName = zParameterModel.getParameter().getFullName(); //entryTerm P091 ou P21
         String unit=zParameterModel.getParameter().getUnit().toLowerCase(); //TODO CPT ajouter l'unité pour Z
         String sdnParameterUrn  = getURNSyntaxe(URNtype.object, zParameterModel.getParameter()
@@ -765,10 +770,12 @@ public class NetCDFWriter extends NemoWriter
         if(!dataDomain.getModel().getVerticalParametersList().getP_pressure().isEmpty())
             return dataDomain.getModel().getVerticalParametersList().getP_pressure();
         
+        
+        
         return null;
     }
     
-    private String getZVarName()
+    private String getZVarName(ParameterModel zParameterModel)
     {
         if(!dataDomain.getModel().getVerticalParametersList().getP_depthBSBed().isEmpty())
             return ParameterNames.DEPTH;
@@ -779,15 +786,21 @@ public class NetCDFWriter extends NemoWriter
         if(!dataDomain.getModel().getVerticalParametersList().getP_pressure().isEmpty())
             return ParameterNames.PRESS;
         
+        if("ADEPZZ01".equals(zParameterModel.getParameter().getCode()))
+            return ParameterNames.DEPTH;
+        
         return null;
     }
     
-    private String getZStandardName()
+    private String getZStandardName(ParameterModel zParameterModel)
     {
         if (!dataDomain.getModel().getVerticalParametersList().getP_pressure().isEmpty() && mediaModel.getInputType() != E_InputType.TIMESERIES)
             return ParameterValues.Z_PRESSURE;
         
         if(!dataDomain.getModel().getVerticalParametersList().getP_depthBSSurf().isEmpty())
+            return ParameterValues.Z_DEPTH;
+        
+        if("ADEPZZ01".equals(zParameterModel.getParameter().getCode()))
             return ParameterValues.Z_DEPTH;
         
         return null;

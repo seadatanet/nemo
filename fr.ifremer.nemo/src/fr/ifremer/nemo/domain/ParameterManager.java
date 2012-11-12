@@ -341,7 +341,9 @@ public class ParameterManager
 					addFixedParameterModel(IdParameter.CJDY);
 				}
 			}
-
+		}
+		if (isODV || isNetCDF)
+        {
 			/** aap_p 1 2 */
 			// Ajout du paramètre DEPH ( = Sensor Depth) pour ODV
 			if (!exist_p_depthBSSurf && getMesureType() == E_MesureType.BSSURF)
