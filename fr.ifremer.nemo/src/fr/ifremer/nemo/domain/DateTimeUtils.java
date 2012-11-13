@@ -10,6 +10,10 @@
  */
 package fr.ifremer.nemo.domain;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.util.Calendar;
@@ -20,6 +24,7 @@ import fr.ifremer.nemo.input.LineFragment;
 import fr.ifremer.nemo.input.PropertyModel;
 import fr.ifremer.nemo.util.Formatter;
 import fr.ifremer.nemo.util.Global;
+import fr.ifremer.nemo.util.Global.E_InputType;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.format.DateTimeFormat;
 
@@ -135,15 +140,52 @@ public class DateTimeUtils {
 	}
 
 	public static long computeEndTime(Station currentStation) {
-		long rate = new Float(currentStation.getSamplingRate() * 1000.0f).longValue();
-		int size = currentStation.getNbRecords() - 1;
-		long date = DateTimeUtils.getFullDate(currentStation) + (size * rate);
-		TimeZone tz = TimeZone.getTimeZone(DateTimeFormat.GMT);
-		Calendar cal = Calendar.getInstance(tz);
-		cal.clear();
-		cal.setTimeInMillis(date);
+	    TimeZone tz = TimeZone.getTimeZone(DateTimeFormat.GMT);
+        Calendar cal = Calendar.getInstance(tz);
+        cal.clear();
 
-		return cal.getTimeInMillis();
+        // FAE 13195: Calcul de la date de fin d'une série temporelle
+        // la dete de fin n'est plus calculer mais lu lorsque c'est possible.
+        MediaDomain mediaDomain = Nemo.getInstance().getDomain().getMedia();
+        boolean badConvertion = false;
+        if (mediaDomain.getModel().getInputType() == E_InputType.TIMESERIES) {
+            int lastFileLine = mediaDomain.getStationHeaderNumberLines() + currentStation.getNbRecords() - 1;
+            String endLigne;
+            String fileName = mediaDomain.getModel().getSourcePath();
+            String name = currentStation.getFileName();
+            if (!fileName.endsWith(name))
+                fileName = fileName + File.separator + name;
+
+            long date;
+
+            // lecture jusqu'a la derniere ligne afin de la recuperer.
+            try {
+                FileInputStream fs = new FileInputStream(fileName);
+                BufferedReader br = new BufferedReader(new InputStreamReader(fs));
+                for (int i = 0; i < lastFileLine; ++i)
+                    br.readLine();
+                // lecture de la derniere ligne
+                endLigne = br.readLine();
+                // recuperation des champs datetime et convertion en long.
+                date = convertTimestamp(endLigne);
+                cal.setTimeInMillis(date);
+                br.close();
+                fs.close();
+            } catch (Exception e) {
+                // convertion impossible du fichier non compatible.
+                // donc passage au calcul.
+                badConvertion = true;
+            }
+        }
+        if (mediaDomain.getModel().getInputType() != E_InputType.TIMESERIES || badConvertion) {
+
+            long rate = new Float(currentStation.getSamplingRate() * 1000.0f).longValue();
+            int size = currentStation.getNbRecords() - 1;
+            long date = DateTimeUtils.getFullDate(currentStation) + (size * rate);
+            cal.setTimeInMillis(date);
+
+        }
+        return cal.getTimeInMillis();
 	}
 
 	public static long getCurrentDate(Station currentStation, int indexRecord) {
