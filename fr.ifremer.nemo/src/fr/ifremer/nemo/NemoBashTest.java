@@ -96,7 +96,7 @@ public class NemoBashTest
     public static int nbTotalSuccess = 0;
 
     public static boolean isVocabV2Param = true;
-    public static boolean isVocabV2 = false;
+    public static boolean isVocabV2 = true;
 
     public Message message;
 
@@ -523,7 +523,7 @@ public class NemoBashTest
                 + cptFail + " failed /" + cptTests + " tested"
                 + "=========================================" + "\r\n");
 
-        return nbTotalFailed == 0;
+        return cptFail == 0;
     }
 
     public boolean isToTest(String dirName)
