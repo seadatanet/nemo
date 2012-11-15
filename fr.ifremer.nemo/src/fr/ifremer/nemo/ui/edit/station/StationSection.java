@@ -1457,12 +1457,16 @@ public class StationSection extends NemoSection
                         }
                         else
                         {
-                            if (autoInput.getLines().get(i).getCursor() != null)
-                                Utils.calculPosxPosy(propertyModel
-                                    .getFragment(),
-                                        getCursor(i));
-                            setAutoValueInput(propertyModel, null, fillVariPos,
-                                    offset, i);
+                            // 13997
+                            // on a rentre que la ligne 1 donc les valeurs de
+                            // ligne 2 sont vides
+                            if (propertyModel.getFragment() != null) {
+
+                                if (autoInput.getLines().get(i).getCursor() != null)
+                                    Utils.calculPosxPosy(propertyModel.getFragment(), getCursor(i));
+                                setAutoValueInput(propertyModel, null, fillVariPos, offset, i);
+                            } else
+                                setAutoValueInput(Global.EMPTY_STRING, Global.EMPTY_STRING, Global.EMPTY_STRING, i);
 
                         }
                     }
