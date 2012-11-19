@@ -138,7 +138,7 @@ public abstract class NemoSection
 	public void setMandatory(boolean mandatory)
 	{
 	    isMandatory = mandatory;
-	    if(section !=null)
+	    if(section !=null && !section.isDisposed())
     	    if (!isMandatory)
                 section.setText(title);
             else

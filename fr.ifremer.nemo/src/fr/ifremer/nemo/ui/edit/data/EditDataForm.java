@@ -218,6 +218,12 @@ public class EditDataForm extends EditForm
 			Nemo.getInstance().getDomain().getData().getModel().setDataListType(dataList);
 
 		}
+		if ((conv == E_TypeConversion.NETCDF_MONOSTATION || conv == E_TypeConversion.NETCDF_MULTISTATIONS) && dataList == dataList.P091)
+        {
+            dataList = DataListTypeEnum.UNKNOWN;
+            Nemo.getInstance().getDomain().getData().getModel().setDataListType(dataList);
+
+        }
 		Nemo.getInstance().getViewMain().getMyRulesManager().updateFromModel(dataList);
 		// update mesureType to use
 		E_MesureType mesureType = Nemo.getInstance().getDomain().getData().getModel().getMesureType();

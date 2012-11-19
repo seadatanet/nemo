@@ -1115,14 +1115,17 @@ public class StationSection extends NemoSection
                 ExternalizableFormat format = null;
 
                 // gestion des flags qualite
-                String property = name;
-                if (name.equals(Intern.S_TIME) || name.equals(Intern.S_DATE))
-                    property = Intern.DATETIME;
-                Fragment flag =
-                        myForm.qcFlags.fillFlagFragment(property);
-                if (flag != null)
-                    propertyModel.setFlag(flag);
-
+                
+                if(!myForm.qcFlags.getSection().isDisposed())
+                {
+                    String property = name;
+                    if (name.equals(Intern.S_TIME) || name.equals(Intern.S_DATE))
+                        property = Intern.DATETIME;
+                    Fragment flag =
+                            myForm.qcFlags.fillFlagFragment(property);
+                    if (flag != null)
+                        propertyModel.setFlag(flag);
+                }
                 // gestion des converteurs
                 try
                 {

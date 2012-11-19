@@ -417,6 +417,17 @@ public class RulesManager
 				newDataList = myDataListType;
 				mustReinitDataForm = true;
 			}
+			if (myDataListType == DataListTypeEnum.P091
+                    && (convType == E_TypeConversion.NETCDF_MONOSTATION || convType == E_TypeConversion.NETCDF_MULTISTATIONS) )
+            {
+                confirm =
+                        MessageDialog.openConfirm(null,
+                                Messages.edit_data_dataListDialogBox_title,
+                                Messages.edit_data_dataListDialogBox_text);
+                myDataListType = DEFAULT_DATALIST;
+                newDataList = myDataListType;
+                mustReinitDataForm = true;
+            }
 			if (confirm)
 			{
 				reinitRules();

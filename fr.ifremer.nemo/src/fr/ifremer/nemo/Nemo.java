@@ -22,6 +22,8 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.sax.SAXResult;
 import javax.xml.transform.stream.StreamSource;
 
+import org.eclipse.core.runtime.Platform;
+
 import com.ago.xml.XMLBootstrapParser;
 
 import fr.ifremer.nemo.config.Configuration;
@@ -367,5 +369,9 @@ public class Nemo
                 + getLog_currentInputFile() + Global.SPACE
                 + Messages.error_lineNumber_message + Global.DBL_PT
                 + Global.SPACE + getLog_currentInputLine();
+    }
+    
+    public String getVersion(){
+        return Platform.getProduct().getDefiningBundle().getVersion().toString();
     }
 }

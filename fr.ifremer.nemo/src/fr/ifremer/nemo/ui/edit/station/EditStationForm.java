@@ -128,10 +128,12 @@ public class EditStationForm extends EditForm
 		drawSections();
 
 		// FAE 3749
-		Text textCommentaire = comments.getManualInput().getLines().get(0).getValueText();
-		GridDataFactory.fillDefaults().grab(true, true).hint(Global.SIZE_SECTION, SWT.DEFAULT).minSize(Global.SIZE_SECTION, 200)
-				.applyTo(textCommentaire);
-
+		if(!Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToNetCDF())
+		{
+    		Text textCommentaire = comments.getManualInput().getLines().get(0).getValueText();
+    		GridDataFactory.fillDefaults().grab(true, true).hint(Global.SIZE_SECTION, SWT.DEFAULT).minSize(Global.SIZE_SECTION, 200)
+    				.applyTo(textCommentaire);
+		}
 		// remplissage de l'IHM par le modèle chargé
 		// if (!Nemo.getInstance().getNomModele().isEmpty())
 		// FAE 10632 fill necessaire car appelle le remplissabe du dataType
@@ -182,53 +184,65 @@ public class EditStationForm extends EditForm
 		 * acquisition history
          * ==============================================================================================
 		 */
-		historique =
-				new StationSection(Intern.S_DCHIST, Messages
-						.getString(Intern.S_DCHIST),
-						Messages.edit_station_sectionHistory_lib, true, false, 2, this);
-		historique.addManualInput(null, ComboType.NONE, Global.EMPTY_STRING);
-		historique.addAutoInput(null, false, MetaInData.INTERDIT, true, false);
-		listeSections.add(historique);
+		if(!rulesManager.isConversionToNetCDF())
+		{
+    		historique =
+    				new StationSection(Intern.S_DCHIST, Messages
+    						.getString(Intern.S_DCHIST),
+    						Messages.edit_station_sectionHistory_lib, true, false, 2, this);
+    		historique.addManualInput(null, ComboType.NONE, Global.EMPTY_STRING);
+    		historique.addAutoInput(null, false, MetaInData.INTERDIT, true, false);
+    		listeSections.add(historique);
+		}
 		/**
          * ==============================================================================================
 		 * comments
          * ==============================================================================================
 		 */
-		comments =
-				new StationSection(Intern.S_COMMENT, Messages
-						.getString(Intern.S_COMMENT),
-						Messages.edit_station_sectionComment_lib, true, false, 1, this);
-		comments.addManualInput(null, ComboType.BLOCK, Global.EMPTY_STRING);
-		comments.addAutoInput(null, true, MetaInData.INTERDIT, true, false);
-		listeSections.add(comments);
-		comments.getAutoInput().setVariableLabel(
-				Messages.label_variable_comment);
+		if(!rulesManager.isConversionToNetCDF())
+        {
+    		comments =
+    				new StationSection(Intern.S_COMMENT, Messages
+    						.getString(Intern.S_COMMENT),
+    						Messages.edit_station_sectionComment_lib, true, false, 1, this);
+    		comments.addManualInput(null, ComboType.BLOCK, Global.EMPTY_STRING);
+    		comments.addAutoInput(null, true, MetaInData.INTERDIT, true, false);
+    		listeSections.add(comments);
+    		comments.getAutoInput().setVariableLabel(
+    				Messages.label_variable_comment);
+        }
 		/**
          * ==============================================================================================
 		 * surface sample
          * ==============================================================================================
 		 */
-		surfaceSample =
-				new StationSection(Intern.S_SURFACE, Messages
-						.getString(Intern.S_SURFACE),
-						Messages.edit_station_sectionSurface_lib, true, false, 2, this);
-		surfaceSample.addManualInput(null, ComboType.NONE, Global.EMPTY_STRING);
-		surfaceSample.addAutoInput(null, false, MetaInData.INTERDIT, true,
-				false);
-		listeSections.add(surfaceSample);
+		if(!rulesManager.isConversionToNetCDF())
+        {
+    		surfaceSample =
+    				new StationSection(Intern.S_SURFACE, Messages
+    						.getString(Intern.S_SURFACE),
+    						Messages.edit_station_sectionSurface_lib, true, false, 2, this);
+    		surfaceSample.addManualInput(null, ComboType.NONE, Global.EMPTY_STRING);
+    		surfaceSample.addAutoInput(null, false, MetaInData.INTERDIT, true,
+    				false);
+    		listeSections.add(surfaceSample);
+        }
 		/**
          * ==============================================================================================
 		 * UT conversion
          * ==============================================================================================
 		 */
-		utConvertion =
-				new StationSection(Intern.S_OFFSETTU, Messages
-						.getString(Intern.S_OFFSETTU), Global.EMPTY_STRING, true,
-						false, 1, this);
-		utConvertion.addManualInput(null, ComboType.NONE, "0.0"); //$NON-NLS-1$
-		utConvertion.addAutoInput(null, false, MetaInData.INTERDIT, false,
-				false);
-		listeSections.add(utConvertion);
+		if(!rulesManager.isConversionToNetCDF())
+        {
+    		utConvertion =
+    				new StationSection(Intern.S_OFFSETTU, Messages
+    						.getString(Intern.S_OFFSETTU), Global.EMPTY_STRING, true,
+    						false, 1, this);
+    		utConvertion.addManualInput(null, ComboType.NONE, "0.0"); //$NON-NLS-1$
+    		utConvertion.addAutoInput(null, false, MetaInData.INTERDIT, false,
+    				false);
+    		listeSections.add(utConvertion);
+        }
 		/**
          * ==============================================================================================
 		 * time
@@ -271,7 +285,7 @@ public class EditStationForm extends EditForm
 		latitude.addAutoInput(null, true, MetaInData.FACULTATIF, false, false);
 		listeSections.add(latitude);
 
-		if (rulesManager.isTimeSeries())
+		if (rulesManager.isTimeSeries() && !rulesManager.isConversionToNetCDF())
 		{
 			endLatitude =
 					new StationSection(Intern.S_ELAT, Messages
@@ -298,7 +312,7 @@ public class EditStationForm extends EditForm
 		longitude.addAutoInput(null, true, MetaInData.FACULTATIF, false, false);
 		listeSections.add(longitude);
 
-		if (rulesManager.isTimeSeries())
+		if (rulesManager.isTimeSeries() && !rulesManager.isConversionToNetCDF())
 		{
 			endLongitude =
 					new StationSection(Intern.S_ELON, Messages
@@ -330,7 +344,7 @@ public class EditStationForm extends EditForm
 
 		if (!rulesManager.isProfile())
 		{
-			if (rulesManager.isTimeSeries())
+			if (rulesManager.isTimeSeries() && !rulesManager.isConversionToNetCDF())
 			{
 				endDepth =
 						new StationSection(Intern.S_EDEPTH, Messages
@@ -360,7 +374,7 @@ public class EditStationForm extends EditForm
 			sensorDepth.setTimeSeriesInfo(true);
 			listeSections.add(sensorDepth);
 
-			if (rulesManager.isTimeSeries())
+			if (rulesManager.isTimeSeries() && !rulesManager.isConversionToNetCDF())
 			{
 				magneticDeclin =
 						new StationSection(Intern.S_MAGNETIC, Messages
@@ -378,27 +392,33 @@ public class EditStationForm extends EditForm
 			 * sampling rate
              * ==============================================================================================
 			 */
-			samplingRate =
-					new StationSection(Intern.S_SAMPLINGRATE, Messages
-							.getString(Intern.S_SAMPLINGRATE),
-							Messages.edit_station_sectionSampling_lib, true, true, 1, this);
-			samplingRate.addConverter(ComboType.FRQ, "*1"); //$NON-NLS-1$
-			samplingRate.addManualInput(null, ComboType.NONE, "0"); //$NON-NLS-1$
-			samplingRate.addAutoInput(null, false, MetaInData.INTERDIT, false,
-					false);
-			samplingRate.setTimeSeriesInfo(true);
-			listeSections.add(samplingRate);
+			if(!rulesManager.isConversionToNetCDF())
+	        {
+    			samplingRate =
+    					new StationSection(Intern.S_SAMPLINGRATE, Messages
+    							.getString(Intern.S_SAMPLINGRATE),
+    							Messages.edit_station_sectionSampling_lib, true, true, 1, this);
+    			samplingRate.addConverter(ComboType.FRQ, "*1"); //$NON-NLS-1$
+    			samplingRate.addManualInput(null, ComboType.NONE, "0"); //$NON-NLS-1$
+    			samplingRate.addAutoInput(null, false, MetaInData.INTERDIT, false,
+    					false);
+    			samplingRate.setTimeSeriesInfo(true);
+    			listeSections.add(samplingRate);
+	        }
 		}
 		/**
          * ==============================================================================================
 		 * QC flags
          * ==============================================================================================
 		 */
-		qcFlags =
-				new QCflagsSection(Intern.S_QCFLAG, Messages
-						.getString(Intern.S_QCFLAG),
-						Messages.edit_station_sectionQCflags_lib, this);
-		listeSections.add(qcFlags);
+		
+    		qcFlags =
+    				new QCflagsSection(Intern.S_QCFLAG, Messages
+    						.getString(Intern.S_QCFLAG),
+    						Messages.edit_station_sectionQCflags_lib, this);
+    		listeSections.add(qcFlags);
+    		
+        
 	}
 
 	@Override
@@ -415,7 +435,8 @@ public class EditStationForm extends EditForm
 			boolean timeInData =
 					time.getAutoInput().getLines().get(0).isInData();
 			// => Sampling Rate : disable (car pas nécessaire pour le calcul)
-			samplingRate.setEnabled(!(dateInData || timeInData));
+			if(!samplingRate.getSection().isDisposed())
+			    samplingRate.setEnabled(!(dateInData || timeInData));
 			date.setEnabledManual(!(dateInData || timeInData));
 			time.setEnabledManual(!(dateInData || timeInData));
 		}
@@ -482,7 +503,8 @@ public class EditStationForm extends EditForm
 		StationModel sModel = Nemo.getInstance().getDomain().getStation().getModel();
 
         for (NemoSection stationSection : listeSections){
-			stationSection.fillFromModel(sModel);
+            if(!stationSection.getSection().isDisposed())
+                stationSection.fillFromModel(sModel);
 		}
 
 		// ENDDATETIME flag !!
@@ -510,7 +532,8 @@ public class EditStationForm extends EditForm
 		// parcours des sections de la station pour initialisation
 		for (NemoSection stationSection : listeSections)
 		{
-			stationSection.initModel(stationModel);
+		    if(!stationSection.getSection().isDisposed())
+		        stationSection.initModel(stationModel);
 		}
 
 		// Completer les données manquantes
@@ -521,21 +544,25 @@ public class EditStationForm extends EditForm
 
         if (inputType != E_InputType.PROFILE){
 			// GESTION Time/Date in Data
-            if ( samplingRate.isEnabled()){
-				// calcul e partir frequence echantillonnage
-				stationDomain.setComputed(true);
+            if(!samplingRate.getSection().isDisposed())
+            {
+                if (samplingRate.isEnabled()){
+                    // calcul e partir frequence echantillonnage
+                    stationDomain.setComputed(true);
+                }
+                else{
+                    // calcul position date/heure dans les donnees
+                    stationDomain.setComputed(false);
+                    // remplissage avec les données par défaut
+                    propertyModel = stationModel.propertiesAt(Intern.S_SAMPLINGRATE);
+                    propertyModel.setUserProvided(true);
+                    propertyModel.setConversionFormula("*1"); //$NON-NLS-1$
+                    //sModel.getTimeSeriesModel().setSampleRateConversion("*1"); //$NON-NLS-1$
+                    propertyModel.setUserValue(Global.ZERO);
+                    // sModel.getTimeSeriesInformation().setSamplingRate(Global.ZERO);
+                }
             }
-            else{
-				// calcul position date/heure dans les donnees
-				stationDomain.setComputed(false);
-				// remplissage avec les données par défaut
-				propertyModel = stationModel.propertiesAt(Intern.S_SAMPLINGRATE);
-				propertyModel.setUserProvided(true);
-				propertyModel.setConversionFormula("*1"); //$NON-NLS-1$
-				//sModel.getTimeSeriesModel().setSampleRateConversion("*1"); //$NON-NLS-1$
-				propertyModel.setUserValue(Global.ZERO);
-				// sModel.getTimeSeriesInformation().setSamplingRate(Global.ZERO);
-			}
+            
 
 			// DATE / HEURE DE FIN
 			propertyModel = new PropertyModel();

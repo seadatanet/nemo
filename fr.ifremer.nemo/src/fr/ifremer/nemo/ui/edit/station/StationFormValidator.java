@@ -48,8 +48,8 @@ public class StationFormValidator extends FormValidator
             // test des valeurs de Station
 
             // Remplissage du tableau de correspondance de flags
-            editStationForm.qcFlags.getFlagTable().fillFlagTable(
-                editStationForm.qcFlags.getTabCorrespondance());
+            if(!rulesManager.isConversionToNetCDF())
+                editStationForm.qcFlags.getFlagTable().fillFlagTable(editStationForm.qcFlags.getTabCorrespondance());
 
             // retour à l'onglet message d'erreur
             ViewLog.tabFolderLog.setSelection(0);
@@ -60,9 +60,9 @@ public class StationFormValidator extends FormValidator
 
             ligneOK = true;
             ok = true;
-
-            int size =
-                editStationForm.qcFlags.getTabFlagQC().getItemCount();
+            int size=0;
+            if(!rulesManager.isConversionToNetCDF())
+                size = editStationForm.qcFlags.getTabFlagQC().getItemCount();
 
             // raz du message d'erreurs
             Utils.messageErreur(Global.EMPTY_STRING);
@@ -148,7 +148,7 @@ public class StationFormValidator extends FormValidator
 //            }
 
             // HISTORIQUE ACQUISITION
-            if (!editStationForm.historique.isManual())
+            if (!rulesManager.isConversionToNetCDF() && !editStationForm.historique.isManual())
             {
                 // position dans fichier, verif des valeurs
                 resultat1 =
@@ -218,7 +218,7 @@ public class StationFormValidator extends FormValidator
             }
 
             // COMMENTAIRE
-            if (!editStationForm.comments.isManual())
+            if (!rulesManager.isConversionToNetCDF() && !editStationForm.comments.isManual())
             {
                 resultat1 =
                     editStationForm.comments
@@ -244,7 +244,7 @@ public class StationFormValidator extends FormValidator
             }
 
             // ECHANTILLON SURFACE
-            if (!editStationForm.surfaceSample.isManual())
+            if (!rulesManager.isConversionToNetCDF() && !editStationForm.surfaceSample.isManual())
             {
                 resultat1 =
                     editStationForm.surfaceSample
@@ -468,7 +468,7 @@ public class StationFormValidator extends FormValidator
              */
             // DECALAGE/TU
             checkValue = true;
-            if (!editStationForm.utConvertion.isManual())
+            if (!rulesManager.isConversionToNetCDF() && !editStationForm.utConvertion.isManual())
             {
                 resultat1 =
                     editStationForm.utConvertion
@@ -490,7 +490,7 @@ public class StationFormValidator extends FormValidator
                 }
                 ok = ok && resultat1;
             }
-            if (checkValue)
+            if (!rulesManager.isConversionToNetCDF() && checkValue)
             {
                 value = editStationForm.utConvertion.getValue();
                 if (!value.trim().equals("") && !value.equals("NaN")) { //$NON-NLS-1$ //$NON-NLS-2$
@@ -699,7 +699,7 @@ public class StationFormValidator extends FormValidator
                 // FREQUENCE ECHANTILLONNAGE
                 // ne tester que si section frequence pas grisee !
                 checkValue = true;
-                if (editStationForm.samplingRate.isEnabled())
+                if (!rulesManager.isConversionToNetCDF() && editStationForm.samplingRate.isEnabled())
                 {
                     if (!editStationForm.samplingRate.isManual())
                     {
@@ -724,7 +724,7 @@ public class StationFormValidator extends FormValidator
                         }
                         ok = ok && resultat1;
                     }
-                    if (checkValue)
+                    if (!rulesManager.isConversionToNetCDF() && checkValue)
                     {
                         value =
                             editStationForm.samplingRate.getValue();
@@ -784,7 +784,7 @@ public class StationFormValidator extends FormValidator
              * ==============================================================================================
              */
             // specifique SERIE TEMPO
-            if (rulesManager.isTimeSeries())
+            if (!rulesManager.isConversionToNetCDF() && rulesManager.isTimeSeries())
             {
                 /**
                  * ==============================================================================================

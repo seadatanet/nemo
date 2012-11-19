@@ -56,6 +56,11 @@ public class Station implements Comparable {
 	public Station(String fileName, String[] inputStationHeader) throws  GenerationException {
 		// TODO BGT supprimer errorMsg
 		String errorMessage = "";
+		boolean isNetCDF = false;
+		try{
+		    isNetCDF = Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToNetCDF();
+		}
+		catch(Exception e){}
 		try {
 			_fileName = fileName;
 			_reference = null;
@@ -81,9 +86,10 @@ public class Station implements Comparable {
 				_time = -1;
 			else
 				_time = (Long) time;
-
-			errorMessage = Intern.S_OFFSETTU;
-			_offsetTU = ((Float) stationDomain.getModel().getProperty(Intern.S_OFFSETTU).applyOn(inputStationHeader)).floatValue();
+			if(!isNetCDF){
+    			errorMessage = Intern.S_OFFSETTU;
+    			_offsetTU = ((Float) stationDomain.getModel().getProperty(Intern.S_OFFSETTU).applyOn(inputStationHeader)).floatValue();
+			}
 			errorMessage = Intern.DATETIME;
 			addMetaFlag(Intern.DATETIME, stationDomain.getMetaFlag(Intern.DATETIME, inputStationHeader));
 			errorMessage = Intern.S_LAT;
@@ -98,30 +104,34 @@ public class Station implements Comparable {
 			if (Nemo.getInstance().getDomain().getMedia().getModel().getInputType() != E_InputType.PROFILE) {
 				errorMessage = Intern.S_SENSORDEPTH;
 				_sensorDepth = ((Float) stationDomain.getModel().getProperty(Intern.S_SENSORDEPTH).applyOn(inputStationHeader)).floatValue();
-				errorMessage = Intern.S_SAMPLINGRATE;
-				_samplingRate = ((Float) stationDomain.getModel().getProperty(Intern.S_SAMPLINGRATE).applyOn(inputStationHeader)).floatValue();
-
-				String conversionFormula = stationDomain.getModel().getProperty(Intern.S_SAMPLINGRATE).getConversionFormula();
-				errorMessage = Intern.S_SAMPLINGRATE;
-				if (conversionFormula != null && conversionFormula != "") {
-					org.nfunk.jep.JEP parser = new org.nfunk.jep.JEP();
-					parser.addStandardFunctions();
-					parser.addStandardConstants();
-					parser.addVariable(Global.STR_CONVERT, _samplingRate);
-					parser.parseExpression(Global.STR_CONVERT + conversionFormula);
-
-					_samplingRate = (float) parser.getValue();
+				if(!isNetCDF){
+    				errorMessage = Intern.S_SAMPLINGRATE;
+    				_samplingRate = ((Float) stationDomain.getModel().getProperty(Intern.S_SAMPLINGRATE).applyOn(inputStationHeader)).floatValue();
+				
+    				String conversionFormula = stationDomain.getModel().getProperty(Intern.S_SAMPLINGRATE).getConversionFormula();
+    				errorMessage = Intern.S_SAMPLINGRATE;
+    				if (conversionFormula != null && conversionFormula != "") {
+    					org.nfunk.jep.JEP parser = new org.nfunk.jep.JEP();
+    					parser.addStandardFunctions();
+    					parser.addStandardConstants();
+    					parser.addVariable(Global.STR_CONVERT, _samplingRate);
+    					parser.parseExpression(Global.STR_CONVERT + conversionFormula);
+    
+    					_samplingRate = (float) parser.getValue();
+    				}
 				}
 				errorMessage = Intern.S_SENSORDEPTH;
 				addMetaFlag(Intern.S_SENSORDEPTH, stationDomain.getMetaFlag(Intern.S_SENSORDEPTH, inputStationHeader));
 				errorMessage = Intern.ENDDATETIME;
 				addMetaFlag(Intern.ENDDATETIME, stationDomain.getMetaFlag(Intern.ENDDATETIME, inputStationHeader));
-				errorMessage = Intern.S_ELAT;
-				addMetaFlag(Intern.S_ELAT, stationDomain.getMetaFlag(Intern.S_ELAT, inputStationHeader));
-				errorMessage = Intern.S_ELON;
-				addMetaFlag(Intern.S_ELON, stationDomain.getMetaFlag(Intern.S_ELON, inputStationHeader));
-				errorMessage = Intern.S_EDEPTH;
-				addMetaFlag(Intern.S_EDEPTH, stationDomain.getMetaFlag(Intern.S_EDEPTH, inputStationHeader));
+				if(!isNetCDF){
+				    errorMessage = Intern.S_ELAT;
+				    addMetaFlag(Intern.S_ELAT, stationDomain.getMetaFlag(Intern.S_ELAT, inputStationHeader));
+				    errorMessage = Intern.S_ELON;
+				    addMetaFlag(Intern.S_ELON, stationDomain.getMetaFlag(Intern.S_ELON, inputStationHeader));
+				    errorMessage = Intern.S_EDEPTH;
+				    addMetaFlag(Intern.S_EDEPTH, stationDomain.getMetaFlag(Intern.S_EDEPTH, inputStationHeader));
+				}
 				errorMessage = Intern.S_SENSORDEPTH;
 				addMetaFlag(Intern.S_SENSORDEPTH, stationDomain.getMetaFlag(Intern.S_SENSORDEPTH, inputStationHeader));
 				errorMessage = Intern.DISTANCETOBOTTOM;
