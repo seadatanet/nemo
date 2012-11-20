@@ -58,6 +58,12 @@ public class Parameter extends AbstractModel
 	 * Format à appliquer à la valeur du paramètre
 	 */
 	protected String _format;
+	
+	
+	/**
+     * Format à appliquer à la valeur du paramètre
+     */
+    protected String _standardName;
 
 	/**
 	 * Nom complet du paramètre (IOC def.) (MEDATLAS: 30 char max)

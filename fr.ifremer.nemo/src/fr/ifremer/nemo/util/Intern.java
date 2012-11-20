@@ -42,6 +42,7 @@ public class Intern extends NLS {
     public static String list_P091;
     public static String list_P011;
     public static String list_P061;
+    public static String list_P07;
     public static String list_nemo_parameters;
     public static String list_nemo_survey;
     public static String list_edmo;

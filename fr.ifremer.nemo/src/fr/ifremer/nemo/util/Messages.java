@@ -88,6 +88,7 @@ public class Messages
     public static String table_label_is_string;
     public static String table_label_code;
     public static String table_label_userlabel;
+    public static String table_label_standard_name;
     public static String table_label_testIn;
     public static String table_label_testOut;
     public static String table_label_unit;
@@ -110,6 +111,7 @@ public class Messages
     public static String menu_label_paramList;
     public static String menu_label_selectP061Unit;
     public static String menu_label_selectFormat;
+    public static String menu_label_selectStandardName;
     public static String menu_label_upType;
     public static String menu_label_downType;
     public static String menu_label_removeType;
@@ -242,6 +244,7 @@ public class Messages
     public static String edit_data_P021;
     public static String edit_data_P011;
     public static String edit_data_P061;
+    public static String edit_data_P07;
     public static String edit_data_error_dataListUnknown;
     public static String edit_data_dataListDialogBox_title;
     public static String edit_data_dataListDialogBox_text;

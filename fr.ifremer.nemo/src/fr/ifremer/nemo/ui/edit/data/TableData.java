@@ -28,6 +28,7 @@ import fr.ifremer.nemo.ui.FilteredTableFactory;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.tables.FormatsFilteredTable;
 import fr.ifremer.nemo.ui.tables.ParameterFilteredTable;
+import fr.ifremer.nemo.ui.tables.StandardNameFilteredTable;
 import fr.ifremer.nemo.ui.tables.UnitFilteredTable;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Global.DataListTypeEnum;
@@ -49,6 +50,8 @@ public class TableData
      * où on est en P011viaP021, pour affecter une unité
      */
     private ArrayList<TypeUnit> typesP061;
+    
+    
     /**
      * formats output
      */
@@ -116,9 +119,10 @@ public class TableData
     private static String COL_START_FLAG = "COL_START_FLAG"; //$NON-NLS-1$
     private static String COL_END_FLAG = "COL_END_FLAG"; //$NON-NLS-1$
     private static String COL_UNIT_CODE = "COL_UNIT_CODE"; //$NON-NLS-1$
+    private static String COL_STANDARD_NAME = "COL_STANDARD_NAME"; //$NON-NLS-1$
 
     private final String[] colOrder =
-    {COL_IS_STRING, COL_CODE, COL_USERLABEL, COL_UNIT,
+    {COL_IS_STRING, COL_CODE, COL_STANDARD_NAME, COL_USERLABEL, COL_UNIT,
             COL_CONVERSION, COL_TEST, COL_START, COL_END, COL_FORMAT,
             COL_VALUE_IN, COL_VALUE_OUT, COL_TEST_IN, COL_TEST_OUT,
             COL_START_FLAG, COL_END_FLAG, COL_UNIT_CODE};
@@ -131,14 +135,15 @@ public class TableData
     int MENU_ITEM_PARAMLIST = 2;
     int MENU_ITEM_SELECTUNIT = 3;
     int MENU_ITEM_SELECTFORMAT = 4;
-    int MENU_ITEM_UPTOTOPPARAM = 5;
-    int MENU_ITEM_UPPARAM = 6;
-    int MENU_ITEM_DOWNPARAM = 7;
-    int MENU_ITEM_DOWNTOBOTTOMPARAM = 8;
-    int MENU_ITEM_REMOVEPARAM = 9;
-    int MENU_ITEM_SETFLAG = 10;
-    int MENU_ITEM_DELATEFLAG = 11;
-    int MENU_ITEM_DELETEALLPARAMS = 12;
+    int MENU_ITEM_SELECTSTANDARDNAME = 5;
+    int MENU_ITEM_UPTOTOPPARAM = 6;
+    int MENU_ITEM_UPPARAM = 7;
+    int MENU_ITEM_DOWNPARAM = 8;
+    int MENU_ITEM_DOWNTOBOTTOMPARAM = 9;
+    int MENU_ITEM_REMOVEPARAM = 10;
+    int MENU_ITEM_SETFLAG = 11;
+    int MENU_ITEM_DELATEFLAG = 12;
+    int MENU_ITEM_DELETEALLPARAMS = 13;
     /*
      * map key=menuItem / value=index in menu (can change depending to configuration)
      */
@@ -174,8 +179,13 @@ public class TableData
     private boolean isLabelWritable()
     {
         return (Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToODV()
-                ||Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToNetCDF())
+                || Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToNetCDF())
                 && !Nemo.getInstance().getViewMain().getMyRulesManager().isDataListTypeP091();
+    }
+    
+    private boolean isStandardNameWritable()
+    {
+        return Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToNetCDF();
     }
 
     private boolean isCheckBoxWritable()
@@ -207,6 +217,11 @@ public class TableData
         col =
                 new TableDataColumn(COL_CODE, colNbById.get(COL_CODE),
                         Messages.table_label_code, 100, false, true);
+        columnsMap.put(col.pos, col);
+        col =
+                new TableDataColumn(COL_STANDARD_NAME, colNbById.get(COL_STANDARD_NAME),
+                        Messages.table_label_standard_name, 100, false,
+                        isStandardNameWritable());
         columnsMap.put(col.pos, col);
         col =
                 new TableDataColumn(COL_USERLABEL,
@@ -350,6 +365,12 @@ public class TableData
             {
                 columnsMap.get(i).enable(isLabelWritable());
             }
+            if (columnsMap.get(i).id.equals(COL_STANDARD_NAME))
+            {
+                columnsMap.get(i).setWidth(isStandardNameWritable());
+                columnsMap.get(i).setMandatory(isStandardNameWritable());
+            }
+            
             if (columnsMap.get(i).id.equals(COL_IS_STRING))
             {
                 tableColumn.setToolTipText(Messages.table_checkColumn_tooltip);
@@ -452,7 +473,7 @@ public class TableData
         }
 
     }
-
+    
     public void fillTypes()
     {
         // initialisation de la ArrayList des types des donnees e partir du
@@ -816,6 +837,24 @@ public class TableData
                 }
             });
         }
+        // ========= Selection d'un Standard Names
+        if (Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToNetCDF())
+        {
+            MenuItem selectStandardName =
+                new MenuItem(menu, SWT.NONE, index);
+            menuMap.put(MENU_ITEM_SELECTSTANDARDNAME, index);
+            index++;
+            selectStandardName.setText(Messages.menu_label_selectStandardName);
+            selectStandardName.addListener(SWT.Selection, new Listener()
+            {
+                public void handleEvent(Event e)
+                {
+                    //initTypesP07();
+                    int indice = myTable.getSelectionIndex();
+                    openMyStandardNameFilteredTable(indice);
+                }
+            });
+        }
         // ========= Monter paramètre sélectionné tout en haut de la liste
         MenuItem itemUpToTop =
             new MenuItem(menu, SWT.NONE, index);
@@ -946,7 +985,7 @@ public class TableData
 
         // ========= Suppression de tous les parametres à la fois
         MenuItem deleteAll =
-            new MenuItem(menu, SWT.NONE, MENU_ITEM_DELETEALLPARAMS);
+            new MenuItem(menu, SWT.NONE, index);
         menuMap.put(MENU_ITEM_DELETEALLPARAMS, index);
         index++;
         deleteAll.setText(Messages.menu_label_deleteAllParameters);
@@ -993,6 +1032,13 @@ public class TableData
                 Nemo.getInstance().getViewMain().getEditDataForm()
                         .getCompositeData().getParent());
     }
+    
+    public void openMyStandardNameFilteredTable(int rowIndex)
+    {
+        getMyStandardNameFilteredTable().open(
+                Nemo.getInstance().getViewMain().getEditDataForm()
+                        .getCompositeData().getParent());
+    }
 
     public void initTableData()
     {
@@ -1032,11 +1078,14 @@ public class TableData
                     }
                 }
             }
+            
+            
 
             item.setText(new String[]
             {
                     null,
                     code,
+                    types.get(i).getStandardName(),//TODO CPT STANDARD NAMES
                     label,
                     types.get(i).getUnite(),
                     (types.get(i).isText() ? null : types.get(i)
@@ -1636,7 +1685,9 @@ public class TableData
                         types.get(i).getEntryKeyP011(), userLabel);
             }
             // types.get(i).setUserLabel(myTable.getItem(i).getText(colNbById.get(COL_USERLABEL)));
-
+            
+            types.get(i).setStandardName(myTable.getItem(i).getText(colNbById.get(COL_STANDARD_NAME)));
+            
             types.get(i).setUnite(
                     myTable.getItem(i).getText(colNbById.get(COL_UNIT)));
             types.get(i).setConversion(
@@ -1730,6 +1781,18 @@ public class TableData
         FormatsFilteredTable theTable = new FormatsFilteredTable();
         return theTable;
     }
+    
+    public StandardNameFilteredTable getMyStandardNameFilteredTable()
+    {
+        TypeData typeParameter;
+        int index = myTable.getSelectionIndex();
+        typeParameter =  types.get(index);
+        
+        StandardNameFilteredTable theTable = new StandardNameFilteredTable(typeParameter,Nemo.getInstance().getViewMain().getMyRulesManager().getMyDataListType());
+        return theTable;
+    }
+    
+    
 
     public void setUnit(TypeUnit typeUnit)
     {
@@ -1740,6 +1803,16 @@ public class TableData
             item.setText(colNbById.get(COL_UNIT), typeUnit.getTerm());
             // FAE 6542
             item.setText(colNbById.get(COL_UNIT_CODE), typeUnit.getUnitKey());
+        }
+    }
+    
+    public void setStandardName(TypeStandardName typeStandardName)
+    {
+        int selectedRow = myTable.getSelectionIndex();
+        if (selectedRow > -1)
+        {
+            TableItem item = myTable.getItem(selectedRow);
+            item.setText(colNbById.get(COL_STANDARD_NAME), typeStandardName.getTerm());
         }
     }
 

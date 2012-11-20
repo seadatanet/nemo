@@ -25,6 +25,7 @@ public class TypeData extends Object
     private String entree;
     private String sortie;
     private String test;
+    private String standardName;
 
     private int position, debut, fin;
 
@@ -69,6 +70,7 @@ public class TypeData extends Object
         {
             this.setSortie(typeData.sortie);
         }
+        this.setStandardName(typeData.standardName);
         this.setUnite(typeData.unite);
         this.setEntryKey(typeData.getEntryKey());
         this.setEntryTerm(typeData.getEntryTerm());
@@ -154,6 +156,7 @@ public class TypeData extends Object
         this.setEntryTerm(Global.EMPTY_STRING);
         this.setEntryTermP011(Global.EMPTY_STRING);
         this.setEntryKeyP011(Global.EMPTY_STRING);
+        this.setStandardName(Global.EMPTY_STRING);
         this.setIsP011(false);
         this.setIsText(false);
     }
@@ -168,6 +171,7 @@ public class TypeData extends Object
         setSortie(Global.EMPTY_STRING);
         setUnite(Global.EMPTY_STRING);
         setConversion(DEFAULT_CONVERT);
+        this.setStandardName(Global.EMPTY_STRING);
         setIsText(false);
     }
 
@@ -442,6 +446,24 @@ public class TypeData extends Object
     public void setEntryTerm(String entryTerm)
     {
         this.entryTerm = entryTerm;
+    }
+
+    /**
+     * Getter sur standardName.
+     * @return the standardName
+     */
+    public String getStandardName()
+    {
+        return standardName;
+    }
+
+    /**
+     * Setter sur standardName.
+     * @param standardName the standardName to set
+     */
+    public void setStandardName(String standardName)
+    {
+        this.standardName = standardName;
     }
 
 }
