@@ -376,6 +376,7 @@ public class StationDomain {
 		String stationReference = ref.trim();
 
 		switch (c) {
+		case NETCDF:
 		case ODV:
 			// ODV -> [Reference du jeu de donnees]
 			// if
