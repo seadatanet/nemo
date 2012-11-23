@@ -211,7 +211,7 @@ public class NetCDFWriter extends NemoWriter
         StringBuffer stationHeader = station.getOdvEmptyStationHeader();
 
         //Local CDI ID
-        String localCdiId = stationDomain.getLocalCdiId(cruiseDomain, Conversion.ODV, currentStation.getReference());
+        String localCdiId = stationDomain.getLocalCdiId(cruiseDomain, Conversion.NETCDF, currentStation.getReference());
         setDataValue(indiceStation, localCdiId , ParameterNames.SDN_LOCAL_CDI_ID, null);
         //SDN CRUISE
         setDataValue(indiceStation, cruiseDomain.getModel().getName().trim() , ParameterNames.SDN_CRUISE, null);
@@ -355,7 +355,7 @@ public class NetCDFWriter extends NemoWriter
         if (stationWrited)
         {
             // enregistrement de la station
-            iDomain.getMedia().addStationInOutput(outputFileName,
+            iDomain.getMedia().addStationInOutput(netCDFWriter.getFileName(),
                 currentStation.getReference()); 
         }
 
