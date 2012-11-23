@@ -3,12 +3,12 @@
  <Resource
   name="SISMER"
    type="javax.sql.DataSource"
-   password="serveur"
+   password="XIANFOND"
    driverClassName="oracle.jdbc.driver.OracleDriver"
    maxIdle="2"
    maxWait="5000"
-   username="serveur"
-   url="jdbc:oracle:thin:@borneo:1521:idm"
+   username="SIS_READER"
+   url="jdbc:oracle:thin:@IDMDB"
    maxActive="4"/>
   <WatchedResource>WEB-INF/web.xml</WatchedResource>
 </Context>
