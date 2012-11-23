@@ -284,7 +284,7 @@ Usage: ant [-f buildWS.xml] option
            <include name="log4j-1.2.14.jar"/>
            <include name="commons-logging-1.0.4.jar"/>
 <!--           <include name="classes12.jar"/> -->
-<!--           <include name="ojdbc14.jar"/>   -->
+<!--                   	<include name="ojdbc14-10.2.0.4.0.jar"/> -->
         </lib>
      </war>
      <copy file="${jars.dir}/nemo.war" todir="${catalina.home}/webapps"/>
@@ -328,6 +328,7 @@ Usage: ant [-f buildWS.xml] option
            <include name="mail.jar"/>
            <include name="log4j-1.2.14.jar"/>
            <include name="commons-logging-1.0.4.jar"/>
+<!--                   	<include name="ojdbc14-10.2.0.4.0.jar"/> -->
         </lib>
      </war>
      <copy file="${jars.dir}/nautilus.war" todir="${catalina.home}/webapps/"/>
