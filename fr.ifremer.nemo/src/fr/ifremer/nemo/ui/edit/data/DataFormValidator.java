@@ -105,6 +105,9 @@ public class DataFormValidator extends FormValidator
 
                 /** data45 check des valeurs debut<fin flag */
                 ok = ok && checkStartAndEndFlags(typeCourant);
+                
+                /** check des valeurs standarNames pour NetCDF */
+                ok = ok && checkStandardName(typeCourant);
             }
 
             /**
@@ -323,6 +326,20 @@ public class DataFormValidator extends FormValidator
 		}
 		return ok;
 	}
+	
+	private boolean checkStandardName(TypeData typeCourant)
+    {
+        boolean ok = true;
+        RulesManager rm =
+            Nemo.getInstance().getViewMain().getMyRulesManager();
+        if (typeCourant.getStandardName().equals(Global.EMPTY_STRING) && rm.isConversionToNetCDF())
+        {
+            Utils.messageErreurAppend(Messages.Etape_126 + Global.SPACE
+                + typeCourant.getCodeToUse());
+            ok = false;
+        }
+        return ok;
+    }
 
 	private String getFirstParameterCode()
 	{

@@ -342,7 +342,7 @@ public class ParameterManager
 				}
 			}
 		}
-		if (isODV || isNetCDF)
+		if (isODV )
         {
 			/** aap_p 1 2 */
 			// Ajout du paramètre DEPH ( = Sensor Depth) pour ODV
@@ -356,6 +356,20 @@ public class ParameterManager
 					addFixedParameterModel(IdParameter.generic_depthBSSurf_FromSensor);
 				}
 			}
+		}
+		//TODO CPT a tester
+		if(isNetCDF)
+		{
+		    if (!exist_p_depthBSSurf && !exist_p_pressure && getMesureType() == E_MesureType.BSSURF)
+            {
+                if (isProfile)
+                {
+                    addFixedParameterModel(IdParameter.generic_depthBSSurf_FromPressure);
+                } else
+                {
+                    addFixedParameterModel(IdParameter.generic_depthBSSurf_FromSensor);
+                }
+            }
 		}
 
 	}

@@ -513,6 +513,7 @@ public class Messages
     public static String Etape_122;
     public static String Etape_124;
     public static String Etape_125;
+    public static String Etape_126;
     public static String Etape_127;
     public static String Etape_128;
     public static String Etape_129;

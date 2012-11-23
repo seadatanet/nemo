@@ -138,6 +138,7 @@ public class TypeData extends Object
         setEntryKeyP011(parameter.getCodeP011());
         setEntryTermP011(parameter.getNameP011());
         setIsP011(parameter.isP011());
+        setStandardName(parameter.getStandardName());
 
     }
 

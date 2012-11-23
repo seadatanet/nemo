@@ -135,8 +135,9 @@ public class RulesManager
 			myEditCruiseForm.sectionCentre.setMandatory(isMandatory);
 			myEditCruiseForm.sectionCentre.getItems().get(0).setMandatory(isMandatory);
 			myEditCruiseForm.sectionCentre.getItems().get(1).setMandatory(isMandatory);
-
-			myEditCruiseForm.sectionType.setMandatory(true);
+			
+			
+			myEditCruiseForm.sectionType.setMandatory(isMandatory);
 
 		}
 
@@ -726,7 +727,10 @@ public class RulesManager
 		} else if(myConversionType == E_TypeConversion.NETCDF_MONOSTATION
                 || myConversionType == E_TypeConversion.NETCDF_MULTISTATIONS)
 		{
-		    cruiseEnabled = true;
+		    if(!isProcessCollection())
+		        cruiseEnabled = true;
+		    else
+		        cruiseEnabled = false;
             dataList_P011viaP021_Enabled = true;
             dataList_P091_Enabled = false;
 		    if (addToLog)

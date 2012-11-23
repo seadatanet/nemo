@@ -147,6 +147,7 @@ public class NetCDFWriter extends NemoWriter
                     }
                     writeStation(st, inputFilePath, 0);
                     writeDataToNetCDFFile();
+                  //TODO CPT A supprimer
                     System.out.println(netCDFWriter);
                 }
             }
@@ -159,10 +160,12 @@ public class NetCDFWriter extends NemoWriter
                     outputFileName += Conversion.NETCDF.getExt();
                     iDomain.getStation().updateRef();
                 }
-                if(netCDFWriter == null)
+                if(netCDFWriter == null || !outputFileName.equals(netCDFWriter.getFileName()))
                 {
                     netCDFWriter = new SdnNetCDFManager(outputFileName);
                     // écriture de l'entête campagne
+                    variables = new HashMap<String,ISdnVariable>();
+                    stationData = new HashMap<String,Object[][]>();
                     setNetCDFHeader(inputFilePath, null);
                 }
                 int indiceStation=0;
@@ -551,7 +554,7 @@ public class NetCDFWriter extends NemoWriter
         String unit=zParameterModel.getParameter().getUnit().toLowerCase();
         String sdnParameterUrn  = getURNSyntaxe(URNtype.object, zParameterModel.getParameter()
                 .getCodeP011(), null, Intern.mapping_objet, zParameterModel.isText()); 
-        String sdnParameterName = zParameterModel.getParameter().getNameP011(); 
+        String sdnParameterName = zParameterModel.getParameter().getNameP011(); ; 
         
         String sdnUomUrn ;
         if (zParameterModel.getParameter().getUnitCode() == null
@@ -593,15 +596,15 @@ public class NetCDFWriter extends NemoWriter
         }
 
      // add default value if existe
-        if(/*!zParameterModel.getInputDefault().isEmpty()*/ !zParameterModel.getParameter().getDefault().isEmpty())
+        if( !zParameterModel.getParameter().getDefault().isEmpty())
             z.addVariableAttAttribute(ParameterNames.FILLVALUE, convertValue(DataType.FLOAT, zParameterModel.getParameter().getDefault()));
         
         variables.put(longitude.getVarName(), longitude);
         addVariableToNetCDF(longitude);
         variables.put(latitude.getVarName(), latitude);
+        addVariableToNetCDF(latitude);
         variables.put(zParameterModel.getParameter().getLocalCode(), z);
         addVariableToNetCDF(z);
-        addVariableToNetCDF(latitude);
         variables.put(time.getVarName(), time);
         addVariableToNetCDF(time);
         
@@ -639,7 +642,6 @@ public class NetCDFWriter extends NemoWriter
             }
             sdnUomName = param.getParameter().getUnit();
             
-            //TODO CPT ajouter l'unité pour Les variable geophysical
             unit=param.getParameter().getUnit().toLowerCase();
             if(unit == null)
                 unit=param.getParameter().getUnit().toLowerCase(); 
@@ -651,6 +653,9 @@ public class NetCDFWriter extends NemoWriter
                 // add default value if existe
                 if(!param.getParameter().getDefault().isEmpty())
                     current.addVariableAttAttribute(ParameterNames.FILLVALUE, convertValue(DataType.FLOAT, param.getParameter().getDefault()));
+                
+                if(!param.getParameter().getStandardName().isEmpty())
+                    current.addVariableAttAttribute(ParameterNames.STANDARD_NAME, param.getParameter().getStandardName());
                 variables.put(current.getVarName(), current);
                 addVariableToNetCDF(current);
 
@@ -714,28 +719,28 @@ public class NetCDFWriter extends NemoWriter
         try{
             sdnCruise.addVariableAttAttribute(ModelDescription.node_startdate, DateTimeUtils.getVariantDateTime(cruiseDomain.getModel().getEndDate()) );
         }catch (Exception e){}
-        if(cruiseDomain.getModel().getRegionName() != null)
+        if(cruiseDomain.getModel().getRegionName() != null  && !cruiseDomain.getModel().getRegionName().isEmpty())
             sdnCruise.addVariableAttAttribute(ModelDescription.node_region, cruiseDomain.getModel().getRegionName());
         
         //date source
-        if(cruiseDomain.getModel().getCountryCode() != null)
+        if(cruiseDomain.getModel().getCountryCode() != null && !!cruiseDomain.getModel().getCountryCode().isEmpty())
             sdnCruise.addVariableAttAttribute(ModelDescription.node_country, cruiseDomain.getModel().getCountryCode());
-        if(cruiseDomain.getModel().getLaboratories() != null)
+        if(cruiseDomain.getModel().getLaboratories() != null && !cruiseDomain.getModel().getLaboratories().isEmpty())
             sdnCruise.addVariableAttAttribute(ModelDescription.node_laboratories, cruiseDomain.getModel().getLaboratories());
-        if(cruiseDomain.getModel().getChiefScientist() != null)
+        if(cruiseDomain.getModel().getChiefScientist() != null && !cruiseDomain.getModel().getChiefScientist().isEmpty())
             sdnCruise.addVariableAttAttribute(ModelDescription.node_chief, cruiseDomain.getModel().getChiefScientist());
-        if(cruiseDomain.getModel().getProjectName() != null)
+        if(cruiseDomain.getModel().getProjectName() != null && !cruiseDomain.getModel().getProjectName().isEmpty())
             sdnCruise.addVariableAttAttribute(ModelDescription.node_project, cruiseDomain.getModel().getProjectName());
         
         
         //archive center
-        if(cruiseDomain.getModel().getDataCentre() != null)
+        if(cruiseDomain.getModel().getDataCentre() != null && !cruiseDomain.getModel().getDataCentre().isEmpty())
             sdnCruise.addVariableAttAttribute(ModelDescription.node_datacenter, cruiseDomain.getModel().getDataCentre());
         if(cruiseDomain.getModel().getAvailability() != null)
             sdnCruise.addVariableAttAttribute(ModelDescription.node_availability, cruiseDomain.getModel().getAvailability().name());
         
         //Comment
-        if(cruiseDomain.getModel().getComment() != null)
+        if(cruiseDomain.getModel().getComment() != null && !cruiseDomain.getModel().getComment().isEmpty())
             sdnCruise.addVariableAttAttribute(ModelDescription.node_comment, cruiseDomain.getModel().getComment());
     }
 
@@ -793,6 +798,7 @@ public class NetCDFWriter extends NemoWriter
         return null;
     }
     
+    //TODO CPT A modifier
     private String getZStandardName(ParameterModel zParameterModel)
     {
         if (!dataDomain.getModel().getVerticalParametersList().getP_pressure().isEmpty() && mediaModel.getInputType() != E_InputType.TIMESERIES)

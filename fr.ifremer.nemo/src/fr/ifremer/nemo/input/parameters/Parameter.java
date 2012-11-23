@@ -102,6 +102,8 @@ public class Parameter extends AbstractModel
 
 		setDefault(typeData.getSortie());
 		setFormat(typeData.getFormat());
+		
+		setStandardName(typeData.getStandardName());
 	}
 
 	/**
@@ -118,6 +120,7 @@ public class Parameter extends AbstractModel
 		_unitCode = Global.EMPTY_STRING;
 		_codeP011 = Global.EMPTY_STRING;
 		_nameP011 = Global.EMPTY_STRING;
+		_standardName = Global.EMPTY_STRING;
 		_P011 = false;
 	}
 
@@ -207,6 +210,12 @@ public class Parameter extends AbstractModel
 					new Element2Field(this, ModelDescription.setter_P011);
 			return setter;
 		}
+		if (a_LocalName.equals(ModelDescription.node_standardname))
+        {
+            Element2Field setter =
+                    new Element2Field(this, ModelDescription.setter_standardname);
+            return setter;
+        }
 		return null;
 	}
 
@@ -236,6 +245,7 @@ public class Parameter extends AbstractModel
 		a_Writer.putTag(ModelDescription.node_codeP011, getCodeP011());
 		a_Writer.putTag(ModelDescription.node_nameP011, getNameP011());
 		a_Writer.putTag(ModelDescription.node_P011, isP011());
+		a_Writer.putTag(ModelDescription.node_standardname, getStandardName());
 	}
 
 	/**
@@ -478,6 +488,24 @@ public class Parameter extends AbstractModel
 	}
 
 	/**
+     * Getter sur _standardName.
+     * @return the standardName
+     */
+    public String getStandardName()
+    {
+        return _standardName;
+    }
+
+    /**
+     * Setter sur _standardName.
+     * @param standardName the standardName to set
+     */
+    public void setStandardName(String standardName)
+    {
+        _standardName = standardName;
+    }
+
+    /**
 	 * Getter pour _fullName.
 	 * 
 	 * @return String

@@ -1085,7 +1085,7 @@ public class TableData
             {
                     null,
                     code,
-                    types.get(i).getStandardName(),//TODO CPT STANDARD NAMES
+                    types.get(i).getStandardName(),
                     label,
                     types.get(i).getUnite(),
                     (types.get(i).isText() ? null : types.get(i)
