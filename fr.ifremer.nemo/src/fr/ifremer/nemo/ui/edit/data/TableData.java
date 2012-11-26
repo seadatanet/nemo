@@ -190,7 +190,7 @@ public class TableData
 
     private boolean isCheckBoxWritable()
     {
-        return !Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToMedatlas();
+        return !(Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToMedatlas() || Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToNetCDF());
     }
 
     /**
@@ -1098,8 +1098,10 @@ public class TableData
                     types.get(i).getFinFlag(),
                     // FAE 6542
                     types.get(i).getUniteCode()});
-
-            item.setChecked(types.get(i).isText());
+            if(isCheckBoxWritable())
+                item.setChecked(types.get(i).isText());
+            else
+                item.setChecked(false);
         }
 
     }

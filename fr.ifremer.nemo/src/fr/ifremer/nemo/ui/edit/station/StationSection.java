@@ -1569,12 +1569,14 @@ public class StationSection extends NemoSection
         Boolean isCruiseEnabled =
             Nemo.getInstance().getViewMain().getMyRulesManager()
                 .isCruiseEnabled();
+        Boolean isNetCDF = Nemo.getInstance().getViewMain().getMyRulesManager()
+                .isConversionToNetCDF();
         Boolean addOk = true;
         DataType dataType = station.getDataType();
 
         // FAE 6536 - si pas d'onglet Cruise, ni de dataType dans le modele, on
         // remplit la combo avec tous les dataTypes avec sensor true
-        if (!isCruiseEnabled)
+        if (!isCruiseEnabled || isNetCDF)
         {
             fillDataTypeWithDataTypesIsSensor();
         }
@@ -1585,7 +1587,7 @@ public class StationSection extends NemoSection
 
             // si l'onglet cruise existe, on verifie que le dataType est bien
             // dans la liste des datatypes de cet onglet
-            if (isCruiseEnabled)
+            if (isCruiseEnabled && !isNetCDF)
             {
                 addOk = checkAddDatatypeOk(code);
             }

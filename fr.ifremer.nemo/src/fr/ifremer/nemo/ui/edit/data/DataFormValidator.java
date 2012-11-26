@@ -107,7 +107,8 @@ public class DataFormValidator extends FormValidator
                 ok = ok && checkStartAndEndFlags(typeCourant);
                 
                 /** check des valeurs standarNames pour NetCDF */
-                ok = ok && checkStandardName(typeCourant);
+                //TODO CPT a verifier
+                //ok = ok && checkStandardName(typeCourant);
             }
 
             /**

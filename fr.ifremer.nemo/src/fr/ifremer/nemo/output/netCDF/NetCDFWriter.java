@@ -723,7 +723,7 @@ public class NetCDFWriter extends NemoWriter
             sdnCruise.addVariableAttAttribute(ModelDescription.node_region, cruiseDomain.getModel().getRegionName());
         
         //date source
-        if(cruiseDomain.getModel().getCountryCode() != null && !!cruiseDomain.getModel().getCountryCode().isEmpty())
+        if(cruiseDomain.getModel().getCountryCode() != null && !cruiseDomain.getModel().getCountryCode().isEmpty())
             sdnCruise.addVariableAttAttribute(ModelDescription.node_country, cruiseDomain.getModel().getCountryCode());
         if(cruiseDomain.getModel().getLaboratories() != null && !cruiseDomain.getModel().getLaboratories().isEmpty())
             sdnCruise.addVariableAttAttribute(ModelDescription.node_laboratories, cruiseDomain.getModel().getLaboratories());
