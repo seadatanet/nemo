@@ -221,7 +221,7 @@ public class TableData
         col =
                 new TableDataColumn(COL_STANDARD_NAME, colNbById.get(COL_STANDARD_NAME),
                         Messages.table_label_standard_name, 100, false,
-                        isStandardNameWritable());
+                        false);
         columnsMap.put(col.pos, col);
         col =
                 new TableDataColumn(COL_USERLABEL,
@@ -368,7 +368,6 @@ public class TableData
             if (columnsMap.get(i).id.equals(COL_STANDARD_NAME))
             {
                 columnsMap.get(i).setWidth(isStandardNameWritable());
-                columnsMap.get(i).setMandatory(isStandardNameWritable());
             }
             
             if (columnsMap.get(i).id.equals(COL_IS_STRING))
