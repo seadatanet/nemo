@@ -1,0 +1,1969 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<java version="1.6.0_21" class="java.beans.XMLDecoder"> 
+ <array class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType" length="30"> 
+  <void index="0"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="broadMatch"> 
+     <array class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType" length="1"> 
+      <void index="0"> 
+       <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+        <void property="entryKey"> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/L054/25/134</string> 
+        </void> 
+        <void property="entryTerm"> 
+         <string>water temperature sensor</string> 
+        </void> 
+        <void property="entryTermDef"> 
+         <string>An instrument that measures the temperature of the water with which it is in contact</string> 
+        </void> 
+        <void property="entryTermLastMod"> 
+         <object class="java.util.GregorianCalendar"> 
+          <void property="lenient"> 
+           <boolean>false</boolean> 
+          </void> 
+          <void property="time"> 
+           <object class="java.util.Date"> 
+            <long>1290176698000</long> 
+           </object> 
+          </void> 
+         </object> 
+        </void> 
+        <void property="listKey"> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/L054/25</string> 
+        </void> 
+       </object> 
+      </void> 
+     </array> 
+    </void> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C77/3/H13</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Bathythermograph</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="lenient"> 
+       <boolean>false</boolean> 
+      </void> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>709988400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="exactMatch"> 
+     <array class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType" length="1"> 
+      <void index="0"> 
+       <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+        <void property="entryKey"> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/L054/25/132</string> 
+        </void> 
+        <void property="entryTerm"> 
+         <string>bathythermographs</string> 
+        </void> 
+        <void property="entryTermDef"> 
+         <string>Instruments that measure vertical profiles of sea temperature by either lowering a pressure plus temperature senor package (MBT) or dropping a free falling disposable sensor (XBT).</string> 
+        </void> 
+        <void property="entryTermLastMod"> 
+         <object class="java.util.GregorianCalendar"> 
+          <void property="lenient"> 
+           <boolean>false</boolean> 
+          </void> 
+          <void property="time"> 
+           <object class="java.util.Date"> 
+            <long>1195551280000</long> 
+           </object> 
+          </void> 
+         </object> 
+        </void> 
+        <void property="listKey"> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/L054/25</string> 
+        </void> 
+       </object> 
+      </void> 
+     </array> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/3</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="1"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="broadMatch"> 
+     <array class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType" length="1"> 
+      <void index="0"> 
+       <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+        <void property="entryKey"> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/L054/25/180</string> 
+        </void> 
+        <void property="entryTerm"> 
+         <string>underwater cameras</string> 
+        </void> 
+        <void property="entryTermDef"> 
+         <string>All types of photographic equipment that may be deployed underwater including stills, video, film and digital systems</string> 
+        </void> 
+        <void property="entryTermLastMod"> 
+         <object class="java.util.GregorianCalendar"> 
+          <void property="lenient"> 
+           <boolean>false</boolean> 
+          </void> 
+          <void property="time"> 
+           <object class="java.util.Date"> 
+            <long>1199981604000</long> 
+           </object> 
+          </void> 
+         </object> 
+        </void> 
+        <void property="listKey"> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/L054/25</string> 
+        </void> 
+       </object> 
+      </void> 
+     </array> 
+    </void> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C77/3/G08</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Bottom photography</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="lenient"> 
+       <boolean>false</boolean> 
+      </void> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1323341888000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/3</string> 
+    </void> 
+    <void property="narrowMatch"> 
+     <array class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType" length="1"> 
+      <void index="0"> 
+       <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+        <void property="entryKey"> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/L054/25/378</string> 
+        </void> 
+        <void property="entryTerm"> 
+         <string>sediment profile imagers</string> 
+        </void> 
+        <void property="entryTermDef"> 
+         <string>Devices that provide in-situ still or video images of a section including bottom water, the undisturbed sediment-water interface and the upper sediment layers.</string> 
+        </void> 
+        <void property="entryTermLastMod"> 
+         <object class="java.util.GregorianCalendar"> 
+          <void property="lenient"> 
+           <boolean>false</boolean> 
+          </void> 
+          <void property="time"> 
+           <object class="java.util.Date"> 
+            <long>1271945924000</long> 
+           </object> 
+          </void> 
+         </object> 
+        </void> 
+        <void property="listKey"> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/L054/25</string> 
+        </void> 
+       </object> 
+      </void> 
+     </array> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="2"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="broadMatch"> 
+     <array class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType" length="1"> 
+      <void index="0"> 
+       <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+        <void property="entryKey"> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/L054/25/350</string> 
+        </void> 
+        <void property="entryTerm"> 
+         <string>salinity sensor</string> 
+        </void> 
+        <void property="entryTermDef"> 
+         <string>Instrument that simultaneously measures electrical conductivity and temperature in the water column to provide temperature and salinity data</string> 
+        </void> 
+        <void property="entryTermLastMod"> 
+         <object class="java.util.GregorianCalendar"> 
+          <void property="lenient"> 
+           <boolean>false</boolean> 
+          </void> 
+          <void property="time"> 
+           <object class="java.util.Date"> 
+            <long>1290176650000</long> 
+           </object> 
+          </void> 
+         </object> 
+        </void> 
+        <void property="listKey"> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/L054/25</string> 
+        </void> 
+       </object> 
+      </void> 
+     </array> 
+    </void> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C77/3/H10</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>CTD stations</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="lenient"> 
+       <boolean>false</boolean> 
+      </void> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>709988400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="exactMatch"> 
+     <array class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType" length="1"> 
+      <void index="0"> 
+       <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+        <void property="entryKey"> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/L054/25/130</string> 
+        </void> 
+        <void property="entryTerm"> 
+         <string>CTD</string> 
+        </void> 
+        <void property="entryTermDef"> 
+         <string>A package lowered and raised vertically from a surface platform, usually a ship, always carrying pressure, temperature and conductivity sensors. Addional optional sensors include fluorometers, transmissometers and radiometers.  The package may also carry water bottles.</string> 
+        </void> 
+        <void property="entryTermLastMod"> 
+         <object class="java.util.GregorianCalendar"> 
+          <void property="lenient"> 
+           <boolean>false</boolean> 
+          </void> 
+          <void property="time"> 
+           <object class="java.util.Date"> 
+            <long>1290091930000</long> 
+           </object> 
+          </void> 
+         </object> 
+        </void> 
+        <void property="listKey"> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/L054/25</string> 
+        </void> 
+       </object> 
+      </void> 
+     </array> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/3</string> 
+    </void> 
+    <void property="narrowMatch"> 
+     <array class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType" length="1"> 
+      <void index="0"> 
+       <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+        <void property="entryKey"> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/L054/25/354</string> 
+        </void> 
+        <void property="entryTerm"> 
+         <string>expendable CTDs</string> 
+        </void> 
+        <void property="entryTermDef"> 
+         <string>Instruments that measure vertical profiles of sea temperature and salinity with a free falling disposable temperature and conductivity sensor package.</string> 
+        </void> 
+        <void property="entryTermLastMod"> 
+         <object class="java.util.GregorianCalendar"> 
+          <void property="lenient"> 
+           <boolean>false</boolean> 
+          </void> 
+          <void property="time"> 
+           <object class="java.util.Date"> 
+            <long>1195551280000</long> 
+           </object> 
+          </void> 
+         </object> 
+        </void> 
+        <void property="listKey"> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/L054/25</string> 
+        </void> 
+       </object> 
+      </void> 
+     </array> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="3"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C77/3/G03</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Core - rock</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="lenient"> 
+       <boolean>false</boolean> 
+      </void> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1323341888000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="exactMatch"> 
+     <array class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType" length="1"> 
+      <void index="0"> 
+       <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+        <void property="entryKey"> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/L051/25/53</string> 
+        </void> 
+        <void property="entryTerm"> 
+         <string>rock corers</string> 
+        </void> 
+        <void property="entryTermDef"> 
+         <string>A device that drills into rock extracting a cylindrical sample</string> 
+        </void> 
+        <void property="entryTermLastMod"> 
+         <object class="java.util.GregorianCalendar"> 
+          <void property="lenient"> 
+           <boolean>false</boolean> 
+          </void> 
+          <void property="time"> 
+           <object class="java.util.Date"> 
+            <long>1195548603000</long> 
+           </object> 
+          </void> 
+         </object> 
+        </void> 
+        <void property="listKey"> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/L051/25</string> 
+        </void> 
+       </object> 
+      </void> 
+     </array> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/3</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="4"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C77/3/G04</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Core - soft bottom</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="lenient"> 
+       <boolean>false</boolean> 
+      </void> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1323341888000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="exactMatch"> 
+     <array class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType" length="1"> 
+      <void index="0"> 
+       <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+        <void property="entryKey"> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/L051/25/51</string> 
+        </void> 
+        <void property="entryTerm"> 
+         <string>unconsolidated sediment corers</string> 
+        </void> 
+        <void property="entryTermDef"> 
+         <string>Devices designed to collect samples of unconsolidated sediment from between the surface and depths from a metre to 10s of metres with minimal disturbance of the sediment structure.</string> 
+        </void> 
+        <void property="entryTermLastMod"> 
+         <object class="java.util.GregorianCalendar"> 
+          <void property="lenient"> 
+           <boolean>false</boolean> 
+          </void> 
+          <void property="time"> 
+           <object class="java.util.Date"> 
+            <long>1279609417000</long> 
+           </object> 
+          </void> 
+         </object> 
+        </void> 
+        <void property="listKey"> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/L051/25</string> 
+        </void> 
+       </object> 
+      </void> 
+     </array> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/3</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="5"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C77/3/D01</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Current meters</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="lenient"> 
+       <boolean>false</boolean> 
+      </void> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>709988400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="exactMatch"> 
+     <array class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType" length="1"> 
+      <void index="0"> 
+       <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+        <void property="entryKey"> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/L054/25/114</string> 
+        </void> 
+        <void property="entryTerm"> 
+         <string>current meters</string> 
+        </void> 
+        <void property="entryTermDef"> 
+         <string>Instrument that measures current speed and direction at a single depth</string> 
+        </void> 
+        <void property="entryTermLastMod"> 
+         <object class="java.util.GregorianCalendar"> 
+          <void property="lenient"> 
+           <boolean>false</boolean> 
+          </void> 
+          <void property="time"> 
+           <object class="java.util.Date"> 
+            <long>1195551280000</long> 
+           </object> 
+          </void> 
+         </object> 
+        </void> 
+        <void property="listKey"> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/L054/25</string> 
+        </void> 
+       </object> 
+      </void> 
+     </array> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/3</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="6"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C77/3/D71</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Current profiler (eg ADCP)</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="lenient"> 
+       <boolean>false</boolean> 
+      </void> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>709988400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="exactMatch"> 
+     <array class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType" length="1"> 
+      <void index="0"> 
+       <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+        <void property="entryKey"> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/L054/25/115</string> 
+        </void> 
+        <void property="entryTerm"> 
+         <string>current profilers</string> 
+        </void> 
+        <void property="entryTermDef"> 
+         <string>Instrument that measures current speed and direction at multiple predetermined depths simultaneously</string> 
+        </void> 
+        <void property="entryTermLastMod"> 
+         <object class="java.util.GregorianCalendar"> 
+          <void property="lenient"> 
+           <boolean>false</boolean> 
+          </void> 
+          <void property="time"> 
+           <object class="java.util.Date"> 
+            <long>1195551280000</long> 
+           </object> 
+          </void> 
+         </object> 
+        </void> 
+        <void property="listKey"> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/L054/25</string> 
+        </void> 
+       </object> 
+      </void> 
+     </array> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/3</string> 
+    </void> 
+    <void property="narrowMatch"> 
+     <array class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType" length="1"> 
+      <void index="0"> 
+       <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+        <void property="entryKey"> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/L054/25/116</string> 
+        </void> 
+        <void property="entryTerm"> 
+         <string>lowered current profilers</string> 
+        </void> 
+        <void property="entryTermDef"> 
+         <string>An acoustic doppler current meter lowered and raised vertically from a surface platform, typically a ship.</string> 
+        </void> 
+        <void property="entryTermLastMod"> 
+         <object class="java.util.GregorianCalendar"> 
+          <void property="lenient"> 
+           <boolean>false</boolean> 
+          </void> 
+          <void property="time"> 
+           <object class="java.util.Date"> 
+            <long>1195551280000</long> 
+           </object> 
+          </void> 
+         </object> 
+        </void> 
+        <void property="listKey"> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/L054/25</string> 
+        </void> 
+       </object> 
+      </void> 
+     </array> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="7"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="broadMatch"> 
+     <array class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType" length="1"> 
+      <void index="0"> 
+       <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+        <void property="entryKey"> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/L051/25/24</string> 
+        </void> 
+        <void property="entryTerm"> 
+         <string>benthos samplers</string> 
+        </void> 
+        <void property="entryTermDef"> 
+         <string>A net or sledge dragged across the seabed designed to sample benthic fauna.</string> 
+        </void> 
+        <void property="entryTermLastMod"> 
+         <object class="java.util.GregorianCalendar"> 
+          <void property="lenient"> 
+           <boolean>false</boolean> 
+          </void> 
+          <void property="time"> 
+           <object class="java.util.Date"> 
+            <long>1195548603000</long> 
+           </object> 
+          </void> 
+         </object> 
+        </void> 
+        <void property="listKey"> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/L051/25</string> 
+        </void> 
+       </object> 
+      </void> 
+     </array> 
+    </void> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C77/3/B19</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Demersal fish</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="lenient"> 
+       <boolean>false</boolean> 
+      </void> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1323341900000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/3</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="8"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C77/3/G01</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Dredge</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="lenient"> 
+       <boolean>false</boolean> 
+      </void> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1323341887000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/3</string> 
+    </void> 
+    <void property="narrowMatch"> 
+     <array class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType" length="2"> 
+      <void index="0"> 
+       <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+        <void property="entryKey"> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/L051/25/60</string> 
+        </void> 
+        <void property="entryTerm"> 
+         <string>sediment dredges</string> 
+        </void> 
+        <void property="entryTermDef"> 
+         <string>Bucket-like containers hauled over the sea bed collecting integrated samples of surface sediment along a segment of ship track.</string> 
+        </void> 
+        <void property="entryTermLastMod"> 
+         <object class="java.util.GregorianCalendar"> 
+          <void property="lenient"> 
+           <boolean>false</boolean> 
+          </void> 
+          <void property="time"> 
+           <object class="java.util.Date"> 
+            <long>1279609614000</long> 
+           </object> 
+          </void> 
+         </object> 
+        </void> 
+        <void property="listKey"> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/L051/25</string> 
+        </void> 
+       </object> 
+      </void> 
+      <void index="1"> 
+       <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+        <void property="entryKey"> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/L051/25/54</string> 
+        </void> 
+        <void property="entryTerm"> 
+         <string>rock dredges</string> 
+        </void> 
+        <void property="entryTermDef"> 
+         <string>A device dragged across the seabed designed to collect loose rock samples.</string> 
+        </void> 
+        <void property="entryTermLastMod"> 
+         <object class="java.util.GregorianCalendar"> 
+          <void property="lenient"> 
+           <boolean>false</boolean> 
+          </void> 
+          <void property="time"> 
+           <object class="java.util.Date"> 
+            <long>1195548603000</long> 
+           </object> 
+          </void> 
+         </object> 
+        </void> 
+        <void property="listKey"> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/L051/25</string> 
+        </void> 
+       </object> 
+      </void> 
+     </array> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="9"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C77/3/G02</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Grab</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="lenient"> 
+       <boolean>false</boolean> 
+      </void> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1323341888000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="exactMatch"> 
+     <array class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType" length="1"> 
+      <void index="0"> 
+       <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+        <void property="entryKey"> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/L051/25/50</string> 
+        </void> 
+        <void property="entryTerm"> 
+         <string>sediment grabs</string> 
+        </void> 
+        <void property="entryTermDef"> 
+         <string>A device that collects a sample of surface sediment including manually deployed equipment like a shovel or bucket.</string> 
+        </void> 
+        <void property="entryTermLastMod"> 
+         <object class="java.util.GregorianCalendar"> 
+          <void property="lenient"> 
+           <boolean>false</boolean> 
+          </void> 
+          <void property="time"> 
+           <object class="java.util.Date"> 
+            <long>1195548603000</long> 
+           </object> 
+          </void> 
+         </object> 
+        </void> 
+        <void property="listKey"> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/L051/25</string> 
+        </void> 
+       </object> 
+      </void> 
+     </array> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/3</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="10"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C77/3/G27</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Gravity measurements</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="lenient"> 
+       <boolean>false</boolean> 
+      </void> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1323341888000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="exactMatch"> 
+     <array class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType" length="1"> 
+      <void index="0"> 
+       <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+        <void property="entryKey"> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/L054/25/158</string> 
+        </void> 
+        <void property="entryTerm"> 
+         <string>gravimeters</string> 
+        </void> 
+        <void property="entryTermDef"> 
+         <string>Instrument that makes measurements of the Earth&apos;s gravity field</string> 
+        </void> 
+        <void property="entryTermLastMod"> 
+         <object class="java.util.GregorianCalendar"> 
+          <void property="lenient"> 
+           <boolean>false</boolean> 
+          </void> 
+          <void property="time"> 
+           <object class="java.util.Date"> 
+            <long>1195551280000</long> 
+           </object> 
+          </void> 
+         </object> 
+        </void> 
+        <void property="listKey"> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/L054/25</string> 
+        </void> 
+       </object> 
+      </void> 
+     </array> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/3</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="11"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="broadMatch"> 
+     <array class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType" length="1"> 
+      <void index="0"> 
+       <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+        <void property="entryKey"> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/L054/25/122</string> 
+        </void> 
+        <void property="entryTerm"> 
+         <string>radiometers</string> 
+        </void> 
+        <void property="entryTermDef"> 
+         <string>Instrument that measures the intensity of electromagnetic radiation in either the atmosphere or the water column</string> 
+        </void> 
+        <void property="entryTermLastMod"> 
+         <object class="java.util.GregorianCalendar"> 
+          <void property="lenient"> 
+           <boolean>false</boolean> 
+          </void> 
+          <void property="time"> 
+           <object class="java.util.Date"> 
+            <long>1195551280000</long> 
+           </object> 
+          </void> 
+         </object> 
+        </void> 
+        <void property="listKey"> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/L054/25</string> 
+        </void> 
+       </object> 
+      </void> 
+     </array> 
+    </void> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C77/3/M02</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Incident radiation</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="lenient"> 
+       <boolean>false</boolean> 
+      </void> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1323341894000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/3</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="12"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C77/3/D72</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Instrumented wave measurements</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="lenient"> 
+       <boolean>false</boolean> 
+      </void> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>709988400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="exactMatch"> 
+     <array class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType" length="1"> 
+      <void index="0"> 
+       <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+        <void property="entryKey"> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/L054/25/110</string> 
+        </void> 
+        <void property="entryTerm"> 
+         <string>wave recorders</string> 
+        </void> 
+        <void property="entryTermDef"> 
+         <string>Instrument that measures water column surface wave parameters including height, period, direction and energy spectra.</string> 
+        </void> 
+        <void property="entryTermLastMod"> 
+         <object class="java.util.GregorianCalendar"> 
+          <void property="lenient"> 
+           <boolean>false</boolean> 
+          </void> 
+          <void property="time"> 
+           <object class="java.util.Date"> 
+            <long>1195551280000</long> 
+           </object> 
+          </void> 
+         </object> 
+        </void> 
+        <void property="listKey"> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/L054/25</string> 
+        </void> 
+       </object> 
+      </void> 
+     </array> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/3</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="13"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C77/3/G24</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Long/short range side scan sonar</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="lenient"> 
+       <boolean>false</boolean> 
+      </void> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1323341888000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="exactMatch"> 
+     <array class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType" length="1"> 
+      <void index="0"> 
+       <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+        <void property="entryKey"> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/L054/25/152</string> 
+        </void> 
+        <void property="entryTerm"> 
+         <string>sidescan sonars</string> 
+        </void> 
+        <void property="entryTermDef"> 
+         <string>Instruments with directional acoustic transmitters and receivers fitted to an underwater platform that emit fan-shaped pulses down toward the seafloor across a wide angle perpendicular to the path of the platform through the water.</string> 
+        </void> 
+        <void property="entryTermLastMod"> 
+         <object class="java.util.GregorianCalendar"> 
+          <void property="lenient"> 
+           <boolean>false</boolean> 
+          </void> 
+          <void property="time"> 
+           <object class="java.util.Date"> 
+            <long>1195551280000</long> 
+           </object> 
+          </void> 
+         </object> 
+        </void> 
+        <void property="listKey"> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/L054/25</string> 
+        </void> 
+       </object> 
+      </void> 
+     </array> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/3</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="14"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C77/3/G28</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Magnetic measurements</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="lenient"> 
+       <boolean>false</boolean> 
+      </void> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1323341888000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="exactMatch"> 
+     <array class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType" length="1"> 
+      <void index="0"> 
+       <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+        <void property="entryKey"> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/L054/25/159</string> 
+        </void> 
+        <void property="entryTerm"> 
+         <string>magnetometers</string> 
+        </void> 
+        <void property="entryTermDef"> 
+         <string>Instrument that makes measurements of the Earth&apos;s magnetic field</string> 
+        </void> 
+        <void property="entryTermLastMod"> 
+         <object class="java.util.GregorianCalendar"> 
+          <void property="lenient"> 
+           <boolean>false</boolean> 
+          </void> 
+          <void property="time"> 
+           <object class="java.util.Date"> 
+            <long>1195551280000</long> 
+           </object> 
+          </void> 
+         </object> 
+        </void> 
+        <void property="listKey"> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/L054/25</string> 
+        </void> 
+       </object> 
+      </void> 
+     </array> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/3</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="15"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C77/3/G74</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Multi-beam echosounding</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="lenient"> 
+       <boolean>false</boolean> 
+      </void> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1323341888000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="exactMatch"> 
+     <array class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType" length="1"> 
+      <void index="0"> 
+       <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+        <void property="entryKey"> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/L054/25/157</string> 
+        </void> 
+        <void property="entryTerm"> 
+         <string>multi-beam echosounders</string> 
+        </void> 
+        <void property="entryTermDef"> 
+         <string>Instruments that measure water depth along several tracks parallel to the platform track by timing pulses of sound reflected on the seafloor</string> 
+        </void> 
+        <void property="entryTermLastMod"> 
+         <object class="java.util.GregorianCalendar"> 
+          <void property="lenient"> 
+           <boolean>false</boolean> 
+          </void> 
+          <void property="time"> 
+           <object class="java.util.Date"> 
+            <long>1195551280000</long> 
+           </object> 
+          </void> 
+         </object> 
+        </void> 
+        <void property="listKey"> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/L054/25</string> 
+        </void> 
+       </object> 
+      </void> 
+     </array> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/3</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="16"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C77/3/G76</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Multichannel seismic reflection</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="lenient"> 
+       <boolean>false</boolean> 
+      </void> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1323341889000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="exactMatch"> 
+     <array class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType" length="1"> 
+      <void index="0"> 
+       <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+        <void property="entryKey"> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/L054/25/154</string> 
+        </void> 
+        <void property="entryTerm"> 
+         <string>multi-channel seismic reflection systems</string> 
+        </void> 
+        <void property="entryTermDef"> 
+         <string>An energy source of unspecified frequency plus a multiple strings of towed hydrophones (streamers) that determine geologic structure by detecting waves reflected by subsurface layers.</string> 
+        </void> 
+        <void property="entryTermLastMod"> 
+         <object class="java.util.GregorianCalendar"> 
+          <void property="lenient"> 
+           <boolean>false</boolean> 
+          </void> 
+          <void property="time"> 
+           <object class="java.util.Date"> 
+            <long>1266580769000</long> 
+           </object> 
+          </void> 
+         </object> 
+        </void> 
+        <void property="listKey"> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/L054/25</string> 
+        </void> 
+       </object> 
+      </void> 
+     </array> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/3</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="17"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C77/3/B14</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Pelagic fish</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="lenient"> 
+       <boolean>false</boolean> 
+      </void> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1323341900000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="exactMatch"> 
+     <array class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType" length="1"> 
+      <void index="0"> 
+       <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+        <void property="entryKey"> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/L051/25/23</string> 
+        </void> 
+        <void property="entryTerm"> 
+         <string>pelagic trawl nets</string> 
+        </void> 
+        <void property="entryTermDef"> 
+         <string>A net towed through the water column designed to sample free-swimming nekton or fish.</string> 
+        </void> 
+        <void property="entryTermLastMod"> 
+         <object class="java.util.GregorianCalendar"> 
+          <void property="lenient"> 
+           <boolean>false</boolean> 
+          </void> 
+          <void property="time"> 
+           <object class="java.util.Date"> 
+            <long>1195548603000</long> 
+           </object> 
+          </void> 
+         </object> 
+        </void> 
+        <void property="listKey"> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/L051/25</string> 
+        </void> 
+       </object> 
+      </void> 
+     </array> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/3</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="18"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="broadMatch"> 
+     <array class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType" length="1"> 
+      <void index="0"> 
+       <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+        <void property="entryKey"> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/L051/25/24</string> 
+        </void> 
+        <void property="entryTerm"> 
+         <string>benthos samplers</string> 
+        </void> 
+        <void property="entryTermDef"> 
+         <string>A net or sledge dragged across the seabed designed to sample benthic fauna.</string> 
+        </void> 
+        <void property="entryTermLastMod"> 
+         <object class="java.util.GregorianCalendar"> 
+          <void property="lenient"> 
+           <boolean>false</boolean> 
+          </void> 
+          <void property="time"> 
+           <object class="java.util.Date"> 
+            <long>1195548603000</long> 
+           </object> 
+          </void> 
+         </object> 
+        </void> 
+        <void property="listKey"> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/L051/25</string> 
+        </void> 
+       </object> 
+      </void> 
+     </array> 
+    </void> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C77/3/B17</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Phytobenthos</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="lenient"> 
+       <boolean>false</boolean> 
+      </void> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1323341900000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/3</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="19"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C77/3/D09</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Sea level (inc. bot. press., inverted echosounder)</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="lenient"> 
+       <boolean>false</boolean> 
+      </void> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>709988400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/3</string> 
+    </void> 
+    <void property="narrowMatch"> 
+     <array class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType" length="2"> 
+      <void index="0"> 
+       <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+        <void property="entryKey"> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/L054/25/111</string> 
+        </void> 
+        <void property="entryTerm"> 
+         <string>sea level recorders</string> 
+        </void> 
+        <void property="entryTermDef"> 
+         <string>Instrument that make smoothed measuremeants of the elevation of the sea surface relative to a fixed vertical datum</string> 
+        </void> 
+        <void property="entryTermLastMod"> 
+         <object class="java.util.GregorianCalendar"> 
+          <void property="lenient"> 
+           <boolean>false</boolean> 
+          </void> 
+          <void property="time"> 
+           <object class="java.util.Date"> 
+            <long>1195551280000</long> 
+           </object> 
+          </void> 
+         </object> 
+        </void> 
+        <void property="listKey"> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/L054/25</string> 
+        </void> 
+       </object> 
+      </void> 
+      <void index="1"> 
+       <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+        <void property="entryKey"> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/L054/25/112</string> 
+        </void> 
+        <void property="entryTerm"> 
+         <string>inverted echosounders</string> 
+        </void> 
+        <void property="entryTermDef"> 
+         <string>Instruments that locate acoustic reflectors such as fronts in the water column by transmitting pulses of sound from the seabed and determing reflection return times</string> 
+        </void> 
+        <void property="entryTermLastMod"> 
+         <object class="java.util.GregorianCalendar"> 
+          <void property="lenient"> 
+           <boolean>false</boolean> 
+          </void> 
+          <void property="time"> 
+           <object class="java.util.Date"> 
+            <long>1195551280000</long> 
+           </object> 
+          </void> 
+         </object> 
+        </void> 
+        <void property="listKey"> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/L054/25</string> 
+        </void> 
+       </object> 
+      </void> 
+     </array> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="20"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C77/3/B73</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Sediment traps</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="lenient"> 
+       <boolean>false</boolean> 
+      </void> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1323341900000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="exactMatch"> 
+     <array class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType" length="1"> 
+      <void index="0"> 
+       <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+        <void property="entryKey"> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/L051/25/33</string> 
+        </void> 
+        <void property="entryTerm"> 
+         <string>sediment traps</string> 
+        </void> 
+        <void property="entryTermDef"> 
+         <string>A collector of particulates as they sink through the water column</string> 
+        </void> 
+        <void property="entryTermLastMod"> 
+         <object class="java.util.GregorianCalendar"> 
+          <void property="lenient"> 
+           <boolean>false</boolean> 
+          </void> 
+          <void property="time"> 
+           <object class="java.util.Date"> 
+            <long>1195548603000</long> 
+           </object> 
+          </void> 
+         </object> 
+        </void> 
+        <void property="listKey"> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/L051/25</string> 
+        </void> 
+       </object> 
+      </void> 
+     </array> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/3</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="21"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C77/3/G26</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Seismic refraction</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="lenient"> 
+       <boolean>false</boolean> 
+      </void> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1323341888000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="exactMatch"> 
+     <array class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType" length="1"> 
+      <void index="0"> 
+       <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+        <void property="entryKey"> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/L054/25/155</string> 
+        </void> 
+        <void property="entryTerm"> 
+         <string>seismic refraction systems</string> 
+        </void> 
+        <void property="entryTermDef"> 
+         <string>A network of seismometers or geophones plus an energy source that determine geologic structure by detecting waves refracted by subsurface layers.</string> 
+        </void> 
+        <void property="entryTermLastMod"> 
+         <object class="java.util.GregorianCalendar"> 
+          <void property="lenient"> 
+           <boolean>false</boolean> 
+          </void> 
+          <void property="time"> 
+           <object class="java.util.Date"> 
+            <long>1195551280000</long> 
+           </object> 
+          </void> 
+         </object> 
+        </void> 
+        <void property="listKey"> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/L054/25</string> 
+        </void> 
+       </object> 
+      </void> 
+     </array> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/3</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="22"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C77/3/G75</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Single channel seismic reflection</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="lenient"> 
+       <boolean>false</boolean> 
+      </void> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1323341888000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="exactMatch"> 
+     <array class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType" length="1"> 
+      <void index="0"> 
+       <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+        <void property="entryKey"> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/L054/25/153</string> 
+        </void> 
+        <void property="entryTerm"> 
+         <string>single-channel seismic reflection systems</string> 
+        </void> 
+        <void property="entryTermDef"> 
+         <string>An energy source of unspecified frequency plus a single string of towed hydrophones (streamer) that determine geologic structure by detecting waves reflected by subsurface layers.</string> 
+        </void> 
+        <void property="entryTermLastMod"> 
+         <object class="java.util.GregorianCalendar"> 
+          <void property="lenient"> 
+           <boolean>false</boolean> 
+          </void> 
+          <void property="time"> 
+           <object class="java.util.Date"> 
+            <long>1266580693000</long> 
+           </object> 
+          </void> 
+         </object> 
+        </void> 
+        <void property="listKey"> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/L054/25</string> 
+        </void> 
+       </object> 
+      </void> 
+     </array> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/3</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="23"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C77/3/G73</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Single-beam echosounding</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="lenient"> 
+       <boolean>false</boolean> 
+      </void> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1323341888000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="exactMatch"> 
+     <array class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType" length="1"> 
+      <void index="0"> 
+       <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+        <void property="entryKey"> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/L054/25/156</string> 
+        </void> 
+        <void property="entryTerm"> 
+         <string>single-beam echosounders</string> 
+        </void> 
+        <void property="entryTermDef"> 
+         <string>Instruments that measure water depth at a single point below the platform by timing pulses of sound reflected on the seafloor</string> 
+        </void> 
+        <void property="entryTermLastMod"> 
+         <object class="java.util.GregorianCalendar"> 
+          <void property="lenient"> 
+           <boolean>false</boolean> 
+          </void> 
+          <void property="time"> 
+           <object class="java.util.Date"> 
+            <long>1195551280000</long> 
+           </object> 
+          </void> 
+         </object> 
+        </void> 
+        <void property="listKey"> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/L054/25</string> 
+        </void> 
+       </object> 
+      </void> 
+     </array> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/3</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="24"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="broadMatch"> 
+     <array class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType" length="1"> 
+      <void index="0"> 
+       <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+        <void property="entryKey"> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/L054/25/350</string> 
+        </void> 
+        <void property="entryTerm"> 
+         <string>salinity sensor</string> 
+        </void> 
+        <void property="entryTermDef"> 
+         <string>Instrument that simultaneously measures electrical conductivity and temperature in the water column to provide temperature and salinity data</string> 
+        </void> 
+        <void property="entryTermLastMod"> 
+         <object class="java.util.GregorianCalendar"> 
+          <void property="lenient"> 
+           <boolean>false</boolean> 
+          </void> 
+          <void property="time"> 
+           <object class="java.util.Date"> 
+            <long>1290176650000</long> 
+           </object> 
+          </void> 
+         </object> 
+        </void> 
+        <void property="listKey"> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/L054/25</string> 
+        </void> 
+       </object> 
+      </void> 
+     </array> 
+    </void> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C77/3/H11</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Subsurface temperature and salinity measurements</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Measurements of temperature and salinity within a water body other than CTD profiles which are considered as a separate entity in this vocabulary. Examples where this term is appropriate are conductivity+temperature sensors mounted on undulators, AUVs, moving vessel profilers, or moorings.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="lenient"> 
+       <boolean>false</boolean> 
+      </void> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1253110328000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/3</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="25"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="broadMatch"> 
+     <array class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType" length="1"> 
+      <void index="0"> 
+       <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+        <void property="entryKey"> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/L054/25/134</string> 
+        </void> 
+        <void property="entryTerm"> 
+         <string>water temperature sensor</string> 
+        </void> 
+        <void property="entryTermDef"> 
+         <string>An instrument that measures the temperature of the water with which it is in contact</string> 
+        </void> 
+        <void property="entryTermLastMod"> 
+         <object class="java.util.GregorianCalendar"> 
+          <void property="lenient"> 
+           <boolean>false</boolean> 
+          </void> 
+          <void property="time"> 
+           <object class="java.util.Date"> 
+            <long>1290176698000</long> 
+           </object> 
+          </void> 
+         </object> 
+        </void> 
+        <void property="listKey"> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/L054/25</string> 
+        </void> 
+       </object> 
+      </void> 
+     </array> 
+    </void> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C77/3/H72</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Subsurface temperature measurements</string> 
+    </void> 
+    <void property="entryTermDef"> 
+     <string>Measurements of temperature with no associated conductivity measurements within a water body, such as moored instruments with temperature sensors. Originally set up for thermistor chains but broadened as these were replaced by other hardware with the same functionality.</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="lenient"> 
+       <boolean>false</boolean> 
+      </void> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1253110700000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="exactMatch"> 
+     <array class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType" length="1"> 
+      <void index="0"> 
+       <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+        <void property="entryKey"> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/L054/25/135</string> 
+        </void> 
+        <void property="entryTerm"> 
+         <string>thermistor chains</string> 
+        </void> 
+        <void property="entryTermDef"> 
+         <string>A group of rigidly-mounted temperature sensors sampled by a common data logger held at various depths in the water column.</string> 
+        </void> 
+        <void property="entryTermLastMod"> 
+         <object class="java.util.GregorianCalendar"> 
+          <void property="lenient"> 
+           <boolean>false</boolean> 
+          </void> 
+          <void property="time"> 
+           <object class="java.util.Date"> 
+            <long>1195551280000</long> 
+           </object> 
+          </void> 
+         </object> 
+        </void> 
+        <void property="listKey"> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/L054/25</string> 
+        </void> 
+       </object> 
+      </void> 
+     </array> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/3</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="26"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="broadMatch"> 
+     <array class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType" length="1"> 
+      <void index="0"> 
+       <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+        <void property="entryKey"> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/L054/25/350</string> 
+        </void> 
+        <void property="entryTerm"> 
+         <string>salinity sensor</string> 
+        </void> 
+        <void property="entryTermDef"> 
+         <string>Instrument that simultaneously measures electrical conductivity and temperature in the water column to provide temperature and salinity data</string> 
+        </void> 
+        <void property="entryTermLastMod"> 
+         <object class="java.util.GregorianCalendar"> 
+          <void property="lenient"> 
+           <boolean>false</boolean> 
+          </void> 
+          <void property="time"> 
+           <object class="java.util.Date"> 
+            <long>1290176650000</long> 
+           </object> 
+          </void> 
+         </object> 
+        </void> 
+        <void property="listKey"> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/L054/25</string> 
+        </void> 
+       </object> 
+      </void> 
+     </array> 
+    </void> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C77/3/H71</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Surface measurements underway (T,S)</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="lenient"> 
+       <boolean>false</boolean> 
+      </void> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>709988400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/3</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="27"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C77/3/M01</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Upper air observations</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="lenient"> 
+       <boolean>false</boolean> 
+      </void> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1323341894000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/3</string> 
+    </void> 
+    <void property="narrowMatch"> 
+     <array class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType" length="1"> 
+      <void index="0"> 
+       <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+        <void property="entryKey"> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/L054/25/103</string> 
+        </void> 
+        <void property="entryTerm"> 
+         <string>radiosondes</string> 
+        </void> 
+        <void property="entryTermDef"> 
+         <string>A balloon-borne package equipped with a radio transmitter and meteorological sensors typically measuring temperature, pressure, and humidity.</string> 
+        </void> 
+        <void property="entryTermLastMod"> 
+         <object class="java.util.GregorianCalendar"> 
+          <void property="lenient"> 
+           <boolean>false</boolean> 
+          </void> 
+          <void property="time"> 
+           <object class="java.util.Date"> 
+            <long>1195551280000</long> 
+           </object> 
+          </void> 
+         </object> 
+        </void> 
+        <void property="listKey"> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/L054/25</string> 
+        </void> 
+       </object> 
+      </void> 
+     </array> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="28"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="broadMatch"> 
+     <array class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType" length="1"> 
+      <void index="0"> 
+       <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+        <void property="entryKey"> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/L051/25/30</string> 
+        </void> 
+        <void property="entryTerm"> 
+         <string>discrete water samplers</string> 
+        </void> 
+        <void property="entryTermDef"> 
+         <string>A device that collects an in-situ discrete water sample from any depth and returns it to the surface without contamination by the waters through which it passes, such as a water bottle</string> 
+        </void> 
+        <void property="entryTermLastMod"> 
+         <object class="java.util.GregorianCalendar"> 
+          <void property="lenient"> 
+           <boolean>false</boolean> 
+          </void> 
+          <void property="time"> 
+           <object class="java.util.Date"> 
+            <long>1195548603000</long> 
+           </object> 
+          </void> 
+         </object> 
+        </void> 
+        <void property="listKey"> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/L051/25</string> 
+        </void> 
+       </object> 
+      </void> 
+     </array> 
+    </void> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C77/3/H09</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Water bottle stations</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="lenient"> 
+       <boolean>false</boolean> 
+      </void> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>709988400000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/3</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void index="29"> 
+   <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+    <void property="broadMatch"> 
+     <array class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType" length="1"> 
+      <void index="0"> 
+       <object class="fr.ifremer.nemo.wsVocab.vocab.CodeTableRecordType"> 
+        <void property="entryKey"> 
+         <string>http://vocab.ndg.nerc.ac.uk/term/L051/25/24</string> 
+        </void> 
+        <void property="entryTerm"> 
+         <string>benthos samplers</string> 
+        </void> 
+        <void property="entryTermDef"> 
+         <string>A net or sledge dragged across the seabed designed to sample benthic fauna.</string> 
+        </void> 
+        <void property="entryTermLastMod"> 
+         <object class="java.util.GregorianCalendar"> 
+          <void property="lenient"> 
+           <boolean>false</boolean> 
+          </void> 
+          <void property="time"> 
+           <object class="java.util.Date"> 
+            <long>1195548603000</long> 
+           </object> 
+          </void> 
+         </object> 
+        </void> 
+        <void property="listKey"> 
+         <string>http://vocab.ndg.nerc.ac.uk/list/L051/25</string> 
+        </void> 
+       </object> 
+      </void> 
+     </array> 
+    </void> 
+    <void property="entryKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/term/C77/3/B18</string> 
+    </void> 
+    <void property="entryTerm"> 
+     <string>Zoobenthos</string> 
+    </void> 
+    <void property="entryTermLastMod"> 
+     <object class="java.util.GregorianCalendar"> 
+      <void property="lenient"> 
+       <boolean>false</boolean> 
+      </void> 
+      <void property="time"> 
+       <object class="java.util.Date"> 
+        <long>1323341900000</long> 
+       </object> 
+      </void> 
+     </object> 
+    </void> 
+    <void property="listKey"> 
+     <string>http://vocab.ndg.nerc.ac.uk/list/C77/3</string> 
+    </void> 
+   </object> 
+  </void> 
+ </array> 
+</java> 

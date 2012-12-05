@@ -1,0 +1,5 @@
+nemo_batch
+-i "C:\Documents and Settings\sbregent\Bureau\diap_hudson\diapalis2_bot.prn"
+-m "C:\Documents and Settings\sbregent\Bureau\diap_hudson\diap_1232_MEDATLAS_P091.xml"
+-o "C:\Documents and Settings\sbregent\Bureau\diap_hudson\out_diap_MEDATLAS_P091"
+-c MEDATLAS

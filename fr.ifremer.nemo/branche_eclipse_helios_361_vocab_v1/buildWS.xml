@@ -1,0 +1,394 @@
+<!--
+*****************************************
+BGT - 28/06/2011
+Génération des web services Nemo et Nautilus:
+1/ clean
+2/ compileWS
+3/ genWSDL (génere les WSDL dans le paquet etc)
+4/nemo-war (génere le nemo.war dans ${myenv.CATALINA_HOME})
+5/nautilus-war (génere le nautilus.war dans ${myenv.CATALINA_HOME})
+
+Rq: les deploy ne fonctionnent pas (voir accès au serveur ifremer, droits...)
+*****************************************
+
+Projet: CONVMED
+Code projet: 9064780
+Auteur: ATLANTIDE
+Date: $Id: buildWS.xml,v 1.7 2008-03-25 08:26:59 htaniou Exp $
+Description: build pour la generation, le deploiement et le test du Web Services NEMO
+Usage: ant [-f buildWS.xml] option
+       avec option:
+            - properties               : affichage des proprietes du projet
+            - compile                  : compilation des sources
+            - clean                    : remise a zero projet
+            - init                     : creation des repertoires
+            - compile                  : compilation
+            - compileWS                : compilation des Web Service
+            - jar                      : jar de convmed
+            - javadoc                  : javadoc de convmed
+            - genWSDL                  : generation du WSDL
+            - wsdl                     : generation du WSDL
+            - nemo-war                 : war de nemo-war
+            - nautilus-war             : war de nautilus-war
+            - deploy-nemo-ws           : deploiement de nemo.war
+            - deploy-nautilus-ws       : deploiement de nautilus.war
+            - test1                    : test de conversion JADE
+            - test2                    : test de conversion DIAPALIS2
+            - test3                    : test de conversion DIAPALIS2A
+            - test-ws-list             : test de Web Service 1
+            - test-nautilus-ws         : test de Web Service 2
+
+       le cheminement normal:
+            modifier le fichier buildWS.xml (lignes the_hostname et the_portnumber)
+            clean
+            compile
+            genWSDL
+            wsdl
+            nemo-war
+            nautilus-war
+            deploy-nemo-ws
+            deploy-nautilus-ws
+            tester via navigateur Web: http://[hostname][:port]/nemo/services
+            tester via navigateur Web: http://[hostname][:port]/nautilus/services
+            test-nemo-ws
+            test-nautilus-ws
+-->
+
+
+<project name="CONVMED" default="compile" basedir=".">
+  <!-- recuperation des variables d environnement de l utilisateur -->
+  <property environment="myenv" />
+
+  <!-- AXIS -->
+  <property name="axis.lib" value="${basedir}/lib_axis_14"/>
+  <property name="axis2.home" value="${basedir}/axis2-1.5.4"/>
+
+  <!-- TOMCAT -->
+  <property name="catalina.home" value="${myenv.CATALINA_HOME}"/>
+
+  <!-- Chemins de l applicatif -->
+  <property name="src.dir" value="${basedir}/src"/>
+  <property name="etc.dir" value="${basedir}/etc"/>
+  <property name="build.classes" value="${basedir}/ws-deploy/bin"/>
+  <property name="jars.dir" value="${basedir}/ws-deploy/jars"/>
+  <property name="javadoc.dir" value="${basedir}/ws-deploy/javadoc"/>
+  <property name="output.dir" value="${basedir}/ws-deploy/output"/>
+
+<!-- configuration IFREMER -->
+  <property name="the_hostname" value="alboran5.ifremer.fr" />
+  <property name="the_portnumber" value="8081" />
+  <property name="the_log4jpath" value="/home/alboran/logiciels/apache-tomcat-5.5.17/webapps" />  
+
+	
+<!-- configuration ALTRAN OUEST  
+   <property name="the_hostname" value="localhost" />
+   <property name="the_portnumber" value="8080" />
+   <property name="the_log4jpath" value="c:/tmp" />
+-->
+
+  <!-- librairies d AXIS -->
+  <path id="axis.classpath">
+    <fileset dir="${axis.lib}">
+      <include name="**/*.jar" />
+    </fileset>
+  	 <fileset dir="${axis2.home}/lib">
+  	      <include name="**/*.jar" />
+  	    </fileset>
+  </path>
+
+  <taskdef resource="axis-tasks.properties" classpathref="axis.classpath" />
+
+  <path id="build.path">
+      <pathelement location="${build.classes}"/>
+      <fileset dir="${basedir}/lib">
+          <include name="**/*.jar" />
+      </fileset>
+  	  <fileset dir="${basedir}/plugins">
+  		 <include name="**/*.jar" />
+      </fileset>
+      <path refid="axis.classpath" />
+  </path>
+
+  <!-- target: affichage des proprietes -->
+  <target name="properties" description="Affichage des proprietes">
+     <echoproperties/>
+  </target>
+
+  <!-- target: remise a zero projet -->
+  <target name="clean" description="RAZ projet NEMO Web Service">
+     <delete>
+        <fileset dir="${basedir}" includes="**/*.bak"/>
+     </delete>
+     <delete dir="${build.classes}"/>
+     <delete dir="${output.dir}"/>
+     <delete dir="${javadoc.dir}"/>
+     <delete dir="${jars.dir}"/>
+  </target>
+
+  <!-- target: creation des repertoires -->
+  <target name="init" description="Creation des repertoires de l application">
+     <!-- Create the time stamp -->
+     <tstamp/>
+     <!-- Create the build directory structure used by compile -->
+     <mkdir dir="${build.classes}"/>
+     <mkdir dir="${build.classes}/resources"/>
+     <mkdir dir="${jars.dir}"/>
+     <mkdir dir="${javadoc.dir}"/>
+     <mkdir dir="${output.dir}"/>
+  </target>
+
+  <!-- target: compilation -->
+  <target name="compile" depends="init" description="Compilation des sources">
+     <javac srcdir="${src.dir}"
+            excludes="fr/ifremer/nemo/ui/**"
+            destdir="${build.classes}"
+            classpathref="build.path"
+     		encoding="ISO-8859-15"
+            debug="true">
+     	<exclude name="${src.dir}/test/nemo/TestNemo.java" />
+        <compilerarg value="-Xlint:deprecation"/>
+     </javac>
+
+     <copy todir="${build.classes}" overwrite="true">
+        <fileset dir="${src.dir}">
+           <include name="**/*.vtl"/>
+        </fileset>
+        <fileset dir="${basedir}">
+           <include name="resources/*.*"/>
+        </fileset>
+     </copy>
+  </target>
+
+  <!-- target: compilation des Web Service -->
+  <target name="compileWS" depends="init" description="compilation des Web Service">
+     <javac
+           srcdir="${src.dir}"
+           destdir="${build.classes}"
+           classpathref="build.path"
+           includes="fr/ifremer/nemo/ws/**, fr/ifremer/nautilus/metadata/**"
+           debug="true">
+     </javac>
+  </target>
+
+  <!-- target: jar de convmed -->
+  <target name="jar" depends="compile" description="Jar de convmed.jar">
+     <jar
+           destfile="${jars.dir}/convmed.jar"
+           basedir="${build.classes}"
+           update="false">
+        <include name="**/*.class"/>
+     </jar>
+  </target>
+
+  <!-- target: javadoc de l API NEMO WS -->
+  <target name="javadoc" description="Javadoc de l API NEMO">
+     <javadoc
+           destdir="${javadoc.dir}"
+           windowtitle="NEMO API">
+        <packageset dir="${src.dir}" defaultexcludes="yes">
+           <include name="fr/ifremer/**"/>
+        </packageset>
+     </javadoc>
+  </target>
+
+  <!-- target: generation du WSDL -->
+  <target name="genWSDL" description="generation du WSDL a partir des classes JAVA">
+     <axis-java2wsdl
+           classname="fr.ifremer.nemo.ws.NemoWS"
+           namespace="nemo"
+           namespaceimpl="nemo"
+           output="${etc.dir}/nemo.wsdl"
+           location="http://${the_hostname}:${the_portnumber}/nemo/services/NEMO">
+         <classpath>
+            <pathelement location="${build.classes}"/>
+         </classpath>
+     </axis-java2wsdl>
+     <axis-java2wsdl
+           classname="fr.ifremer.nautilus.metadata.NautilusSurveyWS"
+           namespace="nautilus"
+           namespaceimpl="nautilus"
+           output="${etc.dir}/nautilus.wsdl"
+           location="http://${the_hostname}:${the_portnumber}/nautilus/services/NAUTILUS">
+          <classpath>
+             <pathelement location="${build.classes}"/>
+          </classpath>
+     </axis-java2wsdl>
+  </target>
+
+  <!-- target: generation du WSDL -->
+  <target name="wsdl" description="generation du WSDL a partir des classes JAVA">
+     <axis-wsdl2java
+          output="${src.dir}"
+          serverside="true"
+          verbose="true"
+          url="${etc.dir}/nemo.wsdl" >
+        <mapping
+             namespace="http://axis.apache.org/ns/interop"
+             package="interop"/>
+        <mapping
+             namespace="nemo"
+             package="fr.ifremer.nemo.ws"/>
+     </axis-wsdl2java>
+     <replace file="${src.dir}/fr/ifremer/nemo/ws/deploy.wsdd" token="NEMOSoapBindingImpl" value="NemoWSImpl"/>
+     <axis-wsdl2java
+          output="${src.dir}"
+          serverside="true"
+          verbose="true"
+          url="${etc.dir}/nautilus.wsdl" >
+        <mapping
+             namespace="http://axis.apache.org/ns/interop"
+             package="interop"/>
+        <mapping
+             namespace="nautilus"
+             package="fr.ifremer.nautilus.metadata"/>
+      </axis-wsdl2java>
+      <replace file="${src.dir}/fr/ifremer/nautilus/metadata/deploy.wsdd" token="NAUTILUSSoapBindingImpl" value="NautilusSurveyWSImpl"/>
+  </target>
+  
+  <!-- target: war de nemo-war -->
+  <target name="nemo-war" depends="compileWS" description="war de nemo-war">
+
+  	<copy file="${etc.dir}/log4j.properties.template" tofile="${etc.dir}/log4j.properties" />
+    <replace file="${etc.dir}/log4j.properties" token="###LOGPATTERN###" value="${the_log4jpath}"/>
+  	
+     <war
+          destfile="${jars.dir}/nemo.war"
+          webxml="${etc.dir}/WEB-INF-NEMO/web.xml"
+          update="false">
+        <metainf dir="${etc.dir}">
+           <include name="context.xml"/>
+        </metainf>
+
+        <webinf dir="${etc.dir}/WEB-INF-NEMO" />
+
+        <classes dir="${build.classes}">
+           <include name="fr/ifremer/nemo/ws/*.class"/>
+        </classes>
+        <classes dir="${src.dir}">
+           <include name="fr/ifremer/nemo/ws/*.wsdd"/>
+        </classes>
+        <classes dir="${etc.dir}">
+           <include name="log4j.properties"/>
+        </classes>
+        <lib dir="${axis.lib}">
+           <include name="axis.jar"/>
+           <include name="axis-ant.jar"/>
+           <include name="commons-discovery-0.2.jar"/>
+           <include name="jaxrpc.jar"/>
+           <include name="saaj.jar"/>
+           <include name="wsdl4j-1.5.1.jar"/>
+        </lib>
+        <lib dir="${basedir}/lib">
+           <include name="activation.jar"/>
+           <include name="mail.jar"/>
+           <include name="log4j-1.2.14.jar"/>
+           <include name="commons-logging-1.0.4.jar"/>
+<!--           <include name="classes12.jar"/> -->
+<!--           <include name="ojdbc14.jar"/>   -->
+        </lib>
+     </war>
+     <copy file="${jars.dir}/nemo.war" todir="${catalina.home}/webapps"/>
+  </target>
+
+  <!-- target: war de nautilus-war -->
+  <target name="nautilus-war" depends="compileWS" description="war de nautilus-war">
+
+  	<copy file="${etc.dir}/log4j.properties.template" tofile="${etc.dir}/log4j.properties" />
+    <replace file="${etc.dir}/log4j.properties" token="###LOGPATTERN###" value="${the_log4jpath}"/>
+  		
+     <war
+          destfile="${jars.dir}/nautilus.war"
+          webxml="${etc.dir}/WEB-INF-NAUTILUS/web.xml"
+          update="false">
+        <metainf dir="${etc.dir}">
+           <include name="context.xml"/>
+        </metainf>
+        
+        <webinf dir="${etc.dir}/WEB-INF-NAUTILUS" />
+
+        <classes dir="${build.classes}">
+           <include name="fr/ifremer/nautilus/metadata/*.class"/>
+        </classes>
+        <classes dir="${src.dir}">
+           <include name="fr/ifremer/nautilus/metadata/*.wsdd"/>
+        </classes>
+        <classes dir="${etc.dir}">
+           <include name="log4j.properties"/>
+        </classes>
+        <lib dir="${axis.lib}">
+           <include name="axis.jar"/>
+           <include name="axis-ant.jar"/>
+           <include name="commons-discovery-0.2.jar"/>
+           <include name="jaxrpc.jar"/>
+           <include name="saaj.jar"/>
+           <include name="wsdl4j-1.5.1.jar"/>
+        </lib>
+        <lib dir="${basedir}/lib">
+           <include name="activation.jar"/>
+           <include name="mail.jar"/>
+           <include name="log4j-1.2.14.jar"/>
+           <include name="commons-logging-1.0.4.jar"/>
+        </lib>
+     </war>
+     <copy file="${jars.dir}/nautilus.war" todir="${catalina.home}/webapps/"/>
+  </target>
+
+  <!-- target: deploiement de nemo.war -->
+  <target name="deploy-nemo-ws" depends="nemo-war" description="deploiement de nemo.war">
+     <axis-admin
+          port="${the_portnumber}"
+          hostname="${the_hostname}"
+          failonerror="true"
+          servletpath="nemo/services/AdminService"
+          debug="true"
+          xmlfile="src/fr/ifremer/nemo/ws/deploy.wsdd" />
+  </target>
+
+  <!-- target: deploiement de nautilus.war -->
+  <target name="deploy-nautilus-ws" depends="nautilus-war">
+     <axis-admin
+          port="${the_portnumber}"
+          hostname="${the_hostname}"
+          failonerror="true"
+          servletpath="nautilus/services/AdminService"
+          debug="true"
+          xmlfile="src/fr/ifremer/nautilus/metadata/deploy.wsdd" />
+  </target>
+
+  <!-- target: test de conversion JADE -->
+  <target name="test1" description="test de conversion JADE">
+     <java classname="test.nemo.TestNemo" classpathref="build.path">
+        <arg value="test/JADE_97.xml"/>
+        <arg value="output/JADE_97.crt"/>
+     </java>
+  </target>
+
+  <!-- target: test de conversion DIAPALIS2 -->
+  <target name="test2" description="test de conversion DIAPALIS2">
+     <java classname="test.nemo.TestNemo" classpathref="build.path">
+        <arg value="test/DIAPALIS2.xml"/>
+        <arg value="output/DIAPALIS2.bot"/>
+     </java>
+  </target>
+
+  <!-- target: test de conversion DIAPALIS2A -->
+  <target name="test3" description="test de conversion DIAPALIS2A">
+     <java classname="test.nemo.TestNemo" classpathref="build.path">
+        <arg value="test/DIAPALIS2A.xml"/>
+        <arg value="output/DIAPALIS2A.bot"/>
+     </java>
+  </target>
+
+  <!-- target: test de Web Service 1 -->
+  <target name="test-ws-list" description="test de Web Service 1">
+     <java classname="fr.ifremer.nemo.config.NemoLists" classpathref="build.path"/>
+  </target>
+
+  <!-- target: test de Web Service 2 -->
+  <target name="test-nautilus-ws" description="test de Web Service 2">
+     <java classname="fr.ifremer.nemo.domain.Survey" classpathref="build.path">
+        <arg value="FI352003100120"/>
+     </java>
+  </target>
+
+</project>

@@ -1,0 +1,149 @@
+<!-- MAIN BUILD Generation des installeurs Nemo -->
+<project name="fr.ifremer.nemo.build" default="build">
+	<!--sets the path of the properties file-->
+	<property name="pdeBuildPluginVersion" value="3.6.1.R36x_v20100823" />
+	<property name="equinoxLauncherPluginVersion" value="1.1.0.v20100507" />
+
+	
+	
+	<target name="clean" description="suppression d'anciens fichiers provenant de build précédent si nécéssaire" depends="init">
+		 <!-- suppression contenu du nemo_izPack/src -->
+		<delete includeemptydirs="true">
+		    <fileset dir="${buildDirectory}/Nemo_IzPack/src" includes="**/*"/>
+		</delete>
+		 <!-- suppression contenu du nemo_izPack/dist -->
+		<delete includeemptydirs="true">
+			<fileset dir="${buildDirectory}/Nemo_IzPack/dist" excludes="readme.txt"/>
+		</delete>
+		
+		 <!-- suppression contenu fichiers generes dans le workspace -->
+		<delete file="${buildDirectory}/Nemo-win32.win32.x86.zip" />
+		<delete file="${buildDirectory}/Nemo-win32.win32.x86_64.zip"/>
+		<delete file="${buildDirectory}/Nemo-linux.gtk.x86.zip"/>
+		<delete file="${buildDirectory}/Nemo-linux.gtk.x86_64.zip"/>
+		<delete file="${buildDirectory}/Nemo-solaris.gtk.sparc.zip"/>
+		
+		<delete file="${buildDirectory}/assemble.org.eclipse.pde.build.container.feature.all.xml" />
+		<delete file="${buildDirectory}/assemble.org.eclipse.pde.build.container.feature.linux.gtk.x86.xml" />
+		<delete file="${buildDirectory}/assemble.org.eclipse.pde.build.container.feature.linux.gtk.x86_64.xml" />
+		<delete file="${buildDirectory}/assemble.org.eclipse.pde.build.container.feature.solaris.gtk.sparc.xml" />
+		<delete file="${buildDirectory}/assemble.org.eclipse.pde.build.container.feature.win32.win32.x86.xml" />
+		<delete file="${buildDirectory}/assemble.org.eclipse.pde.build.container.feature.win32.win32.x86_64.xml" />
+
+		<delete file="${buildDirectory}/finalFeaturesVersions.linux_gtk_x86.properties" />
+		<delete file="${buildDirectory}/finalFeaturesVersions.linux_gtk_x86_64.properties" />
+		<delete file="${buildDirectory}/finalFeaturesVersions.properties" />
+		<delete file="${buildDirectory}/finalFeaturesVersions.solaris_gtk_sparc.properties" />
+		<delete file="${buildDirectory}/finalFeaturesVersions.win32_win32_x86.properties" />
+		<delete file="${buildDirectory}/finalFeaturesVersions.win32_win32_x86_64.properties" />
+		<delete file="${buildDirectory}/finalPluginsVersions.linux_gtk_x86.properties" />
+		<delete file="${buildDirectory}/finalPluginsVersions.linux_gtk_x86_64.properties" /> 
+		<delete file="${buildDirectory}/finalPluginsVersions.properties" />
+		<delete file="${buildDirectory}/finalPluginsVersions.solaris_gtk_sparc.properties" />
+		<delete file="${buildDirectory}/finalPluginsVersions.win32_win32_x86.properties" />
+		<delete file="${buildDirectory}/finalPluginsVersions.win32_win32_x86_64.properties" />
+		<delete file="${buildDirectory}/package.org.eclipse.pde.build.container.feature.all.xml" />
+		<delete file="${buildDirectory}/package.org.eclipse.pde.build.container.feature.linux.gtk.x86.xml" />
+		<delete file="${buildDirectory}/package.org.eclipse.pde.build.container.feature.linux.gtk.x86_64.xml" />
+		<delete file="${buildDirectory}/package.org.eclipse.pde.build.container.feature.solaris.gtk.sparc.xml" />
+		<delete file="${buildDirectory}/package.org.eclipse.pde.build.container.feature.win32.win32.x86.xml" />
+		<delete file="${buildDirectory}/package.org.eclipse.pde.build.container.feature.win32.win32.x86_64.xml" />
+	</target>
+	
+	
+	<target name="init" description="Copie des sources">
+		<!-- ### Ugly hack pour eviter les antislashs dans repertoire courant ###  -->
+		<path id="pathbuildDirectory">
+			<pathelement location="/${basedir}"/>
+		</path>
+		<pathconvert targetos="unix" property="winbuildDirectory" refid="pathbuildDirectory"/>
+		<echo> Build directory ${basedir} ou ${winbuildDirectory} </echo>
+		
+		<replaceregexp file="build.properties"
+					match="buildDirectory=.*"
+					replace="buildDirectory=${winbuildDirectory}" 
+					byline="true" />
+		<!-- ### -->
+		
+		<property file="build.properties" />
+
+	</target>
+
+	<target name="pde-build" description="Eclipse PDE Build">
+	
+		<java classname="org.eclipse.equinox.launcher.Main" fork="true" failonerror="true">
+			<arg value="-application" />
+			<arg value="org.eclipse.ant.core.antRunner" />
+			<arg value="-buildfile" />
+			<arg value="${baseLocation}/plugins/org.eclipse.pde.build_${pdeBuildPluginVersion}/scripts/productBuild/productBuild.xml" />
+			<arg value="-Dtimestamp=${timestamp}" />
+			<classpath>
+				<pathelement location="${baseLocation}/plugins/org.eclipse.equinox.launcher_${equinoxLauncherPluginVersion}.jar" />
+			</classpath>
+		</java>
+
+	</target>
+
+	<target name="installer" description="Make installer with IzPack">
+
+		<mkdir dir="${buildDirectory}/Nemo_IzPack/src/win32.win32.x86"/>
+		<unzip src="${buildDirectory}/Nemo-win32.win32.x86.zip" dest="${buildDirectory}/Nemo_IzPack/src/win32.win32.x86"/>
+		<mkdir dir="${buildDirectory}/Nemo_IzPack/src/win32.win32.x86_64"/>
+		<unzip src="${buildDirectory}/Nemo-win32.win32.x86_64.zip" dest="${buildDirectory}/Nemo_IzPack/src/win32.win32.x86_64"/>
+		<mkdir dir="${buildDirectory}/Nemo_IzPack/src/linux.gtk.x86"/>
+		<unzip src="${buildDirectory}/Nemo-linux.gtk.x86.zip" dest="${buildDirectory}/Nemo_IzPack/src/linux.gtk.x86"/>
+		<mkdir dir="${buildDirectory}/Nemo_IzPack/src/linux.gtk.x86_64"/>
+		<unzip src="${buildDirectory}/Nemo-linux.gtk.x86_64.zip" dest="${buildDirectory}/Nemo_IzPack/src/linux.gtk.x86_64"/>
+		<mkdir dir="${buildDirectory}/Nemo_IzPack/src/solaris.gtk.sparc"/>
+		<unzip src="${buildDirectory}/Nemo-solaris.gtk.sparc.zip" dest="${buildDirectory}/Nemo_IzPack/src/solaris.gtk.sparc"/>
+		
+		<ant antfile="build_hudson.xml" dir="${buildDirectory}/Nemo_IzPack" inheritAll="false"/> 
+		
+	</target>
+	
+	<!--This target defines the run-order of the targets-->
+	<target name="build" depends="clean, pde-build, installer" />
+	
+	<target name="test" depends="init">
+		<echo message="${buildDirectory}"/>
+		<mkdir dir="${buildDirectory}/Nemo_Test"/>
+		<unzip src="${buildDirectory}/Nemo-win32.win32.x86.zip" dest="${buildDirectory}/Nemo_Test"/>
+		<copy todir="${buildDirectory}/Nemo_Test/eclipse/resources" overwrite="true">   
+				  <fileset dir="${buildDirectory}/NEMO_product/resources">     
+				    <exclude name="CVS/**,Vocab/CVS/**"/>   
+				  </fileset>   
+				</copy> 
+				<!--<copy file="${buildDirectory}/Nemo_Test/eclipse/resources/NemoConfiguration_ini.xml" 
+					  tofile="${buildDirectory}/Nemo_Test/eclipse/resources/NemoConfiguration.xml"
+					  overwrite="true"/>-->
+		<copy file="${buildDirectory}/Nemo_Test/eclipse/nemo.exe" 
+					  tofile="${buildDirectory}/Nemo_Test/eclipse/nemo_batch.exe"
+					  overwrite="true"/>
+		<exec executable="${buildDirectory}/Nemo_Test/eclipse/nemo_batch.exe" dir="${buildDirectory}/Nemo_Test/eclipse" logerror="true" output="${buildDirectory}/Nemo_Test/eclipse/log">
+			<arg value="-i"/>
+			<arg value="${buildDirectory}/diap_hudson/diapalis2_bot.prn"/>
+			<arg value="-m"/>
+			<arg value="${buildDirectory}/diap_hudson/diap_1232_MEDATLAS_P091.xml"/>
+			<arg value="-o"/>
+			<arg value="${buildDirectory}/out"/>
+			<arg value="-c"/>
+			<arg value="MEDATLAS"/>
+		</exec>
+		<delete dir="${buildDirectory}/Nemo_Test"/>
+		<condition property="testok">
+			<filesmatch file1="out" file2=".\diap_hudson\out_diap_MEDATLAS_P091"/>
+		</condition>
+		<fail>
+			 <condition>
+			 	<not>
+			 		<isset property="testok"/>
+			 	</not>
+			 </condition>
+		</fail>
+	</target>
+	
+	
+	
+	
+	
+</project>
