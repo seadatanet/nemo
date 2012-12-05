@@ -333,7 +333,9 @@ public class Application implements IPlatformRunnable
             if (!(cl.getOptionValue(optConv).toUpperCase()
                 .equals(Conversion.MEDATLAS.name()) || cl
                 .getOptionValue(optConv).toUpperCase()
-                .equals(Conversion.ODV.name())))
+                .equals(Conversion.ODV.name()) || cl
+                .getOptionValue(optConv).toUpperCase()
+                .equals(Conversion.NETCDF.name())))
             {
                 batchLogger
                     .info("Error, Conversion type must be \"medatlas\" or \"odv\"");

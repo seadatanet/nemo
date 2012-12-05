@@ -107,8 +107,7 @@ public class DataFormValidator extends FormValidator
                 ok = ok && checkStartAndEndFlags(typeCourant);
                 
                 /** check des valeurs standarNames pour NetCDF */
-                //TODO CPT a verifier
-                //ok = ok && checkStandardName(typeCourant);
+                checkStandardName(typeCourant);
             }
 
             /**
@@ -226,7 +225,7 @@ public class DataFormValidator extends FormValidator
 	protected void onSuccess()
 	{
 		super.onSuccess();
-
+		
 		EditDataForm editDataForm =
 				Nemo.getInstance().getViewMain().getEditDataForm();
 

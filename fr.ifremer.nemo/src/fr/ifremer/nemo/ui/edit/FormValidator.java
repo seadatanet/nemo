@@ -29,7 +29,7 @@ public class FormValidator
     }
     protected void onSuccess()
     {
-        Utils.messageOK(Messages.success_etape);
+        Utils.messageOKAppend(Messages.success_etape);
     }
     
 }

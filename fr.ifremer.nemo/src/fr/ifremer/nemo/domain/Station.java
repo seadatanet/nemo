@@ -20,6 +20,7 @@ import fr.ifremer.nemo.input.parameters.addedParameters.AddedParam;
 import fr.ifremer.nemo.output.GenerationException;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Global.E_InputType;
+import fr.ifremer.nemo.util.Global.E_TypeConversion;
 import fr.ifremer.nemo.util.Intern;
 
 /**
@@ -57,10 +58,13 @@ public class Station implements Comparable {
 		// TODO BGT supprimer errorMsg
 		String errorMessage = "";
 		boolean isNetCDF = false;
-		try{
-		    isNetCDF = Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToNetCDF();
-		}
-		catch(Exception e){}
+
+		    //isNetCDF = Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToNetCDF();
+		E_TypeConversion convertion = Nemo.getInstance().getDomain().getConversion().getCurrent();
+		if (convertion == E_TypeConversion.NETCDF_MONOSTATION || convertion == E_TypeConversion.NETCDF_MULTISTATIONS)
+		    isNetCDF = true;
+
+		
 		try {
 			_fileName = fileName;
 			_reference = null;

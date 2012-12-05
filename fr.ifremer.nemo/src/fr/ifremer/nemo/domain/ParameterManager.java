@@ -357,7 +357,6 @@ public class ParameterManager
 				}
 			}
 		}
-		//TODO CPT a tester
 		if(isNetCDF)
 		{
 		    if (!exist_p_depthBSSurf && !exist_p_pressure && getMesureType() == E_MesureType.BSSURF)

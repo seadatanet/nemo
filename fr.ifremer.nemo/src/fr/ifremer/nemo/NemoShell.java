@@ -22,6 +22,7 @@ import fr.ifremer.nemo.domain.InputDomain;
 import fr.ifremer.nemo.domain.Station;
 import fr.ifremer.nemo.domain.StationDomain;
 import fr.ifremer.nemo.input.PropertyModel;
+import fr.ifremer.nemo.input.parameters.ParameterModel;
 import fr.ifremer.nemo.mapping.Mapping;
 import fr.ifremer.nemo.mapping.MappingTable;
 import fr.ifremer.nemo.output.CDIResumeWriter;
@@ -31,6 +32,7 @@ import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Global.E_ProcessType;
 import fr.ifremer.nemo.util.Global.E_TypeConversion;
+import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.util.Preformat;
 
 /**
@@ -112,6 +114,10 @@ public class NemoShell
                     case MEDATLAS:
                         conv = Conversion.MEDATLAS;
                     break;
+                    case  NETCDF_MONOSTATION:
+                    case  NETCDF_MULTISTATIONS:
+                        conv = Conversion.NETCDF;
+                    break;
                     default:
                         return false;
                 }
@@ -188,6 +194,18 @@ public class NemoShell
                     }
                 }
             }
+            
+            if (odvConv != E_TypeConversion.NETCDF_MONOSTATION || odvConv != E_TypeConversion.NETCDF_MULTISTATIONS)
+            {
+                for (ParameterModel pModel : inputDomain.getData().getModel().getParameterModels())
+                {
+                    if(pModel.getParameter().getStandardName().equals(Global.EMPTY_STRING))
+                    {
+                            logger.warn(Messages.Etape_126 + Global.SPACE + pModel.getParameter().getCodeP011());
+                    }
+                }
+            }
+            
 
             // FAE 7138
             // on repasse sur la methode setAddedParameterModel car on n'avait
