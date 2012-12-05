@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+ <Resource
+  name="SISMER"
+   type="javax.sql.DataSource"
+   password="XIANFOND"
+   driverClassName="oracle.jdbc.driver.OracleDriver"
+   maxIdle="2"
+   maxWait="5000"
+   username="SIS_READER"
+   url="jdbc:oracle:thin:@IDMDB"
+   maxActive="4"/>
+  <WatchedResource>WEB-INF/web.xml</WatchedResource>
+</Context>

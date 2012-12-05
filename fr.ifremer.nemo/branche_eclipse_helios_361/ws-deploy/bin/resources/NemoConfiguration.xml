@@ -1,0 +1,8 @@
+<NemoConfiguration lang="fr_FR">
+  <nemoWsURL>http://192.168.5.200:8088/nemo/services</nemoWsURL>
+  <nautilusWsURL>http://192.168.5.200:8088/nautilus/services</nautilusWsURL>
+  <showRule>true</showRule>
+  <contact></contact>
+  <modelsDirectory>C:\Documents and Settings\fmiras\Bureau\Donnees_pour_conmed\jade97_CRT</modelsDirectory>
+  <outputDirectory>D:/Projets/CONVMED/Donnees/Output</outputDirectory>
+</NemoConfiguration>

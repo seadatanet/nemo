@@ -1,0 +1,801 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2007 (http://www.altova.com) by Peter Thijsse (MARIS BV) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="Metadata" type="Metadata"/>
+	<xs:complexType name="Metadata">
+		<xs:sequence>
+			<xs:element ref="mdFileID"/>
+			<xs:element ref="mdLang"/>
+			<xs:element ref="mdChar"/>
+			<xs:element ref="mdHrLv"/>
+			<xs:element ref="mdHrLvName"/>
+			<xs:element ref="mdContact"/>
+			<xs:element ref="mdDateSt"/>
+			<xs:element ref="mdExtInfo" minOccurs="0"/>
+			<xs:element ref="dataIdInfo" maxOccurs="unbounded"/>
+			<xs:element ref="distInfo" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="mdFileID" type="xs:string"/>
+	<xs:element name="mdLang" type="element_languageCode"/>
+	<xs:element name="mdChar" type="element_CharSetCd"/>
+	<xs:element name="mdHrLv" type="element_ScopeCd"/>
+	<xs:element name="mdHrLvName" type="element_Name"/>
+	<xs:element name="mdContact" type="RespParty"/>
+	<xs:element name="mdDateSt" type="xs:dateTime"/>
+	<xs:element name="mdExtInfo" type="MdExtInfo"/>
+	<xs:element name="dataIdInfo" type="DataIdent"/>
+	<xs:simpleType name="element_Name_Value">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Cruise Summary record"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="element_Name">
+		<xs:simpleContent>
+			<xs:extension base="element_Name_Value">
+				<xs:attribute name="SDNIdent" type="xs:string" use="required"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="element_languageCode">
+		<xs:sequence>
+			<xs:element ref="languageCode"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="languageCode">
+		<xs:complexType>
+			<xs:attributeGroup ref="attlist_languageCode"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:attributeGroup name="attlist_languageCode">
+		<xs:attribute name="value" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:token">
+					<xs:enumeration value="en"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<xs:complexType name="element_CharSetCd">
+		<xs:sequence>
+			<xs:element ref="CharSetCd"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="CharSetCd">
+		<xs:complexType>
+			<xs:attributeGroup ref="attlist_CharSetCd"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:attributeGroup name="attlist_CharSetCd">
+		<xs:attribute name="value" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:token">
+					<xs:enumeration value="utf8"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<xs:complexType name="element_ScopeCd">
+		<xs:sequence>
+			<xs:element ref="ScopeCd"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ScopeCd">
+		<xs:complexType>
+			<xs:attributeGroup ref="attlist_ScopeCd"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:attributeGroup name="attlist_ScopeCd">
+		<xs:attribute name="value" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:token">
+					<xs:enumeration value="series"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<xs:complexType name="RespParty">
+		<xs:sequence>
+			<xs:element name="rpIndName" default="" nillable="1" minOccurs="0"/>
+			<xs:element ref="rpOrgName"/>
+			<xs:element ref="rpCntInfo" minOccurs="0"/>
+			<xs:element ref="role"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="rpPosName" type="xs:string"/>
+	<xs:element name="rpOrgName">
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="SDNIdent" type="xs:string" use="required"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="rpCntInfo" type="Contact"/>
+	<xs:complexType name="Contact">
+		<xs:sequence>
+			<xs:element ref="cntPhone" minOccurs="0"/>
+			<xs:element ref="cntAddress" minOccurs="0"/>
+			<xs:element ref="cntOnLineRes" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="cntPhone" type="Telephone"/>
+	<xs:element name="cntAddress" type="Address"/>
+	<xs:element name="cntOnLineRes" type="OnlineRes"/>
+	<xs:complexType name="Telephone">
+		<xs:sequence>
+			<xs:element ref="voiceNum" minOccurs="0"/>
+			<xs:element ref="faxNum" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="voiceNum" type="xs:string"/>
+	<xs:element name="faxNum" type="xs:string"/>
+	<xs:complexType name="Address">
+		<xs:sequence>
+			<xs:element ref="delPoint" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="city" minOccurs="0"/>
+			<xs:element ref="adminArea" minOccurs="0"/>
+			<xs:element ref="postCode" minOccurs="0"/>
+			<xs:element ref="country" minOccurs="0"/>
+			<xs:element ref="eMailAdd" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="delPoint" type="xs:string"/>
+	<xs:element name="city" type="xs:string"/>
+	<xs:element name="adminArea" type="xs:string"/>
+	<xs:element name="postCode" type="xs:string"/>
+	<xs:element name="country" type="xs:string"/>
+	<xs:element name="eMailAdd" type="xs:string"/>
+	<xs:complexType name="OnlineRes">
+		<xs:sequence>
+			<xs:element ref="linkage"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="linkage" type="xs:string"/>
+	<xs:element name="role" type="element_RoleCd"/>
+	<xs:complexType name="element_RoleCd">
+		<xs:sequence>
+			<xs:element ref="RoleCd"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="RoleCd">
+		<xs:complexType>
+			<xs:attributeGroup ref="attlist_RoleCd"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:attributeGroup name="attlist_RoleCd">
+		<xs:attribute name="value" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:token">
+					<xs:enumeration value="originator"/>
+					<xs:enumeration value="custodian"/>
+					<xs:enumeration value="author"/>
+					<xs:enumeration value="distributor"/>
+					<xs:enumeration value="pointOfContact"/>
+					<xs:enumeration value="principalInvestigator"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<xs:complexType name="MdExtInfo">
+		<xs:sequence>
+			<xs:element ref="extEleInfo" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="extEleInfo" type="ExtEleInfo"/>
+	<xs:complexType name="ExtEleInfo">
+		<xs:sequence>
+			<xs:element ref="extEleName"/>
+			<xs:element ref="extEleDef"/>
+			<xs:element ref="eleDatatype"/>
+			<xs:element ref="extEleParEnt" maxOccurs="unbounded"/>
+			<xs:element ref="extEleSrc" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="extEleName" type="xs:string"/>
+	<xs:element name="extEleDef" type="xs:string"/>
+	<xs:element name="eleDatatype" type="element_DatatypeCd"/>
+	<xs:complexType name="element_DatatypeCd">
+		<xs:sequence>
+			<xs:element ref="DatatypeCd"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="DatatypeCd">
+		<xs:complexType mixed="true">
+			<xs:attributeGroup ref="attlist_DatatypeCd"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:attributeGroup name="attlist_DatatypeCd">
+		<xs:attribute name="value" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:token">
+					<xs:enumeration value="codelist"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<xs:element name="extEleParEnt" type="xs:string"/>
+	<xs:element name="extEleSrc" type="Citation"/>
+	<xs:complexType name="Citation">
+		<xs:sequence>
+			<xs:element ref="resTitle" minOccurs="0"/>
+			<xs:element ref="resAltTitle" minOccurs="0"/>
+			<xs:element ref="resRefDate" minOccurs="0"/>
+			<xs:element ref="resEd" minOccurs="0"/>
+			<xs:element ref="citId" minOccurs="0"/>
+			<xs:element ref="citRespParty" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="citRespParty" type="RespParty"/>
+	<xs:element name="resTitle">
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="SDNIdent" type="xs:string"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="resAltTitle" type="xs:string"/>
+	<xs:element name="resRefDate" type="DateRef"/>
+	<xs:element name="resEd" type="xs:string"/>
+	<xs:element name="citId" type="element_citId"/>
+	<xs:simpleType name="element_citId">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="http://www.seadatanet.org/urnurl/"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="DateRef">
+		<xs:sequence>
+			<xs:element ref="refDate"/>
+			<xs:element ref="refDateType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="refDate" type="xs:string"/>
+	<xs:element name="refDateType" type="element_DateTypCd"/>
+	<xs:complexType name="element_DateTypCd">
+		<xs:sequence>
+			<xs:element ref="DateTypCd"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="DateTypCd">
+		<xs:complexType>
+			<xs:attributeGroup ref="attlist_DateTypCd"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:attributeGroup name="attlist_DateTypCd">
+		<xs:attribute name="value" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:token">
+					<xs:enumeration value="creation"/>
+					<xs:enumeration value="revision"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<xs:complexType name="DataIdent">
+		<xs:sequence>
+			<xs:element ref="idCitation"/>
+			<xs:element name="idPurp" default="" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:string"/>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="graphOver" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="bgFileName" type="xs:string"/>
+						<xs:element name="bgFileDesc" type="xs:string"/>
+						<xs:element name="bgFileType" type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element ref="idAbs" minOccurs="0"/>
+			<xs:element ref="idPoC" minOccurs="0"/>
+			<xs:element ref="descKeys" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="resConst" minOccurs="0"/>
+			<xs:element ref="aggrInfo" minOccurs="0" maxOccurs="2"/>
+			<xs:element ref="dataScale" minOccurs="0"/>
+			<xs:element ref="dataLang"/>
+			<xs:element ref="tpCat"/>
+			<xs:element name="suppInfo" type="xs:string" minOccurs="0"/>
+			<xs:element ref="dataExt" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="idCitation" type="Citation"/>
+	<xs:element name="idAbs" type="xs:string"/>
+	<xs:element name="descKeys" type="Keywords"/>
+	<xs:complexType name="Keywords">
+		<xs:sequence>
+			<xs:element ref="keyword" maxOccurs="unbounded"/>
+			<xs:element ref="keyTyp" minOccurs="0"/>
+			<xs:element ref="thesaName" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="keyword">
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="SDNIdent" type="xs:string" use="required"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="keyTyp" type="element_KeyTypCd"/>
+	<xs:element name="thesaName" type="Citation"/>
+	<xs:complexType name="element_KeyTypCd">
+		<xs:sequence>
+			<xs:element ref="KeyTypCd"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="KeyTypCd">
+		<xs:complexType>
+			<xs:attributeGroup ref="attlist_KeyTypCd"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:attributeGroup name="attlist_KeyTypCd">
+		<xs:attribute name="value" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:token">
+					<xs:enumeration value="parameter"/>
+					<xs:enumeration value="instrument"/>
+					<xs:enumeration value="project"/>
+					<xs:enumeration value="platform"/>
+					<xs:enumeration value="departure_place"/>
+					<xs:enumeration value="arrival_place"/>
+					<xs:enumeration value="departure_country"/>
+					<xs:enumeration value="arrival_country"/>
+					<xs:enumeration value="platform_class"/>
+					<xs:enumeration value="place"/>
+					<xs:enumeration value="marsden_square"/>
+					<xs:enumeration value="counting_unit"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<xs:element name="resConst" type="ConstsTypes"/>
+	<xs:element name="ConstsTypes" abstract="true"/>
+	<xs:complexType name="ConstsTypes">
+		<xs:sequence>
+			<xs:element ref="ConstsTypes"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="LegConsts" type="LegConsts" substitutionGroup="ConstsTypes"/>
+	<xs:complexType name="LegConsts">
+		<xs:sequence>
+			<xs:element ref="accessConsts" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="accessConsts">
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="SDNIdent" type="xs:string" use="required"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dataLang" type="element_languageCode"/>
+	<xs:element name="tpCat" type="element_TopicCatCd"/>
+	<xs:complexType name="element_TopicCatCd">
+		<xs:sequence>
+			<xs:element ref="TopicCatCd"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="TopicCatCd">
+		<xs:complexType>
+			<xs:attributeGroup ref="attlist_TopicCatCd"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:attributeGroup name="attlist_TopicCatCd">
+		<xs:attribute name="value" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:token">
+					<xs:enumeration value="oceans"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<xs:element name="dataExt" type="Extent"/>
+	<xs:complexType name="Extent">
+		<xs:sequence>
+			<xs:element ref="geoEle" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="tempEle" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="vertEle" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="tempEle" type="TempExtentTypes"/>
+	<xs:element name="geoEle" type="GeoExtentTypes"/>
+	<xs:element name="TempExtentTypes" abstract="true"/>
+	<xs:complexType name="TempExtentTypes">
+		<xs:sequence>
+			<xs:element ref="TempExtentTypes"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="GeoExtentTypes" abstract="true"/>
+	<xs:complexType name="GeoExtentTypes">
+		<xs:sequence>
+			<xs:element ref="GeoExtentTypes"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="idPoC" type="RespParty"/>
+	<xs:complexType name="TempExtent">
+		<xs:complexContent>
+			<xs:extension base="element_exTemp"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="element_exTemp">
+		<xs:sequence>
+			<xs:element ref="exTemp"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="TempExtent" type="TempExtent" substitutionGroup="TempExtentTypes"/>
+	<xs:element name="exTemp" type="TM_Primitive"/>
+	<xs:element name="TM_Primitive" type="TM_GeometricPrimitive" abstract="true"/>
+	<xs:complexType name="TM_Primitive">
+		<xs:sequence>
+			<xs:element ref="TM_Primitive"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="TM_GeometricPrimitive" substitutionGroup="TM_Primitive"/>
+	<xs:complexType name="TM_GeometricPrimitive">
+		<xs:choice>
+			<xs:element ref="TM_Period"/>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="TM_Period">
+		<xs:sequence>
+			<xs:element ref="begin"/>
+			<xs:element ref="end"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="TM_Period" type="TM_Period"/>
+	<xs:element name="begin" type="xs:string"/>
+	<xs:element name="end" type="xs:string"/>
+	<xs:element name="geoId" type="MdIdent" substitutionGroup="GeoExtentTypes"/>
+	<xs:complexType name="MdIdent">
+		<xs:sequence>
+			<xs:element ref="identAuth" minOccurs="0"/>
+			<xs:element ref="identCode"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="identAuth" type="Citation"/>
+	<xs:element name="identCode">
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string"/>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="GeoBndBox" type="GeoBndBox" substitutionGroup="GeoExtentTypes"/>
+	<xs:complexType name="GeoBndBox">
+		<xs:sequence>
+			<xs:element ref="westBL"/>
+			<xs:element ref="eastBL" minOccurs="0"/>
+			<xs:element ref="southBL"/>
+			<xs:element ref="northBL" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="westBL" type="xs:string"/>
+	<xs:element name="eastBL" type="xs:string"/>
+	<xs:element name="southBL" type="xs:string"/>
+	<xs:element name="northBL" type="xs:string"/>
+	<xs:element name="aggrInfo">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="aggrDSName" minOccurs="0"/>
+				<xs:element ref="assocType"/>
+				<xs:element ref="initType"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="aggrDSName">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="resTitle"/>
+				<xs:element ref="resAltTitle"/>
+				<xs:element ref="resRefDate"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="assocType">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="AscTypeCd"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="initType">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="InitTypCd"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="AscTypeCd">
+		<xs:complexType>
+			<xs:attributeGroup ref="attlist_AscTypeCd"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="InitTypCd">
+		<xs:complexType>
+			<xs:attributeGroup ref="attlist_InitTypCd"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:attributeGroup name="attlist_InitTypCd">
+		<xs:attribute name="value">
+			<xs:simpleType>
+				<xs:restriction base="xs:token">
+					<xs:enumeration value="operation"/>
+					<xs:enumeration value="campaign"/>
+					<xs:enumeration value="platform"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="attlist_AscTypeCd">
+		<xs:attribute name="value">
+			<xs:simpleType>
+				<xs:restriction base="xs:token">
+					<xs:enumeration value="largerWorkCitation"/>
+					<xs:enumeration value="source"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<xs:element name="BoundPoly" type="BoundPoly" substitutionGroup="GeoExtentTypes"/>
+	<xs:complexType name="BoundPoly">
+		<xs:sequence>
+			<xs:element ref="exTypeCode" minOccurs="0"/>
+			<xs:element ref="polygon" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="exTypeCode" type="xs:string"/>
+	<xs:element name="polygon" type="GM_Polygon"/>
+	<xs:complexType name="GM_Polygon">
+		<xs:sequence>
+			<xs:element ref="GM_Point" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GM_Point">
+		<xs:sequence>
+			<xs:element ref="coordinates"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="GM_Point" type="GM_Point"/>
+	<xs:element name="coordinates">
+		<xs:complexType mixed="true">
+			<xs:attributeGroup ref="attlist_coordinates"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:attributeGroup name="attlist_coordinates">
+		<xs:attribute name="tupleSep" default="space">
+			<xs:simpleType>
+				<xs:restriction base="xs:token">
+					<xs:enumeration value="space"/>
+					<xs:enumeration value="comma"/>
+					<xs:enumeration value="period"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<xs:element name="spatRepInfo" type="spatRepInfo"/>
+	<xs:complexType name="spatRepInfo">
+		<xs:sequence>
+			<xs:element ref="VectSpatRep"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="VectSpatRep" type="VectSpatRep"/>
+	<xs:complexType name="VectSpatRep">
+		<xs:sequence>
+			<xs:element ref="geometObjs"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="geometObjs" type="geometObjs"/>
+	<xs:complexType name="geometObjs">
+		<xs:sequence>
+			<xs:element ref="geoObjTyp"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="geoObjTyp" type="geoObjTyp"/>
+	<xs:complexType name="geoObjTyp">
+		<xs:sequence>
+			<xs:element ref="GeoObjTypCd"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="GeoObjTypCd" type="GeoObjTypCd"/>
+	<xs:complexType name="GeoObjTypCd">
+		<xs:attributeGroup ref="attlist_GeoObjTypCd"/>
+	</xs:complexType>
+	<xs:attributeGroup name="attlist_GeoObjTypCd">
+		<xs:attribute name="value">
+			<xs:simpleType>
+				<xs:restriction base="xs:token">
+					<xs:enumeration value="curve"/>
+					<xs:enumeration value="surface"/>
+					<xs:enumeration value="point"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<xs:element name="refSysInfo" type="refSysInfo"/>
+	<xs:complexType name="refSysInfo">
+		<xs:sequence>
+			<xs:element ref="MdCoRefSys"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="MdCoRefSys" type="MdCoRefSys"/>
+	<xs:complexType name="MdCoRefSys">
+		<xs:sequence>
+			<xs:element ref="refSysID"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="refSysID" type="MdIdent"/>
+	<xs:element name="dataScale">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="scaleDist"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="scaleDist">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="value"/>
+				<xs:element ref="uom"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="value">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="Decimal"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Decimal" type="xs:decimal" default="0"/>
+	<xs:element name="uom">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="UomTime"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="UomTime">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="uomName"/>
+				<xs:element ref="conversionToISOstandarUnit"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="uomName">
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="SDNIdent" type="xs:string" use="optional"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="conversionToISOstandarUnit"/>
+	<xs:element name="vertEle">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="vertMinVal"/>
+				<xs:element ref="vertMaxVal"/>
+				<xs:element ref="vertUoM"/>
+				<xs:element ref="vertDatum"/>
+				<xs:element ref="vertLimit"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="vertMinVal" type="xs:decimal"/>
+	<xs:element name="vertMaxVal" type="xs:decimal"/>
+	<xs:element name="vertLimit" type="xs:decimal"/>
+	<xs:element name="vertUoM">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="uomName"/>
+				<xs:element ref="conversionToISOstandarUnit"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="vertDatum">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="datumId"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="datumId">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="identAuth"/>
+				<xs:element ref="identCode"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="distInfo">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="distributor"/>
+				<xs:element ref="distTranOps"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="distributor">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="distorCont"/>
+				<xs:element ref="distorFormat"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="distorCont">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="rpOrgName"/>
+				<xs:element ref="rpCntInfo"/>
+				<xs:element ref="role"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="distorFormat">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="formatName" maxOccurs="unbounded"/>
+				<xs:element ref="formatVer"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="formatName" type="element_formatName"/>
+	<xs:complexType name="element_formatName">
+		<xs:simpleContent>
+			<xs:extension base="xs:string">
+				<xs:attribute name="SDNIdent" type="xs:string" use="optional"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:element name="formatVer"/>
+	<xs:element name="distTranOps">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="transSize"/>
+				<xs:element ref="onLineSrc"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="transSize" type="xs:decimal"/>
+	<xs:element name="onLineSrc">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="linkage"/>
+				<xs:element ref="orDesc"/>
+				<xs:element ref="orFunct"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="orDesc" type="xs:string"/>
+	<xs:element name="orFunct">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="OnFunctCd"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="OnFunctCd" type="OnFunctCd"/>
+	<xs:complexType name="OnFunctCd">
+		<xs:attributeGroup ref="attlist_OnFunctCd"/>
+	</xs:complexType>
+	<xs:attributeGroup name="attlist_OnFunctCd">
+		<xs:attribute name="value">
+			<xs:simpleType>
+				<xs:restriction base="xs:token">
+					<xs:enumeration value="downloadRegistration"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:attributeGroup>
+</xs:schema>

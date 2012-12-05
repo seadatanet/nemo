@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vocabularies>
+   <vocabulary list="SDN:P02:75:"  version="75"  date="2012-07-18T01:00:02.000"  title="SeaDataNet Parameter Discovery Vocabulary"  />
+   <vocabulary list="SDN:P04:4:"  version="4"  date="2007-04-18T13:55:46.000"  title="Global Change Master Directory Science Keywords"  />
+   <vocabulary list="SDN:P07:20:"  version="20"  date="2012-09-20T01:00:04.000"  title="Climate and Forecast Standard Names"  />
+   <vocabulary list="SDN:P25:5:"  version="5"  date="2012-07-26T01:00:03.000"  title="NETMAR aggregation parameters"  />
+   <vocabulary list="SDN:P06:43:"  version="43"  date="2012-08-22T01:00:03.000"  title="BODC data storage units"  />
+</vocabularies>

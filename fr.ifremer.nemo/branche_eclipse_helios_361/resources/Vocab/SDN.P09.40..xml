@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vocabulary list="SDN:P09:40:"  version="40"  date="2012-01-11T07:46:54.000"  title="MEDATLAS Parameter Usage Vocabulary" >
+   <keyword SDNIdent="SDN:P09::DCAW"  smallLabel="DCAW" >DARK CARBON ABSORPTION</keyword>
+   <keyword SDNIdent="SDN:P09::UPTH"  smallLabel="UPTH" >BACTERIAL PRODUCTION(THYM. UP)</keyword>
+   <keyword SDNIdent="SDN:P09::CPH1"  smallLabel="CPH1" >CHLOROPHYLL-A TOTAL</keyword>
+   <keyword SDNIdent="SDN:P09::CPH2"  smallLabel="CPH2" >CHLOROPHYLL-A/2 MICRON FILTER</keyword>
+   <keyword SDNIdent="SDN:P09::LONX"  smallLabel="LONX" >LONGITUDE</keyword>
+   <keyword SDNIdent="SDN:P09::MALF"  smallLabel="MALF" >AL FLUX IN SETTLING PARTICLES</keyword>
+   <keyword SDNIdent="SDN:P09::CPH3"  smallLabel="CPH3" >CHLOROPHYLL-A/20 MICRON FILTER</keyword>
+   <keyword SDNIdent="SDN:P09::PTPP"  smallLabel="PTPP" >TOTAL PARTICULATE PHOSPHORUS</keyword>
+   <keyword SDNIdent="SDN:P09::OSMP"  smallLabel="OSMP" >ORGANIC SUSPENDED MATTER</keyword>
+   <keyword SDNIdent="SDN:P09::CPH4"  smallLabel="CPH4" >CHLOROPHYLL-A/10 MICRON FILTER</keyword>
+   <keyword SDNIdent="SDN:P09::HEAD"  smallLabel="HEAD" >PLAT. HEADING REL. TRUE NORTH</keyword>
+   <keyword SDNIdent="SDN:P09::MUUS"  smallLabel="MUUS" >U IN THE SEDIMENT</keyword>
+   <keyword SDNIdent="SDN:P09::LCAW"  smallLabel="LCAW" >LIGHT CARBON ABSORPTION</keyword>
+   <keyword SDNIdent="SDN:P09::MMGS"  smallLabel="MMGS" >Mg IN THE SEDIMENT</keyword>
+   <keyword SDNIdent="SDN:P09::MMGP"  smallLabel="MMGP" >Mg IN SUSPENDED MATTER</keyword>
+   <keyword SDNIdent="SDN:P09::TCCF"  smallLabel="TCCF" >PART. TOTAL CARBON FLUX</keyword>
+   <keyword SDNIdent="SDN:P09::UPTS"  smallLabel="UPTS" >BACT. PROD. STANDARD DEVIATION</keyword>
+   <keyword SDNIdent="SDN:P09::BCMW"  smallLabel="BCMW" >BACTERIAL BIOMASS IN SEA WATER</keyword>
+   <keyword SDNIdent="SDN:P09::ETDD"  smallLabel="ETDD" >ELLAPSED TIME</keyword>
+   <keyword SDNIdent="SDN:P09::VZMX"  smallLabel="VZMX" >MAXI ZERO CROSSING WAVE HEIGHT</keyword>
+   <keyword SDNIdent="SDN:P09::TCCS"  smallLabel="TCCS" >SEDIMENT TOTAL CARBON</keyword>
+   <keyword SDNIdent="SDN:P09::PHOP"  smallLabel="PHOP" >PHOSPHATE IN SEDIMT PORE WATER</keyword>
+   <keyword SDNIdent="SDN:P09::NAVG"  smallLabel="NAVG" >AVERAGED DATA CYCLE NUMBER</keyword>
+   <keyword SDNIdent="SDN:P09::MALS"  smallLabel="MALS" >Al IN THE SEDIMENT</keyword>
+   <keyword SDNIdent="SDN:P09::PHOS"  smallLabel="PHOS" >PHOSPHATE (PO4-P) CONTENT</keyword>
+   <keyword SDNIdent="SDN:P09::MALP"  smallLabel="MALP" >Al IN SUSPENDED MATTER</keyword>
+   <keyword SDNIdent="SDN:P09::PHOW"  smallLabel="PHOW" >PHOSPHATE (PO4-P) CONTENT</keyword>
+   <keyword SDNIdent="SDN:P09::CPHL"  smallLabel="CPHL" >CHLOROPHYLL-A TOTAL</keyword>
+   <keyword SDNIdent="SDN:P09::VPED"  smallLabel="VPED" >WAVE SPECTRUM PEAK ENERGY DIR.</keyword>
+   <keyword SDNIdent="SDN:P09::SIOF"  smallLabel="SIOF" >PART. BIOGENIC Si FLUX</keyword>
+   <keyword SDNIdent="SDN:P09::PXAP"  smallLabel="PXAP" >PRASINOXANTHINE</keyword>
+   <keyword SDNIdent="SDN:P09::DXAP"  smallLabel="DXAP" >DIADINOXANTHINE</keyword>
+   <keyword SDNIdent="SDN:P09::DPS1"  smallLabel="DPS1" >DEPTH BELOW BOTTOM-LOWER LIMIT</keyword>
+   <keyword SDNIdent="SDN:P09::CDFW"  smallLabel="CDFW" >DARK FIXATION</keyword>
+   <keyword SDNIdent="SDN:P09::MIIS"  smallLabel="MIIS" >I IN THE SEDIMENT</keyword>
+   <keyword SDNIdent="SDN:P09::PHPH"  smallLabel="PHPH" >PH</keyword>
+   <keyword SDNIdent="SDN:P09::SIOS"  smallLabel="SIOS" >SEDIMENT BIOGENIC SiO2</keyword>
+   <keyword SDNIdent="SDN:P09::ATPT"  smallLabel="ATPT" >ATMOSPHERIC PRESSURE TENDENCY</keyword>
+   <keyword SDNIdent="SDN:P09::WSPE"  smallLabel="WSPE" >WIND SPEED EASTWARD COMPONENT</keyword>
+   <keyword SDNIdent="SDN:P09::WSPD"  smallLabel="WSPD" >HORIZONTAL WIND SPEED</keyword>
+   <keyword SDNIdent="SDN:P09::SAND"  smallLabel="SAND" >SAND IN THE SEDIMENT</keyword>
+   <keyword SDNIdent="SDN:P09::LTHF"  smallLabel="LTHF" >LITHOGENIC FRACTION FLUX</keyword>
+   <keyword SDNIdent="SDN:P09::DPSF"  smallLabel="DPSF" >DEPTH BELOW SEA FLOOR</keyword>
+   <keyword SDNIdent="SDN:P09::NTRZ"  smallLabel="NTRZ" >NITRATE + NITRITE CONTENT</keyword>
+   <keyword SDNIdent="SDN:P09::GLUC"  smallLabel="GLUC" >CARBOHYDRATE</keyword>
+   <keyword SDNIdent="SDN:P09::MVVS"  smallLabel="MVVS" >V IN THE SEDIMENT</keyword>
+   <keyword SDNIdent="SDN:P09::WSPN"  smallLabel="WSPN" >WIND SPEED NORTHWARD COMPONENT</keyword>
+   <keyword SDNIdent="SDN:P09::VEPK"  smallLabel="VEPK" >WAVE SPECTRUM PEAK ENERGY</keyword>
+   <keyword SDNIdent="SDN:P09::OPAP"  smallLabel="OPAP" >OPAL CONTENT</keyword>
+   <keyword SDNIdent="SDN:P09::ALTS"  smallLabel="ALTS" >HEIGHT ABOVE MEAN SEA LEVEL</keyword>
+   <keyword SDNIdent="SDN:P09::RVFL"  smallLabel="RVFL" >RIVER FLOW RATE</keyword>
+   <keyword SDNIdent="SDN:P09::MSSP"  smallLabel="MSSP" >S IN SUSPENDED MATTER</keyword>
+   <keyword SDNIdent="SDN:P09::VPSP"  smallLabel="VPSP" >DIR. SPREADING AT WAVE PEAK</keyword>
+   <keyword SDNIdent="SDN:P09::TEMP"  smallLabel="TEMP" >SEA TEMPERATURE</keyword>
+   <keyword SDNIdent="SDN:P09::PC1P"  smallLabel="PC1P" >PARTICULATE ORGANIC CARBON/POC</keyword>
+   <keyword SDNIdent="SDN:P09::TPHS"  smallLabel="TPHS" >TOTAL PHOSPHORUS (P) CONTENT</keyword>
+   <keyword SDNIdent="SDN:P09::VOCP"  smallLabel="VOCP" >VOLUME CONC. OF PARTICLES</keyword>
+   <keyword SDNIdent="SDN:P09::MTHS"  smallLabel="MTHS" >Th IN THE SEDIMENT</keyword>
+   <keyword SDNIdent="SDN:P09::TPHP"  smallLabel="TPHP" >TOTAL PHAEOPIGMENTS</keyword>
+   <keyword SDNIdent="SDN:P09::HBAW"  smallLabel="HBAW" >NB OF HETEROTROPHIC BACTERIA</keyword>
+   <keyword SDNIdent="SDN:P09::ATMP"  smallLabel="ATMP" >ATMOSPHERIC PRESSURE</keyword>
+   <keyword SDNIdent="SDN:P09::MNIW"  smallLabel="MNIW" >DISSOLVED NICKEL (Ni)</keyword>
+   <keyword SDNIdent="SDN:P09::PONP"  smallLabel="PONP" >PARTICULATE ORGANIC NITROGEN</keyword>
+   <keyword SDNIdent="SDN:P09::ATMS"  smallLabel="ATMS" >ATMOSPHERIC PRESSURE - SEA LEV</keyword>
+   <keyword SDNIdent="SDN:P09::MCRS"  smallLabel="MCRS" >Cr IN THE SEDIMENT</keyword>
+   <keyword SDNIdent="SDN:P09::MLAS"  smallLabel="MLAS" >La IN THE SEDIMENT</keyword>
+   <keyword SDNIdent="SDN:P09::VCMX"  smallLabel="VCMX" >MAXIMUM CREST TO TROUGH WAVE HEIGHT</keyword>
+   <keyword SDNIdent="SDN:P09::MNIS"  smallLabel="MNIS" >Ni IN THE SEDIMENT</keyword>
+   <keyword SDNIdent="SDN:P09::MSDP"  smallLabel="MSDP" >MEAN SPHERIC DIAM. OF PARTICLE</keyword>
+   <keyword SDNIdent="SDN:P09::GYRW"  smallLabel="GYRW" >NUMBER OF SW GYRODINIUM</keyword>
+   <keyword SDNIdent="SDN:P09::TRIW"  smallLabel="TRIW" >DISSOLVED TRITIUM</keyword>
+   <keyword SDNIdent="SDN:P09::VTDH"  smallLabel="VTDH" >SIGNIFICANT WAVE HEIGHT</keyword>
+   <keyword SDNIdent="SDN:P09::DEWT"  smallLabel="DEWT" >DEW POINT TEMPERATURE</keyword>
+   <keyword SDNIdent="SDN:P09::PP1P"  smallLabel="PP1P" >PART. ORGANIC PHOSPHORUS (P)</keyword>
+   <keyword SDNIdent="SDN:P09::HCDT"  smallLabel="HCDT" >DIRECTION REL. TRUE NORTH</keyword>
+   <keyword SDNIdent="SDN:P09::MCAS"  smallLabel="MCAS" >Ca IN THE SEDIMENT</keyword>
+   <keyword SDNIdent="SDN:P09::ABCP"  smallLabel="ABCP" >ALPHA BETA CAROTENES</keyword>
+   <keyword SDNIdent="SDN:P09::PCO2"  smallLabel="PCO2" >CO2 PART. PRES IN DRY/WET GAS</keyword>
+   <keyword SDNIdent="SDN:P09::MCAP"  smallLabel="MCAP" >Ca IN SUSPENDED MATTER</keyword>
+   <keyword SDNIdent="SDN:P09::MPBS"  smallLabel="MPBS" >Pb IN THE SEDIMENT</keyword>
+   <keyword SDNIdent="SDN:P09::NHUW"  smallLabel="NHUW" >AMMONIUM UPTAKE</keyword>
+   <keyword SDNIdent="SDN:P09::WDIR"  smallLabel="WDIR" >WIND DIRECTION REL. TRUE NORTH</keyword>
+   <keyword SDNIdent="SDN:P09::SVEL"  smallLabel="SVEL" >SOUND VELOCITY</keyword>
+   <keyword SDNIdent="SDN:P09::DFPF"  smallLabel="DFPF" >DINOFLAGELLATES PPC FLUX</keyword>
+   <keyword SDNIdent="SDN:P09::MSCS"  smallLabel="MSCS" >Sc IN THE SEDIMENT</keyword>
+   <keyword SDNIdent="SDN:P09::PHNS"  smallLabel="PHNS" >SEDIMENT PHENOLS</keyword>
+   <keyword SDNIdent="SDN:P09::MPBF"  smallLabel="MPBF" >PB FLUX IN SETTLING PARTICLES</keyword>
+   <keyword SDNIdent="SDN:P09::DOPW"  smallLabel="DOPW" >DISSOLVED ORGANIC PHOSPHORUS</keyword>
+   <keyword SDNIdent="SDN:P09::VCSP"  smallLabel="VCSP" >VERTICAL CURRENT SPEED</keyword>
+   <keyword SDNIdent="SDN:P09::GDIR"  smallLabel="GDIR" >GUST WIND DIRECTION</keyword>
+   <keyword SDNIdent="SDN:P09::TNNF"  smallLabel="TNNF" >PART. TOTAL NITROGEN FLUX</keyword>
+   <keyword SDNIdent="SDN:P09::ETHP"  smallLabel="ETHP" >PARTICULATE 234 TH ACT. ERROR</keyword>
+   <keyword SDNIdent="SDN:P09::HELW"  smallLabel="HELW" >DISSOLVED HELIUM</keyword>
+   <keyword SDNIdent="SDN:P09::TNNS"  smallLabel="TNNS" >SEDIMENT TOTAL NITROGEN</keyword>
+   <keyword SDNIdent="SDN:P09::TH4W"  smallLabel="TH4W" >DISSOLVED 234TH</keyword>
+   <keyword SDNIdent="SDN:P09::TH4P"  smallLabel="TH4P" >PARTICULATE 234TH ACTIVTY</keyword>
+   <keyword SDNIdent="SDN:P09::MYYS"  smallLabel="MYYS" >Y IN THE SEDIMENT</keyword>
+   <keyword SDNIdent="SDN:P09::ETHW"  smallLabel="ETHW" >DISSOLVED 234 TH ACT. ERROR</keyword>
+   <keyword SDNIdent="SDN:P09::TINW"  smallLabel="TINW" >DISSOLVED INORGANIC NITROGEN</keyword>
+   <keyword SDNIdent="SDN:P09::SWHT"  smallLabel="SWHT" >SWELL HEIGHT</keyword>
+   <keyword SDNIdent="SDN:P09::MSBO"  smallLabel="MSBO" >MESOZOOPLANKTON ASH-FREE DRY W</keyword>
+   <keyword SDNIdent="SDN:P09::NTOT"  smallLabel="NTOT" >TOTAL NITROGEN (N) CONTENT</keyword>
+   <keyword SDNIdent="SDN:P09::CE3W"  smallLabel="CE3W" >DISSOLVED CFC113 ERROR</keyword>
+   <keyword SDNIdent="SDN:P09::SSAL"  smallLabel="SSAL" >SALINITY (PRE-1978 DEFN)</keyword>
+   <keyword SDNIdent="SDN:P09::VSMC"  smallLabel="VSMC" >SPECT. MOMENT(0,2) WAVE PERIOD</keyword>
+   <keyword SDNIdent="SDN:P09::CHLT"  smallLabel="CHLT" >CHLOROPHYLL-TOTAL</keyword>
+   <keyword SDNIdent="SDN:P09::OMMF"  smallLabel="OMMF" >PART. ORGANIC MATTER FLUX</keyword>
+   <keyword SDNIdent="SDN:P09::NORW"  smallLabel="NORW" >NITRIFICATION</keyword>
+   <keyword SDNIdent="SDN:P09::TIME"  smallLabel="TIME" >TIME WITHIN DAY</keyword>
+   <keyword SDNIdent="SDN:P09::MCUF"  smallLabel="MCUF" >CU FLUX IN SETTLING PARTICLES</keyword>
+   <keyword SDNIdent="SDN:P09::MSRS"  smallLabel="MSRS" >Sr IN THE SEDIMENT</keyword>
+   <keyword SDNIdent="SDN:P09::CHLC"  smallLabel="CHLC" >CHLOROPHYLL-C TOTAL</keyword>
+   <keyword SDNIdent="SDN:P09::CUPH"  smallLabel="CUPH" >14C PRODUCTION FILTER UNSPECIF</keyword>
+   <keyword SDNIdent="SDN:P09::ZXAP"  smallLabel="ZXAP" >ZEAXANTHINE</keyword>
+   <keyword SDNIdent="SDN:P09::NEOW"  smallLabel="NEOW" >DISSOLVED NEON</keyword>
+   <keyword SDNIdent="SDN:P09::CNDC"  smallLabel="CNDC" >ELECTRICAL CONDUCTIVITY</keyword>
+   <keyword SDNIdent="SDN:P09::N15D"  smallLabel="N15D" >DELTA 15N (15N/14N)</keyword>
+   <keyword SDNIdent="SDN:P09::CHLB"  smallLabel="CHLB" >CHLOROPHYLL-B TOTAL</keyword>
+   <keyword SDNIdent="SDN:P09::GSPD"  smallLabel="GSPD" >GUST WIND SPEED</keyword>
+   <keyword SDNIdent="SDN:P09::MCUS"  smallLabel="MCUS" >Cu IN THE SEDIMENT</keyword>
+   <keyword SDNIdent="SDN:P09::LTUW"  smallLabel="LTUW" >LEUCINE UPTAKE RATE</keyword>
+   <keyword SDNIdent="SDN:P09::CE2W"  smallLabel="CE2W" >DISSOLVED CFC12 ERROR</keyword>
+   <keyword SDNIdent="SDN:P09::NSCT"  smallLabel="NSCT" >CURRENT NORTH COMPONENT</keyword>
+   <keyword SDNIdent="SDN:P09::TOCW"  smallLabel="TOCW" >TOTAL ORGANIC CARBON</keyword>
+   <keyword SDNIdent="SDN:P09::NSCS"  smallLabel="NSCS" >CURRENT NORTH STD. DEVIATION</keyword>
+   <keyword SDNIdent="SDN:P09::CUPW"  smallLabel="CUPW" >14C PRODUCTION FILTER UNSPECIF</keyword>
+   <keyword SDNIdent="SDN:P09::MCUW"  smallLabel="MCUW" >DISSOLVED COPPER (Cu)</keyword>
+   <keyword SDNIdent="SDN:P09::NFAW"  smallLabel="NFAW" >AUTOTROPHIC NANOFLAGELLATES</keyword>
+   <keyword SDNIdent="SDN:P09::TOCS"  smallLabel="TOCS" >SEDIMENT TOTAL ORGANIC CARBON</keyword>
+   <keyword SDNIdent="SDN:P09::VDIR"  smallLabel="VDIR" >WAVE DIRECTION REL. TRUE NORTH</keyword>
+   <keyword SDNIdent="SDN:P09::NTRI"  smallLabel="NTRI" >NITRITE (NO2-N) CONTENT</keyword>
+   <keyword SDNIdent="SDN:P09::CF2W"  smallLabel="CF2W" >DISSOLVED CFC12</keyword>
+   <keyword SDNIdent="SDN:P09::NTRA"  smallLabel="NTRA" >NITRATE (NO3-N) CONTENT</keyword>
+   <keyword SDNIdent="SDN:P09::NHRW"  smallLabel="NHRW" >AMMONIUM REGENERATION</keyword>
+   <keyword SDNIdent="SDN:P09::MBRS"  smallLabel="MBRS" >Br IN THE SEDIMENT</keyword>
+   <keyword SDNIdent="SDN:P09::SILT"  smallLabel="SILT" >SILT IN THE SEDIMENT</keyword>
+   <keyword SDNIdent="SDN:P09::CE1W"  smallLabel="CE1W" >DISSOLVED CFC11 ERROR</keyword>
+   <keyword SDNIdent="SDN:P09::PRES"  smallLabel="PRES" >SEA PRESSURE sea surface=0</keyword>
+   <keyword SDNIdent="SDN:P09::LINC"  smallLabel="LINC" >LONG-WAVE INCOMING RADIATION</keyword>
+   <keyword SDNIdent="SDN:P09::SAMA"  smallLabel="SAMA" >SIGNAL RETURN AMPLITUDE</keyword>
+   <keyword SDNIdent="SDN:P09::DRYT"  smallLabel="DRYT" >DRY BULB TEMPERATURE</keyword>
+   <keyword SDNIdent="SDN:P09::AMON"  smallLabel="AMON" >AMMONIUM (NH4-N) CONTENT</keyword>
+   <keyword SDNIdent="SDN:P09::NTAW"  smallLabel="NTAW" >NITRATE (NO3-N) CONTENT</keyword>
+   <keyword SDNIdent="SDN:P09::MCES"  smallLabel="MCES" >Ce IN THE SEDIMENT</keyword>
+   <keyword SDNIdent="SDN:P09::RDIN"  smallLabel="RDIN" >INCIDENT RADIATION</keyword>
+   <keyword SDNIdent="SDN:P09::AMOP"  smallLabel="AMOP" >AMONIUM IN SEDIMENT PORE WATER</keyword>
+   <keyword SDNIdent="SDN:P09::CF3W"  smallLabel="CF3W" >DISSOLVED CFC113</keyword>
+   <keyword SDNIdent="SDN:P09::NT1P"  smallLabel="NT1P" >TOTAL PARTICULATE NITROGEN</keyword>
+   <keyword SDNIdent="SDN:P09::ASDW"  smallLabel="ASDW" >ABSORPTION STANDARD DEVIATION</keyword>
+   <keyword SDNIdent="SDN:P09::DAYX"  smallLabel="DAYX" >DAY WITHIN MONTH</keyword>
+   <keyword SDNIdent="SDN:P09::NORG"  smallLabel="NORG" >DISSOLVED ORGANIC NITROGEN</keyword>
+   <keyword SDNIdent="SDN:P09::IODI"  smallLabel="IODI" >IODINE</keyword>
+   <keyword SDNIdent="SDN:P09::NTAP"  smallLabel="NTAP" >NITRATE IN SEDIMENT PORE WATER</keyword>
+   <keyword SDNIdent="SDN:P09::MBAS"  smallLabel="MBAS" >Ba IN THE SEDIMENT</keyword>
+   <keyword SDNIdent="SDN:P09::HSUL"  smallLabel="HSUL" >HYDROGEN SULPHIDE (H2S)</keyword>
+   <keyword SDNIdent="SDN:P09::MBAP"  smallLabel="MBAP" >Ba IN SUSPENDED MATTER</keyword>
+   <keyword SDNIdent="SDN:P09::FUCP"  smallLabel="FUCP" >FUCOXANTHINE</keyword>
+   <keyword SDNIdent="SDN:P09::TXAP"  smallLabel="TXAP" >DIATOXANTHINE</keyword>
+   <keyword SDNIdent="SDN:P09::HELD"  smallLabel="HELD" >DELTA HELIUM 3</keyword>
+   <keyword SDNIdent="SDN:P09::SO4O"  smallLabel="SO4O" >PORE WATER SULFATE</keyword>
+   <keyword SDNIdent="SDN:P09::VTPK"  smallLabel="VTPK" >WAVE PEAK PERIOD</keyword>
+   <keyword SDNIdent="SDN:P09::PERP"  smallLabel="PERP" >PERIDININE</keyword>
+   <keyword SDNIdent="SDN:P09::AMOW"  smallLabel="AMOW" >AMMONIUM (NH4-N) CONTENT</keyword>
+   <keyword SDNIdent="SDN:P09::AXAP"  smallLabel="AXAP" >ALLOXANTHINE</keyword>
+   <keyword SDNIdent="SDN:P09::SLCP"  smallLabel="SLCP" >PARTICULATE ORGANIC SILICA(SI)</keyword>
+   <keyword SDNIdent="SDN:P09::WMSP"  smallLabel="WMSP" >WIND SPEED - MAX AVER PER 2 MN</keyword>
+   <keyword SDNIdent="SDN:P09::XCO2"  smallLabel="XCO2" >CO2 MOLE FRACTION IN DRY GAS</keyword>
+   <keyword SDNIdent="SDN:P09::CH1P"  smallLabel="CH1P" >CHL-A(LESS DIVINYLCHL-A)</keyword>
+   <keyword SDNIdent="SDN:P09::NUNM"  smallLabel="NUNM" >NUMBER OF PARTICLES &gt;=480UM</keyword>
+   <keyword SDNIdent="SDN:P09::TR10"  smallLabel="TR10" >RED LIGHT TRANSMISSION 10CM</keyword>
+   <keyword SDNIdent="SDN:P09::CH1T"  smallLabel="CH1T" >CHLOROPHYLL TOTAL</keyword>
+   <keyword SDNIdent="SDN:P09::SLCW"  smallLabel="SLCW" >SILICATE (SIO4-SI) CONTENT</keyword>
+   <keyword SDNIdent="SDN:P09::MMOS"  smallLabel="MMOS" >Mo IN THE SEDIMENT</keyword>
+   <keyword SDNIdent="SDN:P09::NFCW"  smallLabel="NFCW" >NUMBER OF SW NANOFLAGELLATES</keyword>
+   <keyword SDNIdent="SDN:P09::CODW"  smallLabel="CODW" >CHEMICAL OXYGEN DEMAND</keyword>
+   <keyword SDNIdent="SDN:P09::BFUP"  smallLabel="BFUP" >19&apos;BUTANOYLOXYFUCOXANTHINE</keyword>
+   <keyword SDNIdent="SDN:P09::CHAF"  smallLabel="CHAF" >CHLOROPHYLL-A VERTICAL FLUX</keyword>
+   <keyword SDNIdent="SDN:P09::CHAE"  smallLabel="CHAE" >EPIMERE CHLOROPHYLL-A</keyword>
+   <keyword SDNIdent="SDN:P09::CHAD"  smallLabel="CHAD" >DIVINYL CHLOROPHYLL-A</keyword>
+   <keyword SDNIdent="SDN:P09::SNCW"  smallLabel="SNCW" >NUMBER OF SW SYNECHOCOCCUS</keyword>
+   <keyword SDNIdent="SDN:P09::CF1W"  smallLabel="CF1W" >DISSOLVED CFC11</keyword>
+   <keyword SDNIdent="SDN:P09::COCW"  smallLabel="COCW" >NUMBER OF SW COCCOLITHOPHORIDS</keyword>
+   <keyword SDNIdent="SDN:P09::BATH"  smallLabel="BATH" >BATHYMETRIC DEPTH</keyword>
+   <keyword SDNIdent="SDN:P09::MNDS"  smallLabel="MNDS" >Nd IN THE SEDIMENT</keyword>
+   <keyword SDNIdent="SDN:P09::OXIR"  smallLabel="OXIR" >ISOTOPIC RATIO O18/O16</keyword>
+   <keyword SDNIdent="SDN:P09::CLAY"  smallLabel="CLAY" >CLAY IN THE SEDIMENT</keyword>
+   <keyword SDNIdent="SDN:P09::MNTH"  smallLabel="MNTH" >MONTH</keyword>
+   <keyword SDNIdent="SDN:P09::LGHT"  smallLabel="LGHT" >LIGHT IRRADIANCE IMMERGED PAR</keyword>
+   <keyword SDNIdent="SDN:P09::TPAW"  smallLabel="TPAW" >DISS. TRIPHOSPHATE ADENOSINE</keyword>
+   <keyword SDNIdent="SDN:P09::C2UW"  smallLabel="C2UW" >14C PRODUCTION/2 MICRON FILT.</keyword>
+   <keyword SDNIdent="SDN:P09::LATX"  smallLabel="LATX" >LATITUDE</keyword>
+   <keyword SDNIdent="SDN:P09::EWCT"  smallLabel="EWCT" >CURRENT EAST COMPONENT</keyword>
+   <keyword SDNIdent="SDN:P09::EWCS"  smallLabel="EWCS" >CURRENT EAST  STD. DEVIATION</keyword>
+   <keyword SDNIdent="SDN:P09::DOXY"  smallLabel="DOXY" >DISSOLVED OXYGEN</keyword>
+   <keyword SDNIdent="SDN:P09::POCP"  smallLabel="POCP" >PARTICULATE ORGANIC CARBON/POC</keyword>
+   <keyword SDNIdent="SDN:P09::PRCW"  smallLabel="PRCW" >NUMBER OF SW PROCHLOROCOCCUS</keyword>
+   <keyword SDNIdent="SDN:P09::RELH"  smallLabel="RELH" >RELATIVE HUMIDITY</keyword>
+   <keyword SDNIdent="SDN:P09::CHBD"  smallLabel="CHBD" >DIVINYL-CHLOROPHYLL-B</keyword>
+   <keyword SDNIdent="SDN:P09::NTZW"  smallLabel="NTZW" >NITRATE + NITRITE CONTENT</keyword>
+   <keyword SDNIdent="SDN:P09::HCSS"  smallLabel="HCSS" >CURRENT SPEED STD DEV</keyword>
+   <keyword SDNIdent="SDN:P09::HCSP"  smallLabel="HCSP" >HORIZONTAL CURRENT SPEED</keyword>
+   <keyword SDNIdent="SDN:P09::MZNS"  smallLabel="MZNS" >Zn IN THE SEDIMENT</keyword>
+   <keyword SDNIdent="SDN:P09::POCF"  smallLabel="POCF" >PART. ORGANIC CARBON FLUX</keyword>
+   <keyword SDNIdent="SDN:P09::SWDR"  smallLabel="SWDR" >SWELL DIRECTION  REL TRUE N.</keyword>
+   <keyword SDNIdent="SDN:P09::MSMP"  smallLabel="MSMP" >MEAN SPHERIC DIAM. MEDIAN</keyword>
+   <keyword SDNIdent="SDN:P09::CDOM"  smallLabel="CDOM" >COLORED DISS. ORGANIC MATTER</keyword>
+   <keyword SDNIdent="SDN:P09::CHC3"  smallLabel="CHC3" >CHLOROPHYLL-C3</keyword>
+   <keyword SDNIdent="SDN:P09::PETD"  smallLabel="PETD" >POTENTIAL EVAPOTRANSPIRATION</keyword>
+   <keyword SDNIdent="SDN:P09::PRRT"  smallLabel="PRRT" >PRECIPITATION RATE</keyword>
+   <keyword SDNIdent="SDN:P09::MZNF"  smallLabel="MZNF" >ZN FLUX IN SETTLING PARTICLES</keyword>
+   <keyword SDNIdent="SDN:P09::GPMP"  smallLabel="GPMP" >TOTAL SUSP. PART. MATTER/GLASS</keyword>
+   <keyword SDNIdent="SDN:P09::PHEA"  smallLabel="PHEA" >PHEOPHYTIN-A</keyword>
+   <keyword SDNIdent="SDN:P09::VAVT"  smallLabel="VAVT" >AVER. PERIOD HIGHEST 1/3 WAVE</keyword>
+   <keyword SDNIdent="SDN:P09::PHEB"  smallLabel="PHEB" >PHEOPHYTIN-B</keyword>
+   <keyword SDNIdent="SDN:P09::TUR2"  smallLabel="TUR2" >LIGHT ATTENUATION COEFFICIENT</keyword>
+   <keyword SDNIdent="SDN:P09::PTZF"  smallLabel="PTZF" >PROTOZOA PPC FLUX</keyword>
+   <keyword SDNIdent="SDN:P09::PRRD"  smallLabel="PRRD" >PRECIPITATION RATE</keyword>
+   <keyword SDNIdent="SDN:P09::PHEC"  smallLabel="PHEC" >PHEOPHYTIN-C</keyword>
+   <keyword SDNIdent="SDN:P09::CO3F"  smallLabel="CO3F" >PART. CaCO3 FLUX</keyword>
+   <keyword SDNIdent="SDN:P09::TUR3"  smallLabel="TUR3" >LIGHT TRANSMISSION</keyword>
+   <keyword SDNIdent="SDN:P09::TUR4"  smallLabel="TUR4" >TURBIDITY</keyword>
+   <keyword SDNIdent="SDN:P09::TUR5"  smallLabel="TUR5" >TURBIDITY</keyword>
+   <keyword SDNIdent="SDN:P09::DIPF"  smallLabel="DIPF" >DIATOMS PPC FLUX</keyword>
+   <keyword SDNIdent="SDN:P09::MFES"  smallLabel="MFES" >Fe IN THE SEDIMENT</keyword>
+   <keyword SDNIdent="SDN:P09::TUR6"  smallLabel="TUR6" >TURBIDITY</keyword>
+   <keyword SDNIdent="SDN:P09::MFEP"  smallLabel="MFEP" >Fe IN SUSPENDED MATTER</keyword>
+   <keyword SDNIdent="SDN:P09::SLEV"  smallLabel="SLEV" >OBSERVED SEA LEVEL</keyword>
+   <keyword SDNIdent="SDN:P09::CO2W"  smallLabel="CO2W" >DISSOLVED CARBON DIOXYD (CO2)</keyword>
+   <keyword SDNIdent="SDN:P09::PCEW"  smallLabel="PCEW" >NUMBER OF SW PICOEUCARYOTES</keyword>
+   <keyword SDNIdent="SDN:P09::TR25"  smallLabel="TR25" >RED LIGHT TRANSMISSION 25CM</keyword>
+   <keyword SDNIdent="SDN:P09::PHE2"  smallLabel="PHE2" >PHEOPHYTINE / 2 MICRON FILTER</keyword>
+   <keyword SDNIdent="SDN:P09::NODW"  smallLabel="NODW" >DISSOLVED ORGANIC NITROGEN</keyword>
+   <keyword SDNIdent="SDN:P09::PHE4"  smallLabel="PHE4" >PHEOPHYTINE / 10 MICRON FILTER</keyword>
+   <keyword SDNIdent="SDN:P09::MNBS"  smallLabel="MNBS" >Nb IN THE SEDIMENT</keyword>
+   <keyword SDNIdent="SDN:P09::CICW"  smallLabel="CICW" >NUMBER OF SW CILIATES</keyword>
+   <keyword SDNIdent="SDN:P09::DEPH"  smallLabel="DEPH" >DEPTH BELOW SEA SURFACE</keyword>
+   <keyword SDNIdent="SDN:P09::PODW"  smallLabel="PODW" >DISSOLVED ORGANIC PHOSPHORUS</keyword>
+   <keyword SDNIdent="SDN:P09::PN1P"  smallLabel="PN1P" >PARTICULATE ORGANIC NITROGEN</keyword>
+   <keyword SDNIdent="SDN:P09::TPCW"  smallLabel="TPCW" >TOTAL PARTICULATE CARBON</keyword>
+   <keyword SDNIdent="SDN:P09::NUMN"  smallLabel="NUMN" >NUMBER OF PARTICLES &gt;0.7UM</keyword>
+   <keyword SDNIdent="SDN:P09::NUMP"  smallLabel="NUMP" >NUMBER OF PARTICLES 3-80UM</keyword>
+   <keyword SDNIdent="SDN:P09::MRBS"  smallLabel="MRBS" >Rb IN THE SEDIMENT</keyword>
+   <keyword SDNIdent="SDN:P09::ALKY"  smallLabel="ALKY" >ALKALINITY</keyword>
+   <keyword SDNIdent="SDN:P09::DENS"  smallLabel="DENS" >DENSITY (Sigma-theta)</keyword>
+   <keyword SDNIdent="SDN:P09::ALKW"  smallLabel="ALKW" >ALKALINITY</keyword>
+   <keyword SDNIdent="SDN:P09::DOX1"  smallLabel="DOX1" >DISSOLVED OXYGEN</keyword>
+   <keyword SDNIdent="SDN:P09::MNAS"  smallLabel="MNAS" >Na IN THE SEDIMENT</keyword>
+   <keyword SDNIdent="SDN:P09::DOX2"  smallLabel="DOX2" >DISSOLVED OXYGEN</keyword>
+   <keyword SDNIdent="SDN:P09::LGH5"  smallLabel="LGH5" >IMMERGED/SURF IRRADIANCE RATIO</keyword>
+   <keyword SDNIdent="SDN:P09::CO3S"  smallLabel="CO3S" >SEDIMENT CARBONATES</keyword>
+   <keyword SDNIdent="SDN:P09::DINW"  smallLabel="DINW" >NUMBER OF SW DYNOPHYSIS</keyword>
+   <keyword SDNIdent="SDN:P09::SLVR"  smallLabel="SLVR" >RESIDUAL (OBS-PRED SEA LEVEL)</keyword>
+   <keyword SDNIdent="SDN:P09::CORG"  smallLabel="CORG" >DISSOLVED ORGANIC CARBON</keyword>
+   <keyword SDNIdent="SDN:P09::FLPF"  smallLabel="FLPF" >FLAGELLATES PPC FLUX</keyword>
+   <keyword SDNIdent="SDN:P09::H2OS"  smallLabel="H2OS" >WATER CONTENT</keyword>
+   <keyword SDNIdent="SDN:P09::VAVH"  smallLabel="VAVH" >AVER. HEIGHT HIGHEST 1/3 WAVE</keyword>
+   <keyword SDNIdent="SDN:P09::CO3P"  smallLabel="CO3P" >CARBONATES CONTENT</keyword>
+   <keyword SDNIdent="SDN:P09::MFEF"  smallLabel="MFEF" >FE FLUX IN SETTLING PARTICLES</keyword>
+   <keyword SDNIdent="SDN:P09::SACC"  smallLabel="SACC" >SALINITY ACCURACY</keyword>
+   <keyword SDNIdent="SDN:P09::LSCT"  smallLabel="LSCT" >LIGHT SCATTERING</keyword>
+   <keyword SDNIdent="SDN:P09::HFUP"  smallLabel="HFUP" >19&apos;HEXANOYLOXYFUCOXANTHINE</keyword>
+   <keyword SDNIdent="SDN:P09::LGH2"  smallLabel="LGH2" >PAR ATTENUATION COEFFICIENT</keyword>
+   <keyword SDNIdent="SDN:P09::LGH4"  smallLabel="LGH4" >LIGHT IRRADIANCE SURFACE PAR</keyword>
+   <keyword SDNIdent="SDN:P09::LGH3"  smallLabel="LGH3" >LIGHT IRRADIANCE CORRECTED PAR</keyword>
+   <keyword SDNIdent="SDN:P09::CHTS"  smallLabel="CHTS" >SEDIMENT CARBOHYDRATES</keyword>
+   <keyword SDNIdent="SDN:P09::MPPP"  smallLabel="MPPP" >P IN SUSPENDED MATTER</keyword>
+   <keyword SDNIdent="SDN:P09::FLU3"  smallLabel="FLU3" >FLUORESCENCE</keyword>
+   <keyword SDNIdent="SDN:P09::HEDW"  smallLabel="HEDW" >HELIUM DEV. OF ISOTOPIC RATIO</keyword>
+   <keyword SDNIdent="SDN:P09::MPPS"  smallLabel="MPPS" >P IN THE SEDIMENT</keyword>
+   <keyword SDNIdent="SDN:P09::C13D"  smallLabel="C13D" >DELTA 13C (13C/12C)</keyword>
+   <keyword SDNIdent="SDN:P09::FLU1"  smallLabel="FLU1" >FLUORESCENCE</keyword>
+   <keyword SDNIdent="SDN:P09::VERT"  smallLabel="VERT" >VERTICAL DISPLACEMENT</keyword>
+   <keyword SDNIdent="SDN:P09::FLU2"  smallLabel="FLU2" >FLUORESCENCE</keyword>
+   <keyword SDNIdent="SDN:P09::C1UW"  smallLabel="C1UW" >14C UPTAKE 0.2-1 MICRON</keyword>
+   <keyword SDNIdent="SDN:P09::YEAR"  smallLabel="YEAR" >YEAR</keyword>
+   <keyword SDNIdent="SDN:P09::DOCP"  smallLabel="DOCP" >DOC IN SEDIMENT PORE WATER</keyword>
+   <keyword SDNIdent="SDN:P09::PHTP"  smallLabel="PHTP" >TOTAL PHEOPHYTINE</keyword>
+   <keyword SDNIdent="SDN:P09::LIPS"  smallLabel="LIPS" >SEDIMENT LIPIDS</keyword>
+   <keyword SDNIdent="SDN:P09::TREW"  smallLabel="TREW" >DISSOLVED TRITIUM ERROR</keyword>
+   <keyword SDNIdent="SDN:P09::WSTN"  smallLabel="WSTN" >WIND STRESS NORTH COMPONENT</keyword>
+   <keyword SDNIdent="SDN:P09::SECC"  smallLabel="SECC" >SECCHI DISK DEPTH</keyword>
+   <keyword SDNIdent="SDN:P09::TE02"  smallLabel="TE02" >SEA TEMPERATURE</keyword>
+   <keyword SDNIdent="SDN:P09::TE01"  smallLabel="TE01" >SEA TEMPERATURE</keyword>
+   <keyword SDNIdent="SDN:P09::TE04"  smallLabel="TE04" >SEA TEMPERATURE</keyword>
+   <keyword SDNIdent="SDN:P09::PHTF"  smallLabel="PHTF" >PHAEOPIGMENTS VERTICAL FLUX</keyword>
+   <keyword SDNIdent="SDN:P09::TE03"  smallLabel="TE03" >SEA TEMPERATURE</keyword>
+   <keyword SDNIdent="SDN:P09::CL4W"  smallLabel="CL4W" >DISSOLVED C-TETRACHLORIDE</keyword>
+   <keyword SDNIdent="SDN:P09::VTZA"  smallLabel="VTZA" >AVER ZERO CROSSING WAVE PERIOD</keyword>
+   <keyword SDNIdent="SDN:P09::WSTE"  smallLabel="WSTE" >WIND STRESS EAST COMPONENT</keyword>
+   <keyword SDNIdent="SDN:P09::TE06"  smallLabel="TE06" >SEA TEMPERATURE</keyword>
+   <keyword SDNIdent="SDN:P09::SWPR"  smallLabel="SWPR" >SWELL PERIOD</keyword>
+   <keyword SDNIdent="SDN:P09::TE05"  smallLabel="TE05" >SEA TEMPERATURE</keyword>
+   <keyword SDNIdent="SDN:P09::TE08"  smallLabel="TE08" >SEA TEMPERATURE</keyword>
+   <keyword SDNIdent="SDN:P09::TE07"  smallLabel="TE07" >SEA TEMPERATURE</keyword>
+   <keyword SDNIdent="SDN:P09::MKKS"  smallLabel="MKKS" >K IN THE SEDIMENT</keyword>
+   <keyword SDNIdent="SDN:P09::NOUW"  smallLabel="NOUW" >NITRATE UPTAKE</keyword>
+   <keyword SDNIdent="SDN:P09::VERR"  smallLabel="VERR" >VELOCITY ERROR</keyword>
+   <keyword SDNIdent="SDN:P09::TE09"  smallLabel="TE09" >SEA TEMPERATURE</keyword>
+   <keyword SDNIdent="SDN:P09::MKKP"  smallLabel="MKKP" >K IN SUSPENDED MATTER</keyword>
+   <keyword SDNIdent="SDN:P09::PROT"  smallLabel="PROT" >PROTEIN</keyword>
+   <keyword SDNIdent="SDN:P09::ZNTH"  smallLabel="ZNTH" >TILT OF MEASUREMENT PLATFORM</keyword>
+   <keyword SDNIdent="SDN:P09::MSIS"  smallLabel="MSIS" >Si IN THE SEDIMENT</keyword>
+   <keyword SDNIdent="SDN:P09::FLUO"  smallLabel="FLUO" >FLUORESCENCE</keyword>
+   <keyword SDNIdent="SDN:P09::OSAT"  smallLabel="OSAT" >OXYGEN SATURATION</keyword>
+   <keyword SDNIdent="SDN:P09::AMIS"  smallLabel="AMIS" >SEDIMENT AMINO-ACIDS</keyword>
+   <keyword SDNIdent="SDN:P09::DICP"  smallLabel="DICP" >DIC IN SEDIMENT PORE WATER</keyword>
+   <keyword SDNIdent="SDN:P09::DTCW"  smallLabel="DTCW" >NUMBER OF SW DIATOMS</keyword>
+   <keyword SDNIdent="SDN:P09::MCLP"  smallLabel="MCLP" >Cl IN SUSPENDED MATTER</keyword>
+   <keyword SDNIdent="SDN:P09::ISMP"  smallLabel="ISMP" >INORGANIC SUSPENDED MATTER</keyword>
+   <keyword SDNIdent="SDN:P09::MTIS"  smallLabel="MTIS" >Ti IN THE SEDIMENT</keyword>
+   <keyword SDNIdent="SDN:P09::LSIC"  smallLabel="LSIC" >LITHOGENIC CONTENT</keyword>
+   <keyword SDNIdent="SDN:P09::CHTF"  smallLabel="CHTF" >PART. TOTAL CARBOHYDRATES FLUX</keyword>
+   <keyword SDNIdent="SDN:P09::FCO2"  smallLabel="FCO2" >CO2 FUGACITY</keyword>
+   <keyword SDNIdent="SDN:P09::MTIP"  smallLabel="MTIP" >Ti IN SUSPENDED MATTER</keyword>
+   <keyword SDNIdent="SDN:P09::COPP"  smallLabel="COPP" >NUMBER OF COPEPODS</keyword>
+   <keyword SDNIdent="SDN:P09::MSZW"  smallLabel="MSZW" >MESOZOOPLANCTON DRY WEIGHT</keyword>
+   <keyword SDNIdent="SDN:P09::PHCW"  smallLabel="PHCW" >PHYTOPLANKTON ABUNDANCE</keyword>
+   <keyword SDNIdent="SDN:P09::DRDD"  smallLabel="DRDD" >DURATION (DAYS)</keyword>
+   <keyword SDNIdent="SDN:P09::MZRS"  smallLabel="MZRS" >Zr IN THE SEDIMENT</keyword>
+   <keyword SDNIdent="SDN:P09::VHM0"  smallLabel="VHM0" >SPECTRAL SIGNIFICANT WAVE HEIGHT HM0</keyword>
+   <keyword SDNIdent="SDN:P09::MSIP"  smallLabel="MSIP" >Si IN SUSPENDED MATTER</keyword>
+   <keyword SDNIdent="SDN:P09::COPF"  smallLabel="COPF" >COCCOLITHOPHORIDAE PPC FLUX</keyword>
+   <keyword SDNIdent="SDN:P09::EPMP"  smallLabel="EPMP" >TOTAL SUSP. PART. MATTER/ESTER</keyword>
+   <keyword SDNIdent="SDN:P09::HEEW"  smallLabel="HEEW" >DISSOLVED HELIUM ERROR</keyword>
+   <keyword SDNIdent="SDN:P09::VIAW"  smallLabel="VIAW" >VIRUS ABUNDANCE IN SEA WATER</keyword>
+   <keyword SDNIdent="SDN:P09::REDS"  smallLabel="REDS" >REDOX POTENTIAL</keyword>
+   <keyword SDNIdent="SDN:P09::NEEW"  smallLabel="NEEW" >DISSOLVED NEON ERROR</keyword>
+   <keyword SDNIdent="SDN:P09::NIUW"  smallLabel="NIUW" >NITROGEN UPTAKE (FIXATION)</keyword>
+   <keyword SDNIdent="SDN:P09::IC13"  smallLabel="IC13" >DIC DELTA-13C</keyword>
+   <keyword SDNIdent="SDN:P09::TSMP"  smallLabel="TSMP" >TOTAL SUSPENDED MATTER</keyword>
+   <keyword SDNIdent="SDN:P09::TDPW"  smallLabel="TDPW" >TOTAL DISSOLVED PHOSPHORUS</keyword>
+   <keyword SDNIdent="SDN:P09::BCCS"  smallLabel="BCCS" >NUMBER OF BACTERIA IN SEDIMENT</keyword>
+   <keyword SDNIdent="SDN:P09::PTNP"  smallLabel="PTNP" >TOTAL PARTICULATE NITROGEN</keyword>
+   <keyword SDNIdent="SDN:P09::BCCW"  smallLabel="BCCW" >NUMBER OF SW BACTERIA</keyword>
+   <keyword SDNIdent="SDN:P09::CHCZ"  smallLabel="CHCZ" >CHLOROPHYLL-C1+C2</keyword>
+   <keyword SDNIdent="SDN:P09::MMNF"  smallLabel="MMNF" >MN FLUX IN SETTLING PARTICLES</keyword>
+   <keyword SDNIdent="SDN:P09::TOMP"  smallLabel="TOMP" >ORGANIC MATTER CONTENT</keyword>
+   <keyword SDNIdent="SDN:P09::NTIP"  smallLabel="NTIP" >NITRITE IN SEDIMENT PORE WATER</keyword>
+   <keyword SDNIdent="SDN:P09::MMNP"  smallLabel="MMNP" >Mn IN SUSPENDED MATTER</keyword>
+   <keyword SDNIdent="SDN:P09::DFCW"  smallLabel="DFCW" >NUMBER OF SW DINOFLAGELLATES</keyword>
+   <keyword SDNIdent="SDN:P09::UREA"  smallLabel="UREA" >UREA</keyword>
+   <keyword SDNIdent="SDN:P09::MMNS"  smallLabel="MMNS" >Mn IN THE SEDIMENT</keyword>
+   <keyword SDNIdent="SDN:P09::NFHW"  smallLabel="NFHW" >HETEROTROPHIC NANOFLAGELLATES</keyword>
+   <keyword SDNIdent="SDN:P09::HEDE"  smallLabel="HEDE" >HELIUM ISOTOPIC RATIO ERROR</keyword>
+   <keyword SDNIdent="SDN:P09::TSMF"  smallLabel="TSMF" >TOTAL MASS FLUX</keyword>
+   <keyword SDNIdent="SDN:P09::TB25"  smallLabel="TR25" >BLUE LIGHT TRANSMISSION 25CM</keyword>
+   <keyword SDNIdent="SDN:P09::CH2P"  smallLabel="CH2P" >CHL-B(LESS DIVINYLCHL-B)</keyword>
+   <keyword SDNIdent="SDN:P09::PT1P"  smallLabel="PT1P" >TOTAL PARTICULATE PHOSPHORUS</keyword>
+   <keyword SDNIdent="SDN:P09::C4UW"  smallLabel="C4UW" >14C PRODUCTION/10 MICRON FILT.</keyword>
+   <keyword SDNIdent="SDN:P09::TICW"  smallLabel="TICW" >TOTAL INORGANIC CARBON</keyword>
+   <keyword SDNIdent="SDN:P09::TE12"  smallLabel="TE12" >SEA TEMPERATURE</keyword>
+   <keyword SDNIdent="SDN:P09::TE11"  smallLabel="TE11" >SEA TEMPERATURE</keyword>
+   <keyword SDNIdent="SDN:P09::TE10"  smallLabel="TE10" >SEA TEMPERATURE</keyword>
+   <keyword SDNIdent="SDN:P09::PSAL"  smallLabel="PSAL" >PRACTICAL SALINITY</keyword>
+   <keyword SDNIdent="SDN:P09::NTIW"  smallLabel="NTIW" >NITRITE (NO2-N) CONTENT</keyword>
+   <keyword SDNIdent="SDN:P09::VMXL"  smallLabel="VMXL" >MAXIMUM WAVE LEVEL</keyword>
+   <keyword SDNIdent="SDN:P09::LIPI"  smallLabel="LIPI" >LIPIDS IN THE WATER COLUMN</keyword>
+   <keyword SDNIdent="SDN:P09::SLCA"  smallLabel="SLCA" >SILICATE (SIO4-SI) CONTENT</keyword>
+</vocabulary>

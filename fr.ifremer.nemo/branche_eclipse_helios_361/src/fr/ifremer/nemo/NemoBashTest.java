@@ -1,0 +1,899 @@
+/*
+ * ============================================================================
+ * Nom du fichier : NemoShellTest.java
+ * Auteur : sbregent
+ * Date : 4 févr. 11
+ * Copyright : Altran
+ * ============================================================================
+ */
+package fr.ifremer.nemo;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+import org.apache.log4j.xml.DOMConfigurator;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+import fr.ifremer.nemo.config.Configuration;
+import fr.ifremer.nemo.config.Proxy;
+import fr.ifremer.nemo.util.Conversion;
+import fr.ifremer.nemo.util.Global;
+import fr.ifremer.nemo.util.Global.DataListTypeEnum;
+import fr.ifremer.nemo.util.Global.E_TypeConversion;
+import fr.ifremer.nemo.util.Intern;
+
+/**
+ * Description: classe de tests - generation auto en appelant le mode batch -
+ * comparaison avec des fichiers de référence Structure des repertoires:
+ * dataRootPath/xxxx/versionDirName/dataList/conversion/tyyy où - xxx est un nom
+ * representant le type de données (ex: diapalis,...) - choix libre - yyy est un
+ * nom quelconque, nb de char quelconque pour xxx: si le repertoire commence par
+ * "_", il est ignoré pour tyyy: si ce répertoire commence par "t", il est
+ * considéré comme un test. S'il commence par "_", il est considéré comme un
+ * test désactivé. S'il commence par un autre caractère, il est ignoré. Pour ne
+ * lancer les tests que sur un répertoire, utiliser testDirAlone ex: public
+ * static String[] testDirAlone={"cruiseFile_trajectory_6959"}; ne lancera les
+ * tests que sur cruiseFile_trajectory_6959 utiliser - time ODV = ISO Le EDMO
+ * code est forcé automatiquement à 486 (code IFREMER utilisé dans les fichiers
+ * reference)
+ * 
+ * @author sbregent
+ */
+public class NemoBashTest
+{
+    // racine du repertoire contenant les tests
+    // public static String dataRootPath = "C:\\Documents" + Global.SPACE +
+    // "and" + Global.SPACE + "Settings" + File.separator + "sbregent" +
+    // File.separator + "Mes" + Global.SPACE + "documents" + File.separator +
+    // "SOPHIE\\NEMO\\NEMO\\workspaceEclipse361\\ifremer_datatest";
+
+    public static String dataRootPath = "";
+    // générer les fichiers en batch et les comparer aux fichiers REFERENCE
+    public static boolean testBatchs = true;
+    // comparer les fichiers manuels (output_eclipse) aux fichiers REFERENCE
+    public static boolean compareManualFiles = false;
+
+    public static String[] testDirAlone = {};
+
+    public String inputName = "input";
+    public String outputName = "output_junit";
+    public static String outputManualName = "output_junit_batch";
+    public String modelName = "model.xml";
+    public String outputReferenceName = "output_REFERENCE";
+    private static String batchCommands;
+
+    public NemoShell shell = new NemoShell();
+
+    public boolean sortDatas = false;
+
+    public String datasetRef = Global.EMPTY_STRING;
+    public String cdiSummaryFile = Global.EMPTY_STRING;
+    public boolean couplingTableUpdate = false;
+    public String couplingTablePrefix = Global.EMPTY_STRING;
+    public static Logger batchLogger;
+    public static Logger testLogger;
+
+    public static int nbTotalTests = 0;
+    public static int nbTotalFailed = 0;
+    public static int nbTotalSuccess = 0;
+
+    public static boolean isVocabV2Param = true;
+    public static boolean isVocabV2 = true;
+
+    public Message message;
+
+    /**
+     * @throws java.lang.Exception
+     */
+    @BeforeClass
+    public static void setUpBeforeClass() throws Exception
+    {
+        DOMConfigurator.configure("resources/log4jBatch.xml"); //$NON-NLS-1$
+        batchLogger = Logger.getLogger("nemoBatch");//$NON-NLS-1$
+        batchLogger.setLevel(Level.DEBUG);
+        // LOGGER
+        DOMConfigurator.configure("resources/log4jBatch.xml"); //$NON-NLS-1$
+        testLogger = Logger.getLogger("nemoJunits");//$NON-NLS-1$
+        testLogger.setLevel(Level.DEBUG);
+        nbTotalTests = 0;
+        nbTotalFailed = 0;
+        nbTotalSuccess = 0;
+        Date actuelle = new Date();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        String dat = dateFormat.format(actuelle);
+        setDataRootPath();
+
+        testLogger
+            .info("\r\n\r\n\r\n\r\n===================================== "
+                    + dat + " =========================\r\n\r\n\r\n\r\n");
+        testLogger.info("test batchs : " + testBatchs);
+        testLogger.info("comp manual files : " + compareManualFiles + "("
+                + outputManualName + ")");
+
+    }
+
+    public static void setDataRootPath()
+    {
+        String pwdPath = System.getProperty("user.dir");
+        // hudson: C:\Portail\data\jobs\Nemo\workspace\Nemo_product
+        System.out.println("pwdPath = " + pwdPath + "--------------");
+
+        int index = pwdPath.indexOf("NEMO_product");
+        int index2 = pwdPath.indexOf("Nemo_product");
+
+        if (index != -1)
+        {
+            String path = pwdPath.substring(0, index);
+            dataRootPath = path + "ifremer_datatest";
+        }
+        else if (index2 != -1)
+        {
+            String path = pwdPath.substring(0, index2);
+            dataRootPath = path + "ifremer_datatest";
+        }
+        else
+        {
+            dataRootPath = pwdPath + File.separator + "ifremer_datatest";
+        }
+        System.out.println("dataRootPath = " + dataRootPath + "--------------");
+    }
+
+    /**
+     * @throws java.lang.Exception
+     */
+    @AfterClass
+    public static void tearDownAfterClass() throws Exception
+    {
+        testLogger
+            .info("\r\n\r\n\r\n\r\n___________________________isVocabV2_____________________________\r\n\r\n\r\n\r\n");
+        if (isVocabV2Param == true)
+        {
+            Assert.assertTrue(isVocabV2);
+            testLogger.info("is vocab v2");
+        }
+        else
+        {
+            Assert.assertFalse(isVocabV2);
+            testLogger.info("is vocab v1");
+        }
+
+        testLogger
+            .info("\r\n\r\n"
+                    + "TOTAL ====================================================================================="
+                    + "\r\n" + nbTotalSuccess + " tests succeed on "
+                    + nbTotalTests + "\r\n" + nbTotalFailed + " tests failed");
+
+        testLogger.info("batchCommands" + Global.RN);
+        testLogger.info(batchCommands);
+    }
+
+    /**
+     * @throws java.lang.Exception
+     */
+    @Before
+    public void setUp() throws Exception
+    {
+
+        sortDatas = false;
+        datasetRef = Global.EMPTY_STRING;
+        cdiSummaryFile = Global.EMPTY_STRING;
+        couplingTableUpdate = false;
+        couplingTablePrefix = Global.EMPTY_STRING;
+    }
+
+    /**
+     * @throws java.lang.Exception
+     */
+    @After
+    public void tearDown() throws Exception
+    {
+
+    }
+
+    /**
+     * =================================================================
+     * MEDATLAS
+     * =================================================================
+     */
+    @Test
+    public final void test_P091_Medatlas()
+    {
+        testLogger
+            .info("\r\n\r\n\r\n\r\n___________________________test_P091_Medatlas_____________________________\r\n\r\n\r\n\r\n");
+        boolean res =
+            testOneType_ListConv(DataListTypeEnum.P091, Conversion.MEDATLAS,
+                E_TypeConversion.MEDATLAS);
+        Assert.assertTrue(res);
+    }
+
+    @Test
+    public final void test_P011viaP091_Medatlas()
+    {
+        testLogger
+            .info("\r\n\r\n\r\n\r\n___________________________test_P011viaP091_Medatlas_____________________________\r\n\r\n\r\n\r\n");
+        Assert.assertTrue(testOneType_ListConv(DataListTypeEnum.P011_VIA_P091,
+            Conversion.MEDATLAS, E_TypeConversion.MEDATLAS));
+    }
+
+    /**
+     * ================================================================= ODV
+     * =================================================================
+     */
+    @Test
+    public final void test_P091_ODVMULTI()
+    {
+        testLogger
+            .info("\r\n\r\n\r\n\r\n____________________________test_P091_ODVMULTI____________________________\r\n\r\n\r\n\r\n");
+        Assert.assertTrue(testOneType_ListConv(DataListTypeEnum.P091,
+            Conversion.ODV, E_TypeConversion.ODV_MULTISTATIONS));
+    }
+
+    @Test
+    public final void test_P011viaP091_ODVMULTI()
+    {
+        testLogger
+            .info("\r\n\r\n\r\n\r\n____________________________test_P011viaP091_ODVMULTI____________________________\r\n\r\n\r\n\r\n");
+        Assert.assertTrue(testOneType_ListConv(DataListTypeEnum.P011_VIA_P091,
+            Conversion.ODV, E_TypeConversion.ODV_MULTISTATIONS));
+    }
+
+    @Test
+    public final void test_P011viaP021_ODVMULTI()
+    {
+        testLogger
+            .info("\r\n\r\n\r\n\r\n__________________________test_P011viaP021_ODVMULTI_____________________________\r\n\r\n\r\n\r\n");
+        Assert.assertTrue(testOneType_ListConv(DataListTypeEnum.P011_VIA_P021,
+            Conversion.ODV, E_TypeConversion.ODV_MULTISTATIONS));
+    }
+
+    /**
+     * =================================================================
+     * invalidated model
+     * =================================================================
+     */
+    @Test
+    public final void inValidated_model()
+    {
+        testLogger
+            .info("\r\n\r\n\r\n\r\n_______________________________unValidated_model________________________________\r\n\r\n\r\n\r\n");
+        message = new Message();
+        message.testName = "invalidated model in batch mod";
+        File root = new File(dataRootPath);
+        String inputAbsolutePath =
+            root.getAbsolutePath()
+                    + "\\_9656_collectionGroupByCruise_withSeparator_unvalidated_model\\"
+                    + inputName;
+        String outputAbsolutePath =
+            root.getAbsolutePath()
+                    + "\\_9656_collectionGroupByCruise_withSeparator_unvalidated_model\\P091\\ODV_MULTISTATIONS\\";
+        Assert.assertFalse(convertWithNemoBatch(Conversion.ODV,
+            E_TypeConversion.ODV_MULTISTATIONS, inputAbsolutePath,
+            outputAbsolutePath));
+    }
+
+    /**
+     * =================================================================
+     * emptyProxy
+     * =================================================================
+     */
+    @Test
+    public final void checkEmptyProxyTest()
+    {
+        testLogger
+            .info("\r\n\r\n\r\n\r\n_______________________________emptyProxyTest________________________________\r\n\r\n\r\n\r\n");
+        message = new Message();
+        message.testName = "empty Proxy test";
+
+        Configuration config = new Configuration();
+        Assert.assertTrue(checkEmptyProxy(config));
+    }
+
+    @Test
+    public final void checkEmptyProxyTestInit()
+    {
+        testLogger
+            .info("\r\n\r\n\r\n\r\n_______________________________emptyProxyTest________________________________\r\n\r\n\r\n\r\n");
+        message = new Message();
+        message.testName = "empty Proxy test";
+
+        Configuration config = new Configuration(true);
+        Assert.assertTrue(checkEmptyProxy(config));
+    }
+
+    @Test
+    public final void checkDefaultLanguageTest()
+    {
+        testLogger
+            .info("\r\n\r\n\r\n\r\n_______________________________emptyProxyTest________________________________\r\n\r\n\r\n\r\n");
+        message = new Message();
+        message.testName = "empty Proxy test";
+        Configuration config = new Configuration();
+        String lang = config.getLang();
+        Assert.assertTrue(lang.equals("en_GB"));
+    }
+
+    @Test
+    public final void checkDefaultLanguageInitTest()
+    {
+        testLogger
+            .info("\r\n\r\n\r\n\r\n_______________________________emptyProxyTest________________________________\r\n\r\n\r\n\r\n");
+        message = new Message();
+        message.testName = "empty Proxy test";
+        Configuration config = new Configuration(true);
+        String lang = config.getLang();
+        Assert.assertTrue(lang.equals("en_GB"));
+    }
+
+    /**
+     * =================================================================
+     * userParemetersLabels Empty
+     * =================================================================
+     */
+    @Test
+    public final void userParemetersLabelsEmpty()
+    {
+        boolean res = false;
+        testLogger
+            .info("\r\n\r\n\r\n\r\n__________________________userParemetersLabelsEmpty___________________________\r\n\r\n\r\n\r\n");
+        message = new Message();
+        message.testName = " Empty userParemetersLabels";
+        org.w3c.dom.Document document;
+        String userParametersLabels =
+            Intern.dir_resources + File.separator + "userParametersLabels"
+                    + Global.EXT_XML;
+        // création d'une fabrique de documents
+        DocumentBuilderFactory fabrique = DocumentBuilderFactory.newInstance();
+        // création d'un constructeur de documents
+        DocumentBuilder constructeur;
+        try
+        {
+            constructeur = fabrique.newDocumentBuilder();
+            document = constructeur.parse(userParametersLabels);
+            res = document.getFirstChild().getTextContent().trim().isEmpty();
+
+        }
+        catch (Exception e)
+        {
+            res = false;
+        }
+
+        Assert.assertTrue(res);
+    }
+
+    /**
+     * =================================================================
+     * methodes
+     * =================================================================
+     */
+    public boolean testOneType_ListConv(DataListTypeEnum dataList,
+            Conversion conversion, E_TypeConversion odvConv)
+    {
+
+        boolean ok = true;
+        boolean res;
+        boolean comp = false;
+        int cptTests = 0;
+        int cptFail = 0;
+        boolean testFound;
+        System.out.println("dataRootPath" + dataRootPath + "--------");
+        File root = new File(dataRootPath);
+        for (File testDir : root.listFiles())
+        {
+            if (isToTest(testDir.getName()))
+            {
+                System.out.println("testDir: " + testDir.toString());
+                message = new Message();
+                message.dirName = testDir.getName();
+                testFound = false;
+                for (File paramListDir : testDir.listFiles())
+                {
+                    if (paramListDir.getName().equals(dataList.toString()))
+                    {
+
+                        for (File convDir : paramListDir.listFiles())
+                        {
+                            if (convDir.getName().equals(odvConv.toString()))
+                            {
+                                for (File unitTest : convDir.listFiles())
+                                {
+                                    ok = true;
+                                    message = new Message();
+                                    message.dirName = testDir.getName();
+                                    if (unitTest.getName().startsWith("t"))
+                                    {
+                                        res = false;
+                                        comp = false;
+                                        message.testName =
+                                            paramListDir.getName() + " "
+                                                    + convDir.getName() + " "
+                                                    + unitTest.getName();
+                                        String inputAbsolutePath =
+                                            testDir.getAbsolutePath() + "\\"
+                                                    + inputName;
+                                        String outputAbsolutePath =
+                                            unitTest.getAbsolutePath();
+                                        cptTests++;
+                                        nbTotalTests++;
+                                        testFound = true;
+                                        message.isTestFound = true;
+                                        if (testBatchs)
+                                        {
+                                            message.isReferenceFound =
+                                                fileExist(outputAbsolutePath,
+                                                    outputReferenceName);
+                                            res =
+                                                convertWithNemoBatch(
+                                                    conversion, odvConv,
+                                                    inputAbsolutePath,
+                                                    outputAbsolutePath);
+                                            ok = res && ok;
+                                            if (res)
+                                            {
+
+                                                comp =
+                                                    compareWithReference(
+                                                        outputAbsolutePath,
+                                                        outputName);
+                                                message.batchCompRes = comp;
+                                                ok = comp && ok;
+                                            }
+                                            if (ok)
+                                            {
+                                                nbTotalSuccess++;
+                                            }
+                                            if (!ok)
+                                            {
+                                                cptFail++;
+                                                nbTotalFailed++;
+                                            }
+
+                                        }
+
+                                        if (compareManualFiles)
+                                        {
+                                            message.isManualFound =
+                                                fileExist(outputAbsolutePath,
+                                                    outputManualName);
+                                            if (message.isManualFound)
+                                            {
+                                                comp =
+                                                    compareWithReference(
+                                                        outputAbsolutePath,
+                                                        outputManualName);
+                                                message.manualCompRes = comp;
+                                                message.manualCompName =
+                                                    outputManualName;
+                                                ok = comp && ok;
+                                            }
+                                        }
+
+                                    }
+                                    else if (unitTest.getName()
+                                        .startsWith("_t"))
+                                    {
+                                        message.testName =
+                                            paramListDir.getName() + " "
+                                                    + convDir.getName() + " "
+                                                    + unitTest.getName();
+                                        message.isActivated = false;
+                                    }
+                                    if (!testFound)
+                                    {
+                                        message.isTestFound = false;
+                                    }
+                                    else
+                                    {
+
+                                        message.print();
+                                    }
+                                }
+
+                            }
+                        }
+
+                    }
+
+                }
+                if (!testFound)
+                {
+                    message.print();
+                }
+
+            }
+        }
+        testLogger.info("\r\n========================================="
+                + cptFail + " failed /" + cptTests + " tested"
+                + "=========================================" + "\r\n");
+
+        return cptFail == 0;
+    }
+
+    public boolean isToTest(String dirName)
+    {
+        boolean res = true;
+        if (dirName.startsWith("_") || dirName.startsWith("."))
+        {
+            res = false;
+        }
+        else if (testDirAlone.length > 0)
+        {
+            res = false;
+            for (String oneDir : testDirAlone)
+            {
+                if (dirName.equals(oneDir))
+                {
+                    res = true;
+                }
+            }
+        }
+        return res;
+    }
+
+    public boolean convertWithNemoBatch(Conversion conversion,
+            E_TypeConversion odvConv, String inputAbsolutePath,
+            String outputAbsolutePath)
+    {
+        boolean res = false;
+        String output = outputAbsolutePath + "\\" + outputName;
+        String model = outputAbsolutePath + "\\" + modelName;
+        couplingTablePrefix = outputAbsolutePath;
+        couplingTableUpdate = false;
+        cdiSummaryFile = outputAbsolutePath + "\\" + "cdiSummary_junit";
+        File mod = new File(model);
+        Nemo.getInstance().resetInstance();
+        Nemo.getInstance().getConfig().setIdEdmoRespCdi("486");// 486 is ifremer
+// edmo code
+        shell = new NemoShell();
+        String batchCmd = "";
+        if (!mod.exists())
+        {
+            message.isModelFound = false;
+        }
+        else
+        {
+            message.isModelFound = true;
+            Nemo.getInstance().setBatchMode(true);
+            try
+            {
+                res =
+                    shell.main(inputAbsolutePath, output, model, conversion,
+                        sortDatas, odvConv, datasetRef, cdiSummaryFile,
+                        couplingTableUpdate, couplingTablePrefix, batchLogger);
+            }
+            catch (Exception e)
+            {
+                message.conversionRes = res;
+                message.conversionError = e.getMessage();
+            }
+
+        }
+        batchCmd = "nemo_batch";
+        batchCmd += Global.SPACE + Global.MOINS + Global.optInputFile;
+        batchCmd += Global.SPACE + inputAbsolutePath;
+
+        batchCmd += Global.SPACE + Global.MOINS + Global.optModelFile;
+        batchCmd += Global.SPACE + model;
+
+        batchCmd += Global.SPACE + Global.MOINS + Global.optOutputFile;
+        batchCmd += Global.SPACE + output + "_batch";
+
+        batchCmd += Global.SPACE + Global.MOINS + Global.optConv;
+        batchCmd += Global.SPACE + conversion;
+        if (E_TypeConversion.ODV_MULTISTATIONS == odvConv)
+        {
+            batchCmd += Global.SPACE + Global.MOINS + Global.optOdvMulti;
+        }
+        batchCmd += Global.SPACE + Global.MOINS + Global.optCdiSummary;
+        batchCmd += Global.SPACE + cdiSummaryFile + "_batch";
+
+        if (couplingTableUpdate)
+        {
+            batchCmd +=
+                Global.SPACE + Global.MOINS + Global.optCouplingTableUpdate;
+            batchCmd +=
+                Global.SPACE + Global.MOINS + Global.optCouplingTablePrefix;
+            batchCmd += Global.SPACE + couplingTablePrefix;
+        }
+        batchCommands += Global.RN + batchCmd;
+
+        message.conversionRes = res;
+        return res;
+    }
+
+    public boolean fileExist(String outputAbsolutePath, String outputTestName)
+    {
+        File f = new File(outputAbsolutePath + "\\" + outputTestName);
+        return f.exists();
+    }
+
+    public boolean compareWithReference(String outputAbsolutePath,
+            String outputTestName)
+    {
+        boolean comp = false;
+        comp =
+            compare_____TwoFiles(outputAbsolutePath, outputTestName,
+                outputReferenceName);
+        return comp;
+    }
+
+    public boolean compare_____TwoFiles(String outputAbsolutePath,
+            String fileA, String fileB)
+    {
+
+        BufferedReader bufOut = null;
+        BufferedReader bufRef = null;
+        String outputLine = "";
+        String refFileLine;
+        String outputTest = outputAbsolutePath + "\\" + fileA;
+        String output_REFERENCE = outputAbsolutePath + "\\" + fileB;
+        boolean identical = true;
+
+        try
+        {
+            bufOut = new BufferedReader(new FileReader(outputTest));
+        }
+        catch (FileNotFoundException e1)
+        {
+            // testLogger.error(fileA+" file not found");
+            // message.filesMap.put(fileA, false);
+            return false;
+        }
+        try
+        {
+            bufRef = new BufferedReader(new FileReader(output_REFERENCE));
+        }
+        catch (FileNotFoundException e1)
+        {
+            // testLogger.error(fileB+" file not found");
+            // message.filesMap.put(fileB, false);
+            return false;
+        }
+
+        // message.filesMap.put(fileA, true);
+        // message.filesMap.put(fileB, true);
+        try
+        {
+            String newRefLine = "";
+            if (bufOut != null && bufRef != null)
+            {
+                while (bufOut.ready() && identical)
+                {
+                    outputLine = bufOut.readLine();
+                    refFileLine = bufRef.readLine();
+                    String format = "";
+
+                    identical = outputLine.equals(refFileLine);
+                    // depuis le 17/01/2012, le mapping BODC a changé : PRESPS02
+                    // remplace par PRESPR01
+                    Pattern p;
+                    Matcher m;
+                    if (!identical)
+                    {
+                        p = Pattern.compile("PRESPS02");
+                        m = p.matcher(refFileLine);
+                        if (m.find())
+                        {
+                            refFileLine = m.replaceAll("PRESPR01");
+                            identical = outputLine.equals(refFileLine);
+                        }
+                    }
+                    // depuisles vocab v2, le mapping BODC a changé : P011
+                    // remplace par P01
+                    if (!identical)
+                    {
+                        p = Pattern.compile("P011");
+                        m = p.matcher(refFileLine);
+                        if (m.find())
+                        {
+                            refFileLine = m.replaceAll("P01");
+                            identical = outputLine.equals(refFileLine);
+                            isVocabV2 = true;
+                        }
+                    }
+                    // depuisles vocab v2, le mapping BODC a changé : P061
+                    // remplace par P06
+                    if (!identical)
+                    {
+                        p = Pattern.compile("P061");
+                        m = p.matcher(refFileLine);
+                        if (m.find())
+                        {
+                            refFileLine = m.replaceAll("P06");
+                            identical = outputLine.equals(refFileLine);
+                            isVocabV2 = true;
+                        }
+                    }
+
+                }
+            }
+            return identical;
+
+        }
+        catch (IOException e)
+        {
+            // TODO Auto-generated catch block
+            testLogger.error("IOException");
+            return false;
+        }
+    }
+
+    private String completeTitle(String title)
+    {
+        String res = "";
+        if (title.length() < 70)
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                res += "_";
+            }
+            res += title;
+
+            for (int i = 0; i < 60 - title.length(); i++)
+            {
+                res += "_";
+            }
+        }
+        else
+        {
+            res = title;
+        }
+        return res;
+    }
+
+    public class Message
+    {
+        public boolean isActivated = true;
+        public boolean isTestFound = true;
+        public String dirName;
+        public String testName = null;
+        public boolean isModelFound;
+        public boolean isReferenceFound = false;
+        public boolean conversionRes;
+        public String conversionError;
+        public boolean batchCompRes;
+        public boolean manualCompRes;
+        public String manualCompName;
+        public boolean isManualFound;
+        public boolean atLeastOneTestFound = false;
+
+        public Message()
+        {
+
+        }
+
+        public void print()
+        {
+            String mes = "";
+            mes += completeTitle(dirName);
+            if (testName != null)
+            {
+                mes += "\r\n" + testName;
+                if (!isActivated)
+                {
+                    mes += ("- DESACTIVATED -");
+                    write(mes);
+                    return;
+                }
+                if (!isTestFound)
+                {
+                    mes += ("- No test found -");
+                    write(mes);
+                    return;
+                }
+                if (!isModelFound)
+                {
+                    mes += ("- KO No model found -");
+                    write(mes);
+                    return;
+                }
+                if (!conversionRes)
+                {
+                    mes += "\r\nconversion: " + getString(conversionRes);
+                    mes += " " + conversionError;
+                }
+                if (testBatchs)
+                {
+                    if (isReferenceFound)
+                    {
+                        if (batchCompRes)
+                        {
+                            mes += " " + getString(conversionRes);
+                        }
+                        else
+                        {
+                            mes +=
+                                "\r\nbatch comparison: "
+                                        + getString(batchCompRes);
+                        }
+                    }
+                    else
+                    {
+                        mes += "\r\nReference file not found";
+                    }
+                }
+                if (compareManualFiles && isManualFound)
+                {
+                    if (isReferenceFound)
+                    {
+                        mes +=
+                            "\r\nmanual comparison: "
+                                    + getString(manualCompRes);
+                    }
+                    else
+                    {
+                        mes += "\r\nReference file not found";
+                    }
+
+                }
+                if (!(batchCompRes && conversionRes))
+                {
+                    write(mes);
+                }
+            }
+            else
+            {
+                mes += " no test found";
+                write(mes);
+            }
+
+        }
+
+        private String getString(boolean res)
+        {
+            String str = "";
+            if (res)
+            {
+                str = "OK";
+            }
+            else
+            {
+                str = "KO";
+            }
+            return str;
+        }
+
+        private void write(String mes)
+        {
+            testLogger.info(mes + "\r\n");
+        }
+    }
+
+    public boolean checkEmptyProxy(Configuration config)
+    {
+
+        Proxy proxy = config.getProxy();
+        if (!proxy.isUse() && proxy.getAdress().isEmpty()
+                && proxy.getLogin().isEmpty() && proxy.getPassword().isEmpty()
+                && proxy.getPort().isEmpty())
+        {
+            config.restoreDefault();
+            proxy = config.getProxy();
+            if (!proxy.isUse() && proxy.getAdress().isEmpty()
+                    && proxy.getLogin().isEmpty()
+                    && proxy.getPassword().isEmpty()
+                    && proxy.getPort().isEmpty())
+                return true;
+        }
+
+        return false;
+    }
+
+}

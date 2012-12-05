@@ -1,0 +1,431 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vocabulary list="SDN:P02:73:"  version="73"  date="2012-03-03T02:00:05.000"  title="SeaDataNet Parameter Discovery Vocabulary" >
+   <keyword SDNIdent="SDN:P02::WCWT"  smallLabel="Sed_WaterCont" >Sediment water content, porosity and surface area</keyword>
+   <keyword SDNIdent="SDN:P02::GRZO"  smallLabel="ZooplGrowthRate" >Zooplankton growth rates</keyword>
+   <keyword SDNIdent="SDN:P02::HEAD"  smallLabel="PlatOrientation" >Platform or instrument orientation</keyword>
+   <keyword SDNIdent="SDN:P02::DGPW"  smallLabel="SedPoreWat_O2" >Dissolved oxygen concentration parameters in sediment pore waters</keyword>
+   <keyword SDNIdent="SDN:P02::EXCO"  smallLabel="Extco" >Light extinction and diffusion coefficients</keyword>
+   <keyword SDNIdent="SDN:P02::SR2D"  smallLabel="2DSeisReflec" >Two-dimensional seismic reflection</keyword>
+   <keyword SDNIdent="SDN:P02::HEAV"  smallLabel="WaveHeight" >Wave height estimates</keyword>
+   <keyword SDNIdent="SDN:P02::RSIS"  smallLabel="Resistivity" >Field resistivity,  electromagnetics  and polarisation</keyword>
+   <keyword SDNIdent="SDN:P02::OMWC"  smallLabel="Water_OrganoMet" >Organometallic species concentration parameters in water bodies</keyword>
+   <keyword SDNIdent="SDN:P02::FPRT"  smallLabel="ZooDefRate" >Zooplankton defecation rates in the water column</keyword>
+   <keyword SDNIdent="SDN:P02::BRAD"  smallLabel="Biota_RadAct" >Radioactivity in biota</keyword>
+   <keyword SDNIdent="SDN:P02::RACC"  smallLabel="AccumRate" >Sediment accumulation rate</keyword>
+   <keyword SDNIdent="SDN:P02::ATPC"  smallLabel="At_Part" >Atmospheric particulates</keyword>
+   <keyword SDNIdent="SDN:P02::PPRD"  smallLabel="WC_PrimaryProd" >Primary production in the water column</keyword>
+   <keyword SDNIdent="SDN:P02::AMUP"  smallLabel="Reg_prod" >Regenerated production in water bodies</keyword>
+   <keyword SDNIdent="SDN:P02::CSLR"  smallLabel="Sol_Rad" >Solar Radiation</keyword>
+   <keyword SDNIdent="SDN:P02::EXCR"  smallLabel="WC_Excretion" >Excretion rate parameters in the water column</keyword>
+   <keyword SDNIdent="SDN:P02::ABAG"  smallLabel="SPM_aggreg" >Suspended particulate material aggregates</keyword>
+   <keyword SDNIdent="SDN:P02::LIFX"  smallLabel="Terr_Flux" >Sedimentation flux of terrestrially derived material in the water column</keyword>
+   <keyword SDNIdent="SDN:P02::PCLM"  smallLabel="PalaeoInd" >Palaeoclimatic indicators and parameters</keyword>
+   <keyword SDNIdent="SDN:P02::XKEY"  smallLabel="Sec_Key" >Security tags and keys</keyword>
+   <keyword SDNIdent="SDN:P02::IALZ"  smallLabel="Littoral_TaxInsectWormAFDW" >Insect and earthworm taxonomy-related ash-free dry weight biomass per unit area of the littoral zone</keyword>
+   <keyword SDNIdent="SDN:P02::MTWC"  smallLabel="Met_WC_Coll" >Colloidal metal concentrations in the water column</keyword>
+   <keyword SDNIdent="SDN:P02::SDNA"  smallLabel="Sed_NuclAcid" >Concentration of nucleic acids in sediment</keyword>
+   <keyword SDNIdent="SDN:P02::MTWD"  smallLabel="Met_WC_Diss" >Dissolved metal concentrations in the water column</keyword>
+   <keyword SDNIdent="SDN:P02::PYTT"  smallLabel="WC_PlanktonAbund" >Plankton abundance per unit volume of the water column</keyword>
+   <keyword SDNIdent="SDN:P02::HBCH"  smallLabel="Hab_CHar" >Habitat characterisation</keyword>
+   <keyword SDNIdent="SDN:P02::ATPX"  smallLabel="Aden_WC" >Concentration of adenlylates in the water column</keyword>
+   <keyword SDNIdent="SDN:P02::MTWT"  smallLabel="Met_WC_Tot" >Total metal concentrations in water bodies</keyword>
+   <keyword SDNIdent="SDN:P02::MTWP"  smallLabel="Met_WC_Part" >Particulate metal concentrations in the water column</keyword>
+   <keyword SDNIdent="SDN:P02::TEMP"  smallLabel="WC_Temp" >Temperature of the water column</keyword>
+   <keyword SDNIdent="SDN:P02::SIPW"  smallLabel="Iso_SedPoreWater" >Stable isotope enrichment in sediment pore waters</keyword>
+   <keyword SDNIdent="SDN:P02::SPOL"  smallLabel="Sed_Pollen" >Sediment pollen content</keyword>
+   <keyword SDNIdent="SDN:P02::PXSP"  smallLabel="SPM_Phosphorus" >Phosphorus concentrations in suspended particulate material</keyword>
+   <keyword SDNIdent="SDN:P02::OPBS"  smallLabel="OptBS" >Optical backscatter</keyword>
+   <keyword SDNIdent="SDN:P02::PCO2"  smallLabel="WC_pCO2" >Partial pressure (pCO2) and fugacity (fCO2) of carbon dioxide in the water column</keyword>
+   <keyword SDNIdent="SDN:P02::MDWP"  smallLabel="Metoid_WC_Part" >Particulate trace metalloid concentrations in the water column</keyword>
+   <keyword SDNIdent="SDN:P02::GHDX"  smallLabel="Sed_FossilMorph" >Sediment microfossil morphology parameters</keyword>
+   <keyword SDNIdent="SDN:P02::ZBTX"  smallLabel="ZoobenthTaxAbund" >Zoobenthos taxonomic abundance</keyword>
+   <keyword SDNIdent="SDN:P02::ZNLG"  smallLabel="WC_MetalLigand" >Metal ligand parameters in the water column</keyword>
+   <keyword SDNIdent="SDN:P02::MDWD"  smallLabel="Metoid_WC_Diss" >Dissolved trace metalloid concentrations in the water column</keyword>
+   <keyword SDNIdent="SDN:P02::SBPH"  smallLabel="BedPhoto" >Seabed photography</keyword>
+   <keyword SDNIdent="SDN:P02::RFVL"  smallLabel="Horiz_Currents_WC" >Horizontal velocity of the water column (currents)</keyword>
+   <keyword SDNIdent="SDN:P02::DVLP"  smallLabel="Animal_devlopment" >Zooplankton and zoobenthos development stage parameters</keyword>
+   <keyword SDNIdent="SDN:P02::SPHT"  smallLabel="PoreWat_S" >Concentration of inorganic sulphur species in sediment pore water</keyword>
+   <keyword SDNIdent="SDN:P02::VDFC"  smallLabel="WC_Transport" >Transport in the water column</keyword>
+   <keyword SDNIdent="SDN:P02::CETA"  smallLabel="Cetac_abund" >Cetacean abundance</keyword>
+   <keyword SDNIdent="SDN:P02::BRDD"  smallLabel="Bird_taxa_abund" >Bird taxonomy-related abundance per unit area of surface</keyword>
+   <keyword SDNIdent="SDN:P02::TCFX"  smallLabel="WC_SedFluxOrgMatter" >Sedimentation flux of carbon, nitrogen or organic matter in the water column</keyword>
+   <keyword SDNIdent="SDN:P02::LWRD"  smallLabel="LWRad" >Long-wave radiation</keyword>
+   <keyword SDNIdent="SDN:P02::APDA"  smallLabel="Horiz_Plat_Vel" >Horizontal platform movement</keyword>
+   <keyword SDNIdent="SDN:P02::TVLT"  smallLabel="Raw_SPM_optics" >Raw suspended particulate material optical sensor output</keyword>
+   <keyword SDNIdent="SDN:P02::CFTM"  smallLabel="ContamFlux" >Contaminant fluxes between the terrestrial and marine environment</keyword>
+   <keyword SDNIdent="SDN:P02::PCFX"  smallLabel="WC_SedFluxCellsCarb" >Sedimentation flux of identified biota expressed as carbon in the water column</keyword>
+   <keyword SDNIdent="SDN:P02::BRDA"  smallLabel="Bird_taxa_count" >Bird taxonomy-related counts</keyword>
+   <keyword SDNIdent="SDN:P02::AAFX"  smallLabel="WaterSedFlux_AminoAcidCmpd" >Sedimentation flux of amino acids and associated compounds in water bodies</keyword>
+   <keyword SDNIdent="SDN:P02::ATTN"  smallLabel="WC_Trans+Attn" >Transmittance and attenuance of the water column</keyword>
+   <keyword SDNIdent="SDN:P02::ACO2"  smallLabel="Atm_pCO2" >Carbon monoxide and dioxide concentrations in the atmosphere</keyword>
+   <keyword SDNIdent="SDN:P02::SSTR"  smallLabel="Sed_struct" >Sedimentary structure</keyword>
+   <keyword SDNIdent="SDN:P02::SPGS"  smallLabel="SPM_GrSize" >Suspended particulate material grain size parameters</keyword>
+   <keyword SDNIdent="SDN:P02::ACNT"  smallLabel="Macroalgae+Seagrass_taxa_count" >Macroalgae and seagrass taxonomy-related counts</keyword>
+   <keyword SDNIdent="SDN:P02::LVLT"  smallLabel="RawLightOutput" >Raw light meter output</keyword>
+   <keyword SDNIdent="SDN:P02::CBCC"  smallLabel="Bacteria_morph+physio" >Bacteria morphology and physiology</keyword>
+   <keyword SDNIdent="SDN:P02::PNTX"  smallLabel="PhytoGenAbundWater" >Phytoplankton generic abundance in water bodies</keyword>
+   <keyword SDNIdent="SDN:P02::SSTB"  smallLabel="Iso_Sed" >Stable isotope enrichment in sediment</keyword>
+   <keyword SDNIdent="SDN:P02::GPIG"  smallLabel="GutPig" >Zooplankton gut pigments</keyword>
+   <keyword SDNIdent="SDN:P02::SEMP"  smallLabel="Seal_Morph_Phys" >Seal morphology and physiology</keyword>
+   <keyword SDNIdent="SDN:P02::SEMO"  smallLabel="Seal_Mort" >Seal mortality</keyword>
+   <keyword SDNIdent="SDN:P02::CNTX"  smallLabel="PhytoGenBiomWater" >Phytoplankton generic biomass in water bodies</keyword>
+   <keyword SDNIdent="SDN:P02::ZCTC"  smallLabel="Zoo_taxa_C_biomass" >Zooplankton taxonomy-related biomass expressed as carbon per unit volume of the water column</keyword>
+   <keyword SDNIdent="SDN:P02::SAMO"  smallLabel="WCBed_NutFlux" >Nutrient fluxes between the bed and the water column</keyword>
+   <keyword SDNIdent="SDN:P02::MARC"  smallLabel="MarineArch" >Marine archaeology</keyword>
+   <keyword SDNIdent="SDN:P02::ZOOB"  smallLabel="Zoobenth_taxa_count" >Zoobenthos taxonomy-related counts</keyword>
+   <keyword SDNIdent="SDN:P02::TDIN"  smallLabel="DissInorgN" >Dissolved inorganic nitrogen concentration in the water column</keyword>
+   <keyword SDNIdent="SDN:P02::PPWC"  smallLabel="WC_PCB" >Concentration of polychlorobiphenyls (PCBs) in the water column</keyword>
+   <keyword SDNIdent="SDN:P02::FDMS"  smallLabel="WCAt_GasFlux" >Gas fluxes between the water column and the atmosphere</keyword>
+   <keyword SDNIdent="SDN:P02::PCHW"  smallLabel="WC_PAH" >Concentration of polycyclic aromatic hydrocarbons (PAHs) in the water column</keyword>
+   <keyword SDNIdent="SDN:P02::ENGP"  smallLabel="Engineer" >Engineering parameters</keyword>
+   <keyword SDNIdent="SDN:P02::ZATP"  smallLabel="Zoo_taxa_prot_biom" >Zooplankton taxonomy-related biomass expressed as protein per unit volume of the water column</keyword>
+   <keyword SDNIdent="SDN:P02::XMGS"  smallLabel="GeoMagElecAcc" >Geological sample magnetic, electrical and acoustic properties</keyword>
+   <keyword SDNIdent="SDN:P02::AMON"  smallLabel="WC_NH4" >Ammonium concentration parameters in the water column</keyword>
+   <keyword SDNIdent="SDN:P02::HAAC"  smallLabel="Sed_AminoAcids" >Amino acids in sediment</keyword>
+   <keyword SDNIdent="SDN:P02::PHYC"  smallLabel="WC_PhycobolPig" >Phycobolin pigment concentrations in the water column</keyword>
+   <keyword SDNIdent="SDN:P02::ZATX"  smallLabel="Zoo_taxa_abund" >Zooplankton taxonomy-related abundance per unit volume of the water column</keyword>
+   <keyword SDNIdent="SDN:P02::IWAB"  smallLabel="InsWorm_tax_abund_bed" >Insect and earthworm taxonomy-related abundance per unit area of the bed</keyword>
+   <keyword SDNIdent="SDN:P02::WCTR"  smallLabel="WC_tracer" >Water body released tracers</keyword>
+   <keyword SDNIdent="SDN:P02::PHYG"  smallLabel="Phyt_Growth" >Phytoplankton growth</keyword>
+   <keyword SDNIdent="SDN:P02::ZZZZ"  smallLabel="Unspec" >Unspecified</keyword>
+   <keyword SDNIdent="SDN:P02::MDSV"  smallLabel="SPM_SettVeloc" >Suspended particulate material setting velocity parameters</keyword>
+   <keyword SDNIdent="SDN:P02::BAUC"  smallLabel="BactTaxaAbundSed" >Bacteria taxonomic abundance in sediment</keyword>
+   <keyword SDNIdent="SDN:P02::SALK"  smallLabel="Sed_AliphaticHC" >Concentration of aliphatic hydrocarbons in sediment samples</keyword>
+   <keyword SDNIdent="SDN:P02::IPHY"  smallLabel="SnowIce_PhysChar" >Snow and ice physical properties and characteristics</keyword>
+   <keyword SDNIdent="SDN:P02::MMST"  smallLabel="Structures" >Man-made structures</keyword>
+   <keyword SDNIdent="SDN:P02::ZCTN"  smallLabel="Zoo_taxa_N_biomass" >Zooplankton taxonomy-related biomass expressed as nitrogen per unit volume of the water column</keyword>
+   <keyword SDNIdent="SDN:P02::AMOX"  smallLabel="WC_Nitrif" >Nitrification rate in the water column</keyword>
+   <keyword SDNIdent="SDN:P02::BATX"  smallLabel="BactTaxaAbundWater" >Bacteria taxonomic abundance in water bodies</keyword>
+   <keyword SDNIdent="SDN:P02::HLWC"  smallLabel="WC_Halogen" >Concentration of inorganic halogens in water bodies</keyword>
+   <keyword SDNIdent="SDN:P02::IATC"  smallLabel="Insect_txax_C_abund" >Insecta taxonomy-related biomass expressed as carbon per unit volume of the water column</keyword>
+   <keyword SDNIdent="SDN:P02::SXCN"  smallLabel="SPM_SulphSpecies" >Concentration of inorganic sulphur species in suspended particulate material</keyword>
+   <keyword SDNIdent="SDN:P02::TADN"  smallLabel="Sed_Adenylates" >Concentration of adenylates in sediment</keyword>
+   <keyword SDNIdent="SDN:P02::ZCMP"  smallLabel="ZooplChemComp" >Zooplankton chemical composition</keyword>
+   <keyword SDNIdent="SDN:P02::RALT"  smallLabel="RockAlt" >Rock alteration</keyword>
+   <keyword SDNIdent="SDN:P02::RMIN"  smallLabel="InorgChemRockSed" >Inorganic chemical composition of sediment or rocks</keyword>
+   <keyword SDNIdent="SDN:P02::MATX"  smallLabel="MicrozooTaxaAbundWater" >Microzooplankton taxonomic abundance in water bodies</keyword>
+   <keyword SDNIdent="SDN:P02::DAAW"  smallLabel="Water_coll_part_AA" >Particulate amino acid concentrations in the water column</keyword>
+   <keyword SDNIdent="SDN:P02::BATC"  smallLabel="WC_TaxBacteriaCarbBiomass" >Bacteria taxonomy-related biomass expressed as carbon per unit volume of the water column</keyword>
+   <keyword SDNIdent="SDN:P02::WBRX"  smallLabel="RC_redox" >Water body redox potential</keyword>
+   <keyword SDNIdent="SDN:P02::TBGZ"  smallLabel="WC_BactConsump" >Bacterial consumption in the water column</keyword>
+   <keyword SDNIdent="SDN:P02::GWCH"  smallLabel="GwaterChem" >Groundwater chemistry</keyword>
+   <keyword SDNIdent="SDN:P02::PESD"  smallLabel="Pesticide_Sediment" >Pesticide concentrations in sediment</keyword>
+   <keyword SDNIdent="SDN:P02::MFAZ"  smallLabel="Littoral_TaxZoobenthAFDW" >Zoobenthos taxonomy-related ash-free dry weight biomass per unit area of the littoral zone</keyword>
+   <keyword SDNIdent="SDN:P02::HZNV"  smallLabel="HazNav" >Hazards to navigation</keyword>
+   <keyword SDNIdent="SDN:P02::MATC"  smallLabel="Microzoo_taxa_C_biomass" >Microzooplankton taxonomy-related biomass expressed as carbon per unit volume of the water column</keyword>
+   <keyword SDNIdent="SDN:P02::CLAY"  smallLabel="Min_comp" >Mineralogical composition</keyword>
+   <keyword SDNIdent="SDN:P02::IATX"  smallLabel="Insect_taxa_abund" >Insecta taxonomy-related abundance per unit volume of the water column</keyword>
+   <keyword SDNIdent="SDN:P02::TRAN"  smallLabel="TransAct" >Transport activity</keyword>
+   <keyword SDNIdent="SDN:P02::BATT"  smallLabel="BactEnvironParm" >Bacteria environmental parameters</keyword>
+   <keyword SDNIdent="SDN:P02::PASR"  smallLabel="PassSeisRefrac" >Passive seismic refraction</keyword>
+   <keyword SDNIdent="SDN:P02::TSED"  smallLabel="WC_SPM" >Concentration of suspended particulate material in the water column</keyword>
+   <keyword SDNIdent="SDN:P02::CBFX"  smallLabel="Carb_flux" >Sedimentation flux of carbohydates in the water column</keyword>
+   <keyword SDNIdent="SDN:P02::FCST"  smallLabel="FishCatch" >Fish and shellfish catch statistics</keyword>
+   <keyword SDNIdent="SDN:P02::NOYS"  smallLabel="Noise" >Acoustic noise in the water column</keyword>
+   <keyword SDNIdent="SDN:P02::CSDE"  smallLabel="WC_OrgSulphDyn" >Organic sulphur compound dynamics in the water column</keyword>
+   <keyword SDNIdent="SDN:P02::PHWC"  smallLabel="WC_PhaeoPigs" >Phaeopigment concentrations in the water column</keyword>
+   <keyword SDNIdent="SDN:P02::PHWB"  smallLabel="Pharm_WaterBody" >Pharmaceutical concentrations in water bodies</keyword>
+   <keyword SDNIdent="SDN:P02::PATX"  smallLabel="PhytoTaxaAbundWater" >Phytoplankton taxonomic abundance in water bodies</keyword>
+   <keyword SDNIdent="SDN:P02::DBDX"  smallLabel="GeoSampDens" >Geological sample density</keyword>
+   <keyword SDNIdent="SDN:P02::COCC"  smallLabel="Colloid_OrgC" >Colloidal organic carbon concentration in the water column</keyword>
+   <keyword SDNIdent="SDN:P02::GWDR"  smallLabel="WaveDir" >Wave direction</keyword>
+   <keyword SDNIdent="SDN:P02::IPRX"  smallLabel="OnorgPerox_Water" >Inorganic peroxides in water bodies</keyword>
+   <keyword SDNIdent="SDN:P02::FCRT"  smallLabel="Zoopl_feeding" >Zooplankton feeding</keyword>
+   <keyword SDNIdent="SDN:P02::IS4R"  smallLabel="Sed_Red_Rt" >Reduction rates in bed sediments</keyword>
+   <keyword SDNIdent="SDN:P02::SIXX"  smallLabel="WC_SiSpecies" >Concentration of silicon species in the water column</keyword>
+   <keyword SDNIdent="SDN:P02::IRSP"  smallLabel="Iso_Speleo" >Stable isotope enrichment in speleothems</keyword>
+   <keyword SDNIdent="SDN:P02::ATEM"  smallLabel="AtmosEmiss" >Atmospheric emissions</keyword>
+   <keyword SDNIdent="SDN:P02::CXAA"  smallLabel="AtmosCarboxyl" >Concentrations of carboxylic acids and carboxylates in the atmosphere</keyword>
+   <keyword SDNIdent="SDN:P02::SHTA"  smallLabel="Sed_HydrolAct" >Hydrolytic activity in sediment</keyword>
+   <keyword SDNIdent="SDN:P02::OXYC"  smallLabel="RawO2Output" >Raw oxygen sensor output</keyword>
+   <keyword SDNIdent="SDN:P02::GWAM"  smallLabel="GwaterAmt" >Groundwater amount</keyword>
+   <keyword SDNIdent="SDN:P02::BLUM"  smallLabel="Biolum" >Bioluminescence parameters</keyword>
+   <keyword SDNIdent="SDN:P02::SPWC"  smallLabel="WC_SulphSpecies" >Concentration of inorganic sulphur species in the water column</keyword>
+   <keyword SDNIdent="SDN:P02::MFWW"  smallLabel="ZoobenthNontaxWetWtBiomass" >Zoobenthos non taxonomy-related wet weight biomass per unit area of the bed</keyword>
+   <keyword SDNIdent="SDN:P02::BDRV"  smallLabel="Biodiversity" >Biodiversity indices</keyword>
+   <keyword SDNIdent="SDN:P02::FNTM"  smallLabel="Fish_nontaxa_morph" >Fish non taxonomy-related morphology</keyword>
+   <keyword SDNIdent="SDN:P02::MMAN"  smallLabel="Magnetics" >Magnetics</keyword>
+   <keyword SDNIdent="SDN:P02::R410"  smallLabel="Ocean_clr" >Ocean colour and earth-leaving visible waveband spectral radiation</keyword>
+   <keyword SDNIdent="SDN:P02::PHUP"  smallLabel="OthNut_WCUp" >Uptake of other nutrients in the water column</keyword>
+   <keyword SDNIdent="SDN:P02::ALKY"  smallLabel="WC_Alk+Ac+pH" >Alkalinity, acidity and pH of the water column</keyword>
+   <keyword SDNIdent="SDN:P02::FABD"  smallLabel="Faun_abuns_bed" >Fauna abundance per unit area of the bed</keyword>
+   <keyword SDNIdent="SDN:P02::CYEU"  smallLabel="WC_PlanktonCarbBiomass" >Plankton biomass expressed as carbon per unit volume of the water column</keyword>
+   <keyword SDNIdent="SDN:P02::COAS"  smallLabel="Land_map" >Terrestrial mapping</keyword>
+   <keyword SDNIdent="SDN:P02::FNTX"  smallLabel="Fish_nontaxa_abund" >Fish non taxonomy-related abundance per unit volume of the water column</keyword>
+   <keyword SDNIdent="SDN:P02::OMPW"  smallLabel="Sed_OrganoMet" >Organometallic species concentration parameters in sediments</keyword>
+   <keyword SDNIdent="SDN:P02::FIBM"  smallLabel="FishBiomass" >Fish biomass in water bodies</keyword>
+   <keyword SDNIdent="SDN:P02::WSTR"  smallLabel="WindForces" >Wind stress and shear</keyword>
+   <keyword SDNIdent="SDN:P02::HMSB"  smallLabel="Diss_Org_Mat" >Concentration of dissolved organic matter in the water column</keyword>
+   <keyword SDNIdent="SDN:P02::CMFL"  smallLabel="Var_fluor" >Variable fluorescence parameters</keyword>
+   <keyword SDNIdent="SDN:P02::PCOC"  smallLabel="SPM_Orgcontam" >Concentration of other organic contaminants in suspended particulate material</keyword>
+   <keyword SDNIdent="SDN:P02::ASLV"  smallLabel="Sea_Level" >Sea level</keyword>
+   <keyword SDNIdent="SDN:P02::AORG"  smallLabel="Atm_Organics" >Concentration of organic matter in the atmosphere</keyword>
+   <keyword SDNIdent="SDN:P02::HEXC"  smallLabel="WC_NobleGas" >Dissolved noble gas concentration parameters in the water column</keyword>
+   <keyword SDNIdent="SDN:P02::VATX"  smallLabel="PhytoTaxaVolWater" >Phytoplankton taxonomic volume in water bodies</keyword>
+   <keyword SDNIdent="SDN:P02::TMES"  smallLabel="Metadata_param" >Metadata parameters</keyword>
+   <keyword SDNIdent="SDN:P02::DOCU"  smallLabel="DOC_dyn_WC" >Dissolved organic carbon uptake and production in the water column</keyword>
+   <keyword SDNIdent="SDN:P02::OCAA"  smallLabel="AtmosOrgContam" >Concentration of other organic contaminants in the atmosphere</keyword>
+   <keyword SDNIdent="SDN:P02::SECC"  smallLabel="Secchi" >Secchi disk depth</keyword>
+   <keyword SDNIdent="SDN:P02::WSTB"  smallLabel="Iso_WC" >Stable isotope enrichment in the water column</keyword>
+   <keyword SDNIdent="SDN:P02::OGPW"  smallLabel="SedPoreWater_Gases" >Dissolved concentration parameters for other gases in sediment pore waters</keyword>
+   <keyword SDNIdent="SDN:P02::CHEX"  smallLabel="Atm_CloudCover" >Cloud cover height and extent</keyword>
+   <keyword SDNIdent="SDN:P02::DOCC"  smallLabel="DOC" >Dissolved organic carbon concentration in the water column</keyword>
+   <keyword SDNIdent="SDN:P02::PEWB"  smallLabel="Pesticide_WaterBody" >Pesticide concentrations in water bodies</keyword>
+   <keyword SDNIdent="SDN:P02::MZCT"  smallLabel="WC_MicrozooGraz" >Microzooplankton grazing</keyword>
+   <keyword SDNIdent="SDN:P02::OZON"  smallLabel="Atm_O3_Oxy" >Ozone and oxygen concentrations in the atmosphere</keyword>
+   <keyword SDNIdent="SDN:P02::VIRU"  smallLabel="VirAbundWater" >Virus abundance in water bodies</keyword>
+   <keyword SDNIdent="SDN:P02::FCNT"  smallLabel="Fish_taxa_count" >Fish taxonomy-related counts</keyword>
+   <keyword SDNIdent="SDN:P02::PHSD"  smallLabel="Sed_PhaeoPigs" >Phaeopigment concentrations in sediment</keyword>
+   <keyword SDNIdent="SDN:P02::CPCN"  smallLabel="Sed_Pigments" >Unclassified pigment concentrations in sediment</keyword>
+   <keyword SDNIdent="SDN:P02::PHSE"  smallLabel="Pharm_Sediment" >Pharmaceutical concentrations in sediments</keyword>
+   <keyword SDNIdent="SDN:P02::SEBH"  smallLabel="Seal_Behav" >Seal behaviour</keyword>
+   <keyword SDNIdent="SDN:P02::AAMN"  smallLabel="Atm_Nspecies" >Concentration of nitrogen species in the atmosphere</keyword>
+   <keyword SDNIdent="SDN:P02::ACFL"  smallLabel="QC_Flag" >Quality control flags</keyword>
+   <keyword SDNIdent="SDN:P02::RAGE"  smallLabel="RockAge" >Rock age</keyword>
+   <keyword SDNIdent="SDN:P02::LIBI"  smallLabel="Lipid_Biota" >Biota lipid concentrations</keyword>
+   <keyword SDNIdent="SDN:P02::MZBN"  smallLabel="MicrozooGenAbundWater" >Microzooplankton generic abundance in water bodies</keyword>
+   <keyword SDNIdent="SDN:P02::LERR"  smallLabel="Raw_CM_Parm" >Raw current meter output parameters</keyword>
+   <keyword SDNIdent="SDN:P02::DPEV"  smallLabel="Dep_env" >Depositional environment</keyword>
+   <keyword SDNIdent="SDN:P02::AYMD"  smallLabel="Date + Time" >Date and time</keyword>
+   <keyword SDNIdent="SDN:P02::BPBP"  smallLabel="BactPopBiomProt" >Bacteria non taxonomy-related biomass expressed as protein per unit volume of the water column</keyword>
+   <keyword SDNIdent="SDN:P02::RTCO"  smallLabel="RockThermCond" >Rock thermal conductivity</keyword>
+   <keyword SDNIdent="SDN:P02::AHGT"  smallLabel="Vert_spac_coord" >Vertical spatial coordinates</keyword>
+   <keyword SDNIdent="SDN:P02::HBEX"  smallLabel="Hab_Extnt" >Habitat extent</keyword>
+   <keyword SDNIdent="SDN:P02::MZBC"  smallLabel="WC_NontaxMicrozooCarbBiomass" >Microzooplankton non taxonomy-related biomass expressed as carbon per unit volume of the water column</keyword>
+   <keyword SDNIdent="SDN:P02::PU02"  smallLabel="MacAlgaeGenAbundWater" >Macroalgae generic abundance in water bodies</keyword>
+   <keyword SDNIdent="SDN:P02::RPOT"  smallLabel="Sed_RedoxPot" >Redox potential in sediment</keyword>
+   <keyword SDNIdent="SDN:P02::SDAC"  smallLabel="Sed_acoustics" >Sediment acoustics</keyword>
+   <keyword SDNIdent="SDN:P02::TFAA"  smallLabel="WC_AminoAcid" >Dissolved amino acid concentrations in the water column</keyword>
+   <keyword SDNIdent="SDN:P02::WPRO"  smallLabel="Prot_WX" >Concentration of proteins in the water column</keyword>
+   <keyword SDNIdent="SDN:P02::DSCO"  smallLabel="WC_DistCoeff" >Distribution coefficients in the water column</keyword>
+   <keyword SDNIdent="SDN:P02::BDWC"  smallLabel="Sed_TaxBacteriaAFDW" >Bacteria taxonomy-related ash-free dry weight biomass in sediment</keyword>
+   <keyword SDNIdent="SDN:P02::AALK"  smallLabel="At_Alkane" >Concentration of alkanes in the atmosphere</keyword>
+   <keyword SDNIdent="SDN:P02::SPRO"  smallLabel="Sed_Protein" >Concentration of proteins in sediment</keyword>
+   <keyword SDNIdent="SDN:P02::SR3D"  smallLabel="3DSeisReflec" >Three-dimensional seismic reflection</keyword>
+   <keyword SDNIdent="SDN:P02::SATM"  smallLabel="Sfish_MorphAgePhys" >Shellfish morphology, age and physiology</keyword>
+   <keyword SDNIdent="SDN:P02::MFAB"  smallLabel="ZoobenthGenAbund" >Zoobenthos generic abundance</keyword>
+   <keyword SDNIdent="SDN:P02::REFF"  smallLabel="Sed_Resist" >Sediment resistivity</keyword>
+   <keyword SDNIdent="SDN:P02::PSAL"  smallLabel="WC_Sal" >Salinity of the water column</keyword>
+   <keyword SDNIdent="SDN:P02::SLCA"  smallLabel="WC_SiO4" >Silicate concentration parameters in the water column</keyword>
+   <keyword SDNIdent="SDN:P02::PTOX"  smallLabel="Phycotox_biota" >Concentration of phycotoxins in biota</keyword>
+   <keyword SDNIdent="SDN:P02::RBHY"  smallLabel="MolecularBiol" >Molecular biology parameters</keyword>
+   <keyword SDNIdent="SDN:P02::SCDO"  smallLabel="WCBed_MetalFlux" >Metal fluxes between the bed and the water column</keyword>
+   <keyword SDNIdent="SDN:P02::EPSI"  smallLabel="WC_Turbulence" >Turbulence in the water column</keyword>
+   <keyword SDNIdent="SDN:P02::UPTH"  smallLabel="WC_BactProd" >Bacterial production in the water column</keyword>
+   <keyword SDNIdent="SDN:P02::SRAD"  smallLabel="GeoRad" >Geological sample radioactivity</keyword>
+   <keyword SDNIdent="SDN:P02::GP025"  smallLabel="SealRepr" >Seal reproduction</keyword>
+   <keyword SDNIdent="SDN:P02::MSFX"  smallLabel="WC_SedFlux" >Sedimentation flux quantification in the water column</keyword>
+   <keyword SDNIdent="SDN:P02::LRZA"  smallLabel="CurrVert" >Vertical velocity of the water column (currents)</keyword>
+   <keyword SDNIdent="SDN:P02::ALAT"  smallLabel="Horiz_spat_coord" >Horizontal spatial co-ordinates</keyword>
+   <keyword SDNIdent="SDN:P02::BCMT"  smallLabel="Met_Biota" >Metal concentrations in biota</keyword>
+   <keyword SDNIdent="SDN:P02::HFLW"  smallLabel="HeatFlow" >Geothermal heat flow</keyword>
+   <keyword SDNIdent="SDN:P02::NTSP"  smallLabel="SPM_Nitrogen" >Nitrogen concentrations in suspended particulate material</keyword>
+   <keyword SDNIdent="SDN:P02::ICEM"  smallLabel="Ice_motion" >Ice motion and related parameters</keyword>
+   <keyword SDNIdent="SDN:P02::HFLX"  smallLabel="WCAt_HeatFlux" >Heat fluxes between the water column and the atmosphere</keyword>
+   <keyword SDNIdent="SDN:P02::SPCB"  smallLabel="Sed_PCB" >Concentration of polychlorobiphenyls (PCBs) in sediment samples</keyword>
+   <keyword SDNIdent="SDN:P02::PHOS"  smallLabel="WC_PO4" >Phosphate concentration parameters in the water column</keyword>
+   <keyword SDNIdent="SDN:P02::INLZ"  smallLabel="InsWorm_Tax_Litabund" >Insect and earthworm taxonomy-related abundance per unit area of the littoral zone</keyword>
+   <keyword SDNIdent="SDN:P02::GERA"  smallLabel="RadGeophys" >Radiation geophysics</keyword>
+   <keyword SDNIdent="SDN:P02::GP010"  smallLabel="BiolImpact" >Bioassay and contaminant biological impact</keyword>
+   <keyword SDNIdent="SDN:P02::NTSD"  smallLabel="Sed_Nitrogen" >Nitrogen concentrations in sediment</keyword>
+   <keyword SDNIdent="SDN:P02::PPCB"  smallLabel="SPM_PCB" >Concentration of polychlorobiphenyls (PCBs) in suspended particulate material</keyword>
+   <keyword SDNIdent="SDN:P02::CLXX"  smallLabel="SedPoreWater_Halogen" >Concentration of inorganic halogens in sediment pore waters</keyword>
+   <keyword SDNIdent="SDN:P02::UVRD"  smallLabel="UVRad" >Ultra-violet (UV) radiation</keyword>
+   <keyword SDNIdent="SDN:P02::SPAG"  smallLabel="Speleo_Age" >Speleothem age</keyword>
+   <keyword SDNIdent="SDN:P02::GP018"  smallLabel="CetacRepr" >Cetacean reproduction</keyword>
+   <keyword SDNIdent="SDN:P02::GP012"  smallLabel="AlgaeDis" >Macroalgae and seagrass infection and damage</keyword>
+   <keyword SDNIdent="SDN:P02::VSRA"  smallLabel="Atm_VisRad" >Visible waveband radiance and irradiance measurements in the atmosphere</keyword>
+   <keyword SDNIdent="SDN:P02::OHWC"  smallLabel="WC_UnclassHydrocarb" >Concentration of other hydrocarbons in the water column</keyword>
+   <keyword SDNIdent="SDN:P02::AASD"  smallLabel="SedAlkenoneAlkenoate" >Concentration of alkenones and alkenoates in sediment</keyword>
+   <keyword SDNIdent="SDN:P02::MSEP"  smallLabel="ZooplanktonRepoduction" >Zooplankton reproduction rate parameters</keyword>
+   <keyword SDNIdent="SDN:P02::ROGS"  smallLabel="RockGrainSize" >Rock grain size</keyword>
+   <keyword SDNIdent="SDN:P02::RGAS"  smallLabel="Raw_gas" >Raw gas analyser output</keyword>
+   <keyword SDNIdent="SDN:P02::VSRW"  smallLabel="WC_VisRad" >Visible waveband radiance and irradiance measurements in the water column</keyword>
+   <keyword SDNIdent="SDN:P02::GP004"  smallLabel="BirdRepr" >Bird reproduction</keyword>
+   <keyword SDNIdent="SDN:P02::BCPB"  smallLabel="Biota_PCB" >Concentration of polychlorobiphenyls (PCBs) in biota</keyword>
+   <keyword SDNIdent="SDN:P02::GP001"  smallLabel="PollutEvnt" >Pollution events</keyword>
+   <keyword SDNIdent="SDN:P02::GP005"  smallLabel="FishDis" >Fish disease and parasites</keyword>
+   <keyword SDNIdent="SDN:P02::TPHS"  smallLabel="WC_PartP" >Particulate total and organic phosphorus concentrations in the water column</keyword>
+   <keyword SDNIdent="SDN:P02::NTUP"  smallLabel="New_prod" >New production in water bodies</keyword>
+   <keyword SDNIdent="SDN:P02::OPWC"  smallLabel="WC_Pigments" >Unclassified pigment concentrations in the water column</keyword>
+   <keyword SDNIdent="SDN:P02::PPAB"  smallLabel="WC_LightAbsorb" >Light absorption in the water column</keyword>
+   <keyword SDNIdent="SDN:P02::BCOS"  smallLabel="Biota_Other_Subst" >Concentration of other substances in biota</keyword>
+   <keyword SDNIdent="SDN:P02::SUAT"  smallLabel="Sulph_At" >Sulphur species concentrations in the atmosphere</keyword>
+   <keyword SDNIdent="SDN:P02::TRIS"  smallLabel="Sed_SulphSpecies" >Concentration of inorganic sulphur species in sediment</keyword>
+   <keyword SDNIdent="SDN:P02::OMET"  smallLabel="UnclassMet" >Other meteorological measurements</keyword>
+   <keyword SDNIdent="SDN:P02::CAKN"  smallLabel="Akenone+alkenoate_WC" >Concentration of alkenones and alkenoates in the water column</keyword>
+   <keyword SDNIdent="SDN:P02::RPER"  smallLabel="RockPoros" >Rock porosity and permeability</keyword>
+   <keyword SDNIdent="SDN:P02::BCOC"  smallLabel="Biota_Orgcontam" >Concentration of other organic contaminants in biota</keyword>
+   <keyword SDNIdent="SDN:P02::CDTA"  smallLabel="Air_temp" >Air temperature</keyword>
+   <keyword SDNIdent="SDN:P02::SVEL"  smallLabel="WC_SoundVel" >Sound velocity and travel time in the water column</keyword>
+   <keyword SDNIdent="SDN:P02::CRYS"  smallLabel="SnowIce_Amount" >Snow and ice mass, thickness and extent</keyword>
+   <keyword SDNIdent="SDN:P02::NUTV"  smallLabel="Raw_Nuts" >Raw in-situ nutrient analyser output</keyword>
+   <keyword SDNIdent="SDN:P02::A999"  smallLabel="WC_TaxMicrozooSurfArea" >Microzooplankton taxonomy-related biosurface area per unit volume of the water column</keyword>
+   <keyword SDNIdent="SDN:P02::COGE"  smallLabel="Coast_Geomorph" >Coastal geomorphology</keyword>
+   <keyword SDNIdent="SDN:P02::MSBD"  smallLabel="WC_ZooDWBiomass" >Zooplankton dry weight biomass per unit volume of the water column</keyword>
+   <keyword SDNIdent="SDN:P02::PNFX"  smallLabel="WC_SedFluxCells" >Sedimentation flux of identified biota in the water column</keyword>
+   <keyword SDNIdent="SDN:P02::QDMD"  smallLabel="Amount_dumped" >Quantity of material dumped</keyword>
+   <keyword SDNIdent="SDN:P02::MSBO"  smallLabel="WC_ZooAFDWBiomass" >Zooplankton ash-free dry weight biomass per unit volume of the water column</keyword>
+   <keyword SDNIdent="SDN:P02::CBSP"  smallLabel="SPM_C" >Carbon concentrations in suspended particulate material</keyword>
+   <keyword SDNIdent="SDN:P02::CDRU"  smallLabel="WC_MetalUptake" >Metal uptake rates in the water column</keyword>
+   <keyword SDNIdent="SDN:P02::NTOT"  smallLabel="WC_PON" >Particulate total and organic nitrogen concentrations in the water column</keyword>
+   <keyword SDNIdent="SDN:P02::IDIS"  smallLabel="IndDisch" >Industrial discharges</keyword>
+   <keyword SDNIdent="SDN:P02::MNGS"  smallLabel="Sed_GrainSize" >Sediment grain size parameters</keyword>
+   <keyword SDNIdent="SDN:P02::BNUC"  smallLabel="BactGenAbundSed" >Bacteria generic abundance in sediment</keyword>
+   <keyword SDNIdent="SDN:P02::CBSD"  smallLabel="Sed_Carb" >Carbon concentrations in sediment</keyword>
+   <keyword SDNIdent="SDN:P02::BNTX"  smallLabel="BactGenAbundWater" >Bacteria generic abundance in water bodies</keyword>
+   <keyword SDNIdent="SDN:P02::AAWC"  smallLabel="WC_Amines" >Concentration of alkanamines (amines) in the water column</keyword>
+   <keyword SDNIdent="SDN:P02::SCAH"  smallLabel="Sed_PAH" >Concentration of polycyclic aromatic hydrocarbons (PAHs) in sediment samples</keyword>
+   <keyword SDNIdent="SDN:P02::CNDC"  smallLabel="WC_Cond" >Electrical conductivity of the water column</keyword>
+   <keyword SDNIdent="SDN:P02::DCMX"  smallLabel="Haloc_WC" >Other halocarbon concentrations in water bodies</keyword>
+   <keyword SDNIdent="SDN:P02::TOCH"  smallLabel="CarbPhenolAlkanolAldKetWater" >Concentration of carbohydrates, phenols, alkanols (alcohols), aldehydes and ketones in water bodies</keyword>
+   <keyword SDNIdent="SDN:P02::MTAT"  smallLabel="Met_At" >Metal concentrations in the atmosphere</keyword>
+   <keyword SDNIdent="SDN:P02::PTDZ"  smallLabel="WC_TempVar" >Temperature variation in the water column</keyword>
+   <keyword SDNIdent="SDN:P02::FREP"  smallLabel="Fish_Rep" >Fish reproduction</keyword>
+   <keyword SDNIdent="SDN:P02::GOXP"  smallLabel="WC_O2Prod+Resp" >Oxygen production and respiration in the water column</keyword>
+   <keyword SDNIdent="SDN:P02::ICHM"  smallLabel="SnowIce_Chem" >Snow and ice chemistry</keyword>
+   <keyword SDNIdent="SDN:P02::NTRI"  smallLabel="WC_NO2" >Nitrite concentration parameters in the water column</keyword>
+   <keyword SDNIdent="SDN:P02::MLES"  smallLabel="MarLeisUse" >Marine environment leisure usage</keyword>
+   <keyword SDNIdent="SDN:P02::BEST"  smallLabel="Sed_resus" >Sediment resuspension</keyword>
+   <keyword SDNIdent="SDN:P02::CEBH"  smallLabel="Cetac_Behav" >Cetacean behaviour</keyword>
+   <keyword SDNIdent="SDN:P02::NTRA"  smallLabel="WC_NO3" >Nitrate concentration parameters in the water column</keyword>
+   <keyword SDNIdent="SDN:P02::MDBO"  smallLabel="Metoid_Biota" >Trace metalloid concentrations in biota</keyword>
+   <keyword SDNIdent="SDN:P02::PEBI"  smallLabel="Pesticide_Biota" >Pesticide concentrations in biota</keyword>
+   <keyword SDNIdent="SDN:P02::STCO"  smallLabel="SedThermCond" >Sediment thermal conductivity</keyword>
+   <keyword SDNIdent="SDN:P02::PREX"  smallLabel="SeaLvl_Press" >Sea level expressed as pressure</keyword>
+   <keyword SDNIdent="SDN:P02::RBSC"  smallLabel="RadarBScatter" >Radar backscatter</keyword>
+   <keyword SDNIdent="SDN:P02::SSCN"  smallLabel="Side_Scan" >Side-scan sonar</keyword>
+   <keyword SDNIdent="SDN:P02::ZADX"  smallLabel="ZoobenthTaxDryBiomass" >Zoobenthos taxonomic dry weight biomass</keyword>
+   <keyword SDNIdent="SDN:P02::CCPW"  smallLabel="SedPoreWat_TCO2" >Total dissolved inorganic carbon (TCO2) in sediment pore waters</keyword>
+   <keyword SDNIdent="SDN:P02::MBAN"  smallLabel="Bath_Elev" >Bathymetry and Elevation</keyword>
+   <keyword SDNIdent="SDN:P02::AATX"  smallLabel="PhytoTaxaAreaWater" >Phytoplankton taxonomic surface area in water bodies</keyword>
+   <keyword SDNIdent="SDN:P02::ISAT"  smallLabel="Iso_Atmos" >Stable isotope enrichment in the atmosphere</keyword>
+   <keyword SDNIdent="SDN:P02::BNTC"  smallLabel="WC_NontaxBacteriaCarbBiomass" >Bacteria non taxonomy-related biomass expressed as carbon per unit volume of the water column</keyword>
+   <keyword SDNIdent="SDN:P02::AXFX"  smallLabel="Pig_flux" >Sedimentation flux of pigments in the water column</keyword>
+   <keyword SDNIdent="SDN:P02::FATX"  smallLabel="Fish_abund" >Fish abundance in water bodies</keyword>
+   <keyword SDNIdent="SDN:P02::CAPH"  smallLabel="Air_Press" >Air pressure</keyword>
+   <keyword SDNIdent="SDN:P02::NTPW"  smallLabel="SedPoreWat_Nuts" >Nutrient concentrations in sediment pore waters</keyword>
+   <keyword SDNIdent="SDN:P02::EXUV"  smallLabel="WC_Biodetritus" >Biological detritus in the water column suspended particulate material</keyword>
+   <keyword SDNIdent="SDN:P02::MLFX"  smallLabel="Metal_flux" >Sedimentation flux of metallic and metalloid elements and isotopes in water bodies</keyword>
+   <keyword SDNIdent="SDN:P02::FATM"  smallLabel="Fish_MorphAgePhys" >Fish morphology, age and physiology</keyword>
+   <keyword SDNIdent="SDN:P02::DALK"  smallLabel="WC_alkane" >Concentration of alkanes in the water column</keyword>
+   <keyword SDNIdent="SDN:P02::CD10"  smallLabel="Sed_Lipids" >Sediment lipid concentrations</keyword>
+   <keyword SDNIdent="SDN:P02::FOCA"  smallLabel="Seal_Abund" >Seal abundance</keyword>
+   <keyword SDNIdent="SDN:P02::BABI"  smallLabel="Bact_Biota" >Bacteria in biota</keyword>
+   <keyword SDNIdent="SDN:P02::ASAM"  smallLabel="Acc_bksctr" >Acoustic backscatter in the water column</keyword>
+   <keyword SDNIdent="SDN:P02::TCNT"  smallLabel="Raw_TS" >Raw temperature and/or salinity instrument output</keyword>
+   <keyword SDNIdent="SDN:P02::WVST"  smallLabel="WaveStats" >Wave height and period statistics</keyword>
+   <keyword SDNIdent="SDN:P02::TD00"  smallLabel="WC_Terrdetritus" >Terrestrial detritus in the water column suspended particulate material</keyword>
+   <keyword SDNIdent="SDN:P02::TCO2"  smallLabel="WC_TCO2" >Total dissolved inorganic carbon (TCO2) concentration in the water column</keyword>
+   <keyword SDNIdent="SDN:P02::CASD"  smallLabel="CarbPhenolAlkanolEtherAldKetSed" >Concentration of carbohydrates, phenols, alkanols (alcohols), ethers, aldehydes and ketones in sediment</keyword>
+   <keyword SDNIdent="SDN:P02::EWSB"  smallLabel="Wind" >Wind speed and direction</keyword>
+   <keyword SDNIdent="SDN:P02::IAGE"  smallLabel="Age_Ice" >Ice age</keyword>
+   <keyword SDNIdent="SDN:P02::PSST"  smallLabel="Skin_temp" >Skin temperature of the water column</keyword>
+   <keyword SDNIdent="SDN:P02::DOXY"  smallLabel="WC_O2" >Dissolved oxygen parameters in the water column</keyword>
+   <keyword SDNIdent="SDN:P02::CARS"  smallLabel="Sed_CarotPig" >Carotenoid pigment concentrations in sediment</keyword>
+   <keyword SDNIdent="SDN:P02::CARO"  smallLabel="WC_CarotPig" >Carotenoid pigment concentrations in the water column</keyword>
+   <keyword SDNIdent="SDN:P02::MEPH"  smallLabel="MesozooEggHatch" >Zooplankton egg hatch proportion</keyword>
+   <keyword SDNIdent="SDN:P02::MDPW"  smallLabel="Metoid_SedPW" >Trace metalloid concentrations in sediment pore water</keyword>
+   <keyword SDNIdent="SDN:P02::TNRP"  smallLabel="TCO2_Prod" >Dissolved inorganic carbon production and respiration in the water column</keyword>
+   <keyword SDNIdent="SDN:P02::WCOC"  smallLabel="WC_Orgcontam" >Concentration of other organic contaminants in the water column</keyword>
+   <keyword SDNIdent="SDN:P02::ATVS"  smallLabel="AtmosVis" >Atmospheric visibility and transparency</keyword>
+   <keyword SDNIdent="SDN:P02::FBAB"  smallLabel="Fish_tax_aubund_bed" >Fish taxonomy-related abundance per unit area of the bed</keyword>
+   <keyword SDNIdent="SDN:P02::LSST"  smallLabel="LandTemp" >Land surface temperature</keyword>
+   <keyword SDNIdent="SDN:P02::AQYN"  smallLabel="WC_Alkene+yne" >Concentration of alkenes and alkynes in the water column</keyword>
+   <keyword SDNIdent="SDN:P02::IRBO"  smallLabel="Iso_Biota" >Stable isotope enrichment in biota</keyword>
+   <keyword SDNIdent="SDN:P02::CING"  smallLabel="WC_PartInorgC" >Particulate inorganic carbon concentrations in the water column</keyword>
+   <keyword SDNIdent="SDN:P02::GP085"  smallLabel="FishBehav" >Fish behaviour</keyword>
+   <keyword SDNIdent="SDN:P02::FPFX"  smallLabel="Biodetritus_WCFlux" >Sedimentation flux of biological detritus in the water column</keyword>
+   <keyword SDNIdent="SDN:P02::GP087"  smallLabel="Fisheries" >Fishery characterisation</keyword>
+   <keyword SDNIdent="SDN:P02::ACYC"  smallLabel="Refno" >Reference numbers</keyword>
+   <keyword SDNIdent="SDN:P02::GP088"  smallLabel="BirdBehav" >Bird behaviour</keyword>
+   <keyword SDNIdent="SDN:P02::CATX"  smallLabel="PhytoTaxaBiomWater" >Phytoplankton taxonomic biomass in water bodies</keyword>
+   <keyword SDNIdent="SDN:P02::IWDX"  smallLabel="InsWorm_tax_afdw_biomass" >Insect and earthworm taxonomy-related ash-free dry weight biomass per unit area of the bed</keyword>
+   <keyword SDNIdent="SDN:P02::AEYN"  smallLabel="Atm_Alkene+yne" >Concentration of alkenes and alkynes in the atmosphere</keyword>
+   <keyword SDNIdent="SDN:P02::SABB"  smallLabel="Sfish_AbundBiom" >Shellfish abundance and biomass in water bodies</keyword>
+   <keyword SDNIdent="SDN:P02::WCPH"  smallLabel="WaterColPhoto" >Water column photography</keyword>
+   <keyword SDNIdent="SDN:P02::MTPW"  smallLabel="Met_SedPW" >Metal concentrations in sediment pore waters</keyword>
+   <keyword SDNIdent="SDN:P02::RWCH"  smallLabel="Precip_Chem" >Precipitation chemistry</keyword>
+   <keyword SDNIdent="SDN:P02::IACT"  smallLabel="IndAct" >Industrial activity</keyword>
+   <keyword SDNIdent="SDN:P02::LVEG"  smallLabel="LandVeg" >Land vegetation</keyword>
+   <keyword SDNIdent="SDN:P02::LWET"  smallLabel="LandWet" >Terrestrial water content</keyword>
+   <keyword SDNIdent="SDN:P02::DENS"  smallLabel="SPM_Properties" >Other physical and chemical properties of suspended particulate material</keyword>
+   <keyword SDNIdent="SDN:P02::SACT"  smallLabel="WC_surfactant" >Surfactant concentrations in water bodies</keyword>
+   <keyword SDNIdent="SDN:P02::GP080"  smallLabel="ByCatch" >Fishing by-catch</keyword>
+   <keyword SDNIdent="SDN:P02::CPRP"  smallLabel="Precip+Evap" >Precipitation and evaporation</keyword>
+   <keyword SDNIdent="SDN:P02::ATDP"  smallLabel="At_Dep_Rate" >Atmospheric deposition rates</keyword>
+   <keyword SDNIdent="SDN:P02::FR11"  smallLabel="WC_Freon" >Chlorofluorocarbon concentrations in the water column</keyword>
+   <keyword SDNIdent="SDN:P02::CORG"  smallLabel="WC_POC" >Particulate total and organic carbon concentrations in the water column</keyword>
+   <keyword SDNIdent="SDN:P02::LITH"  smallLabel="Lithology" >Lithology</keyword>
+   <keyword SDNIdent="SDN:P02::HLDE"  smallLabel="HalocDynam_WC" >Other halocarbon dynamics in water bodies</keyword>
+   <keyword SDNIdent="SDN:P02::FBAF"  smallLabel="Fish_tax_afdw_biomass" >Fish taxonomy-related ash-free dry weight biomass per unit area of the bed</keyword>
+   <keyword SDNIdent="SDN:P02::LITT"  smallLabel="Litter" >Litter abundance and type</keyword>
+   <keyword SDNIdent="SDN:P02::CPSD"  smallLabel="Sed_ChlPigs" >Chlorophyll pigment concentrations in sediment</keyword>
+   <keyword SDNIdent="SDN:P02::SIGT"  smallLabel="WC_Dens" >Density of the water column</keyword>
+   <keyword SDNIdent="SDN:P02::CEMO"  smallLabel="Cetac_Mort" >Cetacean mortality</keyword>
+   <keyword SDNIdent="SDN:P02::GP079"  smallLabel="ZooplWWBiom" >Zooplankton wet weight biomass</keyword>
+   <keyword SDNIdent="SDN:P02::CEMP"  smallLabel="Cetac_Morph_Phys" >Cetacean morphology and physiology</keyword>
+   <keyword SDNIdent="SDN:P02::GRAV"  smallLabel="Gravity" >Gravity</keyword>
+   <keyword SDNIdent="SDN:P02::ZFIT"  smallLabel="ZoobenthPhysioCondition" >Zoobenthos physiological condition parameters</keyword>
+   <keyword SDNIdent="SDN:P02::ZNTP"  smallLabel="Zoo_nontaxa_prot_biom" >Zooplankton non taxonomy-related biomass expressed as protein per unit volume of the water column</keyword>
+   <keyword SDNIdent="SDN:P02::OCPW"  smallLabel="SedPoreWat_DOC" >Dissolved organic carbon concentrations in sediment pore waters</keyword>
+   <keyword SDNIdent="SDN:P02::STMP"  smallLabel="GeolTemp" >Temperature of geological units</keyword>
+   <keyword SDNIdent="SDN:P02::A01X"  smallLabel="WC_SedFluxAlkeno" >Sedimentation flux of alkenones and alkenoates in the water column</keyword>
+   <keyword SDNIdent="SDN:P02::ZNTX"  smallLabel="Zoo_nontaxa_abund" >Zooplankton non taxonomy-related abundance per unit volume of the water column</keyword>
+   <keyword SDNIdent="SDN:P02::WRAD"  smallLabel="WC_RadAct" >Radioactivity in the water column</keyword>
+   <keyword SDNIdent="SDN:P02::BCAH"  smallLabel="Biota_PAH" >Concentration of polycyclic aromatic hydrocarbons (PAHs) in biota</keyword>
+   <keyword SDNIdent="SDN:P02::ZNTC"  smallLabel="Zoo_nontaxa_C_biomass" >Zooplankton non taxonomy-related biomass expressed as carbon per unit volume of the water column</keyword>
+   <keyword SDNIdent="SDN:P02::GP068"  smallLabel="ReptAbund" >Reptile abundance</keyword>
+   <keyword SDNIdent="SDN:P02::GP067"  smallLabel="ReptDis" >Reptile disease and parasites</keyword>
+   <keyword SDNIdent="SDN:P02::TDNT"  smallLabel="WC_DissNitrogen" >Dissolved total and organic nitrogen concentrations in the water column</keyword>
+   <keyword SDNIdent="SDN:P02::GP069"  smallLabel="ReptRepr" >Reptile reproduction</keyword>
+   <keyword SDNIdent="SDN:P02::GTCH"  smallLabel="GeoTech" >Geotechnics</keyword>
+   <keyword SDNIdent="SDN:P02::CHUM"  smallLabel="Humidity" >Atmospheric humidity</keyword>
+   <keyword SDNIdent="SDN:P02::WDNA"  smallLabel="NuclAcid_WC" >Concentration of nucleic acids in water bodies</keyword>
+   <keyword SDNIdent="SDN:P02::ZNTN"  smallLabel="Zoo_nontaxa_N_biomass" >Zooplankton non taxonomy-related biomass expressed as nitrogen per unit volume of the water column</keyword>
+   <keyword SDNIdent="SDN:P02::SREP"  smallLabel="Sfish_Rep" >Shellfish reproduction</keyword>
+   <keyword SDNIdent="SDN:P02::OPCN"  smallLabel="SPM_SiSpecies" >Concentration of silicon species in suspended particulate material</keyword>
+   <keyword SDNIdent="SDN:P02::OHAT"  smallLabel="Atm_UnclassHydrocarb" >Concentration of other hydrocarbons in the atmosphere</keyword>
+   <keyword SDNIdent="SDN:P02::RVDS"  smallLabel="Riv_flow_discharge" >River flow and discharge</keyword>
+   <keyword SDNIdent="SDN:P02::MFLZ"  smallLabel="Zoobenth_Tax_Litabund" >Zoobenthos taxonomy-related abundance per unit area of the littoral zone</keyword>
+   <keyword SDNIdent="SDN:P02::MSIC"  smallLabel="WC_IntegratedZooCarbBiomass" >Zooplankton carbon biomass per unit area of the water column</keyword>
+   <keyword SDNIdent="SDN:P02::STOM"  smallLabel="Sed_OrgMatter" >Concentration of organic matter in sediments</keyword>
+   <keyword SDNIdent="SDN:P02::SRFL"  smallLabel="Reflection" >Seismic reflection</keyword>
+   <keyword SDNIdent="SDN:P02::BLEN"  smallLabel="Animal_morph" >Zooplankton and zoobenthos morphological parameters</keyword>
+   <keyword SDNIdent="SDN:P02::FVLT"  smallLabel="RawFluorometerOutput" >Raw fluorometer output</keyword>
+   <keyword SDNIdent="SDN:P02::CLTY"  smallLabel="Atm_CloudType" >Cloud type</keyword>
+   <keyword SDNIdent="SDN:P02::SRFR"  smallLabel="Refraction" >Seismic refraction</keyword>
+   <keyword SDNIdent="SDN:P02::GP050"  smallLabel="AtmosPAH" >Concentration of polycyclic aromatic hydrocarbons (PAHs) in the atmosphere</keyword>
+   <keyword SDNIdent="SDN:P02::MTIC"  smallLabel="Met_Ice" >Metal concentrations in the cryosphere</keyword>
+   <keyword SDNIdent="SDN:P02::SIAT"  smallLabel="Silic_At" >Inorganic silicon species concentrations in the atmosphere</keyword>
+   <keyword SDNIdent="SDN:P02::WQBI"  smallLabel="WaterQualBioind" >Water quality bioindicators</keyword>
+   <keyword SDNIdent="SDN:P02::HLAT"  smallLabel="Amos_Halogen" >Concentration of inorganic halogens in the atmosphere</keyword>
+   <keyword SDNIdent="SDN:P02::MINC"  smallLabel="Min_chem" >Mineral chemistry</keyword>
+   <keyword SDNIdent="SDN:P02::ZWTX"  smallLabel="Zoobenth_tax_ww_biomass" >Zoobenthos taxonomy-related wet weight biomass per unit area of the bed</keyword>
+   <keyword SDNIdent="SDN:P02::GP048"  smallLabel="AtmosPCB" >Concentration of polychlorobiphenyls (PCBs) in the atmosphere</keyword>
+   <keyword SDNIdent="SDN:P02::OMBI"  smallLabel="Biota_OrganoMet" >Organometallic species concentration parameters in biota</keyword>
+   <keyword SDNIdent="SDN:P02::APZA"  smallLabel="VertPlatVelocity" >Vertical platform movement</keyword>
+   <keyword SDNIdent="SDN:P02::GREF"  smallLabel="Bact_Growth" >Bacterial growth</keyword>
+   <keyword SDNIdent="SDN:P02::OPFX"  smallLabel="WC_SedFlux_nonmet" >Sedimentation flux of non-metallic inorganic species in the water column</keyword>
+   <keyword SDNIdent="SDN:P02::TDPX"  smallLabel="WC_DissPhosphorus" >Dissolved total or organic phosphorus concentration in the water column</keyword>
+   <keyword SDNIdent="SDN:P02::F001"  smallLabel="WC_Lipids" >Water body lipid concentrations</keyword>
+   <keyword SDNIdent="SDN:P02::MPMN"  smallLabel="Depth" >Moored instrument depth</keyword>
+   <keyword SDNIdent="SDN:P02::PHBI"  smallLabel="Pharm_Biota" >Pharmaceutical concentrations in biota</keyword>
+   <keyword SDNIdent="SDN:P02::MXLM"  smallLabel="Struct_WC" >Structure and stability of the water column</keyword>
+   <keyword SDNIdent="SDN:P02::UREA"  smallLabel="WC_Urea" >Urea concentration parameters in the water column</keyword>
+   <keyword SDNIdent="SDN:P02::V999"  smallLabel="WC_TaxMicrozooBiovol" >Microzooplankton taxonomy-related biovolume per unit volume of the water column</keyword>
+   <keyword SDNIdent="SDN:P02::SCOC"  smallLabel="Sed_Orgcontam" >Concentration of other organic contaminants in sediment samples</keyword>
+   <keyword SDNIdent="SDN:P02::DMST"  smallLabel="WC_OrgS" >Organosulphur species concentration parameters in the water column</keyword>
+   <keyword SDNIdent="SDN:P02::ACSR"  smallLabel="ActSeisRefrac" >Active seismic refraction</keyword>
+   <keyword SDNIdent="SDN:P02::SICO"  smallLabel="OthFlux_WCBed" >Other fluxes between the bed and the water column</keyword>
+   <keyword SDNIdent="SDN:P02::SAGE"  smallLabel="Sed_Age" >Sediment age</keyword>
+   <keyword SDNIdent="SDN:P02::ZV00"  smallLabel="ZooBiovol" >Zooplankton biovolume</keyword>
+   <keyword SDNIdent="SDN:P02::PHAT"  smallLabel="Phos_At" >Inorganic phosphorus species concentrations in the atmosphere</keyword>
+   <keyword SDNIdent="SDN:P02::SCOX"  smallLabel="OthGas_WC" >Dissolved concentration parameters for other gases in the water column</keyword>
+   <keyword SDNIdent="SDN:P02::CPWC"  smallLabel="WC_ChlPigs" >Chlorophyll pigment concentrations in the water column</keyword>
+   <keyword SDNIdent="SDN:P02::PCAH"  smallLabel="SPM_PAH" >Concentration of polycyclic aromatic hydrocarbons (PAHs) in suspended particulate material</keyword>
+   <keyword SDNIdent="SDN:P02::KRTS"  smallLabel="Oth_WaveStat" >Other wave statistics</keyword>
+   <keyword SDNIdent="SDN:P02::LGCR"  smallLabel="Lagran_Currents_WC" >Lagrangian currents and transport rates in the water column</keyword>
+   <keyword SDNIdent="SDN:P02::D000"  smallLabel="Sed_TaxaDiatomAbund" >Diatom taxonomy-related abundance per unit mass of sediment</keyword>
+   <keyword SDNIdent="SDN:P02::WVSP"  smallLabel="SpectWaveParm" >Spectral wave data parameters</keyword>
+</vocabulary>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vocabulary list="SDN:L08:2:"  version="2"  date="2008-09-26T01:00:06.000"  title="SeaDataNet Data Access Restriction Policies" >
+   <accessConsts SDNIdent="SDN:L08::RS"  smallLabel="restricted" >restricted</accessConsts>
+   <accessConsts SDNIdent="SDN:L08::UN"  smallLabel="unrestricted" >unrestricted</accessConsts>
+   <accessConsts SDNIdent="SDN:L08::FE"  smallLabel="commercial_charge" >commercial charge</accessConsts>
+   <accessConsts SDNIdent="SDN:L08::OG"  smallLabel="organisation" >organisation</accessConsts>
+   <accessConsts SDNIdent="SDN:L08::CC"  smallLabel="collection_charge" >collection cost charge</accessConsts>
+   <accessConsts SDNIdent="SDN:L08::LI"  smallLabel="licence" >licence</accessConsts>
+   <accessConsts SDNIdent="SDN:L08::UK"  smallLabel="unknown" >unknown</accessConsts>
+   <accessConsts SDNIdent="SDN:L08::NA"  smallLabel="none" >no access</accessConsts>
+   <accessConsts SDNIdent="SDN:L08::MO"  smallLabel="moratorium" >moratorium</accessConsts>
+   <accessConsts SDNIdent="SDN:L08::LS"  smallLabel="SDN_licence" >SeaDataNet licence</accessConsts>
+   <accessConsts SDNIdent="SDN:L08::NC"  smallLabel="distribution_charge" >distribution cost charge</accessConsts>
+   <accessConsts SDNIdent="SDN:L08::SR"  smallLabel="academic" >academic</accessConsts>
+</vocabulary>
