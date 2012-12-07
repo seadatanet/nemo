@@ -25,8 +25,7 @@ import fr.ifremer.nemo.util.Global.E_InputType;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
 
-public class EditStationForm extends EditForm
-{
+public class EditStationForm extends EditForm {
 
 	public StationSection stationNumber;
 	public StationSection dataType, historique, comments,
@@ -40,17 +39,14 @@ public class EditStationForm extends EditForm
 
 	private StyledText textAreaStation;
 
-	public EditStationForm()
-	{
+	public EditStationForm() {
 		super();
 		myValidator = new StationFormValidator();
 	}
 
 	@Override
-	public void createEditionForm(Composite parent)
-	{
-		try
-		{
+	public void createEditionForm(Composite parent) {
+		try {
 			super.createEditionForm(parent);
 
 			formEdition.getBody().setLayout(new GridLayout());
@@ -62,7 +58,7 @@ public class EditStationForm extends EditForm
 			// bouton validate
 			createButtonValidate();
 			buttonValidate
-            .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+					.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 						@Override
 						public void widgetSelected(
 								org.eclipse.swt.events.SelectionEvent e)
@@ -79,25 +75,21 @@ public class EditStationForm extends EditForm
 			createButtonExpand();
 
 			// TODO BGT tjs utile 6536?
-			if (Nemo.getInstance().getViewMain().getMyRulesManager().isProcessCollection())
-			{
+			if (Nemo.getInstance().getViewMain().getMyRulesManager().isProcessCollection()) {
 				TableDataSurvey.initTypes();
 			}
 
 			// Draw Station Sections
 			drawSections();
-		} catch (Exception e)
-		{
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
 	@Override
-	public void razText()
-	{
+	public void razText() {
 		super.razText();
-		if (!samplingRate.getSection().isDisposed())
-		{
+		if (!samplingRate.getSection().isDisposed()) {
 			samplingRate.setEnabled(true);
 			date.setEnabledManual(true);
 			time.setEnabledManual(true);
@@ -105,8 +97,7 @@ public class EditStationForm extends EditForm
 	}
 
 	@Override
-	public void afficheEdition()
-	{
+	public void afficheEdition() {
 		super.afficheEdition();
 
 		ViewLog.aideStation();
@@ -119,8 +110,7 @@ public class EditStationForm extends EditForm
 		Nemo.getInstance().getViewMain().setAffiche(2);
 
 		// refreshEdition
-		for (NemoSection stationSection : listeSections)
-		{
+		for (NemoSection stationSection : listeSections) {
 			stationSection.dispose();
 		}
 		listeSections.clear();
@@ -128,11 +118,10 @@ public class EditStationForm extends EditForm
 		drawSections();
 
 		// FAE 3749
-		if(!Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToNetCDF())
-		{
-    		Text textCommentaire = comments.getManualInput().getLines().get(0).getValueText();
-    		GridDataFactory.fillDefaults().grab(true, true).hint(Global.SIZE_SECTION, SWT.DEFAULT).minSize(Global.SIZE_SECTION, 200)
-    				.applyTo(textCommentaire);
+		if (!Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToNetCDF()) {
+			Text textCommentaire = comments.getManualInput().getLines().get(0).getValueText();
+			GridDataFactory.fillDefaults().grab(true, true).hint(Global.SIZE_SECTION, SWT.DEFAULT).minSize(Global.SIZE_SECTION, 200)
+					.applyTo(textCommentaire);
 		}
 		// remplissage de l'IHM par le modèle chargé
 		// if (!Nemo.getInstance().getNomModele().isEmpty())
@@ -148,21 +137,19 @@ public class EditStationForm extends EditForm
 	}
 
 	@Override
-	protected void initSections()
-	{
+	protected void initSections() {
 		RulesManager rulesManager = Nemo.getInstance().getViewMain().getMyRulesManager();
 		/**
-         * ==============================================================================================
+		 * ==============================================================================================
 		 * station number
-         * ==============================================================================================
+		 * ==============================================================================================
 		 */
 		stationNumber =
 				new StationSection(Intern.S_STATIONNUMBER, Messages
 						.getString(Intern.S_STATIONNUMBER),
 						Messages.edit_station_sectionReference_lib, true, true, 1, this);
 		stationNumber.addManualInput(null, ComboType.NONE, "1"); //$NON-NLS-1$ 
-		if (!rulesManager.isTrajectory())
-		{
+		if (!rulesManager.isTrajectory()) {
 			stationNumber.getManualInput().setNbColumns(2);
 			stationNumber.getManualInput().setLabelButton(
 					Messages.edit_station_refIncrement);
@@ -171,82 +158,78 @@ public class EditStationForm extends EditForm
 				MetaInData.FACULTATIF, false, false);
 		listeSections.add(stationNumber);
 		/**
-         * ==============================================================================================
+		 * ==============================================================================================
 		 * data type
-         * ==============================================================================================
+		 * ==============================================================================================
 		 */
 
 		dataType = new StationSection(Intern.S_DATATYPE, Messages.getString(Intern.S_DATATYPE), Messages.edit_station_sectionDataType_lib, true, false, 1, this);
 		dataType.addCouple(ComboType.DATATYPE, Global.EMPTY_STRING);
 		listeSections.add(dataType);
 		/**
-         * ==============================================================================================
+		 * ==============================================================================================
 		 * acquisition history
-         * ==============================================================================================
+		 * ==============================================================================================
 		 */
-		if(!rulesManager.isConversionToNetCDF())
-		{
-    		historique =
-    				new StationSection(Intern.S_DCHIST, Messages
-    						.getString(Intern.S_DCHIST),
-    						Messages.edit_station_sectionHistory_lib, true, false, 2, this);
-    		historique.addManualInput(null, ComboType.NONE, Global.EMPTY_STRING);
-    		historique.addAutoInput(null, false, MetaInData.INTERDIT, true, false);
-    		listeSections.add(historique);
+		if (!rulesManager.isConversionToNetCDF()) {
+			historique =
+					new StationSection(Intern.S_DCHIST, Messages
+							.getString(Intern.S_DCHIST),
+							Messages.edit_station_sectionHistory_lib, true, false, 2, this);
+			historique.addManualInput(null, ComboType.NONE, Global.EMPTY_STRING);
+			historique.addAutoInput(null, false, MetaInData.INTERDIT, true, false);
+			listeSections.add(historique);
 		}
 		/**
-         * ==============================================================================================
+		 * ==============================================================================================
 		 * comments
-         * ==============================================================================================
+		 * ==============================================================================================
 		 */
-		if(!rulesManager.isConversionToNetCDF())
-        {
-    		comments =
-    				new StationSection(Intern.S_COMMENT, Messages
-    						.getString(Intern.S_COMMENT),
-    						Messages.edit_station_sectionComment_lib, true, false, 1, this);
-    		comments.addManualInput(null, ComboType.BLOCK, Global.EMPTY_STRING);
-    		comments.addAutoInput(null, true, MetaInData.INTERDIT, true, false);
-    		listeSections.add(comments);
-    		comments.getAutoInput().setVariableLabel(
-    				Messages.label_variable_comment);
-        }
+		if (!rulesManager.isConversionToNetCDF()) {
+			comments =
+					new StationSection(Intern.S_COMMENT, Messages
+							.getString(Intern.S_COMMENT),
+							Messages.edit_station_sectionComment_lib, true, false, 1, this);
+			comments.addManualInput(null, ComboType.BLOCK, Global.EMPTY_STRING);
+			comments.addAutoInput(null, true, MetaInData.INTERDIT, true, false);
+			listeSections.add(comments);
+			comments.getAutoInput().setVariableLabel(
+					Messages.label_variable_comment);
+		}
 		/**
-         * ==============================================================================================
+		 * ==============================================================================================
 		 * surface sample
-         * ==============================================================================================
+		 * ==============================================================================================
 		 */
-		if(!rulesManager.isConversionToNetCDF())
-        {
-    		surfaceSample =
-    				new StationSection(Intern.S_SURFACE, Messages
-    						.getString(Intern.S_SURFACE),
-    						Messages.edit_station_sectionSurface_lib, true, false, 2, this);
-    		surfaceSample.addManualInput(null, ComboType.NONE, Global.EMPTY_STRING);
-    		surfaceSample.addAutoInput(null, false, MetaInData.INTERDIT, true,
-    				false);
-    		listeSections.add(surfaceSample);
-        }
+		if (!rulesManager.isConversionToNetCDF()) {
+			surfaceSample =
+					new StationSection(Intern.S_SURFACE, Messages
+							.getString(Intern.S_SURFACE),
+							Messages.edit_station_sectionSurface_lib, true, false, 2, this);
+			surfaceSample.addManualInput(null, ComboType.NONE, Global.EMPTY_STRING);
+			surfaceSample.addAutoInput(null, false, MetaInData.INTERDIT, true,
+					false);
+			listeSections.add(surfaceSample);
+		}
 		/**
-         * ==============================================================================================
+		 * ==============================================================================================
 		 * UT conversion
-         * ==============================================================================================
+		 * ==============================================================================================
 		 */
-		if(!rulesManager.isConversionToNetCDF())
-        {
-    		utConvertion =
-    				new StationSection(Intern.S_OFFSETTU, Messages
-    						.getString(Intern.S_OFFSETTU), Global.EMPTY_STRING, true,
-    						false, 1, this);
-    		utConvertion.addManualInput(null, ComboType.NONE, "0.0"); //$NON-NLS-1$
-    		utConvertion.addAutoInput(null, false, MetaInData.INTERDIT, false,
-    				false);
-    		listeSections.add(utConvertion);
-        }
+
+		utConvertion =
+					new StationSection(Intern.S_OFFSETTU, Messages
+							.getString(Intern.S_OFFSETTU), Global.EMPTY_STRING, true,
+							false, 1, this);
+		utConvertion.addManualInput(null, ComboType.NONE, "0.0"); //$NON-NLS-1$
+		utConvertion.addAutoInput(null, false, MetaInData.INTERDIT, false,
+					false);
+		listeSections.add(utConvertion);
+
 		/**
-         * ==============================================================================================
+		 * ==============================================================================================
 		 * time
-         * ==============================================================================================
+		 * ==============================================================================================
 		 */
 		time =
 				new StationSection(Intern.S_TIME,
@@ -260,9 +243,9 @@ public class EditStationForm extends EditForm
 		time.addAutoInput(null, false, MetaInData.FACULTATIF, false, defaultValueEnable);
 		listeSections.add(time);
 		/**
-         * ==============================================================================================
+		 * ==============================================================================================
 		 * date
-         * ==============================================================================================
+		 * ==============================================================================================
 		 */
 		date =
 				new StationSection(Intern.S_DATE,
@@ -273,9 +256,9 @@ public class EditStationForm extends EditForm
 		date.addAutoInput(null, false, MetaInData.FACULTATIF, false, false);
 		listeSections.add(date);
 		/**
-         * ==============================================================================================
+		 * ==============================================================================================
 		 * latitude
-         * ==============================================================================================
+		 * ==============================================================================================
 		 */
 		latitude =
 				new StationSection(Intern.S_LAT, Messages.getString(Intern.S_LAT),
@@ -285,8 +268,7 @@ public class EditStationForm extends EditForm
 		latitude.addAutoInput(null, true, MetaInData.FACULTATIF, false, false);
 		listeSections.add(latitude);
 
-		if (rulesManager.isTimeSeries() && !rulesManager.isConversionToNetCDF())
-		{
+		if (rulesManager.isTimeSeries() && !rulesManager.isConversionToNetCDF()) {
 			endLatitude =
 					new StationSection(Intern.S_ELAT, Messages
 							.getString(Intern.S_ELAT), Global.EMPTY_STRING, false,
@@ -300,9 +282,9 @@ public class EditStationForm extends EditForm
 			listeSections.add(endLatitude);
 		}
 		/**
-         * ==============================================================================================
+		 * ==============================================================================================
 		 * longitude
-         * ==============================================================================================
+		 * ==============================================================================================
 		 */
 		longitude =
 				new StationSection(Intern.S_LON, Messages.getString(Intern.S_LON),
@@ -312,8 +294,7 @@ public class EditStationForm extends EditForm
 		longitude.addAutoInput(null, true, MetaInData.FACULTATIF, false, false);
 		listeSections.add(longitude);
 
-		if (rulesManager.isTimeSeries() && !rulesManager.isConversionToNetCDF())
-		{
+		if (rulesManager.isTimeSeries() && !rulesManager.isConversionToNetCDF()) {
 			endLongitude =
 					new StationSection(Intern.S_ELON, Messages
 							.getString(Intern.S_ELON), Global.EMPTY_STRING, false,
@@ -327,9 +308,9 @@ public class EditStationForm extends EditForm
 			listeSections.add(endLongitude);
 		}
 		/**
-         * ==============================================================================================
+		 * ==============================================================================================
 		 * bottom depth
-         * ==============================================================================================
+		 * ==============================================================================================
 		 */
 		// FAE 1129 : ajout TEST / position variable à DEPTH
 		depth =
@@ -342,10 +323,8 @@ public class EditStationForm extends EditForm
 		depth.addAutoInput(null, true, MetaInData.FACULTATIF, false, true);
 		listeSections.add(depth);
 
-		if (!rulesManager.isProfile())
-		{
-			if (rulesManager.isTimeSeries() && !rulesManager.isConversionToNetCDF())
-			{
+		if (!rulesManager.isProfile()) {
+			if (rulesManager.isTimeSeries() && !rulesManager.isConversionToNetCDF()) {
 				endDepth =
 						new StationSection(Intern.S_EDEPTH, Messages
 								.getString(Intern.S_EDEPTH), Global.EMPTY_STRING, true,
@@ -358,9 +337,9 @@ public class EditStationForm extends EditForm
 				listeSections.add(endDepth);
 			}
 			/**
-             * ==============================================================================================
+			 * ==============================================================================================
 			 * sensor depth
-             * ==============================================================================================
+			 * ==============================================================================================
 			 */
 			sensorDepth =
 					new StationSection(Intern.S_SENSORDEPTH, Messages
@@ -374,8 +353,7 @@ public class EditStationForm extends EditForm
 			sensorDepth.setTimeSeriesInfo(true);
 			listeSections.add(sensorDepth);
 
-			if (rulesManager.isTimeSeries() && !rulesManager.isConversionToNetCDF())
-			{
+			if (rulesManager.isTimeSeries() && !rulesManager.isConversionToNetCDF()) {
 				magneticDeclin =
 						new StationSection(Intern.S_MAGNETIC, Messages
 								.getString(Intern.S_MAGNETIC),
@@ -388,46 +366,42 @@ public class EditStationForm extends EditForm
 				listeSections.add(magneticDeclin);
 			}
 			/**
-             * ==============================================================================================
+			 * ==============================================================================================
 			 * sampling rate
-             * ==============================================================================================
+			 * ==============================================================================================
 			 */
-			if(!rulesManager.isConversionToNetCDF())
-	        {
-    			samplingRate =
-    					new StationSection(Intern.S_SAMPLINGRATE, Messages
-    							.getString(Intern.S_SAMPLINGRATE),
-    							Messages.edit_station_sectionSampling_lib, true, true, 1, this);
-    			samplingRate.addConverter(ComboType.FRQ, "*1"); //$NON-NLS-1$
-    			samplingRate.addManualInput(null, ComboType.NONE, "0"); //$NON-NLS-1$
-    			samplingRate.addAutoInput(null, false, MetaInData.INTERDIT, false,
-    					false);
-    			samplingRate.setTimeSeriesInfo(true);
-    			listeSections.add(samplingRate);
-	        }
+			if (!rulesManager.isConversionToNetCDF()) {
+				samplingRate =
+						new StationSection(Intern.S_SAMPLINGRATE, Messages
+								.getString(Intern.S_SAMPLINGRATE),
+								Messages.edit_station_sectionSampling_lib, true, true, 1, this);
+				samplingRate.addConverter(ComboType.FRQ, "*1"); //$NON-NLS-1$
+				samplingRate.addManualInput(null, ComboType.NONE, "0"); //$NON-NLS-1$
+				samplingRate.addAutoInput(null, false, MetaInData.INTERDIT, false,
+						false);
+				samplingRate.setTimeSeriesInfo(true);
+				listeSections.add(samplingRate);
+			}
 		}
 		/**
-         * ==============================================================================================
+		 * ==============================================================================================
 		 * QC flags
-         * ==============================================================================================
+		 * ==============================================================================================
 		 */
-		
-    		qcFlags =
-    				new QCflagsSection(Intern.S_QCFLAG, Messages
-    						.getString(Intern.S_QCFLAG),
-    						Messages.edit_station_sectionQCflags_lib, this);
-    		listeSections.add(qcFlags);
-    		
-        
+
+		qcFlags =
+					new QCflagsSection(Intern.S_QCFLAG, Messages
+							.getString(Intern.S_QCFLAG),
+							Messages.edit_station_sectionQCflags_lib, this);
+		listeSections.add(qcFlags);
+
 	}
 
 	@Override
-	public void actualiseEdition()
-	{
+	public void actualiseEdition() {
 		RulesManager rulesManager = Nemo.getInstance().getViewMain().getMyRulesManager();
 		// pour trajectoires et time-series
-		if (rulesManager.isTrajectory() || rulesManager.isTimeSeries())
-		{
+		if (rulesManager.isTrajectory() || rulesManager.isTimeSeries()) {
 			// si Date est saisie dans les données
 			boolean dateInData =
 					date.getAutoInput().getLines().get(0).isInData();
@@ -435,14 +409,13 @@ public class EditStationForm extends EditForm
 			boolean timeInData =
 					time.getAutoInput().getLines().get(0).isInData();
 			// => Sampling Rate : disable (car pas nécessaire pour le calcul)
-			if(!samplingRate.getSection().isDisposed())
-			    samplingRate.setEnabled(!(dateInData || timeInData));
+			if (!samplingRate.getSection().isDisposed())
+				samplingRate.setEnabled(!(dateInData || timeInData));
 			date.setEnabledManual(!(dateInData || timeInData));
 			time.setEnabledManual(!(dateInData || timeInData));
 		}
 
-		if (rulesManager.isTrajectory())
-		{
+		if (rulesManager.isTrajectory()) {
 			// in trajectory, latitude must be in data
 			latitude.setEnableInData(MetaInData.OBLIGATOIRE);
 			latitude.setEnabledManual(false);
@@ -456,10 +429,8 @@ public class EditStationForm extends EditForm
 
 		}
 
-		for (NemoSection section : listeSections)
-		{
-			if (section instanceof StationSection)
-			{
+		for (NemoSection section : listeSections) {
+			if (section instanceof StationSection) {
 				((StationSection) section).diseableLineInData();
 			}
 		}
@@ -467,48 +438,42 @@ public class EditStationForm extends EditForm
 	}
 
 	@Override
-	public void drawingBack()
-	{
+	public void drawingBack() {
 		super.drawingBack();
 
 		ViewLog.aideStation();
 		Nemo.getInstance().getViewMain().setAffiche(2);
 	}
 
-	public boolean someInData()
-	{
+	public boolean someInData() {
 		boolean inData = false;
-		for (NemoSection stationSection : listeSections)
-		{
+		for (NemoSection stationSection : listeSections) {
 			if (stationSection instanceof StationSection
-					&& ((StationSection) stationSection).isInData())
-			{
+					&& ((StationSection) stationSection).isInData()) {
 				inData = true;
 			}
 		}
 		return inData;
 	}
 
-	public void invalidEtape()
-	{
+	public void invalidEtape() {
 		super.invalidEtape(2);
 		Nemo.getInstance().getViewMain().tabStation.setText(Messages.onglet_station);
 	}
 
 	@Override
-	public void fillFromModel()
-	{
+	public void fillFromModel() {
 
 		MediaModel mModel = Nemo.getInstance().getDomain().getMedia().getModel();
 		StationModel sModel = Nemo.getInstance().getDomain().getStation().getModel();
 
-        for (NemoSection stationSection : listeSections){
-            if(!stationSection.getSection().isDisposed())
-                stationSection.fillFromModel(sModel);
+		for (NemoSection stationSection : listeSections) {
+			if (!stationSection.getSection().isDisposed())
+				stationSection.fillFromModel(sModel);
 		}
 
 		// ENDDATETIME flag !!
-        if (mModel.getInputType() != E_InputType.PROFILE){
+		if (mModel.getInputType() != E_InputType.PROFILE) {
 			PropertyModel propertyModel = sModel.propertiesAt(Intern.S_EDATE);
 			qcFlags.setFlagFragment(propertyModel
 					.getFlag(), Intern.ENDDATETIME, Messages.getString(
@@ -520,8 +485,7 @@ public class EditStationForm extends EditForm
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void initFromNewModel()
-	{
+	public void initFromNewModel() {
 		// recuperation du model correspondant
 		StationDomain stationDomain = Nemo.getInstance().getDomain().getStation();
 		StationModel stationModel = new StationModel();
@@ -530,10 +494,9 @@ public class EditStationForm extends EditForm
 		PropertyModel propertyModel;
 
 		// parcours des sections de la station pour initialisation
-		for (NemoSection stationSection : listeSections)
-		{
-		    if(!stationSection.getSection().isDisposed())
-		        stationSection.initModel(stationModel);
+		for (NemoSection stationSection : listeSections) {
+			if (!stationSection.getSection().isDisposed())
+				stationSection.initModel(stationModel);
 		}
 
 		// Completer les données manquantes
@@ -542,34 +505,31 @@ public class EditStationForm extends EditForm
 		// station.setDmHistory1(Global.EMPTY_STRING);
 		// station.setDmHistory2(Global.EMPTY_STRING);
 
-        if (inputType != E_InputType.PROFILE){
+		if (inputType != E_InputType.PROFILE) {
 			// GESTION Time/Date in Data
-            if(!samplingRate.getSection().isDisposed())
-            {
-                if (samplingRate.isEnabled()){
-                    // calcul e partir frequence echantillonnage
-                    stationDomain.setComputed(true);
-                }
-                else{
-                    // calcul position date/heure dans les donnees
-                    stationDomain.setComputed(false);
-                    // remplissage avec les données par défaut
-                    propertyModel = stationModel.propertiesAt(Intern.S_SAMPLINGRATE);
-                    propertyModel.setUserProvided(true);
-                    propertyModel.setConversionFormula("*1"); //$NON-NLS-1$
-                    //sModel.getTimeSeriesModel().setSampleRateConversion("*1"); //$NON-NLS-1$
-                    propertyModel.setUserValue(Global.ZERO);
-                    // sModel.getTimeSeriesInformation().setSamplingRate(Global.ZERO);
-                }
-            }
-            
+			if (!samplingRate.getSection().isDisposed()) {
+				if (samplingRate.isEnabled()) {
+					// calcul e partir frequence echantillonnage
+					stationDomain.setComputed(true);
+				} else {
+					// calcul position date/heure dans les donnees
+					stationDomain.setComputed(false);
+					// remplissage avec les données par défaut
+					propertyModel = stationModel.propertiesAt(Intern.S_SAMPLINGRATE);
+					propertyModel.setUserProvided(true);
+					propertyModel.setConversionFormula("*1"); //$NON-NLS-1$
+					//sModel.getTimeSeriesModel().setSampleRateConversion("*1"); //$NON-NLS-1$
+					propertyModel.setUserValue(Global.ZERO);
+					// sModel.getTimeSeriesInformation().setSamplingRate(Global.ZERO);
+				}
+			}
 
 			// DATE / HEURE DE FIN
 			propertyModel = new PropertyModel();
 			// stationModel.propertiesAt(Intern.S_EDATE);
 			propertyModel.setProperty(Intern.S_EDATE);
 			propertyModel.setUserProvided(true);
-            propertyModel.setFlag(qcFlags.getFlagFragment(Intern.ENDDATETIME)); // Flag qualite
+			propertyModel.setFlag(qcFlags.getFlagFragment(Intern.ENDDATETIME)); // Flag qualite
 			stationModel.addProperty(propertyModel);
 
 			propertyModel = new PropertyModel();
@@ -580,7 +540,7 @@ public class EditStationForm extends EditForm
 					.getFlagFragment(Intern.ENDDATETIME)); // Flag qualite
 			stationModel.addProperty(propertyModel);
 
-            if (inputType == E_InputType.TRAJECTORY){
+			if (inputType == E_InputType.TRAJECTORY) {
 				initDiseabledField(stationModel, Intern.S_ELAT);
 				initDiseabledField(stationModel, Intern.S_ELON);
 				initDiseabledField(stationModel, Intern.S_EDEPTH);
@@ -603,22 +563,19 @@ public class EditStationForm extends EditForm
 		setValidated(true);
 	}
 
-	private static void initDiseabledField(StationModel sModel, String property)
-	{
+	private static void initDiseabledField(StationModel sModel, String property) {
 		PropertyModel propertyModel = new PropertyModel();
 		propertyModel.setProperty(property);
-        propertyModel.setFlag(Nemo.getInstance().getViewMain().getEditStationForm().qcFlags.getFlagFragment(property)); // Flag qualite
+		propertyModel.setFlag(Nemo.getInstance().getViewMain().getEditStationForm().qcFlags.getFlagFragment(property)); // Flag qualite
 		propertyModel.setToCompute(true);
 		sModel.addProperty(propertyModel);
 	}
 
-	public StyledText getTextAreaStation()
-	{
+	public StyledText getTextAreaStation() {
 		return textAreaStation;
 	}
 
-	public void setTextAreaStation(StyledText textAreaStation)
-	{
+	public void setTextAreaStation(StyledText textAreaStation) {
 		this.textAreaStation = textAreaStation;
 	}
 }

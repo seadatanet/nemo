@@ -218,17 +218,17 @@ This step is performed to indicate NEMO where to find the data measurements in i
 This information concern the name and unit of the measured parameters, their default values (found in the input file 
 when the parameter is not measured), and the format in which the parameter will be kept in the output file.
 
-+ First step is to choose the parameters list to use: P091, P011viaP091 or P011viaP021 If output format MEDATLAS has been selected, P011 via P021 can not be chosen.
++ First step is to choose the parameters list to use: P09, P01viaP09 or P01viaP02 If output format MEDATLAS has been selected, P01 via P02 can not be chosen.
 + Then choose the measure type: below sea surface or below sea bed.
 + Then fulfil the parameter table
 
   - For vertical profiles :
-    MEDATLAS format (Parameter list P091, or P011 via P091), in the water column :
+    MEDATLAS format (Parameter list P09, or P01 via P09), in the water column :
        PRES is a mandatory parameter. It is set, by default, in the parameter table; it can be deleted from the table only if DEPH, TEMP and PSAL are in the table.
        In that case, pressure will be calculated by NEMO and added in the output MEDATLAS file to be compliant with MEDATLAS requirements.
        PRES or DEPH must be in first position in the parameter table.
   
-    MEDATLAS format (Parameter list P091, or P011 via P091), in the sediment :
+    MEDATLAS format (Parameter list P09, or P01 via P09), in the sediment :
        DPSF (Depth below sea floor) must be in first position in the parameter table.
   
     ODV format (all parameter lists),in the water column:
@@ -236,7 +236,7 @@ when the parameter is not measured), and the format in which the parameter will 
        Depth is a mandatory parameter in ODV and will be calculated from the pressure if it is not included in the parameter table.  
        
     ODV format (all parameter lists), in the sediment:
-       Depth below sea bed is mandatory : DPSF if P091, COREDIST if P011 via P091 or P011 via P021
+       Depth below sea bed is mandatory : DPSF if P09, COREDIST if P01 via P09 or P01 via P02
 	
 	NEMO accepts non-numeric parameters for ODV format. 
 	Click on the checkbox, in the left column, to specify the parameter is not numeric.
@@ -250,8 +250,8 @@ when the parameter is not measured), and the format in which the parameter will 
 + Final step is to input the vertical references (in the right hand side of the screen): This step is needed to control the user input: existence of mandatory parameters, their position in the list, it also
   identify the parameters that will be used by NEMO for automatic additions of calculated parameters (see user manual).
     The parameters list in these fields are filled from the parameters added in the table.
-    If P091 or P011viaP091 is used, the vertical reference fields will be automatically selected when click on the "Validate step" button (.
-    If P011viaP021 is used, you will have to select manually the vertical reference.
+    If P09 or P01viaP09 is used, the vertical reference fields will be automatically selected when click on the "Validate step" button (.
+    If P01viaP02 is used, you will have to select manually the vertical reference.
 
 ==Right click on the table of measured parameters to open the Menu with the following items :
 =============================================================================================
@@ -266,18 +266,18 @@ when the parameter is not measured), and the format in which the parameter will 
  
 - Parameter list:
    To add a new parameter in the table of measured parameters. 
-   + If chosen parameter list is P091
-       The selected parameter in P091 list is added in the table, with some values filled by default; all these default values can be modified. 
-   +If chosen parameter list is P011 via P091
-       A first window with P091 codes opens, then when a P091 code is selected, another window with the corresponding P011 opens
-       You have to select the P011 parameter in the list, it is then  added in the table, with some values filled by default; all these default values can be modified.
-   +If chosen parameter list is P011 via P021
-       A first window with P021 codes opens, then when a P021 code is selected, another window with the corresponding P011 opens
-      You have to select the P011 parameter in the list, it is then  added in the table, with no default values.
+   + If chosen parameter list is P09
+       The selected parameter in P09 list is added in the table, with some values filled by default; all these default values can be modified. 
+   +If chosen parameter list is P01 via P09
+       A first window with P09 codes opens, then when a P09 code is selected, another window with the corresponding P01 opens
+       You have to select the P01 parameter in the list, it is then  added in the table, with some values filled by default; all these default values can be modified.
+   +If chosen parameter list is P01 via P02
+       A first window with P02 codes opens, then when a P02 code is selected, another window with the corresponding P01 opens
+      You have to select the P01 parameter in the list, it is then  added in the table, with no default values.
       
-- Select a P061 unit:
-   To select the unit of the parameter in P061 list.
-   This choice is only available for numeric values if P011 via P021 list of parameters is used.
+- Select a P06 unit:
+   To select the unit of the parameter in P06 list.
+   This choice is only available for numeric values if P01 via P02 list of parameters is used.
    
 - Move current parameter up:
    To move up a parameter in the table of measured parameters.
