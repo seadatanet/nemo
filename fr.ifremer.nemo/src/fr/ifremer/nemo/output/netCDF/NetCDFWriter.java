@@ -529,15 +529,45 @@ public class NetCDFWriter extends NemoWriter {
 		// add default value if existe
 		if (!zParameterModel.getParameter().getDefault().isEmpty())
 			z.addVariableAttAttribute(ParameterNames.FILLVALUE, convertValue(DataType.FLOAT, zParameterModel.getParameter().getDefault()));
+		
+		
+		//Sdn variable
+		SdnEdmoCodeVariable sdnEdmoCode = new SdnEdmoCodeVariable(instanceDim);
+		variables.put(sdnEdmoCode.getVarName(), sdnEdmoCode);
+		addVariableToNetCDF(sdnEdmoCode);
+		
+		SdnCruiseVariable sdnCruise = new SdnCruiseVariable(sdnDim);
+		addCruiseOptionalAttribute(sdnCruise);
+		variables.put(sdnCruise.getVarName(), sdnCruise);
+		addVariableToNetCDF(sdnCruise);
+		
+		SdnStationVariable sdnStation = new SdnStationVariable(sdnDim);
+		variables.put(sdnStation.getVarName(), sdnStation);
+		addVariableToNetCDF(sdnStation);
+		
+		SdnLocalCdiIdVariable SdnLocalCdi = new SdnLocalCdiIdVariable(sdnDim, getFeatureType() + "_id");
+		variables.put(SdnLocalCdi.getVarName(), SdnLocalCdi);
+		addVariableToNetCDF(SdnLocalCdi);
+		
+		if (!cruiseDomain.getDataSetRef().isEmpty()) {
+			SdnReferenceVariable srnRef = new SdnReferenceVariable(sdnDim);
+			variables.put(srnRef.getVarName(), srnRef);
+			addVariableToNetCDF(srnRef);
+		}
+		
+		SdnBotDepthVariable SdnBotDepth = new SdnBotDepthVariable(instanceDim);
+		variables.put(SdnBotDepth.getVarName(), SdnBotDepth);
+		addVariableToNetCDF(SdnBotDepth);
+		
 
 		variables.put(longitude.getVarName(), longitude);
 		addVariableToNetCDF(longitude);
 		variables.put(latitude.getVarName(), latitude);
 		addVariableToNetCDF(latitude);
-		variables.put(zParameterModel.getParameter().getLocalCode(), z);
-		addVariableToNetCDF(z);
 		variables.put(time.getVarName(), time);
 		addVariableToNetCDF(time);
+		variables.put(zParameterModel.getParameter().getLocalCode(), z);
+		addVariableToNetCDF(z);
 
 		//Geophysical variable
 		ParameterModel[] paramAdded = dataDomain.getMyParameterManager().getNetCDFParameterModels();
@@ -581,28 +611,7 @@ public class NetCDFWriter extends NemoWriter {
 			}
 		}
 
-		//Sdn variable
-		SdnEdmoCodeVariable sdnEdmoCode = new SdnEdmoCodeVariable(instanceDim);
-		variables.put(sdnEdmoCode.getVarName(), sdnEdmoCode);
-		addVariableToNetCDF(sdnEdmoCode);
-		SdnBotDepthVariable SdnBotDepth = new SdnBotDepthVariable(instanceDim);
-		variables.put(SdnBotDepth.getVarName(), SdnBotDepth);
-		addVariableToNetCDF(SdnBotDepth);
-		SdnCruiseVariable sdnCruise = new SdnCruiseVariable(sdnDim);
-		addCruiseOptionalAttribute(sdnCruise);
-		variables.put(sdnCruise.getVarName(), sdnCruise);
-		addVariableToNetCDF(sdnCruise);
-		SdnStationVariable sdnStation = new SdnStationVariable(sdnDim);
-		variables.put(sdnStation.getVarName(), sdnStation);
-		addVariableToNetCDF(sdnStation);
-		SdnLocalCdiIdVariable SdnLocalCdi = new SdnLocalCdiIdVariable(sdnDim, getFeatureType() + "_id");
-		variables.put(SdnLocalCdi.getVarName(), SdnLocalCdi);
-		addVariableToNetCDF(SdnLocalCdi);
-		if (!cruiseDomain.getDataSetRef().isEmpty()) {
-			SdnReferenceVariable srnRef = new SdnReferenceVariable(sdnDim);
-			variables.put(srnRef.getVarName(), srnRef);
-			addVariableToNetCDF(srnRef);
-		}
+		
 
 	}
 

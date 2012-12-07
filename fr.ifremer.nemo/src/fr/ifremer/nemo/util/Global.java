@@ -1,14 +1,13 @@
 package fr.ifremer.nemo.util;
 
-public interface Global
-{
+public interface Global {
 	public static final String NEMO_ENCODING = "ISO-8859-15";
 	public static final int SIZE_SECTION = 270;
 	public static final String SDN = "SDN"; //$NON-NLS-1$
 	public static final String ZERO = "0"; //$NON-NLS-1$
 	public static final String DEFAULT_FLAG = "9"; //$NON-NLS-1$
 	public static final String WORSE_FLAG = "Z"; //$NON-NLS-1$
-    // FAE 0001131 : remplacer "\n" par "\r\n" pour retour chariot sous bloc-note
+	// FAE 0001131 : remplacer "\n" par "\r\n" pour retour chariot sous bloc-note
 	public static final String RN = "\r\n"; //$NON-NLS-1$
 	public static final String STR_CONVERT = "x"; //$NON-NLS-1$
 	public static final String UNDERSCORE = "_"; //$NON-NLS-1$
@@ -56,7 +55,9 @@ public interface Global
 	public static final String SHIP = "SHIP"; //$NON-NLS-1$
 	public static final String DATACENTRE = "DATACENTRE"; //$NON-NLS-1$
 	public static final String REGION = "REGION"; //$NON-NLS-1$
-	public static final String SUBPARAMETER = "subParameter"; //$NON-NLS-1$    
+	public static final String SUBPARAMETER = "subParameter"; //$NON-NLS-1$
+
+	public static final String VIA = "VIA"; //$NON-NLS-1$
 
 	// batch arguments
 	public static final String optInputFile = "i";
@@ -72,18 +73,17 @@ public interface Global
 	public static final String optCouplingTablePrefix = "couplingTablePrefix";
 
 	/*
-    // Types de metadonnee
-    public static final String DATETIME = "dateTime"; //$NON-NLS-1$
-    public static final String ENDDATETIME = "endDateTime"; //$NON-NLS-1$
-    // (Type de metadonnee calcules)
-    public static final String DURATION = "duration"; //$NON-NLS-1$    
-    public static final String DISTANCETOBOTTOM = "distanceToBottom"; //$NON-NLS-1$      
+	// Types de metadonnee
+	public static final String DATETIME = "dateTime"; //$NON-NLS-1$
+	public static final String ENDDATETIME = "endDateTime"; //$NON-NLS-1$
+	// (Type de metadonnee calcules)
+	public static final String DURATION = "duration"; //$NON-NLS-1$    
+	public static final String DISTANCETOBOTTOM = "distanceToBottom"; //$NON-NLS-1$      
 	 */
 	public enum E_Availability {
 		publicly, limited, confidential;
 
-		public String getCode()
-		{
+		public String getCode() {
 			String code = Global.EMPTY_STRING;
 			switch (this) {
 			case confidential:
