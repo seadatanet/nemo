@@ -40,323 +40,277 @@ import fr.ifremer.nemo.util.Preformat;
  * 
  * @author ycaudal
  */
-public class NemoShell
-{
+public class NemoShell {
 
-    /**
-     * @param args
-     */
-    public static boolean main(String inputFile, String outputFile,
-            String modelFile, Conversion conv, boolean sortDatas,
-            E_TypeConversion odvConv, String datasetRef, String cdiSummaryFile,
-            boolean couplingTableUpdate, String couplingTablePrefix,
-            Logger logger)
-    {
+	/**
+	 * @param args
+	 */
+	public static boolean main(String inputFile, String outputFile,
+			String modelFile, Conversion conv, boolean sortDatas,
+			E_TypeConversion odvConv, String datasetRef, String cdiSummaryFile,
+			boolean couplingTableUpdate, String couplingTablePrefix,
+			Logger logger) {
 
-        try
-        {
-            ManageLists.initLists();
-            Nemo nemo = Nemo.getInstance();
-            if (!new File(inputFile).exists())
-            {
-                logger.error("Input file not found");
-                return false;
-            }
-            if (!new File(modelFile).exists())
-            {
-                logger.error("Model file not found");
-                return false;
-            }
+		try {
+			ManageLists.initLists();
+			Nemo nemo = Nemo.getInstance();
+			if (!new File(inputFile).exists()) {
+				logger.error("Input file not found");
+				return false;
+			}
+			if (!new File(modelFile).exists()) {
+				logger.error("Model file not found");
+				return false;
+			}
 
-            boolean sort = sortDatas;
+			boolean sort = sortDatas;
 
-            if (!nemo.openModel(modelFile))
-            {
-                // ERREUR les deux sont UNKNOWN
-                logger.error("Error, model file not valid");
-                return false;
-            }
-            InputDomain inputDomain = Nemo.getInstance().getDomain();
-            if (inputDomain.getMedia().getModel().getSeparator() != Global.EMPTY_STRING)
-                inputFile =
-                    Preformat.run(new File(inputFile)).getAbsolutePath();
+			if (!nemo.openModel(modelFile)) {
+				// ERREUR les deux sont UNKNOWN
+				logger.error("Error, model file not valid");
+				return false;
+			}
+			InputDomain inputDomain = Nemo.getInstance().getDomain();
+			if (inputDomain.getMedia().getModel().getSeparator() != Global.EMPTY_STRING)
+				inputFile =
+						Preformat.run(new File(inputFile)).getAbsolutePath();
 
-            nemo.getDomain().getMedia().getModel().setSourcePath(inputFile);
+			nemo.getDomain().getMedia().getModel().setSourcePath(inputFile);
 
-            E_TypeConversion convertModel =
-                inputDomain.getConversion().getModel().getOutputFormat();
-            E_TypeConversion convertArgument = odvConv;
+			E_TypeConversion convertModel =
+					inputDomain.getConversion().getModel().getOutputFormat();
+			E_TypeConversion convertArgument = odvConv;
 
-            // les deux sont égaux et différents de UNKNOWN
-            if (convertModel == convertArgument)
-            {
-                if (convertModel != E_TypeConversion.UNKNOWN)
-                {
-                    nemo.getDomain().getConversion()
-                        .setCurrentConversion(convertArgument);
-                }
-                else
-                {
-                    // ERREUR les deux sont UNKNOWN
-                    logger.error("Error, Conversion format must be set");
-                    return false;
-                }
-            }
-            // Argument UNKNOWN Modele NON UNKNOWN
-            else if (convertArgument == E_TypeConversion.UNKNOWN)
-            {
-                switch (convertModel)
-                {
-                    case ODV_MONOSTATION:
-                    case ODV_MULTISTATIONS:
-                        conv = Conversion.ODV;
-                    break;
-                    case MEDATLAS:
-                        conv = Conversion.MEDATLAS;
-                    break;
-                    case  NETCDF_MONOSTATION:
-                    case  NETCDF_MULTISTATIONS:
-                        conv = Conversion.NETCDF;
-                    break;
-                    default:
-                        return false;
-                }
+			// les deux sont égaux et différents de UNKNOWN
+			if (convertModel == convertArgument) {
+				if (convertModel != E_TypeConversion.UNKNOWN) {
+					nemo.getDomain().getConversion()
+							.setCurrentConversion(convertArgument);
+				} else {
+					// ERREUR les deux sont UNKNOWN
+					logger.error("Error, Conversion format must be set");
+					return false;
+				}
+			}
+			// Argument UNKNOWN Modele NON UNKNOWN
+			else if (convertArgument == E_TypeConversion.UNKNOWN) {
+				switch (convertModel) {
+				case ODV_MONOSTATION:
+				case ODV_MULTISTATIONS:
+					conv = Conversion.ODV;
+					break;
+				case MEDATLAS:
+					conv = Conversion.MEDATLAS;
+					break;
+				case NETCDF_MONOSTATION:
+				case NETCDF_MULTISTATIONS:
+					conv = Conversion.NETCDF;
+					break;
+				default:
+					return false;
+				}
 
-                inputDomain.getConversion().setCurrentConversion(convertModel);
-            }
-            // Modele UNKNOWN Argument NON UNKNOWN
-            else if (convertModel == E_TypeConversion.UNKNOWN)
-            {
-                inputDomain.getConversion().setCurrentConversion(
-                    convertArgument);
-            }
-            else
-            {
-                // ERREUR argument et modele sont différents !!
-                logger
-                    .error("Error, Conversion format incompatible with the model");
-                return false;
-            }
+				inputDomain.getConversion().setCurrentConversion(convertModel);
+			}
+			// Modele UNKNOWN Argument NON UNKNOWN
+			else if (convertModel == E_TypeConversion.UNKNOWN) {
+				inputDomain.getConversion().setCurrentConversion(
+						convertArgument);
+			} else {
+				// ERREUR argument et modele sont différents !!
+				logger
+						.error("Error, Conversion format incompatible with the model");
+				return false;
+			}
 
-            inputDomain.getConversion().setCurrentConversion(odvConv);
+			inputDomain.getConversion().setCurrentConversion(odvConv);
 
-            inputDomain.getMedia().buildInputFilesNames();
+			inputDomain.getMedia().buildInputFilesNames();
 
-            inputDomain.getMedia().setOutputFileName(outputFile);
+			inputDomain.getMedia().setOutputFileName(outputFile);
 
-            inputDomain.getConversion().setSortData(sort);
+			inputDomain.getConversion().setSortData(sort);
 
-            // The default dataset ref
-            String strDefault = datasetRef;
+			// The default dataset ref
+			String strDefault = datasetRef;
 
-            if (strDefault.equals(Global.EMPTY_STRING))
-                strDefault = inputDomain.getCruise().getModel().getReference();
+			if (strDefault.equals(Global.EMPTY_STRING))
+				strDefault = inputDomain.getCruise().getModel().getReference();
 
-            if (strDefault.equals(Global.EMPTY_STRING))
-                strDefault = inputDomain.getCruise().getModel().getName();
+			if (strDefault.equals(Global.EMPTY_STRING))
+				strDefault = inputDomain.getCruise().getModel().getName();
 
-            if (odvConv != E_TypeConversion.MEDATLAS)
-                inputDomain.getCruise().setDataSetRef(strDefault);
+			if (odvConv != E_TypeConversion.MEDATLAS)
+				inputDomain.getCruise().setDataSetRef(strDefault);
 
-            // Is a station property in file
-            int nbLignes =
-                inputDomain.getMedia().getModel().getFileHeader()
-                        + Nemo.getInstance().getDomain().getMedia()
-                            .getShellStationHeaderNumberLines();
+			// Is a station property in file
+			int nbLignes =
+					inputDomain.getMedia().getModel().getFileHeader()
+							+ Nemo.getInstance().getDomain().getMedia()
+									.getShellStationHeaderNumberLines();
 
-            // FAE 7239
-            PropertyModel prefModel =
-                inputDomain.getStation().getModel().getReferenceProperty();
-            if (prefModel.getFragment() != null)
-            {
+			// FAE 7239
+			PropertyModel prefModel =
+					inputDomain.getStation().getModel().getReferenceProperty();
+			if (prefModel.getFragment() != null) {
 
-                // FAE 7138
-                if (prefModel.getFragment().getLastLine()
-                        + inputDomain.getMedia().getModel().getFileHeader() > nbLignes)
-                {
-                    nemo.getDomain().getStation().setSomeInData(true);
-                    prefModel.setInData(true);
-                }
-            }
+				// FAE 7138
+				if (prefModel.getFragment().getLastLine()
+						+ inputDomain.getMedia().getModel().getFileHeader() > nbLignes) {
+					nemo.getDomain().getStation().setSomeInData(true);
+					prefModel.setInData(true);
+				}
+			}
 
-            for (PropertyModel pModel : inputDomain.getStation().getModel()
-                .getProperties())
-            {
-                if (pModel.getFragment() != null)
-                {
+			for (PropertyModel pModel : inputDomain.getStation().getModel()
+					.getProperties()) {
+				if (pModel.getFragment() != null) {
 
-                    // FAE 7138
-                    if (pModel.getFragment().getLastLine()
-                            + inputDomain.getMedia().getModel().getFileHeader() > nbLignes)
-                    {
-                        nemo.getDomain().getStation().setSomeInData(true);
-                        pModel.setInData(true);
-                    }
-                }
-            }
-            
-            if (odvConv != E_TypeConversion.NETCDF_MONOSTATION || odvConv != E_TypeConversion.NETCDF_MULTISTATIONS)
-            {
-                for (ParameterModel pModel : inputDomain.getData().getModel().getParameterModels())
-                {
-                    if(pModel.getParameter().getStandardName().equals(Global.EMPTY_STRING))
-                    {
-                            logger.warn(Messages.Etape_126 + Global.SPACE + pModel.getParameter().getCodeP011());
-                    }
-                }
-            }
-            
+					// FAE 7138
+					if (pModel.getFragment().getLastLine()
+							+ inputDomain.getMedia().getModel().getFileHeader() > nbLignes) {
+						nemo.getDomain().getStation().setSomeInData(true);
+						pModel.setInData(true);
+					}
+				}
+			}
 
-            // FAE 7138
-            // on repasse sur la methode setAddedParameterModel car on n'avait
-            // pas toutes les infos necessaires
-            // la premiere fois (1er appel via openModel ci-dessus)
-            // a ce stade, il manque notamment la taille du stationHeader si
-            // celui-ci est variable
-            nemo.getDomain().getData().getMyParameterManager()
-                .setAddedParameterModel();
-            File repertory = null;
+			if (odvConv == E_TypeConversion.NETCDF_MONOSTATION || odvConv == E_TypeConversion.NETCDF_MULTISTATIONS) {
+				for (ParameterModel pModel : inputDomain.getData().getModel().getParameterModels()) {
+					if (pModel.getParameter().getStandardName().equals(Global.EMPTY_STRING)) {
+						logger.warn(Messages.Etape_126 + Global.SPACE + pModel.getParameter().getCodeP011());
+					}
+				}
+			}
 
-            if (odvConv.equals(E_TypeConversion.ODV_MONOSTATION) || odvConv.equals(E_TypeConversion.NETCDF_MONOSTATION))
-            {
-                repertory = new File(outputFile);
-            }
-            else
-            {
-                repertory = new File(outputFile).getParentFile();
-            }
+			// FAE 7138
+			// on repasse sur la methode setAddedParameterModel car on n'avait
+			// pas toutes les infos necessaires
+			// la premiere fois (1er appel via openModel ci-dessus)
+			// a ce stade, il manque notamment la taille du stationHeader si
+			// celui-ci est variable
+			nemo.getDomain().getData().getMyParameterManager()
+					.setAddedParameterModel();
+			File repertory = null;
 
-            if (!(repertory == null) && !repertory.exists())
-                repertory.mkdirs();
+			if (odvConv.equals(E_TypeConversion.ODV_MONOSTATION) || odvConv.equals(E_TypeConversion.NETCDF_MONOSTATION)) {
+				repertory = new File(outputFile);
+			} else {
+				repertory = new File(outputFile).getParentFile();
+			}
 
-            NemoWriter writer = NemoWriterFactory.createWriter(conv);
+			if (!(repertory == null) && !repertory.exists())
+				repertory.mkdirs();
 
-            writer.write(null);
+			NemoWriter writer = NemoWriterFactory.createWriter(conv);
 
-            // export CDI summary (FAE 4525)
-            if (!cdiSummaryFile.equals(Global.EMPTY_STRING))
-            {
-                CDIResumeWriter.getInstance().reset();
-                CDIResumeWriter.getInstance().setNomFichierSortie(
-                    cdiSummaryFile);
-                CDIResumeWriter.getInstance().writeResume(conv);
-            }
+			writer.write(null);
 
-            if (couplingTableUpdate)
-            {
-                // update coupling table (FAE 4525)
-                MappingTable mappingTable = new MappingTable();
-                mapping(logger, conv, mappingTable, couplingTablePrefix);
-                // mappingTable.exporter(couplingTableFile, logger);
-            }
+			// export CDI summary (FAE 4525)
+			if (!cdiSummaryFile.equals(Global.EMPTY_STRING)) {
+				CDIResumeWriter.getInstance().reset();
+				CDIResumeWriter.getInstance().setNomFichierSortie(
+						cdiSummaryFile);
+				CDIResumeWriter.getInstance().writeResume(conv);
+			}
 
-            return true;
-        }
-        catch (Exception e)
-        {
-            logger.error(e.getMessage(), e);
-            logger.error(Nemo.getInstance()
-                .getErrorMessageWithFileAndLineNumber());
-            return false;
-        }
+			if (couplingTableUpdate) {
+				// update coupling table (FAE 4525)
+				MappingTable mappingTable = new MappingTable();
+				mapping(logger, conv, mappingTable, couplingTablePrefix);
+				// mappingTable.exporter(couplingTableFile, logger);
+			}
 
-    }
+			return true;
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			logger.error(Nemo.getInstance()
+					.getErrorMessageWithFileAndLineNumber());
+			return false;
+		}
 
-    private static void mapping(Logger logger, Conversion conv,
-            MappingTable mappingTable, String couplingTablePrefix)
-            throws Exception
-    {
-        Mapping mapping;
+	}
 
-        InputDomain inputDomain = Nemo.getInstance().getDomain();
-        CruiseDomain cDomain = inputDomain.getCruise();
-        StationDomain sDomain = inputDomain.getStation();
-        String nomHorsPrefix;
-        try
-        {
-            for (String outputPath : inputDomain.getMedia().getOutputFiles()
-                .keySet())
-            {
-                File outputFile = new File(outputPath);
-                if (!outputPath.startsWith(couplingTablePrefix))
-                {
-                    logger
-                        .error("Error: couplingTablePrefix is not consistent with output path");
-                    throw new Exception();
-                }
-                if (couplingTablePrefix.endsWith(File.separator)
-                        || couplingTablePrefix.equals(outputPath))
-                {
-                    nomHorsPrefix =
-                        outputPath.replace(couplingTablePrefix,
-                            Global.EMPTY_STRING);
-                }
-                else
-                {
-                    nomHorsPrefix =
-                        outputPath.replace(
-                            couplingTablePrefix + File.separator,
-                            Global.EMPTY_STRING);
-                }
+	private static void mapping(Logger logger, Conversion conv,
+			MappingTable mappingTable, String couplingTablePrefix)
+			throws Exception {
+		Mapping mapping;
 
-                for (String stRef : inputDomain.getMedia().getOutputFiles()
-                    .get(outputPath))
-                {
-                    Station st = sDomain.getStationByRef(stRef);
-                    String localCdiId;
+		InputDomain inputDomain = Nemo.getInstance().getDomain();
+		CruiseDomain cDomain = inputDomain.getCruise();
+		StationDomain sDomain = inputDomain.getStation();
+		String nomHorsPrefix;
+		try {
+			for (String outputPath : inputDomain.getMedia().getOutputFiles()
+					.keySet()) {
+				File outputFile = new File(outputPath);
+				if (!outputPath.startsWith(couplingTablePrefix)) {
+					logger
+							.error("Error: couplingTablePrefix is not consistent with output path");
+					throw new Exception();
+				}
+				if (couplingTablePrefix.endsWith(File.separator)
+						|| couplingTablePrefix.equals(outputPath)) {
+					nomHorsPrefix =
+							outputPath.replace(couplingTablePrefix,
+									Global.EMPTY_STRING);
+				} else {
+					nomHorsPrefix =
+							outputPath.replace(
+									couplingTablePrefix + File.separator,
+									Global.EMPTY_STRING);
+				}
 
-                    localCdiId =
-                        sDomain.getLocalCdiId(cDomain, conv, st.getReference());
+				for (String stRef : inputDomain.getMedia().getOutputFiles()
+						.get(outputPath)) {
+					Station st = sDomain.getStationByRef(stRef);
+					String localCdiId;
 
-                    mapping = new Mapping(localCdiId, conv.toString());
+					localCdiId =
+							sDomain.getLocalCdiId(cDomain, conv, st.getReference());
 
-                    String modus = Mapping.MODUS_MULTISTATIONS;
+					mapping = new Mapping(localCdiId, conv.toString());
 
-                    StringBuffer filename = new StringBuffer();
-                    inputDomain.getConversion().setNomMappingHorsPrefix(
-                        nomHorsPrefix);
-                    filename.append(inputDomain.getConversion()
-                        .getNomMappingHorsPrefix());
+					String modus = Mapping.MODUS_MULTISTATIONS;
 
-                    if (inputDomain.getMedia().getModel().getProcessType() == E_ProcessType.CRUISE_DIR)
-                    {
-                        if (!filename.equals(Global.EMPTY_STRING))
-                            filename.append(File.separator);
-                        if (inputDomain.getConversion().getCurrent() == E_TypeConversion.ODV_MONOSTATION
-                                ||inputDomain.getConversion().getCurrent() == E_TypeConversion.NETCDF_MONOSTATION)
-                        {
-                            filename.append(outputFile.getParentFile()
-                                .getName());
-                            filename.append(File.separator);
-                            modus = Mapping.MODUS_MONOSTATION;
-                        }
-                        filename.append(outputFile.getName());
-                    }
-                    else
-                    {
-                        if (inputDomain.getConversion().getCurrent() == E_TypeConversion.ODV_MONOSTATION 
-                                || inputDomain.getConversion().getCurrent() == E_TypeConversion.NETCDF_MONOSTATION)
-                        {
-                            if (!filename.equals(Global.EMPTY_STRING))
-                                filename.append(File.separator);
-                            filename.append(outputFile.getName());
-                            modus = Mapping.MODUS_MONOSTATION;
-                        }
-                    }
+					StringBuffer filename = new StringBuffer();
+					inputDomain.getConversion().setNomMappingHorsPrefix(
+							nomHorsPrefix);
+					filename.append(inputDomain.getConversion()
+							.getNomMappingHorsPrefix());
 
-                    mapping.setFilename(filename.toString());
-                    mapping.setDate(new Date());
-                    mapping.setModus(modus);
+					if (inputDomain.getMedia().getModel().getProcessType() == E_ProcessType.CRUISE_DIR) {
+						if (!filename.equals(Global.EMPTY_STRING))
+							filename.append(File.separator);
+						if (inputDomain.getConversion().getCurrent() == E_TypeConversion.ODV_MONOSTATION
+								|| inputDomain.getConversion().getCurrent() == E_TypeConversion.NETCDF_MONOSTATION) {
+							filename.append(outputFile.getParentFile()
+									.getName());
+							filename.append(File.separator);
+							modus = Mapping.MODUS_MONOSTATION;
+						}
+						filename.append(outputFile.getName());
+					} else {
+						if (inputDomain.getConversion().getCurrent() == E_TypeConversion.ODV_MONOSTATION
+								|| inputDomain.getConversion().getCurrent() == E_TypeConversion.NETCDF_MONOSTATION) {
+							if (!filename.equals(Global.EMPTY_STRING))
+								filename.append(File.separator);
+							filename.append(outputFile.getName());
+							modus = Mapping.MODUS_MONOSTATION;
+						}
+					}
 
-                    mappingTable.persist(mapping);
-                }
-            }
-        }
-        catch (ParseException e)
-        {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-    }
+					mapping.setFilename(filename.toString());
+					mapping.setDate(new Date());
+					mapping.setModus(modus);
+
+					mappingTable.persist(mapping);
+				}
+			}
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 }
