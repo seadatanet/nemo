@@ -520,6 +520,12 @@ public class NetCDFWriter extends NemoWriter {
 
 		}
 
+		//add DefaultFillValue
+		longitude.addVariableAttAttribute(ParameterNames.FILLVALUE, convertValue(DataType.FLOAT, ParameterValues.DEFAULT_FILLVALUE));
+		latitude.addVariableAttAttribute(ParameterNames.FILLVALUE, convertValue(DataType.FLOAT, ParameterValues.DEFAULT_FILLVALUE));
+		time.addVariableAttAttribute(ParameterNames.FILLVALUE, convertValue(DataType.FLOAT, ParameterValues.DEFAULT_FILLVALUE));
+		z.addVariableAttAttribute(ParameterNames.FILLVALUE, convertValue(DataType.FLOAT, ParameterValues.DEFAULT_FILLVALUE));
+
 		// add default value if existe
 		if (!zParameterModel.getParameter().getDefault().isEmpty())
 			z.addVariableAttAttribute(ParameterNames.FILLVALUE, convertValue(DataType.FLOAT, zParameterModel.getParameter().getDefault()));
@@ -565,7 +571,8 @@ public class NetCDFWriter extends NemoWriter {
 				// add default value if existe
 				if (!param.getParameter().getDefault().isEmpty())
 					current.addVariableAttAttribute(ParameterNames.FILLVALUE, convertValue(DataType.FLOAT, param.getParameter().getDefault()));
-
+				else
+					current.addVariableAttAttribute(ParameterNames.FILLVALUE, convertValue(DataType.FLOAT, ParameterValues.DEFAULT_FILLVALUE));
 				if (!param.getParameter().getStandardName().isEmpty())
 					current.addVariableAttAttribute(ParameterNames.STANDARD_NAME, param.getParameter().getStandardName());
 				variables.put(current.getVarName(), current);
