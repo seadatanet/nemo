@@ -14,6 +14,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.util.jar.Manifest;
 
 import javax.xml.transform.Result;
 import javax.xml.transform.Transformer;
@@ -325,8 +327,14 @@ public class Nemo {
 	}
 
 	public String getVersion() {
-		//TODO a voir
-		String version = "1.5";
+		String version = null;
+		try {
+			InputStream in = new FileInputStream("META-INF/MANIFEST.MF");
+			Manifest manifest = new Manifest(in);
+			version = manifest.getMainAttributes().getValue("Bundle-Version");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return version;
 	}
 }

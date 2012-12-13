@@ -32,6 +32,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import compare.OdvToNetCDF;
+
 import fr.ifremer.nemo.config.Configuration;
 import fr.ifremer.nemo.config.Proxy;
 import fr.ifremer.nemo.util.Conversion;
@@ -89,6 +91,7 @@ public class NemoBashTest {
 	public String couplingTablePrefix = Global.EMPTY_STRING;
 	public static Logger batchLogger;
 	public static Logger testLogger;
+	public static Logger netCDFLogger;
 
 	public static int nbTotalTests = 0;
 	public static int nbTotalFailed = 0;
@@ -111,6 +114,12 @@ public class NemoBashTest {
 		DOMConfigurator.configure("resources/log4jBatch.xml"); //$NON-NLS-1$
 		testLogger = Logger.getLogger("nemoJunits");//$NON-NLS-1$
 		testLogger.setLevel(Level.DEBUG);
+
+//		// LOGGER
+//		DOMConfigurator.configure("resources/log4j.xml"); //$NON-NLS-1$
+//		netCDFLogger = Logger.getLogger("nemoJunits");//$NON-NLS-1$
+//		netCDFLogger.setLevel(Level.DEBUG);
+
 		nbTotalTests = 0;
 		nbTotalFailed = 0;
 		nbTotalSuccess = 0;
@@ -243,6 +252,22 @@ public class NemoBashTest {
 				.info("\r\n\r\n\r\n\r\n__________________________test_P011viaP021_ODVMULTI_____________________________\r\n\r\n\r\n\r\n");
 		Assert.assertTrue(testOneType_ListConv(DataListTypeEnum.P011_VIA_P021,
 				Conversion.ODV, E_TypeConversion.ODV_MULTISTATIONS));
+	}
+
+	@Test
+	public final void test_P011viaP091_NETCDFMULTI() {
+		testLogger
+				.info("\r\n\r\n\r\n\r\n____________________________test_P011viaP091_NETCDFMULTI____________________________\r\n\r\n\r\n\r\n");
+		Assert.assertTrue(testOneType_ListConv(DataListTypeEnum.P011_VIA_P091,
+				Conversion.NETCDF, E_TypeConversion.NETCDF_MULTISTATIONS));
+	}
+
+	@Test
+	public final void test_P011viaP021_NETCDFMULTI() {
+		testLogger
+				.info("\r\n\r\n\r\n\r\n__________________________test_P011viaP021_NETCDFMULTI_____________________________\r\n\r\n\r\n\r\n");
+		Assert.assertTrue(testOneType_ListConv(DataListTypeEnum.P011_VIA_P021,
+				Conversion.NETCDF, E_TypeConversion.NETCDF_MULTISTATIONS));
 	}
 
 	/**
@@ -408,11 +433,16 @@ public class NemoBashTest {
 															outputAbsolutePath);
 											ok = res && ok;
 											if (res) {
-
-												comp =
-														compareWithReference(
-																outputAbsolutePath,
-																outputName);
+												if (conversion == Conversion.NETCDF) {
+													comp = compareWithODVReference(outputAbsolutePath,
+																	outputName);
+												} else {
+													comp =
+															compareWithReference(
+																	outputAbsolutePath,
+																	outputName);
+													message.batchCompRes = comp;
+												}
 												message.batchCompRes = comp;
 												ok = comp && ok;
 											}
@@ -565,6 +595,22 @@ public class NemoBashTest {
 		comp =
 				compare_____TwoFiles(outputAbsolutePath, outputTestName,
 						outputReferenceName);
+		return comp;
+	}
+
+	public boolean compareWithODVReference(String outputAbsolutePath,
+			String outputTestName) {
+		boolean comp = false;
+
+		String outputTest = outputAbsolutePath + "\\" + outputTestName;
+		String output_REFERENCE = outputAbsolutePath + "\\" + outputReferenceName;
+
+		try {
+			comp = OdvToNetCDF.compare(output_REFERENCE, outputTest);
+		} catch (Exception e) {
+			comp = false;
+		}
+
 		return comp;
 	}
 
