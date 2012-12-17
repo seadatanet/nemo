@@ -30,7 +30,7 @@ and the file containing this LOCAL_CDI_ID.
 3/ If needed, load a model via the model/open menu and by choosing the XML file of the model you want to use for the current dataset.
 4/ If the file contains separators, click on separator and choose the correct separator.
 5/ Select the type of data you are processing: vertical profiles, time-series or trajectories.
-6/ Select the output format: MEDATLAS or ODV (one file per station or one unique file for all the stations)
+6/ Select the output format: MEDATLAS, ODV or NETCDF (one file per station or one unique file for all the stations)
 You can click on "Sort data within stations by increasing reference parameter (Pressure or time)" if the measurements are not order by increasing reference parameter in the input file.
 
 ==Right part of the screen:
@@ -219,6 +219,7 @@ This information concern the name and unit of the measured parameters, their def
 when the parameter is not measured), and the format in which the parameter will be kept in the output file.
 
 + First step is to choose the parameters list to use: P09, P01viaP09 or P01viaP02 If output format MEDATLAS has been selected, P01 via P02 can not be chosen.
+If output format NETCDF has been selected, P09 can not be chosen and you need to choose a Standard Name if it possible.
 + Then choose the measure type: below sea surface or below sea bed.
 + Then fulfil the parameter table
 
@@ -278,6 +279,10 @@ when the parameter is not measured), and the format in which the parameter will 
 - Select a P06 unit:
    To select the unit of the parameter in P06 list.
    This choice is only available for numeric values if P01 via P02 list of parameters is used.
+   
+- Select a P07 Standard Name:
+   To select the Standard  of the parameter in P07 list.
+    This choice is only available for NETCDF Conversion.
    
 - Move current parameter up:
    To move up a parameter in the table of measured parameters.
