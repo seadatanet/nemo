@@ -37,6 +37,7 @@ import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Global.E_EndData;
 import fr.ifremer.nemo.util.Global.E_InputType;
 import fr.ifremer.nemo.util.Intern;
+import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.sdnNetCDF.SdnDimensionManager;
 import fr.ifremer.sdnNetCDF.SdnGlobalAttribute;
 import fr.ifremer.sdnNetCDF.SdnNetCDFManager;
@@ -213,6 +214,7 @@ public class NetCDFWriter extends NemoWriter {
 
 		// scan the InputFile line by line
 		while ((readedLine = bufferedReader.readLine()) != null) {
+			currentDate = DateTimeUtils.getCurrentDate(currentStation, indexRecord);
 			incrementLine();
 			if (inFileHeader())
 				continue;
@@ -490,7 +492,6 @@ public class NetCDFWriter extends NemoWriter {
 		String unit = zParameterModel.getParameter().getUnit().toLowerCase();
 		String sdnParameterUrn = getURNSyntaxe(URNtype.object, zParameterModel.getParameter().getCodeP011(), null, Intern.mapping_objet, zParameterModel.isText());
 		String sdnParameterName = zParameterModel.getParameter().getNameP011();
-		;
 
 		String sdnUomUrn;
 		if (zParameterModel.getParameter().getUnitCode() == null || zParameterModel.getParameter().getUnitCode().isEmpty()) {
@@ -499,20 +500,22 @@ public class NetCDFWriter extends NemoWriter {
 			sdnUomUrn = getURNSyntaxe(URNtype.units, zParameterModel.getParameter().getUnitCode(), null, Intern.mapping_unit, zParameterModel.isText());
 		}
 		String sdnUomName = zParameterModel.getParameter().getUnit();
-
+		String sdnBotDepthLongName = "";
 		//create Co-ordinate Variable
 		if (mediaModel.getInputType() == E_InputType.TRAJECTORY) {
-
+			sdnBotDepthLongName = Messages.typeFile_trajectory;
 			longitude = new SdnX(geoDim);
 			latitude = new SdnY(geoDim);
 			time = new SdnT(geoDim);
 			z = new SdnZ(varName, geoDim, longName, standardName, unit, sdnParameterUrn, sdnParameterName, sdnUomUrn, sdnUomName);
 		} else if (mediaModel.getInputType() == E_InputType.PROFILE) {
+			sdnBotDepthLongName = Messages.typeFile_profile;
 			longitude = new SdnX(instanceDim);
 			latitude = new SdnY(instanceDim);
 			time = new SdnT(instanceDim);
 			z = new SdnZ(varName, geoDim, longName, standardName, unit, sdnParameterUrn, sdnParameterName, sdnUomUrn, sdnUomName);
 		} else {
+			sdnBotDepthLongName = Messages.typeFile_timeseries;
 			longitude = new SdnX(instanceDim);
 			latitude = new SdnY(instanceDim);
 			time = new SdnT(geoDim);
@@ -529,41 +532,40 @@ public class NetCDFWriter extends NemoWriter {
 		// add default value if existe
 		if (!zParameterModel.getParameter().getDefault().isEmpty())
 			z.addVariableAttAttribute(ParameterNames.FILLVALUE, convertValue(DataType.FLOAT, zParameterModel.getParameter().getDefault()));
-		
-		
+
 		//Sdn variable
 		SdnEdmoCodeVariable sdnEdmoCode = new SdnEdmoCodeVariable(instanceDim);
 		variables.put(sdnEdmoCode.getVarName(), sdnEdmoCode);
 		addVariableToNetCDF(sdnEdmoCode);
-		
+
 		SdnCruiseVariable sdnCruise = new SdnCruiseVariable(sdnDim);
 		addCruiseOptionalAttribute(sdnCruise);
 		variables.put(sdnCruise.getVarName(), sdnCruise);
 		addVariableToNetCDF(sdnCruise);
-		
+
 		SdnStationVariable sdnStation = new SdnStationVariable(sdnDim);
 		variables.put(sdnStation.getVarName(), sdnStation);
 		addVariableToNetCDF(sdnStation);
-		
+
 		SdnLocalCdiIdVariable SdnLocalCdi = new SdnLocalCdiIdVariable(sdnDim, getFeatureType() + "_id");
 		variables.put(SdnLocalCdi.getVarName(), SdnLocalCdi);
 		addVariableToNetCDF(SdnLocalCdi);
-		
+
 		if (!cruiseDomain.getDataSetRef().isEmpty()) {
 			SdnReferenceVariable srnRef = new SdnReferenceVariable(sdnDim);
 			variables.put(srnRef.getVarName(), srnRef);
 			addVariableToNetCDF(srnRef);
 		}
-		
-		SdnBotDepthVariable SdnBotDepth = new SdnBotDepthVariable(instanceDim);
+
+		SdnBotDepthVariable SdnBotDepth = new SdnBotDepthVariable(instanceDim, sdnBotDepthLongName);
 		variables.put(SdnBotDepth.getVarName(), SdnBotDepth);
 		addVariableToNetCDF(SdnBotDepth);
-		
 
 		variables.put(longitude.getVarName(), longitude);
 		addVariableToNetCDF(longitude);
 		variables.put(latitude.getVarName(), latitude);
 		addVariableToNetCDF(latitude);
+
 		variables.put(time.getVarName(), time);
 		addVariableToNetCDF(time);
 		variables.put(zParameterModel.getParameter().getLocalCode(), z);
@@ -579,7 +581,8 @@ public class NetCDFWriter extends NemoWriter {
 
 		String coordinates = longitude.getVarName() + " " + latitude.getVarName() + " " + time.getVarName() + " " + z.getVarName();
 		for (ParameterModel param : params) {
-			varName = param.getParameter().getLocalCode();
+			//varName = param.getParameter().getLocalCode();
+			varName = param.getParameter().getCodeP011();
 			longName = param.getParameter().getFullName(); //entryTerm P091 ou P21
 
 			sdnParameterUrn = getURNSyntaxe(URNtype.object, param.getParameter().getCodeP011(), null, Intern.mapping_objet, param.isText());
@@ -610,8 +613,6 @@ public class NetCDFWriter extends NemoWriter {
 
 			}
 		}
-
-		
 
 	}
 
@@ -709,11 +710,11 @@ public class NetCDFWriter extends NemoWriter {
 			return ParameterNames.PRESS;
 
 		//si parametre vertical non selection alors z peut etre un parametre mesuré
-		AP_ADEPZZ01 zADEPZZ01 = new AP_ADEPZZ01();
+		AP_ADEPZZ01 zADEPZZ01 = new AP_ADEPZZ01(Conversion.NETCDF);
 		if (zADEPZZ01.getCode().equals(zParameterModel.getParameter().getCode()))
 			return ParameterNames.DEPTH;
 
-		AP_DEPHPR01 zDEPHPR01 = new AP_DEPHPR01();
+		AP_DEPHPR01 zDEPHPR01 = new AP_DEPHPR01(Conversion.NETCDF);
 		if (zDEPHPR01.getCode().equals(zParameterModel.getParameter().getCode()))
 			return ParameterNames.DEPTH;
 
@@ -732,11 +733,11 @@ public class NetCDFWriter extends NemoWriter {
 			return ParameterValues.Z_DEPTH;
 
 		//si parametre vertical non selection alors z peut etre un parametre mesuré
-		AP_ADEPZZ01 zADEPZZ01 = new AP_ADEPZZ01();
+		AP_ADEPZZ01 zADEPZZ01 = new AP_ADEPZZ01(Conversion.NETCDF);
 		if (zADEPZZ01.getCode().equals(zParameterModel.getParameter().getCode()))
 			return ParameterValues.Z_DEPTH;
 
-		AP_DEPHPR01 zDEPHPR01 = new AP_DEPHPR01();
+		AP_DEPHPR01 zDEPHPR01 = new AP_DEPHPR01(Conversion.NETCDF);
 		if (zDEPHPR01.getCode().equals(zParameterModel.getParameter().getCode()))
 			return ParameterValues.Z_DEPTH;
 

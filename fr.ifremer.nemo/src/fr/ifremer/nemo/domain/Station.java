@@ -54,17 +54,16 @@ public class Station implements Comparable {
 
 	protected String _fileName;
 
-	public Station(String fileName, String[] inputStationHeader) throws  GenerationException {
+	public Station(String fileName, String[] inputStationHeader) throws GenerationException {
 		// TODO BGT supprimer errorMsg
 		String errorMessage = "";
 		boolean isNetCDF = false;
 
-		    //isNetCDF = Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToNetCDF();
+		//isNetCDF = Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToNetCDF();
 		E_TypeConversion convertion = Nemo.getInstance().getDomain().getConversion().getCurrent();
 		if (convertion == E_TypeConversion.NETCDF_MONOSTATION || convertion == E_TypeConversion.NETCDF_MULTISTATIONS)
-		    isNetCDF = true;
+			isNetCDF = true;
 
-		
 		try {
 			_fileName = fileName;
 			_reference = null;
@@ -90,9 +89,9 @@ public class Station implements Comparable {
 				_time = -1;
 			else
 				_time = (Long) time;
-			if(!isNetCDF){
-    			errorMessage = Intern.S_OFFSETTU;
-    			_offsetTU = ((Float) stationDomain.getModel().getProperty(Intern.S_OFFSETTU).applyOn(inputStationHeader)).floatValue();
+			if (!isNetCDF) {
+				errorMessage = Intern.S_OFFSETTU;
+				_offsetTU = ((Float) stationDomain.getModel().getProperty(Intern.S_OFFSETTU).applyOn(inputStationHeader)).floatValue();
 			}
 			errorMessage = Intern.DATETIME;
 			addMetaFlag(Intern.DATETIME, stationDomain.getMetaFlag(Intern.DATETIME, inputStationHeader));
@@ -108,33 +107,33 @@ public class Station implements Comparable {
 			if (Nemo.getInstance().getDomain().getMedia().getModel().getInputType() != E_InputType.PROFILE) {
 				errorMessage = Intern.S_SENSORDEPTH;
 				_sensorDepth = ((Float) stationDomain.getModel().getProperty(Intern.S_SENSORDEPTH).applyOn(inputStationHeader)).floatValue();
-				if(!isNetCDF){
-    				errorMessage = Intern.S_SAMPLINGRATE;
-    				_samplingRate = ((Float) stationDomain.getModel().getProperty(Intern.S_SAMPLINGRATE).applyOn(inputStationHeader)).floatValue();
-				
-    				String conversionFormula = stationDomain.getModel().getProperty(Intern.S_SAMPLINGRATE).getConversionFormula();
-    				errorMessage = Intern.S_SAMPLINGRATE;
-    				if (conversionFormula != null && conversionFormula != "") {
-    					org.nfunk.jep.JEP parser = new org.nfunk.jep.JEP();
-    					parser.addStandardFunctions();
-    					parser.addStandardConstants();
-    					parser.addVariable(Global.STR_CONVERT, _samplingRate);
-    					parser.parseExpression(Global.STR_CONVERT + conversionFormula);
-    
-    					_samplingRate = (float) parser.getValue();
-    				}
+
+				errorMessage = Intern.S_SAMPLINGRATE;
+				_samplingRate = ((Float) stationDomain.getModel().getProperty(Intern.S_SAMPLINGRATE).applyOn(inputStationHeader)).floatValue();
+
+				String conversionFormula = stationDomain.getModel().getProperty(Intern.S_SAMPLINGRATE).getConversionFormula();
+				errorMessage = Intern.S_SAMPLINGRATE;
+				if (conversionFormula != null && conversionFormula != "") {
+					org.nfunk.jep.JEP parser = new org.nfunk.jep.JEP();
+					parser.addStandardFunctions();
+					parser.addStandardConstants();
+					parser.addVariable(Global.STR_CONVERT, _samplingRate);
+					parser.parseExpression(Global.STR_CONVERT + conversionFormula);
+
+					_samplingRate = (float) parser.getValue();
 				}
+
 				errorMessage = Intern.S_SENSORDEPTH;
 				addMetaFlag(Intern.S_SENSORDEPTH, stationDomain.getMetaFlag(Intern.S_SENSORDEPTH, inputStationHeader));
 				errorMessage = Intern.ENDDATETIME;
 				addMetaFlag(Intern.ENDDATETIME, stationDomain.getMetaFlag(Intern.ENDDATETIME, inputStationHeader));
-				if(!isNetCDF){
-				    errorMessage = Intern.S_ELAT;
-				    addMetaFlag(Intern.S_ELAT, stationDomain.getMetaFlag(Intern.S_ELAT, inputStationHeader));
-				    errorMessage = Intern.S_ELON;
-				    addMetaFlag(Intern.S_ELON, stationDomain.getMetaFlag(Intern.S_ELON, inputStationHeader));
-				    errorMessage = Intern.S_EDEPTH;
-				    addMetaFlag(Intern.S_EDEPTH, stationDomain.getMetaFlag(Intern.S_EDEPTH, inputStationHeader));
+				if (!isNetCDF) {
+					errorMessage = Intern.S_ELAT;
+					addMetaFlag(Intern.S_ELAT, stationDomain.getMetaFlag(Intern.S_ELAT, inputStationHeader));
+					errorMessage = Intern.S_ELON;
+					addMetaFlag(Intern.S_ELON, stationDomain.getMetaFlag(Intern.S_ELON, inputStationHeader));
+					errorMessage = Intern.S_EDEPTH;
+					addMetaFlag(Intern.S_EDEPTH, stationDomain.getMetaFlag(Intern.S_EDEPTH, inputStationHeader));
 				}
 				errorMessage = Intern.S_SENSORDEPTH;
 				addMetaFlag(Intern.S_SENSORDEPTH, stationDomain.getMetaFlag(Intern.S_SENSORDEPTH, inputStationHeader));
@@ -156,8 +155,7 @@ public class Station implements Comparable {
 				_missingValueParams.put(paramModel.getParameter().getCode(), true);
 			}
 
-		} catch (Exception e)
-		{
+		} catch (Exception e) {
 			throw new GenerationException(errorMessage + " " + e.getMessage());
 		}
 	}
@@ -284,7 +282,7 @@ public class Station implements Comparable {
 	public void setReference(String reference) {
 		_reference = reference;
 	}
-	
+
 	/**
 	 * Getter pour _date.
 	 * 

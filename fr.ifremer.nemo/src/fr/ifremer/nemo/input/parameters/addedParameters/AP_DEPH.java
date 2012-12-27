@@ -28,11 +28,9 @@ import fr.ifremer.nemo.util.Intern;
  * @author sbregent
  * 
  */
-public class AP_DEPH extends AddedParam
-{
+public class AP_DEPH extends AddedParam {
 
-	public AP_DEPH()
-	{
+	public AP_DEPH() {
 		super();
 		_code = "DEPH";
 		_fullName = "DEPTH BELOW SEA SURFACE";
@@ -40,22 +38,31 @@ public class AP_DEPH extends AddedParam
 		cible = Conversion.ODV;
 	}
 
+	public AP_DEPH(Conversion conv) {
+		super();
+		if (conv == Conversion.ODV)
+			new AP_DEPH();
+		else {
+			_code = "DEPH";
+			_fullName = "Depth";
+			_unit = "Metres";
+			cible = Conversion.ODV;
+			_default = Global.EMPTY_STRING;
+		}
+	}
+
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public String getFormat()
-	{
+	public String getFormat() {
 		InputDomain iDomain = Nemo.getInstance().getDomain();
-		if (iDomain.getMedia().getModel().getInputType() == E_InputType.PROFILE)
-		{
+		if (iDomain.getMedia().getModel().getInputType() == E_InputType.PROFILE) {
 			ParameterModel pModelPRES = getParameterModel();
 			return pModelPRES.getParameter().getFormat();
 		}
-		for (int i = 0; i < NemoLists.getParameters().length; i++)
-		{
-			if (NemoLists.getParameters()[i].getCode().equals(this.toString()))
-			{
+		for (int i = 0; i < NemoLists.getParameters().length; i++) {
+			if (NemoLists.getParameters()[i].getCode().equals(this.toString())) {
 				return NemoLists.getParameters()[i].getFormat();
 			}
 		}
@@ -66,11 +73,9 @@ public class AP_DEPH extends AddedParam
 	 * {@inheritDoc}
 	 */
 	@Override
-	public String getFlag(Station currentStation, String inputLine)
-	{
+	public String getFlag(Station currentStation, String inputLine) {
 		InputDomain iDomain = Nemo.getInstance().getDomain();
-		if (iDomain.getMedia().getModel().getInputType() == E_InputType.PROFILE)
-		{
+		if (iDomain.getMedia().getModel().getInputType() == E_InputType.PROFILE) {
 			ParameterModel pModelPRES = getParameterModel();
 			return pModelPRES.retreiveParameterFlag(inputLine);
 		}
@@ -81,14 +86,12 @@ public class AP_DEPH extends AddedParam
 	 * {@inheritDoc}
 	 */
 	@Override
-	public String getValue(Station currentStation, String inputLine, long currentDate) throws ParseException
-	{
+	public String getValue(Station currentStation, String inputLine, long currentDate) throws ParseException {
 		String stringValue = null;
 		InputDomain iDomain = Nemo.getInstance().getDomain();
 		String formatString = this.getFormat();
 
-		if (iDomain.getMedia().getModel().getInputType() == E_InputType.PROFILE)
-		{
+		if (iDomain.getMedia().getModel().getInputType() == E_InputType.PROFILE) {
 			// récupération de la valeur de la pression
 			ParameterModel pModelPRES = getParameterModel();
 			pModelPRES.computeParameterValue(inputLine);
@@ -97,18 +100,15 @@ public class AP_DEPH extends AddedParam
 			// calculDepth
 			// FAE091 : calcul de la profondeur en fonction de la pression
 			double X, Gr, P, Depth;
-			
-			P=Double.NaN;
+
+			P = Double.NaN;
 			//TODO : voir pour l'ajout de controle.
-			try
-			{
-			    P = Double.parseDouble(valuePRES.getValue());
+			try {
+				P = Double.parseDouble(valuePRES.getValue());
+			} catch (NumberFormatException e) {
+				e.printStackTrace();
 			}
-			catch(NumberFormatException e)
-			{
-			    e.printStackTrace();
-			}
-			
+
 			X = Math.sin(currentStation.getLatitude() / 57.29578);
 			double X2 = X * X;
 
@@ -117,25 +117,21 @@ public class AP_DEPH extends AddedParam
 			Depth = Depth / Gr;
 
 			stringValue = Formatter.getSingleton().formatDouble(formatString, Depth);
-		} else
-		{
+		} else {
 			// = SensorDepth
 			stringValue = String.valueOf(currentStation.getSensorDepth());
 		}
 		return stringValue;
 	}
 
-	protected ParameterModel getParameterModel()
-	{
+	protected ParameterModel getParameterModel() {
 		InputDomain iDomain = Nemo.getInstance().getDomain();
 		String pressureCode = Nemo.getInstance().getDomain().getData().getModel().getVerticalParametersList().getP_pressure();
 		ParameterModel pModelPRES;
 		// récupération de la valeur de la pression
-		if (iDomain.getData().getModel().getDataListType() == DataListTypeEnum.P091)
-		{
+		if (iDomain.getData().getModel().getDataListType() == DataListTypeEnum.P091) {
 			pModelPRES = iDomain.getData().getModel().getParameterModel(pressureCode);
-		} else
-		{
+		} else {
 			pModelPRES = iDomain.getData().getModel().getParameterModelByP011(pressureCode);
 		}
 		return pModelPRES;

@@ -114,6 +114,8 @@ public class ParameterManager {
 	private AddedParam createAddedParam(IdParameter code) {
 		DataListTypeEnum dataList = getDataList();
 		AddedParam addedParam = null;
+		boolean isNetCDF = getConversionType() == E_TypeConversion.NETCDF_MONOSTATION || getConversionType() == E_TypeConversion.NETCDF_MULTISTATIONS;
+
 		if (code == IdParameter.YEAR) {
 			addedParam = new AP_YEAR();
 		} else if (code == IdParameter.MNTH) {
@@ -141,14 +143,23 @@ public class ParameterManager {
 		else if (code == IdParameter.generic_depthBSSurf_FromPressure) {
 			if (dataList == DataListTypeEnum.P091) {
 				addedParam = new AP_DEPH();
+				if (isNetCDF)
+					addedParam = new AP_DEPH(Conversion.NETCDF);
 			} else {
 				addedParam = new AP_DEPHPR01();
+				if (isNetCDF)
+					addedParam = new AP_DEPHPR01(Conversion.NETCDF);
 			}
 		} else if (code == IdParameter.generic_depthBSSurf_FromSensor) {
 			if (dataList == DataListTypeEnum.P091) {
 				addedParam = new AP_DEPH();
+				if (isNetCDF)
+					addedParam = new AP_DEPH(Conversion.NETCDF);
 			} else {
 				addedParam = new AP_ADEPZZ01();
+				if (isNetCDF)
+					addedParam = new AP_ADEPZZ01(Conversion.NETCDF);
+
 			}
 		}
 		return addedParam;

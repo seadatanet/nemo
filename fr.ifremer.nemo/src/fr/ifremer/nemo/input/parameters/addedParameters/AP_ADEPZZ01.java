@@ -8,6 +8,7 @@
 package fr.ifremer.nemo.input.parameters.addedParameters;
 
 import fr.ifremer.nemo.util.Conversion;
+import fr.ifremer.nemo.util.Global;
 
 /**
  * Description: description du paramètre ADEPZZ01
@@ -15,11 +16,9 @@ import fr.ifremer.nemo.util.Conversion;
  * @author sbregent
  * 
  */
-public class AP_ADEPZZ01 extends AP_DEPH
-{
+public class AP_ADEPZZ01 extends AP_DEPH {
 
-	public AP_ADEPZZ01()
-	{
+	public AP_ADEPZZ01() {
 		super();
 		_code = "ADEPZZ01";
 		_fullName = "Depth below surface of the water body";
@@ -28,6 +27,23 @@ public class AP_ADEPZZ01 extends AP_DEPH
 		_P011 = true;
 		_codeP011 = "ADEPZZ01";
 		_unitCode = "ULAA";
+	}
+
+	public AP_ADEPZZ01(Conversion conv) {
+		super();
+		if (conv == Conversion.ODV)
+			new AP_ADEPZZ01();
+		else {
+			_code = "ADEPZZ01";
+			_fullName = "Depth";
+			_unit = "Metres";
+			cible = Conversion.ODV;
+			_P011 = true;
+			_codeP011 = "ADEPZZ01";
+			_nameP011 = "Depth below surface of the water body";
+			_unitCode = "ULAA";
+			_default = Global.EMPTY_STRING;
+		}
 	}
 
 }

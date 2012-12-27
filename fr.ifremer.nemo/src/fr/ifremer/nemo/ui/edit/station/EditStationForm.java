@@ -370,18 +370,18 @@ public class EditStationForm extends EditForm {
 			 * sampling rate
 			 * ==============================================================================================
 			 */
-			if (!rulesManager.isConversionToNetCDF()) {
-				samplingRate =
+
+			samplingRate =
 						new StationSection(Intern.S_SAMPLINGRATE, Messages
 								.getString(Intern.S_SAMPLINGRATE),
 								Messages.edit_station_sectionSampling_lib, true, true, 1, this);
-				samplingRate.addConverter(ComboType.FRQ, "*1"); //$NON-NLS-1$
-				samplingRate.addManualInput(null, ComboType.NONE, "0"); //$NON-NLS-1$
-				samplingRate.addAutoInput(null, false, MetaInData.INTERDIT, false,
+			samplingRate.addConverter(ComboType.FRQ, "*1"); //$NON-NLS-1$
+			samplingRate.addManualInput(null, ComboType.NONE, "0"); //$NON-NLS-1$
+			samplingRate.addAutoInput(null, false, MetaInData.INTERDIT, false,
 						false);
-				samplingRate.setTimeSeriesInfo(true);
-				listeSections.add(samplingRate);
-			}
+			samplingRate.setTimeSeriesInfo(true);
+			listeSections.add(samplingRate);
+
 		}
 		/**
 		 * ==============================================================================================
