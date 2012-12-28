@@ -10,12 +10,15 @@
  */
 package fr.ifremer.nemo;
 
+import java.io.BufferedReader;
+import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.util.jar.Manifest;
+import java.io.InputStreamReader;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.xml.transform.Result;
 import javax.xml.transform.Transformer;
@@ -328,11 +331,36 @@ public class Nemo {
 
 	public String getVersion() {
 		String version = null;
+		//		try {
+		//			InputStream in = new FileInputStream("META-INF/MANIFEST.MF");
+		//			Manifest manifest = new Manifest(in);
+		//			version = manifest.getMainAttributes().getValue("Bundle-Version");
+		//		} catch (Exception e) {
+		//			e.printStackTrace();
+		//		}
+		Pattern p;
+		Matcher m;
 		try {
-			InputStream in = new FileInputStream("META-INF/MANIFEST.MF");
-			Manifest manifest = new Manifest(in);
-			version = manifest.getMainAttributes().getValue("Bundle-Version");
-		} catch (Exception e) {
+			// Open the file that is the first 
+			// command line parameter
+			FileInputStream fstream = new FileInputStream("resources/version.txt");
+			// Get the object of DataInputStream
+			DataInputStream in = new DataInputStream(fstream);
+			BufferedReader br = new BufferedReader(new InputStreamReader(in));
+			String strLine;
+			//Read File Line By Line
+			if ((strLine = br.readLine()) != null) {
+				version = strLine;
+				p = Pattern.compile("([a-zA-Z\\s])");
+				m = p.matcher(strLine);
+				if (m.find()) {
+					version = strLine.substring(0, m.start());
+				}
+
+			}
+			//Close the input stream
+			in.close();
+		} catch (Exception e) {//Catch exception if any
 			e.printStackTrace();
 		}
 		return version;
