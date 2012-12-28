@@ -48,6 +48,7 @@ import fr.ifremer.sdnNetCDF.variable.CoOrdinateVariable;
 import fr.ifremer.sdnNetCDF.variable.GeophysicalVariable;
 import fr.ifremer.sdnNetCDF.variable.ISdnVariable;
 import fr.ifremer.sdnNetCDF.variable.SdnBotDepthVariable;
+import fr.ifremer.sdnNetCDF.variable.SdnCrs;
 import fr.ifremer.sdnNetCDF.variable.SdnCruiseVariable;
 import fr.ifremer.sdnNetCDF.variable.SdnEdmoCodeVariable;
 import fr.ifremer.sdnNetCDF.variable.SdnLocalCdiIdVariable;
@@ -565,6 +566,10 @@ public class NetCDFWriter extends NemoWriter {
 		addVariableToNetCDF(longitude);
 		variables.put(latitude.getVarName(), latitude);
 		addVariableToNetCDF(latitude);
+
+		SdnCrs crs = new SdnCrs();
+		variables.put(crs.getVarName(), crs);
+		addVariableToNetCDF(crs);
 
 		variables.put(time.getVarName(), time);
 		addVariableToNetCDF(time);
