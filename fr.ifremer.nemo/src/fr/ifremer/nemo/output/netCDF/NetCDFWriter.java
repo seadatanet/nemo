@@ -534,6 +534,9 @@ public class NetCDFWriter extends NemoWriter {
 		if (!zParameterModel.getParameter().getDefault().isEmpty())
 			z.addVariableAttAttribute(ParameterNames.FILLVALUE, convertValue(DataType.FLOAT, zParameterModel.getParameter().getDefault()));
 
+		if (varName == ParameterNames.DEPTH)
+			z.addVariableAttAttribute(ParameterNames.POSITIVE, ParameterValues.Z_POSITIVE_DOWN);
+
 		//Sdn variable
 		SdnEdmoCodeVariable sdnEdmoCode = new SdnEdmoCodeVariable(instanceDim);
 		variables.put(sdnEdmoCode.getVarName(), sdnEdmoCode);
