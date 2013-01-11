@@ -137,6 +137,7 @@ public class NetCDFWriter extends NemoWriter {
 					}
 					writeStation(st, inputFilePath, 0);
 					writeDataToNetCDFFile();
+					netCDFWriter.finish();
 					//TODO CPT A supprimer
 					//System.out.println(netCDFWriter);
 				}
@@ -164,10 +165,8 @@ public class NetCDFWriter extends NemoWriter {
 				}
 
 				writeDataToNetCDFFile();
-				//TODO CPT A supprimer
-				//System.out.println(netCDFWriter);
+				netCDFWriter.finish();
 			}
-			netCDFWriter.finish();
 
 		} catch (Exception e) {
 			throw new GenerationException(e);
