@@ -35,25 +35,23 @@ import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.util.format.DateTimeFormat;
 import fr.ifremer.nemo.ws.WSDataType;
 
-public class EditCruiseForm extends EditForm
-{
+public class EditCruiseForm extends EditForm {
 	public Button buttonInitServeur, buttonXML;
 	public CruiseSection sectionReference;
 	public CruiseSection sectionLocalisation, sectionSource, sectionCentre;
 	public CruiseSection sectionCommentaire;
+	public CruiseSection sectionCorrespondingURL;
 	public CruiseDatatypeSection sectionType;
 	private Composite _parent;
 	private StyledText textAreaCruise;
 
-	public EditCruiseForm()
-	{
+	public EditCruiseForm() {
 		super();
 		myValidator = new CruiseFormValidator();
 	}
 
 	@Override
-	public void createEditionForm(Composite parent)
-	{
+	public void createEditionForm(Composite parent) {
 		super.createEditionForm(parent);
 
 		_parent = parent;
@@ -115,8 +113,7 @@ public class EditCruiseForm extends EditForm
 	}
 
 	@Override
-	public void afficheEdition()
-	{
+	public void afficheEdition() {
 		super.afficheEdition();
 
 		ViewLog.aideCruise();
@@ -125,25 +122,20 @@ public class EditCruiseForm extends EditForm
 		textAreaCruise.setText(Utils.texteBrut);
 		EditFileForm editFileForm = Nemo.getInstance().getViewMain().getEditFileForm();
 
-		if (!isLoaded())
-		{
+		if (!isLoaded()) {
 			// INFOS sur les fichiers utilises
-			if (editFileForm.isCruiseIsAFile())
-			{
+			if (editFileForm.isCruiseIsAFile()) {
 				// fichier campagne
 				Utils.messageInfoAppend(Messages.view_file_cruiseFile);
-			} else
-			{
+			} else {
 				// dossier campagne
 				Utils.messageInfoAppend(Messages.view_file_cruiseDir + editFileForm.nomRepertoire);
 			}
 
-			if (Nemo.getInstance().getViewMain().getMyRulesManager().isTimeSeries())
-			{
+			if (Nemo.getInstance().getViewMain().getMyRulesManager().isTimeSeries()) {
 				// Série temporelle
 				Utils.messageInfoAppend(Messages.typeFile_timeseries);
-			} else if (Nemo.getInstance().getViewMain().getMyRulesManager().isTrajectory())
-			{
+			} else if (Nemo.getInstance().getViewMain().getMyRulesManager().isTrajectory()) {
 				// Trajectoire
 				Utils.messageInfoAppend(Messages.typeFile_trajectory);
 			}
@@ -210,19 +202,16 @@ public class EditCruiseForm extends EditForm
 	}
 
 	@Override
-	public void actualiseEdition()
-	{
+	public void actualiseEdition() {
 		// pas d'actualisation nécessaire pour cet onglet
 	}
 
-	public void init_webService()
-	{
+	public void init_webService() {
 		// selection de la ref campagne dans une liste
 		Nemo.getInstance().getViewMain().getMyFilteredTableFactory().go(_parent, Global.WSSURVEY, null);
 	}
 
-	public boolean webService(String reference)
-	{
+	public boolean webService(String reference) {
 		boolean ok = true;
 		// remplissage du dataModel à partir des valeurs du ws
 
@@ -237,12 +226,10 @@ public class EditCruiseForm extends EditForm
 		 */
 		String error = new SWTProgressWS().run();
 		Utils.messageErreur("");
-		if (!error.equals(""))
-		{
+		if (!error.equals("")) {
 			Utils.messageErreur(error);
 			ok = false;
-		} else
-		{
+		} else {
 			// mise à jour de l'onglet courant
 			// DataModel.fillCruise();
 			fillFromModel();
@@ -251,8 +238,7 @@ public class EditCruiseForm extends EditForm
 		return ok;
 	}
 
-	protected void ouvertureDescriptionXML()
-	{
+	protected void ouvertureDescriptionXML() {
 		String nomXML;
 		File fich;
 
@@ -260,35 +246,29 @@ public class EditCruiseForm extends EditForm
 		// description
 
 		// verifier que un fichier est charge avant d'ouvrir un modele
-		if ((!Nemo.getInstance().getViewMain().getEditFileForm().isValidated()) && (!isLoaded()))
-		{
+		if ((!Nemo.getInstance().getViewMain().getEditFileForm().isValidated()) && (!isLoaded())) {
 			Utils.messageErreurAppend(Messages.error_cruise_openXml);
-		} else
-		{
+		} else {
 			FileDialog dialog = new FileDialog(new Shell(), SWT.OPEN | SWT.APPLICATION_MODAL);
 			dialog.setText(Messages.edit_cruise_openXML);
 			String extensions[] = new String[1];
 			extensions[0] = Global.STAR + Global.EXT_XML;
 			dialog.setFilterExtensions(extensions);
 			nomXML = dialog.open();
-			if (nomXML != null)
-			{
+			if (nomXML != null) {
 				fich = new File(nomXML);
 				Utils.messageErreurAppend("fiche:" + fich);//$NON-NLS-1$  
-				try
-				{
+				try {
 					chargementXML(fich);
 					Utils.messageOKAppend(Messages.success_openSurveyDesc);
-				} catch (Exception e)
-				{
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		}
 	}
 
-	protected void chargementXML(File fichier) throws Exception
-	{
+	protected void chargementXML(File fichier) throws Exception {
 		// reset de la liste des dataTypes
 		TableDataSurvey.types.clear();
 
@@ -302,17 +282,14 @@ public class EditCruiseForm extends EditForm
 		fillFromModel();
 	}
 
-	protected CruiseModel importXML(File fichier) throws Exception
-	{
+	protected CruiseModel importXML(File fichier) throws Exception {
 
 		// Liste des capteurs
 		ArrayList<String> listSensor = new ArrayList<String>();
 
 		WSDataType[] listWSDT = ManageLists.getDataTypes();
-		for (int i = 0; i < listWSDT.length; i++)
-		{
-			if (listWSDT[i].isSensor())
-			{
+		for (int i = 0; i < listWSDT.length; i++) {
+			if (listWSDT[i].isSensor()) {
 				listSensor.add(listWSDT[i].getCode());
 			}
 		}
@@ -322,16 +299,14 @@ public class EditCruiseForm extends EditForm
 		cruise.setDataCentre(Nemo.getInstance().getConfig().getDataCenter());
 
 		// Mej des types de donnees capteurs
-		for (int index = 0; index < cruise.getDataTypes().length; index++)
-		{
+		for (int index = 0; index < cruise.getDataTypes().length; index++) {
 			cruise.dataTypesAt(index).setSensor(listSensor.contains(cruise.dataTypesAt(index).getCode().substring(0, 3)));
 		}
 		return cruise;
 	}
 
 	@Override
-	public void drawingBack()
-	{
+	public void drawingBack() {
 		super.drawingBack();
 
 		ViewLog.aideCruise();
@@ -339,8 +314,7 @@ public class EditCruiseForm extends EditForm
 	}
 
 	@Override
-	public void initSections()
-	{
+	public void initSections() {
 
 		sectionReference = new CruiseSection(Messages.edit_cruise_sectionReference, Messages.edit_cruise_sectionReference, Messages.edit_cruise_sectionReference_lib, this);
 		sectionReference.addItem(Messages.edit_cruise_cruiseRef, ComboType.NONE, Global.EMPTY_STRING);
@@ -373,29 +347,28 @@ public class EditCruiseForm extends EditForm
 		sectionCommentaire.addItem(Global.EMPTY_STRING, ComboType.BLOCK, Global.EMPTY_STRING);
 		listeSections.add(sectionCommentaire);
 
+		sectionCorrespondingURL = new CruiseSection(Messages.edit_cruise_sectionCorrespondingUrl, Messages.edit_cruise_sectionCorrespondingUrl, Messages.edit_cruise_sectionCorrespondingUrl_lib, this);
+		sectionCorrespondingURL.addItem(Global.EMPTY_STRING, ComboType.NONE, Global.EMPTY_STRING);
+		listeSections.add(sectionCorrespondingURL);
 	}
 
 	@Override
-	protected void disposeElements()
-	{
+	protected void disposeElements() {
 		if (buttonInitServeur != null)
 			buttonInitServeur.dispose();
 		if (buttonXML != null)
 			buttonXML.dispose();
 	}
 
-	public void invalidEtape()
-	{
-		if (!Nemo.getInstance().getViewMain().tabCruise.isDisposed())
-		{
+	public void invalidEtape() {
+		if (!Nemo.getInstance().getViewMain().tabCruise.isDisposed()) {
 			super.invalidEtape(1);
 			Nemo.getInstance().getViewMain().tabCruise.setText(Messages.onglet_cruise);
 		}
 	}
 
 	@Override
-	public void initFromNewModel()
-	{
+	public void initFromNewModel() {
 		// recuperation du model correspondant
 		CruiseModel cruiseModel = new CruiseModel();
 
@@ -413,14 +386,14 @@ public class EditCruiseForm extends EditForm
 		Couple centreDonnee = sectionCentre.getItem(Messages.edit_cruise_dataCenter);
 		Couple confidentialite = sectionCentre.getItem(Messages.edit_cruise_confident);
 		Couple commentaires = sectionCommentaire.getItem(Global.EMPTY_STRING);
+		Couple correspondingURL = sectionCorrespondingURL.getItem(Global.EMPTY_STRING);
 
 		// maj des dataTypes
 		TableDataSurvey.majTypeData();
 
 		// injection des valeurs de l'IHM -> datamodel
 		// reference
-		if (Nemo.getInstance().getViewMain().tabCruise.isDisposed())
-		{
+		if (Nemo.getInstance().getViewMain().tabCruise.isDisposed()) {
 			setValidated(true);
 			return;
 		}
@@ -433,33 +406,27 @@ public class EditCruiseForm extends EditForm
 		// Localisation
 
 		// DATE DE DEBUT
-		try
-		{
+		try {
 			DateTimeFormat dateFormat = new DateTimeFormat();
 			dateFormat.setFormatString("dd/MM/yyyy"); //$NON-NLS-1$
 			Long dateLong = (Long) dateFormat.parseObject(dateDebut.getText());
 			cruiseModel.setStartDate(dateLong);
-		} catch (ParseException e)
-		{
+		} catch (ParseException e) {
 			e.printStackTrace();
-		} catch (UnsupportedEncodingException e)
-		{
+		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 		// DATE DE FIN
-		try
-		{
+		try {
 			DateTimeFormat dateFormat = new DateTimeFormat();
 			dateFormat.setFormatString("dd/MM/yyyy"); //$NON-NLS-1$
 			Long dateLong = (Long) dateFormat.parseObject(dateFin.getText());
 			cruiseModel.setEndDate(dateLong);
-		} catch (ParseException e)
-		{
+		} catch (ParseException e) {
 			e.printStackTrace();
-		} catch (UnsupportedEncodingException e)
-		{
+		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -489,6 +456,9 @@ public class EditCruiseForm extends EditForm
 		// Commentaire
 		cruiseModel.setComment(commentaires.getText());
 
+		//Corresponding URL
+		cruiseModel.setCorrespondingURL(correspondingURL.getText());
+
 		// Mise à jour du model
 		Nemo.getInstance().getDomain().getCruise().updateCruise(cruiseModel);
 
@@ -499,8 +469,7 @@ public class EditCruiseForm extends EditForm
 	}
 
 	@Override
-	public void fillFromModel()
-	{
+	public void fillFromModel() {
 		// recuperation du model correspondant
 		CruiseModel cruiseModel = Nemo.getInstance().getDomain().getCruise().getModel();
 
@@ -518,6 +487,7 @@ public class EditCruiseForm extends EditForm
 		Couple centreDonnee = sectionCentre.getItem(Messages.edit_cruise_dataCenter);
 		Couple confidentialite = sectionCentre.getItem(Messages.edit_cruise_confident);
 		Couple commentaires = sectionCommentaire.getItem(Global.EMPTY_STRING);
+		Couple correspondingURL = sectionCorrespondingURL.getItem(Global.EMPTY_STRING);
 
 		// injection des valeurs de l'IHM -> datamodel
 		// reference
@@ -539,11 +509,9 @@ public class EditCruiseForm extends EditForm
 		Utils.selectComboLibelle(region.getValueCombo(), cruiseModel.getRegionName());
 
 		// Source de donnees
-		if (cruiseModel.getCountryName() != null)
-		{
+		if (cruiseModel.getCountryName() != null) {
 			Utils.selectComboLibelle(pays.getValueCombo(), cruiseModel.getCountryName());
-		} else
-		{
+		} else {
 			Utils.selectComboCode(pays.getValueCombo(), cruiseModel.getCountryCode());
 		}
 		labo.setText(cruiseModel.getLaboratories());
@@ -559,18 +527,17 @@ public class EditCruiseForm extends EditForm
 
 		// Commentaire
 		commentaires.setText(cruiseModel.getComment());
+		correspondingURL.setText(cruiseModel.getCorrespondingURL());
 
 		// Remplissage de la liste des dataTypes de la campagne
 		sectionType.fillFromModel(cruiseModel);
 	}
 
-	public StyledText getTextAreaCruise()
-	{
+	public StyledText getTextAreaCruise() {
 		return textAreaCruise;
 	}
 
-	public void setTextAreaCruise(StyledText textAreaCruise)
-	{
+	public void setTextAreaCruise(StyledText textAreaCruise) {
 		this.textAreaCruise = textAreaCruise;
 	}
 }

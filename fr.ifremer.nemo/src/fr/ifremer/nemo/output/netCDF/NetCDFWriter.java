@@ -195,7 +195,7 @@ public class NetCDFWriter extends NemoWriter {
 		String localCdiId = stationDomain.getLocalCdiId(cruiseDomain, Conversion.NETCDF, currentStation.getReference());
 		setDataValue(indiceStation, localCdiId, ParameterNames.SDN_LOCAL_CDI_ID, null);
 		//SDN CRUISE
-		setDataValue(indiceStation, cruiseDomain.getModel().getName().trim(), ParameterNames.SDN_CRUISE, null);
+		setDataValue(indiceStation, cruiseDomain.getDataSetRef(), ParameterNames.SDN_CRUISE, null);
 		//SDN Station
 		setDataValue(indiceStation, currentStation.getReference().trim(), ParameterNames.SDN_STATION, null);
 		//SDN EDMO_CODE
@@ -207,10 +207,10 @@ public class NetCDFWriter extends NemoWriter {
 		double currentLatitude = currentStation.getLatitude();
 
 		//SDN_REFERENCE
-		if (!cruiseDomain.getDataSetRef().isEmpty())
-			setDataValue(indiceStation, cruiseDomain.getDataSetRef(), ParameterNames.SDN_REFERENCE, currentStation.getMetaFlag(Intern.S_STATIONNUMBER));
+		if (!cruiseDomain.getModel().getCorrespondingURL().isEmpty())
+			setDataValue(indiceStation, cruiseDomain.getModel().getCorrespondingURL(), ParameterNames.SDN_REFERENCE, null);
 		else
-			setDataValue(indiceStation, null, ParameterNames.SDN_REFERENCE, "0");
+			setDataValue(indiceStation, null, ParameterNames.SDN_REFERENCE, null);
 
 		// scan the InputFile line by line
 		while ((readedLine = bufferedReader.readLine()) != null) {
@@ -361,7 +361,7 @@ public class NetCDFWriter extends NemoWriter {
 		String varName;
 		//parametre ajouté
 		for (ParameterModel pModel : dataDomain.getMyParameterManager().getNetCDFParameterModels()) {
-			varName = pModel.getParameter().getLocalCode();
+			varName = pModel.getParameter().getCodeP011();
 
 			pModel.computeAddedParameterValue(currentStation, inputLine, currentDate);
 
@@ -382,7 +382,7 @@ public class NetCDFWriter extends NemoWriter {
 		// paramètres mesurés
 		for (ParameterModel pModel : dataDomain.getModel().getParameterModels()) {
 
-			varName = pModel.getParameter().getLocalCode();
+			varName = pModel.getParameter().getCodeP011();
 			paramData = stationData.get(varName);
 			//if paramData == null => no data for Parameter
 			if (paramData == null)
@@ -533,15 +533,18 @@ public class NetCDFWriter extends NemoWriter {
 		if (!zParameterModel.getParameter().getDefault().isEmpty())
 			z.addVariableAttAttribute(ParameterNames.FILLVALUE, convertValue(DataType.FLOAT, zParameterModel.getParameter().getDefault()));
 
-		if (varName == ParameterNames.DEPTH)
+		//14771
+		if (varName.equals(ParameterNames.DEPTH) || varName == ParameterNames.PRESS)
 			z.addVariableAttAttribute(ParameterNames.POSITIVE, ParameterValues.Z_POSITIVE_DOWN);
+		else if (varName == ParameterNames.HEIGHT)
+			z.addVariableAttAttribute(ParameterNames.POSITIVE, ParameterValues.Z_POSITIVE_UP);
 
 		//Sdn variable
 		SdnEdmoCodeVariable sdnEdmoCode = new SdnEdmoCodeVariable(instanceDim);
 		variables.put(sdnEdmoCode.getVarName(), sdnEdmoCode);
 		addVariableToNetCDF(sdnEdmoCode);
 
-		SdnCruiseVariable sdnCruise = new SdnCruiseVariable(sdnDim);
+		SdnCruiseVariable sdnCruise = new SdnCruiseVariable(sdnDim, cruiseDomain.getModel().getName().trim());
 		addCruiseOptionalAttribute(sdnCruise);
 		variables.put(sdnCruise.getVarName(), sdnCruise);
 		addVariableToNetCDF(sdnCruise);
@@ -575,7 +578,7 @@ public class NetCDFWriter extends NemoWriter {
 
 		variables.put(time.getVarName(), time);
 		addVariableToNetCDF(time);
-		variables.put(zParameterModel.getParameter().getLocalCode(), z);
+		variables.put(zParameterModel.getParameter().getCodeP011(), z);
 		addVariableToNetCDF(z);
 
 		//Geophysical variable
