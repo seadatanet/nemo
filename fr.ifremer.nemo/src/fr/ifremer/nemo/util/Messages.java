@@ -87,6 +87,7 @@ public class Messages {
 	public static String table_label_is_string;
 	public static String table_label_code;
 	public static String table_label_userlabel;
+	public static String table_label_long_name;
 	public static String table_label_standard_name;
 	public static String table_label_testIn;
 	public static String table_label_testOut;
@@ -522,6 +523,7 @@ public class Messages {
 	public static String Etape_131;
 	public static String Etape_132;
 	public static String Etape_133;
+	public static String Etape_134;
 
 	public static String SaveAction_1;
 	public static String SaveAction_3;

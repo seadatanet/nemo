@@ -22,6 +22,7 @@ import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.config.ManageLists;
 import fr.ifremer.nemo.domain.CruiseDomain;
 import fr.ifremer.nemo.input.CruiseModel;
+import fr.ifremer.nemo.ui.RulesManager;
 import fr.ifremer.nemo.ui.SWTProcessWS;
 import fr.ifremer.nemo.ui.SWTProgressWS;
 import fr.ifremer.nemo.ui.Utils;
@@ -197,13 +198,17 @@ public class EditCruiseForm extends EditForm {
 
 		GridDataFactory.fillDefaults().grab(true, true).hint(Global.SIZE_SECTION, 200).minSize(Global.SIZE_SECTION, 200).applyTo(textCommentaire);
 
+		actualiseEdition();
+
+		// refresh du formulaire
 		formEdition.redraw();
 		formEdition.reflow(true);
 	}
 
 	@Override
 	public void actualiseEdition() {
-		// pas d'actualisation nécessaire pour cet onglet
+		RulesManager rulesManager = Nemo.getInstance().getViewMain().getMyRulesManager();
+		sectionCorrespondingURL.setEnabled(rulesManager.isConversionToNetCDF());
 	}
 
 	public void init_webService() {

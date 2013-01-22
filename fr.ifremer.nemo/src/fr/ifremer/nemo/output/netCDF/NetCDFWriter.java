@@ -23,6 +23,7 @@ import ucar.nc2.Dimension;
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.config.VocabLists;
 import fr.ifremer.nemo.domain.DateTimeUtils;
+import fr.ifremer.nemo.domain.NetCDFLongNameParameterManager;
 import fr.ifremer.nemo.domain.Station;
 import fr.ifremer.nemo.domain.StationDomain;
 import fr.ifremer.nemo.input.ModelDescription;
@@ -295,6 +296,18 @@ public class NetCDFWriter extends NemoWriter {
 						currentLatitude = ((Double) stationDomain.getModel().getProperty(Intern.S_LAT).applyOnLine(readedLine.toString())).doubleValue();
 					if (stationDomain.getModel().getProperty(Intern.S_DATE).isInData())
 						currentDate = Long.valueOf(DateTimeUtils.convertTimestamp(readedLine));
+
+					if (station.getModel().getProperty(Intern.S_DEPTH).isInData()) {
+						Object botDepth = stationDomain.getModel().getProperty(Intern.S_DEPTH).applyOnLine(readedLine.toString());
+						setDataValue(indiceStation, botDepth.toString(), ParameterNames.SDN_BOT_DEPTH, null);
+					} else {
+						String bottomDepth = stationDomain.getModel().getProperty(Intern.S_DEPTH).getUserValue();
+						if (bottomDepth.isEmpty()) {
+							SdnBotDepthVariable SdnBotDepth = (SdnBotDepthVariable) variables.get(ParameterNames.SDN_BOT_DEPTH);
+							setDataValue(indiceStation, String.valueOf(SdnBotDepth.getFillValue()), ParameterNames.SDN_BOT_DEPTH, null);
+						} else
+							setDataValue(indiceStation, bottomDepth, ParameterNames.SDN_BOT_DEPTH, null);
+					}
 				}
 
 				//longitude
@@ -488,7 +501,9 @@ public class NetCDFWriter extends NemoWriter {
 
 		String varName = getZVarName(zParameterModel);
 		String standardName = getZStandardName(zParameterModel);
-		String longName = zParameterModel.getParameter().getFullName(); //entryTerm P091 ou P21
+		String longName = NetCDFLongNameParameterManager.getInstance().getUserLongName(zParameterModel.getParameter().getCodeP011());
+		if (longName == null)
+			throw new Exception(Messages.Etape_134 + Global.SPACE + zParameterModel.getParameter().getCodeP011());
 		String unit = zParameterModel.getParameter().getUnit().toLowerCase();
 		String sdnParameterUrn = getURNSyntaxe(URNtype.object, zParameterModel.getParameter().getCodeP011(), null, Intern.mapping_objet, zParameterModel.isText());
 		String sdnParameterName = zParameterModel.getParameter().getNameP011();
@@ -501,6 +516,8 @@ public class NetCDFWriter extends NemoWriter {
 		}
 		String sdnUomName = zParameterModel.getParameter().getUnit();
 		String sdnBotDepthLongName = "";
+
+		SdnBotDepthVariable SdnBotDepth = new SdnBotDepthVariable(instanceDim, sdnBotDepthLongName);
 		//create Co-ordinate Variable
 		if (mediaModel.getInputType() == E_InputType.TRAJECTORY) {
 			sdnBotDepthLongName = Messages.typeFile_trajectory;
@@ -508,6 +525,7 @@ public class NetCDFWriter extends NemoWriter {
 			latitude = new SdnY(geoDim);
 			time = new SdnT(geoDim);
 			z = new SdnZ(varName, geoDim, longName, standardName, unit, sdnParameterUrn, sdnParameterName, sdnUomUrn, sdnUomName);
+			SdnBotDepth = new SdnBotDepthVariable(geoDim, sdnBotDepthLongName);
 		} else if (mediaModel.getInputType() == E_InputType.PROFILE) {
 			sdnBotDepthLongName = Messages.typeFile_profile;
 			longitude = new SdnX(instanceDim);
@@ -563,7 +581,6 @@ public class NetCDFWriter extends NemoWriter {
 			addVariableToNetCDF(srnRef);
 		}
 
-		SdnBotDepthVariable SdnBotDepth = new SdnBotDepthVariable(instanceDim, sdnBotDepthLongName);
 		variables.put(SdnBotDepth.getVarName(), SdnBotDepth);
 		addVariableToNetCDF(SdnBotDepth);
 
@@ -593,7 +610,9 @@ public class NetCDFWriter extends NemoWriter {
 		for (ParameterModel param : params) {
 			//varName = param.getParameter().getLocalCode();
 			varName = param.getParameter().getCodeP011();
-			longName = param.getParameter().getFullName(); //entryTerm P091 ou P21
+			longName = NetCDFLongNameParameterManager.getInstance().getUserLongName(param.getParameter().getCodeP011());
+			if (longName == null)
+				throw new Exception(Messages.Etape_134 + Global.SPACE + zParameterModel.getParameter().getCodeP011());
 
 			sdnParameterUrn = getURNSyntaxe(URNtype.object, param.getParameter().getCodeP011(), null, Intern.mapping_objet, param.isText());
 			sdnParameterName = param.getParameter().getNameP011();

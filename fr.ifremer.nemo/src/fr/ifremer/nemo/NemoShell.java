@@ -223,9 +223,9 @@ public class NemoShell {
 
 			return true;
 		} catch (Exception e) {
-			logger.error(e.getMessage(), e);
-			logger.error(Nemo.getInstance()
-					.getErrorMessageWithFileAndLineNumber());
+			logger.error(e.getMessage());
+			e.printStackTrace();
+			logger.error(Nemo.getInstance().getErrorMessageWithFileAndLineNumber());
 			return false;
 		}
 

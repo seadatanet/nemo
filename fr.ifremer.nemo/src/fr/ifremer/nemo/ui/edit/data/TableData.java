@@ -24,6 +24,8 @@ import fr.ifremer.nemo.config.NemoLists;
 import fr.ifremer.nemo.config.VocabLists;
 import fr.ifremer.nemo.domain.LabelParameterManager;
 import fr.ifremer.nemo.domain.MediaDomain;
+import fr.ifremer.nemo.domain.NetCDFLongNameParameterManager;
+import fr.ifremer.nemo.domain.StandardNameParameterManager;
 import fr.ifremer.nemo.ui.FilteredTableFactory;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.tables.FormatsFilteredTable;
@@ -116,9 +118,10 @@ public class TableData {
 	private static String COL_END_FLAG = "COL_END_FLAG"; //$NON-NLS-1$
 	private static String COL_UNIT_CODE = "COL_UNIT_CODE"; //$NON-NLS-1$
 	private static String COL_STANDARD_NAME = "COL_STANDARD_NAME"; //$NON-NLS-1$
+	private static String COL_LONG_NAME = "COL_LONG_NAME"; //$NON-NLS-1$
 
 	private final String[] colOrder =
-	{ COL_IS_STRING, COL_CODE, COL_STANDARD_NAME, COL_USERLABEL, COL_UNIT,
+	{ COL_IS_STRING, COL_CODE, COL_STANDARD_NAME, COL_LONG_NAME, COL_USERLABEL, COL_UNIT,
 			COL_CONVERSION, COL_TEST, COL_START, COL_END, COL_FORMAT,
 			COL_VALUE_IN, COL_VALUE_OUT, COL_TEST_IN, COL_TEST_OUT,
 			COL_START_FLAG, COL_END_FLAG, COL_UNIT_CODE };
@@ -178,6 +181,10 @@ public class TableData {
 		return Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToNetCDF();
 	}
 
+	private boolean isLongNameWritable() {
+		return Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToNetCDF();
+	}
+
 	private boolean isCheckBoxWritable() {
 		return !(Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToMedatlas() || Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToNetCDF());
 	}
@@ -208,6 +215,12 @@ public class TableData {
 		col =
 				new TableDataColumn(COL_STANDARD_NAME, colNbById.get(COL_STANDARD_NAME),
 						Messages.table_label_standard_name, 100, false,
+						false);
+		columnsMap.put(col.pos, col);
+
+		col =
+				new TableDataColumn(COL_LONG_NAME, colNbById.get(COL_LONG_NAME),
+						Messages.table_label_long_name, 100, isLongNameWritable(),
 						false);
 		columnsMap.put(col.pos, col);
 		col =
@@ -343,6 +356,10 @@ public class TableData {
 			}
 			if (columnsMap.get(i).id.equals(COL_STANDARD_NAME)) {
 				columnsMap.get(i).setWidth(isStandardNameWritable());
+			}
+			if (columnsMap.get(i).id.equals(COL_LONG_NAME)) {
+				columnsMap.get(i).enable(isLongNameWritable());
+				columnsMap.get(i).setMandatory(isLongNameWritable());
 			}
 
 			if (columnsMap.get(i).id.equals(COL_IS_STRING)) {
@@ -1010,8 +1027,7 @@ public class TableData {
 			}
 
 			if (types.get(i).isP011()) {
-				if (Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToODV()
-						|| Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToNetCDF()) {
+				if (Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToODV()) {
 					String userLabel =
 							LabelParameterManager.getInstance().getUserLabel(
 									types.get(i).getEntryKeyP011());
@@ -1021,11 +1037,28 @@ public class TableData {
 				}
 			}
 
+			String standardName = "";
+			if (Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToNetCDF()) {
+				String userStandardName = StandardNameParameterManager.getInstance().getUserStandardName(types.get(i).getEntryKeyP011());
+				if (userStandardName != null) {
+					standardName = userStandardName;
+				}
+			}
+
+			String longName = "";
+			if (Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToNetCDF()) {
+				String userLongName = NetCDFLongNameParameterManager.getInstance().getUserLongName(types.get(i).getEntryKeyP011());
+				if (userLongName != null) {
+					longName = userLongName;
+				}
+			}
+
 			item.setText(new String[]
 			{
 					null,
 					code,
-					types.get(i).getStandardName(),
+					standardName,
+					longName,
 					label,
 					types.get(i).getUnite(),
 					(types.get(i).isText() ? null : types.get(i)
@@ -1553,14 +1586,28 @@ public class TableData {
 					myTable.getItem(i).getText(colNbById.get(COL_USERLABEL));
 
 			if (!userLabel.equals(Global.EMPTY_STRING)) {
-				System.out.println("p11Label " + types.get(i).getEntryKeyP011()
-						+ " userLabel: " + userLabel);
 				LabelParameterManager.getInstance().updateLabel(
 						types.get(i).getEntryKeyP011(), userLabel);
 			}
 			// types.get(i).setUserLabel(myTable.getItem(i).getText(colNbById.get(COL_USERLABEL)));
 
-			types.get(i).setStandardName(myTable.getItem(i).getText(colNbById.get(COL_STANDARD_NAME)));
+			String userStandardName =
+					myTable.getItem(i).getText(colNbById.get(COL_STANDARD_NAME));
+
+			if (!userStandardName.equals(Global.EMPTY_STRING)) {
+				StandardNameParameterManager.getInstance().updateStandardName(
+						types.get(i).getEntryKeyP011(), userStandardName);
+			}
+
+			String userLongName =
+					myTable.getItem(i).getText(colNbById.get(COL_LONG_NAME));
+
+			if (!userLongName.equals(Global.EMPTY_STRING)) {
+				NetCDFLongNameParameterManager.getInstance().updateLongName(
+						types.get(i).getEntryKeyP011(), userLongName);
+			}
+
+			//types.get(i).setStandardName(myTable.getItem(i).getText(colNbById.get(COL_STANDARD_NAME)));
 
 			types.get(i).setUnite(
 					myTable.getItem(i).getText(colNbById.get(COL_UNIT)));
