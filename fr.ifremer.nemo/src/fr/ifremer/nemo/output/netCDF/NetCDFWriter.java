@@ -671,7 +671,7 @@ public class NetCDFWriter extends NemoWriter {
 		} catch (Exception e) {
 		}
 		try {
-			sdnCruise.addVariableAttAttribute(ModelDescription.node_startdate, DateTimeUtils.getVariantDateTime(cruiseDomain.getModel().getEndDate()));
+			sdnCruise.addVariableAttAttribute(ModelDescription.node_enddate, DateTimeUtils.getVariantDateTime(cruiseDomain.getModel().getEndDate()));
 		} catch (Exception e) {
 		}
 		if (cruiseDomain.getModel().getRegionName() != null && !cruiseDomain.getModel().getRegionName().isEmpty())
