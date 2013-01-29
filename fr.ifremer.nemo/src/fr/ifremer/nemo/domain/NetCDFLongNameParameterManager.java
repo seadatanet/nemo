@@ -42,6 +42,7 @@ import fr.ifremer.nemo.util.Intern;
 public class NetCDFLongNameParameterManager {
 	private static NetCDFLongNameParameterManager instance;
 	private HashMap<String, String> longNamesMap;
+
 	String fileName =
 			Intern.dir_resources + File.separator + "userParametersNetCDFLongNames"
 					+ Global.EXT_XML;
@@ -166,5 +167,19 @@ public class NetCDFLongNameParameterManager {
 
 		}
 
+	}
+
+	/**
+	 * @return the longNamesMap
+	 */
+	public HashMap<String, String> getLongNamesMap() {
+		return longNamesMap;
+	}
+
+	/**
+	 * @param longNamesMap the longNamesMap to set
+	 */
+	public void setLongNamesMap(HashMap<String, String> longNamesMap) {
+		this.longNamesMap = longNamesMap;
 	}
 }

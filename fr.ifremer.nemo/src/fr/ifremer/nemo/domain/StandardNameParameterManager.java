@@ -167,4 +167,18 @@ public class StandardNameParameterManager {
 		}
 
 	}
+
+	/**
+	 * @return the standardNamesMap
+	 */
+	public HashMap<String, String> getStandardNamesMap() {
+		return StandardNamesMap;
+	}
+
+	/**
+	 * @param standardNamesMap the standardNamesMap to set
+	 */
+	public void setStandardNamesMap(HashMap<String, String> standardNamesMap) {
+		StandardNamesMap = standardNamesMap;
+	}
 }

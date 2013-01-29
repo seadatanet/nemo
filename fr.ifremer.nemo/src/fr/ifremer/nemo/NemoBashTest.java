@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -36,6 +37,8 @@ import compare.OdvToNetCDF;
 
 import fr.ifremer.nemo.config.Configuration;
 import fr.ifremer.nemo.config.Proxy;
+import fr.ifremer.nemo.domain.NetCDFLongNameParameterManager;
+import fr.ifremer.nemo.domain.StandardNameParameterManager;
 import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Global.DataListTypeEnum;
@@ -115,10 +118,10 @@ public class NemoBashTest {
 		testLogger = Logger.getLogger("nemoJunits");//$NON-NLS-1$
 		testLogger.setLevel(Level.DEBUG);
 
-//		// LOGGER
-//		DOMConfigurator.configure("resources/log4j.xml"); //$NON-NLS-1$
-//		netCDFLogger = Logger.getLogger("nemoJunits");//$NON-NLS-1$
-//		netCDFLogger.setLevel(Level.DEBUG);
+		//		// LOGGER
+		//		DOMConfigurator.configure("resources/log4j.xml"); //$NON-NLS-1$
+		//		netCDFLogger = Logger.getLogger("nemoJunits");//$NON-NLS-1$
+		//		netCDFLogger.setLevel(Level.DEBUG);
 
 		nbTotalTests = 0;
 		nbTotalFailed = 0;
@@ -377,6 +380,70 @@ public class NemoBashTest {
 
 	/**
 	 * =================================================================
+	 * userParemetersLongNames Empty
+	 * =================================================================
+	 */
+	@Test
+	public final void userParemetersLongNameEmpty() {
+		boolean res = false;
+		testLogger
+				.info("\r\n\r\n\r\n\r\n__________________________userParemetersLongNamesEmpty___________________________\r\n\r\n\r\n\r\n");
+		message = new Message();
+		message.testName = " Empty userParemetersLongNames";
+		org.w3c.dom.Document document;
+		String userParametersLongNames =
+				Intern.dir_resources + File.separator + "userParametersNETCDFLongNames"
+						+ Global.EXT_XML;
+		// création d'une fabrique de documents
+		DocumentBuilderFactory fabrique = DocumentBuilderFactory.newInstance();
+		// création d'un constructeur de documents
+		DocumentBuilder constructeur;
+		try {
+			constructeur = fabrique.newDocumentBuilder();
+			document = constructeur.parse(userParametersLongNames);
+			res = document.getFirstChild().getTextContent().trim().isEmpty();
+
+		} catch (Exception e) {
+			res = false;
+		}
+
+		Assert.assertTrue(res);
+	}
+
+	/**
+	 * =================================================================
+	 * userParemetersStandardNames Empty
+	 * =================================================================
+	 */
+	@Test
+	public final void userParemetersStandardNameEmpty() {
+		boolean res = false;
+		testLogger
+				.info("\r\n\r\n\r\n\r\n__________________________userParemetersStandardNamesEmpty___________________________\r\n\r\n\r\n\r\n");
+		message = new Message();
+		message.testName = " Empty userParemetersStandardNames";
+		org.w3c.dom.Document document;
+		String userParametersStandardNames =
+				Intern.dir_resources + File.separator + "userParametersStandardNames"
+						+ Global.EXT_XML;
+		// création d'une fabrique de documents
+		DocumentBuilderFactory fabrique = DocumentBuilderFactory.newInstance();
+		// création d'un constructeur de documents
+		DocumentBuilder constructeur;
+		try {
+			constructeur = fabrique.newDocumentBuilder();
+			document = constructeur.parse(userParametersStandardNames);
+			res = document.getFirstChild().getTextContent().trim().isEmpty();
+
+		} catch (Exception e) {
+			res = false;
+		}
+
+		Assert.assertTrue(res);
+	}
+
+	/**
+	 * =================================================================
 	 * methodes
 	 * =================================================================
 	 */
@@ -534,6 +601,10 @@ public class NemoBashTest {
 		File mod = new File(model);
 		Nemo.getInstance().resetInstance();
 		Nemo.getInstance().getConfig().setIdEdmoRespCdi("486");// 486 is ifremer
+		// add long Name for test
+		NetCDFLongNameParameterManager.getInstance().getLongNamesMap().putAll(netCDFLongNamesMap());
+		// add standard Name for test
+		StandardNameParameterManager.getInstance().getStandardNamesMap().putAll(netCDFStandardNamesMap());
 		// edmo code
 		shell = new NemoShell();
 		String batchCmd = "";
@@ -582,6 +653,90 @@ public class NemoBashTest {
 
 		message.conversionRes = res;
 		return res;
+	}
+
+	private HashMap<String, String> netCDFLongNamesMap() {
+		HashMap<String, String> longNames = new HashMap<String, String>();
+
+		longNames.put("NTRAYYDZ", "Concentration of Nitrate"); //$NON-NLS-1$//$NON-NLS-2$
+		longNames.put("PRESPR01", "Pressure"); //$NON-NLS-1$//$NON-NLS-2$
+		longNames.put("ADEPZZ01", "Depth"); //$NON-NLS-1$//$NON-NLS-2$
+		longNames.put("PSSTZZ01", "Temperature"); //$NON-NLS-1$//$NON-NLS-2$
+		longNames.put("ODSDM021", "Salinity"); //$NON-NLS-1$//$NON-NLS-2$
+		longNames.put("DOXYZZ01", "Concentration of oxygen"); //$NON-NLS-1$//$NON-NLS-2$
+		longNames.put("FLUOZZZZ", "Fluorescence"); //$NON-NLS-1$//$NON-NLS-2$
+		longNames.put("TEMPET01", "Temperature"); //$NON-NLS-1$//$NON-NLS-2$
+		longNames.put("NTRIZZXX", "Concentration of nitrite"); //$NON-NLS-1$//$NON-NLS-2$
+		longNames.put("PSLTZZ01", "Salinity"); //$NON-NLS-1$//$NON-NLS-2$
+		longNames.put("COREDIST", "Depth"); //$NON-NLS-1$//$NON-NLS-2$
+		longNames.put("ASLVMSZZ", "Surface elevation"); //$NON-NLS-1$//$NON-NLS-2$
+		longNames.put("MAGNFLDX", "Magnetic Field of the Earth"); //$NON-NLS-1$//$NON-NLS-2$
+		longNames.put("MAGNFL02", "Magnetic Field of the Earth"); //$NON-NLS-1$//$NON-NLS-2$
+		longNames.put("MAGDCORR", "Diurnal Varaition"); //$NON-NLS-1$//$NON-NLS-2$
+		longNames.put("GRAVFLDX", "Gravity Field of the Earth"); //$NON-NLS-1$//$NON-NLS-2$
+		longNames.put("EOTVCORR", "Eotvoscorrection"); //$NON-NLS-1$//$NON-NLS-2$
+		longNames.put("FAGRVANM", "Gravity Field Anomaly"); //$NON-NLS-1$//$NON-NLS-2$
+		longNames.put("PBXXISPW", "Concentration of lead"); //$NON-NLS-1$//$NON-NLS-2$
+		longNames.put("MZNSP012", "Concentration of zinc"); //$NON-NLS-1$//$NON-NLS-2$
+		longNames.put("PRESCX01", "Pressure"); //$NON-NLS-1$//$NON-NLS-2$
+		longNames.put("NO2FLTIC", "Concentration of nitrite"); //$NON-NLS-1$//$NON-NLS-2$
+		longNames.put("NTRAAA04", "Concentration of nitrate"); //$NON-NLS-1$//$NON-NLS-2$
+		longNames.put("PHOSAAD3", "Concentration of phosphate"); //$NON-NLS-1$//$NON-NLS-2$
+		longNames.put("AMONHOTX", "Concentration of ammonium"); //$NON-NLS-1$//$NON-NLS-2$
+		longNames.put("CPHLFLP2", "Concentration of chlorophll-a"); //$NON-NLS-1$//$NON-NLS-2$
+		longNames.put("CHLBINTC", "Concentration of chlorophll-b"); //$NON-NLS-1$//$NON-NLS-2$
+		longNames.put("CHLAEPIM", "Concentration of chlorophll-a"); //$NON-NLS-1$//$NON-NLS-2$
+		longNames.put("SPHAFLPD", "Concentration of phaeopigments"); //$NON-NLS-1$//$NON-NLS-2$
+		longNames.put("CHLBMHP1", "Concentration of chlorophll-b"); //$NON-NLS-1$//$NON-NLS-2$
+		longNames.put("CPHLHPP2", "Concentration of chlorophll-a"); //$NON-NLS-1$//$NON-NLS-2$
+		longNames.put("PHPICP01", "Concentration of phosphorus"); //$NON-NLS-1$//$NON-NLS-2$
+		longNames.put("ORGPMSZZ", "Concentration of phosphorus"); //$NON-NLS-1$//$NON-NLS-2$
+		longNames.put("TPHSXFP2", "Concentration of phosphorus"); //$NON-NLS-1$//$NON-NLS-2$
+		longNames.put("DEPHPM01", "Depth"); //$NON-NLS-1$//$NON-NLS-2$
+		longNames.put("NTRAZZXX", "Concentration of nitrite"); //$NON-NLS-1$//$NON-NLS-2$
+		longNames.put("CNDCST01", "Electrical conductivity"); //$NON-NLS-1$//$NON-NLS-2$
+		longNames.put("TEMPSZ01", "Temperature"); //$NON-NLS-1$//$NON-NLS-2$
+		longNames.put("SSALSG01", "Salinity"); //$NON-NLS-1$//$NON-NLS-2$
+		longNames.put("TEMPPR01", "Temperature"); //$NON-NLS-1$//$NON-NLS-2$
+		longNames.put("PBCNXTXT", "Concentration of lead"); //$NON-NLS-1$//$NON-NLS-2$
+
+		return longNames;
+	}
+
+	private HashMap<String, String> netCDFStandardNamesMap() {
+		HashMap<String, String> standardNames = new HashMap<String, String>();
+
+		standardNames.put("PRESPR01", "sea_water_pressure"); //$NON-NLS-1$//$NON-NLS-2$
+		standardNames.put("NTRAYYDZ", "mole_concentration_of_nitrate_in_sea_water"); //$NON-NLS-1$//$NON-NLS-2$
+		standardNames.put("ADEPZZ01", "depth"); //$NON-NLS-1$//$NON-NLS-2$
+		standardNames.put("PSSTZZ01", "sea_water_temperature"); //$NON-NLS-1$//$NON-NLS-2$
+		standardNames.put("ODSDM021", "sea_water_salinity"); //$NON-NLS-1$//$NON-NLS-2$
+		standardNames.put("DOXYZZ01", "mole_concentration_of_dissolved_molecular_oxygen_in_sea_water"); //$NON-NLS-1$//$NON-NLS-2$
+		standardNames.put("TEMPET01", "sea_water_temperature"); //$NON-NLS-1$//$NON-NLS-2$
+		standardNames.put("NTRIZZXX", "moles_of_nitrite_per_unit_mass_in_sea_water"); //$NON-NLS-1$//$NON-NLS-2$
+		standardNames.put("PSLTZZ01", "sea_water_salinity"); //$NON-NLS-1$//$NON-NLS-2$
+		standardNames.put("COREDIST", "depth"); //$NON-NLS-1$//$NON-NLS-2$
+		standardNames.put("ASLVMSZZ", "sea_surface_height_above_sea_level"); //$NON-NLS-1$//$NON-NLS-2$
+		standardNames.put("PRESCX01", "sea_water_pressure"); //$NON-NLS-1$//$NON-NLS-2$
+		standardNames.put("NO2FLTIC", "moles_of_nitrite_per_unit_mass_in_sea_water"); //$NON-NLS-1$//$NON-NLS-2$
+		standardNames.put("NTRAAA04", "mole_concentration_of_nitrate_in_sea_water"); //$NON-NLS-1$//$NON-NLS-2$
+		standardNames.put("PHOSAAD3", "mole_concentration_of_phosphate_in_sea_water"); //$NON-NLS-1$//$NON-NLS-2$
+		standardNames.put("AMONHOTX", "mole_concentration_of_ammonium_in_sea_water"); //$NON-NLS-1$//$NON-NLS-2$
+		standardNames.put("CPHLFLP2", "mass_concentration_of_chlorophyll_a_in_sea_water"); //$NON-NLS-1$//$NON-NLS-2$
+		standardNames.put("CHLBINTC", "mass_concentration_of_chlorophyll_in_sea_water"); //$NON-NLS-1$//$NON-NLS-2$
+		standardNames.put("CHLAEPIM", "mass_concentration_of_chlorophyll_in_sea_water"); //$NON-NLS-1$//$NON-NLS-2$
+		standardNames.put("CHLBMHP1", "mass_concentration_of_chlorophyll_in_sea_water"); //$NON-NLS-1$//$NON-NLS-2$
+		standardNames.put("CPHLHPP2", "mass_concentration_of_chlorophyll_in_sea_water"); //$NON-NLS-1$//$NON-NLS-2$
+		standardNames.put("PHPICP01", "mole_concentration_of_particulate_organic_matter_expressed_as_phosphorus_in_sea_water"); //$NON-NLS-1$//$NON-NLS-2$
+		standardNames.put("TPHSXFP2", "mole_concentration_of_particulate_organic_matter_expressed_as_phosphorus_in_sea_water"); //$NON-NLS-1$//$NON-NLS-2$
+		standardNames.put("DEPHPM01", "depth"); //$NON-NLS-1$//$NON-NLS-2$
+		standardNames.put("NTRAZZXX", "mole_concentration_of_nitrate_in_sea_water"); //$NON-NLS-1$//$NON-NLS-2$
+		standardNames.put("CNDCST01", "sea_water_electrical_conductivity"); //$NON-NLS-1$//$NON-NLS-2$
+		standardNames.put("TEMPSZ01", "sea_water_temperature"); //$NON-NLS-1$//$NON-NLS-2$
+		standardNames.put("SSALSG01", "sea_water_salinity"); //$NON-NLS-1$//$NON-NLS-2$
+		standardNames.put("TEMPPR01", "sea_water_temperature"); //$NON-NLS-1$//$NON-NLS-2$
+
+		return standardNames;
 	}
 
 	public boolean fileExist(String outputAbsolutePath, String outputTestName) {
