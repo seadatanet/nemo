@@ -44,6 +44,7 @@ import fr.ifremer.sdnNetCDF.SdnGlobalAttribute;
 import fr.ifremer.sdnNetCDF.SdnNetCDFManager;
 import fr.ifremer.sdnNetCDF.util.ParameterNames;
 import fr.ifremer.sdnNetCDF.util.ParameterValues;
+import fr.ifremer.sdnNetCDF.util.UnitConvertionManager;
 import fr.ifremer.sdnNetCDF.variable.AncillaryVariable;
 import fr.ifremer.sdnNetCDF.variable.CoOrdinateVariable;
 import fr.ifremer.sdnNetCDF.variable.GeophysicalVariable;
@@ -478,6 +479,8 @@ public class NetCDFWriter extends NemoWriter {
 		sdnDim.add(dims.getDimInstance());
 		sdnDim.add(dims.getString80());
 
+		UnitConvertionManager unitConvertion = UnitConvertionManager.getInstance();
+
 		//add to net CDF
 		netCDFWriter.addDimensions(dims);
 
@@ -504,7 +507,7 @@ public class NetCDFWriter extends NemoWriter {
 		String longName = NetCDFLongNameParameterManager.getInstance().getUserLongName(zParameterModel.getParameter().getCodeP011());
 		if (longName == null)
 			throw new Exception(Messages.Etape_134 + Global.SPACE + zParameterModel.getParameter().getCodeP011());
-		String unit = zParameterModel.getParameter().getUnit().toLowerCase();
+		String unit = unitConvertion.getUnitConvertion(zParameterModel.getParameter().getUnit());
 		String sdnParameterUrn = getURNSyntaxe(URNtype.object, zParameterModel.getParameter().getCodeP011(), null, Intern.mapping_objet, zParameterModel.isText());
 		String sdnParameterName = zParameterModel.getParameter().getNameP011();
 
@@ -623,9 +626,7 @@ public class NetCDFWriter extends NemoWriter {
 			}
 			sdnUomName = param.getParameter().getUnit();
 
-			unit = param.getParameter().getUnit().toLowerCase();
-			if (unit == null)
-				unit = param.getParameter().getUnit().toLowerCase();
+			unit = unitConvertion.getUnitConvertion(param.getParameter().getUnit());
 
 			if (!sdnParameterUrn.equals(z.getSdnParameterUrn())) {
 				GeophysicalVariable current = new GeophysicalVariable(varName, getUnits(param.getParameter().getFormat()), geoDim, longName, coordinates, unit, sdnParameterUrn, sdnParameterName, sdnUomUrn, sdnUomName);
