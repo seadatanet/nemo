@@ -655,6 +655,8 @@ public class NemoBashTest {
 		return res;
 	}
 
+	//Long Names utilisé pour les tests de non regretion
+	// à completer si ajout de test
 	private HashMap<String, String> netCDFLongNamesMap() {
 		HashMap<String, String> longNames = new HashMap<String, String>();
 
@@ -703,6 +705,8 @@ public class NemoBashTest {
 		return longNames;
 	}
 
+	//Standard Names utilisé pour les tests de non regretion
+	// à completer si ajout de test
 	private HashMap<String, String> netCDFStandardNamesMap() {
 		HashMap<String, String> standardNames = new HashMap<String, String>();
 
