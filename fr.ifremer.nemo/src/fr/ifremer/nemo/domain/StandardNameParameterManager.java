@@ -41,7 +41,7 @@ import fr.ifremer.nemo.util.Intern;
  */
 public class StandardNameParameterManager {
 	private static StandardNameParameterManager instance;
-	private HashMap<String, String> StandardNamesMap;
+	private HashMap<String, String> standardNamesMap;
 	String fileName =
 			Intern.dir_resources + File.separator + "userParametersStandardNames"
 					+ Global.EXT_XML;
@@ -53,7 +53,7 @@ public class StandardNameParameterManager {
 	 */
 	public StandardNameParameterManager() {
 		super();
-		StandardNamesMap = new HashMap<String, String>();
+		standardNamesMap = new HashMap<String, String>();
 		loadUserStandardNames();
 		// TODO Auto-generated constructor stub
 	}
@@ -66,11 +66,11 @@ public class StandardNameParameterManager {
 	}
 
 	public String getUserStandardName(String P011Code) {
-		return StandardNamesMap.get(P011Code);
+		return standardNamesMap.get(P011Code);
 	}
 
 	public void updateStandardName(String StandardNameP011, String StandardNameUser) {
-		String item = StandardNamesMap.get(StandardNameP011);
+		String item = standardNamesMap.get(StandardNameP011);
 		Element racine = document.getDocumentElement();
 		if (item == null) {
 			// Element child = document.createElement("StandardName");
@@ -79,7 +79,7 @@ public class StandardNameParameterManager {
 			// child.setNodeValue(StandardNameUser);
 
 			child.setTextContent(StandardNameUser);
-			StandardNamesMap.put(StandardNameP011, StandardNameUser);
+			standardNamesMap.put(StandardNameP011, StandardNameUser);
 			racine.appendChild(child);
 			updateXML();
 		} else {
@@ -87,7 +87,7 @@ public class StandardNameParameterManager {
 			Node node = listChildren.item(0);
 			node.setTextContent(StandardNameUser);
 			// node.setNodeValue(StandardNameUser);
-			StandardNamesMap.put(StandardNameP011, StandardNameUser);
+			standardNamesMap.put(StandardNameP011, StandardNameUser);
 			updateXML();
 		}
 
@@ -120,7 +120,7 @@ public class StandardNameParameterManager {
 	}
 
 	private void loadUserStandardNames() {
-		StandardNamesMap = new HashMap<String, String>();
+		standardNamesMap = new HashMap<String, String>();
 
 		if (file.exists()) {
 
@@ -150,7 +150,7 @@ public class StandardNameParameterManager {
 					String userStandardName = oneFormat.getTextContent();
 					// System.out.println(" -- " + format + " -- " + example);
 
-					StandardNamesMap.put(P011, userStandardName);
+					standardNamesMap.put(P011, userStandardName);
 				}
 			} catch (ParserConfigurationException pce) {
 				System.out.println("Erreur de configuration du parseur DOM");
@@ -172,13 +172,13 @@ public class StandardNameParameterManager {
 	 * @return the standardNamesMap
 	 */
 	public HashMap<String, String> getStandardNamesMap() {
-		return StandardNamesMap;
+		return standardNamesMap;
 	}
 
 	/**
 	 * @param standardNamesMap the standardNamesMap to set
 	 */
 	public void setStandardNamesMap(HashMap<String, String> standardNamesMap) {
-		StandardNamesMap = standardNamesMap;
+		this.standardNamesMap = standardNamesMap;
 	}
 }
