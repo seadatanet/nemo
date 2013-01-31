@@ -265,7 +265,10 @@ public class NetCDFWriter extends NemoWriter {
 						//SDN_BOT_DEPTH
 						if (station.getModel().getProperty(Intern.S_DEPTH).isInData()) {
 							Object botDepth = stationDomain.getModel().getProperty(Intern.S_DEPTH).applyOn(inputStationHeader);
-							setDataValue(indiceStation, botDepth.toString(), ParameterNames.SDN_BOT_DEPTH, null);
+							if (!botDepth.equals("Default")) {
+								setDataValue(indiceStation, botDepth.toString(), ParameterNames.SDN_BOT_DEPTH, null);
+							}
+
 						} else {
 							String bottomDepth = stationDomain.getModel().getProperty(Intern.S_DEPTH).getUserValue();
 							if (bottomDepth.isEmpty()) {
@@ -300,7 +303,9 @@ public class NetCDFWriter extends NemoWriter {
 
 					if (station.getModel().getProperty(Intern.S_DEPTH).isInData()) {
 						Object botDepth = stationDomain.getModel().getProperty(Intern.S_DEPTH).applyOnLine(readedLine.toString());
-						setDataValue(indiceStation, botDepth.toString(), ParameterNames.SDN_BOT_DEPTH, null);
+						if (!botDepth.equals("Default")) {
+							setDataValue(indiceStation, botDepth.toString(), ParameterNames.SDN_BOT_DEPTH, null);
+						}
 					} else {
 						String bottomDepth = stationDomain.getModel().getProperty(Intern.S_DEPTH).getUserValue();
 						if (bottomDepth.isEmpty()) {

@@ -235,7 +235,9 @@ public class Station implements Comparable {
 
 		// ENDDEPTH => BATH si inData
 		if (stationDomain.getModel().getProperty(Intern.S_DEPTH).isInData()) {
-			_enddepth = (Float) stationDomain.getModel().getProperty(Intern.S_DEPTH).applyOnLine(inputLine);
+			Object botDepth = stationDomain.getModel().getProperty(Intern.S_DEPTH).applyOnLine(inputLine);
+			if ((!botDepth.equals("Default")) && !((Float) botDepth).isNaN())
+				_enddepth = (Float) botDepth;
 		}
 	}
 
