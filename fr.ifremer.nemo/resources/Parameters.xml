@@ -393,7 +393,7 @@
      <string>%6.2f</string> 
     </void> 
     <void property="name"> 
-     <string>14C PRODUCTION/2 MICRON FILT.</string> 
+     <string>14C PRODUCTION &gt;2 MICRON</string> 
     </void> 
     <void property="unit"> 
      <string>milligram carbon/(m3.day)</string> 
@@ -412,7 +412,7 @@
      <string>%6.2f</string> 
     </void> 
     <void property="name"> 
-     <string>14C PRODUCTION/10 MICRON FILT.</string> 
+     <string>14C PRODUCTION &gt;10 MICRON</string> 
     </void> 
     <void property="unit"> 
      <string>milligram carbon/(m3.day)</string> 
@@ -1115,7 +1115,7 @@
      <string>%5.2f</string> 
     </void> 
     <void property="name"> 
-     <string>CHLOROPHYLL-A/2 MICRON FILTER</string> 
+     <string>CHLOROPHYLL-A &gt;2 MICRON </string> 
     </void> 
     <void property="unit"> 
      <string>milligram/m3</string> 
@@ -1134,7 +1134,7 @@
      <string>%5.2f</string> 
     </void> 
     <void property="name"> 
-     <string>CHLOROPHYLL-A/20 MICRON FILTER</string> 
+     <string>CHLOROPHYLL-A &gt;20 MICRON</string> 
     </void> 
     <void property="unit"> 
      <string>milligram/m3</string> 
@@ -1153,7 +1153,45 @@
      <string>%5.2f</string> 
     </void> 
     <void property="name"> 
-     <string>CHLOROPHYLL-A/10 MICRON FILTER</string> 
+     <string>CHLOROPHYLL-A &gt;10 MICRON</string> 
+    </void> 
+    <void property="unit"> 
+     <string>milligram/m3</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSParameter"> 
+    <void property="code"> 
+     <string>CPH5</string> 
+    </void> 
+    <void property="defaultValue"> 
+     <string>99.99</string> 
+    </void> 
+    <void property="format"> 
+     <string>%5.2f</string> 
+    </void> 
+    <void property="name"> 
+     <string>CHLOROPHYLL-A &gt;3 &lt;20 MICRON</string> 
+    </void> 
+    <void property="unit"> 
+     <string>milligram/m3</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSParameter"> 
+    <void property="code"> 
+     <string>CPH6</string> 
+    </void> 
+    <void property="defaultValue"> 
+     <string>99.99</string> 
+    </void> 
+    <void property="format"> 
+     <string>%5.2f</string> 
+    </void> 
+    <void property="name"> 
+     <string>CHLOROPHYLL-A &lt;3 MICRON</string> 
     </void> 
     <void property="unit"> 
      <string>milligram/m3</string> 
@@ -4383,7 +4421,26 @@
      <string>%5.2f</string> 
     </void> 
     <void property="name"> 
-     <string>PHEOPHYTINE / 2 MICRON FILTER</string> 
+     <string>PHAEOPHYTIN &gt;2 MICRON</string> 
+    </void> 
+    <void property="unit"> 
+     <string>milligram/m3</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSParameter"> 
+    <void property="code"> 
+     <string>PHE3</string> 
+    </void> 
+    <void property="defaultValue"> 
+     <string>99.99</string> 
+    </void> 
+    <void property="format"> 
+     <string>%5.2f</string> 
+    </void> 
+    <void property="name"> 
+     <string>PHAEOPHYTIN &gt;20 MICRON</string> 
     </void> 
     <void property="unit"> 
      <string>milligram/m3</string> 
@@ -4402,7 +4459,45 @@
      <string>%5.2f</string> 
     </void> 
     <void property="name"> 
-     <string>PHEOPHYTINE / 10 MICRON FILTER</string> 
+     <string>PHAEOPHYTIN &gt;10 MICRON</string> 
+    </void> 
+    <void property="unit"> 
+     <string>milligram/m3</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSParameter"> 
+    <void property="code"> 
+     <string>PHE5</string> 
+    </void> 
+    <void property="defaultValue"> 
+     <string>99.99</string> 
+    </void> 
+    <void property="format"> 
+     <string>%5.2f</string> 
+    </void> 
+    <void property="name"> 
+     <string>PHAEOPHYTIN &gt;3 &lt;20 MICRON</string> 
+    </void> 
+    <void property="unit"> 
+     <string>milligram/m3</string> 
+    </void> 
+   </object> 
+  </void> 
+  <void method="add"> 
+   <object class="fr.ifremer.nemo.ws.WSParameter"> 
+    <void property="code"> 
+     <string>PHE6</string> 
+    </void> 
+    <void property="defaultValue"> 
+     <string>99.99</string> 
+    </void> 
+    <void property="format"> 
+     <string>%5.2f</string> 
+    </void> 
+    <void property="name"> 
+     <string>PHAEOPHYTIN &lt;3 MICRON</string> 
     </void> 
     <void property="unit"> 
      <string>milligram/m3</string> 
