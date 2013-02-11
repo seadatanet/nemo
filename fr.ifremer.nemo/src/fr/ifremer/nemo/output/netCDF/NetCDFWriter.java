@@ -37,6 +37,7 @@ import fr.ifremer.nemo.util.Formatter;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Global.E_EndData;
 import fr.ifremer.nemo.util.Global.E_InputType;
+import fr.ifremer.nemo.util.Global.E_ProcessType;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.sdnNetCDF.SdnDimensionManager;
@@ -263,12 +264,9 @@ public class NetCDFWriter extends NemoWriter {
 						setDataValue(indiceStation, julianDay.toString(), ParameterNames.TIME, currentStation.getMetaFlag(Intern.S_DATE));
 
 						//SDN_BOT_DEPTH
-						if (station.getModel().getProperty(Intern.S_DEPTH).isInData()) {
-							Object botDepth = stationDomain.getModel().getProperty(Intern.S_DEPTH).applyOn(inputStationHeader);
-							if (!botDepth.equals("Default")) {
-								setDataValue(indiceStation, botDepth.toString(), ParameterNames.SDN_BOT_DEPTH, null);
-							}
-
+						Object botDepth = stationDomain.getModel().getProperty(Intern.S_DEPTH).applyOn(inputStationHeader);
+						if (!botDepth.equals("Default") && !botDepth.equals(Float.NaN)) {
+							setDataValue(indiceStation, botDepth.toString(), ParameterNames.SDN_BOT_DEPTH, null);
 						} else {
 							String bottomDepth = stationDomain.getModel().getProperty(Intern.S_DEPTH).getUserValue();
 							if (bottomDepth.isEmpty()) {
@@ -303,7 +301,7 @@ public class NetCDFWriter extends NemoWriter {
 
 					if (station.getModel().getProperty(Intern.S_DEPTH).isInData()) {
 						Object botDepth = stationDomain.getModel().getProperty(Intern.S_DEPTH).applyOnLine(readedLine.toString());
-						if (!botDepth.equals("Default")) {
+						if (!botDepth.equals("Default") && !botDepth.equals(Float.NaN)) {
 							setDataValue(indiceStation, botDepth.toString(), ParameterNames.SDN_BOT_DEPTH, null);
 						}
 					} else {
@@ -497,6 +495,7 @@ public class NetCDFWriter extends NemoWriter {
 		SdnY latitude = null;
 		SdnT time = null;
 		SdnZ z = null;
+
 		//z Variable
 		ParameterModel zParameterModel = null;
 		if (mediaModel.getInputType() != E_InputType.TIMESERIES)
@@ -526,6 +525,7 @@ public class NetCDFWriter extends NemoWriter {
 		String sdnBotDepthLongName = "";
 
 		SdnBotDepthVariable SdnBotDepth = new SdnBotDepthVariable(instanceDim, sdnBotDepthLongName);
+
 		//create Co-ordinate Variable
 		if (mediaModel.getInputType() == E_InputType.TRAJECTORY) {
 			sdnBotDepthLongName = Messages.typeFile_trajectory;
@@ -570,7 +570,18 @@ public class NetCDFWriter extends NemoWriter {
 		variables.put(sdnEdmoCode.getVarName(), sdnEdmoCode);
 		addVariableToNetCDF(sdnEdmoCode);
 
-		SdnCruiseVariable sdnCruise = new SdnCruiseVariable(sdnDim, cruiseDomain.getModel().getName().trim());
+		//14926 et 14931
+		//LongName suivant ProcessType
+		String longNameCruise = "";
+		if (mediaModel.getProcessType() == E_ProcessType.COLLECTION_DIR) {
+			longNameCruise = cruiseDomain.getDataSetRef();
+		} else if (mediaModel.getProcessType() == E_ProcessType.COLLECTION_FILES) {
+			longNameCruise = Intern.unknown;
+		} else {
+			longNameCruise = cruiseDomain.getModel().getName().trim();
+		}
+
+		SdnCruiseVariable sdnCruise = new SdnCruiseVariable(sdnDim, longNameCruise);
 		addCruiseOptionalAttribute(sdnCruise);
 		variables.put(sdnCruise.getVarName(), sdnCruise);
 		addVariableToNetCDF(sdnCruise);
