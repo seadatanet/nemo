@@ -39,8 +39,7 @@ import fr.ifremer.nemo.ui.view.ViewLog;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 
-public class Utils
-{
+public class Utils {
 
 	public static String texteBrut, texteFinal; // texte brut entier et texte
 
@@ -66,8 +65,7 @@ public class Utils
 
 	private static FlagTable _blank;
 
-	public static void insertTextFich(String fich, StyledText zone, boolean raz) throws IOException
-	{
+	public static void insertTextFich(String fich, StyledText zone, boolean raz) throws IOException {
 
 		int nbreLignes, i, cumul, indexMax;
 		String ligne;
@@ -81,12 +79,10 @@ public class Utils
 
 		// lecture et concatenation
 		BufferedReader entree = new BufferedReader(new InputStreamReader(new FileInputStream(fich), Global.NEMO_ENCODING));
-		do
-		{
+		do {
 			ligne = entree.readLine();
 
-			if (ligne != null)
-			{
+			if (ligne != null) {
 
 				lignesBrutes.add(ligne);
 				stringBuffer.append(ligne);
@@ -105,8 +101,7 @@ public class Utils
 		cumul = 0;
 
 		taillesCumLignes[0] = 0;
-		for (i = 1; i <= indexMax; i++)
-		{
+		for (i = 1; i <= indexMax; i++) {
 			cumul = cumul + lignesBrutes.get(i - 1).length() + 1;
 			taillesCumLignes[i] = cumul;
 
@@ -130,8 +125,7 @@ public class Utils
 		// RAZ global si reouverture fichier en cours de processus
 		Nemo.getInstance().refreshNomNemo();
 
-		if (raz)
-		{
+		if (raz) {
 			Utils.razGlobal();
 			// invalidEtapes();
 			Nemo.getInstance().resetModel();
@@ -141,8 +135,7 @@ public class Utils
 		}
 	}
 
-	public static void inject(Text ligne, Text debut, Text fin, StyledText styledtext)
-	{
+	public static void inject(Text ligne, Text debut, Text fin, StyledText styledtext) {
 		int deb, fi, lign, i;
 
 		// on recupere les coordonnees de la selection
@@ -150,32 +143,26 @@ public class Utils
 		deb = styledtext.getSelection().x;
 		fi = styledtext.getSelection().y;
 
-		if (deb == fi)
-		{
+		if (deb == fi) {
 			Utils.messageErreurAppend(Messages.Utils_26);
 
-		} else
-		{
+		} else {
 
 			lign = 1;
 			// calcul de la ligne en fonction de la valeur de x
 			// parcours du tableau des tailles de lignes cumulees
 
-			for (i = 0; i < lignesBrutes.size(); i++)
-			{
+			for (i = 0; i < lignesBrutes.size(); i++) {
 
-				if (deb == taillesCumLignes[i])
-				{
+				if (deb == taillesCumLignes[i]) {
 					lign = i + 1;
 					break;
 				}
-				if (i == (lignesBrutes.size() - 1))
-				{
+				if (i == (lignesBrutes.size() - 1)) {
 					lign = i + 1;
 					break;
 				}
-				if ((deb >= taillesCumLignes[i]) && (deb < taillesCumLignes[i + 1]))
-				{
+				if ((deb >= taillesCumLignes[i]) && (deb < taillesCumLignes[i + 1])) {
 					lign = i + 1;
 					break;
 				}
@@ -201,15 +188,12 @@ public class Utils
 		}
 	}
 
-	public static void test(Text test, StyledText styledtext, Text ligne, Text debut, Text fin)
-	{
+	public static void test(Text test, StyledText styledtext, Text ligne, Text debut, Text fin) {
 		int deb, fi, lign;
 
-		if (ligne.getText().equals(Global.EMPTY_STRING))
-		{
+		if (ligne.getText().equals(Global.EMPTY_STRING)) {
 			lign = Nemo.getInstance().getDomain().getMedia().getModel().getStationHeader() + 1;
-		} else
-		{
+		} else {
 			lign = Integer.parseInt(ligne.getText());
 		}
 
@@ -223,15 +207,13 @@ public class Utils
 		test.pack();
 	}
 
-	public static void test(Text test, Text saisie)
-	{
+	public static void test(Text test, Text saisie) {
 		test.setText(saisie.getText());
 
 		test.pack();
 	}
 
-	public static void injectData(StyledText styledtext, int debut, int fin)
-	{
+	public static void injectData(StyledText styledtext, int debut, int fin) {
 		int deb, fi, lign, i, index;
 
 		// on recupere les coordonnees de la selection
@@ -239,32 +221,26 @@ public class Utils
 		fi = styledtext.getSelection().y;
 		index = Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().getMyTable().getSelectionIndex();
 
-		if (deb == fi)
-		{
+		if (deb == fi) {
 			Utils.messageErreurAppend(Messages.Utils_26);
-		} else
-		{
+		} else {
 			Utils.messageErreur("");
 
 			lign = 1;
 			// calcul de la ligne en fonction de la valeur de x
 			// parcours du tableau des tailles de lignes cumulees
 
-			for (i = 0; i < lignesBrutes.size(); i++)
-			{
+			for (i = 0; i < lignesBrutes.size(); i++) {
 
-				if (deb == taillesCumLignes[i])
-				{
+				if (deb == taillesCumLignes[i]) {
 					lign = i + 1;
 					break;
 				}
-				if (i == (lignesBrutes.size() - 1))
-				{
+				if (i == (lignesBrutes.size() - 1)) {
 					lign = i + 1;
 					break;
 				}
-				if ((deb >= taillesCumLignes[i]) && (deb < taillesCumLignes[i + 1]))
-				{
+				if ((deb >= taillesCumLignes[i]) && (deb < taillesCumLignes[i + 1])) {
 					lign = i + 1;
 					break;
 				}
@@ -287,42 +263,34 @@ public class Utils
 		}
 	}
 
-	public static void injectFlag(StyledText styledtext, FlagTable flagTable, Table table, int indexLigne, int indexDebut, int indexFin, int indexTest1, int indexTest2)
-	{
+	public static void injectFlag(StyledText styledtext, FlagTable flagTable, Table table, int indexLigne, int indexDebut, int indexFin, int indexTest1, int indexTest2) {
 		int index = table.getSelectionIndex();
-		if (index >= 0 && table.getItems() != null)
-		{
+		if (index >= 0 && table.getItems() != null) {
 			int deb, fi, lign, i;
 
 			// on recupere les coordonnees de la selection
 			deb = styledtext.getSelection().x;
 			fi = styledtext.getSelection().y;
 
-			if (deb == fi)
-			{
+			if (deb == fi) {
 				Utils.messageErreurAppend(Messages.Utils_26);
-			} else
-			{
+			} else {
 
 				lign = 1;
 				// calcul de la ligne en fonction de la valeur de x
 				// parcours du tableau des tailles de lignes cumulees
 
-				for (i = 0; i < lignesBrutes.size(); i++)
-				{
+				for (i = 0; i < lignesBrutes.size(); i++) {
 
-					if (deb == taillesCumLignes[i])
-					{
+					if (deb == taillesCumLignes[i]) {
 						lign = i + 1;
 						break;
 					}
-					if (i == (lignesBrutes.size() - 1))
-					{
+					if (i == (lignesBrutes.size() - 1)) {
 						lign = i + 1;
 						break;
 					}
-					if ((deb >= taillesCumLignes[i]) && (deb < taillesCumLignes[i + 1]))
-					{
+					if ((deb >= taillesCumLignes[i]) && (deb < taillesCumLignes[i + 1])) {
 						lign = i + 1;
 						break;
 					}
@@ -347,14 +315,11 @@ public class Utils
 		}
 	}
 
-	public static void testFlag(StyledText styledtext, FlagTable flagTable, Table table, int indexLigne, int indexDebut, int indexFin, int indexTest1, int indexTest2)
-	{
+	public static void testFlag(StyledText styledtext, FlagTable flagTable, Table table, int indexLigne, int indexDebut, int indexFin, int indexTest1, int indexTest2) {
 		int deb, fi, lign;
 
-		for (int i = 0; i < table.getItemCount(); i++)
-		{
-			try
-			{
+		for (int i = 0; i < table.getItemCount(); i++) {
+			try {
 				lign = Integer.parseInt(table.getItems()[i].getText(indexLigne));
 
 				deb = Integer.parseInt(table.getItems()[i].getText(indexDebut)) + taillesCumLignes[lign - 1];
@@ -366,24 +331,20 @@ public class Utils
 				// remplissage test sortie dans interface
 				String flagSDN = Global.ZERO;
 				int size = flagTable.getFlags().size();
-				for (int j = 0; j < size; j++)
-				{
-					if (flagTable.getFlags().get(j).getLocal().equals(table.getItems()[i].getText(indexTest1)))
-					{
+				for (int j = 0; j < size; j++) {
+					if (flagTable.getFlags().get(j).getLocal().equals(table.getItems()[i].getText(indexTest1))) {
 						flagSDN = fr.ifremer.nemo.util.Utils.extraitCode(flagTable.getFlags().get(j).getSdn());
 						break;
 					}
 				}
 				table.getItems()[i].setText(indexTest2, flagSDN);
-			} catch (Exception e)
-			{
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
 	}
 
-	public static void injectNbreLignes(Text nbrelignes, StyledText styledtext)
-	{
+	public static void injectNbreLignes(Text nbrelignes, StyledText styledtext) {
 		int deb, fi, lignDepart, lignFin, i;
 
 		// on recupere les coordonnees de la selection
@@ -395,29 +356,23 @@ public class Utils
 		// calcul de la ligne en fonction de la valeur de x
 		// parcours du tableau des tailles de lignes cumulees
 
-		if (deb == fi)
-		{
+		if (deb == fi) {
 			Utils.messageErreurAppend(Messages.Utils_26);
 
-		} else
-		{
+		} else {
 
 			// calcul ligne depart
-			for (i = 0; i < lignesBrutes.size(); i++)
-			{
+			for (i = 0; i < lignesBrutes.size(); i++) {
 
-				if (deb == taillesCumLignes[i])
-				{
+				if (deb == taillesCumLignes[i]) {
 					lignDepart = i + 1;
 					break;
 				}
-				if (i == (lignesBrutes.size() - 1))
-				{
+				if (i == (lignesBrutes.size() - 1)) {
 					lignDepart = i + 1;
 					break;
 				}
-				if ((deb >= taillesCumLignes[i]) && (deb < taillesCumLignes[i + 1]))
-				{
+				if ((deb >= taillesCumLignes[i]) && (deb < taillesCumLignes[i + 1])) {
 					lignDepart = i + 1;
 					break;
 				}
@@ -426,21 +381,17 @@ public class Utils
 
 			// calcul ligne fin
 
-			for (i = 0; i < lignesBrutes.size(); i++)
-			{
+			for (i = 0; i < lignesBrutes.size(); i++) {
 
-				if (fi == taillesCumLignes[i])
-				{
+				if (fi == taillesCumLignes[i]) {
 					lignFin = i + 1;
 					break;
 				}
-				if (i == (lignesBrutes.size() - 1))
-				{
+				if (i == (lignesBrutes.size() - 1)) {
 					lignFin = i + 1;
 					break;
 				}
-				if ((fi >= taillesCumLignes[i]) && (fi < taillesCumLignes[i + 1]))
-				{
+				if ((fi >= taillesCumLignes[i]) && (fi < taillesCumLignes[i + 1])) {
 					lignFin = i + 1;
 					break;
 				}
@@ -453,8 +404,7 @@ public class Utils
 		}
 	}
 
-	public static void calculPosxPosy(Fragment frag, Cursor cursor)
-	{
+	public static void calculPosxPosy(Fragment frag, Cursor cursor) {
 		// reconstitue la position x et y du surlignement souris e partir du
 		// fragment
 
@@ -470,8 +420,7 @@ public class Utils
 
 	}
 
-	public static void calculOffsetDebOffsetFin(Fragment frag, Cursor cursor)
-	{
+	public static void calculOffsetDebOffsetFin(Fragment frag, Cursor cursor) {
 		// calcule debut et fin e partir du surlignement souris
 		int offsetDebut, offsetFin, ligneDebut, ligneFin;
 
@@ -480,45 +429,37 @@ public class Utils
 
 		offsetDebut = cursor.getX() - taillesCumLignes[ligneDebut - 1] + 1;
 		offsetFin = cursor.getY() - taillesCumLignes[ligneFin - 1];
-		if (offsetDebut < 0)
-		{
+		if (offsetDebut < 0) {
 			frag.setFirstCharOffset(1);
-		} else
-		{
+		} else {
 			frag.setFirstCharOffset(offsetDebut);
 		}
 
-		if (offsetFin > 0)
-		{
+		if (offsetFin > 0) {
 			frag.setLastCharOffset(offsetFin);
 		}
 	}
 
-	public static void calculRealOffsetFin(Fragment frag)
-	{
+	public static void calculRealOffsetFin(Fragment frag) {
 		EditFileForm editFileForm = Nemo.getInstance().getViewMain().getEditFileForm();
 		int offsetFin;
 		int enteteFichier = Integer.parseInt(editFileForm.getSectionFileHeader().getValue());
 
 		// calcul de l'offset de fin après rechargement du modèle
-		if (enteteFichier > 0)
-		{
+		if (enteteFichier > 0) {
 			// prise en compte de l'entête de fichier
 			offsetFin = frag.getLastCharOffset() + taillesCumLignes[frag.getLastLine() + Integer.parseInt(editFileForm.getSectionFileHeader().getValue())] - taillesCumLignes[frag.getFirstLine() + Integer.parseInt(editFileForm.getSectionFileHeader().getValue())];
-		} else
-		{
+		} else {
 			// il n'y a pas d'entête de fichier
 			offsetFin = frag.getLastCharOffset() + taillesCumLignes[frag.getLastLine() - 1] - taillesCumLignes[frag.getFirstLine() - 1];
 		}
 
-		if (offsetFin > 0)
-		{
+		if (offsetFin > 0) {
 			frag.setLastCharOffset(offsetFin);
 		}
 	}
 
-	public static void calculNbreLignesPuisRemplissageFrag(Fragment frag, int headerLines)
-	{
+	public static void calculNbreLignesPuisRemplissageFrag(Fragment frag, int headerLines) {
 		int fi, lignDepart, lignFin, i, nbrelignes, longueur;
 
 		// on recupere les coordonnees de la selection
@@ -557,21 +498,17 @@ public class Utils
 
 		// calcul ligne fin
 
-		for (i = lignDepart - 1; i < lignesBrutes.size(); i++)
-		{
+		for (i = lignDepart - 1; i < lignesBrutes.size(); i++) {
 
-			if (longueur == taillesCumLignes[i] - taillesCumLignes[lignDepart - 1])
-			{
+			if (longueur == taillesCumLignes[i] - taillesCumLignes[lignDepart - 1]) {
 				lignFin = i + 1;
 				break;
 			}
-			if (i == (lignesBrutes.size() - 1))
-			{
+			if (i == (lignesBrutes.size() - 1)) {
 				lignFin = i + 1;
 				break;
 			}
-			if ((longueur >= taillesCumLignes[i] - taillesCumLignes[lignDepart - 1]) && (longueur < taillesCumLignes[i + 1] - taillesCumLignes[lignDepart - 1]))
-			{
+			if ((longueur >= taillesCumLignes[i] - taillesCumLignes[lignDepart - 1]) && (longueur < taillesCumLignes[i + 1] - taillesCumLignes[lignDepart - 1])) {
 				lignFin = i + 1;
 				break;
 			}
@@ -583,19 +520,16 @@ public class Utils
 		// nbre de lignes effectif
 		nbrelignes = (lignFin - lignDepart + 1);
 
-		if (nbrelignes == 1)
-		{
+		if (nbrelignes == 1) {
 			// frag.setSingleLine(true);
 			frag.setLastLine(frag.getFirstLine());
-		} else
-		{
+		} else {
 			frag.setSingleLine(false);
 			frag.setLastLine(frag.getFirstLine() + nbrelignes - 1);
 
 			// calcul de l'offset reel sur la derniere ligne
 			int cpt = fi;
-			for (int j = lignDepart - 1; j < lignFin - 1; j++)
-			{
+			for (int j = lignDepart - 1; j < lignFin - 1; j++) {
 				cpt = cpt - Utils.lignesBrutes.get(j).length();
 			}
 			// en sortie de boucle, cpt a la valeur de l'offset de fin sur la
@@ -604,8 +538,7 @@ public class Utils
 			// System.out.println("ligne fin = " + lignFin);
 			// System.out.println("ligne debut = " + lignDepart);
 
-			if (cpt > 0)
-			{
+			if (cpt > 0) {
 				cpt = cpt - (nbrelignes - 1);
 			}
 
@@ -614,8 +547,7 @@ public class Utils
 
 	}
 
-	public static void calculNbreLignesPuisRemplissageFragClic(Fragment frag, Cursor cursor)
-	{
+	public static void calculNbreLignesPuisRemplissageFragClic(Fragment frag, Cursor cursor) {
 		int deb, fi, lignDepart, lignFin, i, nbrelignes;
 
 		// calcul nbre ligne/debut/fin en fonction de la zone de surlignement
@@ -637,20 +569,16 @@ public class Utils
 		// parcours du tableau des tailles de lignes cumulees
 
 		// calcul ligne depart
-		for (i = 0; i < lignesBrutes.size(); i++)
-		{
-			if (deb == taillesCumLignes[i])
-			{
+		for (i = 0; i < lignesBrutes.size(); i++) {
+			if (deb == taillesCumLignes[i]) {
 				lignDepart = i + 1;
 				break;
 			}
-			if (i == (lignesBrutes.size() - 1))
-			{
+			if (i == (lignesBrutes.size() - 1)) {
 				lignDepart = i + 1;
 				break;
 			}
-			if ((deb >= taillesCumLignes[i]) && (deb < taillesCumLignes[i + 1]))
-			{
+			if ((deb >= taillesCumLignes[i]) && (deb < taillesCumLignes[i + 1])) {
 				lignDepart = i + 1;
 				break;
 			}
@@ -662,21 +590,17 @@ public class Utils
 
 		// calcul ligne fin
 
-		for (i = 0; i < lignesBrutes.size(); i++)
-		{
+		for (i = 0; i < lignesBrutes.size(); i++) {
 
-			if (fi == taillesCumLignes[i])
-			{
+			if (fi == taillesCumLignes[i]) {
 				lignFin = i + 1;
 				break;
 			}
-			if (i == (lignesBrutes.size() - 1))
-			{
+			if (i == (lignesBrutes.size() - 1)) {
 				lignFin = i + 1;
 				break;
 			}
-			if ((fi >= taillesCumLignes[i]) && (fi < taillesCumLignes[i + 1]))
-			{
+			if ((fi >= taillesCumLignes[i]) && (fi < taillesCumLignes[i + 1])) {
 				lignFin = i + 1;
 				break;
 			}
@@ -688,12 +612,10 @@ public class Utils
 		// nbre de lignes effectif
 		nbrelignes = (lignFin - lignDepart + 1);
 
-		if (nbrelignes == 1)
-		{
+		if (nbrelignes == 1) {
 			// frag.setSingleLine(true);
 			frag.setLastLine(lignDepart);
-		} else
-		{
+		} else {
 			frag.setSingleLine(false);
 			frag.setLastLine(frag.getFirstLine() + nbrelignes - 1);
 		}
@@ -705,8 +627,7 @@ public class Utils
 	 * @param onglet
 	 *            : destination
 	 */
-	public static void validationEtape(int onglet)
-	{
+	public static void validationEtape(int onglet) {
 		// ViewMain.affiche => onglet courant
 		// onglet => onglet destination
 		EditFileForm editFileForm = Nemo.getInstance().getViewMain().getEditFileForm();
@@ -715,23 +636,18 @@ public class Utils
 		EditDataForm editDataForm = Nemo.getInstance().getViewMain().getEditDataForm();
 		EditConversionForm editConversionForm = Nemo.getInstance().getViewMain().getEditConversionForm();
 
-		switch (onglet)
-		{
+		switch (onglet) {
 		case 0:
 			ViewLog.aideFile();
-			if (editFileForm != null)
-			{
+			if (editFileForm != null) {
 				razEditionCurrent();
-				if (editFileForm.isLoaded())
-				{
+				if (editFileForm.isLoaded()) {
 					// EditDesc.DrawingBack();
 					editFileForm.drawingBack();
-				} else if (editFileForm.isFileLoaded())
-				{
+				} else if (editFileForm.isFileLoaded()) {
 					// EditDesc.affichageEdition();
 					editFileForm.afficheEdition();
-				} else
-				{
+				} else {
 					editFileForm.reinitTextArea();
 				}
 			}
@@ -739,14 +655,11 @@ public class Utils
 			break;
 		case 1:
 			razEditionCurrent();
-			if (editCruiseForm.isLoaded())
-			{
+			if (editCruiseForm.isLoaded()) {
 				editCruiseForm.drawingBack();
-			} else if (editFileForm.isValidated())
-			{
+			} else if (editFileForm.isValidated()) {
 				editCruiseForm.afficheEdition();
-			} else
-			{
+			} else {
 				ViewLog.aideCruise();
 				Nemo.getInstance().getViewMain().getEditCruiseForm().getTextAreaCruise().setText(Global.EMPTY_STRING);
 				Nemo.getInstance().getViewMain().setAffiche(1);
@@ -754,14 +667,11 @@ public class Utils
 			break;
 		case 2:
 			razEditionCurrent();
-			if (editStationForm.isLoaded())
-			{
+			if (editStationForm.isLoaded()) {
 				editStationForm.drawingBack();
-			} else if ((!Nemo.getInstance().getViewMain().tabCruise.isDisposed() && editCruiseForm.isValidated()) || (Nemo.getInstance().getViewMain().tabCruise.isDisposed() && editFileForm.isValidated()))
-			{
+			} else if ((!Nemo.getInstance().getViewMain().tabCruise.isDisposed() && editCruiseForm.isValidated()) || (Nemo.getInstance().getViewMain().tabCruise.isDisposed() && editFileForm.isValidated())) {
 				editStationForm.afficheEdition();
-			} else
-			{
+			} else {
 				ViewLog.aideStation();
 				Nemo.getInstance().getViewMain().getEditStationForm().getTextAreaStation().setText(Global.EMPTY_STRING);
 				Nemo.getInstance().getViewMain().setAffiche(2);
@@ -769,14 +679,11 @@ public class Utils
 			break;
 		case 3:
 			razEditionCurrent();
-			if (editDataForm.isLoaded())
-			{
+			if (editDataForm.isLoaded()) {
 				editDataForm.drawingBack();
-			} else if (editStationForm.isValidated())
-			{
+			} else if (editStationForm.isValidated()) {
 				editDataForm.afficheEdition();
-			} else
-			{
+			} else {
 				ViewLog.aideData();
 				Nemo.getInstance().getViewMain().getEditDataForm().getTextAreaData().setText(Global.EMPTY_STRING);
 				Nemo.getInstance().getViewMain().setAffiche(3);
@@ -784,14 +691,11 @@ public class Utils
 			break;
 		case 4:
 			razEditionCurrent();
-			if (editConversionForm.isLoaded())
-			{
+			if (editConversionForm.isLoaded()) {
 				editConversionForm.drawingBack();
-			} else if (editDataForm.isValidated())
-			{
+			} else if (editDataForm.isValidated()) {
 				editConversionForm.afficheEdition();
-			} else
-			{
+			} else {
 				ViewLog.aideConversion();
 				Nemo.getInstance().getViewMain().setAffiche(4);
 			}
@@ -800,16 +704,14 @@ public class Utils
 
 	}
 
-	private static void razEditionCurrent()
-	{
+	private static void razEditionCurrent() {
 		EditFileForm editFileForm = Nemo.getInstance().getViewMain().getEditFileForm();
 		EditCruiseForm editCruiseForm = Nemo.getInstance().getViewMain().getEditCruiseForm();
 		EditStationForm editStationForm = Nemo.getInstance().getViewMain().getEditStationForm();
 		EditDataForm editDataForm = Nemo.getInstance().getViewMain().getEditDataForm();
 		EditConversionForm editConversionForm = Nemo.getInstance().getViewMain().getEditConversionForm();
 
-		switch (Nemo.getInstance().getViewMain().getAffiche())
-		{
+		switch (Nemo.getInstance().getViewMain().getAffiche()) {
 		case 0:
 			// from FILE
 			if (editFileForm.isLoaded())
@@ -840,16 +742,12 @@ public class Utils
 		}
 	}
 
-	public static boolean deleteDir(File dir)
-	{
-		if (dir.isDirectory())
-		{
+	public static boolean deleteDir(File dir) {
+		if (dir.isDirectory()) {
 			String[] children = dir.list();
-			for (int i = 0; i < children.length; i++)
-			{
+			for (int i = 0; i < children.length; i++) {
 				boolean success = deleteDir(new File(dir, children[i]));
-				if (!success)
-				{
+				if (!success) {
 					return false;
 				}
 			}
@@ -859,8 +757,7 @@ public class Utils
 		return dir.delete();
 	}
 
-	public static Boolean findFiles(String directoryPath, boolean raz)
-	{
+	public static Boolean findFiles(String directoryPath, boolean raz) {
 		File directory = new File(directoryPath);
 
 		Boolean ok = true;
@@ -876,29 +773,23 @@ public class Utils
 		Pattern p = Pattern.compile("[.]"); //$NON-NLS-1$
 		String[] mots = p.split(nom);
 		String ext;
-		if (mots.length == 1)
-		{
+		if (mots.length == 1) {
 			ext = Global.EMPTY_STRING;
-		} else
-		{
+		} else {
 			ext = mots[1];
 		}
 
-		for (int i = 0; i < nbre; i++)
-		{
+		for (int i = 0; i < nbre; i++) {
 
 			String mots1[] = p.split(subfiles[i].getName());
 			String ext1;
-			if (mots1.length == 1)
-			{
+			if (mots1.length == 1) {
 				ext1 = Global.EMPTY_STRING;
-			} else
-			{
+			} else {
 				ext1 = mots1[1];
 			}
 
-			if (!ext.equals(ext1))
-			{
+			if (!ext.equals(ext1)) {
 				ok = false;
 				Utils.messageErreurAppend(Messages.Utils_27);
 				break;
@@ -906,17 +797,14 @@ public class Utils
 
 		}
 
-		if (ok)
-		{
+		if (ok) {
 			EditFileForm editFileForm = Nemo.getInstance().getViewMain().getEditFileForm();
 			editFileForm.nomFichier = directoryPath + File.separator + subfiles[0].getName();
 			editFileForm.nomRepertoire = directoryPath;
 
-			try
-			{
+			try {
 				Utils.insertTextFich(editFileForm.nomFichier, editFileForm.getTextAreaFile(), raz);
-			} catch (IOException e)
-			{
+			} catch (IOException e) {
 				e.printStackTrace();
 				// gestion de l'erreur si le dossier ne contient aucun fichier -
 				// affichage d'un message a l'utilisateur
@@ -930,8 +818,7 @@ public class Utils
 
 	}
 
-	public static Boolean findFilesCollectCas1(String directoryPath, boolean raz)
-	{
+	public static Boolean findFilesCollectCas1(String directoryPath, boolean raz) {
 		File directory = new File(directoryPath);
 
 		Boolean ok = true;
@@ -947,29 +834,23 @@ public class Utils
 		Pattern p = Pattern.compile("[.]"); //$NON-NLS-1$
 		String[] mots = p.split(nom);
 		String ext;
-		if (mots.length == 1)
-		{
+		if (mots.length == 1) {
 			ext = Global.EMPTY_STRING;
-		} else
-		{
+		} else {
 			ext = mots[1];
 		}
 
-		for (int i = 0; i < nbre; i++)
-		{
+		for (int i = 0; i < nbre; i++) {
 
 			String mots1[] = p.split(subfiles[i].getName());
 			String ext1;
-			if (mots1.length == 1)
-			{
+			if (mots1.length == 1) {
 				ext1 = Global.EMPTY_STRING;
-			} else
-			{
+			} else {
 				ext1 = mots1[1];
 			}
 
-			if (!ext.equals(ext1))
-			{
+			if (!ext.equals(ext1)) {
 				ok = false;
 				Utils.messageErreurAppend(Messages.Utils_27);
 				break;
@@ -986,31 +867,25 @@ public class Utils
 		// verif sur l'extension de tous les fichiers du dossier
 		mots = p.split(nom2);
 
-		if (mots.length == 1)
-		{
+		if (mots.length == 1) {
 			ext = Global.EMPTY_STRING;
-		} else
-		{
+		} else {
 			ext = mots[1];
 		}
 
 		int nbre2 = subsubfiles.length;
 
-		for (int i = 0; i < nbre2; i++)
-		{
+		for (int i = 0; i < nbre2; i++) {
 
 			String mots1[] = p.split(subsubfiles[i].getName());
 			String ext1;
-			if (mots1.length == 1)
-			{
+			if (mots1.length == 1) {
 				ext1 = Global.EMPTY_STRING;
-			} else
-			{
+			} else {
 				ext1 = mots1[1];
 			}
 
-			if (!ext.equals(ext1))
-			{
+			if (!ext.equals(ext1)) {
 				ok = false;
 				Utils.messageErreurAppend(Messages.Utils_27);
 				break;
@@ -1018,18 +893,15 @@ public class Utils
 
 		}
 
-		if (ok)
-		{
+		if (ok) {
 			EditFileForm editFileForm = Nemo.getInstance().getViewMain().getEditFileForm();
 
 			editFileForm.nomFichier = directoryPath + File.separator + subfiles[0].getName() + File.separator + subsubfiles[0].getName();
 			editFileForm.nomRepertoire = directoryPath;
 
-			try
-			{
+			try {
 				Utils.insertTextFich(editFileForm.nomFichier, editFileForm.getTextAreaFile(), raz);
-			} catch (IOException e)
-			{
+			} catch (IOException e) {
 
 				e.printStackTrace();
 			}
@@ -1040,36 +912,124 @@ public class Utils
 
 	}
 
-	public static void messageErreur(String message)
-	{
-		ViewLog.styledTextLogErreurs.setText(message);
-		Color truc = new Color(Application.display, 255, 0, 0);
+	public static void messageErreur(String message) {
+
+		String errorMessage = message.trim();
+		if (!errorMessage.equals(Global.EMPTY_STRING))
+			errorMessage = Messages.ERROR + Global.SPACE + Global.DBL_PT + Global.SPACE + message;
+
+		ViewLog.styledTextLogErreurs.setText(errorMessage);
 
 		StyleRange style = new StyleRange();
 		style.start = 0;
+		style.length = errorMessage.length();
+
+		style.foreground = new Color(Application.display, 255, 0, 0);
+
+		ViewLog.styledTextLogErreurs.setStyleRange(style);
+		ViewLog.tabFolderLog.setSelection(0);
+
+		ViewLog.styledTextLogErreurs.update();
+	}
+
+	public static void messageErreurAppend(String message) {
+
+		String errorMessage = message.trim();
+		if (!errorMessage.equals(Global.EMPTY_STRING))
+			errorMessage = Messages.ERROR + Global.SPACE + Global.DBL_PT + Global.SPACE + message;
+
+		ViewLog.styledTextLogErreurs.append(Global.RN);
+
+		int start = ViewLog.styledTextLogErreurs.getText().length();
+
+		ViewLog.styledTextLogErreurs.append(errorMessage);
+
+		StyleRange style = new StyleRange();
+		style.start = start;
+		style.length = errorMessage.length();
+		style.foreground = new Color(Application.display, 255, 000, 0);
+
+		ViewLog.styledTextLogErreurs.setStyleRange(style);
+		ViewLog.tabFolderLog.setSelection(0);
+
+		ViewLog.styledTextLogErreurs.update();
+
+	}
+
+	public static void messageWarning(String message) {
+
+		String warningMessage = message.trim();
+		if (!warningMessage.equals(Global.EMPTY_STRING))
+			warningMessage = Messages.WARNING + Global.SPACE + Global.DBL_PT + Global.SPACE + message;
+
+		ViewLog.styledTextLogErreurs.setText(warningMessage);
+
+		StyleRange style = new StyleRange();
+		style.start = 0;
+		style.length = warningMessage.length();
+		style.foreground = new Color(Application.display, 255, 0, 0);
+		;
+
+		ViewLog.styledTextLogErreurs.setStyleRange(style);
+		ViewLog.tabFolderLog.setSelection(0);
+
+		ViewLog.styledTextLogErreurs.update();
+	}
+
+	public static void messageWarningAppend(String message) {
+
+		String warningMessage = message.trim();
+		if (!warningMessage.equals(Global.EMPTY_STRING))
+			warningMessage = Messages.WARNING + Global.SPACE + Global.DBL_PT + Global.SPACE + message;
+
+		ViewLog.styledTextLogErreurs.append(Global.RN);
+
+		int start = ViewLog.styledTextLogErreurs.getText().length();
+
+		ViewLog.styledTextLogErreurs.append(warningMessage);
+
+		StyleRange style = new StyleRange();
+		style.start = start;
+		style.length = warningMessage.length();
+		style.foreground = new Color(Application.display, 255, 128, 0);
+
+		ViewLog.styledTextLogErreurs.setStyleRange(style);
+		ViewLog.tabFolderLog.setSelection(0);
+
+		ViewLog.styledTextLogErreurs.update();
+
+	}
+
+	public static void messageOK(String message) {
+
+		ViewLog.styledTextLogErreurs.setText(message);
+		Color truc = new Color(Application.display, 0, 151, 0);
+
+		StyleRange style = new StyleRange();
+		style.start = 0;
+		style.length = ViewLog.styledTextLogErreurs.getText().length();
+
+		style.foreground = truc;
+
+		ViewLog.styledTextLogErreurs.setStyleRange(style);
+		ViewLog.tabFolderLog.setSelection(0);
+
+		ViewLog.styledTextLogErreurs.update();
+	}
+
+	public static void messageOKAppend(String message) {
+
+		ViewLog.styledTextLogErreurs.append(Global.RN);
+
+		int start = ViewLog.styledTextLogErreurs.getText().length();
+
+		ViewLog.styledTextLogErreurs.append(message);
+
+		StyleRange style = new StyleRange();
+		style.start = start;
 		style.length = message.length();
 
-		style.foreground = truc;
-
-		ViewLog.styledTextLogErreurs.setStyleRange(style);
-		ViewLog.tabFolderLog.setSelection(0);
-
-		ViewLog.styledTextLogErreurs.update();
-	}
-
-	public static void messageErreurAppend(String message)
-	{
-
-		ViewLog.styledTextLogErreurs.append(Global.RN);
-
-		ViewLog.styledTextLogErreurs.append(message);
-		Color truc = new Color(Application.display, 255, 0, 0);
-
-		StyleRange style = new StyleRange();
-		style.start = 0;
-		style.length = ViewLog.styledTextLogErreurs.getText().length();
-
-		style.foreground = truc;
+		style.foreground = new Color(Application.display, 0, 151, 0);
 
 		ViewLog.styledTextLogErreurs.setStyleRange(style);
 		ViewLog.tabFolderLog.setSelection(0);
@@ -1078,47 +1038,7 @@ public class Utils
 
 	}
 
-	public static void messageOK(String message)
-	{
-
-		ViewLog.styledTextLogErreurs.setText(message);
-		Color truc = new Color(Application.display, 0, 151, 0);
-
-		StyleRange style = new StyleRange();
-		style.start = 0;
-		style.length = ViewLog.styledTextLogErreurs.getText().length();
-
-		style.foreground = truc;
-
-		ViewLog.styledTextLogErreurs.setStyleRange(style);
-		ViewLog.tabFolderLog.setSelection(0);
-
-		ViewLog.styledTextLogErreurs.update();
-	}
-
-	public static void messageOKAppend(String message)
-	{
-
-		ViewLog.styledTextLogErreurs.append(Global.RN);
-
-		ViewLog.styledTextLogErreurs.append(message);
-		Color truc = new Color(Application.display, 0, 151, 0);
-
-		StyleRange style = new StyleRange();
-		style.start = 0;
-		style.length = ViewLog.styledTextLogErreurs.getText().length();
-
-		style.foreground = truc;
-
-		ViewLog.styledTextLogErreurs.setStyleRange(style);
-		ViewLog.tabFolderLog.setSelection(0);
-
-		ViewLog.styledTextLogErreurs.update();
-
-	}
-
-	public static void razGlobal()
-	{
+	public static void razGlobal() {
 		EditFileForm editFileForm = Nemo.getInstance().getViewMain().getEditFileForm();
 		EditCruiseForm editCruiseForm = Nemo.getInstance().getViewMain().getEditCruiseForm();
 		EditStationForm editStationForm = Nemo.getInstance().getViewMain().getEditStationForm();
@@ -1126,8 +1046,7 @@ public class Utils
 
 		// efface tous les onglets qui ont ete affiches jusque le en preparation
 		// du chargement d'un nouveau fichier
-		if (editFileForm.getSectionFileHeader() != null)
-		{
+		if (editFileForm.getSectionFileHeader() != null) {
 			// //effacement boutons
 			editFileForm.razEdition();
 
@@ -1144,91 +1063,73 @@ public class Utils
 		invalidEtapes();
 	}
 
-	public static void messageInfo(String message)
-	{
+	public static void messageInfo(String message) {
 		ViewLog.styledTextLogInfos.setText(message);
 	}
 
-	public static void messageInfoAppend(String message)
-	{
+	public static void messageInfoAppend(String message) {
 		ViewLog.styledTextLogInfos.append("\n" + message); //$NON-NLS-1$
 	}
 
-	public static void selectComboValeur(Combo combo, String valeur)
-	{
+	public static void selectComboValeur(Combo combo, String valeur) {
 		int i = 0;
 		int size = combo.getItemCount();
 
-		if (valeur.equals(Global.EMPTY_STRING))
-		{
+		if (valeur.equals(Global.EMPTY_STRING)) {
 			combo.select(-1);
-		} else
-		{
+		} else {
 			combo.select(i);
 
-			while (i < size && !combo.getText().equalsIgnoreCase(valeur))
-			{
+			while (i < size && !combo.getText().equalsIgnoreCase(valeur)) {
 				i++;
 				combo.select(i);
 			}
 
-			if (!combo.getText().equalsIgnoreCase(valeur))
-			{
+			if (!combo.getText().equalsIgnoreCase(valeur)) {
 				combo.add(valeur);
 				combo.select(combo.getItemCount() - 1);
 			}
 		}
 	}
 
-	public static void selectComboCode(Combo combo, String code)
-	{
+	public static void selectComboCode(Combo combo, String code) {
 		int i = 0;
 		int length = code.length();
 		int size = combo.getItemCount();
 
-		if (code.equals(Global.EMPTY_STRING))
-		{
+		if (code.equals(Global.EMPTY_STRING)) {
 			combo.deselectAll();
 			combo.select(-1);
-		} else
-		{
+		} else {
 			combo.select(i);
 
-			while (i < size && !combo.getText().substring(0, Math.min(combo.getText().length(), length)).equals(code))
-			{
+			while (i < size && !combo.getText().substring(0, Math.min(combo.getText().length(), length)).equals(code)) {
 				i++;
 				combo.select(i);
 			}
 
-			if (!combo.getText().substring(0, Math.min(combo.getText().length(), length)).equals(code))
-			{
+			if (!combo.getText().substring(0, Math.min(combo.getText().length(), length)).equals(code)) {
 				combo.add(code);
 				combo.select(combo.getItemCount() - 1);
 			}
 		}
 	}
 
-	public static void selectComboLibelle(Combo combo, String libelle)
-	{
+	public static void selectComboLibelle(Combo combo, String libelle) {
 		int i = 0;
 		int length = libelle.length();
 		int size = combo.getItemCount();
 		boolean blnFound = false;
 
-		if (libelle.equals(Global.EMPTY_STRING))
-		{
+		if (libelle.equals(Global.EMPTY_STRING)) {
 			combo.select(-1);
-		} else
-		{
+		} else {
 
-			while (i < size)
-			{
+			while (i < size) {
 				combo.select(i);
 				int debutLibelle = combo.getText().length() - length;
-				if (debutLibelle >= 0)
-				{
-					if (combo.getText().substring(debutLibelle).trim().equalsIgnoreCase(libelle))
-					{
+				if (debutLibelle >= 0) {
+					if (combo.getText().substring(debutLibelle).trim().equalsIgnoreCase(libelle)) {
 						blnFound = true;
 						break;
 					}
@@ -1236,43 +1137,36 @@ public class Utils
 				i++;
 			}
 
-			if (!blnFound)
-			{
+			if (!blnFound) {
 				combo.add(libelle);
 				combo.select(combo.getItemCount() - 1);
 			}
 		}
 	}
 
-	public static void selectComboCodePlus(Combo combo, String code, String valeur)
-	{
+	public static void selectComboCodePlus(Combo combo, String code, String valeur) {
 		int i = 0;
 		int length = code.length();
 		int size = combo.getItemCount();
 
-		if (code.equals(Global.EMPTY_STRING))
-		{
+		if (code.equals(Global.EMPTY_STRING)) {
 			combo.select(-1);
-		} else
-		{
+		} else {
 			combo.select(i);
 
-			while (i < size && !combo.getText().substring(0, Math.min(combo.getText().length(), length)).equals(code))
-			{
+			while (i < size && !combo.getText().substring(0, Math.min(combo.getText().length(), length)).equals(code)) {
 				i++;
 				combo.select(i);
 			}
 
-			if (!combo.getText().substring(0, Math.min(combo.getText().length(), length)).equals(code))
-			{
+			if (!combo.getText().substring(0, Math.min(combo.getText().length(), length)).equals(code)) {
 				combo.add(code + Global.SEP + valeur);
 				combo.select(combo.getItemCount() - 1);
 			}
 		}
 	}
 
-	public static void createSearchMenu(Combo combo, String table)
-	{
+	public static void createSearchMenu(Combo combo, String table) {
 		Menu menu = new Menu(combo.getShell(), SWT.POP_UP);
 
 		MenuItem itemSearch = new MenuItem(menu, SWT.NONE);
@@ -1292,36 +1186,29 @@ public class Utils
 		});
 	}
 
-	public static int calculNbLigne(File file)
-	{
+	public static int calculNbLigne(File file) {
 		int nbLignes = 0;
 
-		try
-		{
+		try {
 			FileReader reader = new FileReader(file);
 			BufferedReader readerLigne = new BufferedReader(reader);
 
-			while (readerLigne.readLine() != null)
-			{
+			while (readerLigne.readLine() != null) {
 				nbLignes++;
 			}
 			readerLigne.close();
 			return nbLignes;
-		} catch (IOException e)
-		{
+		} catch (IOException e) {
 			e.printStackTrace();
 			return -1;
 		}
 	}
 
-	public static FlagTable getBlankFlagTable()
-	{
-		if (_blank == null)
-		{
+	public static FlagTable getBlankFlagTable() {
+		if (_blank == null) {
 			_blank = new FlagTable();
 			String[] flags = Flag.flagSDN();
-			for (int i = 0; i < flags.length; i++)
-			{
+			for (int i = 0; i < flags.length; i++) {
 				_blank.getFlags().add(new Flag(fr.ifremer.nemo.util.Utils.extraitCode(flags[i]), flags[i]));
 			}
 		}
@@ -1329,8 +1216,7 @@ public class Utils
 		return _blank;
 	}
 
-	public static void forceMenu(Table table, Menu menu)
-	{
+	public static void forceMenu(Table table, Menu menu) {
 		final Menu men = menu;
 		table.addListener(SWT.MouseDown, new Listener()
 		{
@@ -1346,8 +1232,7 @@ public class Utils
 		});
 	}
 
-	public static void invalidEtapes()
-	{
+	public static void invalidEtapes() {
 		EditFileForm editFileForm = Nemo.getInstance().getViewMain().getEditFileForm();
 		EditCruiseForm editCruiseForm = Nemo.getInstance().getViewMain().getEditCruiseForm();
 		EditStationForm editStationForm = Nemo.getInstance().getViewMain().getEditStationForm();
@@ -1359,8 +1244,7 @@ public class Utils
 
 		// on invalide toutes les étapes suivantes avec le second
 		// flag okApresReset à false
-		if (editFileForm != null)
-		{
+		if (editFileForm != null) {
 			int currentTab = Nemo.getInstance().getViewMain().getAffiche();
 
 			if (currentTab <= 0) // onglet FILE ou inférieur en cours
@@ -1381,10 +1265,9 @@ public class Utils
 	}
 
 	/**
-     * 
-     */
-	public static Shell getMainShell()
-	{
+	 * 
+	 */
+	public static Shell getMainShell() {
 		return ApplicationWorkbenchWindowAdvisor.configurer.getWindow().getShell();
 	}
 }

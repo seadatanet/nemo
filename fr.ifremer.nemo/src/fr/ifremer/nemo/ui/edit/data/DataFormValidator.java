@@ -306,7 +306,7 @@ public class DataFormValidator extends FormValidator {
 		RulesManager rm = Nemo.getInstance().getViewMain().getMyRulesManager();
 		String standardName = StandardNameParameterManager.getInstance().getUserStandardName(typeCourant.getEntryKeyP011());
 		if (standardName == null || standardName.equals(Global.EMPTY_STRING) && rm.isConversionToNetCDF()) {
-			Utils.messageErreurAppend(Messages.Etape_126 + Global.SPACE
+			Utils.messageWarningAppend(Messages.Etape_126 + Global.SPACE
 					+ typeCourant.getCodeToUse());
 			ok = false;
 		}

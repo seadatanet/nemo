@@ -410,6 +410,8 @@ public class Messages {
 	public static String CHECKED;
 	public static String FAILED;
 	public static String INTERRUPTED;
+	public static String ERROR;
+	public static String WARNING;
 
 	// MAPPING
 	public static String ImportMappingAction_1;
