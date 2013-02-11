@@ -701,6 +701,7 @@ public class NemoBashTest {
 		longNames.put("SSALSG01", "Salinity"); //$NON-NLS-1$//$NON-NLS-2$
 		longNames.put("TEMPPR01", "Temperature"); //$NON-NLS-1$//$NON-NLS-2$
 		longNames.put("PBCNXTXT", "Concentration of lead"); //$NON-NLS-1$//$NON-NLS-2$
+		longNames.put("TEMPZZXX", "Temperature"); //$NON-NLS-1$//$NON-NLS-2$
 
 		return longNames;
 	}
@@ -739,6 +740,7 @@ public class NemoBashTest {
 		standardNames.put("TEMPSZ01", "sea_water_temperature"); //$NON-NLS-1$//$NON-NLS-2$
 		standardNames.put("SSALSG01", "sea_water_salinity"); //$NON-NLS-1$//$NON-NLS-2$
 		standardNames.put("TEMPPR01", "sea_water_temperature"); //$NON-NLS-1$//$NON-NLS-2$
+		standardNames.put("TEMPZZXX", "sea_water_temperature"); //$NON-NLS-1$//$NON-NLS-2$
 
 		return standardNames;
 	}
