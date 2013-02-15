@@ -242,6 +242,7 @@ public abstract class NemoWriter {
 
 		} catch (Exception e) {
 			stationDomain.resetStations();
+			e.printStackTrace();
 			throw new GenerationException(e);
 
 		} finally {

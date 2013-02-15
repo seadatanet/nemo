@@ -237,11 +237,14 @@ public class Messages {
 	public static String edit_data_verticalParameters_depthBSSurf;
 	public static String edit_data_verticalParameters_depthBSBed;
 	public static String edit_data_verticalParameters_pressure;
+	public static String edit_data_verticalParameters_heightASLvl;
 	public static String edit_data_verticalParameters_info_chooseDepthBSBed;
 	public static String edit_data_verticalParameters_info_chooseDepthBSurfOrPressure;
+	public static String edit_data_verticalParameters_info_chooseHeightASLvl;
 
 	public static String edit_data_belowSeaSurface;
 	public static String edit_data_belowSeaBed;
+	public static String edit_data_aboveSeaLevel;
 	public static String edit_data_P091;
 	public static String edit_data_P021;
 	public static String edit_data_P011;
@@ -268,6 +271,7 @@ public class Messages {
 	public static String edit_file_info_cruiseDisabledBecauseODV;
 	public static String edit_file_info_conversionNotApplicable;
 	public static String edit_file_info_P011viaP021_disabled;
+	public static String edit_file_info_AboveSeaLevel_disabled;
 	public static String edit_file_info_P091disabled;
 	// RESULTATS
 	public static String error_preformat_impossible;

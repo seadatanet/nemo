@@ -123,6 +123,6 @@ public interface Global {
 	};
 
 	public enum E_MesureType {
-		BSSURF, BSBED, UNKNOWN
+		BSSURF, BSBED, ASLVL, UNKNOWN
 	};
 }

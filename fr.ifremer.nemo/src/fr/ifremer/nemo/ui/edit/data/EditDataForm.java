@@ -18,6 +18,7 @@ import fr.ifremer.nemo.ui.RulesManager;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.EditForm;
 import fr.ifremer.nemo.ui.edit.data.listeners.DataListRadioSelectionListener;
+import fr.ifremer.nemo.ui.edit.data.listeners.MesureTypeAboveSeaLevelSelectionListener;
 import fr.ifremer.nemo.ui.edit.data.listeners.MesureTypeBelowSeaBedSelectionListener;
 import fr.ifremer.nemo.ui.edit.data.listeners.MesureTypeBelowSeaSurfaceSelectionListener;
 import fr.ifremer.nemo.ui.view.ViewLog;
@@ -27,8 +28,7 @@ import fr.ifremer.nemo.util.Global.E_MesureType;
 import fr.ifremer.nemo.util.Global.E_TypeConversion;
 import fr.ifremer.nemo.util.Messages;
 
-public class EditDataForm extends EditForm
-{
+public class EditDataForm extends EditForm {
 
 	// les données utilisées dans cette table myTable
 	private TableData myTableData;
@@ -42,23 +42,21 @@ public class EditDataForm extends EditForm
 	// choix du type de mesure
 	private Button mesType_belowSeaSurface;
 	private Button mesType_belowSeaBed;
+	private Button mesType_AboveSeaLevel;
 
 	private GroupVerticalParameters myGroupeVerticalParameters;
 
-	public EditDataForm()
-	{
+	public EditDataForm() {
 		super();
 		myValidator = new DataFormValidator();
 	}
 
-	public void init()
-	{
+	public void init() {
 		Nemo.getInstance().getViewMain().getMyRulesManager().resetDataForm();
 	}
 
 	@Override
-	public void createEditionForm(Composite parent)
-	{
+	public void createEditionForm(Composite parent) {
 		super.createEditionForm(parent);
 		myGroupeVerticalParameters = new GroupVerticalParameters();
 
@@ -102,14 +100,12 @@ public class EditDataForm extends EditForm
 	}
 
 	@Override
-	protected void initSections()
-	{
+	protected void initSections() {
 
 	}
 
 	@Override
-	public void afficheEdition()
-	{
+	public void afficheEdition() {
 		super.afficheEdition();
 
 		ViewLog.aideData();
@@ -124,58 +120,48 @@ public class EditDataForm extends EditForm
 		// nom du model
 		String modelName = Nemo.getInstance().getNomModele();
 
-		if (myTableData.getTypes() != null && !myTableData.getTypes().isEmpty())
-		{
+		if (myTableData.getTypes() != null && !myTableData.getTypes().isEmpty()) {
 			myTableData.razAndRecreateTable();
-		} else if (!Global.EMPTY_STRING.equals(modelName))
-		{
+		} else if (!Global.EMPTY_STRING.equals(modelName)) {
 			fillFromModel();
-		} else
-		{
+		} else {
 			myTableData.fillTypes();
 		}
 	}
 
 	@Override
-	public void drawingBack()
-	{
+	public void drawingBack() {
 		super.drawingBack();
 
 		ViewLog.aideData();
 		Nemo.getInstance().getViewMain().setAffiche(3);
-		
+
 	}
 
 	@Override
-	public void razText()
-	{
+	public void razText() {
 		boolean confirm = true;
 		confirm = MessageDialog.openConfirm(null,
 					Messages.edit_data_dataListDialogBox_title,
 					Messages.edit_data_dataListDialogBox_text);
-		if (confirm)
-		{
+		if (confirm) {
 			reset();
 		}
 	}
 
-	public void razText(boolean askForConfirm)
-	{
+	public void razText(boolean askForConfirm) {
 		boolean confirm = true;
-		if (askForConfirm)
-		{
+		if (askForConfirm) {
 			confirm = MessageDialog.openConfirm(null,
 					Messages.edit_data_dataListDialogBox_title,
 					Messages.edit_data_dataListDialogBox_text);
 		}
-		if (confirm)
-		{
+		if (confirm) {
 			reset();
 		}
 	}
 
-	private void reset()
-	{
+	private void reset() {
 		Nemo.getInstance().getViewMain().getMyRulesManager().resetDataForm();
 		// !!! le fillTypes doit être appelé APRES le removeToAllcombos, car
 		// il
@@ -184,14 +170,11 @@ public class EditDataForm extends EditForm
 	}
 
 	@Override
-	public void actualiseEdition()
-	{
+	public void actualiseEdition() {
 		// pas d'actualisation nécessaire pour cet onglet
-		System.out.println("act");
 	}
 
-	public void invalidEtape()
-	{
+	public void invalidEtape() {
 		super.invalidEtape(3);
 		Nemo.getInstance().getViewMain().tabData.setText(Messages.onglet_data);
 	}
@@ -200,40 +183,40 @@ public class EditDataForm extends EditForm
 	 * fill with current model values
 	 */
 	@Override
-	public void fillFromModel()
-	{
+	public void fillFromModel() {
 
 		myTableData.reinitTypes();
 		ParameterModel[] parameterModels =
 				Nemo.getInstance().getDomain().getData().getModel().getParameterModels();
 
-		
 		// update dataList to use
 
 		DataListTypeEnum dataList = Nemo.getInstance().getDomain().getData().getModel().getDataListType();
 		E_TypeConversion conv = Nemo.getInstance().getViewMain().getMyRulesManager().getMyConversionType();
-		if (conv == E_TypeConversion.MEDATLAS && dataList == dataList.P011_VIA_P021)
-		{
+		if (conv == E_TypeConversion.MEDATLAS && dataList == dataList.P011_VIA_P021) {
 			dataList = DataListTypeEnum.UNKNOWN;
 			Nemo.getInstance().getDomain().getData().getModel().setDataListType(dataList);
 
 		}
-		if ((conv == E_TypeConversion.NETCDF_MONOSTATION || conv == E_TypeConversion.NETCDF_MULTISTATIONS) && dataList == dataList.P091)
-        {
-            dataList = DataListTypeEnum.UNKNOWN;
-            Nemo.getInstance().getDomain().getData().getModel().setDataListType(dataList);
+		if ((conv == E_TypeConversion.NETCDF_MONOSTATION || conv == E_TypeConversion.NETCDF_MULTISTATIONS) && dataList == dataList.P091) {
+			dataList = DataListTypeEnum.UNKNOWN;
+			Nemo.getInstance().getDomain().getData().getModel().setDataListType(dataList);
 
-        }
+		}
+
 		Nemo.getInstance().getViewMain().getMyRulesManager().updateFromModel(dataList);
 		// update mesureType to use
 		E_MesureType mesureType = Nemo.getInstance().getDomain().getData().getModel().getMesureType();
+		if ((conv == E_TypeConversion.MEDATLAS) && mesureType == E_MesureType.ASLVL) {
+			mesureType = E_MesureType.UNKNOWN;
+			Nemo.getInstance().getDomain().getData().getModel().setMesureType(mesureType);
+
+		}
 		Nemo.getInstance().getViewMain().getMyRulesManager().updateFromModel(mesureType);
 
-		if (dataList != DataListTypeEnum.UNKNOWN)
-		{
+		if (dataList != DataListTypeEnum.UNKNOWN) {
 			// remplissage des parametres mesures APRES le datatype
-			for (ParameterModel paraCourant : parameterModels)
-			{
+			for (ParameterModel paraCourant : parameterModels) {
 				TypeData typeData = new TypeData(paraCourant);
 				myTableData.addType(typeData);
 			}
@@ -244,66 +227,58 @@ public class EditDataForm extends EditForm
 				Nemo.getInstance().getDomain().getData().getModel().getVerticalParametersList();
 		Nemo.getInstance().getViewMain().getMyRulesManager().updateFromModel(verticParams);
 		// refresh de la table de l'onglet Data
-        myTableData.razAndRecreateTable();
+		myTableData.razAndRecreateTable();
 	}
 
-	public void enableP011viaP021(boolean enabled)
-	{
+	public void enableP011viaP021(boolean enabled) {
 		button_P011viaP021.setEnabled(enabled);
 	}
-	 
-    public void enableP091(boolean enabled)
-    {
-        button_P091.setEnabled(enabled);
-    }
 
-	public void selectDataList(DataListTypeEnum theDataList)
-	{
+	public void enableP091(boolean enabled) {
+		button_P091.setEnabled(enabled);
+	}
+
+	public void enableAboveSeaLevel(boolean enabled) {
+		mesType_AboveSeaLevel.setEnabled(enabled);
+	}
+
+	public void selectDataList(DataListTypeEnum theDataList) {
 		RulesManager rulesManager = Nemo.getInstance().getViewMain().getMyRulesManager();
 		button_P091.setSelection(false);
 		button_P011viaP091.setSelection(false);
 		button_P011viaP021.setSelection(false);
 
-		if (theDataList == DataListTypeEnum.P091)
-		{
+		if (theDataList == DataListTypeEnum.P091) {
 			button_P091.setSelection(true);
-        }
-        else if(theDataList == DataListTypeEnum.P011_VIA_P091)
-		{
+		} else if (theDataList == DataListTypeEnum.P011_VIA_P091) {
 			button_P011viaP091.setSelection(true);
-        }
-        else if(theDataList == DataListTypeEnum.P011_VIA_P021)
-		{
+		} else if (theDataList == DataListTypeEnum.P011_VIA_P021) {
 			button_P011viaP021.setSelection(true);
 		}
 
 	}
 
-	public void selectMesureType(E_MesureType mesureType)
-	{
+	public void selectMesureType(E_MesureType mesureType) {
 		mesType_belowSeaSurface.setSelection(false);
 		mesType_belowSeaBed.setSelection(false);
+		mesType_AboveSeaLevel.setSelection(false);
 
-		if (mesureType == E_MesureType.BSBED)
-		{
+		if (mesureType == E_MesureType.BSBED) {
 			mesType_belowSeaBed.setSelection(true);
-		} else if (mesureType == E_MesureType.BSSURF)
-		{
+		} else if (mesureType == E_MesureType.BSSURF) {
 			mesType_belowSeaSurface.setSelection(true);
+		} else if (mesureType == E_MesureType.ASLVL) {
+			mesType_AboveSeaLevel.setSelection(true);
 		}
 	}
 
-	private DataListTypeEnum getSelectedDataList()
-	{
+	private DataListTypeEnum getSelectedDataList() {
 		DataListTypeEnum res = DataListTypeEnum.UNKNOWN;
-		if (button_P091.getSelection())
-		{
+		if (button_P091.getSelection()) {
 			res = DataListTypeEnum.P091;
-		} else if (button_P011viaP091.getSelection())
-		{
+		} else if (button_P011viaP091.getSelection()) {
 			res = DataListTypeEnum.P011_VIA_P091;
-		} else if (button_P011viaP021.getSelection())
-		{
+		} else if (button_P011viaP021.getSelection()) {
 			res = DataListTypeEnum.P011_VIA_P021;
 		}
 		return res;
@@ -313,8 +288,7 @@ public class EditDataForm extends EditForm
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void initFromNewModel()
-	{
+	public void initFromNewModel() {
 		/**
 		 * cette methode consiste à recréer un nouveau modele qu'on remplit avec
 		 * les valeurs recupérées dans l'IHM
@@ -329,8 +303,7 @@ public class EditDataForm extends EditForm
 		// mise e jour des types avant validation
 		myTableData.majTypeData();
 
-		for (TypeData typeCourant : myTableData.getTypes())
-		{
+		for (TypeData typeCourant : myTableData.getTypes()) {
 			ParameterModel parameterModel = new ParameterModel(typeCourant);
 			dataModel.addParameterModel(parameterModel);
 		}
@@ -341,8 +314,7 @@ public class EditDataForm extends EditForm
 
 	}
 
-	public void createLeft(Composite left)
-	{
+	public void createLeft(Composite left) {
 
 		left.setLayout(new FillLayout(SWT.VERTICAL));
 
@@ -356,13 +328,11 @@ public class EditDataForm extends EditForm
 
 	}
 
-	public void reinitTableData()
-	{
+	public void reinitTableData() {
 		myTableData.reinitTable();
 	}
 
-	public void reinitParameters()
-	{
+	public void reinitParameters() {
 		selectMesureType(E_MesureType.BSSURF);
 		myGroupeVerticalParameters.removeAllToAllCombos();
 	}
@@ -370,8 +340,7 @@ public class EditDataForm extends EditForm
 	/**
 	 * This method initializes data list group
 	 */
-	private void createGroupDataList()
-	{
+	private void createGroupDataList() {
 		Group group = new Group(formEdition.getBody(), SWT.NONE);
 		group.setFont(Utils.font08);
 		group.setText(Messages.edit_data_parametersList);
@@ -399,8 +368,7 @@ public class EditDataForm extends EditForm
 	/**
 	 * Group pour choix du type de mesure
 	 */
-	private void createGroupMesureType()
-	{
+	private void createGroupMesureType() {
 		Group group = new Group(formEdition.getBody(), SWT.NONE);
 		group.setFont(Utils.font08);
 		group.setText(Messages.edit_data_mesureType_label);
@@ -418,62 +386,55 @@ public class EditDataForm extends EditForm
 		mesType_belowSeaBed = new Button(group, SWT.RADIO);
 		mesType_belowSeaBed.setText(Messages.edit_data_belowSeaBed);
 		mesType_belowSeaBed.addSelectionListener(bedListener);
-
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(mesType_belowSeaBed);
+
+		MesureTypeAboveSeaLevelSelectionListener lvlListener = new MesureTypeAboveSeaLevelSelectionListener();
+		mesType_AboveSeaLevel = new Button(group, SWT.RADIO);
+		mesType_AboveSeaLevel.setText(Messages.edit_data_aboveSeaLevel);
+		mesType_AboveSeaLevel.addSelectionListener(lvlListener);
+		GridDataFactory.fillDefaults().grab(true, false).applyTo(mesType_AboveSeaLevel);
 
 	}
 
-	private void createGroupVerticalParametersChoices()
-	{
+	private void createGroupVerticalParametersChoices() {
 
 		myGroupeVerticalParameters.createGroup(formEdition);
 	}
 
-	public TableData getMyTableData()
-	{
+	public TableData getMyTableData() {
 		return myTableData;
 	}
 
-	public StyledText getTextAreaData()
-	{
+	public StyledText getTextAreaData() {
 		return textAreaData;
 	}
 
-	public void setTextAreaData(StyledText textAreaData)
-	{
+	public void setTextAreaData(StyledText textAreaData) {
 		this.textAreaData = textAreaData;
 	}
 
-	public Composite getCompositeData()
-	{
+	public Composite getCompositeData() {
 		return compositeData;
 	}
 
-	public void setCompositeData(Composite compositeData)
-	{
+	public void setCompositeData(Composite compositeData) {
 		this.compositeData = compositeData;
 	}
 
-	public Button getButton_P011viaP021()
-	{
+	public Button getButton_P011viaP021() {
 		return button_P011viaP021;
 	}
 
-	public Button getButton_P011viaP091()
-	{
+	public Button getButton_P011viaP091() {
 		return button_P011viaP091;
 	}
 
-	public Button getButton_P091()
-	{
+	public Button getButton_P091() {
 		return button_P091;
 	}
 
-	public GroupVerticalParameters getMyGroupeVerticalParameters()
-	{
+	public GroupVerticalParameters getMyGroupeVerticalParameters() {
 		return myGroupeVerticalParameters;
 	}
-
-   
 
 }

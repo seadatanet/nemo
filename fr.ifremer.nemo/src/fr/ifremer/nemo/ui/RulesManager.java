@@ -61,9 +61,12 @@ public class RulesManager {
 	private boolean dataList_P011viaP021_Enabled = false;
 	private boolean dataList_P091_Enabled = false;
 
+	private boolean m_aboveSeaLevel_Enabled = false;
+
 	private boolean p_depthBSSurf_enabled;
 	private boolean p_depthBSBed_enabled;
 	private boolean p_pressure_enabled;
+	private boolean p_heightASLvl_enabled;
 
 	/**
 	 * valeurs par défaut (à l'ouverture)
@@ -188,6 +191,7 @@ public class RulesManager {
 		myDataListType = DEFAULT_DATALIST;
 		dataList_P011viaP021_Enabled = isConversionToODV() || isConversionToNetCDF();
 		dataList_P091_Enabled = !isConversionToNetCDF();
+		m_aboveSeaLevel_Enabled = !isConversionToMedatlas();
 		myVerticalParametersList = new VerticalParametersList();
 		myMesureType = DEFAULT_MESURETYPE;
 		rule_mesureType();
@@ -216,6 +220,7 @@ public class RulesManager {
 		myEditDataForm.selectDataList(myDataListType);
 		dataList_P011viaP021_Enabled = isConversionToODV() || isConversionToNetCDF();
 		dataList_P091_Enabled = !isConversionToNetCDF();
+		m_aboveSeaLevel_Enabled = !isMedatlasEnabled();
 		myMesureType = DEFAULT_MESURETYPE;
 		myEditDataForm.selectMesureType(myMesureType);
 		rule_mesureType();
@@ -297,6 +302,7 @@ public class RulesManager {
 				.enableP011viaP021(isConversionToODV() || isConversionToNetCDF());
 		Nemo.getInstance().getViewMain().getEditDataForm()
 				.enableP091(!isConversionToNetCDF());
+		Nemo.getInstance().getViewMain().getEditDataForm().enableAboveSeaLevel(!isConversionToMedatlas());
 		ViewLog.styledTextLogErreurs.setText(messageLog);
 		resetDataForm();
 	}
@@ -326,6 +332,7 @@ public class RulesManager {
 				.enableP011viaP021(isConversionToODV() || isConversionToNetCDF());
 		Nemo.getInstance().getViewMain().getEditDataForm()
 				.enableP091(!isConversionToNetCDF());
+		Nemo.getInstance().getViewMain().getEditDataForm().enableAboveSeaLevel(!isConversionToMedatlas());
 		ViewLog.styledTextLogErreurs.setText(messageLog);
 
 		rule_mesureType();
@@ -335,6 +342,7 @@ public class RulesManager {
 		verticGroup.enable_pDepthBSBed(isP_depthBSBed_enabled());
 		verticGroup.enable_pDepthBSSurf(isP_depthBSSurf_enabled());
 		verticGroup.enable_pPressure(isP_pressure_enabled());
+		verticGroup.enable_pHeightASLvl(isP_heightASLvl_enabled());
 
 	}
 
@@ -361,6 +369,8 @@ public class RulesManager {
 				.enableP011viaP021(isConversionToODV() || isConversionToNetCDF());
 		Nemo.getInstance().getViewMain().getEditDataForm()
 				.enableP091(!isConversionToNetCDF());
+		Nemo.getInstance().getViewMain().getEditDataForm()
+				.enableAboveSeaLevel(!isConversionToMedatlas());
 		ViewLog.styledTextLogErreurs.setText(messageLog);
 	}
 
@@ -406,6 +416,9 @@ public class RulesManager {
 				rule_conversionType(true);
 				Nemo.getInstance().getViewMain()
 						.enableCruiseTab(isCruiseEnabled());
+				m_aboveSeaLevel_Enabled = !isConversionToMedatlas();
+				Nemo.getInstance().getViewMain().getEditDataForm().enableAboveSeaLevel(m_aboveSeaLevel_Enabled);
+
 				dataList_P011viaP021_Enabled = isConversionToODV() || isConversionToNetCDF();
 				Nemo.getInstance().getViewMain().getEditDataForm()
 						.enableP011viaP021(dataList_P011viaP021_Enabled);
@@ -457,6 +470,8 @@ public class RulesManager {
 		Nemo.getInstance().getViewMain().getEditDataForm()
 				.enableP011viaP021(isConversionToODV() || isConversionToNetCDF());
 		Nemo.getInstance().getViewMain().getEditDataForm()
+				.enableAboveSeaLevel(!isConversionToMedatlas());
+		Nemo.getInstance().getViewMain().getEditDataForm()
 				.enableP091(!isConversionToNetCDF());
 		ViewLog.styledTextLogErreurs.setText(messageLog);
 
@@ -503,6 +518,7 @@ public class RulesManager {
 				.enableP011viaP021(isConversionToODV() || isConversionToNetCDF());
 		Nemo.getInstance().getViewMain().getEditDataForm()
 				.enableP091(!isConversionToNetCDF());
+		Nemo.getInstance().getViewMain().getEditDataForm().enableAboveSeaLevel(!isConversionToMedatlas());
 		myDataListType = DEFAULT_DATALIST;
 		Nemo.getInstance().getViewMain().getEditDataForm()
 				.selectDataList(DataListTypeEnum.UNKNOWN);
@@ -552,6 +568,7 @@ public class RulesManager {
 				.enableP011viaP021(isConversionToODV() || isConversionToNetCDF());
 		Nemo.getInstance().getViewMain().getEditDataForm()
 				.enableP091(!isConversionToNetCDF());
+		Nemo.getInstance().getViewMain().getEditDataForm().enableAboveSeaLevel(!isConversionToMedatlas());
 		Nemo.getInstance().getViewMain().getEditDataForm()
 				.selectDataList(dataListType);
 		ViewLog.styledTextLogErreurs.setText(messageLog);
@@ -571,6 +588,7 @@ public class RulesManager {
 		verticGroup.enable_pDepthBSBed(isP_depthBSBed_enabled());
 		verticGroup.enable_pDepthBSSurf(isP_depthBSSurf_enabled());
 		verticGroup.enable_pPressure(isP_pressure_enabled());
+		verticGroup.enable_pHeightASLvl(isP_heightASLvl_enabled());
 	}
 
 	public void updateFromModel(E_MesureType mesureType) {
@@ -586,6 +604,7 @@ public class RulesManager {
 		verticGroup.enable_pDepthBSBed(isP_depthBSBed_enabled());
 		verticGroup.enable_pDepthBSSurf(isP_depthBSSurf_enabled());
 		verticGroup.enable_pPressure(isP_pressure_enabled());
+		verticGroup.enable_pHeightASLvl(isP_heightASLvl_enabled());
 		Nemo.getInstance().getViewMain().getEditDataForm()
 				.selectMesureType(mesureType);
 
@@ -599,6 +618,9 @@ public class RulesManager {
 		setP_depthBSBed_enabled(false);
 		setP_depthBSSurf_enabled(false);
 		setP_pressure_enabled(false);
+		setP_heightASLvl_enabled(false);
+
+		setM_aboveSeaLevel_enabled(false);
 
 		boolean p_depthBSBed =
 				(isProfile() || isTrajectory())
@@ -611,9 +633,15 @@ public class RulesManager {
 
 		boolean p_pressure = isProfile() && myMesureType == E_MesureType.BSSURF;
 
+		//TODO CPT affiné activation
+		boolean p_heightASLvl = !isConversionToMedatlas() && (isProfile() || isTrajectory()) && myMesureType == E_MesureType.ASLVL;
+
 		setP_depthBSBed_enabled(p_depthBSBed);
 		setP_depthBSSurf_enabled(p_depthBSSurf);
 		setP_pressure_enabled(p_pressure);
+		setP_heightASLvl_enabled(p_heightASLvl);
+		setM_aboveSeaLevel_enabled(!isConversionToMedatlas());
+
 	}
 
 	/******************************************
@@ -651,6 +679,7 @@ public class RulesManager {
 	}
 
 	private void rule_conversionType(boolean addToLog) {
+		m_aboveSeaLevel_Enabled = true;
 		if (myConversionType == E_TypeConversion.ODV_MONOSTATION
 				|| myConversionType == E_TypeConversion.ODV_MULTISTATIONS) {
 			cruiseEnabled = false;
@@ -661,9 +690,13 @@ public class RulesManager {
 								+ Global.RN;
 			}
 		} else if (myConversionType == E_TypeConversion.MEDATLAS) {
+			m_aboveSeaLevel_Enabled = false;
 			if (addToLog) {
 				messageLog +=
 						Messages.edit_file_info_P011viaP021_disabled + Global.RN;
+				messageLog +=
+						Messages.edit_file_info_AboveSeaLevel_disabled + Global.RN;
+
 			}
 		} else if (myConversionType == E_TypeConversion.NETCDF_MONOSTATION
 				|| myConversionType == E_TypeConversion.NETCDF_MULTISTATIONS) {
@@ -833,6 +866,14 @@ public class RulesManager {
 
 	}
 
+	public boolean isM_aboveSeaLevel_enabled() {
+		return m_aboveSeaLevel_Enabled;
+	}
+
+	public void setM_aboveSeaLevel_enabled(boolean m_aboveSeaLevel_enabled) {
+		m_aboveSeaLevel_Enabled = m_aboveSeaLevel_enabled;
+	}
+
 	public boolean isP_depthBSBed_enabled() {
 		return p_depthBSBed_enabled;
 	}
@@ -855,6 +896,14 @@ public class RulesManager {
 
 	public void setP_pressure_enabled(boolean p_pressure_enabled) {
 		this.p_pressure_enabled = p_pressure_enabled;
+	}
+
+	public boolean isP_heightASLvl_enabled() {
+		return p_heightASLvl_enabled;
+	}
+
+	public void setP_heightASLvl_enabled(boolean p_heightASLvl_enabled) {
+		this.p_heightASLvl_enabled = p_heightASLvl_enabled;
 	}
 
 	public E_MesureType getMyMesureType() {

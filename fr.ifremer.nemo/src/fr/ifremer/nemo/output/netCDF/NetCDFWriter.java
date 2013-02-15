@@ -29,6 +29,7 @@ import fr.ifremer.nemo.domain.StationDomain;
 import fr.ifremer.nemo.input.ModelDescription;
 import fr.ifremer.nemo.input.parameters.ParameterModel;
 import fr.ifremer.nemo.input.parameters.addedParameters.AP_ADEPZZ01;
+import fr.ifremer.nemo.input.parameters.addedParameters.AP_AHGTZZ01;
 import fr.ifremer.nemo.input.parameters.addedParameters.AP_DEPHPR01;
 import fr.ifremer.nemo.output.GenerationException;
 import fr.ifremer.nemo.output.NemoWriter;
@@ -37,6 +38,7 @@ import fr.ifremer.nemo.util.Formatter;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Global.E_EndData;
 import fr.ifremer.nemo.util.Global.E_InputType;
+import fr.ifremer.nemo.util.Global.E_MesureType;
 import fr.ifremer.nemo.util.Global.E_ProcessType;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
@@ -498,7 +500,7 @@ public class NetCDFWriter extends NemoWriter {
 
 		//z Variable
 		ParameterModel zParameterModel = null;
-		if (mediaModel.getInputType() != E_InputType.TIMESERIES)
+		if (mediaModel.getInputType() != E_InputType.TIMESERIES || dataDomain.getModel().getMesureType() == E_MesureType.ASLVL)
 			zParameterModel = dataDomain.getModel().getParameterModelByP011(getZLocalName());
 
 		//Si Parametre vertical non selectionné prendre le premiser parametre mesuré
@@ -733,26 +735,33 @@ public class NetCDFWriter extends NemoWriter {
 	}
 
 	private String getZLocalName() {
-		if (!dataDomain.getModel().getVerticalParametersList().getP_depthBSBed().isEmpty())
+
+		if (!dataDomain.getModel().getVerticalParametersList().getP_heightASLvl().isEmpty() && dataDomain.getModel().getMesureType() == E_MesureType.ASLVL)
+			return dataDomain.getModel().getVerticalParametersList().getP_heightASLvl();
+
+		if (!dataDomain.getModel().getVerticalParametersList().getP_depthBSBed().isEmpty() && dataDomain.getModel().getMesureType() == E_MesureType.BSBED)
 			return dataDomain.getModel().getVerticalParametersList().getP_depthBSBed();
 
-		if (!dataDomain.getModel().getVerticalParametersList().getP_depthBSSurf().isEmpty())
+		if (!dataDomain.getModel().getVerticalParametersList().getP_depthBSSurf().isEmpty() && dataDomain.getModel().getMesureType() == E_MesureType.BSSURF)
 			return dataDomain.getModel().getVerticalParametersList().getP_depthBSSurf();
 
-		if (!dataDomain.getModel().getVerticalParametersList().getP_pressure().isEmpty())
+		if (!dataDomain.getModel().getVerticalParametersList().getP_pressure().isEmpty() && dataDomain.getModel().getMesureType() == E_MesureType.BSSURF)
 			return dataDomain.getModel().getVerticalParametersList().getP_pressure();
 
 		return null;
 	}
 
 	private String getZVarName(ParameterModel zParameterModel) {
-		if (!dataDomain.getModel().getVerticalParametersList().getP_depthBSBed().isEmpty())
+		if (!dataDomain.getModel().getVerticalParametersList().getP_depthBSBed().isEmpty() && dataDomain.getModel().getMesureType() == E_MesureType.BSBED)
 			return ParameterNames.DEPTH;
 
-		if (!dataDomain.getModel().getVerticalParametersList().getP_depthBSSurf().isEmpty())
+		if (!dataDomain.getModel().getVerticalParametersList().getP_depthBSSurf().isEmpty() && dataDomain.getModel().getMesureType() == E_MesureType.BSSURF)
 			return ParameterNames.DEPTH;
 
-		if (!dataDomain.getModel().getVerticalParametersList().getP_pressure().isEmpty())
+		if (!dataDomain.getModel().getVerticalParametersList().getP_heightASLvl().isEmpty() && dataDomain.getModel().getMesureType() == E_MesureType.ASLVL)
+			return ParameterNames.HEIGHT;
+
+		if (!dataDomain.getModel().getVerticalParametersList().getP_pressure().isEmpty() && dataDomain.getModel().getMesureType() == E_MesureType.BSSURF)
 			return ParameterNames.PRESS;
 
 		//si parametre vertical non selection alors z peut etre un parametre mesuré
@@ -764,18 +773,24 @@ public class NetCDFWriter extends NemoWriter {
 		if (zDEPHPR01.getCode().equals(zParameterModel.getParameter().getCode()))
 			return ParameterNames.DEPTH;
 
+		AP_AHGTZZ01 zAHGTZZ01 = new AP_AHGTZZ01(Conversion.NETCDF);
+		if (zAHGTZZ01.getCode().equals(zParameterModel.getParameter().getCode()))
+			return ParameterNames.HEIGHT;
+
 		return null;
 	}
 
-	//TODO CPT A modifier
 	private String getZStandardName(ParameterModel zParameterModel) {
 		if (!dataDomain.getModel().getVerticalParametersList().getP_pressure().isEmpty() && mediaModel.getInputType() != E_InputType.TIMESERIES)
 			return ParameterValues.Z_PRESSURE;
 
-		if (!dataDomain.getModel().getVerticalParametersList().getP_depthBSSurf().isEmpty())
+		if (!dataDomain.getModel().getVerticalParametersList().getP_depthBSSurf().isEmpty() && dataDomain.getModel().getMesureType() == E_MesureType.BSSURF)
 			return ParameterValues.Z_DEPTH;
 
-		if (!dataDomain.getModel().getVerticalParametersList().getP_depthBSBed().isEmpty())
+		if (!dataDomain.getModel().getVerticalParametersList().getP_heightASLvl().isEmpty() && dataDomain.getModel().getMesureType() == E_MesureType.ASLVL)
+			return ParameterValues.Z_HEIGHT;
+
+		if (!dataDomain.getModel().getVerticalParametersList().getP_depthBSBed().isEmpty() && dataDomain.getModel().getMesureType() == E_MesureType.BSBED)
 			return ParameterValues.Z_DEPTH;
 
 		//si parametre vertical non selection alors z peut etre un parametre mesuré
@@ -786,6 +801,10 @@ public class NetCDFWriter extends NemoWriter {
 		AP_DEPHPR01 zDEPHPR01 = new AP_DEPHPR01(Conversion.NETCDF);
 		if (zDEPHPR01.getCode().equals(zParameterModel.getParameter().getCode()))
 			return ParameterValues.Z_DEPTH;
+
+		AP_AHGTZZ01 zAHSLZZ01 = new AP_AHGTZZ01(Conversion.NETCDF);
+		if (zAHSLZZ01.getCode().equals(zParameterModel.getParameter().getCode()))
+			return ParameterValues.Z_HEIGHT;
 
 		return null;
 	}

@@ -20,12 +20,14 @@ import fr.ifremer.nemo.input.parameters.Parameter;
 import fr.ifremer.nemo.input.parameters.ParameterModel;
 import fr.ifremer.nemo.input.parameters.VerticalParametersList;
 import fr.ifremer.nemo.input.parameters.addedParameters.AP_ADEPZZ01;
+import fr.ifremer.nemo.input.parameters.addedParameters.AP_AHGTZZ01;
 import fr.ifremer.nemo.input.parameters.addedParameters.AP_BATH;
 import fr.ifremer.nemo.input.parameters.addedParameters.AP_CJDY;
 import fr.ifremer.nemo.input.parameters.addedParameters.AP_DAYX;
 import fr.ifremer.nemo.input.parameters.addedParameters.AP_DEPH;
 import fr.ifremer.nemo.input.parameters.addedParameters.AP_DEPHPR01;
 import fr.ifremer.nemo.input.parameters.addedParameters.AP_DTUT;
+import fr.ifremer.nemo.input.parameters.addedParameters.AP_HEIGHT;
 import fr.ifremer.nemo.input.parameters.addedParameters.AP_LATX;
 import fr.ifremer.nemo.input.parameters.addedParameters.AP_LONX;
 import fr.ifremer.nemo.input.parameters.addedParameters.AP_MNTH;
@@ -161,6 +163,17 @@ public class ParameterManager {
 					addedParam = new AP_ADEPZZ01(Conversion.NETCDF);
 
 			}
+		} else if (code == IdParameter.generic_heightASLvl_FromSensor) {
+			if (dataList == DataListTypeEnum.P091) {
+				addedParam = new AP_HEIGHT();
+				if (isNetCDF)
+					addedParam = new AP_HEIGHT(Conversion.NETCDF);
+			} else {
+				addedParam = new AP_AHGTZZ01();
+				if (isNetCDF)
+					addedParam = new AP_AHGTZZ01(Conversion.NETCDF);
+
+			}
 		}
 		return addedParam;
 	}
@@ -221,8 +234,10 @@ public class ParameterManager {
 		String p_depthBSBed = getVerticalParametersList().getP_depthBSBed();
 		String p_depthBSSurf = getVerticalParametersList().getP_depthBSSurf();
 		String p_pressure = getVerticalParametersList().getP_pressure();
+		String p_heightASLvl = getVerticalParametersList().getP_heightASLvl();
 		boolean exist_p_depthBSSurf = !p_depthBSSurf.equals(Global.EMPTY_STRING);
 		boolean exist_p_pressure = !p_pressure.equals(Global.EMPTY_STRING);
+		boolean exist_p_heightASLvl = !p_heightASLvl.equals(Global.EMPTY_STRING);
 
 		// verif PSAL et TEMP (code P091 uniquement car test pour MEDATLAS, donc
 		// inutilisé en P011viaP021)
@@ -315,12 +330,20 @@ public class ParameterManager {
 					addFixedParameterModel(IdParameter.generic_depthBSSurf_FromSensor);
 				}
 			}
+
+			if (isTimeSeries && getMesureType() == E_MesureType.ASLVL) {
+				addFixedParameterModel(IdParameter.generic_heightASLvl_FromSensor);
+			}
 		}
 		if (isNetCDF) {
 			/** aap_p 1 2 */
 			// Ajout du paramètre DEPH ( = Sensor Depth) por TIMESERIES
-			if (isTimeSeries) {
+			if (isTimeSeries && getMesureType() != E_MesureType.ASLVL) {
 				addFixedParameterModel(IdParameter.generic_depthBSSurf_FromSensor);
+			}
+
+			if (((isTimeSeries || !exist_p_heightASLvl) && getMesureType() == E_MesureType.ASLVL)) {
+				addFixedParameterModel(IdParameter.generic_heightASLvl_FromSensor);
 			}
 
 			if (!exist_p_depthBSSurf && !exist_p_pressure && getMesureType() == E_MesureType.BSSURF) {
@@ -579,8 +602,16 @@ public class ParameterManager {
 		return isPossible_DepthBSBedParameter(new Parameter(typeData));
 	}
 
-	public boolean isPossible_DepthBSBedParameter(Parameter param) {
+	public boolean isPossible_HeightASlvlParameter(Parameter param) {
 		return param.getCode().equals(getP_depthBSBedCode());
+	}
+
+	public boolean isPossible_HeightASlvlParameter(TypeData typeData) {
+		return isPossible_HeightASlvlParameter(new Parameter(typeData));
+	}
+
+	public boolean isPossible_DepthBSBedParameter(Parameter param) {
+		return param.getCode().equals(getP_heightASLvlCode());
 	}
 
 	public String getP_depthBSSurfCode() {
@@ -595,6 +626,17 @@ public class ParameterManager {
 	}
 
 	public String getP_depthBSBedCode() {
+		String code = Global.EMPTY_STRING;
+		DataListTypeEnum theDataListType = getDataList();
+		if (theDataListType == DataListTypeEnum.P011_VIA_P021) {
+			code = Intern.paramAHGT;
+		} else if (theDataListType == DataListTypeEnum.P091 || theDataListType == DataListTypeEnum.P011_VIA_P091) {
+			code = Intern.paramDPSF;
+		}
+		return code;
+	}
+
+	public String getP_heightASLvlCode() {
 		String code = Global.EMPTY_STRING;
 		DataListTypeEnum theDataListType = getDataList();
 		if (theDataListType == DataListTypeEnum.P011_VIA_P021) {

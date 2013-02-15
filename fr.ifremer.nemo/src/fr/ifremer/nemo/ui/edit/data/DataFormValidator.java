@@ -24,7 +24,7 @@ public class DataFormValidator extends FormValidator {
 	private RulesManager rm;
 	private GroupVerticalParameters verticalParamGroup;
 	private ParameterManager myParameterManager;
-	private Combo comboDBSBed, comboDBBSurf, comboP;
+	private Combo comboDBSBed, comboDBBSurf, comboP, comboHASLvl;
 
 	public DataFormValidator() {
 		super();
@@ -42,7 +42,9 @@ public class DataFormValidator extends FormValidator {
 		verticalParamGroup = editDataForm.getMyGroupeVerticalParameters();
 		comboDBSBed = verticalParamGroup.getComboDBSBed();
 		comboDBBSurf = verticalParamGroup.getComboDBSSurf();
+		comboHASLvl = verticalParamGroup.getComboHASLvl();
 		comboP = verticalParamGroup.getComboP();
+
 		myParameterManager =
 				Nemo.getInstance().getDomain().getData().getMyParameterManager();
 
@@ -565,6 +567,15 @@ public class DataFormValidator extends FormValidator {
 			}
 		}
 
+		// Hauteur au dessus de la colonne d'eau
+		if (rm.isP_heightASLvl_enabled()) {
+			index = comboHASLvl.getSelectionIndex();
+			if (index != -1) {
+				rm.getMyVerticalParametersList().setP_heightASLvl(
+						comboHASLvl.getItem(index));
+			}
+		}
+
 	}
 
 	private boolean checkVerticalParametersWellDetected() {
@@ -596,6 +607,17 @@ public class DataFormValidator extends FormValidator {
 			Utils.messageErreurAppend(message);
 			ok = false;
 		}
+
+		if (rm.isP_heightASLvl_enabled() && rm.getMyVerticalParametersList().getP_heightASLvl().equals(Global.EMPTY_STRING) && !rm.isTrajectory()) {
+			String message = Messages.edit_data_verticalParameters_info_chooseHeightASLvl;
+			message += Global.SPACE;
+			message += "(";
+			message += myParameterManager.getP_heightASLvlCode();
+			message += ")";
+			Utils.messageErreurAppend(message);
+			ok = false;
+		}
+
 		return ok;
 	}
 
@@ -627,6 +649,13 @@ public class DataFormValidator extends FormValidator {
 		if (rm.isP_pressure_enabled()) {
 			rm.getMyVerticalParametersList().setP_pressure(
 					fillComboAsP011viaP091(comboP));
+		}
+
+		// Hauteur au dessus de la colonne d'eau
+		if (rm.isP_heightASLvl_enabled()) {
+			rm.getMyVerticalParametersList().setP_heightASLvl(
+					fillComboAsP011viaP091(comboHASLvl));
+
 		}
 	}
 
@@ -697,6 +726,10 @@ public class DataFormValidator extends FormValidator {
 		if (rm.isP_pressure_enabled()) {
 			rm.getMyVerticalParametersList().setP_pressure(
 					fillComboAsP091(comboP));
+		}
+		if (rm.isP_heightASLvl_enabled()) {
+			rm.getMyVerticalParametersList().setP_heightASLvl(
+					fillComboAsP091(comboHASLvl));
 		}
 	}
 }

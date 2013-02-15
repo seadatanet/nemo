@@ -595,7 +595,7 @@ public class OptionsAction extends Action implements ISelectionListener,
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(
 				textAreaNautilus);
 
-		//TODO CPT la lib sdnVocabulary integre l'adresse
+		//la lib sdnVocabulary integre l'adresse
 		//        // WS Vocab
 		//        labelWSVocab = new Label(compo, SWT.NONE);
 		//        labelWSVocab.setFont(Utils.font08);

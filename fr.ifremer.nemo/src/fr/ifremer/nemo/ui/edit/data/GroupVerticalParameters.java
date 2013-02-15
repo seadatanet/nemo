@@ -34,20 +34,18 @@ import fr.ifremer.nemo.util.Messages;
  * @author sbregent
  * 
  */
-public class GroupVerticalParameters
-{
+public class GroupVerticalParameters {
 	// combos pour choisir les paramètres verticaux de référence
 	private Combo comboDBSSurf;
 	private Combo comboDBSBed;
 	private Combo comboP;
+	private Combo comboHASLvl;
 
-	public GroupVerticalParameters()
-	{
+	public GroupVerticalParameters() {
 
 	}
 
-	public void createGroup(ScrolledForm formEdition)
-	{
+	public void createGroup(ScrolledForm formEdition) {
 
 		Group group = new Group(formEdition.getBody(), SWT.NONE);
 		group.setFont(Utils.font08);
@@ -70,163 +68,165 @@ public class GroupVerticalParameters
 		labelP.setText(Messages.edit_data_verticalParameters_pressure);
 		comboP = new Combo(group, SWT.BORDER | SWT.READ_ONLY);
 
-		SelectionListener selectionListener = new SelectionListener() {
-            @Override
-            public void widgetSelected(SelectionEvent e)
-            {
-                controlNetCDFSelection((Combo)e.widget);
-            }
+		// Pressure
+		Label labelHASLvl = new Label(group, SWT.NO_BACKGROUND);
+		labelHASLvl.setText(Messages.edit_data_verticalParameters_heightASLvl);
+		comboHASLvl = new Combo(group, SWT.BORDER | SWT.READ_ONLY);
 
-            @Override
-            public void widgetDefaultSelected(SelectionEvent e)
-            {
-                controlNetCDFSelection((Combo)e.widget);
-            }
-         };
-		
+		SelectionListener selectionListener = new SelectionListener() {
+			@Override
+			public void widgetSelected(SelectionEvent e)
+			{
+				controlNetCDFSelection((Combo) e.widget);
+			}
+
+			@Override
+			public void widgetDefaultSelected(SelectionEvent e)
+			{
+				controlNetCDFSelection((Combo) e.widget);
+			}
+		};
+
 		comboDBSSurf.addSelectionListener(selectionListener);
 		comboDBSBed.addSelectionListener(selectionListener);
 		comboP.addSelectionListener(selectionListener);
+		comboHASLvl.addSelectionListener(selectionListener);
 		init();
 	}
 
-	private void init()
-	{
+	private void init() {
 		comboDBSSurf.add(Global.EMPTY_STRING);
 		comboDBSBed.add(Global.EMPTY_STRING);
 		comboP.add(Global.EMPTY_STRING);
+		comboHASLvl.add(Global.EMPTY_STRING);
 	}
 
-	public void addTypeData(TypeData typeData)
-	{
+	public void addTypeData(TypeData typeData) {
 		ParameterManager pm = Nemo.getInstance().getDomain().getData().getMyParameterManager();
-		if (pm.isPossible_PressureParameter(typeData))
-		{
+		if (pm.isPossible_PressureParameter(typeData)) {
 			comboP.add(typeData.getCodeToUse());
 		}
-		if (pm.isPossible_DepthBSSurfParameter(typeData))
-		{
+		if (pm.isPossible_DepthBSSurfParameter(typeData)) {
 			comboDBSSurf.add(typeData.getCodeToUse());
 		}
-		if (pm.isPossible_DepthBSBedParameter(typeData))
-		{
+		if (pm.isPossible_DepthBSBedParameter(typeData)) {
 			comboDBSBed.add(typeData.getCodeToUse());
 		}
+		if (pm.isPossible_HeightASlvlParameter(typeData)) {
+			comboHASLvl.add(typeData.getCodeToUse());
+		}
+
 	}
 
-	public void removeToAllCombo(TypeData typeData)
-	{
+	public void removeToAllCombo(TypeData typeData) {
 		String code = typeData.getCodeToUse();
-		try
-		{
+		try {
 			comboDBSSurf.remove(code);
-		} catch (Exception e)
-		{
+		} catch (Exception e) {
 		}
-		try
-		{
+		try {
 			comboDBSBed.remove(code);
-		} catch (Exception e)
-		{
+		} catch (Exception e) {
 		}
-		try
-		{
+		try {
 			comboP.remove(code);
-		} catch (Exception e)
-		{
+		} catch (Exception e) {
+		}
+		try {
+			comboHASLvl.remove(code);
+		} catch (Exception e) {
 		}
 	}
 
-	public void removeAllToAllCombos()
-	{
-		try
-		{
+	public void removeAllToAllCombos() {
+		try {
 			comboDBSSurf.removeAll();
-		} catch (Exception e)
-		{
+		} catch (Exception e) {
 		}
-		try
-		{
+		try {
 			comboDBSBed.removeAll();
-		} catch (Exception e)
-		{
+		} catch (Exception e) {
 		}
-		try
-		{
+		try {
 			comboP.removeAll();
-		} catch (Exception e)
-		{
+		} catch (Exception e) {
+		}
+		try {
+			comboHASLvl.removeAll();
+		} catch (Exception e) {
 		}
 		init();
 	}
 
-	public void enable_pDepthBSBed(boolean enabled)
-	{
+	public void enable_pDepthBSBed(boolean enabled) {
 		comboDBSBed.setEnabled(enabled);
 	}
 
-	public void enable_pDepthBSSurf(boolean enabled)
-	{
+	public void enable_pDepthBSSurf(boolean enabled) {
 		comboDBSSurf.setEnabled(enabled);
 	}
 
-	public void enable_pPressure(boolean enabled)
-	{
+	public void enable_pPressure(boolean enabled) {
 		comboP.setEnabled(enabled);
 	}
 
-	public Combo getComboDBSBed()
-	{
+	public void enable_pHeightASLvl(boolean enabled) {
+		comboHASLvl.setEnabled(enabled);
+	}
+
+	public Combo getComboDBSBed() {
 		return comboDBSBed;
 	}
 
-	public Combo getComboDBSSurf()
-	{
+	public Combo getComboDBSSurf() {
 		return comboDBSSurf;
 	}
 
-	public Combo getComboP()
-	{
+	public Combo getComboP() {
 		return comboP;
 	}
 
-	public void select(VerticalParametersList list)
-	{
-		for (int i = 0; i < comboDBSSurf.getItemCount(); i++)
-		{
-			if (comboDBSSurf.getItem(i).equals(list.getP_depthBSSurf()))
-			{
+	public Combo getComboHASLvl() {
+		return comboHASLvl;
+	}
+
+	public void select(VerticalParametersList list) {
+		for (int i = 0; i < comboDBSSurf.getItemCount(); i++) {
+			if (comboDBSSurf.getItem(i).equals(list.getP_depthBSSurf())) {
 				comboDBSSurf.select(i);
 			}
 		}
-		for (int i = 0; i < comboDBSBed.getItemCount(); i++)
-		{
-			if (comboDBSBed.getItem(i).equals(list.getP_depthBSBed()))
-			{
+		for (int i = 0; i < comboDBSBed.getItemCount(); i++) {
+			if (comboDBSBed.getItem(i).equals(list.getP_depthBSBed())) {
 				comboDBSBed.select(i);
 			}
 		}
-		for (int i = 0; i < comboP.getItemCount(); i++)
-		{
-			if (comboP.getItem(i).equals(list.getP_pressure()))
-			{
+		for (int i = 0; i < comboP.getItemCount(); i++) {
+			if (comboP.getItem(i).equals(list.getP_pressure())) {
 				comboP.select(i);
 			}
 		}
+
+		for (int i = 0; i < comboHASLvl.getItemCount(); i++) {
+			if (comboHASLvl.getItem(i).equals(list.getP_heightASLvl())) {
+				comboHASLvl.select(i);
+			}
+		}
 	}
-	
-	public void controlNetCDFSelection(Combo current)
-	{
-	    if(Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToNetCDF())
-	    {
-    	    if(!current.equals(comboDBSSurf))
-    	        comboDBSSurf.select(0);
-    	    
-    	    if(!current.equals(comboDBSBed))
-    	        comboDBSBed.select(0);
-    	    
-    	    if(!current.equals(comboP))
-    	        comboP.select(0);
-	    }
+
+	public void controlNetCDFSelection(Combo current) {
+		if (Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToNetCDF()) {
+			if (!current.equals(comboDBSSurf))
+				comboDBSSurf.select(0);
+
+			if (!current.equals(comboDBSBed))
+				comboDBSBed.select(0);
+
+			if (!current.equals(comboP))
+				comboP.select(0);
+
+			if (!current.equals(comboHASLvl))
+				comboHASLvl.select(0);
+		}
 	}
 }

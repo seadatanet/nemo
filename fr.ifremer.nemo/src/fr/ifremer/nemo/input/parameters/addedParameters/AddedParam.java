@@ -28,13 +28,11 @@ import fr.ifremer.nemo.util.Global;
  * @author sbregent
  * 
  */
-public class AddedParam extends Parameter
-{
+public class AddedParam extends Parameter {
 
 	@SuppressWarnings("nls")
-	public static enum IdParameter
-	{
-		generic_depthBSSurf_FromPressure, generic_depthBSSurf_FromSensor, YEAR, MNTH, DAYX, TIME, CJDY, DTUT, LATX, LONX, BATH, PRES, DEPH, DEPHPR01, ADEPZZ01, ;
+	public static enum IdParameter {
+		generic_depthBSSurf_FromPressure, generic_depthBSSurf_FromSensor, generic_heightASLvl_FromSensor, YEAR, MNTH, DAYX, TIME, CJDY, DTUT, LATX, LONX, BATH, PRES, DEPH, DEPHPR01, ADEPZZ01, ;
 	}
 
 	DecimalFormatSymbols symbols = new DecimalFormatSymbols(Locale.US);
@@ -47,8 +45,7 @@ public class AddedParam extends Parameter
 	// FAE 6959
 	protected boolean hasDefaultValue;
 
-	public AddedParam()
-	{
+	public AddedParam() {
 		super();
 		// attribut herites de la classe Parameter
 		_default = Global.ZERO;
@@ -66,68 +63,54 @@ public class AddedParam extends Parameter
 	}
 
 	@SuppressWarnings("nls")
-	public String compute(String fragmnt) throws StringIndexOutOfBoundsException, ParseException, UnsupportedEncodingException
-	{
+	public String compute(String fragmnt) throws StringIndexOutOfBoundsException, ParseException, UnsupportedEncodingException {
 
 		String paramValue = null;
 
-		if (fragmnt.equals(Global.EMPTY_STRING))
-		{
+		if (fragmnt.equals(Global.EMPTY_STRING)) {
 			paramValue = Global.EMPTY_STRING;
-		} else
-		{
-			if (_default.equals(fragmnt))
-			{
+		} else {
+			if (_default.equals(fragmnt)) {
 				paramValue = _default;
-			} else
-			{
+			} else {
 				paramValue = getValue(null, fragmnt, 0);
 			}
 		}
 		return paramValue;
 	}
 
-	public String getFlag(Station currentStation, String inputLine)
-	{
+	public String getFlag(Station currentStation, String inputLine) {
 		String flagQc;
-		if (hasDefaultValue)
-		{
+		if (hasDefaultValue) {
 			// FAE 6959
 			flagQc = Global.DEFAULT_FLAG;
-		} else
-		{
+		} else {
 			flagQc = flag;
 		}
 		return flagQc;
 	}
 
-	public String getValue(Station currentStation, String inputLine, long currentDate) throws ParseException, UnsupportedEncodingException
-	{
+	public String getValue(Station currentStation, String inputLine, long currentDate) throws ParseException, UnsupportedEncodingException {
 		return value;
 	}
 
-	public PropertyModel getPropertyModel(StationModel stationModel)
-	{
+	public PropertyModel getPropertyModel(StationModel stationModel) {
 		PropertyModel propertyModel = null;
-		if (propertyCode != null)
-		{
+		if (propertyCode != null) {
 			propertyModel = stationModel.propertiesAt(propertyCode);
 		}
 		return propertyModel;
 	}
 
-	public String getPropertyCode()
-	{
+	public String getPropertyCode() {
 		return propertyCode;
 	}
 
-	public Conversion getCible()
-	{
+	public Conversion getCible() {
 		return cible;
 	}
 
-	public boolean isMesured()
-	{
+	public boolean isMesured() {
 		return isMesured;
 	}
 

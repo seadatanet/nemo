@@ -93,6 +93,7 @@ public class ModelDescription extends NLS {
 	public static String node_p_depthBSBed;
 	public static String node_p_depthBSSurf;
 	public static String node_p_pressure;
+	public static String node_p_heightASLvl;
 
 	public static String node_dataModel;
 	public static String node_conversionModel;
@@ -177,6 +178,7 @@ public class ModelDescription extends NLS {
 	public static String setter_p_depthBSBed;
 	public static String setter_p_depthBSSurf;
 	public static String setter_p_pressure;
+	public static String setter_p_heightASLvl;
 
 	static {
 		// initialize resource bundle

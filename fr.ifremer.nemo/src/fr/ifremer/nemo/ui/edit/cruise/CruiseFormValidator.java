@@ -20,26 +20,21 @@ import fr.ifremer.nemo.util.format.DateTimeFormat;
  * 
  * @author sbregent
  */
-public class CruiseFormValidator extends FormValidator
-{
+public class CruiseFormValidator extends FormValidator {
 	private String warningCruise = "";
 
-	public CruiseFormValidator()
-	{
+	public CruiseFormValidator() {
 		super();
 	}
 
-	private void displayErrorIfNeeded(boolean checkResult, String fieldName)
-	{
-		if (!checkResult)
-		{
+	private void displayErrorIfNeeded(boolean checkResult, String fieldName) {
+		if (!checkResult) {
 			Utils.messageErreurAppend(Messages.Regexp_3 + fieldName + Messages.Regexp_5);
 		}
 	}
 
 	@Override
-	public void validate()
-	{
+	public void validate() {
 		warningCruise = "";
 		EditCruiseForm editCruiseForm = Nemo.getInstance().getViewMain().getEditCruiseForm();
 		EditConversionForm editConversionForm = Nemo.getInstance().getViewMain().getEditConversionForm();
@@ -97,86 +92,71 @@ public class CruiseFormValidator extends FormValidator
 		Date curDate = new Date(System.currentTimeMillis());
 		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 
-		if (!startDate.equals(Global.EMPTY_STRING))
-		{
-			try
-			{
+		if (!startDate.equals(Global.EMPTY_STRING)) {
+			try {
 				DateTimeFormat dateFormat = new DateTimeFormat();
 				dateFormat.setFormatString("dd/MM/yyyy"); //$NON-NLS-1$
 
 				dateFormat.parseObject(startDate);
 
-				if (formatter.format(curDate).equals(startDate))
-				{
+				if (formatter.format(curDate).equals(startDate)) {
 					warningCruise += Messages.Regexp_3 +
 							Messages.edit_cruise_startDate +
 							" (" + startDate + ") " +
 							Messages.Regexp_6 + Global.RN;
 				}
 
-			} catch (ParseException e)
-			{
+			} catch (ParseException e) {
 				Utils.messageErreurAppend(Messages.Etape_24);
 				ok = false;
 				e.printStackTrace();
-			} catch (UnsupportedEncodingException e)
-			{
+			} catch (UnsupportedEncodingException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
-		if (!endDate.equals(Global.EMPTY_STRING))
-		{
-			try
-			{
+		if (!endDate.equals(Global.EMPTY_STRING)) {
+			try {
 				DateTimeFormat dateFormat = new DateTimeFormat();
 				dateFormat.setFormatString("dd/MM/yyyy"); //$NON-NLS-1$
 
 				dateFormat.parseObject(endDate);
-				if (formatter.format(curDate).equals(endDate))
-				{
+				if (formatter.format(curDate).equals(endDate)) {
 					warningCruise += Messages.Regexp_3 +
 							Messages.edit_cruise_endDate +
 							" (" + endDate + ") " +
 							Messages.Regexp_6 + Global.RN;
 				}
-			} catch (ParseException e)
-			{
+			} catch (ParseException e) {
 				Utils.messageErreurAppend(Messages.Etape_27);
 				ok = false;
 				e.printStackTrace();
-			} catch (UnsupportedEncodingException e)
-			{
+			} catch (UnsupportedEncodingException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
 		}
-		
-		if(editCruiseForm.sectionType.isMandatory())
-		    ok = ok & editCruiseForm.sectionType.chekMandatory();
+
+		if (editCruiseForm.sectionType.isMandatory())
+			ok = ok & editCruiseForm.sectionType.chekMandatory();
 
 		// FAE 1143 : la référence campagne doit être == 13 caractères pour
 		// MEDATLAS
 		editConversionForm.setWarningCampagne(Global.EMPTY_STRING);
 		String value = editCruiseForm.sectionReference.getItem(Messages.edit_cruise_cruiseRef).getText().trim();
-		if (value.length() != 13 && (Nemo.getInstance().getViewMain().getMyRulesManager().getMyConversionType() == E_TypeConversion.MEDATLAS))
-		{
+		if (value.length() != 13 && (Nemo.getInstance().getViewMain().getMyRulesManager().getMyConversionType() == E_TypeConversion.MEDATLAS)) {
 			editConversionForm.setWarningCampagne(Messages.ViewLog_5);
-		} else
-		{
+		} else {
 			editConversionForm.setWarningStation(Global.EMPTY_STRING);
 		}
-		if (ok)
-		{
+		if (ok) {
 			editCruiseForm.setOkApresReset(true);
 			// okCruise();
 			onSuccess();
-		} else
-		{
+		} else {
 			editCruiseForm.initFromNewModel();
-			if (!Nemo.getInstance().getViewMain().tabCruise.isDisposed())
-			{
+			if (!Nemo.getInstance().getViewMain().tabCruise.isDisposed()) {
 				Nemo.getInstance().getViewMain().tabCruise.setText(Messages.onglet_cruise_error);
 			}
 			Nemo.getInstance().getViewMain().setEtape(1);
@@ -184,32 +164,24 @@ public class CruiseFormValidator extends FormValidator
 	}
 
 	@Override
-	protected void onSuccess()
-	{
+	protected void onSuccess() {
 		EditConversionForm editConversionForm = Nemo.getInstance().getViewMain().getEditConversionForm();
 		EditCruiseForm editCruiseForm = Nemo.getInstance().getViewMain().getEditCruiseForm();
 
 		editCruiseForm.initFromNewModel();
 
-		if (!Nemo.getInstance().getViewMain().tabCruise.isDisposed())
-		{
+		if (!Nemo.getInstance().getViewMain().tabCruise.isDisposed()) {
 			Nemo.getInstance().getViewMain().tabCruise.setText(Messages.onglet_cruise_valid);
 		}
 
 		Utils.messageOK(Messages.success_etape);
 
-		if (!warningCruise.equals("") || !editConversionForm.getWarningCampagne().equals(Global.EMPTY_STRING))
-		{
-			Utils.messageOKAppend(Messages.ViewLog_8);
+		if (!warningCruise.equals("")) {
+			Utils.messageWarningAppend(warningCruise);
 		}
-		if (!warningCruise.equals(""))
-		{
-			Utils.messageOKAppend(warningCruise);
-		}
-		if (!editConversionForm.getWarningCampagne().equals(Global.EMPTY_STRING))
-		{
+		if (!editConversionForm.getWarningCampagne().equals(Global.EMPTY_STRING)) {
 
-			Utils.messageOKAppend(editConversionForm.getWarningCampagne());
+			Utils.messageWarningAppend(editConversionForm.getWarningCampagne());
 		}
 
 		// validation etape 2
