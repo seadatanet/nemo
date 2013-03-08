@@ -592,7 +592,7 @@ public class NetCDFWriter extends NemoWriter {
 		variables.put(sdnStation.getVarName(), sdnStation);
 		addVariableToNetCDF(sdnStation);
 
-		SdnLocalCdiIdVariable SdnLocalCdi = new SdnLocalCdiIdVariable(sdnDim, getFeatureType() + "_id");
+		SdnLocalCdiIdVariable SdnLocalCdi = new SdnLocalCdiIdVariable(sdnDim, getFeatureType().toLowerCase() + "_id");
 		variables.put(SdnLocalCdi.getVarName(), SdnLocalCdi);
 		addVariableToNetCDF(SdnLocalCdi);
 
