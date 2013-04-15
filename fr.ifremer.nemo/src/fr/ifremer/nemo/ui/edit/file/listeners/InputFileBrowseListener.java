@@ -51,60 +51,71 @@ public class InputFileBrowseListener extends SelectionAdapter
 	}
 
 	@Override
-	public void widgetSelected(SelectionEvent e)
-	{
-
-		E_ProcessType currentProcessType = Nemo.getInstance().getViewMain().getMyRulesManager().getMyProcessType();
+	public void widgetSelected(SelectionEvent e) {
+		// boolean ti indicate if a file or directory has been choosen (false if
+		// user clicked on Cancel)
+		boolean fileChoosen = false;
+		E_ProcessType currentProcessType = Nemo.getInstance().getViewMain()
+				.getMyRulesManager().getMyProcessType();
 
 		Preformat.setPreformat(false);
 
 		if (currentProcessType == E_ProcessType.CRUISE_FILE)
 		{
 			// si fichier campagne
-			browseForCruiseFile();
-		} else if (myEditFileForm.getRadioDossier().getSelection())
-		{
+			fileChoosen = browseForCruiseFile();
+		} else if (myEditFileForm.getRadioDossier().getSelection()) {
 			// si dossier campagne
-			browseForCruiseDirectory();
-		} else if (myEditFileForm.getRadioCollectGroupedByCruise().getSelection())
-		{
-			browseForCollectionGroupedByCruise();
-		} else if (myEditFileForm.getRadioCollectNotGroupedByCruise().getSelection())
-		{
-			browseForCollectionNotGroupedByCruise();
+			fileChoosen = browseForCruiseDirectory();
+		} else if (myEditFileForm.getRadioCollectGroupedByCruise()
+				.getSelection()) {
+			fileChoosen = browseForCollectionGroupedByCruise();
+		} else if (myEditFileForm.getRadioCollectNotGroupedByCruise()
+				.getSelection()) {
+			fileChoosen = browseForCollectionNotGroupedByCruise();
 		}
-		myEditFileForm.nomRepertoireOrigin = myEditFileForm.nomRepertoire;
-		myEditFileForm.nomFichierOrigin = myEditFileForm.nomFichier;
-		// reinitialisation de la conversion et de l'affichage
-		Nemo.getInstance().getViewMain().getMyRulesManager().updateFromBrowse();
-		Nemo.getInstance().getViewMain().getEditConversionForm().fillSummary();
+		if (fileChoosen) {
+			myEditFileForm.nomRepertoireOrigin = myEditFileForm.nomRepertoire;
+			myEditFileForm.nomFichierOrigin = myEditFileForm.nomFichier;
+			// reinitialisation de la conversion et de l'affichage
+			Nemo.getInstance().getViewMain().getMyRulesManager()
+					.updateFromBrowse();
+			Nemo.getInstance().getViewMain().getEditConversionForm()
+					.fillSummary();
+		} else {
+
+			myEditFileForm.nomRepertoire = myEditFileForm.nomRepertoireOrigin;
+			myEditFileForm.nomFichier = myEditFileForm.nomFichierOrigin;
+		}
 	}
 
-	private void browseForCruiseFile()
-	{
-		try
-		{
+	private boolean browseForCruiseFile() {
+		boolean filechoosen = false;
+		try {
 			FileDialog dialog = getFileDialog();
 			myEditFileForm.nomFichier = dialog.open();
 
-			if (myEditFileForm.nomFichier != null)
-			{
+			if (myEditFileForm.nomFichier != null) {
 				reinit();
 				myEditFileForm.setFileLoaded(true);
-				myEditFileForm.nomRepertoire = new File(myEditFileForm.nomFichier).getParent() + File.separator;
+				myEditFileForm.nomRepertoire = new File(
+						myEditFileForm.nomFichier).getParent() + File.separator;
 
 				// affichage du corps du fichier
-				Utils.insertTextFich(myEditFileForm.nomFichier,
-						Nemo.getInstance().getViewMain().getEditCruiseForm().getTextAreaCruise(),
-						true);
+				Utils.insertTextFich(myEditFileForm.nomFichier, Nemo
+						.getInstance().getViewMain().getEditCruiseForm()
+						.getTextAreaCruise(), true);
 				myEditFileForm.getTextAreaFile().setText(Utils.texteBrut);
 				// affichage etape0 dans formulaire d'edition
 				myEditFileForm.afficheEdition();
+				filechoosen = true;
 
-			} else
-			{
-				ViewLog.styledTextLogErreurs
-						.setText(Messages.error_file_selectFile);
+			} else {
+				// display error if no file is selected
+				if (!myEditFileForm.isFileLoaded()) {
+					ViewLog.styledTextLogErreurs
+							.setText(Messages.error_file_selectFile);
+				}
 			}
 		} catch (IOException e1)
 		{
@@ -112,12 +123,12 @@ public class InputFileBrowseListener extends SelectionAdapter
 					.setText(Messages.error);
 			e1.printStackTrace();
 		}
+		return filechoosen;
 	}
 
-	private void browseForCruiseDirectory()
-	{
-		try
-		{
+	private boolean browseForCruiseDirectory() {
+		boolean filechoosen = false;
+		try {
 			DirectoryDialog dialog = getDirectoryDialog();
 			myEditFileForm.nomRepertoire = dialog.open();
 
@@ -125,30 +136,30 @@ public class InputFileBrowseListener extends SelectionAdapter
 			{
 				reinit();
 				myEditFileForm.setFileLoaded(true);
-				if (Utils.findFiles(myEditFileForm.nomRepertoire, true))
-				{
+				if (Utils.findFiles(myEditFileForm.nomRepertoire, true)) {
 					// affichage du corps du fichier
 					myEditFileForm.getTextAreaFile().setText(Utils.texteBrut);
 					// affichage etape0 dans formulaire d'edition
 					myEditFileForm.afficheEdition();
+					filechoosen = true;
 				}
-			} else
-			{
-				ViewLog.styledTextLogErreurs
-						.setText(Messages.error_file_selectDir);
+			} else {
+				if (!myEditFileForm.isFileLoaded()) {
+					ViewLog.styledTextLogErreurs
+							.setText(Messages.error_file_selectDir);
+				}
 			}
 		} catch (Exception e)
 		{
 			ViewLog.styledTextLogErreurs
 					.setText(Messages.error_file_selectDir);
 		}
+		return filechoosen;
 	}
 
-	private void browseForCollectionGroupedByCruise()
-	{
-
-		try
-		{
+	private boolean browseForCollectionGroupedByCruise() {
+		boolean filechoosen = false;
+		try {
 			DirectoryDialog dialog = getDirectoryDialog();
 			myEditFileForm.nomRepertoire = dialog.open();
 
@@ -165,22 +176,24 @@ public class InputFileBrowseListener extends SelectionAdapter
 					// affichage etape0 dans formulaire d'edition
 					myEditFileForm.afficheEdition();
 				}
-			} else
-			{
-				ViewLog.styledTextLogErreurs
-						.setText(Messages.error_file_selectDir);
+				filechoosen = true;
+			} else {
+				if (!myEditFileForm.isFileLoaded()) {
+					ViewLog.styledTextLogErreurs
+							.setText(Messages.error_file_selectDir);
+				}
 			}
 		} catch (Exception e)
 		{
 			ViewLog.styledTextLogErreurs
 					.setText(Messages.error_file_selectDir);
 		}
+		return filechoosen;
 	}
 
-	private void browseForCollectionNotGroupedByCruise()
-	{
-		try
-		{
+	private boolean browseForCollectionNotGroupedByCruise() {
+		boolean filechoosen = false;
+		try {
 			DirectoryDialog dialog = getDirectoryDialog();
 			myEditFileForm.nomRepertoire = dialog.open();
 
@@ -197,16 +210,19 @@ public class InputFileBrowseListener extends SelectionAdapter
 					// affichage etape0 dans formulaire d'edition
 					myEditFileForm.afficheEdition();
 				}
-			} else
-			{
-				ViewLog.styledTextLogErreurs
-						.setText(Messages.error_file_selectDir);
+				filechoosen = true;
+			} else {
+				if (!myEditFileForm.isFileLoaded()) {
+					ViewLog.styledTextLogErreurs
+							.setText(Messages.error_file_selectDir);
+				}
 			}
 		} catch (Exception e)
 		{
 			ViewLog.styledTextLogErreurs
 					.setText(Messages.error_file_selectDir);
 		}
+		return filechoosen;
 	}
 
 	private FileDialog getFileDialog()
