@@ -1455,9 +1455,10 @@ public class TableData {
 						parser.addStandardConstants();
 
 						// 11976
-						Float selectionValue = null;
+						Double selectionValue = null;
 						try {
-							selectionValue = Float.valueOf(selection);
+							//selectionValue = Float.valueOf(selection);
+							selectionValue = Double.valueOf(selection);
 						} catch (NumberFormatException e) {
 							System.out.println("erreur conversion on parameter"
 									+ myTable.getItem(i).getText(
@@ -1480,7 +1481,7 @@ public class TableData {
 									String.format(
 											myTable.getItem(i).getText(
 													colNbById.get(COL_FORMAT)),
-											new Float(
+											new Double(
 													resultJEP));
 						} else if (type.equals("d") || type.equals("D")) { //$NON-NLS-1$ //$NON-NLS-2$
 							resultat =

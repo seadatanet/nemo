@@ -552,14 +552,14 @@ public class NetCDFWriter extends NemoWriter {
 		}
 
 		//add DefaultFillValue
-		longitude.addVariableAttAttribute(ParameterNames.FILLVALUE, convertValue(DataType.FLOAT, ParameterValues.DEFAULT_FILLVALUE));
-		latitude.addVariableAttAttribute(ParameterNames.FILLVALUE, convertValue(DataType.FLOAT, ParameterValues.DEFAULT_FILLVALUE));
-		time.addVariableAttAttribute(ParameterNames.FILLVALUE, convertValue(DataType.FLOAT, ParameterValues.DEFAULT_FILLVALUE));
-		z.addVariableAttAttribute(ParameterNames.FILLVALUE, convertValue(DataType.FLOAT, ParameterValues.DEFAULT_FILLVALUE));
+		longitude.addVariableAttAttribute(ParameterNames.FILLVALUE, convertValue(DataType.DOUBLE, ParameterValues.DEFAULT_FILLVALUE));
+		latitude.addVariableAttAttribute(ParameterNames.FILLVALUE, convertValue(DataType.DOUBLE, ParameterValues.DEFAULT_FILLVALUE));
+		time.addVariableAttAttribute(ParameterNames.FILLVALUE, convertValue(DataType.DOUBLE, ParameterValues.DEFAULT_FILLVALUE));
+		z.addVariableAttAttribute(ParameterNames.FILLVALUE, convertValue(DataType.DOUBLE, ParameterValues.DEFAULT_FILLVALUE));
 
 		// add default value if existe
 		if (!zParameterModel.getParameter().getDefault().isEmpty())
-			z.addVariableAttAttribute(ParameterNames.FILLVALUE, convertValue(DataType.FLOAT, zParameterModel.getParameter().getDefault()));
+			z.addVariableAttAttribute(ParameterNames.FILLVALUE, convertValue(DataType.DOUBLE, zParameterModel.getParameter().getDefault()));
 
 		//14771
 		if (varName.equals(ParameterNames.DEPTH) || varName == ParameterNames.PRESS)
@@ -651,9 +651,9 @@ public class NetCDFWriter extends NemoWriter {
 
 				// add default value if existe
 				if (!param.getParameter().getDefault().isEmpty())
-					current.addVariableAttAttribute(ParameterNames.FILLVALUE, convertValue(DataType.FLOAT, param.getParameter().getDefault()));
+					current.addVariableAttAttribute(ParameterNames.FILLVALUE, convertValue(DataType.DOUBLE, param.getParameter().getDefault()));
 				else
-					current.addVariableAttAttribute(ParameterNames.FILLVALUE, convertValue(DataType.FLOAT, ParameterValues.DEFAULT_FILLVALUE));
+					current.addVariableAttAttribute(ParameterNames.FILLVALUE, convertValue(DataType.DOUBLE, ParameterValues.DEFAULT_FILLVALUE));
 				if (!param.getParameter().getStandardName().isEmpty())
 					current.addVariableAttAttribute(ParameterNames.STANDARD_NAME, param.getParameter().getStandardName());
 				variables.put(current.getVarName(), current);
@@ -727,7 +727,7 @@ public class NetCDFWriter extends NemoWriter {
 		if (size > 0) {
 			char type = format.charAt(size - 1);
 			if (type == 'f' || type == 'F')
-				return DataType.FLOAT;
+				return DataType.DOUBLE;
 			if (type == 'D' || type == 'd')
 				return DataType.INT;
 		}
