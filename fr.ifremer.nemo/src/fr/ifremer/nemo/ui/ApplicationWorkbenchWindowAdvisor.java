@@ -33,7 +33,7 @@ public class ApplicationWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor
 
 		System.setProperty("file.encoding", Global.NEMO_ENCODING);
 		configurer = getWindowConfigurer();
-		configurer.setInitialSize(new Point(1024, 768));
+		configurer.setInitialSize(new Point(1024, 850));
 		configurer.setShowCoolBar(false);
 		configurer.setShowStatusLine(false);
 		configurer.setShowProgressIndicator(false);
