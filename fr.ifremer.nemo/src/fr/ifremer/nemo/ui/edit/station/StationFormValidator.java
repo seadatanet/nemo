@@ -108,7 +108,7 @@ public class StationFormValidator extends FormValidator {
 			if (value != null) {
 				value = value.trim();
 			}
-			if (!Nemo.getInstance().getViewMain().getMyRulesManager().isProcessCollection() && value.length() > 5) {
+			if (!Nemo.getInstance().getViewMain().getMyRulesManager().isProcessCollection() && Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToMedatlas() && value.length() > 5) {
 				editConversionForm
 						.setWarningStation(Messages.ViewLog_6);
 			} else {
