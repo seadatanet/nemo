@@ -107,7 +107,7 @@ public class EditDataForm extends EditForm {
 	@Override
 	public void afficheEdition() {
 		super.afficheEdition();
-
+		reinitTableData();
 		ViewLog.aideData();
 
 		// affichage du texte dans la zone de gauche
