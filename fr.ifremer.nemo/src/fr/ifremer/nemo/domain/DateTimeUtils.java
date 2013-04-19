@@ -262,7 +262,8 @@ public class DateTimeUtils {
 	    }
 	         
 	    D = (int)(30.6001 * (month + 1));
-	    return B + C + D + 1720994.5 + fraction;
+	    //return B + C + D + 1720994.5 + fraction;
+		return B + C + D + 1720994 + fraction;
 
 
 	}

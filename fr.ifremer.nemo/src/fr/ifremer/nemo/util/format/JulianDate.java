@@ -15,8 +15,8 @@ public class JulianDate {
 	/**
 	 * Epoch en DateJulienne represent un delta de 2440953 jours
 	 */
-	private static final double _NB_JOURS_EPOCH = 2440587.5;
-
+	//private static final double _NB_JOURS_EPOCH = 2440587.5;
+	private static final double _NB_JOURS_EPOCH = 2440587;
 	private double _jour = 0;
 
 	public JulianDate(int jour, double sec) {
