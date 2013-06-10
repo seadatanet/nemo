@@ -613,12 +613,8 @@ public class NetCDFWriter extends NemoWriter {
 		SdnCrs crs = new SdnCrs();
 		variables.put(crs.getVarName(), crs);
 		addVariableToNetCDF(crs);
-		//TODO CPT a revoir
 		//add default value for crs
-		// add crsDefaultValue car le parametre ParameterValues.SDN_CRS_DEFAULT_VALUE
-		// ne fonctionne pas une fois compiler
-		String crsDefaultValue = "0";
-		setDataValue(0, crsDefaultValue, crs.getVarName(), null);
+		setDataValue(0, ParameterValues.SDN_CRS_DEFAULT_VALUE, crs.getVarName(), null);
 
 		variables.put(time.getVarName(), time);
 		addVariableToNetCDF(time);
