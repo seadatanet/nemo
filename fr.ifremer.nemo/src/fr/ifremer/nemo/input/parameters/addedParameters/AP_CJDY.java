@@ -12,10 +12,10 @@ import java.text.ParseException;
 import java.util.Locale;
 
 import fr.ifremer.nemo.Nemo;
+import fr.ifremer.nemo.domain.DateTimeUtils;
 import fr.ifremer.nemo.domain.Station;
 import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Intern;
-import fr.ifremer.nemo.util.format.JulianDate;
 
 /**
  * Description: description du paramètre CJDY
@@ -23,11 +23,9 @@ import fr.ifremer.nemo.util.format.JulianDate;
  * @author sbregent
  * 
  */
-public class AP_CJDY extends AddedParam
-{
+public class AP_CJDY extends AddedParam {
 
-	public AP_CJDY()
-	{
+	public AP_CJDY() {
 		super();
 		_code = "CJDY";
 		flag = Nemo.getInstance().getConfig().getDefaultFlag();
@@ -39,15 +37,14 @@ public class AP_CJDY extends AddedParam
 	}
 
 	@Override
-	public String getValue(Station currentStation, String inputLine, long currentDate) throws ParseException
-	{
+	public String getValue(Station currentStation, String inputLine, long currentDate) throws ParseException {
 		// 7129: locale US
 		Locale loc = Locale.getDefault();
 		Locale.setDefault(Locale.US);
 
-		JulianDate jDate = new JulianDate(currentDate);
+		//JulianDate jDate = new JulianDate(currentDate);
 		String format = getFormat();
-		Double jour = jDate.getJour();
+		Double jour = DateTimeUtils.getJulianDay(currentDate);
 		DecimalFormat decFormat = new DecimalFormat(format);
 		String res = decFormat.format(jour);
 		Locale.setDefault(loc);
@@ -60,8 +57,7 @@ public class AP_CJDY extends AddedParam
 	 * {@inheritDoc}
 	 */
 	@Override
-	public String getFlag(Station currentStation, String inputLine)
-	{
+	public String getFlag(Station currentStation, String inputLine) {
 		return currentStation.getMetaFlags().get(Intern.DATETIME);
 	}
 
@@ -69,8 +65,7 @@ public class AP_CJDY extends AddedParam
 	 * {@inheritDoc}
 	 */
 	@Override
-	public String getLocalCode()
-	{
+	public String getLocalCode() {
 		return _fullName;
 	}
 

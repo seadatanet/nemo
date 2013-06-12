@@ -140,52 +140,52 @@ public class DateTimeUtils {
 	}
 
 	public static long computeEndTime(Station currentStation) {
-	    TimeZone tz = TimeZone.getTimeZone(DateTimeFormat.GMT);
-        Calendar cal = Calendar.getInstance(tz);
-        cal.clear();
+		TimeZone tz = TimeZone.getTimeZone(DateTimeFormat.GMT);
+		Calendar cal = Calendar.getInstance(tz);
+		cal.clear();
 
-        // FAE 13195: Calcul de la date de fin d'une série temporelle
-        // la dete de fin n'est plus calculer mais lu lorsque c'est possible.
-        MediaDomain mediaDomain = Nemo.getInstance().getDomain().getMedia();
-        boolean badConvertion = false;
-        if (mediaDomain.getModel().getInputType() == E_InputType.TIMESERIES) {
-            int lastFileLine = mediaDomain.getStationHeaderNumberLines() + currentStation.getNbRecords() - 1;
-            String endLigne;
-            String fileName = mediaDomain.getModel().getSourcePath();
-            String name = currentStation.getFileName();
-            if (!fileName.endsWith(name))
-                fileName = fileName + File.separator + name;
+		// FAE 13195: Calcul de la date de fin d'une série temporelle
+		// la dete de fin n'est plus calculer mais lu lorsque c'est possible.
+		MediaDomain mediaDomain = Nemo.getInstance().getDomain().getMedia();
+		boolean badConvertion = false;
+		if (mediaDomain.getModel().getInputType() == E_InputType.TIMESERIES) {
+			int lastFileLine = mediaDomain.getStationHeaderNumberLines() + currentStation.getNbRecords() - 1;
+			String endLigne;
+			String fileName = mediaDomain.getModel().getSourcePath();
+			String name = currentStation.getFileName();
+			if (!fileName.endsWith(name))
+				fileName = fileName + File.separator + name;
 
-            long date;
+			long date;
 
-            // lecture jusqu'a la derniere ligne afin de la recuperer.
-            try {
-                FileInputStream fs = new FileInputStream(fileName);
-                BufferedReader br = new BufferedReader(new InputStreamReader(fs));
-                for (int i = 0; i < lastFileLine; ++i)
-                    br.readLine();
-                // lecture de la derniere ligne
-                endLigne = br.readLine();
-                // recuperation des champs datetime et convertion en long.
-                date = convertTimestamp(endLigne);
-                cal.setTimeInMillis(date);
-                br.close();
-                fs.close();
-            } catch (Exception e) {
-                // convertion impossible du fichier non compatible.
-                // donc passage au calcul.
-                badConvertion = true;
-            }
-        }
-        if (mediaDomain.getModel().getInputType() != E_InputType.TIMESERIES || badConvertion) {
+			// lecture jusqu'a la derniere ligne afin de la recuperer.
+			try {
+				FileInputStream fs = new FileInputStream(fileName);
+				BufferedReader br = new BufferedReader(new InputStreamReader(fs));
+				for (int i = 0; i < lastFileLine; ++i)
+					br.readLine();
+				// lecture de la derniere ligne
+				endLigne = br.readLine();
+				// recuperation des champs datetime et convertion en long.
+				date = convertTimestamp(endLigne);
+				cal.setTimeInMillis(date);
+				br.close();
+				fs.close();
+			} catch (Exception e) {
+				// convertion impossible du fichier non compatible.
+				// donc passage au calcul.
+				badConvertion = true;
+			}
+		}
+		if (mediaDomain.getModel().getInputType() != E_InputType.TIMESERIES || badConvertion) {
 
-            long rate = new Float(currentStation.getSamplingRate() * 1000.0f).longValue();
-            int size = currentStation.getNbRecords() - 1;
-            long date = DateTimeUtils.getFullDate(currentStation) + (size * rate);
-            cal.setTimeInMillis(date);
+			long rate = new Float(currentStation.getSamplingRate() * 1000.0f).longValue();
+			int size = currentStation.getNbRecords() - 1;
+			long date = DateTimeUtils.getFullDate(currentStation) + (size * rate);
+			cal.setTimeInMillis(date);
 
-        }
-        return cal.getTimeInMillis();
+		}
+		return cal.getTimeInMillis();
 	}
 
 	public static long getCurrentDate(Station currentStation, int indexRecord) {
@@ -221,53 +221,46 @@ public class DateTimeUtils {
 		cal.setTimeInMillis(date);
 		return cal.get(Calendar.YEAR);
 	}
-	
-	public static double getJulianDay(long date)
-	{
-	    TimeZone tz = TimeZone.getTimeZone(DateTimeFormat.GMT);
-        Calendar cal = Calendar.getInstance(tz);
-        cal.setTimeInMillis(date);
-	    int year = cal.get(Calendar.YEAR);
-	    int month = cal.get(Calendar.MONTH) + 1;
-	    int day = cal.get(Calendar.DAY_OF_MONTH);
-	    double hour = cal.get(Calendar.HOUR_OF_DAY);
-	    double minute = cal.get(Calendar.MINUTE);
-	    double second = cal.get(Calendar.SECOND);
-	    int isGregorianCal = 1;
-	    int A;
-	    int B;
-	    int C;
-	    int D;
-	    double fraction = day + ((hour + (minute / 60) + (second / 60 / 60)) / 24);
-	         
-	    if (year < 1582)
-	       isGregorianCal = 0;
-	         
-	    if (month < 3)
-	    {
-	       year = year - 1;
-	       month = month + 12;
-	    }
 
-	    A = year / 100;
-	    B = (2 - A + (A / 4)) * isGregorianCal;
-	         
-	    if (year < 0)
-	    {
-	       C = (int)((365.25 * year) - 0.75);
-	    }
-	    else
-	    {
-	       C = (int)(365.25 * year);
-	    }
-	         
-	    D = (int)(30.6001 * (month + 1));
-	    //return B + C + D + 1720994.5 + fraction;
+	public static double getJulianDay(long date) {
+		TimeZone tz = TimeZone.getTimeZone(DateTimeFormat.GMT);
+		Calendar cal = Calendar.getInstance(tz);
+		cal.setTimeInMillis(date);
+		int year = cal.get(Calendar.YEAR);
+		int month = cal.get(Calendar.MONTH) + 1;
+		int day = cal.get(Calendar.DAY_OF_MONTH);
+		double hour = cal.get(Calendar.HOUR_OF_DAY);
+		double minute = cal.get(Calendar.MINUTE);
+		double second = cal.get(Calendar.SECOND);
+		int isGregorianCal = 1;
+		int A;
+		int B;
+		int C;
+		int D;
+		double fraction = day + ((hour + (minute / 60) + (second / 60 / 60)) / 24);
+
+		if (year < 1582)
+			isGregorianCal = 0;
+
+		if (month < 3) {
+			year = year - 1;
+			month = month + 12;
+		}
+
+		A = year / 100;
+		B = (2 - A + (A / 4)) * isGregorianCal;
+
+		if (year < 0) {
+			C = (int) ((365.25 * year) - 0.75);
+		} else {
+			C = (int) (365.25 * year);
+		}
+
+		D = (int) (30.6001 * (month + 1));
+		//return B + C + D + 1720994.5 + fraction;
 		return B + C + D + 1720994 + fraction;
 
-
 	}
-
 
 	public static String getVariantDateTime(long currentDate) throws ParseException, UnsupportedEncodingException {
 		StringBuffer value = new StringBuffer();
