@@ -30,8 +30,8 @@ and the file containing this LOCAL_CDI_ID.
 3/ If needed, load a model via the model/open menu and by choosing the XML file of the model you want to use for the current dataset.
 4/ If the file contains separators, click on separator and choose the correct separator.
 5/ Select the type of data you are processing: vertical profiles, time-series or trajectories.
-6/ Select the output format: MEDATLAS, ODV or NetCDF (one file per station or one unique file for all the stations)
-You can click on "Sort data within stations by increasing reference parameter (Pressure or time)" if the measurements are not order by increasing reference parameter in the input file.
+6/ Select the output format: MEDATLAS, ODV (one file per station or one unique file for all the stations) or NetCDF (one file per station or one unique file for all the stations)
+You can click on "Sort data within stations by increasing reference parameter (Pressure or time)" if the measurements are not ordered by increasing reference parameter in the input file.
 
 ==Right part of the screen:
 Once the type of file and the input file or directory is chosen, file description appears on the right part of NEMO screen.
@@ -62,7 +62,7 @@ The mandatory sections are highligted by a '*', in this step they are filled by 
 4/ Data termination indicator: This section describes the indicator of the end of a station in a file.
     - For single station file, most of the time the end of file (EOF) is the indicator of end of data, but it may be an empty line at the end of the file or a line with a specific text.
     - For multiple stations file, NEMO needs a separator between the stations, to be able to know that station is changing. This separator can be an empty line or a set of specific characters that may
-      be located on the first line of the next station  (in that case it is necessary to check the corresponding box)
+      be located on the first line of the next station  (in that case it is necessary to check the corresponding box) or a character string different from the one of the previous station.
     For example, in a MEDATLAS file, the indicator of end of data is the line starting with "-999.9 99.999". It is not necessary to type all the line; the first significant characters are enough.
 
     For each of these sections the number of lines or the specific set of characters can be input manually
@@ -279,10 +279,18 @@ If output format NetCDF has been selected, P09 can not be chosen and you need to
 - Select a P06 unit:
    To select the unit of the parameter in P06 list.
    This choice is only available for numeric values if P01 via P02 list of parameters is used.
+   This choice is not available if P09 list of parameters is used, becasue in that case the unit is directly linked to the parameter code.
    
-- Select a P07 Standard Name:
+- Select a format:
+   To select the output fomat of the parameter (total number of digits, number of decimal digits).	
+   
+- Select a Standard Name:
    To select the Standard  of the parameter in P07 list.
     This choice is only available for NetCDF Conversion, Standard names are highly recommanded for CF compliancy.
+   
+- Move current parameter up to top:
+   To move a parameter to the top of the table of measured parameters.
+   The order of parameters in the table defines the order of parameters in the output file.
    
 - Move current parameter up:
    To move up a parameter in the table of measured parameters.
@@ -292,6 +300,10 @@ If output format NetCDF has been selected, P09 can not be chosen and you need to
    To move down a parameter in the table of measured parameters.
    The order of parameters in the table defines the order of parameters in the output file.
 
+- Move current parameter down: to bottom:
+   To move doww a parameter to the bottom of the table of measured parameters.
+   The order of parameters in the table defines the order of parameters in the output file.
+   
 - Delete current parameter:
    To delete a parameter from the table of measured parameters.
 
@@ -310,9 +322,15 @@ If output format NetCDF has been selected, P09 can not be chosen and you need to
 ===================================================================
 The mandatory fields are highlighted by a '*'.
 
-- Checkbox, to be checked only if the parameter is not numerical
+- Checkbox, to be checked only if the parameter is not numerical and only if ODV format is selected
 
-- Code: MEDATLAS code of the parameter
+- Code: code of the parameter (from P09 or P02)
+
+- Label: Label that can be used as header column (only for ODV format), and that is input by the user and then saved by NEMO for next use.
+
+- Standard Name: CF standard name for the parameter (for NetCDF only), this name is not mandatory and does not exist for all parameters.
+
+- Long Name: Long name of the parameter (for NetCDF only) and that is input by the user and then saved by NEMO for next use.
 
 - Unit: MEDATLAS Unit of the parameter
 

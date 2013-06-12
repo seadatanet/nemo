@@ -1,4 +1,4 @@
-﻿Pour plus de détails, se référer au manuel utilisateur de NEMO.
+Pour plus de détails, se référer au manuel utilisateur de NEMO.
 
 ==MODELE============================
 
@@ -29,7 +29,7 @@ pour faire la correspondance entre un LICAL_CDI_ID (un profil vertical, une sér
 3/ Si nécessaire, charger un modèle à l'aide du menu "Modèle/Ouvrir un modèle" et sélectionner le fichier XML correspondant.
 4/ Si le fichier en entrée contient des séparateurs, cliquer sur "Séparateur" et choisissez le séparateur qui convient.
 5/ Sélectionner le type de données traitées : profil vertical, série temporelle ou trajectoire.
-6/ Sélectionner le format de sortie : MEDATLAS, ODV ou NetCDF (un fichier par station ou un fichier pour l'ensemble des stations)
+6/ Sélectionner le format de sortie : MEDATLAS, ODV (un fichier par station ou un fichier pour l'ensemble des stations) ou NetCDF (un fichier par station ou un fichier pour l'ensemble des stations)
 Vous pouvez cliquer sur "Trier les données au sein des stations par paramètre de référence croissant (Pression ou temps)" sil les mesures ne sont pas triées par ordre croissant de la pression ou du temps dans le fichier en entrée.
 
 
@@ -60,7 +60,7 @@ Les parties qui doivent être obligatoirement renseignées sont marquées par un
 4/ Indicateur de fin de données : Ce champ décrit l'indicateur de fin des données mesurées.
     - Pour les fichiers mono-station, la plupart du temps, la fin de fichier (EOF) est l'indicateur de fin de données, mais il peut y avoir une ligne vide ou une ligne avec un texte spécifique qui indique la fin des mesures.
     - Pour les fichiers multi-stations, NEMO a besoin d'un séparateur entre les stations pour pouvoir reconnaître le changement de station.
-      Cet indicateur peut être une ligne vide ou un texte spécifique, qui peut se trouver sur la première ligne de la station suivante (dans ce cas il est nécessaire de cocher le champ correspondant.
+      Cet indicateur peut être une ligne vide ou un texte spécifique, qui peut se trouver sur la première ligne de la station suivante (dans ce cas il est nécessaire de cocher le champ correspondant, ou une chaîne de caractères différente de celle de la station précédente.
       Par exemple, pour les fichiers au format MEDATLAS, l'indicateur de fin de données est la ligne de valeurs par défaut commençant par exemple par "-999.9 99.999". 
       Il n'est pas nécessaire de taper toutes la lignes, les premiers caractères significatifs suffisent.
       
@@ -282,12 +282,19 @@ Cette information concerne le nom, l'unité, les valeurs par défaut en entrée 
 - Sélectionner une unité P06:
    Pour choisir l'unité du paramètre dans la liste P06. 
    Ce choix apparaît seulement pour les paramètres non numeriques si la liste de paramètres utilisée est P01 via P02.
+   Ce choix n'apparaît pas si la liste de paramètres utilisées est P09, l'unité étant associée au code paramètre dans ce cas.
+   
+- Sélectionner un format: 
+   Pour choisir le format de sortie du paramètre.
 
 - Sélectionner un Standard Name P07:
    Pour choisir le Standard Name du paramètre dans la liste P07, les noms standards sont hautement recommandés pour assurer la compatibilité CF du format. 
    Ce choix apparaît seulement pour la conversion NetCDF.
 
-
+- Monter paramètre sélectionné en tête de liste :
+   Pour déplacer un paramètre tout en haut du tableau des paramètres mesurés. 
+   L'ordre des paramètres dans le tableau est l'ordre des paramètres dans le fichier de sortie.
+   
 - Monter paramètre sélectionné:
    Pour déplacer un paramètre vers le haut, dans le tableau des paramètres mesurés. 
    L'ordre des paramètres dans le tableau est l'ordre des paramètres dans le fichier de sortie.
@@ -295,7 +302,11 @@ Cette information concerne le nom, l'unité, les valeurs par défaut en entrée 
 - Descendre paramètre sélectionné:
    Pour déplacer un paramètre vers le bas, dans le tableau des paramètres mesurés. 
    L'ordre des paramètres dans le tableau est l'ordre des paramètres dans le fichier de sortie.
-
+   
+- Descendre paramètre sélectionné en bas de liste :
+   Pour déplacer un paramètre tout en bas du tableau des paramètres mesurés. 
+   L'ordre des paramètres dans le tableau est l'ordre des paramètres dans le fichier de sortie.
+   
 - Supprimer paramètre sélectionné:
    Pour supprimer un paramètre du tableau des paramètres mesurés.
 
@@ -314,9 +325,15 @@ Cette information concerne le nom, l'unité, les valeurs par défaut en entrée 
 =====================================================================
 Les colonnes obligatoires sont marquées par une '*'.
 
-- Case à cocher seulement pour les paramètres non numériques
+- Case à cocher seulement pour les paramètres non numériques (seulement possible pour le format ODV)
 
-- Code : code MEDATLAS du paramètre
+- Code : code paramètre (code P09 ou P02)
+
+- Label : Entête de columne (seulement pour le format ODV), peut être renseignée par l'utilisateur, NEMO le sauve pour une prochaine utilisation.
+
+- Standard Name: Nom CF standard du paramètre (seulement pour le format NetCDF), ce nom est facultatif et n'existe pas pour tous les paramètres.
+
+- Long Name : Nom du paramètre (seulement pour le format NetCDF), ce nom est obligatoire, NEMO le sauve pour une prochaine utilisation.
 
 - Unité : unité MEDATLAS du paramètre
 
