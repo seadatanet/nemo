@@ -630,6 +630,21 @@ public class NemoBashTest {
 		longNames.put("TEMPPR01", "Temperature"); //$NON-NLS-1$//$NON-NLS-2$
 		longNames.put("PBCNXTXT", "Concentration of lead"); //$NON-NLS-1$//$NON-NLS-2$
 		longNames.put("TEMPZZXX", "Temperature"); //$NON-NLS-1$//$NON-NLS-2$
+		longNames.put("ATTNZZ01", "volume beam attenuation coefficient"); //$NON-NLS-1$//$NON-NLS-2$
+		longNames.put("CPHLPM01", "mass concentration of chlorophyll a in sea water"); //$NON-NLS-1$//$NON-NLS-2$
+		longNames.put("AHSLZZ01", "Height above sea level"); //$NON-NLS-1$//$NON-NLS-2$
+		longNames.put("AHGTZZ01", "Height above sea level"); //$NON-NLS-1$//$NON-NLS-2$
+		longNames.put("CJDY1101", "Julien Date"); //$NON-NLS-1$//$NON-NLS-2$
+		longNames.put("CAPASS01", "Pressure"); //$NON-NLS-1$//$NON-NLS-2$
+		longNames.put("CDTBSS01", "Temperature of the atmophere"); //$NON-NLS-1$//$NON-NLS-2$
+		longNames.put("CDTSZZ01", "Temperature standard deviation of the atmosphere"); //$NON-NLS-1$//$NON-NLS-2$
+		longNames.put("CHMSZZ01", "Specific humidity standard of the atmosphere"); //$NON-NLS-1$//$NON-NLS-2$
+		longNames.put("CHUMSS01", "Specific humidity of the atmosphere"); //$NON-NLS-1$//$NON-NLS-2$
+		longNames.put("ESEWZZ01", "Eastward wind Velocity"); //$NON-NLS-1$//$NON-NLS-2$
+		longNames.put("ESNSZZ01", "Northward wind Velocity"); //$NON-NLS-1$//$NON-NLS-2$
+		longNames.put("EWEWSS01", "Eastward wind Velocity"); //$NON-NLS-1$//$NON-NLS-2$
+		longNames.put("EWNSSS01", "Northward wind Velocity"); //$NON-NLS-1$//$NON-NLS-2$
+		longNames.put("CBTASS01", "Temperature"); //$NON-NLS-1$//$NON-NLS-2$
 
 		return longNames;
 	}
@@ -638,31 +653,6 @@ public class NemoBashTest {
 	// à completer si ajout de test
 	private HashMap<String, String> netCDFStandardNamesMap() {
 		HashMap<String, String> standardNames = new HashMap<String, String>();
-
-		// TODO
-		// CPHLPM01 AHSLZZ01
-		// 23672 [main] WARN nemoBatch / Please select a Standard Name for each
-		// parameter if is possible! AHSLZZ01
-		// 23672 [main] WARN nemoBatch / Please select a Standard Name for each
-		// parameter if is possible! CJDY1101
-		// 23672 [main] WARN nemoBatch / Please select a Standard Name for each
-		// parameter if is possible! CAPASS01
-		// 23672 [main] WARN nemoBatch / Please select a Standard Name for each
-		// parameter if is possible! CDTBSS01
-		// 23672 [main] WARN nemoBatch / Please select a Standard Name for each
-		// parameter if is possible! CDTSZZ01
-		// 23672 [main] WARN nemoBatch / Please select a Standard Name for each
-		// parameter if is possible! CHMSZZ01
-		// 23672 [main] WARN nemoBatch / Please select a Standard Name for each
-		// parameter if is possible! CHUMSS01
-		// 23688 [main] WARN nemoBatch / Please select a Standard Name for each
-		// parameter if is possible! ESEWZZ01
-		// 23688 [main] WARN nemoBatch / Please select a Standard Name for each
-		// parameter if is possible! ESNSZZ01
-		// 23703 [main] WARN nemoBatch / Please select a Standard Name for each
-		// parameter if is possible! EWEWSS01
-		// 23703 [main] WARN nemoBatch / Please select a Standard Name for each
-		// parameter if is possible! EWNSSS01
 
 		standardNames.put("PRESPR01", "sea_water_pressure"); //$NON-NLS-1$//$NON-NLS-2$
 		standardNames.put("NTRAYYDZ", "mole_concentration_of_nitrate_in_sea_water"); //$NON-NLS-1$//$NON-NLS-2$
@@ -694,6 +684,10 @@ public class NemoBashTest {
 		standardNames.put("SSALSG01", "sea_water_salinity"); //$NON-NLS-1$//$NON-NLS-2$
 		standardNames.put("TEMPPR01", "sea_water_temperature"); //$NON-NLS-1$//$NON-NLS-2$
 		standardNames.put("TEMPZZXX", "sea_water_temperature"); //$NON-NLS-1$//$NON-NLS-2$
+		standardNames.put("ATTNZZ01", "volume_beam_attenuation_coefficient_of_radiative_flux_in_sea_water"); //$NON-NLS-1$//$NON-NLS-2$
+		standardNames.put("CPHLPM01", "mass_concentration_of_chlorophyll_a_in_sea_water"); //$NON-NLS-1$//$NON-NLS-2$
+		standardNames.put("AHSLZZ01", "height"); //$NON-NLS-1$//$NON-NLS-2$
+		standardNames.put("AHGTZZ01", "height"); //$NON-NLS-1$//$NON-NLS-2$
 
 		return standardNames;
 	}
