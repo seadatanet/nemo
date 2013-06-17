@@ -294,7 +294,7 @@ public class NemoBashTest {
 						+ "\\_9656_collectionGroupByCruise_withSeparator_unvalidated_model\\P091\\ODV_MULTISTATIONS\\";
 		Assert.assertFalse(convertWithNemoBatch(Conversion.ODV,
 				E_TypeConversion.ODV_MULTISTATIONS, inputAbsolutePath,
-				outputAbsolutePath));
+				outputAbsolutePath, true));
 	}
 
 	/**
@@ -493,11 +493,14 @@ public class NemoBashTest {
 											message.isReferenceFound =
 													fileExist(outputAbsolutePath,
 															outputReferenceName);
+
+											//										
+
 											res =
 													convertWithNemoBatch(
 															conversion, odvConv,
 															inputAbsolutePath,
-															outputAbsolutePath);
+															outputAbsolutePath, !unitTest.getName().startsWith("tj"));
 											ok = res && ok;
 											if (res) {
 												if (conversion == Conversion.NETCDF) {
@@ -591,7 +594,7 @@ public class NemoBashTest {
 
 	public boolean convertWithNemoBatch(Conversion conversion,
 			E_TypeConversion odvConv, String inputAbsolutePath,
-			String outputAbsolutePath) {
+			String outputAbsolutePath, boolean isDateIso) {
 		boolean res = false;
 		String output = outputAbsolutePath + "\\" + outputName;
 		String model = outputAbsolutePath + "\\" + modelName;
@@ -601,6 +604,7 @@ public class NemoBashTest {
 		File mod = new File(model);
 		Nemo.getInstance().resetInstance();
 		Nemo.getInstance().getConfig().setIdEdmoRespCdi("486");// 486 is ifremer
+		Nemo.getInstance().getConfig().setDateISO(isDateIso);
 		// add long Name for test
 		NetCDFLongNameParameterManager.getInstance().getLongNamesMap().putAll(netCDFLongNamesMap());
 		// add standard Name for test
