@@ -17,6 +17,9 @@ import org.eclipse.swt.widgets.Text;
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.domain.CruiseDomain;
 import fr.ifremer.nemo.input.CruiseModel;
+import fr.ifremer.nemo.input.parameters.addedParameters.AP_CJDY;
+import fr.ifremer.nemo.input.parameters.addedParameters.AP_DTUT;
+import fr.ifremer.nemo.input.parameters.addedParameters.AddedParam;
 import fr.ifremer.nemo.output.CDIResumeWriter;
 import fr.ifremer.nemo.output.ProgressNotification;
 import fr.ifremer.nemo.ui.ApplicationActionBarAdvisor;
@@ -742,6 +745,23 @@ public class EditConversionForm extends EditForm {
 					Global.RN
 							+ Messages.view_convert_summary_updateCouplingTableInfo;
 		}
+
+		if (rm.isConversionToODV()) {
+			summary += Global.RN;
+			summary += Global.RN + Messages.settings_dateODV + Global.DBL_PT + Global.RN;
+			if (Nemo.getInstance().getConfig().isDateISO()) {
+				AddedParam dateISO = new AP_DTUT();
+
+				summary += dateISO.getFullName().replace(Global.UNDERSCORE, Global.SPACE)
+						+ " [" + dateISO.getUnit() + "]";
+			} else {
+				AddedParam dateJulian = new AP_CJDY();
+
+				summary += dateJulian.getFullName()
+						+ " [" + dateJulian.getUnit() + "]";
+			}
+		}
+
 		summary += Global.RN + Global.RN + Global.RN;
 		conversionSummary.setText(summary);
 

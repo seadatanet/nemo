@@ -1489,6 +1489,9 @@ public class OptionsAction extends Action implements ISelectionListener,
 						// if (DataModel.inputModel != null)
 						// DataModel.inputModel.setConverted(false);
 
+						//maj Summary
+						Nemo.getInstance().getViewMain().getEditConversionForm().fillSummary();
+
 						// fermeture de la fenêtre
 						shelloptions.close();
 
