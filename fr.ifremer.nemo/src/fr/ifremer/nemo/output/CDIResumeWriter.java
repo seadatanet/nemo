@@ -33,8 +33,7 @@ import fr.ifremer.nemo.util.Global.E_TypeConversion;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
 
-public class CDIResumeWriter
-{
+public class CDIResumeWriter {
 	private static CDIResumeWriter instance;
 
 	// private final Nemo nemo;
@@ -44,37 +43,31 @@ public class CDIResumeWriter
 	private FileWriter writer;
 	private final String sep;
 
-	private CDIResumeWriter()
-	{
+	private CDIResumeWriter() {
 		// nemo = Nemo.getInstance();
 		sep = Intern.CDIResumeWriter_separateur;
 	}
 
-	public static CDIResumeWriter getInstance()
-	{
-		if (instance == null)
-		{
+	public static CDIResumeWriter getInstance() {
+		if (instance == null) {
 			instance = new CDIResumeWriter();
 		}
 		return instance;
 	}
 
-	public void reset()
-	{
+	public void reset() {
 		nomFichierSortie = Global.EMPTY_STRING;
 
 	}
 
 	@SuppressWarnings("nls")
-	public void writeResume(Conversion formatConversion) throws IOException
-	{
+	public void writeResume(Conversion formatConversion) throws IOException {
 		// 1 ligne par paramètres mesurés
 
 		File output = new File(nomFichierSortie);
 		writer = null;
 
-		try
-		{
+		try {
 			writer = new FileWriter(output);
 
 			writer.write("LOCAL_CDI_ID" + sep + "EDMO_AUTHOR" + sep
@@ -96,18 +89,15 @@ public class CDIResumeWriter
 			Configuration config = Nemo.getInstance().getConfig();
 
 			for (String outputPath : iDomain.getMedia().getOutputFiles()
-					.keySet())
-			{
+					.keySet()) {
 				File outputFile = new File(outputPath);
 				for (String stRef : iDomain.getMedia().getOutputFiles().get(
-						outputPath))
-				{
+						outputPath)) {
 					// for (Station st :
 					// sDomain.getStations(outputFile.getName())){
 					Station st = sDomain.getStationByRef(stRef);
 					// seuls les paramètres mesurés sont à prendre en compte
-					for (ParameterModel param : dataDomain.getModel().getParameterModels())
-					{
+					for (ParameterModel param : dataDomain.getModel().getParameterModels()) {
 						// writeLineResume(inputFilePath, st, param);
 
 						writer.write(Global.RN);
@@ -127,40 +117,31 @@ public class CDIResumeWriter
 						// Dataset name
 						if (cDomain.getModel().getName().isEmpty()
 								|| cDomain.getModel().getName().equals(
-										Intern.unknown))
-						{
-							if (cDomain.getDataSetRef().isEmpty())
-							{
+										Intern.unknown)) {
+							if (cDomain.getDataSetRef().isEmpty()) {
 								writer.write(sep
 										+ Intern.CDIResumeWriter_notSpecified);
-							} else
-							{
+							} else {
 								writer.write(sep + cDomain.getDataSetRef());
 							}
-						} else
-						{
+						} else {
 							writer.write(sep + cDomain.getModel().getName());
 						}
 
 						// Dataset ID
-						if (cDomain.getModel().getReference().isEmpty())
-						{
+						if (cDomain.getModel().getReference().isEmpty()) {
 
 							// FAE 4525 (retour 03/01/2011)
-							if (iDomain.getMedia().getModel().getProcessType().equals(E_ProcessType.COLLECTION_DIR))
-							{
+							if (iDomain.getMedia().getModel().getProcessType().equals(E_ProcessType.COLLECTION_DIR)) {
 								writer
 										.write(sep + cDomain.getModel().getName());
-							} else if (cDomain.getDataSetRef().isEmpty())
-							{
+							} else if (cDomain.getDataSetRef().isEmpty()) {
 								writer.write(sep
 										+ Intern.CDIResumeWriter_notSpecified);
-							} else
-							{
+							} else {
 								writer.write(sep + cDomain.getDataSetRef());
 							}
-						} else
-						{
+						} else {
 							writer.write(sep
 									+ cDomain.getModel().getReference());
 						}
@@ -169,7 +150,7 @@ public class CDIResumeWriter
 						Calendar calendrier = Calendar.getInstance();
 						Date dateEcriture = calendrier.getTime();
 						SimpleDateFormat dateFormat =
-								new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss");
+								new SimpleDateFormat("yyyy-MM-dd");
 						String stringDate = dateFormat.format(dateEcriture);
 						writer.write(sep + stringDate);
 
@@ -186,11 +167,9 @@ public class CDIResumeWriter
 						String pdvCode = "";
 						// si on est deja en P021, on met directement le code
 						// P021
-						if (iDomain.getData().getModel().getDataListType() == DataListTypeEnum.P011_VIA_P021)
-						{
+						if (iDomain.getData().getModel().getDataListType() == DataListTypeEnum.P011_VIA_P021) {
 							pdvCode = param.getParameter().getCode();
-						} else
-						{
+						} else {
 							// si on est en P091 ou P011viaP091, on map code
 							// P091 -> P021
 							// 6542
@@ -248,8 +227,7 @@ public class CDIResumeWriter
 
 						// data size
 						float datasize = outputFile.length() / 1024f / 1024f;
-						if (iDomain.getConversion().getCurrent() != E_TypeConversion.ODV_MONOSTATION && iDomain.getConversion().getCurrent() != E_TypeConversion.NETCDF_MONOSTATION)
-						{
+						if (iDomain.getConversion().getCurrent() != E_TypeConversion.ODV_MONOSTATION && iDomain.getConversion().getCurrent() != E_TypeConversion.NETCDF_MONOSTATION) {
 							datasize =
 									datasize
 											/ iDomain.getMedia().getOutputFiles()
@@ -268,19 +246,16 @@ public class CDIResumeWriter
 					}
 				}
 			}
-		} catch (Exception e)
-		{
+		} catch (Exception e) {
 			e.printStackTrace();
-		} finally
-		{
+		} finally {
 			// reset();
 			if (writer != null)
 				writer.close();
 		}
 	}
 
-	public void choixFichierSortie()
-	{
+	public void choixFichierSortie() {
 		nomFichierSortie = Global.EMPTY_STRING;
 
 		Shell shell = Utils.getMainShell();
@@ -294,12 +269,10 @@ public class CDIResumeWriter
 		dialog.setFilterExtensions(extensions);
 		nomFichierSortie = dialog.open();
 
-		if (nomFichierSortie != null)
-		{
+		if (nomFichierSortie != null) {
 
 			File fich = new File(nomFichierSortie);
-			if (fich.exists())
-			{
+			if (fich.exists()) {
 				// fichier existe
 				Shell shell2 = Utils.getMainShell();
 
@@ -310,17 +283,14 @@ public class CDIResumeWriter
 				mb.setMessage(Messages.confirm_eraseFile);
 
 				int reponse = mb.open();
-				if (reponse == SWT.NO)
-				{
+				if (reponse == SWT.NO) {
 					// on n'écrase pas le fichier
 					choixFichierSortie();
-				} else
-				{
+				} else {
 					// on écrase le fichier
 					Utils.messageErreur(Global.EMPTY_STRING);
 				}
-			} else
-			{
+			} else {
 				// le fichier n'existe pas, on le cree
 				Utils.messageErreur(Global.EMPTY_STRING);
 			}
@@ -334,13 +304,11 @@ public class CDIResumeWriter
 	 *            : nouvelle valeur pour nomFichierSortie
 	 * @see CDIResumeWriter.java#nomFichierSortie
 	 */
-	public void setNomFichierSortie(String nomFichierSortie)
-	{
+	public void setNomFichierSortie(String nomFichierSortie) {
 		this.nomFichierSortie = nomFichierSortie;
 	}
 
-	public String getNomFichierSortie()
-	{
+	public String getNomFichierSortie() {
 		return nomFichierSortie;
 	}
 
