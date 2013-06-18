@@ -4,18 +4,18 @@
   <nautilusWsURL>http://www.ifremer.fr/WSnautilus/services/NAUTILUS</nautilusWsURL>
   <showRule>true</showRule>
   <contact></contact>
-  <modelsDirectory>D:\dev\dev\workspace\ifremer_datatest</modelsDirectory>
-  <cruisesDirectory>D:\dev\dev\workspace\ifremer_datatest</cruisesDirectory>
+  <modelsDirectory></modelsDirectory>
+  <cruisesDirectory></cruisesDirectory>
   <outputDirectory></outputDirectory>
   <writeCdi>false</writeCdi>
-  <idEdmoRespCdi>486</idEdmoRespCdi>
+  <idEdmoRespCdi></idEdmoRespCdi>
   <codeEdmoDonnees></codeEdmoDonnees>
   <idEdmoRespDonnees></idEdmoRespDonnees>
   <idEdmoDistDonnees></idEdmoDistDonnees>
   <cdiURL>http://www.sdn-taskmanager.org/</cdiURL>
   <cdiMethod>CDIMTH01</cdiMethod>
   <accesDonnees>LS</accesDonnees>
-  <typePlateforme>12</typePlateforme>
+  <typePlateforme></typePlateforme>
   <writeMapping>false</writeMapping>
   <fichierMapping>coupling.txt</fichierMapping>
   <dateISO>true</dateISO>

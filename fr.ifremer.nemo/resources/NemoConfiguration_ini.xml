@@ -15,7 +15,7 @@
   <cdiURL>http://www.sdn-taskmanager.org/</cdiURL>
   <cdiMethod>CDIMTH01</cdiMethod>
   <accesDonnees>LS</accesDonnees>
-  <typePlateforme>12</typePlateforme>
+  <typePlateforme></typePlateforme>
   <writeMapping>false</writeMapping>
   <fichierMapping>coupling.txt</fichierMapping>
   <dateISO>true</dateISO>
@@ -23,7 +23,7 @@
   <proxy use="false" address="" port="" login="" password=""/>
   <edmoURL>http://seadatanet.maris2.nl/ws/ws_edmo.asmx</edmoURL>
   <vocabURL>http://vocab.ndg.nerc.ac.uk/1.1/VocabServerAPI_dl.wsdl</vocabURL>
-   <VocabListURL name="C16" value="http://vocab.ndg.nerc.ac.uk/list/C16/current" version="8"/>
+  <VocabListURL name="C16" value="http://vocab.ndg.nerc.ac.uk/list/C16/current" version="8"/>
   <VocabListURL name="P011" value="http://vocab.ndg.nerc.ac.uk/list/P011/current" version="318"/>
   <VocabListURL name="L300" value="http://vocab.ndg.nerc.ac.uk/list/L300/current" version="2"/>
   <VocabListURL name="L051" value="http://vocab.ndg.nerc.ac.uk/list/L051/current" version="5"/>
