@@ -15,8 +15,10 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.util.Calendar;
+import java.util.Locale;
 import java.util.TimeZone;
 
 import fr.ifremer.nemo.Nemo;
@@ -257,7 +259,13 @@ public class DateTimeUtils {
 		}
 
 		D = (int) (30.6001 * (month + 1));
-		return B + C + D + 1720995 + fraction;
+
+		Locale loc = Locale.getDefault();
+		Locale.setDefault(Locale.US);
+		DecimalFormat twoDForm = new DecimalFormat("#.######");
+		Double julianDate = Double.valueOf(twoDForm.format(B + C + D + 1720995 + fraction));
+		Locale.setDefault(loc);
+		return julianDate;
 
 	}
 
