@@ -31,7 +31,8 @@ public class Intern extends NLS {
 	public static String list_ship;
 	public static String list_dataCenter;
 	public static String list_countries;
-	public static String list_regions;
+	public static String list_regionsRectangles;
+	public static String list_regionsPolygones;
 	public static String list_ROSCOPparameters;
 	public static String list_instruments;
 	public static String list_methodCDI;

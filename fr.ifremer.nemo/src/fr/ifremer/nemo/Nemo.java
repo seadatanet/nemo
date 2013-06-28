@@ -31,6 +31,7 @@ import com.ago.xml.XMLBootstrapParser;
 
 import fr.ifremer.nemo.config.Configuration;
 import fr.ifremer.nemo.domain.InputDomain;
+import fr.ifremer.nemo.input.CruiseModel;
 import fr.ifremer.nemo.input.InputModel;
 import fr.ifremer.nemo.ui.ApplicationWorkbenchWindowAdvisor;
 import fr.ifremer.nemo.ui.view.ViewMain;
@@ -134,9 +135,32 @@ public class Nemo {
 			Transformer transformer = factory.newTransformer(xslSource);
 			transformer.transform(xmlSource, result);
 		}
+		//FAE 16868
+		if (compareVersion(model.getVersion(), "1.5") <= 0) {
+			String regionName = model.getCruiseModel().getRegionName();
+			String C19RegionName = CruiseModel.getTranscodeRegionName(regionName);
+			model.getCruiseModel().setRegionName(C19RegionName);
+		}
+
 		completeDataList(model, isBeforeP011);
 		domain.update(model);
 		return model.isValid();
+	}
+
+	private Integer compareVersion(String version1, String version2) {
+		String[] vals1 = version1.split("\\.");
+		String[] vals2 = version2.split("\\.");
+		int i = 0;
+		while (i < vals1.length && i < vals2.length && vals1[i].equals(vals2[i])) {
+			i++;
+		}
+
+		if (i < vals1.length && i < vals2.length) {
+			int diff = Integer.valueOf(vals1[i]).compareTo(Integer.valueOf(vals2[i]));
+			return diff < 0 ? -1 : diff == 0 ? 0 : 1;
+		}
+
+		return vals1.length < vals2.length ? -1 : vals1.length == vals2.length ? 0 : 1;
 	}
 
 	private void completeDataList(InputModel model, boolean isBeforeP011) {

@@ -262,7 +262,6 @@ public class EditCruiseForm extends EditForm {
 			nomXML = dialog.open();
 			if (nomXML != null) {
 				fich = new File(nomXML);
-				Utils.messageErreurAppend("fiche:" + fich);//$NON-NLS-1$  
 				try {
 					chargementXML(fich);
 					Utils.messageOKAppend(Messages.success_openSurveyDesc);
@@ -281,6 +280,8 @@ public class EditCruiseForm extends EditForm {
 		// cruiseDomain.getModel().reset();
 
 		CruiseModel cruiseModel = importXML(fichier);
+		String C19RegionName = CruiseModel.getTranscodeRegionName(cruiseModel.getRegionName());
+		cruiseModel.setRegionName(C19RegionName);
 		cruiseDomain.updateCruise(cruiseModel);
 
 		// mise à jour de l'onglet courant
@@ -307,6 +308,9 @@ public class EditCruiseForm extends EditForm {
 		for (int index = 0; index < cruise.getDataTypes().length; index++) {
 			cruise.dataTypesAt(index).setSensor(listSensor.contains(cruise.dataTypesAt(index).getCode().substring(0, 3)));
 		}
+
+		//FAE 16868
+
 		return cruise;
 	}
 
@@ -437,6 +441,7 @@ public class EditCruiseForm extends EditForm {
 		}
 
 		cruiseModel.setRegionName(fr.ifremer.nemo.util.Utils.extraitValeur(region.getText()));
+		cruiseModel.setRegionCode(fr.ifremer.nemo.util.Utils.extraitCode(region.getText()));
 
 		// Source de données
 		cruiseModel.setCountryCode(fr.ifremer.nemo.util.Utils.extraitCode(pays.getText()));

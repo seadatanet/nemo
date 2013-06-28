@@ -25,6 +25,9 @@ import javax.xml.validation.Validator;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
+import sdn.vocabulary.interfaces.ICollection;
+import sdn.vocabulary.interfaces.IElement;
+
 import com.ago.xml.Element2Field;
 import com.ago.xml.PathElementConsumer;
 import com.ago.xml.SAXConsumer;
@@ -36,6 +39,7 @@ import fr.ifremer.nautilus.metadata.NautilusSurveyWSServiceLocator;
 import fr.ifremer.nautilus.metadata.WSCollectedData;
 import fr.ifremer.nautilus.metadata.WSSurvey;
 import fr.ifremer.nemo.Nemo;
+import fr.ifremer.nemo.config.VocabLists;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.util.Formatter;
 import fr.ifremer.nemo.util.Global;
@@ -118,6 +122,11 @@ public class CruiseModel extends AbstractModel {
 	protected String _regionName;
 
 	/**
+	 * Code de la région [table C19]
+	 */
+	protected String _regionCode;
+
+	/**
 	 * Code du navire - standardisé WDCA/ICES/IOC (MEDATLAS: 4 char max)
 	 */
 	protected String _shipCode;
@@ -160,6 +169,7 @@ public class CruiseModel extends AbstractModel {
 		_projectName = Global.EMPTY_STRING;
 		_reference = Global.EMPTY_STRING;
 		_regionName = Global.EMPTY_STRING;
+		_regionCode = Global.EMPTY_STRING;
 		_shipCode = "XXXX"; //$NON-NLS-1$
 		_shipName = Intern.unknown;
 		_startDate = System.currentTimeMillis();
@@ -303,6 +313,7 @@ public class CruiseModel extends AbstractModel {
 		a_Writer.putTag(ModelDescription.node_startdate, getStartDate());
 		a_Writer.putTag(ModelDescription.node_enddate, getEndDate());
 		a_Writer.putTag(ModelDescription.node_region, getRegionName());
+		a_Writer.putTag(ModelDescription.node_regionCode, getRegionCode());
 		a_Writer.putTag(ModelDescription.node_country, getCountryCode());
 		a_Writer.putTag(ModelDescription.node_laboratories, getLaboratories());
 		a_Writer.putTag(ModelDescription.node_chief, getChiefScientist());
@@ -350,12 +361,21 @@ public class CruiseModel extends AbstractModel {
 		}
 		setStartDate(wssurvey.getStartDate());
 		setEndDate(wssurvey.getEndDate());
-		if (wssurvey.getRegionName() != null) {
+
+		/*if (wssurvey.getRegionName() != null) {
 			setRegionName(wssurvey.getRegionName());
 		}
+		*/
+
+		//FAE 16868
+		if (wssurvey.getRegionName() != null) {
+			setRegionName(getTranscodeRegionName(wssurvey.getRegionName()));
+		}
+
 		if (wssurvey.getCountryCode() != null) {
 			setCountryCode(wssurvey.getCountryCode());
 		}
+
 		if (wssurvey.getLaboratories() != null) {
 			setLaboratories(wssurvey.getLaboratories());
 		}
@@ -381,6 +401,33 @@ public class CruiseModel extends AbstractModel {
 				addDataType(dataType);
 			}
 		}
+	}
+
+	/**
+	 * transcode C16 label to C19 Label
+	 * @param region Name C16
+	 * @return region Name C19
+	 */
+
+	//FAE 16868
+	public static String getTranscodeRegionName(String regionNameC16) {
+		ICollection regionsRectangles = VocabLists.getVocabList(Intern.list_regionsRectangles);
+		String regionsKey = null;
+		String RegionName = Global.EMPTY_STRING;
+		for (IElement elem : regionsRectangles.getElements()) {
+			if (elem.getLabel().equals(regionNameC16)) {
+				regionsKey = elem.getKey();
+				break;
+			}
+		}
+		if (regionsKey != null) {
+			List<IElement> c19List = VocabLists.getVocabMatchs(Intern.list_regionsRectangles,
+					Intern.list_regionsPolygones, regionsKey);
+			if (!c19List.isEmpty()) {
+				RegionName = c19List.get(0).getLabel();
+			}
+		}
+		return RegionName;
 	}
 
 	/**
@@ -750,6 +797,20 @@ public class CruiseModel extends AbstractModel {
 	 */
 	public void setRegionName(String x) {
 		_regionName = x;
+	}
+
+	/**
+	 * @return the regionCode
+	 */
+	public String getRegionCode() {
+		return _regionCode;
+	}
+
+	/**
+	 * @param regionCode the regionCode to set
+	 */
+	public void setRegionCode(String regionCode) {
+		_regionCode = regionCode;
 	}
 
 	/**

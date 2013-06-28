@@ -46,6 +46,7 @@ public class ModelDescription extends NLS {
 	public static String node_startdate;
 	public static String node_enddate;
 	public static String node_region;
+	public static String node_regionCode;
 	public static String node_country;
 	public static String node_laboratories;
 	public static String node_chief;
