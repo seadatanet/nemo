@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vocabulary list="SDN:L07:2:"  version="2"  date="2012-07-11T01:00:14.000"  title="SeaDataNet data access mechanisms" >
+   <keyword SDNIdent="SDN:L07::CDIMTH01"  smallLabel="download" >web data access</keyword>
+   <keyword SDNIdent="SDN:L07::CDIMTH02"  smallLabel="downloadRegistration" >web data access with registration</keyword>
+   <keyword SDNIdent="SDN:L07::CDIMTH05"  smallLabel="URL" >universal resource locator</keyword>
+   <keyword SDNIdent="SDN:L07::CDIMTH06"  smallLabel="hrsvsRegistration" >high resolution viewing of seismic data with registration</keyword>
+   <keyword SDNIdent="SDN:L07::CDIMTH03"  smallLabel="order" >data request order</keyword>
+   <keyword SDNIdent="SDN:L07::CDIMTH04"  smallLabel="offlineAccess" >delayed online access</keyword>
+</vocabulary>

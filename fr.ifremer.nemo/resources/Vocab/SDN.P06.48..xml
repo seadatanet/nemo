@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vocabulary list="SDN:P06:48:"  version="48"  date="2013-06-21T01:00:03.000"  title="BODC data storage units" >
+   <uomName SDNIdent="SDN:P06::UPDS"  smallLabel="% dry sed" >Percentage of dry sediment</uomName>
+   <uomName SDNIdent="SDN:P06::UPTH"  smallLabel="ppt/h" >Parts per thousand per hour</uomName>
+   <uomName SDNIdent="SDN:P06::DGPS"  smallLabel="deg/s" >Degrees per second</uomName>
+   <uomName SDNIdent="SDN:P06::USVD"  smallLabel="Sv" >Sverdrup</uomName>
+   <uomName SDNIdent="SDN:P06::UGUG"  smallLabel="ug" >Micrograms</uomName>
+   <uomName SDNIdent="SDN:P06::KPRS"  smallLabel="K/s" >Kelvin per second</uomName>
+   <uomName SDNIdent="SDN:P06::UUDX"  smallLabel="ug/m^2/d" >Micrograms per square metre per day</uomName>
+   <uomName SDNIdent="SDN:P06::PPPS"  smallLabel="/Pa/s" >per Pascal per second</uomName>
+   <uomName SDNIdent="SDN:P06::UUUU"  smallLabel="Dmnless" >Dimensionless</uomName>
+   <uomName SDNIdent="SDN:P06::MIKG"  smallLabel="ml/kg" >Millilitres per kilogram</uomName>
+   <uomName SDNIdent="SDN:P06::UMUB"  smallLabel="um/um/d" >Micromole per micromole of biomass per day</uomName>
+   <uomName SDNIdent="SDN:P06::UCCL"  smallLabel="mgC/mgChl/hr" >Milligrams of carbon per milligram of chlorophyll per hour</uomName>
+   <uomName SDNIdent="SDN:P06::UCCM"  smallLabel="um^3/m^3" >Cubic microns per cubic metre</uomName>
+   <uomName SDNIdent="SDN:P06::ULCM"  smallLabel="cm" >Centimetres</uomName>
+   <uomName SDNIdent="SDN:P06::UPDY"  smallLabel="/d" >per day</uomName>
+   <uomName SDNIdent="SDN:P06::KPAS"  smallLabel="K.Pa/s" >Kelvin Pascals per second</uomName>
+   <uomName SDNIdent="SDN:P06::KGS2"  smallLabel="kg^2/s^2" >Kilograms squared per second squared</uomName>
+   <uomName SDNIdent="SDN:P06::PGKG"  smallLabel="pg/kg" >Picograms per kilogram</uomName>
+   <uomName SDNIdent="SDN:P06::UMCU"  smallLabel="um^3" >Cubic micrometres (microns)</uomName>
+   <uomName SDNIdent="SDN:P06::UTHZ"  smallLabel="Hz" >Hertz</uomName>
+   <uomName SDNIdent="SDN:P06::UNDX"  smallLabel="#/m^2/d" >Number per square metre per day</uomName>
+   <uomName SDNIdent="SDN:P06::UWCM"  smallLabel="W/m^3" >Watts per cubic metre</uomName>
+   <uomName SDNIdent="SDN:P06::USEC"  smallLabel="us" >Microseconds</uomName>
+   <uomName SDNIdent="SDN:P06::UMTN"  smallLabel="m^2/Hz^2" >Square metres per squared hertz</uomName>
+   <uomName SDNIdent="SDN:P06::UBQK"  smallLabel="Bq/kg" >Bequerels per kilogram</uomName>
+   <uomName SDNIdent="SDN:P06::PAMS"  smallLabel="Pa.m/s" >Pascal metres per second</uomName>
+   <uomName SDNIdent="SDN:P06::UMEC"  smallLabel="uE/m^3/s" >MicroEinsteins per cubic metre per second</uomName>
+   <uomName SDNIdent="SDN:P06::UGCC"  smallLabel="g/cm^3" >Grams per cubic centimetre</uomName>
+   <uomName SDNIdent="SDN:P06::UPCT"  smallLabel="%" >Percent</uomName>
+   <uomName SDNIdent="SDN:P06::UAMN"  smallLabel="arc_min" >Arc minutes</uomName>
+   <uomName SDNIdent="SDN:P06::M2MS"  smallLabel="mol/m^2/s" >Moles per square metre per second</uomName>
+   <uomName SDNIdent="SDN:P06::UPCH"  smallLabel="%/h" >Percent per hour</uomName>
+   <uomName SDNIdent="SDN:P06::M2MM"  smallLabel="mol/m^2/s/m" >Moles per square metre per second per metre</uomName>
+   <uomName SDNIdent="SDN:P06::MBQF"  smallLabel="mBq/m2/d" >Millibequerels per square metre per day</uomName>
+   <uomName SDNIdent="SDN:P06::PAMT"  smallLabel="Pa.m" >Pascal metres</uomName>
+   <uomName SDNIdent="SDN:P06::PPS2"  smallLabel="Pa^2/s^2" >Pascal squared per second squared</uomName>
+   <uomName SDNIdent="SDN:P06::NCUM"  smallLabel="N/m^3" >Newtons per cubic metre</uomName>
+   <uomName SDNIdent="SDN:P06::UBQL"  smallLabel="Bq/l" >Bequerels per litre</uomName>
+   <uomName SDNIdent="SDN:P06::UPDB"  smallLabel="dbar" >Decibars</uomName>
+   <uomName SDNIdent="SDN:P06::UFPD"  smallLabel="#/fem/d" >per female per day</uomName>
+   <uomName SDNIdent="SDN:P06::UMTC"  smallLabel="m^2.Hz^2" >Square Metres.Hertz squared</uomName>
+   <uomName SDNIdent="SDN:P06::UCUM"  smallLabel="um^3/ml" >Cubic microns per millilitre</uomName>
+   <uomName SDNIdent="SDN:P06::MGAL"  smallLabel="mGal" >MilliGals</uomName>
+   <uomName SDNIdent="SDN:P06::UMTB"  smallLabel="m^2.Hz" >Square metres.Hertz</uomName>
+   <uomName SDNIdent="SDN:P06::DKPM"  smallLabel="degK/m" >Degrees Kelvin per metre</uomName>
+   <uomName SDNIdent="SDN:P06::UCUL"  smallLabel="#/ul" >Number per microlitre</uomName>
+   <uomName SDNIdent="SDN:P06::JKGK"  smallLabel="J/kg/K" >Joules per kilogram per Kelvin</uomName>
+   <uomName SDNIdent="SDN:P06::UMDX"  smallLabel="mmol/m^2/d" >Millimoles per square metre per day</uomName>
+   <uomName SDNIdent="SDN:P06::UMTE"  smallLabel="m^2*Hz^4" >Square metres.Hertz^4</uomName>
+   <uomName SDNIdent="SDN:P06::HPAH"  smallLabel="hPa/h" >Hectopascals per hour</uomName>
+   <uomName SDNIdent="SDN:P06::UMTD"  smallLabel="m^2.Hz^3" >Square metres.cubic Hertz</uomName>
+   <uomName SDNIdent="SDN:P06::UTRV"  smallLabel="pptrv" >Parts per trillion by volume</uomName>
+   <uomName SDNIdent="SDN:P06::MEKG"  smallLabel="mEquiv/kg" >MilliEquivalents per kilogram</uomName>
+   <uomName SDNIdent="SDN:P06::UKWN"  smallLabel="Unknown" >Not known</uomName>
+   <uomName SDNIdent="SDN:P06::PAM2"  smallLabel="Pa.m/s^2" >Pascal metres per second squared</uomName>
+   <uomName SDNIdent="SDN:P06::DEGE"  smallLabel="degree_east" >Degrees east</uomName>
+   <uomName SDNIdent="SDN:P06::USTU"  smallLabel="NTU" >Nephelometric Turbidity Units</uomName>
+   <uomName SDNIdent="SDN:P06::UPCD"  smallLabel="%/d" >Percent per day</uomName>
+   <uomName SDNIdent="SDN:P06::UPCC"  smallLabel="degC/m" >Degrees Celsius per metre</uomName>
+   <uomName SDNIdent="SDN:P06::MWSR"  smallLabel="mW/cm^2/um/sr" >milliwatts per square centimetre per micrometre per steradian</uomName>
+   <uomName SDNIdent="SDN:P06::UMES"  smallLabel="uE/m^2/s" >MicroEinsteins per square metre per second</uomName>
+   <uomName SDNIdent="SDN:P06::NMGH"  smallLabel="nmol/ug/h" >Nanomoles per microgram per hour</uomName>
+   <uomName SDNIdent="SDN:P06::MCS2"  smallLabel="m^3/s^2" >Cubic metres per second squared</uomName>
+   <uomName SDNIdent="SDN:P06::UPRM"  smallLabel="/m" >per metre</uomName>
+   <uomName SDNIdent="SDN:P06::MPS2"  smallLabel="m/s^2" >Metres per second squared</uomName>
+   <uomName SDNIdent="SDN:P06::KMPS"  smallLabel="kg/m/s" >Kilograms per metre per second</uomName>
+   <uomName SDNIdent="SDN:P06::UNBQ"  smallLabel="nBq/l" >Nanobequerels per litre</uomName>
+   <uomName SDNIdent="SDN:P06::UNSM"  smallLabel="N/m^2" >Newtons per square metre</uomName>
+   <uomName SDNIdent="SDN:P06::FGKG"  smallLabel="fg/kg" >Femtograms per kilogram</uomName>
+   <uomName SDNIdent="SDN:P06::MGSQ"  smallLabel="mg/m^2/h" >Milligrams per square metre per hour</uomName>
+   <uomName SDNIdent="SDN:P06::UFAA"  smallLabel="W/m^2" >Watts per square metre</uomName>
+   <uomName SDNIdent="SDN:P06::SQMS"  smallLabel="m^2/s" >Square metres per second</uomName>
+   <uomName SDNIdent="SDN:P06::UMGL"  smallLabel="mg/l" >Milligrams per litre</uomName>
+   <uomName SDNIdent="SDN:P06::UPSS"  smallLabel="/s^2" >per second squared</uomName>
+   <uomName SDNIdent="SDN:P06::DEGN"  smallLabel="degree_north" >Degrees north</uomName>
+   <uomName SDNIdent="SDN:P06::UYGA"  smallLabel="Gyr" >Billions of years before present</uomName>
+   <uomName SDNIdent="SDN:P06::FMKG"  smallLabel="fmol/kg" >Femtomoles per kilogram</uomName>
+   <uomName SDNIdent="SDN:P06::KGUM"  smallLabel="umol/kg" >Micromoles per kilogram</uomName>
+   <uomName SDNIdent="SDN:P06::UNAH"  smallLabel="#/ind/h" >Number per individual per hour</uomName>
+   <uomName SDNIdent="SDN:P06::UUTU"  smallLabel="TU" >Tritium units (10**18H/Tr)</uomName>
+   <uomName SDNIdent="SDN:P06::UPBB"  smallLabel="mBar" >Millibars</uomName>
+   <uomName SDNIdent="SDN:P06::UUUD"  smallLabel="umol/m^2/d" >Micromoles per square metre per day</uomName>
+   <uomName SDNIdent="SDN:P06::USUM"  smallLabel="um^2/ml" >Square microns per millilitre</uomName>
+   <uomName SDNIdent="SDN:P06::DEGF"  smallLabel="degF" >Degrees Fahrenheit</uomName>
+   <uomName SDNIdent="SDN:P06::UMFX"  smallLabel="umol/m^2/h" >Micromoles per square metre per hour</uomName>
+   <uomName SDNIdent="SDN:P06::KSP2"  smallLabel="kg/m^2/s" >Kilograms per square metre per second</uomName>
+   <uomName SDNIdent="SDN:P06::KMP2"  smallLabel="kg/m^2" >Kilograms per square metre</uomName>
+   <uomName SDNIdent="SDN:P06::KSP3"  smallLabel="kg/m^3/s" >Kilograms per cubic metre per second</uomName>
+   <uomName SDNIdent="SDN:P06::SQM2"  smallLabel="m^2/s^2" >Square metres per second squared</uomName>
+   <uomName SDNIdent="SDN:P06::KIPA"  smallLabel="kPa" >Kilopascals</uomName>
+   <uomName SDNIdent="SDN:P06::UCGG"  smallLabel="Mscgs/g" >Magnetic susceptibility cgs units per gram</uomName>
+   <uomName SDNIdent="SDN:P06::UCPS"  smallLabel="counts/s" >Counts per second</uomName>
+   <uomName SDNIdent="SDN:P06::UNPG"  smallLabel="#/g" >Number per gram</uomName>
+   <uomName SDNIdent="SDN:P06::UNPI"  smallLabel="ng" >Nanograms</uomName>
+   <uomName SDNIdent="SDN:P06::UCGS"  smallLabel="MScgs" >Magnetic susceptibility cgs units</uomName>
+   <uomName SDNIdent="SDN:P06::WSMM"  smallLabel="W.s/m^2" >Watt seconds per square metre</uomName>
+   <uomName SDNIdent="SDN:P06::MM3S"  smallLabel="mol/m^3/s" >Moles per cubic metre per second</uomName>
+   <uomName SDNIdent="SDN:P06::UCPL"  smallLabel="#/l" >Number per litre</uomName>
+   <uomName SDNIdent="SDN:P06::KGNM"  smallLabel="nmol/kg" >Nanomoles per kilogram</uomName>
+   <uomName SDNIdent="SDN:P06::UVLT"  smallLabel="V" >Volts</uomName>
+   <uomName SDNIdent="SDN:P06::UDBZ"  smallLabel="dBZ" >Decibels of Z</uomName>
+   <uomName SDNIdent="SDN:P06::UEQL"  smallLabel="uEquiv/l" >MicroEquivalents per litre</uomName>
+   <uomName SDNIdent="SDN:P06::UDTM"  smallLabel="Date+Time" >yyyymmddhh24miss.dd</uomName>
+   <uomName SDNIdent="SDN:P06::UMIN"  smallLabel="min" >Minutes</uomName>
+   <uomName SDNIdent="SDN:P06::SQKM"  smallLabel="km^2" >Square kilometres</uomName>
+   <uomName SDNIdent="SDN:P06::UGPG"  smallLabel="pg" >Picograms</uomName>
+   <uomName SDNIdent="SDN:P06::UGPL"  smallLabel="ug/l" >Micrograms per litre</uomName>
+   <uomName SDNIdent="SDN:P06::UGPM"  smallLabel="uGal/m" >MicroGals per metre</uomName>
+   <uomName SDNIdent="SDN:P06::UDBL"  smallLabel="dB" >Decibels</uomName>
+   <uomName SDNIdent="SDN:P06::MCUB"  smallLabel="m^3" >Cubic metres</uomName>
+   <uomName SDNIdent="SDN:P06::MCUG"  smallLabel="ug/m^3" >Micrograms per cubic metre</uomName>
+   <uomName SDNIdent="SDN:P06::UMIC"  smallLabel="um" >Micrometres (microns)</uomName>
+   <uomName SDNIdent="SDN:P06::UAQU"  smallLabel="A^2/Q" >Angstrom squared per quantum</uomName>
+   <uomName SDNIdent="SDN:P06::UMHZ"  smallLabel="m^2/Hz" >Square metres per Hertz</uomName>
+   <uomName SDNIdent="SDN:P06::UPHI"  smallLabel="phi units" >phi units</uomName>
+   <uomName SDNIdent="SDN:P06::UUGS"  smallLabel="ug/ml wet" >Micrograms per millilitre of wet sediment</uomName>
+   <uomName SDNIdent="SDN:P06::UPFM"  smallLabel="fmol/l" >Femtomoles per litre</uomName>
+   <uomName SDNIdent="SDN:P06::CMPS"  smallLabel="m^3/s" >Cubic metres per second</uomName>
+   <uomName SDNIdent="SDN:P06::WPKG"  smallLabel="W/kg" >Watts per kilogram</uomName>
+   <uomName SDNIdent="SDN:P06::UUKG"  smallLabel="ug/kg" >Micrograms per kilogram</uomName>
+   <uomName SDNIdent="SDN:P06::PAPS"  smallLabel="Pa/s" >Pascals per second</uomName>
+   <uomName SDNIdent="SDN:P06::UGDC"  smallLabel="mg/m^3/d" >Milligrams per cubic metre per day</uomName>
+   <uomName SDNIdent="SDN:P06::KGPM"  smallLabel="pmol/kg" >Picomoles per kilogram</uomName>
+   <uomName SDNIdent="SDN:P06::PAPM"  smallLabel="Pa/m" >Pascals per metre</uomName>
+   <uomName SDNIdent="SDN:P06::KGPS"  smallLabel="kg/s" >Kilogram per second</uomName>
+   <uomName SDNIdent="SDN:P06::USPC"  smallLabel="Unspec." >Not specified</uomName>
+   <uomName SDNIdent="SDN:P06::UPVT"  smallLabel="pmol/m^3/s" >Picomoles per cubic metre per second</uomName>
+   <uomName SDNIdent="SDN:P06::UPVW"  smallLabel="pmol/m/W/s" >Picomoles per metre per watt per second</uomName>
+   <uomName SDNIdent="SDN:P06::KLSQ"  smallLabel="K^2" >Kelvin squared</uomName>
+   <uomName SDNIdent="SDN:P06::PMSQ"  smallLabel="/m^2" >per square metre</uomName>
+   <uomName SDNIdent="SDN:P06::UGRM"  smallLabel="g" >Grams</uomName>
+   <uomName SDNIdent="SDN:P06::PMSR"  smallLabel="/m/sr" >per metre per steradian</uomName>
+   <uomName SDNIdent="SDN:P06::CCPM"  smallLabel="ml/min" >Millilitres per minute</uomName>
+   <uomName SDNIdent="SDN:P06::UMKG"  smallLabel="mg/kg" >Milligrams per kilogram</uomName>
+   <uomName SDNIdent="SDN:P06::UCST"  smallLabel="cSt" >Centistokes</uomName>
+   <uomName SDNIdent="SDN:P06::UCSS"  smallLabel="degC^2/s" >Degrees Celsius squared per second</uomName>
+   <uomName SDNIdent="SDN:P06::PMSC"  smallLabel="/ms" >per millisecond</uomName>
+   <uomName SDNIdent="SDN:P06::NSQD"  smallLabel="nmol/m^2/d" >Nanomoles per square metre per day</uomName>
+   <uomName SDNIdent="SDN:P06::UGDX"  smallLabel="mg/m^2/d" >Milligrams per square metre per day</uomName>
+   <uomName SDNIdent="SDN:P06::UYKA"  smallLabel="kyr" >Kiloyears before present</uomName>
+   <uomName SDNIdent="SDN:P06::UTBB"  smallLabel="s" >Seconds</uomName>
+   <uomName SDNIdent="SDN:P06::UMLV"  smallLabel="ppmv" >Parts per million by volume</uomName>
+   <uomName SDNIdent="SDN:P06::UTAA"  smallLabel="d" >Days</uomName>
+   <uomName SDNIdent="SDN:P06::MPM3"  smallLabel="ml/m^3" >Millilitres per cubic metre</uomName>
+   <uomName SDNIdent="SDN:P06::UPMM"  smallLabel="#/m^3" >Number per cubic metre</uomName>
+   <uomName SDNIdent="SDN:P06::UPML"  smallLabel="pmol/l" >Picomoles per litre</uomName>
+   <uomName SDNIdent="SDN:P06::WMSS"  smallLabel="W/m^2/sr" >Watts per square metre per steradian</uomName>
+   <uomName SDNIdent="SDN:P06::UECA"  smallLabel="S/m" >Siemens per metre</uomName>
+   <uomName SDNIdent="SDN:P06::UCLC"  smallLabel="mgC/(uE/m^2/s)/mgChl/h" >Milligrams of carbon per (microEinstein per square metre per second) per milligram of chlorophyll per hour</uomName>
+   <uomName SDNIdent="SDN:P06::WMSW"  smallLabel="W/m^2/m^-1/sr" >Watts per square metre per inverse metre per steradian</uomName>
+   <uomName SDNIdent="SDN:P06::UUMV"  smallLabel="mV" >Millivolts</uomName>
+   <uomName SDNIdent="SDN:P06::UPMD"  smallLabel="pmol/m^2/d" >Picomoles per square metre per day</uomName>
+   <uomName SDNIdent="SDN:P06::JPKG"  smallLabel="J/kg" >Joules per kilogram</uomName>
+   <uomName SDNIdent="SDN:P06::UMMD"  smallLabel="umol/l/d" >Micromoles per litre per day</uomName>
+   <uomName SDNIdent="SDN:P06::UMMC"  smallLabel="mg/m^3" >Milligrams per cubic metre</uomName>
+   <uomName SDNIdent="SDN:P06::UPMH"  smallLabel="pmol/l/h" >Picomoles per litre per hour</uomName>
+   <uomName SDNIdent="SDN:P06::UNMD"  smallLabel="nmol/l/d" >Nanomoles per litre per day</uomName>
+   <uomName SDNIdent="SDN:P06::UMMH"  smallLabel="umol/l/h" >Micromoles per litre per hour</uomName>
+   <uomName SDNIdent="SDN:P06::MEQL"  smallLabel="mEquiv/l" >MilliEquivalents per litre</uomName>
+   <uomName SDNIdent="SDN:P06::MMPL"  smallLabel="mmol/l" >Millimoles per litre</uomName>
+   <uomName SDNIdent="SDN:P06::UNMH"  smallLabel="nmol/l/h" >Nanomoles per litre per hour</uomName>
+   <uomName SDNIdent="SDN:P06::UKMC"  smallLabel="kg/m^3" >Kilograms per cubic metre</uomName>
+   <uomName SDNIdent="SDN:P06::MMPH"  smallLabel="mm/h" >Millimetres per hour</uomName>
+   <uomName SDNIdent="SDN:P06::UPMA"  smallLabel="pmol/m^3" >Picomoles per cubic metre</uomName>
+   <uomName SDNIdent="SDN:P06::PASX"  smallLabel="Pa" >Pascals</uomName>
+   <uomName SDNIdent="SDN:P06::MMPD"  smallLabel="mm/d" >Millimetres per day</uomName>
+   <uomName SDNIdent="SDN:P06::UMMM"  smallLabel="mm/min" >Millimetres per minute</uomName>
+   <uomName SDNIdent="SDN:P06::UMMS"  smallLabel="mg/m^2" >Milligrams per square metre</uomName>
+   <uomName SDNIdent="SDN:P06::PASS"  smallLabel="Pa.s" >Pascal seconds</uomName>
+   <uomName SDNIdent="SDN:P06::UHOR"  smallLabel="h" >Hours</uomName>
+   <uomName SDNIdent="SDN:P06::UYMD"  smallLabel="yyyymmdd" >Gregorian date (yyyymmdd)</uomName>
+   <uomName SDNIdent="SDN:P06::UMKS"  smallLabel="10^-8m^3kg-1" >10^-8 * Cubic metres per kilogram</uomName>
+   <uomName SDNIdent="SDN:P06::PRSC"  smallLabel="/s" >per second</uomName>
+   <uomName SDNIdent="SDN:P06::MBYT"  smallLabel="MByte" >Megabytes</uomName>
+   <uomName SDNIdent="SDN:P06::UYMA"  smallLabel="Myr" >Millions of years before present</uomName>
+   <uomName SDNIdent="SDN:P06::M3PS"  smallLabel="/m^3/s" >per cubic metre per second</uomName>
+   <uomName SDNIdent="SDN:P06::PMPS"  smallLabel="/m/s" >per metre per second</uomName>
+   <uomName SDNIdent="SDN:P06::UGKG"  smallLabel="g/kg" >Grams per kilogram</uomName>
+   <uomName SDNIdent="SDN:P06::UCML"  smallLabel="#/ml" >Number per millilitre</uomName>
+   <uomName SDNIdent="SDN:P06::UFFU"  smallLabel="FFU" >Fluorescein Fluorescence Units</uomName>
+   <uomName SDNIdent="SDN:P06::UAAA"  smallLabel="deg" >Degrees</uomName>
+   <uomName SDNIdent="SDN:P06::NPKM"  smallLabel="#/km^2" >Number per square kilometre</uomName>
+   <uomName SDNIdent="SDN:P06::UCMS"  smallLabel="cm^2/s" >Square centimetres per second</uomName>
+   <uomName SDNIdent="SDN:P06::UMLL"  smallLabel="ml/l" >Millilitres per litre</uomName>
+   <uomName SDNIdent="SDN:P06::UATM"  smallLabel="uatm" >Microatmospheres</uomName>
+   <uomName SDNIdent="SDN:P06::MLM2"  smallLabel="mol/m^2" >Moles per square metre</uomName>
+   <uomName SDNIdent="SDN:P06::MLM3"  smallLabel="mol/m^3" >Moles per cubic metre</uomName>
+   <uomName SDNIdent="SDN:P06::MSMD"  smallLabel="ml/m^2/d" >Millilitres per square metre per day</uomName>
+   <uomName SDNIdent="SDN:P06::UMNX"  smallLabel="/m/nm" >per metre per nanometre</uomName>
+   <uomName SDNIdent="SDN:P06::PCUM"  smallLabel="/m^3" >per cubic metre</uomName>
+   <uomName SDNIdent="SDN:P06::WM2M"  smallLabel="W/m^2/m" >Watts per square metre per metre</uomName>
+   <uomName SDNIdent="SDN:P06::UXMM"  smallLabel="mm" >Millimetres</uomName>
+   <uomName SDNIdent="SDN:P06::UCNL"  smallLabel="#/nl" >Number per nanolitre</uomName>
+   <uomName SDNIdent="SDN:P06::UPKA"  smallLabel="K" >Degrees Kelvin</uomName>
+   <uomName SDNIdent="SDN:P06::M3SR"  smallLabel="mol/m^2/s/sr" >Moles per square metre per second per steradian</uomName>
+   <uomName SDNIdent="SDN:P06::WM2S"  smallLabel="W/m^2/m/sr" >Watts per square metre per metre per steradian</uomName>
+   <uomName SDNIdent="SDN:P06::WAPM"  smallLabel="W/m" >Watts per metre</uomName>
+   <uomName SDNIdent="SDN:P06::WAPK"  smallLabel="W/m/K" >Watts per metre per Kelvin</uomName>
+   <uomName SDNIdent="SDN:P06::ULKM"  smallLabel="km" >Kilometres</uomName>
+   <uomName SDNIdent="SDN:P06::M2SX"  smallLabel="m^2.s" >Square metre seconds</uomName>
+   <uomName SDNIdent="SDN:P06::UABB"  smallLabel="deg T" >Degrees True</uomName>
+   <uomName SDNIdent="SDN:P06::MRAD"  smallLabel="mRad/hr" >Millirads per hour</uomName>
+   <uomName SDNIdent="SDN:P06::ULKG"  smallLabel="l/kg" >Litres per kilogram</uomName>
+   <uomName SDNIdent="SDN:P06::M2SR"  smallLabel="mol/m^2/s/m/sr" >Moles per square metre per second per metre per steradian</uomName>
+   <uomName SDNIdent="SDN:P06::OHMM"  smallLabel="ohm.m" >Ohm metres</uomName>
+   <uomName SDNIdent="SDN:P06::M4S1"  smallLabel="m^4/s" >metres to the power four per second</uomName>
+   <uomName SDNIdent="SDN:P06::UWNS"  smallLabel="W/m^2/nm/sr" >Watts per square metre per nanometre per steradian</uomName>
+   <uomName SDNIdent="SDN:P06::UKNT"  smallLabel="Knots" >Knots (nautical miles per hour)</uomName>
+   <uomName SDNIdent="SDN:P06::THSC"  smallLabel="10^-3s" >thousandths of a second</uomName>
+   <uomName SDNIdent="SDN:P06::UWNM"  smallLabel="W/m^2/nm" >Watts per square metre per nanometre</uomName>
+   <uomName SDNIdent="SDN:P06::MLKG"  smallLabel="mol/kg" >Moles per kilogram</uomName>
+   <uomName SDNIdent="SDN:P06::UXNM"  smallLabel="nm" >Nanometres</uomName>
+   <uomName SDNIdent="SDN:P06::KSXX"  smallLabel="K.s" >Kelvin second</uomName>
+   <uomName SDNIdent="SDN:P06::ULIT"  smallLabel="l" >Litres</uomName>
+   <uomName SDNIdent="SDN:P06::UPAA"  smallLabel="degC" >Degrees Celsius</uomName>
+   <uomName SDNIdent="SDN:P06::PSTR"  smallLabel="/sr" >per steradian</uomName>
+   <uomName SDNIdent="SDN:P06::M2S2"  smallLabel="/m^2/s" >per square metre per second</uomName>
+   <uomName SDNIdent="SDN:P06::UMNS"  smallLabel="/m/nm/sr" >per metre per nanometre per steradian</uomName>
+   <uomName SDNIdent="SDN:P06::UUML"  smallLabel="ul/l" >Microlitres per litre</uomName>
+   <uomName SDNIdent="SDN:P06::M2RD"  smallLabel="m2.s/rad" >Square metre seconds per radian</uomName>
+   <uomName SDNIdent="SDN:P06::UBLV"  smallLabel="ppbv" >Parts per billion by volume</uomName>
+   <uomName SDNIdent="SDN:P06::UM2D"  smallLabel="mg/m^2/inc" >Milligrams per square metre per incubation duration</uomName>
+   <uomName SDNIdent="SDN:P06::UNIM"  smallLabel="ng/ind/min" >Nanograms per individual per minute</uomName>
+   <uomName SDNIdent="SDN:P06::KPMT"  smallLabel="K/m" >Kelvin per metre</uomName>
+   <uomName SDNIdent="SDN:P06::JMSQ"  smallLabel="J/m^2" >Joules per square metre</uomName>
+   <uomName SDNIdent="SDN:P06::URAD"  smallLabel="rad" >Radians</uomName>
+   <uomName SDNIdent="SDN:P06::USIS"  smallLabel="MSSI" >Magnetic susceptibility SI units</uomName>
+   <uomName SDNIdent="SDN:P06::UNID"  smallLabel="ng/d" >Nanograms per day</uomName>
+   <uomName SDNIdent="SDN:P06::UPPE"  smallLabel="pptt" >Parts per ten thousand</uomName>
+   <uomName SDNIdent="SDN:P06::UMPE"  smallLabel="mol/E" >Moles per Einstein</uomName>
+   <uomName SDNIdent="SDN:P06::UPPM"  smallLabel="ppm" >Parts per million</uomName>
+   <uomName SDNIdent="SDN:P06::UPPT"  smallLabel="ppt" >Parts per thousand</uomName>
+   <uomName SDNIdent="SDN:P06::UVCC"  smallLabel="mm/s" >Millimetres per second</uomName>
+   <uomName SDNIdent="SDN:P06::ULPM"  smallLabel="l/min" >Litres per minute</uomName>
+   <uomName SDNIdent="SDN:P06::MLPS"  smallLabel="mol/s" >Moles per second</uomName>
+   <uomName SDNIdent="SDN:P06::ULAA"  smallLabel="m" >Metres</uomName>
+   <uomName SDNIdent="SDN:P06::MOLE"  smallLabel="mol" >Moles</uomName>
+   <uomName SDNIdent="SDN:P06::UPOX"  smallLabel="umol/l" >Micromoles per litre</uomName>
+   <uomName SDNIdent="SDN:P06::UMAA"  smallLabel="nT" >Nanoteslas</uomName>
+   <uomName SDNIdent="SDN:P06::UOHM"  smallLabel="ohm" >Ohms</uomName>
+   <uomName SDNIdent="SDN:P06::UMPM"  smallLabel="umol/mol" >Micromoles per mole</uomName>
+   <uomName SDNIdent="SDN:P06::UPPB"  smallLabel="ppb" >Parts per billion</uomName>
+   <uomName SDNIdent="SDN:P06::UYBP"  smallLabel="BP" >Years before present</uomName>
+   <uomName SDNIdent="SDN:P06::KMTS"  smallLabel="K.m/s" >Kelvin metres per second</uomName>
+   <uomName SDNIdent="SDN:P06::UNVH"  smallLabel="um^3/ind/h" >Cubic microns per individual per hour</uomName>
+   <uomName SDNIdent="SDN:P06::UMSG"  smallLabel="m^2/g dry" >Square metres per gram of dry sediment</uomName>
+   <uomName SDNIdent="SDN:P06::BYTE"  smallLabel="Bytes" >Bytes</uomName>
+   <uomName SDNIdent="SDN:P06::UGLH"  smallLabel="mg/m^3/h" >Milligrams per cubic metre per hour</uomName>
+   <uomName SDNIdent="SDN:P06::KGXX"  smallLabel="kg" >Kilograms</uomName>
+   <uomName SDNIdent="SDN:P06::UMSC"  smallLabel="ms" >Milliseconds</uomName>
+   <uomName SDNIdent="SDN:P06::KMTX"  smallLabel="K.m" >Kelvin metres</uomName>
+   <uomName SDNIdent="SDN:P06::UPOP"  smallLabel="%/m" >Percent per metre</uomName>
+   <uomName SDNIdent="SDN:P06::UVBB"  smallLabel="cm/s" >Centimetres per second</uomName>
+   <uomName SDNIdent="SDN:P06::UUBQ"  smallLabel="uBq/l" >Microbequerels per litre</uomName>
+   <uomName SDNIdent="SDN:P06::UMAM"  smallLabel="mA" >Milliamps</uomName>
+   <uomName SDNIdent="SDN:P06::UNGL"  smallLabel="ng/l" >Nanograms per litre</uomName>
+   <uomName SDNIdent="SDN:P06::WATT"  smallLabel="W" >Watts</uomName>
+   <uomName SDNIdent="SDN:P06::UGM3"  smallLabel="ug/m^3/h" >Micrograms per cubic metre per hour</uomName>
+   <uomName SDNIdent="SDN:P06::UYBC"  smallLabel="BC" >Gregorian calendar years before Christ</uomName>
+   <uomName SDNIdent="SDN:P06::UUPH"  smallLabel="pH units" >pH units</uomName>
+   <uomName SDNIdent="SDN:P06::UMSQ"  smallLabel="m^2" >Square metres</uomName>
+   <uomName SDNIdent="SDN:P06::PMLD"  smallLabel="pmol/l/d" >picomoles/litre/day</uomName>
+   <uomName SDNIdent="SDN:P06::KMSS"  smallLabel="K.m^2/kg/s" >Kelvin square metres per kilogram per second</uomName>
+   <uomName SDNIdent="SDN:P06::UHMS"  smallLabel="hh24miss" >Hours Minutes Seconds</uomName>
+   <uomName SDNIdent="SDN:P06::UGMC"  smallLabel="g/m^3" >Grams per cubic metre</uomName>
+   <uomName SDNIdent="SDN:P06::UCKA"  smallLabel="cm/kyr" >Centimetres per thousand years</uomName>
+   <uomName SDNIdent="SDN:P06::TISO"  smallLabel="ISO8601" >ISO8601</uomName>
+   <uomName SDNIdent="SDN:P06::UVAA"  smallLabel="m/s" >Metres per second</uomName>
+   <uomName SDNIdent="SDN:P06::UPNM"  smallLabel="nmol/l" >Nanomoles per litre</uomName>
+   <uomName SDNIdent="SDN:P06::UMBQ"  smallLabel="mBq/l" >Millibequerels per litre</uomName>
+   <uomName SDNIdent="SDN:P06::UYRS"  smallLabel="yr" >Years</uomName>
+   <uomName SDNIdent="SDN:P06::UVAY"  smallLabel="#/cm^2/ka" >Number per square centimetre per thousand years</uomName>
+   <uomName SDNIdent="SDN:P06::KMDY"  smallLabel="km/d" >Kilometres per day</uomName>
+   <uomName SDNIdent="SDN:P06::UGMS"  smallLabel="g/m^2" >Grams per square metre</uomName>
+   <uomName SDNIdent="SDN:P06::UYAD"  smallLabel="AD" >Gregorian calendar years anno Domini</uomName>
+   <uomName SDNIdent="SDN:P06::UMCH"  smallLabel="ml/ind/h" >Millilitres cleared per individual per hour</uomName>
+   <uomName SDNIdent="SDN:P06::UPMS"  smallLabel="#/m^2" >Number per square metre</uomName>
+   <uomName SDNIdent="SDN:P06::MMOM"  smallLabel="mmol/mol" >Millimoles per mole</uomName>
+</vocabulary>

@@ -1,0 +1,773 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapping>
+   <vocabulary list="SDN:C19:14:"  version="14"  date="2013-04-23T01:00:04.000"  title="SeaVoX salt and fresh water body gazetteer"  />
+   <mapped>
+      <vocabulary list="SDN:C16:9:"  version="9"  date="2012-11-07T02:00:06.000"  title="SeaDataNet sea areas"  />
+   </mapped>
+   <match>
+      <element ekey="SDN:C16:9:28Bg"  elabel="Adriatic Sea (Mediterranean Sea)"   />
+      <exact>
+         <element ekey="SDN:C19:9:3_1_2_1"  elabel="Adriatic Sea"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:28Bh"  elabel="Aegean Sea (The Archipelago) (Mediterranean Sea)"   />
+      <exact>
+         <element ekey="SDN:C19:9:3_1_2_4"  elabel="Aegean Sea"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:28Ab"  elabel="Alboran Sea (Mediterranean Sea)"   />
+      <exact>
+         <element ekey="SDN:C19:9:3_1_1_2"  elabel="Alboran Sea"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:44"  elabel="Andaman or Burma Sea"   />
+      <exact>
+         <element ekey="SDN:C19:9:5_14"  elabel="Andaman Sea"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:39"  elabel="Arabian Sea"   />
+      <exact>
+         <element ekey="SDN:C19:9:5_9"  elabel="Arabian Sea"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:48h"  elabel="Arafura Sea (East Indian Archipelago)"   />
+      <exact>
+         <element ekey="SDN:C19:9:5_16"  elabel="Arafura Sea"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:ARA"  elabel="Aral Sea"   />
+      <exact>
+         <element ekey="SDN:C19:9:SVX00003"  elabel="Aral Sea"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:17"  elabel="Arctic Ocean"   />
+      <exact>
+         <element ekey="SDN:C19:9:9"  elabel="Arctic Ocean"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:17a"  elabel="Arctic Ocean - Lincoln Sea"   />
+      <exact>
+         <element ekey="SDN:C19:9:9_13"  elabel="Lincoln Sea"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:200"  elabel="Atlantic Ocean"   />
+      <exact>
+         <element ekey="SDN:C19:9:SVX00005"  elabel="Atlantic Ocean"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:28Ac"  elabel="Balearic (Iberian) Sea (Mediterranean Sea)"   />
+      <exact>
+         <element ekey="SDN:C19:9:3_1_1_3"  elabel="Balearic Sea"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:48l"  elabel="Bali Sea (East Indian Archipelago)"   />
+      <exact>
+         <element ekey="SDN:C19:9:6_10"  elabel="Bali Sea"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:01"  elabel="Baltic Sea"   />
+      <exact>
+         <element ekey="SDN:C19:9:2"  elabel="Baltic Sea"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:48g"  elabel="Banda Sea (East Indian Archipelago)"   />
+      <exact>
+         <element ekey="SDN:C19:9:6_15"  elabel="Banda Sea"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:07"  elabel="Barents Sea"   />
+      <exact>
+         <element ekey="SDN:C19:9:9_4"  elabel="Barents Sea"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:62a"  elabel="Bass Strait (Great Australian Bight)"   />
+      <exact>
+         <element ekey="SDN:C19:9:8_4_1"  elabel="Bass Strait"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:43"  elabel="Bay of Bengal"   />
+      <exact>
+         <element ekey="SDN:C19:9:5_13"  elabel="Bay of Bengal"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:22"  elabel="Bay of Biscay"   />
+      <exact>
+         <element ekey="SDN:C19:9:1_8"  elabel="Bay of Biscay"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:25"  elabel="Bay of Fundy"   />
+      <exact>
+         <element ekey="SDN:C19:9:1_13"  elabel="Bay of Fundy"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:13"  elabel="Beaufort Sea"   />
+      <exact>
+         <element ekey="SDN:C19:9:9_15"  elabel="Beaufort Sea"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:55"  elabel="Bering Sea"   />
+      <exact>
+         <element ekey="SDN:C19:9:7_8"  elabel="Bering Sea"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:66"  elabel="Bismarck Sea"   />
+      <exact>
+         <element ekey="SDN:C19:9:8_1"  elabel="Bismarck Sea"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:30"  elabel="Black Sea"   />
+      <exact>
+         <element ekey="SDN:C19:9:3_3"  elabel="Black Sea"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:20"  elabel="Bristol Channel"   />
+      <exact>
+         <element ekey="SDN:C19:9:1_5"  elabel="Bristol Channel"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:27"  elabel="Caribbean Sea"   />
+      <exact>
+         <element ekey="SDN:C19:9:1_10"  elabel="Caribbean Sea"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:CAS"  elabel="Caspian Sea"   />
+      <exact>
+         <element ekey="SDN:C19:9:SVX00007"  elabel="Caspian Sea"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:48b"  elabel="Celebes Sea (East Indian Archipelago)"   />
+      <exact>
+         <element ekey="SDN:C19:9:6_22"  elabel="Celebes Sea"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:21a"  elabel="Celtic Sea"   />
+      <exact>
+         <element ekey="SDN:C19:9:1_6"  elabel="Celtic Sea"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:48f"  elabel="Ceram Sea (East Indian Archipelago)"   />
+      <exact>
+         <element ekey="SDN:C19:9:6_17"  elabel="Ceram Sea"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:12"  elabel="Chukchi Sea"   />
+      <exact>
+         <element ekey="SDN:C19:9:9_16"  elabel="Chukchi Sea"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:59"  elabel="Coastal Waters of SE Alaska and British Columbia"   />
+      <exact>
+         <element ekey="SDN:C19:9:7_11"  elabel="Coastal Waters of Southeast Alaska and British Columbia"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:64"  elabel="Coral Sea"   />
+      <exact>
+         <element ekey="SDN:C19:9:8_3"  elabel="Coral Sea"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:15"  elabel="Davis Strait"   />
+      <exact>
+         <element ekey="SDN:C19:9:9_9"  elabel="Davis Strait"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:48"  elabel="East Indian Archipelago (Indonesia)"   />
+      <exact>
+         <element ekey="SDN:C19:9:6"  elabel="South China and Eastern Archipelagic Seas"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:11"  elabel="East Siberian Sea"   />
+      <exact>
+         <element ekey="SDN:C19:9:9_1"  elabel="East Siberian Sea"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:50"  elabel="Eastern China Sea (Tung Hai)"   />
+      <exact>
+         <element ekey="SDN:C19:9:7_3"  elabel="East China Sea"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:ESC"  elabel="Eastern Scheldt"   />
+      <exact>
+         <element ekey="SDN:C19:9:NSL02"  elabel="Eastern Scheldt"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:21"  elabel="English Channel"   />
+      <exact>
+         <element ekey="SDN:C19:9:1_7"  elabel="English Channel"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:48j"  elabel="Flores Sea (East Indian Archipelago)"   />
+      <exact>
+         <element ekey="SDN:C19:9:6_11"  elabel="Flores Sea"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:FRM"  elabel="Fram Strait"   />
+      <exact>
+         <element ekey="SDN:C19:9:FRAM"  elabel="Fram Strait"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:62"  elabel="Great Australian Bight"   />
+      <exact>
+         <element ekey="SDN:C19:9:5_17"  elabel="Great Australian Bight"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:05"  elabel="Greenland Sea"   />
+      <exact>
+         <element ekey="SDN:C19:9:9_6"  elabel="Greenland Sea"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:38"  elabel="Gulf of Aden"   />
+      <exact>
+         <element ekey="SDN:C19:9:5_5"  elabel="Gulf of Aden"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:58"  elabel="Gulf of Alaska"   />
+      <exact>
+         <element ekey="SDN:C19:9:7_10"  elabel="Gulf of Alaska"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:36"  elabel="Gulf of Aqaba"   />
+      <exact>
+         <element ekey="SDN:C19:9:5_3"  elabel="Gulf of Aqaba"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:48k"  elabel="Gulf of Boni (East Indian Archipelago)"   />
+      <exact>
+         <element ekey="SDN:C19:9:6_16"  elabel="Teluk Bone"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:01a"  elabel="Gulf of Bothnia (Baltic Sea)"   />
+      <exact>
+         <element ekey="SDN:C19:9:2_2"  elabel="Gulf of Bothnia"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:60"  elabel="Gulf of California"   />
+      <exact>
+         <element ekey="SDN:C19:9:7_12"  elabel="Gulf of California"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:01b"  elabel="Gulf of Finland (Baltic Sea)"   />
+      <exact>
+         <element ekey="SDN:C19:9:2_3"  elabel="Gulf of Finland"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:34"  elabel="Gulf of Guinea"   />
+      <exact>
+         <element ekey="SDN:C19:9:1_9"  elabel="Gulf of Guinea"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:41"  elabel="Gulf of Iran (Persian Gulf)"   />
+      <exact>
+         <element ekey="SDN:C19:9:5_6"  elabel="Persian Gulf"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:26"  elabel="Gulf of Mexico"   />
+      <exact>
+         <element ekey="SDN:C19:9:1_11"  elabel="Gulf of Mexico"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:40"  elabel="Gulf of Oman"   />
+      <exact>
+         <element ekey="SDN:C19:9:5_8"  elabel="Gulf of Oman"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:01c"  elabel="Gulf of Riga (Baltic Sea)"   />
+      <exact>
+         <element ekey="SDN:C19:9:2_5"  elabel="Gulf of Riga"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:24"  elabel="Gulf of St. Lawrence"   />
+      <exact>
+         <element ekey="SDN:C19:9:1_14"  elabel="Gulf of St. Lawrence"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:35"  elabel="Gulf of Suez"   />
+      <exact>
+         <element ekey="SDN:C19:9:5_2"  elabel="Gulf of Suez"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:47"  elabel="Gulf of Thailand (Siam)"   />
+      <exact>
+         <element ekey="SDN:C19:9:6_3"  elabel="Gulf of Thailand"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:48d"  elabel="Gulf of Tomini (East Indian Archipelago)"   />
+      <exact>
+         <element ekey="SDN:C19:9:6_21"  elabel="Teluk Tomini"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:48e"  elabel="Halmahera Sea (East Indian Archipelago)"   />
+      <exact>
+         <element ekey="SDN:C19:9:6_19"  elabel="Halmahera Sea"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:16"  elabel="Hudson Bay"   />
+      <exact>
+         <element ekey="SDN:C19:9:9_11"  elabel="Hudson Bay"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:16a"  elabel="Hudson Strait"   />
+      <exact>
+         <element ekey="SDN:C19:9:9_10"  elabel="Hudson Strait"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:IJM"  elabel="IJsselmeer"   />
+      <exact>
+         <element ekey="SDN:C19:9:IJM"  elabel="IJsselmeer"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:ICS"  elabel="Iceland Sea"   />
+      <exact>
+         <element ekey="SDN:C19:9:9_8"  elabel="Iceland Sea"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:45"  elabel="Indian Ocean"   />
+      <exact>
+         <element ekey="SDN:C19:9:5"  elabel="Indian Ocean"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:18"  elabel="Inner Seas off the West Coast of Scotland"   />
+      <exact>
+         <element ekey="SDN:C19:9:1_3"  elabel="Inner Seas off the West Coast of Scotland"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:28Bf"  elabel="Ionian Sea (Mediterranean Sea)"   />
+      <exact>
+         <element ekey="SDN:C19:9:3_1_2_3"  elabel="Ionian Sea"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:19"  elabel="Irish Sea and St. George&apos;s Channel"   />
+      <exact>
+         <element ekey="SDN:C19:9:1_4"  elabel="Irish Sea"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:IRM"  elabel="Irminger Sea"   />
+      <exact>
+         <element ekey="SDN:C19:9:IRM"  elabel="Irminger Sea"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:52"  elabel="Japan Sea"   />
+      <exact>
+         <element ekey="SDN:C19:9:7_6"  elabel="Japan Sea"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:48n"  elabel="Java Sea (East Indian Archipelago)"   />
+      <exact>
+         <element ekey="SDN:C19:9:6_8"  elabel="Jawa Sea"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:09"  elabel="Kara Sea"   />
+      <exact>
+         <element ekey="SDN:C19:9:9_3"  elabel="Kara Sea"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:02"  elabel="Kattegat, Sound and Belts"   />
+      <narrow>
+         <element ekey="SDN:C19:9:2_9"  elabel="Kattegat"   />
+         <element ekey="SDN:C19:9:2_8"  elabel="Lillebaelt"   />
+         <element ekey="SDN:C19:9:2_7"  elabel="Storebaelt"   />
+         <element ekey="SDN:C19:9:2_6"  elabel="The Sound"   />
+      </narrow>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:15a"  elabel="Labrador Sea (Davis Strait)"   />
+      <exact>
+         <element ekey="SDN:C19:9:1_15"  elabel="Labrador Sea"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:42"  elabel="Laccadive Sea"   />
+      <exact>
+         <element ekey="SDN:C19:9:5_10"  elabel="Lakshadweep Sea"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:10"  elabel="Laptev Sea (or Nordenskjold Sea)"   />
+      <exact>
+         <element ekey="SDN:C19:9:9_2"  elabel="Laptev Sea"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:28Ad"  elabel="Ligurian Sea (Mediterranean Sea)"   />
+      <exact>
+         <element ekey="SDN:C19:9:3_1_1_4"  elabel="Ligurian Sea"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:48m"  elabel="Makassar Strait (East Indian Archipelago)"   />
+      <exact>
+         <element ekey="SDN:C19:9:6_9"  elabel="Selat Makasar"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:46a"  elabel="Malacca Strait"   />
+      <exact>
+         <element ekey="SDN:C19:9:6_5"  elabel="Malacca Strait"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:46"  elabel="Malacca and Singapore Straits"   />
+      <narrow>
+         <element ekey="SDN:C19:9:6_6"  elabel="Singapore Strait"   />
+         <element ekey="SDN:C19:9:6_5"  elabel="Malacca Strait"   />
+      </narrow>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:MKM"  elabel="Markermeer"   />
+      <exact>
+         <element ekey="SDN:C19:9:MKM"  elabel="Markermeer"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:28"  elabel="Mediterranean Sea"   />
+      <exact>
+         <element ekey="SDN:C19:9:3_1"  elabel="Mediterranean Sea"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:28B"  elabel="Mediterranean Sea - Eastern basin"   />
+      <exact>
+         <element ekey="SDN:C19:9:3_1_2"  elabel="Mediterranean Sea, Eastern Basin"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:28A"  elabel="Mediterranean Sea - Western basin"   />
+      <exact>
+         <element ekey="SDN:C19:9:3_1_1"  elabel="Mediterranean Sea, Western Basin"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:48c"  elabel="Molukka Sea (East Indian Archipelago)"   />
+      <exact>
+         <element ekey="SDN:C19:9:6_20"  elabel="Molucca Sea"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:45a"  elabel="Mozambique Channel (Indian Ocean)"   />
+      <exact>
+         <element ekey="SDN:C19:9:5_1"  elabel="Mozambique Channel"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:23"  elabel="North Atlantic Ocean"   />
+      <exact>
+         <element ekey="SDN:C19:9:1"  elabel="North Atlantic Ocean"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:23a"  elabel="North East Atlantic Ocean (limit 40W)"   />
+      <exact>
+         <element ekey="SDN:C19:9:SVX00015"  elabel="Northeast Atlantic Ocean (40W)"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:57a"  elabel="North East Pacific Ocean (limit 180W)"   />
+      <exact>
+         <element ekey="SDN:C19:9:SVX00016"  elabel="Northeast Pacific Ocean (180W)"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:57"  elabel="North Pacific Ocean"   />
+      <exact>
+         <element ekey="SDN:C19:9:7"  elabel="North Pacific Ocean"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:04"  elabel="North Sea"   />
+      <exact>
+         <element ekey="SDN:C19:9:1_2"  elabel="North Sea"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:23b"  elabel="North West Atlantic Ocean (limit 40W)"   />
+      <exact>
+         <element ekey="SDN:C19:9:SVX00017"  elabel="Northwest Atlantic Ocean (40W)"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:57b"  elabel="North West Pacific Ocean (limit 180W)"   />
+      <exact>
+         <element ekey="SDN:C19:9:SVX00018"  elabel="Northwest Pacific Ocean (180W)"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:06"  elabel="Norwegian Sea"   />
+      <exact>
+         <element ekey="SDN:C19:9:9_7"  elabel="Norwegian Sea"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:500"  elabel="Pacific Ocean"   />
+      <exact>
+         <element ekey="SDN:C19:9:SVX00019"  elabel="Pacific Ocean"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:56"  elabel="Philippine Sea"   />
+      <exact>
+         <element ekey="SDN:C19:9:7_1"  elabel="Philippine Sea"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:37"  elabel="Red Sea"   />
+      <exact>
+         <element ekey="SDN:C19:9:5_4"  elabel="Red Sea"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:33"  elabel="Rio de La Plata"   />
+      <exact>
+         <element ekey="SDN:C19:9:4_1"  elabel="Rio de la Plata"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:48o"  elabel="Savu Sea (East Indian Archipelago)"   />
+      <exact>
+         <element ekey="SDN:C19:9:6_13"  elabel="Sawu Sea"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:31"  elabel="Sea of Azov"   />
+      <exact>
+         <element ekey="SDN:C19:9:3_4"  elabel="Sea of Azov"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:29"  elabel="Sea of Marmara"   />
+      <exact>
+         <element ekey="SDN:C19:9:3_2"  elabel="Sea of Marmara"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:54"  elabel="Sea of Okhotsk"   />
+      <exact>
+         <element ekey="SDN:C19:9:7_7"  elabel="Sea of Okhotsk"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:53"  elabel="Seto Naikai or Inland Sea"   />
+      <exact>
+         <element ekey="SDN:C19:9:7_5"  elabel="Seto Naikai"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:46b"  elabel="Singapore Strait"   />
+      <exact>
+         <element ekey="SDN:C19:9:6_6"  elabel="Singapore Strait"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:03"  elabel="Skagerrak"   />
+      <exact>
+         <element ekey="SDN:C19:9:1_1"  elabel="Skagerrak"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:65"  elabel="Solomon Sea"   />
+      <exact>
+         <element ekey="SDN:C19:9:8_2"  elabel="Solomon Sea"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:32"  elabel="South Atlantic Ocean"   />
+      <exact>
+         <element ekey="SDN:C19:9:4"  elabel="South Atlantic Ocean"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:49"  elabel="South China Sea (Nan Hai)"   />
+      <exact>
+         <element ekey="SDN:C19:9:6_1"  elabel="South China Sea"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:32a"  elabel="South East Atlantic Ocean (limit 20W)"   />
+      <exact>
+         <element ekey="SDN:C19:9:SVX00021"  elabel="Southeast Atlantic Ocean (20W)"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:61a"  elabel="South East Pacific Ocean (limit 140W)"   />
+      <exact>
+         <element ekey="SDN:C19:9:SVX00022"  elabel="Southeast Pacific Ocean (140W)"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:61"  elabel="South Pacific Ocean"   />
+      <exact>
+         <element ekey="SDN:C19:9:8"  elabel="South Pacific Ocean"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:32b"  elabel="South West Atlantic Ocean (limit 20W)"   />
+      <exact>
+         <element ekey="SDN:C19:9:SVX00023"  elabel="Southwest Atlantic Ocean (20W)"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:61b"  elabel="South West Pacific Ocean (limit 140W)"   />
+      <exact>
+         <element ekey="SDN:C19:9:SVX00024"  elabel="Southwest Pacific Ocean (140W)"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:SOC"  elabel="Southern Ocean"   />
+      <exact>
+         <element ekey="SDN:C19:9:10"  elabel="Southern Ocean"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:28Aa"  elabel="Strait of Gibraltar (Mediterranean Sea)"   />
+      <exact>
+         <element ekey="SDN:C19:9:3_1_1_1"  elabel="Strait of Gibraltar"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:28C"  elabel="Strait of Sicily"   />
+      <exact>
+         <element ekey="SDN:C19:9:3_1_2_2"  elabel="Strait of Sicily"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:48a"  elabel="Sulu Sea (East Indian Archipelago)"   />
+      <exact>
+         <element ekey="SDN:C19:9:6_23"  elabel="Sulu Sea"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:63"  elabel="Tasman Sea"   />
+      <exact>
+         <element ekey="SDN:C19:9:8_4_"  elabel="Tasman Sea"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:14"  elabel="The Northwestern Passages"   />
+      <exact>
+         <element ekey="SDN:C19:9:9_14"  elabel="Northwestern Passages"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:14a"  elabel="The Northwestern Passages - Baffin Bay"   />
+      <exact>
+         <element ekey="SDN:C19:9:9_12"  elabel="Baffin Bay"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:48i"  elabel="Timor Sea (East Indian Archipelago)"   />
+      <exact>
+         <element ekey="SDN:C19:9:5_15"  elabel="Timor Sea"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:28Ae"  elabel="Tyrrhenian Sea (Mediterranean Sea)"   />
+      <exact>
+         <element ekey="SDN:C19:9:3_1_1_5"  elabel="Tyrrhenian Sea"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:ZZ"  elabel="Unknown"   />
+      <exact>
+         <element ekey="SDN:C19:9:ZZ"  elabel="Unknown"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:WAS"  elabel="Wadden Sea"   />
+      <exact>
+         <element ekey="SDN:C19:9:NSL03"  elabel="Wadden Sea"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:WSC"  elabel="Western Scheldt"   />
+      <exact>
+         <element ekey="SDN:C19:9:NSL01"  elabel="Western Scheldt"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:08"  elabel="White Sea"   />
+      <exact>
+         <element ekey="SDN:C19:9:9_5"  elabel="White Sea"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:GLO"  elabel="Worldwide"   />
+      <exact>
+         <element ekey="SDN:C19:9:SVX00025"  elabel="World"   />
+      </exact>
+   </match>
+   <match>
+      <element ekey="SDN:C16:9:51"  elabel="Yellow Sea (Hwang Hai)"   />
+      <exact>
+         <element ekey="SDN:C19:9:7_4"  elabel="Yellow Sea"   />
+      </exact>
+   </match>
+</mapping>
