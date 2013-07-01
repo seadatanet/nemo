@@ -136,7 +136,7 @@ public class Nemo {
 			transformer.transform(xmlSource, result);
 		}
 		//FAE 16868
-		if (compareVersion(model.getVersion(), "1.5") <= 0) {
+		if (compareVersion(model.getVersion(), "1.5.1") == -1) {
 			String regionName = model.getCruiseModel().getRegionName();
 			String C19RegionName = CruiseModel.getTranscodeRegionName(regionName);
 			model.getCruiseModel().setRegionName(C19RegionName);
