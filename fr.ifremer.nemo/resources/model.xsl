@@ -23,7 +23,7 @@
     
         <!-- tag root -->
         <InputModel>
-          <xsl:attribute name="version">1.2.20</xsl:attribute>
+          <xsl:attribute name="version">1.5.1</xsl:attribute>
           <xsl:for-each select="InputModel/Media/*">
           
           

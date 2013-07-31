@@ -308,6 +308,9 @@ public class Messages {
 	// ACTIONS
 	public static String settings_typePlateForme;
 	public static String settings_accesDonnees;
+	public static String settings_odvVersion;
+	public static String settings_netcdfVersion;
+	public static String settings_medatlasVersion;
 	public static String error_updateSurvey_url;
 	public static String error_updateSurvey_distant;
 	public static String error_updateSurvey_service;

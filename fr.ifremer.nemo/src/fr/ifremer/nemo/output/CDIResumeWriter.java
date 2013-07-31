@@ -73,12 +73,12 @@ public class CDIResumeWriter {
 			writer.write("LOCAL_CDI_ID" + sep + "EDMO_AUTHOR" + sep
 					+ "AREA_TYPE" + sep + "DATASET_NAME" + sep + "DATASET_ID"
 					+ sep + "DATASET_REV_DATE" + sep + "EDMO_ORIGINATOR" + sep
-					+ "DATASET_ABS" + sep + "EDMO_CUSTODIAN" + sep + "PDV_CODE"
+					+ "DATASET_ABS" + sep + "EDMO_CUSTODIAN" + sep + "P01_CODE"
 					+ sep + "PLATFORM_TYPE" + sep + "DATASET_ACCESS" + sep
 					+ "CRUISE_NAME" + sep + "STATION_NAME" + sep
 					+ "STATION_LATITUDE" + sep + "STATION_LONGITUDE" + sep
 					+ "STATION_DATE" + sep + "EDMO_DISTRIBUTOR" + sep
-					+ "FORMAT" + sep + "DATA_SIZE" + sep + "DIST_WEBSITE" + sep
+					+ "FORMAT" + sep + "FORMAT_VERSION" + sep + "DATA_SIZE" + sep + "DIST_WEBSITE" + sep
 					+ "DIST_METHODE");
 
 			InputDomain iDomain = Nemo.getInstance().getDomain();
@@ -163,7 +163,7 @@ public class CDIResumeWriter {
 						// EDMO Custodian
 						writer.write(sep + config.getIdEdmoRespDonnees());
 
-						// PDV code: le code P021 du parametre (FAE 7308)
+						// P01 code: le code P021 du parametre (FAE 7308)
 						String pdvCode = "";
 						// si on est deja en P021, on met directement le code
 						// P021
@@ -223,7 +223,17 @@ public class CDIResumeWriter {
 						writer.write(sep + config.getIdEdmoDistDonnees());
 
 						// Format
-						writer.write(sep + formatConversion.toString());
+						writer.write(sep + formatConversion.getFormatName());
+
+						// Format Version
+						if (formatConversion == Conversion.ODV)
+							writer.write(sep + config.getODVFormatVersion());
+						else if (formatConversion == Conversion.MEDATLAS)
+							writer.write(sep + config.getMedatlasVersion());
+						else if (formatConversion == Conversion.NETCDF)
+							writer.write(sep + config.getNetCDFVersion());
+						else
+							writer.write(sep);
 
 						// data size
 						float datasize = outputFile.length() / 1024f / 1024f;

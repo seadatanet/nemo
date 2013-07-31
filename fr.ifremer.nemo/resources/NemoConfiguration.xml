@@ -13,6 +13,9 @@
   <idEdmoRespDonnees></idEdmoRespDonnees>
   <idEdmoDistDonnees></idEdmoDistDonnees>
   <cdiURL>http://www.sdn-taskmanager.org/</cdiURL>
+  <odvVersion>0.4</odvVersion>
+  <medatlasVersion>2.0</medatlasVersion>
+  <netCDFVersion>1.0</netCDFVersion>
   <cdiMethod>CDIMTH01</cdiMethod>
   <accesDonnees>LS</accesDonnees>
   <typePlateforme></typePlateforme>

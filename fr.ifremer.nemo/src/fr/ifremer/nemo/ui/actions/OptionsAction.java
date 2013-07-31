@@ -95,13 +95,16 @@ public class OptionsAction extends Action implements ISelectionListener,
 			labelIdEdmoRespCdi, labelUrlCdi, labelMethodeCdi,
 			labelCodeEdmoDonnees, labelIdEdmoRespDonnees,
 			labelIdEdmoDistDonnees, labelWSVocab, labelFichierMapping,
+			lblOdvFormatVersion, lblNetCDFFormatVersion,
+			lblMedatlasFormatVersion,
 			labelWSEdmo, lblTypePlateForme, lblAccesDonnees = null;
 
 	public static Button checkCDI, checkMapping, radDateISO, radDateJulian;
 
 	public static Text textAreaNemo, textAreaNautilus, textDossierModele,
 			textDossierCampagne, textUrlCdi, /*textVocabURL,*/
-			textFichierMapping,
+			textFichierMapping, textOdvFormatVersion, textNetCDFFormatVersion,
+			textMedatlasFormatVersion,
 			textWSEdmo = null;
 
 	public static Table tabFlagTable, tabFlag;
@@ -353,6 +356,12 @@ public class OptionsAction extends Action implements ISelectionListener,
 		case UNKNOWN:
 			break;
 		}
+
+		//FAE 16993
+		textOdvFormatVersion.setText(config.getODVFormatVersion());
+		textMedatlasFormatVersion.setText(config.getMedatlasVersion());
+		textNetCDFFormatVersion.setText(config.getNetCDFVersion());
+
 		afficheGrpODV();
 
 		// FAE 4431 Flag qualité par défault configurable
@@ -379,6 +388,12 @@ public class OptionsAction extends Action implements ISelectionListener,
 		comboTypePlateForme.setEnabled(status);
 		lblAccesDonnees.setEnabled(status);
 		comboAccesDonnees.setEnabled(status);
+		lblOdvFormatVersion.setEnabled(status);
+		textOdvFormatVersion.setEnabled(false);
+		lblNetCDFFormatVersion.setEnabled(status);
+		textNetCDFFormatVersion.setEnabled(false);
+		lblMedatlasFormatVersion.setEnabled(status);
+		textMedatlasFormatVersion.setEnabled(false);
 	}
 
 	protected void mappingCheckMask(Boolean enabled) {
@@ -848,6 +863,37 @@ public class OptionsAction extends Action implements ISelectionListener,
 		comboAccesDonnees.setFont(Utils.font08);
 		GridDataFactory.fillDefaults().grab(false, false).applyTo(
 				comboAccesDonnees);
+
+		//FAE 16993 FORMAT VERSION
+		//Version Format ODV
+		lblOdvFormatVersion = new Label(compo, SWT.NONE);
+		lblOdvFormatVersion.setFont(Utils.font08);
+		lblOdvFormatVersion.setText(Messages.settings_odvVersion);
+		lblOdvFormatVersion.pack();
+
+		textOdvFormatVersion = new Text(compo, SWT.BORDER);
+		textOdvFormatVersion.setFont(Utils.font08);
+		GridDataFactory.fillDefaults().grab(true, false).applyTo(textOdvFormatVersion);
+
+		//Version Format Medatlas
+		lblMedatlasFormatVersion = new Label(compo, SWT.NONE);
+		lblMedatlasFormatVersion.setFont(Utils.font08);
+		lblMedatlasFormatVersion.setText(Messages.settings_medatlasVersion);
+		lblMedatlasFormatVersion.pack();
+
+		textMedatlasFormatVersion = new Text(compo, SWT.BORDER);
+		textMedatlasFormatVersion.setFont(Utils.font08);
+		GridDataFactory.fillDefaults().grab(true, false).applyTo(textMedatlasFormatVersion);
+
+		//Version Format NetCDF
+		lblNetCDFFormatVersion = new Label(compo, SWT.NONE);
+		lblNetCDFFormatVersion.setFont(Utils.font08);
+		lblNetCDFFormatVersion.setText(Messages.settings_netcdfVersion);
+		lblNetCDFFormatVersion.pack();
+
+		textNetCDFFormatVersion = new Text(compo, SWT.BORDER);
+		textNetCDFFormatVersion.setFont(Utils.font08);
+		GridDataFactory.fillDefaults().grab(true, false).applyTo(textNetCDFFormatVersion);
 	}
 
 	/**
@@ -1588,6 +1634,13 @@ public class OptionsAction extends Action implements ISelectionListener,
 			messageCDI.append(checkMandatory(comboTypePlateForme.getText(),
 					Messages.settings_typePlateForme, Global.SEP));
 
+			messageCDI.append(checkMandatory(textMedatlasFormatVersion.getText(),
+					Messages.settings_medatlasVersion, Global.SEP));
+			messageCDI.append(checkMandatory(textOdvFormatVersion.getText(),
+					Messages.settings_odvVersion, Global.SEP));
+			messageCDI.append(checkMandatory(textNetCDFFormatVersion.getText(),
+					Messages.settings_netcdfVersion, Global.SEP));
+
 			if (messageCDI.length() > 0) {
 				messageCDI.insert(0, Messages.error_settings_cdi);
 				message.append(messageCDI);
@@ -1642,6 +1695,9 @@ public class OptionsAction extends Action implements ISelectionListener,
 		redLabel(comboIdEdmoRespDonnees.getText(), labelIdEdmoRespDonnees);
 		redLabel(comboIdEdmoDistDonnees.getText(), labelIdEdmoDistDonnees);
 		redLabel(textUrlCdi.getText(), labelUrlCdi);
+		redLabel(textOdvFormatVersion.getText(), lblOdvFormatVersion);
+		redLabel(textMedatlasFormatVersion.getText(), lblMedatlasFormatVersion);
+		redLabel(textNetCDFFormatVersion.getText(), lblNetCDFFormatVersion);
 		redLabel(comboMethodeCdi.getText(), labelMethodeCdi);
 		redLabel(comboTypePlateForme.getText(), lblTypePlateForme);
 		redLabel(textFichierMapping.getText(), labelFichierMapping);
@@ -1788,6 +1844,10 @@ public class OptionsAction extends Action implements ISelectionListener,
 				.getText()));
 		configuration.setTypePlateForme(fr.ifremer.nemo.util.Utils.extraitCode(comboTypePlateForme
 				.getText()));
+
+		configuration.setMedatlasVersion(textMedatlasFormatVersion.getText());
+		configuration.setOdvVersion(textOdvFormatVersion.getText());
+		configuration.setNetCDFVersion(textNetCDFFormatVersion.getText());
 
 		// MAPPING
 		configuration.setWriteMapping(checkMapping.getSelection());

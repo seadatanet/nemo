@@ -149,6 +149,11 @@ public class Intern extends NLS {
 	public static String DISTANCETOBOTTOM;
 
 	public static String TEXT;
+
+	public static String defaultODVFormatVersion;
+	public static String defaultNetCDFFormatVersion;
+	public static String defaultMedatlasFormatVersion;
+
 	static {
 		// initialize resource bundle
 		NLS.initializeMessages(BUNDLE_NAME, Intern.class);

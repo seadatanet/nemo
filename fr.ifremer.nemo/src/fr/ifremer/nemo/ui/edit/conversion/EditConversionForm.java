@@ -455,7 +455,13 @@ public class EditConversionForm extends EditForm {
 			File output =
 					new File(Nemo.getInstance().getDomain().getMedia()
 							.getOutputFileName());
+
 			String cheminComplet = output.getParentFile().getPath();
+			//FAE 17128
+			if (Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToNetCDFMonoStation()
+					|| Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToODVMonoStation()) {
+				cheminComplet = output.getAbsolutePath();
+			}
 
 			InputDialog inputPrefixDossier =
 					new InputDialog(Utils.getMainShell(),
