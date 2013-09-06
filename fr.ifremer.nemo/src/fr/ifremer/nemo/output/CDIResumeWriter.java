@@ -73,7 +73,7 @@ public class CDIResumeWriter {
 			writer.write("LOCAL_CDI_ID" + sep + "EDMO_AUTHOR" + sep
 					+ "AREA_TYPE" + sep + "DATASET_NAME" + sep + "DATASET_ID"
 					+ sep + "DATASET_REV_DATE" + sep + "EDMO_ORIGINATOR" + sep
-					+ "DATASET_ABS" + sep + "EDMO_CUSTODIAN" + sep + "P01_CODE"
+					+ "DATASET_ABS" + sep + "EDMO_CUSTODIAN" + sep + "P02_CODE"
 					+ sep + "PLATFORM_TYPE" + sep + "DATASET_ACCESS" + sep
 					+ "CRUISE_NAME" + sep + "STATION_NAME" + sep
 					+ "STATION_LATITUDE" + sep + "STATION_LONGITUDE" + sep
