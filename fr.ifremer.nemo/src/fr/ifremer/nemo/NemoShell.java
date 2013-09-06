@@ -269,7 +269,7 @@ public class NemoShell {
 					localCdiId =
 							sDomain.getLocalCdiId(cDomain, conv, st.getReference());
 
-					mapping = new Mapping(localCdiId, conv.toString());
+					mapping = new Mapping(localCdiId, conv.getFormatName());
 
 					String modus = Mapping.MODUS_MULTISTATIONS;
 

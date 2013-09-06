@@ -25,104 +25,107 @@ import fr.ifremer.nemo.util.Global.E_ProcessType;
 import fr.ifremer.nemo.util.Global.E_TypeConversion;
 import fr.ifremer.nemo.util.Messages;
 
-public class SWTProcess implements IRunnableWithProgress
-{
+public class SWTProcess implements IRunnableWithProgress {
 
-    public static ProgressNotification notifier;
+	public static ProgressNotification notifier;
 
-    private NemoWriter writer;
-    private Mapping mapping;
-    private final MappingTable MappingTable = new MappingTable();
+	private NemoWriter writer;
+	private Mapping mapping;
+	private final MappingTable MappingTable = new MappingTable();
 
-    @SuppressWarnings("unused")
-    public void run(IProgressMonitor monitor) throws InvocationTargetException,
-            InterruptedException
-    {
+	@SuppressWarnings("unused")
+	public void run(IProgressMonitor monitor) throws InvocationTargetException,
+			InterruptedException {
 
-        InputDomain iDomain = Nemo.getInstance().getDomain();
-        CruiseDomain cDomain = iDomain.getCruise();
-        StationDomain sDomain = iDomain.getStation();
-        
-        Configuration config = Nemo.getInstance().getConfig();
-        
-        Conversion formatConversion = Conversion.MEDATLAS;
-        
-        if (iDomain.getConversion().getCurrent() == E_TypeConversion.ODV_MONOSTATION 
-                || iDomain.getConversion().getCurrent() == E_TypeConversion.ODV_MULTISTATIONS)
-            formatConversion = Conversion.ODV;
-        
-        if (iDomain.getConversion().getCurrent() == E_TypeConversion.NETCDF_MONOSTATION 
-                || iDomain.getConversion().getCurrent() == E_TypeConversion.NETCDF_MULTISTATIONS)
-            formatConversion = Conversion.NETCDF;
+		InputDomain iDomain = Nemo.getInstance().getDomain();
+		CruiseDomain cDomain = iDomain.getCruise();
+		StationDomain sDomain = iDomain.getStation();
 
-        try
-        {
-            System.out.println("Conversion START at " + new Date()); //$NON-NLS-1$
-            monitor.beginTask(Messages.SWTProcess_1, IProgressMonitor.UNKNOWN);
+		Configuration config = Nemo.getInstance().getConfig();
 
-            if (!monitor.isCanceled()){
+		Conversion formatConversion = Conversion.MEDATLAS;
 
-                // Ecriture des fichiers
-                monitor.setTaskName(Messages.SWTProcess_4);
-                writer = NemoWriterFactory.createWriter(formatConversion);
-                writer.write(notifier);
-                
-                // mapping
-                if (config.isWriteMapping()){  
-                    monitor.setTaskName("enregistrement du mapping");
-                    for (String outputPath : iDomain.getMedia().getOutputFiles().keySet()){
-                        File outputFile = new File(outputPath);
-                        for (String stRef : iDomain.getMedia().getOutputFiles().get(outputPath)){
-                            Station st = sDomain.getStationByRef(stRef);
-                            String localCdiId = sDomain.getLocalCdiId(cDomain, formatConversion, st.getReference());
-                            mapping = new Mapping(localCdiId, formatConversion.toString());
-                            
-                            String modus = Mapping.MODUS_MULTISTATIONS;
+		if (iDomain.getConversion().getCurrent() == E_TypeConversion.ODV_MONOSTATION
+				|| iDomain.getConversion().getCurrent() == E_TypeConversion.ODV_MULTISTATIONS)
+			formatConversion = Conversion.ODV;
 
-                            StringBuffer filename = new StringBuffer();
-                            filename.append(iDomain.getConversion().getNomMappingHorsPrefix());
-                            
-                            if (iDomain.getMedia().getModel().getProcessType() == E_ProcessType.CRUISE_DIR) {
-                                if (!filename.toString().equals(Global.EMPTY_STRING))
-                                    filename.append(File.separator);
-                                if (iDomain.getConversion().getCurrent() == E_TypeConversion.ODV_MONOSTATION 
-                                        || iDomain.getConversion().getCurrent() == E_TypeConversion.NETCDF_MONOSTATION) {
-                                    filename.append(outputFile.getParentFile().getName());
-                                    filename.append(File.separator);
-                                    modus = Mapping.MODUS_MONOSTATION;
-                                }
-                                filename.append(outputFile.getName());
-                            } else {
-                                if (iDomain.getConversion().getCurrent() == E_TypeConversion.ODV_MONOSTATION
-                                        || iDomain.getConversion().getCurrent() == E_TypeConversion.NETCDF_MONOSTATION) {
-                                    if (!filename.toString().equals(Global.EMPTY_STRING))
-                                        filename.append(File.separator);
-                                    modus = Mapping.MODUS_MONOSTATION;
-                                }
-                                filename.append(outputFile.getName());
-                            }
-                            
-                            mapping.setFilename(filename.toString());
-                            mapping.setDate(new Date());
-                            mapping.setModus(modus);
+		if (iDomain.getConversion().getCurrent() == E_TypeConversion.NETCDF_MONOSTATION
+				|| iDomain.getConversion().getCurrent() == E_TypeConversion.NETCDF_MULTISTATIONS)
+			formatConversion = Conversion.NETCDF;
 
-                            MappingTable.persist(mapping);
-                        }
-                    }
-                }
+		try {
+			System.out.println("Conversion START at " + new Date()); //$NON-NLS-1$
+			monitor.beginTask(Messages.SWTProcess_1, IProgressMonitor.UNKNOWN);
 
-                // Ecriture du resume CDI
-                if (config.isWriteCdi()){
-                    monitor.setTaskName(Messages.SWTProcess_CDIresume);
-                    CDIResumeWriter.getInstance().writeResume(formatConversion);
-                }
-            }
+			if (!monitor.isCanceled()) {
 
-            System.out.println("Conversion END   at " + new Date() + "\n---------------"); //$NON-NLS-1$ //$NON-NLS-2$
-            monitor.done();
-        }
-        catch (Exception e){
-            throw new InterruptedException(Messages.SWTProcess_5 + e.getMessage());
-        }
-    }
+				// Ecriture des fichiers
+				monitor.setTaskName(Messages.SWTProcess_4);
+				writer = NemoWriterFactory.createWriter(formatConversion);
+				writer.write(notifier);
+
+				// mapping
+				if (config.isWriteMapping()) {
+					monitor.setTaskName("enregistrement du mapping");
+					for (String outputPath : iDomain.getMedia().getOutputFiles().keySet()) {
+						File outputFile = new File(outputPath);
+						for (String stRef : iDomain.getMedia().getOutputFiles().get(outputPath)) {
+							Station st = sDomain.getStationByRef(stRef);
+							String localCdiId = sDomain.getLocalCdiId(cDomain, formatConversion, st.getReference());
+							mapping = new Mapping(localCdiId, formatConversion.getFormatName());
+
+							String modus = Mapping.MODUS_MULTISTATIONS;
+
+							StringBuffer filename = new StringBuffer();
+							filename.append(iDomain.getConversion().getNomMappingHorsPrefix());
+
+							if (iDomain.getMedia().getModel().getProcessType() == E_ProcessType.CRUISE_DIR) {
+								if (!filename.toString().equals(Global.EMPTY_STRING))
+									filename.append(File.separator);
+								if (iDomain.getConversion().getCurrent() == E_TypeConversion.ODV_MONOSTATION
+										|| iDomain.getConversion().getCurrent() == E_TypeConversion.NETCDF_MONOSTATION) {
+									filename.append(outputFile.getParentFile().getName());
+									filename.append(File.separator);
+									modus = Mapping.MODUS_MONOSTATION;
+								}
+								if (!filename.toString().endsWith(File.separator)) {
+									filename.append(File.separator);
+								}
+								filename.append(outputFile.getName());
+							} else {
+								if (iDomain.getConversion().getCurrent() == E_TypeConversion.ODV_MONOSTATION
+										|| iDomain.getConversion().getCurrent() == E_TypeConversion.NETCDF_MONOSTATION) {
+									if (!filename.toString().equals(Global.EMPTY_STRING))
+										filename.append(File.separator);
+									modus = Mapping.MODUS_MONOSTATION;
+								}
+								if (!filename.toString().endsWith(File.separator)) {
+									filename.append(File.separator);
+								}
+
+								filename.append(outputFile.getName());
+							}
+
+							mapping.setFilename(filename.toString());
+							mapping.setDate(new Date());
+							mapping.setModus(modus);
+
+							MappingTable.persist(mapping);
+						}
+					}
+				}
+
+				// Ecriture du resume CDI
+				if (config.isWriteCdi()) {
+					monitor.setTaskName(Messages.SWTProcess_CDIresume);
+					CDIResumeWriter.getInstance().writeResume(formatConversion);
+				}
+			}
+
+			System.out.println("Conversion END   at " + new Date() + "\n---------------"); //$NON-NLS-1$ //$NON-NLS-2$
+			monitor.done();
+		} catch (Exception e) {
+			throw new InterruptedException(Messages.SWTProcess_5 + e.getMessage());
+		}
+	}
 }

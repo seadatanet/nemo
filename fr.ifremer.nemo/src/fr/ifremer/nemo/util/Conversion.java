@@ -28,7 +28,7 @@ public enum Conversion {
 		String name = Global.EMPTY_STRING;
 		switch (this) {
 		case NETCDF:
-			name = "SDN NetCDF";//$NON-NLS-1$
+			name = "CFPOINT";//$NON-NLS-1$
 			break;
 		default:
 			name = this.toString();
