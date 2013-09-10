@@ -30,7 +30,6 @@ import fr.ifremer.nemo.output.NemoWriter;
 import fr.ifremer.nemo.output.NemoWriterFactory;
 import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Global;
-import fr.ifremer.nemo.util.Global.E_ProcessType;
 import fr.ifremer.nemo.util.Global.E_TypeConversion;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.util.Preformat;
@@ -274,31 +273,18 @@ public class NemoShell {
 					String modus = Mapping.MODUS_MULTISTATIONS;
 
 					StringBuffer filename = new StringBuffer();
-					inputDomain.getConversion().setNomMappingHorsPrefix(
-							nomHorsPrefix);
-					filename.append(inputDomain.getConversion()
-							.getNomMappingHorsPrefix());
+					filename.append(inputDomain.getConversion().getNomMappingHorsPrefix());
 
-					if (inputDomain.getMedia().getModel().getProcessType() == E_ProcessType.CRUISE_DIR) {
-						if (!filename.equals(Global.EMPTY_STRING))
-							filename.append(File.separator);
-						if (inputDomain.getConversion().getCurrent() == E_TypeConversion.ODV_MONOSTATION
-								|| inputDomain.getConversion().getCurrent() == E_TypeConversion.NETCDF_MONOSTATION) {
-							filename.append(outputFile.getParentFile()
-									.getName());
-							filename.append(File.separator);
-							modus = Mapping.MODUS_MONOSTATION;
-						}
-						filename.append(outputFile.getName());
-					} else {
-						if (inputDomain.getConversion().getCurrent() == E_TypeConversion.ODV_MONOSTATION
-								|| inputDomain.getConversion().getCurrent() == E_TypeConversion.NETCDF_MONOSTATION) {
-							if (!filename.equals(Global.EMPTY_STRING))
-								filename.append(File.separator);
-							filename.append(outputFile.getName());
-							modus = Mapping.MODUS_MONOSTATION;
-						}
+					if (inputDomain.getConversion().getCurrent() == E_TypeConversion.ODV_MONOSTATION
+							|| inputDomain.getConversion().getCurrent() == E_TypeConversion.NETCDF_MONOSTATION) {
+						modus = Mapping.MODUS_MONOSTATION;
 					}
+
+					if (!filename.toString().equals(Global.EMPTY_STRING) && !filename.toString().endsWith(File.separator)) {
+						filename.append(File.separator);
+					}
+
+					filename.append(outputFile.getName());
 
 					mapping.setFilename(filename.toString());
 					mapping.setDate(new Date());

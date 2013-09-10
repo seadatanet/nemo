@@ -21,7 +21,6 @@ import fr.ifremer.nemo.output.NemoWriterFactory;
 import fr.ifremer.nemo.output.ProgressNotification;
 import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Global;
-import fr.ifremer.nemo.util.Global.E_ProcessType;
 import fr.ifremer.nemo.util.Global.E_TypeConversion;
 import fr.ifremer.nemo.util.Messages;
 
@@ -66,7 +65,7 @@ public class SWTProcess implements IRunnableWithProgress {
 
 				// mapping
 				if (config.isWriteMapping()) {
-					monitor.setTaskName("enregistrement du mapping");
+					monitor.setTaskName("enregistrement du mapping"); //$NON-NLS-1$
 					for (String outputPath : iDomain.getMedia().getOutputFiles().keySet()) {
 						File outputFile = new File(outputPath);
 						for (String stRef : iDomain.getMedia().getOutputFiles().get(outputPath)) {
@@ -79,32 +78,16 @@ public class SWTProcess implements IRunnableWithProgress {
 							StringBuffer filename = new StringBuffer();
 							filename.append(iDomain.getConversion().getNomMappingHorsPrefix());
 
-							if (iDomain.getMedia().getModel().getProcessType() == E_ProcessType.CRUISE_DIR) {
-								if (!filename.toString().equals(Global.EMPTY_STRING))
-									filename.append(File.separator);
-								if (iDomain.getConversion().getCurrent() == E_TypeConversion.ODV_MONOSTATION
-										|| iDomain.getConversion().getCurrent() == E_TypeConversion.NETCDF_MONOSTATION) {
-									filename.append(outputFile.getParentFile().getName());
-									filename.append(File.separator);
-									modus = Mapping.MODUS_MONOSTATION;
-								}
-								if (!filename.toString().endsWith(File.separator)) {
-									filename.append(File.separator);
-								}
-								filename.append(outputFile.getName());
-							} else {
-								if (iDomain.getConversion().getCurrent() == E_TypeConversion.ODV_MONOSTATION
-										|| iDomain.getConversion().getCurrent() == E_TypeConversion.NETCDF_MONOSTATION) {
-									if (!filename.toString().equals(Global.EMPTY_STRING))
-										filename.append(File.separator);
-									modus = Mapping.MODUS_MONOSTATION;
-								}
-								if (!filename.toString().endsWith(File.separator)) {
-									filename.append(File.separator);
-								}
-
-								filename.append(outputFile.getName());
+							if (iDomain.getConversion().getCurrent() == E_TypeConversion.ODV_MONOSTATION
+									|| iDomain.getConversion().getCurrent() == E_TypeConversion.NETCDF_MONOSTATION) {
+								modus = Mapping.MODUS_MONOSTATION;
 							}
+
+							if (!filename.toString().equals(Global.EMPTY_STRING) && !filename.toString().endsWith(File.separator)) {
+								filename.append(File.separator);
+							}
+
+							filename.append(outputFile.getName());
 
 							mapping.setFilename(filename.toString());
 							mapping.setDate(new Date());

@@ -32,6 +32,7 @@ import fr.ifremer.nemo.ui.edit.file.EditFileForm;
 import fr.ifremer.nemo.ui.view.ViewLog;
 import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Global;
+import fr.ifremer.nemo.util.Global.E_ProcessType;
 import fr.ifremer.nemo.util.Messages;
 
 public class EditConversionForm extends EditForm {
@@ -455,11 +456,11 @@ public class EditConversionForm extends EditForm {
 			File output =
 					new File(Nemo.getInstance().getDomain().getMedia()
 							.getOutputFileName());
-
 			String cheminComplet = output.getParentFile().getPath();
 			//FAE 17128
 			if (Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToNetCDFMonoStation()
-					|| Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToODVMonoStation()) {
+					|| Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToODVMonoStation()
+					|| Nemo.getInstance().getDomain().getMedia().getModel().getProcessType() == E_ProcessType.COLLECTION_DIR) {
 				cheminComplet = output.getAbsolutePath();
 			}
 
