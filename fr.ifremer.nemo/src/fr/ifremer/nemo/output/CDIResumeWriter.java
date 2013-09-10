@@ -99,8 +99,8 @@ public class CDIResumeWriter {
 					Station st = sDomain.getStationByRef(stRef);
 					// seuls les paramètres mesurés sont à prendre en compte
 					for (ParameterModel param : dataDomain.getModel().getParameterModels()) {
+						writeCDILine(st, param, formatConversion, outputPath);
 						if (formatConversion == Conversion.MEDATLAS) {
-							writeCDILine(st, param, formatConversion, outputPath);
 							writeCDILine(st, param, Conversion.ODV, outputPath);
 						}
 
