@@ -483,23 +483,24 @@ public class TableDataSurvey {
 					&& !TableDataSurvey.tableTypeSurvey.isDisposed()) {
 				nbre = TableDataSurvey.tableTypeSurvey.getItemCount();
 				for (int i = 0; i < nbre; i++) {
+					TypeSurvey ts = new TypeSurvey();
 
-					types.get(i).setCode(
+					ts.setCode(
 							TableDataSurvey.tableTypeSurvey.getItem(i).getText(0));
 					if (TableDataSurvey.tableTypeSurvey.getItem(i).getText(1)
 							.equals(Global.EMPTY_STRING)) {
-						types.get(i).setNombre(0);
+						ts.setNombre(0);
 					} else {
-						types.get(i).setNombre(
+						ts.setNombre(
 								Integer.valueOf(TableDataSurvey.tableTypeSurvey
 										.getItem(i).getText(1)));
 					}
-					types.get(i).setQc(
+					ts.setQc(
 							TableDataSurvey.tableTypeSurvey.getItem(i).getText(2));
-					types.get(i).setSensor(
+					ts.setSensor(
 							Boolean.parseBoolean(TableDataSurvey.tableTypeSurvey
 									.getItem(i).getText(3)));
-
+					types.set(i, ts);
 				}
 			}
 		} catch (Exception e) {
