@@ -474,7 +474,7 @@ public class EditConversionForm extends EditForm {
 				if (inputPrefixDossier.getValue().endsWith(File.separator)
 						|| inputPrefixDossier.getValue().equals(cheminComplet)) {
 					nomHorsPrefix =
-							cheminComplet.replace(inputPrefixDossier.getValue(),
+							(cheminComplet + File.separator).replace(inputPrefixDossier.getValue(),
 									Global.EMPTY_STRING);
 				} else {
 					nomHorsPrefix =
