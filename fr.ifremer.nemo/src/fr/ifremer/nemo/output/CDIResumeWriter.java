@@ -87,7 +87,6 @@ public class CDIResumeWriter {
 			StationDomain sDomain = iDomain.getStation();
 			DataDomain dataDomain = iDomain.getData();
 			sDomain.resetlocalCDIList();
-			Configuration config = Nemo.getInstance().getConfig();
 
 			for (String outputPath : iDomain.getMedia().getOutputFiles()
 					.keySet()) {
@@ -99,9 +98,12 @@ public class CDIResumeWriter {
 					Station st = sDomain.getStationByRef(stRef);
 					// seuls les paramètres mesurés sont à prendre en compte
 					for (ParameterModel param : dataDomain.getModel().getParameterModels()) {
-						writeCDILine(st, param, formatConversion, outputPath);
+						String localCDIId = sDomain.getLocalCdiId(cDomain,
+								formatConversion, st.getReference());
+
+						writeCDILine(st, param, formatConversion, localCDIId, outputPath);
 						if (formatConversion == Conversion.MEDATLAS) {
-							writeCDILine(st, param, Conversion.ODV, outputPath);
+							writeCDILine(st, param, Conversion.ODV, localCDIId, outputPath);
 						}
 
 					}
@@ -116,21 +118,17 @@ public class CDIResumeWriter {
 		}
 	}
 
-	private void writeCDILine(Station st, ParameterModel param, Conversion formatConversion, String outputPath) throws IOException, ParseException {
+	private void writeCDILine(Station st, ParameterModel param, Conversion formatConversion, String localCDIId, String outputPath) throws IOException, ParseException {
 
 		InputDomain iDomain = Nemo.getInstance().getDomain();
 		CruiseDomain cDomain = iDomain.getCruise();
-		StationDomain sDomain = iDomain.getStation();
-		DataDomain dataDomain = iDomain.getData();
-		sDomain.resetlocalCDIList();
 		Configuration config = Nemo.getInstance().getConfig();
 		File outputFile = new File(outputPath);
 
 		writer.write(Global.RN);
 
 		// CDI ID
-		writer.write(sDomain.getLocalCdiId(cDomain,
-					formatConversion, st.getReference()));
+		writer.write(localCDIId);
 		// EDMO author
 		writer.write(sep + config.getIdEdmoRespCdi());
 
@@ -159,17 +157,14 @@ public class CDIResumeWriter {
 
 			// FAE 4525 (retour 03/01/2011)
 			if (iDomain.getMedia().getModel().getProcessType().equals(E_ProcessType.COLLECTION_DIR)) {
-				writer
-						.write(sep + cDomain.getModel().getName());
+				writer.write(sep + cDomain.getModel().getName());
 			} else if (cDomain.getDataSetRef().isEmpty()) {
-				writer.write(sep
-						+ Intern.CDIResumeWriter_notSpecified);
+				writer.write(sep + Intern.CDIResumeWriter_notSpecified);
 			} else {
 				writer.write(sep + cDomain.getDataSetRef());
 			}
 		} else {
-			writer.write(sep
-					+ cDomain.getModel().getReference());
+			writer.write(sep + cDomain.getModel().getReference());
 		}
 
 		// Dataset Rev Date
@@ -190,21 +185,21 @@ public class CDIResumeWriter {
 		writer.write(sep + config.getIdEdmoRespDonnees());
 
 		// P02 code: le code P021 du parametre (FAE 7308)
-		String pdvCode = "";
+		String p02Code = Global.EMPTY_STRING;
 		// si on est deja en P021, on met directement le code
 		// P021
 		if (iDomain.getData().getModel().getDataListType() == DataListTypeEnum.P011_VIA_P021) {
-			pdvCode = param.getParameter().getCode();
+			p02Code = param.getParameter().getCode();
 		} else {
 			// si on est en P091 ou P011viaP091, on map code
 			// P091 -> P021
 			// 6542
-			pdvCode = VocabLists.getVocabMatch(
+			p02Code = VocabLists.getVocabMatch(
 							Intern.mapping_subject, Intern.list_BODCpdv,
 							param.getParameter().getCode(),
 							Intern.NemoLists_unknown);
 		}
-		writer.write(sep + pdvCode + Global.EMPTY_STRING);
+		writer.write(sep + p02Code + Global.EMPTY_STRING);
 
 		// Platform Type
 		writer.write(sep + config.getTypePlateForme());
@@ -264,10 +259,7 @@ public class CDIResumeWriter {
 		// data size
 		float datasize = outputFile.length() / 1024f / 1024f;
 		if (iDomain.getConversion().getCurrent() != E_TypeConversion.ODV_MONOSTATION && iDomain.getConversion().getCurrent() != E_TypeConversion.NETCDF_MONOSTATION) {
-			datasize =
-					datasize
-							/ iDomain.getMedia().getOutputFiles()
-									.get(outputPath).size();
+			datasize = datasize / iDomain.getMedia().getOutputFiles().get(outputPath).size();
 		}
 
 		writer.write(sep
