@@ -511,8 +511,14 @@ public class NetCDFWriter extends NemoWriter {
 		String varName = getZVarName(zParameterModel);
 		String standardName = getZStandardName(zParameterModel);
 		String longName = NetCDFLongNameParameterManager.getInstance().getUserLongName(zParameterModel.getParameter().getCodeP011());
-		if (longName == null)
-			throw new Exception(Messages.Etape_134 + Global.SPACE + zParameterModel.getParameter().getCodeP011());
+		if (longName == null) {
+			if (zParameterModel.getParameter().getNameP011() != null)
+			{
+				longName = zParameterModel.getParameter().getNameP011();
+			}else{
+				throw new Exception(Messages.Etape_134 + Global.SPACE + zParameterModel.getParameter().getCodeP011());
+			}
+		}
 		String unit = unitConvertion.getUnitConvertion(zParameterModel.getParameter().getUnit());
 		String sdnParameterUrn = getURNSyntaxe(URNtype.object, zParameterModel.getParameter().getCodeP011(), null, Intern.mapping_objet, zParameterModel.isText());
 		String sdnParameterName = zParameterModel.getParameter().getNameP011();
@@ -634,9 +640,14 @@ public class NetCDFWriter extends NemoWriter {
 			//varName = param.getParameter().getLocalCode();
 			varName = param.getParameter().getCodeP011();
 			longName = NetCDFLongNameParameterManager.getInstance().getUserLongName(param.getParameter().getCodeP011());
-			if (longName == null)
-				throw new Exception(Messages.Etape_134 + Global.SPACE + zParameterModel.getParameter().getCodeP011());
-
+			if (longName == null) {
+				if (zParameterModel.getParameter().getNameP011() != null)
+				{
+					longName = zParameterModel.getParameter().getNameP011();
+				}else{
+					throw new Exception(Messages.Etape_134 + Global.SPACE + zParameterModel.getParameter().getCodeP011());
+				}
+			}
 			sdnParameterUrn = getURNSyntaxe(URNtype.object, param.getParameter().getCodeP011(), null, Intern.mapping_objet, param.isText());
 			sdnParameterName = param.getParameter().getNameP011();
 			if (param.getParameter().getUnitCode() == null || param.getParameter().getUnitCode().isEmpty()) {
