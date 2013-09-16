@@ -36,7 +36,6 @@ import fr.ifremer.nemo.input.parameters.addedParameters.AP_TIME;
 import fr.ifremer.nemo.input.parameters.addedParameters.AP_YEAR;
 import fr.ifremer.nemo.input.parameters.addedParameters.AddedParam;
 import fr.ifremer.nemo.input.parameters.addedParameters.AddedParam.IdParameter;
-import fr.ifremer.nemo.ui.RulesManager;
 import fr.ifremer.nemo.ui.edit.data.TypeData;
 import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Global;
@@ -117,8 +116,7 @@ public class ParameterManager {
 	private AddedParam createAddedParam(IdParameter code) {
 		DataListTypeEnum dataList = getDataList();
 		AddedParam addedParam = null;
-		RulesManager rulesMgr = Nemo.getInstance().getViewMain()
-				.getMyRulesManager();
+		boolean isNetCDF = getConversionType() == E_TypeConversion.NETCDF_MONOSTATION || getConversionType() == E_TypeConversion.NETCDF_MULTISTATIONS;
 
 		if (code == IdParameter.YEAR) {
 			addedParam = new AP_YEAR();
@@ -149,7 +147,7 @@ public class ParameterManager {
 				addedParam = new AP_DEPH();
 			} else {
 				addedParam = new AP_DEPHPR01();
-				if (rulesMgr.isConversionToNetCDF())
+				if (isNetCDF)
 					addedParam = new AP_DEPHPR01(Conversion.NETCDF);
 			}
 		} else if (code == IdParameter.generic_depthBSSurf_FromSensor) {
@@ -157,7 +155,7 @@ public class ParameterManager {
 				addedParam = new AP_DEPH();
 			} else {
 				addedParam = new AP_ADEPZZ01();
-				if (rulesMgr.isConversionToNetCDF())
+				if (isNetCDF)
 					addedParam = new AP_ADEPZZ01(Conversion.NETCDF);
 
 			}
@@ -166,7 +164,7 @@ public class ParameterManager {
 				addedParam = new AP_HEIGHT();
 			} else {
 				addedParam = new AP_AHGTZZ01();
-				if (rulesMgr.isConversionToNetCDF())
+				if (isNetCDF)
 					addedParam = new AP_AHGTZZ01(Conversion.NETCDF);
 
 			}
@@ -223,11 +221,6 @@ public class ParameterManager {
 		 * ====================================================================
 		 * recup des infos utiles pour la suite
 		 */
-		// TODO BGT: les infos sont deja calculées dans le RulesManager.
-		// Utiliser celui-ci pour éviter les regles en n exemplaires pas tous à
-		// jour
-		// RulesManager mgr =
-		// Nemo.getInstance().getViewMain().getMyRulesManager();
 		boolean isProfile = getInputType() == E_InputType.PROFILE;
 		boolean isTrajectory = getInputType() == E_InputType.TRAJECTORY;
 		boolean isTimeSeries = getInputType() == E_InputType.TIMESERIES;
