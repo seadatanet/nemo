@@ -453,6 +453,9 @@ public class TableData {
 
 	}
 
+	/**
+	 * fill types - add PRES automatically for Medatlas in P091 (see param rules table, data01) 
+	 */
 	public void fillTypes() {
 		// initialisation de la ArrayList des types des donnees e partir du
 		types = null;
