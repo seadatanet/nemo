@@ -12,6 +12,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -63,6 +64,11 @@ import fr.ifremer.nemo.util.Intern;
  * @author sbregent
  */
 public class NemoBashTest {
+
+	// fichier de resultats
+	private static FileWriter _writer;
+	private static File _resFile;
+
 	// racine du repertoire contenant les tests
 	// public static String dataRootPath = "C:\\Documents" + Global.SPACE +
 	// "and" + Global.SPACE + "Settings" + File.separator + "sbregent" +
@@ -75,7 +81,7 @@ public class NemoBashTest {
 	// comparer les fichiers manuels (output_eclipse) aux fichiers REFERENCE
 	public static boolean compareManualFiles = false;
 
-	public static String[] testDirAlone = {};
+	public static String[] testDirAlone = { "cruiseDir_timeseries_suva" };
 
 	public String inputName = "input";
 	public String outputName = "output_junit";
@@ -134,6 +140,49 @@ public class NemoBashTest {
 		testLogger.info("\r\n\r\n\r\n\r\n===================================== " + dat + " =========================\r\n\r\n\r\n\r\n");
 		testLogger.info("test batchs : " + testBatchs);
 		testLogger.info("comp manual files : " + compareManualFiles + "(" + outputManualName + ")");
+		initResultWriter();
+	}
+
+	private static void initResultWriter() {
+		SimpleDateFormat df = new SimpleDateFormat("yyyy_mm_dd-hh-mm-ss"); //$NON-NLS-1$
+		String resFileName = "results_" + df.format(new Date()) + ".csv";
+		_resFile = new File(resFileName);
+		try {
+			_writer = new FileWriter(resFileName);
+			_writer.append("testName;");
+			_writer.append("test directory;");
+			_writer.append("atLeastOneTestFound;");
+			_writer.append("parameters list;");
+			_writer.append("conversion;");
+			// _writer.append("unit test;");
+			_writer.append("reference found;");
+			_writer.append("nemo convert ended;");
+			_writer.append("comparison ok;");
+			_writer.append('\n');
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	private void writeInResultsFile(Message message) {
+		try {
+			_writer.append(message.testName + ";");
+			_writer.append(message.dirName + ";");
+			_writer.append(message.atLeastOneTestFound + ";");
+			_writer.append(message.parameterList + ";");
+			_writer.append(message.convType + ";");
+			_writer.append(message.isReferenceFound + ";");
+			_writer.append(message.conversionRes + ";");
+			_writer.append(message.batchCompRes + ";");
+			_writer.append('\n');
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 
@@ -166,6 +215,8 @@ public class NemoBashTest {
 	 */
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
+		_writer.close();
+
 		testLogger.info("\r\n\r\n\r\n\r\n___________________________isVocabV2_____________________________\r\n\r\n\r\n\r\n");
 		if (isVocabV2Param == true) {
 			Assert.assertTrue(isVocabV2);
@@ -202,21 +253,33 @@ public class NemoBashTest {
 
 	}
 
+	private void writeInResultsFile(String theString) {
+		try {
+			System.out.println(theString);
+			_writer.append(theString);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 	/**
 	 * =================================================================
 	 * MEDATLAS
 	 * =================================================================
 	 */
-	@Test
+	// @Test
 	public final void test_P091_Medatlas() {
 		testLogger.info("\r\n\r\n\r\n\r\n___________________________test_P091_Medatlas_____________________________\r\n\r\n\r\n\r\n");
+		// writeInResultsFile("P091_Medatlas;");
 		boolean res = testOneType_ListConv(DataListTypeEnum.P091, Conversion.MEDATLAS, E_TypeConversion.MEDATLAS);
 		Assert.assertTrue(res);
 	}
 
-	@Test
+	// @Test
 	public final void test_P011viaP091_Medatlas() {
 		testLogger.info("\r\n\r\n\r\n\r\n___________________________test_P011viaP091_Medatlas_____________________________\r\n\r\n\r\n\r\n");
+		// writeInResultsFile("P011viaP091_Medatlas;");
 		Assert.assertTrue(testOneType_ListConv(DataListTypeEnum.P011_VIA_P091, Conversion.MEDATLAS, E_TypeConversion.MEDATLAS));
 	}
 
@@ -224,33 +287,38 @@ public class NemoBashTest {
 	 * ================================================================= ODV
 	 * =================================================================
 	 */
-	@Test
+	// @Test
 	public final void test_P091_ODVMULTI() {
 		testLogger.info("\r\n\r\n\r\n\r\n____________________________test_P091_ODVMULTI____________________________\r\n\r\n\r\n\r\n");
+		// writeInResultsFile("P091_ODVMULTI;");
 		Assert.assertTrue(testOneType_ListConv(DataListTypeEnum.P091, Conversion.ODV, E_TypeConversion.ODV_MULTISTATIONS));
 	}
 
-	@Test
+	// @Test
 	public final void test_P011viaP091_ODVMULTI() {
 		testLogger.info("\r\n\r\n\r\n\r\n____________________________test_P011viaP091_ODVMULTI____________________________\r\n\r\n\r\n\r\n");
+		// writeInResultsFile("P011viaP091_ODVMULTI;");
 		Assert.assertTrue(testOneType_ListConv(DataListTypeEnum.P011_VIA_P091, Conversion.ODV, E_TypeConversion.ODV_MULTISTATIONS));
 	}
 
-	@Test
+	// @Test
 	public final void test_P011viaP021_ODVMULTI() {
 		testLogger.info("\r\n\r\n\r\n\r\n__________________________test_P011viaP021_ODVMULTI_____________________________\r\n\r\n\r\n\r\n");
+		// writeInResultsFile("P011viaP021_ODVMULTI;");
 		Assert.assertTrue(testOneType_ListConv(DataListTypeEnum.P011_VIA_P021, Conversion.ODV, E_TypeConversion.ODV_MULTISTATIONS));
 	}
 
-	@Test
+	// @Test
 	public final void test_P011viaP091_NETCDFMULTI() {
 		testLogger.info("\r\n\r\n\r\n\r\n____________________________test_P011viaP091_NETCDFMULTI____________________________\r\n\r\n\r\n\r\n");
+		// writeInResultsFile("P011viaP091_NETCDFMULTI;");
 		Assert.assertTrue(testOneType_ListConv(DataListTypeEnum.P011_VIA_P091, Conversion.NETCDF, E_TypeConversion.NETCDF_MULTISTATIONS));
 	}
 
 	@Test
 	public final void test_P011viaP021_NETCDFMULTI() {
 		testLogger.info("\r\n\r\n\r\n\r\n__________________________test_P011viaP021_NETCDFMULTI_____________________________\r\n\r\n\r\n\r\n");
+		// writeInResultsFile("P011viaP021_NETCDFMULTI;");
 		Assert.assertTrue(testOneType_ListConv(DataListTypeEnum.P011_VIA_P021, Conversion.NETCDF, E_TypeConversion.NETCDF_MULTISTATIONS));
 	}
 
@@ -407,7 +475,7 @@ public class NemoBashTest {
 	 * methodes
 	 * =================================================================
 	 */
-	public boolean testOneType_ListConv(DataListTypeEnum dataList, Conversion conversion, E_TypeConversion odvConv) {
+	public boolean testOneType_ListConv(DataListTypeEnum dataList, Conversion conversion, E_TypeConversion convType) {
 
 		boolean ok = true;
 		boolean res;
@@ -418,21 +486,34 @@ public class NemoBashTest {
 		System.out.println("dataRootPath" + dataRootPath + "--------");
 		File root = new File(dataRootPath);
 		for (File testDir : root.listFiles()) {
+			// writeInResultsFile(testDir.getName() + ";");
 			if (isToTest(testDir.getName())) {
+				// writeInResultsFile("yes" + ";");
 				System.out.println("testDir: " + testDir.toString());
 				message = new Message();
 				message.dirName = testDir.getName();
 				testFound = false;
+
 				for (File paramListDir : testDir.listFiles()) {
+
 					if (paramListDir.getName().equals(dataList.toString())) {
+						// writeInResultsFile(dataList.toString() + ";");
 
 						for (File convDir : paramListDir.listFiles()) {
-							if (convDir.getName().equals(odvConv.toString())) {
+							// writeInResultsFile(convDir.getName() + ";");
+
+							if (convDir.getName().equals(convType.toString())) {
+
 								for (File unitTest : convDir.listFiles()) {
 									ok = true;
 									message = new Message();
+
 									message.dirName = testDir.getName();
+									message.convType = convType.toString();
+									message.parameterList = paramListDir.getName();
 									if (unitTest.getName().startsWith("t")) {
+										// writeInResultsFile(unitTest.getName()
+										// + ";");
 										res = false;
 										comp = false;
 										message.testName = paramListDir.getName() + " " + convDir.getName() + " " + unitTest.getName();
@@ -444,19 +525,21 @@ public class NemoBashTest {
 										message.isTestFound = true;
 										if (testBatchs) {
 											message.isReferenceFound = fileExist(outputAbsolutePath, outputReferenceName);
+											// writeInResultsFile(message.isReferenceFound
+											// + ";");
 
-											//
-
-											res = convertWithNemoBatch(conversion, odvConv, inputAbsolutePath, outputAbsolutePath, !unitTest.getName().startsWith("tj"));
+											res = convertWithNemoBatch(conversion, convType, inputAbsolutePath, outputAbsolutePath, !unitTest.getName().startsWith("tj"));
+											// writeInResultsFile(res + ";");
 											ok = res && ok;
 											if (res) {
 												if (conversion == Conversion.NETCDF) {
 													comp = compareWithODVReference(outputAbsolutePath, outputName);
 												} else {
 													comp = compareWithReference(outputAbsolutePath, outputName);
-													message.batchCompRes = comp;
 												}
 												message.batchCompRes = comp;
+												// writeInResultsFile(comp +
+												// "\n");
 												ok = comp && ok;
 											}
 											if (ok) {
@@ -489,6 +572,7 @@ public class NemoBashTest {
 
 										message.print();
 									}
+									writeInResultsFile(message);
 								}
 
 							}
@@ -501,6 +585,8 @@ public class NemoBashTest {
 					message.print();
 				}
 
+			} else {
+				// writeInResultsFile("no" + ";");
 			}
 		}
 		testLogger.info("\r\n=========================================" + cptFail + " failed /" + cptTests + " tested" + "=========================================" + "\r\n");
@@ -818,6 +904,8 @@ public class NemoBashTest {
 	}
 
 	public class Message {
+		public String parameterList;
+		public String convType;
 		public boolean isActivated = true;
 		public boolean isTestFound = true;
 		public String dirName;
