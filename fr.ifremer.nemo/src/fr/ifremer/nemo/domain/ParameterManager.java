@@ -36,6 +36,7 @@ import fr.ifremer.nemo.input.parameters.addedParameters.AP_TIME;
 import fr.ifremer.nemo.input.parameters.addedParameters.AP_YEAR;
 import fr.ifremer.nemo.input.parameters.addedParameters.AddedParam;
 import fr.ifremer.nemo.input.parameters.addedParameters.AddedParam.IdParameter;
+import fr.ifremer.nemo.ui.RulesManager;
 import fr.ifremer.nemo.ui.edit.data.TypeData;
 import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Global;
@@ -116,7 +117,8 @@ public class ParameterManager {
 	private AddedParam createAddedParam(IdParameter code) {
 		DataListTypeEnum dataList = getDataList();
 		AddedParam addedParam = null;
-		boolean isNetCDF = getConversionType() == E_TypeConversion.NETCDF_MONOSTATION || getConversionType() == E_TypeConversion.NETCDF_MULTISTATIONS;
+		RulesManager rulesMgr = Nemo.getInstance().getViewMain()
+				.getMyRulesManager();
 
 		if (code == IdParameter.YEAR) {
 			addedParam = new AP_YEAR();
@@ -145,36 +147,30 @@ public class ParameterManager {
 		else if (code == IdParameter.generic_depthBSSurf_FromPressure) {
 			if (dataList == DataListTypeEnum.P091) {
 				addedParam = new AP_DEPH();
-				if (isNetCDF)
-					addedParam = new AP_DEPH(Conversion.NETCDF);
 			} else {
 				addedParam = new AP_DEPHPR01();
-				if (isNetCDF)
+				if (rulesMgr.isConversionToNetCDF())
 					addedParam = new AP_DEPHPR01(Conversion.NETCDF);
 			}
 		} else if (code == IdParameter.generic_depthBSSurf_FromSensor) {
 			if (dataList == DataListTypeEnum.P091) {
 				addedParam = new AP_DEPH();
-				if (isNetCDF)
-					addedParam = new AP_DEPH(Conversion.NETCDF);
 			} else {
 				addedParam = new AP_ADEPZZ01();
-				if (isNetCDF)
+				if (rulesMgr.isConversionToNetCDF())
 					addedParam = new AP_ADEPZZ01(Conversion.NETCDF);
 
 			}
 		} else if (code == IdParameter.generic_heightASLvl_FromSensor) {
 			if (dataList == DataListTypeEnum.P091) {
 				addedParam = new AP_HEIGHT();
-				if (isNetCDF)
-					addedParam = new AP_HEIGHT(Conversion.NETCDF);
 			} else {
 				addedParam = new AP_AHGTZZ01();
-				if (isNetCDF)
+				if (rulesMgr.isConversionToNetCDF())
 					addedParam = new AP_AHGTZZ01(Conversion.NETCDF);
 
 			}
-		}
+		}// TODO BGT below sea bed a rajouter???
 		return addedParam;
 	}
 
@@ -205,7 +201,13 @@ public class ParameterManager {
 			if (!_medParameterModels.contains(parameterModel))
 				_medParameterModels.add(parameterModel);
 			break;
+		// case NETCDF:
+		// // TODO BGT: le cas n'existe pas puisque la cible utilisée en netcdf
+		// est ODV
+		// à modifier pour y voir plus clair
+
 		}
+
 	}
 
 	public void setAddedParameterModel() {
@@ -221,6 +223,11 @@ public class ParameterManager {
 		 * ====================================================================
 		 * recup des infos utiles pour la suite
 		 */
+		// TODO BGT: les infos sont deja calculées dans le RulesManager.
+		// Utiliser celui-ci pour éviter les regles en n exemplaires pas tous à
+		// jour
+		// RulesManager mgr =
+		// Nemo.getInstance().getViewMain().getMyRulesManager();
 		boolean isProfile = getInputType() == E_InputType.PROFILE;
 		boolean isTrajectory = getInputType() == E_InputType.TRAJECTORY;
 		boolean isTimeSeries = getInputType() == E_InputType.TIMESERIES;
@@ -291,9 +298,11 @@ public class ParameterManager {
 				// info:
 				// Nemo.getInstance().getDomain().getStation().getModel().getProperty(Intern.S_DEPTH).isInData()=true
 				// <=> automatique
-				boolean isBottomDepthManual = Nemo.getInstance().getDomain().getStation().getModel().getProperty(Intern.S_DEPTH).isInData();
+				boolean isBottomDepthAuto = Nemo.getInstance().getDomain()
+						.getStation().getModel().getProperty(Intern.S_DEPTH)
+						.isInData();
 
-				if (isBottomDepthManual) {
+				if (isBottomDepthAuto) {
 					// FAE 4471 on regarde si le parametre BATH est dans les
 					// parametres de l'onlget données
 					// -> Ajout BATH pour Medatlas
@@ -330,26 +339,28 @@ public class ParameterManager {
 					addFixedParameterModel(IdParameter.generic_depthBSSurf_FromSensor);
 				}
 			}
-
+			/** aap_p 9 */
 			if (isTimeSeries && getMesureType() == E_MesureType.ASLVL) {
 				addFixedParameterModel(IdParameter.generic_heightASLvl_FromSensor);
 			}
 		}
 		if (isNetCDF) {
-			/** aap_p 1 2 */
+			/** aap_p 12 */
 			// Ajout du paramètre DEPH ( = Sensor Depth) por TIMESERIES
 			if (isTimeSeries && getMesureType() != E_MesureType.ASLVL) {
 				addFixedParameterModel(IdParameter.generic_depthBSSurf_FromSensor);
 			}
-
+			/** aap_p 13 */
 			if (((isTimeSeries || !exist_p_heightASLvl) && getMesureType() == E_MesureType.ASLVL)) {
 				addFixedParameterModel(IdParameter.generic_heightASLvl_FromSensor);
 			}
 
 			if (!exist_p_depthBSSurf && !exist_p_pressure && getMesureType() == E_MesureType.BSSURF) {
 				if (isProfile) {
+					/** aap_p 10 */
 					addFixedParameterModel(IdParameter.generic_depthBSSurf_FromPressure);
 				} else {
+					/** aap_p 11 */
 					addFixedParameterModel(IdParameter.generic_depthBSSurf_FromSensor);
 				}
 			}
@@ -360,143 +371,149 @@ public class ParameterManager {
 	/**
 	 * Ajoute les paramètres fixes en fonction du type de fichier
 	 */
-	public void setAddedParameterModelOrig() {
-
-		// reset systematique des parametres stockes dans le dataModel
-		// releaseAddedParameterModels();
-		_odvParameterModels = new ArrayList<ParameterModel>();
-		_medParameterModels = new ArrayList<ParameterModel>();
-
-		// *** Ajouts automatiques de certains paramètres
-		boolean existDEPH = false;
-		boolean existPRES = false;
-		boolean existTEMP = false;
-		boolean existPSAL = false;
-		DataModel dataModel = Nemo.getInstance().getDomain().getData().getModel();
-		for (ParameterModel param : dataModel.getParameterModels()) {
-			if (param.getParameter().getCode().equals(IdParameter.DEPH.toString()))
-				existDEPH = true;
-			else if (param.getParameter().getCode().equals(Intern.paramPRES))
-				existPRES = true;
-			else if (param.getParameter().getCode().equals(Intern.paramPSAL))
-				existPSAL = true;
-			else if (param.getParameter().getCode().equals(Intern.paramTEMP))
-				existTEMP = true;
-		}
-
-		if (getInputType() == E_InputType.PROFILE) {
-			/** aap_p1 */
-			// Profile vertical
-			if (!existDEPH && existPRES) {
-				// ajout de DEPH calculé à partir de PRES
-				// parameterModel.setFlag(stationModel.parameterModelsAt(indexPRES).getFlag());
-				addFixedParameterModel(IdParameter.DEPH);
-			}
-			/**
-			 * *****************************************************************
-			 * ******************
-			 */
-			/** aap_p3 */
-			if (!existPRES && existDEPH && existPSAL && existTEMP) {
-				// ajout de DEPH calculé à partir de PRES
-				// parameterModel.setFlag(stationModel.parameterModelsAt(indexPRES).getFlag());
-				addFixedParameterModel(IdParameter.PRES);
-			}
-			/**
-			 * *****************************************************************
-			 * ******************
-			 */
-		} else {
-			// Serie temporelle ou Trajectoire
-
-			/** aap_p5 */
-			// Ajout YEAR, MNTH, DAYX et TIME pour Medatlas
-			addFixedParameterModel(IdParameter.YEAR);
-			addFixedParameterModel(IdParameter.MNTH);
-			addFixedParameterModel(IdParameter.DAYX);
-			addFixedParameterModel(IdParameter.TIME);
-			/**
-			 * *****************************************************************
-			 * ******************
-			 */
-
-			if (getInputType() == E_InputType.TIMESERIES) {
-				/** aap_p6 */
-				// Ajout de "Chronological Julian Date" ou "time-ISO8601 pour
-				// ODV
-				if (Nemo.getInstance().getConfig().isDateISO()) {
-					addFixedParameterModel(IdParameter.DTUT);
-				}
-				/**
-				 * *************************************************************
-				 * **********************
-				 */
-				/** aap_p7 */
-				else {
-					addFixedParameterModel(IdParameter.CJDY);
-				}
-				/**
-				 * *************************************************************
-				 * **********************
-				 */
-
-				/** aap_p2 */
-				// Serie temporelle
-				// Ajout du paramètre DEPH ( = Sensor Depth) pour ODV
-				if (!existDEPH)
-					addFixedParameterModel(IdParameter.DEPH);
-				/**
-				 * *************************************************************
-				 * **********************
-				 */
-			} else {
-				/** aap_p8 */
-				// Trajectoire
-				// Ajout LATX et LONX pour Medatlas
-				addFixedParameterModel(IdParameter.LATX);
-				addFixedParameterModel(IdParameter.LONX);
-				/**
-				 * *************************************************************
-				 * **********************
-				 */
-
-				/** aap_p4 */
-				// si bottomDepth est en manuel
-				// info:
-				// Nemo.getInstance().getDomain().getCruise().getStation().getModel().getProperty(Intern.S_DEPTH).isInData()=true
-				// <=> automatique
-				if (Nemo.getInstance().getDomain().getStation().getModel().getProperty(Intern.S_DEPTH).isInData()) {
-					// FAE 4471 on regarde si le parametre BATH est dans les
-					// parametres de l'onlget données
-					boolean isBathPresentInDataTab = false;
-					for (ParameterModel param : dataModel.getParameterModels()) {
-						if (param.getParameter().getCode().equals(IdParameter.BATH.name())) {
-							isBathPresentInDataTab = true;
-						}
-					}
-					// -> Ajout BATH pour Medatlas
-					// - si "Profondeur" saisie dans les données
-					// -et si il n'est pas déjà présent dans l'onglet data
-					if (!isBathPresentInDataTab) {
-						addFixedParameterModel(IdParameter.BATH);
-					}
-				}
-				/**
-				 * *************************************************************
-				 * **********************
-				 */
-
-				/** aap_p2 */
-				// Ajout du paramètre DEPH ( = Sensor Depth) pour ODV
-				if (!existDEPH)
-					addFixedParameterModel(IdParameter.DEPH);
-				/**
-				 * *************************************************************
-				 * **********************
-				 */
-			}
-		}
-	}
+	// public void setAddedParameterModelOrig() {
+	//
+	// // reset systematique des parametres stockes dans le dataModel
+	// // releaseAddedParameterModels();
+	// _odvParameterModels = new ArrayList<ParameterModel>();
+	// _medParameterModels = new ArrayList<ParameterModel>();
+	//
+	// // *** Ajouts automatiques de certains paramètres
+	// boolean existDEPH = false;
+	// boolean existPRES = false;
+	// boolean existTEMP = false;
+	// boolean existPSAL = false;
+	// DataModel dataModel =
+	// Nemo.getInstance().getDomain().getData().getModel();
+	// for (ParameterModel param : dataModel.getParameterModels()) {
+	// if (param.getParameter().getCode().equals(IdParameter.DEPH.toString()))
+	// existDEPH = true;
+	// else if (param.getParameter().getCode().equals(Intern.paramPRES))
+	// existPRES = true;
+	// else if (param.getParameter().getCode().equals(Intern.paramPSAL))
+	// existPSAL = true;
+	// else if (param.getParameter().getCode().equals(Intern.paramTEMP))
+	// existTEMP = true;
+	// }
+	//
+	// if (getInputType() == E_InputType.PROFILE) {
+	// /** aap_p1 */
+	// // Profile vertical
+	// if (!existDEPH && existPRES) {
+	// // ajout de DEPH calculé à partir de PRES
+	// //
+	// parameterModel.setFlag(stationModel.parameterModelsAt(indexPRES).getFlag());
+	// addFixedParameterModel(IdParameter.DEPH);
+	// }
+	// /**
+	// * *****************************************************************
+	// * ******************
+	// */
+	// /** aap_p3 */
+	// if (!existPRES && existDEPH && existPSAL && existTEMP) {
+	// // ajout de DEPH calculé à partir de PRES
+	// //
+	// parameterModel.setFlag(stationModel.parameterModelsAt(indexPRES).getFlag());
+	// addFixedParameterModel(IdParameter.PRES);
+	// }
+	// /**
+	// * *****************************************************************
+	// * ******************
+	// */
+	// } else {
+	// // Serie temporelle ou Trajectoire
+	//
+	// /** aap_p5 */
+	// // Ajout YEAR, MNTH, DAYX et TIME pour Medatlas
+	// addFixedParameterModel(IdParameter.YEAR);
+	// addFixedParameterModel(IdParameter.MNTH);
+	// addFixedParameterModel(IdParameter.DAYX);
+	// addFixedParameterModel(IdParameter.TIME);
+	// /**
+	// * *****************************************************************
+	// * ******************
+	// */
+	//
+	// if (getInputType() == E_InputType.TIMESERIES) {
+	// /** aap_p6 */
+	// // Ajout de "Chronological Julian Date" ou "time-ISO8601 pour
+	// // ODV
+	// if (Nemo.getInstance().getConfig().isDateISO()) {
+	// addFixedParameterModel(IdParameter.DTUT);
+	// }
+	// /**
+	// * *************************************************************
+	// * **********************
+	// */
+	// /** aap_p7 */
+	// else {
+	// addFixedParameterModel(IdParameter.CJDY);
+	// }
+	// /**
+	// * *************************************************************
+	// * **********************
+	// */
+	//
+	// /** aap_p2 */
+	// // Serie temporelle
+	// // Ajout du paramètre DEPH ( = Sensor Depth) pour ODV
+	// if (!existDEPH)
+	// addFixedParameterModel(IdParameter.DEPH);
+	// /**
+	// * *************************************************************
+	// * **********************
+	// */
+	// } else {
+	// /** aap_p8 */
+	// // Trajectoire
+	// // Ajout LATX et LONX pour Medatlas
+	// addFixedParameterModel(IdParameter.LATX);
+	// addFixedParameterModel(IdParameter.LONX);
+	// /**
+	// * *************************************************************
+	// * **********************
+	// */
+	//
+	// /** aap_p4 */
+	// // si bottomDepth est en manuel
+	// // info:
+	// //
+	// Nemo.getInstance().getDomain().getCruise().getStation().getModel().getProperty(Intern.S_DEPTH).isInData()=true
+	// // <=> automatique
+	// if
+	// (Nemo.getInstance().getDomain().getStation().getModel().getProperty(Intern.S_DEPTH).isInData())
+	// {
+	// // FAE 4471 on regarde si le parametre BATH est dans les
+	// // parametres de l'onlget données
+	// boolean isBathPresentInDataTab = false;
+	// for (ParameterModel param : dataModel.getParameterModels()) {
+	// if (param.getParameter().getCode().equals(IdParameter.BATH.name())) {
+	// isBathPresentInDataTab = true;
+	// }
+	// }
+	// // -> Ajout BATH pour Medatlas
+	// // - si "Profondeur" saisie dans les données
+	// // -et si il n'est pas déjà présent dans l'onglet data
+	// if (!isBathPresentInDataTab) {
+	// addFixedParameterModel(IdParameter.BATH);
+	// }
+	// }
+	// /**
+	// * *************************************************************
+	// * **********************
+	// */
+	//
+	// /** aap_p2 */
+	// // Ajout du paramètre DEPH ( = Sensor Depth) pour ODV
+	// if (!existDEPH)
+	// addFixedParameterModel(IdParameter.DEPH);
+	// /**
+	// * *************************************************************
+	// * **********************
+	// */
+	// }
+	// }
+	// }
 
 	public ParameterModel[] getAddedParameterModels(Conversion c) {
 		ParameterModel[] addedParameters = null;
