@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<vocabulary list="SDN:P02:75:"  version="75"  date="2012-07-18T01:00:02.000"  title="SeaDataNet Parameter Discovery Vocabulary" >
+<vocabulary list="SDN:P02:76:"  version="76"  date="2013-08-02T01:00:03.000"  title="SeaDataNet Parameter Discovery Vocabulary" >
    <keyword SDNIdent="SDN:P02::WCWT"  smallLabel="Sed_WaterCont" >Sediment water content, porosity and surface area</keyword>
    <keyword SDNIdent="SDN:P02::GRZO"  smallLabel="ZooplGrowthRate" >Zooplankton growth rates</keyword>
    <keyword SDNIdent="SDN:P02::HEAD"  smallLabel="PlatOrientation" >Platform or instrument orientation</keyword>
@@ -296,7 +296,7 @@
    <keyword SDNIdent="SDN:P02::PREX"  smallLabel="SeaLvl_Press" >Sea level expressed as pressure</keyword>
    <keyword SDNIdent="SDN:P02::RBSC"  smallLabel="RadarBScatter" >Radar backscatter</keyword>
    <keyword SDNIdent="SDN:P02::SSCN"  smallLabel="Side_Scan" >Side-scan sonar</keyword>
-   <keyword SDNIdent="SDN:P02::ZADX"  smallLabel="ZoobenthTaxDryBiomass" >Zoobenthos taxonomic dry weight biomass</keyword>
+   <keyword SDNIdent="SDN:P02::ZADX"  smallLabel="ZoobenthDryBiomass" >Zoobenthos dry weight biomass</keyword>
    <keyword SDNIdent="SDN:P02::CCPW"  smallLabel="SedPoreWat_TCO2" >Total dissolved inorganic carbon (TCO2) in sediment pore waters</keyword>
    <keyword SDNIdent="SDN:P02::MBAN"  smallLabel="Bath_Elev" >Bathymetry and Elevation</keyword>
    <keyword SDNIdent="SDN:P02::AATX"  smallLabel="PhytoTaxaAreaWater" >Phytoplankton taxonomic surface area in water bodies</keyword>

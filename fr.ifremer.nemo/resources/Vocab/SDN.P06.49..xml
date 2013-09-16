@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<vocabulary list="SDN:P06:48:"  version="48"  date="2013-06-21T01:00:03.000"  title="BODC data storage units" >
+<vocabulary list="SDN:P06:49:"  version="49"  date="2013-07-17T01:00:02.000"  title="BODC data storage units" >
    <uomName SDNIdent="SDN:P06::UPDS"  smallLabel="% dry sed" >Percentage of dry sediment</uomName>
    <uomName SDNIdent="SDN:P06::UPTH"  smallLabel="ppt/h" >Parts per thousand per hour</uomName>
    <uomName SDNIdent="SDN:P06::DGPS"  smallLabel="deg/s" >Degrees per second</uomName>
@@ -223,6 +223,7 @@
    <uomName SDNIdent="SDN:P06::UBLV"  smallLabel="ppbv" >Parts per billion by volume</uomName>
    <uomName SDNIdent="SDN:P06::UM2D"  smallLabel="mg/m^2/inc" >Milligrams per square metre per incubation duration</uomName>
    <uomName SDNIdent="SDN:P06::UNIM"  smallLabel="ng/ind/min" >Nanograms per individual per minute</uomName>
+   <uomName SDNIdent="SDN:P06::PWAV"  smallLabel="pW/cm^2/l" >Picowatts per square centimetre per litre</uomName>
    <uomName SDNIdent="SDN:P06::KPMT"  smallLabel="K/m" >Kelvin per metre</uomName>
    <uomName SDNIdent="SDN:P06::JMSQ"  smallLabel="J/m^2" >Joules per square metre</uomName>
    <uomName SDNIdent="SDN:P06::URAD"  smallLabel="rad" >Radians</uomName>
@@ -261,7 +262,7 @@
    <uomName SDNIdent="SDN:P06::UYBC"  smallLabel="BC" >Gregorian calendar years before Christ</uomName>
    <uomName SDNIdent="SDN:P06::UUPH"  smallLabel="pH units" >pH units</uomName>
    <uomName SDNIdent="SDN:P06::UMSQ"  smallLabel="m^2" >Square metres</uomName>
-   <uomName SDNIdent="SDN:P06::PMLD"  smallLabel="pmol/l/d" >picomoles/litre/day</uomName>
+   <uomName SDNIdent="SDN:P06::PMLD"  smallLabel="pmol/l/d" >Picomoles per litre per day</uomName>
    <uomName SDNIdent="SDN:P06::KMSS"  smallLabel="K.m^2/kg/s" >Kelvin square metres per kilogram per second</uomName>
    <uomName SDNIdent="SDN:P06::UHMS"  smallLabel="hh24miss" >Hours Minutes Seconds</uomName>
    <uomName SDNIdent="SDN:P06::UGMC"  smallLabel="g/m^3" >Grams per cubic metre</uomName>

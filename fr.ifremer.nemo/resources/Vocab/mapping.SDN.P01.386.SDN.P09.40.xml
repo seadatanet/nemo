@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mapping>
-   <vocabulary list="SDN:P01:375:"  version="375"  date="2013-06-28T01:00:04.000"  title="BODC Parameter Usage Vocabulary"  />
+   <vocabulary list="SDN:P01:386:"  version="386"  date="2013-09-11T01:00:02.000"  title="BODC Parameter Usage Vocabulary"  />
    <mapped>
       <vocabulary list="SDN:P09:40:"  version="40"  date="2012-01-11T07:46:54.000"  title="MEDATLAS Parameter Usage Vocabulary"  />
    </mapped>
@@ -565,37 +565,37 @@
    <match>
       <element ekey="SDN:P09:40:CF1W"  elabel="DISSOLVED CFC11"   />
       <broad>
-         <element ekey="SDN:P01:40:MDMAP001"  elabel="Concentration of trichlorofluoromethane {freon-11 or CFC-11} per unit mass of the water body [dissolved plus reactive particulate phase]"   />
+         <element ekey="SDN:P01:40:MDMAP001"  elabel="Concentration of trichlorofluoromethane {CFC-11 CAS 75-69-4} per unit mass of the water body [dissolved plus reactive particulate phase]"   />
       </broad>
    </match>
    <match>
       <element ekey="SDN:P09:40:CE1W"  elabel="DISSOLVED CFC11 ERROR"   />
       <exact>
-         <element ekey="SDN:P01:40:MDMAPER1"  elabel="Concentration error of trichlorofluoromethane {freon-11 or CFC-11} per unit mass of the water body [dissolved plus reactive particulate phase]"   />
+         <element ekey="SDN:P01:40:MDMAPER1"  elabel="Concentration error of trichlorofluoromethane {CFC-11 CAS 75-69-4} per unit mass of the water body [dissolved plus reactive particulate phase]"   />
       </exact>
    </match>
    <match>
       <element ekey="SDN:P09:40:CF3W"  elabel="DISSOLVED CFC113"   />
       <broad>
-         <element ekey="SDN:P01:40:MDMAP003"  elabel="Concentration of 1,1,2-trichloro-1,2,2-trifluoroethane {freon-113 or CFC-113} per unit mass of the water body [dissolved plus reactive particulate phase]"   />
+         <element ekey="SDN:P01:40:MDMAP003"  elabel="Concentration of 1,1,2-trichloro-1,2,2-trifluoroethane {CFC-113 CAS 76-13-1} per unit mass of the water body [dissolved plus reactive particulate phase]"   />
       </broad>
    </match>
    <match>
       <element ekey="SDN:P09:40:CE3W"  elabel="DISSOLVED CFC113 ERROR"   />
       <exact>
-         <element ekey="SDN:P01:40:MDMAPER3"  elabel="Concentration error of 1,1,2-trichloro-1,2,2-trifluoroethane {freon-113 or CFC-113} per unit mass of the water body [dissolved plus reactive particulate phase]"   />
+         <element ekey="SDN:P01:40:MDMAPER3"  elabel="Concentration error of 1,1,2-trichloro-1,2,2-trifluoroethane {CFC-113 CAS 76-13-1} per unit mass of the water body [dissolved plus reactive particulate phase]"   />
       </exact>
    </match>
    <match>
       <element ekey="SDN:P09:40:CF2W"  elabel="DISSOLVED CFC12"   />
       <broad>
-         <element ekey="SDN:P01:40:MDMAP002"  elabel="Concentration of dichlorodifluoromethane {freon-12 or CFC-12} per unit mass of the water body [dissolved plus reactive particulate phase]"   />
+         <element ekey="SDN:P01:40:MDMAP002"  elabel="Concentration of dichlorodifluoromethane {CFC-12 CAS 75-71-8} per unit mass of the water body [dissolved plus reactive particulate phase]"   />
       </broad>
    </match>
    <match>
       <element ekey="SDN:P09:40:CE2W"  elabel="DISSOLVED CFC12 ERROR"   />
       <exact>
-         <element ekey="SDN:P01:40:MDMAPER2"  elabel="Concentration error of dichlorodifluoromethane {freon-12 or CFC-12} per unit mass of the water body [dissolved plus reactive particulate phase]"   />
+         <element ekey="SDN:P01:40:MDMAPER2"  elabel="Concentration error of dichlorodifluoromethane {CFC-12 CAS 75-71-8} per unit mass of the water body [dissolved plus reactive particulate phase]"   />
       </exact>
    </match>
    <match>

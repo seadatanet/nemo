@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<vocabulary list="SDN:P07:24:"  version="24"  date="2013-06-28T01:00:04.000"  title="Climate and Forecast Standard Names" >
+<vocabulary list="SDN:P07:25:"  version="25"  date="2013-07-06T01:00:03.000"  title="Climate and Forecast Standard Names" >
    <keyword SDNIdent="SDN:P07::CF12N608"  >tendency_of_atmosphere_mass_content_of_black_carbon_dry_aerosol_due_to_turbulent_deposition</keyword>
    <keyword SDNIdent="SDN:P07::CF12N120"  >atmosphere_moles_of_biogenic_nmvoc_expressed_as_carbon</keyword>
    <keyword SDNIdent="SDN:P07::CF12N609"  >tendency_of_atmosphere_mass_content_of_butane_due_to_emission</keyword>
@@ -61,6 +61,7 @@
    <keyword SDNIdent="SDN:P07::CF14N103"  >tendency_of_ocean_mole_content_of_carbon_due_to_runoff_and_sediment_dissolution</keyword>
    <keyword SDNIdent="SDN:P07::CF14N104"  >tendency_of_ocean_mole_content_of_carbon_due_to_sedimentation</keyword>
    <keyword SDNIdent="SDN:P07::CF14N105"  >tendency_of_ocean_mole_content_of_dissolved_inorganic_carbon</keyword>
+   <keyword SDNIdent="SDN:P07::CH3BBTYJ"  >platform_name</keyword>
    <keyword SDNIdent="SDN:P07::CF14N106"  >tendency_of_ocean_mole_content_of_dissolved_inorganic_carbon_due_to_biological_processes</keyword>
    <keyword SDNIdent="SDN:P07::CF14N100"  >tendency_of_mole_concentration_of_silicon_in_sea_water_due_to_biological_production</keyword>
    <keyword SDNIdent="SDN:P07::CF14N101"  >tendency_of_ocean_mole_content_of_aragonite_expressed_as_carbon_due_to_biological_production</keyword>
@@ -862,7 +863,6 @@
    <keyword SDNIdent="SDN:P07::CF12N517"  >mole_fraction_of_brox_expressed_as_bromine_in_air</keyword>
    <keyword SDNIdent="SDN:P07::CF12N516"  >mole_fraction_of_biogenic_nmvoc_expressed_as_carbon_in_air</keyword>
    <keyword SDNIdent="SDN:P07::W7942BWD"  >sensor_band_central_radiation_frequency</keyword>
-   <keyword SDNIdent="SDN:P07::RF2NF77P"  >station_wmo_id</keyword>
    <keyword SDNIdent="SDN:P07::CFV7N19"  >tendency_of_atmosphere_mass_content_of_mercury_dry_aerosol_due_to_emission</keyword>
    <keyword SDNIdent="SDN:P07::U5JCF4GZ"  >y_heat_flux_in_sea_water_due_to_advection</keyword>
    <keyword SDNIdent="SDN:P07::CFV7N17"  >tendency_of_atmosphere_mass_content_of_hexachlorobiphenyl_due_to_wet_deposition</keyword>
@@ -1544,6 +1544,7 @@
    <keyword SDNIdent="SDN:P07::CF14N67"  >surface_molecular_oxygen_partial_pressure_difference_between_sea_water_and_air</keyword>
    <keyword SDNIdent="SDN:P07::CF14N68"  >surface_upward_mole_flux_of_dimethyl_sulfide</keyword>
    <keyword SDNIdent="SDN:P07::CF14N69"  >tendency_of_mass_fraction_of_stratiform_cloud_condensed_water_in_air</keyword>
+   <keyword SDNIdent="SDN:P07::I2NHBPFG"  >platform_id</keyword>
    <keyword SDNIdent="SDN:P07::CF14N60"  >sinking_mole_flux_of_particulate_organic_matter_expressed_as_carbon_in_sea_water</keyword>
    <keyword SDNIdent="SDN:P07::CF14N61"  >sinking_mole_flux_of_particulate_organic_nitrogen_in_sea_water</keyword>
    <keyword SDNIdent="SDN:P07::CF14N62"  >sinking_mole_flux_of_particulate_organic_phosphorus_in_sea_water</keyword>
@@ -2357,7 +2358,6 @@
    <keyword SDNIdent="SDN:P07::EDFEEJCA"  >tendency_of_atmosphere_mass_content_of_methane_due_to_emission_from_land_transport</keyword>
    <keyword SDNIdent="SDN:P07::JFFJFGGE"  >tendency_of_atmosphere_mass_content_of_propene_due_to_emission_from_agricultural_waste_burning</keyword>
    <keyword SDNIdent="SDN:P07::GIABFHDG"  >tendency_of_atmosphere_mass_content_of_alcohols_due_to_emission_from_solvent_production_and_use</keyword>
-   <keyword SDNIdent="SDN:P07::G5URGJYJ"  >station_description</keyword>
    <keyword SDNIdent="SDN:P07::CFSN0308"  >sound_pressure_in_water</keyword>
    <keyword SDNIdent="SDN:P07::CFSN0307"  >sound_pressure_in_air</keyword>
    <keyword SDNIdent="SDN:P07::CFSN0309"  >sound_pressure_level_in_air</keyword>
