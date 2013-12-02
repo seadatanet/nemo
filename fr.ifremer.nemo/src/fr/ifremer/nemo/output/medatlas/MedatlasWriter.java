@@ -18,6 +18,7 @@ import fr.ifremer.nemo.output.GenerationException;
 import fr.ifremer.nemo.output.NemoWriter;
 import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Global;
+import fr.ifremer.nemo.util.Global.E_EndData;
 import fr.ifremer.nemo.util.Global.E_InputType;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.presdepth.CalcPres;
@@ -177,13 +178,18 @@ public class MedatlasWriter extends NemoWriter
 				 * derniere ligne d'une station en sortie (end station) reperee
 				 * grace a endData=EOF
 				 */
-				if (stationWrited && !lastLineWrited)
+				if ((mediaModel.getEndData() == E_EndData.EOF) && stationWrited)
+				{
+					// écriture de la dernière ligne de données
+					writeLastDataLine(dataDomain, currentStation, outputFileName);
+
+				} else if (((mediaModel.getEndData() == E_EndData.BEGIN_LINE_CHANGES) || (mediaModel.getEndData() == E_EndData.NEXT_START_WITH)) && stationWrited && (!lastLineWrited))
 				{
 					// écriture de la dernière ligne de données
 					writeLastDataLine(dataDomain, currentStation, outputFileName);
 					lastLineWrited = true;
-
 				}
+				
 				// FAE6315 on ajoute la station pour le CDI ici au lieu de le
 				// faire dans la methode writeLastDataLine
 				// qui n'est pas appelée dans tous les cas (slmt si endData=EOF)
