@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Nemo Plug-in
 Bundle-SymbolicName: fr.ifremer.nemo; singleton:=true
-Bundle-Version: 1.5.2
+Bundle-Version: 1.5.3
 Bundle-Localization: plugin
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.ui,
@@ -24,7 +24,7 @@ Bundle-ClassPath: .,
  lib/slf4j-log4j12-1.5.6.jar,
  lib/SdnVocabulary.jar,
  lib/netcdf-4.2.jar,
- lib/fr.ifremer.sdnNetCDF.0.5.jar,
+ lib/cfpointLib-0.10.jar,
  lib/odvToNetCDF.jar,
  lib/xercesImpl.jar,
  lib/xmlParserAPIs.jar,
