@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mapping>
-   <vocabulary list="SDN:P01:386:"  version="386"  date="2013-09-11T01:00:02.000"  title="BODC Parameter Usage Vocabulary"  />
+   <vocabulary list="SDN:P01:412:"  version="412"  date="2013-11-28T02:00:03.000"  title="BODC Parameter Usage Vocabulary"  />
    <mapped>
       <vocabulary list="SDN:P09:40:"  version="40"  date="2012-01-11T07:46:54.000"  title="MEDATLAS Parameter Usage Vocabulary"  />
    </mapped>
@@ -235,7 +235,7 @@
    <match>
       <element ekey="SDN:P09:40:CH1P"  elabel="CHL-A(LESS DIVINYLCHL-A)"   />
       <exact>
-         <element ekey="SDN:P01:40:NODVCHLA"  elabel="Concentration of divinyl-corrected chlorophyll-a per unit volume of the water body"   />
+         <element ekey="SDN:P01:40:NODVCHLA"  elabel="Concentration of divinyl-corrected chlorophyll-a per unit volume of the water body [particulate &lt;unknown phase]"   />
       </exact>
    </match>
    <match>
@@ -253,13 +253,13 @@
    <match>
       <element ekey="SDN:P09:40:CPHL"  elabel="CHLOROPHYLL-A TOTAL"   />
       <exact>
-         <element ekey="SDN:P01:40:CPHLZZXX"  elabel="Concentration of chlorophyll-a per unit volume of the water body"   />
+         <element ekey="SDN:P01:40:CPHLZZXX"  elabel="Concentration of chlorophyll-a per unit volume of the water body [particulate &lt;unknown phase]"   />
       </exact>
    </match>
    <match>
       <element ekey="SDN:P09:40:CPH1"  elabel="CHLOROPHYLL-A TOTAL"   />
       <exact>
-         <element ekey="SDN:P01:40:CPHLZZXX"  elabel="Concentration of chlorophyll-a per unit volume of the water body"   />
+         <element ekey="SDN:P01:40:CPHLZZXX"  elabel="Concentration of chlorophyll-a per unit volume of the water body [particulate &lt;unknown phase]"   />
       </exact>
    </match>
    <match>
@@ -703,7 +703,7 @@
    <match>
       <element ekey="SDN:P09:40:CHAD"  elabel="DIVINYL CHLOROPHYLL-A"   />
       <exact>
-         <element ekey="SDN:P01:40:DVCAXXXX"  elabel="Concentration of divinyl chlorophyll-a per unit volume of the water body"   />
+         <element ekey="SDN:P01:40:DVCAXXXX"  elabel="Concentration of divinyl chlorophyll-a per unit volume of the water body [particulate &lt;unknown phase]"   />
       </exact>
    </match>
    <match>
@@ -745,7 +745,7 @@
    <match>
       <element ekey="SDN:P09:40:CHAE"  elabel="EPIMERE CHLOROPHYLL-A"   />
       <exact>
-         <element ekey="SDN:P01:40:CHLAEPIM"  elabel="Concentration of chlorophyll-a epimer per unit volume of the water body"   />
+         <element ekey="SDN:P01:40:CHLAEPIM"  elabel="Concentration of chlorophyll-a epimer per unit volume of the water body [particulate &lt;unknown phase]"   />
       </exact>
    </match>
    <match>
@@ -1063,7 +1063,7 @@
    <match>
       <element ekey="SDN:P09:40:MMNS"  elabel="Mn IN THE SEDIMENT"   />
       <exact>
-         <element ekey="SDN:P01:40:MMNSP012"  elabel="Concentration of manganese {Mn} per unit dry weight of sediment"   />
+         <element ekey="SDN:P01:40:MMNSP012"  elabel="Concentration of manganese (total) {Mn} per unit dry weight of sediment"   />
       </exact>
    </match>
    <match>
@@ -1429,7 +1429,7 @@
    <match>
       <element ekey="SDN:P09:40:PHEA"  elabel="PHEOPHYTIN-A"   />
       <exact>
-         <element ekey="SDN:P01:40:PTAXZZXX"  elabel="Concentration of phaeophytin-a per unit volume of the water body"   />
+         <element ekey="SDN:P01:40:PTAXZZXX"  elabel="Concentration of phaeophytin-a per unit volume of the water body [particulate &lt;unknown phase]"   />
       </exact>
    </match>
    <match>
@@ -1742,7 +1742,7 @@
    <match>
       <element ekey="SDN:P09:40:TNNS"  elabel="SEDIMENT TOTAL NITROGEN"   />
       <broad>
-         <element ekey="SDN:P01:40:TNCNCNXT"  elabel="Concentration of nitrogen (total) per unit dry weight of sediment by elemental analysis"   />
+         <element ekey="SDN:P01:40:TNCNCNXT"  elabel="Concentration of nitrogen (total) {&apos;organic&apos; nitrogen} per unit dry weight of sediment by elemental analysis"   />
       </broad>
    </match>
    <match>

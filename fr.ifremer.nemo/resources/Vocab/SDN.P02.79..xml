@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<vocabulary list="SDN:P02:76:"  version="76"  date="2013-08-02T01:00:03.000"  title="SeaDataNet Parameter Discovery Vocabulary" >
+<vocabulary list="SDN:P02:79:"  version="79"  date="2013-11-21T02:00:02.000"  title="SeaDataNet Parameter Discovery Vocabulary" >
    <keyword SDNIdent="SDN:P02::WCWT"  smallLabel="Sed_WaterCont" >Sediment water content, porosity and surface area</keyword>
    <keyword SDNIdent="SDN:P02::GRZO"  smallLabel="ZooplGrowthRate" >Zooplankton growth rates</keyword>
    <keyword SDNIdent="SDN:P02::HEAD"  smallLabel="PlatOrientation" >Platform or instrument orientation</keyword>
@@ -293,11 +293,10 @@
    <keyword SDNIdent="SDN:P02::MDBO"  smallLabel="Metoid_Biota" >Trace metalloid concentrations in biota</keyword>
    <keyword SDNIdent="SDN:P02::PEBI"  smallLabel="Pesticide_Biota" >Pesticide concentrations in biota</keyword>
    <keyword SDNIdent="SDN:P02::STCO"  smallLabel="SedThermCond" >Sediment thermal conductivity</keyword>
-   <keyword SDNIdent="SDN:P02::PREX"  smallLabel="SeaLvl_Press" >Sea level expressed as pressure</keyword>
    <keyword SDNIdent="SDN:P02::RBSC"  smallLabel="RadarBScatter" >Radar backscatter</keyword>
    <keyword SDNIdent="SDN:P02::SSCN"  smallLabel="Side_Scan" >Side-scan sonar</keyword>
    <keyword SDNIdent="SDN:P02::ZADX"  smallLabel="ZoobenthDryBiomass" >Zoobenthos dry weight biomass</keyword>
-   <keyword SDNIdent="SDN:P02::CCPW"  smallLabel="SedPoreWat_TCO2" >Total dissolved inorganic carbon (TCO2) in sediment pore waters</keyword>
+   <keyword SDNIdent="SDN:P02::CCPW"  smallLabel="SedPoreWat_DIC" >Dissolved inorganic carbon in sediment pore waters</keyword>
    <keyword SDNIdent="SDN:P02::MBAN"  smallLabel="Bath_Elev" >Bathymetry and Elevation</keyword>
    <keyword SDNIdent="SDN:P02::AATX"  smallLabel="PhytoTaxaAreaWater" >Phytoplankton taxonomic surface area in water bodies</keyword>
    <keyword SDNIdent="SDN:P02::ISAT"  smallLabel="Iso_Atmos" >Stable isotope enrichment in the atmosphere</keyword>
@@ -429,4 +428,5 @@
    <keyword SDNIdent="SDN:P02::LGCR"  smallLabel="Lagran_Currents_WC" >Lagrangian currents and transport rates in the water column</keyword>
    <keyword SDNIdent="SDN:P02::D000"  smallLabel="Sed_TaxaDiatomAbund" >Diatom taxonomy-related abundance per unit mass of sediment</keyword>
    <keyword SDNIdent="SDN:P02::WVSP"  smallLabel="SpectWaveParm" >Spectral wave data parameters</keyword>
+   <keyword SDNIdent="SDN:P02::BPRP"  smallLabel="BioProp" >Biota properties</keyword>
 </vocabulary>
