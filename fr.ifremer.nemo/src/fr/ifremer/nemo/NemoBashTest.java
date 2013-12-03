@@ -81,7 +81,7 @@ public class NemoBashTest {
 	// comparer les fichiers manuels (output_eclipse) aux fichiers REFERENCE
 	public static boolean compareManualFiles = false;
 
-	public static String[] testDirAlone = { "cruiseDir_timeseries_suva" };
+	public static String[] testDirAlone = {};
 
 	public String inputName = "input";
 	public String outputName = "output_junit";
@@ -268,7 +268,7 @@ public class NemoBashTest {
 	 * MEDATLAS
 	 * =================================================================
 	 */
-	// @Test
+	@Test
 	public final void test_P091_Medatlas() {
 		testLogger.info("\r\n\r\n\r\n\r\n___________________________test_P091_Medatlas_____________________________\r\n\r\n\r\n\r\n");
 		// writeInResultsFile("P091_Medatlas;");
@@ -276,7 +276,7 @@ public class NemoBashTest {
 		Assert.assertTrue(res);
 	}
 
-	// @Test
+	@Test
 	public final void test_P011viaP091_Medatlas() {
 		testLogger.info("\r\n\r\n\r\n\r\n___________________________test_P011viaP091_Medatlas_____________________________\r\n\r\n\r\n\r\n");
 		// writeInResultsFile("P011viaP091_Medatlas;");
@@ -287,35 +287,35 @@ public class NemoBashTest {
 	 * ================================================================= ODV
 	 * =================================================================
 	 */
-	// @Test
+//	@Test
 	public final void test_P091_ODVMULTI() {
 		testLogger.info("\r\n\r\n\r\n\r\n____________________________test_P091_ODVMULTI____________________________\r\n\r\n\r\n\r\n");
 		// writeInResultsFile("P091_ODVMULTI;");
 		Assert.assertTrue(testOneType_ListConv(DataListTypeEnum.P091, Conversion.ODV, E_TypeConversion.ODV_MULTISTATIONS));
 	}
 
-	// @Test
+//	@Test
 	public final void test_P011viaP091_ODVMULTI() {
 		testLogger.info("\r\n\r\n\r\n\r\n____________________________test_P011viaP091_ODVMULTI____________________________\r\n\r\n\r\n\r\n");
 		// writeInResultsFile("P011viaP091_ODVMULTI;");
 		Assert.assertTrue(testOneType_ListConv(DataListTypeEnum.P011_VIA_P091, Conversion.ODV, E_TypeConversion.ODV_MULTISTATIONS));
 	}
 
-	// @Test
+//	@Test
 	public final void test_P011viaP021_ODVMULTI() {
 		testLogger.info("\r\n\r\n\r\n\r\n__________________________test_P011viaP021_ODVMULTI_____________________________\r\n\r\n\r\n\r\n");
 		// writeInResultsFile("P011viaP021_ODVMULTI;");
 		Assert.assertTrue(testOneType_ListConv(DataListTypeEnum.P011_VIA_P021, Conversion.ODV, E_TypeConversion.ODV_MULTISTATIONS));
 	}
 
-	// @Test
+//	@Test
 	public final void test_P011viaP091_NETCDFMULTI() {
 		testLogger.info("\r\n\r\n\r\n\r\n____________________________test_P011viaP091_NETCDFMULTI____________________________\r\n\r\n\r\n\r\n");
 		// writeInResultsFile("P011viaP091_NETCDFMULTI;");
 		Assert.assertTrue(testOneType_ListConv(DataListTypeEnum.P011_VIA_P091, Conversion.NETCDF, E_TypeConversion.NETCDF_MULTISTATIONS));
 	}
 
-	@Test
+//	@Test
 	public final void test_P011viaP021_NETCDFMULTI() {
 		testLogger.info("\r\n\r\n\r\n\r\n__________________________test_P011viaP021_NETCDFMULTI_____________________________\r\n\r\n\r\n\r\n");
 		// writeInResultsFile("P011viaP021_NETCDFMULTI;");
@@ -882,6 +882,11 @@ public class NemoBashTest {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			testLogger.error("IOException");
+			return false;
+		}
+		catch (NullPointerException e) {
+			// TODO Auto-generated catch block
+			testLogger.error("NullPointerException");
 			return false;
 		}
 	}
