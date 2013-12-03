@@ -1137,7 +1137,7 @@ public class Utils {
 				// ex : SVX00019 - Pacific Ocean
 				startLabelPosition = combo.getText().indexOf(Global.SEP)  + Global.SEP.length();
 				if(startLabelPosition > 0){
-					//label have code
+					//label have code extract only label
 					comboLibelle = combo.getText().substring(startLabelPosition).trim();
 				}
 				else
@@ -1145,6 +1145,7 @@ public class Utils {
 					//label don't have code
 					comboLibelle = combo.getText();
 				}
+				
 				if (comboLibelle.trim().equalsIgnoreCase(libelle)) {
 					blnFound = true;
 					break;
