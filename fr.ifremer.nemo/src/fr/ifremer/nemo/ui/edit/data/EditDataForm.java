@@ -108,6 +108,9 @@ public class EditDataForm extends EditForm {
 	public void afficheEdition() {
 		super.afficheEdition();
 		reinitTableData();
+		//FAE 18259
+		reinitParameters();
+		
 		ViewLog.aideData();
 
 		// affichage du texte dans la zone de gauche
