@@ -139,7 +139,7 @@ public class NetCDFWriter extends NemoWriter {
 					stationData = new HashMap<String, Object[][]>();
 
 					// écriture de l'entête campagne
-					setNetCDFHeader(inputFilePath, st);
+					setNetCDFMetadata(inputFilePath, st);
 
 					if (isProcessType_CruiseFile) {
 						iDomain.getStation().updateRef();
@@ -162,7 +162,7 @@ public class NetCDFWriter extends NemoWriter {
 					// écriture de l'entête campagne
 					variables = new HashMap<String, ISdnVariable>();
 					stationData = new HashMap<String, Object[][]>();
-					setNetCDFHeader(inputFilePath, null);
+					setNetCDFMetadata(inputFilePath, null);
 				}
 				int indiceStation = 0;
 				for (Station st : stationDomain.getStations(inputFilePath)) {
@@ -174,7 +174,6 @@ public class NetCDFWriter extends NemoWriter {
 				}
 
 				writeDataToNetCDFFile();
-				myCFPointWriterManager.finish();
 			}
 
 		} catch (Exception e) {
@@ -567,11 +566,22 @@ public class NetCDFWriter extends NemoWriter {
 						.getFillvalue();
 
 			stationData.put(ancillaryName, paramData);
+			
 		}
 
 	}
 
-	public void setNetCDFHeader(String inputFilePath, Station st)
+	/**
+	 * initialise NetCDFWriter with station metadata
+	 * *************************************************************
+	 * scheduling variable is important. 
+	 * it defines the order in the CFPoint file
+	 * ************************************************************** 
+	 * @param inputFilePath
+	 * @param st
+	 * @throws Exception
+	 */
+	public void setNetCDFMetadata(String inputFilePath, Station st)
 			throws Exception {
 
 		// create Dimension
