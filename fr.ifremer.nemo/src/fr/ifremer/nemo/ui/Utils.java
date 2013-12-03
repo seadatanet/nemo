@@ -1114,11 +1114,17 @@ public class Utils {
 			}
 		}
 	}
-
+	
+	/**
+	 * search label in combo
+	 * @param combo
+	 * @param libelle
+	 */
 	public static void selectComboLibelle(Combo combo, String libelle) {
 		int i = 0;
-		int length = libelle.length();
 		int size = combo.getItemCount();
+		String comboLibelle;
+		int startLabelPosition;
 		boolean blnFound = false;
 
 		if (libelle.equals(Global.EMPTY_STRING)) {
@@ -1127,16 +1133,26 @@ public class Utils {
 
 			while (i < size) {
 				combo.select(i);
-				int debutLibelle = combo.getText().length() - length;
-				if (debutLibelle >= 0) {
-					if (combo.getText().substring(debutLibelle).trim().equalsIgnoreCase(libelle)) {
-						blnFound = true;
-						break;
-					}
+				//check if label combo have code
+				// ex : SVX00019 - Pacific Ocean
+				startLabelPosition = combo.getText().indexOf(Global.SEP)  + Global.SEP.length();
+				if(startLabelPosition > 0){
+					//label have code
+					comboLibelle = combo.getText().substring(startLabelPosition).trim();
+				}
+				else
+				{
+					//label don't have code
+					comboLibelle = combo.getText();
+				}
+				if (comboLibelle.trim().equalsIgnoreCase(libelle)) {
+					blnFound = true;
+					break;
 				}
 				i++;
 			}
-
+			
+			//label not found add in list an select it
 			if (!blnFound) {
 				combo.add(libelle);
 				combo.select(combo.getItemCount() - 1);
