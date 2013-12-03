@@ -365,12 +365,6 @@ public class CruiseModel extends AbstractModel {
 		if (wssurvey.getRegionName() != null) {
 			setRegionName(wssurvey.getRegionName());
 		}
-		
-
-		//FAE 16868
-		/*if (wssurvey.getRegionName() != null) {
-			setRegionName(getTranscodeRegionName(wssurvey.getRegionName()));
-		}*/
 
 		if (wssurvey.getCountryCode() != null) {
 			setCountryCode(wssurvey.getCountryCode());
