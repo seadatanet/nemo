@@ -18,7 +18,6 @@ import fr.ifremer.nemo.output.GenerationException;
 import fr.ifremer.nemo.output.NemoWriter;
 import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Global;
-import fr.ifremer.nemo.util.Global.E_EndData;
 import fr.ifremer.nemo.util.Global.E_InputType;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.presdepth.CalcPres;
@@ -86,6 +85,8 @@ public class MedatlasWriter extends NemoWriter
 			 * stationDomain (donc TOUTES les stations, quel que soit le nb de
 			 * fichiers en entree)
 			 */
+			boolean stationWrited = false;
+			boolean lastLineWrited = false;
 			for (Station currentStation : stationDomain.getStations(inputFilePath))
 			{
 
@@ -97,8 +98,8 @@ public class MedatlasWriter extends NemoWriter
 
 				indexRecord = 0;
 				stationDatas.clear();
-				boolean stationWrited = false;
-				boolean lastLineWrited = false;
+				stationWrited = false;
+				lastLineWrited = false;
 
 				// scan the InputFile line by line
 				while ((readedLine = bufferedReader.readLine()) != null)
@@ -118,7 +119,7 @@ public class MedatlasWriter extends NemoWriter
 					if (isEndData() && stationWrited)
 					{
 						// écriture de la dernière ligne de données
-						writeLastDataLine(dataDomain, currentStation, outputFileName);
+						writeLastDataLine(dataDomain);
 						lastLineWrited = true;
 					}
 					/**
@@ -135,7 +136,7 @@ public class MedatlasWriter extends NemoWriter
 							// readedRef=
 							// stationDomain.getReference(currentStation.getFileName(),
 							// inputStationHeader, false);
-							readedRef = readReference(currentStation.getFileName(), inputStationHeader, false);
+							readedRef = readReference(currentStation.getFileName(), inputStationHeader);
 						}
 
 						if (inputStationHeader != null && currentStation.getReference().equals(readedRef))
@@ -174,19 +175,17 @@ public class MedatlasWriter extends NemoWriter
 				{
 					increment = Integer.valueOf(Nemo.getInstance().getDomain().getStation().getModel().getReferenceProperty().getUserValue());
 				}
-				/**
-				 * derniere ligne d'une station en sortie (end station) reperee
-				 * grace a endData=EOF
-				 */
-				if ((mediaModel.getEndData() == E_EndData.EOF) && stationWrited)
-				{
-					// écriture de la dernière ligne de données
-					writeLastDataLine(dataDomain, currentStation, outputFileName);
+		
 
-				} else if (((mediaModel.getEndData() == E_EndData.BEGIN_LINE_CHANGES) || (mediaModel.getEndData() == E_EndData.NEXT_START_WITH)) && stationWrited && (!lastLineWrited))
+				/*
+				 * apres avoir ecrit les données de la staion
+				 * on ecrit la derniere ligne.
+				 * si celle si n'a pas pas déja été ecrite
+				 */
+				if (stationWrited && !lastLineWrited)
 				{
 					// écriture de la dernière ligne de données
-					writeLastDataLine(dataDomain, currentStation, outputFileName);
+					writeLastDataLine(dataDomain);
 					lastLineWrited = true;
 				}
 				
@@ -213,7 +212,7 @@ public class MedatlasWriter extends NemoWriter
 		}
 	}
 
-	private String readReference(String inputFileName, String[] inputStationHeader, boolean mustIncrement) throws ParseException
+	private String readReference(String inputFileName, String[] inputStationHeader) throws ParseException
 	{
 		String ref = null;
 		if (iDomain.getStation().getModel().getReferenceProperty().isUserProvided())
@@ -256,7 +255,7 @@ public class MedatlasWriter extends NemoWriter
 		indexRecord++;
 	}
 
-	private void writeLastDataLine(DataDomain data, Station currentStation, String outputFileName)
+	private void writeLastDataLine(DataDomain data)
 	{
 		if (iDomain.getConversion().isSortData())
 		{

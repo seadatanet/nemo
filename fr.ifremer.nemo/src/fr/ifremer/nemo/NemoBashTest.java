@@ -287,35 +287,35 @@ public class NemoBashTest {
 	 * ================================================================= ODV
 	 * =================================================================
 	 */
-//	@Test
+	@Test
 	public final void test_P091_ODVMULTI() {
 		testLogger.info("\r\n\r\n\r\n\r\n____________________________test_P091_ODVMULTI____________________________\r\n\r\n\r\n\r\n");
 		// writeInResultsFile("P091_ODVMULTI;");
 		Assert.assertTrue(testOneType_ListConv(DataListTypeEnum.P091, Conversion.ODV, E_TypeConversion.ODV_MULTISTATIONS));
 	}
 
-//	@Test
+	@Test
 	public final void test_P011viaP091_ODVMULTI() {
 		testLogger.info("\r\n\r\n\r\n\r\n____________________________test_P011viaP091_ODVMULTI____________________________\r\n\r\n\r\n\r\n");
 		// writeInResultsFile("P011viaP091_ODVMULTI;");
 		Assert.assertTrue(testOneType_ListConv(DataListTypeEnum.P011_VIA_P091, Conversion.ODV, E_TypeConversion.ODV_MULTISTATIONS));
 	}
 
-//	@Test
+	@Test
 	public final void test_P011viaP021_ODVMULTI() {
 		testLogger.info("\r\n\r\n\r\n\r\n__________________________test_P011viaP021_ODVMULTI_____________________________\r\n\r\n\r\n\r\n");
 		// writeInResultsFile("P011viaP021_ODVMULTI;");
 		Assert.assertTrue(testOneType_ListConv(DataListTypeEnum.P011_VIA_P021, Conversion.ODV, E_TypeConversion.ODV_MULTISTATIONS));
 	}
 
-//	@Test
+	@Test
 	public final void test_P011viaP091_NETCDFMULTI() {
 		testLogger.info("\r\n\r\n\r\n\r\n____________________________test_P011viaP091_NETCDFMULTI____________________________\r\n\r\n\r\n\r\n");
 		// writeInResultsFile("P011viaP091_NETCDFMULTI;");
 		Assert.assertTrue(testOneType_ListConv(DataListTypeEnum.P011_VIA_P091, Conversion.NETCDF, E_TypeConversion.NETCDF_MULTISTATIONS));
 	}
 
-//	@Test
+	@Test
 	public final void test_P011viaP021_NETCDFMULTI() {
 		testLogger.info("\r\n\r\n\r\n\r\n__________________________test_P011viaP021_NETCDFMULTI_____________________________\r\n\r\n\r\n\r\n");
 		// writeInResultsFile("P011viaP021_NETCDFMULTI;");
@@ -834,7 +834,7 @@ public class NemoBashTest {
 		try {
 			String newRefLine = "";
 			if (bufOut != null && bufRef != null) {
-				while (bufOut.ready() && identical) {
+				while (bufRef.ready() && bufOut.ready() && identical) {
 					outputLine = bufOut.readLine();
 					refFileLine = bufRef.readLine();
 					String format = "";
@@ -876,7 +876,13 @@ public class NemoBashTest {
 					}
 
 				}
+				//normalement les 2 fichier doivent etre a la fin si identique.
+				if(bufRef.ready() || bufOut.ready())
+				{
+					identical = false;
+				}
 			}
+			
 			return identical;
 
 		} catch (IOException e) {
