@@ -69,6 +69,7 @@ public abstract class NemoWriter {
 
 	protected boolean isProcessType_CruiseFile = false;
 	protected boolean isProcessType_CollectionDir = false;
+	protected boolean isProcessType_CollectionFiles = false;
 
 	protected boolean isInputType_Trajectory;
 	protected boolean isInputType_Profile;
@@ -99,6 +100,7 @@ public abstract class NemoWriter {
 		isRefIncremented = iDomain.getStation().getModel().getReferenceProperty().isUserProvided();
 		isProcessType_CruiseFile = mediaDomain.getModel().getProcessType() == E_ProcessType.CRUISE_FILE;
 		isProcessType_CollectionDir = mediaDomain.getModel().getProcessType() == E_ProcessType.COLLECTION_DIR;
+		isProcessType_CollectionFiles = mediaDomain.getModel().getProcessType() == E_ProcessType.COLLECTION_FILES;
 
 		E_TypeConversion selectedConversion = iDomain.getConversion().getCurrent();
 		isConversionTo_ODVMonostation = (selectedConversion == E_TypeConversion.ODV_MONOSTATION);

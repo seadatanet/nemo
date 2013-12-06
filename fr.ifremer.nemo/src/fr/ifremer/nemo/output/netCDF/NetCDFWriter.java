@@ -197,7 +197,7 @@ public class NetCDFWriter extends NemoWriter {
 		boolean stationWrited = false;
 		indexRecord = 0;
 		stationDatas.clear();
-		StringBuffer stationHeader = station.getOdvEmptyStationHeader();
+		station.getOdvEmptyStationHeader();
 
 		// Local CDI ID
 		String localCdiId = stationDomain.getLocalCdiId(cruiseDomain,
@@ -254,7 +254,7 @@ public class NetCDFWriter extends NemoWriter {
 				if (inputStationHeader != null
 						&& currentStation.getReference().equals(stRef)) {
 
-					stationHeader = iDomain.getStation().getHeader(
+					iDomain.getStation().getHeader(
 							myConversion, currentStation, inputStationHeader);
 
 					// FAE 4673 Pb si une seule ligne données et pas d'entête
@@ -329,7 +329,7 @@ public class NetCDFWriter extends NemoWriter {
 						}
 
 						writeDataLine(currentStation, readedLine, indiceStation);
-						stationHeader = station.getOdvEmptyStationHeader();
+						station.getOdvEmptyStationHeader();
 					}
 					stationWrited = true;
 				} else if (stationWrited || inputStationHeader == null) {
@@ -403,7 +403,7 @@ public class NetCDFWriter extends NemoWriter {
 						currentStation.getMetaFlag(Intern.S_DATE));
 
 				writeDataLine(currentStation, readedLine, indiceStation);
-				stationHeader = station.getOdvEmptyStationHeader();
+				station.getOdvEmptyStationHeader();
 			}
 
 		}
@@ -853,15 +853,16 @@ public class NetCDFWriter extends NemoWriter {
 	/**
 	 * get longname from  ProcessType and input Type
 	 * @return SDN_CRUISE Long Name
+	 * @throws Exception 
 	 */
-	private String getlongNameCruise() {
+	private String getlongNameCruise() throws Exception {
 		// 14926 et 14931
 		// LongName suivant ProcessType
 		String longNameCruise = Global.EMPTY_STRING;
 		if (mediaModel.getProcessType() == E_ProcessType.COLLECTION_DIR) {
 			longNameCruise = cruiseDomain.getDataSetRef();
 		} else if (mediaModel.getProcessType() == E_ProcessType.COLLECTION_FILES) {
-			//TODO CPT MODIF LIB?
+			//18332
 			switch(mediaModel.getInputType())
 			{
 				case PROFILE:
@@ -873,8 +874,6 @@ public class NetCDFWriter extends NemoWriter {
 				case TRAJECTORY:
 					longNameCruise= ParameterValues.SDN_CRUISE_LONG_NAME_CRUISE_TRAJECTORY;
 					break;
-				default:
-					longNameCruise = Intern.unknown;
 			}
 		} else {
 			longNameCruise = cruiseDomain.getModel().getName().trim();
@@ -898,68 +897,81 @@ public class NetCDFWriter extends NemoWriter {
 	 * @param sdnCruise
 	 */
 	private void addCruiseOptionalAttribute(SdnCruiseVariable sdnCruise) {
-		// sous onglet Reference
-		if (cruiseDomain.getModel().getShipCode() != null
-				&& !cruiseDomain.getModel().getShipCode().isEmpty())
-			sdnCruise.addVariableAttribute(ModelDescription.node_shipcode,
-					cruiseDomain.getModel().getShipCode());
-		if (cruiseDomain.getModel().getShipName() != null
-				&& !cruiseDomain.getModel().getShipName().isEmpty())
-			sdnCruise.addVariableAttribute(ModelDescription.node_shipname,
-					cruiseDomain.getModel().getShipName());
 
-		// sous onglet Location
-		try {
-			sdnCruise.addVariableAttribute(ModelDescription.node_startdate,
-					DateTimeUtils.getVariantDateTime(cruiseDomain.getModel()
-							.getStartDate()));
-		} catch (Exception e) {
+		if(!(isProcessType_CollectionFiles || isProcessType_CollectionDir))
+		{
+			// sous onglet Reference
+			if (cruiseDomain.getModel().getShipCode() != null
+					&& !cruiseDomain.getModel().getShipCode().isEmpty())
+				sdnCruise.addVariableAttribute(ModelDescription.node_shipcode,
+						cruiseDomain.getModel().getShipCode());
+			if (cruiseDomain.getModel().getShipName() != null
+					&& !cruiseDomain.getModel().getShipName().isEmpty())
+				sdnCruise.addVariableAttribute(ModelDescription.node_shipname,
+						cruiseDomain.getModel().getShipName());
 		}
-		try {
-			sdnCruise.addVariableAttribute(ModelDescription.node_enddate,
-					DateTimeUtils.getVariantDateTime(cruiseDomain.getModel()
-							.getEndDate()));
-		} catch (Exception e) {
+		
+		if(!isProcessType_CollectionFiles)
+		{
+			// sous onglet Location
+			try {
+				sdnCruise.addVariableAttribute(ModelDescription.node_startdate,
+						DateTimeUtils.getVariantDateTime(cruiseDomain.getModel()
+								.getStartDate()));
+			} catch (Exception e) {
+			}
+			try {
+				sdnCruise.addVariableAttribute(ModelDescription.node_enddate,
+						DateTimeUtils.getVariantDateTime(cruiseDomain.getModel()
+								.getEndDate()));
+			} catch (Exception e) {
+			}
 		}
-		if (cruiseDomain.getModel().getRegionName() != null
-				&& !cruiseDomain.getModel().getRegionName().isEmpty())
-			sdnCruise.addVariableAttribute(ModelDescription.node_region,
-					cruiseDomain.getModel().getRegionName());
+		
+		if(!(isProcessType_CollectionFiles || isProcessType_CollectionDir))
+		{
+			if (cruiseDomain.getModel().getRegionName() != null
+					&& !cruiseDomain.getModel().getRegionName().isEmpty())
+				sdnCruise.addVariableAttribute(ModelDescription.node_region,
+						cruiseDomain.getModel().getRegionName());
+	
+			// date source
+			if (cruiseDomain.getModel().getCountryCode() != null
+					&& !cruiseDomain.getModel().getCountryCode().isEmpty())
+				sdnCruise.addVariableAttribute(ModelDescription.node_country,
+						cruiseDomain.getModel().getCountryCode());
+			if (cruiseDomain.getModel().getLaboratories() != null
+					&& !cruiseDomain.getModel().getLaboratories().isEmpty())
+				sdnCruise.addVariableAttribute(
+						ModelDescription.node_laboratories, cruiseDomain.getModel()
+								.getLaboratories());
+			if (cruiseDomain.getModel().getChiefScientist() != null
+					&& !cruiseDomain.getModel().getChiefScientist().isEmpty())
+				sdnCruise.addVariableAttribute(ModelDescription.node_chief,
+						cruiseDomain.getModel().getChiefScientist());
+			if (cruiseDomain.getModel().getProjectName() != null
+					&& !cruiseDomain.getModel().getProjectName().isEmpty())
+				sdnCruise.addVariableAttribute(ModelDescription.node_project,
+						cruiseDomain.getModel().getProjectName());
+	
+			// archive center
+			if (cruiseDomain.getModel().getDataCentre() != null
+					&& !cruiseDomain.getModel().getDataCentre().isEmpty())
+				sdnCruise.addVariableAttribute(ModelDescription.node_datacenter,
+						cruiseDomain.getModel().getDataCentre());
+			if (cruiseDomain.getModel().getAvailability() != null)
+				sdnCruise.addVariableAttribute(
+						ModelDescription.node_availability, cruiseDomain.getModel()
+								.getAvailability().name());
+		
 
-		// date source
-		if (cruiseDomain.getModel().getCountryCode() != null
-				&& !cruiseDomain.getModel().getCountryCode().isEmpty())
-			sdnCruise.addVariableAttribute(ModelDescription.node_country,
-					cruiseDomain.getModel().getCountryCode());
-		if (cruiseDomain.getModel().getLaboratories() != null
-				&& !cruiseDomain.getModel().getLaboratories().isEmpty())
-			sdnCruise.addVariableAttribute(
-					ModelDescription.node_laboratories, cruiseDomain.getModel()
-							.getLaboratories());
-		if (cruiseDomain.getModel().getChiefScientist() != null
-				&& !cruiseDomain.getModel().getChiefScientist().isEmpty())
-			sdnCruise.addVariableAttribute(ModelDescription.node_chief,
-					cruiseDomain.getModel().getChiefScientist());
-		if (cruiseDomain.getModel().getProjectName() != null
-				&& !cruiseDomain.getModel().getProjectName().isEmpty())
-			sdnCruise.addVariableAttribute(ModelDescription.node_project,
-					cruiseDomain.getModel().getProjectName());
-
-		// archive center
-		if (cruiseDomain.getModel().getDataCentre() != null
-				&& !cruiseDomain.getModel().getDataCentre().isEmpty())
-			sdnCruise.addVariableAttribute(ModelDescription.node_datacenter,
-					cruiseDomain.getModel().getDataCentre());
-		if (cruiseDomain.getModel().getAvailability() != null)
-			sdnCruise.addVariableAttribute(
-					ModelDescription.node_availability, cruiseDomain.getModel()
-							.getAvailability().name());
-
-		// Comment
-		if (cruiseDomain.getModel().getComment() != null
-				&& !cruiseDomain.getModel().getComment().isEmpty())
-			sdnCruise.addVariableAttribute(ModelDescription.node_comment,
-					cruiseDomain.getModel().getComment());
+			// Comment
+			if (cruiseDomain.getModel().getComment() != null
+					&& !cruiseDomain.getModel().getComment().isEmpty())
+				sdnCruise.addVariableAttribute(ModelDescription.node_comment,
+						cruiseDomain.getModel().getComment());
+		
+		}
 	}
 
 	private String getFeatureType() {
