@@ -18,7 +18,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.swt.widgets.Table;
 
 import fr.ifremer.nemo.Nemo;
-import fr.ifremer.nemo.config.UpdateBean.EtatUpdate;
+import fr.ifremer.nemo.config.UpdateStatus.EtatUpdate;
 import fr.ifremer.nemo.ns_ws_edmo.Edmo_webservice;
 import fr.ifremer.nemo.ns_ws_edmo.Edmo_webserviceLocator;
 import fr.ifremer.nemo.ns_ws_edmo.Edmo_webserviceSoap;
@@ -638,13 +638,12 @@ public class NemoLists implements Cloneable
 	/**
 	 * 
 	 */
-	public static void updateParameters(IProgressMonitor monitor, NemoWS service, UpdateBean updateNemo)
+	public static void updateParameters(IProgressMonitor monitor, NemoWS service, UpdateStatusList updateNemoList)
 	{
 
 		String listName = Intern.list_nemo_parameters;
 		int nbParameters = 0;
-		UpdateBean updateParameters = new UpdateBean(listName, listName);
-		updateParameters.setNbTot(_parameters.size());
+		UpdateStatusNemo updateParameters = new UpdateStatusNemo(listName, listName);
 
 		if (service != null)
 		{
@@ -724,23 +723,22 @@ public class NemoLists implements Cloneable
 			updateParameters.setEtat(EtatUpdate.FAILED);
 		}
 
-		updateNemo.addSubUpdate(updateParameters);
-		if (updateNemo.getEtat().compareTo(updateParameters.getEtat()) < 0)
+		updateNemoList.addUpdateStatus(updateParameters);
+		if (updateNemoList.getEtat().compareTo(updateParameters.getEtat()) < 0)
 		{
-			updateNemo.setEtat(updateParameters.getEtat());
+			updateNemoList.setEtat(updateParameters.getEtat());
 		}
 	}
 
 	/**
 	 * 
 	 */
-	public static void updateSurveys(IProgressMonitor monitor, NemoWS service, UpdateBean updateNemo)
+	public static void updateSurveys(IProgressMonitor monitor, NemoWS service, UpdateStatusList updateNemoList)
 	{
 
 		String listName = Intern.list_nemo_survey;
 		int nbSurveys = 0;
-		UpdateBean updateSurveys = new UpdateBean(listName, listName);
-		updateSurveys.setNbTot(_surveys.size());
+		UpdateStatusNemo updateSurveys = new UpdateStatusNemo(listName, listName);
 
 		if (service != null)
 		{
@@ -822,10 +820,10 @@ public class NemoLists implements Cloneable
 			updateSurveys.setEtat(EtatUpdate.FAILED);
 		}
 
-		updateNemo.addSubUpdate(updateSurveys);
-		if (updateNemo.getEtat().compareTo(updateSurveys.getEtat()) < 0)
+		updateNemoList.addUpdateStatus(updateSurveys);
+		if (updateNemoList.getEtat().compareTo(updateSurveys.getEtat()) < 0)
 		{
-			updateNemo.setEtat(updateSurveys.getEtat());
+			updateNemoList.setEtat(updateSurveys.getEtat());
 		}
 	}
 
@@ -833,8 +831,7 @@ public class NemoLists implements Cloneable
 	public static void updateEdmo(IProgressMonitor monitor)
 	{
 
-		UpdateBean updateEdmo = ManageLists.getUpdate(Intern.id_edmo);
-		updateEdmo.setNbTot(_edmo.size());
+		UpdateStatusNemo updateEdmo = (UpdateStatusNemo) ManageLists.getUpdate(Intern.id_edmo);
 		int nbEdmo = 0;
 		FileOutputStream stream = null;
 		String result = Global.EMPTY_STRING;

@@ -12,13 +12,13 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.actions.ActionFactory;
 
 import fr.ifremer.nemo.config.ManageLists;
-import fr.ifremer.nemo.config.UpdateBean;
-import fr.ifremer.nemo.config.UpdateBean.EtatUpdate;
+import fr.ifremer.nemo.config.UpdateStatus;
+import fr.ifremer.nemo.config.UpdateStatus.EtatUpdate;
+import fr.ifremer.nemo.config.UpdateStatusList;
 import fr.ifremer.nemo.ui.SWTProcessWS;
 import fr.ifremer.nemo.ui.SWTProgressWS;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.util.Global;
-import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
 
 public class UpdateAction extends Action implements ISelectionListener,
@@ -32,7 +32,7 @@ public class UpdateAction extends Action implements ISelectionListener,
 
     // vars necessaires e la fenetre d'options
 
-    public static Shell shelloptions = new Shell();;
+    public static Shell shelloptions = new Shell();
 
     public static int options;
 
@@ -47,7 +47,8 @@ public class UpdateAction extends Action implements ISelectionListener,
 
     }
 
-    public void dispose()
+    @Override
+	public void dispose()
     {
         window.getSelectionService().addSelectionListener(this);
 
@@ -65,7 +66,7 @@ public class UpdateAction extends Action implements ISelectionListener,
 
        String interrompuError = new SWTProgressWS().run();
 
-        if (!interrompuError.equals(""))
+        if (!interrompuError.equals(Global.EMPTY_STRING))
         {
             message.append(Messages.update_info);
             message.append(Global.RN);
@@ -75,25 +76,29 @@ public class UpdateAction extends Action implements ISelectionListener,
         }
 
         // affichage du resultats des mises a jour
-        ArrayList<UpdateBean> updatedLists = ManageLists.getUpdatedLists();
-        for (UpdateBean list : updatedLists)
+        ArrayList<UpdateStatus> updatedLists = ManageLists.getUpdatedLists();
+        for (UpdateStatus list : updatedLists)
         {
+        	//si valide
             if (list.getEtat().compareTo(EtatUpdate.LOCAL) > 0)
             {
-                message.append(getMessageUpdate(list, false));
-                ArrayList<UpdateBean> subUpdatedLists = list.getSubUpdates();
-                for (UpdateBean sublist : subUpdatedLists)
-                {
-                    message.append(getMessageUpdate(sublist, true));
-                }
+            	message.append(getMessageUpdate(list, false));
+            	//si  UpdateStatus est en faite une liste
+            	if(list instanceof UpdateStatusList)
+            	{
+	                ArrayList<UpdateStatus> subUpdatedLists = ((UpdateStatusList) list).getUpdateList();
+	                for (UpdateStatus sublist : subUpdatedLists)
+	                {
+	                    message.append(getMessageUpdate(sublist, true));
+	                }
+            	}
             }
         }
 
-        MessageDialog.openInformation(shelloptions,
-            "WebServices Info", message.toString()); //$NON-NLS-1$
+        MessageDialog.openInformation(shelloptions, "WebServices Info", message.toString()); //$NON-NLS-1$
     }
 
-    private String getMessageUpdate(UpdateBean list, boolean sublist)
+    private String getMessageUpdate(UpdateStatus list, boolean sublist)
     {
         StringBuffer message = new StringBuffer();
         if (!sublist)
@@ -103,7 +108,10 @@ public class UpdateAction extends Action implements ISelectionListener,
         }
         else
         {
-            message.append(Global.TAB);
+            message.append(Global.SPACE);
+            message.append(Global.SPACE);
+            message.append(Global.SPACE);
+            message.append(Global.SPACE);
             message.append(padRight(list.getName(), 33, ' '));
             if (list.getName().trim().length() < 15)
                 message.append(Global.TAB);
@@ -112,40 +120,28 @@ public class UpdateAction extends Action implements ISelectionListener,
         message.append(Global.TAB);
         message.append(Global.SPACE);
         message.append(Global.SPACE);
-        EtatUpdate etat = list.getEtat();
-        message.append(Messages.getString(etat.toString()));
-        switch (etat)
-        {
-            case UPDATED:
-                message.append(Global.SEP);
-                message.append(list.getNbRetrieve());
-                message.append(Global.SPACE);
-                message.append(Messages.retrieved);
-            break;
-            case INTERRUPTED:
-                if (!sublist && !list.getId().equals(Intern.id_nemo)
-                        && !list.getId().equals(Intern.id_edmo))
-                {
-                    message.append(Global.SEP);
-                    message.append(list.getNbRetrieve());
-                    message.append(Global.SPACE);
-                    message.append(Messages.retrieved);
-                    message.append(" / "); //$NON-NLS-1$
-                    message.append(list.getNbTot());
-                }
-            break;
-            default:
-            break;
-        }
+        
+        message.append(list.getStatusString());
+        
         message.append(Global.RN);
         return message.toString();
     }
 
-    public void selectionChanged(IWorkbenchPart part, ISelection incoming)
+    @Override
+	public void selectionChanged(IWorkbenchPart part, ISelection incoming)
     {
         // implement ISelectionListener...
     }
 
+    /**
+     * transforme la chaine d'entrée 
+     * pour n'affichier qu un certain nombre de caractere
+     * defini par max lenght
+     * @param input string
+     * @param maxlength max length use
+     * @param pad
+     * @return
+     */
     private String padRight(String input, int maxlength, char pad)
     {
         StringBuffer output = new StringBuffer();

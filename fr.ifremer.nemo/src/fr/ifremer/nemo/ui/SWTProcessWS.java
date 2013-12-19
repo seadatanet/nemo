@@ -12,8 +12,8 @@ import org.eclipse.jface.operation.IRunnableWithProgress;
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.config.ManageLists;
 import fr.ifremer.nemo.config.NemoLists;
-import fr.ifremer.nemo.config.UpdateBean;
-import fr.ifremer.nemo.config.UpdateBean.EtatUpdate;
+import fr.ifremer.nemo.config.UpdateStatus.EtatUpdate;
+import fr.ifremer.nemo.config.UpdateStatusList;
 import fr.ifremer.nemo.config.VocabLists;
 import fr.ifremer.nemo.input.CruiseModel;
 import fr.ifremer.nemo.util.Intern;
@@ -44,8 +44,7 @@ public class SWTProcessWS implements IRunnableWithProgress
 				// appel au WebService NEMO
 				monitor.subTask(Messages.connect_nemo);
 				NemoWS service = NemoLists.callNemoWS();
-				UpdateBean updateNemo = ManageLists.getUpdate(Intern.id_nemo);
-				updateNemo.setNbTot(Integer.parseInt(Intern.nbnemolists));
+				UpdateStatusList updateNemo = (UpdateStatusList) ManageLists.getUpdate(Intern.id_nemo);
 
 				if (!monitor.isCanceled())
 				{
@@ -58,8 +57,6 @@ public class SWTProcessWS implements IRunnableWithProgress
 					monitor.subTask(Messages.update_survey);
 					NemoLists.updateSurveys(monitor, service, updateNemo);
 				}
-
-				updateNemo.setNbRetrieve();
 
 				if (monitor.isCanceled())
 				{

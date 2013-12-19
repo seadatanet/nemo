@@ -13,7 +13,7 @@ import java.util.List;
 import sdn.vocabulary.interfaces.ICollection;
 import sdn.vocabulary.interfaces.ICollectionMapping;
 import sdn.vocabulary.interfaces.IElement;
-import fr.ifremer.nemo.config.UpdateBean.EtatUpdate;
+import fr.ifremer.nemo.config.UpdateStatus.EtatUpdate;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.ws.WSDataType;
 
@@ -24,7 +24,7 @@ import fr.ifremer.nemo.ws.WSDataType;
  */
 public class ManageLists
 {
-    static protected ArrayList<UpdateBean> updatedLists;
+    static protected ArrayList<UpdateStatus> updatedLists;
     
     static protected List<WSDataType> _dataTypes = new java.util.ArrayList<WSDataType>();
     
@@ -43,7 +43,7 @@ public class ManageLists
     }
     
     
-    public static ArrayList<UpdateBean> getUpdatedLists()
+    public static ArrayList<UpdateStatus> getUpdatedLists()
     {
         return updatedLists;
     }
@@ -52,9 +52,9 @@ public class ManageLists
      * @param id
      * @return the updatedList selected
      */
-    public static UpdateBean getUpdate(String id)
+    public static UpdateStatus getUpdate(String id)
     {
-        for (UpdateBean value : updatedLists)
+        for (UpdateStatus value : updatedLists)
         {
             if (value.getId().equals(id))
             {
@@ -70,11 +70,11 @@ public class ManageLists
      */
     private static void initUpdatedLists()
     {
-        updatedLists = new ArrayList<UpdateBean>();
-        updatedLists.add(new UpdateBean(Intern.id_nemo));
-        updatedLists.add(new UpdateBean(Intern.id_lists));
-        updatedLists.add(new UpdateBean(Intern.id_maps));
-        updatedLists.add(new UpdateBean(Intern.id_edmo));
+        updatedLists = new ArrayList<UpdateStatus>();
+        updatedLists.add(new UpdateStatusList(Intern.id_nemo));
+        updatedLists.add(new UpdateStatusList(Intern.id_lists));
+        updatedLists.add(new UpdateStatusList(Intern.id_maps));
+        updatedLists.add(new UpdateStatusNemo(Intern.id_edmo));
     }
     
 
@@ -90,7 +90,7 @@ public class ManageLists
             initUpdatedLists();
         } else
         {
-            for (UpdateBean value : updatedLists)
+            for (UpdateStatus value : updatedLists)
             {
                 value.reset();
             }
@@ -396,8 +396,8 @@ public class ManageLists
     public static void updateDataTypes()
     {
         // les listes sont-elles mises à jour ?
-        UpdateBean parameters = ManageLists.getUpdate(Intern.id_nemo).getSubUpdate(Intern.list_ROSCOPparameters);
-        UpdateBean instruments = ManageLists.getUpdate(Intern.id_nemo).getSubUpdate(Intern.list_instruments);
+        UpdateStatus parameters =((UpdateStatusList) ManageLists.getUpdate(Intern.id_nemo)).getUpdateStatus(Intern.list_ROSCOPparameters);
+        UpdateStatus instruments =((UpdateStatusList)  ManageLists.getUpdate(Intern.id_nemo)).getUpdateStatus(Intern.list_instruments);
 
         if ((parameters != null && parameters.getEtat().equals(EtatUpdate.UPDATED))
                 || (instruments != null && instruments.getEtat().equals(EtatUpdate.UPDATED)))

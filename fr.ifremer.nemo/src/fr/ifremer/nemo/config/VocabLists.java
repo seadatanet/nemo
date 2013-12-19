@@ -20,13 +20,13 @@ import sdn.vocabulary.interfaces.ICollectionFactory;
 import sdn.vocabulary.interfaces.ICollectionMapping;
 import sdn.vocabulary.interfaces.IElement;
 import sdn.vocabulary.interfaces.VocabularyException;
-import fr.ifremer.nemo.config.UpdateBean.EtatUpdate;
+import fr.ifremer.nemo.config.UpdateStatus.EtatUpdate;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
 
 /**
- * Description: Class permettant de gerer le list BODDC via la librartie SDNVocabulary
+ * Description: Class permettant de gerer les listes BODC via la librartie SDNVocabulary
  * @author dcapitai
  *
  */
@@ -177,12 +177,11 @@ public class VocabLists {
 
 	public static void updateVocabLists(IProgressMonitor monitor) {
 
-		UpdateBean updateLists = ManageLists.getUpdate(Intern.id_lists);
+		UpdateStatusList updateLists = (UpdateStatusList) ManageLists.getUpdate(Intern.id_lists);
 		String[] listNames = Intern.vocabLists.split(Global.COMMA);
 		int keySetSize = listNames.length;
 
 		int idxCurrent = 0;
-		int nbRetrieve = 0;
 		try {
 			cf.reload();
 		} catch (VocabularyException e1) {
@@ -203,8 +202,8 @@ public class VocabLists {
 					msg.append("]");//$NON-NLS-1$
 					monitor.subTask(msg.toString());
 
-					UpdateBean updateMap = updateVocabList(listName);
-					updateLists.addSubUpdate(updateMap);
+					UpdateStatusBODC updateMap = updateVocabList(listName);
+					updateLists.addUpdateStatus(updateMap);
 
 					if (updateLists.getEtat().compareTo(updateMap.getEtat()) < 0) {
 						updateLists.setEtat(updateMap.getEtat());
@@ -212,8 +211,8 @@ public class VocabLists {
 				} else {
 					updateLists.setEtat(EtatUpdate.INTERRUPTED);
 				}
-
-				updateLists.setNbRetrieve(nbRetrieve);
+				//TODO
+				//updateLists.setNbRetrieve(nbRetrieve);
 			} catch (Exception e) {
 				updateLists.setEtat(EtatUpdate.FAILED);
 				e.printStackTrace();
@@ -221,7 +220,7 @@ public class VocabLists {
 		}
 	}
 
-	public static UpdateBean updateVocabList(String listId) {
+	public static UpdateStatusBODC updateVocabList(String listId) {
 
 		String label = _vocabList.get(listId).getDescription().getLabel();
 
@@ -229,14 +228,12 @@ public class VocabLists {
 		msg.append(listId);
 		msg.append(Global.SEP);
 		msg.append(label);
-		UpdateBean updateList = new UpdateBean(listId, msg.toString());
-		int nbTot = _vocabList.get(listId).getElements().size();
-		updateList.setNbTot(nbTot);
+		UpdateStatusBODC updateList = new UpdateStatusBODC(listId, msg.toString());
 		int numVersion = _vocabList.get(listId).getDescription().getVersion();
 
 		try {
 			cf.loadCollections(true, listId);
-			_vocabList.put(listId, cf.getCollection(true, listId));
+			_vocabList.put(listId, cf.getCollection(false, listId));
 			updateList.setEtat(EtatUpdate.UPDATED);
 		} catch (VocabularyException e) {
 			updateList.setEtat(EtatUpdate.FAILED);
@@ -245,19 +242,18 @@ public class VocabLists {
 
 		if (numVersion == _vocabList.get(listId).getDescription().getVersion())
 			updateList.setEtat(EtatUpdate.CHECKED);
-		updateList.setNbRetrieve(_vocabList.get(listId).getElements().size() - nbTot);
+		updateList.setVersion(numVersion);
 		return updateList;
 	}
 
 	public static void updateMapLists(IProgressMonitor monitor) {
 
-		UpdateBean updateMaps = ManageLists.getUpdate(Intern.id_maps);
+		UpdateStatusList updateMaps = (UpdateStatusList) ManageLists.getUpdate(Intern.id_maps);
 
 		String[] listMaps = Intern.vocabMaps.split(Global.COMMA);
 		int keySetSize = listMaps.length;
 
 		int idxCurrent = 0;
-		int nbRetrieve = 0;
 
 		for (String mapName : listMaps) {
 			try {
@@ -273,12 +269,8 @@ public class VocabLists {
 					msg.append("]");//$NON-NLS-1$
 					monitor.subTask(msg.toString());
 
-					UpdateBean updateMap = updateMapLists(mapName);
-					updateMaps.addSubUpdate(updateMap);
-					if (updateMap.getEtat().compareTo(EtatUpdate.UPDATED) == 0
-							|| updateMap.getEtat().compareTo(EtatUpdate.CHECKED) == 0) {
-						nbRetrieve++;
-					}
+					UpdateStatusBODC updateMap = updateMapLists(mapName);
+					updateMaps.addUpdateStatus(updateMap);
 					if (updateMaps.getEtat().compareTo(updateMap.getEtat()) < 0) {
 						updateMaps.setEtat(updateMap.getEtat());
 					}
@@ -286,7 +278,7 @@ public class VocabLists {
 				} else {
 					updateMaps.setEtat(EtatUpdate.INTERRUPTED);
 				}
-				updateMaps.setNbRetrieve(nbRetrieve);
+				//updateMaps.setNbRetrieve(nbRetrieve);
 
 			} catch (Exception e) {
 				updateMaps.setEtat(EtatUpdate.FAILED);
@@ -295,9 +287,9 @@ public class VocabLists {
 		}
 	}
 
-	public static UpdateBean updateMapLists(String mapName) {
+	public static UpdateStatusBODC updateMapLists(String mapName) {
 
-		UpdateBean updateMap = new UpdateBean(mapName, mapName);
+		UpdateStatusBODC updateMap = new UpdateStatusBODC(mapName, mapName);
 		try {
 			String[] listNames = mapName.split(Global.UNDERSCORE);
 			ICollection vocab = _vocabList.get(listNames[1]);
