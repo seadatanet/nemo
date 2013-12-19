@@ -5,6 +5,7 @@ import java.util.ResourceBundle;
 
 import org.eclipse.osgi.util.NLS;
 
+
 /**
  * Intern application properties
  * @author IFREMER
@@ -104,8 +105,10 @@ public class Intern extends NLS {
 	public static String CDIResumeWriter_separateur;
 
 	public static String CruiseShemaFactory;
-	public static String CruiseShemaLocation;
-	public static String CruiseXSL;
+	public static String CruiseShemaLocationISO19139;
+	public static String CruiseXSLISO19139;
+	public static String CruiseShemaLocationISO19115;
+	public static String CruiseXSLISO19115;
 	public static String ModelXSL;
 	public static String CruiseDateFormat;
 
@@ -158,6 +161,7 @@ public class Intern extends NLS {
 		// initialize resource bundle
 		NLS.initializeMessages(BUNDLE_NAME, Intern.class);
 	}
+
 
 	private Intern() {
 	}

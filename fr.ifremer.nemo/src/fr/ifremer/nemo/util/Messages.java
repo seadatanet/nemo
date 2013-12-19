@@ -413,6 +413,7 @@ public class Messages {
 	public static String update_edmo;
 	public static String update_vocabmaps;
 	public static String retrieved;
+	public static String version;
 	public static String UPDATED;
 	public static String CHECKED;
 	public static String FAILED;

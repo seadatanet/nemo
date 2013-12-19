@@ -280,8 +280,21 @@ public class EditCruiseForm extends EditForm {
 		// cruiseDomain.getModel().reset();
 
 		CruiseModel cruiseModel = importXML(fichier);
-		String C19RegionName = CruiseModel.getTranscodeRegionName(cruiseModel.getRegionName());
-		cruiseModel.setRegionName(C19RegionName);
+		
+		//chargement de la liste via le nom car le fichier ne contient que l'information par nom
+		if (cruiseModel.getCountryName() != null) {
+			Couple pays = sectionSource.getItem(Messages.edit_cruise_country);
+			Utils.selectComboLibelle(pays.getValueCombo(), cruiseModel.getCountryName());
+		}
+		
+		//transcode seulement en ISO_19115
+		//19139 contient deja des nom de region en C19
+		if(cruiseModel.getXmlVersion() == CruiseModel.XmlVersion.ISO_19115)
+		{
+			String C19RegionName = CruiseModel.getTranscodeRegionName(cruiseModel.getRegionName());
+			cruiseModel.setRegionName(C19RegionName);
+		}
+		
 		cruiseDomain.updateCruise(cruiseModel);
 
 		// mise à jour de l'onglet courant
@@ -309,7 +322,7 @@ public class EditCruiseForm extends EditForm {
 			cruise.dataTypesAt(index).setSensor(listSensor.contains(cruise.dataTypesAt(index).getCode().substring(0, 3)));
 		}
 
-		//FAE 16868
+		
 
 		return cruise;
 	}

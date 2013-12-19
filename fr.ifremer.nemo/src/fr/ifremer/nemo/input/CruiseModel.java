@@ -55,7 +55,12 @@ import fr.ifremer.nemo.util.Messages;
 public class CruiseModel extends AbstractModel {
 	private static String CSR_DATE_FORMAT = "yyyy-MM-dd"; //$NON-NLS-1$
 	public static String MED_DATE_FORMAT = "dd/MM/yyyy"; //$NON-NLS-1$
-
+	
+	/**
+	 * xml actuellement autorise pour initialisation xml
+	 */
+	public static enum XmlVersion {ISO_19139, ISO_19115};
+	
 	/**
 	 * Code d'accessibilité des données (MEDATLAS: 1 char = P/L/C)
 	 */
@@ -140,7 +145,13 @@ public class CruiseModel extends AbstractModel {
 	 * Date de début de campagne (MEDATLAS: DD/MM/YYYY)
 	 */
 	protected long _startDate;
-
+	
+	
+	/**
+	 * version xml du fichier charger depuis xml initialisation
+	 */
+	private XmlVersion xmlVersion;
+	
 	/**
 	 * Liste , ordonnee, des types de donnees
 	 */
@@ -246,6 +257,10 @@ public class CruiseModel extends AbstractModel {
 		}
 		if (a_LocalName.equals(ModelDescription.node_country)) {
 			Element2Field setter = new Element2Field(this, ModelDescription.setter_country);
+			return setter;
+		}
+		if (a_LocalName.equals(ModelDescription.node_countryName)) {
+			Element2Field setter = new Element2Field(this, ModelDescription.setter_countryName);
 			return setter;
 		}
 		if (a_LocalName.equals(ModelDescription.node_laboratories)) {
@@ -423,28 +438,63 @@ public class CruiseModel extends AbstractModel {
 		}
 		return RegionName;
 	}
+	
+	
+	
 
 	/**
 	 * Methode de creation d'instance a partir d'un fichier XML
+	 * il peut charger des fichier ISO 19139 et 19115
 	 * @param xmlFile : Schéma XML
 	 * @exception SAXException
 	 * @exception TransformerException
 	 * @exception java.io.FileNotFoundException
 	 */
 	public void importFromXML(File xmlFile) throws SAXException, TransformerException {
+		
+		//verifie si input xml est SDN2_CSR_ISO19139_3.0.0.xsd complieant
+		if(checkSchema( new StreamSource(xmlFile), Intern.CruiseShemaLocationISO19139))
+		{
+			importFromXML(xmlFile, new File(Intern.dir_resources + File.separator + Intern.CruiseXSLISO19139));
+			xmlVersion = XmlVersion.ISO_19139;
+		}
+		//verifie si input xml est CSR_sdn_V1.3.xsd complieant
+		else if (checkSchema( new StreamSource(xmlFile), Intern.CruiseShemaLocationISO19115))
+		{
+			importFromXML(xmlFile,  new File(Intern.dir_resources + File.separator + Intern.CruiseXSLISO19115));
+			xmlVersion = XmlVersion.ISO_19115;
+		}
+		else
+		{
+			//erreur si fichier n'est pas en ISO_19139 ou ISO_19115
+			Utils.messageErreurAppend(Messages.error_cruise_invalidXML);
+		}
+		
+		
+		
+	}
+	
+	
+	/**
+	 * Methode de creation d'instance a partir d'un fichier XML
+	 * @param xmlFile : Schéma XML
+	 * @param xslSource : Schéma XSL
+	 * @param schemaFile : Schéma XSD
+	 * @exception SAXException
+	 * @exception TransformerException
+	 * @exception java.io.FileNotFoundException
+	 */
+	private void importFromXML(File xmlFile, File xslFile) throws SAXException, TransformerException {
 
 		StreamSource xmlSource = new StreamSource(xmlFile);
-		StreamSource xslSource = new StreamSource(new File(Intern.dir_resources +
-															File.separator +
-															Intern.CruiseXSL));
+		StreamSource xslSource = new StreamSource(xslFile);
+		
 		XMLBootstrapParser parser = new XMLBootstrapParser(this);
 		Result result = new SAXResult(parser);
+		TransformerFactory factory = TransformerFactory.newInstance();
+		Transformer transformer = factory.newTransformer(xslSource);
+		transformer.transform(xmlSource, result);
 
-		if (checkSchema(xmlSource)) {
-			TransformerFactory factory = TransformerFactory.newInstance();
-			Transformer transformer = factory.newTransformer(xslSource);
-			transformer.transform(xmlSource, result);
-		}
 	}
 
 	/**
@@ -453,7 +503,7 @@ public class CruiseModel extends AbstractModel {
 	 * @return Boolean : true si valide, false sinon
 	 * @throws SAXException
 	 */
-	private Boolean checkSchema(Source xmlFile) throws SAXException {
+	private Boolean checkSchema(Source xmlFile, String fileName) throws SAXException {
 
 		// 1. Lookup a factory for the W3C XML Schema language
 		SchemaFactory factory = SchemaFactory.newInstance(Intern.CruiseShemaFactory);
@@ -461,8 +511,8 @@ public class CruiseModel extends AbstractModel {
 		// 2. Compile the schema.
 		// Here the schema is loaded from a java.io.File, but you could use
 		// a java.net.URL or a javax.xml.transform.Source instead.
-		File schemaLocation = new File(Intern.dir_resources + File.separator + Intern.CruiseShemaLocation);
-		Schema schema = factory.newSchema(schemaLocation);
+		File schemaFile = new File(Intern.dir_resources + File.separator + fileName);
+		Schema schema = factory.newSchema(schemaFile);
 
 		// 3. Get a validator from the schema.
 		Validator validator = schema.newValidator();
@@ -473,9 +523,7 @@ public class CruiseModel extends AbstractModel {
 			return true;
 
 		} catch (SAXException ex) {
-			Utils.messageErreurAppend(Messages.error_cruise_invalidXML);
-			Utils.messageErreurAppend(ex.getMessage());
-			throw ex;
+			return false;
 		} catch (IOException ex) {
 			return false;
 		}
@@ -850,6 +898,16 @@ public class CruiseModel extends AbstractModel {
 	 */
 	public long getStartDate() {
 		return _startDate;
+	}
+	
+	/**
+	 * Getter pour xmlVersion.
+	 * @return XmlVersion
+	 * @see CruiseModel.java#xmlVersion
+	 */
+	public XmlVersion getXmlVersion()
+	{
+		return xmlVersion;
 	}
 
 	/**

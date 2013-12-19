@@ -48,6 +48,7 @@ public class ModelDescription extends NLS {
 	public static String node_region;
 	public static String node_regionCode;
 	public static String node_country;
+	public static String node_countryName;
 	public static String node_laboratories;
 	public static String node_chief;
 	public static String node_project;
@@ -143,6 +144,7 @@ public class ModelDescription extends NLS {
 	public static String setter_enddate;
 	public static String setter_region;
 	public static String setter_country;
+	public static String setter_countryName;
 	public static String setter_laboratories;
 	public static String setter_chief;
 	public static String setter_project;
