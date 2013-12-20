@@ -94,10 +94,6 @@ public class ConfigDescription extends NLS {
 
 	public static String node_typePlateforme;
 
-	public static String node_VocabListURL;
-
-	public static String node_vocabURL;
-
 	public static String node_writeCdi;
 
 	public static String node_writeMapping;
@@ -156,7 +152,6 @@ public class ConfigDescription extends NLS {
 
 	public static String setter_TypePlateForme;
 
-	public static String setter_VocabURL;
 
 	public static String setter_WriteCdi;
 

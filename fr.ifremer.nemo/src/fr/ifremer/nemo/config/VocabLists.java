@@ -278,7 +278,6 @@ public class VocabLists {
 				} else {
 					updateMaps.setEtat(EtatUpdate.INTERRUPTED);
 				}
-				//updateMaps.setNbRetrieve(nbRetrieve);
 
 			} catch (Exception e) {
 				updateMaps.setEtat(EtatUpdate.FAILED);

@@ -1,14 +1,13 @@
 package fr.ifremer.nemo.config;
 
 import java.util.ArrayList;
-import java.util.TreeMap;
 import java.util.Map.Entry;
+import java.util.TreeMap;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableItem;
 
-import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.util.Global;
 
 /**

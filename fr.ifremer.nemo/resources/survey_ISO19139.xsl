@@ -62,13 +62,13 @@
             <formattedEndDate><xsl:value-of select="gmi:MI_Metadata/gmd:identificationInfo/sdn:SDN_DataIdentification/gmd:extent/gmd:EX_Extent/gmd:temporalElement/gmd:EX_TemporalExtent/gmd:extent/gml:TimePeriod/gml:endPosition"/></formattedEndDate>
 			
 			
-			<!-- Pays TODO a VALIDER -->
+			<!-- Pays -->
 			<countryName><xsl:value-of select="gmi:MI_Metadata/gmd:identificationInfo/sdn:SDN_DataIdentification/gmd:pointOfContact/gmd:CI_ResponsibleParty/gmd:contactInfo/gmd:CI_Contact/gmd:address/gmd:CI_Address/gmd:country/sdn:SDN_CountryCode"/></countryName>
 			
-			<!-- Chef de mission TODO a VALIDER  -->
+			<!-- Chef de mission -->
 			<chiefScientist><xsl:value-of select="gmi:MI_Metadata/gmd:identificationInfo/sdn:SDN_DataIdentification/gmd:pointOfContact/gmd:CI_ResponsibleParty/gmd:individualName/gco:CharacterString"/></chiefScientist>
 			
-			<!-- Laboratoire TODO a VALIDER  -->
+			<!-- Laboratoire  -->
 			<laboratories><xsl:value-of select="gmi:MI_Metadata/gmd:identificationInfo/sdn:SDN_DataIdentification/gmd:citation/gmd:CI_Citation/gmd:citedResponsibleParty/gmd:CI_ResponsibleParty/gmd:organisationName/sdn:SDN_EDMOCode"/></laboratories>
 	    
 	    	

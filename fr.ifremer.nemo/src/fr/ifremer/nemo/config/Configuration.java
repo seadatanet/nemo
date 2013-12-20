@@ -5,8 +5,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Locale;
 import java.util.StringTokenizer;
 
@@ -78,16 +76,11 @@ public class Configuration extends AbstractModel {
 
 	protected String _accesDonnees;
 
-	protected String _vocabURL;
-
 	protected String _edmoURL;
 
 	protected int _predicate;
 
 	protected String _fichierMapping;
-
-	protected HashMap<String, BODCList> _vocabLists =
-			new HashMap<String, BODCList>();
 
 	protected boolean _showRule;
 
@@ -139,8 +132,8 @@ public class Configuration extends AbstractModel {
 		try {
 			parser.parse(new FileInputStream(Intern.dir_resources +
 												File.separator +
-												ConfigDescription.node_root
-					+ "_ini" +
+												ConfigDescription.node_root +
+												"_ini" +
 												Global.EXT_XML),
 							false);
 		} catch (FileNotFoundException e) {
@@ -175,14 +168,11 @@ public class Configuration extends AbstractModel {
 		_accesDonnees = Global.EMPTY_STRING;
 		_showRule = true;
 		_locale = null;
-		_vocabURL = Global.EMPTY_STRING;
 		_edmoURL = Global.EMPTY_STRING;
 		_predicate = 255;
 		_fichierMapping = Global.EMPTY_STRING;
 		_defaultCode = Global.EMPTY_STRING;
 		_defaultConversionType = E_TypeConversion.UNKNOWN;
-
-		_vocabLists = new HashMap<String, BODCList>();
 
 		_flagTables = new ArrayList<FlagTable>();
 		proxy = new Proxy();
@@ -364,25 +354,7 @@ public class Configuration extends AbstractModel {
 					new Element2Field(this, ConfigDescription.setter_EdmoURL);
 			return setter;
 		}
-		if (a_LocalName.equals(ConfigDescription.node_vocabURL)) {
-			Element2Field setter =
-					new Element2Field(this, ConfigDescription.setter_VocabURL);
-			return setter;
-		}
-		if (a_LocalName.equals(ConfigDescription.node_VocabListURL)) {
-			String name = null;
-			String value = null;
-			String version = null;
-			if ((name = a_Attributes.getValue(ConfigDescription.a_name)) != null
-					&& (value =
-							a_Attributes.getValue(ConfigDescription.a_value)) != null
-					&& (version =
-							a_Attributes.getValue(ConfigDescription.a_version)) != null) {
-				BODCList list = new BODCList(name, version, value);
-				_vocabLists.put(name, list);
-			}
-			return this;
-		}
+	
 		if (a_LocalName.equals(ConfigDescription.node_defaultFlagTable)) {
 			Element2Field setter =
 					new Element2Field(this, ConfigDescription.setter_DefaultCode);
@@ -504,18 +476,7 @@ public class Configuration extends AbstractModel {
 		a_Writer.closeTag();
 
 		a_Writer.putTag(ConfigDescription.node_edmoURL, getEdmoURL());
-		a_Writer.putTag(ConfigDescription.node_vocabURL, getVocabURL());
-		Iterator<String> keys = getVocabLists().keySet().iterator();
-		while (keys.hasNext()) {
-			String listName = keys.next();
-			BODCList list = _vocabLists.get(listName);
-			a_Writer.openTag(ConfigDescription.node_VocabListURL);
-			a_Writer.putAttribute(ConfigDescription.a_name, listName);
-			a_Writer.putAttribute(ConfigDescription.a_value, list.getUrl());
-			a_Writer.putAttribute(ConfigDescription.a_version, list
-					.getLocalVersion());
-			a_Writer.closeTag();
-		}
+
 		a_Writer.putTag(ConfigDescription.node_defaultFlagTable,
 				getDefaultCode());
 		for (int i = 0; i < getFlagTables().size(); i++) {
@@ -543,11 +504,6 @@ public class Configuration extends AbstractModel {
 	 * 
 	 */
 	public void restoreDefault() {
-		// sauvegarde des listes BODC
-		HashMap<String, BODCList> bkVocabLists =
-				new HashMap<String, BODCList>();
-		bkVocabLists.putAll(_vocabLists);
-
 		XMLBootstrapParser parser = new XMLBootstrapParser(this);
 		try {
 			parser.parse(new FileInputStream(Intern.dir_resources +
@@ -555,11 +511,6 @@ public class Configuration extends AbstractModel {
 												Intern.fileName_configIni +
 												Global.EXT_XML),
 							false);
-
-			// récupération des listes BODC
-			_vocabLists.clear();
-			_vocabLists.putAll(bkVocabLists);
-			setVocabLists(_vocabLists);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -630,7 +581,6 @@ public class Configuration extends AbstractModel {
 	@Override
 	public void release() {
 		_flagTables = null;
-		_vocabLists = null;
 	}
 
 	/**
@@ -1007,38 +957,6 @@ public class Configuration extends AbstractModel {
 		return _locale;
 	}
 
-	/**
-	 * Read accessor (getter) for attribute _vocabURL
-	 * 
-	 * @return String
-	 * @see Configuration#_vocabURL
-	 */
-	public String getVocabURL() {
-		return _vocabURL;
-	}
-
-	/**
-	 * Write accessor (setter) for attribute _vocabURL
-	 * 
-	 * @param x
-	 *            new value for _vocabURL
-	 * @see Configuration#_vocabURL
-	 */
-	public void setVocabURL(String x) {
-		_vocabURL = x;
-	}
-
-	public HashMap<String, BODCList> getVocabLists() {
-		return _vocabLists;
-	}
-
-	public BODCList getVocabList(String listName) {
-		return _vocabLists.get(listName);
-	}
-
-	public void setVocabLists(HashMap<String, BODCList> lists) {
-		_vocabLists = lists;
-	}
 
 	public int getPredicate() {
 		return _predicate;

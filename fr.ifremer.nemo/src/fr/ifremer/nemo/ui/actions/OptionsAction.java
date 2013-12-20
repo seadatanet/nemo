@@ -54,7 +54,6 @@ import org.eclipse.ui.forms.widgets.Section;
 
 import sdn.vocabulary.interfaces.IElement;
 import fr.ifremer.nemo.Nemo;
-import fr.ifremer.nemo.config.BODCList;
 import fr.ifremer.nemo.config.Configuration;
 import fr.ifremer.nemo.config.EdmoHandler;
 import fr.ifremer.nemo.config.Flag;
@@ -1819,13 +1818,9 @@ public class OptionsAction extends Action implements ISelectionListener,
 		// WS
 		configuration.setNautilusWebServiceURL(textAreaNautilus.getText());
 		configuration.setNemoWebServiceURL(textAreaNemo.getText());
-		//configuration.setVocabURL(textVocabURL.getText());
 		configuration.setEdmoURL(textWSEdmo.getText());
 		configuration.getProxy().update(writeIni);
 
-		for (BODCList list : configuration.getVocabLists().values()) {
-			list.setUrl();
-		}
 
 		// CDI
 		configuration.setWriteCdi(checkCDI.getSelection());
