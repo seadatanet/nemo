@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<vocabulary list="SDN:L05:39:"  version="39"  date="2013-04-24T01:00:03.000"  title="SeaDataNet device categories" >
+<vocabulary list="SDN:L05:40:"  version="40"  date="2013-12-20T02:00:01.000"  title="SeaDataNet device categories" >
    <keyword SDNIdent="SDN:L05::33"  >sediment traps</keyword>
    <keyword SDNIdent="SDN:L05::159"  >magnetometers</keyword>
    <keyword SDNIdent="SDN:L05::158"  >gravimeters</keyword>
@@ -204,7 +204,9 @@
    <keyword SDNIdent="SDN:L05::379"  >altimeters</keyword>
    <keyword SDNIdent="SDN:L05::378"  >sediment profile imagers</keyword>
    <keyword SDNIdent="SDN:L05::375"  >250 Hz top-bandwidth multi-channel seismic reflection systems</keyword>
+   <keyword SDNIdent="SDN:L05::LAB42"  >laboratory optical rangefinders</keyword>
    <keyword SDNIdent="SDN:L05::374"  >60 Hz top-bandwidth multi-channel seismic reflection systems</keyword>
+   <keyword SDNIdent="SDN:L05::LAB41"  >laboratory cameras</keyword>
    <keyword SDNIdent="SDN:L05::377"  >water level markers</keyword>
    <keyword SDNIdent="SDN:L05::LAB40"  >Volume measures</keyword>
    <keyword SDNIdent="SDN:L05::376"  >sediment surface markers</keyword>

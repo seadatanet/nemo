@@ -175,6 +175,10 @@ public class VocabLists {
 		return listReturn;
 	}
 
+	/**
+	 * update vocabulary map from vocabulary file
+	 * @param monitor
+	 */
 	public static void updateVocabLists(IProgressMonitor monitor) {
 
 		UpdateStatusList updateLists = (UpdateStatusList) ManageLists.getUpdate(Intern.id_lists);
@@ -211,8 +215,6 @@ public class VocabLists {
 				} else {
 					updateLists.setEtat(EtatUpdate.INTERRUPTED);
 				}
-				//TODO
-				//updateLists.setNbRetrieve(nbRetrieve);
 			} catch (Exception e) {
 				updateLists.setEtat(EtatUpdate.FAILED);
 				e.printStackTrace();
