@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<vocabulary list="SDN:C17:339:"  version="339"  date="2013-12-19T02:00:02.000"  title="ICES Platform Codes" >
+<vocabulary list="SDN:C17:345:"  version="345"  date="2014-01-04T02:00:02.000"  title="ICES Platform Codes" >
    <keyword SDNIdent="SDN:C17::31VI"  >Vicca</keyword>
    <keyword SDNIdent="SDN:C17::46A2"  >Aegir</keyword>
    <keyword SDNIdent="SDN:C17::06NX"  >Nixe II</keyword>
@@ -76,6 +76,7 @@
    <keyword SDNIdent="SDN:C17::74WH"  >Sir William Hardy</keyword>
    <keyword SDNIdent="SDN:C17::74WC"  >Weather Recorder</keyword>
    <keyword SDNIdent="SDN:C17::35ZU"  >SG508</keyword>
+   <keyword SDNIdent="SDN:C17::74WB"  >Wellington Express</keyword>
    <keyword SDNIdent="SDN:C17::35ZT"  >Nearchos</keyword>
    <keyword SDNIdent="SDN:C17::74WE"  >Weather Explorer</keyword>
    <keyword SDNIdent="SDN:C17::35ZW"  >Tenuse</keyword>
@@ -120,8 +121,8 @@
    <keyword SDNIdent="SDN:C17::74UN"  >Undaunted</keyword>
    <keyword SDNIdent="SDN:C17::74UA"  >Ursa</keyword>
    <keyword SDNIdent="SDN:C17::06PU"  >Polarfuchs</keyword>
-   <keyword SDNIdent="SDN:C17::46FR"  >Arni Fridriksson</keyword>
    <keyword SDNIdent="SDN:C17::74UC"  >Urchin</keyword>
+   <keyword SDNIdent="SDN:C17::46FR"  >Arni Fridriksson</keyword>
    <keyword SDNIdent="SDN:C17::74UB"  >Carina</keyword>
    <keyword SDNIdent="SDN:C17::74UD"  >Undine</keyword>
    <keyword SDNIdent="SDN:C17::74UG"  >Seagull</keyword>
@@ -255,10 +256,15 @@
    <keyword SDNIdent="SDN:C17::74HP"  >Loch Craggie</keyword>
    <keyword SDNIdent="SDN:C17::74HQ"  >Humber Guardian</keyword>
    <keyword SDNIdent="SDN:C17::74I2"  >Sovereign</keyword>
+   <keyword SDNIdent="SDN:C17::74I3"  >Contship Aurora</keyword>
    <keyword SDNIdent="SDN:C17::74HM"  >Hermes</keyword>
    <keyword SDNIdent="SDN:C17::74HW"  >Severn Guardian</keyword>
    <keyword SDNIdent="SDN:C17::74HY"  >Hydra</keyword>
+   <keyword SDNIdent="SDN:C17::74I4"  >Hydra</keyword>
+   <keyword SDNIdent="SDN:C17::74I5"  >CP Aurora</keyword>
    <keyword SDNIdent="SDN:C17::74HT"  >Loch Tralaig</keyword>
+   <keyword SDNIdent="SDN:C17::74I6"  >Brak</keyword>
+   <keyword SDNIdent="SDN:C17::74I7"  >European Leader</keyword>
    <keyword SDNIdent="SDN:C17::74HV"  >Loch Scavaig</keyword>
    <keyword SDNIdent="SDN:C17::74FC"  >Dido</keyword>
    <keyword SDNIdent="SDN:C17::74FD"  >Queen Elizabeth II</keyword>
@@ -510,6 +516,7 @@
    <keyword SDNIdent="SDN:C17::89LM"  >Lamas-1</keyword>
    <keyword SDNIdent="SDN:C17::747S"  smallLabel="S1" >Scotia</keyword>
    <keyword SDNIdent="SDN:C17::FONO"  >Norrona</keyword>
+   <keyword SDNIdent="SDN:C17::SIOX"  >CMA CGM Onyx</keyword>
    <keyword SDNIdent="SDN:C17::45AC"  >An Capall Ban</keyword>
    <keyword SDNIdent="SDN:C17::749S"  smallLabel="S2" >Scotia</keyword>
    <keyword SDNIdent="SDN:C17::32Z0"  >Tashtego</keyword>
@@ -567,6 +574,7 @@
    <keyword SDNIdent="SDN:C17::45CV"  >Celtic Voyager</keyword>
    <keyword SDNIdent="SDN:C17::745V"  >Our Sarah Jayne</keyword>
    <keyword SDNIdent="SDN:C17::745R"  smallLabel="CAL" >Calanus</keyword>
+   <keyword SDNIdent="SDN:C17::BMBE"  >Barcelona Express</keyword>
    <keyword SDNIdent="SDN:C17::45CE"  >Celtic Explorer</keyword>
    <keyword SDNIdent="SDN:C17::SELA"  >Laurent, Amaro</keyword>
    <keyword SDNIdent="SDN:C17::45CB"  >Cosantoir Bradan</keyword>
@@ -599,8 +607,8 @@
    <keyword SDNIdent="SDN:C17::74BO"  >Bulldog</keyword>
    <keyword SDNIdent="SDN:C17::74C0"  >Coastal Surveyor</keyword>
    <keyword SDNIdent="SDN:C17::09VE"  >Vendetta</keyword>
-   <keyword SDNIdent="SDN:C17::74BL"  >Blackpool</keyword>
    <keyword SDNIdent="SDN:C17::09VA"  >Vampire</keyword>
+   <keyword SDNIdent="SDN:C17::74BL"  >Blackpool</keyword>
    <keyword SDNIdent="SDN:C17::74BI"  >Bigbury Bay</keyword>
    <keyword SDNIdent="SDN:C17::45FE"  >Felucca</keyword>
    <keyword SDNIdent="SDN:C17::74BG"  >Brighton</keyword>
@@ -648,8 +656,10 @@
    <keyword SDNIdent="SDN:C17::09WR"  >Warramunga</keyword>
    <keyword SDNIdent="SDN:C17::32NM"  >New Horizon</keyword>
    <keyword SDNIdent="SDN:C17::ESSA"  >Salme</keyword>
+   <keyword SDNIdent="SDN:C17::09WA"  >Warreen</keyword>
    <keyword SDNIdent="SDN:C17::SEAR"  >Arfang</keyword>
    <keyword SDNIdent="SDN:C17::SISR"  >Swan River Bridge</keyword>
+   <keyword SDNIdent="SDN:C17::09WG"  >Warrego</keyword>
    <keyword SDNIdent="SDN:C17::3309"  >Horizon Trader</keyword>
    <keyword SDNIdent="SDN:C17::09WM"  >Warramunga</keyword>
    <keyword SDNIdent="SDN:C17::3308"  >Kaholo</keyword>
@@ -732,7 +742,10 @@
    <keyword SDNIdent="SDN:C17::09PL"  >Paluma</keyword>
    <keyword SDNIdent="SDN:C17::PAPR"  >Progress Ace</keyword>
    <keyword SDNIdent="SDN:C17::09PR"  >Perth</keyword>
+   <keyword SDNIdent="SDN:C17::BMS1"  >TMM Sinaloa</keyword>
+   <keyword SDNIdent="SDN:C17::BMS2"  >CP Sinaloa</keyword>
    <keyword SDNIdent="SDN:C17::77UA"  >Ulla Rinman</keyword>
+   <keyword SDNIdent="SDN:C17::09PU"  >Paluma</keyword>
    <keyword SDNIdent="SDN:C17::33FI"  >Ferdinand R. Hassler</keyword>
    <keyword SDNIdent="SDN:C17::AGNR"  >Norrland</keyword>
    <keyword SDNIdent="SDN:C17::77UT"  >Norrbylabb 1</keyword>
@@ -786,15 +799,15 @@
    <keyword SDNIdent="SDN:C17::740H"  smallLabel="JC" >James Cook</keyword>
    <keyword SDNIdent="SDN:C17::09CA"  >Canberra</keyword>
    <keyword SDNIdent="SDN:C17::740G"  smallLabel="SQ" >Squilla</keyword>
-   <keyword SDNIdent="SDN:C17::740F"  >Tamaris</keyword>
    <keyword SDNIdent="SDN:C17::BHVE"  >Venezia</keyword>
+   <keyword SDNIdent="SDN:C17::740F"  >Tamaris</keyword>
    <keyword SDNIdent="SDN:C17::740E"  >Challenge &apos;A&apos;</keyword>
    <keyword SDNIdent="SDN:C17::740D"  >Nucella</keyword>
    <keyword SDNIdent="SDN:C17::740C"  >Kings Cross</keyword>
    <keyword SDNIdent="SDN:C17::09DU"  >Duchess</keyword>
    <keyword SDNIdent="SDN:C17::741A"  >Edinburgh</keyword>
-   <keyword SDNIdent="SDN:C17::741B"  >Gloucester</keyword>
    <keyword SDNIdent="SDN:C17::LAVA"  >Varonis</keyword>
+   <keyword SDNIdent="SDN:C17::741B"  >Gloucester</keyword>
    <keyword SDNIdent="SDN:C17::741C"  >Boxer</keyword>
    <keyword SDNIdent="SDN:C17::740S"  >Gleaner</keyword>
    <keyword SDNIdent="SDN:C17::09DM"  >Diamantina</keyword>
@@ -810,8 +823,8 @@
    <keyword SDNIdent="SDN:C17::741N"  >Plumleaf</keyword>
    <keyword SDNIdent="SDN:C17::741Q"  >Penelope</keyword>
    <keyword SDNIdent="SDN:C17::741P"  >Leander</keyword>
-   <keyword SDNIdent="SDN:C17::741S"  >Euryalus</keyword>
    <keyword SDNIdent="SDN:C17::LAVR"  >Varita</keyword>
+   <keyword SDNIdent="SDN:C17::741S"  >Euryalus</keyword>
    <keyword SDNIdent="SDN:C17::741R"  >Aurora</keyword>
    <keyword SDNIdent="SDN:C17::741E"  >Leeds Castle</keyword>
    <keyword SDNIdent="SDN:C17::741F"  >Dumbarton Castle</keyword>
@@ -897,6 +910,7 @@
    <keyword SDNIdent="SDN:C17::77AZ"  >TV257</keyword>
    <keyword SDNIdent="SDN:C17::26MH"  >Magnus Heinason</keyword>
    <keyword SDNIdent="SDN:C17::90LL"  >Leningrad</keyword>
+   <keyword SDNIdent="SDN:C17::BHAE"  >SC Aberdeen</keyword>
    <keyword SDNIdent="SDN:C17::77BA"  >TV260</keyword>
    <keyword SDNIdent="SDN:C17::90LJ"  >Akademik Lazarev</keyword>
    <keyword SDNIdent="SDN:C17::BHAB"  >Explorer</keyword>
@@ -981,7 +995,7 @@
    <keyword SDNIdent="SDN:C17::491V"  >Kojima</keyword>
    <keyword SDNIdent="SDN:C17::33MX"  >Meg L. Skansi</keyword>
    <keyword SDNIdent="SDN:C17::CYGL"  >Salamis Glory</keyword>
-   <keyword SDNIdent="SDN:C17::33MW"  >Malcolm Baldridge</keyword>
+   <keyword SDNIdent="SDN:C17::33MW"  >Malcolm Baldrige</keyword>
    <keyword SDNIdent="SDN:C17::15PV"  >Professor A. Valkanov</keyword>
    <keyword SDNIdent="SDN:C17::491Z"  >Kagoshima Maru</keyword>
    <keyword SDNIdent="SDN:C17::491X"  >Hoyo</keyword>
@@ -999,6 +1013,7 @@
    <keyword SDNIdent="SDN:C17::09AN"  >Anzac</keyword>
    <keyword SDNIdent="SDN:C17::BHFP"  >Finnpolaris</keyword>
    <keyword SDNIdent="SDN:C17::90SG"  >Akademik Sergey Vavilov</keyword>
+   <keyword SDNIdent="SDN:C17::33OC"  >Oscar Elton Sette</keyword>
    <keyword SDNIdent="SDN:C17::90SE"  >Georgiy Sedov</keyword>
    <keyword SDNIdent="SDN:C17::49CX"  >Chiba Maru No. 2</keyword>
    <keyword SDNIdent="SDN:C17::09AD"  >Adelaide</keyword>
@@ -1029,6 +1044,7 @@
    <keyword SDNIdent="SDN:C17::26VD"  >Vaedderen</keyword>
    <keyword SDNIdent="SDN:C17::BHHB"  >Hoegh Berlin</keyword>
    <keyword SDNIdent="SDN:C17::49EQ"  >Enoshima Maru</keyword>
+   <keyword SDNIdent="SDN:C17::CIEA"  >Elegant Ace</keyword>
    <keyword SDNIdent="SDN:C17::33RE"  >Nobska</keyword>
    <keyword SDNIdent="SDN:C17::61TN"  >Tangaroa</keyword>
    <keyword SDNIdent="SDN:C17::33RC"  >Horizon Spirit</keyword>
@@ -1086,8 +1102,8 @@
    <keyword SDNIdent="SDN:C17::RUAK"  >Akademik Aleksandr Karpinsky</keyword>
    <keyword SDNIdent="SDN:C17::RUAC"  >Akademik Nemchinov</keyword>
    <keyword SDNIdent="SDN:C17::RUAB"  >Akademik Boris Petrov</keyword>
-   <keyword SDNIdent="SDN:C17::49K5"  >Kaiyo-Maru No 5</keyword>
    <keyword SDNIdent="SDN:C17::RUAV"  >Akademik M. A. Lavrentiev</keyword>
+   <keyword SDNIdent="SDN:C17::49K5"  >Kaiyo-Maru No 5</keyword>
    <keyword SDNIdent="SDN:C17::RUAZ"  >Akademik Lazarev</keyword>
    <keyword SDNIdent="SDN:C17::54JV"  >JPO Volans</keyword>
    <keyword SDNIdent="SDN:C17::54JR"  >JOIDES Resolution</keyword>
@@ -1105,8 +1121,8 @@
    <keyword SDNIdent="SDN:C17::54ME"  >CMA CGM Melbourne</keyword>
    <keyword SDNIdent="SDN:C17::61MU"  >Munida</keyword>
    <keyword SDNIdent="SDN:C17::49LO"  >Koyo Maru</keyword>
-   <keyword SDNIdent="SDN:C17::9067"  >Gonets</keyword>
    <keyword SDNIdent="SDN:C17::LTVJ"  >Vejunas</keyword>
+   <keyword SDNIdent="SDN:C17::9067"  >Gonets</keyword>
    <keyword SDNIdent="SDN:C17::49FQ"  >Fuji Maru</keyword>
    <keyword SDNIdent="SDN:C17::LTVE"  >Vejas</keyword>
    <keyword SDNIdent="SDN:C17::49FA"  >Keifu Maru</keyword>
@@ -1146,6 +1162,7 @@
    <keyword SDNIdent="SDN:C17::90CG"  >Kara-Dag</keyword>
    <keyword SDNIdent="SDN:C17::58S6"  >Norbjorn</keyword>
    <keyword SDNIdent="SDN:C17::58S5"  >Vesteralen</keyword>
+   <keyword SDNIdent="SDN:C17::58RT"  >Artus</keyword>
    <keyword SDNIdent="SDN:C17::49TD"  >Tansei Maru</keyword>
    <keyword SDNIdent="SDN:C17::58S4"  >Trollfjord</keyword>
    <keyword SDNIdent="SDN:C17::58S3"  >Norbjorn</keyword>
@@ -1181,6 +1198,7 @@
    <keyword SDNIdent="SDN:C17::90BH"  >Cheleken</keyword>
    <keyword SDNIdent="SDN:C17::54SD"  >Sedco/BP 471</keyword>
    <keyword SDNIdent="SDN:C17::90BI"  >Pamyat Merkutya</keyword>
+   <keyword SDNIdent="SDN:C17::49UX"  >Ryofu Maru</keyword>
    <keyword SDNIdent="SDN:C17::90DO"  >Fedor Litke</keyword>
    <keyword SDNIdent="SDN:C17::49UQ"  >Asama</keyword>
    <keyword SDNIdent="SDN:C17::49UP"  >Ryofu Maru</keyword>
@@ -1209,17 +1227,21 @@
    <keyword SDNIdent="SDN:C17::49UF"  >Keifu Maru</keyword>
    <keyword SDNIdent="SDN:C17::58SV"  >Svanen</keyword>
    <keyword SDNIdent="SDN:C17::49OQ"  >Kuroshio Maru</keyword>
-   <keyword SDNIdent="SDN:C17::7301"  >Steaua de Mare</keyword>
    <keyword SDNIdent="SDN:C17::54VB"  >VOS Baltic</keyword>
+   <keyword SDNIdent="SDN:C17::7301"  >Steaua de Mare</keyword>
    <keyword SDNIdent="SDN:C17::61BL"  >Blackpool</keyword>
    <keyword SDNIdent="SDN:C17::58VJ"  >Volstad Jr.</keyword>
    <keyword SDNIdent="SDN:C17::58VF"  >Veafisk</keyword>
+   <keyword SDNIdent="SDN:C17::54WA"  >Contship Washington</keyword>
    <keyword SDNIdent="SDN:C17::49NQ"  >Kaiko Maru</keyword>
+   <keyword SDNIdent="SDN:C17::54WC"  >Albert Rickmers</keyword>
    <keyword SDNIdent="SDN:C17::49O4"  >Osaka</keyword>
+   <keyword SDNIdent="SDN:C17::54WB"  >Direct Tui</keyword>
    <keyword SDNIdent="SDN:C17::49NZ"  >Mirai</keyword>
    <keyword SDNIdent="SDN:C17::49OI"  >Kaiko-Maru</keyword>
    <keyword SDNIdent="SDN:C17::90A8"  >Aelita</keyword>
    <keyword SDNIdent="SDN:C17::49QQ"  >Kuroshio</keyword>
+   <keyword SDNIdent="SDN:C17::49QV"  >Takuyo Maru</keyword>
    <keyword SDNIdent="SDN:C17::26AI"  >Christoffer</keyword>
    <keyword SDNIdent="SDN:C17::26AO"  >Pernille Kim</keyword>
    <keyword SDNIdent="SDN:C17::90AE"  >Ariel</keyword>
@@ -1312,6 +1334,7 @@
    <keyword SDNIdent="SDN:C17::58D1"  >G. M. Dannevig</keyword>
    <keyword SDNIdent="SDN:C17::3149"  >Goerlitz</keyword>
    <keyword SDNIdent="SDN:C17::58D2"  >G. M. Dannevig</keyword>
+   <keyword SDNIdent="SDN:C17::58CQ"  >Agatha</keyword>
    <keyword SDNIdent="SDN:C17::58D3"  >Dr. Fridtjof Nansen</keyword>
    <keyword SDNIdent="SDN:C17::58D4"  >Dr. Fridtjof Nansen</keyword>
    <keyword SDNIdent="SDN:C17::353L"  >L&apos;Astrolabe</keyword>
@@ -1460,7 +1483,6 @@
    <keyword SDNIdent="SDN:C17::42SA"  >Samudera</keyword>
    <keyword SDNIdent="SDN:C17::35QA"  >Côte d´Aquitaine</keyword>
    <keyword SDNIdent="SDN:C17::CYIT"  >Iller Trader</keyword>
-   <keyword SDNIdent="SDN:C17::58A2"  >SC Aberdeen</keyword>
    <keyword SDNIdent="SDN:C17::35OM"  >L&apos;Orsom I</keyword>
    <keyword SDNIdent="SDN:C17::31A4"  >Albatross IV</keyword>
    <keyword SDNIdent="SDN:C17::29GD"  >Garcia Del Cid</keyword>
@@ -1500,9 +1522,9 @@
    <keyword SDNIdent="SDN:C17::35DG"  >Atlantic Surveyor</keyword>
    <keyword SDNIdent="SDN:C17::35DH"  >Soizen</keyword>
    <keyword SDNIdent="SDN:C17::35DK"  >Cap Morgane</keyword>
+   <keyword SDNIdent="SDN:C17::35DJ"  >Verlaine</keyword>
    <keyword SDNIdent="SDN:C17::18NA"  >CCGS Navicula</keyword>
    <keyword SDNIdent="SDN:C17::07KS"  >Kronsort</keyword>
-   <keyword SDNIdent="SDN:C17::35DJ"  >Verlaine</keyword>
    <keyword SDNIdent="SDN:C17::35DM"  >Bretagne</keyword>
    <keyword SDNIdent="SDN:C17::64TR"  >Tyro</keyword>
    <keyword SDNIdent="SDN:C17::35DL"  >Castor 2</keyword>
@@ -1563,6 +1585,7 @@
    <keyword SDNIdent="SDN:C17::18RD"  >Pierre Radisson</keyword>
    <keyword SDNIdent="SDN:C17::URAR"  >Arshincevo</keyword>
    <keyword SDNIdent="SDN:C17::64PK"  >Pelikaan</keyword>
+   <keyword SDNIdent="SDN:C17::18RG"  >Radium Gilbert</keyword>
    <keyword SDNIdent="SDN:C17::35HT"  >Thalassa</keyword>
    <keyword SDNIdent="SDN:C17::64PE"  >Pelagia</keyword>
    <keyword SDNIdent="SDN:C17::35HL"  >Haliotis</keyword>
@@ -1579,6 +1602,7 @@
    <keyword SDNIdent="SDN:C17::57VA"  >Alejandro de Humboldt</keyword>
    <keyword SDNIdent="SDN:C17::35GH"  >Gallieni</keyword>
    <keyword SDNIdent="SDN:C17::35GL"  >Glycine</keyword>
+   <keyword SDNIdent="SDN:C17::18SC"  >St Catharines</keyword>
    <keyword SDNIdent="SDN:C17::31ET"  >Eltanin</keyword>
    <keyword SDNIdent="SDN:C17::35GA"  >Gardour</keyword>
    <keyword SDNIdent="SDN:C17::18SZ"  >Sir John Franklin</keyword>
@@ -1586,16 +1610,19 @@
    <keyword SDNIdent="SDN:C17::14AZ"  >Amazonas</keyword>
    <keyword SDNIdent="SDN:C17::35FY"  >La Bonite</keyword>
    <keyword SDNIdent="SDN:C17::LR1J"  >Jonni Ritscher</keyword>
+   <keyword SDNIdent="SDN:C17::18SO"  >Stonetown</keyword>
    <keyword SDNIdent="SDN:C17::35FT"  >Fille de Suet</keyword>
    <keyword SDNIdent="SDN:C17::14AP"  >Apa</keyword>
    <keyword SDNIdent="SDN:C17::18SN"  >Louis S. St. Laurent</keyword>
    <keyword SDNIdent="SDN:C17::35FV"  >Venus</keyword>
+   <keyword SDNIdent="SDN:C17::18SL"  >Salvelinus</keyword>
    <keyword SDNIdent="SDN:C17::URD5"  >Razvedchiki</keyword>
    <keyword SDNIdent="SDN:C17::35FR"  >France I</keyword>
    <keyword SDNIdent="SDN:C17::URD4"  >Poiskovik</keyword>
    <keyword SDNIdent="SDN:C17::35FL"  >Florence</keyword>
    <keyword SDNIdent="SDN:C17::14AH"  >Almirante Saboia</keyword>
    <keyword SDNIdent="SDN:C17::14AI"  >Alpha Crucis</keyword>
+   <keyword SDNIdent="SDN:C17::18TH"  >Theta</keyword>
    <keyword SDNIdent="SDN:C17::18TA"  >Toronto</keyword>
    <keyword SDNIdent="SDN:C17::35FE"  >Fée de l&apos;Aulne</keyword>
    <keyword SDNIdent="SDN:C17::14AA"  >Almirante Maximiano</keyword>
