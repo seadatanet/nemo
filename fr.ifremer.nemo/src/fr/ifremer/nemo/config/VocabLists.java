@@ -231,7 +231,7 @@ public class VocabLists {
 		msg.append(Global.SEP);
 		msg.append(label);
 		UpdateStatusBODC updateList = new UpdateStatusBODC(listId, msg.toString());
-		int numVersion = _vocabList.get(listId).getDescription().getVersion();
+		int oldNumVersion = _vocabList.get(listId).getDescription().getVersion();
 
 		try {
 			cf.loadCollections(true, listId);
@@ -242,9 +242,11 @@ public class VocabLists {
 			e.printStackTrace();
 		}
 
-		if (numVersion == _vocabList.get(listId).getDescription().getVersion())
+		int newNumVersion = _vocabList.get(listId).getDescription().getVersion();
+		
+		if (oldNumVersion == newNumVersion)
 			updateList.setEtat(EtatUpdate.CHECKED);
-		updateList.setVersion(numVersion);
+		updateList.setVersion(newNumVersion);
 		return updateList;
 	}
 
