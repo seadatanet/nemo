@@ -17,10 +17,12 @@ import java.util.HashSet;
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.domain.CruiseDomain;
 import fr.ifremer.nemo.domain.DataDomain;
+import fr.ifremer.nemo.domain.DateTimeUtils;
 import fr.ifremer.nemo.domain.InputDomain;
 import fr.ifremer.nemo.domain.MediaDomain;
 import fr.ifremer.nemo.domain.Station;
 import fr.ifremer.nemo.domain.StationDomain;
+import fr.ifremer.nemo.input.CruiseModel;
 import fr.ifremer.nemo.input.MediaModel;
 import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Global;
@@ -136,18 +138,32 @@ public abstract class NemoWriter {
 		stationDomain.updateRef();
 
 		try {
+			
+			
 
 			int readerSize = 0;
 			// pour chaque repertoire d'entree
 			for (String inputFilePath : mediaDomain.getInputFilesNames().keySet()) {
-				if (!inputFilePath.endsWith(".svn")) {
+				if (!inputFilePath.endsWith(Global.SVN_DIR)) {
 
 					// FAE 6087
 					stationDomain.updateRef();
+					
+					//FAE 18333
+					//initialise la start date et la end date de cruiseModel 
+					//pour chaque repertoire d'entrée
+					if(isProcessType_CollectionDir &&(isConversionTo_NetCDFMonostation || isConversionTo_NetCDFMultistations))
+					{
+						CruiseModel cruiseModel = cruiseDomain.getModel();
+						cruiseModel.setStartDate(System.currentTimeMillis());
+						cruiseModel.setEndDate(0);
+					}
 
 					// pour chaque fichier de ce repertoire d'entree
 					for (String inputFileName : mediaDomain.getInputFilesNames().get(inputFilePath)) {
-						if (!inputFileName.endsWith(".svn")) {
+						
+						if (!inputFileName.endsWith(Global.SVN_DIR)) {
+
 							Nemo.getInstance().setLog_currentInputFile(inputFilePath + File.separator + inputFileName);
 
 							File inputFile = new File(inputFilePath + File.separator + inputFileName);
@@ -176,6 +192,7 @@ public abstract class NemoWriter {
 										st = null;
 									}
 
+
 									if (isStartStationHeader()) {
 										nbrecords = 0;
 										String[] inputStationHeader = null;
@@ -185,6 +202,11 @@ public abstract class NemoWriter {
 											String ref = stationDomain.getReference(inputFile.getName(), inputStationHeader, true);
 
 											st.setReference(ref);
+											
+											//FAE 18333
+											//calcul start et end date of cruise
+											updateStartEndDate(st);
+											
 
 											if (stationDomain.isSomeInData()) {
 
@@ -197,7 +219,6 @@ public abstract class NemoWriter {
 												st.updateGlobalParamQc(readedLine);
 
 											nbrecords++;
-
 										} else {
 											break;
 										}
@@ -205,9 +226,15 @@ public abstract class NemoWriter {
 										if (mediaDomain.getModel().getInputType() == E_InputType.TRAJECTORY) {
 											st.completeMedatlasTrajectory(readedLine);
 										}
-										// sampling rate peut etre à calculer
-										if (mediaDomain.getModel().getInputType() != E_InputType.PROFILE && !isRateCalculated) {
-											if (stationDomain.getModel().getProperty(Intern.S_DATE).isInData()) {
+										
+										if (mediaDomain.getModel().getInputType() != E_InputType.PROFILE ) {
+											
+											//FAE 18333
+											//calcul min et max date of cruise
+											updateStartEndDate(st);
+											
+											// sampling rate peut etre à calculer
+											if (stationDomain.getModel().getProperty(Intern.S_DATE).isInData() && !isRateCalculated) {
 												st.calculSamplingRate(readedLine);
 												isRateCalculated = true;
 											}
@@ -259,6 +286,43 @@ public abstract class NemoWriter {
 			}
 		}
 
+	}
+
+	
+	/**
+	 * mise à jour de la date de debut et de fin uniquement pour groupbyCruise et les conversions netCDF
+	 * @param st station courante
+	 * @throws UnsupportedEncodingException
+	 * @throws ParseException
+	 */
+	private void updateStartEndDate(Station st) throws UnsupportedEncodingException, ParseException {
+		
+		//si process type =  groupbyCruise et les conversions = netCDF
+		if(isProcessType_CollectionDir && (isConversionTo_NetCDFMonostation || isConversionTo_NetCDFMultistations))
+		{
+			
+			//set date
+			Long date = st.getDate() + st.getTime();
+			if(stationDomain.getModel().getProperty(Intern.S_DATE).isInData())
+			{
+				date = Long.valueOf(DateTimeUtils.convertTimestamp(readedLine));
+			}
+			
+			CruiseModel cruiseModel = cruiseDomain.getModel();
+			//si min date debut est superieur a date courante
+			if(cruiseModel.getStartDate() > date )
+			{
+				cruiseModel.setStartDate(date);
+			}
+			
+			//si max date fin est superieur a date courante
+			if(cruiseModel.getEndDate() < date )
+			{
+				cruiseModel.setEndDate(date);
+			}
+			
+		}
+		
 	}
 
 	protected abstract String getOutputFileName(String inputFilePath);

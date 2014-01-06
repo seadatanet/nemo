@@ -34,6 +34,7 @@ public interface Global {
 	public static final String EXT_XML = ".xml"; //$NON-NLS-1$
 	public static final String EXT_TXT = ".txt"; //$NON-NLS-1$
 	public static final String EXT_NC = ".nc"; //$NON-NLS-1$
+	public static final String SVN_DIR = ".svn";//$NON-NLS-1$
 
 	// Séparateurs
 	public static final String TAB = "\t"; //$NON-NLS-1$

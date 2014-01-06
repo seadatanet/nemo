@@ -107,13 +107,13 @@ public class Utils
 
 	public static String[] getFilesWithoutSVN(String[] listeFichiers)
 	{
-		if (listeFichiers != null && listeFichiers[0].toString().endsWith(".svn"))
+		if (listeFichiers != null && listeFichiers[0].toString().endsWith(Global.SVN_DIR))
 		{
 			String[] listeFichiersWithoutSVN = new String[listeFichiers.length - 1];
 			int cpt = 0;
 			for (int i = 0; i < listeFichiers.length; i++)
 			{
-				if (!listeFichiers[i].endsWith(".svn"))
+				if (!listeFichiers[i].endsWith(Global.SVN_DIR))
 				{
 					listeFichiersWithoutSVN[cpt] = listeFichiers[i];
 					cpt++;
@@ -127,13 +127,13 @@ public class Utils
 	public static File[] getFilesWithoutSVN(File[] subfiles)
 	{
 		// on enleve le repertoire .svn s'il existe
-		if (subfiles != null && subfiles[0].toString().endsWith(".svn"))
+		if (subfiles != null && subfiles[0].toString().endsWith(Global.SVN_DIR))
 		{
 			File[] listeFichiersWithoutSVN = new File[subfiles.length - 1];
 			int cpt = 0;
 			for (int i = 0; i < subfiles.length; i++)
 			{
-				if (!subfiles[i].toString().endsWith(".svn"))
+				if (!subfiles[i].toString().endsWith(Global.SVN_DIR))
 				{
 					listeFichiersWithoutSVN[cpt] = subfiles[i];
 					cpt++;
