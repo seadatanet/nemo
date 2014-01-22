@@ -261,11 +261,16 @@ public class OptionsAction extends Action implements ISelectionListener,
 		for (Entry<Integer, String> currentEntry : edmoTree.entrySet()) {
 			strTemp = currentEntry.getKey() + Global.SEP
 					+ currentEntry.getValue();
+
+			// TODO LDN : Nettoyage des strings
+			strTemp = strTemp.replace("\n", "").replace("\t", "")
+					.replace("\r", "").trim();
+
 			EdmoHandler.listeOrigine.add(strTemp);
 			comboIdEdmoRespCdi.add(strTemp);
 		}
 
-		// TODO Optimisation remplissage des combos
+		// TODO LDN : Optimisation remplissage des combos
 		String[] items = comboIdEdmoRespCdi.getItems();
 		comboCodeEdmoDonnees.setItems(items);
 		comboIdEdmoRespDonnees.setItems(items);
