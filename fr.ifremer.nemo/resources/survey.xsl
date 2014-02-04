@@ -66,10 +66,8 @@
             <!-- FAE021 Fin -->      
             
             <!-- FAE021 Evolution : changement de format du fichier xml   -->
-            <xsl:for-each select="Metadata/dataIdInfo/descKeys">
-                <xsl:if test="keyTyp/KeyTypCd/@value =  'project'">
-                    <projectName><xsl:value-of select="keyword"/></projectName> 
-                </xsl:if>
+            <xsl:for-each select="Metadata/dataIdInfo/descKeys[keyTyp/KeyTypCd/@value =  'project'][1]">
+                    <projectName><xsl:value-of select="keyword/@SDNIdent"/> (<xsl:value-of select="substring-before(substring-after(keyword,'{acronym=&quot;'), '&quot; organisation')"/>)</projectName> 
             </xsl:for-each>     
             <!-- FAE021 Fin -->      
             
@@ -95,6 +93,10 @@
                         <availability>limited</availability>
                     </xsl:when>
                     
+                    <xsl:when test="contains(Metadata/dataIdInfo/resConst/LegConsts/accessConsts/@SDNIdent ,'NA')">
+                        <availability>confidential</availability>
+                    </xsl:when>
+                    
                     <xsl:when test="contains(Metadata/dataIdInfo/resConst/LegConsts/accessConsts/@SDNIdent ,'NC')">
                         <availability>limited</availability>
                     </xsl:when>
@@ -104,27 +106,23 @@
                     </xsl:when>
                     
                     <xsl:when test="contains(Metadata/dataIdInfo/resConst/LegConsts/accessConsts/@SDNIdent ,'RS')">
-                        <availability>limited</availability>
+                        <availability>confidential</availability>
                     </xsl:when>
                     
                     <xsl:when test="contains(Metadata/dataIdInfo/resConst/LegConsts/accessConsts/@SDNIdent ,'SR')">
-                        <availability>limited</availability>
+                        <availability>publicly</availability>
                     </xsl:when>
                     
-                    <!-- FAE034 Fin --> 
+                    <xsl:when test="contains(Metadata/dataIdInfo/resConst/LegConsts/accessConsts/@SDNIdent ,'UK')">
+                        <availability>limited</availability>
+                    </xsl:when> 
                     
                     <xsl:when test="contains(Metadata/dataIdInfo/resConst/LegConsts/accessConsts/@SDNIdent ,'UN')">
                         <availability>publicly</availability>
                     </xsl:when>
                     
-                    <xsl:when test="contains(Metadata/dataIdInfo/resConst/LegConsts/accessConsts/@SDNIdent ,'UK')">
-                        <availability>publicly</availability>
-                    </xsl:when> 
-                                     
-                    <xsl:when test="contains(Metadata/dataIdInfo/resConst/LegConsts/accessConsts/@SDNIdent ,'NA')">
-                        <availability>confidential</availability>
-                    </xsl:when>
                     
+                                     
                     <xsl:otherwise>
                         <availability>restricted</availability>
                     </xsl:otherwise>

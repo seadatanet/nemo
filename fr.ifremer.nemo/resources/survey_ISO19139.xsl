@@ -35,25 +35,21 @@
             <!--nom campagne-->
             <name><xsl:value-of select="gmi:MI_Metadata/gmd:identificationInfo/sdn:SDN_DataIdentification/gmd:citation/gmd:CI_Citation/gmd:title/gco:CharacterString"/></name>
         	
-        	
-			<xsl:for-each select="gmi:MI_Metadata/gmd:identificationInfo/sdn:SDN_DataIdentification/gmd:descriptiveKeywords">
-                <!--Navire-->
-                <xsl:if test="gmd:MD_Keywords/gmd:type/gmd:MD_KeywordTypeCode/@codeListValue =  'platform'">
-					<shipCode><xsl:value-of select="gmd:MD_Keywords/gmd:keyword/sdn:SDN_PlatformCode/@codeListValue"/></shipCode>
-	                <shipName><xsl:value-of select="gmd:MD_Keywords/gmd:keyword/sdn:SDN_PlatformCode"/></shipName> 
-                </xsl:if>
-                
-                <!-- Region -->
-                <xsl:if test="gmd:MD_Keywords/gmd:type/gmd:MD_KeywordTypeCode/@codeListValue =  'place'">
-                    <regionCode><xsl:value-of select="gmd:MD_Keywords/gmd:keyword/sdn:SDN_WaterBodyCode/@codeListValue"/></regionCode>
-                    <regionName><xsl:value-of select="gmd:MD_Keywords/gmd:keyword/sdn:SDN_WaterBodyCode"/></regionName> 
-                </xsl:if>
-                
-    			<!-- project -->
-                <xsl:if test="gmd:MD_Keywords/gmd:type/gmd:MD_KeywordTypeCode/@codeListValue =  'project'">
-                    <projectName><xsl:value-of select="substring-before(gmd:MD_Keywords/gmd:keyword/sdn:SDN_EDMERPCode,'{')"/></projectName> 
-                </xsl:if>
-                
+        	<!--Navire-->
+			<xsl:for-each select="gmi:MI_Metadata/gmd:identificationInfo/sdn:SDN_DataIdentification/gmd:descriptiveKeywords[gmd:MD_Keywords/gmd:type/gmd:MD_KeywordTypeCode/@codeListValue =  'platform'][1]">
+				<shipCode><xsl:value-of select="gmd:MD_Keywords/gmd:keyword/sdn:SDN_PlatformCode/@codeListValue"/></shipCode>
+	            <shipName><xsl:value-of select="gmd:MD_Keywords/gmd:keyword/sdn:SDN_PlatformCode"/></shipName> 
+            </xsl:for-each>  
+              
+            <!-- Region -->
+            <xsl:for-each select="gmi:MI_Metadata/gmd:identificationInfo/sdn:SDN_DataIdentification/gmd:descriptiveKeywords[gmd:MD_Keywords/gmd:type/gmd:MD_KeywordTypeCode/@codeListValue =  'place'][1]">   
+                <regionCode><xsl:value-of select="gmd:MD_Keywords/gmd:keyword/sdn:SDN_WaterBodyCode/@codeListValue"/></regionCode>
+                <regionName><xsl:value-of select="gmd:MD_Keywords/gmd:keyword/sdn:SDN_WaterBodyCode"/></regionName> 
+            </xsl:for-each> 
+            
+            <!-- project --> 
+            <xsl:for-each select="gmi:MI_Metadata/gmd:identificationInfo/sdn:SDN_DataIdentification/gmd:descriptiveKeywords[gmd:MD_Keywords/gmd:type/gmd:MD_KeywordTypeCode/@codeListValue =  'project'][1]">   
+                 <projectName>SDN:EDMERP::<xsl:value-of select="gmd:MD_Keywords/gmd:keyword/sdn:SDN_EDMERPCode/@codeListValue"/> (<xsl:value-of select="substring-before(substring-after(gmd:MD_Keywords/gmd:keyword/sdn:SDN_EDMERPCode,'{acronym=&quot;'), '&quot; organisation')"/>)</projectName> 
             </xsl:for-each>   
             
             <!-- Date de debut -->
@@ -74,48 +70,48 @@
 	    	
 	    	<!-- Availability -->
 	    	<xsl:choose>
-                    <xsl:when test="contains(gmi:MI_Metadata/gmd:identificationInfo/sdn:SDN_DataIdentification/gmd:resourceConstraints[2]/gmd:MD_LegalConstraints/gmd:otherConstraints/gmx:Anchor/@xlink:href ,'CC')">
+                    <xsl:when test="contains(gmi:MI_Metadata/gmd:identificationInfo/sdn:SDN_DataIdentification/gmd:resourceConstraints[2]/gmd:MD_LegalConstraints/gmd:otherConstraints/gmx:Anchor/@xlink:href  ,'CC')">
                         <availability>limited</availability>
                     </xsl:when>
                     
-                    <xsl:when test="contains(gmi:MI_Metadata/gmd:identificationInfo/sdn:SDN_DataIdentification/gmd:resourceConstraints[2]/gmd:MD_LegalConstraints/gmd:otherConstraints/gmx:Anchor/@xlink:href ,'FE')">
+                    <xsl:when test="contains(gmi:MI_Metadata/gmd:identificationInfo/sdn:SDN_DataIdentification/gmd:resourceConstraints[2]/gmd:MD_LegalConstraints/gmd:otherConstraints/gmx:Anchor/@xlink:href  ,'FE')">
                         <availability>limited</availability>
                     </xsl:when>
                     
-                    <xsl:when test="contains(gmi:MI_Metadata/gmd:identificationInfo/sdn:SDN_DataIdentification/gmd:resourceConstraints[2]/gmd:MD_LegalConstraints/gmd:otherConstraints/gmx:Anchor/@xlink:href ,'LI')">
+                    <xsl:when test="contains(gmi:MI_Metadata/gmd:identificationInfo/sdn:SDN_DataIdentification/gmd:resourceConstraints[2]/gmd:MD_LegalConstraints/gmd:otherConstraints/gmx:Anchor/@xlink:href  ,'LI')">
                         <availability>limited</availability>
                     </xsl:when>
                     
-                    <xsl:when test="contains(gmi:MI_Metadata/gmd:identificationInfo/sdn:SDN_DataIdentification/gmd:resourceConstraints[2]/gmd:MD_LegalConstraints/gmd:otherConstraints/gmx:Anchor/@xlink:href ,'MO')">
+                    <xsl:when test="contains(gmi:MI_Metadata/gmd:identificationInfo/sdn:SDN_DataIdentification/gmd:resourceConstraints[2]/gmd:MD_LegalConstraints/gmd:otherConstraints/gmx:Anchor/@xlink:href  ,'MO')">
                         <availability>limited</availability>
                     </xsl:when>
                     
-                    <xsl:when test="contains(gmi:MI_Metadata/gmd:identificationInfo/sdn:SDN_DataIdentification/gmd:resourceConstraints[2]/gmd:MD_LegalConstraints/gmd:otherConstraints/gmx:Anchor/@xlink:href ,'NC')">
-                        <availability>limited</availability>
-                    </xsl:when>
-                    
-                    <xsl:when test="contains(gmi:MI_Metadata/gmd:identificationInfo/sdn:SDN_DataIdentification/gmd:resourceConstraints[2]/gmd:MD_LegalConstraints/gmd:otherConstraints/gmx:Anchor/@xlink:href ,'OG')">
-                        <availability>limited</availability>
-                    </xsl:when>
-                    
-                    <xsl:when test="contains(gmi:MI_Metadata/gmd:identificationInfo/sdn:SDN_DataIdentification/gmd:resourceConstraints[2]/gmd:MD_LegalConstraints/gmd:otherConstraints/gmx:Anchor/@xlink:href ,'RS')">
-                        <availability>limited</availability>
-                    </xsl:when>
-                    
-                    <xsl:when test="contains(gmi:MI_Metadata/gmd:identificationInfo/sdn:SDN_DataIdentification/gmd:resourceConstraints[2]/gmd:MD_LegalConstraints/gmd:otherConstraints/gmx:Anchor/@xlink:href ,'SR')">
-                        <availability>limited</availability>
-                    </xsl:when>
-                    
-                    <xsl:when test="contains(gmi:MI_Metadata/gmd:identificationInfo/sdn:SDN_DataIdentification/gmd:resourceConstraints[2]/gmd:MD_LegalConstraints/gmd:otherConstraints/gmx:Anchor/@xlink:href ,'UN')">
-                        <availability>publicly</availability>
-                    </xsl:when>
-                    
-                    <xsl:when test="contains(gmi:MI_Metadata/gmd:identificationInfo/sdn:SDN_DataIdentification/gmd:resourceConstraints[2]/gmd:MD_LegalConstraints/gmd:otherConstraints/gmx:Anchor/@xlink:href ,'UK')">
-                        <availability>publicly</availability>
-                    </xsl:when> 
-                                     
-                    <xsl:when test="contains(gmi:MI_Metadata/gmd:identificationInfo/sdn:SDN_DataIdentification/gmd:resourceConstraints[2]/gmd:MD_LegalConstraints/gmd:otherConstraints/gmx:Anchor/@xlink:href ,'NA')">
+                    <xsl:when test="contains(gmi:MI_Metadata/gmd:identificationInfo/sdn:SDN_DataIdentification/gmd:resourceConstraints[2]/gmd:MD_LegalConstraints/gmd:otherConstraints/gmx:Anchor/@xlink:href  ,'NA')">
                         <availability>confidential</availability>
+                    </xsl:when>
+                    
+                    <xsl:when test="contains(gmi:MI_Metadata/gmd:identificationInfo/sdn:SDN_DataIdentification/gmd:resourceConstraints[2]/gmd:MD_LegalConstraints/gmd:otherConstraints/gmx:Anchor/@xlink:href  ,'NC')">
+                        <availability>limited</availability>
+                    </xsl:when>
+                    
+                    <xsl:when test="contains(gmi:MI_Metadata/gmd:identificationInfo/sdn:SDN_DataIdentification/gmd:resourceConstraints[2]/gmd:MD_LegalConstraints/gmd:otherConstraints/gmx:Anchor/@xlink:href  ,'OG')">
+                        <availability>limited</availability>
+                    </xsl:when>
+                    
+                    <xsl:when test="contains(gmi:MI_Metadata/gmd:identificationInfo/sdn:SDN_DataIdentification/gmd:resourceConstraints[2]/gmd:MD_LegalConstraints/gmd:otherConstraints/gmx:Anchor/@xlink:href  ,'RS')">
+                        <availability>confidential</availability>
+                    </xsl:when>
+                    
+                    <xsl:when test="contains(gmi:MI_Metadata/gmd:identificationInfo/sdn:SDN_DataIdentification/gmd:resourceConstraints[2]/gmd:MD_LegalConstraints/gmd:otherConstraints/gmx:Anchor/@xlink:href  ,'SR')">
+                        <availability>publicly</availability>
+                    </xsl:when>
+                    
+                    <xsl:when test="contains(gmi:MI_Metadata/gmd:identificationInfo/sdn:SDN_DataIdentification/gmd:resourceConstraints[2]/gmd:MD_LegalConstraints/gmd:otherConstraints/gmx:Anchor/@xlink:href  ,'UK')">
+                        <availability>limited</availability>
+                    </xsl:when> 
+                    
+                    <xsl:when test="contains(gmi:MI_Metadata/gmd:identificationInfo/sdn:SDN_DataIdentification/gmd:resourceConstraints[2]/gmd:MD_LegalConstraints/gmd:otherConstraints/gmx:Anchor/@xlink:href  ,'UN')">
+                        <availability>publicly</availability>
                     </xsl:when>
                     
                     <xsl:otherwise>
@@ -128,18 +124,25 @@
         
 			<!-- Data Type -->
         	<dataTypes>
-        		<!-- parcours gmi:objective group by sdn:SDN_Objective/gmi:sensingInstrument/gmi:MI_Instrument/gmi:type/sdn:SDN_DataCategoryCode/@codeListValue  -->                
-        		<xsl:for-each select="gmi:MI_Metadata/gmi:acquisitionInformation/gmi:MI_AcquisitionInformation/gmi:objective[not( preceding::sdn:SDN_Objective/gmi:sensingInstrument/gmi:MI_Instrument/gmi:type/sdn:SDN_DataCategoryCode/@codeListValue = sdn:SDN_Objective/gmi:sensingInstrument/gmi:MI_Instrument/gmi:type/sdn:SDN_DataCategoryCode/@codeListValue )]">
-                	<DataType>
-                	<xsl:variable name="dataCategoryCode" select="sdn:SDN_Objective/gmi:sensingInstrument/gmi:MI_Instrument/gmi:type/sdn:SDN_DataCategoryCode/@codeListValue" />
-                        	
-                    	<xsl:attribute name="code">
-                        	<xsl:value-of select="sdn:SDN_Objective/gmi:sensingInstrument/gmi:MI_Instrument/gmi:type/sdn:SDN_DataCategoryCode/@codeListValue"/> - <xsl:value-of select="sdn:SDN_Objective/gmi:sensingInstrument/gmi:MI_Instrument/gmi:type/sdn:SDN_DataCategoryCode"/>
-                        </xsl:attribute>
-                        
-                        <!-- count number of current @codeListValue -->
-                        <profiles><xsl:value-of select="count(//gmi:MI_Metadata/gmi:acquisitionInformation/gmi:MI_AcquisitionInformation/gmi:objective/sdn:SDN_Objective/gmi:sensingInstrument/gmi:MI_Instrument/gmi:type/sdn:SDN_DataCategoryCode[@codeListValue = $dataCategoryCode])"/></profiles>
-                    </DataType>
+        		<xsl:for-each select="gmi:MI_Metadata/gmi:acquisitionInformation/gmi:MI_AcquisitionInformation/gmi:objective">
+                	<xsl:if test="sdn:SDN_Objective/gmi:type/gmi:MI_ObjectiveTypeCode/@codeListValue = 'instantaneousCollection'">
+	                	<DataType>
+	                	<xsl:variable name="dataCategoryCode" select="sdn:SDN_Objective/gmi:sensingInstrument/gmi:MI_Instrument/gmi:type/sdn:SDN_DataCategoryCode/@codeListValue" />
+	                        	
+	                    	<xsl:attribute name="code">
+	                        	<xsl:value-of select="sdn:SDN_Objective/gmi:sensingInstrument/gmi:MI_Instrument/gmi:type/sdn:SDN_DataCategoryCode/@codeListValue"/> - <xsl:value-of select="sdn:SDN_Objective/gmi:sensingInstrument/gmi:MI_Instrument/gmi:type/sdn:SDN_DataCategoryCode"/>
+	                        </xsl:attribute>
+	                        
+	                       	<xsl:choose>
+         						<xsl:when test="sdn:SDN_Objective/sdn:SDN_SamplingActivity/sdn:quantity">
+	                        		<profiles><xsl:value-of select="sdn:SDN_Objective/sdn:SDN_SamplingActivity/sdn:quantity"/></profiles>
+	                        	</xsl:when>
+        						<xsl:otherwise>
+        							<profiles></profiles>
+        						</xsl:otherwise>
+        					</xsl:choose>
+	                    </DataType>
+                   	</xsl:if>
                 </xsl:for-each>
             </dataTypes>
             
