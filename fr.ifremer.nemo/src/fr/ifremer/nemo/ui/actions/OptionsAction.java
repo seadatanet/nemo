@@ -2,7 +2,6 @@ package fr.ifremer.nemo.ui.actions;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.Map.Entry;
 import java.util.TreeMap;
 import java.util.TreeSet;
@@ -55,7 +54,6 @@ import org.eclipse.ui.forms.widgets.Section;
 import sdn.vocabulary.interfaces.IElement;
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.config.Configuration;
-import fr.ifremer.nemo.config.EdmoHandler;
 import fr.ifremer.nemo.config.Flag;
 import fr.ifremer.nemo.config.FlagTable;
 import fr.ifremer.nemo.config.NemoLists;
@@ -82,47 +80,51 @@ public class OptionsAction extends Action implements ISelectionListener,
 
 	private final IWorkbenchWindow window;
 
-	public static Combo comboLangue, comboCentreDonnees, comboIdEdmoRespCdi,
-			comboMethodeCdi, comboCodeEdmoDonnees, comboIdEdmoRespDonnees,
-			comboIdEdmoDistDonnees, comboTypePlateForme,
-			comboAccesDonnees = null;
+	private static Combo comboLangue, comboCentreDonnees, comboMethodeCdi,
+			comboTypePlateForme, comboAccesDonnees = null;
 
-	public static Button buttonCancel, buttonValider, buttonRestore,
+	private Button buttonEdmoChoiceIdEdmoRespCdi;
+	private Button buttonEdmoChoiceIdCodeEdmoDonnees;
+	private Button buttonEdmoChoiceIdEdmoRespDonnees;
+	private Button buttonEdmoChoiceIdEdmoDistDonnees;
+	private EdmoChoiceListener edmoChoiceListener;
+
+	private EdmoChoices tmpEdmoChoices;
+	private static Button buttonCancel, buttonValider, buttonRestore,
 			buttonParcourirModele, buttonParcourirCampagne = null;
 
-	public static Label labelNemo, labelNautilus, labelCampagne, lblCDI,
-			labelIdEdmoRespCdi, labelUrlCdi, labelMethodeCdi,
-			labelCodeEdmoDonnees, labelIdEdmoRespDonnees,
-			labelIdEdmoDistDonnees, labelWSVocab, labelFichierMapping,
-			lblOdvFormatVersion, lblNetCDFFormatVersion,
+	private static Label labelNemo, labelNautilus, labelCampagne, lblCDI,
+			labelIdEdmoRespCdi, labelIdEdmoRespDonnees, labelCodeEdmoDonnees,
+			labelIdEdmoDistDonnees, labelUrlCdi, labelMethodeCdi, labelWSVocab,
+			labelFichierMapping, lblOdvFormatVersion, lblNetCDFFormatVersion,
 			lblMedatlasFormatVersion, labelWSEdmo, lblTypePlateForme,
 			lblAccesDonnees = null;
 
-	public static Button checkCDI, checkMapping, radDateISO, radDateJulian;
+	private static Button checkCDI, checkMapping, radDateISO, radDateJulian;
 
-	public static Text textAreaNemo, textAreaNautilus, textDossierModele,
+	private static Text textAreaNemo, textAreaNautilus, textDossierModele,
 			textDossierCampagne, textUrlCdi, /* textVocabURL, */
 			textFichierMapping, textOdvFormatVersion, textNetCDFFormatVersion,
 			textMedatlasFormatVersion, textWSEdmo = null;
 
-	public static Table tabFlagTable, tabFlag;
+	private static Table tabFlagTable, tabFlag;
 
-	public static String _defaultCode = Global.EMPTY_STRING;
+	private static String _defaultCode = Global.EMPTY_STRING;
 
-	public static FlagTable _flagTable = new FlagTable();
+	private static FlagTable _flagTable = new FlagTable();
 
-	public static ArrayList<FlagTable> _flagTables = new ArrayList<FlagTable>();
+	private static ArrayList<FlagTable> _flagTables = new ArrayList<FlagTable>();
 
-	public static Label textAreaFlag;
+	private static Label textAreaFlag;
 
 	// FAE 4431 Flag qualité par défault configurable
-	public static Combo _flagDefault;
+	private static Combo _flagDefault;
 
-	public final static String ID = "fr.ifremer.nemo.ui.OptionsAction"; //$NON-NLS-1$
+	private final static String ID = "fr.ifremer.nemo.ui.OptionsAction"; //$NON-NLS-1$
 
 	// vars nécessaires à la fenêtre d'options
 
-	public static Shell shelloptions;
+	private static Shell shelloptions;
 
 	private Composite /* top, */compo, compo01, compo02;
 	private Group group, group01, group02;
@@ -132,13 +134,15 @@ public class OptionsAction extends Action implements ISelectionListener,
 	private Button radODV;
 	private Button radODVMonoFichier;
 	private Button radODVMonoStation;
-	protected Group grpODV;
+	private Group grpODV;
 	// -- PROXY
 	public static Button useProxy;
 	private Label label, labelAdrProxy, labelPortProxy, labelLoginProxy,
 			labelPassProxy;
 	public static Text textAdrProxy, textPortProxy, textLoginProxy,
 			textPassProxy;
+
+	private EdmoViewer edmoViewer;
 
 	// -- options necessitant un redemarrage
 	private String configLangage;
@@ -165,7 +169,7 @@ public class OptionsAction extends Action implements ISelectionListener,
 		// sauvegarde des options necessitant un redemarrage
 		configLangage = config.getLang();
 		configProxy = config.getProxy();
-
+		loadEdmoConfig();
 		// lancement IHM options
 		shelloptions = new Shell(Application.display, SWT.BORDER | SWT.TITLE
 				| SWT.APPLICATION_MODAL | SWT.SYSTEM_MODAL);
@@ -195,9 +199,32 @@ public class OptionsAction extends Action implements ISelectionListener,
 		System.out.println("Temps : run() = " + (end - start) + "ms");
 	}
 
+	private void loadEdmoConfig() {
+
+		tmpEdmoChoices = new EdmoChoices();
+
+		String value = Nemo.getInstance().getConfig().getIdEdmoRespCdi();
+		if (!value.isEmpty()) {
+			tmpEdmoChoices.setIdEdmoRespCdi(Integer.valueOf(value));
+		}
+		value = Nemo.getInstance().getConfig().getCodeEdmoDonnees();
+		if (!value.isEmpty()) {
+			tmpEdmoChoices.setCodeEdmoDonnees(Integer.valueOf(value));
+		}
+		value = Nemo.getInstance().getConfig().getIdEdmoRespDonnees();
+		if (!value.isEmpty()) {
+			tmpEdmoChoices.setIdEdmoRespDonnees(Integer.valueOf(value));
+		}
+
+		value = Nemo.getInstance().getConfig().getIdEdmoDistDonnees();
+		if (!value.isEmpty()) {
+			tmpEdmoChoices.setIdEdmoDistDonnees(Integer.valueOf(value));
+		}
+	}
+
 	private void alimenteCombos() {
 
-		long start = System.currentTimeMillis();
+		// long start = System.currentTimeMillis();
 
 		// CENTRES DE DONNEES
 		Collection<IElement> centres = VocabLists.getVocabList(
@@ -250,42 +277,16 @@ public class OptionsAction extends Action implements ISelectionListener,
 		for (String champ : champsMethodesCdi)
 			comboAccesDonnees.add(champ);
 
-		// alimentation des combos EDMO
-		HashMap<Integer, String> edmoHash = NemoLists.getEdmo();
-		TreeMap<Integer, String> edmoTree = new TreeMap<Integer, String>();
-		EdmoHandler.listeOrigine = new ArrayList<String>();
-		for (Entry<Integer, String> currentEntry : edmoHash.entrySet()) {
-			edmoTree.put(currentEntry.getKey(), currentEntry.getValue());
-		}
-		String strTemp = Global.EMPTY_STRING;
-		for (Entry<Integer, String> currentEntry : edmoTree.entrySet()) {
-			strTemp = currentEntry.getKey() + Global.SEP
-					+ currentEntry.getValue();
-
-			// TODO LDN : Nettoyage des strings
-			strTemp = strTemp.replace("\n", "").replace("\t", "")
-					.replace("\r", "").trim();
-
-			EdmoHandler.listeOrigine.add(strTemp);
-			comboIdEdmoRespCdi.add(strTemp);
-		}
-
-		// TODO LDN : Optimisation remplissage des combos
-		String[] items = comboIdEdmoRespCdi.getItems();
-		comboCodeEdmoDonnees.setItems(items);
-		comboIdEdmoRespDonnees.setItems(items);
-		comboIdEdmoDistDonnees.setItems(items);
-
 		fillFlagTable();
 
 		// FAE 4431 Flag qualité par défault configurable
 		_flagDefault.add("0");
 		_flagDefault.add("1");
 
-		long end = System.currentTimeMillis();
+		// long end = System.currentTimeMillis();
 
-		System.out
-				.println("Temps : alimenteCombos() = " + (end - start) + "ms");
+		// System.out
+		// .println("Temps : alimenteCombos() = " + (end - start) + "ms");
 	}
 
 	protected void remplissageOptions() {
@@ -326,16 +327,11 @@ public class OptionsAction extends Action implements ISelectionListener,
 		textPassProxy.setText(proxy.getPassword());
 		enableProxy(proxy.isUse());
 
-		// EDMO code
-		Utils.selectComboCode(comboIdEdmoRespCdi, config.getIdEdmoRespCdi());
-
 		// CDI
 		checkCDI.setSelection(config.isWriteCdi());
-		Utils.selectComboCode(comboCodeEdmoDonnees, config.getCodeEdmoDonnees());
-		Utils.selectComboCode(comboIdEdmoRespDonnees,
-				config.getIdEdmoRespDonnees());
-		Utils.selectComboCode(comboIdEdmoDistDonnees,
-				config.getIdEdmoDistDonnees());
+		loadEdmoConfig();
+		updateEdmo(tmpEdmoChoices);
+
 		textUrlCdi.setText(config.getCdiURL());
 		Utils.selectComboCode(comboMethodeCdi, config.getCdiMethod());
 		Utils.selectComboCode(comboAccesDonnees, config.getAccesDonnees());
@@ -407,11 +403,11 @@ public class OptionsAction extends Action implements ISelectionListener,
 
 	protected void CDICheckMask(Boolean status) {
 		labelCodeEdmoDonnees.setEnabled(status);
-		comboCodeEdmoDonnees.setEnabled(status);
+		buttonEdmoChoiceIdCodeEdmoDonnees.setEnabled(status);
 		labelIdEdmoRespDonnees.setEnabled(status);
-		comboIdEdmoRespDonnees.setEnabled(status);
+		buttonEdmoChoiceIdEdmoRespDonnees.setEnabled(status);
 		labelIdEdmoDistDonnees.setEnabled(status);
-		comboIdEdmoDistDonnees.setEnabled(status);
+		buttonEdmoChoiceIdEdmoDistDonnees.setEnabled(status);
 		labelUrlCdi.setEnabled(status);
 		textUrlCdi.setEnabled(status);
 		labelMethodeCdi.setEnabled(status);
@@ -756,27 +752,44 @@ public class OptionsAction extends Action implements ISelectionListener,
 	 * This method initializes groupCDI
 	 */
 	private void createGroupEdmo(Composite parent) {
-		// FAE 1123 : Extraire le centre de données responsable du CDI du bloc
-		// CDI.
 
-		group = new Group(parent, SWT.NONE);
-		group.setFont(Utils.font08);
-		group.setText(Messages.settings_EDMO);
+		Group groupEdmoRespCDI = new Group(parent, SWT.NONE);
+		groupEdmoRespCDI.setFont(Utils.font08);
+		groupEdmoRespCDI.setText(Messages.settings_EDMO);
 		GridLayoutFactory.fillDefaults().margins(4, 4).numColumns(2)
-				.applyTo(group);
+				.applyTo(groupEdmoRespCDI);
 		GridDataFactory.fillDefaults().grab(false, true).hint(600, SWT.DEFAULT)
-				.applyTo(group);
+				.applyTo(groupEdmoRespCDI);
 
-		labelIdEdmoRespCdi = new Label(group, SWT.NONE);
+		buttonEdmoChoiceIdEdmoRespCdi = new Button(groupEdmoRespCDI, SWT.PUSH);
+		buttonEdmoChoiceIdEdmoRespCdi
+				.setText(Messages.settings_EDMO_choice_button);
+		buttonEdmoChoiceIdEdmoRespCdi.addListener(SWT.Selection,
+				edmoChoiceListener);
+
+		labelIdEdmoRespCdi = new Label(groupEdmoRespCDI, SWT.NONE);
 		labelIdEdmoRespCdi.setFont(Utils.font08);
-		labelIdEdmoRespCdi.setText(Messages.settings_EDMOauthor);
-		labelIdEdmoRespCdi.pack();
 
-		comboIdEdmoRespCdi = new Combo(group, SWT.BORDER | SWT.READ_ONLY);
-		comboIdEdmoRespCdi.setFont(Utils.font08);
-		GridDataFactory.fillDefaults().grab(true, false)
-				.applyTo(comboIdEdmoRespCdi);
+	}
 
+	public class EdmoChoiceListener implements Listener {
+		public void handleEvent(Event event) {
+			if (event.widget == buttonEdmoChoiceIdEdmoRespCdi) {
+				edmoViewer = new EdmoViewer(OptionsAction.this,
+						EdmoChoices.CHOICE_IdEdmoRespCdi);
+			} else if (event.widget == buttonEdmoChoiceIdCodeEdmoDonnees) {
+				edmoViewer = new EdmoViewer(OptionsAction.this,
+						EdmoChoices.CHOICE_CodeEdmoDonnees);
+
+			} else if (event.widget == buttonEdmoChoiceIdEdmoRespDonnees) {
+				edmoViewer = new EdmoViewer(OptionsAction.this,
+						EdmoChoices.CHOICE_IdEdmoRespDonnees);
+
+			} else if (event.widget == buttonEdmoChoiceIdEdmoDistDonnees) {
+				edmoViewer = new EdmoViewer(OptionsAction.this,
+						EdmoChoices.CHOICE_IdEdmoDistDonnees);
+			}
+		}
 	}
 
 	/**
@@ -807,35 +820,38 @@ public class OptionsAction extends Action implements ISelectionListener,
 			}
 		});
 
+		buttonEdmoChoiceIdCodeEdmoDonnees = new Button(compo, SWT.PUSH);
+		buttonEdmoChoiceIdCodeEdmoDonnees
+				.setText(Messages.settings_EDMO_choice_button);// TODO
+		buttonEdmoChoiceIdCodeEdmoDonnees.addListener(SWT.Selection,
+				edmoChoiceListener);
+		buttonEdmoChoiceIdCodeEdmoDonnees.pack();
+
 		labelCodeEdmoDonnees = new Label(compo, SWT.NONE);
 		labelCodeEdmoDonnees.setFont(Utils.font08);
-		labelCodeEdmoDonnees.setText(Messages.settings_EDMOori);
 		labelCodeEdmoDonnees.pack();
 
-		comboCodeEdmoDonnees = new Combo(compo, SWT.BORDER | SWT.READ_ONLY);
-		comboCodeEdmoDonnees.setFont(Utils.font08);
-		GridDataFactory.fillDefaults().grab(true, false)
-				.applyTo(comboCodeEdmoDonnees);
+		buttonEdmoChoiceIdEdmoRespDonnees = new Button(compo, SWT.PUSH);
+		buttonEdmoChoiceIdEdmoRespDonnees
+				.setText(Messages.settings_EDMO_choice_button);// TODO
+		buttonEdmoChoiceIdEdmoRespDonnees.addListener(SWT.Selection,
+				edmoChoiceListener);
+		buttonEdmoChoiceIdEdmoRespDonnees.pack();
 
 		labelIdEdmoRespDonnees = new Label(compo, SWT.NONE);
 		labelIdEdmoRespDonnees.setFont(Utils.font08);
-		labelIdEdmoRespDonnees.setText(Messages.settings_EDMOcustodian);
 		labelIdEdmoRespDonnees.pack();
 
-		comboIdEdmoRespDonnees = new Combo(compo, SWT.BORDER | SWT.READ_ONLY);
-		comboIdEdmoRespDonnees.setFont(Utils.font08);
-		GridDataFactory.fillDefaults().grab(true, false)
-				.applyTo(comboIdEdmoRespDonnees);
+		buttonEdmoChoiceIdEdmoDistDonnees = new Button(compo, SWT.PUSH);
+		buttonEdmoChoiceIdEdmoDistDonnees
+				.setText(Messages.settings_EDMO_choice_button);// TODO
+		buttonEdmoChoiceIdEdmoDistDonnees.addListener(SWT.Selection,
+				edmoChoiceListener);
+		buttonEdmoChoiceIdEdmoDistDonnees.pack();
 
 		labelIdEdmoDistDonnees = new Label(compo, SWT.NONE);
 		labelIdEdmoDistDonnees.setFont(Utils.font08);
-		labelIdEdmoDistDonnees.setText(Messages.settings_EDMOdist);
 		labelIdEdmoDistDonnees.pack();
-
-		comboIdEdmoDistDonnees = new Combo(compo, SWT.BORDER | SWT.READ_ONLY);
-		comboIdEdmoDistDonnees.setFont(Utils.font08);
-		GridDataFactory.fillDefaults().grab(true, false)
-				.applyTo(comboIdEdmoDistDonnees);
 
 		labelUrlCdi = new Label(compo, SWT.NONE);
 		labelUrlCdi.setFont(Utils.font08);
@@ -855,12 +871,6 @@ public class OptionsAction extends Action implements ISelectionListener,
 		comboMethodeCdi.setFont(Utils.font08);
 		GridDataFactory.fillDefaults().grab(true, false)
 				.applyTo(comboMethodeCdi);
-
-		// Menu recherche combos
-		Utils.createSearchMenu(comboIdEdmoRespCdi, Global.IDEDMO);
-		Utils.createSearchMenu(comboCodeEdmoDonnees, Global.IDEDMO);
-		Utils.createSearchMenu(comboIdEdmoRespDonnees, Global.IDEDMO);
-		Utils.createSearchMenu(comboIdEdmoDistDonnees, Global.IDEDMO);
 
 		// FAE 59 CDL 09/04/08
 		lblTypePlateForme = new Label(compo, SWT.NONE);
@@ -1474,6 +1484,7 @@ public class OptionsAction extends Action implements ISelectionListener,
 		data.widthHint = 600;
 		data.grabExcessVerticalSpace = true;
 		formOption.getBody().setLayoutData(data);
+		edmoChoiceListener = new EdmoChoiceListener();
 
 		createSection(toolkitOption, formOption, Messages.settings_general,
 				ExpandableComposite.EXPANDED);
@@ -1490,12 +1501,15 @@ public class OptionsAction extends Action implements ISelectionListener,
 		sep.setLayoutData(data);
 		createCompoBouton(parent);
 
+		updateEdmo(tmpEdmoChoices);
+
 		// listener cancel
 		buttonCancel
 				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 					@Override
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent e) {
+						tmpEdmoChoices = new EdmoChoices();
 						shelloptions.close();
 					}
 				});
@@ -1589,7 +1603,7 @@ public class OptionsAction extends Action implements ISelectionListener,
 		StringBuffer message = new StringBuffer();
 		StringBuffer messageCDI = new StringBuffer();
 
-		message.append(checkMandatory(comboIdEdmoRespCdi.getText(),
+		message.append(checkEdmoMandatory(tmpEdmoChoices.getIdEdmoRespCdi(),
 				Messages.settings_EDMOauthor, Global.SEP));
 		if (useProxy.getSelection()) {
 			message.append(checkMandatory(textAdrProxy.getText(),
@@ -1604,12 +1618,16 @@ public class OptionsAction extends Action implements ISelectionListener,
 		}
 
 		if (checkCDI.getSelection()) {
-			messageCDI.append(checkMandatory(comboCodeEdmoDonnees.getText(),
+			messageCDI.append(checkEdmoMandatory(
+					tmpEdmoChoices.getCodeEdmoDonnees(),
 					Messages.settings_EDMOori, Global.SEP));
-			messageCDI.append(checkMandatory(comboIdEdmoRespDonnees.getText(),
+			messageCDI.append(checkEdmoMandatory(
+					tmpEdmoChoices.getIdEdmoRespDonnees(),
 					Messages.settings_EDMOcustodian, Global.SEP));
-			messageCDI.append(checkMandatory(comboIdEdmoDistDonnees.getText(),
+			messageCDI.append(checkEdmoMandatory(
+					tmpEdmoChoices.getIdEdmoDistDonnees(),
 					Messages.settings_EDMOdist, Global.SEP));
+
 			messageCDI.append(checkMandatory(textUrlCdi.getText(),
 					Messages.settings_dataDist_web, Global.SEP));
 			messageCDI.append(checkMandatory(comboMethodeCdi.getText(),
@@ -1649,7 +1667,7 @@ public class OptionsAction extends Action implements ISelectionListener,
 			try {
 				String[] buttons = new String[1];
 				buttons[0] = Messages.success;
-				MessageDialog dialog = new MessageDialog(Utils.getMainShell(),
+				MessageDialog dialog = new MessageDialog(shelloptions,
 						Messages.error_missing, null, message.toString(),
 						MessageDialog.ERROR, buttons, 0);
 				dialog.open();
@@ -1670,12 +1688,26 @@ public class OptionsAction extends Action implements ISelectionListener,
 		return message.toString();
 	}
 
+	protected String checkEdmoMandatory(int value, String errorMsg, String sep) {
+		StringBuffer message = new StringBuffer();
+		if (value == 0) {
+			message.append(Global.RN);
+			message.append(sep);
+			message.append(errorMsg);
+		}
+		return message.toString();
+	}
+
 	protected void redLabels() {
 		// Libelles rouges si parametres manquants
-		redLabel(comboIdEdmoRespCdi.getText(), labelIdEdmoRespCdi);
-		redLabel(comboCodeEdmoDonnees.getText(), labelCodeEdmoDonnees);
-		redLabel(comboIdEdmoRespDonnees.getText(), labelIdEdmoRespDonnees);
-		redLabel(comboIdEdmoDistDonnees.getText(), labelIdEdmoDistDonnees);
+
+		redEdmoLabel(tmpEdmoChoices.getIdEdmoRespCdi(), labelIdEdmoRespCdi);
+		redEdmoLabel(tmpEdmoChoices.getCodeEdmoDonnees(), labelCodeEdmoDonnees);
+		redEdmoLabel(tmpEdmoChoices.getIdEdmoRespDonnees(),
+				labelIdEdmoRespDonnees);
+		redEdmoLabel(tmpEdmoChoices.getIdEdmoDistDonnees(),
+				labelIdEdmoDistDonnees);
+
 		redLabel(textUrlCdi.getText(), labelUrlCdi);
 		redLabel(textOdvFormatVersion.getText(), lblOdvFormatVersion);
 		redLabel(textMedatlasFormatVersion.getText(), lblMedatlasFormatVersion);
@@ -1685,6 +1717,16 @@ public class OptionsAction extends Action implements ISelectionListener,
 		redLabel(textFichierMapping.getText(), labelFichierMapping);
 		redLabel(textAdrProxy.getText(), labelAdrProxy);
 		redLabel(textPortProxy.getText(), labelPortProxy);
+	}
+
+	protected void redEdmoLabel(int value, Label redLabel) {
+		if (value == 0) {
+			redLabel.setForeground(Display.getCurrent().getSystemColor(
+					SWT.COLOR_RED));
+		} else {
+			redLabel.setForeground(Display.getCurrent().getSystemColor(
+					SWT.COLOR_BLACK));
+		}
 	}
 
 	protected void redLabel(String text, Label redLabel) {
@@ -1805,14 +1847,15 @@ public class OptionsAction extends Action implements ISelectionListener,
 
 		// CDI
 		configuration.setWriteCdi(checkCDI.getSelection());
-		configuration.setIdEdmoRespCdi(fr.ifremer.nemo.util.Utils
-				.extraitCode(comboIdEdmoRespCdi.getText()));
-		configuration.setCodeEdmoDonnees(fr.ifremer.nemo.util.Utils
-				.extraitCode(comboCodeEdmoDonnees.getText()));
-		configuration.setIdEdmoRespDonnees(fr.ifremer.nemo.util.Utils
-				.extraitCode(comboIdEdmoRespDonnees.getText()));
-		configuration.setIdEdmoDistDonnees(fr.ifremer.nemo.util.Utils
-				.extraitCode(comboIdEdmoDistDonnees.getText()));
+		configuration.setIdEdmoRespCdi(String.valueOf(tmpEdmoChoices
+				.getIdEdmoRespCdi()));
+		configuration.setCodeEdmoDonnees(String.valueOf(tmpEdmoChoices
+				.getCodeEdmoDonnees()));
+		configuration.setIdEdmoRespDonnees(String.valueOf(tmpEdmoChoices
+				.getIdEdmoRespDonnees()));
+		configuration.setIdEdmoDistDonnees(String.valueOf(tmpEdmoChoices
+				.getIdEdmoDistDonnees()));
+
 		configuration.setCdiURL(textUrlCdi.getText());
 		configuration.setCdiMethod(fr.ifremer.nemo.util.Utils
 				.extraitCode(comboMethodeCdi.getText()));
@@ -1900,5 +1943,34 @@ public class OptionsAction extends Action implements ISelectionListener,
 
 	public static void setDefaultCode(String code) {
 		_defaultCode = code;
+	}
+
+	public void updateEdmo(EdmoChoices tmpEdmoChoicesNew) {
+		tmpEdmoChoices = tmpEdmoChoicesNew;
+		// TODO BGT: remplir tmpEdmoChoices avec config a l'ouverture
+		labelIdEdmoRespCdi.setText(Messages.settings_EDMOauthor + ": "
+				+ tmpEdmoChoices.getIdEdmoRespCdi());
+
+		labelIdEdmoRespDonnees.setText(Messages.settings_EDMOcustodian + ": "
+				+ tmpEdmoChoices.getIdEdmoRespDonnees());
+
+		labelCodeEdmoDonnees.setText(Messages.settings_EDMOori + ": "
+				+ tmpEdmoChoices.getCodeEdmoDonnees());
+
+		labelIdEdmoDistDonnees.setText(Messages.settings_EDMOdist + ": "
+				+ tmpEdmoChoices.getIdEdmoDistDonnees());
+
+		labelIdEdmoRespCdi.pack();
+		// buttonEdmoChoiceIdEdmoRespCdi.pack();
+
+		labelIdEdmoRespDonnees.pack();
+		// buttonEdmoChoiceIdEdmoRespDonnees.pack();
+
+		labelCodeEdmoDonnees.pack();
+		// buttonEdmoChoiceIdCodeEdmoDonnees.pack();
+
+		labelIdEdmoDistDonnees.pack();
+		// buttonEdmoChoiceIdEdmoDistDonnees.pack();
+
 	}
 }

@@ -365,6 +365,8 @@ public class Messages {
 	public static String settings_mapping_check;
 	public static String settings_web;
 	public static String settings_EDMO;
+	public static String settings_EDMO_choice_button;
+	public static String settings_EDMO_search_label;
 	public static String settings_cdi;
 	public static String settings_mapping;
 	public static String settings_dateODV;
@@ -614,8 +616,8 @@ public class Messages {
 				bundleName.append(Global.UNDERSCORE);
 				bundleName.append(langue);
 			}
-			ResourceBundle resource =
-					ResourceBundle.getBundle(bundleName.toString());
+			ResourceBundle resource = ResourceBundle.getBundle(bundleName
+					.toString());
 			return resource.getString(key);
 		} catch (MissingResourceException e) {
 			return '!' + key + '!';

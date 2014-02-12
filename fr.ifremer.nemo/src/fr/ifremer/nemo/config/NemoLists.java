@@ -36,8 +36,7 @@ import fr.ifremer.nemo.ws.WSSurveyDescription;
  * 
  * @author Gerard BUNEL
  */
-public class NemoLists implements Cloneable
-{
+public class NemoLists implements Cloneable {
 
 	static protected List<WSParameter> _parameters = new java.util.ArrayList<WSParameter>();
 
@@ -48,19 +47,19 @@ public class NemoLists implements Cloneable
 	/**
 	 * list of updates
 	 */
-	
 
 	// static protected String _sdnParameters;
 
 	public static Table filtreTable;
 
-	public static ArrayList<String> listeNavire, listeCentreDonnees, listeRegion;
+	public static ArrayList<String> listeNavire, listeCentreDonnees,
+			listeRegion;
 
 	public static ArrayList<String> listeFiltree;
 
+	private static List<EdmoEntity> _edmoList;
 
-	public NemoLists()
-	{
+	public NemoLists() {
 	}
 
 	/**
@@ -69,24 +68,17 @@ public class NemoLists implements Cloneable
 	 * @return a copy of this object
 	 */
 	@Override
-	public Object clone() throws CloneNotSupportedException
-	{
+	public Object clone() throws CloneNotSupportedException {
 		NemoLists copy = null;
 		copy = (NemoLists) super.clone();
 		return copy;
 	}
 
-	
-
-	
-
 	/**
 	 * release all links for role "parameters"
 	 */
-	public static void releaseParameters()
-	{
-		for (WSParameter t : getParameters())
-		{
+	public static void releaseParameters() {
+		for (WSParameter t : getParameters()) {
 			removeParameter(t);
 		}
 	}
@@ -97,8 +89,7 @@ public class NemoLists implements Cloneable
 	 * @param x
 	 *            the linked object to unlink
 	 */
-	public static void removeParameter(WSParameter x)
-	{
+	public static void removeParameter(WSParameter x) {
 		if (!parametersIncludes(x))
 			return;
 		nocheckRemoveParameter(x);
@@ -110,8 +101,7 @@ public class NemoLists implements Cloneable
 	 * @param x
 	 *            the object to link with
 	 */
-	public static void addParameter(WSParameter x)
-	{
+	public static void addParameter(WSParameter x) {
 		if (parametersIncludes(x))
 			return;
 		nocheckAddParameter(x);
@@ -122,8 +112,7 @@ public class NemoLists implements Cloneable
 	 * 
 	 * @return Array of linked objects
 	 */
-	public static WSParameter[] getParameters()
-	{
+	public static WSParameter[] getParameters() {
 		WSParameter[] v = new WSParameter[_parameters.size()];
 		_parameters.toArray(v);
 		return v;
@@ -136,8 +125,7 @@ public class NemoLists implements Cloneable
 	 *            the index of the linked object
 	 * @return linked object at index i
 	 */
-	public static WSParameter parametersAt(int i)
-	{
+	public static WSParameter parametersAt(int i) {
 		return _parameters.get(i);
 	}
 
@@ -147,14 +135,11 @@ public class NemoLists implements Cloneable
 	 * @param x
 	 *            the linked object
 	 */
-	public static int parametersIndexOf(WSParameter x)
-	{
+	public static int parametersIndexOf(WSParameter x) {
 		if (!parametersIncludes(x))
 			return -1;
-		for (int i = 0; i < parametersSize(); i++)
-		{
-			if (parametersAt(i) == x)
-			{
+		for (int i = 0; i < parametersSize(); i++) {
+			if (parametersAt(i) == x) {
 				return i;
 			}
 		}
@@ -167,8 +152,7 @@ public class NemoLists implements Cloneable
 	 * @param x
 	 *            the object to move
 	 */
-	public static void parametersMoveUp(WSParameter x)
-	{
+	public static void parametersMoveUp(WSParameter x) {
 		int index;
 		index = parametersIndexOf(x);
 		if (index < 1)
@@ -182,8 +166,7 @@ public class NemoLists implements Cloneable
 	 * @param x
 	 *            the object to move
 	 */
-	public static void parametersMoveTop(WSParameter x)
-	{
+	public static void parametersMoveTop(WSParameter x) {
 		int index;
 		index = parametersIndexOf(x);
 		if (index < 1)
@@ -197,8 +180,7 @@ public class NemoLists implements Cloneable
 	 * @param x
 	 *            the object to move
 	 */
-	public static void parametersMoveDown(WSParameter x)
-	{
+	public static void parametersMoveDown(WSParameter x) {
 		int index;
 		index = parametersIndexOf(x);
 		if (index < 0 || index > parametersSize() - 2)
@@ -212,8 +194,7 @@ public class NemoLists implements Cloneable
 	 * @param x
 	 *            the object to move
 	 */
-	public static void parametersMoveBottom(WSParameter x)
-	{
+	public static void parametersMoveBottom(WSParameter x) {
 		int index;
 		index = parametersIndexOf(x);
 		if (index < 0 || index > parametersSize() - 2)
@@ -227,8 +208,7 @@ public class NemoLists implements Cloneable
 	 * @param x
 	 *            the object to move
 	 */
-	public static void nocheckMoveParameterAt(WSParameter x, int a_Index)
-	{
+	public static void nocheckMoveParameterAt(WSParameter x, int a_Index) {
 		int index;
 		WSParameter tmp;
 		index = parametersIndexOf(x);
@@ -246,8 +226,7 @@ public class NemoLists implements Cloneable
 	 *            the object to link with
 	 * @see NemoLists#removeParameter(WSParameter)
 	 */
-	protected static void nocheckRemoveParameter(WSParameter x)
-	{
+	protected static void nocheckRemoveParameter(WSParameter x) {
 		_parameters.remove(x);
 	}
 
@@ -260,8 +239,7 @@ public class NemoLists implements Cloneable
 	 *            the object to link with
 	 * @see NemoLists#addParameter(WSParameter)
 	 */
-	protected static void nocheckAddParameter(WSParameter x)
-	{
+	protected static void nocheckAddParameter(WSParameter x) {
 		_parameters.add(x);
 	}
 
@@ -270,8 +248,7 @@ public class NemoLists implements Cloneable
 	 * 
 	 * @return the number of linked objects
 	 */
-	public static int parametersSize()
-	{
+	public static int parametersSize() {
 		return _parameters.size();
 	}
 
@@ -281,8 +258,7 @@ public class NemoLists implements Cloneable
 	 * @param x
 	 *            an instance of WSParameter
 	 */
-	public static boolean parametersIncludes(WSParameter x)
-	{
+	public static boolean parametersIncludes(WSParameter x) {
 		return _parameters.contains(x);
 	}
 
@@ -290,8 +266,7 @@ public class NemoLists implements Cloneable
 	 * returns an Iterator to iterate over the elements of "parameters"
 	 * 
 	 */
-	public static java.util.Iterator<WSParameter> parametersIterator()
-	{
+	public static java.util.Iterator<WSParameter> parametersIterator() {
 		return _parameters.iterator();
 
 	}
@@ -299,10 +274,8 @@ public class NemoLists implements Cloneable
 	/**
 	 * release all links for role "surveys"
 	 */
-	public static void releaseSurveys()
-	{
-		for (WSSurveyDescription t : getSurveys())
-		{
+	public static void releaseSurveys() {
+		for (WSSurveyDescription t : getSurveys()) {
 			removeSurvey(t);
 		}
 	}
@@ -313,8 +286,7 @@ public class NemoLists implements Cloneable
 	 * @param x
 	 *            the linked object to unlink
 	 */
-	public static void removeSurvey(WSSurveyDescription x)
-	{
+	public static void removeSurvey(WSSurveyDescription x) {
 		if (!surveysIncludes(x))
 			return;
 		nocheckRemoveSurvey(x);
@@ -326,8 +298,7 @@ public class NemoLists implements Cloneable
 	 * @param x
 	 *            the object to link with
 	 */
-	public static void addSurvey(WSSurveyDescription x)
-	{
+	public static void addSurvey(WSSurveyDescription x) {
 		if (surveysIncludes(x))
 			return;
 		nocheckAddSurvey(x);
@@ -338,8 +309,7 @@ public class NemoLists implements Cloneable
 	 * 
 	 * @return Array of linked objects
 	 */
-	public static WSSurveyDescription[] getSurveys()
-	{
+	public static WSSurveyDescription[] getSurveys() {
 		WSSurveyDescription[] v = new WSSurveyDescription[_surveys.size()];
 		_surveys.toArray(v);
 		return v;
@@ -352,8 +322,7 @@ public class NemoLists implements Cloneable
 	 *            the index of the linked object
 	 * @return linked object at index i
 	 */
-	public static WSSurveyDescription surveysAt(int i)
-	{
+	public static WSSurveyDescription surveysAt(int i) {
 		return _surveys.get(i);
 	}
 
@@ -363,14 +332,11 @@ public class NemoLists implements Cloneable
 	 * @param x
 	 *            the linked object
 	 */
-	public static int surveysIndexOf(WSSurveyDescription x)
-	{
+	public static int surveysIndexOf(WSSurveyDescription x) {
 		if (!surveysIncludes(x))
 			return -1;
-		for (int i = 0; i < surveysSize(); i++)
-		{
-			if (surveysAt(i) == x)
-			{
+		for (int i = 0; i < surveysSize(); i++) {
+			if (surveysAt(i) == x) {
 				return i;
 			}
 		}
@@ -383,8 +349,7 @@ public class NemoLists implements Cloneable
 	 * @param x
 	 *            the object to move
 	 */
-	public static void surveysMoveUp(WSSurveyDescription x)
-	{
+	public static void surveysMoveUp(WSSurveyDescription x) {
 		int index;
 		index = surveysIndexOf(x);
 		if (index < 1)
@@ -398,8 +363,7 @@ public class NemoLists implements Cloneable
 	 * @param x
 	 *            the object to move
 	 */
-	public static void surveysMoveTop(WSSurveyDescription x)
-	{
+	public static void surveysMoveTop(WSSurveyDescription x) {
 		int index;
 		index = surveysIndexOf(x);
 		if (index < 1)
@@ -413,8 +377,7 @@ public class NemoLists implements Cloneable
 	 * @param x
 	 *            the object to move
 	 */
-	public static void surveysMoveDown(WSSurveyDescription x)
-	{
+	public static void surveysMoveDown(WSSurveyDescription x) {
 		int index;
 		index = surveysIndexOf(x);
 		if (index < 0 || index > surveysSize() - 2)
@@ -428,8 +391,7 @@ public class NemoLists implements Cloneable
 	 * @param x
 	 *            the object to move
 	 */
-	public static void surveysMoveBottom(WSSurveyDescription x)
-	{
+	public static void surveysMoveBottom(WSSurveyDescription x) {
 		int index;
 		index = surveysIndexOf(x);
 		if (index < 0 || index > surveysSize() - 2)
@@ -443,8 +405,7 @@ public class NemoLists implements Cloneable
 	 * @param x
 	 *            the object to move
 	 */
-	public static void nocheckMoveSurveyAt(WSSurveyDescription x, int a_Index)
-	{
+	public static void nocheckMoveSurveyAt(WSSurveyDescription x, int a_Index) {
 		int index;
 		WSSurveyDescription tmp;
 		index = surveysIndexOf(x);
@@ -462,8 +423,7 @@ public class NemoLists implements Cloneable
 	 *            the object to link with
 	 * @see NemoLists#removeSurvey(WSSurveyDescription)
 	 */
-	protected static void nocheckRemoveSurvey(WSSurveyDescription x)
-	{
+	protected static void nocheckRemoveSurvey(WSSurveyDescription x) {
 		_surveys.remove(x);
 	}
 
@@ -476,8 +436,7 @@ public class NemoLists implements Cloneable
 	 *            the object to link with
 	 * @see NemoLists#addSurvey(WSSurveyDescription)
 	 */
-	protected static void nocheckAddSurvey(WSSurveyDescription x)
-	{
+	protected static void nocheckAddSurvey(WSSurveyDescription x) {
 		_surveys.add(x);
 	}
 
@@ -486,8 +445,7 @@ public class NemoLists implements Cloneable
 	 * 
 	 * @return the number of linked objects
 	 */
-	public static int surveysSize()
-	{
+	public static int surveysSize() {
 		return _surveys.size();
 	}
 
@@ -497,8 +455,7 @@ public class NemoLists implements Cloneable
 	 * @param x
 	 *            an instance of WSSurveyDescription
 	 */
-	public static boolean surveysIncludes(WSSurveyDescription x)
-	{
+	public static boolean surveysIncludes(WSSurveyDescription x) {
 		return _surveys.contains(x);
 	}
 
@@ -506,19 +463,14 @@ public class NemoLists implements Cloneable
 	 * returns an Iterator to iterate over the elements of "surveys"
 	 * 
 	 */
-	public static java.util.Iterator<WSSurveyDescription> surveysIterator()
-	{
+	public static java.util.Iterator<WSSurveyDescription> surveysIterator() {
 		return _surveys.iterator();
 
 	}
 
-
-	public static java.util.HashMap<Integer, String> getEdmo()
-	{
+	public static java.util.HashMap<Integer, String> getEdmo() {
 		return _edmo;
 	}
-
-
 
 	/*
 	 * Initialisation des listes
@@ -527,8 +479,7 @@ public class NemoLists implements Cloneable
 	/**
 	 * 
 	 */
-	public static void initLists()
-	{
+	public static void initLists() {
 
 		initParameters();
 		initSurveys();
@@ -539,25 +490,19 @@ public class NemoLists implements Cloneable
 	 * 
 	 */
 	@SuppressWarnings("unchecked")
-	public static void initParameters()
-	{
+	public static void initParameters() {
 		XMLDecoder decoder = null;
-		try
-		{
-			decoder = new XMLDecoder(new FileInputStream(Intern.dir_resources + File.separator + Intern.list_nemo_parameters));
+		try {
+			decoder = new XMLDecoder(new FileInputStream(Intern.dir_resources
+					+ File.separator + Intern.list_nemo_parameters));
 			_parameters = (List<WSParameter>) decoder.readObject();
-		} catch (Exception e)
-		{
+		} catch (Exception e) {
 			e.printStackTrace();
-		} finally
-		{
-			if (decoder != null)
-			{
-				try
-				{
+		} finally {
+			if (decoder != null) {
+				try {
 					decoder.close();
-				} catch (Exception ex)
-				{
+				} catch (Exception ex) {
 				}
 			}
 		}
@@ -567,69 +512,58 @@ public class NemoLists implements Cloneable
 	 * 
 	 */
 	@SuppressWarnings("unchecked")
-	public static void initSurveys()
-	{
+	public static void initSurveys() {
 		XMLDecoder decoder = null;
-		try
-		{
-			decoder = new XMLDecoder(new FileInputStream(Intern.dir_resources + File.separator + Intern.list_nemo_survey));
+		try {
+			decoder = new XMLDecoder(new FileInputStream(Intern.dir_resources
+					+ File.separator + Intern.list_nemo_survey));
 			_surveys = (List<WSSurveyDescription>) decoder.readObject();
-		} catch (Exception e)
-		{
+		} catch (Exception e) {
 			e.printStackTrace();
-		} finally
-		{
-			if (decoder != null)
-			{
-				try
-				{
+		} finally {
+			if (decoder != null) {
+				try {
 					decoder.close();
-				} catch (Exception ex)
-				{
+				} catch (Exception ex) {
 				}
 			}
 		}
 	}
 
-	
-
-	
-
-	public static int initEdmo()
-	{
+	public static int initEdmo() {
 		int edmoSize = 0;
-		try
-		{
+		try {
 
 			EdmoHandler edmoH = new EdmoHandler();
 
-			SAXParserFactory.newInstance().newSAXParser().parse(
-					new FileInputStream(Intern.dir_resources + File.separator + Intern.list_edmo), edmoH);
+			SAXParserFactory
+					.newInstance()
+					.newSAXParser()
+					.parse(new FileInputStream(Intern.dir_resources
+							+ File.separator + Intern.list_edmo), edmoH);
 
 			_edmo.putAll(edmoH.get_valeurs());
 			edmoSize = _edmo.size();
-		} catch (Exception e)
-		{
+			_edmoList = edmoH.getEdmoList();
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return edmoSize;
 	}
 
+	public static List<EdmoEntity> getEdmoList() {
+		return _edmoList;
+	}
 
-	public static NemoWS callNemoWS()
-	{
+	public static NemoWS callNemoWS() {
 
 		NemoWS service = null;
-		try
-		{
-			service = new NemoWSServiceLocator()
-					.getNEMO(new java.net.URL(Nemo.getInstance().getConfig()
-							.getNemoWebServiceURL()));
-		} catch (ServiceException e)
-		{
+		try {
+			service = new NemoWSServiceLocator().getNEMO(new java.net.URL(Nemo
+					.getInstance().getConfig().getNemoWebServiceURL()));
+		} catch (ServiceException e) {
 			e.printStackTrace();
-		} catch (MalformedURLException e)
-		{
+		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
 		return service;
@@ -638,40 +572,36 @@ public class NemoLists implements Cloneable
 	/**
 	 * 
 	 */
-	public static void updateParameters(IProgressMonitor monitor, NemoWS service, UpdateStatusList updateNemoList)
-	{
+	public static void updateParameters(IProgressMonitor monitor,
+			NemoWS service, UpdateStatusList updateNemoList) {
 
 		String listName = Intern.list_nemo_parameters;
 		int nbParameters = 0;
-		UpdateStatusNemo updateParameters = new UpdateStatusNemo(listName, listName);
+		UpdateStatusNemo updateParameters = new UpdateStatusNemo(listName,
+				listName);
 
-		if (service != null)
-		{
+		if (service != null) {
 			// BackUp de l'objet
 			List<WSParameter> bkParameters = new ArrayList<WSParameter>();
-			for (WSParameter bkParam : _parameters)
-			{
+			for (WSParameter bkParam : _parameters) {
 				bkParameters.add(bkParam);
 			}
 
 			FileOutputStream stream = null;
 			XMLEncoder encoder = null;
-			try
-			{
-				if (!monitor.isCanceled())
-				{
+			try {
+				if (!monitor.isCanceled()) {
 					WSParameter[] parameters = service.getParameters();
 					releaseParameters();
-					for (int i = 0; i < parameters.length; i++)
-					{
+					for (int i = 0; i < parameters.length; i++) {
 						addParameter(parameters[i]);
 					}
 					nbParameters = parameters.length;
 				}
 
-				if (!monitor.isCanceled())
-				{
-					File file = new java.io.File(Intern.dir_resources + File.separator + listName);
+				if (!monitor.isCanceled()) {
+					File file = new java.io.File(Intern.dir_resources
+							+ File.separator + listName);
 					stream = new FileOutputStream(file.toString());
 					encoder = new XMLEncoder(stream);
 					encoder.writeObject(_parameters);
@@ -679,53 +609,40 @@ public class NemoLists implements Cloneable
 					updateParameters.setEtat(EtatUpdate.UPDATED);
 					updateParameters.setNbRetrieve(nbParameters);
 
-				} else
-				{
+				} else {
 					updateParameters.setEtat(EtatUpdate.INTERRUPTED);
-					if (nbParameters != 0)
-					{
+					if (nbParameters != 0) {
 						// rollback
 						releaseParameters();
-						for (WSParameter bkParam : bkParameters)
-						{
+						for (WSParameter bkParam : bkParameters) {
 							addParameter(bkParam);
 						}
 						nbParameters = 0;
 					}
 				}
-			} catch (Exception e)
-			{
+			} catch (Exception e) {
 				updateParameters.setEtat(EtatUpdate.FAILED);
 				e.printStackTrace();
-			} finally
-			{
-				if (encoder != null)
-				{
-					try
-					{
+			} finally {
+				if (encoder != null) {
+					try {
 						encoder.close();
-					} catch (Exception ex)
-					{
+					} catch (Exception ex) {
 					}
 				}
-				if (stream != null)
-				{
-					try
-					{
+				if (stream != null) {
+					try {
 						stream.close();
-					} catch (Exception ex)
-					{
+					} catch (Exception ex) {
 					}
 				}
 			}
-		} else
-		{
+		} else {
 			updateParameters.setEtat(EtatUpdate.FAILED);
 		}
 
 		updateNemoList.addUpdateStatus(updateParameters);
-		if (updateNemoList.getEtat().compareTo(updateParameters.getEtat()) < 0)
-		{
+		if (updateNemoList.getEtat().compareTo(updateParameters.getEtat()) < 0) {
 			updateNemoList.setEtat(updateParameters.getEtat());
 		}
 	}
@@ -733,41 +650,37 @@ public class NemoLists implements Cloneable
 	/**
 	 * 
 	 */
-	public static void updateSurveys(IProgressMonitor monitor, NemoWS service, UpdateStatusList updateNemoList)
-	{
+	public static void updateSurveys(IProgressMonitor monitor, NemoWS service,
+			UpdateStatusList updateNemoList) {
 
 		String listName = Intern.list_nemo_survey;
 		int nbSurveys = 0;
-		UpdateStatusNemo updateSurveys = new UpdateStatusNemo(listName, listName);
+		UpdateStatusNemo updateSurveys = new UpdateStatusNemo(listName,
+				listName);
 
-		if (service != null)
-		{
+		if (service != null) {
 
 			// BackUp de l'objet
 			List<WSSurveyDescription> bkSurveys = new ArrayList<WSSurveyDescription>();
-			for (WSSurveyDescription bkSurvey : _surveys)
-			{
+			for (WSSurveyDescription bkSurvey : _surveys) {
 				bkSurveys.add(bkSurvey);
 			}
 
 			FileOutputStream stream = null;
 			XMLEncoder encoder = null;
-			try
-			{
-				if (!monitor.isCanceled())
-				{
+			try {
+				if (!monitor.isCanceled()) {
 					WSSurveyDescription[] surveys = service.getSurveyList();
 					releaseSurveys();
-					for (int i = 0; i < surveys.length; i++)
-					{
+					for (int i = 0; i < surveys.length; i++) {
 						addSurvey(surveys[i]);
 					}
 					nbSurveys = surveys.length;
 				}
 
-				if (!monitor.isCanceled())
-				{
-					File file = new java.io.File(Intern.dir_resources + File.separator + listName);
+				if (!monitor.isCanceled()) {
+					File file = new java.io.File(Intern.dir_resources
+							+ File.separator + listName);
 					stream = new FileOutputStream(file.toString());
 
 					encoder = new XMLEncoder(stream);
@@ -775,88 +688,74 @@ public class NemoLists implements Cloneable
 
 					updateSurveys.setEtat(EtatUpdate.UPDATED);
 					updateSurveys.setNbRetrieve(nbSurveys);
-				} else
-				{
+				} else {
 					updateSurveys.setEtat(EtatUpdate.INTERRUPTED);
-					if (nbSurveys != 0)
-					{
+					if (nbSurveys != 0) {
 						// rollback
 						releaseSurveys();
-						for (WSSurveyDescription bkSurvey : bkSurveys)
-						{
+						for (WSSurveyDescription bkSurvey : bkSurveys) {
 							addSurvey(bkSurvey);
 						}
 						nbSurveys = 0;
 					}
 				}
 
-			} catch (Exception e)
-			{
+			} catch (Exception e) {
 				updateSurveys.setEtat(EtatUpdate.FAILED);
 				e.printStackTrace();
-			} finally
-			{
-				if (encoder != null)
-				{
-					try
-					{
+			} finally {
+				if (encoder != null) {
+					try {
 						encoder.close();
-					} catch (Exception ex)
-					{
+					} catch (Exception ex) {
 					}
 				}
-				if (stream != null)
-				{
-					try
-					{
+				if (stream != null) {
+					try {
 						stream.close();
-					} catch (Exception ex)
-					{
+					} catch (Exception ex) {
 					}
 				}
 			}
-		} else
-		{
+		} else {
 			updateSurveys.setEtat(EtatUpdate.FAILED);
 		}
 
 		updateNemoList.addUpdateStatus(updateSurveys);
-		if (updateNemoList.getEtat().compareTo(updateSurveys.getEtat()) < 0)
-		{
+		if (updateNemoList.getEtat().compareTo(updateSurveys.getEtat()) < 0) {
 			updateNemoList.setEtat(updateSurveys.getEtat());
 		}
 	}
 
-	
-	public static void updateEdmo(IProgressMonitor monitor)
-	{
+	public static void updateEdmo(IProgressMonitor monitor) {
 
-		UpdateStatusNemo updateEdmo = (UpdateStatusNemo) ManageLists.getUpdate(Intern.id_edmo);
+		UpdateStatusNemo updateEdmo = (UpdateStatusNemo) ManageLists
+				.getUpdate(Intern.id_edmo);
 		int nbEdmo = 0;
 		FileOutputStream stream = null;
 		String result = Global.EMPTY_STRING;
 
-		try
-		{
-			if (!monitor.isCanceled())
-			{
+		try {
+			if (!monitor.isCanceled()) {
 				// Appel au WebService
 				Edmo_webservice service = new Edmo_webserviceLocator();
-				((Edmo_webserviceLocator) service).setedmo_webserviceSoap12EndpointAddress(Nemo.getInstance().getConfig().getEdmoURL());
+				((Edmo_webserviceLocator) service)
+						.setedmo_webserviceSoap12EndpointAddress(Nemo
+								.getInstance().getConfig().getEdmoURL());
 				Edmo_webserviceSoap port = service.getedmo_webserviceSoap12();
 				result = port.ws_edmo_get_list();
 			}
-			if (!monitor.isCanceled())
-			{
-				if (!result.equals(Global.EMPTY_STRING))
-				{
+			if (!monitor.isCanceled()) {
+				if (!result.equals(Global.EMPTY_STRING)) {
 					monitor.subTask(Messages.getString(Intern.id_edmo));
 
 					// écriture du nouveau fichier
-					File file = new java.io.File(Intern.dir_resources + File.separator + Intern.list_edmo);
+					File file = new java.io.File(Intern.dir_resources
+							+ File.separator + Intern.list_edmo);
 
 					stream = new FileOutputStream(file.toString());
-					OutputStreamWriter osw = new OutputStreamWriter(stream, "UTF-8"); //$NON-NLS-1$
+					OutputStreamWriter osw = new OutputStreamWriter(stream,
+							"UTF-8"); //$NON-NLS-1$
 					osw.write(result);
 					osw.flush();
 					osw.close();
@@ -865,17 +764,14 @@ public class NemoLists implements Cloneable
 					nbEdmo = initEdmo();
 					updateEdmo.setEtat(EtatUpdate.UPDATED);
 					updateEdmo.setNbRetrieve(nbEdmo);
-				} else
-				{
+				} else {
 					updateEdmo.setEtat(EtatUpdate.FAILED);
 				}
-			} else
-			{
+			} else {
 				updateEdmo.setEtat(EtatUpdate.INTERRUPTED);
 			}
 
-		} catch (Exception exG)
-		{
+		} catch (Exception exG) {
 			updateEdmo.setEtat(EtatUpdate.FAILED);
 			exG.printStackTrace();
 		}
