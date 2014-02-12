@@ -20,6 +20,9 @@ import java.util.Map.Entry;
 
 import ucar.ma2.DataType;
 import ucar.nc2.Dimension;
+
+import com.ibm.icu.text.MessageFormat;
+
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.config.VocabLists;
 import fr.ifremer.nemo.domain.DateTimeUtils;
@@ -63,7 +66,6 @@ import fr.ifremer.seadatanet.cfpoint.variable.SdnT;
 import fr.ifremer.seadatanet.cfpoint.variable.SdnX;
 import fr.ifremer.seadatanet.cfpoint.variable.SdnY;
 import fr.ifremer.seadatanet.cfpoint.variable.SdnZ;
-
 
 /**
  * Description: TODO
@@ -134,7 +136,8 @@ public class NetCDFWriter extends NemoWriter {
 					String mOutputFileName = outputFileName + File.separator
 							+ localCdiId + Conversion.NETCDF.getExt();
 
-					myCFPointWriterManager = new CFPointWriterManager(mOutputFileName);
+					myCFPointWriterManager = new CFPointWriterManager(
+							mOutputFileName);
 					variables = new HashMap<String, ISdnVariable>();
 					stationData = new HashMap<String, Object[][]>();
 
@@ -157,8 +160,10 @@ public class NetCDFWriter extends NemoWriter {
 					iDomain.getStation().updateRef();
 				}
 				if (myCFPointWriterManager == null
-						|| !outputFileName.equals(myCFPointWriterManager.getFileName())) {
-					myCFPointWriterManager = new CFPointWriterManager(outputFileName);
+						|| !outputFileName.equals(myCFPointWriterManager
+								.getFileName())) {
+					myCFPointWriterManager = new CFPointWriterManager(
+							outputFileName);
 					// écriture de l'entête campagne
 					variables = new HashMap<String, ISdnVariable>();
 					stationData = new HashMap<String, Object[][]>();
@@ -254,8 +259,8 @@ public class NetCDFWriter extends NemoWriter {
 				if (inputStationHeader != null
 						&& currentStation.getReference().equals(stRef)) {
 
-					iDomain.getStation().getHeader(
-							myConversion, currentStation, inputStationHeader);
+					iDomain.getStation().getHeader(myConversion,
+							currentStation, inputStationHeader);
 
 					// FAE 4673 Pb si une seule ligne données et pas d'entête
 					// station
@@ -410,7 +415,8 @@ public class NetCDFWriter extends NemoWriter {
 
 		if (stationWrited) {
 			// enregistrement de la station
-			iDomain.getMedia().addStationInOutput(myCFPointWriterManager.getFileName(),
+			iDomain.getMedia().addStationInOutput(
+					myCFPointWriterManager.getFileName(),
 					currentStation.getReference());
 		}
 
@@ -528,12 +534,13 @@ public class NetCDFWriter extends NemoWriter {
 	}
 
 	public void writeDataToNetCDFFile() throws Exception {
-		
-		for (Entry<String, Object[][]> currentStationData : stationData.entrySet()) {
 
-				myCFPointWriterManager.writeDataToVariable(
-						variables.get(currentStationData.getKey()).getVarName(), 
-						currentStationData.getValue());
+		for (Entry<String, Object[][]> currentStationData : stationData
+				.entrySet()) {
+
+			myCFPointWriterManager.writeDataToVariable(
+					variables.get(currentStationData.getKey()).getVarName(),
+					currentStationData.getValue());
 
 		}
 		// close file after write all data
@@ -566,17 +573,17 @@ public class NetCDFWriter extends NemoWriter {
 						.getFillvalue();
 
 			stationData.put(ancillaryName, paramData);
-			
+
 		}
 
 	}
 
 	/**
 	 * initialise NetCDFWriter with station metadata
-	 * *************************************************************
-	 * scheduling variable is important. 
-	 * it defines the order in the CFPoint file
-	 * ************************************************************** 
+	 * ************************************************************* scheduling
+	 * variable is important. it defines the order in the CFPoint file
+	 * **************************************************************
+	 * 
 	 * @param inputFilePath
 	 * @param st
 	 * @throws Exception
@@ -602,7 +609,8 @@ public class NetCDFWriter extends NemoWriter {
 		sdnDim.add(dims.getDimInstance());
 		sdnDim.add(dims.getString80());
 
-		UnitConversionManager unitConversion = UnitConversionManager.getInstance();
+		UnitConversionManager unitConversion = UnitConversionManager
+				.getInstance();
 
 		// add to net CDF
 		myCFPointWriterManager.addDimensions(dims);
@@ -731,8 +739,6 @@ public class NetCDFWriter extends NemoWriter {
 		variables.put(sdnEdmoCode.getVarName(), sdnEdmoCode);
 		addVariableToNetCDF(sdnEdmoCode);
 
-		
-
 		SdnCruiseVariable sdnCruise = new SdnCruiseVariable(sdnDim,
 				getlongNameCruise());
 		addCruiseOptionalAttribute(sdnCruise);
@@ -839,9 +845,8 @@ public class NetCDFWriter extends NemoWriter {
 							convertValue(DataType.DOUBLE,
 									ParameterValues.DEFAULT_FILLVALUE));
 				if (!param.getParameter().getStandardName().isEmpty())
-					current.addVariableAttribute(
-							ParameterNames.STANDARD_NAME, param.getParameter()
-									.getStandardName());
+					current.addVariableAttribute(ParameterNames.STANDARD_NAME,
+							param.getParameter().getStandardName());
 				variables.put(current.getVarName(), current);
 				addVariableToNetCDF(current);
 
@@ -851,9 +856,10 @@ public class NetCDFWriter extends NemoWriter {
 	}
 
 	/**
-	 * get longname from  ProcessType and input Type
+	 * get longname from ProcessType and input Type
+	 * 
 	 * @return SDN_CRUISE Long Name
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	private String getlongNameCruise() throws Exception {
 		// 14926 et 14931
@@ -862,18 +868,17 @@ public class NetCDFWriter extends NemoWriter {
 		if (mediaModel.getProcessType() == E_ProcessType.COLLECTION_DIR) {
 			longNameCruise = cruiseDomain.getDataSetRef();
 		} else if (mediaModel.getProcessType() == E_ProcessType.COLLECTION_FILES) {
-			//18332
-			switch(mediaModel.getInputType())
-			{
-				case PROFILE:
-					longNameCruise= ParameterValues.SDN_CRUISE_LONG_NAME_CRUISE_PROFILE;
-					break;
-				case TIMESERIES:
-					longNameCruise= ParameterValues.SDN_CRUISE_LONG_NAME_CRUISE_TIME_SERIES;
-					break;
-				case TRAJECTORY:
-					longNameCruise= ParameterValues.SDN_CRUISE_LONG_NAME_CRUISE_TRAJECTORY;
-					break;
+			// 18332
+			switch (mediaModel.getInputType()) {
+			case PROFILE:
+				longNameCruise = ParameterValues.SDN_CRUISE_LONG_NAME_CRUISE_PROFILE;
+				break;
+			case TIMESERIES:
+				longNameCruise = ParameterValues.SDN_CRUISE_LONG_NAME_CRUISE_TIME_SERIES;
+				break;
+			case TRAJECTORY:
+				longNameCruise = ParameterValues.SDN_CRUISE_LONG_NAME_CRUISE_TRAJECTORY;
+				break;
 			}
 		} else {
 			longNameCruise = cruiseDomain.getModel().getName().trim();
@@ -898,8 +903,7 @@ public class NetCDFWriter extends NemoWriter {
 	 */
 	private void addCruiseOptionalAttribute(SdnCruiseVariable sdnCruise) {
 
-		if(!(isProcessType_CollectionFiles || isProcessType_CollectionDir))
-		{
+		if (!(isProcessType_CollectionFiles || isProcessType_CollectionDir)) {
 			// sous onglet Reference
 			if (cruiseDomain.getModel().getShipCode() != null
 					&& !cruiseDomain.getModel().getShipCode().isEmpty())
@@ -910,31 +914,29 @@ public class NetCDFWriter extends NemoWriter {
 				sdnCruise.addVariableAttribute(ModelDescription.node_shipname,
 						cruiseDomain.getModel().getShipName());
 		}
-		
-		if(!isProcessType_CollectionFiles)
-		{
+
+		if (!isProcessType_CollectionFiles) {
 			// sous onglet Location
 			try {
 				sdnCruise.addVariableAttribute(ModelDescription.node_startdate,
-						DateTimeUtils.getVariantDateTime(cruiseDomain.getModel()
-								.getStartDate()));
+						DateTimeUtils.getVariantDateTime(cruiseDomain
+								.getModel().getStartDate()));
 			} catch (Exception e) {
 			}
 			try {
 				sdnCruise.addVariableAttribute(ModelDescription.node_enddate,
-						DateTimeUtils.getVariantDateTime(cruiseDomain.getModel()
-								.getEndDate()));
+						DateTimeUtils.getVariantDateTime(cruiseDomain
+								.getModel().getEndDate()));
 			} catch (Exception e) {
 			}
 		}
-		
-		if(!(isProcessType_CollectionFiles || isProcessType_CollectionDir))
-		{
+
+		if (!(isProcessType_CollectionFiles || isProcessType_CollectionDir)) {
 			if (cruiseDomain.getModel().getRegionName() != null
 					&& !cruiseDomain.getModel().getRegionName().isEmpty())
 				sdnCruise.addVariableAttribute(ModelDescription.node_region,
 						cruiseDomain.getModel().getRegionName());
-	
+
 			// date source
 			if (cruiseDomain.getModel().getCountryCode() != null
 					&& !cruiseDomain.getModel().getCountryCode().isEmpty())
@@ -943,8 +945,8 @@ public class NetCDFWriter extends NemoWriter {
 			if (cruiseDomain.getModel().getLaboratories() != null
 					&& !cruiseDomain.getModel().getLaboratories().isEmpty())
 				sdnCruise.addVariableAttribute(
-						ModelDescription.node_laboratories, cruiseDomain.getModel()
-								.getLaboratories());
+						ModelDescription.node_laboratories, cruiseDomain
+								.getModel().getLaboratories());
 			if (cruiseDomain.getModel().getChiefScientist() != null
 					&& !cruiseDomain.getModel().getChiefScientist().isEmpty())
 				sdnCruise.addVariableAttribute(ModelDescription.node_chief,
@@ -953,24 +955,24 @@ public class NetCDFWriter extends NemoWriter {
 					&& !cruiseDomain.getModel().getProjectName().isEmpty())
 				sdnCruise.addVariableAttribute(ModelDescription.node_project,
 						cruiseDomain.getModel().getProjectName());
-	
+
 			// archive center
 			if (cruiseDomain.getModel().getDataCentre() != null
 					&& !cruiseDomain.getModel().getDataCentre().isEmpty())
-				sdnCruise.addVariableAttribute(ModelDescription.node_datacenter,
-						cruiseDomain.getModel().getDataCentre());
+				sdnCruise.addVariableAttribute(
+						ModelDescription.node_datacenter, cruiseDomain
+								.getModel().getDataCentre());
 			if (cruiseDomain.getModel().getAvailability() != null)
 				sdnCruise.addVariableAttribute(
-						ModelDescription.node_availability, cruiseDomain.getModel()
-								.getAvailability().name());
-		
+						ModelDescription.node_availability, cruiseDomain
+								.getModel().getAvailability().name());
 
 			// Comment
 			if (cruiseDomain.getModel().getComment() != null
 					&& !cruiseDomain.getModel().getComment().isEmpty())
 				sdnCruise.addVariableAttribute(ModelDescription.node_comment,
 						cruiseDomain.getModel().getComment());
-		
+
 		}
 	}
 
@@ -1130,7 +1132,8 @@ public class NetCDFWriter extends NemoWriter {
 	}
 
 	private static String getURNSyntaxe(URNtype type, String code,
-			String list1, String list2, Boolean isText) {
+			String list1, String list2, Boolean isText)
+			throws GenerationException {
 		StringBuffer urnSyntaxe = new StringBuffer();
 
 		switch (type) {
@@ -1153,6 +1156,13 @@ public class NetCDFWriter extends NemoWriter {
 						Intern.NemoLists_unknown);
 			else
 				pdvCodeobject = code;
+
+			if (pdvCodeobject.endsWith(Intern.NemoLists_unknown)) {
+
+				throw new GenerationException(MessageFormat.format(
+						Messages.error_convert_sdnmapping_paramcode, code,
+						list1, list2));
+			}
 			urnSyntaxe.append(pdvCodeobject);
 			break;
 		case units:
@@ -1167,6 +1177,11 @@ public class NetCDFWriter extends NemoWriter {
 						Intern.NemoLists_unknown);
 			else
 				pdvCodeunits = code;
+			if (pdvCodeunits.endsWith(Intern.NemoLists_unknown)) {
+				throw new GenerationException(MessageFormat.format(
+						Messages.error_convert_sdnmapping_paramunit, code,
+						list1, list2));
+			}
 			// FAE 10755
 			if (isText)
 				urnSyntaxe.append(Intern.NemoLists_unknown);

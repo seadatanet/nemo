@@ -21,19 +21,19 @@ import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.input.CruiseModel;
 import fr.ifremer.nemo.input.DataType;
 import fr.ifremer.nemo.input.InputModel;
+import fr.ifremer.nemo.output.GenerationException;
 import fr.ifremer.nemo.output.medatlas.Elts;
 import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Formatter;
 import fr.ifremer.nemo.util.Global;
 
 /**
- * Class CruiseDomain.java
- * Description: Classe pour la description des données de l'onglet Cruise
+ * Class CruiseDomain.java Description: Classe pour la description des données
+ * de l'onglet Cruise
  * 
  * @author Delphine BOULANGER
  */
-public class CruiseDomain
-{
+public class CruiseDomain {
 	/**
 	 * Informations descrivant l'onglet Cuise
 	 */
@@ -43,40 +43,34 @@ public class CruiseDomain
 
 	private String _dataSetRef;
 
-	public CruiseDomain()
-	{
+	public CruiseDomain() {
 		form = Formatter.getSingleton();
 		initValues();
 	}
 
-
-	public void initValues()
-	{
+	public void initValues() {
 		_model = new CruiseModel();
 		// _station = new StationDomain();
 		_dataSetRef = Global.EMPTY_STRING;
 	}
 
-	public void update(InputModel model)
-	{
+	public void update(InputModel model) {
 		updateCruise(model.getCruiseModel());
 	}
 
-	public void updateCruise(CruiseModel cruiseModel)
-	{
+	public void updateCruise(CruiseModel cruiseModel) {
 		_model = cruiseModel;
 		// TODO update Domain
 	}
 
 	// RELEASE
-	public void release()
-	{
+	public void release() {
 		// _station.release();
 		_model.release();
 	}
 
-	public StringBuffer getHeader(Conversion c) throws ParseException, UnsupportedEncodingException
-	{
+	public StringBuffer getHeader(Conversion c) throws ParseException,
+			UnsupportedEncodingException, GenerationException {
 		StringBuffer cruiseHeader = new StringBuffer();
 		switch (c) {
 		case ODV:
@@ -89,15 +83,12 @@ public class CruiseDomain
 		return cruiseHeader;
 	}
 
-	private StringBuffer getOdvHeader()
-	{
+	private StringBuffer getOdvHeader() throws GenerationException {
 		String start = Conversion.ODV.getDebut();
 		StringBuffer odvCruiseHeader = new StringBuffer();
 
-		if (!_model.getComment().equals(Global.EMPTY_STRING))
-		{
-			for (String line : getCommentLines())
-			{
+		if (!_model.getComment().equals(Global.EMPTY_STRING)) {
+			for (String line : getCommentLines()) {
 				odvCruiseHeader.append(start);
 				odvCruiseHeader.append(line);
 				odvCruiseHeader.append(Global.RN);
@@ -106,7 +97,8 @@ public class CruiseDomain
 
 		odvCruiseHeader.append(start);
 		odvCruiseHeader.append(Global.RN);
-		StationDomain stationDomain = Nemo.getInstance().getDomain().getStation();
+		StationDomain stationDomain = Nemo.getInstance().getDomain()
+				.getStation();
 		DataDomain dataDomain = Nemo.getInstance().getDomain().getData();
 		odvCruiseHeader.append(dataDomain.getSDNparameters(Conversion.ODV));
 		odvCruiseHeader.append(start);
@@ -118,65 +110,75 @@ public class CruiseDomain
 		return odvCruiseHeader;
 	}
 
-	private StringBuffer getMedatlasHeader() throws ParseException, UnsupportedEncodingException
-	{
+	private StringBuffer getMedatlasHeader() throws ParseException,
+			UnsupportedEncodingException {
 		String start = Conversion.MEDATLAS.getDebut();
 		SimpleDateFormat fmt = new SimpleDateFormat(CruiseModel.MED_DATE_FORMAT);
 
 		StringBuffer medCruiseHeader = new StringBuffer();
 
 		medCruiseHeader.append(start);
-		medCruiseHeader.append(Elts.getElt(Elts.cruise_ref, _model.getReference()));
+		medCruiseHeader.append(Elts.getElt(Elts.cruise_ref,
+				_model.getReference()));
 		medCruiseHeader.append(Global.SPACE);
 		medCruiseHeader.append(Elts.getElt(Elts.cruise_name, _model.getName()));
 		medCruiseHeader.append(Global.SPACE);
-		medCruiseHeader.append(Elts.getElt(Elts.cruise_shipcode, _model.getShipCode()));
+		medCruiseHeader.append(Elts.getElt(Elts.cruise_shipcode,
+				_model.getShipCode()));
 		medCruiseHeader.append(Global.SPACE);
-		medCruiseHeader.append(Elts.getElt(Elts.cruise_shipname, _model.getShipName()));
+		medCruiseHeader.append(Elts.getElt(Elts.cruise_shipname,
+				_model.getShipName()));
 		medCruiseHeader.append(Global.RN);
 
 		medCruiseHeader.append(fmt.format(new Date(_model.getStartDate())));
 		medCruiseHeader.append(Global.MOINS);
 		medCruiseHeader.append(fmt.format(new Date(_model.getEndDate())));
 		medCruiseHeader.append(Global.SPACE);
-		medCruiseHeader.append(Elts.getElt(Elts.cruise_region, _model.getRegionName()));
+		medCruiseHeader.append(Elts.getElt(Elts.cruise_region,
+				_model.getRegionName()));
 		medCruiseHeader.append(Global.RN);
 
-		medCruiseHeader.append(Elts.getElt(Elts.cruise_country, _model.getCountryCode()));
+		medCruiseHeader.append(Elts.getElt(Elts.cruise_country,
+				_model.getCountryCode()));
 		medCruiseHeader.append(Global.SPACE);
-		String cruiseLabo = Elts.getElt(Elts.cruise_labo, _model.getLaboratories());
+		String cruiseLabo = Elts.getElt(Elts.cruise_labo,
+				_model.getLaboratories());
 		medCruiseHeader.append(cruiseLabo.replaceAll(Global.RN, " "));
 		medCruiseHeader.append(Global.RN);
 
-		medCruiseHeader.append(Elts.getElt(Elts.cruise_chiefscientist, _model.getChiefScientist()));
-		medCruiseHeader.append(Elts.getElt(Elts.cruise_project, _model.getProjectName()));
+		medCruiseHeader.append(Elts.getElt(Elts.cruise_chiefscientist,
+				_model.getChiefScientist()));
+		medCruiseHeader.append(Elts.getElt(Elts.cruise_project,
+				_model.getProjectName()));
 		medCruiseHeader.append(Global.RN);
 
-		medCruiseHeader.append(Elts.getElt(Elts.cruise_datacenter, _model.getDataCentre()));
+		medCruiseHeader.append(Elts.getElt(Elts.cruise_datacenter,
+				_model.getDataCentre()));
 		medCruiseHeader.append(form.padString(Global.EMPTY_STRING, 18));
-		medCruiseHeader.append(Elts.getElt(Elts.cruise_availability, _model.getAvailability().getCode()));
+		medCruiseHeader.append(Elts.getElt(Elts.cruise_availability, _model
+				.getAvailability().getCode()));
 		medCruiseHeader.append(Global.RN);
 
 		int end = _model.getDataTypesLength();
 		int length = 0;
-		for (DataType dType : _model.getDataTypes())
-		{
-			medCruiseHeader.append(Elts.getElt(Elts.datatype_code, dType.getCode()));
-			medCruiseHeader.append(Elts.getElt(Elts.datatype_nbprofile, Integer.toString(dType.getNumberOfProfiles())));
-			medCruiseHeader.append(Elts.getElt(Elts.qc, form.formatBoolean(dType.isQc())));
+		for (DataType dType : _model.getDataTypes()) {
+			medCruiseHeader.append(Elts.getElt(Elts.datatype_code,
+					dType.getCode()));
+			medCruiseHeader.append(Elts.getElt(Elts.datatype_nbprofile,
+					Integer.toString(dType.getNumberOfProfiles())));
+			medCruiseHeader.append(Elts.getElt(Elts.qc,
+					form.formatBoolean(dType.isQc())));
 			length++;
 			if (length != end)
 				medCruiseHeader.append(Global.RN);
 		}
 
-		if (!_model.getComment().equals(Global.EMPTY_STRING))
-		{
+		if (!_model.getComment().equals(Global.EMPTY_STRING)) {
 			medCruiseHeader.append(Global.RN);
 			medCruiseHeader.append(Elts.kw_cruise_comment);
 			// medCruiseHeader.append(Global.RN);
 
-			for (String line : getCommentLines())
-			{
+			for (String line : getCommentLines()) {
 				medCruiseHeader.append(Global.RN);
 				medCruiseHeader.append(line);
 			}
@@ -189,27 +191,21 @@ public class CruiseDomain
 	 * 
 	 * @return String[]
 	 */
-	private String[] getCommentLines()
-	{
-		LineNumberReader reader = new LineNumberReader(new StringReader(_model.getComment()));
+	private String[] getCommentLines() {
+		LineNumberReader reader = new LineNumberReader(new StringReader(
+				_model.getComment()));
 		String line = null;
 		java.util.Vector<String> lines = new java.util.Vector<String>();
-		try
-		{
-			while ((line = reader.readLine()) != null)
-			{
+		try {
+			while ((line = reader.readLine()) != null) {
 				lines.add(line);
 			}
-		} catch (Exception e)
-		{
+		} catch (Exception e) {
 			e.printStackTrace();
-		} finally
-		{
-			try
-			{
+		} finally {
+			try {
 				reader.close();
-			} catch (Exception ex)
-			{
+			} catch (Exception ex) {
 			}
 		}
 		String[] lineArray = new String[lines.size()];
@@ -222,8 +218,7 @@ public class CruiseDomain
 	 * @return CruiseModel
 	 * @see CruiseDomain.java#model
 	 */
-	public CruiseModel getModel()
-	{
+	public CruiseModel getModel() {
 		return _model;
 	}
 
@@ -234,8 +229,7 @@ public class CruiseDomain
 	 *            : nouvelle valeur pour model
 	 * @see CruiseDomain.java#model
 	 */
-	public void setModel(CruiseModel model)
-	{
+	public void setModel(CruiseModel model) {
 		_model = model;
 	}
 
@@ -263,8 +257,7 @@ public class CruiseDomain
 	 * @return String
 	 * @see CruiseDomain.java#_dataSetRef
 	 */
-	public String getDataSetRef()
-	{
+	public String getDataSetRef() {
 		return _dataSetRef;
 	}
 
@@ -275,8 +268,7 @@ public class CruiseDomain
 	 *            : nouvelle valeur pour dataSetRef
 	 * @see CruiseDomain.java#_dataSetRef
 	 */
-	public void setDataSetRef(String dataSetRef)
-	{
+	public void setDataSetRef(String dataSetRef) {
 		_dataSetRef = dataSetRef;
 	}
 }

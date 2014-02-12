@@ -7,7 +7,6 @@ import com.ago.xml.SAXConsumer;
 import com.ago.xml.XMLOutputWriter;
 
 import fr.ifremer.nemo.Nemo;
-import fr.ifremer.nemo.config.VocabLists;
 import fr.ifremer.nemo.domain.LabelParameterManager;
 import fr.ifremer.nemo.domain.StandardNameParameterManager;
 import fr.ifremer.nemo.input.AbstractModel;
@@ -141,48 +140,48 @@ public class Parameter extends AbstractModel {
 	public SAXConsumer consumeElement(String a_URI, String a_LocalName,
 			String a_QName, Attributes a_Attributes) {
 		if (a_LocalName.equals(ModelDescription.node_fullname)) {
-			Element2Field setter =
-					new Element2Field(this, ModelDescription.setter_fullname);
+			Element2Field setter = new Element2Field(this,
+					ModelDescription.setter_fullname);
 			return setter;
 		}
 		if (a_LocalName.equals(ModelDescription.node_unit)) {
-			Element2Field setter =
-					new Element2Field(this, ModelDescription.setter_unit);
+			Element2Field setter = new Element2Field(this,
+					ModelDescription.setter_unit);
 			return setter;
 		}
 		if (a_LocalName.equals(ModelDescription.node_unitCode)) {
-			Element2Field setter =
-					new Element2Field(this, ModelDescription.setter_unitCode);
+			Element2Field setter = new Element2Field(this,
+					ModelDescription.setter_unitCode);
 			return setter;
 		}
 		if (a_LocalName.equals(ModelDescription.node_outdefault)) {
-			Element2Field setter =
-					new Element2Field(this, ModelDescription.setter_outdefault);
+			Element2Field setter = new Element2Field(this,
+					ModelDescription.setter_outdefault);
 			return setter;
 		}
 		if (a_LocalName.equals(ModelDescription.node_format)) {
-			Element2Field setter =
-					new Element2Field(this, ModelDescription.setter_format);
+			Element2Field setter = new Element2Field(this,
+					ModelDescription.setter_format);
 			return setter;
 		}
 		if (a_LocalName.equals(ModelDescription.node_fullname)) {
-			Element2Field setter =
-					new Element2Field(this, ModelDescription.setter_fullname);
+			Element2Field setter = new Element2Field(this,
+					ModelDescription.setter_fullname);
 			return setter;
 		}
 		if (a_LocalName.equals(ModelDescription.node_codeP011)) {
-			Element2Field setter =
-					new Element2Field(this, ModelDescription.setter_codeP011);
+			Element2Field setter = new Element2Field(this,
+					ModelDescription.setter_codeP011);
 			return setter;
 		}
 		if (a_LocalName.equals(ModelDescription.node_nameP011)) {
-			Element2Field setter =
-					new Element2Field(this, ModelDescription.setter_nameP011);
+			Element2Field setter = new Element2Field(this,
+					ModelDescription.setter_nameP011);
 			return setter;
 		}
 		if (a_LocalName.equals(ModelDescription.node_P011)) {
-			Element2Field setter =
-					new Element2Field(this, ModelDescription.setter_P011);
+			Element2Field setter = new Element2Field(this,
+					ModelDescription.setter_P011);
 			return setter;
 		}
 		return null;
@@ -253,8 +252,8 @@ public class Parameter extends AbstractModel {
 	/**
 	 * Setter pour _code
 	 * 
-	 * @param x :
-	 *            nouvelle valeur pour _code
+	 * @param x
+	 *            : nouvelle valeur pour _code
 	 * @see Fragment.java#_code
 	 */
 	public void setCode(String x) {
@@ -271,33 +270,21 @@ public class Parameter extends AbstractModel {
 		return _codeP011;
 	}
 
-	public String getCodeToUse() {
-		String codeToUse;
-		if (isP011()) {
-			if (getCodeP011() == null
-					|| getCodeP011().equals("")) {
-				setCodeP011(VocabLists.getVocabMatch(
-						Intern.mapping_subject, Intern.mapping_objet, getCode(),
-						Intern.NemoLists_unknown));
-			}
-			codeToUse = getCodeP011();
 
-		} else {
-			codeToUse = getCode();
-		}
-		return codeToUse;
-	}
 
 	public String getLocalCode() {
 		String localCode = null;
-		DataListTypeEnum dataListType = Nemo.getInstance().getDomain().getData().getModel().getDataListType();
-		E_TypeConversion conv = Nemo.getInstance().getDomain().getConversion().getModel().getOutputFormat();
+		DataListTypeEnum dataListType = Nemo.getInstance().getDomain()
+				.getData().getModel().getDataListType();
+		E_TypeConversion conv = Nemo.getInstance().getDomain().getConversion()
+				.getModel().getOutputFormat();
 
 		// **************************************
 		// MEDATLAS
 		// **************************************
 		if (conv == E_TypeConversion.MEDATLAS) {
-			if (dataListType == DataListTypeEnum.P011_VIA_P091 || dataListType == DataListTypeEnum.P091) {
+			if (dataListType == DataListTypeEnum.P011_VIA_P091
+					|| dataListType == DataListTypeEnum.P091) {
 				localCode = getCode();
 			}
 		}
@@ -308,7 +295,8 @@ public class Parameter extends AbstractModel {
 			if (dataListType == DataListTypeEnum.P091) {
 				localCode = getCode();
 			} else {
-				String userLabel = LabelParameterManager.getInstance().getUserLabel(getCodeP011());
+				String userLabel = LabelParameterManager.getInstance()
+						.getUserLabel(getCodeP011());
 				if (userLabel != null) {
 					localCode = userLabel;
 				} else {
@@ -322,8 +310,8 @@ public class Parameter extends AbstractModel {
 	/**
 	 * Setter pour _nameP011
 	 * 
-	 * @param x :
-	 *            nouvelle valeur pour _nameP011
+	 * @param x
+	 *            : nouvelle valeur pour _nameP011
 	 * @see Fragment.java#_nameP011
 	 */
 	public void setNameP011(String x) {
@@ -343,8 +331,8 @@ public class Parameter extends AbstractModel {
 	/**
 	 * Setter pour _code
 	 * 
-	 * @param x :
-	 *            nouvelle valeur pour _code
+	 * @param x
+	 *            : nouvelle valeur pour _code
 	 * @see Fragment.java#_code
 	 */
 	public void setCodeP011(String x) {
@@ -364,8 +352,8 @@ public class Parameter extends AbstractModel {
 	/**
 	 * Setter pour _P011
 	 * 
-	 * @param x :
-	 *            nouvelle valeur pour _P011
+	 * @param x
+	 *            : nouvelle valeur pour _P011
 	 * @see Fragment.java#_P011
 	 */
 	public void setP011(String x) {
@@ -375,8 +363,8 @@ public class Parameter extends AbstractModel {
 	/**
 	 * Setter pour _P011
 	 * 
-	 * @param x :
-	 *            nouvelle valeur pour _P011
+	 * @param x
+	 *            : nouvelle valeur pour _P011
 	 * @see Fragment.java#_P011
 	 */
 	public void setP011(boolean x) {
@@ -396,8 +384,8 @@ public class Parameter extends AbstractModel {
 	/**
 	 * Setter pour _default
 	 * 
-	 * @param x :
-	 *            nouvelle valeur pour _default
+	 * @param x
+	 *            : nouvelle valeur pour _default
 	 * @see Fragment.java#_default
 	 */
 	public void setDefault(String x) {
@@ -417,8 +405,8 @@ public class Parameter extends AbstractModel {
 	/**
 	 * Setter pour _format
 	 * 
-	 * @param x :
-	 *            nouvelle valeur pour _format
+	 * @param x
+	 *            : nouvelle valeur pour _format
 	 * @see Fragment.java#_format
 	 */
 	public void setFormat(String x) {
@@ -427,11 +415,13 @@ public class Parameter extends AbstractModel {
 
 	/**
 	 * Getter sur _standardName.
+	 * 
 	 * @return the standardName
 	 */
 	public String getStandardName() {
 		String standardName = "";
-		String userStandardName = StandardNameParameterManager.getInstance().getUserStandardName(getCodeP011());
+		String userStandardName = StandardNameParameterManager.getInstance()
+				.getUserStandardName(getCodeP011());
 		if (userStandardName != null) {
 			standardName = userStandardName;
 		}
@@ -451,8 +441,8 @@ public class Parameter extends AbstractModel {
 	/**
 	 * Setter pour _fullName
 	 * 
-	 * @param x :
-	 *            nouvelle valeur pour _fullName
+	 * @param x
+	 *            : nouvelle valeur pour _fullName
 	 * @see Fragment.java#_fullName
 	 */
 	public void setFullName(String x) {
@@ -472,15 +462,16 @@ public class Parameter extends AbstractModel {
 	/**
 	 * Setter pour _unit
 	 * 
-	 * @param x :
-	 *            nouvelle valeur pour _unit
+	 * @param x
+	 *            : nouvelle valeur pour _unit
 	 * @see Fragment.java#_unit
 	 */
 	public void setUnit(String x) {
 		_unit = x;
 	}
 
-	public String getOutputCode(Conversion c, boolean lastParam, Integer parameterSize, Boolean isText) {
+	public String getOutputCode(Conversion c, boolean lastParam,
+			Integer parameterSize, Boolean isText) {
 		String code = null;
 		switch (c) {
 		case ODV:
@@ -501,10 +492,12 @@ public class Parameter extends AbstractModel {
 		return Formatter.getSingleton().padString(_code, len);
 	}
 
-	private String getOutputOdvCode(boolean lastParam, Integer parameterSize, Boolean isText) {
+	private String getOutputOdvCode(boolean lastParam, Integer parameterSize,
+			Boolean isText) {
 		StringBuffer paramHeader = new StringBuffer();
 		String code;
-		// on ne fabrique le code qu'à un seul endroit comme ca on sera sur que c'est le meme!!!!
+		// on ne fabrique le code qu'à un seul endroit comme ca on sera sur que
+		// c'est le meme!!!!
 		code = getLocalCode();
 
 		if (!isText) {
@@ -515,7 +508,7 @@ public class Parameter extends AbstractModel {
 			paramHeader.append(']');
 
 		} else {
-			//FAE 10755
+			// FAE 10755
 			paramHeader.append(code);
 			paramHeader.append(Global.DBL_PT);
 			paramHeader.append(Intern.TEXT);
