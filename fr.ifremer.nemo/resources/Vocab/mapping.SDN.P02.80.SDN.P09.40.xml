@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mapping>
-   <vocabulary list="SDN:P02:79:"  version="79"  date="2013-11-21T02:00:02.000"  title="SeaDataNet Parameter Discovery Vocabulary"  />
+   <vocabulary list="SDN:P02:80:"  version="80"  date="2014-01-22T02:00:03.000"  title="SeaDataNet Parameter Discovery Vocabulary"  />
    <mapped>
       <vocabulary list="SDN:P09:40:"  version="40"  date="2012-01-11T07:46:54.000"  title="MEDATLAS Parameter Usage Vocabulary"  />
    </mapped>

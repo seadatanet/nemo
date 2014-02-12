@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<vocabulary list="SDN:P02:79:"  version="79"  date="2013-11-21T02:00:02.000"  title="SeaDataNet Parameter Discovery Vocabulary" >
+<vocabulary list="SDN:P02:80:"  version="80"  date="2014-01-22T02:00:03.000"  title="SeaDataNet Parameter Discovery Vocabulary" >
    <keyword SDNIdent="SDN:P02::WCWT"  smallLabel="Sed_WaterCont" >Sediment water content, porosity and surface area</keyword>
    <keyword SDNIdent="SDN:P02::GRZO"  smallLabel="ZooplGrowthRate" >Zooplankton growth rates</keyword>
    <keyword SDNIdent="SDN:P02::HEAD"  smallLabel="PlatOrientation" >Platform or instrument orientation</keyword>
@@ -52,7 +52,7 @@
    <keyword SDNIdent="SDN:P02::TCFX"  smallLabel="WC_SedFluxOrgMatter" >Sedimentation flux of carbon, nitrogen or organic matter in the water column</keyword>
    <keyword SDNIdent="SDN:P02::LWRD"  smallLabel="LWRad" >Long-wave radiation</keyword>
    <keyword SDNIdent="SDN:P02::APDA"  smallLabel="Horiz_Plat_Vel" >Horizontal platform movement</keyword>
-   <keyword SDNIdent="SDN:P02::TVLT"  smallLabel="Raw_SPM_optics" >Raw suspended particulate material optical sensor output</keyword>
+   <keyword SDNIdent="SDN:P02::TVLT"  smallLabel="Raw_SPM_optics" >Raw suspended particulate material concentration sensor output</keyword>
    <keyword SDNIdent="SDN:P02::CFTM"  smallLabel="ContamFlux" >Contaminant fluxes between the terrestrial and marine environment</keyword>
    <keyword SDNIdent="SDN:P02::PCFX"  smallLabel="WC_SedFluxCellsCarb" >Sedimentation flux of identified biota expressed as carbon in the water column</keyword>
    <keyword SDNIdent="SDN:P02::BRDA"  smallLabel="Bird_taxa_count" >Bird taxonomy-related counts</keyword>
@@ -215,8 +215,8 @@
    <keyword SDNIdent="SDN:P02::UPTH"  smallLabel="WC_BactProd" >Bacterial production in the water column</keyword>
    <keyword SDNIdent="SDN:P02::SRAD"  smallLabel="GeoRad" >Geological sample radioactivity</keyword>
    <keyword SDNIdent="SDN:P02::GP025"  smallLabel="SealRepr" >Seal reproduction</keyword>
-   <keyword SDNIdent="SDN:P02::MSFX"  smallLabel="WC_SedFlux" >Sedimentation flux quantification in the water column</keyword>
    <keyword SDNIdent="SDN:P02::LRZA"  smallLabel="CurrVert" >Vertical velocity of the water column (currents)</keyword>
+   <keyword SDNIdent="SDN:P02::MSFX"  smallLabel="WC_SedFlux" >Sedimentation flux quantification in the water column</keyword>
    <keyword SDNIdent="SDN:P02::ALAT"  smallLabel="Horiz_spat_coord" >Horizontal spatial co-ordinates</keyword>
    <keyword SDNIdent="SDN:P02::HFLW"  smallLabel="HeatFlow" >Geothermal heat flow</keyword>
    <keyword SDNIdent="SDN:P02::BCMT"  smallLabel="Met_Biota" >Metal concentrations in biota</keyword>

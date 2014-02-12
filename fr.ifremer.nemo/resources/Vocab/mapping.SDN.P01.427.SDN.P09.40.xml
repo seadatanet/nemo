@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mapping>
-   <vocabulary list="SDN:P01:415:"  version="415"  date="2013-12-18T02:00:03.000"  title="BODC Parameter Usage Vocabulary"  />
+   <vocabulary list="SDN:P01:427:"  version="427"  date="2014-02-07T02:00:02.000"  title="BODC Parameter Usage Vocabulary"  />
    <mapped>
       <vocabulary list="SDN:P09:40:"  version="40"  date="2012-01-11T07:46:54.000"  title="MEDATLAS Parameter Usage Vocabulary"  />
    </mapped>
@@ -451,7 +451,7 @@
    <match>
       <element ekey="SDN:P09:40:HELD"  elabel="DELTA HELIUM 3"   />
       <exact>
-         <element ekey="SDN:P01:40:D3HEMXDG"  elabel="Enrichment of helium-3 {3He} in the water body [dissolved phase] by mass spectrometry"   />
+         <element ekey="SDN:P01:40:D3HEMXDG"  elabel="Enrichment of helium-3 {3He} in the water body [dissolved plus reactive particulate phase] by mass spectrometry"   />
       </exact>
    </match>
    <match>
@@ -511,7 +511,7 @@
    <match>
       <element ekey="SDN:P09:40:DICP"  elabel="DIC IN SEDIMENT PORE WATER"   />
       <narrow>
-         <element ekey="SDN:P01:40:TCO2CAPW"  elabel="Concentration of carbon (total inorganic) {TCO2} per unit volume of the sediment pore water [dissolved plus reactive particulate &lt;0.4um phase] by centrifugal extraction, filtration, acidification and CO2 quantification by gas analyser"   />
+         <element ekey="SDN:P01:40:TCO2CAPW"  elabel="Concentration of carbon (total inorganic) {TCO2} per unit volume of the sediment pore water [dissolved plus reactive particulate &lt;0.4/0.45um phase] by centrifugal extraction, filtration, acidification and CO2 quantification by gas analyser"   />
       </narrow>
    </match>
    <match>
@@ -601,19 +601,19 @@
    <match>
       <element ekey="SDN:P09:40:MCUW"  elabel="DISSOLVED COPPER (Cu)"   />
       <exact>
-         <element ekey="SDN:P01:40:CUXXZZZZ"  elabel="Concentration of copper {Cu} per unit volume of the water body [dissolved phase]"   />
+         <element ekey="SDN:P01:40:CUXXZZZZ"  elabel="Concentration of copper {Cu} per unit volume of the water body [dissolved plus reactive particulate phase]"   />
       </exact>
    </match>
    <match>
       <element ekey="SDN:P09:40:HELW"  elabel="DISSOLVED HELIUM"   />
       <exact>
-         <element ekey="SDN:P01:40:HECNMASS"  elabel="Concentration of helium {He} per unit mass of the water body [dissolved phase]"   />
+         <element ekey="SDN:P01:40:HECNMASS"  elabel="Concentration of helium {He} per unit mass of the water body [dissolved plus reactive particulate phase]"   />
       </exact>
    </match>
    <match>
       <element ekey="SDN:P09:40:HEEW"  elabel="DISSOLVED HELIUM ERROR"   />
       <exact>
-         <element ekey="SDN:P01:40:HEERMASS"  elabel="Concentration error of helium {He} per unit mass of the water body [dissolved phase]"   />
+         <element ekey="SDN:P01:40:HEERMASS"  elabel="Concentration error of helium {He} per unit mass of the water body [dissolved plus reactive particulate phase]"   />
       </exact>
    </match>
    <match>
@@ -625,13 +625,13 @@
    <match>
       <element ekey="SDN:P09:40:NEOW"  elabel="DISSOLVED NEON"   />
       <exact>
-         <element ekey="SDN:P01:40:NECNMASS"  elabel="Concentration of neon {Ne} per unit mass of the water body [dissolved phase]"   />
+         <element ekey="SDN:P01:40:NECNMASS"  elabel="Concentration of neon {Ne} per unit mass of the water body [dissolved plus reactive particulate phase]"   />
       </exact>
    </match>
    <match>
       <element ekey="SDN:P09:40:NEEW"  elabel="DISSOLVED NEON ERROR"   />
       <exact>
-         <element ekey="SDN:P01:40:NEERMASS"  elabel="Concentration error of neon {Ne} per unit mass of the water body [dissolved phase]"   />
+         <element ekey="SDN:P01:40:NEERMASS"  elabel="Concentration error of neon {Ne} per unit mass of the water body [dissolved plus reactive particulate phase]"   />
       </exact>
    </match>
    <match>
@@ -673,31 +673,31 @@
    <match>
       <element ekey="SDN:P09:40:DOXY"  elabel="DISSOLVED OXYGEN"   />
       <broad>
-         <element ekey="SDN:P01:40:DOXYZZXX"  elabel="Concentration of oxygen {O2} per unit volume of the water body [dissolved phase]"   />
+         <element ekey="SDN:P01:40:DOXYZZXX"  elabel="Concentration of oxygen {O2} per unit volume of the water body [dissolved plus reactive particulate phase]"   />
       </broad>
    </match>
    <match>
       <element ekey="SDN:P09:40:DOX2"  elabel="DISSOLVED OXYGEN"   />
       <broad>
-         <element ekey="SDN:P01:40:DOXMZZXX"  elabel="Concentration of oxygen {O2} per unit mass of the water body [dissolved phase]"   />
+         <element ekey="SDN:P01:40:DOXMZZXX"  elabel="Concentration of oxygen {O2} per unit mass of the water body [dissolved plus reactive particulate phase]"   />
       </broad>
    </match>
    <match>
       <element ekey="SDN:P09:40:DOX1"  elabel="DISSOLVED OXYGEN"   />
       <broad>
-         <element ekey="SDN:P01:40:DOXYZZXX"  elabel="Concentration of oxygen {O2} per unit volume of the water body [dissolved phase]"   />
+         <element ekey="SDN:P01:40:DOXYZZXX"  elabel="Concentration of oxygen {O2} per unit volume of the water body [dissolved plus reactive particulate phase]"   />
       </broad>
    </match>
    <match>
       <element ekey="SDN:P09:40:TRIW"  elabel="DISSOLVED TRITIUM"   />
       <exact>
-         <element ekey="SDN:P01:40:MXTX3H1H"  elabel="Atomic ratio of tritium/hydrogen in the water body [dissolved phase] by mass spectrometry"   />
+         <element ekey="SDN:P01:40:MXTX3H1H"  elabel="Atomic ratio of tritium/hydrogen in the water body [dissolved plus reactive particulate phase] by mass spectrometry"   />
       </exact>
    </match>
    <match>
       <element ekey="SDN:P09:40:TREW"  elabel="DISSOLVED TRITIUM ERROR"   />
       <exact>
-         <element ekey="SDN:P01:40:S3HHMXTX"  elabel="Atomic ratio standard error of tritium/hydrogen in the water body [dissolved phase] by mass spectrometry"   />
+         <element ekey="SDN:P01:40:S3HHMXTX"  elabel="Atomic ratio standard error of tritium/hydrogen in the water body [dissolved plus reactive particulate phase] by mass spectrometry"   />
       </exact>
    </match>
    <match>
@@ -715,7 +715,7 @@
    <match>
       <element ekey="SDN:P09:40:DOCP"  elabel="DOC IN SEDIMENT PORE WATER"   />
       <narrow>
-         <element ekey="SDN:P01:40:CORGCOPW"  elabel="Concentration of carbon (organic) {DOC} per unit volume of the sediment pore water [dissolved plus reactive particulate &lt;0.4um phase] by centrifugal extraction, filtration and high temperature Pt catalytic oxidation"   />
+         <element ekey="SDN:P01:40:CORGCOPW"  elabel="Concentration of carbon (organic) {DOC} per unit volume of the sediment pore water [dissolved plus reactive particulate &lt;0.4/0.45um phase] by centrifugal extraction, filtration and high temperature Pt catalytic oxidation"   />
       </narrow>
    </match>
    <match>
@@ -728,12 +728,6 @@
       <element ekey="SDN:P09:40:DRDD"  elabel="DURATION (DAYS)"   />
       <exact>
          <element ekey="SDN:P01:40:AZDRZZ01"  elabel="Sample duration"   />
-      </exact>
-   </match>
-   <match>
-      <element ekey="SDN:P09:40:CNDC"  elabel="ELECTRICAL CONDUCTIVITY"   />
-      <exact>
-         <element ekey="SDN:P01:40:PCONZZ01"  elabel="Electrical conductivity of the water body"   />
       </exact>
    </match>
    <match>
@@ -823,13 +817,13 @@
    <match>
       <element ekey="SDN:P09:40:HEDW"  elabel="HELIUM DEV. OF ISOTOPIC RATIO"   />
       <exact>
-         <element ekey="SDN:P01:40:SDD3HEXX"  elabel="Enrichment standard deviation of helium-3 {3He} in the water body [dissolved phase] by mass spectrometry"   />
+         <element ekey="SDN:P01:40:SDD3HEXX"  elabel="Enrichment standard deviation of helium-3 {3He} in the water body [dissolved plus reactive particulate phase] by mass spectrometry"   />
       </exact>
    </match>
    <match>
       <element ekey="SDN:P09:40:HEDE"  elabel="HELIUM ISOTOPIC RATIO ERROR"   />
       <narrow>
-         <element ekey="SDN:P01:40:S3HEMXDG"  elabel="Enrichment standard error of helium-3 {3He} in the water body [dissolved phase] by mass spectrometry"   />
+         <element ekey="SDN:P01:40:S3HEMXDG"  elabel="Enrichment standard error of helium-3 {3He} in the water body [dissolved plus reactive particulate phase] by mass spectrometry"   />
       </narrow>
    </match>
    <match>
@@ -841,7 +835,7 @@
    <match>
       <element ekey="SDN:P09:40:HCSP"  elabel="HORIZONTAL CURRENT SPEED"   />
       <exact>
-         <element ekey="SDN:P01:40:LCSAZZ01"  elabel="Current speed in the water body"   />
+         <element ekey="SDN:P01:40:LCSAZZ01"  elabel="Current speed (Eulerian) in the water body"   />
       </exact>
    </match>
    <match>
@@ -1291,7 +1285,7 @@
    <match>
       <element ekey="SDN:P09:40:OSAT"  elabel="OXYGEN SATURATION"   />
       <exact>
-         <element ekey="SDN:P01:40:OXYSZZ01"  elabel="Saturation of oxygen {O2} in the water body [dissolved phase]"   />
+         <element ekey="SDN:P01:40:OXYSZZ01"  elabel="Saturation of oxygen {O2} in the water body [dissolved plus reactive particulate phase]"   />
       </exact>
    </match>
    <match>

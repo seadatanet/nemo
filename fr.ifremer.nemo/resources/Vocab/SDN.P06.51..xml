@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<vocabulary list="SDN:P06:50:"  version="50"  date="2013-10-26T01:00:04.000"  title="BODC data storage units" >
+<vocabulary list="SDN:P06:51:"  version="51"  date="2014-02-05T02:00:15.000"  title="BODC data storage units" >
    <uomName SDNIdent="SDN:P06::UPDS"  smallLabel="% dry sed" >Percentage of dry sediment</uomName>
    <uomName SDNIdent="SDN:P06::UPTH"  smallLabel="ppt/h" >Parts per thousand per hour</uomName>
    <uomName SDNIdent="SDN:P06::DGPS"  smallLabel="deg/s" >Degrees per second</uomName>
@@ -38,6 +38,7 @@
    <uomName SDNIdent="SDN:P06::PPS2"  smallLabel="Pa^2/s^2" >Pascal squared per second squared</uomName>
    <uomName SDNIdent="SDN:P06::NCUM"  smallLabel="N/m^3" >Newtons per cubic metre</uomName>
    <uomName SDNIdent="SDN:P06::UBQL"  smallLabel="Bq/l" >Bequerels per litre</uomName>
+   <uomName SDNIdent="SDN:P06::MBQK"  smallLabel="mBq/kg" >Millibequerels per kilogram</uomName>
    <uomName SDNIdent="SDN:P06::UPDB"  smallLabel="dbar" >Decibars</uomName>
    <uomName SDNIdent="SDN:P06::UFPD"  smallLabel="#/fem/d" >per female per day</uomName>
    <uomName SDNIdent="SDN:P06::UMTC"  smallLabel="m^2.Hz^2" >Square Metres.Hertz squared</uomName>
@@ -220,6 +221,7 @@
    <uomName SDNIdent="SDN:P06::M2S2"  smallLabel="/m^2/s" >per square metre per second</uomName>
    <uomName SDNIdent="SDN:P06::UMNS"  smallLabel="/m/nm/sr" >per metre per nanometre per steradian</uomName>
    <uomName SDNIdent="SDN:P06::UUML"  smallLabel="ul/l" >Microlitres per litre</uomName>
+   <uomName SDNIdent="SDN:P06::PGPL"  smallLabel="pg/l" >Picograms per litre</uomName>
    <uomName SDNIdent="SDN:P06::M2RD"  smallLabel="m2.s/rad" >Square metre seconds per radian</uomName>
    <uomName SDNIdent="SDN:P06::UBLV"  smallLabel="ppbv" >Parts per billion by volume</uomName>
    <uomName SDNIdent="SDN:P06::UM2D"  smallLabel="mg/m^2/inc" >Milligrams per square metre per incubation duration</uomName>
@@ -279,5 +281,6 @@
    <uomName SDNIdent="SDN:P06::UYAD"  smallLabel="AD" >Gregorian calendar years anno Domini</uomName>
    <uomName SDNIdent="SDN:P06::UMCH"  smallLabel="ml/ind/h" >Millilitres cleared per individual per hour</uomName>
    <uomName SDNIdent="SDN:P06::UPMS"  smallLabel="#/m^2" >Number per square metre</uomName>
+   <uomName SDNIdent="SDN:P06::FGPL"  smallLabel="fg/l" >Femtograms per litre</uomName>
    <uomName SDNIdent="SDN:P06::MMOM"  smallLabel="mmol/mol" >Millimoles per mole</uomName>
 </vocabulary>
