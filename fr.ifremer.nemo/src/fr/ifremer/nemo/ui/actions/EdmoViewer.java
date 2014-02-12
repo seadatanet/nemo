@@ -47,12 +47,12 @@ public class EdmoViewer {
 	private EdmoFilter filter;
 	private final EdmoChoices tmpEdmoChoices;
 	private final int choice;
-	private final OptionsAction optionActions;
+	private final OptionsAction optionAction;
 
 	public EdmoViewer(OptionsAction optionsAction, int choice) {
 		this.choice = choice;
-		this.optionActions = optionsAction;
-		this.tmpEdmoChoices = new EdmoChoices();
+		this.optionAction = optionsAction;
+		this.tmpEdmoChoices = optionAction.getTmpEdmoChoices();
 		createViewer();
 	}
 
@@ -169,7 +169,7 @@ public class EdmoViewer {
 					@Override
 					public void widgetSelected(
 							org.eclipse.swt.events.SelectionEvent e) {
-						optionActions.updateEdmo(tmpEdmoChoices);
+						optionAction.updateEdmo(tmpEdmoChoices);
 						shellEdmo.close();
 					}
 				});

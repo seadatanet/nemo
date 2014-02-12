@@ -1961,16 +1961,14 @@ public class OptionsAction extends Action implements ISelectionListener,
 				+ tmpEdmoChoices.getIdEdmoDistDonnees());
 
 		labelIdEdmoRespCdi.pack();
-		// buttonEdmoChoiceIdEdmoRespCdi.pack();
-
 		labelIdEdmoRespDonnees.pack();
-		// buttonEdmoChoiceIdEdmoRespDonnees.pack();
-
 		labelCodeEdmoDonnees.pack();
-		// buttonEdmoChoiceIdCodeEdmoDonnees.pack();
-
 		labelIdEdmoDistDonnees.pack();
-		// buttonEdmoChoiceIdEdmoDistDonnees.pack();
 
+
+	}
+
+	public EdmoChoices getTmpEdmoChoices() {
+		return tmpEdmoChoices;
 	}
 }
