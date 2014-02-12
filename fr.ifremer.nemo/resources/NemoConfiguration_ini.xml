@@ -16,7 +16,7 @@
   <odvVersion>0.4</odvVersion>
   <medatlasVersion>2.0</medatlasVersion>
   <netCDFVersion>1.0</netCDFVersion>
-  <cdiMethod>CDIMTH01</cdiMethod>
+  <cdiMethod>CDIMTH02</cdiMethod>
   <accesDonnees>LS</accesDonnees>
   <typePlateforme></typePlateforme>
   <writeMapping>false</writeMapping>
