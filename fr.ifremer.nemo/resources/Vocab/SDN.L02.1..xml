@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <vocabulary list="SDN:L02:1:"  version="1"  date="2007-12-20T02:00:05.000"  title="SeaDataNet Geospatial Feature Types" >
-   <GeoObjTypCd SDNIdent="SDN:L02::004"  value="point"   />
-   <GeoObjTypCd SDNIdent="SDN:L02::006"  value="surface"   />
-   <GeoObjTypCd SDNIdent="SDN:L02::003"  value="curve"   />
+   <element  key="SDN:L02::004"  label="point"   date="2007-12-19T11:54:17.000"  />
+   <element  key="SDN:L02::006"  label="surface"   date="2007-12-19T11:56:57.000"  />
+   <element  key="SDN:L02::003"  label="curve"   date="2007-12-19T11:53:35.000"  />
 </vocabulary>

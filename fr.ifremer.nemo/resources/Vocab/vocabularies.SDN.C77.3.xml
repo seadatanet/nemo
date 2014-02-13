@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <vocabularies>
-   <vocabulary list="SDN:L05:28:"  version="28"  date="2012-03-23T02:00:02.000"  title="SeaDataNet device categories"  />
-   <vocabulary list="SDN:L06:7:"  version="7"  date="2008-12-05T02:00:04.000"  title="SeaVoX Platform Categories"  />
+   <vocabulary list="SDN:L05:41:"  version="41"  date="2014-02-05T02:00:15.000"  title="SeaDataNet device categories"  />
+   <vocabulary list="SDN:L06:10:"  version="10"  date="2013-08-21T01:00:02.000"  title="SeaVoX Platform Categories"  />
    <vocabulary list="SDN:P08:3:"  version="3"  date="2008-05-01T01:00:03.000"  title="SeaDataNet Parameter Disciplines"  />
 </vocabularies>

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <vocabulary list="SDN:L03:3:"  version="3"  date="2011-08-27T01:00:05.000"  title="SeaDataNet Measurement Periodicity Categories" >
-   <keyword SDNIdent="SDN:L03::3"  smallLabel="minute2hour" >minute to sub-hour</keyword>
-   <keyword SDNIdent="SDN:L03::98"  smallLabel="NA" >inapplicable</keyword>
-   <keyword SDNIdent="SDN:L03::2"  smallLabel="second2minute" >second to sub-minute</keyword>
-   <keyword SDNIdent="SDN:L03::1"  smallLabel="sub-second" >sub-second</keyword>
-   <keyword SDNIdent="SDN:L03::0"  smallLabel="indeterminate" >indeterminate</keyword>
-   <keyword SDNIdent="SDN:L03::7"  smallLabel="month2year" >month to sub-year</keyword>
-   <keyword SDNIdent="SDN:L03::6"  smallLabel="week2month" >week to sub-month</keyword>
-   <keyword SDNIdent="SDN:L03::5"  smallLabel="day2week" >day to sub-week</keyword>
-   <keyword SDNIdent="SDN:L03::4"  smallLabel="hour2day" >hour to sub-day</keyword>
-   <keyword SDNIdent="SDN:L03::15"  smallLabel="decadal" >decadal</keyword>
-   <keyword SDNIdent="SDN:L03::13"  smallLabel="annual" >year to sub-decade</keyword>
-   <keyword SDNIdent="SDN:L03::99"  smallLabel="unknown" >unknown</keyword>
+   <element  key="SDN:L03::3"  label="minute to sub-hour"  shortLabel="minute2hour"  date="2006-08-18T13:33:02.000"  />
+   <element  key="SDN:L03::98"  label="inapplicable"  shortLabel="NA"  date="2011-08-26T09:27:47.000"  />
+   <element  key="SDN:L03::2"  label="second to sub-minute"  shortLabel="second2minute"  date="2006-08-18T13:33:02.000"  />
+   <element  key="SDN:L03::1"  label="sub-second"  shortLabel="sub-second"  date="2006-08-18T13:33:02.000"  />
+   <element  key="SDN:L03::0"  label="indeterminate"  shortLabel="indeterminate"  date="2006-12-20T11:26:15.000"  />
+   <element  key="SDN:L03::7"  label="month to sub-year"  shortLabel="month2year"  date="2006-08-18T13:33:02.000"  />
+   <element  key="SDN:L03::6"  label="week to sub-month"  shortLabel="week2month"  date="2006-08-18T13:33:02.000"  />
+   <element  key="SDN:L03::5"  label="day to sub-week"  shortLabel="day2week"  date="2006-08-18T13:33:02.000"  />
+   <element  key="SDN:L03::4"  label="hour to sub-day"  shortLabel="hour2day"  date="2006-08-18T13:33:02.000"  />
+   <element  key="SDN:L03::15"  label="decadal"  shortLabel="decadal"  date="2006-08-18T13:33:02.000"  />
+   <element  key="SDN:L03::13"  label="year to sub-decade"  shortLabel="annual"  date="2006-08-18T13:33:02.000"  />
+   <element  key="SDN:L03::99"  label="unknown"  shortLabel="unknown"  date="2006-12-20T11:29:52.000"  />
 </vocabulary>

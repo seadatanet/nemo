@@ -5,2151 +5,2151 @@
       <vocabulary list="SDN:P09:40:"  version="40"  date="2012-01-11T07:46:54.000"  title="MEDATLAS Parameter Usage Vocabulary"  />
    </mapped>
    <match>
-      <element ekey="SDN:P09:40:CUPW"  elabel="14C PRODUCTION FILTER UNSPECIF"   />
+      <element  key="SDN:P09:40:CUPW"  label="14C PRODUCTION FILTER UNSPECIF"    />
       <related>
-         <element ekey="SDN:P06:40:UGDC"  elabel="Milligrams per cubic metre per day"   />
+         <element  key="SDN:P06:40:UGDC"  label="Milligrams per cubic metre per day"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:CUPH"  elabel="14C PRODUCTION FILTER UNSPECIF"   />
+      <element  key="SDN:P09:40:CUPH"  label="14C PRODUCTION FILTER UNSPECIF"    />
       <related>
-         <element ekey="SDN:P06:40:UGLH"  elabel="Milligrams per cubic metre per hour"   />
+         <element  key="SDN:P06:40:UGLH"  label="Milligrams per cubic metre per hour"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:C4UW"  elabel="14C PRODUCTION/10 MICRON FILT."   />
+      <element  key="SDN:P09:40:C4UW"  label="14C PRODUCTION/10 MICRON FILT."    />
       <related>
-         <element ekey="SDN:P06:40:UGDC"  elabel="Milligrams per cubic metre per day"   />
+         <element  key="SDN:P06:40:UGDC"  label="Milligrams per cubic metre per day"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:C2UW"  elabel="14C PRODUCTION/2 MICRON FILT."   />
+      <element  key="SDN:P09:40:C2UW"  label="14C PRODUCTION/2 MICRON FILT."    />
       <related>
-         <element ekey="SDN:P06:40:UGDC"  elabel="Milligrams per cubic metre per day"   />
+         <element  key="SDN:P06:40:UGDC"  label="Milligrams per cubic metre per day"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:C1UW"  elabel="14C UPTAKE 0.2-1 MICRON"   />
+      <element  key="SDN:P09:40:C1UW"  label="14C UPTAKE 0.2-1 MICRON"    />
       <related>
-         <element ekey="SDN:P06:40:UGDC"  elabel="Milligrams per cubic metre per day"   />
+         <element  key="SDN:P06:40:UGDC"  label="Milligrams per cubic metre per day"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:BFUP"  elabel="19&apos;BUTANOYLOXYFUCOXANTHINE"   />
+      <element  key="SDN:P09:40:BFUP"  label="19&apos;BUTANOYLOXYFUCOXANTHINE"    />
       <related>
-         <element ekey="SDN:P06:40:UMMC"  elabel="Milligrams per cubic metre"   />
+         <element  key="SDN:P06:40:UMMC"  label="Milligrams per cubic metre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:HFUP"  elabel="19&apos;HEXANOYLOXYFUCOXANTHINE"   />
+      <element  key="SDN:P09:40:HFUP"  label="19&apos;HEXANOYLOXYFUCOXANTHINE"    />
       <related>
-         <element ekey="SDN:P06:40:UMMC"  elabel="Milligrams per cubic metre"   />
+         <element  key="SDN:P06:40:UMMC"  label="Milligrams per cubic metre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:ASDW"  elabel="ABSORPTION STANDARD DEVIATION"   />
+      <element  key="SDN:P09:40:ASDW"  label="ABSORPTION STANDARD DEVIATION"    />
       <related>
-         <element ekey="SDN:P06:40:UMMC"  elabel="Milligrams per cubic metre"   />
+         <element  key="SDN:P06:40:UMMC"  label="Milligrams per cubic metre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MALF"  elabel="AL FLUX IN SETTLING PARTICLES"   />
+      <element  key="SDN:P09:40:MALF"  label="AL FLUX IN SETTLING PARTICLES"    />
       <related>
-         <element ekey="SDN:P06:40:UGDX"  elabel="Milligrams per square metre per day"   />
+         <element  key="SDN:P06:40:UGDX"  label="Milligrams per square metre per day"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:ALKW"  elabel="ALKALINITY"   />
+      <element  key="SDN:P09:40:ALKW"  label="ALKALINITY"    />
       <related>
-         <element ekey="SDN:P06:40:KGUM"  elabel="Micromoles per kilogram"   />
+         <element  key="SDN:P06:40:KGUM"  label="Micromoles per kilogram"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:ALKY"  elabel="ALKALINITY"   />
+      <element  key="SDN:P09:40:ALKY"  label="ALKALINITY"    />
       <related>
-         <element ekey="SDN:P06:40:UPOX"  elabel="Micromoles per litre"   />
+         <element  key="SDN:P06:40:UPOX"  label="Micromoles per litre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:AXAP"  elabel="ALLOXANTHINE"   />
+      <element  key="SDN:P09:40:AXAP"  label="ALLOXANTHINE"    />
       <related>
-         <element ekey="SDN:P06:40:UMMC"  elabel="Milligrams per cubic metre"   />
+         <element  key="SDN:P06:40:UMMC"  label="Milligrams per cubic metre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:ABCP"  elabel="ALPHA BETA CAROTENES"   />
+      <element  key="SDN:P09:40:ABCP"  label="ALPHA BETA CAROTENES"    />
       <related>
-         <element ekey="SDN:P06:40:UMMC"  elabel="Milligrams per cubic metre"   />
+         <element  key="SDN:P06:40:UMMC"  label="Milligrams per cubic metre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:AMOW"  elabel="AMMONIUM (NH4-N) CONTENT"   />
+      <element  key="SDN:P09:40:AMOW"  label="AMMONIUM (NH4-N) CONTENT"    />
       <related>
-         <element ekey="SDN:P06:40:KGUM"  elabel="Micromoles per kilogram"   />
+         <element  key="SDN:P06:40:KGUM"  label="Micromoles per kilogram"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:AMON"  elabel="AMMONIUM (NH4-N) CONTENT"   />
+      <element  key="SDN:P09:40:AMON"  label="AMMONIUM (NH4-N) CONTENT"    />
       <related>
-         <element ekey="SDN:P06:40:UPOX"  elabel="Micromoles per litre"   />
+         <element  key="SDN:P06:40:UPOX"  label="Micromoles per litre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:NHRW"  elabel="AMMONIUM REGENERATION"   />
+      <element  key="SDN:P09:40:NHRW"  label="AMMONIUM REGENERATION"    />
       <related>
-         <element ekey="SDN:P06:40:UNMD"  elabel="Nanomoles per litre per day"   />
+         <element  key="SDN:P06:40:UNMD"  label="Nanomoles per litre per day"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:NHUW"  elabel="AMMONIUM UPTAKE"   />
+      <element  key="SDN:P09:40:NHUW"  label="AMMONIUM UPTAKE"    />
       <related>
-         <element ekey="SDN:P06:40:UNMD"  elabel="Nanomoles per litre per day"   />
+         <element  key="SDN:P06:40:UNMD"  label="Nanomoles per litre per day"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:AMOP"  elabel="AMONIUM IN SEDIMENT PORE WATER"   />
+      <element  key="SDN:P09:40:AMOP"  label="AMONIUM IN SEDIMENT PORE WATER"    />
       <related>
-         <element ekey="SDN:P06:40:UPOX"  elabel="Micromoles per litre"   />
+         <element  key="SDN:P06:40:UPOX"  label="Micromoles per litre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:ATMP"  elabel="ATMOSPHERIC PRESSURE"   />
+      <element  key="SDN:P09:40:ATMP"  label="ATMOSPHERIC PRESSURE"    />
       <related>
-         <element ekey="SDN:P06:40:UPBB"  elabel="Millibars"   />
+         <element  key="SDN:P06:40:UPBB"  label="Millibars"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:ATMS"  elabel="ATMOSPHERIC PRESSURE - SEA LEV"   />
+      <element  key="SDN:P09:40:ATMS"  label="ATMOSPHERIC PRESSURE - SEA LEV"    />
       <related>
-         <element ekey="SDN:P06:40:UPBB"  elabel="Millibars"   />
+         <element  key="SDN:P06:40:UPBB"  label="Millibars"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:ATPT"  elabel="ATMOSPHERIC PRESSURE TENDENCY"   />
+      <element  key="SDN:P09:40:ATPT"  label="ATMOSPHERIC PRESSURE TENDENCY"    />
       <related>
-         <element ekey="SDN:P06:40:HPAH"  elabel="Hectopascals per hour"   />
+         <element  key="SDN:P06:40:HPAH"  label="Hectopascals per hour"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:NFAW"  elabel="AUTOTROPHIC NANOFLAGELLATES"   />
+      <element  key="SDN:P09:40:NFAW"  label="AUTOTROPHIC NANOFLAGELLATES"    />
       <related>
-         <element ekey="SDN:P06:40:UCPL"  elabel="Number per litre"   />
+         <element  key="SDN:P06:40:UCPL"  label="Number per litre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:VTZA"  elabel="AVER ZERO CROSSING WAVE PERIOD"   />
+      <element  key="SDN:P09:40:VTZA"  label="AVER ZERO CROSSING WAVE PERIOD"    />
       <related>
-         <element ekey="SDN:P06:40:UTBB"  elabel="Seconds"   />
+         <element  key="SDN:P06:40:UTBB"  label="Seconds"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:VAVH"  elabel="AVER. HEIGHT HIGHEST 1/3 WAVE"   />
+      <element  key="SDN:P09:40:VAVH"  label="AVER. HEIGHT HIGHEST 1/3 WAVE"    />
       <related>
-         <element ekey="SDN:P06:40:ULAA"  elabel="Metres"   />
+         <element  key="SDN:P06:40:ULAA"  label="Metres"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:VAVT"  elabel="AVER. PERIOD HIGHEST 1/3 WAVE"   />
+      <element  key="SDN:P09:40:VAVT"  label="AVER. PERIOD HIGHEST 1/3 WAVE"    />
       <related>
-         <element ekey="SDN:P06:40:UTBB"  elabel="Seconds"   />
+         <element  key="SDN:P06:40:UTBB"  label="Seconds"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:NAVG"  elabel="AVERAGED DATA CYCLE NUMBER"   />
+      <element  key="SDN:P09:40:NAVG"  label="AVERAGED DATA CYCLE NUMBER"    />
       <related>
-         <element ekey="SDN:P06:40:UUUU"  elabel="Dimensionless"   />
+         <element  key="SDN:P06:40:UUUU"  label="Dimensionless"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MALP"  elabel="Al IN SUSPENDED MATTER"   />
+      <element  key="SDN:P09:40:MALP"  label="Al IN SUSPENDED MATTER"    />
       <related>
-         <element ekey="SDN:P06:40:UMMC"  elabel="Milligrams per cubic metre"   />
+         <element  key="SDN:P06:40:UMMC"  label="Milligrams per cubic metre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MALS"  elabel="Al IN THE SEDIMENT"   />
+      <element  key="SDN:P09:40:MALS"  label="Al IN THE SEDIMENT"    />
       <related>
-         <element ekey="SDN:P06:40:UPCT"  elabel="Percent"   />
+         <element  key="SDN:P06:40:UPCT"  label="Percent"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:UPTS"  elabel="BACT. PROD. STANDARD DEVIATION"   />
+      <element  key="SDN:P09:40:UPTS"  label="BACT. PROD. STANDARD DEVIATION"    />
       <related>
-         <element ekey="SDN:P06:40:UPMH"  elabel="Picomoles per litre per hour"   />
+         <element  key="SDN:P06:40:UPMH"  label="Picomoles per litre per hour"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:BCMW"  elabel="BACTERIAL BIOMASS IN SEA WATER"   />
+      <element  key="SDN:P09:40:BCMW"  label="BACTERIAL BIOMASS IN SEA WATER"    />
       <related>
-         <element ekey="SDN:P06:40:UMMC"  elabel="Milligrams per cubic metre"   />
+         <element  key="SDN:P06:40:UMMC"  label="Milligrams per cubic metre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:UPTH"  elabel="BACTERIAL PRODUCTION(THYM. UP)"   />
+      <element  key="SDN:P09:40:UPTH"  label="BACTERIAL PRODUCTION(THYM. UP)"    />
       <related>
-         <element ekey="SDN:P06:40:UPMH"  elabel="Picomoles per litre per hour"   />
+         <element  key="SDN:P06:40:UPMH"  label="Picomoles per litre per hour"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:BATH"  elabel="BATHYMETRIC DEPTH"   />
+      <element  key="SDN:P09:40:BATH"  label="BATHYMETRIC DEPTH"    />
       <related>
-         <element ekey="SDN:P06:40:ULAA"  elabel="Metres"   />
+         <element  key="SDN:P06:40:ULAA"  label="Metres"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TB25"  elabel="BLUE LIGHT TRANSMISSION 25CM"   />
+      <element  key="SDN:P09:40:TB25"  label="BLUE LIGHT TRANSMISSION 25CM"    />
       <related>
-         <element ekey="SDN:P06:40:UPCT"  elabel="Percent"   />
+         <element  key="SDN:P06:40:UPCT"  label="Percent"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MBAP"  elabel="Ba IN SUSPENDED MATTER"   />
+      <element  key="SDN:P09:40:MBAP"  label="Ba IN SUSPENDED MATTER"    />
       <related>
-         <element ekey="SDN:P06:40:UMMC"  elabel="Milligrams per cubic metre"   />
+         <element  key="SDN:P06:40:UMMC"  label="Milligrams per cubic metre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MBAS"  elabel="Ba IN THE SEDIMENT"   />
+      <element  key="SDN:P09:40:MBAS"  label="Ba IN THE SEDIMENT"    />
       <related>
-         <element ekey="SDN:P06:40:UPPM"  elabel="Parts per million"   />
+         <element  key="SDN:P06:40:UPPM"  label="Parts per million"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MBRS"  elabel="Br IN THE SEDIMENT"   />
+      <element  key="SDN:P09:40:MBRS"  label="Br IN THE SEDIMENT"    />
       <related>
-         <element ekey="SDN:P06:40:UPPM"  elabel="Parts per million"   />
+         <element  key="SDN:P06:40:UPPM"  label="Parts per million"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:GLUC"  elabel="CARBOHYDRATE"   />
+      <element  key="SDN:P09:40:GLUC"  label="CARBOHYDRATE"    />
       <related>
-         <element ekey="SDN:P06:40:UMMC"  elabel="Milligrams per cubic metre"   />
+         <element  key="SDN:P06:40:UMMC"  label="Milligrams per cubic metre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:CO3P"  elabel="CARBONATES CONTENT"   />
+      <element  key="SDN:P09:40:CO3P"  label="CARBONATES CONTENT"    />
       <related>
-         <element ekey="SDN:P06:40:UPCT"  elabel="Percent"   />
+         <element  key="SDN:P06:40:UPCT"  label="Percent"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:CODW"  elabel="CHEMICAL OXYGEN DEMAND"   />
+      <element  key="SDN:P09:40:CODW"  label="CHEMICAL OXYGEN DEMAND"    />
       <related>
-         <element ekey="SDN:P06:40:UPOX"  elabel="Micromoles per litre"   />
+         <element  key="SDN:P06:40:UPOX"  label="Micromoles per litre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:CH1P"  elabel="CHL-A(LESS DIVINYLCHL-A)"   />
+      <element  key="SDN:P09:40:CH1P"  label="CHL-A(LESS DIVINYLCHL-A)"    />
       <related>
-         <element ekey="SDN:P06:40:UMMC"  elabel="Milligrams per cubic metre"   />
+         <element  key="SDN:P06:40:UMMC"  label="Milligrams per cubic metre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:CH2P"  elabel="CHL-B(LESS DIVINYLCHL-B)"   />
+      <element  key="SDN:P09:40:CH2P"  label="CHL-B(LESS DIVINYLCHL-B)"    />
       <related>
-         <element ekey="SDN:P06:40:UMMC"  elabel="Milligrams per cubic metre"   />
+         <element  key="SDN:P06:40:UMMC"  label="Milligrams per cubic metre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:CH1T"  elabel="CHLOROPHYLL TOTAL"   />
+      <element  key="SDN:P09:40:CH1T"  label="CHLOROPHYLL TOTAL"    />
       <related>
-         <element ekey="SDN:P06:40:UUKG"  elabel="Micrograms per kilogram"   />
+         <element  key="SDN:P06:40:UUKG"  label="Micrograms per kilogram"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:CPHL"  elabel="CHLOROPHYLL-A TOTAL"   />
+      <element  key="SDN:P09:40:CPHL"  label="CHLOROPHYLL-A TOTAL"    />
       <related>
-         <element ekey="SDN:P06:40:UMMC"  elabel="Milligrams per cubic metre"   />
+         <element  key="SDN:P06:40:UMMC"  label="Milligrams per cubic metre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:CPH1"  elabel="CHLOROPHYLL-A TOTAL"   />
+      <element  key="SDN:P09:40:CPH1"  label="CHLOROPHYLL-A TOTAL"    />
       <related>
-         <element ekey="SDN:P06:40:UMMC"  elabel="Milligrams per cubic metre"   />
+         <element  key="SDN:P06:40:UMMC"  label="Milligrams per cubic metre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:CHAF"  elabel="CHLOROPHYLL-A VERTICAL FLUX"   />
+      <element  key="SDN:P09:40:CHAF"  label="CHLOROPHYLL-A VERTICAL FLUX"    />
       <related>
-         <element ekey="SDN:P06:40:UGDX"  elabel="Milligrams per square metre per day"   />
+         <element  key="SDN:P06:40:UGDX"  label="Milligrams per square metre per day"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:CPH4"  elabel="CHLOROPHYLL-A/10 MICRON FILTER"   />
+      <element  key="SDN:P09:40:CPH4"  label="CHLOROPHYLL-A/10 MICRON FILTER"    />
       <related>
-         <element ekey="SDN:P06:40:UMMC"  elabel="Milligrams per cubic metre"   />
+         <element  key="SDN:P06:40:UMMC"  label="Milligrams per cubic metre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:CPH2"  elabel="CHLOROPHYLL-A/2 MICRON FILTER"   />
+      <element  key="SDN:P09:40:CPH2"  label="CHLOROPHYLL-A/2 MICRON FILTER"    />
       <related>
-         <element ekey="SDN:P06:40:UMMC"  elabel="Milligrams per cubic metre"   />
+         <element  key="SDN:P06:40:UMMC"  label="Milligrams per cubic metre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:CPH3"  elabel="CHLOROPHYLL-A/20 MICRON FILTER"   />
+      <element  key="SDN:P09:40:CPH3"  label="CHLOROPHYLL-A/20 MICRON FILTER"    />
       <related>
-         <element ekey="SDN:P06:40:UMMC"  elabel="Milligrams per cubic metre"   />
+         <element  key="SDN:P06:40:UMMC"  label="Milligrams per cubic metre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:CHLB"  elabel="CHLOROPHYLL-B TOTAL"   />
+      <element  key="SDN:P09:40:CHLB"  label="CHLOROPHYLL-B TOTAL"    />
       <related>
-         <element ekey="SDN:P06:40:UMMC"  elabel="Milligrams per cubic metre"   />
+         <element  key="SDN:P06:40:UMMC"  label="Milligrams per cubic metre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:CHLC"  elabel="CHLOROPHYLL-C TOTAL"   />
+      <element  key="SDN:P09:40:CHLC"  label="CHLOROPHYLL-C TOTAL"    />
       <related>
-         <element ekey="SDN:P06:40:UMMC"  elabel="Milligrams per cubic metre"   />
+         <element  key="SDN:P06:40:UMMC"  label="Milligrams per cubic metre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:CHCZ"  elabel="CHLOROPHYLL-C1+C2"   />
+      <element  key="SDN:P09:40:CHCZ"  label="CHLOROPHYLL-C1+C2"    />
       <related>
-         <element ekey="SDN:P06:40:UMMC"  elabel="Milligrams per cubic metre"   />
+         <element  key="SDN:P06:40:UMMC"  label="Milligrams per cubic metre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:CHC3"  elabel="CHLOROPHYLL-C3"   />
+      <element  key="SDN:P09:40:CHC3"  label="CHLOROPHYLL-C3"    />
       <related>
-         <element ekey="SDN:P06:40:UMMC"  elabel="Milligrams per cubic metre"   />
+         <element  key="SDN:P06:40:UMMC"  label="Milligrams per cubic metre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:CHLT"  elabel="CHLOROPHYLL-TOTAL"   />
+      <element  key="SDN:P09:40:CHLT"  label="CHLOROPHYLL-TOTAL"    />
       <related>
-         <element ekey="SDN:P06:40:UMMC"  elabel="Milligrams per cubic metre"   />
+         <element  key="SDN:P06:40:UMMC"  label="Milligrams per cubic metre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:CLAY"  elabel="CLAY IN THE SEDIMENT"   />
+      <element  key="SDN:P09:40:CLAY"  label="CLAY IN THE SEDIMENT"    />
       <related>
-         <element ekey="SDN:P06:40:UPCT"  elabel="Percent"   />
+         <element  key="SDN:P06:40:UPCT"  label="Percent"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:FCO2"  elabel="CO2 FUGACITY"   />
+      <element  key="SDN:P09:40:FCO2"  label="CO2 FUGACITY"    />
       <related>
-         <element ekey="SDN:P06:40:UATM"  elabel="Microatmospheres"   />
+         <element  key="SDN:P06:40:UATM"  label="Microatmospheres"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:XCO2"  elabel="CO2 MOLE FRACTION IN DRY GAS"   />
+      <element  key="SDN:P09:40:XCO2"  label="CO2 MOLE FRACTION IN DRY GAS"    />
       <related>
-         <element ekey="SDN:P06:40:UPPM"  elabel="Parts per million"   />
+         <element  key="SDN:P06:40:UPPM"  label="Parts per million"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:PCO2"  elabel="CO2 PART. PRES IN DRY/WET GAS"   />
+      <element  key="SDN:P09:40:PCO2"  label="CO2 PART. PRES IN DRY/WET GAS"    />
       <related>
-         <element ekey="SDN:P06:40:UATM"  elabel="Microatmospheres"   />
+         <element  key="SDN:P06:40:UATM"  label="Microatmospheres"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:COPF"  elabel="COCCOLITHOPHORIDAE PPC FLUX"   />
+      <element  key="SDN:P09:40:COPF"  label="COCCOLITHOPHORIDAE PPC FLUX"    />
       <related>
-         <element ekey="SDN:P06:40:UGDX"  elabel="Milligrams per square metre per day"   />
+         <element  key="SDN:P06:40:UGDX"  label="Milligrams per square metre per day"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:CDOM"  elabel="COLORED DISS. ORGANIC MATTER"   />
+      <element  key="SDN:P09:40:CDOM"  label="COLORED DISS. ORGANIC MATTER"    />
       <related>
-         <element ekey="SDN:P06:40:UPPB"  elabel="Parts per billion"   />
+         <element  key="SDN:P06:40:UPPB"  label="Parts per billion"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MCUF"  elabel="CU FLUX IN SETTLING PARTICLES"   />
+      <element  key="SDN:P09:40:MCUF"  label="CU FLUX IN SETTLING PARTICLES"    />
       <related>
-         <element ekey="SDN:P06:40:UUDX"  elabel="Micrograms per square metre per day"   />
+         <element  key="SDN:P06:40:UUDX"  label="Micrograms per square metre per day"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:EWCS"  elabel="CURRENT EAST  STD. DEVIATION"   />
+      <element  key="SDN:P09:40:EWCS"  label="CURRENT EAST  STD. DEVIATION"    />
       <related>
-         <element ekey="SDN:P06:40:UVAA"  elabel="Metres per second"   />
+         <element  key="SDN:P06:40:UVAA"  label="Metres per second"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:EWCT"  elabel="CURRENT EAST COMPONENT"   />
+      <element  key="SDN:P09:40:EWCT"  label="CURRENT EAST COMPONENT"    />
       <related>
-         <element ekey="SDN:P06:40:UVAA"  elabel="Metres per second"   />
+         <element  key="SDN:P06:40:UVAA"  label="Metres per second"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:NSCT"  elabel="CURRENT NORTH COMPONENT"   />
+      <element  key="SDN:P09:40:NSCT"  label="CURRENT NORTH COMPONENT"    />
       <related>
-         <element ekey="SDN:P06:40:UVAA"  elabel="Metres per second"   />
+         <element  key="SDN:P06:40:UVAA"  label="Metres per second"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:NSCS"  elabel="CURRENT NORTH STD. DEVIATION"   />
+      <element  key="SDN:P09:40:NSCS"  label="CURRENT NORTH STD. DEVIATION"    />
       <related>
-         <element ekey="SDN:P06:40:UVAA"  elabel="Metres per second"   />
+         <element  key="SDN:P06:40:UVAA"  label="Metres per second"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:HCSS"  elabel="CURRENT SPEED STD DEV"   />
+      <element  key="SDN:P09:40:HCSS"  label="CURRENT SPEED STD DEV"    />
       <related>
-         <element ekey="SDN:P06:40:UVAA"  elabel="Metres per second"   />
+         <element  key="SDN:P06:40:UVAA"  label="Metres per second"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MCAP"  elabel="Ca IN SUSPENDED MATTER"   />
+      <element  key="SDN:P09:40:MCAP"  label="Ca IN SUSPENDED MATTER"    />
       <related>
-         <element ekey="SDN:P06:40:UMMC"  elabel="Milligrams per cubic metre"   />
+         <element  key="SDN:P06:40:UMMC"  label="Milligrams per cubic metre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MCAS"  elabel="Ca IN THE SEDIMENT"   />
+      <element  key="SDN:P09:40:MCAS"  label="Ca IN THE SEDIMENT"    />
       <related>
-         <element ekey="SDN:P06:40:UPCT"  elabel="Percent"   />
+         <element  key="SDN:P06:40:UPCT"  label="Percent"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MCES"  elabel="Ce IN THE SEDIMENT"   />
+      <element  key="SDN:P09:40:MCES"  label="Ce IN THE SEDIMENT"    />
       <related>
-         <element ekey="SDN:P06:40:UPPM"  elabel="Parts per million"   />
+         <element  key="SDN:P06:40:UPPM"  label="Parts per million"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MCLP"  elabel="Cl IN SUSPENDED MATTER"   />
+      <element  key="SDN:P09:40:MCLP"  label="Cl IN SUSPENDED MATTER"    />
       <related>
-         <element ekey="SDN:P06:40:UMMC"  elabel="Milligrams per cubic metre"   />
+         <element  key="SDN:P06:40:UMMC"  label="Milligrams per cubic metre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MCRS"  elabel="Cr IN THE SEDIMENT"   />
+      <element  key="SDN:P09:40:MCRS"  label="Cr IN THE SEDIMENT"    />
       <related>
-         <element ekey="SDN:P06:40:UPPM"  elabel="Parts per million"   />
+         <element  key="SDN:P06:40:UPPM"  label="Parts per million"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MCUS"  elabel="Cu IN THE SEDIMENT"   />
+      <element  key="SDN:P09:40:MCUS"  label="Cu IN THE SEDIMENT"    />
       <related>
-         <element ekey="SDN:P06:40:UPPM"  elabel="Parts per million"   />
+         <element  key="SDN:P06:40:UPPM"  label="Parts per million"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:DCAW"  elabel="DARK CARBON ABSORPTION"   />
+      <element  key="SDN:P09:40:DCAW"  label="DARK CARBON ABSORPTION"    />
       <related>
-         <element ekey="SDN:P06:40:UMMC"  elabel="Milligrams per cubic metre"   />
+         <element  key="SDN:P06:40:UMMC"  label="Milligrams per cubic metre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:CDFW"  elabel="DARK FIXATION"   />
+      <element  key="SDN:P09:40:CDFW"  label="DARK FIXATION"    />
       <related>
-         <element ekey="SDN:P06:40:UGDC"  elabel="Milligrams per cubic metre per day"   />
+         <element  key="SDN:P06:40:UGDC"  label="Milligrams per cubic metre per day"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:DAYX"  elabel="DAY WITHIN MONTH"   />
+      <element  key="SDN:P09:40:DAYX"  label="DAY WITHIN MONTH"    />
       <related>
-         <element ekey="SDN:P06:40:UUUU"  elabel="Dimensionless"   />
+         <element  key="SDN:P06:40:UUUU"  label="Dimensionless"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:C13D"  elabel="DELTA 13C (13C/12C)"   />
+      <element  key="SDN:P09:40:C13D"  label="DELTA 13C (13C/12C)"    />
       <related>
-         <element ekey="SDN:P06:40:UPPT"  elabel="Parts per thousand"   />
+         <element  key="SDN:P06:40:UPPT"  label="Parts per thousand"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:N15D"  elabel="DELTA 15N (15N/14N)"   />
+      <element  key="SDN:P09:40:N15D"  label="DELTA 15N (15N/14N)"    />
       <related>
-         <element ekey="SDN:P06:40:UPPT"  elabel="Parts per thousand"   />
+         <element  key="SDN:P06:40:UPPT"  label="Parts per thousand"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:HELD"  elabel="DELTA HELIUM 3"   />
+      <element  key="SDN:P09:40:HELD"  label="DELTA HELIUM 3"    />
       <related>
-         <element ekey="SDN:P06:40:UPCT"  elabel="Percent"   />
+         <element  key="SDN:P06:40:UPCT"  label="Percent"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:DENS"  elabel="DENSITY (Sigma-theta)"   />
+      <element  key="SDN:P09:40:DENS"  label="DENSITY (Sigma-theta)"    />
       <related>
-         <element ekey="SDN:P06:40:UKMC"  elabel="Kilograms per cubic metre"   />
+         <element  key="SDN:P06:40:UKMC"  label="Kilograms per cubic metre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:DPS1"  elabel="DEPTH BELOW BOTTOM-LOWER LIMIT"   />
+      <element  key="SDN:P09:40:DPS1"  label="DEPTH BELOW BOTTOM-LOWER LIMIT"    />
       <related>
-         <element ekey="SDN:P06:40:ULAA"  elabel="Metres"   />
+         <element  key="SDN:P06:40:ULAA"  label="Metres"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:DPSF"  elabel="DEPTH BELOW SEA FLOOR"   />
+      <element  key="SDN:P09:40:DPSF"  label="DEPTH BELOW SEA FLOOR"    />
       <related>
-         <element ekey="SDN:P06:40:ULAA"  elabel="Metres"   />
+         <element  key="SDN:P06:40:ULAA"  label="Metres"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:DEPH"  elabel="DEPTH BELOW SEA SURFACE"   />
+      <element  key="SDN:P09:40:DEPH"  label="DEPTH BELOW SEA SURFACE"    />
       <related>
-         <element ekey="SDN:P06:40:ULAA"  elabel="Metres"   />
+         <element  key="SDN:P06:40:ULAA"  label="Metres"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:DEWT"  elabel="DEW POINT TEMPERATURE"   />
+      <element  key="SDN:P09:40:DEWT"  label="DEW POINT TEMPERATURE"    />
       <related>
-         <element ekey="SDN:P06:40:UPAA"  elabel="Degrees Celsius"   />
+         <element  key="SDN:P06:40:UPAA"  label="Degrees Celsius"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:DXAP"  elabel="DIADINOXANTHINE"   />
+      <element  key="SDN:P09:40:DXAP"  label="DIADINOXANTHINE"    />
       <related>
-         <element ekey="SDN:P06:40:UMMC"  elabel="Milligrams per cubic metre"   />
+         <element  key="SDN:P06:40:UMMC"  label="Milligrams per cubic metre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:DIPF"  elabel="DIATOMS PPC FLUX"   />
+      <element  key="SDN:P09:40:DIPF"  label="DIATOMS PPC FLUX"    />
       <related>
-         <element ekey="SDN:P06:40:UGDX"  elabel="Milligrams per square metre per day"   />
+         <element  key="SDN:P06:40:UGDX"  label="Milligrams per square metre per day"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TXAP"  elabel="DIATOXANTHINE"   />
+      <element  key="SDN:P09:40:TXAP"  label="DIATOXANTHINE"    />
       <related>
-         <element ekey="SDN:P06:40:UMMC"  elabel="Milligrams per cubic metre"   />
+         <element  key="SDN:P06:40:UMMC"  label="Milligrams per cubic metre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:IC13"  elabel="DIC DELTA-13C"   />
+      <element  key="SDN:P09:40:IC13"  label="DIC DELTA-13C"    />
       <related>
-         <element ekey="SDN:P06:40:UPPT"  elabel="Parts per thousand"   />
+         <element  key="SDN:P06:40:UPPT"  label="Parts per thousand"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:DICP"  elabel="DIC IN SEDIMENT PORE WATER"   />
+      <element  key="SDN:P09:40:DICP"  label="DIC IN SEDIMENT PORE WATER"    />
       <related>
-         <element ekey="SDN:P06:40:UMGL"  elabel="Milligrams per litre"   />
+         <element  key="SDN:P06:40:UMGL"  label="Milligrams per litre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:DFPF"  elabel="DINOFLAGELLATES PPC FLUX"   />
+      <element  key="SDN:P09:40:DFPF"  label="DINOFLAGELLATES PPC FLUX"    />
       <related>
-         <element ekey="SDN:P06:40:UGDX"  elabel="Milligrams per square metre per day"   />
+         <element  key="SDN:P06:40:UGDX"  label="Milligrams per square metre per day"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:VPSP"  elabel="DIR. SPREADING AT WAVE PEAK"   />
+      <element  key="SDN:P09:40:VPSP"  label="DIR. SPREADING AT WAVE PEAK"    />
       <related>
-         <element ekey="SDN:P06:40:UAAA"  elabel="Degrees"   />
+         <element  key="SDN:P06:40:UAAA"  label="Degrees"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:HCDT"  elabel="DIRECTION REL. TRUE NORTH"   />
+      <element  key="SDN:P09:40:HCDT"  label="DIRECTION REL. TRUE NORTH"    />
       <related>
-         <element ekey="SDN:P06:40:UAAA"  elabel="Degrees"   />
+         <element  key="SDN:P06:40:UAAA"  label="Degrees"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TPAW"  elabel="DISS. TRIPHOSPHATE ADENOSINE"   />
+      <element  key="SDN:P09:40:TPAW"  label="DISS. TRIPHOSPHATE ADENOSINE"    />
       <related>
-         <element ekey="SDN:P06:40:UMMC"  elabel="Milligrams per cubic metre"   />
+         <element  key="SDN:P06:40:UMMC"  label="Milligrams per cubic metre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:ETHW"  elabel="DISSOLVED 234 TH ACT. ERROR"   />
+      <element  key="SDN:P09:40:ETHW"  label="DISSOLVED 234 TH ACT. ERROR"    />
       <related>
-         <element ekey="SDN:P06:40:UMBQ"  elabel="Millibequerels per litre"   />
+         <element  key="SDN:P06:40:UMBQ"  label="Millibequerels per litre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TH4W"  elabel="DISSOLVED 234TH"   />
+      <element  key="SDN:P09:40:TH4W"  label="DISSOLVED 234TH"    />
       <related>
-         <element ekey="SDN:P06:40:UMBQ"  elabel="Millibequerels per litre"   />
+         <element  key="SDN:P06:40:UMBQ"  label="Millibequerels per litre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:CL4W"  elabel="DISSOLVED C-TETRACHLORIDE"   />
+      <element  key="SDN:P09:40:CL4W"  label="DISSOLVED C-TETRACHLORIDE"    />
       <related>
-         <element ekey="SDN:P06:40:KGPM"  elabel="Picomoles per kilogram"   />
+         <element  key="SDN:P06:40:KGPM"  label="Picomoles per kilogram"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:CO2W"  elabel="DISSOLVED CARBON DIOXYD (CO2)"   />
+      <element  key="SDN:P09:40:CO2W"  label="DISSOLVED CARBON DIOXYD (CO2)"    />
       <related>
-         <element ekey="SDN:P06:40:UPOX"  elabel="Micromoles per litre"   />
+         <element  key="SDN:P06:40:UPOX"  label="Micromoles per litre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:CF1W"  elabel="DISSOLVED CFC11"   />
+      <element  key="SDN:P09:40:CF1W"  label="DISSOLVED CFC11"    />
       <related>
-         <element ekey="SDN:P06:40:KGPM"  elabel="Picomoles per kilogram"   />
+         <element  key="SDN:P06:40:KGPM"  label="Picomoles per kilogram"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:CE1W"  elabel="DISSOLVED CFC11 ERROR"   />
+      <element  key="SDN:P09:40:CE1W"  label="DISSOLVED CFC11 ERROR"    />
       <related>
-         <element ekey="SDN:P06:40:KGPM"  elabel="Picomoles per kilogram"   />
+         <element  key="SDN:P06:40:KGPM"  label="Picomoles per kilogram"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:CF3W"  elabel="DISSOLVED CFC113"   />
+      <element  key="SDN:P09:40:CF3W"  label="DISSOLVED CFC113"    />
       <related>
-         <element ekey="SDN:P06:40:KGPM"  elabel="Picomoles per kilogram"   />
+         <element  key="SDN:P06:40:KGPM"  label="Picomoles per kilogram"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:CE3W"  elabel="DISSOLVED CFC113 ERROR"   />
+      <element  key="SDN:P09:40:CE3W"  label="DISSOLVED CFC113 ERROR"    />
       <related>
-         <element ekey="SDN:P06:40:KGPM"  elabel="Picomoles per kilogram"   />
+         <element  key="SDN:P06:40:KGPM"  label="Picomoles per kilogram"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:CF2W"  elabel="DISSOLVED CFC12"   />
+      <element  key="SDN:P09:40:CF2W"  label="DISSOLVED CFC12"    />
       <related>
-         <element ekey="SDN:P06:40:KGPM"  elabel="Picomoles per kilogram"   />
+         <element  key="SDN:P06:40:KGPM"  label="Picomoles per kilogram"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:CE2W"  elabel="DISSOLVED CFC12 ERROR"   />
+      <element  key="SDN:P09:40:CE2W"  label="DISSOLVED CFC12 ERROR"    />
       <related>
-         <element ekey="SDN:P06:40:KGPM"  elabel="Picomoles per kilogram"   />
+         <element  key="SDN:P06:40:KGPM"  label="Picomoles per kilogram"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MCUW"  elabel="DISSOLVED COPPER (Cu)"   />
+      <element  key="SDN:P09:40:MCUW"  label="DISSOLVED COPPER (Cu)"    />
       <related>
-         <element ekey="SDN:P06:40:UPNM"  elabel="Nanomoles per litre"   />
+         <element  key="SDN:P06:40:UPNM"  label="Nanomoles per litre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:HELW"  elabel="DISSOLVED HELIUM"   />
+      <element  key="SDN:P09:40:HELW"  label="DISSOLVED HELIUM"    />
       <related>
-         <element ekey="SDN:P06:40:KGNM"  elabel="Nanomoles per kilogram"   />
+         <element  key="SDN:P06:40:KGNM"  label="Nanomoles per kilogram"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:HEEW"  elabel="DISSOLVED HELIUM ERROR"   />
+      <element  key="SDN:P09:40:HEEW"  label="DISSOLVED HELIUM ERROR"    />
       <related>
-         <element ekey="SDN:P06:40:KGNM"  elabel="Nanomoles per kilogram"   />
+         <element  key="SDN:P06:40:KGNM"  label="Nanomoles per kilogram"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TINW"  elabel="DISSOLVED INORGANIC NITROGEN"   />
+      <element  key="SDN:P09:40:TINW"  label="DISSOLVED INORGANIC NITROGEN"    />
       <related>
-         <element ekey="SDN:P06:40:UPOX"  elabel="Micromoles per litre"   />
+         <element  key="SDN:P06:40:UPOX"  label="Micromoles per litre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:NEOW"  elabel="DISSOLVED NEON"   />
+      <element  key="SDN:P09:40:NEOW"  label="DISSOLVED NEON"    />
       <related>
-         <element ekey="SDN:P06:40:KGNM"  elabel="Nanomoles per kilogram"   />
+         <element  key="SDN:P06:40:KGNM"  label="Nanomoles per kilogram"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:NEEW"  elabel="DISSOLVED NEON ERROR"   />
+      <element  key="SDN:P09:40:NEEW"  label="DISSOLVED NEON ERROR"    />
       <related>
-         <element ekey="SDN:P06:40:KGNM"  elabel="Nanomoles per kilogram"   />
+         <element  key="SDN:P06:40:KGNM"  label="Nanomoles per kilogram"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MNIW"  elabel="DISSOLVED NICKEL (Ni)"   />
+      <element  key="SDN:P09:40:MNIW"  label="DISSOLVED NICKEL (Ni)"    />
       <related>
-         <element ekey="SDN:P06:40:UPNM"  elabel="Nanomoles per litre"   />
+         <element  key="SDN:P06:40:UPNM"  label="Nanomoles per litre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:CORG"  elabel="DISSOLVED ORGANIC CARBON"   />
+      <element  key="SDN:P09:40:CORG"  label="DISSOLVED ORGANIC CARBON"    />
       <related>
-         <element ekey="SDN:P06:40:UPOX"  elabel="Micromoles per litre"   />
+         <element  key="SDN:P06:40:UPOX"  label="Micromoles per litre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:NODW"  elabel="DISSOLVED ORGANIC NITROGEN"   />
+      <element  key="SDN:P09:40:NODW"  label="DISSOLVED ORGANIC NITROGEN"    />
       <related>
-         <element ekey="SDN:P06:40:KGUM"  elabel="Micromoles per kilogram"   />
+         <element  key="SDN:P06:40:KGUM"  label="Micromoles per kilogram"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:NORG"  elabel="DISSOLVED ORGANIC NITROGEN"   />
+      <element  key="SDN:P09:40:NORG"  label="DISSOLVED ORGANIC NITROGEN"    />
       <related>
-         <element ekey="SDN:P06:40:UPOX"  elabel="Micromoles per litre"   />
+         <element  key="SDN:P06:40:UPOX"  label="Micromoles per litre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:PODW"  elabel="DISSOLVED ORGANIC PHOSPHORUS"   />
+      <element  key="SDN:P09:40:PODW"  label="DISSOLVED ORGANIC PHOSPHORUS"    />
       <related>
-         <element ekey="SDN:P06:40:KGUM"  elabel="Micromoles per kilogram"   />
+         <element  key="SDN:P06:40:KGUM"  label="Micromoles per kilogram"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:DOPW"  elabel="DISSOLVED ORGANIC PHOSPHORUS"   />
+      <element  key="SDN:P09:40:DOPW"  label="DISSOLVED ORGANIC PHOSPHORUS"    />
       <related>
-         <element ekey="SDN:P06:40:UPOX"  elabel="Micromoles per litre"   />
+         <element  key="SDN:P06:40:UPOX"  label="Micromoles per litre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:DOXY"  elabel="DISSOLVED OXYGEN"   />
+      <element  key="SDN:P09:40:DOXY"  label="DISSOLVED OXYGEN"    />
       <related>
-         <element ekey="SDN:P06:40:UPOX"  elabel="Micromoles per litre"   />
+         <element  key="SDN:P06:40:UPOX"  label="Micromoles per litre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:DOX2"  elabel="DISSOLVED OXYGEN"   />
+      <element  key="SDN:P09:40:DOX2"  label="DISSOLVED OXYGEN"    />
       <related>
-         <element ekey="SDN:P06:40:KGUM"  elabel="Micromoles per kilogram"   />
+         <element  key="SDN:P06:40:KGUM"  label="Micromoles per kilogram"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:DOX1"  elabel="DISSOLVED OXYGEN"   />
+      <element  key="SDN:P09:40:DOX1"  label="DISSOLVED OXYGEN"    />
       <related>
-         <element ekey="SDN:P06:40:UMLL"  elabel="Millilitres per litre"   />
+         <element  key="SDN:P06:40:UMLL"  label="Millilitres per litre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TRIW"  elabel="DISSOLVED TRITIUM"   />
+      <element  key="SDN:P09:40:TRIW"  label="DISSOLVED TRITIUM"    />
       <related>
-         <element ekey="SDN:P06:40:UUTU"  elabel="Tritium units (10**18H/Tr)"   />
+         <element  key="SDN:P06:40:UUTU"  label="Tritium units (10**18H/Tr)"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TREW"  elabel="DISSOLVED TRITIUM ERROR"   />
+      <element  key="SDN:P09:40:TREW"  label="DISSOLVED TRITIUM ERROR"    />
       <related>
-         <element ekey="SDN:P06:40:UUTU"  elabel="Tritium units (10**18H/Tr)"   />
+         <element  key="SDN:P06:40:UUTU"  label="Tritium units (10**18H/Tr)"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:CHAD"  elabel="DIVINYL CHLOROPHYLL-A"   />
+      <element  key="SDN:P09:40:CHAD"  label="DIVINYL CHLOROPHYLL-A"    />
       <related>
-         <element ekey="SDN:P06:40:UMMC"  elabel="Milligrams per cubic metre"   />
+         <element  key="SDN:P06:40:UMMC"  label="Milligrams per cubic metre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:CHBD"  elabel="DIVINYL-CHLOROPHYLL-B"   />
+      <element  key="SDN:P09:40:CHBD"  label="DIVINYL-CHLOROPHYLL-B"    />
       <related>
-         <element ekey="SDN:P06:40:UMMC"  elabel="Milligrams per cubic metre"   />
+         <element  key="SDN:P06:40:UMMC"  label="Milligrams per cubic metre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:DOCP"  elabel="DOC IN SEDIMENT PORE WATER"   />
+      <element  key="SDN:P09:40:DOCP"  label="DOC IN SEDIMENT PORE WATER"    />
       <related>
-         <element ekey="SDN:P06:40:UMGL"  elabel="Milligrams per litre"   />
+         <element  key="SDN:P06:40:UMGL"  label="Milligrams per litre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:DRYT"  elabel="DRY BULB TEMPERATURE"   />
+      <element  key="SDN:P09:40:DRYT"  label="DRY BULB TEMPERATURE"    />
       <related>
-         <element ekey="SDN:P06:40:UPAA"  elabel="Degrees Celsius"   />
+         <element  key="SDN:P06:40:UPAA"  label="Degrees Celsius"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:DRDD"  elabel="DURATION (DAYS)"   />
+      <element  key="SDN:P09:40:DRDD"  label="DURATION (DAYS)"    />
       <related>
-         <element ekey="SDN:P06:40:UTAA"  elabel="Days"   />
+         <element  key="SDN:P06:40:UTAA"  label="Days"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:CNDC"  elabel="ELECTRICAL CONDUCTIVITY"   />
+      <element  key="SDN:P09:40:CNDC"  label="ELECTRICAL CONDUCTIVITY"    />
       <related>
-         <element ekey="SDN:P06:40:UECA"  elabel="Siemens per metre"   />
+         <element  key="SDN:P06:40:UECA"  label="Siemens per metre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:ETDD"  elabel="ELLAPSED TIME"   />
+      <element  key="SDN:P09:40:ETDD"  label="ELLAPSED TIME"    />
       <related>
-         <element ekey="SDN:P06:40:UTAA"  elabel="Days"   />
+         <element  key="SDN:P06:40:UTAA"  label="Days"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:CHAE"  elabel="EPIMERE CHLOROPHYLL-A"   />
+      <element  key="SDN:P09:40:CHAE"  label="EPIMERE CHLOROPHYLL-A"    />
       <related>
-         <element ekey="SDN:P06:40:UMMC"  elabel="Milligrams per cubic metre"   />
+         <element  key="SDN:P06:40:UMMC"  label="Milligrams per cubic metre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MFEF"  elabel="FE FLUX IN SETTLING PARTICLES"   />
+      <element  key="SDN:P09:40:MFEF"  label="FE FLUX IN SETTLING PARTICLES"    />
       <related>
-         <element ekey="SDN:P06:40:UGDX"  elabel="Milligrams per square metre per day"   />
+         <element  key="SDN:P06:40:UGDX"  label="Milligrams per square metre per day"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:FLPF"  elabel="FLAGELLATES PPC FLUX"   />
+      <element  key="SDN:P09:40:FLPF"  label="FLAGELLATES PPC FLUX"    />
       <related>
-         <element ekey="SDN:P06:40:UGDX"  elabel="Milligrams per square metre per day"   />
+         <element  key="SDN:P06:40:UGDX"  label="Milligrams per square metre per day"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:FLU3"  elabel="FLUORESCENCE"   />
+      <element  key="SDN:P09:40:FLU3"  label="FLUORESCENCE"    />
       <related>
-         <element ekey="SDN:P06:40:UFFU"  elabel="Fluorescein Fluorescence Units"   />
+         <element  key="SDN:P06:40:UFFU"  label="Fluorescein Fluorescence Units"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:FLU2"  elabel="FLUORESCENCE"   />
+      <element  key="SDN:P09:40:FLU2"  label="FLUORESCENCE"    />
       <related>
-         <element ekey="SDN:P06:40:UMMC"  elabel="Milligrams per cubic metre"   />
+         <element  key="SDN:P06:40:UMMC"  label="Milligrams per cubic metre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:FLU1"  elabel="FLUORESCENCE"   />
+      <element  key="SDN:P09:40:FLU1"  label="FLUORESCENCE"    />
       <related>
-         <element ekey="SDN:P06:40:UVLT"  elabel="Volts"   />
+         <element  key="SDN:P06:40:UVLT"  label="Volts"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:FLUO"  elabel="FLUORESCENCE"   />
+      <element  key="SDN:P09:40:FLUO"  label="FLUORESCENCE"    />
       <related>
-         <element ekey="SDN:P06:40:UUUU"  elabel="Dimensionless"   />
+         <element  key="SDN:P06:40:UUUU"  label="Dimensionless"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:FUCP"  elabel="FUCOXANTHINE"   />
+      <element  key="SDN:P09:40:FUCP"  label="FUCOXANTHINE"    />
       <related>
-         <element ekey="SDN:P06:40:UMMC"  elabel="Milligrams per cubic metre"   />
+         <element  key="SDN:P06:40:UMMC"  label="Milligrams per cubic metre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MFEP"  elabel="Fe IN SUSPENDED MATTER"   />
+      <element  key="SDN:P09:40:MFEP"  label="Fe IN SUSPENDED MATTER"    />
       <related>
-         <element ekey="SDN:P06:40:UMMC"  elabel="Milligrams per cubic metre"   />
+         <element  key="SDN:P06:40:UMMC"  label="Milligrams per cubic metre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MFES"  elabel="Fe IN THE SEDIMENT"   />
+      <element  key="SDN:P09:40:MFES"  label="Fe IN THE SEDIMENT"    />
       <related>
-         <element ekey="SDN:P06:40:UPCT"  elabel="Percent"   />
+         <element  key="SDN:P06:40:UPCT"  label="Percent"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:GDIR"  elabel="GUST WIND DIRECTION"   />
+      <element  key="SDN:P09:40:GDIR"  label="GUST WIND DIRECTION"    />
       <related>
-         <element ekey="SDN:P06:40:UAAA"  elabel="Degrees"   />
+         <element  key="SDN:P06:40:UAAA"  label="Degrees"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:GSPD"  elabel="GUST WIND SPEED"   />
+      <element  key="SDN:P09:40:GSPD"  label="GUST WIND SPEED"    />
       <related>
-         <element ekey="SDN:P06:40:UVAA"  elabel="Metres per second"   />
+         <element  key="SDN:P06:40:UVAA"  label="Metres per second"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:ALTS"  elabel="HEIGHT ABOVE MEAN SEA LEVEL"   />
+      <element  key="SDN:P09:40:ALTS"  label="HEIGHT ABOVE MEAN SEA LEVEL"    />
       <related>
-         <element ekey="SDN:P06:40:ULAA"  elabel="Metres"   />
+         <element  key="SDN:P06:40:ULAA"  label="Metres"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:HEDW"  elabel="HELIUM DEV. OF ISOTOPIC RATIO"   />
+      <element  key="SDN:P09:40:HEDW"  label="HELIUM DEV. OF ISOTOPIC RATIO"    />
       <related>
-         <element ekey="SDN:P06:40:UPCT"  elabel="Percent"   />
+         <element  key="SDN:P06:40:UPCT"  label="Percent"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:HEDE"  elabel="HELIUM ISOTOPIC RATIO ERROR"   />
+      <element  key="SDN:P09:40:HEDE"  label="HELIUM ISOTOPIC RATIO ERROR"    />
       <related>
-         <element ekey="SDN:P06:40:UPCT"  elabel="Percent"   />
+         <element  key="SDN:P06:40:UPCT"  label="Percent"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:NFHW"  elabel="HETEROTROPHIC NANOFLAGELLATES"   />
+      <element  key="SDN:P09:40:NFHW"  label="HETEROTROPHIC NANOFLAGELLATES"    />
       <related>
-         <element ekey="SDN:P06:40:UCPL"  elabel="Number per litre"   />
+         <element  key="SDN:P06:40:UCPL"  label="Number per litre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:HCSP"  elabel="HORIZONTAL CURRENT SPEED"   />
+      <element  key="SDN:P09:40:HCSP"  label="HORIZONTAL CURRENT SPEED"    />
       <related>
-         <element ekey="SDN:P06:40:UVAA"  elabel="Metres per second"   />
+         <element  key="SDN:P06:40:UVAA"  label="Metres per second"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:WSPD"  elabel="HORIZONTAL WIND SPEED"   />
+      <element  key="SDN:P09:40:WSPD"  label="HORIZONTAL WIND SPEED"    />
       <related>
-         <element ekey="SDN:P06:40:UVAA"  elabel="Metres per second"   />
+         <element  key="SDN:P06:40:UVAA"  label="Metres per second"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:HSUL"  elabel="HYDROGEN SULPHIDE (H2S)"   />
+      <element  key="SDN:P09:40:HSUL"  label="HYDROGEN SULPHIDE (H2S)"    />
       <related>
-         <element ekey="SDN:P06:40:UPOX"  elabel="Micromoles per litre"   />
+         <element  key="SDN:P06:40:UPOX"  label="Micromoles per litre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MIIS"  elabel="I IN THE SEDIMENT"   />
+      <element  key="SDN:P09:40:MIIS"  label="I IN THE SEDIMENT"    />
       <related>
-         <element ekey="SDN:P06:40:UPPM"  elabel="Parts per million"   />
+         <element  key="SDN:P06:40:UPPM"  label="Parts per million"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:LGH5"  elabel="IMMERGED/SURF IRRADIANCE RATIO"   />
+      <element  key="SDN:P09:40:LGH5"  label="IMMERGED/SURF IRRADIANCE RATIO"    />
       <related>
-         <element ekey="SDN:P06:40:UPCT"  elabel="Percent"   />
+         <element  key="SDN:P06:40:UPCT"  label="Percent"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:RDIN"  elabel="INCIDENT RADIATION"   />
+      <element  key="SDN:P09:40:RDIN"  label="INCIDENT RADIATION"    />
       <related>
-         <element ekey="SDN:P06:40:UFAA"  elabel="Watts per square metre"   />
+         <element  key="SDN:P06:40:UFAA"  label="Watts per square metre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:ISMP"  elabel="INORGANIC SUSPENDED MATTER"   />
+      <element  key="SDN:P09:40:ISMP"  label="INORGANIC SUSPENDED MATTER"    />
       <related>
-         <element ekey="SDN:P06:40:UMGL"  elabel="Milligrams per litre"   />
+         <element  key="SDN:P06:40:UMGL"  label="Milligrams per litre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:IODI"  elabel="IODINE"   />
+      <element  key="SDN:P09:40:IODI"  label="IODINE"    />
       <related>
-         <element ekey="SDN:P06:40:UPOX"  elabel="Micromoles per litre"   />
+         <element  key="SDN:P06:40:UPOX"  label="Micromoles per litre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:OXIR"  elabel="ISOTOPIC RATIO O18/O16"   />
+      <element  key="SDN:P09:40:OXIR"  label="ISOTOPIC RATIO O18/O16"    />
       <related>
-         <element ekey="SDN:P06:40:UPPT"  elabel="Parts per thousand"   />
+         <element  key="SDN:P06:40:UPPT"  label="Parts per thousand"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MKKP"  elabel="K IN SUSPENDED MATTER"   />
+      <element  key="SDN:P09:40:MKKP"  label="K IN SUSPENDED MATTER"    />
       <related>
-         <element ekey="SDN:P06:40:UMMC"  elabel="Milligrams per cubic metre"   />
+         <element  key="SDN:P06:40:UMMC"  label="Milligrams per cubic metre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MKKS"  elabel="K IN THE SEDIMENT"   />
+      <element  key="SDN:P09:40:MKKS"  label="K IN THE SEDIMENT"    />
       <related>
-         <element ekey="SDN:P06:40:UPCT"  elabel="Percent"   />
+         <element  key="SDN:P06:40:UPCT"  label="Percent"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:LATX"  elabel="LATITUDE"   />
+      <element  key="SDN:P09:40:LATX"  label="LATITUDE"    />
       <related>
-         <element ekey="SDN:P06:40:UAAA"  elabel="Degrees"   />
+         <element  key="SDN:P06:40:UAAA"  label="Degrees"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:LTUW"  elabel="LEUCINE UPTAKE RATE"   />
+      <element  key="SDN:P09:40:LTUW"  label="LEUCINE UPTAKE RATE"    />
       <related>
-         <element ekey="SDN:P06:40:UGM3"  elabel="Micrograms per cubic metre per hour"   />
+         <element  key="SDN:P06:40:UGM3"  label="Micrograms per cubic metre per hour"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TUR2"  elabel="LIGHT ATTENUATION COEFFICIENT"   />
+      <element  key="SDN:P09:40:TUR2"  label="LIGHT ATTENUATION COEFFICIENT"    />
       <related>
-         <element ekey="SDN:P06:40:UPRM"  elabel="per metre"   />
+         <element  key="SDN:P06:40:UPRM"  label="per metre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:LCAW"  elabel="LIGHT CARBON ABSORPTION"   />
+      <element  key="SDN:P09:40:LCAW"  label="LIGHT CARBON ABSORPTION"    />
       <related>
-         <element ekey="SDN:P06:40:UMMC"  elabel="Milligrams per cubic metre"   />
+         <element  key="SDN:P06:40:UMMC"  label="Milligrams per cubic metre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:LGH3"  elabel="LIGHT IRRADIANCE CORRECTED PAR"   />
+      <element  key="SDN:P09:40:LGH3"  label="LIGHT IRRADIANCE CORRECTED PAR"    />
       <related>
-         <element ekey="SDN:P06:40:UMES"  elabel="MicroEinsteins per square metre per second"   />
+         <element  key="SDN:P06:40:UMES"  label="MicroEinsteins per square metre per second"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:LGHT"  elabel="LIGHT IRRADIANCE IMMERGED PAR"   />
+      <element  key="SDN:P09:40:LGHT"  label="LIGHT IRRADIANCE IMMERGED PAR"    />
       <related>
-         <element ekey="SDN:P06:40:UMES"  elabel="MicroEinsteins per square metre per second"   />
+         <element  key="SDN:P06:40:UMES"  label="MicroEinsteins per square metre per second"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:LGH4"  elabel="LIGHT IRRADIANCE SURFACE PAR"   />
+      <element  key="SDN:P09:40:LGH4"  label="LIGHT IRRADIANCE SURFACE PAR"    />
       <related>
-         <element ekey="SDN:P06:40:UMES"  elabel="MicroEinsteins per square metre per second"   />
+         <element  key="SDN:P06:40:UMES"  label="MicroEinsteins per square metre per second"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:LSCT"  elabel="LIGHT SCATTERING"   />
+      <element  key="SDN:P09:40:LSCT"  label="LIGHT SCATTERING"    />
       <related>
-         <element ekey="SDN:P06:40:UPCT"  elabel="Percent"   />
+         <element  key="SDN:P06:40:UPCT"  label="Percent"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TUR3"  elabel="LIGHT TRANSMISSION"   />
+      <element  key="SDN:P09:40:TUR3"  label="LIGHT TRANSMISSION"    />
       <related>
-         <element ekey="SDN:P06:40:UPCT"  elabel="Percent"   />
+         <element  key="SDN:P06:40:UPCT"  label="Percent"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:LIPI"  elabel="LIPIDS IN THE WATER COLUMN"   />
+      <element  key="SDN:P09:40:LIPI"  label="LIPIDS IN THE WATER COLUMN"    />
       <related>
-         <element ekey="SDN:P06:40:UMMC"  elabel="Milligrams per cubic metre"   />
+         <element  key="SDN:P06:40:UMMC"  label="Milligrams per cubic metre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:LSIC"  elabel="LITHOGENIC CONTENT"   />
+      <element  key="SDN:P09:40:LSIC"  label="LITHOGENIC CONTENT"    />
       <related>
-         <element ekey="SDN:P06:40:UPCT"  elabel="Percent"   />
+         <element  key="SDN:P06:40:UPCT"  label="Percent"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:LTHF"  elabel="LITHOGENIC FRACTION FLUX"   />
+      <element  key="SDN:P09:40:LTHF"  label="LITHOGENIC FRACTION FLUX"    />
       <related>
-         <element ekey="SDN:P06:40:UGDX"  elabel="Milligrams per square metre per day"   />
+         <element  key="SDN:P06:40:UGDX"  label="Milligrams per square metre per day"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:LINC"  elabel="LONG-WAVE INCOMING RADIATION"   />
+      <element  key="SDN:P09:40:LINC"  label="LONG-WAVE INCOMING RADIATION"    />
       <related>
-         <element ekey="SDN:P06:40:UFAA"  elabel="Watts per square metre"   />
+         <element  key="SDN:P06:40:UFAA"  label="Watts per square metre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:LONX"  elabel="LONGITUDE"   />
+      <element  key="SDN:P09:40:LONX"  label="LONGITUDE"    />
       <related>
-         <element ekey="SDN:P06:40:UAAA"  elabel="Degrees"   />
+         <element  key="SDN:P06:40:UAAA"  label="Degrees"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MLAS"  elabel="La IN THE SEDIMENT"   />
+      <element  key="SDN:P09:40:MLAS"  label="La IN THE SEDIMENT"    />
       <related>
-         <element ekey="SDN:P06:40:UPPM"  elabel="Parts per million"   />
+         <element  key="SDN:P06:40:UPPM"  label="Parts per million"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:VZMX"  elabel="MAXI ZERO CROSSING WAVE HEIGHT"   />
+      <element  key="SDN:P09:40:VZMX"  label="MAXI ZERO CROSSING WAVE HEIGHT"    />
       <related>
-         <element ekey="SDN:P06:40:ULAA"  elabel="Metres"   />
+         <element  key="SDN:P06:40:ULAA"  label="Metres"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:VCMX"  elabel="MAXIMUM CREST TO TROUGH WAVE HEIGHT"   />
+      <element  key="SDN:P09:40:VCMX"  label="MAXIMUM CREST TO TROUGH WAVE HEIGHT"    />
       <related>
-         <element ekey="SDN:P06:40:ULAA"  elabel="Metres"   />
+         <element  key="SDN:P06:40:ULAA"  label="Metres"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:VMXL"  elabel="MAXIMUM WAVE LEVEL"   />
+      <element  key="SDN:P09:40:VMXL"  label="MAXIMUM WAVE LEVEL"    />
       <related>
-         <element ekey="SDN:P06:40:ULAA"  elabel="Metres"   />
+         <element  key="SDN:P06:40:ULAA"  label="Metres"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MSMP"  elabel="MEAN SPHERIC DIAM. MEDIAN"   />
+      <element  key="SDN:P09:40:MSMP"  label="MEAN SPHERIC DIAM. MEDIAN"    />
       <related>
-         <element ekey="SDN:P06:40:UXMM"  elabel="Millimetres"   />
+         <element  key="SDN:P06:40:UXMM"  label="Millimetres"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MSDP"  elabel="MEAN SPHERIC DIAM. OF PARTICLE"   />
+      <element  key="SDN:P09:40:MSDP"  label="MEAN SPHERIC DIAM. OF PARTICLE"    />
       <related>
-         <element ekey="SDN:P06:40:UXMM"  elabel="Millimetres"   />
+         <element  key="SDN:P06:40:UXMM"  label="Millimetres"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MSZW"  elabel="MESOZOOPLANCTON DRY WEIGHT"   />
+      <element  key="SDN:P09:40:MSZW"  label="MESOZOOPLANCTON DRY WEIGHT"    />
       <related>
-         <element ekey="SDN:P06:40:UMMC"  elabel="Milligrams per cubic metre"   />
+         <element  key="SDN:P06:40:UMMC"  label="Milligrams per cubic metre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MSBO"  elabel="MESOZOOPLANKTON ASH-FREE DRY W"   />
+      <element  key="SDN:P09:40:MSBO"  label="MESOZOOPLANKTON ASH-FREE DRY W"    />
       <related>
-         <element ekey="SDN:P06:40:UMMC"  elabel="Milligrams per cubic metre"   />
+         <element  key="SDN:P06:40:UMMC"  label="Milligrams per cubic metre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MMNF"  elabel="MN FLUX IN SETTLING PARTICLES"   />
+      <element  key="SDN:P09:40:MMNF"  label="MN FLUX IN SETTLING PARTICLES"    />
       <related>
-         <element ekey="SDN:P06:40:UUDX"  elabel="Micrograms per square metre per day"   />
+         <element  key="SDN:P06:40:UUDX"  label="Micrograms per square metre per day"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MNTH"  elabel="MONTH"   />
+      <element  key="SDN:P09:40:MNTH"  label="MONTH"    />
       <related>
-         <element ekey="SDN:P06:40:UUUU"  elabel="Dimensionless"   />
+         <element  key="SDN:P06:40:UUUU"  label="Dimensionless"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MMGP"  elabel="Mg IN SUSPENDED MATTER"   />
+      <element  key="SDN:P09:40:MMGP"  label="Mg IN SUSPENDED MATTER"    />
       <related>
-         <element ekey="SDN:P06:40:UMMC"  elabel="Milligrams per cubic metre"   />
+         <element  key="SDN:P06:40:UMMC"  label="Milligrams per cubic metre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MMGS"  elabel="Mg IN THE SEDIMENT"   />
+      <element  key="SDN:P09:40:MMGS"  label="Mg IN THE SEDIMENT"    />
       <related>
-         <element ekey="SDN:P06:40:UPCT"  elabel="Percent"   />
+         <element  key="SDN:P06:40:UPCT"  label="Percent"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MMNP"  elabel="Mn IN SUSPENDED MATTER"   />
+      <element  key="SDN:P09:40:MMNP"  label="Mn IN SUSPENDED MATTER"    />
       <related>
-         <element ekey="SDN:P06:40:UMMC"  elabel="Milligrams per cubic metre"   />
+         <element  key="SDN:P06:40:UMMC"  label="Milligrams per cubic metre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MMNS"  elabel="Mn IN THE SEDIMENT"   />
+      <element  key="SDN:P09:40:MMNS"  label="Mn IN THE SEDIMENT"    />
       <related>
-         <element ekey="SDN:P06:40:UPCT"  elabel="Percent"   />
+         <element  key="SDN:P06:40:UPCT"  label="Percent"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MMOS"  elabel="Mo IN THE SEDIMENT"   />
+      <element  key="SDN:P09:40:MMOS"  label="Mo IN THE SEDIMENT"    />
       <related>
-         <element ekey="SDN:P06:40:UPPM"  elabel="Parts per million"   />
+         <element  key="SDN:P06:40:UPPM"  label="Parts per million"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:HBAW"  elabel="NB OF HETEROTROPHIC BACTERIA"   />
+      <element  key="SDN:P09:40:HBAW"  label="NB OF HETEROTROPHIC BACTERIA"    />
       <related>
-         <element ekey="SDN:P06:40:UCML"  elabel="Number per millilitre"   />
+         <element  key="SDN:P06:40:UCML"  label="Number per millilitre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:NTRA"  elabel="NITRATE (NO3-N) CONTENT"   />
+      <element  key="SDN:P09:40:NTRA"  label="NITRATE (NO3-N) CONTENT"    />
       <related>
-         <element ekey="SDN:P06:40:UPOX"  elabel="Micromoles per litre"   />
+         <element  key="SDN:P06:40:UPOX"  label="Micromoles per litre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:NTAW"  elabel="NITRATE (NO3-N) CONTENT"   />
+      <element  key="SDN:P09:40:NTAW"  label="NITRATE (NO3-N) CONTENT"    />
       <related>
-         <element ekey="SDN:P06:40:KGUM"  elabel="Micromoles per kilogram"   />
+         <element  key="SDN:P06:40:KGUM"  label="Micromoles per kilogram"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:NTZW"  elabel="NITRATE + NITRITE CONTENT"   />
+      <element  key="SDN:P09:40:NTZW"  label="NITRATE + NITRITE CONTENT"    />
       <related>
-         <element ekey="SDN:P06:40:KGUM"  elabel="Micromoles per kilogram"   />
+         <element  key="SDN:P06:40:KGUM"  label="Micromoles per kilogram"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:NTRZ"  elabel="NITRATE + NITRITE CONTENT"   />
+      <element  key="SDN:P09:40:NTRZ"  label="NITRATE + NITRITE CONTENT"    />
       <related>
-         <element ekey="SDN:P06:40:UPOX"  elabel="Micromoles per litre"   />
+         <element  key="SDN:P06:40:UPOX"  label="Micromoles per litre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:NTAP"  elabel="NITRATE IN SEDIMENT PORE WATER"   />
+      <element  key="SDN:P09:40:NTAP"  label="NITRATE IN SEDIMENT PORE WATER"    />
       <related>
-         <element ekey="SDN:P06:40:UPOX"  elabel="Micromoles per litre"   />
+         <element  key="SDN:P06:40:UPOX"  label="Micromoles per litre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:NOUW"  elabel="NITRATE UPTAKE"   />
+      <element  key="SDN:P09:40:NOUW"  label="NITRATE UPTAKE"    />
       <related>
-         <element ekey="SDN:P06:40:UNMD"  elabel="Nanomoles per litre per day"   />
+         <element  key="SDN:P06:40:UNMD"  label="Nanomoles per litre per day"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:NORW"  elabel="NITRIFICATION"   />
+      <element  key="SDN:P09:40:NORW"  label="NITRIFICATION"    />
       <related>
-         <element ekey="SDN:P06:40:UNMD"  elabel="Nanomoles per litre per day"   />
+         <element  key="SDN:P06:40:UNMD"  label="Nanomoles per litre per day"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:NTIW"  elabel="NITRITE (NO2-N) CONTENT"   />
+      <element  key="SDN:P09:40:NTIW"  label="NITRITE (NO2-N) CONTENT"    />
       <related>
-         <element ekey="SDN:P06:40:KGUM"  elabel="Micromoles per kilogram"   />
+         <element  key="SDN:P06:40:KGUM"  label="Micromoles per kilogram"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:NTRI"  elabel="NITRITE (NO2-N) CONTENT"   />
+      <element  key="SDN:P09:40:NTRI"  label="NITRITE (NO2-N) CONTENT"    />
       <related>
-         <element ekey="SDN:P06:40:UPOX"  elabel="Micromoles per litre"   />
+         <element  key="SDN:P06:40:UPOX"  label="Micromoles per litre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:NTIP"  elabel="NITRITE IN SEDIMENT PORE WATER"   />
+      <element  key="SDN:P09:40:NTIP"  label="NITRITE IN SEDIMENT PORE WATER"    />
       <related>
-         <element ekey="SDN:P06:40:UPOX"  elabel="Micromoles per litre"   />
+         <element  key="SDN:P06:40:UPOX"  label="Micromoles per litre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:NIUW"  elabel="NITROGEN UPTAKE (FIXATION)"   />
+      <element  key="SDN:P09:40:NIUW"  label="NITROGEN UPTAKE (FIXATION)"    />
       <related>
-         <element ekey="SDN:P06:40:UNMD"  elabel="Nanomoles per litre per day"   />
+         <element  key="SDN:P06:40:UNMD"  label="Nanomoles per litre per day"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:BCCS"  elabel="NUMBER OF BACTERIA IN SEDIMENT"   />
+      <element  key="SDN:P09:40:BCCS"  label="NUMBER OF BACTERIA IN SEDIMENT"    />
       <related>
-         <element ekey="SDN:P06:40:UCNL"  elabel="Number per nanolitre"   />
+         <element  key="SDN:P06:40:UCNL"  label="Number per nanolitre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:COPP"  elabel="NUMBER OF COPEPODS"   />
+      <element  key="SDN:P09:40:COPP"  label="NUMBER OF COPEPODS"    />
       <related>
-         <element ekey="SDN:P06:40:UPMM"  elabel="Number per cubic metre"   />
+         <element  key="SDN:P06:40:UPMM"  label="Number per cubic metre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:NUMP"  elabel="NUMBER OF PARTICLES 3-80UM"   />
+      <element  key="SDN:P09:40:NUMP"  label="NUMBER OF PARTICLES 3-80UM"    />
       <related>
-         <element ekey="SDN:P06:40:UPMM"  elabel="Number per cubic metre"   />
+         <element  key="SDN:P06:40:UPMM"  label="Number per cubic metre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:NUMN"  elabel="NUMBER OF PARTICLES &gt;0.7UM"   />
+      <element  key="SDN:P09:40:NUMN"  label="NUMBER OF PARTICLES &gt;0.7UM"    />
       <related>
-         <element ekey="SDN:P06:40:UPMM"  elabel="Number per cubic metre"   />
+         <element  key="SDN:P06:40:UPMM"  label="Number per cubic metre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:NUNM"  elabel="NUMBER OF PARTICLES &gt;=480UM"   />
+      <element  key="SDN:P09:40:NUNM"  label="NUMBER OF PARTICLES &gt;=480UM"    />
       <related>
-         <element ekey="SDN:P06:40:UPMM"  elabel="Number per cubic metre"   />
+         <element  key="SDN:P06:40:UPMM"  label="Number per cubic metre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:BCCW"  elabel="NUMBER OF SW BACTERIA"   />
+      <element  key="SDN:P09:40:BCCW"  label="NUMBER OF SW BACTERIA"    />
       <related>
-         <element ekey="SDN:P06:40:UCUL"  elabel="Number per microlitre"   />
+         <element  key="SDN:P06:40:UCUL"  label="Number per microlitre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:CICW"  elabel="NUMBER OF SW CILIATES"   />
+      <element  key="SDN:P09:40:CICW"  label="NUMBER OF SW CILIATES"    />
       <related>
-         <element ekey="SDN:P06:40:UCPL"  elabel="Number per litre"   />
+         <element  key="SDN:P06:40:UCPL"  label="Number per litre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:COCW"  elabel="NUMBER OF SW COCCOLITHOPHORIDS"   />
+      <element  key="SDN:P09:40:COCW"  label="NUMBER OF SW COCCOLITHOPHORIDS"    />
       <related>
-         <element ekey="SDN:P06:40:UCPL"  elabel="Number per litre"   />
+         <element  key="SDN:P06:40:UCPL"  label="Number per litre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:DTCW"  elabel="NUMBER OF SW DIATOMS"   />
+      <element  key="SDN:P09:40:DTCW"  label="NUMBER OF SW DIATOMS"    />
       <related>
-         <element ekey="SDN:P06:40:UCPL"  elabel="Number per litre"   />
+         <element  key="SDN:P06:40:UCPL"  label="Number per litre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:DFCW"  elabel="NUMBER OF SW DINOFLAGELLATES"   />
+      <element  key="SDN:P09:40:DFCW"  label="NUMBER OF SW DINOFLAGELLATES"    />
       <related>
-         <element ekey="SDN:P06:40:UCPL"  elabel="Number per litre"   />
+         <element  key="SDN:P06:40:UCPL"  label="Number per litre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:DINW"  elabel="NUMBER OF SW DYNOPHYSIS"   />
+      <element  key="SDN:P09:40:DINW"  label="NUMBER OF SW DYNOPHYSIS"    />
       <related>
-         <element ekey="SDN:P06:40:UCPL"  elabel="Number per litre"   />
+         <element  key="SDN:P06:40:UCPL"  label="Number per litre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:GYRW"  elabel="NUMBER OF SW GYRODINIUM"   />
+      <element  key="SDN:P09:40:GYRW"  label="NUMBER OF SW GYRODINIUM"    />
       <related>
-         <element ekey="SDN:P06:40:UCPL"  elabel="Number per litre"   />
+         <element  key="SDN:P06:40:UCPL"  label="Number per litre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:NFCW"  elabel="NUMBER OF SW NANOFLAGELLATES"   />
+      <element  key="SDN:P09:40:NFCW"  label="NUMBER OF SW NANOFLAGELLATES"    />
       <related>
-         <element ekey="SDN:P06:40:UCPL"  elabel="Number per litre"   />
+         <element  key="SDN:P06:40:UCPL"  label="Number per litre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:PCEW"  elabel="NUMBER OF SW PICOEUCARYOTES"   />
+      <element  key="SDN:P09:40:PCEW"  label="NUMBER OF SW PICOEUCARYOTES"    />
       <related>
-         <element ekey="SDN:P06:40:UCML"  elabel="Number per millilitre"   />
+         <element  key="SDN:P06:40:UCML"  label="Number per millilitre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:PRCW"  elabel="NUMBER OF SW PROCHLOROCOCCUS"   />
+      <element  key="SDN:P09:40:PRCW"  label="NUMBER OF SW PROCHLOROCOCCUS"    />
       <related>
-         <element ekey="SDN:P06:40:UCML"  elabel="Number per millilitre"   />
+         <element  key="SDN:P06:40:UCML"  label="Number per millilitre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:SNCW"  elabel="NUMBER OF SW SYNECHOCOCCUS"   />
+      <element  key="SDN:P09:40:SNCW"  label="NUMBER OF SW SYNECHOCOCCUS"    />
       <related>
-         <element ekey="SDN:P06:40:UCML"  elabel="Number per millilitre"   />
+         <element  key="SDN:P06:40:UCML"  label="Number per millilitre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MNAS"  elabel="Na IN THE SEDIMENT"   />
+      <element  key="SDN:P09:40:MNAS"  label="Na IN THE SEDIMENT"    />
       <related>
-         <element ekey="SDN:P06:40:UPCT"  elabel="Percent"   />
+         <element  key="SDN:P06:40:UPCT"  label="Percent"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MNBS"  elabel="Nb IN THE SEDIMENT"   />
+      <element  key="SDN:P09:40:MNBS"  label="Nb IN THE SEDIMENT"    />
       <related>
-         <element ekey="SDN:P06:40:UPPM"  elabel="Parts per million"   />
+         <element  key="SDN:P06:40:UPPM"  label="Parts per million"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MNDS"  elabel="Nd IN THE SEDIMENT"   />
+      <element  key="SDN:P09:40:MNDS"  label="Nd IN THE SEDIMENT"    />
       <related>
-         <element ekey="SDN:P06:40:UPPM"  elabel="Parts per million"   />
+         <element  key="SDN:P06:40:UPPM"  label="Parts per million"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MNIS"  elabel="Ni IN THE SEDIMENT"   />
+      <element  key="SDN:P09:40:MNIS"  label="Ni IN THE SEDIMENT"    />
       <related>
-         <element ekey="SDN:P06:40:UPPM"  elabel="Parts per million"   />
+         <element  key="SDN:P06:40:UPPM"  label="Parts per million"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:SLEV"  elabel="OBSERVED SEA LEVEL"   />
+      <element  key="SDN:P09:40:SLEV"  label="OBSERVED SEA LEVEL"    />
       <related>
-         <element ekey="SDN:P06:40:ULAA"  elabel="Metres"   />
+         <element  key="SDN:P06:40:ULAA"  label="Metres"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:OPAP"  elabel="OPAL CONTENT"   />
+      <element  key="SDN:P09:40:OPAP"  label="OPAL CONTENT"    />
       <related>
-         <element ekey="SDN:P06:40:UPCT"  elabel="Percent"   />
+         <element  key="SDN:P06:40:UPCT"  label="Percent"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TOMP"  elabel="ORGANIC MATTER CONTENT"   />
+      <element  key="SDN:P09:40:TOMP"  label="ORGANIC MATTER CONTENT"    />
       <related>
-         <element ekey="SDN:P06:40:UPCT"  elabel="Percent"   />
+         <element  key="SDN:P06:40:UPCT"  label="Percent"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:OSMP"  elabel="ORGANIC SUSPENDED MATTER"   />
+      <element  key="SDN:P09:40:OSMP"  label="ORGANIC SUSPENDED MATTER"    />
       <related>
-         <element ekey="SDN:P06:40:UMGL"  elabel="Milligrams per litre"   />
+         <element  key="SDN:P06:40:UMGL"  label="Milligrams per litre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:OSAT"  elabel="OXYGEN SATURATION"   />
+      <element  key="SDN:P09:40:OSAT"  label="OXYGEN SATURATION"    />
       <related>
-         <element ekey="SDN:P06:40:UPCT"  elabel="Percent"   />
+         <element  key="SDN:P06:40:UPCT"  label="Percent"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MPPP"  elabel="P IN SUSPENDED MATTER"   />
+      <element  key="SDN:P09:40:MPPP"  label="P IN SUSPENDED MATTER"    />
       <related>
-         <element ekey="SDN:P06:40:UMMC"  elabel="Milligrams per cubic metre"   />
+         <element  key="SDN:P06:40:UMMC"  label="Milligrams per cubic metre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MPPS"  elabel="P IN THE SEDIMENT"   />
+      <element  key="SDN:P09:40:MPPS"  label="P IN THE SEDIMENT"    />
       <related>
-         <element ekey="SDN:P06:40:UPCT"  elabel="Percent"   />
+         <element  key="SDN:P06:40:UPCT"  label="Percent"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:LGH2"  elabel="PAR ATTENUATION COEFFICIENT"   />
+      <element  key="SDN:P09:40:LGH2"  label="PAR ATTENUATION COEFFICIENT"    />
       <related>
-         <element ekey="SDN:P06:40:UPRM"  elabel="per metre"   />
+         <element  key="SDN:P06:40:UPRM"  label="per metre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:SIOF"  elabel="PART. BIOGENIC Si FLUX"   />
+      <element  key="SDN:P09:40:SIOF"  label="PART. BIOGENIC Si FLUX"    />
       <related>
-         <element ekey="SDN:P06:40:UGDX"  elabel="Milligrams per square metre per day"   />
+         <element  key="SDN:P06:40:UGDX"  label="Milligrams per square metre per day"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:CO3F"  elabel="PART. CaCO3 FLUX"   />
+      <element  key="SDN:P09:40:CO3F"  label="PART. CaCO3 FLUX"    />
       <related>
-         <element ekey="SDN:P06:40:UGDX"  elabel="Milligrams per square metre per day"   />
+         <element  key="SDN:P06:40:UGDX"  label="Milligrams per square metre per day"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:POCF"  elabel="PART. ORGANIC CARBON FLUX"   />
+      <element  key="SDN:P09:40:POCF"  label="PART. ORGANIC CARBON FLUX"    />
       <related>
-         <element ekey="SDN:P06:40:UGDX"  elabel="Milligrams per square metre per day"   />
+         <element  key="SDN:P06:40:UGDX"  label="Milligrams per square metre per day"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:OMMF"  elabel="PART. ORGANIC MATTER FLUX"   />
+      <element  key="SDN:P09:40:OMMF"  label="PART. ORGANIC MATTER FLUX"    />
       <related>
-         <element ekey="SDN:P06:40:UGDX"  elabel="Milligrams per square metre per day"   />
+         <element  key="SDN:P06:40:UGDX"  label="Milligrams per square metre per day"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:PP1P"  elabel="PART. ORGANIC PHOSPHORUS (P)"   />
+      <element  key="SDN:P09:40:PP1P"  label="PART. ORGANIC PHOSPHORUS (P)"    />
       <related>
-         <element ekey="SDN:P06:40:UPOX"  elabel="Micromoles per litre"   />
+         <element  key="SDN:P06:40:UPOX"  label="Micromoles per litre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:CHTF"  elabel="PART. TOTAL CARBOHYDRATES FLUX"   />
+      <element  key="SDN:P09:40:CHTF"  label="PART. TOTAL CARBOHYDRATES FLUX"    />
       <related>
-         <element ekey="SDN:P06:40:UGDX"  elabel="Milligrams per square metre per day"   />
+         <element  key="SDN:P06:40:UGDX"  label="Milligrams per square metre per day"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TCCF"  elabel="PART. TOTAL CARBON FLUX"   />
+      <element  key="SDN:P09:40:TCCF"  label="PART. TOTAL CARBON FLUX"    />
       <related>
-         <element ekey="SDN:P06:40:UGDX"  elabel="Milligrams per square metre per day"   />
+         <element  key="SDN:P06:40:UGDX"  label="Milligrams per square metre per day"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TNNF"  elabel="PART. TOTAL NITROGEN FLUX"   />
+      <element  key="SDN:P09:40:TNNF"  label="PART. TOTAL NITROGEN FLUX"    />
       <related>
-         <element ekey="SDN:P06:40:UGDX"  elabel="Milligrams per square metre per day"   />
+         <element  key="SDN:P06:40:UGDX"  label="Milligrams per square metre per day"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:ETHP"  elabel="PARTICULATE 234 TH ACT. ERROR"   />
+      <element  key="SDN:P09:40:ETHP"  label="PARTICULATE 234 TH ACT. ERROR"    />
       <related>
-         <element ekey="SDN:P06:40:UMBQ"  elabel="Millibequerels per litre"   />
+         <element  key="SDN:P06:40:UMBQ"  label="Millibequerels per litre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TH4P"  elabel="PARTICULATE 234TH ACTIVTY"   />
+      <element  key="SDN:P09:40:TH4P"  label="PARTICULATE 234TH ACTIVTY"    />
       <related>
-         <element ekey="SDN:P06:40:UMBQ"  elabel="Millibequerels per litre"   />
+         <element  key="SDN:P06:40:UMBQ"  label="Millibequerels per litre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:PC1P"  elabel="PARTICULATE ORGANIC CARBON/POC"   />
+      <element  key="SDN:P09:40:PC1P"  label="PARTICULATE ORGANIC CARBON/POC"    />
       <related>
-         <element ekey="SDN:P06:40:UPOX"  elabel="Micromoles per litre"   />
+         <element  key="SDN:P06:40:UPOX"  label="Micromoles per litre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:POCP"  elabel="PARTICULATE ORGANIC CARBON/POC"   />
+      <element  key="SDN:P09:40:POCP"  label="PARTICULATE ORGANIC CARBON/POC"    />
       <related>
-         <element ekey="SDN:P06:40:UMMC"  elabel="Milligrams per cubic metre"   />
+         <element  key="SDN:P06:40:UMMC"  label="Milligrams per cubic metre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:PONP"  elabel="PARTICULATE ORGANIC NITROGEN"   />
+      <element  key="SDN:P09:40:PONP"  label="PARTICULATE ORGANIC NITROGEN"    />
       <related>
-         <element ekey="SDN:P06:40:UMMC"  elabel="Milligrams per cubic metre"   />
+         <element  key="SDN:P06:40:UMMC"  label="Milligrams per cubic metre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:PN1P"  elabel="PARTICULATE ORGANIC NITROGEN"   />
+      <element  key="SDN:P09:40:PN1P"  label="PARTICULATE ORGANIC NITROGEN"    />
       <related>
-         <element ekey="SDN:P06:40:UPOX"  elabel="Micromoles per litre"   />
+         <element  key="SDN:P06:40:UPOX"  label="Micromoles per litre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:SLCP"  elabel="PARTICULATE ORGANIC SILICA(SI)"   />
+      <element  key="SDN:P09:40:SLCP"  label="PARTICULATE ORGANIC SILICA(SI)"    />
       <related>
-         <element ekey="SDN:P06:40:UPOX"  elabel="Micromoles per litre"   />
+         <element  key="SDN:P06:40:UPOX"  label="Micromoles per litre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MPBF"  elabel="PB FLUX IN SETTLING PARTICLES"   />
+      <element  key="SDN:P09:40:MPBF"  label="PB FLUX IN SETTLING PARTICLES"    />
       <related>
-         <element ekey="SDN:P06:40:UUDX"  elabel="Micrograms per square metre per day"   />
+         <element  key="SDN:P06:40:UUDX"  label="Micrograms per square metre per day"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:PERP"  elabel="PERIDININE"   />
+      <element  key="SDN:P09:40:PERP"  label="PERIDININE"    />
       <related>
-         <element ekey="SDN:P06:40:UMMC"  elabel="Milligrams per cubic metre"   />
+         <element  key="SDN:P06:40:UMMC"  label="Milligrams per cubic metre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:PHPH"  elabel="PH"   />
+      <element  key="SDN:P09:40:PHPH"  label="PH"    />
       <related>
-         <element ekey="SDN:P06:40:UUPH"  elabel="pH units"   />
+         <element  key="SDN:P06:40:UUPH"  label="pH units"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:PHTF"  elabel="PHAEOPIGMENTS VERTICAL FLUX"   />
+      <element  key="SDN:P09:40:PHTF"  label="PHAEOPIGMENTS VERTICAL FLUX"    />
       <related>
-         <element ekey="SDN:P06:40:UGDX"  elabel="Milligrams per square metre per day"   />
+         <element  key="SDN:P06:40:UGDX"  label="Milligrams per square metre per day"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:PHEA"  elabel="PHEOPHYTIN-A"   />
+      <element  key="SDN:P09:40:PHEA"  label="PHEOPHYTIN-A"    />
       <related>
-         <element ekey="SDN:P06:40:UMMC"  elabel="Milligrams per cubic metre"   />
+         <element  key="SDN:P06:40:UMMC"  label="Milligrams per cubic metre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:PHEB"  elabel="PHEOPHYTIN-B"   />
+      <element  key="SDN:P09:40:PHEB"  label="PHEOPHYTIN-B"    />
       <related>
-         <element ekey="SDN:P06:40:UMMC"  elabel="Milligrams per cubic metre"   />
+         <element  key="SDN:P06:40:UMMC"  label="Milligrams per cubic metre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:PHEC"  elabel="PHEOPHYTIN-C"   />
+      <element  key="SDN:P09:40:PHEC"  label="PHEOPHYTIN-C"    />
       <related>
-         <element ekey="SDN:P06:40:UMMC"  elabel="Milligrams per cubic metre"   />
+         <element  key="SDN:P06:40:UMMC"  label="Milligrams per cubic metre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:PHE4"  elabel="PHEOPHYTINE / 10 MICRON FILTER"   />
+      <element  key="SDN:P09:40:PHE4"  label="PHEOPHYTINE / 10 MICRON FILTER"    />
       <related>
-         <element ekey="SDN:P06:40:UMMC"  elabel="Milligrams per cubic metre"   />
+         <element  key="SDN:P06:40:UMMC"  label="Milligrams per cubic metre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:PHE2"  elabel="PHEOPHYTINE / 2 MICRON FILTER"   />
+      <element  key="SDN:P09:40:PHE2"  label="PHEOPHYTINE / 2 MICRON FILTER"    />
       <related>
-         <element ekey="SDN:P06:40:UMMC"  elabel="Milligrams per cubic metre"   />
+         <element  key="SDN:P06:40:UMMC"  label="Milligrams per cubic metre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:PHOS"  elabel="PHOSPHATE (PO4-P) CONTENT"   />
+      <element  key="SDN:P09:40:PHOS"  label="PHOSPHATE (PO4-P) CONTENT"    />
       <related>
-         <element ekey="SDN:P06:40:UPOX"  elabel="Micromoles per litre"   />
+         <element  key="SDN:P06:40:UPOX"  label="Micromoles per litre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:PHOW"  elabel="PHOSPHATE (PO4-P) CONTENT"   />
+      <element  key="SDN:P09:40:PHOW"  label="PHOSPHATE (PO4-P) CONTENT"    />
       <related>
-         <element ekey="SDN:P06:40:KGUM"  elabel="Micromoles per kilogram"   />
+         <element  key="SDN:P06:40:KGUM"  label="Micromoles per kilogram"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:PHOP"  elabel="PHOSPHATE IN SEDIMT PORE WATER"   />
+      <element  key="SDN:P09:40:PHOP"  label="PHOSPHATE IN SEDIMT PORE WATER"    />
       <related>
-         <element ekey="SDN:P06:40:UPOX"  elabel="Micromoles per litre"   />
+         <element  key="SDN:P06:40:UPOX"  label="Micromoles per litre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:PHCW"  elabel="PHYTOPLANKTON ABUNDANCE"   />
+      <element  key="SDN:P09:40:PHCW"  label="PHYTOPLANKTON ABUNDANCE"    />
       <related>
-         <element ekey="SDN:P06:40:UCPL"  elabel="Number per litre"   />
+         <element  key="SDN:P06:40:UCPL"  label="Number per litre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:HEAD"  elabel="PLAT. HEADING REL. TRUE NORTH"   />
+      <element  key="SDN:P09:40:HEAD"  label="PLAT. HEADING REL. TRUE NORTH"    />
       <related>
-         <element ekey="SDN:P06:40:UAAA"  elabel="Degrees"   />
+         <element  key="SDN:P06:40:UAAA"  label="Degrees"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:SO4O"  elabel="PORE WATER SULFATE"   />
+      <element  key="SDN:P09:40:SO4O"  label="PORE WATER SULFATE"    />
       <related>
-         <element ekey="SDN:P06:40:UPOX"  elabel="Micromoles per litre"   />
+         <element  key="SDN:P06:40:UPOX"  label="Micromoles per litre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:PETD"  elabel="POTENTIAL EVAPOTRANSPIRATION"   />
+      <element  key="SDN:P09:40:PETD"  label="POTENTIAL EVAPOTRANSPIRATION"    />
       <related>
-         <element ekey="SDN:P06:40:MMPD"  elabel="Millimetres per day"   />
+         <element  key="SDN:P06:40:MMPD"  label="Millimetres per day"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:PSAL"  elabel="PRACTICAL SALINITY"   />
+      <element  key="SDN:P09:40:PSAL"  label="PRACTICAL SALINITY"    />
       <related>
-         <element ekey="SDN:P06:40:UUUU"  elabel="Dimensionless"   />
+         <element  key="SDN:P06:40:UUUU"  label="Dimensionless"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:PXAP"  elabel="PRASINOXANTHINE"   />
+      <element  key="SDN:P09:40:PXAP"  label="PRASINOXANTHINE"    />
       <related>
-         <element ekey="SDN:P06:40:UMMC"  elabel="Milligrams per cubic metre"   />
+         <element  key="SDN:P06:40:UMMC"  label="Milligrams per cubic metre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:PRRT"  elabel="PRECIPITATION RATE"   />
+      <element  key="SDN:P09:40:PRRT"  label="PRECIPITATION RATE"    />
       <related>
-         <element ekey="SDN:P06:40:MMPH"  elabel="Millimetres per hour"   />
+         <element  key="SDN:P06:40:MMPH"  label="Millimetres per hour"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:PRRD"  elabel="PRECIPITATION RATE"   />
+      <element  key="SDN:P09:40:PRRD"  label="PRECIPITATION RATE"    />
       <related>
-         <element ekey="SDN:P06:40:MMPD"  elabel="Millimetres per day"   />
+         <element  key="SDN:P06:40:MMPD"  label="Millimetres per day"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:PROT"  elabel="PROTEIN"   />
+      <element  key="SDN:P09:40:PROT"  label="PROTEIN"    />
       <related>
-         <element ekey="SDN:P06:40:UMMC"  elabel="Milligrams per cubic metre"   />
+         <element  key="SDN:P06:40:UMMC"  label="Milligrams per cubic metre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:PTZF"  elabel="PROTOZOA PPC FLUX"   />
+      <element  key="SDN:P09:40:PTZF"  label="PROTOZOA PPC FLUX"    />
       <related>
-         <element ekey="SDN:P06:40:UGDX"  elabel="Milligrams per square metre per day"   />
+         <element  key="SDN:P06:40:UGDX"  label="Milligrams per square metre per day"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MPBS"  elabel="Pb IN THE SEDIMENT"   />
+      <element  key="SDN:P09:40:MPBS"  label="Pb IN THE SEDIMENT"    />
       <related>
-         <element ekey="SDN:P06:40:UPPM"  elabel="Parts per million"   />
+         <element  key="SDN:P06:40:UPPM"  label="Parts per million"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TR10"  elabel="RED LIGHT TRANSMISSION 10CM"   />
+      <element  key="SDN:P09:40:TR10"  label="RED LIGHT TRANSMISSION 10CM"    />
       <related>
-         <element ekey="SDN:P06:40:UPCT"  elabel="Percent"   />
+         <element  key="SDN:P06:40:UPCT"  label="Percent"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TR25"  elabel="RED LIGHT TRANSMISSION 25CM"   />
+      <element  key="SDN:P09:40:TR25"  label="RED LIGHT TRANSMISSION 25CM"    />
       <related>
-         <element ekey="SDN:P06:40:UPCT"  elabel="Percent"   />
+         <element  key="SDN:P06:40:UPCT"  label="Percent"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:REDS"  elabel="REDOX POTENTIAL"   />
+      <element  key="SDN:P09:40:REDS"  label="REDOX POTENTIAL"    />
       <related>
-         <element ekey="SDN:P06:40:UUMV"  elabel="Millivolts"   />
+         <element  key="SDN:P06:40:UUMV"  label="Millivolts"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:RELH"  elabel="RELATIVE HUMIDITY"   />
+      <element  key="SDN:P09:40:RELH"  label="RELATIVE HUMIDITY"    />
       <related>
-         <element ekey="SDN:P06:40:UPCT"  elabel="Percent"   />
+         <element  key="SDN:P06:40:UPCT"  label="Percent"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:SLVR"  elabel="RESIDUAL (OBS-PRED SEA LEVEL)"   />
+      <element  key="SDN:P09:40:SLVR"  label="RESIDUAL (OBS-PRED SEA LEVEL)"    />
       <related>
-         <element ekey="SDN:P06:40:ULAA"  elabel="Metres"   />
+         <element  key="SDN:P06:40:ULAA"  label="Metres"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:RVFL"  elabel="RIVER FLOW RATE"   />
+      <element  key="SDN:P09:40:RVFL"  label="RIVER FLOW RATE"    />
       <related>
-         <element ekey="SDN:P06:40:CMPS"  elabel="Cubic metres per second"   />
+         <element  key="SDN:P06:40:CMPS"  label="Cubic metres per second"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MRBS"  elabel="Rb IN THE SEDIMENT"   />
+      <element  key="SDN:P09:40:MRBS"  label="Rb IN THE SEDIMENT"    />
       <related>
-         <element ekey="SDN:P06:40:UPPM"  elabel="Parts per million"   />
+         <element  key="SDN:P06:40:UPPM"  label="Parts per million"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MSSP"  elabel="S IN SUSPENDED MATTER"   />
+      <element  key="SDN:P09:40:MSSP"  label="S IN SUSPENDED MATTER"    />
       <related>
-         <element ekey="SDN:P06:40:UMMC"  elabel="Milligrams per cubic metre"   />
+         <element  key="SDN:P06:40:UMMC"  label="Milligrams per cubic metre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:SSAL"  elabel="SALINITY (PRE-1978 DEFN)"   />
+      <element  key="SDN:P09:40:SSAL"  label="SALINITY (PRE-1978 DEFN)"    />
       <related>
-         <element ekey="SDN:P06:40:UPPT"  elabel="Parts per thousand"   />
+         <element  key="SDN:P06:40:UPPT"  label="Parts per thousand"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:SACC"  elabel="SALINITY ACCURACY"   />
+      <element  key="SDN:P09:40:SACC"  label="SALINITY ACCURACY"    />
       <related>
-         <element ekey="SDN:P06:40:UUUU"  elabel="Dimensionless"   />
+         <element  key="SDN:P06:40:UUUU"  label="Dimensionless"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:SAND"  elabel="SAND IN THE SEDIMENT"   />
+      <element  key="SDN:P09:40:SAND"  label="SAND IN THE SEDIMENT"    />
       <related>
-         <element ekey="SDN:P06:40:UPCT"  elabel="Percent"   />
+         <element  key="SDN:P06:40:UPCT"  label="Percent"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:PRES"  elabel="SEA PRESSURE sea surface=0"   />
+      <element  key="SDN:P09:40:PRES"  label="SEA PRESSURE sea surface=0"    />
       <related>
-         <element ekey="SDN:P06:40:UPDB"  elabel="Decibars"   />
+         <element  key="SDN:P06:40:UPDB"  label="Decibars"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TEMP"  elabel="SEA TEMPERATURE"   />
+      <element  key="SDN:P09:40:TEMP"  label="SEA TEMPERATURE"    />
       <related>
-         <element ekey="SDN:P06:40:UPAA"  elabel="Degrees Celsius"   />
+         <element  key="SDN:P06:40:UPAA"  label="Degrees Celsius"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TE02"  elabel="SEA TEMPERATURE"   />
+      <element  key="SDN:P09:40:TE02"  label="SEA TEMPERATURE"    />
       <related>
-         <element ekey="SDN:P06:40:UPAA"  elabel="Degrees Celsius"   />
+         <element  key="SDN:P06:40:UPAA"  label="Degrees Celsius"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TE01"  elabel="SEA TEMPERATURE"   />
+      <element  key="SDN:P09:40:TE01"  label="SEA TEMPERATURE"    />
       <related>
-         <element ekey="SDN:P06:40:UPAA"  elabel="Degrees Celsius"   />
+         <element  key="SDN:P06:40:UPAA"  label="Degrees Celsius"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TE03"  elabel="SEA TEMPERATURE"   />
+      <element  key="SDN:P09:40:TE03"  label="SEA TEMPERATURE"    />
       <related>
-         <element ekey="SDN:P06:40:UPAA"  elabel="Degrees Celsius"   />
+         <element  key="SDN:P06:40:UPAA"  label="Degrees Celsius"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TE04"  elabel="SEA TEMPERATURE"   />
+      <element  key="SDN:P09:40:TE04"  label="SEA TEMPERATURE"    />
       <related>
-         <element ekey="SDN:P06:40:UPAA"  elabel="Degrees Celsius"   />
+         <element  key="SDN:P06:40:UPAA"  label="Degrees Celsius"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TE05"  elabel="SEA TEMPERATURE"   />
+      <element  key="SDN:P09:40:TE05"  label="SEA TEMPERATURE"    />
       <related>
-         <element ekey="SDN:P06:40:UPAA"  elabel="Degrees Celsius"   />
+         <element  key="SDN:P06:40:UPAA"  label="Degrees Celsius"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TE06"  elabel="SEA TEMPERATURE"   />
+      <element  key="SDN:P09:40:TE06"  label="SEA TEMPERATURE"    />
       <related>
-         <element ekey="SDN:P06:40:UPAA"  elabel="Degrees Celsius"   />
+         <element  key="SDN:P06:40:UPAA"  label="Degrees Celsius"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TE07"  elabel="SEA TEMPERATURE"   />
+      <element  key="SDN:P09:40:TE07"  label="SEA TEMPERATURE"    />
       <related>
-         <element ekey="SDN:P06:40:UPAA"  elabel="Degrees Celsius"   />
+         <element  key="SDN:P06:40:UPAA"  label="Degrees Celsius"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TE08"  elabel="SEA TEMPERATURE"   />
+      <element  key="SDN:P09:40:TE08"  label="SEA TEMPERATURE"    />
       <related>
-         <element ekey="SDN:P06:40:UPAA"  elabel="Degrees Celsius"   />
+         <element  key="SDN:P06:40:UPAA"  label="Degrees Celsius"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TE12"  elabel="SEA TEMPERATURE"   />
+      <element  key="SDN:P09:40:TE12"  label="SEA TEMPERATURE"    />
       <related>
-         <element ekey="SDN:P06:40:UPAA"  elabel="Degrees Celsius"   />
+         <element  key="SDN:P06:40:UPAA"  label="Degrees Celsius"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TE10"  elabel="SEA TEMPERATURE"   />
+      <element  key="SDN:P09:40:TE10"  label="SEA TEMPERATURE"    />
       <related>
-         <element ekey="SDN:P06:40:UPAA"  elabel="Degrees Celsius"   />
+         <element  key="SDN:P06:40:UPAA"  label="Degrees Celsius"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TE09"  elabel="SEA TEMPERATURE"   />
+      <element  key="SDN:P09:40:TE09"  label="SEA TEMPERATURE"    />
       <related>
-         <element ekey="SDN:P06:40:UPAA"  elabel="Degrees Celsius"   />
+         <element  key="SDN:P06:40:UPAA"  label="Degrees Celsius"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TE11"  elabel="SEA TEMPERATURE"   />
+      <element  key="SDN:P09:40:TE11"  label="SEA TEMPERATURE"    />
       <related>
-         <element ekey="SDN:P06:40:UPAA"  elabel="Degrees Celsius"   />
+         <element  key="SDN:P06:40:UPAA"  label="Degrees Celsius"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:SECC"  elabel="SECCHI DISK DEPTH"   />
+      <element  key="SDN:P09:40:SECC"  label="SECCHI DISK DEPTH"    />
       <related>
-         <element ekey="SDN:P06:40:ULAA"  elabel="Metres"   />
+         <element  key="SDN:P06:40:ULAA"  label="Metres"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:AMIS"  elabel="SEDIMENT AMINO-ACIDS"   />
+      <element  key="SDN:P09:40:AMIS"  label="SEDIMENT AMINO-ACIDS"    />
       <related>
-         <element ekey="SDN:P06:40:UMKG"  elabel="Milligrams per kilogram"   />
+         <element  key="SDN:P06:40:UMKG"  label="Milligrams per kilogram"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:SIOS"  elabel="SEDIMENT BIOGENIC SiO2"   />
+      <element  key="SDN:P09:40:SIOS"  label="SEDIMENT BIOGENIC SiO2"    />
       <related>
-         <element ekey="SDN:P06:40:UPCT"  elabel="Percent"   />
+         <element  key="SDN:P06:40:UPCT"  label="Percent"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:CHTS"  elabel="SEDIMENT CARBOHYDRATES"   />
+      <element  key="SDN:P09:40:CHTS"  label="SEDIMENT CARBOHYDRATES"    />
       <related>
-         <element ekey="SDN:P06:40:UMKG"  elabel="Milligrams per kilogram"   />
+         <element  key="SDN:P06:40:UMKG"  label="Milligrams per kilogram"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:CO3S"  elabel="SEDIMENT CARBONATES"   />
+      <element  key="SDN:P09:40:CO3S"  label="SEDIMENT CARBONATES"    />
       <related>
-         <element ekey="SDN:P06:40:UPCT"  elabel="Percent"   />
+         <element  key="SDN:P06:40:UPCT"  label="Percent"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:LIPS"  elabel="SEDIMENT LIPIDS"   />
+      <element  key="SDN:P09:40:LIPS"  label="SEDIMENT LIPIDS"    />
       <related>
-         <element ekey="SDN:P06:40:UMKG"  elabel="Milligrams per kilogram"   />
+         <element  key="SDN:P06:40:UMKG"  label="Milligrams per kilogram"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:PHNS"  elabel="SEDIMENT PHENOLS"   />
+      <element  key="SDN:P09:40:PHNS"  label="SEDIMENT PHENOLS"    />
       <related>
-         <element ekey="SDN:P06:40:UMKG"  elabel="Milligrams per kilogram"   />
+         <element  key="SDN:P06:40:UMKG"  label="Milligrams per kilogram"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TCCS"  elabel="SEDIMENT TOTAL CARBON"   />
+      <element  key="SDN:P09:40:TCCS"  label="SEDIMENT TOTAL CARBON"    />
       <related>
-         <element ekey="SDN:P06:40:UPCT"  elabel="Percent"   />
+         <element  key="SDN:P06:40:UPCT"  label="Percent"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TNNS"  elabel="SEDIMENT TOTAL NITROGEN"   />
+      <element  key="SDN:P09:40:TNNS"  label="SEDIMENT TOTAL NITROGEN"    />
       <related>
-         <element ekey="SDN:P06:40:UPCT"  elabel="Percent"   />
+         <element  key="SDN:P06:40:UPCT"  label="Percent"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TOCS"  elabel="SEDIMENT TOTAL ORGANIC CARBON"   />
+      <element  key="SDN:P09:40:TOCS"  label="SEDIMENT TOTAL ORGANIC CARBON"    />
       <related>
-         <element ekey="SDN:P06:40:UPCT"  elabel="Percent"   />
+         <element  key="SDN:P06:40:UPCT"  label="Percent"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:SAMA"  elabel="SIGNAL RETURN AMPLITUDE"   />
+      <element  key="SDN:P09:40:SAMA"  label="SIGNAL RETURN AMPLITUDE"    />
       <related>
-         <element ekey="SDN:P06:40:UDBL"  elabel="Decibels"   />
+         <element  key="SDN:P06:40:UDBL"  label="Decibels"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:VTDH"  elabel="SIGNIFICANT WAVE HEIGHT"   />
+      <element  key="SDN:P09:40:VTDH"  label="SIGNIFICANT WAVE HEIGHT"    />
       <related>
-         <element ekey="SDN:P06:40:ULAA"  elabel="Metres"   />
+         <element  key="SDN:P06:40:ULAA"  label="Metres"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:SLCA"  elabel="SILICATE (SIO4-SI) CONTENT"   />
+      <element  key="SDN:P09:40:SLCA"  label="SILICATE (SIO4-SI) CONTENT"    />
       <related>
-         <element ekey="SDN:P06:40:UPOX"  elabel="Micromoles per litre"   />
+         <element  key="SDN:P06:40:UPOX"  label="Micromoles per litre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:SLCW"  elabel="SILICATE (SIO4-SI) CONTENT"   />
+      <element  key="SDN:P09:40:SLCW"  label="SILICATE (SIO4-SI) CONTENT"    />
       <related>
-         <element ekey="SDN:P06:40:KGUM"  elabel="Micromoles per kilogram"   />
+         <element  key="SDN:P06:40:KGUM"  label="Micromoles per kilogram"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:SILT"  elabel="SILT IN THE SEDIMENT"   />
+      <element  key="SDN:P09:40:SILT"  label="SILT IN THE SEDIMENT"    />
       <related>
-         <element ekey="SDN:P06:40:UPCT"  elabel="Percent"   />
+         <element  key="SDN:P06:40:UPCT"  label="Percent"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:SVEL"  elabel="SOUND VELOCITY"   />
+      <element  key="SDN:P09:40:SVEL"  label="SOUND VELOCITY"    />
       <related>
-         <element ekey="SDN:P06:40:UVAA"  elabel="Metres per second"   />
+         <element  key="SDN:P06:40:UVAA"  label="Metres per second"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:VSMC"  elabel="SPECT. MOMENT(0,2) WAVE PERIOD"   />
+      <element  key="SDN:P09:40:VSMC"  label="SPECT. MOMENT(0,2) WAVE PERIOD"    />
       <related>
-         <element ekey="SDN:P06:40:UTBB"  elabel="Seconds"   />
+         <element  key="SDN:P06:40:UTBB"  label="Seconds"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:VHM0"  elabel="SPECTRAL SIGNIFICANT WAVE HEIGHT HM0"   />
+      <element  key="SDN:P09:40:VHM0"  label="SPECTRAL SIGNIFICANT WAVE HEIGHT HM0"    />
       <related>
-         <element ekey="SDN:P06:40:ULAA"  elabel="Metres"   />
+         <element  key="SDN:P06:40:ULAA"  label="Metres"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:SWDR"  elabel="SWELL DIRECTION  REL TRUE N."   />
+      <element  key="SDN:P09:40:SWDR"  label="SWELL DIRECTION  REL TRUE N."    />
       <related>
-         <element ekey="SDN:P06:40:UAAA"  elabel="Degrees"   />
+         <element  key="SDN:P06:40:UAAA"  label="Degrees"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:SWHT"  elabel="SWELL HEIGHT"   />
+      <element  key="SDN:P09:40:SWHT"  label="SWELL HEIGHT"    />
       <related>
-         <element ekey="SDN:P06:40:ULAA"  elabel="Metres"   />
+         <element  key="SDN:P06:40:ULAA"  label="Metres"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:SWPR"  elabel="SWELL PERIOD"   />
+      <element  key="SDN:P09:40:SWPR"  label="SWELL PERIOD"    />
       <related>
-         <element ekey="SDN:P06:40:UTBB"  elabel="Seconds"   />
+         <element  key="SDN:P06:40:UTBB"  label="Seconds"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MSCS"  elabel="Sc IN THE SEDIMENT"   />
+      <element  key="SDN:P09:40:MSCS"  label="Sc IN THE SEDIMENT"    />
       <related>
-         <element ekey="SDN:P06:40:UPPM"  elabel="Parts per million"   />
+         <element  key="SDN:P06:40:UPPM"  label="Parts per million"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MSIP"  elabel="Si IN SUSPENDED MATTER"   />
+      <element  key="SDN:P09:40:MSIP"  label="Si IN SUSPENDED MATTER"    />
       <related>
-         <element ekey="SDN:P06:40:UMMC"  elabel="Milligrams per cubic metre"   />
+         <element  key="SDN:P06:40:UMMC"  label="Milligrams per cubic metre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MSIS"  elabel="Si IN THE SEDIMENT"   />
+      <element  key="SDN:P09:40:MSIS"  label="Si IN THE SEDIMENT"    />
       <related>
-         <element ekey="SDN:P06:40:UPCT"  elabel="Percent"   />
+         <element  key="SDN:P06:40:UPCT"  label="Percent"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MSRS"  elabel="Sr IN THE SEDIMENT"   />
+      <element  key="SDN:P09:40:MSRS"  label="Sr IN THE SEDIMENT"    />
       <related>
-         <element ekey="SDN:P06:40:UPPM"  elabel="Parts per million"   />
+         <element  key="SDN:P06:40:UPPM"  label="Parts per million"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:ZNTH"  elabel="TILT OF MEASUREMENT PLATFORM"   />
+      <element  key="SDN:P09:40:ZNTH"  label="TILT OF MEASUREMENT PLATFORM"    />
       <related>
-         <element ekey="SDN:P06:40:UAAA"  elabel="Degrees"   />
+         <element  key="SDN:P06:40:UAAA"  label="Degrees"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TIME"  elabel="TIME WITHIN DAY"   />
+      <element  key="SDN:P09:40:TIME"  label="TIME WITHIN DAY"    />
       <related>
-         <element ekey="SDN:P06:40:UHMS"  elabel="Hours Minutes Seconds"   />
+         <element  key="SDN:P06:40:UHMS"  label="Hours Minutes Seconds"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TDPW"  elabel="TOTAL DISSOLVED PHOSPHORUS"   />
+      <element  key="SDN:P09:40:TDPW"  label="TOTAL DISSOLVED PHOSPHORUS"    />
       <related>
-         <element ekey="SDN:P06:40:UPOX"  elabel="Micromoles per litre"   />
+         <element  key="SDN:P06:40:UPOX"  label="Micromoles per litre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TICW"  elabel="TOTAL INORGANIC CARBON"   />
+      <element  key="SDN:P09:40:TICW"  label="TOTAL INORGANIC CARBON"    />
       <related>
-         <element ekey="SDN:P06:40:KGUM"  elabel="Micromoles per kilogram"   />
+         <element  key="SDN:P06:40:KGUM"  label="Micromoles per kilogram"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TSMF"  elabel="TOTAL MASS FLUX"   />
+      <element  key="SDN:P09:40:TSMF"  label="TOTAL MASS FLUX"    />
       <related>
-         <element ekey="SDN:P06:40:UGDX"  elabel="Milligrams per square metre per day"   />
+         <element  key="SDN:P06:40:UGDX"  label="Milligrams per square metre per day"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:NTOT"  elabel="TOTAL NITROGEN (N) CONTENT"   />
+      <element  key="SDN:P09:40:NTOT"  label="TOTAL NITROGEN (N) CONTENT"    />
       <related>
-         <element ekey="SDN:P06:40:UPOX"  elabel="Micromoles per litre"   />
+         <element  key="SDN:P06:40:UPOX"  label="Micromoles per litre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TOCW"  elabel="TOTAL ORGANIC CARBON"   />
+      <element  key="SDN:P09:40:TOCW"  label="TOTAL ORGANIC CARBON"    />
       <related>
-         <element ekey="SDN:P06:40:UPOX"  elabel="Micromoles per litre"   />
+         <element  key="SDN:P06:40:UPOX"  label="Micromoles per litre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TPCW"  elabel="TOTAL PARTICULATE CARBON"   />
+      <element  key="SDN:P09:40:TPCW"  label="TOTAL PARTICULATE CARBON"    />
       <related>
-         <element ekey="SDN:P06:40:UMMC"  elabel="Milligrams per cubic metre"   />
+         <element  key="SDN:P06:40:UMMC"  label="Milligrams per cubic metre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:PTNP"  elabel="TOTAL PARTICULATE NITROGEN"   />
+      <element  key="SDN:P09:40:PTNP"  label="TOTAL PARTICULATE NITROGEN"    />
       <related>
-         <element ekey="SDN:P06:40:UMMC"  elabel="Milligrams per cubic metre"   />
+         <element  key="SDN:P06:40:UMMC"  label="Milligrams per cubic metre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:NT1P"  elabel="TOTAL PARTICULATE NITROGEN"   />
+      <element  key="SDN:P09:40:NT1P"  label="TOTAL PARTICULATE NITROGEN"    />
       <related>
-         <element ekey="SDN:P06:40:KGUM"  elabel="Micromoles per kilogram"   />
+         <element  key="SDN:P06:40:KGUM"  label="Micromoles per kilogram"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:PT1P"  elabel="TOTAL PARTICULATE PHOSPHORUS"   />
+      <element  key="SDN:P09:40:PT1P"  label="TOTAL PARTICULATE PHOSPHORUS"    />
       <related>
-         <element ekey="SDN:P06:40:KGUM"  elabel="Micromoles per kilogram"   />
+         <element  key="SDN:P06:40:KGUM"  label="Micromoles per kilogram"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:PTPP"  elabel="TOTAL PARTICULATE PHOSPHORUS"   />
+      <element  key="SDN:P09:40:PTPP"  label="TOTAL PARTICULATE PHOSPHORUS"    />
       <related>
-         <element ekey="SDN:P06:40:UMMC"  elabel="Milligrams per cubic metre"   />
+         <element  key="SDN:P06:40:UMMC"  label="Milligrams per cubic metre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TPHP"  elabel="TOTAL PHAEOPIGMENTS"   />
+      <element  key="SDN:P09:40:TPHP"  label="TOTAL PHAEOPIGMENTS"    />
       <related>
-         <element ekey="SDN:P06:40:UMMC"  elabel="Milligrams per cubic metre"   />
+         <element  key="SDN:P06:40:UMMC"  label="Milligrams per cubic metre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:PHTP"  elabel="TOTAL PHEOPHYTINE"   />
+      <element  key="SDN:P09:40:PHTP"  label="TOTAL PHEOPHYTINE"    />
       <related>
-         <element ekey="SDN:P06:40:UMMC"  elabel="Milligrams per cubic metre"   />
+         <element  key="SDN:P06:40:UMMC"  label="Milligrams per cubic metre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TPHS"  elabel="TOTAL PHOSPHORUS (P) CONTENT"   />
+      <element  key="SDN:P09:40:TPHS"  label="TOTAL PHOSPHORUS (P) CONTENT"    />
       <related>
-         <element ekey="SDN:P06:40:UPOX"  elabel="Micromoles per litre"   />
+         <element  key="SDN:P06:40:UPOX"  label="Micromoles per litre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:EPMP"  elabel="TOTAL SUSP. PART. MATTER/ESTER"   />
+      <element  key="SDN:P09:40:EPMP"  label="TOTAL SUSP. PART. MATTER/ESTER"    />
       <related>
-         <element ekey="SDN:P06:40:UMGL"  elabel="Milligrams per litre"   />
+         <element  key="SDN:P06:40:UMGL"  label="Milligrams per litre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:GPMP"  elabel="TOTAL SUSP. PART. MATTER/GLASS"   />
+      <element  key="SDN:P09:40:GPMP"  label="TOTAL SUSP. PART. MATTER/GLASS"    />
       <related>
-         <element ekey="SDN:P06:40:UMGL"  elabel="Milligrams per litre"   />
+         <element  key="SDN:P06:40:UMGL"  label="Milligrams per litre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TSMP"  elabel="TOTAL SUSPENDED MATTER"   />
+      <element  key="SDN:P09:40:TSMP"  label="TOTAL SUSPENDED MATTER"    />
       <related>
-         <element ekey="SDN:P06:40:UMGL"  elabel="Milligrams per litre"   />
+         <element  key="SDN:P06:40:UMGL"  label="Milligrams per litre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TUR4"  elabel="TURBIDITY"   />
+      <element  key="SDN:P09:40:TUR4"  label="TURBIDITY"    />
       <related>
-         <element ekey="SDN:P06:40:USTU"  elabel="Nephelometric Turbidity Units"   />
+         <element  key="SDN:P06:40:USTU"  label="Nephelometric Turbidity Units"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TUR5"  elabel="TURBIDITY"   />
+      <element  key="SDN:P09:40:TUR5"  label="TURBIDITY"    />
       <related>
-         <element ekey="SDN:P06:40:UUUU"  elabel="Dimensionless"   />
+         <element  key="SDN:P06:40:UUUU"  label="Dimensionless"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TUR6"  elabel="TURBIDITY"   />
+      <element  key="SDN:P09:40:TUR6"  label="TURBIDITY"    />
       <related>
-         <element ekey="SDN:P06:40:USTU"  elabel="Nephelometric Turbidity Units"   />
+         <element  key="SDN:P06:40:USTU"  label="Nephelometric Turbidity Units"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MTHS"  elabel="Th IN THE SEDIMENT"   />
+      <element  key="SDN:P09:40:MTHS"  label="Th IN THE SEDIMENT"    />
       <related>
-         <element ekey="SDN:P06:40:UPPM"  elabel="Parts per million"   />
+         <element  key="SDN:P06:40:UPPM"  label="Parts per million"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MTIP"  elabel="Ti IN SUSPENDED MATTER"   />
+      <element  key="SDN:P09:40:MTIP"  label="Ti IN SUSPENDED MATTER"    />
       <related>
-         <element ekey="SDN:P06:40:UMMC"  elabel="Milligrams per cubic metre"   />
+         <element  key="SDN:P06:40:UMMC"  label="Milligrams per cubic metre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MTIS"  elabel="Ti IN THE SEDIMENT"   />
+      <element  key="SDN:P09:40:MTIS"  label="Ti IN THE SEDIMENT"    />
       <related>
-         <element ekey="SDN:P06:40:UPCT"  elabel="Percent"   />
+         <element  key="SDN:P06:40:UPCT"  label="Percent"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MUUS"  elabel="U IN THE SEDIMENT"   />
+      <element  key="SDN:P09:40:MUUS"  label="U IN THE SEDIMENT"    />
       <related>
-         <element ekey="SDN:P06:40:UPPM"  elabel="Parts per million"   />
+         <element  key="SDN:P06:40:UPPM"  label="Parts per million"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:UREA"  elabel="UREA"   />
+      <element  key="SDN:P09:40:UREA"  label="UREA"    />
       <related>
-         <element ekey="SDN:P06:40:UPOX"  elabel="Micromoles per litre"   />
+         <element  key="SDN:P06:40:UPOX"  label="Micromoles per litre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MVVS"  elabel="V IN THE SEDIMENT"   />
+      <element  key="SDN:P09:40:MVVS"  label="V IN THE SEDIMENT"    />
       <related>
-         <element ekey="SDN:P06:40:UPPM"  elabel="Parts per million"   />
+         <element  key="SDN:P06:40:UPPM"  label="Parts per million"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:VERR"  elabel="VELOCITY ERROR"   />
+      <element  key="SDN:P09:40:VERR"  label="VELOCITY ERROR"    />
       <related>
-         <element ekey="SDN:P06:40:UVAA"  elabel="Metres per second"   />
+         <element  key="SDN:P06:40:UVAA"  label="Metres per second"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:VCSP"  elabel="VERTICAL CURRENT SPEED"   />
+      <element  key="SDN:P09:40:VCSP"  label="VERTICAL CURRENT SPEED"    />
       <related>
-         <element ekey="SDN:P06:40:UVAA"  elabel="Metres per second"   />
+         <element  key="SDN:P06:40:UVAA"  label="Metres per second"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:VERT"  elabel="VERTICAL DISPLACEMENT"   />
+      <element  key="SDN:P09:40:VERT"  label="VERTICAL DISPLACEMENT"    />
       <related>
-         <element ekey="SDN:P06:40:ULAA"  elabel="Metres"   />
+         <element  key="SDN:P06:40:ULAA"  label="Metres"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:VIAW"  elabel="VIRUS ABUNDANCE IN SEA WATER"   />
+      <element  key="SDN:P09:40:VIAW"  label="VIRUS ABUNDANCE IN SEA WATER"    />
       <related>
-         <element ekey="SDN:P06:40:UCNL"  elabel="Number per nanolitre"   />
+         <element  key="SDN:P06:40:UCNL"  label="Number per nanolitre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:VOCP"  elabel="VOLUME CONC. OF PARTICLES"   />
+      <element  key="SDN:P09:40:VOCP"  label="VOLUME CONC. OF PARTICLES"    />
       <related>
-         <element ekey="SDN:P06:40:UPPM"  elabel="Parts per million"   />
+         <element  key="SDN:P06:40:UPPM"  label="Parts per million"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:H2OS"  elabel="WATER CONTENT"   />
+      <element  key="SDN:P09:40:H2OS"  label="WATER CONTENT"    />
       <related>
-         <element ekey="SDN:P06:40:UPCT"  elabel="Percent"   />
+         <element  key="SDN:P06:40:UPCT"  label="Percent"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:VDIR"  elabel="WAVE DIRECTION REL. TRUE NORTH"   />
+      <element  key="SDN:P09:40:VDIR"  label="WAVE DIRECTION REL. TRUE NORTH"    />
       <related>
-         <element ekey="SDN:P06:40:UAAA"  elabel="Degrees"   />
+         <element  key="SDN:P06:40:UAAA"  label="Degrees"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:VTPK"  elabel="WAVE PEAK PERIOD"   />
+      <element  key="SDN:P09:40:VTPK"  label="WAVE PEAK PERIOD"    />
       <related>
-         <element ekey="SDN:P06:40:UTBB"  elabel="Seconds"   />
+         <element  key="SDN:P06:40:UTBB"  label="Seconds"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:VEPK"  elabel="WAVE SPECTRUM PEAK ENERGY"   />
+      <element  key="SDN:P09:40:VEPK"  label="WAVE SPECTRUM PEAK ENERGY"    />
       <related>
-         <element ekey="SDN:P06:40:UMHZ"  elabel="Square metres per Hertz"   />
+         <element  key="SDN:P06:40:UMHZ"  label="Square metres per Hertz"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:VPED"  elabel="WAVE SPECTRUM PEAK ENERGY DIR."   />
+      <element  key="SDN:P09:40:VPED"  label="WAVE SPECTRUM PEAK ENERGY DIR."    />
       <related>
-         <element ekey="SDN:P06:40:UABB"  elabel="Degrees True"   />
+         <element  key="SDN:P06:40:UABB"  label="Degrees True"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:WDIR"  elabel="WIND DIRECTION REL. TRUE NORTH"   />
+      <element  key="SDN:P09:40:WDIR"  label="WIND DIRECTION REL. TRUE NORTH"    />
       <related>
-         <element ekey="SDN:P06:40:UAAA"  elabel="Degrees"   />
+         <element  key="SDN:P06:40:UAAA"  label="Degrees"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:WMSP"  elabel="WIND SPEED - MAX AVER PER 2 MN"   />
+      <element  key="SDN:P09:40:WMSP"  label="WIND SPEED - MAX AVER PER 2 MN"    />
       <related>
-         <element ekey="SDN:P06:40:UVAA"  elabel="Metres per second"   />
+         <element  key="SDN:P06:40:UVAA"  label="Metres per second"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:WSPE"  elabel="WIND SPEED EASTWARD COMPONENT"   />
+      <element  key="SDN:P09:40:WSPE"  label="WIND SPEED EASTWARD COMPONENT"    />
       <related>
-         <element ekey="SDN:P06:40:UVAA"  elabel="Metres per second"   />
+         <element  key="SDN:P06:40:UVAA"  label="Metres per second"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:WSPN"  elabel="WIND SPEED NORTHWARD COMPONENT"   />
+      <element  key="SDN:P09:40:WSPN"  label="WIND SPEED NORTHWARD COMPONENT"    />
       <related>
-         <element ekey="SDN:P06:40:UVAA"  elabel="Metres per second"   />
+         <element  key="SDN:P06:40:UVAA"  label="Metres per second"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:WSTE"  elabel="WIND STRESS EAST COMPONENT"   />
+      <element  key="SDN:P09:40:WSTE"  label="WIND STRESS EAST COMPONENT"    />
       <related>
-         <element ekey="SDN:P06:40:UNSM"  elabel="Newtons per square metre"   />
+         <element  key="SDN:P06:40:UNSM"  label="Newtons per square metre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:WSTN"  elabel="WIND STRESS NORTH COMPONENT"   />
+      <element  key="SDN:P09:40:WSTN"  label="WIND STRESS NORTH COMPONENT"    />
       <related>
-         <element ekey="SDN:P06:40:UNSM"  elabel="Newtons per square metre"   />
+         <element  key="SDN:P06:40:UNSM"  label="Newtons per square metre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MYYS"  elabel="Y IN THE SEDIMENT"   />
+      <element  key="SDN:P09:40:MYYS"  label="Y IN THE SEDIMENT"    />
       <related>
-         <element ekey="SDN:P06:40:UPPM"  elabel="Parts per million"   />
+         <element  key="SDN:P06:40:UPPM"  label="Parts per million"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:YEAR"  elabel="YEAR"   />
+      <element  key="SDN:P09:40:YEAR"  label="YEAR"    />
       <related>
-         <element ekey="SDN:P06:40:UUUU"  elabel="Dimensionless"   />
+         <element  key="SDN:P06:40:UUUU"  label="Dimensionless"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:ZXAP"  elabel="ZEAXANTHINE"   />
+      <element  key="SDN:P09:40:ZXAP"  label="ZEAXANTHINE"    />
       <related>
-         <element ekey="SDN:P06:40:UMMC"  elabel="Milligrams per cubic metre"   />
+         <element  key="SDN:P06:40:UMMC"  label="Milligrams per cubic metre"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MZNF"  elabel="ZN FLUX IN SETTLING PARTICLES"   />
+      <element  key="SDN:P09:40:MZNF"  label="ZN FLUX IN SETTLING PARTICLES"    />
       <related>
-         <element ekey="SDN:P06:40:UUDX"  elabel="Micrograms per square metre per day"   />
+         <element  key="SDN:P06:40:UUDX"  label="Micrograms per square metre per day"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MZNS"  elabel="Zn IN THE SEDIMENT"   />
+      <element  key="SDN:P09:40:MZNS"  label="Zn IN THE SEDIMENT"    />
       <related>
-         <element ekey="SDN:P06:40:UPPM"  elabel="Parts per million"   />
+         <element  key="SDN:P06:40:UPPM"  label="Parts per million"    />
       </related>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MZRS"  elabel="Zr IN THE SEDIMENT"   />
+      <element  key="SDN:P09:40:MZRS"  label="Zr IN THE SEDIMENT"    />
       <related>
-         <element ekey="SDN:P06:40:UPPM"  elabel="Parts per million"   />
+         <element  key="SDN:P06:40:UPPM"  label="Parts per million"    />
       </related>
    </match>
 </mapping>

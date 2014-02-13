@@ -5,2154 +5,2154 @@
       <vocabulary list="SDN:P09:40:"  version="40"  date="2012-01-11T07:46:54.000"  title="MEDATLAS Parameter Usage Vocabulary"  />
    </mapped>
    <match>
-      <element ekey="SDN:P09:40:CUPW"  elabel="14C PRODUCTION FILTER UNSPECIF"   />
+      <element  key="SDN:P09:40:CUPW"  label="14C PRODUCTION FILTER UNSPECIF"    />
       <broad>
-         <element ekey="SDN:P02:40:PPRD"  elabel="Primary production in the water column"   />
+         <element  key="SDN:P02:40:PPRD"  label="Primary production in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:CUPH"  elabel="14C PRODUCTION FILTER UNSPECIF"   />
+      <element  key="SDN:P09:40:CUPH"  label="14C PRODUCTION FILTER UNSPECIF"    />
       <broad>
-         <element ekey="SDN:P02:40:PPRD"  elabel="Primary production in the water column"   />
+         <element  key="SDN:P02:40:PPRD"  label="Primary production in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:C4UW"  elabel="14C PRODUCTION/10 MICRON FILT."   />
+      <element  key="SDN:P09:40:C4UW"  label="14C PRODUCTION/10 MICRON FILT."    />
       <broad>
-         <element ekey="SDN:P02:40:PPRD"  elabel="Primary production in the water column"   />
+         <element  key="SDN:P02:40:PPRD"  label="Primary production in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:C2UW"  elabel="14C PRODUCTION/2 MICRON FILT."   />
+      <element  key="SDN:P09:40:C2UW"  label="14C PRODUCTION/2 MICRON FILT."    />
       <broad>
-         <element ekey="SDN:P02:40:PPRD"  elabel="Primary production in the water column"   />
+         <element  key="SDN:P02:40:PPRD"  label="Primary production in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:C1UW"  elabel="14C UPTAKE 0.2-1 MICRON"   />
+      <element  key="SDN:P09:40:C1UW"  label="14C UPTAKE 0.2-1 MICRON"    />
       <broad>
-         <element ekey="SDN:P02:40:PPRD"  elabel="Primary production in the water column"   />
+         <element  key="SDN:P02:40:PPRD"  label="Primary production in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:BFUP"  elabel="19&apos;BUTANOYLOXYFUCOXANTHINE"   />
+      <element  key="SDN:P09:40:BFUP"  label="19&apos;BUTANOYLOXYFUCOXANTHINE"    />
       <broad>
-         <element ekey="SDN:P02:40:CARO"  elabel="Carotenoid pigment concentrations in the water column"   />
+         <element  key="SDN:P02:40:CARO"  label="Carotenoid pigment concentrations in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:HFUP"  elabel="19&apos;HEXANOYLOXYFUCOXANTHINE"   />
+      <element  key="SDN:P09:40:HFUP"  label="19&apos;HEXANOYLOXYFUCOXANTHINE"    />
       <broad>
-         <element ekey="SDN:P02:40:CARO"  elabel="Carotenoid pigment concentrations in the water column"   />
+         <element  key="SDN:P02:40:CARO"  label="Carotenoid pigment concentrations in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:ASDW"  elabel="ABSORPTION STANDARD DEVIATION"   />
+      <element  key="SDN:P09:40:ASDW"  label="ABSORPTION STANDARD DEVIATION"    />
       <broad>
-         <element ekey="SDN:P02:40:PPRD"  elabel="Primary production in the water column"   />
+         <element  key="SDN:P02:40:PPRD"  label="Primary production in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MALF"  elabel="AL FLUX IN SETTLING PARTICLES"   />
+      <element  key="SDN:P09:40:MALF"  label="AL FLUX IN SETTLING PARTICLES"    />
       <broad>
-         <element ekey="SDN:P02:40:MLFX"  elabel="Sedimentation flux of metallic and metalloid elements and isotopes in water bodies"   />
+         <element  key="SDN:P02:40:MLFX"  label="Sedimentation flux of metallic and metalloid elements and isotopes in water bodies"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:ALKW"  elabel="ALKALINITY"   />
+      <element  key="SDN:P09:40:ALKW"  label="ALKALINITY"    />
       <broad>
-         <element ekey="SDN:P02:40:ALKY"  elabel="Alkalinity, acidity and pH of the water column"   />
+         <element  key="SDN:P02:40:ALKY"  label="Alkalinity, acidity and pH of the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:ALKY"  elabel="ALKALINITY"   />
+      <element  key="SDN:P09:40:ALKY"  label="ALKALINITY"    />
       <broad>
-         <element ekey="SDN:P02:40:ALKY"  elabel="Alkalinity, acidity and pH of the water column"   />
+         <element  key="SDN:P02:40:ALKY"  label="Alkalinity, acidity and pH of the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:AXAP"  elabel="ALLOXANTHINE"   />
+      <element  key="SDN:P09:40:AXAP"  label="ALLOXANTHINE"    />
       <broad>
-         <element ekey="SDN:P02:40:CARO"  elabel="Carotenoid pigment concentrations in the water column"   />
+         <element  key="SDN:P02:40:CARO"  label="Carotenoid pigment concentrations in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:ABCP"  elabel="ALPHA BETA CAROTENES"   />
+      <element  key="SDN:P09:40:ABCP"  label="ALPHA BETA CAROTENES"    />
       <broad>
-         <element ekey="SDN:P02:40:CARO"  elabel="Carotenoid pigment concentrations in the water column"   />
+         <element  key="SDN:P02:40:CARO"  label="Carotenoid pigment concentrations in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:AMOW"  elabel="AMMONIUM (NH4-N) CONTENT"   />
+      <element  key="SDN:P09:40:AMOW"  label="AMMONIUM (NH4-N) CONTENT"    />
       <broad>
-         <element ekey="SDN:P02:40:AMON"  elabel="Ammonium concentration parameters in the water column"   />
+         <element  key="SDN:P02:40:AMON"  label="Ammonium concentration parameters in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:AMON"  elabel="AMMONIUM (NH4-N) CONTENT"   />
+      <element  key="SDN:P09:40:AMON"  label="AMMONIUM (NH4-N) CONTENT"    />
       <broad>
-         <element ekey="SDN:P02:40:AMON"  elabel="Ammonium concentration parameters in the water column"   />
+         <element  key="SDN:P02:40:AMON"  label="Ammonium concentration parameters in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:NHRW"  elabel="AMMONIUM REGENERATION"   />
+      <element  key="SDN:P09:40:NHRW"  label="AMMONIUM REGENERATION"    />
       <broad>
-         <element ekey="SDN:P02:40:EXCR"  elabel="Excretion rate parameters in the water column"   />
+         <element  key="SDN:P02:40:EXCR"  label="Excretion rate parameters in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:NHUW"  elabel="AMMONIUM UPTAKE"   />
+      <element  key="SDN:P09:40:NHUW"  label="AMMONIUM UPTAKE"    />
       <broad>
-         <element ekey="SDN:P02:40:AMUP"  elabel="Regenerated production in water bodies"   />
+         <element  key="SDN:P02:40:AMUP"  label="Regenerated production in water bodies"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:AMOP"  elabel="AMONIUM IN SEDIMENT PORE WATER"   />
+      <element  key="SDN:P09:40:AMOP"  label="AMONIUM IN SEDIMENT PORE WATER"    />
       <broad>
-         <element ekey="SDN:P02:40:NTPW"  elabel="Nutrient concentrations in sediment pore waters"   />
+         <element  key="SDN:P02:40:NTPW"  label="Nutrient concentrations in sediment pore waters"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:ATMP"  elabel="ATMOSPHERIC PRESSURE"   />
+      <element  key="SDN:P09:40:ATMP"  label="ATMOSPHERIC PRESSURE"    />
       <broad>
-         <element ekey="SDN:P02:40:CAPH"  elabel="Air pressure"   />
+         <element  key="SDN:P02:40:CAPH"  label="Air pressure"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:ATMS"  elabel="ATMOSPHERIC PRESSURE - SEA LEV"   />
+      <element  key="SDN:P09:40:ATMS"  label="ATMOSPHERIC PRESSURE - SEA LEV"    />
       <broad>
-         <element ekey="SDN:P02:40:CAPH"  elabel="Air pressure"   />
+         <element  key="SDN:P02:40:CAPH"  label="Air pressure"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:ATPT"  elabel="ATMOSPHERIC PRESSURE TENDENCY"   />
+      <element  key="SDN:P09:40:ATPT"  label="ATMOSPHERIC PRESSURE TENDENCY"    />
       <broad>
-         <element ekey="SDN:P02:40:CAPH"  elabel="Air pressure"   />
+         <element  key="SDN:P02:40:CAPH"  label="Air pressure"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:NFAW"  elabel="AUTOTROPHIC NANOFLAGELLATES"   />
+      <element  key="SDN:P09:40:NFAW"  label="AUTOTROPHIC NANOFLAGELLATES"    />
       <broad>
-         <element ekey="SDN:P02:40:PNTX"  elabel="Phytoplankton generic abundance in water bodies"   />
+         <element  key="SDN:P02:40:PNTX"  label="Phytoplankton generic abundance in water bodies"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:VTZA"  elabel="AVER ZERO CROSSING WAVE PERIOD"   />
+      <element  key="SDN:P09:40:VTZA"  label="AVER ZERO CROSSING WAVE PERIOD"    />
       <broad>
-         <element ekey="SDN:P02:40:WVST"  elabel="Wave height and period statistics"   />
+         <element  key="SDN:P02:40:WVST"  label="Wave height and period statistics"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:VAVH"  elabel="AVER. HEIGHT HIGHEST 1/3 WAVE"   />
+      <element  key="SDN:P09:40:VAVH"  label="AVER. HEIGHT HIGHEST 1/3 WAVE"    />
       <broad>
-         <element ekey="SDN:P02:40:WVST"  elabel="Wave height and period statistics"   />
+         <element  key="SDN:P02:40:WVST"  label="Wave height and period statistics"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:VAVT"  elabel="AVER. PERIOD HIGHEST 1/3 WAVE"   />
+      <element  key="SDN:P09:40:VAVT"  label="AVER. PERIOD HIGHEST 1/3 WAVE"    />
       <broad>
-         <element ekey="SDN:P02:40:WVST"  elabel="Wave height and period statistics"   />
+         <element  key="SDN:P02:40:WVST"  label="Wave height and period statistics"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:NAVG"  elabel="AVERAGED DATA CYCLE NUMBER"   />
+      <element  key="SDN:P09:40:NAVG"  label="AVERAGED DATA CYCLE NUMBER"    />
       <broad>
-         <element ekey="SDN:P02:40:ACYC"  elabel="Reference numbers"   />
+         <element  key="SDN:P02:40:ACYC"  label="Reference numbers"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MALP"  elabel="Al IN SUSPENDED MATTER"   />
+      <element  key="SDN:P09:40:MALP"  label="Al IN SUSPENDED MATTER"    />
       <broad>
-         <element ekey="SDN:P02:40:MTWP"  elabel="Particulate metal concentrations in the water column"   />
+         <element  key="SDN:P02:40:MTWP"  label="Particulate metal concentrations in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MALS"  elabel="Al IN THE SEDIMENT"   />
+      <element  key="SDN:P09:40:MALS"  label="Al IN THE SEDIMENT"    />
       <broad>
-         <element ekey="SDN:P02:40:RMIN"  elabel="Inorganic chemical composition of sediment or rocks"   />
+         <element  key="SDN:P02:40:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:UPTS"  elabel="BACT. PROD. STANDARD DEVIATION"   />
+      <element  key="SDN:P09:40:UPTS"  label="BACT. PROD. STANDARD DEVIATION"    />
       <broad>
-         <element ekey="SDN:P02:40:UPTH"  elabel="Bacterial production in the water column"   />
+         <element  key="SDN:P02:40:UPTH"  label="Bacterial production in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:BCMW"  elabel="BACTERIAL BIOMASS IN SEA WATER"   />
+      <element  key="SDN:P09:40:BCMW"  label="BACTERIAL BIOMASS IN SEA WATER"    />
       <broad>
-         <element ekey="SDN:P02:40:BNTC"  elabel="Bacteria non taxonomy-related biomass expressed as carbon per unit volume of the water column"   />
+         <element  key="SDN:P02:40:BNTC"  label="Bacteria non taxonomy-related biomass expressed as carbon per unit volume of the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:UPTH"  elabel="BACTERIAL PRODUCTION(THYM. UP)"   />
+      <element  key="SDN:P09:40:UPTH"  label="BACTERIAL PRODUCTION(THYM. UP)"    />
       <broad>
-         <element ekey="SDN:P02:40:UPTH"  elabel="Bacterial production in the water column"   />
+         <element  key="SDN:P02:40:UPTH"  label="Bacterial production in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:BATH"  elabel="BATHYMETRIC DEPTH"   />
+      <element  key="SDN:P09:40:BATH"  label="BATHYMETRIC DEPTH"    />
       <broad>
-         <element ekey="SDN:P02:40:MBAN"  elabel="Bathymetry and Elevation"   />
+         <element  key="SDN:P02:40:MBAN"  label="Bathymetry and Elevation"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TB25"  elabel="BLUE LIGHT TRANSMISSION 25CM"   />
+      <element  key="SDN:P09:40:TB25"  label="BLUE LIGHT TRANSMISSION 25CM"    />
       <broad>
-         <element ekey="SDN:P02:40:ATTN"  elabel="Transmittance and attenuance of the water column"   />
+         <element  key="SDN:P02:40:ATTN"  label="Transmittance and attenuance of the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MBAP"  elabel="Ba IN SUSPENDED MATTER"   />
+      <element  key="SDN:P09:40:MBAP"  label="Ba IN SUSPENDED MATTER"    />
       <broad>
-         <element ekey="SDN:P02:40:MTWP"  elabel="Particulate metal concentrations in the water column"   />
+         <element  key="SDN:P02:40:MTWP"  label="Particulate metal concentrations in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MBAS"  elabel="Ba IN THE SEDIMENT"   />
+      <element  key="SDN:P09:40:MBAS"  label="Ba IN THE SEDIMENT"    />
       <broad>
-         <element ekey="SDN:P02:40:RMIN"  elabel="Inorganic chemical composition of sediment or rocks"   />
+         <element  key="SDN:P02:40:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MBRS"  elabel="Br IN THE SEDIMENT"   />
+      <element  key="SDN:P09:40:MBRS"  label="Br IN THE SEDIMENT"    />
       <broad>
-         <element ekey="SDN:P02:40:RMIN"  elabel="Inorganic chemical composition of sediment or rocks"   />
+         <element  key="SDN:P02:40:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:GLUC"  elabel="CARBOHYDRATE"   />
+      <element  key="SDN:P09:40:GLUC"  label="CARBOHYDRATE"    />
       <broad>
-         <element ekey="SDN:P02:40:TOCH"  elabel="Concentration of carbohydrates, phenols, alkanols (alcohols), aldehydes and ketones in water bodies"   />
+         <element  key="SDN:P02:40:TOCH"  label="Concentration of carbohydrates, phenols, alkanols (alcohols), aldehydes and ketones in water bodies"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:CO3P"  elabel="CARBONATES CONTENT"   />
+      <element  key="SDN:P09:40:CO3P"  label="CARBONATES CONTENT"    />
       <broad>
-         <element ekey="SDN:P02:40:CBSP"  elabel="Carbon concentrations in suspended particulate material"   />
+         <element  key="SDN:P02:40:CBSP"  label="Carbon concentrations in suspended particulate material"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:CODW"  elabel="CHEMICAL OXYGEN DEMAND"   />
+      <element  key="SDN:P09:40:CODW"  label="CHEMICAL OXYGEN DEMAND"    />
       <broad>
-         <element ekey="SDN:P02:40:DOXY"  elabel="Dissolved oxygen parameters in the water column"   />
+         <element  key="SDN:P02:40:DOXY"  label="Dissolved oxygen parameters in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:CH1P"  elabel="CHL-A(LESS DIVINYLCHL-A)"   />
+      <element  key="SDN:P09:40:CH1P"  label="CHL-A(LESS DIVINYLCHL-A)"    />
       <broad>
-         <element ekey="SDN:P02:40:CPWC"  elabel="Chlorophyll pigment concentrations in the water column"   />
+         <element  key="SDN:P02:40:CPWC"  label="Chlorophyll pigment concentrations in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:CH2P"  elabel="CHL-B(LESS DIVINYLCHL-B)"   />
+      <element  key="SDN:P09:40:CH2P"  label="CHL-B(LESS DIVINYLCHL-B)"    />
       <broad>
-         <element ekey="SDN:P02:40:CPWC"  elabel="Chlorophyll pigment concentrations in the water column"   />
+         <element  key="SDN:P02:40:CPWC"  label="Chlorophyll pigment concentrations in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:CH1T"  elabel="CHLOROPHYLL TOTAL"   />
+      <element  key="SDN:P09:40:CH1T"  label="CHLOROPHYLL TOTAL"    />
       <broad>
-         <element ekey="SDN:P02:40:CPWC"  elabel="Chlorophyll pigment concentrations in the water column"   />
+         <element  key="SDN:P02:40:CPWC"  label="Chlorophyll pigment concentrations in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:CPHL"  elabel="CHLOROPHYLL-A TOTAL"   />
+      <element  key="SDN:P09:40:CPHL"  label="CHLOROPHYLL-A TOTAL"    />
       <broad>
-         <element ekey="SDN:P02:40:CPWC"  elabel="Chlorophyll pigment concentrations in the water column"   />
+         <element  key="SDN:P02:40:CPWC"  label="Chlorophyll pigment concentrations in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:CPH1"  elabel="CHLOROPHYLL-A TOTAL"   />
+      <element  key="SDN:P09:40:CPH1"  label="CHLOROPHYLL-A TOTAL"    />
       <broad>
-         <element ekey="SDN:P02:40:CPWC"  elabel="Chlorophyll pigment concentrations in the water column"   />
+         <element  key="SDN:P02:40:CPWC"  label="Chlorophyll pigment concentrations in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:CHAF"  elabel="CHLOROPHYLL-A VERTICAL FLUX"   />
+      <element  key="SDN:P09:40:CHAF"  label="CHLOROPHYLL-A VERTICAL FLUX"    />
       <broad>
-         <element ekey="SDN:P02:40:AXFX"  elabel="Sedimentation flux of pigments in the water column"   />
+         <element  key="SDN:P02:40:AXFX"  label="Sedimentation flux of pigments in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:CPH4"  elabel="CHLOROPHYLL-A/10 MICRON FILTER"   />
+      <element  key="SDN:P09:40:CPH4"  label="CHLOROPHYLL-A/10 MICRON FILTER"    />
       <broad>
-         <element ekey="SDN:P02:40:CPWC"  elabel="Chlorophyll pigment concentrations in the water column"   />
+         <element  key="SDN:P02:40:CPWC"  label="Chlorophyll pigment concentrations in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:CPH2"  elabel="CHLOROPHYLL-A/2 MICRON FILTER"   />
+      <element  key="SDN:P09:40:CPH2"  label="CHLOROPHYLL-A/2 MICRON FILTER"    />
       <broad>
-         <element ekey="SDN:P02:40:CPWC"  elabel="Chlorophyll pigment concentrations in the water column"   />
+         <element  key="SDN:P02:40:CPWC"  label="Chlorophyll pigment concentrations in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:CPH3"  elabel="CHLOROPHYLL-A/20 MICRON FILTER"   />
+      <element  key="SDN:P09:40:CPH3"  label="CHLOROPHYLL-A/20 MICRON FILTER"    />
       <broad>
-         <element ekey="SDN:P02:40:CPWC"  elabel="Chlorophyll pigment concentrations in the water column"   />
+         <element  key="SDN:P02:40:CPWC"  label="Chlorophyll pigment concentrations in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:CHLB"  elabel="CHLOROPHYLL-B TOTAL"   />
+      <element  key="SDN:P09:40:CHLB"  label="CHLOROPHYLL-B TOTAL"    />
       <broad>
-         <element ekey="SDN:P02:40:CPWC"  elabel="Chlorophyll pigment concentrations in the water column"   />
+         <element  key="SDN:P02:40:CPWC"  label="Chlorophyll pigment concentrations in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:CHLC"  elabel="CHLOROPHYLL-C TOTAL"   />
+      <element  key="SDN:P09:40:CHLC"  label="CHLOROPHYLL-C TOTAL"    />
       <broad>
-         <element ekey="SDN:P02:40:CPWC"  elabel="Chlorophyll pigment concentrations in the water column"   />
+         <element  key="SDN:P02:40:CPWC"  label="Chlorophyll pigment concentrations in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:CHCZ"  elabel="CHLOROPHYLL-C1+C2"   />
+      <element  key="SDN:P09:40:CHCZ"  label="CHLOROPHYLL-C1+C2"    />
       <broad>
-         <element ekey="SDN:P02:40:CPWC"  elabel="Chlorophyll pigment concentrations in the water column"   />
+         <element  key="SDN:P02:40:CPWC"  label="Chlorophyll pigment concentrations in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:CHC3"  elabel="CHLOROPHYLL-C3"   />
+      <element  key="SDN:P09:40:CHC3"  label="CHLOROPHYLL-C3"    />
       <broad>
-         <element ekey="SDN:P02:40:CPWC"  elabel="Chlorophyll pigment concentrations in the water column"   />
+         <element  key="SDN:P02:40:CPWC"  label="Chlorophyll pigment concentrations in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:CHLT"  elabel="CHLOROPHYLL-TOTAL"   />
+      <element  key="SDN:P09:40:CHLT"  label="CHLOROPHYLL-TOTAL"    />
       <broad>
-         <element ekey="SDN:P02:40:CPWC"  elabel="Chlorophyll pigment concentrations in the water column"   />
+         <element  key="SDN:P02:40:CPWC"  label="Chlorophyll pigment concentrations in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:CLAY"  elabel="CLAY IN THE SEDIMENT"   />
+      <element  key="SDN:P09:40:CLAY"  label="CLAY IN THE SEDIMENT"    />
       <broad>
-         <element ekey="SDN:P02:40:MNGS"  elabel="Sediment grain size parameters"   />
+         <element  key="SDN:P02:40:MNGS"  label="Sediment grain size parameters"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:FCO2"  elabel="CO2 FUGACITY"   />
+      <element  key="SDN:P09:40:FCO2"  label="CO2 FUGACITY"    />
       <broad>
-         <element ekey="SDN:P02:40:PCO2"  elabel="Partial pressure (pCO2) and fugacity (fCO2) of carbon dioxide in the water column"   />
+         <element  key="SDN:P02:40:PCO2"  label="Partial pressure (pCO2) and fugacity (fCO2) of carbon dioxide in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:XCO2"  elabel="CO2 MOLE FRACTION IN DRY GAS"   />
+      <element  key="SDN:P09:40:XCO2"  label="CO2 MOLE FRACTION IN DRY GAS"    />
       <broad>
-         <element ekey="SDN:P02:40:PCO2"  elabel="Partial pressure (pCO2) and fugacity (fCO2) of carbon dioxide in the water column"   />
+         <element  key="SDN:P02:40:PCO2"  label="Partial pressure (pCO2) and fugacity (fCO2) of carbon dioxide in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:PCO2"  elabel="CO2 PART. PRES IN DRY/WET GAS"   />
+      <element  key="SDN:P09:40:PCO2"  label="CO2 PART. PRES IN DRY/WET GAS"    />
       <broad>
-         <element ekey="SDN:P02:40:PCO2"  elabel="Partial pressure (pCO2) and fugacity (fCO2) of carbon dioxide in the water column"   />
+         <element  key="SDN:P02:40:PCO2"  label="Partial pressure (pCO2) and fugacity (fCO2) of carbon dioxide in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:COPF"  elabel="COCCOLITHOPHORIDAE PPC FLUX"   />
+      <element  key="SDN:P09:40:COPF"  label="COCCOLITHOPHORIDAE PPC FLUX"    />
       <broad>
-         <element ekey="SDN:P02:40:PCFX"  elabel="Sedimentation flux of identified biota expressed as carbon in the water column"   />
+         <element  key="SDN:P02:40:PCFX"  label="Sedimentation flux of identified biota expressed as carbon in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:CDOM"  elabel="COLORED DISS. ORGANIC MATTER"   />
+      <element  key="SDN:P09:40:CDOM"  label="COLORED DISS. ORGANIC MATTER"    />
       <broad>
-         <element ekey="SDN:P02:40:HMSB"  elabel="Concentration of dissolved organic matter in the water column"   />
+         <element  key="SDN:P02:40:HMSB"  label="Concentration of dissolved organic matter in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MCUF"  elabel="CU FLUX IN SETTLING PARTICLES"   />
+      <element  key="SDN:P09:40:MCUF"  label="CU FLUX IN SETTLING PARTICLES"    />
       <broad>
-         <element ekey="SDN:P02:40:MLFX"  elabel="Sedimentation flux of metallic and metalloid elements and isotopes in water bodies"   />
+         <element  key="SDN:P02:40:MLFX"  label="Sedimentation flux of metallic and metalloid elements and isotopes in water bodies"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:EWCS"  elabel="CURRENT EAST  STD. DEVIATION"   />
+      <element  key="SDN:P09:40:EWCS"  label="CURRENT EAST  STD. DEVIATION"    />
       <broad>
-         <element ekey="SDN:P02:40:RFVL"  elabel="Horizontal velocity of the water column (currents)"   />
+         <element  key="SDN:P02:40:RFVL"  label="Horizontal velocity of the water column (currents)"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:EWCT"  elabel="CURRENT EAST COMPONENT"   />
+      <element  key="SDN:P09:40:EWCT"  label="CURRENT EAST COMPONENT"    />
       <broad>
-         <element ekey="SDN:P02:40:RFVL"  elabel="Horizontal velocity of the water column (currents)"   />
+         <element  key="SDN:P02:40:RFVL"  label="Horizontal velocity of the water column (currents)"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:NSCT"  elabel="CURRENT NORTH COMPONENT"   />
+      <element  key="SDN:P09:40:NSCT"  label="CURRENT NORTH COMPONENT"    />
       <broad>
-         <element ekey="SDN:P02:40:RFVL"  elabel="Horizontal velocity of the water column (currents)"   />
+         <element  key="SDN:P02:40:RFVL"  label="Horizontal velocity of the water column (currents)"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:NSCS"  elabel="CURRENT NORTH STD. DEVIATION"   />
+      <element  key="SDN:P09:40:NSCS"  label="CURRENT NORTH STD. DEVIATION"    />
       <broad>
-         <element ekey="SDN:P02:40:RFVL"  elabel="Horizontal velocity of the water column (currents)"   />
+         <element  key="SDN:P02:40:RFVL"  label="Horizontal velocity of the water column (currents)"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:HCSS"  elabel="CURRENT SPEED STD DEV"   />
+      <element  key="SDN:P09:40:HCSS"  label="CURRENT SPEED STD DEV"    />
       <broad>
-         <element ekey="SDN:P02:40:RFVL"  elabel="Horizontal velocity of the water column (currents)"   />
+         <element  key="SDN:P02:40:RFVL"  label="Horizontal velocity of the water column (currents)"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MCAP"  elabel="Ca IN SUSPENDED MATTER"   />
+      <element  key="SDN:P09:40:MCAP"  label="Ca IN SUSPENDED MATTER"    />
       <broad>
-         <element ekey="SDN:P02:40:MTWP"  elabel="Particulate metal concentrations in the water column"   />
+         <element  key="SDN:P02:40:MTWP"  label="Particulate metal concentrations in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MCAS"  elabel="Ca IN THE SEDIMENT"   />
+      <element  key="SDN:P09:40:MCAS"  label="Ca IN THE SEDIMENT"    />
       <broad>
-         <element ekey="SDN:P02:40:RMIN"  elabel="Inorganic chemical composition of sediment or rocks"   />
+         <element  key="SDN:P02:40:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MCES"  elabel="Ce IN THE SEDIMENT"   />
+      <element  key="SDN:P09:40:MCES"  label="Ce IN THE SEDIMENT"    />
       <broad>
-         <element ekey="SDN:P02:40:RMIN"  elabel="Inorganic chemical composition of sediment or rocks"   />
+         <element  key="SDN:P02:40:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MCLP"  elabel="Cl IN SUSPENDED MATTER"   />
+      <element  key="SDN:P09:40:MCLP"  label="Cl IN SUSPENDED MATTER"    />
       <broad>
-         <element ekey="SDN:P02:40:HLWC"  elabel="Concentration of inorganic halogens in water bodies"   />
+         <element  key="SDN:P02:40:HLWC"  label="Concentration of inorganic halogens in water bodies"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MCRS"  elabel="Cr IN THE SEDIMENT"   />
+      <element  key="SDN:P09:40:MCRS"  label="Cr IN THE SEDIMENT"    />
       <broad>
-         <element ekey="SDN:P02:40:RMIN"  elabel="Inorganic chemical composition of sediment or rocks"   />
+         <element  key="SDN:P02:40:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MCUS"  elabel="Cu IN THE SEDIMENT"   />
+      <element  key="SDN:P09:40:MCUS"  label="Cu IN THE SEDIMENT"    />
       <broad>
-         <element ekey="SDN:P02:40:RMIN"  elabel="Inorganic chemical composition of sediment or rocks"   />
+         <element  key="SDN:P02:40:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:DCAW"  elabel="DARK CARBON ABSORPTION"   />
+      <element  key="SDN:P09:40:DCAW"  label="DARK CARBON ABSORPTION"    />
       <broad>
-         <element ekey="SDN:P02:40:PPRD"  elabel="Primary production in the water column"   />
+         <element  key="SDN:P02:40:PPRD"  label="Primary production in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:CDFW"  elabel="DARK FIXATION"   />
+      <element  key="SDN:P09:40:CDFW"  label="DARK FIXATION"    />
       <broad>
-         <element ekey="SDN:P02:40:PPRD"  elabel="Primary production in the water column"   />
+         <element  key="SDN:P02:40:PPRD"  label="Primary production in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:DAYX"  elabel="DAY WITHIN MONTH"   />
+      <element  key="SDN:P09:40:DAYX"  label="DAY WITHIN MONTH"    />
       <broad>
-         <element ekey="SDN:P02:40:AYMD"  elabel="Date and time"   />
+         <element  key="SDN:P02:40:AYMD"  label="Date and time"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:C13D"  elabel="DELTA 13C (13C/12C)"   />
+      <element  key="SDN:P09:40:C13D"  label="DELTA 13C (13C/12C)"    />
       <broad>
-         <element ekey="SDN:P02:40:WSTB"  elabel="Stable isotope enrichment in the water column"   />
+         <element  key="SDN:P02:40:WSTB"  label="Stable isotope enrichment in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:N15D"  elabel="DELTA 15N (15N/14N)"   />
+      <element  key="SDN:P09:40:N15D"  label="DELTA 15N (15N/14N)"    />
       <broad>
-         <element ekey="SDN:P02:40:WSTB"  elabel="Stable isotope enrichment in the water column"   />
+         <element  key="SDN:P02:40:WSTB"  label="Stable isotope enrichment in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:HELD"  elabel="DELTA HELIUM 3"   />
+      <element  key="SDN:P09:40:HELD"  label="DELTA HELIUM 3"    />
       <broad>
-         <element ekey="SDN:P02:40:WSTB"  elabel="Stable isotope enrichment in the water column"   />
+         <element  key="SDN:P02:40:WSTB"  label="Stable isotope enrichment in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:DENS"  elabel="DENSITY (Sigma-theta)"   />
+      <element  key="SDN:P09:40:DENS"  label="DENSITY (Sigma-theta)"    />
       <broad>
-         <element ekey="SDN:P02:40:SIGT"  elabel="Density of the water column"   />
+         <element  key="SDN:P02:40:SIGT"  label="Density of the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:DPS1"  elabel="DEPTH BELOW BOTTOM-LOWER LIMIT"   />
+      <element  key="SDN:P09:40:DPS1"  label="DEPTH BELOW BOTTOM-LOWER LIMIT"    />
       <broad>
-         <element ekey="SDN:P02:40:AHGT"  elabel="Vertical spatial coordinates"   />
+         <element  key="SDN:P02:40:AHGT"  label="Vertical spatial coordinates"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:DPSF"  elabel="DEPTH BELOW SEA FLOOR"   />
+      <element  key="SDN:P09:40:DPSF"  label="DEPTH BELOW SEA FLOOR"    />
       <broad>
-         <element ekey="SDN:P02:40:AHGT"  elabel="Vertical spatial coordinates"   />
+         <element  key="SDN:P02:40:AHGT"  label="Vertical spatial coordinates"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:DEPH"  elabel="DEPTH BELOW SEA SURFACE"   />
+      <element  key="SDN:P09:40:DEPH"  label="DEPTH BELOW SEA SURFACE"    />
       <broad>
-         <element ekey="SDN:P02:40:AHGT"  elabel="Vertical spatial coordinates"   />
+         <element  key="SDN:P02:40:AHGT"  label="Vertical spatial coordinates"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:DEWT"  elabel="DEW POINT TEMPERATURE"   />
+      <element  key="SDN:P09:40:DEWT"  label="DEW POINT TEMPERATURE"    />
       <broad>
-         <element ekey="SDN:P02:40:CHUM"  elabel="Atmospheric humidity"   />
+         <element  key="SDN:P02:40:CHUM"  label="Atmospheric humidity"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:DXAP"  elabel="DIADINOXANTHINE"   />
+      <element  key="SDN:P09:40:DXAP"  label="DIADINOXANTHINE"    />
       <broad>
-         <element ekey="SDN:P02:40:CARO"  elabel="Carotenoid pigment concentrations in the water column"   />
+         <element  key="SDN:P02:40:CARO"  label="Carotenoid pigment concentrations in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:DIPF"  elabel="DIATOMS PPC FLUX"   />
+      <element  key="SDN:P09:40:DIPF"  label="DIATOMS PPC FLUX"    />
       <broad>
-         <element ekey="SDN:P02:40:PCFX"  elabel="Sedimentation flux of identified biota expressed as carbon in the water column"   />
+         <element  key="SDN:P02:40:PCFX"  label="Sedimentation flux of identified biota expressed as carbon in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TXAP"  elabel="DIATOXANTHINE"   />
+      <element  key="SDN:P09:40:TXAP"  label="DIATOXANTHINE"    />
       <broad>
-         <element ekey="SDN:P02:40:CARO"  elabel="Carotenoid pigment concentrations in the water column"   />
+         <element  key="SDN:P02:40:CARO"  label="Carotenoid pigment concentrations in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:IC13"  elabel="DIC DELTA-13C"   />
+      <element  key="SDN:P09:40:IC13"  label="DIC DELTA-13C"    />
       <broad>
-         <element ekey="SDN:P02:40:WSTB"  elabel="Stable isotope enrichment in the water column"   />
+         <element  key="SDN:P02:40:WSTB"  label="Stable isotope enrichment in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:DICP"  elabel="DIC IN SEDIMENT PORE WATER"   />
+      <element  key="SDN:P09:40:DICP"  label="DIC IN SEDIMENT PORE WATER"    />
       <broad>
-         <element ekey="SDN:P02:40:CCPW"  elabel="Dissolved inorganic carbon in sediment pore waters"   />
+         <element  key="SDN:P02:40:CCPW"  label="Dissolved inorganic carbon in sediment pore waters"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:DFPF"  elabel="DINOFLAGELLATES PPC FLUX"   />
+      <element  key="SDN:P09:40:DFPF"  label="DINOFLAGELLATES PPC FLUX"    />
       <broad>
-         <element ekey="SDN:P02:40:PCFX"  elabel="Sedimentation flux of identified biota expressed as carbon in the water column"   />
+         <element  key="SDN:P02:40:PCFX"  label="Sedimentation flux of identified biota expressed as carbon in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:VPSP"  elabel="DIR. SPREADING AT WAVE PEAK"   />
+      <element  key="SDN:P09:40:VPSP"  label="DIR. SPREADING AT WAVE PEAK"    />
       <broad>
-         <element ekey="SDN:P02:40:GWDR"  elabel="Wave direction"   />
+         <element  key="SDN:P02:40:GWDR"  label="Wave direction"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:HCDT"  elabel="DIRECTION REL. TRUE NORTH"   />
+      <element  key="SDN:P09:40:HCDT"  label="DIRECTION REL. TRUE NORTH"    />
       <broad>
-         <element ekey="SDN:P02:40:RFVL"  elabel="Horizontal velocity of the water column (currents)"   />
+         <element  key="SDN:P02:40:RFVL"  label="Horizontal velocity of the water column (currents)"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TPAW"  elabel="DISS. TRIPHOSPHATE ADENOSINE"   />
+      <element  key="SDN:P09:40:TPAW"  label="DISS. TRIPHOSPHATE ADENOSINE"    />
       <broad>
-         <element ekey="SDN:P02:40:ATPX"  elabel="Concentration of adenlylates in the water column"   />
+         <element  key="SDN:P02:40:ATPX"  label="Concentration of adenlylates in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:ETHW"  elabel="DISSOLVED 234 TH ACT. ERROR"   />
+      <element  key="SDN:P09:40:ETHW"  label="DISSOLVED 234 TH ACT. ERROR"    />
       <broad>
-         <element ekey="SDN:P02:40:WRAD"  elabel="Radioactivity in the water column"   />
+         <element  key="SDN:P02:40:WRAD"  label="Radioactivity in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TH4W"  elabel="DISSOLVED 234TH"   />
+      <element  key="SDN:P09:40:TH4W"  label="DISSOLVED 234TH"    />
       <broad>
-         <element ekey="SDN:P02:40:WRAD"  elabel="Radioactivity in the water column"   />
+         <element  key="SDN:P02:40:WRAD"  label="Radioactivity in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:CL4W"  elabel="DISSOLVED C-TETRACHLORIDE"   />
+      <element  key="SDN:P09:40:CL4W"  label="DISSOLVED C-TETRACHLORIDE"    />
       <broad>
-         <element ekey="SDN:P02:40:DCMX"  elabel="Other halocarbon concentrations in water bodies"   />
+         <element  key="SDN:P02:40:DCMX"  label="Other halocarbon concentrations in water bodies"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:CO2W"  elabel="DISSOLVED CARBON DIOXYD (CO2)"   />
+      <element  key="SDN:P09:40:CO2W"  label="DISSOLVED CARBON DIOXYD (CO2)"    />
       <broad>
-         <element ekey="SDN:P02:40:TCO2"  elabel="Total dissolved inorganic carbon (TCO2) concentration in the water column"   />
+         <element  key="SDN:P02:40:TCO2"  label="Total dissolved inorganic carbon (TCO2) concentration in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:CF1W"  elabel="DISSOLVED CFC11"   />
+      <element  key="SDN:P09:40:CF1W"  label="DISSOLVED CFC11"    />
       <broad>
-         <element ekey="SDN:P02:40:FR11"  elabel="Chlorofluorocarbon concentrations in the water column"   />
+         <element  key="SDN:P02:40:FR11"  label="Chlorofluorocarbon concentrations in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:CE1W"  elabel="DISSOLVED CFC11 ERROR"   />
+      <element  key="SDN:P09:40:CE1W"  label="DISSOLVED CFC11 ERROR"    />
       <broad>
-         <element ekey="SDN:P02:40:FR11"  elabel="Chlorofluorocarbon concentrations in the water column"   />
+         <element  key="SDN:P02:40:FR11"  label="Chlorofluorocarbon concentrations in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:CF3W"  elabel="DISSOLVED CFC113"   />
+      <element  key="SDN:P09:40:CF3W"  label="DISSOLVED CFC113"    />
       <broad>
-         <element ekey="SDN:P02:40:FR11"  elabel="Chlorofluorocarbon concentrations in the water column"   />
+         <element  key="SDN:P02:40:FR11"  label="Chlorofluorocarbon concentrations in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:CE3W"  elabel="DISSOLVED CFC113 ERROR"   />
+      <element  key="SDN:P09:40:CE3W"  label="DISSOLVED CFC113 ERROR"    />
       <broad>
-         <element ekey="SDN:P02:40:FR11"  elabel="Chlorofluorocarbon concentrations in the water column"   />
+         <element  key="SDN:P02:40:FR11"  label="Chlorofluorocarbon concentrations in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:CF2W"  elabel="DISSOLVED CFC12"   />
+      <element  key="SDN:P09:40:CF2W"  label="DISSOLVED CFC12"    />
       <broad>
-         <element ekey="SDN:P02:40:FR11"  elabel="Chlorofluorocarbon concentrations in the water column"   />
+         <element  key="SDN:P02:40:FR11"  label="Chlorofluorocarbon concentrations in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:CE2W"  elabel="DISSOLVED CFC12 ERROR"   />
+      <element  key="SDN:P09:40:CE2W"  label="DISSOLVED CFC12 ERROR"    />
       <broad>
-         <element ekey="SDN:P02:40:FR11"  elabel="Chlorofluorocarbon concentrations in the water column"   />
+         <element  key="SDN:P02:40:FR11"  label="Chlorofluorocarbon concentrations in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MCUW"  elabel="DISSOLVED COPPER (Cu)"   />
+      <element  key="SDN:P09:40:MCUW"  label="DISSOLVED COPPER (Cu)"    />
       <broad>
-         <element ekey="SDN:P02:40:MTWD"  elabel="Dissolved metal concentrations in the water column"   />
+         <element  key="SDN:P02:40:MTWD"  label="Dissolved metal concentrations in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:HELW"  elabel="DISSOLVED HELIUM"   />
+      <element  key="SDN:P09:40:HELW"  label="DISSOLVED HELIUM"    />
       <broad>
-         <element ekey="SDN:P02:40:HEXC"  elabel="Dissolved noble gas concentration parameters in the water column"   />
+         <element  key="SDN:P02:40:HEXC"  label="Dissolved noble gas concentration parameters in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:HEEW"  elabel="DISSOLVED HELIUM ERROR"   />
+      <element  key="SDN:P09:40:HEEW"  label="DISSOLVED HELIUM ERROR"    />
       <broad>
-         <element ekey="SDN:P02:40:HEXC"  elabel="Dissolved noble gas concentration parameters in the water column"   />
+         <element  key="SDN:P02:40:HEXC"  label="Dissolved noble gas concentration parameters in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TINW"  elabel="DISSOLVED INORGANIC NITROGEN"   />
+      <element  key="SDN:P09:40:TINW"  label="DISSOLVED INORGANIC NITROGEN"    />
       <broad>
-         <element ekey="SDN:P02:40:TDIN"  elabel="Dissolved inorganic nitrogen concentration in the water column"   />
+         <element  key="SDN:P02:40:TDIN"  label="Dissolved inorganic nitrogen concentration in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:NEOW"  elabel="DISSOLVED NEON"   />
+      <element  key="SDN:P09:40:NEOW"  label="DISSOLVED NEON"    />
       <broad>
-         <element ekey="SDN:P02:40:HEXC"  elabel="Dissolved noble gas concentration parameters in the water column"   />
+         <element  key="SDN:P02:40:HEXC"  label="Dissolved noble gas concentration parameters in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:NEEW"  elabel="DISSOLVED NEON ERROR"   />
+      <element  key="SDN:P09:40:NEEW"  label="DISSOLVED NEON ERROR"    />
       <broad>
-         <element ekey="SDN:P02:40:HEXC"  elabel="Dissolved noble gas concentration parameters in the water column"   />
+         <element  key="SDN:P02:40:HEXC"  label="Dissolved noble gas concentration parameters in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MNIW"  elabel="DISSOLVED NICKEL (Ni)"   />
+      <element  key="SDN:P09:40:MNIW"  label="DISSOLVED NICKEL (Ni)"    />
       <broad>
-         <element ekey="SDN:P02:40:MTWD"  elabel="Dissolved metal concentrations in the water column"   />
+         <element  key="SDN:P02:40:MTWD"  label="Dissolved metal concentrations in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:CORG"  elabel="DISSOLVED ORGANIC CARBON"   />
+      <element  key="SDN:P09:40:CORG"  label="DISSOLVED ORGANIC CARBON"    />
       <broad>
-         <element ekey="SDN:P02:40:DOCC"  elabel="Dissolved organic carbon concentration in the water column"   />
+         <element  key="SDN:P02:40:DOCC"  label="Dissolved organic carbon concentration in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:NODW"  elabel="DISSOLVED ORGANIC NITROGEN"   />
+      <element  key="SDN:P09:40:NODW"  label="DISSOLVED ORGANIC NITROGEN"    />
       <broad>
-         <element ekey="SDN:P02:40:TDNT"  elabel="Dissolved total and organic nitrogen concentrations in the water column"   />
+         <element  key="SDN:P02:40:TDNT"  label="Dissolved total and organic nitrogen concentrations in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:NORG"  elabel="DISSOLVED ORGANIC NITROGEN"   />
+      <element  key="SDN:P09:40:NORG"  label="DISSOLVED ORGANIC NITROGEN"    />
       <broad>
-         <element ekey="SDN:P02:40:TDNT"  elabel="Dissolved total and organic nitrogen concentrations in the water column"   />
+         <element  key="SDN:P02:40:TDNT"  label="Dissolved total and organic nitrogen concentrations in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:PODW"  elabel="DISSOLVED ORGANIC PHOSPHORUS"   />
+      <element  key="SDN:P09:40:PODW"  label="DISSOLVED ORGANIC PHOSPHORUS"    />
       <broad>
-         <element ekey="SDN:P02:40:TDPX"  elabel="Dissolved total or organic phosphorus concentration in the water column"   />
+         <element  key="SDN:P02:40:TDPX"  label="Dissolved total or organic phosphorus concentration in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:DOPW"  elabel="DISSOLVED ORGANIC PHOSPHORUS"   />
+      <element  key="SDN:P09:40:DOPW"  label="DISSOLVED ORGANIC PHOSPHORUS"    />
       <broad>
-         <element ekey="SDN:P02:40:TDPX"  elabel="Dissolved total or organic phosphorus concentration in the water column"   />
+         <element  key="SDN:P02:40:TDPX"  label="Dissolved total or organic phosphorus concentration in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:DOXY"  elabel="DISSOLVED OXYGEN"   />
+      <element  key="SDN:P09:40:DOXY"  label="DISSOLVED OXYGEN"    />
       <broad>
-         <element ekey="SDN:P02:40:DOXY"  elabel="Dissolved oxygen parameters in the water column"   />
+         <element  key="SDN:P02:40:DOXY"  label="Dissolved oxygen parameters in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:DOX2"  elabel="DISSOLVED OXYGEN"   />
+      <element  key="SDN:P09:40:DOX2"  label="DISSOLVED OXYGEN"    />
       <broad>
-         <element ekey="SDN:P02:40:DOXY"  elabel="Dissolved oxygen parameters in the water column"   />
+         <element  key="SDN:P02:40:DOXY"  label="Dissolved oxygen parameters in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:DOX1"  elabel="DISSOLVED OXYGEN"   />
+      <element  key="SDN:P09:40:DOX1"  label="DISSOLVED OXYGEN"    />
       <broad>
-         <element ekey="SDN:P02:40:DOXY"  elabel="Dissolved oxygen parameters in the water column"   />
+         <element  key="SDN:P02:40:DOXY"  label="Dissolved oxygen parameters in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TRIW"  elabel="DISSOLVED TRITIUM"   />
+      <element  key="SDN:P09:40:TRIW"  label="DISSOLVED TRITIUM"    />
       <broad>
-         <element ekey="SDN:P02:40:WRAD"  elabel="Radioactivity in the water column"   />
+         <element  key="SDN:P02:40:WRAD"  label="Radioactivity in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TREW"  elabel="DISSOLVED TRITIUM ERROR"   />
+      <element  key="SDN:P09:40:TREW"  label="DISSOLVED TRITIUM ERROR"    />
       <broad>
-         <element ekey="SDN:P02:40:WRAD"  elabel="Radioactivity in the water column"   />
+         <element  key="SDN:P02:40:WRAD"  label="Radioactivity in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:CHAD"  elabel="DIVINYL CHLOROPHYLL-A"   />
+      <element  key="SDN:P09:40:CHAD"  label="DIVINYL CHLOROPHYLL-A"    />
       <broad>
-         <element ekey="SDN:P02:40:CPWC"  elabel="Chlorophyll pigment concentrations in the water column"   />
+         <element  key="SDN:P02:40:CPWC"  label="Chlorophyll pigment concentrations in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:CHBD"  elabel="DIVINYL-CHLOROPHYLL-B"   />
+      <element  key="SDN:P09:40:CHBD"  label="DIVINYL-CHLOROPHYLL-B"    />
       <broad>
-         <element ekey="SDN:P02:40:CPWC"  elabel="Chlorophyll pigment concentrations in the water column"   />
+         <element  key="SDN:P02:40:CPWC"  label="Chlorophyll pigment concentrations in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:DOCP"  elabel="DOC IN SEDIMENT PORE WATER"   />
+      <element  key="SDN:P09:40:DOCP"  label="DOC IN SEDIMENT PORE WATER"    />
       <broad>
-         <element ekey="SDN:P02:40:OCPW"  elabel="Dissolved organic carbon concentrations in sediment pore waters"   />
+         <element  key="SDN:P02:40:OCPW"  label="Dissolved organic carbon concentrations in sediment pore waters"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:DRYT"  elabel="DRY BULB TEMPERATURE"   />
+      <element  key="SDN:P09:40:DRYT"  label="DRY BULB TEMPERATURE"    />
       <broad>
-         <element ekey="SDN:P02:40:CDTA"  elabel="Air temperature"   />
+         <element  key="SDN:P02:40:CDTA"  label="Air temperature"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:DRDD"  elabel="DURATION (DAYS)"   />
+      <element  key="SDN:P09:40:DRDD"  label="DURATION (DAYS)"    />
       <broad>
-         <element ekey="SDN:P02:40:AYMD"  elabel="Date and time"   />
+         <element  key="SDN:P02:40:AYMD"  label="Date and time"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:CNDC"  elabel="ELECTRICAL CONDUCTIVITY"   />
+      <element  key="SDN:P09:40:CNDC"  label="ELECTRICAL CONDUCTIVITY"    />
       <broad>
-         <element ekey="SDN:P02:40:CNDC"  elabel="Electrical conductivity of the water column"   />
+         <element  key="SDN:P02:40:CNDC"  label="Electrical conductivity of the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:ETDD"  elabel="ELLAPSED TIME"   />
+      <element  key="SDN:P09:40:ETDD"  label="ELLAPSED TIME"    />
       <broad>
-         <element ekey="SDN:P02:40:AYMD"  elabel="Date and time"   />
+         <element  key="SDN:P02:40:AYMD"  label="Date and time"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:CHAE"  elabel="EPIMERE CHLOROPHYLL-A"   />
+      <element  key="SDN:P09:40:CHAE"  label="EPIMERE CHLOROPHYLL-A"    />
       <broad>
-         <element ekey="SDN:P02:40:CPWC"  elabel="Chlorophyll pigment concentrations in the water column"   />
+         <element  key="SDN:P02:40:CPWC"  label="Chlorophyll pigment concentrations in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MFEF"  elabel="FE FLUX IN SETTLING PARTICLES"   />
+      <element  key="SDN:P09:40:MFEF"  label="FE FLUX IN SETTLING PARTICLES"    />
       <broad>
-         <element ekey="SDN:P02:40:MLFX"  elabel="Sedimentation flux of metallic and metalloid elements and isotopes in water bodies"   />
+         <element  key="SDN:P02:40:MLFX"  label="Sedimentation flux of metallic and metalloid elements and isotopes in water bodies"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:FLPF"  elabel="FLAGELLATES PPC FLUX"   />
+      <element  key="SDN:P09:40:FLPF"  label="FLAGELLATES PPC FLUX"    />
       <broad>
-         <element ekey="SDN:P02:40:PNFX"  elabel="Sedimentation flux of identified biota in the water column"   />
+         <element  key="SDN:P02:40:PNFX"  label="Sedimentation flux of identified biota in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:FLU3"  elabel="FLUORESCENCE"   />
+      <element  key="SDN:P09:40:FLU3"  label="FLUORESCENCE"    />
       <broad>
-         <element ekey="SDN:P02:40:FVLT"  elabel="Raw fluorometer output"   />
+         <element  key="SDN:P02:40:FVLT"  label="Raw fluorometer output"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:FLU2"  elabel="FLUORESCENCE"   />
+      <element  key="SDN:P09:40:FLU2"  label="FLUORESCENCE"    />
       <broad>
-         <element ekey="SDN:P02:40:CPWC"  elabel="Chlorophyll pigment concentrations in the water column"   />
+         <element  key="SDN:P02:40:CPWC"  label="Chlorophyll pigment concentrations in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:FLU1"  elabel="FLUORESCENCE"   />
+      <element  key="SDN:P09:40:FLU1"  label="FLUORESCENCE"    />
       <broad>
-         <element ekey="SDN:P02:40:FVLT"  elabel="Raw fluorometer output"   />
+         <element  key="SDN:P02:40:FVLT"  label="Raw fluorometer output"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:FLUO"  elabel="FLUORESCENCE"   />
+      <element  key="SDN:P09:40:FLUO"  label="FLUORESCENCE"    />
       <broad>
-         <element ekey="SDN:P02:40:FVLT"  elabel="Raw fluorometer output"   />
+         <element  key="SDN:P02:40:FVLT"  label="Raw fluorometer output"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:FUCP"  elabel="FUCOXANTHINE"   />
+      <element  key="SDN:P09:40:FUCP"  label="FUCOXANTHINE"    />
       <broad>
-         <element ekey="SDN:P02:40:CARO"  elabel="Carotenoid pigment concentrations in the water column"   />
+         <element  key="SDN:P02:40:CARO"  label="Carotenoid pigment concentrations in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MFEP"  elabel="Fe IN SUSPENDED MATTER"   />
+      <element  key="SDN:P09:40:MFEP"  label="Fe IN SUSPENDED MATTER"    />
       <broad>
-         <element ekey="SDN:P02:40:MTWP"  elabel="Particulate metal concentrations in the water column"   />
+         <element  key="SDN:P02:40:MTWP"  label="Particulate metal concentrations in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MFES"  elabel="Fe IN THE SEDIMENT"   />
+      <element  key="SDN:P09:40:MFES"  label="Fe IN THE SEDIMENT"    />
       <broad>
-         <element ekey="SDN:P02:40:RMIN"  elabel="Inorganic chemical composition of sediment or rocks"   />
+         <element  key="SDN:P02:40:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:GDIR"  elabel="GUST WIND DIRECTION"   />
+      <element  key="SDN:P09:40:GDIR"  label="GUST WIND DIRECTION"    />
       <broad>
-         <element ekey="SDN:P02:40:EWSB"  elabel="Wind speed and direction"   />
+         <element  key="SDN:P02:40:EWSB"  label="Wind speed and direction"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:GSPD"  elabel="GUST WIND SPEED"   />
+      <element  key="SDN:P09:40:GSPD"  label="GUST WIND SPEED"    />
       <broad>
-         <element ekey="SDN:P02:40:EWSB"  elabel="Wind speed and direction"   />
+         <element  key="SDN:P02:40:EWSB"  label="Wind speed and direction"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:ALTS"  elabel="HEIGHT ABOVE MEAN SEA LEVEL"   />
+      <element  key="SDN:P09:40:ALTS"  label="HEIGHT ABOVE MEAN SEA LEVEL"    />
       <broad>
-         <element ekey="SDN:P02:40:AHGT"  elabel="Vertical spatial coordinates"   />
+         <element  key="SDN:P02:40:AHGT"  label="Vertical spatial coordinates"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:HEDW"  elabel="HELIUM DEV. OF ISOTOPIC RATIO"   />
+      <element  key="SDN:P09:40:HEDW"  label="HELIUM DEV. OF ISOTOPIC RATIO"    />
       <broad>
-         <element ekey="SDN:P02:40:WSTB"  elabel="Stable isotope enrichment in the water column"   />
+         <element  key="SDN:P02:40:WSTB"  label="Stable isotope enrichment in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:HEDE"  elabel="HELIUM ISOTOPIC RATIO ERROR"   />
+      <element  key="SDN:P09:40:HEDE"  label="HELIUM ISOTOPIC RATIO ERROR"    />
       <broad>
-         <element ekey="SDN:P02:40:WSTB"  elabel="Stable isotope enrichment in the water column"   />
+         <element  key="SDN:P02:40:WSTB"  label="Stable isotope enrichment in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:NFHW"  elabel="HETEROTROPHIC NANOFLAGELLATES"   />
+      <element  key="SDN:P09:40:NFHW"  label="HETEROTROPHIC NANOFLAGELLATES"    />
       <broad>
-         <element ekey="SDN:P02:40:MZBN"  elabel="Microzooplankton generic abundance in water bodies"   />
+         <element  key="SDN:P02:40:MZBN"  label="Microzooplankton generic abundance in water bodies"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:HCSP"  elabel="HORIZONTAL CURRENT SPEED"   />
+      <element  key="SDN:P09:40:HCSP"  label="HORIZONTAL CURRENT SPEED"    />
       <broad>
-         <element ekey="SDN:P02:40:RFVL"  elabel="Horizontal velocity of the water column (currents)"   />
+         <element  key="SDN:P02:40:RFVL"  label="Horizontal velocity of the water column (currents)"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:WSPD"  elabel="HORIZONTAL WIND SPEED"   />
+      <element  key="SDN:P09:40:WSPD"  label="HORIZONTAL WIND SPEED"    />
       <broad>
-         <element ekey="SDN:P02:40:EWSB"  elabel="Wind speed and direction"   />
+         <element  key="SDN:P02:40:EWSB"  label="Wind speed and direction"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:HSUL"  elabel="HYDROGEN SULPHIDE (H2S)"   />
+      <element  key="SDN:P09:40:HSUL"  label="HYDROGEN SULPHIDE (H2S)"    />
       <broad>
-         <element ekey="SDN:P02:40:SCOX"  elabel="Dissolved concentration parameters for other gases in the water column"   />
+         <element  key="SDN:P02:40:SCOX"  label="Dissolved concentration parameters for other gases in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MIIS"  elabel="I IN THE SEDIMENT"   />
+      <element  key="SDN:P09:40:MIIS"  label="I IN THE SEDIMENT"    />
       <broad>
-         <element ekey="SDN:P02:40:RMIN"  elabel="Inorganic chemical composition of sediment or rocks"   />
+         <element  key="SDN:P02:40:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:LGH5"  elabel="IMMERGED/SURF IRRADIANCE RATIO"   />
+      <element  key="SDN:P09:40:LGH5"  label="IMMERGED/SURF IRRADIANCE RATIO"    />
       <broad>
-         <element ekey="SDN:P02:40:VSRW"  elabel="Visible waveband radiance and irradiance measurements in the water column"   />
+         <element  key="SDN:P02:40:VSRW"  label="Visible waveband radiance and irradiance measurements in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:RDIN"  elabel="INCIDENT RADIATION"   />
+      <element  key="SDN:P09:40:RDIN"  label="INCIDENT RADIATION"    />
       <broad>
-         <element ekey="SDN:P02:40:VSRA"  elabel="Visible waveband radiance and irradiance measurements in the atmosphere"   />
+         <element  key="SDN:P02:40:VSRA"  label="Visible waveband radiance and irradiance measurements in the atmosphere"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:ISMP"  elabel="INORGANIC SUSPENDED MATTER"   />
+      <element  key="SDN:P09:40:ISMP"  label="INORGANIC SUSPENDED MATTER"    />
       <broad>
-         <element ekey="SDN:P02:40:TSED"  elabel="Concentration of suspended particulate material in the water column"   />
+         <element  key="SDN:P02:40:TSED"  label="Concentration of suspended particulate material in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:IODI"  elabel="IODINE"   />
+      <element  key="SDN:P09:40:IODI"  label="IODINE"    />
       <broad>
-         <element ekey="SDN:P02:40:HLWC"  elabel="Concentration of inorganic halogens in water bodies"   />
+         <element  key="SDN:P02:40:HLWC"  label="Concentration of inorganic halogens in water bodies"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:OXIR"  elabel="ISOTOPIC RATIO O18/O16"   />
+      <element  key="SDN:P09:40:OXIR"  label="ISOTOPIC RATIO O18/O16"    />
       <broad>
-         <element ekey="SDN:P02:40:WSTB"  elabel="Stable isotope enrichment in the water column"   />
+         <element  key="SDN:P02:40:WSTB"  label="Stable isotope enrichment in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MKKP"  elabel="K IN SUSPENDED MATTER"   />
+      <element  key="SDN:P09:40:MKKP"  label="K IN SUSPENDED MATTER"    />
       <broad>
-         <element ekey="SDN:P02:40:MTWP"  elabel="Particulate metal concentrations in the water column"   />
+         <element  key="SDN:P02:40:MTWP"  label="Particulate metal concentrations in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MKKS"  elabel="K IN THE SEDIMENT"   />
+      <element  key="SDN:P09:40:MKKS"  label="K IN THE SEDIMENT"    />
       <broad>
-         <element ekey="SDN:P02:40:RMIN"  elabel="Inorganic chemical composition of sediment or rocks"   />
+         <element  key="SDN:P02:40:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:LATX"  elabel="LATITUDE"   />
+      <element  key="SDN:P09:40:LATX"  label="LATITUDE"    />
       <broad>
-         <element ekey="SDN:P02:40:ALAT"  elabel="Horizontal spatial co-ordinates"   />
+         <element  key="SDN:P02:40:ALAT"  label="Horizontal spatial co-ordinates"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:LTUW"  elabel="LEUCINE UPTAKE RATE"   />
+      <element  key="SDN:P09:40:LTUW"  label="LEUCINE UPTAKE RATE"    />
       <broad>
-         <element ekey="SDN:P02:40:UPTH"  elabel="Bacterial production in the water column"   />
+         <element  key="SDN:P02:40:UPTH"  label="Bacterial production in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TUR2"  elabel="LIGHT ATTENUATION COEFFICIENT"   />
+      <element  key="SDN:P09:40:TUR2"  label="LIGHT ATTENUATION COEFFICIENT"    />
       <broad>
-         <element ekey="SDN:P02:40:ATTN"  elabel="Transmittance and attenuance of the water column"   />
+         <element  key="SDN:P02:40:ATTN"  label="Transmittance and attenuance of the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:LCAW"  elabel="LIGHT CARBON ABSORPTION"   />
+      <element  key="SDN:P09:40:LCAW"  label="LIGHT CARBON ABSORPTION"    />
       <broad>
-         <element ekey="SDN:P02:40:PPRD"  elabel="Primary production in the water column"   />
+         <element  key="SDN:P02:40:PPRD"  label="Primary production in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:LGH3"  elabel="LIGHT IRRADIANCE CORRECTED PAR"   />
+      <element  key="SDN:P09:40:LGH3"  label="LIGHT IRRADIANCE CORRECTED PAR"    />
       <broad>
-         <element ekey="SDN:P02:40:VSRW"  elabel="Visible waveband radiance and irradiance measurements in the water column"   />
+         <element  key="SDN:P02:40:VSRW"  label="Visible waveband radiance and irradiance measurements in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:LGHT"  elabel="LIGHT IRRADIANCE IMMERGED PAR"   />
+      <element  key="SDN:P09:40:LGHT"  label="LIGHT IRRADIANCE IMMERGED PAR"    />
       <broad>
-         <element ekey="SDN:P02:40:VSRW"  elabel="Visible waveband radiance and irradiance measurements in the water column"   />
+         <element  key="SDN:P02:40:VSRW"  label="Visible waveband radiance and irradiance measurements in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:LGH4"  elabel="LIGHT IRRADIANCE SURFACE PAR"   />
+      <element  key="SDN:P09:40:LGH4"  label="LIGHT IRRADIANCE SURFACE PAR"    />
       <broad>
-         <element ekey="SDN:P02:40:VSRA"  elabel="Visible waveband radiance and irradiance measurements in the atmosphere"   />
+         <element  key="SDN:P02:40:VSRA"  label="Visible waveband radiance and irradiance measurements in the atmosphere"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:LSCT"  elabel="LIGHT SCATTERING"   />
+      <element  key="SDN:P09:40:LSCT"  label="LIGHT SCATTERING"    />
       <broad>
-         <element ekey="SDN:P02:40:OPBS"  elabel="Optical backscatter"   />
+         <element  key="SDN:P02:40:OPBS"  label="Optical backscatter"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TUR3"  elabel="LIGHT TRANSMISSION"   />
+      <element  key="SDN:P09:40:TUR3"  label="LIGHT TRANSMISSION"    />
       <broad>
-         <element ekey="SDN:P02:40:ATTN"  elabel="Transmittance and attenuance of the water column"   />
+         <element  key="SDN:P02:40:ATTN"  label="Transmittance and attenuance of the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:LIPI"  elabel="LIPIDS IN THE WATER COLUMN"   />
+      <element  key="SDN:P09:40:LIPI"  label="LIPIDS IN THE WATER COLUMN"    />
       <broad>
-         <element ekey="SDN:P02:40:F001"  elabel="Water body lipid concentrations"   />
+         <element  key="SDN:P02:40:F001"  label="Water body lipid concentrations"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:LSIC"  elabel="LITHOGENIC CONTENT"   />
+      <element  key="SDN:P09:40:LSIC"  label="LITHOGENIC CONTENT"    />
       <broad>
-         <element ekey="SDN:P02:40:TD00"  elabel="Terrestrial detritus in the water column suspended particulate material"   />
+         <element  key="SDN:P02:40:TD00"  label="Terrestrial detritus in the water column suspended particulate material"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:LTHF"  elabel="LITHOGENIC FRACTION FLUX"   />
+      <element  key="SDN:P09:40:LTHF"  label="LITHOGENIC FRACTION FLUX"    />
       <broad>
-         <element ekey="SDN:P02:40:LIFX"  elabel="Sedimentation flux of terrestrially derived material in the water column"   />
+         <element  key="SDN:P02:40:LIFX"  label="Sedimentation flux of terrestrially derived material in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:LINC"  elabel="LONG-WAVE INCOMING RADIATION"   />
+      <element  key="SDN:P09:40:LINC"  label="LONG-WAVE INCOMING RADIATION"    />
       <broad>
-         <element ekey="SDN:P02:40:LWRD"  elabel="Long-wave radiation"   />
+         <element  key="SDN:P02:40:LWRD"  label="Long-wave radiation"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:LONX"  elabel="LONGITUDE"   />
+      <element  key="SDN:P09:40:LONX"  label="LONGITUDE"    />
       <broad>
-         <element ekey="SDN:P02:40:ALAT"  elabel="Horizontal spatial co-ordinates"   />
+         <element  key="SDN:P02:40:ALAT"  label="Horizontal spatial co-ordinates"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MLAS"  elabel="La IN THE SEDIMENT"   />
+      <element  key="SDN:P09:40:MLAS"  label="La IN THE SEDIMENT"    />
       <broad>
-         <element ekey="SDN:P02:40:RMIN"  elabel="Inorganic chemical composition of sediment or rocks"   />
+         <element  key="SDN:P02:40:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:VZMX"  elabel="MAXI ZERO CROSSING WAVE HEIGHT"   />
+      <element  key="SDN:P09:40:VZMX"  label="MAXI ZERO CROSSING WAVE HEIGHT"    />
       <broad>
-         <element ekey="SDN:P02:40:WVST"  elabel="Wave height and period statistics"   />
+         <element  key="SDN:P02:40:WVST"  label="Wave height and period statistics"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:VCMX"  elabel="MAXIMUM CREST TO TROUGH WAVE HEIGHT"   />
+      <element  key="SDN:P09:40:VCMX"  label="MAXIMUM CREST TO TROUGH WAVE HEIGHT"    />
       <broad>
-         <element ekey="SDN:P02:40:WVST"  elabel="Wave height and period statistics"   />
+         <element  key="SDN:P02:40:WVST"  label="Wave height and period statistics"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:VMXL"  elabel="MAXIMUM WAVE LEVEL"   />
+      <element  key="SDN:P09:40:VMXL"  label="MAXIMUM WAVE LEVEL"    />
       <broad>
-         <element ekey="SDN:P02:40:WVST"  elabel="Wave height and period statistics"   />
+         <element  key="SDN:P02:40:WVST"  label="Wave height and period statistics"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MSMP"  elabel="MEAN SPHERIC DIAM. MEDIAN"   />
+      <element  key="SDN:P09:40:MSMP"  label="MEAN SPHERIC DIAM. MEDIAN"    />
       <broad>
-         <element ekey="SDN:P02:40:SPGS"  elabel="Suspended particulate material grain size parameters"   />
+         <element  key="SDN:P02:40:SPGS"  label="Suspended particulate material grain size parameters"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MSDP"  elabel="MEAN SPHERIC DIAM. OF PARTICLE"   />
+      <element  key="SDN:P09:40:MSDP"  label="MEAN SPHERIC DIAM. OF PARTICLE"    />
       <broad>
-         <element ekey="SDN:P02:40:SPGS"  elabel="Suspended particulate material grain size parameters"   />
+         <element  key="SDN:P02:40:SPGS"  label="Suspended particulate material grain size parameters"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MSZW"  elabel="MESOZOOPLANCTON DRY WEIGHT"   />
+      <element  key="SDN:P09:40:MSZW"  label="MESOZOOPLANCTON DRY WEIGHT"    />
       <broad>
-         <element ekey="SDN:P02:40:MSBD"  elabel="Zooplankton dry weight biomass per unit volume of the water column"   />
+         <element  key="SDN:P02:40:MSBD"  label="Zooplankton dry weight biomass per unit volume of the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MSBO"  elabel="MESOZOOPLANKTON ASH-FREE DRY W"   />
+      <element  key="SDN:P09:40:MSBO"  label="MESOZOOPLANKTON ASH-FREE DRY W"    />
       <broad>
-         <element ekey="SDN:P02:40:MSBO"  elabel="Zooplankton ash-free dry weight biomass per unit volume of the water column"   />
+         <element  key="SDN:P02:40:MSBO"  label="Zooplankton ash-free dry weight biomass per unit volume of the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MMNF"  elabel="MN FLUX IN SETTLING PARTICLES"   />
+      <element  key="SDN:P09:40:MMNF"  label="MN FLUX IN SETTLING PARTICLES"    />
       <broad>
-         <element ekey="SDN:P02:40:MLFX"  elabel="Sedimentation flux of metallic and metalloid elements and isotopes in water bodies"   />
+         <element  key="SDN:P02:40:MLFX"  label="Sedimentation flux of metallic and metalloid elements and isotopes in water bodies"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MNTH"  elabel="MONTH"   />
+      <element  key="SDN:P09:40:MNTH"  label="MONTH"    />
       <broad>
-         <element ekey="SDN:P02:40:AYMD"  elabel="Date and time"   />
+         <element  key="SDN:P02:40:AYMD"  label="Date and time"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MMGP"  elabel="Mg IN SUSPENDED MATTER"   />
+      <element  key="SDN:P09:40:MMGP"  label="Mg IN SUSPENDED MATTER"    />
       <broad>
-         <element ekey="SDN:P02:40:MTWP"  elabel="Particulate metal concentrations in the water column"   />
+         <element  key="SDN:P02:40:MTWP"  label="Particulate metal concentrations in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MMGS"  elabel="Mg IN THE SEDIMENT"   />
+      <element  key="SDN:P09:40:MMGS"  label="Mg IN THE SEDIMENT"    />
       <broad>
-         <element ekey="SDN:P02:40:RMIN"  elabel="Inorganic chemical composition of sediment or rocks"   />
+         <element  key="SDN:P02:40:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MMNP"  elabel="Mn IN SUSPENDED MATTER"   />
+      <element  key="SDN:P09:40:MMNP"  label="Mn IN SUSPENDED MATTER"    />
       <broad>
-         <element ekey="SDN:P02:40:MTWP"  elabel="Particulate metal concentrations in the water column"   />
+         <element  key="SDN:P02:40:MTWP"  label="Particulate metal concentrations in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MMNS"  elabel="Mn IN THE SEDIMENT"   />
+      <element  key="SDN:P09:40:MMNS"  label="Mn IN THE SEDIMENT"    />
       <broad>
-         <element ekey="SDN:P02:40:RMIN"  elabel="Inorganic chemical composition of sediment or rocks"   />
+         <element  key="SDN:P02:40:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MMOS"  elabel="Mo IN THE SEDIMENT"   />
+      <element  key="SDN:P09:40:MMOS"  label="Mo IN THE SEDIMENT"    />
       <broad>
-         <element ekey="SDN:P02:40:RMIN"  elabel="Inorganic chemical composition of sediment or rocks"   />
+         <element  key="SDN:P02:40:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:HBAW"  elabel="NB OF HETEROTROPHIC BACTERIA"   />
+      <element  key="SDN:P09:40:HBAW"  label="NB OF HETEROTROPHIC BACTERIA"    />
       <broad>
-         <element ekey="SDN:P02:40:BNTX"  elabel="Bacteria generic abundance in water bodies"   />
+         <element  key="SDN:P02:40:BNTX"  label="Bacteria generic abundance in water bodies"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:NTRA"  elabel="NITRATE (NO3-N) CONTENT"   />
+      <element  key="SDN:P09:40:NTRA"  label="NITRATE (NO3-N) CONTENT"    />
       <broad>
-         <element ekey="SDN:P02:40:NTRA"  elabel="Nitrate concentration parameters in the water column"   />
+         <element  key="SDN:P02:40:NTRA"  label="Nitrate concentration parameters in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:NTAW"  elabel="NITRATE (NO3-N) CONTENT"   />
+      <element  key="SDN:P09:40:NTAW"  label="NITRATE (NO3-N) CONTENT"    />
       <broad>
-         <element ekey="SDN:P02:40:NTRA"  elabel="Nitrate concentration parameters in the water column"   />
+         <element  key="SDN:P02:40:NTRA"  label="Nitrate concentration parameters in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:NTZW"  elabel="NITRATE + NITRITE CONTENT"   />
+      <element  key="SDN:P09:40:NTZW"  label="NITRATE + NITRITE CONTENT"    />
       <broad>
-         <element ekey="SDN:P02:40:NTRA"  elabel="Nitrate concentration parameters in the water column"   />
+         <element  key="SDN:P02:40:NTRA"  label="Nitrate concentration parameters in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:NTRZ"  elabel="NITRATE + NITRITE CONTENT"   />
+      <element  key="SDN:P09:40:NTRZ"  label="NITRATE + NITRITE CONTENT"    />
       <broad>
-         <element ekey="SDN:P02:40:NTRA"  elabel="Nitrate concentration parameters in the water column"   />
+         <element  key="SDN:P02:40:NTRA"  label="Nitrate concentration parameters in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:NTAP"  elabel="NITRATE IN SEDIMENT PORE WATER"   />
+      <element  key="SDN:P09:40:NTAP"  label="NITRATE IN SEDIMENT PORE WATER"    />
       <broad>
-         <element ekey="SDN:P02:40:NTPW"  elabel="Nutrient concentrations in sediment pore waters"   />
+         <element  key="SDN:P02:40:NTPW"  label="Nutrient concentrations in sediment pore waters"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:NOUW"  elabel="NITRATE UPTAKE"   />
+      <element  key="SDN:P09:40:NOUW"  label="NITRATE UPTAKE"    />
       <broad>
-         <element ekey="SDN:P02:40:NTUP"  elabel="New production in water bodies"   />
+         <element  key="SDN:P02:40:NTUP"  label="New production in water bodies"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:NORW"  elabel="NITRIFICATION"   />
+      <element  key="SDN:P09:40:NORW"  label="NITRIFICATION"    />
       <broad>
-         <element ekey="SDN:P02:40:AMOX"  elabel="Nitrification rate in the water column"   />
+         <element  key="SDN:P02:40:AMOX"  label="Nitrification rate in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:NTIW"  elabel="NITRITE (NO2-N) CONTENT"   />
+      <element  key="SDN:P09:40:NTIW"  label="NITRITE (NO2-N) CONTENT"    />
       <broad>
-         <element ekey="SDN:P02:40:NTRI"  elabel="Nitrite concentration parameters in the water column"   />
+         <element  key="SDN:P02:40:NTRI"  label="Nitrite concentration parameters in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:NTRI"  elabel="NITRITE (NO2-N) CONTENT"   />
+      <element  key="SDN:P09:40:NTRI"  label="NITRITE (NO2-N) CONTENT"    />
       <broad>
-         <element ekey="SDN:P02:40:NTRI"  elabel="Nitrite concentration parameters in the water column"   />
+         <element  key="SDN:P02:40:NTRI"  label="Nitrite concentration parameters in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:NTIP"  elabel="NITRITE IN SEDIMENT PORE WATER"   />
+      <element  key="SDN:P09:40:NTIP"  label="NITRITE IN SEDIMENT PORE WATER"    />
       <broad>
-         <element ekey="SDN:P02:40:NTPW"  elabel="Nutrient concentrations in sediment pore waters"   />
+         <element  key="SDN:P02:40:NTPW"  label="Nutrient concentrations in sediment pore waters"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:NIUW"  elabel="NITROGEN UPTAKE (FIXATION)"   />
+      <element  key="SDN:P09:40:NIUW"  label="NITROGEN UPTAKE (FIXATION)"    />
       <broad>
-         <element ekey="SDN:P02:40:NTUP"  elabel="New production in water bodies"   />
+         <element  key="SDN:P02:40:NTUP"  label="New production in water bodies"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:BCCS"  elabel="NUMBER OF BACTERIA IN SEDIMENT"   />
+      <element  key="SDN:P09:40:BCCS"  label="NUMBER OF BACTERIA IN SEDIMENT"    />
       <broad>
-         <element ekey="SDN:P02:40:BNUC"  elabel="Bacteria generic abundance in sediment"   />
+         <element  key="SDN:P02:40:BNUC"  label="Bacteria generic abundance in sediment"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:COPP"  elabel="NUMBER OF COPEPODS"   />
+      <element  key="SDN:P09:40:COPP"  label="NUMBER OF COPEPODS"    />
       <broad>
-         <element ekey="SDN:P02:40:ZNTX"  elabel="Zooplankton non taxonomy-related abundance per unit volume of the water column"   />
+         <element  key="SDN:P02:40:ZNTX"  label="Zooplankton non taxonomy-related abundance per unit volume of the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:NUMP"  elabel="NUMBER OF PARTICLES 3-80UM"   />
+      <element  key="SDN:P09:40:NUMP"  label="NUMBER OF PARTICLES 3-80UM"    />
       <broad>
-         <element ekey="SDN:P02:40:TSED"  elabel="Concentration of suspended particulate material in the water column"   />
-         <element ekey="SDN:P02:40:SPGS"  elabel="Suspended particulate material grain size parameters"   />
+         <element  key="SDN:P02:40:TSED"  label="Concentration of suspended particulate material in the water column"    />
+         <element  key="SDN:P02:40:SPGS"  label="Suspended particulate material grain size parameters"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:NUMN"  elabel="NUMBER OF PARTICLES &gt;0.7UM"   />
+      <element  key="SDN:P09:40:NUMN"  label="NUMBER OF PARTICLES &gt;0.7UM"    />
       <broad>
-         <element ekey="SDN:P02:40:TSED"  elabel="Concentration of suspended particulate material in the water column"   />
-         <element ekey="SDN:P02:40:SPGS"  elabel="Suspended particulate material grain size parameters"   />
+         <element  key="SDN:P02:40:TSED"  label="Concentration of suspended particulate material in the water column"    />
+         <element  key="SDN:P02:40:SPGS"  label="Suspended particulate material grain size parameters"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:NUNM"  elabel="NUMBER OF PARTICLES &gt;=480UM"   />
+      <element  key="SDN:P09:40:NUNM"  label="NUMBER OF PARTICLES &gt;=480UM"    />
       <broad>
-         <element ekey="SDN:P02:40:SPGS"  elabel="Suspended particulate material grain size parameters"   />
-         <element ekey="SDN:P02:40:TSED"  elabel="Concentration of suspended particulate material in the water column"   />
+         <element  key="SDN:P02:40:SPGS"  label="Suspended particulate material grain size parameters"    />
+         <element  key="SDN:P02:40:TSED"  label="Concentration of suspended particulate material in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:BCCW"  elabel="NUMBER OF SW BACTERIA"   />
+      <element  key="SDN:P09:40:BCCW"  label="NUMBER OF SW BACTERIA"    />
       <broad>
-         <element ekey="SDN:P02:40:BNTX"  elabel="Bacteria generic abundance in water bodies"   />
+         <element  key="SDN:P02:40:BNTX"  label="Bacteria generic abundance in water bodies"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:CICW"  elabel="NUMBER OF SW CILIATES"   />
+      <element  key="SDN:P09:40:CICW"  label="NUMBER OF SW CILIATES"    />
       <broad>
-         <element ekey="SDN:P02:40:MATX"  elabel="Microzooplankton taxonomic abundance in water bodies"   />
+         <element  key="SDN:P02:40:MATX"  label="Microzooplankton taxonomic abundance in water bodies"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:COCW"  elabel="NUMBER OF SW COCCOLITHOPHORIDS"   />
+      <element  key="SDN:P09:40:COCW"  label="NUMBER OF SW COCCOLITHOPHORIDS"    />
       <broad>
-         <element ekey="SDN:P02:40:PNTX"  elabel="Phytoplankton generic abundance in water bodies"   />
+         <element  key="SDN:P02:40:PNTX"  label="Phytoplankton generic abundance in water bodies"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:DTCW"  elabel="NUMBER OF SW DIATOMS"   />
+      <element  key="SDN:P09:40:DTCW"  label="NUMBER OF SW DIATOMS"    />
       <broad>
-         <element ekey="SDN:P02:40:PNTX"  elabel="Phytoplankton generic abundance in water bodies"   />
+         <element  key="SDN:P02:40:PNTX"  label="Phytoplankton generic abundance in water bodies"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:DFCW"  elabel="NUMBER OF SW DINOFLAGELLATES"   />
+      <element  key="SDN:P09:40:DFCW"  label="NUMBER OF SW DINOFLAGELLATES"    />
       <broad>
-         <element ekey="SDN:P02:40:PNTX"  elabel="Phytoplankton generic abundance in water bodies"   />
+         <element  key="SDN:P02:40:PNTX"  label="Phytoplankton generic abundance in water bodies"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:DINW"  elabel="NUMBER OF SW DYNOPHYSIS"   />
+      <element  key="SDN:P09:40:DINW"  label="NUMBER OF SW DYNOPHYSIS"    />
       <broad>
-         <element ekey="SDN:P02:40:PATX"  elabel="Phytoplankton taxonomic abundance in water bodies"   />
+         <element  key="SDN:P02:40:PATX"  label="Phytoplankton taxonomic abundance in water bodies"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:GYRW"  elabel="NUMBER OF SW GYRODINIUM"   />
+      <element  key="SDN:P09:40:GYRW"  label="NUMBER OF SW GYRODINIUM"    />
       <broad>
-         <element ekey="SDN:P02:40:PATX"  elabel="Phytoplankton taxonomic abundance in water bodies"   />
+         <element  key="SDN:P02:40:PATX"  label="Phytoplankton taxonomic abundance in water bodies"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:NFCW"  elabel="NUMBER OF SW NANOFLAGELLATES"   />
+      <element  key="SDN:P09:40:NFCW"  label="NUMBER OF SW NANOFLAGELLATES"    />
       <broad>
-         <element ekey="SDN:P02:40:PNTX"  elabel="Phytoplankton generic abundance in water bodies"   />
+         <element  key="SDN:P02:40:PNTX"  label="Phytoplankton generic abundance in water bodies"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:PCEW"  elabel="NUMBER OF SW PICOEUCARYOTES"   />
+      <element  key="SDN:P09:40:PCEW"  label="NUMBER OF SW PICOEUCARYOTES"    />
       <broad>
-         <element ekey="SDN:P02:40:PNTX"  elabel="Phytoplankton generic abundance in water bodies"   />
+         <element  key="SDN:P02:40:PNTX"  label="Phytoplankton generic abundance in water bodies"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:PRCW"  elabel="NUMBER OF SW PROCHLOROCOCCUS"   />
+      <element  key="SDN:P09:40:PRCW"  label="NUMBER OF SW PROCHLOROCOCCUS"    />
       <broad>
-         <element ekey="SDN:P02:40:PATX"  elabel="Phytoplankton taxonomic abundance in water bodies"   />
+         <element  key="SDN:P02:40:PATX"  label="Phytoplankton taxonomic abundance in water bodies"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:SNCW"  elabel="NUMBER OF SW SYNECHOCOCCUS"   />
+      <element  key="SDN:P09:40:SNCW"  label="NUMBER OF SW SYNECHOCOCCUS"    />
       <broad>
-         <element ekey="SDN:P02:40:PATX"  elabel="Phytoplankton taxonomic abundance in water bodies"   />
+         <element  key="SDN:P02:40:PATX"  label="Phytoplankton taxonomic abundance in water bodies"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MNAS"  elabel="Na IN THE SEDIMENT"   />
+      <element  key="SDN:P09:40:MNAS"  label="Na IN THE SEDIMENT"    />
       <broad>
-         <element ekey="SDN:P02:40:RMIN"  elabel="Inorganic chemical composition of sediment or rocks"   />
+         <element  key="SDN:P02:40:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MNBS"  elabel="Nb IN THE SEDIMENT"   />
+      <element  key="SDN:P09:40:MNBS"  label="Nb IN THE SEDIMENT"    />
       <broad>
-         <element ekey="SDN:P02:40:RMIN"  elabel="Inorganic chemical composition of sediment or rocks"   />
+         <element  key="SDN:P02:40:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MNDS"  elabel="Nd IN THE SEDIMENT"   />
+      <element  key="SDN:P09:40:MNDS"  label="Nd IN THE SEDIMENT"    />
       <broad>
-         <element ekey="SDN:P02:40:RMIN"  elabel="Inorganic chemical composition of sediment or rocks"   />
+         <element  key="SDN:P02:40:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MNIS"  elabel="Ni IN THE SEDIMENT"   />
+      <element  key="SDN:P09:40:MNIS"  label="Ni IN THE SEDIMENT"    />
       <broad>
-         <element ekey="SDN:P02:40:RMIN"  elabel="Inorganic chemical composition of sediment or rocks"   />
+         <element  key="SDN:P02:40:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:SLEV"  elabel="OBSERVED SEA LEVEL"   />
+      <element  key="SDN:P09:40:SLEV"  label="OBSERVED SEA LEVEL"    />
       <broad>
-         <element ekey="SDN:P02:40:ASLV"  elabel="Sea level"   />
+         <element  key="SDN:P02:40:ASLV"  label="Sea level"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:OPAP"  elabel="OPAL CONTENT"   />
+      <element  key="SDN:P09:40:OPAP"  label="OPAL CONTENT"    />
       <broad>
-         <element ekey="SDN:P02:40:CLAY"  elabel="Mineralogical composition"   />
+         <element  key="SDN:P02:40:CLAY"  label="Mineralogical composition"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TOMP"  elabel="ORGANIC MATTER CONTENT"   />
+      <element  key="SDN:P09:40:TOMP"  label="ORGANIC MATTER CONTENT"    />
       <broad>
-         <element ekey="SDN:P02:40:DENS"  elabel="Other physical and chemical properties of suspended particulate material"   />
+         <element  key="SDN:P02:40:DENS"  label="Other physical and chemical properties of suspended particulate material"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:OSMP"  elabel="ORGANIC SUSPENDED MATTER"   />
+      <element  key="SDN:P09:40:OSMP"  label="ORGANIC SUSPENDED MATTER"    />
       <broad>
-         <element ekey="SDN:P02:40:TSED"  elabel="Concentration of suspended particulate material in the water column"   />
+         <element  key="SDN:P02:40:TSED"  label="Concentration of suspended particulate material in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:OSAT"  elabel="OXYGEN SATURATION"   />
+      <element  key="SDN:P09:40:OSAT"  label="OXYGEN SATURATION"    />
       <broad>
-         <element ekey="SDN:P02:40:DOXY"  elabel="Dissolved oxygen parameters in the water column"   />
+         <element  key="SDN:P02:40:DOXY"  label="Dissolved oxygen parameters in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MPPP"  elabel="P IN SUSPENDED MATTER"   />
+      <element  key="SDN:P09:40:MPPP"  label="P IN SUSPENDED MATTER"    />
       <broad>
-         <element ekey="SDN:P02:40:PXSP"  elabel="Phosphorus concentrations in suspended particulate material"   />
+         <element  key="SDN:P02:40:PXSP"  label="Phosphorus concentrations in suspended particulate material"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MPPS"  elabel="P IN THE SEDIMENT"   />
+      <element  key="SDN:P09:40:MPPS"  label="P IN THE SEDIMENT"    />
       <broad>
-         <element ekey="SDN:P02:40:RMIN"  elabel="Inorganic chemical composition of sediment or rocks"   />
+         <element  key="SDN:P02:40:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:LGH2"  elabel="PAR ATTENUATION COEFFICIENT"   />
+      <element  key="SDN:P09:40:LGH2"  label="PAR ATTENUATION COEFFICIENT"    />
       <broad>
-         <element ekey="SDN:P02:40:EXCO"  elabel="Light extinction and diffusion coefficients"   />
+         <element  key="SDN:P02:40:EXCO"  label="Light extinction and diffusion coefficients"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:SIOF"  elabel="PART. BIOGENIC Si FLUX"   />
+      <element  key="SDN:P09:40:SIOF"  label="PART. BIOGENIC Si FLUX"    />
       <broad>
-         <element ekey="SDN:P02:40:OPFX"  elabel="Sedimentation flux of non-metallic inorganic species in the water column"   />
+         <element  key="SDN:P02:40:OPFX"  label="Sedimentation flux of non-metallic inorganic species in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:CO3F"  elabel="PART. CaCO3 FLUX"   />
+      <element  key="SDN:P09:40:CO3F"  label="PART. CaCO3 FLUX"    />
       <broad>
-         <element ekey="SDN:P02:40:TCFX"  elabel="Sedimentation flux of carbon, nitrogen or organic matter in the water column"   />
+         <element  key="SDN:P02:40:TCFX"  label="Sedimentation flux of carbon, nitrogen or organic matter in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:POCF"  elabel="PART. ORGANIC CARBON FLUX"   />
+      <element  key="SDN:P09:40:POCF"  label="PART. ORGANIC CARBON FLUX"    />
       <broad>
-         <element ekey="SDN:P02:40:TCFX"  elabel="Sedimentation flux of carbon, nitrogen or organic matter in the water column"   />
+         <element  key="SDN:P02:40:TCFX"  label="Sedimentation flux of carbon, nitrogen or organic matter in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:OMMF"  elabel="PART. ORGANIC MATTER FLUX"   />
+      <element  key="SDN:P09:40:OMMF"  label="PART. ORGANIC MATTER FLUX"    />
       <broad>
-         <element ekey="SDN:P02:40:TCFX"  elabel="Sedimentation flux of carbon, nitrogen or organic matter in the water column"   />
+         <element  key="SDN:P02:40:TCFX"  label="Sedimentation flux of carbon, nitrogen or organic matter in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:PP1P"  elabel="PART. ORGANIC PHOSPHORUS (P)"   />
+      <element  key="SDN:P09:40:PP1P"  label="PART. ORGANIC PHOSPHORUS (P)"    />
       <broad>
-         <element ekey="SDN:P02:40:TPHS"  elabel="Particulate total and organic phosphorus concentrations in the water column"   />
+         <element  key="SDN:P02:40:TPHS"  label="Particulate total and organic phosphorus concentrations in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:CHTF"  elabel="PART. TOTAL CARBOHYDRATES FLUX"   />
+      <element  key="SDN:P09:40:CHTF"  label="PART. TOTAL CARBOHYDRATES FLUX"    />
       <broad>
-         <element ekey="SDN:P02:40:CBFX"  elabel="Sedimentation flux of carbohydates in the water column"   />
+         <element  key="SDN:P02:40:CBFX"  label="Sedimentation flux of carbohydates in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TCCF"  elabel="PART. TOTAL CARBON FLUX"   />
+      <element  key="SDN:P09:40:TCCF"  label="PART. TOTAL CARBON FLUX"    />
       <broad>
-         <element ekey="SDN:P02:40:TCFX"  elabel="Sedimentation flux of carbon, nitrogen or organic matter in the water column"   />
+         <element  key="SDN:P02:40:TCFX"  label="Sedimentation flux of carbon, nitrogen or organic matter in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TNNF"  elabel="PART. TOTAL NITROGEN FLUX"   />
+      <element  key="SDN:P09:40:TNNF"  label="PART. TOTAL NITROGEN FLUX"    />
       <broad>
-         <element ekey="SDN:P02:40:TCFX"  elabel="Sedimentation flux of carbon, nitrogen or organic matter in the water column"   />
+         <element  key="SDN:P02:40:TCFX"  label="Sedimentation flux of carbon, nitrogen or organic matter in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:ETHP"  elabel="PARTICULATE 234 TH ACT. ERROR"   />
+      <element  key="SDN:P09:40:ETHP"  label="PARTICULATE 234 TH ACT. ERROR"    />
       <broad>
-         <element ekey="SDN:P02:40:WRAD"  elabel="Radioactivity in the water column"   />
+         <element  key="SDN:P02:40:WRAD"  label="Radioactivity in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TH4P"  elabel="PARTICULATE 234TH ACTIVTY"   />
+      <element  key="SDN:P09:40:TH4P"  label="PARTICULATE 234TH ACTIVTY"    />
       <broad>
-         <element ekey="SDN:P02:40:WRAD"  elabel="Radioactivity in the water column"   />
+         <element  key="SDN:P02:40:WRAD"  label="Radioactivity in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:PC1P"  elabel="PARTICULATE ORGANIC CARBON/POC"   />
+      <element  key="SDN:P09:40:PC1P"  label="PARTICULATE ORGANIC CARBON/POC"    />
       <broad>
-         <element ekey="SDN:P02:40:CORG"  elabel="Particulate total and organic carbon concentrations in the water column"   />
+         <element  key="SDN:P02:40:CORG"  label="Particulate total and organic carbon concentrations in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:POCP"  elabel="PARTICULATE ORGANIC CARBON/POC"   />
+      <element  key="SDN:P09:40:POCP"  label="PARTICULATE ORGANIC CARBON/POC"    />
       <broad>
-         <element ekey="SDN:P02:40:CORG"  elabel="Particulate total and organic carbon concentrations in the water column"   />
+         <element  key="SDN:P02:40:CORG"  label="Particulate total and organic carbon concentrations in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:PONP"  elabel="PARTICULATE ORGANIC NITROGEN"   />
+      <element  key="SDN:P09:40:PONP"  label="PARTICULATE ORGANIC NITROGEN"    />
       <broad>
-         <element ekey="SDN:P02:40:NTOT"  elabel="Particulate total and organic nitrogen concentrations in the water column"   />
+         <element  key="SDN:P02:40:NTOT"  label="Particulate total and organic nitrogen concentrations in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:PN1P"  elabel="PARTICULATE ORGANIC NITROGEN"   />
+      <element  key="SDN:P09:40:PN1P"  label="PARTICULATE ORGANIC NITROGEN"    />
       <broad>
-         <element ekey="SDN:P02:40:NTOT"  elabel="Particulate total and organic nitrogen concentrations in the water column"   />
+         <element  key="SDN:P02:40:NTOT"  label="Particulate total and organic nitrogen concentrations in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:SLCP"  elabel="PARTICULATE ORGANIC SILICA(SI)"   />
+      <element  key="SDN:P09:40:SLCP"  label="PARTICULATE ORGANIC SILICA(SI)"    />
       <broad>
-         <element ekey="SDN:P02:40:SIXX"  elabel="Concentration of silicon species in the water column"   />
+         <element  key="SDN:P02:40:SIXX"  label="Concentration of silicon species in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MPBF"  elabel="PB FLUX IN SETTLING PARTICLES"   />
+      <element  key="SDN:P09:40:MPBF"  label="PB FLUX IN SETTLING PARTICLES"    />
       <broad>
-         <element ekey="SDN:P02:40:MLFX"  elabel="Sedimentation flux of metallic and metalloid elements and isotopes in water bodies"   />
+         <element  key="SDN:P02:40:MLFX"  label="Sedimentation flux of metallic and metalloid elements and isotopes in water bodies"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:PERP"  elabel="PERIDININE"   />
+      <element  key="SDN:P09:40:PERP"  label="PERIDININE"    />
       <broad>
-         <element ekey="SDN:P02:40:CARO"  elabel="Carotenoid pigment concentrations in the water column"   />
+         <element  key="SDN:P02:40:CARO"  label="Carotenoid pigment concentrations in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:PHPH"  elabel="PH"   />
+      <element  key="SDN:P09:40:PHPH"  label="PH"    />
       <broad>
-         <element ekey="SDN:P02:40:ALKY"  elabel="Alkalinity, acidity and pH of the water column"   />
+         <element  key="SDN:P02:40:ALKY"  label="Alkalinity, acidity and pH of the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:PHTF"  elabel="PHAEOPIGMENTS VERTICAL FLUX"   />
+      <element  key="SDN:P09:40:PHTF"  label="PHAEOPIGMENTS VERTICAL FLUX"    />
       <broad>
-         <element ekey="SDN:P02:40:AXFX"  elabel="Sedimentation flux of pigments in the water column"   />
+         <element  key="SDN:P02:40:AXFX"  label="Sedimentation flux of pigments in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:PHEA"  elabel="PHEOPHYTIN-A"   />
+      <element  key="SDN:P09:40:PHEA"  label="PHEOPHYTIN-A"    />
       <broad>
-         <element ekey="SDN:P02:40:PHWC"  elabel="Phaeopigment concentrations in the water column"   />
+         <element  key="SDN:P02:40:PHWC"  label="Phaeopigment concentrations in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:PHEB"  elabel="PHEOPHYTIN-B"   />
+      <element  key="SDN:P09:40:PHEB"  label="PHEOPHYTIN-B"    />
       <broad>
-         <element ekey="SDN:P02:40:PHWC"  elabel="Phaeopigment concentrations in the water column"   />
+         <element  key="SDN:P02:40:PHWC"  label="Phaeopigment concentrations in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:PHEC"  elabel="PHEOPHYTIN-C"   />
+      <element  key="SDN:P09:40:PHEC"  label="PHEOPHYTIN-C"    />
       <broad>
-         <element ekey="SDN:P02:40:PHWC"  elabel="Phaeopigment concentrations in the water column"   />
+         <element  key="SDN:P02:40:PHWC"  label="Phaeopigment concentrations in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:PHE4"  elabel="PHEOPHYTINE / 10 MICRON FILTER"   />
+      <element  key="SDN:P09:40:PHE4"  label="PHEOPHYTINE / 10 MICRON FILTER"    />
       <broad>
-         <element ekey="SDN:P02:40:PHWC"  elabel="Phaeopigment concentrations in the water column"   />
+         <element  key="SDN:P02:40:PHWC"  label="Phaeopigment concentrations in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:PHE2"  elabel="PHEOPHYTINE / 2 MICRON FILTER"   />
+      <element  key="SDN:P09:40:PHE2"  label="PHEOPHYTINE / 2 MICRON FILTER"    />
       <broad>
-         <element ekey="SDN:P02:40:PHWC"  elabel="Phaeopigment concentrations in the water column"   />
+         <element  key="SDN:P02:40:PHWC"  label="Phaeopigment concentrations in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:PHOS"  elabel="PHOSPHATE (PO4-P) CONTENT"   />
+      <element  key="SDN:P09:40:PHOS"  label="PHOSPHATE (PO4-P) CONTENT"    />
       <broad>
-         <element ekey="SDN:P02:40:PHOS"  elabel="Phosphate concentration parameters in the water column"   />
+         <element  key="SDN:P02:40:PHOS"  label="Phosphate concentration parameters in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:PHOW"  elabel="PHOSPHATE (PO4-P) CONTENT"   />
+      <element  key="SDN:P09:40:PHOW"  label="PHOSPHATE (PO4-P) CONTENT"    />
       <broad>
-         <element ekey="SDN:P02:40:PHOS"  elabel="Phosphate concentration parameters in the water column"   />
+         <element  key="SDN:P02:40:PHOS"  label="Phosphate concentration parameters in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:PHOP"  elabel="PHOSPHATE IN SEDIMT PORE WATER"   />
+      <element  key="SDN:P09:40:PHOP"  label="PHOSPHATE IN SEDIMT PORE WATER"    />
       <broad>
-         <element ekey="SDN:P02:40:NTPW"  elabel="Nutrient concentrations in sediment pore waters"   />
+         <element  key="SDN:P02:40:NTPW"  label="Nutrient concentrations in sediment pore waters"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:PHCW"  elabel="PHYTOPLANKTON ABUNDANCE"   />
+      <element  key="SDN:P09:40:PHCW"  label="PHYTOPLANKTON ABUNDANCE"    />
       <broad>
-         <element ekey="SDN:P02:40:PNTX"  elabel="Phytoplankton generic abundance in water bodies"   />
+         <element  key="SDN:P02:40:PNTX"  label="Phytoplankton generic abundance in water bodies"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:HEAD"  elabel="PLAT. HEADING REL. TRUE NORTH"   />
+      <element  key="SDN:P09:40:HEAD"  label="PLAT. HEADING REL. TRUE NORTH"    />
       <broad>
-         <element ekey="SDN:P02:40:HEAD"  elabel="Platform or instrument orientation"   />
+         <element  key="SDN:P02:40:HEAD"  label="Platform or instrument orientation"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:SO4O"  elabel="PORE WATER SULFATE"   />
+      <element  key="SDN:P09:40:SO4O"  label="PORE WATER SULFATE"    />
       <broad>
-         <element ekey="SDN:P02:40:SPHT"  elabel="Concentration of inorganic sulphur species in sediment pore water"   />
+         <element  key="SDN:P02:40:SPHT"  label="Concentration of inorganic sulphur species in sediment pore water"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:PETD"  elabel="POTENTIAL EVAPOTRANSPIRATION"   />
+      <element  key="SDN:P09:40:PETD"  label="POTENTIAL EVAPOTRANSPIRATION"    />
       <broad>
-         <element ekey="SDN:P02:40:CPRP"  elabel="Precipitation and evaporation"   />
+         <element  key="SDN:P02:40:CPRP"  label="Precipitation and evaporation"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:PSAL"  elabel="PRACTICAL SALINITY"   />
+      <element  key="SDN:P09:40:PSAL"  label="PRACTICAL SALINITY"    />
       <broad>
-         <element ekey="SDN:P02:40:PSAL"  elabel="Salinity of the water column"   />
+         <element  key="SDN:P02:40:PSAL"  label="Salinity of the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:PXAP"  elabel="PRASINOXANTHINE"   />
+      <element  key="SDN:P09:40:PXAP"  label="PRASINOXANTHINE"    />
       <broad>
-         <element ekey="SDN:P02:40:CARO"  elabel="Carotenoid pigment concentrations in the water column"   />
+         <element  key="SDN:P02:40:CARO"  label="Carotenoid pigment concentrations in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:PRRT"  elabel="PRECIPITATION RATE"   />
+      <element  key="SDN:P09:40:PRRT"  label="PRECIPITATION RATE"    />
       <broad>
-         <element ekey="SDN:P02:40:CPRP"  elabel="Precipitation and evaporation"   />
+         <element  key="SDN:P02:40:CPRP"  label="Precipitation and evaporation"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:PRRD"  elabel="PRECIPITATION RATE"   />
+      <element  key="SDN:P09:40:PRRD"  label="PRECIPITATION RATE"    />
       <broad>
-         <element ekey="SDN:P02:40:CPRP"  elabel="Precipitation and evaporation"   />
+         <element  key="SDN:P02:40:CPRP"  label="Precipitation and evaporation"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:PROT"  elabel="PROTEIN"   />
+      <element  key="SDN:P09:40:PROT"  label="PROTEIN"    />
       <broad>
-         <element ekey="SDN:P02:40:WPRO"  elabel="Concentration of proteins in the water column"   />
+         <element  key="SDN:P02:40:WPRO"  label="Concentration of proteins in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:PTZF"  elabel="PROTOZOA PPC FLUX"   />
+      <element  key="SDN:P09:40:PTZF"  label="PROTOZOA PPC FLUX"    />
       <broad>
-         <element ekey="SDN:P02:40:PCFX"  elabel="Sedimentation flux of identified biota expressed as carbon in the water column"   />
+         <element  key="SDN:P02:40:PCFX"  label="Sedimentation flux of identified biota expressed as carbon in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MPBS"  elabel="Pb IN THE SEDIMENT"   />
+      <element  key="SDN:P09:40:MPBS"  label="Pb IN THE SEDIMENT"    />
       <broad>
-         <element ekey="SDN:P02:40:RMIN"  elabel="Inorganic chemical composition of sediment or rocks"   />
+         <element  key="SDN:P02:40:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TR10"  elabel="RED LIGHT TRANSMISSION 10CM"   />
+      <element  key="SDN:P09:40:TR10"  label="RED LIGHT TRANSMISSION 10CM"    />
       <broad>
-         <element ekey="SDN:P02:40:ATTN"  elabel="Transmittance and attenuance of the water column"   />
+         <element  key="SDN:P02:40:ATTN"  label="Transmittance and attenuance of the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TR25"  elabel="RED LIGHT TRANSMISSION 25CM"   />
+      <element  key="SDN:P09:40:TR25"  label="RED LIGHT TRANSMISSION 25CM"    />
       <broad>
-         <element ekey="SDN:P02:40:ATTN"  elabel="Transmittance and attenuance of the water column"   />
+         <element  key="SDN:P02:40:ATTN"  label="Transmittance and attenuance of the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:REDS"  elabel="REDOX POTENTIAL"   />
+      <element  key="SDN:P09:40:REDS"  label="REDOX POTENTIAL"    />
       <broad>
-         <element ekey="SDN:P02:40:RPOT"  elabel="Redox potential in sediment"   />
+         <element  key="SDN:P02:40:RPOT"  label="Redox potential in sediment"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:RELH"  elabel="RELATIVE HUMIDITY"   />
+      <element  key="SDN:P09:40:RELH"  label="RELATIVE HUMIDITY"    />
       <broad>
-         <element ekey="SDN:P02:40:CHUM"  elabel="Atmospheric humidity"   />
+         <element  key="SDN:P02:40:CHUM"  label="Atmospheric humidity"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:SLVR"  elabel="RESIDUAL (OBS-PRED SEA LEVEL)"   />
+      <element  key="SDN:P09:40:SLVR"  label="RESIDUAL (OBS-PRED SEA LEVEL)"    />
       <broad>
-         <element ekey="SDN:P02:40:ASLV"  elabel="Sea level"   />
+         <element  key="SDN:P02:40:ASLV"  label="Sea level"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:RVFL"  elabel="RIVER FLOW RATE"   />
+      <element  key="SDN:P09:40:RVFL"  label="RIVER FLOW RATE"    />
       <broad>
-         <element ekey="SDN:P02:40:RVDS"  elabel="River flow and discharge"   />
+         <element  key="SDN:P02:40:RVDS"  label="River flow and discharge"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MRBS"  elabel="Rb IN THE SEDIMENT"   />
+      <element  key="SDN:P09:40:MRBS"  label="Rb IN THE SEDIMENT"    />
       <broad>
-         <element ekey="SDN:P02:40:RMIN"  elabel="Inorganic chemical composition of sediment or rocks"   />
+         <element  key="SDN:P02:40:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MSSP"  elabel="S IN SUSPENDED MATTER"   />
+      <element  key="SDN:P09:40:MSSP"  label="S IN SUSPENDED MATTER"    />
       <broad>
-         <element ekey="SDN:P02:40:SXCN"  elabel="Concentration of inorganic sulphur species in suspended particulate material"   />
+         <element  key="SDN:P02:40:SXCN"  label="Concentration of inorganic sulphur species in suspended particulate material"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:SSAL"  elabel="SALINITY (PRE-1978 DEFN)"   />
+      <element  key="SDN:P09:40:SSAL"  label="SALINITY (PRE-1978 DEFN)"    />
       <broad>
-         <element ekey="SDN:P02:40:PSAL"  elabel="Salinity of the water column"   />
+         <element  key="SDN:P02:40:PSAL"  label="Salinity of the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:SACC"  elabel="SALINITY ACCURACY"   />
+      <element  key="SDN:P09:40:SACC"  label="SALINITY ACCURACY"    />
       <broad>
-         <element ekey="SDN:P02:40:TMES"  elabel="Metadata parameters"   />
+         <element  key="SDN:P02:40:TMES"  label="Metadata parameters"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:SAND"  elabel="SAND IN THE SEDIMENT"   />
+      <element  key="SDN:P09:40:SAND"  label="SAND IN THE SEDIMENT"    />
       <broad>
-         <element ekey="SDN:P02:40:MNGS"  elabel="Sediment grain size parameters"   />
+         <element  key="SDN:P02:40:MNGS"  label="Sediment grain size parameters"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:PRES"  elabel="SEA PRESSURE sea surface=0"   />
+      <element  key="SDN:P09:40:PRES"  label="SEA PRESSURE sea surface=0"    />
       <broad>
-         <element ekey="SDN:P02:40:AHGT"  elabel="Vertical spatial coordinates"   />
+         <element  key="SDN:P02:40:AHGT"  label="Vertical spatial coordinates"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TEMP"  elabel="SEA TEMPERATURE"   />
+      <element  key="SDN:P09:40:TEMP"  label="SEA TEMPERATURE"    />
       <broad>
-         <element ekey="SDN:P02:40:TEMP"  elabel="Temperature of the water column"   />
+         <element  key="SDN:P02:40:TEMP"  label="Temperature of the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TE02"  elabel="SEA TEMPERATURE"   />
+      <element  key="SDN:P09:40:TE02"  label="SEA TEMPERATURE"    />
       <broad>
-         <element ekey="SDN:P02:40:TEMP"  elabel="Temperature of the water column"   />
+         <element  key="SDN:P02:40:TEMP"  label="Temperature of the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TE01"  elabel="SEA TEMPERATURE"   />
+      <element  key="SDN:P09:40:TE01"  label="SEA TEMPERATURE"    />
       <broad>
-         <element ekey="SDN:P02:40:TEMP"  elabel="Temperature of the water column"   />
+         <element  key="SDN:P02:40:TEMP"  label="Temperature of the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TE03"  elabel="SEA TEMPERATURE"   />
+      <element  key="SDN:P09:40:TE03"  label="SEA TEMPERATURE"    />
       <broad>
-         <element ekey="SDN:P02:40:TEMP"  elabel="Temperature of the water column"   />
+         <element  key="SDN:P02:40:TEMP"  label="Temperature of the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TE04"  elabel="SEA TEMPERATURE"   />
+      <element  key="SDN:P09:40:TE04"  label="SEA TEMPERATURE"    />
       <broad>
-         <element ekey="SDN:P02:40:TEMP"  elabel="Temperature of the water column"   />
+         <element  key="SDN:P02:40:TEMP"  label="Temperature of the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TE05"  elabel="SEA TEMPERATURE"   />
+      <element  key="SDN:P09:40:TE05"  label="SEA TEMPERATURE"    />
       <broad>
-         <element ekey="SDN:P02:40:TEMP"  elabel="Temperature of the water column"   />
+         <element  key="SDN:P02:40:TEMP"  label="Temperature of the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TE06"  elabel="SEA TEMPERATURE"   />
+      <element  key="SDN:P09:40:TE06"  label="SEA TEMPERATURE"    />
       <broad>
-         <element ekey="SDN:P02:40:TEMP"  elabel="Temperature of the water column"   />
+         <element  key="SDN:P02:40:TEMP"  label="Temperature of the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TE07"  elabel="SEA TEMPERATURE"   />
+      <element  key="SDN:P09:40:TE07"  label="SEA TEMPERATURE"    />
       <broad>
-         <element ekey="SDN:P02:40:TEMP"  elabel="Temperature of the water column"   />
+         <element  key="SDN:P02:40:TEMP"  label="Temperature of the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TE08"  elabel="SEA TEMPERATURE"   />
+      <element  key="SDN:P09:40:TE08"  label="SEA TEMPERATURE"    />
       <broad>
-         <element ekey="SDN:P02:40:TEMP"  elabel="Temperature of the water column"   />
+         <element  key="SDN:P02:40:TEMP"  label="Temperature of the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TE12"  elabel="SEA TEMPERATURE"   />
+      <element  key="SDN:P09:40:TE12"  label="SEA TEMPERATURE"    />
       <broad>
-         <element ekey="SDN:P02:40:TEMP"  elabel="Temperature of the water column"   />
+         <element  key="SDN:P02:40:TEMP"  label="Temperature of the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TE10"  elabel="SEA TEMPERATURE"   />
+      <element  key="SDN:P09:40:TE10"  label="SEA TEMPERATURE"    />
       <broad>
-         <element ekey="SDN:P02:40:TEMP"  elabel="Temperature of the water column"   />
+         <element  key="SDN:P02:40:TEMP"  label="Temperature of the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TE09"  elabel="SEA TEMPERATURE"   />
+      <element  key="SDN:P09:40:TE09"  label="SEA TEMPERATURE"    />
       <broad>
-         <element ekey="SDN:P02:40:TEMP"  elabel="Temperature of the water column"   />
+         <element  key="SDN:P02:40:TEMP"  label="Temperature of the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TE11"  elabel="SEA TEMPERATURE"   />
+      <element  key="SDN:P09:40:TE11"  label="SEA TEMPERATURE"    />
       <broad>
-         <element ekey="SDN:P02:40:TEMP"  elabel="Temperature of the water column"   />
+         <element  key="SDN:P02:40:TEMP"  label="Temperature of the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:SECC"  elabel="SECCHI DISK DEPTH"   />
+      <element  key="SDN:P09:40:SECC"  label="SECCHI DISK DEPTH"    />
       <broad>
-         <element ekey="SDN:P02:40:SECC"  elabel="Secchi disk depth"   />
+         <element  key="SDN:P02:40:SECC"  label="Secchi disk depth"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:AMIS"  elabel="SEDIMENT AMINO-ACIDS"   />
+      <element  key="SDN:P09:40:AMIS"  label="SEDIMENT AMINO-ACIDS"    />
       <broad>
-         <element ekey="SDN:P02:40:HAAC"  elabel="Amino acids in sediment"   />
+         <element  key="SDN:P02:40:HAAC"  label="Amino acids in sediment"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:SIOS"  elabel="SEDIMENT BIOGENIC SiO2"   />
+      <element  key="SDN:P09:40:SIOS"  label="SEDIMENT BIOGENIC SiO2"    />
       <broad>
-         <element ekey="SDN:P02:40:CLAY"  elabel="Mineralogical composition"   />
+         <element  key="SDN:P02:40:CLAY"  label="Mineralogical composition"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:CHTS"  elabel="SEDIMENT CARBOHYDRATES"   />
+      <element  key="SDN:P09:40:CHTS"  label="SEDIMENT CARBOHYDRATES"    />
       <broad>
-         <element ekey="SDN:P02:40:CASD"  elabel="Concentration of carbohydrates, phenols, alkanols (alcohols), ethers, aldehydes and ketones in sediment"   />
+         <element  key="SDN:P02:40:CASD"  label="Concentration of carbohydrates, phenols, alkanols (alcohols), ethers, aldehydes and ketones in sediment"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:CO3S"  elabel="SEDIMENT CARBONATES"   />
+      <element  key="SDN:P09:40:CO3S"  label="SEDIMENT CARBONATES"    />
       <broad>
-         <element ekey="SDN:P02:40:CLAY"  elabel="Mineralogical composition"   />
+         <element  key="SDN:P02:40:CLAY"  label="Mineralogical composition"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:LIPS"  elabel="SEDIMENT LIPIDS"   />
+      <element  key="SDN:P09:40:LIPS"  label="SEDIMENT LIPIDS"    />
       <broad>
-         <element ekey="SDN:P02:40:CD10"  elabel="Sediment lipid concentrations"   />
+         <element  key="SDN:P02:40:CD10"  label="Sediment lipid concentrations"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:PHNS"  elabel="SEDIMENT PHENOLS"   />
+      <element  key="SDN:P09:40:PHNS"  label="SEDIMENT PHENOLS"    />
       <broad>
-         <element ekey="SDN:P02:40:CASD"  elabel="Concentration of carbohydrates, phenols, alkanols (alcohols), ethers, aldehydes and ketones in sediment"   />
+         <element  key="SDN:P02:40:CASD"  label="Concentration of carbohydrates, phenols, alkanols (alcohols), ethers, aldehydes and ketones in sediment"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TCCS"  elabel="SEDIMENT TOTAL CARBON"   />
+      <element  key="SDN:P09:40:TCCS"  label="SEDIMENT TOTAL CARBON"    />
       <broad>
-         <element ekey="SDN:P02:40:CBSD"  elabel="Carbon concentrations in sediment"   />
+         <element  key="SDN:P02:40:CBSD"  label="Carbon concentrations in sediment"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TNNS"  elabel="SEDIMENT TOTAL NITROGEN"   />
+      <element  key="SDN:P09:40:TNNS"  label="SEDIMENT TOTAL NITROGEN"    />
       <broad>
-         <element ekey="SDN:P02:40:NTSD"  elabel="Nitrogen concentrations in sediment"   />
+         <element  key="SDN:P02:40:NTSD"  label="Nitrogen concentrations in sediment"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TOCS"  elabel="SEDIMENT TOTAL ORGANIC CARBON"   />
+      <element  key="SDN:P09:40:TOCS"  label="SEDIMENT TOTAL ORGANIC CARBON"    />
       <broad>
-         <element ekey="SDN:P02:40:CBSD"  elabel="Carbon concentrations in sediment"   />
+         <element  key="SDN:P02:40:CBSD"  label="Carbon concentrations in sediment"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:SAMA"  elabel="SIGNAL RETURN AMPLITUDE"   />
+      <element  key="SDN:P09:40:SAMA"  label="SIGNAL RETURN AMPLITUDE"    />
       <broad>
-         <element ekey="SDN:P02:40:ASAM"  elabel="Acoustic backscatter in the water column"   />
+         <element  key="SDN:P02:40:ASAM"  label="Acoustic backscatter in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:VTDH"  elabel="SIGNIFICANT WAVE HEIGHT"   />
+      <element  key="SDN:P09:40:VTDH"  label="SIGNIFICANT WAVE HEIGHT"    />
       <broad>
-         <element ekey="SDN:P02:40:WVST"  elabel="Wave height and period statistics"   />
+         <element  key="SDN:P02:40:WVST"  label="Wave height and period statistics"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:SLCA"  elabel="SILICATE (SIO4-SI) CONTENT"   />
+      <element  key="SDN:P09:40:SLCA"  label="SILICATE (SIO4-SI) CONTENT"    />
       <broad>
-         <element ekey="SDN:P02:40:SLCA"  elabel="Silicate concentration parameters in the water column"   />
+         <element  key="SDN:P02:40:SLCA"  label="Silicate concentration parameters in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:SLCW"  elabel="SILICATE (SIO4-SI) CONTENT"   />
+      <element  key="SDN:P09:40:SLCW"  label="SILICATE (SIO4-SI) CONTENT"    />
       <broad>
-         <element ekey="SDN:P02:40:SLCA"  elabel="Silicate concentration parameters in the water column"   />
+         <element  key="SDN:P02:40:SLCA"  label="Silicate concentration parameters in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:SILT"  elabel="SILT IN THE SEDIMENT"   />
+      <element  key="SDN:P09:40:SILT"  label="SILT IN THE SEDIMENT"    />
       <broad>
-         <element ekey="SDN:P02:40:MNGS"  elabel="Sediment grain size parameters"   />
+         <element  key="SDN:P02:40:MNGS"  label="Sediment grain size parameters"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:SVEL"  elabel="SOUND VELOCITY"   />
+      <element  key="SDN:P09:40:SVEL"  label="SOUND VELOCITY"    />
       <broad>
-         <element ekey="SDN:P02:40:SVEL"  elabel="Sound velocity and travel time in the water column"   />
+         <element  key="SDN:P02:40:SVEL"  label="Sound velocity and travel time in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:VSMC"  elabel="SPECT. MOMENT(0,2) WAVE PERIOD"   />
+      <element  key="SDN:P09:40:VSMC"  label="SPECT. MOMENT(0,2) WAVE PERIOD"    />
       <broad>
-         <element ekey="SDN:P02:40:WVST"  elabel="Wave height and period statistics"   />
+         <element  key="SDN:P02:40:WVST"  label="Wave height and period statistics"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:VHM0"  elabel="SPECTRAL SIGNIFICANT WAVE HEIGHT HM0"   />
+      <element  key="SDN:P09:40:VHM0"  label="SPECTRAL SIGNIFICANT WAVE HEIGHT HM0"    />
       <broad>
-         <element ekey="SDN:P02:40:WVST"  elabel="Wave height and period statistics"   />
+         <element  key="SDN:P02:40:WVST"  label="Wave height and period statistics"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:SWDR"  elabel="SWELL DIRECTION  REL TRUE N."   />
+      <element  key="SDN:P09:40:SWDR"  label="SWELL DIRECTION  REL TRUE N."    />
       <broad>
-         <element ekey="SDN:P02:40:GWDR"  elabel="Wave direction"   />
+         <element  key="SDN:P02:40:GWDR"  label="Wave direction"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:SWHT"  elabel="SWELL HEIGHT"   />
+      <element  key="SDN:P09:40:SWHT"  label="SWELL HEIGHT"    />
       <broad>
-         <element ekey="SDN:P02:40:WVST"  elabel="Wave height and period statistics"   />
+         <element  key="SDN:P02:40:WVST"  label="Wave height and period statistics"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:SWPR"  elabel="SWELL PERIOD"   />
+      <element  key="SDN:P09:40:SWPR"  label="SWELL PERIOD"    />
       <broad>
-         <element ekey="SDN:P02:40:WVST"  elabel="Wave height and period statistics"   />
+         <element  key="SDN:P02:40:WVST"  label="Wave height and period statistics"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MSCS"  elabel="Sc IN THE SEDIMENT"   />
+      <element  key="SDN:P09:40:MSCS"  label="Sc IN THE SEDIMENT"    />
       <broad>
-         <element ekey="SDN:P02:40:RMIN"  elabel="Inorganic chemical composition of sediment or rocks"   />
+         <element  key="SDN:P02:40:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MSIP"  elabel="Si IN SUSPENDED MATTER"   />
+      <element  key="SDN:P09:40:MSIP"  label="Si IN SUSPENDED MATTER"    />
       <broad>
-         <element ekey="SDN:P02:40:SIXX"  elabel="Concentration of silicon species in the water column"   />
+         <element  key="SDN:P02:40:SIXX"  label="Concentration of silicon species in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MSIS"  elabel="Si IN THE SEDIMENT"   />
+      <element  key="SDN:P09:40:MSIS"  label="Si IN THE SEDIMENT"    />
       <broad>
-         <element ekey="SDN:P02:40:RMIN"  elabel="Inorganic chemical composition of sediment or rocks"   />
+         <element  key="SDN:P02:40:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MSRS"  elabel="Sr IN THE SEDIMENT"   />
+      <element  key="SDN:P09:40:MSRS"  label="Sr IN THE SEDIMENT"    />
       <broad>
-         <element ekey="SDN:P02:40:RMIN"  elabel="Inorganic chemical composition of sediment or rocks"   />
+         <element  key="SDN:P02:40:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:ZNTH"  elabel="TILT OF MEASUREMENT PLATFORM"   />
+      <element  key="SDN:P09:40:ZNTH"  label="TILT OF MEASUREMENT PLATFORM"    />
       <broad>
-         <element ekey="SDN:P02:40:HEAD"  elabel="Platform or instrument orientation"   />
+         <element  key="SDN:P02:40:HEAD"  label="Platform or instrument orientation"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TIME"  elabel="TIME WITHIN DAY"   />
+      <element  key="SDN:P09:40:TIME"  label="TIME WITHIN DAY"    />
       <broad>
-         <element ekey="SDN:P02:40:AYMD"  elabel="Date and time"   />
+         <element  key="SDN:P02:40:AYMD"  label="Date and time"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TDPW"  elabel="TOTAL DISSOLVED PHOSPHORUS"   />
+      <element  key="SDN:P09:40:TDPW"  label="TOTAL DISSOLVED PHOSPHORUS"    />
       <broad>
-         <element ekey="SDN:P02:40:TDPX"  elabel="Dissolved total or organic phosphorus concentration in the water column"   />
+         <element  key="SDN:P02:40:TDPX"  label="Dissolved total or organic phosphorus concentration in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TICW"  elabel="TOTAL INORGANIC CARBON"   />
+      <element  key="SDN:P09:40:TICW"  label="TOTAL INORGANIC CARBON"    />
       <broad>
-         <element ekey="SDN:P02:40:TCO2"  elabel="Total dissolved inorganic carbon (TCO2) concentration in the water column"   />
+         <element  key="SDN:P02:40:TCO2"  label="Total dissolved inorganic carbon (TCO2) concentration in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TSMF"  elabel="TOTAL MASS FLUX"   />
+      <element  key="SDN:P09:40:TSMF"  label="TOTAL MASS FLUX"    />
       <broad>
-         <element ekey="SDN:P02:40:MSFX"  elabel="Sedimentation flux quantification in the water column"   />
+         <element  key="SDN:P02:40:MSFX"  label="Sedimentation flux quantification in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:NTOT"  elabel="TOTAL NITROGEN (N) CONTENT"   />
+      <element  key="SDN:P09:40:NTOT"  label="TOTAL NITROGEN (N) CONTENT"    />
       <broad>
-         <element ekey="SDN:P02:40:NTOT"  elabel="Particulate total and organic nitrogen concentrations in the water column"   />
+         <element  key="SDN:P02:40:NTOT"  label="Particulate total and organic nitrogen concentrations in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TOCW"  elabel="TOTAL ORGANIC CARBON"   />
+      <element  key="SDN:P09:40:TOCW"  label="TOTAL ORGANIC CARBON"    />
       <broad>
-         <element ekey="SDN:P02:40:DOCC"  elabel="Dissolved organic carbon concentration in the water column"   />
+         <element  key="SDN:P02:40:DOCC"  label="Dissolved organic carbon concentration in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TPCW"  elabel="TOTAL PARTICULATE CARBON"   />
+      <element  key="SDN:P09:40:TPCW"  label="TOTAL PARTICULATE CARBON"    />
       <broad>
-         <element ekey="SDN:P02:40:CORG"  elabel="Particulate total and organic carbon concentrations in the water column"   />
+         <element  key="SDN:P02:40:CORG"  label="Particulate total and organic carbon concentrations in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:PTNP"  elabel="TOTAL PARTICULATE NITROGEN"   />
+      <element  key="SDN:P09:40:PTNP"  label="TOTAL PARTICULATE NITROGEN"    />
       <broad>
-         <element ekey="SDN:P02:40:NTOT"  elabel="Particulate total and organic nitrogen concentrations in the water column"   />
+         <element  key="SDN:P02:40:NTOT"  label="Particulate total and organic nitrogen concentrations in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:NT1P"  elabel="TOTAL PARTICULATE NITROGEN"   />
+      <element  key="SDN:P09:40:NT1P"  label="TOTAL PARTICULATE NITROGEN"    />
       <broad>
-         <element ekey="SDN:P02:40:NTOT"  elabel="Particulate total and organic nitrogen concentrations in the water column"   />
+         <element  key="SDN:P02:40:NTOT"  label="Particulate total and organic nitrogen concentrations in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:PT1P"  elabel="TOTAL PARTICULATE PHOSPHORUS"   />
+      <element  key="SDN:P09:40:PT1P"  label="TOTAL PARTICULATE PHOSPHORUS"    />
       <broad>
-         <element ekey="SDN:P02:40:TPHS"  elabel="Particulate total and organic phosphorus concentrations in the water column"   />
+         <element  key="SDN:P02:40:TPHS"  label="Particulate total and organic phosphorus concentrations in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:PTPP"  elabel="TOTAL PARTICULATE PHOSPHORUS"   />
+      <element  key="SDN:P09:40:PTPP"  label="TOTAL PARTICULATE PHOSPHORUS"    />
       <broad>
-         <element ekey="SDN:P02:40:TPHS"  elabel="Particulate total and organic phosphorus concentrations in the water column"   />
+         <element  key="SDN:P02:40:TPHS"  label="Particulate total and organic phosphorus concentrations in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TPHP"  elabel="TOTAL PHAEOPIGMENTS"   />
+      <element  key="SDN:P09:40:TPHP"  label="TOTAL PHAEOPIGMENTS"    />
       <broad>
-         <element ekey="SDN:P02:40:PHWC"  elabel="Phaeopigment concentrations in the water column"   />
+         <element  key="SDN:P02:40:PHWC"  label="Phaeopigment concentrations in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:PHTP"  elabel="TOTAL PHEOPHYTINE"   />
+      <element  key="SDN:P09:40:PHTP"  label="TOTAL PHEOPHYTINE"    />
       <broad>
-         <element ekey="SDN:P02:40:PHWC"  elabel="Phaeopigment concentrations in the water column"   />
+         <element  key="SDN:P02:40:PHWC"  label="Phaeopigment concentrations in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TPHS"  elabel="TOTAL PHOSPHORUS (P) CONTENT"   />
+      <element  key="SDN:P09:40:TPHS"  label="TOTAL PHOSPHORUS (P) CONTENT"    />
       <broad>
-         <element ekey="SDN:P02:40:TPHS"  elabel="Particulate total and organic phosphorus concentrations in the water column"   />
+         <element  key="SDN:P02:40:TPHS"  label="Particulate total and organic phosphorus concentrations in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:EPMP"  elabel="TOTAL SUSP. PART. MATTER/ESTER"   />
+      <element  key="SDN:P09:40:EPMP"  label="TOTAL SUSP. PART. MATTER/ESTER"    />
       <broad>
-         <element ekey="SDN:P02:40:TSED"  elabel="Concentration of suspended particulate material in the water column"   />
+         <element  key="SDN:P02:40:TSED"  label="Concentration of suspended particulate material in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:GPMP"  elabel="TOTAL SUSP. PART. MATTER/GLASS"   />
+      <element  key="SDN:P09:40:GPMP"  label="TOTAL SUSP. PART. MATTER/GLASS"    />
       <broad>
-         <element ekey="SDN:P02:40:TSED"  elabel="Concentration of suspended particulate material in the water column"   />
+         <element  key="SDN:P02:40:TSED"  label="Concentration of suspended particulate material in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TSMP"  elabel="TOTAL SUSPENDED MATTER"   />
+      <element  key="SDN:P09:40:TSMP"  label="TOTAL SUSPENDED MATTER"    />
       <broad>
-         <element ekey="SDN:P02:40:TSED"  elabel="Concentration of suspended particulate material in the water column"   />
+         <element  key="SDN:P02:40:TSED"  label="Concentration of suspended particulate material in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TUR4"  elabel="TURBIDITY"   />
+      <element  key="SDN:P09:40:TUR4"  label="TURBIDITY"    />
       <broad>
-         <element ekey="SDN:P02:40:TSED"  elabel="Concentration of suspended particulate material in the water column"   />
+         <element  key="SDN:P02:40:TSED"  label="Concentration of suspended particulate material in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TUR5"  elabel="TURBIDITY"   />
+      <element  key="SDN:P09:40:TUR5"  label="TURBIDITY"    />
       <broad>
-         <element ekey="SDN:P02:40:TSED"  elabel="Concentration of suspended particulate material in the water column"   />
+         <element  key="SDN:P02:40:TSED"  label="Concentration of suspended particulate material in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:TUR6"  elabel="TURBIDITY"   />
+      <element  key="SDN:P09:40:TUR6"  label="TURBIDITY"    />
       <broad>
-         <element ekey="SDN:P02:40:TSED"  elabel="Concentration of suspended particulate material in the water column"   />
+         <element  key="SDN:P02:40:TSED"  label="Concentration of suspended particulate material in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MTHS"  elabel="Th IN THE SEDIMENT"   />
+      <element  key="SDN:P09:40:MTHS"  label="Th IN THE SEDIMENT"    />
       <broad>
-         <element ekey="SDN:P02:40:RMIN"  elabel="Inorganic chemical composition of sediment or rocks"   />
+         <element  key="SDN:P02:40:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MTIP"  elabel="Ti IN SUSPENDED MATTER"   />
+      <element  key="SDN:P09:40:MTIP"  label="Ti IN SUSPENDED MATTER"    />
       <broad>
-         <element ekey="SDN:P02:40:MTWP"  elabel="Particulate metal concentrations in the water column"   />
+         <element  key="SDN:P02:40:MTWP"  label="Particulate metal concentrations in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MTIS"  elabel="Ti IN THE SEDIMENT"   />
+      <element  key="SDN:P09:40:MTIS"  label="Ti IN THE SEDIMENT"    />
       <broad>
-         <element ekey="SDN:P02:40:RMIN"  elabel="Inorganic chemical composition of sediment or rocks"   />
+         <element  key="SDN:P02:40:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MUUS"  elabel="U IN THE SEDIMENT"   />
+      <element  key="SDN:P09:40:MUUS"  label="U IN THE SEDIMENT"    />
       <broad>
-         <element ekey="SDN:P02:40:RMIN"  elabel="Inorganic chemical composition of sediment or rocks"   />
+         <element  key="SDN:P02:40:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:UREA"  elabel="UREA"   />
+      <element  key="SDN:P09:40:UREA"  label="UREA"    />
       <broad>
-         <element ekey="SDN:P02:40:UREA"  elabel="Urea concentration parameters in the water column"   />
+         <element  key="SDN:P02:40:UREA"  label="Urea concentration parameters in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MVVS"  elabel="V IN THE SEDIMENT"   />
+      <element  key="SDN:P09:40:MVVS"  label="V IN THE SEDIMENT"    />
       <broad>
-         <element ekey="SDN:P02:40:RMIN"  elabel="Inorganic chemical composition of sediment or rocks"   />
+         <element  key="SDN:P02:40:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:VERR"  elabel="VELOCITY ERROR"   />
+      <element  key="SDN:P09:40:VERR"  label="VELOCITY ERROR"    />
       <broad>
-         <element ekey="SDN:P02:40:TMES"  elabel="Metadata parameters"   />
+         <element  key="SDN:P02:40:TMES"  label="Metadata parameters"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:VCSP"  elabel="VERTICAL CURRENT SPEED"   />
+      <element  key="SDN:P09:40:VCSP"  label="VERTICAL CURRENT SPEED"    />
       <broad>
-         <element ekey="SDN:P02:40:LRZA"  elabel="Vertical velocity of the water column (currents)"   />
+         <element  key="SDN:P02:40:LRZA"  label="Vertical velocity of the water column (currents)"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:VERT"  elabel="VERTICAL DISPLACEMENT"   />
+      <element  key="SDN:P09:40:VERT"  label="VERTICAL DISPLACEMENT"    />
       <broad>
-         <element ekey="SDN:P02:40:AHGT"  elabel="Vertical spatial coordinates"   />
+         <element  key="SDN:P02:40:AHGT"  label="Vertical spatial coordinates"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:VIAW"  elabel="VIRUS ABUNDANCE IN SEA WATER"   />
+      <element  key="SDN:P09:40:VIAW"  label="VIRUS ABUNDANCE IN SEA WATER"    />
       <broad>
-         <element ekey="SDN:P02:40:VIRU"  elabel="Virus abundance in water bodies"   />
+         <element  key="SDN:P02:40:VIRU"  label="Virus abundance in water bodies"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:VOCP"  elabel="VOLUME CONC. OF PARTICLES"   />
+      <element  key="SDN:P09:40:VOCP"  label="VOLUME CONC. OF PARTICLES"    />
       <broad>
-         <element ekey="SDN:P02:40:TSED"  elabel="Concentration of suspended particulate material in the water column"   />
+         <element  key="SDN:P02:40:TSED"  label="Concentration of suspended particulate material in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:H2OS"  elabel="WATER CONTENT"   />
+      <element  key="SDN:P09:40:H2OS"  label="WATER CONTENT"    />
       <broad>
-         <element ekey="SDN:P02:40:WCWT"  elabel="Sediment water content, porosity and surface area"   />
+         <element  key="SDN:P02:40:WCWT"  label="Sediment water content, porosity and surface area"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:VDIR"  elabel="WAVE DIRECTION REL. TRUE NORTH"   />
+      <element  key="SDN:P09:40:VDIR"  label="WAVE DIRECTION REL. TRUE NORTH"    />
       <broad>
-         <element ekey="SDN:P02:40:GWDR"  elabel="Wave direction"   />
+         <element  key="SDN:P02:40:GWDR"  label="Wave direction"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:VTPK"  elabel="WAVE PEAK PERIOD"   />
+      <element  key="SDN:P09:40:VTPK"  label="WAVE PEAK PERIOD"    />
       <broad>
-         <element ekey="SDN:P02:40:WVST"  elabel="Wave height and period statistics"   />
+         <element  key="SDN:P02:40:WVST"  label="Wave height and period statistics"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:VEPK"  elabel="WAVE SPECTRUM PEAK ENERGY"   />
+      <element  key="SDN:P09:40:VEPK"  label="WAVE SPECTRUM PEAK ENERGY"    />
       <broad>
-         <element ekey="SDN:P02:40:WVSP"  elabel="Spectral wave data parameters"   />
+         <element  key="SDN:P02:40:WVSP"  label="Spectral wave data parameters"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:VPED"  elabel="WAVE SPECTRUM PEAK ENERGY DIR."   />
+      <element  key="SDN:P09:40:VPED"  label="WAVE SPECTRUM PEAK ENERGY DIR."    />
       <broad>
-         <element ekey="SDN:P02:40:GWDR"  elabel="Wave direction"   />
+         <element  key="SDN:P02:40:GWDR"  label="Wave direction"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:WDIR"  elabel="WIND DIRECTION REL. TRUE NORTH"   />
+      <element  key="SDN:P09:40:WDIR"  label="WIND DIRECTION REL. TRUE NORTH"    />
       <broad>
-         <element ekey="SDN:P02:40:EWSB"  elabel="Wind speed and direction"   />
+         <element  key="SDN:P02:40:EWSB"  label="Wind speed and direction"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:WMSP"  elabel="WIND SPEED - MAX AVER PER 2 MN"   />
+      <element  key="SDN:P09:40:WMSP"  label="WIND SPEED - MAX AVER PER 2 MN"    />
       <broad>
-         <element ekey="SDN:P02:40:EWSB"  elabel="Wind speed and direction"   />
+         <element  key="SDN:P02:40:EWSB"  label="Wind speed and direction"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:WSPE"  elabel="WIND SPEED EASTWARD COMPONENT"   />
+      <element  key="SDN:P09:40:WSPE"  label="WIND SPEED EASTWARD COMPONENT"    />
       <broad>
-         <element ekey="SDN:P02:40:EWSB"  elabel="Wind speed and direction"   />
+         <element  key="SDN:P02:40:EWSB"  label="Wind speed and direction"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:WSPN"  elabel="WIND SPEED NORTHWARD COMPONENT"   />
+      <element  key="SDN:P09:40:WSPN"  label="WIND SPEED NORTHWARD COMPONENT"    />
       <broad>
-         <element ekey="SDN:P02:40:EWSB"  elabel="Wind speed and direction"   />
+         <element  key="SDN:P02:40:EWSB"  label="Wind speed and direction"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:WSTE"  elabel="WIND STRESS EAST COMPONENT"   />
+      <element  key="SDN:P09:40:WSTE"  label="WIND STRESS EAST COMPONENT"    />
       <broad>
-         <element ekey="SDN:P02:40:WSTR"  elabel="Wind stress and shear"   />
+         <element  key="SDN:P02:40:WSTR"  label="Wind stress and shear"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:WSTN"  elabel="WIND STRESS NORTH COMPONENT"   />
+      <element  key="SDN:P09:40:WSTN"  label="WIND STRESS NORTH COMPONENT"    />
       <broad>
-         <element ekey="SDN:P02:40:WSTR"  elabel="Wind stress and shear"   />
+         <element  key="SDN:P02:40:WSTR"  label="Wind stress and shear"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MYYS"  elabel="Y IN THE SEDIMENT"   />
+      <element  key="SDN:P09:40:MYYS"  label="Y IN THE SEDIMENT"    />
       <broad>
-         <element ekey="SDN:P02:40:RMIN"  elabel="Inorganic chemical composition of sediment or rocks"   />
+         <element  key="SDN:P02:40:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:YEAR"  elabel="YEAR"   />
+      <element  key="SDN:P09:40:YEAR"  label="YEAR"    />
       <broad>
-         <element ekey="SDN:P02:40:AYMD"  elabel="Date and time"   />
+         <element  key="SDN:P02:40:AYMD"  label="Date and time"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:ZXAP"  elabel="ZEAXANTHINE"   />
+      <element  key="SDN:P09:40:ZXAP"  label="ZEAXANTHINE"    />
       <broad>
-         <element ekey="SDN:P02:40:CARO"  elabel="Carotenoid pigment concentrations in the water column"   />
+         <element  key="SDN:P02:40:CARO"  label="Carotenoid pigment concentrations in the water column"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MZNF"  elabel="ZN FLUX IN SETTLING PARTICLES"   />
+      <element  key="SDN:P09:40:MZNF"  label="ZN FLUX IN SETTLING PARTICLES"    />
       <broad>
-         <element ekey="SDN:P02:40:MLFX"  elabel="Sedimentation flux of metallic and metalloid elements and isotopes in water bodies"   />
+         <element  key="SDN:P02:40:MLFX"  label="Sedimentation flux of metallic and metalloid elements and isotopes in water bodies"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MZNS"  elabel="Zn IN THE SEDIMENT"   />
+      <element  key="SDN:P09:40:MZNS"  label="Zn IN THE SEDIMENT"    />
       <broad>
-         <element ekey="SDN:P02:40:RMIN"  elabel="Inorganic chemical composition of sediment or rocks"   />
+         <element  key="SDN:P02:40:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
       </broad>
    </match>
    <match>
-      <element ekey="SDN:P09:40:MZRS"  elabel="Zr IN THE SEDIMENT"   />
+      <element  key="SDN:P09:40:MZRS"  label="Zr IN THE SEDIMENT"    />
       <broad>
-         <element ekey="SDN:P02:40:RMIN"  elabel="Inorganic chemical composition of sediment or rocks"   />
+         <element  key="SDN:P02:40:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
       </broad>
    </match>
 </mapping>
