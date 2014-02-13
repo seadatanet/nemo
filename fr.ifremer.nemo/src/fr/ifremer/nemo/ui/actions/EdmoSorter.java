@@ -50,7 +50,7 @@ public class EdmoSorter extends ViewerSorter {
 		int rc = 0;
 		switch (sortIdentifier) {
 		case 0:
-			rc = Integer.compare(p2.getCode(), p1.getCode());
+			rc = p2.getCode().compareTo(p1.getCode());
 			break;
 		case 1:
 			rc = p1.getName().compareTo(p2.getName());
