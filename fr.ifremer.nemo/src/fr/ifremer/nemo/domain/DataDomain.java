@@ -11,10 +11,9 @@
 package fr.ifremer.nemo.domain;
 
 import java.io.UnsupportedEncodingException;
+import java.text.MessageFormat;
 import java.text.ParseException;
 import java.util.MissingResourceException;
-
-import com.ibm.icu.text.MessageFormat;
 
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.config.VocabLists;
@@ -79,17 +78,14 @@ public class DataDomain {
 		if (c == Conversion.MEDATLAS)
 			dataHeader.append(c.getDebut());
 
-		int nbParamTot = myParameterManager.getAddedParameterModels(c).length
-				+ _model.getParameterModels().length;
+		int nbParamTot = myParameterManager.getAddedParameterModels(c).length + _model.getParameterModels().length;
 		int cptParam = 0;
 
 		// paramètres ajoutés
-		for (ParameterModel pModel : myParameterManager
-				.getAddedParameterModels(c)) {
+		for (ParameterModel pModel : myParameterManager.getAddedParameterModels(c)) {
 			cptParam++;
 			Parameter param = pModel.getParameter();
-			dataHeader.append(param.getOutputCode(c, (cptParam == nbParamTot),
-					null, false));
+			dataHeader.append(param.getOutputCode(c, (cptParam == nbParamTot), null, false));
 
 		}
 
@@ -97,52 +93,40 @@ public class DataDomain {
 		for (ParameterModel pModel : _model.getParameterModels()) {
 			cptParam++;
 			Parameter param = pModel.getParameter();
-			int parameterSize = pModel.getFragment().getLastCharOffset()
-					- pModel.getFragment().getFirstCharOffset() + 1;
-			dataHeader.append(param.getOutputCode(c, (cptParam == nbParamTot),
-					parameterSize, pModel.isText()));
+			int parameterSize = pModel.getFragment().getLastCharOffset() - pModel.getFragment().getFirstCharOffset() + 1;
+			dataHeader.append(param.getOutputCode(c, (cptParam == nbParamTot), parameterSize, pModel.isText()));
 		}
 		return dataHeader;
 	}
 
-	public StringBuffer getDataLine(Conversion c, Station currentStation,
-			String inputLine, int indexRecord) throws Exception {
+	public StringBuffer getDataLine(Conversion c, Station currentStation, String inputLine, int indexRecord) throws Exception {
 		StringBuffer dataLine = new StringBuffer();
 		switch (c) {
 		case ODV:
-			dataLine.append(getOdvDataLine(currentStation, inputLine,
-					indexRecord));
+			dataLine.append(getOdvDataLine(currentStation, inputLine, indexRecord));
 			break;
 		case MEDATLAS:
-			dataLine.append(getMedatlasDataLine(currentStation, inputLine,
-					indexRecord));
+			dataLine.append(getMedatlasDataLine(currentStation, inputLine, indexRecord));
 			break;
 		}
 		return dataLine;
 	}
 
-	private StringBuffer getOdvDataLine(Station currentStation,
-			String inputLine, int indexRecord) throws Exception {
+	private StringBuffer getOdvDataLine(Station currentStation, String inputLine, int indexRecord) throws Exception {
 
 		StringBuffer odvDataLine = new StringBuffer();
 
-		int nbParamTot = myParameterManager.getOdvParameterModels().length
-				+ _model.getParameterModels().length;
+		int nbParamTot = myParameterManager.getOdvParameterModels().length + _model.getParameterModels().length;
 		int cptParam = 0;
 
 		// paramètres ajoutés
-		long currentDate = DateTimeUtils.getCurrentDate(currentStation,
-				indexRecord);
+		long currentDate = DateTimeUtils.getCurrentDate(currentStation, indexRecord);
 		// FAE 11356
-		if (Nemo.getInstance().getDomain().getMedia().getModel().getInputType() == E_InputType.TIMESERIES
-				&& Nemo.getInstance().getDomain().getStation().getModel()
-						.getProperty(Intern.S_DATE).isInData())
-			currentDate = Long.valueOf(DateTimeUtils
-					.convertTimestamp(inputLine));
+		if (Nemo.getInstance().getDomain().getMedia().getModel().getInputType() == E_InputType.TIMESERIES && Nemo.getInstance().getDomain().getStation().getModel().getProperty(Intern.S_DATE).isInData())
+			currentDate = Long.valueOf(DateTimeUtils.convertTimestamp(inputLine));
 		for (ParameterModel pModel : myParameterManager.getOdvParameterModels()) {
 			cptParam++;
-			pModel.computeAddedParameterValue(currentStation, inputLine,
-					currentDate);
+			pModel.computeAddedParameterValue(currentStation, inputLine, currentDate);
 
 			String defaultValue = pModel.getParameter().getDefault();
 			String stringValue = pModel.getLineValue().getValue();
@@ -167,9 +151,7 @@ public class DataDomain {
 			String stringValue = "";
 			if (!pModel.getLineValue().getValue().equals("")) {
 
-				stringValue = Formatter.getSingleton().formatParameter(
-						pModel.getParameter().getFormat(),
-						pModel.getLineValue().getValue());
+				stringValue = Formatter.getSingleton().formatParameter(pModel.getParameter().getFormat(), pModel.getLineValue().getValue());
 			}
 			// odvDataLine.append(Global.TAB);
 			if (!stringValue.equals(defaultValue))
@@ -184,8 +166,7 @@ public class DataDomain {
 		return odvDataLine;
 	}
 
-	private StringBuffer getMedatlasDataLine(Station currentStation,
-			String inputLine, int indexRecord) throws Exception {
+	private StringBuffer getMedatlasDataLine(Station currentStation, String inputLine, int indexRecord) throws Exception {
 
 		StringBuffer medatlasDataLine = new StringBuffer();
 
@@ -193,18 +174,13 @@ public class DataDomain {
 		// paramètres ajoutés
 		long currentDate = 0;
 		if (Nemo.getInstance().getDomain().getMedia().getModel().getInputType() != E_InputType.PROFILE)
-			currentDate = DateTimeUtils.getCurrentDate(currentStation,
-					indexRecord);
+			currentDate = DateTimeUtils.getCurrentDate(currentStation, indexRecord);
 
 		// FAE 11356
-		if (Nemo.getInstance().getDomain().getMedia().getModel().getInputType() == E_InputType.TIMESERIES
-				&& Nemo.getInstance().getDomain().getStation().getModel()
-						.getProperty(Intern.S_DATE).isInData())
-			currentDate = Long.valueOf(DateTimeUtils
-					.convertTimestamp(inputLine));
+		if (Nemo.getInstance().getDomain().getMedia().getModel().getInputType() == E_InputType.TIMESERIES && Nemo.getInstance().getDomain().getStation().getModel().getProperty(Intern.S_DATE).isInData())
+			currentDate = Long.valueOf(DateTimeUtils.convertTimestamp(inputLine));
 		for (ParameterModel pModel : myParameterManager.getMedParameterModels()) {
-			pModel.computeAddedParameterValue(currentStation, inputLine,
-					currentDate);
+			pModel.computeAddedParameterValue(currentStation, inputLine, currentDate);
 
 			medatlasDataLine.append(pModel.getLineValue().getValue());
 			medatlasDataLine.append(Global.SPACE);
@@ -214,9 +190,7 @@ public class DataDomain {
 		for (ParameterModel pModel : _model.getParameterModels()) {
 			pModel.computeParameterValue(inputLine);
 
-			medatlasDataLine.append(Formatter.getSingleton().formatParameter(
-					pModel.getParameter().getFormat(),
-					pModel.getLineValue().getValue()));
+			medatlasDataLine.append(Formatter.getSingleton().formatParameter(pModel.getParameter().getFormat(), pModel.getLineValue().getValue()));
 			medatlasDataLine.append(Global.SPACE);
 		}
 
@@ -263,8 +237,7 @@ public class DataDomain {
 		return medLastDataLine;
 	}
 
-	public StringBuffer getMedParametersDesc() throws ParseException,
-			UnsupportedEncodingException {
+	public StringBuffer getMedParametersDesc() throws ParseException, UnsupportedEncodingException {
 		StringBuffer paramsDesc = new StringBuffer();
 
 		for (ParameterModel pModel : myParameterManager.getMedParameterModels()) {
@@ -279,8 +252,7 @@ public class DataDomain {
 		return paramsDesc;
 	}
 
-	private StringBuffer getMedParameterDesc(ParameterModel pModel)
-			throws ParseException, UnsupportedEncodingException {
+	private StringBuffer getMedParameterDesc(ParameterModel pModel) throws ParseException, UnsupportedEncodingException {
 		// *PRES SEA PRESSURE sea surface=0 (decibar=10000 pascals ) def.=-999.9
 		Parameter param = pModel.getParameter();
 		StringBuffer paramDesc = new StringBuffer();
@@ -301,8 +273,7 @@ public class DataDomain {
 		myParameterManager.releaseAddedParameterModels();
 	}
 
-	public StringBuffer getSDNparameters(Conversion c)
-			throws GenerationException {
+	public StringBuffer getSDNparameters(Conversion c) throws GenerationException {
 		StringBuffer sdnParams = new StringBuffer();
 
 		sdnParams.append(c.getDebut());
@@ -313,37 +284,30 @@ public class DataDomain {
 		 * added parameters
 		 */
 		if (c.equals(Conversion.ODV)) {
-			for (ParameterModel param : myParameterManager
-					.getAddedParameterModels(c)) {
-				param.getParameter().setP011(
-						_model.getParameterModels()[0].getParameter().isP011());
+			for (ParameterModel param : myParameterManager.getAddedParameterModels(c)) {
+				param.getParameter().setP011(_model.getParameterModels()[0].getParameter().isP011());
 			}
 		} else {
-			for (ParameterModel param : myParameterManager
-					.getAddedParameterModels(c)) {
+			for (ParameterModel param : myParameterManager.getAddedParameterModels(c)) {
 				param.getParameter().setP011(false);
 			}
 		}
 
-		for (ParameterModel param : myParameterManager
-				.getAddedParameterModels(c)) {
-			sdnParams.append(parameterMap(c.getDebut(), param.getParameter(),
-					c, param.isText()));
+		for (ParameterModel param : myParameterManager.getAddedParameterModels(c)) {
+			sdnParams.append(parameterMap(c.getDebut(), param.getParameter(), c, param.isText()));
 		}
 
 		/**
 		 * parameters
 		 */
 		for (ParameterModel param : _model.getParameterModels()) {
-			sdnParams.append(parameterMap(c.getDebut(), param.getParameter(),
-					c, param.isText()));
+			sdnParams.append(parameterMap(c.getDebut(), param.getParameter(), c, param.isText()));
 		}
 
 		return sdnParams;
 	}
 
-	private StringBuffer parameterMap(String start, Parameter param,
-			Conversion c, boolean isText) throws GenerationException {
+	private StringBuffer parameterMap(String start, Parameter param, Conversion c, boolean isText) throws GenerationException {
 		String code = param.getCode();
 		StringBuffer sdnMapping = new StringBuffer();
 		sdnMapping.append(start);
@@ -362,22 +326,16 @@ public class DataDomain {
 			 * ----------------------------------------------------- subject
 			 */
 			// FAE 4045 getLocalCode
-			sdnMapping.append(getURNSyntaxe(URNtype.subject,
-					param.getLocalCode(), null, null, null));
+			sdnMapping.append(getURNSyntaxe(URNtype.subject, param.getLocalCode(), null, null, null));
 			/**
 			 * ----------------------------------------------------- object si
 			 * param P011, on met le code P011 si param P091, on met le premier
 			 * P011 de la liste de P011 correspondants au P091
 			 */
 			if (param.isP011()) {
-				sdnMapping
-						.append(getURNSyntaxe(URNtype.object,
-								param.getCodeP011(), null,
-								Intern.mapping_objet, isText));
+				sdnMapping.append(getURNSyntaxe(URNtype.object, param.getCodeP011(), null, Intern.mapping_objet, isText));
 			} else {
-				sdnMapping.append(getURNSyntaxe(URNtype.object,
-						param.getCode(), Intern.mapping_subject,
-						Intern.mapping_objet, isText));
+				sdnMapping.append(getURNSyntaxe(URNtype.object, param.getCode(), Intern.mapping_subject, Intern.mapping_objet, isText));
 			}
 
 			/**
@@ -391,25 +349,18 @@ public class DataDomain {
 			 * P061
 			 */
 
-			if (param.getUnitCode() == null
-					|| param.getUnitCode().equals(Global.EMPTY_STRING)) {
-				sdnMapping.append(getURNSyntaxe(URNtype.units, param.getCode(),
-						Intern.mapping_subject, Intern.mapping_unit, isText));
+			if (param.getUnitCode() == null || param.getUnitCode().equals(Global.EMPTY_STRING)) {
+				sdnMapping.append(getURNSyntaxe(URNtype.units, param.getCode(), Intern.mapping_subject, Intern.mapping_unit, isText));
 			} else {
 				// FAE 6542
-				sdnMapping
-						.append(getURNSyntaxe(URNtype.units,
-								param.getUnitCode(), null, Intern.mapping_unit,
-								isText));
+				sdnMapping.append(getURNSyntaxe(URNtype.units, param.getUnitCode(), null, Intern.mapping_unit, isText));
 			}
 		}
 		sdnMapping.append(Global.RN);
 		return sdnMapping;
 	}
 
-	private static StringBuffer getURNSyntaxe(URNtype type, String code,
-			String list1, String list2, Boolean isText)
-			throws GenerationException {
+	private static StringBuffer getURNSyntaxe(URNtype type, String code, String list1, String list2, Boolean isText) throws GenerationException {
 		StringBuffer urnSyntaxe = new StringBuffer();
 
 		urnSyntaxe.append(Intern.xml_tag_start);
@@ -431,14 +382,11 @@ public class DataDomain {
 			urnSyntaxe.append(Global.DBL_PT);
 			String pdvCodeobject;
 			if (list1 != null)
-				pdvCodeobject = VocabLists.getVocabMatch(list1, list2, code,
-						Intern.NemoLists_unknown);
+				pdvCodeobject = VocabLists.getVocabMatch(list1, list2, code, Intern.NemoLists_unknown);
 			else
 				pdvCodeobject = code;
 			if (pdvCodeobject.equals(Intern.NemoLists_unknown)) {
-				throw new GenerationException(MessageFormat.format(
-						Messages.error_convert_sdnmapping_paramcode, code,
-						list1, list2));
+				throw new GenerationException(MessageFormat.format(Messages.error_convert_sdnmapping_paramcode, code, list1, list2));
 			}
 			urnSyntaxe.append(pdvCodeobject);
 			break;
@@ -448,14 +396,11 @@ public class DataDomain {
 			urnSyntaxe.append(Global.DBL_PT);
 			String pdvCodeunits;
 			if (list1 != null || isText)
-				pdvCodeunits = VocabLists.getVocabMatch(list1, list2, code,
-						Intern.NemoLists_unknown);
+				pdvCodeunits = VocabLists.getVocabMatch(list1, list2, code, Intern.NemoLists_unknown);
 			else
 				pdvCodeunits = code;
 			if (pdvCodeunits.equals(Intern.NemoLists_unknown)) {
-				throw new GenerationException(MessageFormat.format(
-						Messages.error_convert_sdnmapping_paramunit, code,
-						list1, list2));
+				throw new GenerationException(MessageFormat.format(Messages.error_convert_sdnmapping_paramunit, code, list1, list2));
 			}
 			// FAE 10755
 			if (isText)
