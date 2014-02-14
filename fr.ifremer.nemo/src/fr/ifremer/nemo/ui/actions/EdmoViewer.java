@@ -90,8 +90,7 @@ public class EdmoViewer {
 		data.heightHint = 200;
 		compoTable.setLayoutData(data);
 
-		viewer = new TableViewer(compoTable, SWT.SINGLE | SWT.H_SCROLL
-				| SWT.V_SCROLL);
+		viewer = new TableViewer(compoTable, SWT.SINGLE | SWT.H_SCROLL | SWT.V_SCROLL | SWT.FULL_SELECTION);
 
 		createColumns(viewer);
 
@@ -144,8 +143,7 @@ public class EdmoViewer {
 		Label searchLabel = new Label(parent, SWT.NONE);
 		searchLabel.setText(Messages.settings_EDMO_search_label);
 		final Text searchText = new Text(parent, SWT.BORDER | SWT.SEARCH);
-		searchText.setLayoutData(new GridData(GridData.GRAB_HORIZONTAL
-				| GridData.HORIZONTAL_ALIGN_FILL));
+		searchText.setLayoutData(new GridData(GridData.GRAB_HORIZONTAL | GridData.HORIZONTAL_ALIGN_FILL));
 
 		// New to support the search
 		searchText.addKeyListener(new KeyAdapter() {
@@ -164,28 +162,24 @@ public class EdmoViewer {
 		buttonValider.setText(Messages.button_validate);
 		buttonValider.pack();
 		// listener cancel
-		buttonValider
-				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
-					@Override
-					public void widgetSelected(
-							org.eclipse.swt.events.SelectionEvent e) {
-						optionAction.updateEdmo(tmpEdmoChoices);
-						shellEdmo.close();
-					}
-				});
+		buttonValider.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+			@Override
+			public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
+				optionAction.updateEdmo(tmpEdmoChoices);
+				shellEdmo.close();
+			}
+		});
 		buttonCancel = new Button(compoButton, SWT.NONE);
 		buttonCancel.setFont(Utils.font08);
 		buttonCancel.setText(Messages.button_cancel);
 		buttonCancel.pack();
 		// listener cancel
-		buttonCancel
-				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
-					@Override
-					public void widgetSelected(
-							org.eclipse.swt.events.SelectionEvent e) {
-						shellEdmo.close();
-					}
-				});
+		buttonCancel.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+			@Override
+			public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
+				shellEdmo.close();
+			}
+		});
 		compoButton.pack();
 	}
 
@@ -228,20 +222,17 @@ public class EdmoViewer {
 		};
 		colCode = new TableColumn(viewer.getTable(), SWT.LEFT);
 		colCode.setText("Code");
-		((TableColumnLayout) compoTable.getLayout()).setColumnData(colCode,
-				new ColumnWeightData(10, true));
+		((TableColumnLayout) compoTable.getLayout()).setColumnData(colCode, new ColumnWeightData(10, true));
 		colCode.addListener(SWT.Selection, sortListener);
 
 		colName = new TableColumn(viewer.getTable(), SWT.LEFT);
 		colName.setText("Name");
-		((TableColumnLayout) compoTable.getLayout()).setColumnData(colName,
-				new ColumnWeightData(50, true));
+		((TableColumnLayout) compoTable.getLayout()).setColumnData(colName, new ColumnWeightData(50, true));
 		colName.addListener(SWT.Selection, sortListener);
 
 		colCountry = new TableColumn(viewer.getTable(), SWT.LEFT);
 		colCountry.setText("Country");
-		((TableColumnLayout) compoTable.getLayout()).setColumnData(colCountry,
-				new ColumnWeightData(40, true));
+		((TableColumnLayout) compoTable.getLayout()).setColumnData(colCountry, new ColumnWeightData(40, true));
 		colCountry.addListener(SWT.Selection, sortListener);
 
 	}
