@@ -75,8 +75,7 @@ import fr.ifremer.nemo.util.Global.E_TypeConversion;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
 
-public class OptionsAction extends Action implements ISelectionListener,
-		ActionFactory.IWorkbenchAction {
+public class OptionsAction extends Action implements ISelectionListener, ActionFactory.IWorkbenchAction {
 
 	private final IWorkbenchWindow window;
 
@@ -171,8 +170,7 @@ public class OptionsAction extends Action implements ISelectionListener,
 		configProxy = config.getProxy();
 		loadEdmoConfig();
 		// lancement IHM options
-		shelloptions = new Shell(Application.display, SWT.BORDER | SWT.TITLE
-				| SWT.APPLICATION_MODAL | SWT.SYSTEM_MODAL);
+		shelloptions = new Shell(Application.display, SWT.BORDER | SWT.TITLE | SWT.APPLICATION_MODAL | SWT.SYSTEM_MODAL);
 
 		shelloptions.setLocation(20, 20);
 		shelloptions.setSize(620, 600);
@@ -227,8 +225,7 @@ public class OptionsAction extends Action implements ISelectionListener,
 		// long start = System.currentTimeMillis();
 
 		// CENTRES DE DONNEES
-		Collection<IElement> centres = VocabLists.getVocabList(
-				Intern.list_dataCenter).getElements();
+		Collection<IElement> centres = VocabLists.getVocabList(Intern.list_dataCenter).getElements();
 		TreeMap<String, String> treeCentre = new TreeMap<String, String>();
 		for (IElement record : centres) {
 			treeCentre.put(record.getKey(), record.getLabel());
@@ -243,35 +240,29 @@ public class OptionsAction extends Action implements ISelectionListener,
 
 		// CDI
 		// FAE 58 CDL 09/04/08
-		Collection<IElement> records = VocabLists.getVocabList(
-				Intern.list_methodCDI).getElements();
+		Collection<IElement> records = VocabLists.getVocabList(Intern.list_methodCDI).getElements();
 		TreeSet<String> champsMethodesCdi = new TreeSet<String>();
 		for (IElement record : records) {
-			String champCombo = record.getKey() + Global.SEP
-					+ record.getLabel();
+			String champCombo = record.getKey() + Global.SEP + record.getLabel();
 			champsMethodesCdi.add(champCombo);
 		}
 		for (String champ : champsMethodesCdi) {
 			comboMethodeCdi.add(champ);
 		}
 
-		records = VocabLists.getVocabList(Intern.list_typePlatform)
-				.getElements();
+		records = VocabLists.getVocabList(Intern.list_typePlatform).getElements();
 		champsMethodesCdi = new TreeSet<String>();
 		for (IElement record : records) {
-			String champCombo = record.getKey() + Global.SEP
-					+ record.getLabel();
+			String champCombo = record.getKey() + Global.SEP + record.getLabel();
 			champsMethodesCdi.add(champCombo);
 		}
 		for (String champ : champsMethodesCdi)
 			comboTypePlateForme.add(champ);
 
-		records = VocabLists.getVocabList(Intern.list_accesDonnees)
-				.getElements();
+		records = VocabLists.getVocabList(Intern.list_accesDonnees).getElements();
 		champsMethodesCdi = new TreeSet<String>();
 		for (IElement record : records) {
-			String champCombo = record.getKey() + Global.SEP
-					+ record.getLabel();
+			String champCombo = record.getKey() + Global.SEP + record.getLabel();
 			champsMethodesCdi.add(champCombo);
 		}
 		for (String champ : champsMethodesCdi)
@@ -282,6 +273,7 @@ public class OptionsAction extends Action implements ISelectionListener,
 		// FAE 4431 Flag qualité par défault configurable
 		_flagDefault.add("0");
 		_flagDefault.add("1");
+		_flagDefault.add("2");
 
 		// long end = System.currentTimeMillis();
 
@@ -388,17 +380,12 @@ public class OptionsAction extends Action implements ISelectionListener,
 		afficheGrpODV();
 
 		// FAE 4431 Flag qualité par défault configurable
-		if (config.getDefaultFlag().equals("1"))
-			_flagDefault.select(1);
-		else
-			_flagDefault.select(0);
-
+		_flagDefault.select(Integer.valueOf(config.getDefaultFlag()));
 		redLabels();
 
 		long end = System.currentTimeMillis();
 
-		System.out.println("Temps : remplissageOptions() = " + (end - start)
-				+ "ms");
+		System.out.println("Temps : remplissageOptions() = " + (end - start) + "ms");
 	}
 
 	protected void CDICheckMask(Boolean status) {
@@ -428,12 +415,9 @@ public class OptionsAction extends Action implements ISelectionListener,
 		labelFichierMapping.setEnabled(enabled);
 		textFichierMapping.setEnabled(enabled);
 
-		ApplicationActionBarAdvisor.mappingDatabaseEditAction
-				.setEnabled(enabled);
-		ApplicationActionBarAdvisor.mappingDatabaseExportAction
-				.setEnabled(enabled);
-		ApplicationActionBarAdvisor.mappingDatabaseImportAction
-				.setEnabled(enabled);
+		ApplicationActionBarAdvisor.mappingDatabaseEditAction.setEnabled(enabled);
+		ApplicationActionBarAdvisor.mappingDatabaseExportAction.setEnabled(enabled);
+		ApplicationActionBarAdvisor.mappingDatabaseImportAction.setEnabled(enabled);
 	}
 
 	public void selectionChanged(IWorkbenchPart part, ISelection incoming) {
@@ -445,10 +429,8 @@ public class OptionsAction extends Action implements ISelectionListener,
 	private void createCompoHaut(Composite parent) {
 		compo = new Composite(parent, SWT.NONE);
 		compo.setFont(Utils.font08);
-		GridLayoutFactory.fillDefaults().numColumns(2).equalWidth(true)
-				.applyTo(compo);
-		GridDataFactory.fillDefaults().grab(false, true).hint(600, SWT.DEFAULT)
-				.applyTo(compo);
+		GridLayoutFactory.fillDefaults().numColumns(2).equalWidth(true).applyTo(compo);
+		GridDataFactory.fillDefaults().grab(false, true).hint(600, SWT.DEFAULT).applyTo(compo);
 
 		createCompoLCD(compo);
 		createGroupDossier(compo);
@@ -503,8 +485,7 @@ public class OptionsAction extends Action implements ISelectionListener,
 
 		comboCentreDonnees = new Combo(group, SWT.READ_ONLY);
 		comboCentreDonnees.setFont(Utils.font08);
-		GridDataFactory.fillDefaults().grab(true, false)
-				.applyTo(comboCentreDonnees);
+		GridDataFactory.fillDefaults().grab(true, false).applyTo(comboCentreDonnees);
 		comboCentreDonnees.pack();
 
 		Utils.createSearchMenu(comboCentreDonnees, Global.DATACENTRE);
@@ -531,31 +512,26 @@ public class OptionsAction extends Action implements ISelectionListener,
 
 		textDossierModele = new Text(group01, SWT.BORDER);
 		textDossierModele.setFont(Utils.font08);
-		GridDataFactory.fillDefaults().grab(true, false)
-				.applyTo(textDossierModele);
+		GridDataFactory.fillDefaults().grab(true, false).applyTo(textDossierModele);
 		buttonParcourirModele = new Button(group01, SWT.NONE);
 		buttonParcourirModele.setFont(Utils.font08);
 		buttonParcourirModele.setText(Messages.button_browse);
 		buttonParcourirModele.pack();
 		// listener sur le bouton
-		buttonParcourirModele
-				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
-					@Override
-					public void widgetSelected(
-							org.eclipse.swt.events.SelectionEvent e) {
-						String nomRepertoire;
-						Shell shell = Utils.getMainShell();
-						DirectoryDialog dialog = new DirectoryDialog(shell,
-								SWT.OPEN | SWT.APPLICATION_MODAL);
-						nomRepertoire = dialog.open();
-						if (nomRepertoire != null) {
-							textDossierModele.setText(nomRepertoire);
-						} else {
-							ViewLog.styledTextLogErreurs
-									.setText(Messages.error_settings_dir);
-						}
-					}
-				});
+		buttonParcourirModele.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+			@Override
+			public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
+				String nomRepertoire;
+				Shell shell = Utils.getMainShell();
+				DirectoryDialog dialog = new DirectoryDialog(shell, SWT.OPEN | SWT.APPLICATION_MODAL);
+				nomRepertoire = dialog.open();
+				if (nomRepertoire != null) {
+					textDossierModele.setText(nomRepertoire);
+				} else {
+					ViewLog.styledTextLogErreurs.setText(Messages.error_settings_dir);
+				}
+			}
+		});
 
 		group02 = new Group(group, SWT.NONE);
 		group02.setFont(Utils.font08);
@@ -566,31 +542,26 @@ public class OptionsAction extends Action implements ISelectionListener,
 
 		textDossierCampagne = new Text(group02, SWT.BORDER);
 		textDossierCampagne.setFont(Utils.font08);
-		GridDataFactory.fillDefaults().grab(true, false)
-				.applyTo(textDossierCampagne);
+		GridDataFactory.fillDefaults().grab(true, false).applyTo(textDossierCampagne);
 		buttonParcourirCampagne = new Button(group02, SWT.NONE);
 		buttonParcourirCampagne.setFont(Utils.font08);
 		buttonParcourirCampagne.setText(Messages.button_browse);
 		buttonParcourirCampagne.pack();
 		// listener sur le bouton
-		buttonParcourirCampagne
-				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
-					@Override
-					public void widgetSelected(
-							org.eclipse.swt.events.SelectionEvent e) {
-						String nomRepertoire;
-						Shell shell = Utils.getMainShell();
-						DirectoryDialog dialog = new DirectoryDialog(shell,
-								SWT.OPEN | SWT.APPLICATION_MODAL);
-						nomRepertoire = dialog.open();
-						if (nomRepertoire != null) {
-							textDossierCampagne.setText(nomRepertoire);
-						} else {
-							ViewLog.styledTextLogErreurs
-									.setText(Messages.error_settings_dir);
-						}
-					}
-				});
+		buttonParcourirCampagne.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+			@Override
+			public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
+				String nomRepertoire;
+				Shell shell = Utils.getMainShell();
+				DirectoryDialog dialog = new DirectoryDialog(shell, SWT.OPEN | SWT.APPLICATION_MODAL);
+				nomRepertoire = dialog.open();
+				if (nomRepertoire != null) {
+					textDossierCampagne.setText(nomRepertoire);
+				} else {
+					ViewLog.styledTextLogErreurs.setText(Messages.error_settings_dir);
+				}
+			}
+		});
 	}
 
 	/**
@@ -601,8 +572,7 @@ public class OptionsAction extends Action implements ISelectionListener,
 		compo01.setFont(Utils.font08);
 		// group.setText(Messages.settings_web);
 		GridLayoutFactory.fillDefaults().margins(4, 4).applyTo(compo01);
-		GridDataFactory.fillDefaults().grab(false, true).hint(600, SWT.DEFAULT)
-				.applyTo(compo01);
+		GridDataFactory.fillDefaults().grab(false, true).hint(600, SWT.DEFAULT).applyTo(compo01);
 
 		compo = new Composite(compo01, SWT.NONE);
 		compo.setFont(Utils.font08);
@@ -625,8 +595,7 @@ public class OptionsAction extends Action implements ISelectionListener,
 
 		textAreaNautilus = new Text(compo, SWT.BORDER);
 		textAreaNautilus.setFont(Utils.font08);
-		GridDataFactory.fillDefaults().grab(true, false)
-				.applyTo(textAreaNautilus);
+		GridDataFactory.fillDefaults().grab(true, false).applyTo(textAreaNautilus);
 
 		// la lib sdnVocabulary integre l'adresse
 		// // WS Vocab
@@ -657,8 +626,7 @@ public class OptionsAction extends Action implements ISelectionListener,
 
 		label = new Label(compo01, SWT.NULL);
 		label.setFont(Utils.font08);
-		GridDataFactory.swtDefaults().grab(false, false).hint(10, 4)
-				.applyTo(label);
+		GridDataFactory.swtDefaults().grab(false, false).hint(10, 4).applyTo(label);
 
 		// PROXY
 		useProxy = new Button(compo01, SWT.CHECK);
@@ -680,29 +648,24 @@ public class OptionsAction extends Action implements ISelectionListener,
 		labelAdrProxy = new Label(compo02, SWT.NULL);
 		labelAdrProxy.setFont(Utils.font08);
 		labelAdrProxy.setText(Messages.settings_proxy_adr);
-		GridDataFactory.fillDefaults().grab(true, false).minSize(100, 12)
-				.applyTo(labelAdrProxy);
+		GridDataFactory.fillDefaults().grab(true, false).minSize(100, 12).applyTo(labelAdrProxy);
 
 		textAdrProxy = new Text(compo02, SWT.BORDER);
 		textAdrProxy.setFont(Utils.font08);
-		GridDataFactory.fillDefaults().grab(true, false).hint(170, 12)
-				.applyTo(textAdrProxy);
+		GridDataFactory.fillDefaults().grab(true, false).hint(170, 12).applyTo(textAdrProxy);
 
 		label = new Label(compo02, SWT.NULL);
 		label.setFont(Utils.font08);
-		GridDataFactory.fillDefaults().grab(true, false).minSize(10, 12)
-				.applyTo(label);
+		GridDataFactory.fillDefaults().grab(true, false).minSize(10, 12).applyTo(label);
 
 		labelPortProxy = new Label(compo02, SWT.NULL);
 		labelPortProxy.setFont(Utils.font08);
 		labelPortProxy.setText(Messages.settings_proxy_port);
-		GridDataFactory.fillDefaults().grab(true, false).minSize(70, 12)
-				.applyTo(labelPortProxy);
+		GridDataFactory.fillDefaults().grab(true, false).minSize(70, 12).applyTo(labelPortProxy);
 
 		textPortProxy = new Text(compo02, SWT.BORDER);
 		textPortProxy.setFont(Utils.font08);
-		GridDataFactory.fillDefaults().grab(true, false).hint(170, 12)
-				.applyTo(textPortProxy);
+		GridDataFactory.fillDefaults().grab(true, false).hint(170, 12).applyTo(textPortProxy);
 
 		compo02 = new Composite(compo01, SWT.NULL);
 		GridLayoutFactory.fillDefaults().numColumns(5).applyTo(compo02);
@@ -710,30 +673,24 @@ public class OptionsAction extends Action implements ISelectionListener,
 		labelLoginProxy = new Label(compo02, SWT.NULL);
 		labelLoginProxy.setFont(Utils.font08);
 		labelLoginProxy.setText(Messages.settings_proxy_login);
-		GridDataFactory.fillDefaults().grab(true, false).minSize(100, 12)
-				.applyTo(labelLoginProxy);
+		GridDataFactory.fillDefaults().grab(true, false).minSize(100, 12).applyTo(labelLoginProxy);
 
 		textLoginProxy = new Text(compo02, SWT.BORDER);
 		textLoginProxy.setFont(Utils.font08);
-		GridDataFactory.fillDefaults().grab(true, false).hint(170, 12)
-				.applyTo(textLoginProxy);
+		GridDataFactory.fillDefaults().grab(true, false).hint(170, 12).applyTo(textLoginProxy);
 
 		label = new Label(compo02, SWT.NULL);
 		label.setFont(Utils.font08);
-		GridDataFactory.fillDefaults().grab(true, false).minSize(10, 12)
-				.applyTo(label);
+		GridDataFactory.fillDefaults().grab(true, false).minSize(10, 12).applyTo(label);
 
 		labelPassProxy = new Label(compo02, SWT.NULL);
 		labelPassProxy.setFont(Utils.font08);
 		labelPassProxy.setText(Messages.settings_proxy_pass);
-		GridDataFactory.fillDefaults().grab(true, false).minSize(70, 12)
-				.applyTo(labelPassProxy);
+		GridDataFactory.fillDefaults().grab(true, false).minSize(70, 12).applyTo(labelPassProxy);
 
-		textPassProxy = new Text(compo02, SWT.BORDER | SWT.SINGLE
-				| SWT.PASSWORD);
+		textPassProxy = new Text(compo02, SWT.BORDER | SWT.SINGLE | SWT.PASSWORD);
 		textPassProxy.setFont(Utils.font08);
-		GridDataFactory.fillDefaults().grab(true, false).hint(170, 12)
-				.applyTo(textPassProxy);
+		GridDataFactory.fillDefaults().grab(true, false).hint(170, 12).applyTo(textPassProxy);
 
 	}
 
@@ -756,16 +713,12 @@ public class OptionsAction extends Action implements ISelectionListener,
 		Group groupEdmoRespCDI = new Group(parent, SWT.NONE);
 		groupEdmoRespCDI.setFont(Utils.font08);
 		groupEdmoRespCDI.setText(Messages.settings_EDMO);
-		GridLayoutFactory.fillDefaults().margins(4, 4).numColumns(2)
-				.applyTo(groupEdmoRespCDI);
-		GridDataFactory.fillDefaults().grab(false, true).hint(600, SWT.DEFAULT)
-				.applyTo(groupEdmoRespCDI);
+		GridLayoutFactory.fillDefaults().margins(4, 4).numColumns(2).applyTo(groupEdmoRespCDI);
+		GridDataFactory.fillDefaults().grab(false, true).hint(600, SWT.DEFAULT).applyTo(groupEdmoRespCDI);
 
 		buttonEdmoChoiceIdEdmoRespCdi = new Button(groupEdmoRespCDI, SWT.PUSH);
-		buttonEdmoChoiceIdEdmoRespCdi
-				.setText(Messages.settings_EDMO_choice_button);
-		buttonEdmoChoiceIdEdmoRespCdi.addListener(SWT.Selection,
-				edmoChoiceListener);
+		buttonEdmoChoiceIdEdmoRespCdi.setText(Messages.settings_EDMO_choice_button);
+		buttonEdmoChoiceIdEdmoRespCdi.addListener(SWT.Selection, edmoChoiceListener);
 
 		labelIdEdmoRespCdi = new Label(groupEdmoRespCDI, SWT.NONE);
 		labelIdEdmoRespCdi.setFont(Utils.font08);
@@ -775,19 +728,15 @@ public class OptionsAction extends Action implements ISelectionListener,
 	public class EdmoChoiceListener implements Listener {
 		public void handleEvent(Event event) {
 			if (event.widget == buttonEdmoChoiceIdEdmoRespCdi) {
-				edmoViewer = new EdmoViewer(OptionsAction.this,
-						EdmoChoices.CHOICE_IdEdmoRespCdi);
+				edmoViewer = new EdmoViewer(OptionsAction.this, EdmoChoices.CHOICE_IdEdmoRespCdi);
 			} else if (event.widget == buttonEdmoChoiceIdCodeEdmoDonnees) {
-				edmoViewer = new EdmoViewer(OptionsAction.this,
-						EdmoChoices.CHOICE_CodeEdmoDonnees);
+				edmoViewer = new EdmoViewer(OptionsAction.this, EdmoChoices.CHOICE_CodeEdmoDonnees);
 
 			} else if (event.widget == buttonEdmoChoiceIdEdmoRespDonnees) {
-				edmoViewer = new EdmoViewer(OptionsAction.this,
-						EdmoChoices.CHOICE_IdEdmoRespDonnees);
+				edmoViewer = new EdmoViewer(OptionsAction.this, EdmoChoices.CHOICE_IdEdmoRespDonnees);
 
 			} else if (event.widget == buttonEdmoChoiceIdEdmoDistDonnees) {
-				edmoViewer = new EdmoViewer(OptionsAction.this,
-						EdmoChoices.CHOICE_IdEdmoDistDonnees);
+				edmoViewer = new EdmoViewer(OptionsAction.this, EdmoChoices.CHOICE_IdEdmoDistDonnees);
 			}
 		}
 	}
@@ -800,10 +749,8 @@ public class OptionsAction extends Action implements ISelectionListener,
 		compo = new Composite(parent, SWT.NONE);
 		compo.setFont(Utils.font08);
 		// group.setText(Messages.settings_cdi);
-		GridLayoutFactory.fillDefaults().margins(0, 0).numColumns(2)
-				.applyTo(compo);
-		GridDataFactory.fillDefaults().grab(false, true).hint(600, SWT.DEFAULT)
-				.applyTo(compo);
+		GridLayoutFactory.fillDefaults().margins(0, 0).numColumns(2).applyTo(compo);
+		GridDataFactory.fillDefaults().grab(false, true).hint(600, SWT.DEFAULT).applyTo(compo);
 
 		// compo vide pour mise en forme
 		lblCDI = new Label(compo, SWT.NONE);
@@ -821,10 +768,8 @@ public class OptionsAction extends Action implements ISelectionListener,
 		});
 
 		buttonEdmoChoiceIdCodeEdmoDonnees = new Button(compo, SWT.PUSH);
-		buttonEdmoChoiceIdCodeEdmoDonnees
-				.setText(Messages.settings_EDMO_choice_button);// TODO
-		buttonEdmoChoiceIdCodeEdmoDonnees.addListener(SWT.Selection,
-				edmoChoiceListener);
+		buttonEdmoChoiceIdCodeEdmoDonnees.setText(Messages.settings_EDMO_choice_button);// TODO
+		buttonEdmoChoiceIdCodeEdmoDonnees.addListener(SWT.Selection, edmoChoiceListener);
 		buttonEdmoChoiceIdCodeEdmoDonnees.pack();
 
 		labelCodeEdmoDonnees = new Label(compo, SWT.NONE);
@@ -832,10 +777,8 @@ public class OptionsAction extends Action implements ISelectionListener,
 		labelCodeEdmoDonnees.pack();
 
 		buttonEdmoChoiceIdEdmoRespDonnees = new Button(compo, SWT.PUSH);
-		buttonEdmoChoiceIdEdmoRespDonnees
-				.setText(Messages.settings_EDMO_choice_button);// TODO
-		buttonEdmoChoiceIdEdmoRespDonnees.addListener(SWT.Selection,
-				edmoChoiceListener);
+		buttonEdmoChoiceIdEdmoRespDonnees.setText(Messages.settings_EDMO_choice_button);// TODO
+		buttonEdmoChoiceIdEdmoRespDonnees.addListener(SWT.Selection, edmoChoiceListener);
 		buttonEdmoChoiceIdEdmoRespDonnees.pack();
 
 		labelIdEdmoRespDonnees = new Label(compo, SWT.NONE);
@@ -843,10 +786,8 @@ public class OptionsAction extends Action implements ISelectionListener,
 		labelIdEdmoRespDonnees.pack();
 
 		buttonEdmoChoiceIdEdmoDistDonnees = new Button(compo, SWT.PUSH);
-		buttonEdmoChoiceIdEdmoDistDonnees
-				.setText(Messages.settings_EDMO_choice_button);// TODO
-		buttonEdmoChoiceIdEdmoDistDonnees.addListener(SWT.Selection,
-				edmoChoiceListener);
+		buttonEdmoChoiceIdEdmoDistDonnees.setText(Messages.settings_EDMO_choice_button);// TODO
+		buttonEdmoChoiceIdEdmoDistDonnees.addListener(SWT.Selection, edmoChoiceListener);
 		buttonEdmoChoiceIdEdmoDistDonnees.pack();
 
 		labelIdEdmoDistDonnees = new Label(compo, SWT.NONE);
@@ -869,8 +810,7 @@ public class OptionsAction extends Action implements ISelectionListener,
 
 		comboMethodeCdi = new Combo(compo, SWT.BORDER | SWT.READ_ONLY);
 		comboMethodeCdi.setFont(Utils.font08);
-		GridDataFactory.fillDefaults().grab(true, false)
-				.applyTo(comboMethodeCdi);
+		GridDataFactory.fillDefaults().grab(true, false).applyTo(comboMethodeCdi);
 
 		// FAE 59 CDL 09/04/08
 		lblTypePlateForme = new Label(compo, SWT.NONE);
@@ -879,8 +819,7 @@ public class OptionsAction extends Action implements ISelectionListener,
 
 		comboTypePlateForme = new Combo(compo, SWT.BORDER | SWT.READ_ONLY);
 		comboTypePlateForme.setFont(Utils.font08);
-		GridDataFactory.fillDefaults().grab(false, false)
-				.applyTo(comboTypePlateForme);
+		GridDataFactory.fillDefaults().grab(false, false).applyTo(comboTypePlateForme);
 
 		lblAccesDonnees = new Label(compo, SWT.NONE);
 		lblAccesDonnees.setFont(Utils.font08);
@@ -888,8 +827,7 @@ public class OptionsAction extends Action implements ISelectionListener,
 
 		comboAccesDonnees = new Combo(compo, SWT.BORDER | SWT.READ_ONLY);
 		comboAccesDonnees.setFont(Utils.font08);
-		GridDataFactory.fillDefaults().grab(false, false)
-				.applyTo(comboAccesDonnees);
+		GridDataFactory.fillDefaults().grab(false, false).applyTo(comboAccesDonnees);
 
 		// FAE 16993 FORMAT VERSION
 		// Version Format ODV
@@ -900,8 +838,7 @@ public class OptionsAction extends Action implements ISelectionListener,
 
 		textOdvFormatVersion = new Text(compo, SWT.BORDER);
 		textOdvFormatVersion.setFont(Utils.font08);
-		GridDataFactory.fillDefaults().grab(true, false)
-				.applyTo(textOdvFormatVersion);
+		GridDataFactory.fillDefaults().grab(true, false).applyTo(textOdvFormatVersion);
 
 		// Version Format Medatlas
 		lblMedatlasFormatVersion = new Label(compo, SWT.NONE);
@@ -911,8 +848,7 @@ public class OptionsAction extends Action implements ISelectionListener,
 
 		textMedatlasFormatVersion = new Text(compo, SWT.BORDER);
 		textMedatlasFormatVersion.setFont(Utils.font08);
-		GridDataFactory.fillDefaults().grab(true, false)
-				.applyTo(textMedatlasFormatVersion);
+		GridDataFactory.fillDefaults().grab(true, false).applyTo(textMedatlasFormatVersion);
 
 		// Version Format NetCDF
 		lblNetCDFFormatVersion = new Label(compo, SWT.NONE);
@@ -922,8 +858,7 @@ public class OptionsAction extends Action implements ISelectionListener,
 
 		textNetCDFFormatVersion = new Text(compo, SWT.BORDER);
 		textNetCDFFormatVersion.setFont(Utils.font08);
-		GridDataFactory.fillDefaults().grab(true, false)
-				.applyTo(textNetCDFFormatVersion);
+		GridDataFactory.fillDefaults().grab(true, false).applyTo(textNetCDFFormatVersion);
 	}
 
 	/**
@@ -933,8 +868,7 @@ public class OptionsAction extends Action implements ISelectionListener,
 		compo = new Composite(parent, SWT.NONE);
 		compo.setFont(Utils.font08);
 		GridLayoutFactory.fillDefaults().numColumns(2).applyTo(compo);
-		GridDataFactory.fillDefaults().grab(false, true).hint(600, SWT.DEFAULT)
-				.applyTo(compo);
+		GridDataFactory.fillDefaults().grab(false, true).hint(600, SWT.DEFAULT).applyTo(compo);
 
 		createGroupMapping(compo);
 		createGroupDateODV(compo);
@@ -947,8 +881,7 @@ public class OptionsAction extends Action implements ISelectionListener,
 		group = new Group(parent, SWT.NONE);
 		group.setFont(Utils.font08);
 		group.setText(Messages.settings_defaultOutputFormat);
-		GridLayoutFactory.fillDefaults().numColumns(3).equalWidth(true)
-				.margins(4, 4).applyTo(group);
+		GridLayoutFactory.fillDefaults().numColumns(3).equalWidth(true).margins(4, 4).applyTo(group);
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(group);
 
 		// ****************************************************************************************
@@ -1059,17 +992,15 @@ public class OptionsAction extends Action implements ISelectionListener,
 		checkMapping = new Button(group, SWT.CHECK);
 		checkMapping.setFont(Utils.font08);
 		checkMapping.setText(Messages.settings_mapping_check);
-		checkMapping
-				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
-					@Override
-					public void widgetSelected(
-							org.eclipse.swt.events.SelectionEvent e) {
-						// On masque/affiche les champs falcutatif en fonction
-						// de la
-						// case checkMapping
-						mappingCheckMask(checkMapping.getSelection());
-					}
-				});
+		checkMapping.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+			@Override
+			public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
+				// On masque/affiche les champs falcutatif en fonction
+				// de la
+				// case checkMapping
+				mappingCheckMask(checkMapping.getSelection());
+			}
+		});
 
 		compo01 = new Composite(group, SWT.NULL);
 		compo01.setFont(Utils.font08);
@@ -1083,8 +1014,7 @@ public class OptionsAction extends Action implements ISelectionListener,
 
 		textFichierMapping = new Text(compo01, SWT.BORDER);
 		textFichierMapping.setFont(Utils.font08);
-		GridDataFactory.fillDefaults().grab(true, false).hint(50, 12)
-				.applyTo(textFichierMapping);
+		GridDataFactory.fillDefaults().grab(true, false).hint(50, 12).applyTo(textFichierMapping);
 	}
 
 	/**
@@ -1100,30 +1030,24 @@ public class OptionsAction extends Action implements ISelectionListener,
 		AddedParam dateISO = new AP_DTUT();
 		radDateISO = new Button(group, SWT.RADIO);
 		radDateISO.setFont(Utils.font08);
-		radDateISO.setText(dateISO.getFullName()
-				+ " [" + dateISO.getUnit() + "]"); //$NON-NLS-1$ //$NON-NLS-2$
-		radDateISO
-				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
-					@Override
-					public void widgetSelected(
-							org.eclipse.swt.events.SelectionEvent e) {
-						radDateJulian.setSelection(!radDateISO.getSelection());
-					}
-				});
+		radDateISO.setText(dateISO.getFullName() + " [" + dateISO.getUnit() + "]"); //$NON-NLS-1$ //$NON-NLS-2$
+		radDateISO.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+			@Override
+			public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
+				radDateJulian.setSelection(!radDateISO.getSelection());
+			}
+		});
 
 		AddedParam dateJulian = new AP_CJDY();
 		radDateJulian = new Button(group, SWT.RADIO);
 		radDateJulian.setFont(Utils.font08);
-		radDateJulian.setText(dateJulian.getFullName()
-				+ " [" + dateJulian.getUnit() + "]"); //$NON-NLS-1$//$NON-NLS-2$
-		radDateJulian
-				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
-					@Override
-					public void widgetSelected(
-							org.eclipse.swt.events.SelectionEvent e) {
-						radDateISO.setSelection(!radDateJulian.getSelection());
-					}
-				});
+		radDateJulian.setText(dateJulian.getFullName() + " [" + dateJulian.getUnit() + "]"); //$NON-NLS-1$//$NON-NLS-2$
+		radDateJulian.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+			@Override
+			public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
+				radDateISO.setSelection(!radDateJulian.getSelection());
+			}
+		});
 	}
 
 	/**
@@ -1134,8 +1058,7 @@ public class OptionsAction extends Action implements ISelectionListener,
 		compo.setFont(Utils.font08);
 		// group.setText(Messages.settings_flags);
 		GridLayoutFactory.fillDefaults().numColumns(2).applyTo(compo);
-		GridDataFactory.fillDefaults().grab(false, true).hint(600, 90)
-				.applyTo(compo);
+		GridDataFactory.fillDefaults().grab(false, true).hint(600, 90).applyTo(compo);
 
 		// Creation du tableau des tables de correspondaces
 		createTableFlagTable(compo);
@@ -1225,8 +1148,7 @@ public class OptionsAction extends Action implements ISelectionListener,
 			@Override
 			public void mouseDown(MouseEvent event) {
 				// On affiche les flags correspondants
-				_flagTable = FlagTable.getFlagTable(_flagTables,
-						tabFlagTable.getSelection()[0].getText());
+				_flagTable = FlagTable.getFlagTable(_flagTables, tabFlagTable.getSelection()[0].getText());
 				_flagTable.fillTable(tabFlag);
 
 				// Saisie
@@ -1318,10 +1240,8 @@ public class OptionsAction extends Action implements ISelectionListener,
 	protected void selectDefaultFlagsTab(String defaultCode) {
 		setDefaultCode(defaultCode);
 		// Mise en gras du flagtable par defaut
-		Font normal = new Font(Application.display, Global.EMPTY_STRING, 8,
-				SWT.NORMAL);
-		Font bold = new Font(Application.display, Global.EMPTY_STRING, 8,
-				SWT.BOLD);
+		Font normal = new Font(Application.display, Global.EMPTY_STRING, 8, SWT.NORMAL);
+		Font bold = new Font(Application.display, Global.EMPTY_STRING, 8, SWT.BOLD);
 
 		for (int i = 0; i < tabFlagTable.getItemCount(); i++) {
 			if (tabFlagTable.getItem(i).getText(0).equals(getDefaultCode())) {
@@ -1462,8 +1382,7 @@ public class OptionsAction extends Action implements ISelectionListener,
 
 		itemRemove.addListener(SWT.Selection, new Listener() {
 			public void handleEvent(Event e) {
-				_flagTable.getFlags().remove(
-						_flagTable.getFlag(tab.getSelection()[0].getText()));
+				_flagTable.getFlags().remove(_flagTable.getFlag(tab.getSelection()[0].getText()));
 				tab.remove(tab.getSelectionIndex());
 			}
 		});
@@ -1476,8 +1395,7 @@ public class OptionsAction extends Action implements ISelectionListener,
 
 		FormToolkit toolkitOption = new FormToolkit(parent.getDisplay());
 		toolkitOption.setBackground(parent.getBackground());
-		final ScrolledForm formOption = toolkitOption
-				.createScrolledForm(parent);
+		final ScrolledForm formOption = toolkitOption.createScrolledForm(parent);
 		formOption.setBackground(parent.getBackground());
 		formOption.getBody().setLayout(new GridLayout());
 		GridData data = new GridData();
@@ -1486,14 +1404,10 @@ public class OptionsAction extends Action implements ISelectionListener,
 		formOption.getBody().setLayoutData(data);
 		edmoChoiceListener = new EdmoChoiceListener();
 
-		createSection(toolkitOption, formOption, Messages.settings_general,
-				ExpandableComposite.EXPANDED);
-		createSection(toolkitOption, formOption, Messages.settings_web,
-				ExpandableComposite.COMPACT);
-		createSection(toolkitOption, formOption, Messages.settings_cdi,
-				ExpandableComposite.COMPACT);
-		createSection(toolkitOption, formOption, Messages.settings_flags,
-				ExpandableComposite.EXPANDED);
+		createSection(toolkitOption, formOption, Messages.settings_general, ExpandableComposite.EXPANDED);
+		createSection(toolkitOption, formOption, Messages.settings_web, ExpandableComposite.COMPACT);
+		createSection(toolkitOption, formOption, Messages.settings_cdi, ExpandableComposite.COMPACT);
+		createSection(toolkitOption, formOption, Messages.settings_flags, ExpandableComposite.EXPANDED);
 
 		Label sep = new Label(parent, SWT.SEPARATOR | SWT.HORIZONTAL);
 		data = new GridData();
@@ -1504,71 +1418,60 @@ public class OptionsAction extends Action implements ISelectionListener,
 		updateEdmo(tmpEdmoChoices);
 
 		// listener cancel
-		buttonCancel
-				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
-					@Override
-					public void widgetSelected(
-							org.eclipse.swt.events.SelectionEvent e) {
-						tmpEdmoChoices = new EdmoChoices();
-						shelloptions.close();
-					}
-				});
+		buttonCancel.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+			@Override
+			public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
+				tmpEdmoChoices = new EdmoChoices();
+				shelloptions.close();
+			}
+		});
 
 		// listener valider
-		buttonValider
-				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
-					@Override
-					public void widgetSelected(
-							org.eclipse.swt.events.SelectionEvent e) {
-						// FAE 1123 : validation de la config
-						if (checkConfig()) {
-							// message d'information pour redémarrage de
-							// l'application
-							boolean writeIni = checkRestart();
+		buttonValider.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+			@Override
+			public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
+				// FAE 1123 : validation de la config
+				if (checkConfig()) {
+					// message d'information pour redémarrage de
+					// l'application
+					boolean writeIni = checkRestart();
 
-							// sauvegarde de la config
-							saveConfig(writeIni);
+					// sauvegarde de la config
+					saveConfig(writeIni);
 
-							// reinitialisation de la conversion
-							Nemo.getInstance().getDomain().getData()
-									.getMyParameterManager()
-									.setAddedParameterModel();
-							// if (DataModel.inputModel != null)
-							// DataModel.inputModel.setConverted(false);
+					// reinitialisation de la conversion
+					Nemo.getInstance().getDomain().getData().getMyParameterManager().setAddedParameterModel();
+					// if (DataModel.inputModel != null)
+					// DataModel.inputModel.setConverted(false);
 
-							// maj Summary
-							Nemo.getInstance().getViewMain()
-									.getEditConversionForm().fillSummary();
+					// maj Summary
+					Nemo.getInstance().getViewMain().getEditConversionForm().fillSummary();
 
-							// fermeture de la fenêtre
-							shelloptions.close();
+					// fermeture de la fenêtre
+					shelloptions.close();
 
-						} else {
-							redLabels();
-						}
+				} else {
+					redLabels();
+				}
 
-					}
-				});
+			}
+		});
 
 		// listener reinitialiser
-		buttonRestore
-				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
-					@Override
-					public void widgetSelected(
-							org.eclipse.swt.events.SelectionEvent e) {
-						Nemo.getInstance().restoreDefaultConfig();
-						remplissageOptions();
+		buttonRestore.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+			@Override
+			public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
+				Nemo.getInstance().restoreDefaultConfig();
+				remplissageOptions();
 
-						buttonCancel.setEnabled(false);
-					}
-				});
+				buttonCancel.setEnabled(false);
+			}
+		});
 
 	}
 
-	private void createSection(FormToolkit toolkitOption,
-			final ScrolledForm formOption, String title, int expandStyle) {
-		Section section = toolkitOption.createSection(formOption.getBody(),
-				ExpandableComposite.TREE_NODE | expandStyle);
+	private void createSection(FormToolkit toolkitOption, final ScrolledForm formOption, String title, int expandStyle) {
+		Section section = toolkitOption.createSection(formOption.getBody(), ExpandableComposite.TREE_NODE | expandStyle);
 
 		section.addExpansionListener(new ExpansionAdapter() {
 			@Override
@@ -1603,13 +1506,10 @@ public class OptionsAction extends Action implements ISelectionListener,
 		StringBuffer message = new StringBuffer();
 		StringBuffer messageCDI = new StringBuffer();
 
-		message.append(checkEdmoMandatory(tmpEdmoChoices.getIdEdmoRespCdi(),
-				Messages.settings_EDMOauthor, Global.SEP));
+		message.append(checkEdmoMandatory(tmpEdmoChoices.getIdEdmoRespCdi(), Messages.settings_EDMOauthor, Global.SEP));
 		if (useProxy.getSelection()) {
-			message.append(checkMandatory(textAdrProxy.getText(),
-					Messages.settings_proxy_adr, Global.SEP));
-			message.append(checkMandatory(textPortProxy.getText(),
-					Messages.settings_proxy_port, Global.SEP));
+			message.append(checkMandatory(textAdrProxy.getText(), Messages.settings_proxy_adr, Global.SEP));
+			message.append(checkMandatory(textPortProxy.getText(), Messages.settings_proxy_port, Global.SEP));
 		}
 
 		if (message.length() > 0) {
@@ -1618,30 +1518,17 @@ public class OptionsAction extends Action implements ISelectionListener,
 		}
 
 		if (checkCDI.getSelection()) {
-			messageCDI.append(checkEdmoMandatory(
-					tmpEdmoChoices.getCodeEdmoDonnees(),
-					Messages.settings_EDMOori, Global.SEP));
-			messageCDI.append(checkEdmoMandatory(
-					tmpEdmoChoices.getIdEdmoRespDonnees(),
-					Messages.settings_EDMOcustodian, Global.SEP));
-			messageCDI.append(checkEdmoMandatory(
-					tmpEdmoChoices.getIdEdmoDistDonnees(),
-					Messages.settings_EDMOdist, Global.SEP));
+			messageCDI.append(checkEdmoMandatory(tmpEdmoChoices.getCodeEdmoDonnees(), Messages.settings_EDMOori, Global.SEP));
+			messageCDI.append(checkEdmoMandatory(tmpEdmoChoices.getIdEdmoRespDonnees(), Messages.settings_EDMOcustodian, Global.SEP));
+			messageCDI.append(checkEdmoMandatory(tmpEdmoChoices.getIdEdmoDistDonnees(), Messages.settings_EDMOdist, Global.SEP));
 
-			messageCDI.append(checkMandatory(textUrlCdi.getText(),
-					Messages.settings_dataDist_web, Global.SEP));
-			messageCDI.append(checkMandatory(comboMethodeCdi.getText(),
-					Messages.settings_dataDist_met, Global.SEP));
-			messageCDI.append(checkMandatory(comboTypePlateForme.getText(),
-					Messages.settings_typePlateForme, Global.SEP));
+			messageCDI.append(checkMandatory(textUrlCdi.getText(), Messages.settings_dataDist_web, Global.SEP));
+			messageCDI.append(checkMandatory(comboMethodeCdi.getText(), Messages.settings_dataDist_met, Global.SEP));
+			messageCDI.append(checkMandatory(comboTypePlateForme.getText(), Messages.settings_typePlateForme, Global.SEP));
 
-			messageCDI.append(checkMandatory(
-					textMedatlasFormatVersion.getText(),
-					Messages.settings_medatlasVersion, Global.SEP));
-			messageCDI.append(checkMandatory(textOdvFormatVersion.getText(),
-					Messages.settings_odvVersion, Global.SEP));
-			messageCDI.append(checkMandatory(textNetCDFFormatVersion.getText(),
-					Messages.settings_netcdfVersion, Global.SEP));
+			messageCDI.append(checkMandatory(textMedatlasFormatVersion.getText(), Messages.settings_medatlasVersion, Global.SEP));
+			messageCDI.append(checkMandatory(textOdvFormatVersion.getText(), Messages.settings_odvVersion, Global.SEP));
+			messageCDI.append(checkMandatory(textNetCDFFormatVersion.getText(), Messages.settings_netcdfVersion, Global.SEP));
 
 			if (messageCDI.length() > 0) {
 				messageCDI.insert(0, Messages.error_settings_cdi);
@@ -1651,8 +1538,7 @@ public class OptionsAction extends Action implements ISelectionListener,
 		}
 
 		if (checkMapping.getSelection()) {
-			String errorMapping = checkMandatory(textFichierMapping.getText(),
-					Messages.error_settings_mapping, Global.RN);
+			String errorMapping = checkMandatory(textFichierMapping.getText(), Messages.error_settings_mapping, Global.RN);
 			if (errorMapping.length() > 0) {
 				message.append(errorMapping);
 				blnOK = false;
@@ -1667,9 +1553,7 @@ public class OptionsAction extends Action implements ISelectionListener,
 			try {
 				String[] buttons = new String[1];
 				buttons[0] = Messages.success;
-				MessageDialog dialog = new MessageDialog(shelloptions,
-						Messages.error_missing, null, message.toString(),
-						MessageDialog.ERROR, buttons, 0);
+				MessageDialog dialog = new MessageDialog(shelloptions, Messages.error_missing, null, message.toString(), MessageDialog.ERROR, buttons, 0);
 				dialog.open();
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -1703,10 +1587,8 @@ public class OptionsAction extends Action implements ISelectionListener,
 
 		redEdmoLabel(tmpEdmoChoices.getIdEdmoRespCdi(), labelIdEdmoRespCdi);
 		redEdmoLabel(tmpEdmoChoices.getCodeEdmoDonnees(), labelCodeEdmoDonnees);
-		redEdmoLabel(tmpEdmoChoices.getIdEdmoRespDonnees(),
-				labelIdEdmoRespDonnees);
-		redEdmoLabel(tmpEdmoChoices.getIdEdmoDistDonnees(),
-				labelIdEdmoDistDonnees);
+		redEdmoLabel(tmpEdmoChoices.getIdEdmoRespDonnees(), labelIdEdmoRespDonnees);
+		redEdmoLabel(tmpEdmoChoices.getIdEdmoDistDonnees(), labelIdEdmoDistDonnees);
 
 		redLabel(textUrlCdi.getText(), labelUrlCdi);
 		redLabel(textOdvFormatVersion.getText(), lblOdvFormatVersion);
@@ -1721,21 +1603,17 @@ public class OptionsAction extends Action implements ISelectionListener,
 
 	protected void redEdmoLabel(int value, Label redLabel) {
 		if (value == 0) {
-			redLabel.setForeground(Display.getCurrent().getSystemColor(
-					SWT.COLOR_RED));
+			redLabel.setForeground(Display.getCurrent().getSystemColor(SWT.COLOR_RED));
 		} else {
-			redLabel.setForeground(Display.getCurrent().getSystemColor(
-					SWT.COLOR_BLACK));
+			redLabel.setForeground(Display.getCurrent().getSystemColor(SWT.COLOR_BLACK));
 		}
 	}
 
 	protected void redLabel(String text, Label redLabel) {
 		if (text.trim().equals(Global.EMPTY_STRING)) {
-			redLabel.setForeground(Display.getCurrent().getSystemColor(
-					SWT.COLOR_RED));
+			redLabel.setForeground(Display.getCurrent().getSystemColor(SWT.COLOR_RED));
 		} else {
-			redLabel.setForeground(Display.getCurrent().getSystemColor(
-					SWT.COLOR_BLACK));
+			redLabel.setForeground(Display.getCurrent().getSystemColor(SWT.COLOR_BLACK));
 		}
 	}
 
@@ -1757,48 +1635,38 @@ public class OptionsAction extends Action implements ISelectionListener,
 			writeIni = true;
 		} else {
 			if (useProxy.getSelection()) {
-				if (!textAdrProxy.getText().trim()
-						.equals(configProxy.getAdress().trim())) {
+				if (!textAdrProxy.getText().trim().equals(configProxy.getAdress().trim())) {
 					// proxy address change (can't be null)
-					message.append(Global.RN + Global.SEP
-							+ Messages.settings_proxy_adr);
+					message.append(Global.RN + Global.SEP + Messages.settings_proxy_adr);
 					writeIni = true;
 				}
-				if (!textPortProxy.getText().trim()
-						.equals(configProxy.getPort().trim())) {
+				if (!textPortProxy.getText().trim().equals(configProxy.getPort().trim())) {
 					// proxy port change (can't be null)
-					message.append(Global.RN + Global.SEP
-							+ Messages.settings_proxy_port);
+					message.append(Global.RN + Global.SEP + Messages.settings_proxy_port);
 					writeIni = true;
 				}
 
 				if (textLoginProxy.getText() == null) {
 					if (!configProxy.getLogin().equals(Global.EMPTY_STRING)) {
 						// proxy login change
-						message.append(Global.RN + Global.SEP
-								+ Messages.settings_proxy_login);
+						message.append(Global.RN + Global.SEP + Messages.settings_proxy_login);
 						writeIni = true;
 					}
-				} else if (!textLoginProxy.getText().trim()
-						.equals(configProxy.getLogin().trim())) {
+				} else if (!textLoginProxy.getText().trim().equals(configProxy.getLogin().trim())) {
 					// proxy login change
-					message.append(Global.RN + Global.SEP
-							+ Messages.settings_proxy_login);
+					message.append(Global.RN + Global.SEP + Messages.settings_proxy_login);
 					writeIni = true;
 				}
 
 				if (textPassProxy.getText() == null) {
 					if (!configProxy.getPassword().equals(Global.EMPTY_STRING)) {
 						// proxy password change
-						message.append(Global.RN + Global.SEP
-								+ Messages.settings_proxy_pass);
+						message.append(Global.RN + Global.SEP + Messages.settings_proxy_pass);
 						writeIni = true;
 					}
-				} else if (!textPassProxy.getText().trim()
-						.equals(configProxy.getPassword().trim())) {
+				} else if (!textPassProxy.getText().trim().equals(configProxy.getPassword().trim())) {
 					// proxy password change
-					message.append(Global.RN + Global.SEP
-							+ Messages.settings_proxy_pass);
+					message.append(Global.RN + Global.SEP + Messages.settings_proxy_pass);
 					writeIni = true;
 				}
 			}
@@ -1806,9 +1674,7 @@ public class OptionsAction extends Action implements ISelectionListener,
 
 		if (message.length() > 0) {
 			message.insert(0, Messages.warning_settings);
-			MessageDialog dialog = new MessageDialog(Utils.getMainShell(),
-					Messages.warning_settings_title, null, message.toString(),
-					MessageDialog.WARNING, new String[] { Messages.success }, 0);
+			MessageDialog dialog = new MessageDialog(Utils.getMainShell(), Messages.warning_settings_title, null, message.toString(), MessageDialog.WARNING, new String[] { Messages.success }, 0);
 			dialog.open();
 		}
 
@@ -1828,16 +1694,14 @@ public class OptionsAction extends Action implements ISelectionListener,
 		configuration.setCruisesDirectory(textDossierCampagne.getText());
 
 		// LANGUE
-		if (comboLangue.getItem(comboLangue.getSelectionIndex()).equals(
-				Messages.settings_lang_FR)) {
+		if (comboLangue.getItem(comboLangue.getSelectionIndex()).equals(Messages.settings_lang_FR)) {
 			configuration.setLang(Intern.lang_fr);
 		} else {
 			configuration.setLang(Intern.lang_en);
 		}
 
 		// CENTRE DE DONNEES
-		configuration.setDataCenter(fr.ifremer.nemo.util.Utils
-				.extraitCode(comboCentreDonnees.getText()));
+		configuration.setDataCenter(fr.ifremer.nemo.util.Utils.extraitCode(comboCentreDonnees.getText()));
 
 		// WS
 		configuration.setNautilusWebServiceURL(textAreaNautilus.getText());
@@ -1847,22 +1711,15 @@ public class OptionsAction extends Action implements ISelectionListener,
 
 		// CDI
 		configuration.setWriteCdi(checkCDI.getSelection());
-		configuration.setIdEdmoRespCdi(String.valueOf(tmpEdmoChoices
-				.getIdEdmoRespCdi()));
-		configuration.setCodeEdmoDonnees(String.valueOf(tmpEdmoChoices
-				.getCodeEdmoDonnees()));
-		configuration.setIdEdmoRespDonnees(String.valueOf(tmpEdmoChoices
-				.getIdEdmoRespDonnees()));
-		configuration.setIdEdmoDistDonnees(String.valueOf(tmpEdmoChoices
-				.getIdEdmoDistDonnees()));
+		configuration.setIdEdmoRespCdi(String.valueOf(tmpEdmoChoices.getIdEdmoRespCdi()));
+		configuration.setCodeEdmoDonnees(String.valueOf(tmpEdmoChoices.getCodeEdmoDonnees()));
+		configuration.setIdEdmoRespDonnees(String.valueOf(tmpEdmoChoices.getIdEdmoRespDonnees()));
+		configuration.setIdEdmoDistDonnees(String.valueOf(tmpEdmoChoices.getIdEdmoDistDonnees()));
 
 		configuration.setCdiURL(textUrlCdi.getText());
-		configuration.setCdiMethod(fr.ifremer.nemo.util.Utils
-				.extraitCode(comboMethodeCdi.getText()));
-		configuration.setAccesDonnees(fr.ifremer.nemo.util.Utils
-				.extraitCode(comboAccesDonnees.getText()));
-		configuration.setTypePlateForme(fr.ifremer.nemo.util.Utils
-				.extraitCode(comboTypePlateForme.getText()));
+		configuration.setCdiMethod(fr.ifremer.nemo.util.Utils.extraitCode(comboMethodeCdi.getText()));
+		configuration.setAccesDonnees(fr.ifremer.nemo.util.Utils.extraitCode(comboAccesDonnees.getText()));
+		configuration.setTypePlateForme(fr.ifremer.nemo.util.Utils.extraitCode(comboTypePlateForme.getText()));
 
 		configuration.setMedatlasVersion(textMedatlasFormatVersion.getText());
 		configuration.setOdvVersion(textOdvFormatVersion.getText());
@@ -1911,8 +1768,7 @@ public class OptionsAction extends Action implements ISelectionListener,
 	private void fillFlagTable() {
 		int i;
 		ArrayList<FlagTable> flagTables = new ArrayList<FlagTable>();
-		flagTables = FlagTable.getOrderedFlagTables(Nemo.getInstance()
-				.getConfig().getFlagTables());
+		flagTables = FlagTable.getOrderedFlagTables(Nemo.getInstance().getConfig().getFlagTables());
 
 		for (i = 0; i < flagTables.size(); i++) {
 			TableItem item = new TableItem(tabFlagTable, SWT.NONE);
@@ -1922,8 +1778,7 @@ public class OptionsAction extends Action implements ISelectionListener,
 
 		if (flagTables.size() > 0) {
 			tabFlagTable.setSelection(0);
-			_flagTable = FlagTable.getFlagTable(_flagTables,
-					tabFlagTable.getSelection()[0].getText());
+			_flagTable = FlagTable.getFlagTable(_flagTables, tabFlagTable.getSelection()[0].getText());
 			_flagTable.fillTable(tabFlag);
 
 		}
@@ -1948,23 +1803,18 @@ public class OptionsAction extends Action implements ISelectionListener,
 	public void updateEdmo(EdmoChoices tmpEdmoChoicesNew) {
 		tmpEdmoChoices = tmpEdmoChoicesNew;
 		// TODO BGT: remplir tmpEdmoChoices avec config a l'ouverture
-		labelIdEdmoRespCdi.setText(Messages.settings_EDMOauthor + ": "
-				+ tmpEdmoChoices.getIdEdmoRespCdi());
+		labelIdEdmoRespCdi.setText(Messages.settings_EDMOauthor + ": " + tmpEdmoChoices.getIdEdmoRespCdi());
 
-		labelIdEdmoRespDonnees.setText(Messages.settings_EDMOcustodian + ": "
-				+ tmpEdmoChoices.getIdEdmoRespDonnees());
+		labelIdEdmoRespDonnees.setText(Messages.settings_EDMOcustodian + ": " + tmpEdmoChoices.getIdEdmoRespDonnees());
 
-		labelCodeEdmoDonnees.setText(Messages.settings_EDMOori + ": "
-				+ tmpEdmoChoices.getCodeEdmoDonnees());
+		labelCodeEdmoDonnees.setText(Messages.settings_EDMOori + ": " + tmpEdmoChoices.getCodeEdmoDonnees());
 
-		labelIdEdmoDistDonnees.setText(Messages.settings_EDMOdist + ": "
-				+ tmpEdmoChoices.getIdEdmoDistDonnees());
+		labelIdEdmoDistDonnees.setText(Messages.settings_EDMOdist + ": " + tmpEdmoChoices.getIdEdmoDistDonnees());
 
 		labelIdEdmoRespCdi.pack();
 		labelIdEdmoRespDonnees.pack();
 		labelCodeEdmoDonnees.pack();
 		labelIdEdmoDistDonnees.pack();
-
 
 	}
 
