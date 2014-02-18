@@ -22,7 +22,6 @@ Bundle-ClassPath: .,
  lib/slf4j-api-1.5.6.jar,
  lib/slf4j-jdk14-1.5.6.jar,
  lib/slf4j-log4j12-1.5.6.jar,
- lib/SdnVocabulary.jar,
  lib/netcdf-4.2.jar,
  lib/odvToNetCDF.jar,
  lib/xercesImpl.jar,
@@ -55,6 +54,7 @@ Bundle-ClassPath: .,
  axis2-1.5.4/lib/neethi-2.0.4.jar,
  axis2-1.5.4/lib/XmlSchema-1.4.3.jar,
  axis2-1.5.4/lib/axiom-api-1.2.10.jar,
- lib/cfpointLib-0.12.jar
+ lib/cfpointLib-0.12.jar,
+ lib/sdnVocabulary-1.1.jar
 Bundle-Vendor: IFREMER
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
