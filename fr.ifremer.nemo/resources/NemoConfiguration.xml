@@ -8,10 +8,10 @@
   <cruisesDirectory></cruisesDirectory>
   <outputDirectory></outputDirectory>
   <writeCdi>false</writeCdi>
-  <idEdmoRespCdi></idEdmoRespCdi>
-  <codeEdmoDonnees></codeEdmoDonnees>
-  <idEdmoRespDonnees></idEdmoRespDonnees>
-  <idEdmoDistDonnees></idEdmoDistDonnees>
+  <idEdmoRespCdi>2</idEdmoRespCdi>
+  <codeEdmoDonnees>0</codeEdmoDonnees>
+  <idEdmoRespDonnees>0</idEdmoRespDonnees>
+  <idEdmoDistDonnees>0</idEdmoDistDonnees>
   <cdiURL>http://www.sdn-taskmanager.org/</cdiURL>
   <odvVersion>0.4</odvVersion>
   <medatlasVersion>2.0</medatlasVersion>
@@ -278,5 +278,5 @@
     <Flag local="4" SDN="3 - probably bad value"/>
     <Flag local="8" SDN="4 - bad value"/>
   </FlagTable>
-  <defaultFlag>0</defaultFlag>
+  <defaultFlag>3</defaultFlag>
 </NemoConfiguration>

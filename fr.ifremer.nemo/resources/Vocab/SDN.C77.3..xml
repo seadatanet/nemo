@@ -24,8 +24,8 @@
    <element  key="SDN:C77::B25"  label="Birds"   date="2011-12-08T10:58:20.000"  />
    <element  key="SDN:C77::H10"  label="CTD stations"   date="1992-06-30T23:00:00.000"  />
    <element  key="SDN:C77::B64"  label="Gear research"   date="2011-12-08T10:58:20.000"  />
-   <element  key="SDN:C77::B28"  label="Acoustic reflection on marine organisms."   date="2011-12-08T10:58:20.000"  />
    <element  key="SDN:C77::B65"  label="Exploratory fishing"   date="2011-12-08T10:58:20.000"  />
+   <element  key="SDN:C77::B28"  label="Acoustic reflection on marine organisms."   date="2011-12-08T10:58:20.000"  />
    <element  key="SDN:C77::P12"  label="Bottom deposits"   date="2011-12-08T10:58:25.000"  />
    <element  key="SDN:C77::M02"  label="Incident radiation"   date="2011-12-08T10:58:14.000"  />
    <element  key="SDN:C77::M01"  label="Upper air observations"   date="2011-12-08T10:58:14.000"  />

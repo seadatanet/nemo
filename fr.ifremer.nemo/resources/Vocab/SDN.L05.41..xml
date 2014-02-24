@@ -66,8 +66,8 @@
    <element  key="SDN:L05::68"  label="multinet"   date="2011-11-25T11:47:24.000"  />
    <element  key="SDN:L05::302"  label="water body temperature sensor"   date="2010-11-19T14:27:24.000"  />
    <element  key="SDN:L05::121"  label="satellite tracking system"   date="2007-11-20T09:03:34.000"  />
-   <element  key="SDN:L05::301"  label="satellite positioning systems"   date="2007-11-20T09:03:34.000"  />
    <element  key="SDN:L05::122"  label="radiometers"   date="2013-02-26T17:11:07.000"  />
+   <element  key="SDN:L05::301"  label="satellite positioning systems"   date="2007-11-20T09:03:34.000"  />
    <element  key="SDN:L05::POS09"  label="Toran receivers"  shortLabel="Toran"  date="2013-02-26T17:11:07.000"  />
    <element  key="SDN:L05::304"  label="ocean colour radiometers"   date="2008-01-10T16:19:34.000"  />
    <element  key="SDN:L05::123"  label="optical backscatter sensors"   date="2007-11-20T09:34:40.000"  />
@@ -92,8 +92,8 @@
    <element  key="SDN:L05::59"  label="sampling extent markers"   date="2010-04-22T13:56:30.000"  />
    <element  key="SDN:L05::58"  label="continuous air samplers"   date="2013-02-26T17:11:07.000"  />
    <element  key="SDN:L05::POS16"  label="Argos GPS-localised transmitters"  shortLabel="Argos GPS"  date="2013-02-26T17:11:07.000"  />
-   <element  key="SDN:L05::POS15"  label="Omega receivers"  shortLabel="Omega"  date="2013-02-26T17:11:07.000"  />
    <element  key="SDN:L05::CSEM"  label="controlled-source elecromagnetic systems"  shortLabel="CSEM"  date="2011-09-16T10:41:30.000"  />
+   <element  key="SDN:L05::POS15"  label="Omega receivers"  shortLabel="Omega"  date="2013-02-26T17:11:07.000"  />
    <element  key="SDN:L05::57"  label="manual rock samplers"   date="2013-02-26T17:11:07.000"  />
    <element  key="SDN:L05::56"  label="snow and ice samplers"   date="2013-02-26T17:11:07.000"  />
    <element  key="SDN:L05::POS18"  label="Navy Navigation Satellite System receivers"  shortLabel="Navsat"  date="2013-02-26T17:11:07.000"  />
