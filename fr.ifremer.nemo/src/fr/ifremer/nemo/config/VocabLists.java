@@ -8,6 +8,7 @@
 package fr.ifremer.nemo.config;
 
 import java.io.File;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -34,16 +35,15 @@ import fr.ifremer.nemo.util.Messages;
  * 
  */
 public class VocabLists {
-	static private Logger batchLogger;
+	static private Logger logger;
 	static private ICollectionFactory cf;
 
 	static protected HashMap<String, ICollection> _vocabList = new HashMap<String, ICollection>();
 	static protected HashMap<String, ICollectionMapping> _vocabMap = new HashMap<String, ICollectionMapping>();
 
 	static {
-		batchLogger = Logger.getLogger("nemoBatch");//$NON-NLS-1$
-		String vocabDir = Intern.dir_resources + File.separator
-				+ Intern.dir_vocabLists;
+		logger = Logger.getLogger("nemoGui");//$NON-NLS-1$
+		String vocabDir = Intern.dir_resources + File.separator + Intern.dir_vocabLists;
 		File aRep = new File(vocabDir);
 
 		try {
@@ -52,7 +52,7 @@ public class VocabLists {
 			cf = CollectionFactory.getInstance();
 		} catch (VocabularyException ve) {
 			System.out.println("ERROR : " + ve.getMessage()); //$NON-NLS-1$
-			batchLogger.error(ve.getMessage());
+			logger.error(ve.getMessage());
 		}
 	}
 
@@ -70,15 +70,13 @@ public class VocabLists {
 			try {
 				_vocabList.put(listName, cf.getCollection(false, listName));
 			} catch (VocabularyException e) {
-				batchLogger.error("error on local vocablist " + listName
-						+ " - " + e.getMessage()
-						+ " try to download it from the web");
+				logger.warn(MessageFormat.format(Messages.downloadBODCTry, listName));
 				try {
 					_vocabList.put(listName, cf.getCollection(true, listName));
+					logger.info(MessageFormat.format(Messages.downloadBODCSuccess, listName));
 				} catch (Exception e1) {
 					e.printStackTrace();
-					batchLogger.error("error on downloading vocablist "
-							+ listName + " - " + e1.getMessage());
+					logger.error(MessageFormat.format(Messages.downloadBODCError, listName));
 				}
 			}
 		}
@@ -95,20 +93,16 @@ public class VocabLists {
 			ICollection vocab = _vocabList.get(listNames[1]);
 
 			try {
-				_vocabMap.put(mapName, cf.getMapping(false, vocab,
-						vocab.getMappedDescriptionFromKey(listNames[0])));
+				_vocabMap.put(mapName, cf.getMapping(false, vocab, vocab.getMappedDescriptionFromKey(listNames[0])));
 			} catch (VocabularyException e) {
-				batchLogger.error("error on local vocab map " + vocab + "/"
-						+ listNames[0] + " - " + e.getMessage()
-						+ " try to download it from the web");
+				logger.warn(MessageFormat.format(Messages.downloadBODCTry, vocab + "/" + listNames[0]));
 				try {
-					_vocabMap.put(mapName, cf.getMapping(true, vocab,
-							vocab.getMappedDescriptionFromKey(listNames[0])));
+					_vocabMap.put(mapName, cf.getMapping(true, vocab, vocab.getMappedDescriptionFromKey(listNames[0])));
+					logger.info(MessageFormat.format(Messages.downloadBODCSuccess, vocab + "/" + listNames[0]));
 				} catch (Exception e1) {
 
 					e.printStackTrace();
-					batchLogger.error("error on downloading vocab map " + vocab
-							+ "/" + listNames[0] + " - " + e.getMessage());
+					logger.warn(MessageFormat.format(Messages.downloadBODCError, vocab + "/" + listNames[0]));
 				}
 			}
 		}
@@ -137,18 +131,14 @@ public class VocabLists {
 	}
 
 	public static ICollectionMapping getVocabMap(String list1, String list2) {
-		return _vocabMap.get(fr.ifremer.nemo.util.Utils.concat(list1, list2,
-				Global.UNDERSCORE));
+		return _vocabMap.get(fr.ifremer.nemo.util.Utils.concat(list1, list2, Global.UNDERSCORE));
 	}
 
-	public static void setVocabMap(String list1, String list2,
-			ICollectionMapping map) {
-		_vocabMap.put(fr.ifremer.nemo.util.Utils.concat(list1, list2,
-				Global.UNDERSCORE), map);
+	public static void setVocabMap(String list1, String list2, ICollectionMapping map) {
+		_vocabMap.put(fr.ifremer.nemo.util.Utils.concat(list1, list2, Global.UNDERSCORE), map);
 	}
 
-	public static String getVocabMatch(String list1, String list2,
-			String value, String errorMessage) {
+	public static String getVocabMatch(String list1, String list2, String value, String errorMessage) {
 		String strReturn = errorMessage;
 
 		ICollectionMapping tableMap = getVocabMap(list1, list2);
@@ -179,8 +169,7 @@ public class VocabLists {
 	 *         ex: list1=P091 list2=P021, value=BATH renvoie les parametres P021
 	 *         correspondant au parametre BATH en P091
 	 */
-	public static List<IElement> getVocabMatchs(String list1, String list2,
-			String value) {
+	public static List<IElement> getVocabMatchs(String list1, String list2, String value) {
 		ICollectionMapping tableMap = getVocabMap(list1, list2);
 		List<IElement> listReturn = new ArrayList<IElement>();
 
@@ -210,8 +199,7 @@ public class VocabLists {
 	 */
 	public static void updateVocabLists(IProgressMonitor monitor) {
 
-		UpdateStatusList updateLists = (UpdateStatusList) ManageLists
-				.getUpdate(Intern.id_lists);
+		UpdateStatusList updateLists = (UpdateStatusList) ManageLists.getUpdate(Intern.id_lists);
 		String[] listNames = Intern.vocabLists.split(Global.COMMA);
 		int keySetSize = listNames.length;
 
@@ -260,10 +248,8 @@ public class VocabLists {
 		msg.append(listId);
 		msg.append(Global.SEP);
 		msg.append(label);
-		UpdateStatusBODC updateList = new UpdateStatusBODC(listId,
-				msg.toString());
-		int oldNumVersion = _vocabList.get(listId).getDescription()
-				.getVersion();
+		UpdateStatusBODC updateList = new UpdateStatusBODC(listId, msg.toString());
+		int oldNumVersion = _vocabList.get(listId).getDescription().getVersion();
 
 		try {
 			cf.loadCollections(true, listId);
@@ -274,8 +260,7 @@ public class VocabLists {
 			e.printStackTrace();
 		}
 
-		int newNumVersion = _vocabList.get(listId).getDescription()
-				.getVersion();
+		int newNumVersion = _vocabList.get(listId).getDescription().getVersion();
 
 		if (oldNumVersion == newNumVersion)
 			updateList.setEtat(EtatUpdate.CHECKED);
@@ -285,8 +270,7 @@ public class VocabLists {
 
 	public static void updateMapLists(IProgressMonitor monitor) {
 
-		UpdateStatusList updateMaps = (UpdateStatusList) ManageLists
-				.getUpdate(Intern.id_maps);
+		UpdateStatusList updateMaps = (UpdateStatusList) ManageLists.getUpdate(Intern.id_maps);
 
 		String[] listMaps = Intern.vocabMaps.split(Global.COMMA);
 		int keySetSize = listMaps.length;
@@ -330,12 +314,8 @@ public class VocabLists {
 		try {
 			String[] listNames = mapName.split(Global.UNDERSCORE);
 			ICollection vocab = _vocabList.get(listNames[1]);
-			cf.loadMappings(true, vocab,
-					vocab.getMappedDescriptionFromKey(listNames[0]));
-			_vocabMap.put(
-					mapName,
-					cf.getMapping(false, vocab,
-							vocab.getMappedDescriptionFromKey(listNames[0])));
+			cf.loadMappings(true, vocab, vocab.getMappedDescriptionFromKey(listNames[0]));
+			_vocabMap.put(mapName, cf.getMapping(false, vocab, vocab.getMappedDescriptionFromKey(listNames[0])));
 			updateMap.setEtat(EtatUpdate.UPDATED);
 		} catch (VocabularyException e) {
 			updateMap.setEtat(EtatUpdate.FAILED);

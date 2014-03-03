@@ -424,6 +424,9 @@ public class Messages {
 	public static String INTERRUPTED;
 	public static String ERROR;
 	public static String WARNING;
+	public static String downloadBODCTry;
+	public static String downloadBODCSuccess;
+	public static String downloadBODCError;
 
 	// MAPPING
 	public static String ImportMappingAction_1;
@@ -618,8 +621,7 @@ public class Messages {
 				bundleName.append(Global.UNDERSCORE);
 				bundleName.append(langue);
 			}
-			ResourceBundle resource = ResourceBundle.getBundle(bundleName
-					.toString());
+			ResourceBundle resource = ResourceBundle.getBundle(bundleName.toString());
 			return resource.getString(key);
 		} catch (MissingResourceException e) {
 			return '!' + key + '!';
