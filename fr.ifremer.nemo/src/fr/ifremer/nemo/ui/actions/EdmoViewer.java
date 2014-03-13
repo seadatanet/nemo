@@ -44,6 +44,7 @@ public class EdmoViewer {
 	private TableColumn colCode;
 	private TableColumn colName;
 	private TableColumn colCountry;
+	private TableColumn colExisting;
 	private EdmoFilter filter;
 	private final EdmoChoices tmpEdmoChoices;
 	private final int choice;
@@ -216,24 +217,32 @@ public class EdmoViewer {
 				if (currentColumn == colCountry) {
 					sortIdentifier = EdmoSorter.SORT_COUNTRY;
 				}
+				if (currentColumn == colExisting) {
+					sortIdentifier = EdmoSorter.SORT_EXIST;
+				}
 				viewer.getTable().setSortDirection(dir);
 				viewer.setSorter(new EdmoSorter(sortIdentifier, dir));
 			}
 		};
 		colCode = new TableColumn(viewer.getTable(), SWT.LEFT);
-		colCode.setText("Code");
+		colCode.setText(Messages.settings_edmoCol_code);
 		((TableColumnLayout) compoTable.getLayout()).setColumnData(colCode, new ColumnWeightData(10, true));
 		colCode.addListener(SWT.Selection, sortListener);
 
 		colName = new TableColumn(viewer.getTable(), SWT.LEFT);
-		colName.setText("Name");
+		colName.setText(Messages.settings_edmoCol_name);
 		((TableColumnLayout) compoTable.getLayout()).setColumnData(colName, new ColumnWeightData(50, true));
 		colName.addListener(SWT.Selection, sortListener);
 
 		colCountry = new TableColumn(viewer.getTable(), SWT.LEFT);
-		colCountry.setText("Country");
+		colCountry.setText(Messages.settings_edmoCol_country);
 		((TableColumnLayout) compoTable.getLayout()).setColumnData(colCountry, new ColumnWeightData(40, true));
 		colCountry.addListener(SWT.Selection, sortListener);
+
+		colExisting = new TableColumn(viewer.getTable(), SWT.LEFT);
+		colExisting.setText(Messages.settings_edmoCol_exist);
+		((TableColumnLayout) compoTable.getLayout()).setColumnData(colExisting, new ColumnWeightData(40, true));
+		colExisting.addListener(SWT.Selection, sortListener);
 
 	}
 }

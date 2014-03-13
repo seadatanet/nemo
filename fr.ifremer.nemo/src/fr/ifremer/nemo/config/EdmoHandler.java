@@ -17,11 +17,14 @@ public class EdmoHandler extends DefaultHandler {
 
 	private static String n_code = "n_code"; //$NON-NLS-1$
 	private static String name = "name"; //$NON-NLS-1$
+	private static String organisation_exists = "organisation_exists";
+	private static String c_country = "c_country";
 
 	private final java.util.HashMap<Integer, String> _valeurs = new HashMap<Integer, String>();
 	private final List<EdmoEntity> edmoList = new ArrayList<EdmoEntity>();
 	private Integer intCode;
 	private String entityName;
+	private String orgExist;
 	// buffer nous permettant de récupérer les données
 	private StringBuffer buffer;
 
@@ -48,14 +51,15 @@ public class EdmoHandler extends DefaultHandler {
 	}
 
 	@Override
-	public void startElement(String uri, String localName, String qName,
-			Attributes attributes) {
+	public void startElement(String uri, String localName, String qName, Attributes attributes) {
 
 		if (qName.equals(n_code)) {
 			buffer = new StringBuffer();
 		} else if (qName.equals(name)) {
 			buffer = new StringBuffer();
-		} else if (qName.equals("c_country")) {
+		} else if (qName.equals(organisation_exists)) {
+			buffer = new StringBuffer();
+		} else if (qName.equals(c_country)) {
 			buffer = new StringBuffer();
 		}
 
@@ -68,14 +72,27 @@ public class EdmoHandler extends DefaultHandler {
 			intCode = Integer.parseInt(buffer.toString());
 			buffer = null;
 		} else if (qName.equals(name)) {
-			_valeurs.put(intCode, buffer.toString());
+			// _valeurs.put(intCode, buffer.toString());
 			entityName = buffer.toString();
 			buffer = null;
-		} else if (qName.equals("c_country")) {
-			// _valeurs.put(intCode, buffer.toString());
-			edmoList.add(new EdmoEntity(intCode, entityName, buffer.toString()));
+		} else if (qName.equals(organisation_exists)) {
+			// edmoList.add(new EdmoEntity(intCode, entityName,
+			// buffer.toString()));
+			orgExist = getOrgExistLabel(buffer.toString());
+			buffer = null;
+		} else if (qName.equals(c_country)) {
+			edmoList.add(new EdmoEntity(intCode, entityName, orgExist, buffer.toString()));
 			buffer = null;
 		}
+	}
+
+	private String getOrgExistLabel(String xmlValue) {
+		if (xmlValue.equals("True")) {
+			return "Yes";
+		} else {
+			return "No";
+		}
+
 	}
 
 	@Override

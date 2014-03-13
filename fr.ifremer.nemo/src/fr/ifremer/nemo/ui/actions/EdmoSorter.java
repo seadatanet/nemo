@@ -16,6 +16,7 @@ public class EdmoSorter extends ViewerSorter {
 	public static final int SORT_CODE = 0;
 	public static final int SORT_NAME = 1;
 	public static final int SORT_COUNTRY = 2;
+	public static final int SORT_EXIST = 3;
 
 	public EdmoSorter(int sortIdentifier, int dir) {
 		this.propertyIndex = 0;
@@ -57,6 +58,9 @@ public class EdmoSorter extends ViewerSorter {
 			break;
 		case 2:
 			rc = p1.getCountry().compareTo(p2.getCountry());
+			break;
+		case 3:
+			rc = p1.getOrgExist().compareTo(p2.getOrgExist());
 			break;
 		default:
 			rc = 0;

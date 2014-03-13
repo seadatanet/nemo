@@ -57,6 +57,9 @@ public class EdmoLabelProvider implements ITableLabelProvider {
 		case 2:
 			result = ((EdmoEntity) element).getCountry();
 			break;
+		case 3:
+			result = ((EdmoEntity) element).getOrgExist();
+			break;
 		default:
 			result = "?";
 		}

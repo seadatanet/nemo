@@ -384,6 +384,11 @@ public class Messages {
 	public static String settings_defaultOutputFormat;
 	public static String settings_flagDefault;
 
+	public static String settings_edmoCol_code;
+	public static String settings_edmoCol_name;
+	public static String settings_edmoCol_country;
+	public static String settings_edmoCol_exist;
+
 	public static String table_edmo;
 	public static String table_dataTypes;
 	public static String table_parameters;

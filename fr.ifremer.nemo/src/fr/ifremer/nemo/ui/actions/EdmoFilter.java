@@ -27,6 +27,9 @@ public class EdmoFilter extends ViewerFilter {
 			return true;
 		}
 
+		if (p.getCode().toString().matches(searchString.toLowerCase())) {
+			return true;
+		}
 		return false;
 	}
 }

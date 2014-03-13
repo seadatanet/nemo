@@ -493,8 +493,7 @@ public class NemoLists implements Cloneable {
 	public static void initParameters() {
 		XMLDecoder decoder = null;
 		try {
-			decoder = new XMLDecoder(new FileInputStream(Intern.dir_resources
-					+ File.separator + Intern.list_nemo_parameters));
+			decoder = new XMLDecoder(new FileInputStream(Intern.dir_resources + File.separator + Intern.list_nemo_parameters));
 			_parameters = (List<WSParameter>) decoder.readObject();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -515,8 +514,7 @@ public class NemoLists implements Cloneable {
 	public static void initSurveys() {
 		XMLDecoder decoder = null;
 		try {
-			decoder = new XMLDecoder(new FileInputStream(Intern.dir_resources
-					+ File.separator + Intern.list_nemo_survey));
+			decoder = new XMLDecoder(new FileInputStream(Intern.dir_resources + File.separator + Intern.list_nemo_survey));
 			_surveys = (List<WSSurveyDescription>) decoder.readObject();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -536,11 +534,7 @@ public class NemoLists implements Cloneable {
 
 			EdmoHandler edmoH = new EdmoHandler();
 
-			SAXParserFactory
-					.newInstance()
-					.newSAXParser()
-					.parse(new FileInputStream(Intern.dir_resources
-							+ File.separator + Intern.list_edmo), edmoH);
+			SAXParserFactory.newInstance().newSAXParser().parse(new FileInputStream(Intern.dir_resources + File.separator + Intern.list_edmo), edmoH);
 
 			_edmo.putAll(edmoH.get_valeurs());
 			edmoSize = _edmo.size();
@@ -559,8 +553,7 @@ public class NemoLists implements Cloneable {
 
 		NemoWS service = null;
 		try {
-			service = new NemoWSServiceLocator().getNEMO(new java.net.URL(Nemo
-					.getInstance().getConfig().getNemoWebServiceURL()));
+			service = new NemoWSServiceLocator().getNEMO(new java.net.URL(Nemo.getInstance().getConfig().getNemoWebServiceURL()));
 		} catch (ServiceException e) {
 			e.printStackTrace();
 		} catch (MalformedURLException e) {
@@ -572,13 +565,11 @@ public class NemoLists implements Cloneable {
 	/**
 	 * 
 	 */
-	public static void updateParameters(IProgressMonitor monitor,
-			NemoWS service, UpdateStatusList updateNemoList) {
+	public static void updateParameters(IProgressMonitor monitor, NemoWS service, UpdateStatusList updateNemoList) {
 
 		String listName = Intern.list_nemo_parameters;
 		int nbParameters = 0;
-		UpdateStatusNemo updateParameters = new UpdateStatusNemo(listName,
-				listName);
+		UpdateStatusNemo updateParameters = new UpdateStatusNemo(listName, listName);
 
 		if (service != null) {
 			// BackUp de l'objet
@@ -600,8 +591,7 @@ public class NemoLists implements Cloneable {
 				}
 
 				if (!monitor.isCanceled()) {
-					File file = new java.io.File(Intern.dir_resources
-							+ File.separator + listName);
+					File file = new java.io.File(Intern.dir_resources + File.separator + listName);
 					stream = new FileOutputStream(file.toString());
 					encoder = new XMLEncoder(stream);
 					encoder.writeObject(_parameters);
@@ -650,13 +640,11 @@ public class NemoLists implements Cloneable {
 	/**
 	 * 
 	 */
-	public static void updateSurveys(IProgressMonitor monitor, NemoWS service,
-			UpdateStatusList updateNemoList) {
+	public static void updateSurveys(IProgressMonitor monitor, NemoWS service, UpdateStatusList updateNemoList) {
 
 		String listName = Intern.list_nemo_survey;
 		int nbSurveys = 0;
-		UpdateStatusNemo updateSurveys = new UpdateStatusNemo(listName,
-				listName);
+		UpdateStatusNemo updateSurveys = new UpdateStatusNemo(listName, listName);
 
 		if (service != null) {
 
@@ -679,8 +667,7 @@ public class NemoLists implements Cloneable {
 				}
 
 				if (!monitor.isCanceled()) {
-					File file = new java.io.File(Intern.dir_resources
-							+ File.separator + listName);
+					File file = new java.io.File(Intern.dir_resources + File.separator + listName);
 					stream = new FileOutputStream(file.toString());
 
 					encoder = new XMLEncoder(stream);
@@ -729,8 +716,7 @@ public class NemoLists implements Cloneable {
 
 	public static void updateEdmo(IProgressMonitor monitor) {
 
-		UpdateStatusNemo updateEdmo = (UpdateStatusNemo) ManageLists
-				.getUpdate(Intern.id_edmo);
+		UpdateStatusNemo updateEdmo = (UpdateStatusNemo) ManageLists.getUpdate(Intern.id_edmo);
 		int nbEdmo = 0;
 		FileOutputStream stream = null;
 		String result = Global.EMPTY_STRING;
@@ -739,9 +725,7 @@ public class NemoLists implements Cloneable {
 			if (!monitor.isCanceled()) {
 				// Appel au WebService
 				Edmo_webservice service = new Edmo_webserviceLocator();
-				((Edmo_webserviceLocator) service)
-						.setedmo_webserviceSoap12EndpointAddress(Nemo
-								.getInstance().getConfig().getEdmoURL());
+				((Edmo_webserviceLocator) service).setedmo_webserviceSoap12EndpointAddress(Nemo.getInstance().getConfig().getEdmoURL());
 				Edmo_webserviceSoap port = service.getedmo_webserviceSoap12();
 				result = port.ws_edmo_get_list();
 			}
@@ -750,12 +734,10 @@ public class NemoLists implements Cloneable {
 					monitor.subTask(Messages.getString(Intern.id_edmo));
 
 					// écriture du nouveau fichier
-					File file = new java.io.File(Intern.dir_resources
-							+ File.separator + Intern.list_edmo);
+					File file = new java.io.File(Intern.dir_resources + File.separator + Intern.list_edmo);
 
 					stream = new FileOutputStream(file.toString());
-					OutputStreamWriter osw = new OutputStreamWriter(stream,
-							"UTF-8"); //$NON-NLS-1$
+					OutputStreamWriter osw = new OutputStreamWriter(stream, "UTF-8"); //$NON-NLS-1$
 					osw.write(result);
 					osw.flush();
 					osw.close();
