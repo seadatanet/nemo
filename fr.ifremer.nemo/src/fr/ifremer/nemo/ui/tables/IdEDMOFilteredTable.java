@@ -5,8 +5,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.CCombo;
 import org.eclipse.swt.graphics.Rectangle;
-import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
@@ -21,7 +21,7 @@ public class IdEDMOFilteredTable extends AbstractFilteredTable
     /**
      * @param comboRecherche
      */
-    public IdEDMOFilteredTable(Combo comboRecherche)
+    public IdEDMOFilteredTable(CCombo comboRecherche)
     {
         _comboRecherche = comboRecherche;
     }

@@ -11,11 +11,11 @@ import java.util.Arrays;
 import java.util.regex.Pattern;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.CCombo;
 import org.eclipse.swt.custom.StyleRange;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
-import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Menu;
@@ -1071,7 +1071,7 @@ public class Utils {
 		ViewLog.styledTextLogInfos.append("\n" + message); //$NON-NLS-1$
 	}
 
-	public static void selectComboValeur(Combo combo, String valeur) {
+	public static void selectComboValeur(CCombo combo, String valeur) {
 		int i = 0;
 		int size = combo.getItemCount();
 
@@ -1092,7 +1092,7 @@ public class Utils {
 		}
 	}
 
-	public static void selectComboCode(Combo combo, String code) {
+	public static void selectComboCode(CCombo combo, String code) {
 		int i = 0;
 		int length = code.length();
 		int size = combo.getItemCount();
@@ -1120,7 +1120,7 @@ public class Utils {
 	 * @param combo
 	 * @param libelle
 	 */
-	public static void selectComboLibelle(Combo combo, String libelle) {
+	public static void selectComboLibelle(CCombo combo, String libelle) {
 		int i = 0;
 		int size = combo.getItemCount();
 		String comboLibelle;
@@ -1161,7 +1161,7 @@ public class Utils {
 		}
 	}
 
-	public static void selectComboCodePlus(Combo combo, String code, String valeur) {
+	public static void selectComboCodePlus(CCombo combo, String code, String valeur) {
 		int i = 0;
 		int length = code.length();
 		int size = combo.getItemCount();
@@ -1169,21 +1169,25 @@ public class Utils {
 		if (code.equals(Global.EMPTY_STRING)) {
 			combo.select(-1);
 		} else {
-			combo.select(i);
-
-			while (i < size && !combo.getText().substring(0, Math.min(combo.getText().length(), length)).equals(code)) {
-				i++;
-				combo.select(i);
+			boolean isSelected=false;
+			
+			for (int index=0; index<combo.getItemCount(); index++)
+			{
+				if (combo.getItem(index).equals(code + Global.SEP	+ valeur)){
+					combo.select(index);
+					isSelected=true;
+				}
 			}
-
-			if (!combo.getText().substring(0, Math.min(combo.getText().length(), length)).equals(code)) {
+			
+			if (!isSelected){
 				combo.add(code + Global.SEP + valeur);
 				combo.select(combo.getItemCount() - 1);
 			}
+
 		}
 	}
 
-	public static void createSearchMenu(Combo combo, String table) {
+	public static void createSearchMenu(CCombo combo, String table) {
 		Menu menu = new Menu(combo.getShell(), SWT.POP_UP);
 
 		MenuItem itemSearch = new MenuItem(menu, SWT.NONE);
@@ -1191,7 +1195,7 @@ public class Utils {
 
 		combo.setMenu(menu);
 
-		final Combo comb = combo;
+		final CCombo comb = combo;
 		final String tab = table;
 
 		itemSearch.addListener(SWT.Selection, new Listener()

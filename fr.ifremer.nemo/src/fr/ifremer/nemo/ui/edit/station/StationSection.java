@@ -18,8 +18,8 @@ import java.util.regex.Pattern;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.CCombo;
 import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
 
@@ -1316,7 +1316,7 @@ public class StationSection extends NemoSection {
 	}
 
 	public void fillDataTypeWithDataTypesIsSensor() {
-		Combo combo = myForm.dataType.getDatatype().getValueCombo();
+		CCombo combo = myForm.dataType.getDatatype().getValueCombo();
 		combo.removeAll();
 		combo.add(Global.EMPTY_STRING);
 
@@ -1365,7 +1365,7 @@ public class StationSection extends NemoSection {
 
 	private void fillDataType(StationModel station) {
 		// SECTION type de donnee
-		Combo combo = myForm.dataType.getDatatype().getValueCombo();
+		CCombo combo = myForm.dataType.getDatatype().getValueCombo();
 
 		Boolean isCruiseEnabled =
 				Nemo.getInstance().getViewMain().getMyRulesManager()

@@ -8,10 +8,10 @@
 package fr.ifremer.nemo.ui.tables;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.CCombo;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
@@ -36,7 +36,7 @@ public abstract class AbstractFilteredTable
 
     protected Table filtreTableData, filtreTableSurvey;
 
-    protected Combo _comboRecherche;
+    protected CCombo _comboRecherche;
 
     protected Text filtreText;
 

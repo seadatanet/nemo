@@ -13,7 +13,7 @@ import java.util.Map.Entry;
 import java.util.TreeMap;
 
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.Combo;
+import org.eclipse.swt.custom.CCombo;
 import org.eclipse.swt.widgets.Composite;
 
 import sdn.vocabulary.interfaces.IElement;
@@ -45,24 +45,25 @@ public enum ComboType {
 	DATACENTER,
 	CONFIDENT;
 
-	public Combo createCombo(Composite parent) {
-		Combo valueCombo;
+	public CCombo createCombo(Composite parent) {
+		/**
+		 *  SHIP, REGION, COUNTRY, DATACENTER, CONFIDENT must be read only
+		 */
+		CCombo valueCombo;
 		switch (this) {
 		case DATE:
 		case TIME:
 		case LAT:
 		case LON:
 		case DATATYPE:
-			valueCombo = new Combo(parent, SWT.BORDER);
+			valueCombo = new CCombo(parent, SWT.BORDER);
 			break;
 		case REGION:
 		case COUNTRY:
-			valueCombo = new Combo(parent, SWT.NONE);
-			break;
 		case SHIP:
 		case DATACENTER:
 		case CONFIDENT:
-			valueCombo = new Combo(parent, SWT.READ_ONLY);
+			valueCombo = new CCombo(parent, SWT.READ_ONLY);
 			break;
 		default:
 			valueCombo = null;
@@ -71,7 +72,7 @@ public enum ComboType {
 		return valueCombo;
 	}
 
-	public Combo fillCombo(Combo valueCombo) {
+	public CCombo fillCombo(CCombo valueCombo) {
 		String temp;
 		switch (this) {
 		case DATE:

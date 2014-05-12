@@ -89,7 +89,6 @@ public class ViewMain extends ViewPart
 		setEtape(0);
 
 		// init des flags
-		myFilteredTableFactory.setListeOuverte(0);
 		setAffiche(0);
 		editFileForm.setFileLoaded(false);
 

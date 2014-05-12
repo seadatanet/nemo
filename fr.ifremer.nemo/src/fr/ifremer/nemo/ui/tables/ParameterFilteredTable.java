@@ -12,8 +12,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.CCombo;
 import org.eclipse.swt.graphics.Rectangle;
-import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
@@ -42,7 +42,7 @@ public class ParameterFilteredTable extends AbstractFilteredTable
 	/**
      *  reference sur la tableData (de l'onglet data) depuis laquelle cette table a été ouverte
 	 */
-    private TableData myTableDataRef;
+    private final TableData myTableDataRef;
 
 	/**
 	 * copie de la liste des parametres typesWS pouvant être filtrée
@@ -52,7 +52,7 @@ public class ParameterFilteredTable extends AbstractFilteredTable
 	/**
 	 * @param comboRecherche
 	 */
-	public ParameterFilteredTable(Combo comboRecherche)
+	public ParameterFilteredTable(CCombo comboRecherche)
 	{
 		_comboRecherche = comboRecherche;
 		myTableDataRef = Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData();

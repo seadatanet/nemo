@@ -79,7 +79,7 @@ public class OptionsAction extends Action implements ISelectionListener, ActionF
 
 	private final IWorkbenchWindow window;
 
-	private static Combo comboLangue, comboCentreDonnees, comboMethodeCdi,
+	private static CCombo comboLangue, comboCentreDonnees, comboMethodeCdi,
 			comboTypePlateForme, comboAccesDonnees = null;
 
 	private Button buttonEdmoChoiceIdEdmoRespCdi;
@@ -461,7 +461,7 @@ public class OptionsAction extends Action implements ISelectionListener, ActionF
 		GridLayoutFactory.fillDefaults().margins(4, 4).applyTo(group);
 		GridDataFactory.fillDefaults().grab(true, true).applyTo(group);
 
-		comboLangue = new Combo(group, SWT.READ_ONLY);
+		comboLangue = new CCombo(group, SWT.READ_ONLY);
 		comboLangue.setFont(Utils.font08);
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(comboLangue);
 
@@ -483,7 +483,7 @@ public class OptionsAction extends Action implements ISelectionListener, ActionF
 		GridLayoutFactory.fillDefaults().margins(4, 4).applyTo(group);
 		GridDataFactory.fillDefaults().grab(true, true).applyTo(group);
 
-		comboCentreDonnees = new Combo(group, SWT.READ_ONLY);
+		comboCentreDonnees = new CCombo(group, SWT.READ_ONLY);
 		comboCentreDonnees.setFont(Utils.font08);
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(comboCentreDonnees);
 		comboCentreDonnees.pack();
@@ -808,7 +808,7 @@ public class OptionsAction extends Action implements ISelectionListener, ActionF
 		labelMethodeCdi.setText(Messages.settings_dataDist_met);
 		labelMethodeCdi.pack();
 
-		comboMethodeCdi = new Combo(compo, SWT.BORDER | SWT.READ_ONLY);
+		comboMethodeCdi = new CCombo(compo, SWT.BORDER | SWT.READ_ONLY);
 		comboMethodeCdi.setFont(Utils.font08);
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(comboMethodeCdi);
 
@@ -817,7 +817,7 @@ public class OptionsAction extends Action implements ISelectionListener, ActionF
 		lblTypePlateForme.setFont(Utils.font08);
 		lblTypePlateForme.setText(Messages.settings_typePlateForme);
 
-		comboTypePlateForme = new Combo(compo, SWT.BORDER | SWT.READ_ONLY);
+		comboTypePlateForme = new CCombo(compo, SWT.BORDER | SWT.READ_ONLY);
 		comboTypePlateForme.setFont(Utils.font08);
 		GridDataFactory.fillDefaults().grab(false, false).applyTo(comboTypePlateForme);
 
@@ -825,7 +825,7 @@ public class OptionsAction extends Action implements ISelectionListener, ActionF
 		lblAccesDonnees.setFont(Utils.font08);
 		lblAccesDonnees.setText(Messages.settings_accesDonnees);
 
-		comboAccesDonnees = new Combo(compo, SWT.BORDER | SWT.READ_ONLY);
+		comboAccesDonnees = new CCombo(compo, SWT.BORDER | SWT.READ_ONLY);
 		comboAccesDonnees.setFont(Utils.font08);
 		GridDataFactory.fillDefaults().grab(false, false).applyTo(comboAccesDonnees);
 
