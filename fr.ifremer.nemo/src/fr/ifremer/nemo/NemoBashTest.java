@@ -465,7 +465,7 @@ public class NemoBashTest {
 		message.testName = " Empty userParemetersLongNames";
 		org.w3c.dom.Document document;
 		String userParametersLongNames = Intern.dir_resources + File.separator
-				+ "userParametersNETCDFLongNames" + Global.EXT_XML;
+				+ "userParametersNetCDFLongNames" + Global.EXT_XML;
 		// création d'une fabrique de documents
 		DocumentBuilderFactory fabrique = DocumentBuilderFactory.newInstance();
 		// création d'un constructeur de documents
