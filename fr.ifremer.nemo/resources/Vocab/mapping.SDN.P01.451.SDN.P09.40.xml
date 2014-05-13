@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mapping>
-   <vocabulary list="SDN:P01:433:"  version="433"  date="2014-02-28T02:00:03.000"  title="BODC Parameter Usage Vocabulary"  />
+   <vocabulary list="SDN:P01:451:"  version="451"  date="2014-05-09T01:00:03.000"  title="BODC Parameter Usage Vocabulary"  />
    <mapped>
       <vocabulary list="SDN:P09:40:"  version="40"  date="2012-01-11T07:46:54.000"  title="MEDATLAS Parameter Usage Vocabulary"  />
    </mapped>
    <match>
       <element  key="SDN:P09:40:CUPW"  label="14C PRODUCTION FILTER UNSPECIF"    />
       <exact>
-         <element  key="SDN:P01:40:TCUPDZZZ"  label="Uptake rate (daily) of carbon {primary production} per unit time per unit volume of the water body [particulate &gt;unknown phase]"    />
+         <element  key="SDN:P01:40:TCUPDZZZ"  label="Uptake rate (daily) of carbon {primary production} per unit time per unit volume of the water body [particulate phase]"    />
       </exact>
    </match>
    <match>
       <element  key="SDN:P09:40:CUPH"  label="14C PRODUCTION FILTER UNSPECIF"    />
       <exact>
-         <element  key="SDN:P01:40:TCUPHZZZ"  label="Uptake rate (hourly) of carbon {primary production} per unit time per unit volume of the water body [particulate &gt;unknown phase]"    />
+         <element  key="SDN:P01:40:TCUPHZZZ"  label="Uptake rate (hourly) of carbon {primary production} per unit time per unit volume of the water body [particulate phase]"    />
       </exact>
    </match>
    <match>
@@ -97,7 +97,7 @@
    <match>
       <element  key="SDN:P09:40:NHUW"  label="AMMONIUM UPTAKE"    />
       <exact>
-         <element  key="SDN:P01:40:NOUWXXXX"  label="Uptake rate (daily) of nitrate {new production} per unit time per unit volume of the water body [particulate &gt;unknown phase]"    />
+         <element  key="SDN:P01:40:NOUWXXXX"  label="Uptake rate (daily) of nitrate {new production} per unit time per unit volume of the water body [particulate phase]"    />
       </exact>
    </match>
    <match>
@@ -169,7 +169,7 @@
    <match>
       <element  key="SDN:P09:40:UPTS"  label="BACT. PROD. STANDARD DEVIATION"    />
       <exact>
-         <element  key="SDN:P01:40:SDUPTHXX"  label="Update rate standard deviation (hourly) of thymidine per unit time per unit volume of the water body [particulate &gt;unknown phase]"    />
+         <element  key="SDN:P01:40:SDUPTHXX"  label="Update rate standard deviation (hourly) of thymidine per unit time per unit volume of the water body [particulate phase]"    />
       </exact>
    </match>
    <match>
@@ -181,7 +181,7 @@
    <match>
       <element  key="SDN:P09:40:UPTH"  label="BACTERIAL PRODUCTION(THYM. UP)"    />
       <exact>
-         <element  key="SDN:P01:40:UPTHXXXX"  label="Uptake rate (hourly) of thymidine {bacterial production} per unit time per unit volume of the water body [particulate &gt;unknown phase]"    />
+         <element  key="SDN:P01:40:UPTHXXXX"  label="Uptake rate (hourly) of thymidine {bacterial production} per unit time per unit volume of the water body [particulate phase]"    />
       </exact>
    </match>
    <match>
@@ -217,7 +217,7 @@
    <match>
       <element  key="SDN:P09:40:GLUC"  label="CARBOHYDRATE"    />
       <broad>
-         <element  key="SDN:P01:40:TOCHWCZZ"  label="Concentration of carbohydrates (total) per unit volume of the water body [particulate &gt;unknown phase]"    />
+         <element  key="SDN:P01:40:TOCHWCZZ"  label="Concentration of carbohydrates (total) per unit volume of the water body [particulate phase]"    />
       </broad>
    </match>
    <match>
@@ -235,7 +235,7 @@
    <match>
       <element  key="SDN:P09:40:CH1P"  label="CHL-A(LESS DIVINYLCHL-A)"    />
       <exact>
-         <element  key="SDN:P01:40:NODVCHLA"  label="Concentration of divinyl-corrected chlorophyll-a per unit volume of the water body [particulate &lt;unknown phase]"    />
+         <element  key="SDN:P01:40:NODVCHLA"  label="Concentration of divinyl-corrected chlorophyll-a per unit volume of the water body [particulate phase]"    />
       </exact>
    </match>
    <match>
@@ -253,13 +253,13 @@
    <match>
       <element  key="SDN:P09:40:CPHL"  label="CHLOROPHYLL-A TOTAL"    />
       <exact>
-         <element  key="SDN:P01:40:CPHLZZXX"  label="Concentration of chlorophyll-a per unit volume of the water body [particulate &lt;unknown phase]"    />
+         <element  key="SDN:P01:40:CPHLZZXX"  label="Concentration of chlorophyll-a per unit volume of the water body [particulate phase]"    />
       </exact>
    </match>
    <match>
       <element  key="SDN:P09:40:CPH1"  label="CHLOROPHYLL-A TOTAL"    />
       <exact>
-         <element  key="SDN:P01:40:CPHLZZXX"  label="Concentration of chlorophyll-a per unit volume of the water body [particulate &lt;unknown phase]"    />
+         <element  key="SDN:P01:40:CPHLZZXX"  label="Concentration of chlorophyll-a per unit volume of the water body [particulate phase]"    />
       </exact>
    </match>
    <match>
@@ -319,7 +319,7 @@
    <match>
       <element  key="SDN:P09:40:CLAY"  label="CLAY IN THE SEDIMENT"    />
       <exact>
-         <element  key="SDN:P01:40:CLAYZZZZ"  label="Proportion of clay size fraction particles in sediment"    />
+         <element  key="SDN:P01:40:CLAYZZZZ"  label="Proportion of particles (clay size-fraction) in sediment"    />
       </exact>
    </match>
    <match>
@@ -331,7 +331,7 @@
    <match>
       <element  key="SDN:P09:40:XCO2"  label="CO2 MOLE FRACTION IN DRY GAS"    />
       <exact>
-         <element  key="SDN:P01:40:XCO2DCEQ"  label="Mole fraction of carbon dioxide (in dry air) {xCO2} in the equilibrated marine sample by equilibration with air, drying and constant temperature non-dispersive infra-red gas analysis and computed from pCO2 following correction to dry air and calibration against standards"    />
+         <element  key="SDN:P01:40:XCO2DCEQ"  label="Mole fraction (equilibrated marine sample) of carbon dioxide (in dry air) {xCO2} by equilibration with air, drying and constant temperature non-dispersive infra-red gas analysis and computed from pCO2 following correction to dry air and calibration against standards"    />
       </exact>
    </match>
    <match>
@@ -427,7 +427,7 @@
    <match>
       <element  key="SDN:P09:40:CDFW"  label="DARK FIXATION"    />
       <exact>
-         <element  key="SDN:P01:40:SCUPDARK"  label="Uptake rate (daily) of carbon {primary production} per unit time per unit volume of the water body [particulate &gt;unknown phase] by isotope-labelled tracer addition, incubation in the dark, filtration and counting residue"    />
+         <element  key="SDN:P01:40:SCUPDARK"  label="Uptake rate (daily) of carbon {primary production} per unit time per unit volume of the water body [particulate phase] by isotope-labelled tracer addition, incubation in the dark, filtration and counting residue"    />
       </exact>
    </match>
    <match>
@@ -439,13 +439,13 @@
    <match>
       <element  key="SDN:P09:40:C13D"  label="DELTA 13C (13C/12C)"    />
       <exact>
-         <element  key="SDN:P01:40:D13COPXX"  label="Enrichment of 13C in organic carbon in the water body [particulate &gt;unknown phase]"    />
+         <element  key="SDN:P01:40:D13COPXX"  label="Enrichment of 13C in organic carbon in the water body [particulate phase]"    />
       </exact>
    </match>
    <match>
       <element  key="SDN:P09:40:N15D"  label="DELTA 15N (15N/14N)"    />
       <exact>
-         <element  key="SDN:P01:40:D15NOPXX"  label="Enrichment of 15N in total nitrogen in the water body [particulate &gt;unknown phase]"    />
+         <element  key="SDN:P01:40:D15NOPXX"  label="Enrichment of 15N in total nitrogen in the water body [particulate phase]"    />
       </exact>
    </match>
    <match>
@@ -703,7 +703,7 @@
    <match>
       <element  key="SDN:P09:40:CHAD"  label="DIVINYL CHLOROPHYLL-A"    />
       <exact>
-         <element  key="SDN:P01:40:DVCAXXXX"  label="Concentration of divinyl chlorophyll-a per unit volume of the water body [particulate &lt;unknown phase]"    />
+         <element  key="SDN:P01:40:DVCAXXXX"  label="Concentration of divinyl chlorophyll-a per unit volume of the water body [particulate phase]"    />
       </exact>
    </match>
    <match>
@@ -745,7 +745,7 @@
    <match>
       <element  key="SDN:P09:40:CHAE"  label="EPIMERE CHLOROPHYLL-A"    />
       <exact>
-         <element  key="SDN:P01:40:CHLAEPIM"  label="Concentration of chlorophyll-a epimer per unit volume of the water body [particulate &lt;unknown phase]"    />
+         <element  key="SDN:P01:40:CHLAEPIM"  label="Concentration of chlorophyll-a epimer per unit volume of the water body [particulate phase]"    />
       </exact>
    </match>
    <match>
@@ -889,7 +889,7 @@
    <match>
       <element  key="SDN:P09:40:OXIR"  label="ISOTOPIC RATIO O18/O16"    />
       <exact>
-         <element  key="SDN:P01:40:D18OMXDG"  label="Enrichment of 18O in oxygen in the water body [dissolved oxygen phase] by mass spectrometry"    />
+         <element  key="SDN:P01:40:D18OMXDG"  label="Enrichment of 18O in dissolved oxygen in the water body by mass spectrometry"    />
       </exact>
    </match>
    <match>
@@ -913,7 +913,7 @@
    <match>
       <element  key="SDN:P09:40:LTUW"  label="LEUCINE UPTAKE RATE"    />
       <exact>
-         <element  key="SDN:P01:40:LEUCXXXX"  label="Uptake rate (hourly) of leucine {bacterial production} per unit time per unit volume of the water body [particulate &gt;unknown phase]"    />
+         <element  key="SDN:P01:40:LEUCXXXX"  label="Uptake rate (hourly) of leucine {bacterial production} per unit time per unit volume of the water body [particulate phase]"    />
       </exact>
    </match>
    <match>
@@ -955,7 +955,7 @@
    <match>
       <element  key="SDN:P09:40:LIPI"  label="LIPIDS IN THE WATER COLUMN"    />
       <exact>
-         <element  key="SDN:P01:40:LIPIDWCL"  label="Concentration of lipids per unit volume of the water body [particulate &gt;unknown phase]"    />
+         <element  key="SDN:P01:40:LIPIDWCL"  label="Concentration of lipids per unit volume of the water body [particulate phase]"    />
       </exact>
    </match>
    <match>
@@ -1111,7 +1111,7 @@
    <match>
       <element  key="SDN:P09:40:NOUW"  label="NITRATE UPTAKE"    />
       <exact>
-         <element  key="SDN:P01:40:AMUWXXXX"  label="Uptake rate (daily) of ammonium {regenerated production} per unit time per unit volume of the water body [particulate &gt;unknown phase]"    />
+         <element  key="SDN:P01:40:AMUWXXXX"  label="Uptake rate (daily) of ammonium {regenerated production} per unit time per unit volume of the water body [particulate phase]"    />
       </exact>
    </match>
    <match>
@@ -1255,7 +1255,7 @@
    <match>
       <element  key="SDN:P09:40:MNDS"  label="Nd IN THE SEDIMENT"    />
       <exact>
-         <element  key="SDN:P01:40:MNDSP012"  label="Concentration of neodynium {Nd} per unit dry weight of sediment"    />
+         <element  key="SDN:P01:40:MNDSP012"  label="Concentration of neodymium {Nd} per unit dry weight of sediment"    />
       </exact>
    </match>
    <match>
@@ -1339,7 +1339,7 @@
    <match>
       <element  key="SDN:P09:40:PP1P"  label="PART. ORGANIC PHOSPHORUS (P)"    />
       <broad>
-         <element  key="SDN:P01:40:OPHSVLPT"  label="Concentration of phosphorus (organic) per unit volume of the water body [particulate &gt;unknown phase]"    />
+         <element  key="SDN:P01:40:OPHSVLPT"  label="Concentration of phosphorus (organic) per unit volume of the water body [particulate phase]"    />
       </broad>
    </match>
    <match>
@@ -1363,43 +1363,43 @@
    <match>
       <element  key="SDN:P09:40:ETHP"  label="PARTICULATE 234 TH ACT. ERROR"    />
       <exact>
-         <element  key="SDN:P01:40:E234THPX"  label="Activity error of thorium-234 {234Th} per unit volume of the water body [particulate &gt;unknown phase]"    />
+         <element  key="SDN:P01:40:E234THPX"  label="Activity error of thorium-234 {234Th} per unit volume of the water body [particulate phase]"    />
       </exact>
    </match>
    <match>
       <element  key="SDN:P09:40:TH4P"  label="PARTICULATE 234TH ACTIVTY"    />
       <exact>
-         <element  key="SDN:P01:40:A234THPX"  label="Activity of thorium-234 {234Th} per unit volume of the water body [particulate &gt;unknown phase]"    />
+         <element  key="SDN:P01:40:A234THPX"  label="Activity of thorium-234 {234Th} per unit volume of the water body [particulate phase]"    />
       </exact>
    </match>
    <match>
       <element  key="SDN:P09:40:PC1P"  label="PARTICULATE ORGANIC CARBON/POC"    />
       <broad>
-         <element  key="SDN:P01:40:MDMAP010"  label="Concentration of carbon (organic) {POC} per unit volume of the water body [particulate &gt;unknown phase]"    />
+         <element  key="SDN:P01:40:MDMAP010"  label="Concentration of carbon (organic) {POC} per unit volume of the water body [particulate phase]"    />
       </broad>
    </match>
    <match>
       <element  key="SDN:P09:40:POCP"  label="PARTICULATE ORGANIC CARBON/POC"    />
       <broad>
-         <element  key="SDN:P01:40:MDMAP010"  label="Concentration of carbon (organic) {POC} per unit volume of the water body [particulate &gt;unknown phase]"    />
+         <element  key="SDN:P01:40:MDMAP010"  label="Concentration of carbon (organic) {POC} per unit volume of the water body [particulate phase]"    />
       </broad>
    </match>
    <match>
       <element  key="SDN:P09:40:PONP"  label="PARTICULATE ORGANIC NITROGEN"    />
       <exact>
-         <element  key="SDN:P01:40:NTOTZZZZ"  label="Concentration of nitrogen (total) {&apos;PON&apos;} per unit volume of the water body [particulate &gt;unknown phase]"    />
+         <element  key="SDN:P01:40:NTOTZZZZ"  label="Concentration of nitrogen (total) {&apos;PON&apos;} per unit volume of the water body [particulate phase]"    />
       </exact>
    </match>
    <match>
       <element  key="SDN:P09:40:PN1P"  label="PARTICULATE ORGANIC NITROGEN"    />
       <exact>
-         <element  key="SDN:P01:40:NTOTZZZZ"  label="Concentration of nitrogen (total) {&apos;PON&apos;} per unit volume of the water body [particulate &gt;unknown phase]"    />
+         <element  key="SDN:P01:40:NTOTZZZZ"  label="Concentration of nitrogen (total) {&apos;PON&apos;} per unit volume of the water body [particulate phase]"    />
       </exact>
    </match>
    <match>
       <element  key="SDN:P09:40:SLCP"  label="PARTICULATE ORGANIC SILICA(SI)"    />
       <broad>
-         <element  key="SDN:P01:40:OPALWCZZ"  label="Concentration of biogenic silica {opal} per unit volume of the water body [particulate &gt;unknown phase]"    />
+         <element  key="SDN:P01:40:OPALWCZZ"  label="Concentration of biogenic silica {opal} per unit volume of the water body [particulate phase]"    />
       </broad>
    </match>
    <match>
@@ -1429,7 +1429,7 @@
    <match>
       <element  key="SDN:P09:40:PHEA"  label="PHEOPHYTIN-A"    />
       <exact>
-         <element  key="SDN:P01:40:PTAXZZXX"  label="Concentration of phaeophytin-a per unit volume of the water body [particulate &lt;unknown phase]"    />
+         <element  key="SDN:P01:40:PTAXZZXX"  label="Concentration of phaeophytin-a per unit volume of the water body [particulate phase]"    />
       </exact>
    </match>
    <match>
@@ -1525,7 +1525,7 @@
    <match>
       <element  key="SDN:P09:40:PROT"  label="PROTEIN"    />
       <exact>
-         <element  key="SDN:P01:40:PROTWCOL"  label="Concentration of proteins per unit volume of the water body [particulate &gt;unknown phase]"    />
+         <element  key="SDN:P01:40:PROTWCOL"  label="Concentration of proteins per unit volume of the water body [particulate phase]"    />
       </exact>
    </match>
    <match>
@@ -1603,7 +1603,7 @@
    <match>
       <element  key="SDN:P09:40:SAND"  label="SAND IN THE SEDIMENT"    />
       <exact>
-         <element  key="SDN:P01:40:SANDZZZZ"  label="Proportion of sand size fraction particles in sediment"    />
+         <element  key="SDN:P01:40:SANDZZZZ"  label="Proportion of particles (sand size-fraction) in sediment"    />
       </exact>
    </match>
    <match>
@@ -1778,7 +1778,7 @@
    <match>
       <element  key="SDN:P09:40:SILT"  label="SILT IN THE SEDIMENT"    />
       <exact>
-         <element  key="SDN:P01:40:SILTZZZZ"  label="Proportion of silt size-fraction particles in sediment"    />
+         <element  key="SDN:P01:40:SILTZZZZ"  label="Proportion of particles (silt size-fraction) in sediment"    />
       </exact>
    </match>
    <match>
@@ -1892,25 +1892,25 @@
    <match>
       <element  key="SDN:P09:40:PTNP"  label="TOTAL PARTICULATE NITROGEN"    />
       <broad>
-         <element  key="SDN:P01:40:MDMAP013"  label="Concentration of nitrogen (total) per unit volume of the water body [particulate &gt;unknown phase]"    />
+         <element  key="SDN:P01:40:MDMAP013"  label="Concentration of nitrogen (total) per unit volume of the water body [particulate phase]"    />
       </broad>
    </match>
    <match>
       <element  key="SDN:P09:40:NT1P"  label="TOTAL PARTICULATE NITROGEN"    />
       <broad>
-         <element  key="SDN:P01:40:MDMAP013"  label="Concentration of nitrogen (total) per unit volume of the water body [particulate &gt;unknown phase]"    />
+         <element  key="SDN:P01:40:MDMAP013"  label="Concentration of nitrogen (total) per unit volume of the water body [particulate phase]"    />
       </broad>
    </match>
    <match>
       <element  key="SDN:P09:40:PT1P"  label="TOTAL PARTICULATE PHOSPHORUS"    />
       <broad>
-         <element  key="SDN:P01:40:TPHSMSPT"  label="Concentration of phosphorus (total) per unit mass of the water body [particulate &gt;unknown phase]"    />
+         <element  key="SDN:P01:40:TPHSMSPT"  label="Concentration of phosphorus (total) per unit mass of the water body [particulate phase]"    />
       </broad>
    </match>
    <match>
       <element  key="SDN:P09:40:PTPP"  label="TOTAL PARTICULATE PHOSPHORUS"    />
       <broad>
-         <element  key="SDN:P01:40:TPHSVLPT"  label="Concentration of phosphorus (total) per unit volume of the water body [particulate &gt;unknown phase]"    />
+         <element  key="SDN:P01:40:TPHSVLPT"  label="Concentration of phosphorus (total) per unit volume of the water body [particulate phase]"    />
       </broad>
    </match>
    <match>
@@ -1934,7 +1934,7 @@
    <match>
       <element  key="SDN:P09:40:EPMP"  label="TOTAL SUSP. PART. MATTER/ESTER"    />
       <exact>
-         <element  key="SDN:P01:40:TSEDGVPZ"  label="Concentration of suspended particulate material {SPM} per unit volume of the water body [particulate &gt;unknown phase] by filtration and gravimetry"    />
+         <element  key="SDN:P01:40:TSEDGVPZ"  label="Concentration of suspended particulate material {SPM} per unit volume of the water body [particulate phase] by filtration and gravimetry"    />
       </exact>
    </match>
    <match>
@@ -2043,12 +2043,6 @@
       <element  key="SDN:P09:40:VDIR"  label="WAVE DIRECTION REL. TRUE NORTH"    />
       <exact>
          <element  key="SDN:P01:40:GWDRZZ01"  label="Direction of waves on the water body"    />
-      </exact>
-   </match>
-   <match>
-      <element  key="SDN:P09:40:VTPK"  label="WAVE PEAK PERIOD"    />
-      <exact>
-         <element  key="SDN:P01:40:GTPKFA01"  label="Period at spectral maximum of waves on the water body by waverider"    />
       </exact>
    </match>
    <match>

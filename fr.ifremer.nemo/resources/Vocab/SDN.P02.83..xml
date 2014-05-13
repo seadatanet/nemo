@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<vocabulary list="SDN:P02:81:"  version="81"  date="2014-02-21T02:00:02.000"  title="SeaDataNet Parameter Discovery Vocabulary" >
+<vocabulary list="SDN:P02:83:"  version="83"  date="2014-05-02T01:00:04.000"  title="SeaDataNet Parameter Discovery Vocabulary" >
    <element  key="SDN:P02::WCWT"  label="Sediment water content, porosity and surface area"  shortLabel="Sed_WaterCont"  date="2004-08-16T23:50:43.000"  />
    <element  key="SDN:P02::GRZO"  label="Zooplankton growth rates"  shortLabel="ZooplGrowthRate"  date="2005-08-02T15:38:53.000"  />
    <element  key="SDN:P02::HEAD"  label="Platform or instrument orientation"  shortLabel="PlatOrientation"  date="2004-08-13T14:29:46.000"  />
@@ -55,7 +55,7 @@
    <element  key="SDN:P02::TVLT"  label="Raw suspended particulate material concentration sensor output"  shortLabel="Raw_SPM_optics"  date="2014-01-21T00:11:37.000"  />
    <element  key="SDN:P02::CFTM"  label="Contaminant fluxes between the terrestrial and marine environment"  shortLabel="ContamFlux"  date="2008-12-09T10:17:11.000"  />
    <element  key="SDN:P02::PCFX"  label="Sedimentation flux of identified biota expressed as carbon in the water column"  shortLabel="WC_SedFluxCellsCarb"  date="2004-05-18T15:44:49.000"  />
-   <element  key="SDN:P02::BRDA"  label="Bird taxonomy-related counts"  shortLabel="Bird_taxa_count"  date="2007-01-08T16:44:29.000"  />
+   <element  key="SDN:P02::BRDA"  label="Bird counts"  shortLabel="Bird_count"  date="2014-03-26T09:14:08.000"  />
    <element  key="SDN:P02::AAFX"  label="Sedimentation flux of amino acids and associated compounds in water bodies"  shortLabel="WaterSedFlux_AminoAcidCmpd"  date="2011-09-08T09:07:59.000"  />
    <element  key="SDN:P02::ATTN"  label="Transmittance and attenuance of the water column"  shortLabel="WC_Trans+Attn"  date="2007-11-21T16:25:20.000"  />
    <element  key="SDN:P02::ACO2"  label="Carbon monoxide and dioxide concentrations in the atmosphere"  shortLabel="Atm_pCO2"  date="2006-06-04T23:17:29.000"  />
@@ -215,8 +215,8 @@
    <element  key="SDN:P02::UPTH"  label="Bacterial production in the water column"  shortLabel="WC_BactProd"  date="2005-04-26T23:10:16.000"  />
    <element  key="SDN:P02::SRAD"  label="Geological sample radioactivity"  shortLabel="GeoRad"  date="2010-10-22T09:24:53.000"  />
    <element  key="SDN:P02::GP025"  label="Seal reproduction"  shortLabel="SealRepr"  date="2008-12-09T10:17:11.000"  />
-   <element  key="SDN:P02::MSFX"  label="Sedimentation flux quantification in the water column"  shortLabel="WC_SedFlux"  date="2004-08-19T08:28:07.000"  />
    <element  key="SDN:P02::LRZA"  label="Vertical velocity of the water column (currents)"  shortLabel="CurrVert"  date="2004-08-23T16:01:00.000"  />
+   <element  key="SDN:P02::MSFX"  label="Sedimentation flux quantification in the water column"  shortLabel="WC_SedFlux"  date="2004-08-19T08:28:07.000"  />
    <element  key="SDN:P02::ALAT"  label="Horizontal spatial co-ordinates"  shortLabel="Horiz_spat_coord"  date="2004-03-25T16:18:08.000"  />
    <element  key="SDN:P02::HFLW"  label="Geothermal heat flow"  shortLabel="HeatFlow"  date="2010-10-21T23:29:12.000"  />
    <element  key="SDN:P02::BCMT"  label="Metal concentrations in biota"  shortLabel="Met_Biota"  date="2008-09-12T08:34:02.000"  />
@@ -419,6 +419,7 @@
    <element  key="SDN:P02::ACSR"  label="Active seismic refraction"  shortLabel="ActSeisRefrac"  date="2010-02-21T17:24:30.000"  />
    <element  key="SDN:P02::SICO"  label="Other fluxes between the bed and the water column"  shortLabel="OthFlux_WCBed"  date="2010-11-08T15:08:09.000"  />
    <element  key="SDN:P02::SAGE"  label="Sediment age"  shortLabel="Sed_Age"  date="2003-06-10T12:53:19.000"  />
+   <element  key="SDN:P02::FEFF"  label="Fishing effort"  shortLabel="FishEffort"  date="2014-04-30T23:46:41.000"  />
    <element  key="SDN:P02::ZV00"  label="Zooplankton biovolume"  shortLabel="ZooBiovol"  date="2003-06-10T12:53:19.000"  />
    <element  key="SDN:P02::PHAT"  label="Inorganic phosphorus species concentrations in the atmosphere"  shortLabel="Phos_At"  date="2005-09-23T09:41:38.000"  />
    <element  key="SDN:P02::SCOX"  label="Dissolved concentration parameters for other gases in the water column"  shortLabel="OthGas_WC"  date="2010-11-08T15:08:09.000"  />

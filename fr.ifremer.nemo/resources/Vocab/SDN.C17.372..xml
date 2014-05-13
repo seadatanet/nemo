@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<vocabulary list="SDN:C17:362:"  version="362"  date="2014-03-01T02:00:03.000"  title="ICES Platform Codes" >
+<vocabulary list="SDN:C17:372:"  version="372"  date="2014-05-01T01:00:05.000"  title="ICES Platform Codes" >
    <element  key="SDN:C17::31VI"  label="Vicca"   date="2013-08-20T09:40:59.000"  />
    <element  key="SDN:C17::46A2"  label="Aegir"   date="2012-05-24T14:00:12.000"  />
    <element  key="SDN:C17::06NX"  label="Nixe II"   date="2012-11-21T10:59:42.000"  />
@@ -25,6 +25,7 @@
    <element  key="SDN:C17::06P1"  label="Poseidon (02-45)"   date="2013-07-01T08:11:03.000"  />
    <element  key="SDN:C17::MLVA"  label="Valetta"   date="2011-12-06T13:32:15.000"  />
    <element  key="SDN:C17::46AE"  label="Aegir"   date="2011-12-06T13:30:34.000"  />
+   <element  key="SDN:C17::46AC"  label="Tyr"   date="2014-04-23T23:02:59.000"  />
    <element  key="SDN:C17::46AN"  label="Arni Fridriksson"   date="2014-02-05T00:58:01.000"  />
    <element  key="SDN:C17::06OR"  label="CMA CGM Orchid"   date="2012-12-06T14:25:17.000"  />
    <element  key="SDN:C17::06P3"  label="Planet"   date="2013-07-01T08:11:03.000"  />
@@ -91,8 +92,8 @@
    <element  key="SDN:C17::74VY"  label="City of Plymouth"   date="2010-09-21T15:37:39.000"  />
    <element  key="SDN:C17::MLSC"  label="Sea Cargo Express"   date="2013-08-07T14:36:14.000"  />
    <element  key="SDN:C17::MLSA"  label="Sabrina"   date="2011-12-06T13:32:15.000"  />
-   <element  key="SDN:C17::74VW"  label="Challenge II"   date="2009-08-03T15:13:41.000"  />
    <element  key="SDN:C17::3250"  label="Thomas G. Thompson"   date="2012-12-06T00:53:30.000"  />
+   <element  key="SDN:C17::74VW"  label="Challenge II"   date="2009-08-03T15:13:41.000"  />
    <element  key="SDN:C17::74VX"  label="Destro"   date="2010-09-21T15:37:39.000"  />
    <element  key="SDN:C17::74VU"  label="Sugar Producer"   date="2010-09-21T15:37:39.000"  />
    <element  key="SDN:C17::74VS"  label="Dart Atlantica"   date="2012-10-03T09:55:19.000"  />
@@ -103,8 +104,8 @@
    <element  key="SDN:C17::74W3"  label="Admiral Beaufort"   date="2013-04-17T23:23:04.000"  />
    <element  key="SDN:C17::74VO"  label="Vigo"   date="2013-08-02T13:14:27.000"  />
    <element  key="SDN:C17::74W1"  label="Endeavour III"   date="2012-05-14T16:57:14.000"  />
-   <element  key="SDN:C17::74VM"  label="Gardline Locater"   date="2009-08-03T15:13:41.000"  />
    <element  key="SDN:C17::35ZX"  label="Tintin"   date="2013-09-18T09:43:54.000"  />
+   <element  key="SDN:C17::74VM"  label="Gardline Locater"   date="2009-08-03T15:13:41.000"  />
    <element  key="SDN:C17::74VN"  label="Golden West"   date="2009-08-03T15:13:41.000"  />
    <element  key="SDN:C17::74VI"  label="Vidal"   date="2011-04-08T09:13:26.000"  />
    <element  key="SDN:C17::74VJ"  label="Booker Challenge"   date="2010-09-21T15:37:39.000"  />
@@ -147,6 +148,7 @@
    <element  key="SDN:C17::74TF"  label="Trafalgar"   date="2013-02-11T13:02:11.000"  />
    <element  key="SDN:C17::74TE"  label="Tellina"   date="2011-04-08T09:02:20.000"  />
    <element  key="SDN:C17::74TC"  label="Colonel Templer"   date="2013-07-01T08:25:47.000"  />
+   <element  key="SDN:C17::74T8"  label="Polar Bear"   date="2014-03-18T09:02:11.000"  />
    <element  key="SDN:C17::74T7"  label="Virtuous"   date="2013-04-16T12:34:37.000"  />
    <element  key="SDN:C17::06W2"  label="Walther Herwig II"   date="2013-07-01T08:11:03.000"  />
    <element  key="SDN:C17::67LL"  label="Litoral"   date="2013-09-05T14:25:27.000"  />
@@ -182,6 +184,7 @@
    <element  key="SDN:C17::46MJ"  label="Maria Julia"   date="2011-12-06T13:30:35.000"  />
    <element  key="SDN:C17::35QR"  label="Quentin Roosevelt"   date="2011-12-06T13:30:27.000"  />
    <element  key="SDN:C17::RCOM"  label="Ombango"   date="2011-12-06T13:32:18.000"  />
+   <element  key="SDN:C17::35SO"  label="Sepiola"   date="2014-04-22T14:20:23.000"  />
    <element  key="SDN:C17::35SB"  label="Sepia II"   date="2011-12-06T13:30:28.000"  />
    <element  key="SDN:C17::URVI"  label="Vika"   date="2011-12-06T13:32:22.000"  />
    <element  key="SDN:C17::35SC"  label="Sar"   date="2013-07-30T08:45:56.000"  />
@@ -429,17 +432,20 @@
    <element  key="SDN:C17::68AN"  label="Andromeda"   date="2011-12-06T13:31:24.000"  />
    <element  key="SDN:C17::41IG"  label="Indira Ghandi"   date="2013-05-16T14:14:28.000"  />
    <element  key="SDN:C17::74PA"  label="Palliser"   date="2013-12-10T14:02:24.000"  />
+   <element  key="SDN:C17::FOFF"  label="Finnur Fridi"   date="2014-03-18T13:13:42.000"  />
    <element  key="SDN:C17::68AI"  label="Mestre Costeiro"   date="2011-12-06T13:31:24.000"  />
    <element  key="SDN:C17::68AH"  label="Aguas Vivas"   date="2011-12-06T13:31:24.000"  />
    <element  key="SDN:C17::68AU"  label="Auriga"   date="2011-12-06T13:31:24.000"  />
    <element  key="SDN:C17::74PD"  label="Prince Madog"  shortLabel="PM"  date="2013-07-01T08:25:47.000"  />
    <element  key="SDN:C17::68AR"  label="Arquipelago"   date="2011-12-06T13:31:24.000"  />
+   <element  key="SDN:C17::41HV"  label="Harsha Vardhana"   date="2014-04-22T14:10:57.000"  />
    <element  key="SDN:C17::74PQ"  label="Plymouth Quest"  shortLabel="PQ"  date="2013-07-01T08:25:47.000"  />
    <element  key="SDN:C17::06EZ"  label="Elisabeth Mann Borgese"   date="2011-12-06T13:28:00.000"  />
    <element  key="SDN:C17::06EX"  label="Explora"   date="2011-12-06T13:28:00.000"  />
    <element  key="SDN:C17::74PY"  label="Plymouth"   date="2013-02-04T08:32:55.000"  />
    <element  key="SDN:C17::06DB"  label="Damkerort"   date="2011-12-06T13:27:59.000"  />
    <element  key="SDN:C17::74PW"  label="Pellew"   date="2013-12-10T13:58:52.000"  />
+   <element  key="SDN:C17::74PX"  label="Caronia"   date="2014-03-18T13:17:06.000"  />
    <element  key="SDN:C17::74PV"  label="Victoria May"   date="2012-05-10T13:02:51.000"  />
    <element  key="SDN:C17::06DA"  label="Anton Dohrn II"   date="2013-07-01T08:11:03.000"  />
    <element  key="SDN:C17::74PS"  label="Sepia"  shortLabel="SEP"  date="2009-08-10T14:19:22.000"  />
@@ -518,6 +524,7 @@
    <element  key="SDN:C17::06HT"  label="Haithabu"   date="2012-12-22T11:36:51.000"  />
    <element  key="SDN:C17::748S"  label="Scotia"  shortLabel="S3"  date="2013-07-01T08:25:47.000"  />
    <element  key="SDN:C17::GEAM"  label="Asmati"   date="2011-12-06T13:32:11.000"  />
+   <element  key="SDN:C17::FOPF"  label="Polarfront"   date="2014-03-18T08:59:46.000"  />
    <element  key="SDN:C17::LAKS"  label="Kristaps"   date="2011-12-06T13:32:13.000"  />
    <element  key="SDN:C17::89LM"  label="Lamas-1"   date="2011-12-06T13:31:33.000"  />
    <element  key="SDN:C17::747S"  label="Scotia"  shortLabel="S1"  date="2013-07-01T08:25:47.000"  />
@@ -668,6 +675,7 @@
    <element  key="SDN:C17::09WA"  label="Warreen"   date="2014-01-22T15:19:00.000"  />
    <element  key="SDN:C17::SEAR"  label="Arfang"   date="2011-12-06T13:32:20.000"  />
    <element  key="SDN:C17::SISR"  label="Swan River Bridge"   date="2012-12-17T15:02:19.000"  />
+   <element  key="SDN:C17::45MN"  label="Mianda"   date="2014-04-22T14:58:22.000"  />
    <element  key="SDN:C17::09WG"  label="Warrego"   date="2013-12-29T17:01:56.000"  />
    <element  key="SDN:C17::3309"  label="Horizon Trader"   date="2013-11-13T15:28:28.000"  />
    <element  key="SDN:C17::09WM"  label="Warramunga"   date="2013-09-19T12:30:23.000"  />
@@ -974,6 +982,7 @@
    <element  key="SDN:C17::RUMR"  label="Mirazh"   date="2012-10-11T17:05:34.000"  />
    <element  key="SDN:C17::48UN"  label="Universitatis"   date="2013-07-01T08:24:00.000"  />
    <element  key="SDN:C17::48DP"  label="G. Dallaporta"   date="2012-05-30T14:04:29.000"  />
+   <element  key="SDN:C17::RUMZ"  label="Mezen"   date="2014-04-22T14:49:51.000"  />
    <element  key="SDN:C17::77GI"  label="Grisbadarne"   date="2011-12-06T13:31:30.000"  />
    <element  key="SDN:C17::26G2"  label="Gunnar Thorson"   date="2011-12-06T13:28:36.000"  />
    <element  key="SDN:C17::90GL"  label="SRTM 8-432"   date="2012-10-03T13:59:08.000"  />
@@ -1166,6 +1175,7 @@
    <element  key="SDN:C17::58SM"  label="Hoeegh Seoul"   date="2013-04-16T12:23:42.000"  />
    <element  key="SDN:C17::58SF"  label="Seiko"   date="2011-12-06T13:31:13.000"  />
    <element  key="SDN:C17::90C7"  label="Tantal"   date="2013-07-30T13:49:34.000"  />
+   <element  key="SDN:C17::49ST"  label="Satsuma"   date="2014-04-09T08:09:20.000"  />
    <element  key="SDN:C17::90C4"  label="Skif"   date="2013-07-30T13:49:34.000"  />
    <element  key="SDN:C17::48AN"  label="Andrea"   date="2013-07-01T08:24:00.000"  />
    <element  key="SDN:C17::48B1"  label="Bannock"   date="2011-12-06T13:30:36.000"  />
@@ -1231,8 +1241,8 @@
    <element  key="SDN:C17::54TJ"  label="Tianjin"   date="2012-07-26T13:24:41.000"  />
    <element  key="SDN:C17::48CF"  label="Coopernaut Franca"   date="2011-12-06T13:30:36.000"  />
    <element  key="SDN:C17::90D4"  label="Poiskovik"   date="2013-07-30T13:49:34.000"  />
-   <element  key="SDN:C17::34AR"  label="Aranda"   date="2013-07-01T08:21:06.000"  />
    <element  key="SDN:C17::49U1"  label="Tokushima"   date="2012-12-06T15:02:55.000"  />
+   <element  key="SDN:C17::34AR"  label="Aranda"   date="2013-07-01T08:21:06.000"  />
    <element  key="SDN:C17::58TB"  label="Trygve Braarud"   date="2011-12-06T13:31:13.000"  />
    <element  key="SDN:C17::90D9"  label="Patriot"   date="2013-07-30T13:49:34.000"  />
    <element  key="SDN:C17::90D6"  label="Srtr"   date="2013-07-30T13:49:34.000"  />
@@ -1240,6 +1250,7 @@
    <element  key="SDN:C17::49U7"  label="Shoyo"   date="2011-12-06T13:30:57.000"  />
    <element  key="SDN:C17::90D7"  label="Konstantin Boldyrev"   date="2013-07-30T13:49:34.000"  />
    <element  key="SDN:C17::49UJ"  label="Ushio Maru"   date="2012-03-06T08:31:59.000"  />
+   <element  key="SDN:C17::58SQ"  label="Saga Sea"   date="2014-04-22T14:38:04.000"  />
    <element  key="SDN:C17::26DP"  label="Daphne"   date="2013-07-18T14:21:40.000"  />
    <element  key="SDN:C17::90DL"  label="Mys Ostrovskogo"   date="2013-07-30T13:49:34.000"  />
    <element  key="SDN:C17::26DV"  label="Dhiva"   date="2011-12-06T13:28:35.000"  />
@@ -1283,6 +1294,7 @@
    <element  key="SDN:C17::49QD"  label="Shimane Maru"   date="2013-11-13T15:21:55.000"  />
    <element  key="SDN:C17::49QF"  label="Nagasaki Maru"   date="2013-11-13T00:05:34.000"  />
    <element  key="SDN:C17::18FO"  label="Ambrose Foote"   date="2014-02-19T16:19:51.000"  />
+   <element  key="SDN:C17::18FW"  label="Frank M. Weston"   date="2014-04-09T08:05:55.000"  />
    <element  key="SDN:C17::58LG"  label="Ligrunn"   date="2013-09-05T14:20:05.000"  />
    <element  key="SDN:C17::18FN"  label="Fredericton"   date="2014-01-31T14:51:17.000"  />
    <element  key="SDN:C17::58LA"  label="Lance"   date="2013-07-01T08:22:19.000"  />
@@ -1317,7 +1329,7 @@
    <element  key="SDN:C17::310G"  label="Guardian"   date="2013-01-10T00:18:25.000"  />
    <element  key="SDN:C17::54A6"  label="CMA CGM Auckland"   date="2013-12-04T15:39:19.000"  />
    <element  key="SDN:C17::58P1"  label="Polarfront I"   date="2014-02-28T15:43:16.000"  />
-   <element  key="SDN:C17::58P2"  label="Polarfront II"   date="2014-02-28T15:48:25.000"  />
+   <element  key="SDN:C17::58P2"  label="Polarfront II"   date="2014-03-12T10:48:27.000"  />
    <element  key="SDN:C17::54A5"  label="Safmarine Zambezi"   date="2013-07-01T08:24:54.000"  />
    <element  key="SDN:C17::58PG"  label="Polarsirkel"   date="2013-11-13T15:14:23.000"  />
    <element  key="SDN:C17::49XZ"  label="Tottori Maru No.1"   date="2012-07-24T12:15:59.000"  />
@@ -1332,6 +1344,7 @@
    <element  key="SDN:C17::49ZO"  label="Fusakaze"   date="2012-03-06T08:24:09.000"  />
    <element  key="SDN:C17::58PQ"  label="Polar Queen"   date="2013-11-20T16:15:52.000"  />
    <element  key="SDN:C17::58PR"  label="Peder Ronnestad"   date="2013-12-10T14:06:37.000"  />
+   <element  key="SDN:C17::58PT"  label="Polaris"   date="2014-04-25T10:42:47.000"  />
    <element  key="SDN:C17::58PO"  label="Polarbjoern"   date="2011-12-06T13:31:12.000"  />
    <element  key="SDN:C17::18IN"  label="Investigator II"   date="2014-01-28T09:15:02.000"  />
    <element  key="SDN:C17::07PE"  label="Professor Albrecht Penck"   date="2011-12-06T13:28:06.000"  />
@@ -1345,6 +1358,7 @@
    <element  key="SDN:C17::18LN"  label="Limnos"   date="2013-04-23T23:11:38.000"  />
    <element  key="SDN:C17::58NJ"  label="Nybakk"   date="2011-12-06T13:31:12.000"  />
    <element  key="SDN:C17::58NI"  label="Nordfisk"   date="2011-12-06T13:31:11.000"  />
+   <element  key="SDN:C17::49VQ"  label="Satsuma"   date="2014-04-22T14:13:20.000"  />
    <element  key="SDN:C17::58NB"  label="Nanki Bergesen"   date="2012-07-15T23:56:30.000"  />
    <element  key="SDN:C17::29VE"  label="Vizconde de Eza"   date="2013-07-01T08:12:49.000"  />
    <element  key="SDN:C17::58NT"  label="Nordstar"   date="2011-12-06T13:31:12.000"  />
@@ -1374,6 +1388,7 @@
    <element  key="SDN:C17::54CI"  label="JPO Pisces"   date="2013-09-18T23:36:16.000"  />
    <element  key="SDN:C17::58E2"  label="Endre Dyroey"   date="2011-12-06T13:31:08.000"  />
    <element  key="SDN:C17::54CR"  label="CMA CGM Charcoat"   date="2012-07-25T13:36:47.000"  />
+   <element  key="SDN:C17::54CQ"  label="Buxlink"   date="2014-04-22T14:16:59.000"  />
    <element  key="SDN:C17::58DY"  label="Emmy Dyvi"   date="2011-12-06T13:31:08.000"  />
    <element  key="SDN:C17::353U"  label="Le Fougueux"   date="2013-07-01T08:19:09.000"  />
    <element  key="SDN:C17::9057"  label="Kometa Galleya"   date="2013-07-30T13:49:34.000"  />
@@ -1407,6 +1422,7 @@
    <element  key="SDN:C17::902S"  label="Sevastopolskiy Rybak"   date="2013-07-30T13:49:34.000"  />
    <element  key="SDN:C17::58BI"  label="Baragutt"   date="2012-11-21T14:28:23.000"  />
    <element  key="SDN:C17::58BN"  label="Brekne"   date="2012-11-06T16:23:54.000"  />
+   <element  key="SDN:C17::3120"  label="Benjamin Franklin"   date="2014-04-16T13:03:31.000"  />
    <element  key="SDN:C17::58HB"  label="Hans Brattstroem"   date="2011-12-06T13:31:10.000"  />
    <element  key="SDN:C17::18BG"  label="Beluga"   date="2013-07-23T07:40:10.000"  />
    <element  key="SDN:C17::58HD"  label="Hegur"   date="2012-11-21T15:00:08.000"  />
@@ -1426,12 +1442,13 @@
    <element  key="SDN:C17::318M"  label="Melville"   date="2012-12-06T00:53:30.000"  />
    <element  key="SDN:C17::58HV"  label="Havdroen"   date="2011-12-06T13:31:10.000"  />
    <element  key="SDN:C17::58HS"  label="Hyas"   date="2011-12-06T13:31:10.000"  />
+   <element  key="SDN:C17::18AX"  label="Arleux"   date="2014-03-18T16:51:27.000"  />
    <element  key="SDN:C17::58I3"  label="Inger Hildur"   date="2011-12-06T13:31:10.000"  />
    <element  key="SDN:C17::18AU"  label="Viola M. Davidson"   date="2011-12-06T13:28:18.000"  />
    <element  key="SDN:C17::58HP"  label="Havglans"   date="2012-11-21T14:57:51.000"  />
    <element  key="SDN:C17::54HB"  label="Hebe"   date="2013-12-06T15:38:11.000"  />
    <element  key="SDN:C17::58HJ"  label="Helmer Hanssen"   date="2011-12-06T13:31:10.000"  />
-   <element  key="SDN:C17::58HH"  label="Helland Hansen"   date="2014-02-07T14:26:52.000"  />
+   <element  key="SDN:C17::58HH"  label="Helland Hansen"   date="2014-03-18T16:53:29.000"  />
    <element  key="SDN:C17::14SI"  label="Sirius"   date="2012-11-06T16:28:12.000"  />
    <element  key="SDN:C17::18DI"  label="Cape Ballard"   date="2012-09-11T10:10:00.000"  />
    <element  key="SDN:C17::18DL"  label="Amundsen"   date="2013-04-16T12:45:18.000"  />
@@ -1457,6 +1474,7 @@
    <element  key="SDN:C17::58GB"  label="Geo Atlantic"   date="2011-12-06T13:31:09.000"  />
    <element  key="SDN:C17::29MD"  label="Madornina"   date="2011-12-06T13:28:41.000"  />
    <element  key="SDN:C17::29LU"  label="Lura"   date="2011-12-06T13:28:41.000"  />
+   <element  key="SDN:C17::58FU"  label="Furenak"   date="2014-04-22T14:06:46.000"  />
    <element  key="SDN:C17::58G4"  label="Gardar"   date="2011-12-06T13:31:09.000"  />
    <element  key="SDN:C17::58FW"  label="Odd Fellow"   date="2011-12-06T13:31:09.000"  />
    <element  key="SDN:C17::58FN"  label="Fridtjof Nansen"   date="2014-02-06T15:57:21.000"  />
@@ -1550,6 +1568,7 @@
    <element  key="SDN:C17::29EV"  label="Eeva"   date="2011-12-06T13:28:41.000"  />
    <element  key="SDN:C17::35ND"  label="Notre Dame"   date="2012-11-15T09:53:24.000"  />
    <element  key="SDN:C17::35NC"  label="Nadir"   date="2011-12-06T13:30:26.000"  />
+   <element  key="SDN:C17::18MH"  label="Matthew"   date="2014-04-08T14:01:29.000"  />
    <element  key="SDN:C17::18MF"  label="Martha L. Black"   date="2013-04-24T10:56:30.000"  />
    <element  key="SDN:C17::35DU"  label="La Dunkerquoise"   date="2011-12-06T13:30:23.000"  />
    <element  key="SDN:C17::18MP"  label="Montreal"   date="2014-02-04T14:36:25.000"  />
@@ -1629,9 +1648,9 @@
    <element  key="SDN:C17::18RF"  label="Rockcliffe"   date="2014-02-04T15:13:38.000"  />
    <element  key="SDN:C17::18RD"  label="Pierre Radisson"   date="2013-12-11T08:23:42.000"  />
    <element  key="SDN:C17::URAR"  label="Arshincevo"   date="2011-12-06T13:32:22.000"  />
+   <element  key="SDN:C17::35HT"  label="Thalassa"   date="2013-07-01T08:19:09.000"  />
    <element  key="SDN:C17::64PK"  label="Pelikaan"   date="2012-11-21T15:07:48.000"  />
    <element  key="SDN:C17::18RG"  label="Radium Gilbert"   date="2013-12-29T17:25:47.000"  />
-   <element  key="SDN:C17::35HT"  label="Thalassa"   date="2013-07-01T08:19:09.000"  />
    <element  key="SDN:C17::64PE"  label="Pelagia"   date="2013-07-01T08:25:26.000"  />
    <element  key="SDN:C17::35HL"  label="Haliotis"   date="2013-07-01T08:19:09.000"  />
    <element  key="SDN:C17::07GA"  label="Carl Fr. Gauss"   date="2012-11-14T16:49:36.000"  />
@@ -1669,9 +1688,10 @@
    <element  key="SDN:C17::URD4"  label="Poiskovik"   date="2011-12-06T13:32:22.000"  />
    <element  key="SDN:C17::35FL"  label="Florence"   date="2011-12-06T13:30:23.000"  />
    <element  key="SDN:C17::14AH"  label="Almirante Saboia"   date="2012-07-26T08:49:26.000"  />
-   <element  key="SDN:C17::14AI"  label="Alpha Crucis"   date="2013-12-10T14:42:53.000"  />
    <element  key="SDN:C17::18TH"  label="Theta"   date="2013-12-27T00:32:38.000"  />
+   <element  key="SDN:C17::14AI"  label="Alpha Crucis"   date="2013-12-10T14:42:53.000"  />
    <element  key="SDN:C17::18TA"  label="Toronto"   date="2013-06-21T13:28:35.000"  />
+   <element  key="SDN:C17::18TB"  label="Shippagan"   date="2014-04-30T14:01:35.000"  />
    <element  key="SDN:C17::35FE"  label="Fée de l&apos;Aulne"   date="2011-12-06T13:30:23.000"  />
    <element  key="SDN:C17::14AA"  label="Almirante Maximiano"   date="2012-07-26T08:57:24.000"  />
    <element  key="SDN:C17::64RJ"  label="Reykjafoss"   date="2012-11-29T15:52:50.000"  />
