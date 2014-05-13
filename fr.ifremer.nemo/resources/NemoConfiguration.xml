@@ -278,5 +278,5 @@
     <Flag local="4" SDN="3 - probably bad value"/>
     <Flag local="8" SDN="4 - bad value"/>
   </FlagTable>
-  <defaultFlag>3</defaultFlag>
+  <defaultFlag>0</defaultFlag>
 </NemoConfiguration>
