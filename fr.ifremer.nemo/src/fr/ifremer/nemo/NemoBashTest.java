@@ -457,12 +457,12 @@ public class NemoBashTest {
 	 * =================================================================
 	 */
 	@Test
-	public final void userParemetersLongNameEmpty() {
+	public final void userParametersLongNameEmpty() {
 		boolean res = false;
 		testLogger
 				.info("\r\n\r\n\r\n\r\n__________________________userParemetersLongNamesEmpty___________________________\r\n\r\n\r\n\r\n");
 		message = new Message();
-		message.testName = " Empty userParemetersLongNames";
+		message.testName = " Empty userParametersLongNames";
 		org.w3c.dom.Document document;
 		String userParametersLongNames = Intern.dir_resources + File.separator
 				+ "userParametersNetCDFLongNames" + Global.EXT_XML;
@@ -488,12 +488,12 @@ public class NemoBashTest {
 	 * =================================================================
 	 */
 	@Test
-	public final void userParemetersStandardNameEmpty() {
+	public final void userParametersStandardNameEmpty() {
 		boolean res = false;
 		testLogger
 				.info("\r\n\r\n\r\n\r\n__________________________userParemetersStandardNamesEmpty___________________________\r\n\r\n\r\n\r\n");
 		message = new Message();
-		message.testName = " Empty userParemetersStandardNames";
+		message.testName = " Empty userParametersStandardNames";
 		org.w3c.dom.Document document;
 		String userParametersStandardNames = Intern.dir_resources
 				+ File.separator + "userParametersStandardNames"
