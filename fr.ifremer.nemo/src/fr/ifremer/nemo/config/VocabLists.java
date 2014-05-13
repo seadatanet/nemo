@@ -207,7 +207,7 @@ public class VocabLists {
 		try {
 			cf.reload();
 		} catch (VocabularyException e1) {
-
+			logger.error(e1.getMessage());
 			e1.printStackTrace();
 		}
 		for (String listName : listNames) {
@@ -236,6 +236,7 @@ public class VocabLists {
 			} catch (Exception e) {
 				updateLists.setEtat(EtatUpdate.FAILED);
 				e.printStackTrace();
+				logger.error(e.getMessage());
 			}
 		}
 	}
