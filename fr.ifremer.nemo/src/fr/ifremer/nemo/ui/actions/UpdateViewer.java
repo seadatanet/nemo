@@ -37,7 +37,7 @@ public class UpdateViewer {
 
 		message.setEditable(false);
 		message.setText(updateMessage);
-		message.setSize(600, 400);
+		message.setSize(590, 400);
 
 		shell.setSize(600, 500);
 
