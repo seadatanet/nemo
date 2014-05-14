@@ -3,7 +3,6 @@ package fr.ifremer.nemo.ui.actions;
 import java.util.ArrayList;
 
 import org.eclipse.jface.action.Action;
-import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.ISelectionListener;
@@ -75,7 +74,7 @@ public class UpdateAction extends Action implements ISelectionListener,
             message.append(Global.RN);
         }
 
-        // affichage du resultats des mises a jour
+//         affichage du resultats des mises a jour
         ArrayList<UpdateStatus> updatedLists = ManageLists.getUpdatedLists();
         for (UpdateStatus list : updatedLists)
         {
@@ -95,7 +94,10 @@ public class UpdateAction extends Action implements ISelectionListener,
             }
         }
 
-        MessageDialog.openInformation(shelloptions, "WebServices Info", message.toString()); //$NON-NLS-1$
+        		UpdateViewer viewer = new UpdateViewer();
+        		viewer.display(message.toString());
+        	
+        		
     }
 
     private String getMessageUpdate(UpdateStatus list, boolean sublist)
