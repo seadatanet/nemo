@@ -73,6 +73,11 @@ import fr.ifremer.seadatanet.cfpoint.variable.SdnZ;
  */
 
 public class NetCDFWriter extends NemoWriter {
+	
+	
+	String unitsTranslationFileName = "resources" + File.separator + "unitsTranslation.xml";
+
+	
 	private enum URNtype {
 		subject, object, units;
 	}
@@ -492,7 +497,7 @@ public class NetCDFWriter extends NemoWriter {
 		sdnDim.add(dims.getDimInstance());
 		sdnDim.add(dims.getString80());
 
-		UnitConversionManager unitConversion = UnitConversionManager.getInstance();
+		UnitConversionManager unitConversion = UnitConversionManager.getInstance(unitsTranslationFileName);
 
 		// add to net CDF
 		myCFPointWriterManager.addDimensions(dims);
