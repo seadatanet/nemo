@@ -13,6 +13,8 @@
   <idEdmoRespDonnees></idEdmoRespDonnees>
   <idEdmoDistDonnees></idEdmoDistDonnees>
   <cdiURL>http://www.sdn-taskmanager.org/</cdiURL>
+  <cdiHrefPrefix>http://seadatanet.maris2.nl/v_cdi_v3/print_xml.asp?</cdiHrefPrefix>
+  <csrHrefPrefix>http://seadata.bsh.de/cgi-csr/XML/xmlDownload_V2.pl?</csrHrefPrefix>
   <odvVersion>0.4</odvVersion>
   <medatlasVersion>2.0</medatlasVersion>
   <netCDFVersion>1.0</netCDFVersion>

@@ -370,6 +370,7 @@ public class Messages {
 	public static String settings_EDMO_choice_button;
 	public static String settings_EDMO_search_label;
 	public static String settings_cdi;
+	public static String settings_sdnReferences;
 	public static String settings_mapping;
 	public static String settings_dateODV;
 	public static String error_settings_cdi;

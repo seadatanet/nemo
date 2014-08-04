@@ -101,6 +101,12 @@ public class ConfigDescription extends NLS {
 	public static String nodetitle_default;
 
 	public static String node_defaultConversionType;
+	
+	public static String node_cdiHrefPrefix;
+	public static String node_csrHrefPrefix;
+	
+	
+	
 
 	public static String setter_AccesDonnees;
 
@@ -158,6 +164,9 @@ public class ConfigDescription extends NLS {
 	public static String setter_WriteMapping;
 
 	public static String setter_defaultConversionType;
+
+	public static String setter_cdiHrefPrefix;
+	public static String setter_csrHrefPrefix;
 
 	static {
 		// initialize resource bundle
