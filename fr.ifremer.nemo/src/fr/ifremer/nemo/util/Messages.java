@@ -225,6 +225,7 @@ public class Messages {
 	public static String edit_station_sectionMagn_lib;
 	public static String edit_station_sectionSampling_lib;
 	public static String edit_station_sectionQCflags_lib;
+	public static String edit_station_sectionSdnReferences_lib;
 
 	// DATA
 	public static String edit_data_title;

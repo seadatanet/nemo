@@ -5,6 +5,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 
 import fr.ifremer.nemo.Nemo;
@@ -29,13 +30,14 @@ public class EditStationForm extends EditForm {
 
 	public StationSection stationNumber;
 	public StationSection dataType, historique, comments,
-			surfaceSample, utConvertion, time, date, latitude, endLatitude,
-			longitude, endLongitude, depth, sensorDepth,
-			magneticDeclin, samplingRate;
+	surfaceSample, utConvertion, time, date, latitude, endLatitude,
+	longitude, endLongitude, depth, sensorDepth,
+	magneticDeclin, samplingRate;
 
 	public StationSection endDepth;
 
 	public QCflagsSection qcFlags;
+	private SdnReferenceSection sdnReferences;
 
 	private StyledText textAreaStation;
 
@@ -58,15 +60,15 @@ public class EditStationForm extends EditForm {
 			// bouton validate
 			createButtonValidate();
 			buttonValidate
-					.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
-						@Override
-						public void widgetSelected(
-								org.eclipse.swt.events.SelectionEvent e)
+			.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+				@Override
+				public void widgetSelected(
+						org.eclipse.swt.events.SelectionEvent e)
 				{
 
 					validate();
 				}
-					});
+			});
 
 			// bouton reset
 			createButtonRaz();
@@ -121,7 +123,7 @@ public class EditStationForm extends EditForm {
 		if (!Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToNetCDF()) {
 			Text textCommentaire = comments.getManualInput().getLines().get(0).getValueText();
 			GridDataFactory.fillDefaults().grab(true, true).hint(Global.SIZE_SECTION, SWT.DEFAULT).minSize(Global.SIZE_SECTION, 200)
-					.applyTo(textCommentaire);
+			.applyTo(textCommentaire);
 		}
 		// remplissage de l'IHM par le modèle chargé
 		// if (!Nemo.getInstance().getNomModele().isEmpty())
@@ -218,12 +220,12 @@ public class EditStationForm extends EditForm {
 		 */
 
 		utConvertion =
-					new StationSection(Intern.S_OFFSETTU, Messages
-							.getString(Intern.S_OFFSETTU), Global.EMPTY_STRING, true,
-							false, 1, this);
+				new StationSection(Intern.S_OFFSETTU, Messages
+						.getString(Intern.S_OFFSETTU), Global.EMPTY_STRING, true,
+						false, 1, this);
 		utConvertion.addManualInput(null, ComboType.NONE, "0.0"); //$NON-NLS-1$
 		utConvertion.addAutoInput(null, false, MetaInData.INTERDIT, false,
-					false);
+				false);
 		listeSections.add(utConvertion);
 
 		/**
@@ -372,13 +374,14 @@ public class EditStationForm extends EditForm {
 			 */
 
 			samplingRate =
-						new StationSection(Intern.S_SAMPLINGRATE, Messages
-								.getString(Intern.S_SAMPLINGRATE),
-								Messages.edit_station_sectionSampling_lib, true, true, 1, this);
+					new StationSection(Intern.S_SAMPLINGRATE, 
+							Messages.getString(Intern.S_SAMPLINGRATE),
+							Messages.edit_station_sectionSampling_lib, 
+							true, true, 1, this);
 			samplingRate.addConverter(ComboType.FRQ, "*1"); //$NON-NLS-1$
 			samplingRate.addManualInput(null, ComboType.NONE, "0"); //$NON-NLS-1$
 			samplingRate.addAutoInput(null, false, MetaInData.INTERDIT, false,
-						false);
+					false);
 			samplingRate.setTimeSeriesInfo(true);
 			listeSections.add(samplingRate);
 
@@ -390,13 +393,27 @@ public class EditStationForm extends EditForm {
 		 */
 
 		qcFlags =
-					new QCflagsSection(Intern.S_QCFLAG, Messages
-							.getString(Intern.S_QCFLAG),
-							Messages.edit_station_sectionQCflags_lib, this);
+				new QCflagsSection(Intern.S_QCFLAG, Messages
+						.getString(Intern.S_QCFLAG),
+						Messages.edit_station_sectionQCflags_lib, this);
 		listeSections.add(qcFlags);
 
-	}
 
+		/**
+		 * ==============================================================================================
+		 * SDN References
+		 * ==============================================================================================
+		 */
+
+		sdnReferences =
+				new SdnReferenceSection(Intern.S_SDNREFERENCES, Messages
+						.getString(Intern.S_SDNREFERENCES),
+						Messages.edit_station_sectionSdnReferences_lib, this);
+		listeSections.add(sdnReferences);
+	}
+	public TableItem[] getSdnReferences(){
+		return sdnReferences.getSdnReferences();
+	}
 	@Override
 	public void actualiseEdition() {
 		RulesManager rulesManager = Nemo.getInstance().getViewMain().getMyRulesManager();
@@ -477,7 +494,7 @@ public class EditStationForm extends EditForm {
 			PropertyModel propertyModel = sModel.propertiesAt(Intern.S_EDATE);
 			qcFlags.setFlagFragment(propertyModel
 					.getFlag(), Intern.ENDDATETIME, Messages.getString(
-					Intern.ENDDATETIME).trim());
+							Intern.ENDDATETIME).trim());
 		}
 	}
 

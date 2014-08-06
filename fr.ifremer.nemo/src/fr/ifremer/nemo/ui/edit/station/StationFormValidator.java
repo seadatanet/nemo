@@ -3,6 +3,7 @@ package fr.ifremer.nemo.ui.edit.station;
 import java.text.ParseException;
 import java.util.regex.Pattern;
 
+import org.eclipse.swt.widgets.Item;
 import org.eclipse.swt.widgets.Shell;
 
 import fr.ifremer.nemo.Nemo;
@@ -894,6 +895,14 @@ public class StationFormValidator extends FormValidator {
 				line.dispose();
 			}
 
+			/**
+			 * ==============================================================================================
+			 * SdnReferences
+			 * ==============================================================================================
+			 */
+			
+			ok = ok && validateSdnReferences(editStationForm);
+			
 			if (ok) {
 				editStationForm.setOkApresReset(true);
 				//                okStation();
@@ -908,6 +917,42 @@ public class StationFormValidator extends FormValidator {
 			Nemo.getInstance().getViewMain().setEtape(2);
 			e.printStackTrace();
 		}
+	}
+
+	private boolean validateSdnReferences(EditStationForm editStationForm) {
+		// TODO internationalization
+		String type;
+		String role;
+		String href;
+		int i=1;
+		boolean valid = true;
+		for (Item item : editStationForm.getSdnReferences())
+		{
+			type = (String) item.getData(SdnReferencesTableEditor.DATA_KEY.TYPE.toString());
+			role = (String) item.getData(SdnReferencesTableEditor.DATA_KEY.ROLE.toString());
+			href = (String) item.getData(SdnReferencesTableEditor.DATA_KEY.HREF.toString());
+			
+			if (href==null && (type!=null || role!=null)){
+				Utils.messageErreurAppend("href shall not be empty, line " + i); //$NON-NLS-1$
+				valid = false;
+			}else if(
+					href!=null
+					&&
+					!(href.startsWith("http://")
+					||  href.startsWith("https://")
+					||  href.startsWith("doi:"))
+					){
+				Utils.messageErreurAppend("href shall start with http:// or https:// or doi:, line " + i); //$NON-NLS-1$
+				valid = false;
+			}else if (href!=null && href.startsWith("doi:") && type==null){
+				Utils.messageErreurAppend("if href start with doi, type shall be empty, line " + i); //$NON-NLS-1$
+				valid = false;
+			}
+			
+			
+			i++;
+		}
+		return valid ;
 	}
 
 	@Override

@@ -3,6 +3,7 @@ package fr.ifremer.nemo.input;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import org.eclipse.swt.widgets.TableItem;
 import org.xml.sax.Attributes;
 
 import com.ago.xml.PathElementConsumer;
@@ -41,6 +42,8 @@ public class StationModel extends AbstractModel
      * Tableau de correspondance des flags
      */
     protected FlagTable _flagTable;
+
+	private TableItem[] sdnReferences;
 
     public StationModel(){
         _tagName = ModelDescription.node_stationModel;
@@ -358,4 +361,9 @@ public class StationModel extends AbstractModel
     public void setFlagTable(FlagTable x){
         _flagTable = x;
     }
+
+	public void setSdnReferences(TableItem[] items) {
+		this.sdnReferences = items;
+		
+	}
 }
