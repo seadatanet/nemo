@@ -110,7 +110,7 @@ public class FileFormValidator extends FormValidator
                 }
             }
 
-            for (NemoSection desc : editFileForm.listeSections)
+            for (NemoSection desc : editFileForm.getListeSections())
             {
                 if (desc.isEnabled())
                 {

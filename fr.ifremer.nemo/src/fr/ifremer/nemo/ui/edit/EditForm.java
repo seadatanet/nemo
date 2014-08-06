@@ -29,9 +29,11 @@ public abstract class EditForm
 
     protected boolean visible;
 
-    public ArrayList<NemoSection> listeSections;
+    protected ArrayList<NemoSection> listeSections;
 
-    public FormValidator myValidator;
+  
+
+	protected FormValidator myValidator;
 
     /**
      * Constructor
@@ -276,5 +278,8 @@ public abstract class EditForm
     {
         myValidator.validate();
     }
+    public ArrayList<NemoSection> getListeSections() {
+  		return listeSections;
+  	}
 
 }
