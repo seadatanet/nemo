@@ -265,13 +265,13 @@ public class ParameterManager {
 
 		if (isMedatlas) {
 			// ordre: PRES, YMDT, LAT LON, nemo parameters, BATH
-			if (isProfile) {
-				/** aap_p3 */
-				if (!exist_p_pressure && exist_p_depthBSSurf && existPSAL && existTEMP) {
-					// ajout de DEPH calculé à partir de PRES
-					addFixedParameterModel(IdParameter.PRES);
-				}
-			}
+//			if (isProfile) {
+//				/** aap_p3 */
+//				if (!exist_p_pressure && exist_p_depthBSSurf && existPSAL && existTEMP) {
+//					// ajout de DEPH calculé à partir de PRES
+//					addFixedParameterModel(IdParameter.PRES);
+//				}
+//			}
 			if (isTrajectory || isTimeSeries) {
 				/** aap_p5 */
 				// Ajout YEAR, MNTH, DAYX et TIME pour Medatlas

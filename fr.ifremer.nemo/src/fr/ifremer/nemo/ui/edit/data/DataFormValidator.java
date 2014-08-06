@@ -148,33 +148,42 @@ public class DataFormValidator extends FormValidator {
 							&& Nemo.getInstance().getViewMain()
 									.getMyRulesManager().isConversionToMedatlas()
 							&& rm.getMyMesureType() == E_MesureType.BSSURF) {
-						// data70 Si on a PRES dans le tableau, il faut qu'il
-						// soit en 1ère position
-						if (rm.getMyVerticalParametersList().getP_pressure() != Global.EMPTY_STRING) {
-							boolean data70 =
-									getFirstParameterCode().equals(
-											rm.getMyVerticalParametersList()
-													.getP_pressure());
-							if (!data70) {
-								Utils.messageErreurAppend(Messages.ViewLog_70
-										+ " (data70)"); //$NON-NLS-1$
-							}
-							ok = ok && data70;
-						}
+//						// data70 Si on a PRES dans le tableau, il faut qu'il
+//						// soit en 1ère position
+//						if (rm.getMyVerticalParametersList().getP_pressure() != Global.EMPTY_STRING) {
+//							boolean data70 =
+//									getFirstParameterCode().equals(
+//											rm.getMyVerticalParametersList()
+//													.getP_pressure());
+//							if (!data70) {
+//								Utils.messageErreurAppend(Messages.ViewLog_70
+//										+ " (data70)"); //$NON-NLS-1$
+//							}
+//							ok = ok && data70;
+//						}
 						// data75 Si on a DEPH en 1er, il faut TEMP et PSAL
 						// présents
-						else if (getFirstParameterCode()
-								.equals(
-										rm.getMyVerticalParametersList()
-												.getP_depthBSSurf())) {
-							boolean data75 =
-									checkDepthAndSalinityAndTemperature();
-							if (!data75) {
-								Utils.messageErreurAppend(Messages.ViewLog_75
-										+ " (data75)"); //$NON-NLS-1$
-							}
-							ok = ok && data75;
-						}
+//						else if (getFirstParameterCode()
+//								.equals(
+//										rm.getMyVerticalParametersList()
+//												.getP_depthBSSurf())) {
+//							boolean data75 =
+//									checkDepthAndSalinityAndTemperature();
+//							if (!data75) {
+//								Utils.messageErreurAppend(Messages.ViewLog_75
+//										+ " (data75)"); //$NON-NLS-1$
+//							}
+//							ok = ok && data75;
+//						}
+						
+						
+						// data 76
+						// primary parameter must be DEPH or PRES
+						ok = getFirstParameterCode().equals(
+								rm.getMyVerticalParametersList().getP_depthBSSurf())
+								||
+								getFirstParameterCode().equals(
+										rm.getMyVerticalParametersList().getP_pressure());
 					}
 				} else if (rm.isTrajectory() && (rm.isConversionToODV() || rm.isConversionToNetCDF())) {
 					/**
@@ -200,7 +209,7 @@ public class DataFormValidator extends FormValidator {
 		 */
 		if (ok) {
 			// FAE 9656
-			// les données du model doivent etre presente.
+			// les donnees du model doivent etre presente.
 			// 10594: on a besoin que le formulaire soit valide pour lancer la
 			// conversion
 			editDataForm.setOkApresReset(true);
