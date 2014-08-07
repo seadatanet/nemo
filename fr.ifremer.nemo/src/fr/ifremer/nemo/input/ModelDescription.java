@@ -75,6 +75,10 @@ public class ModelDescription extends NLS {
 	public static String node_lastline;
 	public static String node_firstoffset;
 	public static String node_lastoffset;
+	
+	public static String node_sdnXlinks;
+	
+	
 	public static String node_parameterModel;
 	public static String node_formula;
 	public static String node_isText;
@@ -159,6 +163,9 @@ public class ModelDescription extends NLS {
 	public static String setter_firstline;
 	public static String setter_lastline;
 	public static String setter_firstoffset;
+	
+	public static String setter_sdnXlinks;
+	
 	public static String setter_lastoffset;
 	public static String setter_formula;
 	public static String setter_isText;

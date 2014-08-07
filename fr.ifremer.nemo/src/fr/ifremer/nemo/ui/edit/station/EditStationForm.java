@@ -1,11 +1,12 @@
 package fr.ifremer.nemo.ui.edit.station;
 
+import java.util.ArrayList;
+
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 
 import fr.ifremer.nemo.Nemo;
@@ -25,6 +26,8 @@ import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Global.E_InputType;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
+import fr.ifremer.sismer_tools.seadatanet.SDNXLinkException;
+import fr.ifremer.sismer_tools.seadatanet.SdnXLinkReference;
 
 public class EditStationForm extends EditForm {
 
@@ -411,9 +414,14 @@ public class EditStationForm extends EditForm {
 						Messages.edit_station_sectionSdnReferences_lib, this);
 		listeSections.add(sdnReferences);
 	}
-	public TableItem[] getSdnReferences(){
+	
+	
+	
+	public ArrayList<SdnXLinkReference> getSdnReferences() throws SDNXLinkException{
 		return sdnReferences.getSdnReferences();
 	}
+	
+	
 	@Override
 	public void actualiseEdition() {
 		RulesManager rulesManager = Nemo.getInstance().getViewMain().getMyRulesManager();

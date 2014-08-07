@@ -1,9 +1,9 @@
 package fr.ifremer.nemo.ui.edit.station;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.regex.Pattern;
 
-import org.eclipse.swt.widgets.Item;
 import org.eclipse.swt.widgets.Shell;
 
 import fr.ifremer.nemo.Nemo;
@@ -20,6 +20,8 @@ import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.util.format.DateTimeFormat;
 import fr.ifremer.nemo.util.format.LatitudeFormat;
 import fr.ifremer.nemo.util.format.LongitudeFormat;
+import fr.ifremer.sismer_tools.seadatanet.SDNXLinkException;
+import fr.ifremer.sismer_tools.seadatanet.SdnXLinkReference;
 
 /**
  * Description: validation de l'onglet station
@@ -920,38 +922,29 @@ public class StationFormValidator extends FormValidator {
 	}
 
 	private boolean validateSdnReferences(EditStationForm editStationForm) {
-		// TODO internationalization
-		String type;
-		String role;
-		String href;
+
+
 		int i=1;
 		boolean valid = true;
-		for (Item item : editStationForm.getSdnReferences())
-		{
-			type = (String) item.getData(SdnReferencesTableEditor.DATA_KEY.TYPE.toString());
-			role = (String) item.getData(SdnReferencesTableEditor.DATA_KEY.ROLE.toString());
-			href = (String) item.getData(SdnReferencesTableEditor.DATA_KEY.HREF.toString());
-			
-			if (href==null && (type!=null || role!=null)){
-				Utils.messageErreurAppend("href shall not be empty, line " + i); //$NON-NLS-1$
-				valid = false;
-			}else if(
-					href!=null
-					&&
-					!(href.startsWith("http://")
-					||  href.startsWith("https://")
-					||  href.startsWith("doi:"))
-					){
-				Utils.messageErreurAppend("href shall start with http:// or https:// or doi:, line " + i); //$NON-NLS-1$
-				valid = false;
-			}else if (href!=null && href.startsWith("doi:") && type==null){
-				Utils.messageErreurAppend("if href start with doi, type shall be empty, line " + i); //$NON-NLS-1$
-				valid = false;
+		
+		ArrayList<SdnXLinkReference> refs;
+		try {
+			refs = editStationForm.getSdnReferences();
+			for (SdnXLinkReference ref : refs)
+			{
+				try{
+					valid &= ref.check();
+				}catch (SDNXLinkException e)
+				{
+					valid = false;
+					Utils.messageErreurAppend(e.getMessage()+ " ref. no  " + i);// TODO
+				}
+				i++;
 			}
-			
-			
-			i++;
+		} catch (SDNXLinkException e1) {
+			Utils.messageErreurAppend(e1.getMessage());
 		}
+		
 		return valid ;
 	}
 
