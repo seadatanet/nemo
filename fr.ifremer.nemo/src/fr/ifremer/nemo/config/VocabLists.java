@@ -28,8 +28,8 @@ import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
 
 /**
- * Description: Class permettant de gerer les listes BODC via la librartie
- * SDNVocabulary
+ * Description: Class permettant de gerer les listes BODC via la librairie SDNVocabulary
+ * 
  * 
  * @author dcapitai
  * 
