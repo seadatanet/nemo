@@ -31,7 +31,7 @@ public class TypeData extends Object {
 
 	private Boolean sensor;
 	/**
-	 * Definie si la valeur du parametre est du texte ou non.
+	 * Definit si la valeur du parametre est du texte ou non.
 	 */
 	private Boolean isText;
 
