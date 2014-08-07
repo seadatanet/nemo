@@ -3,7 +3,7 @@
 <plugin
    id="fr.ifremer.nemo"
    name="Nemo Plug-in"
-   version="1.5.4"
+   version="1.6.0"
    provider-name="IFREMER">
 
    <extension
@@ -43,10 +43,10 @@
             name="NEMO">
          <property
                name="windowImages"
-               value="nemo16.gif,nemo32.gif"/>
+               value="/NEMO_product/nemo16.gif,/NEMO_product/nemo32.gif"/>
          <property
                name="aboutImage"
-               value="nemoAbout.gif"/>
+               value="/NEMO_product/nemoAbout.gif"/>
          <property
                name="aboutText"
                value="%aboutText"/>
