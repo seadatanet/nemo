@@ -46,7 +46,7 @@ public class NetCDFLongNameParameterManager {
 	String fileName =
 			Intern.dir_resources + File.separator + "userParametersNetCDFLongNames"
 					+ Global.EXT_XML;
-	File file = new File(fileName);
+	File file ;
 	org.w3c.dom.Document document;
 
 	/**
@@ -54,6 +54,7 @@ public class NetCDFLongNameParameterManager {
 	 */
 	public NetCDFLongNameParameterManager() {
 		super();
+		file = new File(fileName);
 		longNamesMap = new HashMap<String, String>();
 		loadUserlongNames();
 		// TODO Auto-generated constructor stub

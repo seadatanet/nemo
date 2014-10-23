@@ -27,6 +27,7 @@ import fr.ifremer.nemo.domain.MediaDomain;
 import fr.ifremer.nemo.domain.NetCDFLongNameParameterManager;
 import fr.ifremer.nemo.domain.StandardNameParameterManager;
 import fr.ifremer.nemo.ui.FilteredTableFactory;
+import fr.ifremer.nemo.ui.RulesManager;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.tables.FormatsFilteredTable;
 import fr.ifremer.nemo.ui.tables.ParameterFilteredTable;
@@ -165,28 +166,28 @@ public class TableData {
 	 * @return true if conversion is Medatlas
 	 */
 	private boolean isValueOutWritable() {
-		return (Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToMedatlas() || Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToNetCDF());
+		return (RulesManager.getInstance().isConversionToMedatlas() || RulesManager.getInstance().isConversionToNetCDF());
 	}
 
 	private boolean isValueOutMandatory() {
-		return Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToMedatlas();
+		return RulesManager.getInstance().isConversionToMedatlas();
 	}
 
 	private boolean isLabelWritable() {
-		return Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToODV()
-				&& !Nemo.getInstance().getViewMain().getMyRulesManager().isDataListTypeP091();
+		return RulesManager.getInstance().isConversionToODV()
+				&& !RulesManager.getInstance().isDataListTypeP091();
 	}
 
 	private boolean isStandardNameWritable() {
-		return Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToNetCDF();
+		return RulesManager.getInstance().isConversionToNetCDF();
 	}
 
 	private boolean isLongNameWritable() {
-		return Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToNetCDF();
+		return RulesManager.getInstance().isConversionToNetCDF();
 	}
 
 	private boolean isCheckBoxWritable() {
-		return !(Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToMedatlas() || Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToNetCDF());
+		return !(RulesManager.getInstance().isConversionToMedatlas() || RulesManager.getInstance().isConversionToNetCDF());
 	}
 
 	/**
@@ -395,7 +396,7 @@ public class TableData {
 	public void initTypesWS() {
 		typesWS = null;
 		typesWS = new ArrayList<TypeData>();
-		if (Nemo.getInstance().getViewMain().getMyRulesManager()
+		if (RulesManager.getInstance()
 				.getMyDataListType() != DataListTypeEnum.P011_VIA_P021)
 
 		{
@@ -464,15 +465,14 @@ public class TableData {
 		// On ajoute systématiquement le paramètre pression pour les profils en
 		// medatlas
 		// verticaux sauf si la liste de paramètres à utiliser est la P011
-		if (Nemo.getInstance().getViewMain().getMyRulesManager().isProfile()
-				&& Nemo.getInstance().getViewMain().getMyRulesManager()
-						.isConversionToMedatlas()
-				&& Nemo.getInstance().getViewMain().getMyRulesManager()
+		if (RulesManager.getInstance().isProfile()
+				&& RulesManager.getInstance().isConversionToMedatlas()
+				&& RulesManager.getInstance()
 						.getMyDataListType() == DataListTypeEnum.P091) {
 			for (TypeData type : typesWS) {
 				// ajout systematique de PRES
 				if (type.getEntryKey().equals(Intern.paramPRES)
-						&& Nemo.getInstance().getViewMain().getMyRulesManager()
+						&& RulesManager.getInstance()
 								.isProfile()) {
 					// on rajoute PRES
 					addType(type);
@@ -572,7 +572,7 @@ public class TableData {
 				// clic 3e bouton (=clic droit): comportement par defaut
 				if (event.button == 3)
 				{
-					if (Nemo.getInstance().getViewMain().getMyRulesManager()
+					if (RulesManager.getInstance()
 							.getMyDataListType() == DataListTypeEnum.P011_VIA_P021)
 					{
 						Point pt = new Point(event.x, event.y);
@@ -763,7 +763,7 @@ public class TableData {
 		{
 			public void handleEvent(Event e)
 			{
-				if (Nemo.getInstance().getViewMain().getMyRulesManager()
+				if (RulesManager.getInstance()
 						.getMyDataListType() != DataListTypeEnum.UNKNOWN)
 				{
 					checkTypesWS();
@@ -777,7 +777,7 @@ public class TableData {
 			}
 		});
 		// ========= Liste des unités P061 (P011 via P021 seulement)
-		if (Nemo.getInstance().getViewMain().getMyRulesManager()
+		if (RulesManager.getInstance()
 				.getMyDataListType() == DataListTypeEnum.P011_VIA_P021) {
 			MenuItem itemAddP061Unit =
 					new MenuItem(menu, SWT.NONE, index);
@@ -795,7 +795,7 @@ public class TableData {
 			});
 		}
 		// ========= Selection d'un format (P011 via P021 seulement)
-		if (Nemo.getInstance().getViewMain().getMyRulesManager()
+		if (RulesManager.getInstance()
 				.getMyDataListType() == DataListTypeEnum.P011_VIA_P021) {
 			MenuItem selectFormat =
 					new MenuItem(menu, SWT.NONE, index);
@@ -813,7 +813,7 @@ public class TableData {
 			});
 		}
 		// ========= Selection d'un Standard Names
-		if (Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToNetCDF()) {
+		if (RulesManager.getInstance().isConversionToNetCDF()) {
 			MenuItem selectStandardName =
 					new MenuItem(menu, SWT.NONE, index);
 			menuMap.put(MENU_ITEM_SELECTSTANDARDNAME, index);
@@ -1030,7 +1030,7 @@ public class TableData {
 			}
 
 			if (types.get(i).isP011()) {
-				if (Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToODV()) {
+				if (RulesManager.getInstance().isConversionToODV()) {
 					String userLabel =
 							LabelParameterManager.getInstance().getUserLabel(
 									types.get(i).getEntryKeyP011());
@@ -1041,7 +1041,7 @@ public class TableData {
 			}
 
 			String standardName = "";
-			if (Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToNetCDF()) {
+			if (RulesManager.getInstance().isConversionToNetCDF()) {
 				String userStandardName = StandardNameParameterManager.getInstance().getUserStandardName(types.get(i).getEntryKeyP011());
 				if (userStandardName != null) {
 					standardName = userStandardName;
@@ -1049,7 +1049,7 @@ public class TableData {
 			}
 
 			String longName = "";
-			if (Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToNetCDF()) {
+			if (RulesManager.getInstance().isConversionToNetCDF()) {
 				String userLongName = NetCDFLongNameParameterManager.getInstance().getUserLongName(types.get(i).getEntryKeyP011());
 				if (userLongName != null) {
 					longName = userLongName;
@@ -1702,7 +1702,7 @@ public class TableData {
 		int index = myTable.getSelectionIndex();
 		typeParameter = types.get(index);
 
-		StandardNameFilteredTable theTable = new StandardNameFilteredTable(typeParameter, Nemo.getInstance().getViewMain().getMyRulesManager().getMyDataListType());
+		StandardNameFilteredTable theTable = new StandardNameFilteredTable(typeParameter, RulesManager.getInstance().getMyDataListType());
 		return theTable;
 	}
 
@@ -1740,7 +1740,7 @@ public class TableData {
 	// FAE 9670 surlignage de la position des paramètres dans le fichier
 	public void selectInViewFile(int debut, int fin) {
 		int lign = 0;
-		if (!Nemo.getInstance().getViewMain().getMyRulesManager()
+		if (!RulesManager.getInstance()
 				.isCruiseInADirectory()
 				|| Nemo.getInstance().getViewMain().getEditFileForm()
 						.isMultiStationFileChecked()) {

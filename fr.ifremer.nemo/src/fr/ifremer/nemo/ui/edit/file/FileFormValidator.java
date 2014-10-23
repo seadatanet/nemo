@@ -13,6 +13,7 @@ package fr.ifremer.nemo.ui.edit.file;
 import java.io.File;
 
 import fr.ifremer.nemo.Nemo;
+import fr.ifremer.nemo.ui.RulesManager;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.FormValidator;
 import fr.ifremer.nemo.ui.edit.NemoSection;
@@ -54,13 +55,13 @@ public class FileFormValidator extends FormValidator
             ok = true;
 
             // first check if an output format has been set
-            if (Nemo.getInstance().getViewMain().getMyRulesManager()
+            if (RulesManager.getInstance()
                 .getMyConversionType() == E_TypeConversion.UNKNOWN)
             {
                 Utils.messageErreur(Messages.error_file_convertFormatUnknown);
                 return;
             }
-            if (Nemo.getInstance().getViewMain().getMyRulesManager()
+            if (RulesManager.getInstance()
                 .getMyFileType() == E_InputType.UNKNOWN)
             {
                 Utils.messageErreur(Messages.error_file_inputTypeUnknown);
@@ -138,7 +139,7 @@ public class FileFormValidator extends FormValidator
                 Nemo.getInstance().getDomain().getMedia()
                     .buildInputFilesNames();
             }
-            Nemo.getInstance().getViewMain().getMyRulesManager().defineSectionMandatory();
+            RulesManager.getInstance().defineSectionMandatory();
 
         }
         catch (Exception e)
@@ -179,7 +180,7 @@ public class FileFormValidator extends FormValidator
         try
         {
             // FAE 022
-            if (!Nemo.getInstance().getViewMain().getMyRulesManager()
+            if (!RulesManager.getInstance()
                 .isCruiseEnabled())
             {
                 editCruiseForm.setOkApresReset(true);

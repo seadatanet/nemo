@@ -19,12 +19,12 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 
 import fr.ifremer.nemo.Nemo;
+import fr.ifremer.nemo.ui.RulesManager;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.ComboType;
 import fr.ifremer.nemo.ui.edit.Couple;
 import fr.ifremer.nemo.ui.edit.Cursor;
 import fr.ifremer.nemo.ui.edit.UIobject;
-import fr.ifremer.nemo.ui.view.ViewMain;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 
@@ -281,7 +281,7 @@ public class AutoLine implements UIobject
     protected int getFileHeaderPos()
     {
         int fileHeader = 0;
-        if (!Nemo.getInstance().getViewMain().getMyRulesManager().isCruiseInADirectory() 
+        if (!RulesManager.getInstance().isCruiseInADirectory() 
                 || Nemo.getInstance().getViewMain().getEditFileForm().isMultiStationFileChecked()){
             // fichier campagne
             fileHeader = Nemo.getInstance().getDomain().getMedia().getModel().getFileHeader();
@@ -666,7 +666,7 @@ public class AutoLine implements UIobject
         int ligneFin = Integer.parseInt(numberLine.getText()) + nbreLignes - 1;
 
         int enteteFichier = 0;
-        if (!Nemo.getInstance().getViewMain().getMyRulesManager().isCruiseInADirectory() 
+        if (!RulesManager.getInstance().isCruiseInADirectory() 
                 || Nemo.getInstance().getViewMain().getEditFileForm().isMultiStationFileChecked()){
             // fichier campagne
             enteteFichier = Nemo.getInstance().getDomain().getMedia().getModel().getFileHeader();

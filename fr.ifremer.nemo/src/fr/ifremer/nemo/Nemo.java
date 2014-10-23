@@ -34,6 +34,7 @@ import fr.ifremer.nemo.domain.InputDomain;
 import fr.ifremer.nemo.input.CruiseModel;
 import fr.ifremer.nemo.input.InputModel;
 import fr.ifremer.nemo.ui.ApplicationWorkbenchWindowAdvisor;
+import fr.ifremer.nemo.ui.RulesManager;
 import fr.ifremer.nemo.ui.view.ViewMain;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Global.DataListTypeEnum;
@@ -271,7 +272,7 @@ public class Nemo {
 		String modelName = Nemo.getInstance().getNomModele();
 
 		// nom de l'application
-		if (getViewMain().getMyRulesManager().isCruiseInADirectory()) {
+		if (RulesManager.getInstance().isCruiseInADirectory()) {
 			// dossier campagne
 			File fich = new File(myViewMain.getEditFileForm().nomRepertoire);
 			if (!Global.EMPTY_STRING.equals(modelName)) {

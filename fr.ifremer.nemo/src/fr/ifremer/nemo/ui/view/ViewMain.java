@@ -61,8 +61,7 @@ public class ViewMain extends ViewPart
 
     private final FilteredTableFactory myFilteredTableFactory;
 
-	// manager pour la gestion de l'IHM en fonction des règles
-    private final RulesManager myRulesManager;
+	
     
 
 	public ViewMain()
@@ -74,7 +73,7 @@ public class ViewMain extends ViewPart
 		editConversionForm = new EditConversionForm();
 		myFilteredTableFactory = new FilteredTableFactory();
 		Nemo.getInstance().setViewMain(this);
-		myRulesManager = new RulesManager();
+		
 
 	}
 
@@ -106,7 +105,7 @@ public class ViewMain extends ViewPart
 			{
 				int tmp = tabFolder.getSelectionIndex();
 
-				if ((!Nemo.getInstance().getViewMain().getMyRulesManager().isCruiseEnabled())
+				if ((! RulesManager.getInstance().isCruiseEnabled())
 						&& tmp > 0)
 				{
 					tmp++;
@@ -138,7 +137,7 @@ public class ViewMain extends ViewPart
 		tabCruise.setText(Messages.onglet_cruise);
 		tabCruise.setControl(contentCruise);
 		// FAE 6739
-		enableCruiseTab(getMyRulesManager().isCruiseEnabled());
+		enableCruiseTab( RulesManager.getInstance().isCruiseEnabled());
 
 		tabStation = new TabItem(tabFolder, SWT.NONE);
 		tabStation.setText(Messages.onglet_station);
@@ -274,7 +273,7 @@ public class ViewMain extends ViewPart
 
 	public void init()
 	{
-		Nemo.getInstance().getViewMain().getMyRulesManager().init();
+		 RulesManager.getInstance().init();
 		// reinitialisation de la conversion
 		Nemo.getInstance().resetModel();
 
@@ -395,9 +394,6 @@ public class ViewMain extends ViewPart
 		return myFilteredTableFactory;
 	}
 
-	public RulesManager getMyRulesManager()
-	{
-		return myRulesManager;
-	}
+	
 
 }

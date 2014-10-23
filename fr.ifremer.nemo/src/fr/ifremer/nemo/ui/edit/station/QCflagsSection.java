@@ -35,9 +35,9 @@ import fr.ifremer.nemo.config.Flag;
 import fr.ifremer.nemo.config.FlagTable;
 import fr.ifremer.nemo.input.Fragment;
 import fr.ifremer.nemo.input.StationModel;
+import fr.ifremer.nemo.ui.RulesManager;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.NemoSection;
-import fr.ifremer.nemo.ui.view.ViewMain;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
@@ -326,8 +326,7 @@ public class QCflagsSection extends NemoSection
 
         MenuItem itemTestFlag = new MenuItem(menuFlag, SWT.NONE);
         itemTestFlag.setText(Messages.label_test);
-
-        if (Nemo.getInstance().getViewMain().getMyRulesManager().isProfile())
+        if ( RulesManager.getInstance().isProfile())
         {
             final FlagMenuItem childDateTime =
                 new FlagMenuItem(subFlag, tabFlagQC, Intern.DATETIME, Messages

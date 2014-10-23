@@ -7,6 +7,8 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
 import fr.ifremer.nemo.Nemo;
@@ -80,7 +82,7 @@ public class EditStationForm extends EditForm {
 			createButtonExpand();
 
 			// TODO BGT tjs utile 6536?
-			if (Nemo.getInstance().getViewMain().getMyRulesManager().isProcessCollection()) {
+			if (RulesManager.getInstance().isProcessCollection()) {
 				TableDataSurvey.initTypes();
 			}
 
@@ -123,7 +125,7 @@ public class EditStationForm extends EditForm {
 		drawSections();
 
 		// FAE 3749
-		if (!Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToNetCDF()) {
+		if (!RulesManager.getInstance().isConversionToNetCDF()) {
 			Text textCommentaire = comments.getManualInput().getLines().get(0).getValueText();
 			GridDataFactory.fillDefaults().grab(true, true).hint(Global.SIZE_SECTION, SWT.DEFAULT).minSize(Global.SIZE_SECTION, 200)
 			.applyTo(textCommentaire);
@@ -143,7 +145,7 @@ public class EditStationForm extends EditForm {
 
 	@Override
 	protected void initSections() {
-		RulesManager rulesManager = Nemo.getInstance().getViewMain().getMyRulesManager();
+		RulesManager rulesManager = RulesManager.getInstance();
 		/**
 		 * ==============================================================================================
 		 * station number
@@ -424,7 +426,7 @@ public class EditStationForm extends EditForm {
 	
 	@Override
 	public void actualiseEdition() {
-		RulesManager rulesManager = Nemo.getInstance().getViewMain().getMyRulesManager();
+		RulesManager rulesManager = RulesManager.getInstance();
 		// pour trajectoires et time-series
 		if (rulesManager.isTrajectory() || rulesManager.isTimeSeries()) {
 			// si Date est saisie dans les données
@@ -603,4 +605,5 @@ public class EditStationForm extends EditForm {
 	public void setTextAreaStation(StyledText textAreaStation) {
 		this.textAreaStation = textAreaStation;
 	}
+
 }

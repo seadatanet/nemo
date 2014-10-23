@@ -39,7 +39,7 @@ public class OutputFormatRadioSelectionListener implements SelectionListener
     public void widgetSelected(SelectionEvent g)
     {
 
-        RulesManager rulesMgr = Nemo.getInstance().getViewMain().getMyRulesManager();
+        RulesManager rulesMgr = RulesManager.getInstance();
         E_TypeConversion currentConv =E_TypeConversion.UNKNOWN;
 
         if (g.getSource().equals(myEditFileForm.getRadMedatlas()))

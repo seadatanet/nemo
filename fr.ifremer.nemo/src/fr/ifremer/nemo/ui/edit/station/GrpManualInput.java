@@ -20,7 +20,6 @@ import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.ui.edit.ComboType;
 import fr.ifremer.nemo.ui.edit.Couple;
 import fr.ifremer.nemo.ui.edit.UIobject;
-import fr.ifremer.nemo.ui.view.ViewMain;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 

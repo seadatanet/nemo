@@ -18,6 +18,7 @@ import fr.ifremer.nemo.ui.edit.EditForm;
 import fr.ifremer.nemo.ui.edit.NemoSection;
 import fr.ifremer.sismer_tools.seadatanet.SDNXLinkException;
 import fr.ifremer.sismer_tools.seadatanet.SdnXLinkReference;
+import fr.ifremer.sismer_tools.seadatanet.SdnXLinkReference.SDN_REFERENCE_ROLE;
 
 public class SdnReferenceSection extends NemoSection {
 	private Group manualReferences ;
@@ -44,13 +45,13 @@ public class SdnReferenceSection extends NemoSection {
 		AddReferenceListener addReferenceListener = new AddReferenceListener();
 		addReference.addListener(SWT.Selection, addReferenceListener);
 
-		table = new SdnReferencesTableEditor(manualReferences);
-
-
 		Button deleteReferences = new Button(manualReferences, SWT.PUSH);
 		deleteReferences.setText("delete selected references");// TODO msg
 		DeleteReferenceListener deleteReferenceListener = new DeleteReferenceListener();
 		deleteReferences.addListener(SWT.Selection, deleteReferenceListener);
+		
+		table = new SdnReferencesTableEditor(manualReferences);
+		
 
 
 	}
@@ -85,8 +86,8 @@ public class SdnReferenceSection extends NemoSection {
 				if (type !=null && !type.isEmpty()){
 					ref.setType( SdnXLinkReference.SDN_L23_PREFIX +type);
 				}
-
-				ref.setRole((String)item.getData(SdnReferencesTableEditor.DATA_KEY.ROLE.toString()));
+				SdnXLinkReference.SDN_REFERENCE_ROLE role = (SDN_REFERENCE_ROLE) item.getData(SdnReferencesTableEditor.DATA_KEY.ROLE.toString());
+				ref.setRole(role);
 
 				ref.setHref((String)item.getData(SdnReferencesTableEditor.DATA_KEY.HREF.toString()));
 

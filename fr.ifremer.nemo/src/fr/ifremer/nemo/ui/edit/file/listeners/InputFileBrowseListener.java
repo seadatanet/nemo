@@ -19,6 +19,7 @@ import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Shell;
 
 import fr.ifremer.nemo.Nemo;
+import fr.ifremer.nemo.ui.RulesManager;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.file.EditFileForm;
 import fr.ifremer.nemo.ui.view.ViewLog;
@@ -55,8 +56,8 @@ public class InputFileBrowseListener extends SelectionAdapter
 		// boolean ti indicate if a file or directory has been choosen (false if
 		// user clicked on Cancel)
 		boolean fileChoosen = false;
-		E_ProcessType currentProcessType = Nemo.getInstance().getViewMain()
-				.getMyRulesManager().getMyProcessType();
+		E_ProcessType currentProcessType = RulesManager.getInstance()
+				.getMyProcessType();
 
 		Preformat.setPreformat(false);
 
@@ -78,7 +79,7 @@ public class InputFileBrowseListener extends SelectionAdapter
 			myEditFileForm.nomRepertoireOrigin = myEditFileForm.nomRepertoire;
 			myEditFileForm.nomFichierOrigin = myEditFileForm.nomFichier;
 			// reinitialisation de la conversion et de l'affichage
-			Nemo.getInstance().getViewMain().getMyRulesManager()
+			RulesManager.getInstance()
 					.updateFromBrowse();
 			Nemo.getInstance().getViewMain().getEditConversionForm()
 					.fillSummary();

@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import fr.ifremer.nemo.Nemo;
+import fr.ifremer.nemo.ui.RulesManager;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.FormValidator;
 import fr.ifremer.nemo.ui.edit.conversion.EditConversionForm;
@@ -145,7 +146,7 @@ public class CruiseFormValidator extends FormValidator {
 		// MEDATLAS
 		editConversionForm.setWarningCampagne(Global.EMPTY_STRING);
 		String value = editCruiseForm.sectionReference.getItem(Messages.edit_cruise_cruiseRef).getText().trim();
-		if (value.length() != 13 && (Nemo.getInstance().getViewMain().getMyRulesManager().getMyConversionType() == E_TypeConversion.MEDATLAS)) {
+		if (value.length() != 13 && (RulesManager.getInstance().getMyConversionType() == E_TypeConversion.MEDATLAS)) {
 			editConversionForm.setWarningCampagne(Messages.ViewLog_5);
 		} else {
 			editConversionForm.setWarningStation(Global.EMPTY_STRING);

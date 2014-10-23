@@ -10,7 +10,6 @@ package fr.ifremer.nemo.ui.edit.file.listeners;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 
-import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.ui.RulesManager;
 import fr.ifremer.nemo.ui.edit.file.EditFileForm;
 import fr.ifremer.nemo.util.Global.E_InputType;
@@ -37,7 +36,7 @@ public class FileTypeSelectionListener  implements SelectionListener
     
     public void widgetSelected( SelectionEvent e)
     {
-        RulesManager rulesMgr = Nemo.getInstance().getViewMain().getMyRulesManager();
+        RulesManager rulesMgr = RulesManager.getInstance();
 
         E_InputType currentFileType = E_InputType.PROFILE ;
         if (e.getSource().equals(myEditFileForm.getRadProfilVertical()))

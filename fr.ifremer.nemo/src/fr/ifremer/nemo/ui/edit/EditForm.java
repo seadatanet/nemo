@@ -15,271 +15,270 @@ import fr.ifremer.nemo.util.Messages;
 
 public abstract class EditForm
 {
-    public ScrolledForm formEdition;
-    protected FormToolkit toolkitEdition;
+	public ScrolledForm formEdition;
+	protected FormToolkit toolkitEdition;
 
-    private boolean loaded;
+	private boolean loaded;
 
-    protected Button buttonValidate, buttonRAZ, buttonExpand;
+	protected Button buttonValidate, buttonRAZ, buttonExpand;
 
-    private Boolean okApresReset;
-    private boolean validated;
-    public boolean expand;
-    public boolean filled;
+	private Boolean okApresReset;
+	private boolean validated;
+	public boolean expand;
+	public boolean filled;
+//	protected Color bg = null ;
+	protected boolean visible;
 
-    protected boolean visible;
+	protected ArrayList<NemoSection> listeSections;
 
-    protected ArrayList<NemoSection> listeSections;
 
-  
 
 	protected FormValidator myValidator;
 
-    /**
-     * Constructor
-     * 
-     * @param viewMain
-     */
-    public EditForm()
-    {
-    }
+	/**
+	 * Constructor
+	 * 
+	 * @param viewMain
+	 */
+	public EditForm()
+	{
+		
+	}
 
-    public void createEditionForm(Composite parent)
-    {
-        listeSections = new ArrayList<NemoSection>();
+	public void createEditionForm(Composite parent)
+	{
+		listeSections = new ArrayList<NemoSection>();
 
-        validated = false;
-        loaded = false;
+		validated = false;
+		loaded = false;
 
-        toolkitEdition = new FormToolkit(parent.getDisplay());
-        formEdition = toolkitEdition.createScrolledForm(parent);
-        formEdition.setVisible(false);
-    }
+		toolkitEdition = new FormToolkit(parent.getDisplay());
+		formEdition = toolkitEdition.createScrolledForm(parent);
+		formEdition.setVisible(false);
+	}
 
-    public void afficheEdition()
-    {
-        // raz message erreur
-        Utils.messageErreur(Global.EMPTY_STRING);
+	public void afficheEdition()
+	{
+		// raz message erreur
+		Utils.messageErreur(Global.EMPTY_STRING);
 
-        // de base les sections sont refermees
-        // FAE 11977 test
-        // if (!listeSections.isEmpty())
-        // {
-        // expand = true;
-        // expandSections();
-        // }
+		// de base les sections sont refermees
+		// FAE 11977 test
+		// if (!listeSections.isEmpty())
+		// {
+		// expand = true;
+		// expandSections();
+		// }
 
-        okApresReset = true;
-        filled = false;
+		okApresReset = true;
+		filled = false;
 
-        // rendre le formulaire visible
-        formEdition.setVisible(true);
-    }
+		// rendre le formulaire visible
+		formEdition.setVisible(true);
+	}
 
-    public void razEdition()
-    {
-        formEdition.setVisible(false);
-    }
+	public void razEdition()
+	{
+		formEdition.setVisible(false);
+	}
 
-    public void drawingBack()
-    {
-        // raz message erreur
-        Utils.messageErreur(Global.EMPTY_STRING);
-        
-        // FAE 11977
-        //if (!listeSections.isEmpty())
-        //{
-        //    expand = true;
-        //    expandSections();
-        //}
+	public void drawingBack()
+	{
+		// raz message erreur
+		Utils.messageErreur(Global.EMPTY_STRING);
 
-        // refresh global
-        formEdition.reflow(true);
-        formEdition.setVisible(true);
-    }
+		// FAE 11977
+		//if (!listeSections.isEmpty())
+		//{
+		//    expand = true;
+		//    expandSections();
+		//}
 
-    public void expandSections()
-    {
-        for (NemoSection section : listeSections)
-        {
-            if (!expand && section.isEnabled())
-            {
-                section.setExpanded(true);
-            }
-            else
-            {
-                section.setExpanded(false);
-            }
-        }
+		// refresh global
+		formEdition.reflow(true);
+		formEdition.setVisible(true);
+	}
 
-        if (!expand)
-        {
-            expand = true;
-            buttonExpand.setText(Global.MOINS);
-        }
-        else
-        {
-            expand = false;
-            buttonExpand.setText(Global.PLUS);
-        }
+	public void expandSections()
+	{
+		for (NemoSection section : listeSections)
+		{
+			if (!expand && section.isEnabled())
+			{
+				section.setExpanded(true);
+			}
+			else
+			{
+				section.setExpanded(false);
+			}
+		}
 
-        // refresh global
-        formEdition.reflow(true);
-    }
+		if (!expand)
+		{
+			expand = true;
+			buttonExpand.setText(Global.MOINS);
+		}
+		else
+		{
+			expand = false;
+			buttonExpand.setText(Global.PLUS);
+		}
 
-    protected abstract void initSections();
+		// refresh global
+		formEdition.reflow(true);
+	}
 
-    protected void createButtonValidate()
-    {
-        buttonValidate = new Button(formEdition.getBody(), SWT.NONE);
-        buttonValidate.setBackground(Nemo.getInstance().getViewMain()
-            .getBackgroundEdit());
-        buttonValidate.setText(Messages.button_validateStep);
-    }
+	protected abstract void initSections();
 
-    protected void createButtonRaz()
-    {
-        buttonRAZ = new Button(formEdition.getBody(), SWT.NONE);
-        buttonRAZ.setBackground(Nemo.getInstance().getViewMain()
-            .getBackgroundEdit());
-        buttonRAZ.setText(Messages.button_reset);
-        buttonRAZ
-            .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
-                @Override
-                public void widgetSelected(
-                            org.eclipse.swt.events.SelectionEvent e)
-                {
-                    razText();
-                    // invalidation de l'étape en cours et des suivantes
-                    Utils.invalidEtapes();
-                    // Suppression message erreur FAE 3752
-                    Utils.messageErreur("");
-                }
-            });
-    }
+	protected void createButtonValidate()
+	{
+		buttonValidate = new Button(formEdition.getBody(), SWT.NONE);
+		buttonValidate.setBackground(Nemo.getInstance().getViewMain().getBackgroundEdit());
+		buttonValidate.setText(Messages.button_validateStep);
+	}
 
-    protected void createButtonExpand()
-    {
-        buttonExpand = new Button(formEdition.getBody(), SWT.NONE);
-        buttonExpand.setBackground(Nemo.getInstance().getViewMain()
-            .getBackgroundEdit());
-        buttonExpand.setText(Global.PLUS);
-        buttonExpand
-            .addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
-                @Override
-                public void widgetSelected(
-                            org.eclipse.swt.events.SelectionEvent e)
-                {
-                    expandSections();
-                }
-            });
-    }
+	protected void createButtonRaz()
+	{
+		buttonRAZ = new Button(formEdition.getBody(), SWT.NONE);
 
-    protected void drawSections()
-    {
-        for (NemoSection section : listeSections)
-        {
-            section.draw(toolkitEdition, formEdition, filled);
-        }
-    }
+		buttonRAZ.setBackground( Nemo.getInstance().getViewMain().getBackgroundEdit());
+		buttonRAZ.setText(Messages.button_reset);
+		buttonRAZ
+		.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+			@Override
+			public void widgetSelected(
+					org.eclipse.swt.events.SelectionEvent e)
+			{
+				razText();
+				// invalidation de l'étape en cours et des suivantes
+				Utils.invalidEtapes();
+				// Suppression message erreur FAE 3752
+				Utils.messageErreur("");
+			}
+		});
+	}
 
-    public void razText()
-    {
-        for (NemoSection section : listeSections)
-        {
-            section.razValues();
-        }
-    }
+	protected void createButtonExpand()
+	{
+		buttonExpand = new Button(formEdition.getBody(), SWT.NONE);
+		buttonExpand.setBackground( Nemo.getInstance().getViewMain().getBackgroundEdit());
+		buttonExpand.setText(Global.PLUS);
+		buttonExpand
+		.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+			@Override
+			public void widgetSelected(
+					org.eclipse.swt.events.SelectionEvent e)
+			{
+				expandSections();
+			}
+		});
+	}
 
-    protected void disposeElements()
-    {
-        if (listeSections != null)
-        {
-            for (NemoSection section : listeSections)
-            {
-                section.dispose();
-            }
-        }
-        if (buttonRAZ != null)
-            buttonRAZ.dispose();
-        if (buttonExpand != null)
-            buttonExpand.dispose();
-        if (buttonValidate != null)
-            buttonValidate.dispose();
-    }
+	protected void drawSections()
+	{
+		for (NemoSection section : listeSections)
+		{
+			section.draw(toolkitEdition, formEdition, filled);
+		}
+	}
 
-    public abstract void actualiseEdition();
+	public void razText()
+	{
+		for (NemoSection section : listeSections)
+		{
+			section.razValues();
+		}
+	}
 
-    public void invalidEtape(int current)
-    {
-        okApresReset = false;
-        validated = false;
+	protected void disposeElements()
+	{
+		if (listeSections != null)
+		{
+			for (NemoSection section : listeSections)
+			{
+				section.dispose();
+			}
+		}
+		if (buttonRAZ != null)
+			buttonRAZ.dispose();
+		if (buttonExpand != null)
+			buttonExpand.dispose();
+		if (buttonValidate != null)
+			buttonValidate.dispose();
+	}
 
-        if (Nemo.getInstance().getViewMain().getAffiche() != current && loaded)
-        {
-            loaded = false;
-            razEdition();
-            // disposeElements();
-        }
-    }
+	public abstract void actualiseEdition();
 
-    /**
-     * remplissage de l'ihm avec les valeurs du modèle courant
-     */
-    public abstract void fillFromModel();
+	public void invalidEtape(int current)
+	{
+		okApresReset = false;
+		validated = false;
 
-    /**
-     * cette methode consiste à recréer un nouveau modele qu'on remplit avec
-     * les valeurs recupérées dans l'IHM
-     */
-    public abstract void initFromNewModel();
+		if (Nemo.getInstance().getViewMain().getAffiche() != current && loaded)
+		{
+			loaded = false;
+			razEdition();
+			// disposeElements();
+		}
+	}
 
-    public boolean isLoaded()
-    {
-        return loaded;
-    }
+	/**
+	 * remplissage de l'ihm avec les valeurs du modèle courant
+	 */
+	 public abstract void fillFromModel();
 
-    protected void setLoaded(boolean loaded)
-    {
-        this.loaded = loaded;
-    }
+	/**
+	 * cette methode consiste à recréer un nouveau modele qu'on remplit avec
+	 * les valeurs recupérées dans l'IHM
+	 */
+	 public abstract void initFromNewModel();
 
-    public Boolean isOkApresReset()
-    {
-        return okApresReset;
-    }
+	 public boolean isLoaded()
+	 {
+		 return loaded;
+	 }
 
-    public void setOkApresReset(Boolean okApresReset)
-    {
-        this.okApresReset = okApresReset;
-    }
+	 protected void setLoaded(boolean loaded)
+	 {
+		 this.loaded = loaded;
+	 }
 
-    public boolean isValidated()
-    {
-        return validated;
-    }
+	 public Boolean isOkApresReset()
+	 {
+		 return okApresReset;
+	 }
 
-    public void setValidated(boolean validated)
-    {
-        this.validated = validated;
-    }
+	 public void setOkApresReset(Boolean okApresReset)
+	 {
+		 this.okApresReset = okApresReset;
+	 }
 
-    public boolean isVisible()
-    {
-        return visible;
-    }
+	 public boolean isValidated()
+	 {
+		 return validated;
+	 }
 
-    public void setVisible(boolean visible)
-    {
-        this.visible = visible;
-    }
+	 public void setValidated(boolean validated)
+	 {
+		 this.validated = validated;
+	 }
 
-    public void validate()
-    {
-        myValidator.validate();
-    }
-    public ArrayList<NemoSection> getListeSections() {
-  		return listeSections;
-  	}
+	 public boolean isVisible()
+	 {
+		 return visible;
+	 }
+
+	 public void setVisible(boolean visible)
+	 {
+		 this.visible = visible;
+	 }
+
+	 public void validate()
+	 {
+		 myValidator.validate();
+	 }
+	 public ArrayList<NemoSection> getListeSections() {
+		 return listeSections;
+	 }
 
 }

@@ -5,17 +5,10 @@ import org.eclipse.swt.custom.CCombo;
 import org.eclipse.swt.custom.TableEditor;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
-import org.eclipse.swt.events.MouseAdapter;
-import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.graphics.Point;
-import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Control;
-import org.eclipse.swt.widgets.Item;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
@@ -41,8 +34,7 @@ public class SdnReferencesTableEditor {
 
 
 	private final Composite parent;
-
-
+	public enum EDITOR_KEY {COMBO_TYPE_EDITOR, COMBO_ROLE_EDITOR, TEXT_HREF_EDITOR};
 	// table columns keys (to store itam data)
 	public enum DATA_KEY {TYPE, ROLE, HREF};
 
@@ -62,16 +54,14 @@ public class SdnReferencesTableEditor {
 	private void createContents() {
 
 		// Create the table
-		table = new Table(parent, SWT.SINGLE | SWT.FULL_SELECTION
-				| SWT.HIDE_SELECTION |SWT.CHECK);
-		table.setLayoutData(
-				new GridData(SWT.FILL, SWT.FILL, true, true));
+		table = new Table(parent, SWT.VIRTUAL | SWT.CHECK |SWT.BORDER|SWT.SINGLE | SWT.FULL_SELECTION| SWT.HIDE_SELECTION );
+		GridData gridData = new GridData(SWT.FILL, SWT.FILL, true, true);
+		gridData.minimumHeight = 500;
+		table.setLayoutData(gridData);
 		table.setHeaderVisible(true);
 		table.setLinesVisible(true);
-
 		// Create columns
 		TableColumn columnSelect = new TableColumn(table, SWT.CENTER);
-		//		columnSelect.setText("select");
 		columnSelect.pack();
 
 		TableColumn columnType = new TableColumn(table, SWT.CENTER);
@@ -87,166 +77,143 @@ public class SdnReferencesTableEditor {
 		columnHref.pack();
 
 
-		// create default NUM rows (empty)
-		//		for (int i = 0; i < NUM; i++) {
-		//			// Create the row
-		//			final TableItem item = new TableItem(table, SWT.NONE);
-		//
-		//		}
 
-		// Create an editor object to use for text editing
-		final TableEditor editor = new TableEditor(table);
-		editor.horizontalAlignment = SWT.LEFT;
+
+	}
+
+
+	public void addRow() {
+		addRow(null);
+
+	}
+	public void addRow(SdnXLinkReference reference) {
+
+
+
+		final TableItem item = new TableItem(table, SWT.NONE);
+
+		TableEditor editor = new TableEditor(table);
 		editor.grabHorizontal = true;
-
-		// Use a mouse listener, not a selection listener, since we're interested
-		// in the selected column as well as row
-		table.addMouseListener(new MouseAdapter() {
-
+		final CCombo comboType = getComboType();
+		editor.setEditor(comboType, item, 1);
+		item.setData(EDITOR_KEY.COMBO_TYPE_EDITOR.toString(), editor); 
+		if (reference !=null && reference.getType() != null){
+			comboType.setText(reference.getType());
+			item.setData(DATA_KEY.TYPE.toString(), reference.getType());
+		}
+			
+		editor.minimumWidth = comboType.computeSize(SWT.DEFAULT, SWT.DEFAULT).x;
+		comboType.addSelectionListener(new SelectionAdapter() {
 			@Override
-			public void mouseDown(MouseEvent event) {
-				// Dispose any existing editor
-				Control old = editor.getEditor();
-				if (old != null) old.dispose();
+			public void widgetSelected(SelectionEvent event) {
+				//				item.setText(col, comboType.getText());
+				item.setData(DATA_KEY.TYPE.toString(),comboType.getText());
 
-				// Determine where the mouse was clicked
-				Point pt = new Point(event.x, event.y);
+				// They selected an item; end the editing session
+				//				comboType.dispose();
 
-				// Determine which row was selected
-				final TableItem item = table.getItem(pt);
-
-				if (item != null) {
-					// Determine which column was selected
-					int column = -1;
-					for (int i = 0, n = table.getColumnCount(); i < n; i++) {
-						Rectangle rect = item.getBounds(i);
-						if (rect.contains(pt)) {
-							// This is the selected column
-							column = i;
-							break;
-						}
-					}
-
-					// Column 0 holds selection checkboxes
-					if (column == 0) {
-						final Button check = new Button(table, SWT.CHECK);
-						check.setEnabled(true);
-						// Set the control into the editor
-						editor.setEditor(check, item, column);
-
-					}
-					// col 1: TYPE
-					else if (column == 1) {
-						// Create the dropdown and add data to it
-						final CCombo combo = new CCombo(table, SWT.READ_ONLY);
-						for (IElement element :l23List.getElements()){
-							combo.add(element.getKey());
-						}
-						// Select the previously selected item from the cell
-						combo.select(combo.indexOf(item.getText(column)));
-
-						// Compute the width for the editor
-						// Also, compute the column width, so that the dropdown fits
-						editor.minimumWidth = combo.computeSize(SWT.DEFAULT, SWT.DEFAULT).x;
-						table.getColumn(column).setWidth(editor.minimumWidth);
-
-						// Set the focus on the dropdown and set into the editor
-						combo.setFocus();
-						editor.setEditor(combo, item, column);
-
-						// Add a listener to set the selected item back into the cell
-						final int col = column;
-						combo.addSelectionListener(new SelectionAdapter() {
-							@Override
-							public void widgetSelected(SelectionEvent event) {
-								item.setText(col, combo.getText());
-								item.setData(DATA_KEY.TYPE.toString(),combo.getText());
-
-								// They selected an item; end the editing session
-								combo.dispose();
-
-							}
-						});
-						// col 2: ROLE
-					} else if (column == 2){
-						// Create the dropdown and add data to it
-						final CCombo combo = new CCombo(table, SWT.READ_ONLY);
-						for (int i = 0, n = optionsRole.length; i < n; i++) {
-							combo.add(optionsRole[i]);
-						}
-
-						// Select the previously selected item from the cell
-						combo.select(combo.indexOf(item.getText(column)));
-
-						// Compute the width for the editor
-						// Also, compute the column width, so that the dropdown fits
-						editor.minimumWidth = combo.computeSize(SWT.DEFAULT, SWT.DEFAULT).x;
-						//						table.getColumn(column).setWidth(editor.minimumWidth);
-
-
-						// Set the focus on the dropdown and set into the editor
-						combo.setFocus();
-						editor.setEditor(combo, item, column);
-
-						// Add a listener to set the selected item back into the cell
-						final int col = column;
-						combo.addSelectionListener(new SelectionAdapter() {
-							@Override
-							public void widgetSelected(SelectionEvent event) {
-								item.setText(col, combo.getText());
-								item.setData(DATA_KEY.ROLE.toString(),combo.getText());
-								// They selected an item; end the editing session
-								combo.dispose();
-							}
-						});
-						// col 3: Href
-					}else if (column ==3) {
-
-						// Create the Text object for our editor
-						final Text text = new Text(table, SWT.NONE);
-						text.setForeground(item.getForeground());
-
-						// Transfer any text from the cell to the Text control,
-						// set the color to match this row, select the text,
-						// and set focus to the control
-						text.setText(item.getText(column));
-						text.setForeground(item.getForeground());
-						text.selectAll();
-						text.setFocus();
-
-						// Recalculate the minimum width for the editor
-						editor.minimumWidth = text.getBounds().width;
-
-						// Set the control into the editor
-						editor.setEditor(text, item, column);
-
-						// Add a handler to transfer the text back to the cell
-						// any time it's modified
-						final int col = column;
-						text.addModifyListener(new ModifyListener() {
-							public void modifyText(ModifyEvent event) {
-								// Set the text of the editor's control back into the cell
-								item.setText(col, text.getText());
-								item.setData(DATA_KEY.HREF.toString(),text.getText());
-							}
-						});
-					}
-				}
 			}
 		});
+
+
+		editor = new TableEditor(table);
+		editor.grabHorizontal = true;
+		final CCombo comboRole = getComboRole();
+		editor.setEditor(comboRole, item, 2);
+		item.setData(EDITOR_KEY.COMBO_ROLE_EDITOR.toString(), editor); 
+		if (reference !=null && reference.getType() != null){
+			comboRole.setText(reference.getRole().toString());
+			item.setData(DATA_KEY.ROLE.toString(), reference.getRole());
+		}
+		
+		editor.minimumWidth = comboRole.computeSize(SWT.DEFAULT, SWT.DEFAULT).x;
+		comboRole.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent event) {
+				//				item.setText(col, combo.getText());
+				item.setData(DATA_KEY.ROLE.toString(),comboRole.getText());
+				// They selected an item; end the editing session
+				//				combo.dispose();
+			}
+		});
+
+		editor = new TableEditor(table);
+		final Text text = new Text(table, SWT.NONE);
+		editor.grabHorizontal = true;
+		editor.setEditor(text, item, 3);
+		item.setData(EDITOR_KEY.TEXT_HREF_EDITOR.toString(), editor); 
+		if (reference != null && reference.getHref()!=null ){
+			text.setText( reference.getHref());
+			item.setData(DATA_KEY.HREF.toString(), reference.getHref().toString());
+		}
+		
+		text.addModifyListener(new ModifyListener() {
+			public void modifyText(ModifyEvent event) {
+				// Set the text of the editor's control back into the cell
+				//				item.setText(col, text.getText());
+				item.setData(DATA_KEY.HREF.toString(),text.getText());
+			}
+		});
+
+//		if (reference != null){
+//			if (reference.getType() != null){
+//				item.setText(1, reference.getType());
+//				item.setData(DATA_KEY.ROLE.toString(), reference.getType());
+//			}
+//			if (reference.getRole() != null){
+//				item.setText(2,reference.getRole().toString());
+//				item.setData(DATA_KEY.ROLE.toString(), reference.getRole().toString());
+//			}
+//			item.setText(3, reference.getHref());
+//			item.setData(DATA_KEY.HREF.toString(), reference.getHref().toString());
+//		}
+
+		table.getColumn(0).setWidth(30);
+		table.getColumn(1).setWidth(comboType.computeSize(SWT.DEFAULT, SWT.DEFAULT).x);
+		table.getColumn(2).setWidth(comboRole.computeSize(SWT.DEFAULT, SWT.DEFAULT).x);
+
 	}
 
-	public void addRow()
-	{
-		final TableItem item = new TableItem(table, SWT.NONE);
+	private CCombo getComboType() {
+		CCombo comboType = new CCombo(table, SWT.READ_ONLY);
+		comboType.add("");
+		for (IElement element :l23List.getElements()){
+			comboType.add(element.getKey());
+		}
+		return comboType;
+
 	}
+
+	private CCombo getComboRole()
+	{
+		final CCombo combo = new CCombo(table, SWT.READ_ONLY);
+		combo.add("");
+		for (int i = 0, n = optionsRole.length; i < n; i++) {
+			combo.add(optionsRole[i]);
+		}
+		return combo;
+	}
+
 
 
 	public void deleteSelectedRows() {
-//		debug
-//		for (Item item : table.getSelection()){
-//			System.out.println(item.getData(DATA_KEY.TYPE.toString()));
-//		}
+		//		debug
+		TableItem[] items = table.getItems();
+		for (TableItem item : items) {
+			if(item.getChecked()){  
+				TableEditor editor = (TableEditor) item.getData(EDITOR_KEY.COMBO_TYPE_EDITOR.toString());
+				editor.getEditor().dispose();
+				editor.dispose();
+				editor = (TableEditor) item.getData(EDITOR_KEY.COMBO_ROLE_EDITOR.toString());
+				editor.getEditor().dispose();
+				editor.dispose();
+				editor = (TableEditor) item.getData(EDITOR_KEY.TEXT_HREF_EDITOR.toString());
+				editor.getEditor().dispose();
+				editor.dispose();
+				table.remove(table.indexOf(item));
+				parent.pack();
+			}
+		}         
 		table.remove(table.getSelectionIndices());
 
 	}
@@ -260,19 +227,12 @@ public class SdnReferencesTableEditor {
 	public void fillFromModel(StationModel stationModel)
 	{
 		if ( stationModel.getSdnXLinkReferences() != null){
-			for (SdnXLinkReference ref : stationModel.getSdnXLinkReferences()){
-				TableItem item = new TableItem(table, SWT.NULL);
-				if (ref.getType() != null){
-					item.setText(1, ref.getType());
-					item.setData(DATA_KEY.ROLE.toString(), ref.getType());
-				}
-				if (ref.getRole() != null){
-					item.setText(2,ref.getRole().toString());
-					item.setData(DATA_KEY.ROLE.toString(), ref.getRole().toString());
-				}
-				item.setText(3, ref.getHref());
-				item.setData(DATA_KEY.HREF.toString(), ref.getHref().toString());
+			for (SdnXLinkReference reference : stationModel.getSdnXLinkReferences()){
+
+				addRow(reference);
 			}
+		}else{
+			addRow();
 		}
 	}
 

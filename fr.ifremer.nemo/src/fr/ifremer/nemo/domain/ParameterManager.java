@@ -36,6 +36,7 @@ import fr.ifremer.nemo.input.parameters.addedParameters.AP_TIME;
 import fr.ifremer.nemo.input.parameters.addedParameters.AP_YEAR;
 import fr.ifremer.nemo.input.parameters.addedParameters.AddedParam;
 import fr.ifremer.nemo.input.parameters.addedParameters.AddedParam.IdParameter;
+import fr.ifremer.nemo.ui.RulesManager;
 import fr.ifremer.nemo.ui.edit.data.TypeData;
 import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Global;
@@ -92,7 +93,7 @@ public class ParameterManager {
 		if (Nemo.getInstance().isBatchMode()) {
 			dataListType = Nemo.getInstance().getDomain().getData().getModel().getDataListType();
 		} else {
-			dataListType = Nemo.getInstance().getViewMain().getMyRulesManager().getMyDataListType();
+			dataListType = RulesManager.getInstance().getMyDataListType();
 		}
 		return dataListType;
 	}

@@ -17,9 +17,9 @@ import org.eclipse.swt.custom.CCombo;
 import org.eclipse.swt.widgets.Composite;
 
 import sdn.vocabulary.interfaces.IElement;
-import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.config.NemoLists;
 import fr.ifremer.nemo.config.VocabLists;
+import fr.ifremer.nemo.ui.RulesManager;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.cruise.TableDataSurvey;
 import fr.ifremer.nemo.util.Global;
@@ -120,7 +120,7 @@ public enum ComboType {
 			break;
 		case DATATYPE:
 			// FAE022
-			if (!Nemo.getInstance().getViewMain().getMyRulesManager().isProcessCollection()
+			if (! RulesManager.getInstance().isProcessCollection()
 							&& TableDataSurvey.types != null) {
 				int taille = TableDataSurvey.types.size();
 				for (int i = 0; i < taille; i++) {

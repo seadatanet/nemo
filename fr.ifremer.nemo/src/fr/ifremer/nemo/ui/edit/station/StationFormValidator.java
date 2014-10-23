@@ -41,7 +41,7 @@ public class StationFormValidator extends FormValidator {
 			EditStationForm editStationForm = Nemo.getInstance().getViewMain().getEditStationForm();
 			EditFileForm editFileForm = Nemo.getInstance().getViewMain().getEditFileForm();
 			EditConversionForm editConversionForm = Nemo.getInstance().getViewMain().getEditConversionForm();
-			RulesManager rulesManager = Nemo.getInstance().getViewMain().getMyRulesManager();
+			RulesManager rulesManager =  RulesManager.getInstance();
 
 			// test des valeurs de Station
 
@@ -85,7 +85,7 @@ public class StationFormValidator extends FormValidator {
 
 			} else {
 				value = editStationForm.stationNumber.getManualValue();
-				if (Nemo.getInstance().getViewMain().getMyRulesManager().isTrajectory()) {
+				if ( RulesManager.getInstance().isTrajectory()) {
 					// saisie manuelle - obligatoire
 					if (value.trim().equals("") || value.equals("NaN")) { //$NON-NLS-1$ //$NON-NLS-2$
 						ok = ok && false;
@@ -111,7 +111,7 @@ public class StationFormValidator extends FormValidator {
 			if (value != null) {
 				value = value.trim();
 			}
-			if (!Nemo.getInstance().getViewMain().getMyRulesManager().isProcessCollection() && Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToMedatlas() && value.length() > 5) {
+			if (! RulesManager.getInstance().isProcessCollection() &&  RulesManager.getInstance().isConversionToMedatlas() && value.length() > 5) {
 				editConversionForm
 						.setWarningStation(Messages.ViewLog_6);
 			} else {

@@ -21,6 +21,7 @@ import org.eclipse.ui.forms.widgets.ScrolledForm;
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.domain.ParameterManager;
 import fr.ifremer.nemo.input.parameters.VerticalParametersList;
+import fr.ifremer.nemo.ui.RulesManager;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
@@ -215,7 +216,7 @@ public class GroupVerticalParameters {
 	}
 
 	public void controlNetCDFSelection(Combo current) {
-		if (Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToNetCDF()) {
+		if (RulesManager.getInstance().isConversionToNetCDF()) {
 			if (!current.equals(comboDBSSurf))
 				comboDBSSurf.select(0);
 

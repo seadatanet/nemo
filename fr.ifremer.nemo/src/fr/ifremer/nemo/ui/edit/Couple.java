@@ -43,6 +43,7 @@ public class Couple implements UIobject
 	private CCombo valueCombo;
 	private int textLimit;
 	private boolean isMandatory=false;
+	
 
 
 	public Couple(String groupTitle, String labelText, ComboType type,

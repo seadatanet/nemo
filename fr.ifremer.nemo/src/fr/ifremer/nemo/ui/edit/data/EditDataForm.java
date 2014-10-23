@@ -52,7 +52,7 @@ public class EditDataForm extends EditForm {
 	}
 
 	public void init() {
-		Nemo.getInstance().getViewMain().getMyRulesManager().resetDataForm();
+		RulesManager.getInstance().resetDataForm();
 	}
 
 	@Override
@@ -165,7 +165,7 @@ public class EditDataForm extends EditForm {
 	}
 
 	private void reset() {
-		Nemo.getInstance().getViewMain().getMyRulesManager().resetDataForm();
+		RulesManager.getInstance().resetDataForm();
 		// !!! le fillTypes doit être appelé APRES le removeToAllcombos, car
 		// il
 		// peut ajouter PRES automatiquement
@@ -195,7 +195,7 @@ public class EditDataForm extends EditForm {
 		// update dataList to use
 
 		DataListTypeEnum dataList = Nemo.getInstance().getDomain().getData().getModel().getDataListType();
-		E_TypeConversion conv = Nemo.getInstance().getViewMain().getMyRulesManager().getMyConversionType();
+		E_TypeConversion conv = RulesManager.getInstance().getMyConversionType();
 		if (conv == E_TypeConversion.MEDATLAS && dataList == dataList.P011_VIA_P021) {
 			dataList = DataListTypeEnum.UNKNOWN;
 			Nemo.getInstance().getDomain().getData().getModel().setDataListType(dataList);
@@ -207,7 +207,7 @@ public class EditDataForm extends EditForm {
 
 		}
 
-		Nemo.getInstance().getViewMain().getMyRulesManager().updateFromModel(dataList);
+		RulesManager.getInstance().updateFromModel(dataList);
 		// update mesureType to use
 		E_MesureType mesureType = Nemo.getInstance().getDomain().getData().getModel().getMesureType();
 		if ((conv == E_TypeConversion.MEDATLAS) && mesureType == E_MesureType.ASLVL) {
@@ -215,7 +215,7 @@ public class EditDataForm extends EditForm {
 			Nemo.getInstance().getDomain().getData().getModel().setMesureType(mesureType);
 
 		}
-		Nemo.getInstance().getViewMain().getMyRulesManager().updateFromModel(mesureType);
+		RulesManager.getInstance().updateFromModel(mesureType);
 
 		if (dataList != DataListTypeEnum.UNKNOWN) {
 			// remplissage des parametres mesures APRES le datatype
@@ -228,7 +228,7 @@ public class EditDataForm extends EditForm {
 		// parameters a la table
 		VerticalParametersList verticParams =
 				Nemo.getInstance().getDomain().getData().getModel().getVerticalParametersList();
-		Nemo.getInstance().getViewMain().getMyRulesManager().updateFromModel(verticParams);
+		RulesManager.getInstance().updateFromModel(verticParams);
 		// refresh de la table de l'onglet Data
 		myTableData.razAndRecreateTable();
 	}
@@ -246,7 +246,7 @@ public class EditDataForm extends EditForm {
 	}
 
 	public void selectDataList(DataListTypeEnum theDataList) {
-		RulesManager rulesManager = Nemo.getInstance().getViewMain().getMyRulesManager();
+		RulesManager rulesManager = RulesManager.getInstance();
 		button_P091.setSelection(false);
 		button_P011viaP091.setSelection(false);
 		button_P011viaP021.setSelection(false);
@@ -297,7 +297,7 @@ public class EditDataForm extends EditForm {
 		 * les valeurs recupérées dans l'IHM
 		 */
 
-		RulesManager rulesManager = Nemo.getInstance().getViewMain().getMyRulesManager();
+		RulesManager rulesManager = RulesManager.getInstance();
 		// recuperation du model correspondant
 		fr.ifremer.nemo.input.DataModel dataModel = new fr.ifremer.nemo.input.DataModel();
 		dataModel.setVerticalParametersList(rulesManager.getMyVerticalParametersList());

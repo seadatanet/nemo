@@ -29,6 +29,7 @@ import fr.ifremer.nemo.input.DataType;
 import fr.ifremer.nemo.input.Fragment;
 import fr.ifremer.nemo.input.PropertyModel;
 import fr.ifremer.nemo.input.StationModel;
+import fr.ifremer.nemo.ui.RulesManager;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.ComboType;
 import fr.ifremer.nemo.ui.edit.Couple;
@@ -1368,9 +1369,9 @@ public class StationSection extends NemoSection {
 		CCombo combo = myForm.dataType.getDatatype().getValueCombo();
 
 		Boolean isCruiseEnabled =
-				Nemo.getInstance().getViewMain().getMyRulesManager()
+				 RulesManager.getInstance()
 						.isCruiseEnabled();
-		Boolean isNetCDF = Nemo.getInstance().getViewMain().getMyRulesManager()
+		Boolean isNetCDF =  RulesManager.getInstance()
 				.isConversionToNetCDF();
 		Boolean addOk = true;
 		DataType dataType = station.getDataType();

@@ -133,10 +133,10 @@ public class EditCruiseForm extends EditForm {
 				Utils.messageInfoAppend(Messages.view_file_cruiseDir + editFileForm.nomRepertoire);
 			}
 
-			if (Nemo.getInstance().getViewMain().getMyRulesManager().isTimeSeries()) {
+			if (RulesManager.getInstance().isTimeSeries()) {
 				// Série temporelle
 				Utils.messageInfoAppend(Messages.typeFile_timeseries);
-			} else if (Nemo.getInstance().getViewMain().getMyRulesManager().isTrajectory()) {
+			} else if (RulesManager.getInstance().isTrajectory()) {
 				// Trajectoire
 				Utils.messageInfoAppend(Messages.typeFile_trajectory);
 			}
@@ -207,7 +207,7 @@ public class EditCruiseForm extends EditForm {
 
 	@Override
 	public void actualiseEdition() {
-		RulesManager rulesManager = Nemo.getInstance().getViewMain().getMyRulesManager();
+		RulesManager rulesManager = RulesManager.getInstance();
 		sectionCorrespondingURL.setEnabled(rulesManager.isConversionToNetCDF());
 	}
 
@@ -369,8 +369,9 @@ public class EditCruiseForm extends EditForm {
 		sectionCommentaire.addItem(Global.EMPTY_STRING, ComboType.BLOCK, Global.EMPTY_STRING);
 		listeSections.add(sectionCommentaire);
 
+		// TODO 20755 change labels
 		sectionCorrespondingURL = new CruiseSection(Messages.edit_cruise_sectionCorrespondingUrl, Messages.edit_cruise_sectionCorrespondingUrl, Messages.edit_cruise_sectionCorrespondingUrl_lib, this);
-		sectionCorrespondingURL.addItem(Global.EMPTY_STRING, ComboType.NONE, Global.EMPTY_STRING);
+		sectionCorrespondingURL.addItem(Global.EMPTY_STRING, ComboType.NONE, Global.EMPTY_STRING, true, "auto"); // TODO 20755
 		listeSections.add(sectionCorrespondingURL);
 	}
 

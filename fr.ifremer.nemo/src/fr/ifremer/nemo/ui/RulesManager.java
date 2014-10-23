@@ -40,7 +40,9 @@ public class RulesManager {
 	 */
 	EditFileForm myEditFileForm;
 	EditDataForm myEditDataForm;
-	/**
+	EditCruiseForm myEditCruiseForm ;
+	EditStationForm myEditStationForm;
+	/*
 	 * description des paramètres Input
 	 */
 	private E_ProcessType myProcessType;
@@ -88,20 +90,30 @@ public class RulesManager {
 	public static E_MesureType DEFAULT_MESURETYPE = E_MesureType.BSSURF;
 
 	private String messageLog = Global.EMPTY_STRING;
-
+	private static RulesManager instance;
+	
 	public RulesManager() {
+		if (Nemo.getInstance().getViewMain() != null){
 		myEditFileForm = Nemo.getInstance().getViewMain().getEditFileForm();
 		myEditDataForm = Nemo.getInstance().getViewMain().getEditDataForm();
+		myEditCruiseForm = Nemo.getInstance().getViewMain().getEditCruiseForm();
+		myEditStationForm = Nemo.getInstance().getViewMain().getEditStationForm();
+		
 		setDefaultValues();
+		}
 	}
-
+	public static RulesManager getInstance() {
+		if (null == instance) { 
+			instance = new RulesManager();
+		}
+		return instance;
+	}
 	public void init() {
 		setDefaultValues();
 	}
 
 	public void defineSectionMandatory() {
-		EditCruiseForm myEditCruiseForm = Nemo.getInstance().getViewMain().getEditCruiseForm();
-		EditStationForm myEditStationForm = Nemo.getInstance().getViewMain().getEditStationForm();
+		
 
 		boolean isMandatory = !isConversionToNetCDF();
 

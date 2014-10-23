@@ -15,6 +15,7 @@ import com.ago.xml.SAXConsumer;
 import com.ago.xml.XMLBootstrapParser;
 import com.ago.xml.XMLOutputWriter;
 
+import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.input.AbstractModel;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.util.Global;
@@ -194,7 +195,7 @@ public class Configuration extends AbstractModel {
 											String a_LocalName,
 											String a_QName,
 											Attributes a_Attributes) {
-		Configuration el = new Configuration();
+		Configuration el = Nemo.getInstance().getConfig();
 		el.buildFromElement(a_URI, a_LocalName, a_QName, a_Attributes);
 		return el;
 	}

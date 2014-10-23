@@ -6,10 +6,9 @@
  * ============================================================================
  */
 package fr.ifremer.nemo.ui.edit.file.listeners;
+import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
-import  org.eclipse.swt.events.SelectionEvent;
 
-import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.ui.RulesManager;
 import fr.ifremer.nemo.ui.edit.file.EditFileForm;
 import fr.ifremer.nemo.util.Global.E_ProcessType;
@@ -36,7 +35,7 @@ public class InputFileRadioSelectionListener implements SelectionListener
     public void widgetSelected(SelectionEvent g)
     {
       
-        RulesManager rulesMgr = Nemo.getInstance().getViewMain().getMyRulesManager();
+        RulesManager rulesMgr = RulesManager.getInstance();
         E_ProcessType processType=E_ProcessType.CRUISE_FILE;
         
         if (g.getSource().equals(myEditFileForm.getRadioFichier()))

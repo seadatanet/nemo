@@ -21,6 +21,7 @@ import org.eclipse.ui.forms.widgets.Section;
 
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.input.StationModel;
+import fr.ifremer.nemo.ui.RulesManager;
 import fr.ifremer.nemo.util.Global;
 
 /**
@@ -59,7 +60,7 @@ public abstract class NemoSection
 	public void dispose()
 	{
 		section.dispose();
-		
+
 	}
 
 	/**
@@ -80,11 +81,14 @@ public abstract class NemoSection
 				formEdition.reflow(true);
 			}
 		});
-		Nemo.getInstance().getViewMain().getMyRulesManager().defineSectionMandatory();
+
+
+		RulesManager.getInstance().defineSectionMandatory();
+
 		if (!isMandatory)
-            section.setText(title);
-        else
-            section.setText(title+" *");
+			section.setText(title);
+		else
+			section.setText(title+" *");
 
 
 		section.setDescription(description);
@@ -99,7 +103,7 @@ public abstract class NemoSection
 		section.setClient(sectionClient);
 
 		section.getParent().layout(true);
-		
+
 	}
 
 	protected abstract void drawSection(Composite parent, boolean filled);
@@ -134,21 +138,21 @@ public abstract class NemoSection
 	{
 		return section.isEnabled();
 	}
-	
+
 	public void setMandatory(boolean mandatory)
 	{
-	    isMandatory = mandatory;
-	    if(section !=null && !section.isDisposed())
-    	    if (!isMandatory)
-                section.setText(title);
-            else
-                section.setText(title+" *");
+		isMandatory = mandatory;
+		if(section !=null && !section.isDisposed())
+			if (!isMandatory)
+				section.setText(title);
+			else
+				section.setText(title+" *");
 	}
-	
+
 	public boolean isMandatory()
-    {
-        return isMandatory;
-    }
+	{
+		return isMandatory;
+	}
 
 	public void initModel(StationModel stationModel)
 	{
@@ -179,7 +183,7 @@ public abstract class NemoSection
 	{
 		return title;
 	}
-	
-	
+
+
 
 }

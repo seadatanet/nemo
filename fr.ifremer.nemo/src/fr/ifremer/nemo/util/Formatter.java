@@ -3,7 +3,7 @@ package fr.ifremer.nemo.util;
 import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 
-import fr.ifremer.nemo.Nemo;
+import fr.ifremer.nemo.ui.RulesManager;
 import fr.ifremer.nemo.util.Global.E_TypeConversion;
 import fr.ifremer.nemo.util.format.DateTimeFormat;
 import fr.ifremer.nemo.util.format.LatitudeFormat;
@@ -366,7 +366,7 @@ public class Formatter implements Cloneable
 	{
 		// 6406
 		String res = stNumber;
-		E_TypeConversion conv = Nemo.getInstance().getViewMain().getMyRulesManager().getMyConversionType();
+		E_TypeConversion conv = RulesManager.getInstance().getMyConversionType();
 		if (conv == E_TypeConversion.MEDATLAS)
 		{
 			res = padZero(stNumber, StationNumberLength_MEDATLAS);

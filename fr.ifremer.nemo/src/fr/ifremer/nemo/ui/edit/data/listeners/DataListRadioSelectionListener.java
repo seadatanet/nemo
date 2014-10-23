@@ -10,9 +10,9 @@ package fr.ifremer.nemo.ui.edit.data.listeners;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 
-import fr.ifremer.nemo.Nemo;
-import fr.ifremer.nemo.util.Global.DataListTypeEnum;
+import fr.ifremer.nemo.ui.RulesManager;
 import fr.ifremer.nemo.ui.edit.data.EditDataForm;
+import fr.ifremer.nemo.util.Global.DataListTypeEnum;
 
 /**
  * Description: listener sur les boutons de selection du type de liste (P091, P011viaP091 ou P011viaP021)
@@ -52,7 +52,7 @@ public class DataListRadioSelectionListener implements SelectionListener
             currentDataList = DataListTypeEnum.P011_VIA_P021;
         }
         
-        Nemo.getInstance().getViewMain().getMyRulesManager().updateFromIHM(currentDataList);
+        RulesManager.getInstance().updateFromIHM(currentDataList);
      
     }
 }

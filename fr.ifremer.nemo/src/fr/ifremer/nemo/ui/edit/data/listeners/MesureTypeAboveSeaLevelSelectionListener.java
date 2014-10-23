@@ -10,7 +10,7 @@ package fr.ifremer.nemo.ui.edit.data.listeners;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 
-import fr.ifremer.nemo.Nemo;
+import fr.ifremer.nemo.ui.RulesManager;
 import fr.ifremer.nemo.util.Global;
 
 /**
@@ -28,6 +28,6 @@ public class MesureTypeAboveSeaLevelSelectionListener implements SelectionListen
 	}
 
 	public void widgetSelected(SelectionEvent g) {
-		Nemo.getInstance().getViewMain().getMyRulesManager().updateFromIHM(Global.E_MesureType.ASLVL);
+		RulesManager.getInstance().updateFromIHM(Global.E_MesureType.ASLVL);
 	}
 }

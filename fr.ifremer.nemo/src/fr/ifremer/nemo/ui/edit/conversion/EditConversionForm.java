@@ -122,7 +122,7 @@ public class EditConversionForm extends EditForm {
 		// FAE 1143 : déactivation MEDATLAS
 		// adaptation du code suite deplacement conversion dans 1er onglet (FAE
 		// 5683)
-		if (Nemo.getInstance().getViewMain().getMyRulesManager()
+		if (RulesManager.getInstance()
 				.isConversionToMedatlas()) {
 			boolean medOK = true;
 			if (!warningFile.equals(Global.EMPTY_STRING)
@@ -184,11 +184,11 @@ public class EditConversionForm extends EditForm {
 		dialog.setText(Messages.edit_convert_outputFilename);
 
 		// FAE090
-		if (Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToODV()
-				|| Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToNetCDF()) {
+		if (RulesManager.getInstance().isConversionToODV()
+				|| RulesManager.getInstance().isConversionToNetCDF()) {
 			String[] extensions = new String[1];
 			String extenstionString = Global.EXT_TXT;
-			if (Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToNetCDF())
+			if (RulesManager.getInstance().isConversionToNetCDF())
 				extenstionString = Global.EXT_NC;
 			extensions[0] = Global.STAR + extenstionString;
 
@@ -342,10 +342,10 @@ public class EditConversionForm extends EditForm {
 		EditFileForm editFileForm =
 				Nemo.getInstance().getViewMain().getEditFileForm();
 		if (resultOK) {
-			if (Nemo.getInstance().getViewMain().getMyRulesManager()
+			if (RulesManager.getInstance()
 					.isConversionToODV()) {
 				Utils.messageOK(Messages.edit_convert_endODV);
-			} else if (Nemo.getInstance().getViewMain().getMyRulesManager()
+			} else if (RulesManager.getInstance()
 					.isConversionToNetCDF()) {
 				Utils.messageOK(Messages.edit_convert_endNETCDF);
 			} else {
@@ -458,8 +458,8 @@ public class EditConversionForm extends EditForm {
 							.getOutputFileName());
 			String cheminComplet = output.getParentFile().getPath();
 			//FAE 17128
-			if (Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToNetCDFMonoStation()
-					|| Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToODVMonoStation()
+			if (RulesManager.getInstance().isConversionToNetCDFMonoStation()
+					|| RulesManager.getInstance().isConversionToODVMonoStation()
 					|| Nemo.getInstance().getDomain().getMedia().getModel().getProcessType() == E_ProcessType.COLLECTION_DIR) {
 				cheminComplet = output.getAbsolutePath();
 			}
@@ -571,9 +571,8 @@ public class EditConversionForm extends EditForm {
 	}
 
 	public String calcBatchCommandLine() {
-		RulesManager rm = Nemo.getInstance().getViewMain().getMyRulesManager();
-		EditFileForm editFileForm =
-				Nemo.getInstance().getViewMain().getEditFileForm();
+		RulesManager rm = RulesManager.getInstance();
+		EditFileForm editFileForm =	Nemo.getInstance().getViewMain().getEditFileForm();
 		String command = "nemo_batch";
 		command += Global.SPACE;
 
@@ -584,7 +583,7 @@ public class EditConversionForm extends EditForm {
 		if (editFileForm.isCruiseIsAFile()) {
 			command += editFileForm.nomFichierOrigin;
 		}
-		if (rm.isCruiseInADirectory()) {
+		if (RulesManager.getInstance().isCruiseInADirectory()) {
 			command += editFileForm.nomRepertoireOrigin;
 		}
 		command += "\"";
@@ -672,7 +671,7 @@ public class EditConversionForm extends EditForm {
 	}
 
 	public void fillSummary() {
-		RulesManager rm = Nemo.getInstance().getViewMain().getMyRulesManager();
+		RulesManager rm = RulesManager.getInstance();
 		String summary = Global.EMPTY_STRING;
 
 		// titre
@@ -688,7 +687,7 @@ public class EditConversionForm extends EditForm {
 				Messages.view_convert_summary_dataTypeLabel
 						+ Global.DBL_PT
 						+ Global.RN
-						+ Nemo.getInstance().getViewMain().getMyRulesManager()
+						+ RulesManager.getInstance()
 								.getMyDataListTypeString();
 		summary += Global.RN + Global.RN + Global.RN;
 
@@ -697,7 +696,7 @@ public class EditConversionForm extends EditForm {
 				Messages.view_file_fileType
 						+ Global.DBL_PT
 						+ Global.RN
-						+ Nemo.getInstance().getViewMain().getMyRulesManager()
+						+ RulesManager.getInstance()
 								.getMyFileType().toString();
 		summary += Global.RN + Global.RN + Global.RN;
 

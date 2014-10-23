@@ -12,6 +12,7 @@ import org.eclipse.swt.events.SelectionListener;
 
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.output.CDIResumeWriter;
+import fr.ifremer.nemo.ui.RulesManager;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.conversion.EditConversionForm;
 import fr.ifremer.nemo.ui.edit.file.EditFileForm;
@@ -58,7 +59,7 @@ public class ConversionSelectionListener implements SelectionListener
             Utils.messageErreur(Global.EMPTY_STRING);
 
             // type de la conversion
-             E_TypeConversion currentConversion = Nemo.getInstance().getViewMain().getMyRulesManager().getMyConversionType();
+             E_TypeConversion currentConversion = RulesManager.getInstance().getMyConversionType();
             Nemo.getInstance().getDomain().getConversion().setCurrentConversion(currentConversion);
             boolean sortData = editFileForm.isSortForced();
             Nemo.getInstance().getDomain().getConversion().setSortData(sortData);
@@ -78,7 +79,7 @@ public class ConversionSelectionListener implements SelectionListener
                 //FAE 6399 correction: process != E_ProcessType.COLLECTION_DIR
                 // et non == 
                 if ((currentConversion != E_TypeConversion.MEDATLAS)
-                    && Nemo.getInstance().getViewMain().getMyRulesManager().getMyProcessType() != E_ProcessType.COLLECTION_DIR)
+                    && RulesManager.getInstance().getMyProcessType() != E_ProcessType.COLLECTION_DIR)
                 {
                     if (!convForm.askDataSetRef())
                     {
@@ -107,7 +108,7 @@ public class ConversionSelectionListener implements SelectionListener
                 }
                 else if(currentConversion == E_TypeConversion.ODV_MULTISTATIONS || currentConversion == E_TypeConversion.NETCDF_MULTISTATIONS)
                 {
-                    if(Nemo.getInstance().getViewMain().getMyRulesManager().isProcessCollectionDir())
+                    if(RulesManager.getInstance().isProcessCollectionDir())
                     {
                         okChoixSortie = convForm.choixDossierSortie();
                     }else{

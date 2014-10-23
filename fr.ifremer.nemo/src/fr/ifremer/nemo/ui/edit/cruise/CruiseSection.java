@@ -14,8 +14,11 @@ import java.util.List;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Group;
 
+import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.ComboType;
 import fr.ifremer.nemo.ui.edit.Couple;
 import fr.ifremer.nemo.ui.edit.NemoSection;
@@ -31,6 +34,21 @@ public class CruiseSection extends NemoSection
 	protected Composite compo;
 	protected List<Couple> items;
 	protected EditCruiseForm myForm;
+	private final List<Boolean> checks;
+	private final List<String> checksLabels;
+
+
+	//	radNextStationIsRegexpCheckbox = new Button(compoNext, SWT.CHECK);
+	//	radNextStationIsRegexpCheckbox.setText(Messages.edit_file_idcNextStationRegexp);
+	//	radNextStationIsRegexpCheckbox.setBackground(Nemo.getInstance().getViewMain().getBackgroundEdit());
+	//	radNextStationIsRegexpCheckbox.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter()
+	//	{
+	//		@Override
+	//		public void widgetSelected(org.eclipse.swt.events.SelectionEvent g)
+	//		{
+	//			Utils.invalidEtapes();
+	//		}
+	//	});
 
 	/**
 	 * @param shell
@@ -43,16 +61,26 @@ public class CruiseSection extends NemoSection
 		super(name, title, description, form);
 		myForm = form;
 		items = new ArrayList<Couple>();
+		checks = new ArrayList<Boolean>();
+		checksLabels = new ArrayList<String>();
 	}
 
 	public void addItem(String label, ComboType type, String defaultValue)
 	{
+		addItem(label, type, defaultValue, false, null);
+	}
+	public void addItem(String label, ComboType type, String defaultValue, boolean check, String checkLabel)
+	{
 		Couple item = new Couple(null, label, type, defaultValue);
 		if (type == ComboType.BLOCK)
 			item.setTextLimit(50000);
-		items.add(item);
-	}
 
+
+		items.add(item);
+		checks.add(check);
+		checksLabels.add(checkLabel);
+
+	}
 	/**
 	 * {@inheritDoc}
 	 */
@@ -77,10 +105,32 @@ public class CruiseSection extends NemoSection
 		compo = new Composite(parent, SWT.NONE);
 		GridLayoutFactory.fillDefaults().numColumns(1).applyTo(compo);
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(compo);
+		Couple item;
+		Group group ;
+		for ( int cpt=0; cpt<items.size(); cpt++){
+			//		for (Couple item : items)
 
-		for (Couple item : items)
-		{
-			item.draw(compo, filled);
+			item = items.get(cpt);
+			if (checks.get(cpt)){
+				group = new Group(compo, SWT.NONE);
+				GridLayoutFactory.fillDefaults().numColumns(1).applyTo(group);
+				GridDataFactory.fillDefaults().grab(true, false).applyTo(group);
+				item.draw(group, filled);
+				Button check = new Button(group, SWT.CHECK);
+				check.setText(checksLabels.get(cpt));
+				check.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter()
+				{
+					@Override
+					public void widgetSelected(org.eclipse.swt.events.SelectionEvent g)
+					{
+						Utils.invalidEtapes();
+					}
+				});
+			} else{
+				item.draw(compo, filled);
+			}
+
+			
 		}
 	}
 
@@ -97,7 +147,7 @@ public class CruiseSection extends NemoSection
 			if (item.getType() == ComboType.BLOCK)
 			{
 				GridDataFactory.fillDefaults().grab(true, true).hint(Global.SIZE_SECTION, SWT.DEFAULT).minSize(Global.SIZE_SECTION, 200)
-						.applyTo(item.getValueText());
+				.applyTo(item.getValueText());
 			}
 		}
 	}

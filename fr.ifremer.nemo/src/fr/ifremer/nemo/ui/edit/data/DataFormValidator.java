@@ -33,7 +33,7 @@ public class DataFormValidator extends FormValidator {
 
 	@Override
 	public void validate() {
-		rm = Nemo.getInstance().getViewMain().getMyRulesManager();
+		rm = RulesManager.getInstance();
 		EditDataForm editDataForm =
 				Nemo.getInstance().getViewMain().getEditDataForm();
 		EditConversionForm editConversionForm =
@@ -145,8 +145,8 @@ public class DataFormValidator extends FormValidator {
 					/** data70/75 Medatlas( FAE 3228/7257 ) **/
 
 					if (ok
-							&& Nemo.getInstance().getViewMain()
-									.getMyRulesManager().isConversionToMedatlas()
+							&& RulesManager.getInstance()
+									.isConversionToMedatlas()
 							&& rm.getMyMesureType() == E_MesureType.BSSURF) {
 //						// data70 Si on a PRES dans le tableau, il faut qu'il
 //						// soit en 1ère position
@@ -314,7 +314,7 @@ public class DataFormValidator extends FormValidator {
 
 	private boolean checkStandardName(TypeData typeCourant) {
 		boolean ok = true;
-		RulesManager rm = Nemo.getInstance().getViewMain().getMyRulesManager();
+		RulesManager rm = RulesManager.getInstance();
 		String standardName = StandardNameParameterManager.getInstance().getUserStandardName(typeCourant.getEntryKeyP011());
 		if (standardName == null || standardName.equals(Global.EMPTY_STRING) && rm.isConversionToNetCDF()) {
 			Utils.messageWarningAppend(Messages.Etape_126 + Global.SPACE
@@ -326,7 +326,7 @@ public class DataFormValidator extends FormValidator {
 
 	private boolean checkLongName(TypeData typeCourant) {
 		boolean ok = true;
-		RulesManager rm = Nemo.getInstance().getViewMain().getMyRulesManager();
+		RulesManager rm = RulesManager.getInstance();
 		String longName = NetCDFLongNameParameterManager.getInstance().getUserLongName(typeCourant.getEntryKeyP011());
 		if (longName == null || longName.equals(Global.EMPTY_STRING) && rm.isConversionToNetCDF()) {
 			Utils.messageErreurAppend(Messages.Etape_134 + Global.SPACE
@@ -429,7 +429,7 @@ public class DataFormValidator extends FormValidator {
 						.getTypes().get(0);
 		String firstParameterCode = premierType.getCodeToUse();
 		E_MesureType mesureType =
-				Nemo.getInstance().getViewMain().getMyRulesManager()
+				RulesManager.getInstance()
 						.getMyMesureType();
 
 		// cas below sea bed (data85)
@@ -534,7 +534,7 @@ public class DataFormValidator extends FormValidator {
 	}
 
 	private boolean detectVerticalParameters() {
-		RulesManager rm = Nemo.getInstance().getViewMain().getMyRulesManager();
+		RulesManager rm = RulesManager.getInstance();
 
 		if (rm.isDataListTypeP091()) {
 			detectVerticalParametersForP091();

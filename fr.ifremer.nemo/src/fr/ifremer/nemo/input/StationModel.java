@@ -5,6 +5,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.xml.sax.Attributes;
 
 import com.ago.xml.PathElementConsumer;
@@ -15,6 +16,7 @@ import fr.ifremer.nemo.config.ConfigDescription;
 import fr.ifremer.nemo.config.Flag;
 import fr.ifremer.nemo.config.FlagTable;
 import fr.ifremer.nemo.ui.edit.station.SdnReferencesTableEditor;
+import fr.ifremer.sismer_tools.seadatanet.SDNXLinkException;
 import fr.ifremer.sismer_tools.seadatanet.SdnXLinkReference;
 
 /**
@@ -22,8 +24,8 @@ import fr.ifremer.sismer_tools.seadatanet.SdnXLinkReference;
  * Description : Informations descrivant l'onglet Station
  * @author Gerard BUNEL
  */
-public class StationModel extends AbstractModel
-{
+public class StationModel extends AbstractModel {
+	private final static Logger logger = Logger.getLogger(AbstractModel.class);
 	/**
 	 * la description de la référence de la station
 	 */
@@ -134,11 +136,11 @@ public class StationModel extends AbstractModel
 			}
 			return this;
 		}
-		if (a_LocalName.equals("sdnXLinkReferences")){// TODO
+		if (a_LocalName.equals("sdnXLinkReferences")) {// TODO 20755
 			return this;
 		}
 		// Sdn XLinks references
-		if (a_LocalName.equals("sdn_reference")){// TODO
+		if (a_LocalName.equals("sdn_reference")) {// TODO 20755
 			{
 				String type = a_Attributes.getValue(SdnReferencesTableEditor.DATA_KEY.TYPE.toString());
 				String role = a_Attributes.getValue(SdnReferencesTableEditor.DATA_KEY.ROLE.toString());
@@ -146,7 +148,15 @@ public class StationModel extends AbstractModel
 				if (this.sdnXLinkReferences == null){
 					this.sdnXLinkReferences = new ArrayList<SdnXLinkReference>();
 				}
-				this.sdnXLinkReferences.add( new SdnXLinkReference(type, role, href));
+				SdnXLinkReference ref;
+				try {
+					ref = new SdnXLinkReference(type, role, href);
+					this.sdnXLinkReferences.add(ref);
+				} catch (SDNXLinkException e) {
+					// TODO 20755 msg
+					logger.error("error reading reference");
+				}
+
 			}
 			return this;
 		}
@@ -213,12 +223,12 @@ public class StationModel extends AbstractModel
 		if (getSdnXLinkReferences() != null){
 			a_Writer.openTag(ModelDescription.node_sdnXlinks);
 			for (SdnXLinkReference ref : getSdnXLinkReferences()){
-				a_Writer.openTag("sdn_reference");// TODO
+				a_Writer.openTag("sdn_reference");// TODO 20755
 				a_Writer.putAttribute(SdnReferencesTableEditor.DATA_KEY.TYPE.toString(), ref.getTypeWithL23Prefix());
 				if (ref.getRole()!= null){
 					a_Writer.putAttribute(SdnReferencesTableEditor.DATA_KEY.ROLE.toString(), ref.getRole().toString());
 				}else{
-					a_Writer.putAttribute(SdnReferencesTableEditor.DATA_KEY.ROLE.toString(), "");// TODO
+					a_Writer.putAttribute(SdnReferencesTableEditor.DATA_KEY.ROLE.toString(), "");// TODO 20755
 				}
 				a_Writer.putAttribute(SdnReferencesTableEditor.DATA_KEY.HREF.toString(), ref.getHref());
 				a_Writer.closeTag();

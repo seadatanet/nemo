@@ -115,7 +115,7 @@ public class EditFileForm extends EditForm
 		textAreaFile.setText(Global.EMPTY_STRING);
 		// separator
 		enableSeparatorChoice(true);
-		Nemo.getInstance().getViewMain().getMyRulesManager().resetFileForm();
+		RulesManager.getInstance().resetFileForm();
 	}
 
 	public void reinitAllButProcess()
@@ -141,7 +141,7 @@ public class EditFileForm extends EditForm
 
 	public void resetDefaultEnableConversionTypes()
 	{
-		RulesManager rulesMgr = Nemo.getInstance().getViewMain().getMyRulesManager();
+		RulesManager rulesMgr = RulesManager.getInstance();
 		radMedatlas.setEnabled(rulesMgr.DEFAULT_MEDATLAS_ENABLED);
 		radODV.setEnabled(rulesMgr.DEFAULT_ODVMULTISTATION_ENABLED || rulesMgr.DEFAULT_ODVMULTISTATION_ENABLED);
 		radNetCDF.setEnabled(rulesMgr.DEFAULT_NETCDFMULTISTATION_ENABLED || rulesMgr.DEFAULT_NETCDFMULTISTATION_ENABLED);
@@ -151,7 +151,7 @@ public class EditFileForm extends EditForm
 
 	public void updateEnableConversionTypes()
 	{
-		RulesManager rulesMgr = Nemo.getInstance().getViewMain().getMyRulesManager();
+		RulesManager rulesMgr = RulesManager.getInstance();
 		radMedatlas.setEnabled(rulesMgr.isMedatlasEnabled());
 		radODV.setEnabled(rulesMgr.isOdvMonostationEnabled() || rulesMgr.isOdvMultistationEnabled());
 		radNetCDF.setEnabled(rulesMgr.isNetCDFMonostationEnabled() || rulesMgr.isNetCDFMultistationEnabled());
@@ -195,7 +195,7 @@ public class EditFileForm extends EditForm
 
 	public void resetDefaultSelectionProcess()
 	{
-		RulesManager rulesMgr = Nemo.getInstance().getViewMain().getMyRulesManager();
+		RulesManager rulesMgr = RulesManager.getInstance();
 		radioFichier.setSelection(rulesMgr.DEFAULT_PROCESSTYPE == E_ProcessType.CRUISE_FILE);
 		radioDossier.setSelection(rulesMgr.DEFAULT_PROCESSTYPE == E_ProcessType.CRUISE_DIR);
 		radioCollectGroupedByCruise.setSelection(rulesMgr.DEFAULT_PROCESSTYPE == E_ProcessType.COLLECTION_DIR);
@@ -226,7 +226,7 @@ public class EditFileForm extends EditForm
 	public void resetDefaultSelectionFileType()
 	{
 		enableFileTypeChoice(true);
-		RulesManager rulesMgr = Nemo.getInstance().getViewMain().getMyRulesManager();
+		RulesManager rulesMgr = RulesManager.getInstance();
 		radSerieTempo.setSelection(rulesMgr.DEFAULT_FILETYPE == E_InputType.TIMESERIES);
 		radTrajectoire.setSelection(rulesMgr.DEFAULT_FILETYPE == E_InputType.TRAJECTORY);
 		radProfilVertical.setSelection(rulesMgr.DEFAULT_FILETYPE == E_InputType.PROFILE);
@@ -290,7 +290,7 @@ public class EditFileForm extends EditForm
 				// FAE 3796
 				int offset = 0;
 				// if (isCollection())
-				if (!Nemo.getInstance().getViewMain().getMyRulesManager().isCruiseEnabled())
+				if (!RulesManager.getInstance().isCruiseEnabled())
 				{
 					offset--;
 					// on efface les erreurs sur cruise car il peut en
@@ -460,11 +460,11 @@ public class EditFileForm extends EditForm
 		setSeparateur(mediaModel.getSeparator());
 
 		// Type de fichier
-		Nemo.getInstance().getViewMain().getMyRulesManager().updateFromModel(mediaModel.getInputType());
+		RulesManager.getInstance().updateFromModel(mediaModel.getInputType());
 
 		// --- remplissage du formulaire de droite (editFileForm)
 		// Entête Fichier
-		if (Nemo.getInstance().getViewMain().getMyRulesManager().isCruiseInADirectory() && !isMultiStationFileChecked())
+		if (RulesManager.getInstance().isCruiseInADirectory() && !isMultiStationFileChecked())
 		{
 			sectionFileHeader.razValues();
 		} else
@@ -491,7 +491,7 @@ public class EditFileForm extends EditForm
 		sectionDataTerminator.setEndData(mediaModel.getEndData(), mediaModel.getEndDataPattern(), mediaModel.getEndDataPatternIsRegexp());
 
 		// conversion:
-		RulesManager rulesMgr = Nemo.getInstance().getViewMain().getMyRulesManager();
+		RulesManager rulesMgr = RulesManager.getInstance();
 		// si un modele est ouvert, on affecte la valeur de ce modèle. Sinon on
 		// affecte la valeur choisie dans les settings
 		if (Nemo.getInstance().getNomModele().equals(Global.EMPTY_STRING))
@@ -826,13 +826,13 @@ public class EditFileForm extends EditForm
 
 		// --- enregistrement du formulaire de gauche (ViewMain)
 		// Type de traitement
-		mediaModel.setProcessType(Nemo.getInstance().getViewMain().getMyRulesManager().getMyProcessType());
+		mediaModel.setProcessType(RulesManager.getInstance().getMyProcessType());
 
 		// Séparateur
 		mediaModel.setSeparator(getSeparateur());
 
 		// Type de fichier
-		mediaModel.setInputType(Nemo.getInstance().getViewMain().getMyRulesManager().getMyFileType());
+		mediaModel.setInputType(RulesManager.getInstance().getMyFileType());
 
 		// Fichier multiStation ?
 		mediaModel.setMultiStations(isMultiStationFileChecked());
@@ -840,7 +840,7 @@ public class EditFileForm extends EditForm
 		// --- enregistrement du formulaire de droite (editFileForm)
 		// Entête Fichier
 		int fileHeader = 0;
-		if (!Nemo.getInstance().getViewMain().getMyRulesManager().isCruiseInADirectory() || mediaModel.isMultiStations())
+		if (!RulesManager.getInstance().isCruiseInADirectory() || mediaModel.isMultiStations())
 		{
 			fileHeader = Integer.parseInt(getSectionFileHeader().getValue());
 		}
@@ -885,8 +885,8 @@ public class EditFileForm extends EditForm
 			mediaModel.setEndDataPattern(tmpString);
 			mediaModel.setEndDataPatternIsRegexp(false);
 		}
-		Nemo.getInstance().getDomain().getConversion().setCurrentConversion(Nemo.getInstance().getViewMain().getMyRulesManager().getMyConversionType());
-		Nemo.getInstance().getDomain().getConversion().getModel().setOutputFormat(Nemo.getInstance().getViewMain().getMyRulesManager().getMyConversionType());
+		Nemo.getInstance().getDomain().getConversion().setCurrentConversion(RulesManager.getInstance().getMyConversionType());
+		Nemo.getInstance().getDomain().getConversion().getModel().setOutputFormat(RulesManager.getInstance().getMyConversionType());
 
 		// Mise à jour du model
 		Nemo.getInstance().getDomain().getMedia().updateMedia(mediaModel);
