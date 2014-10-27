@@ -16,16 +16,22 @@ import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.input.CruiseModel;
 import fr.ifremer.nemo.input.DataType;
 import fr.ifremer.nemo.input.InputModel;
+import fr.ifremer.nemo.input.StationModel;
 import fr.ifremer.nemo.output.GenerationException;
 import fr.ifremer.nemo.output.medatlas.Elts;
 import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Formatter;
 import fr.ifremer.nemo.util.Global;
+import fr.ifremer.sismer_tools.SismerToolsException;
+import fr.ifremer.sismer_tools.seadatanet.SDNReferenceParser;
+import fr.ifremer.sismer_tools.seadatanet.SDNXLinkException;
+import fr.ifremer.sismer_tools.seadatanet.SdnXLinkReference;
 
 /**
  * Class CruiseDomain.java Description: Classe pour la description des données
@@ -69,12 +75,12 @@ public class CruiseDomain {
 		_model.release();
 	}
 
-	public StringBuffer getHeader(Conversion c) throws ParseException,
-			UnsupportedEncodingException, GenerationException {
+	public StringBuffer getHeader(Conversion c, List<Station> st) throws ParseException,
+	UnsupportedEncodingException, GenerationException {
 		StringBuffer cruiseHeader = new StringBuffer();
 		switch (c) {
 		case ODV:
-			cruiseHeader = getOdvHeader();
+			cruiseHeader = getOdvHeader(st);
 			break;
 		case MEDATLAS:
 			cruiseHeader = getMedatlasHeader();
@@ -83,7 +89,7 @@ public class CruiseDomain {
 		return cruiseHeader;
 	}
 
-	private StringBuffer getOdvHeader() throws GenerationException {
+	private StringBuffer getOdvHeader(List<Station> stationsList) throws GenerationException {
 		String start = Conversion.ODV.getDebut();
 		StringBuffer odvCruiseHeader = new StringBuffer();
 
@@ -100,6 +106,51 @@ public class CruiseDomain {
 		StationDomain stationDomain = Nemo.getInstance().getDomain()
 				.getStation();
 		DataDomain dataDomain = Nemo.getInstance().getDomain().getData();
+
+		/**
+		 * SDN references
+		 */
+		StationModel stationModel = Nemo.getInstance().getDomain().getStation().getModel();
+
+
+		List<SdnXLinkReference> refs = stationModel.getSdnXLinkReferences();
+		if (refs !=null){
+			for (SdnXLinkReference ref : refs){
+				odvCruiseHeader.append(start);
+				odvCruiseHeader.append(ref.toString(false));
+				odvCruiseHeader.append(Global.RN);
+			}
+		}
+		for (Station st : stationsList){
+			SdnXLinkReference cdi = new SdnXLinkReference();
+			// TODO 20755: check if it is the good edmo code
+			String localCdiId;
+			try {
+
+				localCdiId = stationDomain.getLocalCdiId(Nemo.getInstance().getDomain().getCruise(), Conversion.ODV, st.getReference());
+				cdi.setAsCdi(Integer.valueOf(Nemo.getInstance().getConfig().getIdEdmoRespCdi()), localCdiId, true);
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (NumberFormatException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SDNXLinkException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+
+			odvCruiseHeader.append(start);
+			odvCruiseHeader.append(cdi.toString(true));
+			odvCruiseHeader.append(Global.RN);
+		}
+		/**
+		 * SDN semantic header
+		 */
 		odvCruiseHeader.append(dataDomain.getSDNparameters(Conversion.ODV));
 		odvCruiseHeader.append(start);
 		odvCruiseHeader.append(Global.RN);
@@ -111,7 +162,7 @@ public class CruiseDomain {
 	}
 
 	private StringBuffer getMedatlasHeader() throws ParseException,
-			UnsupportedEncodingException {
+	UnsupportedEncodingException {
 		String start = Conversion.MEDATLAS.getDebut();
 		SimpleDateFormat fmt = new SimpleDateFormat(CruiseModel.MED_DATE_FORMAT);
 
@@ -212,6 +263,24 @@ public class CruiseDomain {
 		return lines.toArray(lineArray);
 	}
 
+
+	public StringBuffer getSDNCSRreference() throws SDNXLinkException, SismerToolsException{
+		StringBuffer sdnRefs = null;
+		SdnXLinkReference ref =null;
+
+
+		if (!_model.getCorrespondingURL().isEmpty()){
+			SDNReferenceParser parser = new SDNReferenceParser();
+			ref = parser.parseReferenceRow(_model.getCorrespondingURL());
+		}
+		if (ref !=null){
+			sdnRefs = new StringBuffer();
+			sdnRefs.append(ref.toString());
+		}
+		return sdnRefs;
+
+
+	}
 	/**
 	 * Getter pour model.
 	 * 

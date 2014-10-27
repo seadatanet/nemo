@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Formatter;
 import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -34,8 +35,9 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import compare.OdvToNetCDF;
-
+import ucar.nc2.NetcdfFile;
+import ucar.nc2.NetcdfFileWriteable;
+import ucar.nc2.util.CompareNetcdf2;
 import fr.ifremer.nemo.config.Configuration;
 import fr.ifremer.nemo.config.Proxy;
 import fr.ifremer.nemo.domain.NetCDFLongNameParameterManager;
@@ -138,8 +140,8 @@ public class NemoBashTest {
 		setDataRootPath();
 
 		testLogger
-				.info("\r\n\r\n\r\n\r\n===================================== "
-						+ dat + " =========================\r\n\r\n\r\n\r\n");
+		.info("\r\n\r\n\r\n\r\n===================================== "
+				+ dat + " =========================\r\n\r\n\r\n\r\n");
 		testLogger.info("test batchs : " + testBatchs);
 		testLogger.info("comp manual files : " + compareManualFiles + "("
 				+ outputManualName + ")");
@@ -154,13 +156,13 @@ public class NemoBashTest {
 			_writer = new FileWriter(resFileName);
 			_writer.append("testName;");
 			_writer.append("test directory;");
-			_writer.append("atLeastOneTestFound;");
 			_writer.append("parameters list;");
 			_writer.append("conversion;");
 			// _writer.append("unit test;");
 			_writer.append("reference found;");
 			_writer.append("nemo convert ended;");
 			_writer.append("comparison ok;");
+			_writer.append("diff;");
 			_writer.append('\n');
 
 		} catch (IOException e) {
@@ -174,12 +176,12 @@ public class NemoBashTest {
 		try {
 			_writer.append(message.testName + ";");
 			_writer.append(message.dirName + ";");
-			_writer.append(message.atLeastOneTestFound + ";");
 			_writer.append(message.parameterList + ";");
 			_writer.append(message.convType + ";");
 			_writer.append(message.isReferenceFound + ";");
 			_writer.append(message.conversionRes + ";");
 			_writer.append(message.batchCompRes + ";");
+			_writer.append(message.diff + ";");
 			_writer.append('\n');
 
 		} catch (IOException e) {
@@ -221,7 +223,7 @@ public class NemoBashTest {
 		_writer.close();
 
 		testLogger
-				.info("\r\n\r\n\r\n\r\n___________________________isVocabV2_____________________________\r\n\r\n\r\n\r\n");
+		.info("\r\n\r\n\r\n\r\n___________________________isVocabV2_____________________________\r\n\r\n\r\n\r\n");
 		if (isVocabV2Param == true) {
 			Assert.assertTrue(isVocabV2);
 			testLogger.info("is vocab v2");
@@ -231,11 +233,11 @@ public class NemoBashTest {
 		}
 
 		testLogger
-				.info("\r\n\r\n"
-						+ "TOTAL ====================================================================================="
-						+ "\r\n" + nbTotalSuccess + " tests succeed on "
-						+ nbTotalTests + "\r\n" + nbTotalFailed
-						+ " tests failed");
+		.info("\r\n\r\n"
+				+ "TOTAL ====================================================================================="
+				+ "\r\n" + nbTotalSuccess + " tests succeed on "
+				+ nbTotalTests + "\r\n" + nbTotalFailed
+				+ " tests failed");
 
 		testLogger.info("batchCommands" + Global.RN);
 		testLogger.info(batchCommands);
@@ -262,16 +264,6 @@ public class NemoBashTest {
 
 	}
 
-	private void writeInResultsFile(String theString) {
-		try {
-			System.out.println(theString);
-			_writer.append(theString);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
 	/**
 	 * =================================================================
 	 * MEDATLAS
@@ -280,20 +272,18 @@ public class NemoBashTest {
 	@Test
 	public final void test_P091_Medatlas() {
 		testLogger
-				.info("\r\n\r\n\r\n\r\n___________________________test_P091_Medatlas_____________________________\r\n\r\n\r\n\r\n");
+		.info("\r\n\r\n\r\n\r\n___________________________test_P091_Medatlas_____________________________\r\n\r\n\r\n\r\n");
 		// writeInResultsFile("P091_Medatlas;");
-		boolean res = testOneType_ListConv(DataListTypeEnum.P091,
-				Conversion.MEDATLAS, E_TypeConversion.MEDATLAS);
+		boolean res = testOneType_ListConv(DataListTypeEnum.P091,Conversion.MEDATLAS, E_TypeConversion.MEDATLAS);
 		Assert.assertTrue(res);
 	}
 
 	@Test
 	public final void test_P011viaP091_Medatlas() {
 		testLogger
-				.info("\r\n\r\n\r\n\r\n___________________________test_P011viaP091_Medatlas_____________________________\r\n\r\n\r\n\r\n");
+		.info("\r\n\r\n\r\n\r\n___________________________test_P011viaP091_Medatlas_____________________________\r\n\r\n\r\n\r\n");
 		// writeInResultsFile("P011viaP091_Medatlas;");
-		Assert.assertTrue(testOneType_ListConv(DataListTypeEnum.P011_VIA_P091,
-				Conversion.MEDATLAS, E_TypeConversion.MEDATLAS));
+		Assert.assertTrue(testOneType_ListConv(DataListTypeEnum.P011_VIA_P091,	Conversion.MEDATLAS, E_TypeConversion.MEDATLAS));
 	}
 
 	/**
@@ -303,46 +293,41 @@ public class NemoBashTest {
 	@Test
 	public final void test_P091_ODVMULTI() {
 		testLogger
-				.info("\r\n\r\n\r\n\r\n____________________________test_P091_ODVMULTI____________________________\r\n\r\n\r\n\r\n");
+		.info("\r\n\r\n\r\n\r\n____________________________test_P091_ODVMULTI____________________________\r\n\r\n\r\n\r\n");
 		// writeInResultsFile("P091_ODVMULTI;");
-		Assert.assertTrue(testOneType_ListConv(DataListTypeEnum.P091,
-				Conversion.ODV, E_TypeConversion.ODV_MULTISTATIONS));
+		Assert.assertTrue(testOneType_ListConv(DataListTypeEnum.P091,Conversion.ODV, E_TypeConversion.ODV_MULTISTATIONS));
 	}
 
 	@Test
 	public final void test_P011viaP091_ODVMULTI() {
 		testLogger
-				.info("\r\n\r\n\r\n\r\n____________________________test_P011viaP091_ODVMULTI____________________________\r\n\r\n\r\n\r\n");
+		.info("\r\n\r\n\r\n\r\n____________________________test_P011viaP091_ODVMULTI____________________________\r\n\r\n\r\n\r\n");
 		// writeInResultsFile("P011viaP091_ODVMULTI;");
-		Assert.assertTrue(testOneType_ListConv(DataListTypeEnum.P011_VIA_P091,
-				Conversion.ODV, E_TypeConversion.ODV_MULTISTATIONS));
+		Assert.assertTrue(testOneType_ListConv(DataListTypeEnum.P011_VIA_P091,	Conversion.ODV, E_TypeConversion.ODV_MULTISTATIONS));
 	}
 
 	@Test
 	public final void test_P011viaP021_ODVMULTI() {
 		testLogger
-				.info("\r\n\r\n\r\n\r\n__________________________test_P011viaP021_ODVMULTI_____________________________\r\n\r\n\r\n\r\n");
+		.info("\r\n\r\n\r\n\r\n__________________________test_P011viaP021_ODVMULTI_____________________________\r\n\r\n\r\n\r\n");
 		// writeInResultsFile("P011viaP021_ODVMULTI;");
-		Assert.assertTrue(testOneType_ListConv(DataListTypeEnum.P011_VIA_P021,
-				Conversion.ODV, E_TypeConversion.ODV_MULTISTATIONS));
+		Assert.assertTrue(testOneType_ListConv(DataListTypeEnum.P011_VIA_P021,	Conversion.ODV, E_TypeConversion.ODV_MULTISTATIONS));
 	}
 
 	@Test
 	public final void test_P011viaP091_NETCDFMULTI() {
 		testLogger
-				.info("\r\n\r\n\r\n\r\n____________________________test_P011viaP091_NETCDFMULTI____________________________\r\n\r\n\r\n\r\n");
+		.info("\r\n\r\n\r\n\r\n____________________________test_P011viaP091_NETCDFMULTI____________________________\r\n\r\n\r\n\r\n");
 		// writeInResultsFile("P011viaP091_NETCDFMULTI;");
-		Assert.assertTrue(testOneType_ListConv(DataListTypeEnum.P011_VIA_P091,
-				Conversion.NETCDF, E_TypeConversion.NETCDF_MULTISTATIONS));
+		Assert.assertTrue(testOneType_ListConv(DataListTypeEnum.P011_VIA_P091,	Conversion.NETCDF, E_TypeConversion.NETCDF_MULTISTATIONS));
 	}
 
 	@Test
 	public final void test_P011viaP021_NETCDFMULTI() {
 		testLogger
-				.info("\r\n\r\n\r\n\r\n__________________________test_P011viaP021_NETCDFMULTI_____________________________\r\n\r\n\r\n\r\n");
+		.info("\r\n\r\n\r\n\r\n__________________________test_P011viaP021_NETCDFMULTI_____________________________\r\n\r\n\r\n\r\n");
 		// writeInResultsFile("P011viaP021_NETCDFMULTI;");
-		Assert.assertTrue(testOneType_ListConv(DataListTypeEnum.P011_VIA_P021,
-				Conversion.NETCDF, E_TypeConversion.NETCDF_MULTISTATIONS));
+		Assert.assertTrue(testOneType_ListConv(DataListTypeEnum.P011_VIA_P021,	Conversion.NETCDF, E_TypeConversion.NETCDF_MULTISTATIONS));
 	}
 
 	/**
@@ -353,7 +338,7 @@ public class NemoBashTest {
 	@Test
 	public final void inValidated_model() {
 		testLogger
-				.info("\r\n\r\n\r\n\r\n_______________________________unValidated_model________________________________\r\n\r\n\r\n\r\n");
+		.info("\r\n\r\n\r\n\r\n_______________________________unValidated_model________________________________\r\n\r\n\r\n\r\n");
 		message = new Message();
 		message.testName = "invalidated model in batch mod";
 		File root = new File(dataRootPath);
@@ -379,7 +364,7 @@ public class NemoBashTest {
 	@Test
 	public final void checkEmptyProxyTest() {
 		testLogger
-				.info("\r\n\r\n\r\n\r\n_______________________________emptyProxyTest________________________________\r\n\r\n\r\n\r\n");
+		.info("\r\n\r\n\r\n\r\n_______________________________emptyProxyTest________________________________\r\n\r\n\r\n\r\n");
 		message = new Message();
 		message.testName = "empty Proxy test";
 
@@ -390,7 +375,7 @@ public class NemoBashTest {
 	@Test
 	public final void checkEmptyProxyTestInit() {
 		testLogger
-				.info("\r\n\r\n\r\n\r\n_______________________________emptyProxyTest________________________________\r\n\r\n\r\n\r\n");
+		.info("\r\n\r\n\r\n\r\n_______________________________emptyProxyTest________________________________\r\n\r\n\r\n\r\n");
 		message = new Message();
 		message.testName = "empty Proxy test";
 
@@ -401,7 +386,7 @@ public class NemoBashTest {
 	@Test
 	public final void checkDefaultLanguageTest() {
 		testLogger
-				.info("\r\n\r\n\r\n\r\n_______________________________emptyProxyTest________________________________\r\n\r\n\r\n\r\n");
+		.info("\r\n\r\n\r\n\r\n_______________________________emptyProxyTest________________________________\r\n\r\n\r\n\r\n");
 		message = new Message();
 		message.testName = "empty Proxy test";
 		Configuration config = new Configuration();
@@ -412,7 +397,7 @@ public class NemoBashTest {
 	@Test
 	public final void checkDefaultLanguageInitTest() {
 		testLogger
-				.info("\r\n\r\n\r\n\r\n_______________________________emptyProxyTest________________________________\r\n\r\n\r\n\r\n");
+		.info("\r\n\r\n\r\n\r\n_______________________________emptyProxyTest________________________________\r\n\r\n\r\n\r\n");
 		message = new Message();
 		message.testName = "empty Proxy test";
 		Configuration config = new Configuration(true);
@@ -429,7 +414,7 @@ public class NemoBashTest {
 	public final void userParemetersLabelsEmpty() {
 		boolean res = false;
 		testLogger
-				.info("\r\n\r\n\r\n\r\n__________________________userParemetersLabelsEmpty___________________________\r\n\r\n\r\n\r\n");
+		.info("\r\n\r\n\r\n\r\n__________________________userParemetersLabelsEmpty___________________________\r\n\r\n\r\n\r\n");
 		message = new Message();
 		message.testName = " Empty userParemetersLabels";
 		org.w3c.dom.Document document;
@@ -460,7 +445,7 @@ public class NemoBashTest {
 	public final void userParametersLongNameEmpty() {
 		boolean res = false;
 		testLogger
-				.info("\r\n\r\n\r\n\r\n__________________________userParemetersLongNamesEmpty___________________________\r\n\r\n\r\n\r\n");
+		.info("\r\n\r\n\r\n\r\n__________________________userParemetersLongNamesEmpty___________________________\r\n\r\n\r\n\r\n");
 		message = new Message();
 		message.testName = " Empty userParametersLongNames";
 		org.w3c.dom.Document document;
@@ -491,7 +476,7 @@ public class NemoBashTest {
 	public final void userParametersStandardNameEmpty() {
 		boolean res = false;
 		testLogger
-				.info("\r\n\r\n\r\n\r\n__________________________userParemetersStandardNamesEmpty___________________________\r\n\r\n\r\n\r\n");
+		.info("\r\n\r\n\r\n\r\n__________________________userParemetersStandardNamesEmpty___________________________\r\n\r\n\r\n\r\n");
 		message = new Message();
 		message.testName = " Empty userParametersStandardNames";
 		org.w3c.dom.Document document;
@@ -519,8 +504,7 @@ public class NemoBashTest {
 	 * methodes
 	 * =================================================================
 	 */
-	public boolean testOneType_ListConv(DataListTypeEnum dataList,
-			Conversion conversion, E_TypeConversion convType) {
+	public boolean testOneType_ListConv(DataListTypeEnum dataList,Conversion conversion, E_TypeConversion convType) {
 
 		boolean ok = true;
 		boolean res;
@@ -568,11 +552,8 @@ public class NemoBashTest {
 												+ convDir.getName()
 												+ " "
 												+ unitTest.getName();
-										String inputAbsolutePath = testDir
-												.getAbsolutePath()
-												+ File.separator + inputName;
-										String outputAbsolutePath = unitTest
-												.getAbsolutePath();
+										String inputAbsolutePath = testDir.getAbsolutePath()+ File.separator + inputName;
+										String outputAbsolutePath = unitTest.getAbsolutePath();
 										cptTests++;
 										nbTotalTests++;
 										testFound = true;
@@ -589,19 +570,20 @@ public class NemoBashTest {
 													inputAbsolutePath,
 													outputAbsolutePath,
 													!unitTest.getName()
-															.startsWith("tj"));
+													.startsWith("tj"));
 											// writeInResultsFile(res + ";");
 											ok = res && ok;
 											if (res) {
-												if (conversion == Conversion.NETCDF) {
-													comp = compareWithODVReference(
-															outputAbsolutePath,
-															outputName);
-												} else {
-													comp = compareWithReference(
-															outputAbsolutePath,
-															outputName);
-												}
+												//												if (conversion == Conversion.NETCDF) {
+												//													comp = compareWithODVReference(
+												//															outputAbsolutePath,
+												//															outputName);
+												//												} else {
+												comp = compareWithReference(
+														outputAbsolutePath,
+														outputName,
+														conversion);
+												//												}
 												message.batchCompRes = comp;
 												// writeInResultsFile(comp +
 												// "\n");
@@ -624,13 +606,15 @@ public class NemoBashTest {
 											if (message.isManualFound) {
 												comp = compareWithReference(
 														outputAbsolutePath,
-														outputManualName);
+														outputManualName,conversion);
 												message.manualCompRes = comp;
 												message.manualCompName = outputManualName;
 												ok = comp && ok;
 											}
 										}
-
+										if (message.testName != null){
+											writeInResultsFile(message);
+										}
 									} else if (unitTest.getName().startsWith(
 											"_t")) {
 										message.testName = paramListDir
@@ -647,7 +631,7 @@ public class NemoBashTest {
 
 										message.print();
 									}
-									writeInResultsFile(message);
+
 								}
 
 							}
@@ -686,26 +670,25 @@ public class NemoBashTest {
 		return res;
 	}
 
-	public boolean convertWithNemoBatch(Conversion conversion,
-			E_TypeConversion odvConv, String inputAbsolutePath,
+	public boolean convertWithNemoBatch(Conversion conversion,	E_TypeConversion convType, String inputAbsolutePath,
 			String outputAbsolutePath, boolean isDateIso) {
+
 		boolean res = false;
 		String output = outputAbsolutePath + File.separator + outputName;
 		String model = outputAbsolutePath + File.separator + modelName;
 		couplingTablePrefix = outputAbsolutePath;
 		couplingTableUpdate = false;
-		cdiSummaryFile = outputAbsolutePath + File.separator
-				+ "cdiSummary_junit";
+		cdiSummaryFile = outputAbsolutePath + File.separator+ "cdiSummary_junit";
 		File mod = new File(model);
 		Nemo.getInstance().resetInstance();
 		Nemo.getInstance().getConfig().setIdEdmoRespCdi("486");// 486 is ifremer
 		Nemo.getInstance().getConfig().setDateISO(isDateIso);
 		// add long Name for test
 		NetCDFLongNameParameterManager.getInstance().getLongNamesMap()
-				.putAll(netCDFLongNamesMap());
+		.putAll(netCDFLongNamesMap());
 		// add standard Name for test
 		StandardNameParameterManager.getInstance().getStandardNamesMap()
-				.putAll(netCDFStandardNamesMap());
+		.putAll(netCDFStandardNamesMap());
 		// edmo code
 		shell = new NemoShell();
 		String batchCmd = "";
@@ -716,7 +699,7 @@ public class NemoBashTest {
 			Nemo.getInstance().setBatchMode(true);
 			try {
 				res = shell.main(inputAbsolutePath, output, model, conversion,
-						sortDatas, odvConv, datasetRef, cdiSummaryFile,
+						sortDatas, convType, datasetRef, cdiSummaryFile,
 						couplingTableUpdate, couplingTablePrefix, batchLogger);
 			} catch (Exception e) {
 				message.conversionRes = res;
@@ -736,7 +719,7 @@ public class NemoBashTest {
 
 		batchCmd += Global.SPACE + Global.MOINS + Global.optConv;
 		batchCmd += Global.SPACE + conversion;
-		if (E_TypeConversion.ODV_MULTISTATIONS == odvConv) {
+		if (E_TypeConversion.ODV_MULTISTATIONS == convType) {
 			batchCmd += Global.SPACE + Global.MOINS + Global.optOdvMulti;
 		}
 		batchCmd += Global.SPACE + Global.MOINS + Global.optCdiSummary;
@@ -836,7 +819,7 @@ public class NemoBashTest {
 		standardNames.put("PSSTZZ01", "sea_water_temperature"); //$NON-NLS-1$//$NON-NLS-2$
 		standardNames.put("ODSDM021", "sea_water_salinity"); //$NON-NLS-1$//$NON-NLS-2$
 		standardNames
-				.put("DOXYZZ01", "mole_concentration_of_dissolved_molecular_oxygen_in_sea_water"); //$NON-NLS-1$//$NON-NLS-2$
+		.put("DOXYZZ01", "mole_concentration_of_dissolved_molecular_oxygen_in_sea_water"); //$NON-NLS-1$//$NON-NLS-2$
 		standardNames.put("TEMPET01", "sea_water_temperature"); //$NON-NLS-1$//$NON-NLS-2$
 		standardNames.put(
 				"NTRIZZXX", "moles_of_nitrite_per_unit_mass_in_sea_water"); //$NON-NLS-1$//$NON-NLS-2$
@@ -863,9 +846,9 @@ public class NemoBashTest {
 		standardNames.put(
 				"CPHLHPP2", "mass_concentration_of_chlorophyll_in_sea_water"); //$NON-NLS-1$//$NON-NLS-2$
 		standardNames
-				.put("PHPICP01", "mole_concentration_of_particulate_organic_matter_expressed_as_phosphorus_in_sea_water"); //$NON-NLS-1$//$NON-NLS-2$
+		.put("PHPICP01", "mole_concentration_of_particulate_organic_matter_expressed_as_phosphorus_in_sea_water"); //$NON-NLS-1$//$NON-NLS-2$
 		standardNames
-				.put("TPHSXFP2", "mole_concentration_of_particulate_organic_matter_expressed_as_phosphorus_in_sea_water"); //$NON-NLS-1$//$NON-NLS-2$
+		.put("TPHSXFP2", "mole_concentration_of_particulate_organic_matter_expressed_as_phosphorus_in_sea_water"); //$NON-NLS-1$//$NON-NLS-2$
 		standardNames.put("DEPHPM01", "depth"); //$NON-NLS-1$//$NON-NLS-2$
 		standardNames.put(
 				"NTRAZZXX", "mole_concentration_of_nitrate_in_sea_water"); //$NON-NLS-1$//$NON-NLS-2$
@@ -875,7 +858,7 @@ public class NemoBashTest {
 		standardNames.put("TEMPPR01", "sea_water_temperature"); //$NON-NLS-1$//$NON-NLS-2$
 		standardNames.put("TEMPZZXX", "sea_water_temperature"); //$NON-NLS-1$//$NON-NLS-2$
 		standardNames
-				.put("ATTNZZ01", "volume_beam_attenuation_coefficient_of_radiative_flux_in_sea_water"); //$NON-NLS-1$//$NON-NLS-2$
+		.put("ATTNZZ01", "volume_beam_attenuation_coefficient_of_radiative_flux_in_sea_water"); //$NON-NLS-1$//$NON-NLS-2$
 		standardNames.put(
 				"CPHLPM01", "mass_concentration_of_chlorophyll_a_in_sea_water"); //$NON-NLS-1$//$NON-NLS-2$
 		standardNames.put("AHSLZZ01", "height"); //$NON-NLS-1$//$NON-NLS-2$
@@ -889,32 +872,80 @@ public class NemoBashTest {
 		return f.exists();
 	}
 
-	public boolean compareWithReference(String outputAbsolutePath,
-			String outputTestName) {
+	public boolean compareWithReference(String outputAbsolutePath, String outputTestName, Conversion conv) {
 		boolean comp = false;
-		comp = compare_____TwoFiles(outputAbsolutePath, outputTestName,
-				outputReferenceName);
+		if (conv == Conversion.NETCDF){
+			comp = compareCFPoint(outputAbsolutePath, outputTestName, outputReferenceName);
+		}else{
+			comp = compare_____TwoFiles(outputAbsolutePath, outputTestName, outputReferenceName);
+		}
 		return comp;
 	}
 
-	public boolean compareWithODVReference(String outputAbsolutePath,
-			String outputTestName) {
-		boolean comp = false;
-
-		String outputTest = outputAbsolutePath + File.separator
-				+ outputTestName;
-		String output_REFERENCE = outputAbsolutePath + File.separator
-				+ outputReferenceName;
-
+	private boolean compareCFPoint(String outputAbsolutePath, String outputTestName,String  outputNCReferenceName){
+		
+		NetcdfFile ref = null;
+		NetcdfFile junit = null ;
+		Formatter formatter = new Formatter();
+		
+		message.batchCompRes = true;
+		
+		if (new File(outputAbsolutePath+"/"+outputNCReferenceName).exists()){
+			message.isReferenceFound = true;
+		}else{
+			message.isReferenceFound = false;
+			return false;
+		}
+		
+		
 		try {
-			comp = OdvToNetCDF.compare(output_REFERENCE, outputTest);
-		} catch (Exception e) {
-			comp = false;
+			ref = NetcdfFileWriteable.open(outputAbsolutePath+"/"+outputNCReferenceName);
+			junit  = NetcdfFileWriteable.open(outputAbsolutePath+"/"+outputTestName);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} 
+		
+
+		CompareNetcdf2 comparator = new CompareNetcdf2();
+		comparator.compareFiles(ref,junit, formatter);
+
+		String file1="", file2=""; 
+		String expectedTitle= "\\*\\* ucar.nc2.Attribute title = \"NetCDF .* - Generated .*";
+		//				String expectedTitle= "\\*\\* ucar.nc2.Attribute title = \"NetCDF .* - Generated by MedSDN2CFPOINT, version .*";
+		for (String diffEntry : formatter.toString().split("\n"))
+		{
+			//					testLogger.info(diffEntry);
+			// get files paths
+			if(diffEntry.trim().startsWith(  "First file =")){
+				file1 = diffEntry;
+			}
+			if(diffEntry.trim().startsWith(  "Second file =") )
+			{
+				file2 = diffEntry;
+			}
+
+			if (diffEntry.trim().startsWith(  "** ")){
+				if (Pattern.matches(expectedTitle, diffEntry.trim() )) {
+					//								diffEntry.trim().startsWith(  "** ucar.nc2.Attribute title = \"NetCDF PROFILE - Generated by MedSDN2CFPOINT, version ")){
+					//							testLogger.warn(diffEntry);
+					// normal: version updated
+
+				}else if(diffEntry.trim().startsWith(  "** ucar.nc2.Attribute date_update"))
+				{
+					// normal: generation date = today
+				}
+				else{
+					System.out.println(diffEntry);
+					message.diff+=diffEntry;
+					message.batchCompRes = false;
+
+				}
+			}
 		}
 
-		return comp;
-	}
+		return message.batchCompRes;
 
+	}
 	public boolean compare_____TwoFiles(String outputAbsolutePath,
 			String fileA, String fileB) {
 
@@ -986,6 +1017,10 @@ public class NemoBashTest {
 							isVocabV2 = true;
 						}
 					}
+					if (!identical){
+						System.out.println("REF >>  "+ refFileLine);
+						System.out.println("OUT >>  "+ outputLine);
+					}
 
 				}
 				// normalement les 2 fichier doivent etre a la fin si identique.
@@ -1039,7 +1074,7 @@ public class NemoBashTest {
 		public boolean manualCompRes;
 		public String manualCompName;
 		public boolean isManualFound;
-		public boolean atLeastOneTestFound = false;
+		public String diff;
 
 		public Message() {
 

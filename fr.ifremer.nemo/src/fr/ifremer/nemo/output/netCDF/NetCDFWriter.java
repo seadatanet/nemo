@@ -545,8 +545,8 @@ public class NetCDFWriter extends NemoWriter {
 	public void writeDataToNetCDFFile() throws Exception {
 
 		for (Entry<String, Object> currentStationData : stationData.entrySet()) {
-			// TODO debug
-			System.out.println(currentStationData.getKey() + " >> "+currentStationData.getValue());
+			
+//			System.out.println(currentStationData.getKey() + " >> "+currentStationData.getValue());
 			myCFPointWriterManager.writeDataToVariable(dims, mapVariables.get(currentStationData.getKey()), currentStationData.getValue());
 
 		}

@@ -27,6 +27,8 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.sax.SAXResult;
 import javax.xml.transform.stream.StreamSource;
 
+import org.apache.log4j.Logger;
+
 import com.ago.xml.XMLBootstrapParser;
 
 import fr.ifremer.nemo.config.Configuration;
@@ -106,7 +108,7 @@ public class Nemo {
 		domain.update(model);
 	}
 
-	public boolean openModel(String pathModel) throws FileNotFoundException,
+	public boolean openModel(String pathModel, Logger logger) throws FileNotFoundException,
 			TransformerException {
 
 		// nom du model
@@ -142,7 +144,11 @@ public class Nemo {
 			String C19RegionName = CruiseModel.getTranscodeRegionName(regionName);
 			model.getCruiseModel().setRegionName(C19RegionName);
 		}
-
+		// models for profiles, MEDATLAS are invalids if older than 1.6.0 
+		if (compareVersion(model.getVersion(), "1.6.0") == -1) {
+			logger.error("models for medatlas profiles older than 1.6.0 shall be validated in Nemo before be used in batch mode");// TODO 20755
+			return false;
+		}
 		completeDataList(model, isBeforeP011);
 		domain.update(model);
 		return model.isValid();

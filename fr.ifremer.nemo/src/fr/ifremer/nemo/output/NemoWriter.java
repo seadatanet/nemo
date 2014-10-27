@@ -13,6 +13,7 @@ import java.text.ParseException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.domain.CruiseDomain;
@@ -353,10 +354,12 @@ public abstract class NemoWriter {
 
 	protected abstract String getOutputFileName(String inputFilePath);
 
-	protected void printCruiseHeader() throws ParseException,
-			UnsupportedEncodingException, GenerationException {
+	protected void printCruiseHeader() throws ParseException,UnsupportedEncodingException, GenerationException {
+		printCruiseHeader(null);
+	}
+	protected void printCruiseHeader(List<Station> stationsList) throws ParseException,	UnsupportedEncodingException, GenerationException {
 		// écriture de l'entête campagne
-		StringBuffer cruiseHeader = cruiseDomain.getHeader(myConversion);
+		StringBuffer cruiseHeader = cruiseDomain.getHeader(myConversion, stationsList);
 		outputFileWriter.println(cruiseHeader);
 	}
 

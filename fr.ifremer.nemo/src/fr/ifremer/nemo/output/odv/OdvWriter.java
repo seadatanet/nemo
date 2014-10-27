@@ -98,7 +98,9 @@ public class OdvWriter extends NemoWriter
                                 mOutputFileName), Global.NEMO_ENCODING)));
 
                     // écriture de l'entête campagne
-                    printCruiseHeader();
+                    List<Station> stList  = new ArrayList<Station>();
+                    stList.add(st);
+                    printCruiseHeader(stList);
 
                     if (isProcessType_CruiseFile)
                     {
@@ -126,7 +128,7 @@ public class OdvWriter extends NemoWriter
                         Global.NEMO_ENCODING)));
 
                 // écriture de l'entête campagne
-                printCruiseHeader();
+                printCruiseHeader(stationDomain.getStations(inputFilePath));
 
                 for (Station st : stationDomain.getStations(inputFilePath))
                 {

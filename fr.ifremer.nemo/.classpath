@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry excluding="fr/ifremer/nemo/input/CopyOfFragment.java" kind="src" path="src"/>
-	<classpathentry exported="true" kind="lib" path="lib/sismertoolslib-1.1.6-SNAPSHOT.jar" sourcepath="/sismerToolsLib"/>
-	<classpathentry exported="true" kind="lib" path="lib/cfpointLib-0.13.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/cfpointLib-0.15-SNAPSHOT.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/sismertoolslib-1.1.7-SNAPSHOT.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/sdnVocabulary-1.1.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>

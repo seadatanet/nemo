@@ -1,6 +1,5 @@
 package fr.ifremer.nemo.ui.edit.station;
 
-
 import java.util.ArrayList;
 
 import org.eclipse.jface.layout.GridDataFactory;
@@ -18,13 +17,12 @@ import fr.ifremer.nemo.ui.edit.EditForm;
 import fr.ifremer.nemo.ui.edit.NemoSection;
 import fr.ifremer.sismer_tools.seadatanet.SDNXLinkException;
 import fr.ifremer.sismer_tools.seadatanet.SdnXLinkReference;
-import fr.ifremer.sismer_tools.seadatanet.SdnXLinkReference.SDN_REFERENCE_ROLE;
 
 public class SdnReferenceSection extends NemoSection {
-	private Group manualReferences ;
+	private Group manualReferences;
 	SdnReferencesTableEditor table;
 
-	ArrayList<SdnXLinkReference> sdnXLinkReferences ;
+	ArrayList<SdnXLinkReference> sdnXLinkReferences;
 
 	public SdnReferenceSection(String name, String title, String description,
 			EditForm form) {
@@ -35,32 +33,32 @@ public class SdnReferenceSection extends NemoSection {
 	@Override
 	protected void drawSection(Composite parent, boolean filled) {
 		manualReferences = new Group(parent, SWT.SHADOW_ETCHED_IN);
-		manualReferences.setText("manual ref");// TODO msg
+		manualReferences.setText("manual ref");// TODO 20755 msg
 
-		GridLayoutFactory.fillDefaults().numColumns(1).applyTo(manualReferences);
-		GridDataFactory.fillDefaults().grab(true, true).applyTo(manualReferences);
+		GridLayoutFactory.fillDefaults().numColumns(1)
+				.applyTo(manualReferences);
+		GridDataFactory.fillDefaults().grab(true, true)
+				.applyTo(manualReferences);
 
 		Button addReference = new Button(manualReferences, SWT.PUSH);
-		addReference.setText("add reference");// TODO msg
+		addReference.setText("add reference");// TODO 20755 msg
 		AddReferenceListener addReferenceListener = new AddReferenceListener();
 		addReference.addListener(SWT.Selection, addReferenceListener);
 
 		Button deleteReferences = new Button(manualReferences, SWT.PUSH);
-		deleteReferences.setText("delete selected references");// TODO msg
+		deleteReferences.setText("delete selected references");// TODO 20755 msg
 		DeleteReferenceListener deleteReferenceListener = new DeleteReferenceListener();
 		deleteReferences.addListener(SWT.Selection, deleteReferenceListener);
-		
-		table = new SdnReferencesTableEditor(manualReferences);
-		
 
+		table = new SdnReferencesTableEditor(manualReferences);
 
 	}
+
 	@Override
 	public void razValues() {
 		// TODO Auto-generated method stub
 
 	}
-
 
 	public class AddReferenceListener implements Listener {
 		public void handleEvent(Event event) {
@@ -74,23 +72,22 @@ public class SdnReferenceSection extends NemoSection {
 		}
 	}
 
-	public ArrayList<SdnXLinkReference> getSdnReferences() throws SDNXLinkException{
+	public ArrayList<SdnXLinkReference> getSdnReferences()
+			throws SDNXLinkException {
 		sdnXLinkReferences = new ArrayList<SdnXLinkReference>();
 
-		for (TableItem item : table.getItems()){
+		for (TableItem item : table.getItems()) {
 			SdnXLinkReference ref = new SdnXLinkReference();
-			if ( item.getData(SdnReferencesTableEditor.DATA_KEY.HREF.toString()) != null ){
+			if (item.getData(SdnReferencesTableEditor.DATA_KEY.HREF.toString()) != null) {
 
-				String type = (String)item.getData(SdnReferencesTableEditor.DATA_KEY.TYPE.toString());
+				String type = (String) item.getData(SdnReferencesTableEditor.DATA_KEY.TYPE.toString());
 
-				if (type !=null && !type.isEmpty()){
-					ref.setType( SdnXLinkReference.SDN_L23_PREFIX +type);
+				if (type != null && !type.isEmpty()) {
+					ref.setType(SdnXLinkReference.SDN_L23_PREFIX + type);
 				}
-				SdnXLinkReference.SDN_REFERENCE_ROLE role = (SDN_REFERENCE_ROLE) item.getData(SdnReferencesTableEditor.DATA_KEY.ROLE.toString());
-				ref.setRole(role);
 
-				ref.setHref((String)item.getData(SdnReferencesTableEditor.DATA_KEY.HREF.toString()));
-
+				ref.setRole((String) item.getData(SdnReferencesTableEditor.DATA_KEY.ROLE.toString()));
+				ref.setHref((String) item.getData(SdnReferencesTableEditor.DATA_KEY.HREF.toString()));
 				sdnXLinkReferences.add(ref);
 
 			}
@@ -98,9 +95,9 @@ public class SdnReferenceSection extends NemoSection {
 		return sdnXLinkReferences;
 
 	}
+
 	@Override
-	public void initModel(StationModel stationModel)
-	{
+	public void initModel(StationModel stationModel) {
 		try {
 			stationModel.setSdnXLinkReferences(sdnXLinkReferences);
 		} catch (Exception e) {
@@ -112,6 +109,6 @@ public class SdnReferenceSection extends NemoSection {
 
 	@Override
 	public void fillFromModel(StationModel stationModel) {
-		table.fillFromModel( stationModel);
+		table.fillFromModel(stationModel);
 	}
 }

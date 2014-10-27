@@ -208,7 +208,12 @@ public class EditCruiseForm extends EditForm {
 	@Override
 	public void actualiseEdition() {
 		RulesManager rulesManager = RulesManager.getInstance();
-		sectionCorrespondingURL.setEnabled(rulesManager.isConversionToNetCDF());
+		sectionCorrespondingURL.setEnabled(rulesManager.isConversionToNetCDF()||rulesManager.isConversionToMedatlas());
+		int correpsondingURLIndex = sectionCorrespondingURL.getItemIndex(Global.EMPTY_STRING);
+		Couple correspondingURL = sectionCorrespondingURL.getItem(correpsondingURLIndex);
+		Button correspondingURLCheck = sectionCorrespondingURL.getCheckBox(correpsondingURLIndex);
+		
+		correspondingURL.setEnabled(!correspondingURLCheck.getSelection());
 	}
 
 	public void init_webService() {
@@ -371,7 +376,7 @@ public class EditCruiseForm extends EditForm {
 
 		// TODO 20755 change labels
 		sectionCorrespondingURL = new CruiseSection(Messages.edit_cruise_sectionCorrespondingUrl, Messages.edit_cruise_sectionCorrespondingUrl, Messages.edit_cruise_sectionCorrespondingUrl_lib, this);
-		sectionCorrespondingURL.addItem(Global.EMPTY_STRING, ComboType.NONE, Global.EMPTY_STRING, true, "auto"); // TODO 20755
+		sectionCorrespondingURL.addItem(Global.EMPTY_STRING, ComboType.NONE, Global.EMPTY_STRING, true, true, "auto"); // TODO 20755
 		listeSections.add(sectionCorrespondingURL);
 	}
 
@@ -409,7 +414,10 @@ public class EditCruiseForm extends EditForm {
 		Couple centreDonnee = sectionCentre.getItem(Messages.edit_cruise_dataCenter);
 		Couple confidentialite = sectionCentre.getItem(Messages.edit_cruise_confident);
 		Couple commentaires = sectionCommentaire.getItem(Global.EMPTY_STRING);
-		Couple correspondingURL = sectionCorrespondingURL.getItem(Global.EMPTY_STRING);
+//		Couple correspondingURL = sectionCorrespondingURL.getItem(Global.EMPTY_STRING);
+		int correpsondingURLIndex = sectionCorrespondingURL.getItemIndex(Global.EMPTY_STRING);
+		Couple correspondingURL = sectionCorrespondingURL.getItem(correpsondingURLIndex);
+		Button correspondingURLCheck = sectionCorrespondingURL.getCheckBox(correpsondingURLIndex);
 
 		// maj des dataTypes
 		TableDataSurvey.majTypeData();
@@ -482,6 +490,7 @@ public class EditCruiseForm extends EditForm {
 
 		//Corresponding URL
 		cruiseModel.setCorrespondingURL(correspondingURL.getText());
+		cruiseModel.setCorrespondingURLAutoCheck(correspondingURLCheck.getSelection());
 
 		// Mise à jour du model
 		Nemo.getInstance().getDomain().getCruise().updateCruise(cruiseModel);
@@ -511,8 +520,12 @@ public class EditCruiseForm extends EditForm {
 		Couple centreDonnee = sectionCentre.getItem(Messages.edit_cruise_dataCenter);
 		Couple confidentialite = sectionCentre.getItem(Messages.edit_cruise_confident);
 		Couple commentaires = sectionCommentaire.getItem(Global.EMPTY_STRING);
-		Couple correspondingURL = sectionCorrespondingURL.getItem(Global.EMPTY_STRING);
-
+		
+		
+		int correpsondingURLIndex = sectionCorrespondingURL.getItemIndex(Global.EMPTY_STRING);
+		Couple correspondingURL = sectionCorrespondingURL.getItem(correpsondingURLIndex);
+		Button correspondingURLCheck = sectionCorrespondingURL.getCheckBox(correpsondingURLIndex);
+		
 		// injection des valeurs de l'IHM -> datamodel
 		// reference
 		refCampagne.setText(cruiseModel.getReference());
@@ -551,8 +564,12 @@ public class EditCruiseForm extends EditForm {
 
 		// Commentaire
 		commentaires.setText(cruiseModel.getComment());
+		
+		// SDN reference
 		correspondingURL.setText(cruiseModel.getCorrespondingURL());
-
+		correspondingURL.setEnabled(!cruiseModel.getCorrespondingURLAutoCheck());
+		correspondingURLCheck.setSelection(cruiseModel.getCorrespondingURLAutoCheck());
+		
 		// Remplissage de la liste des dataTypes de la campagne
 		sectionType.fillFromModel(cruiseModel);
 	}

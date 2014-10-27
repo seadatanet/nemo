@@ -1471,6 +1471,7 @@ public class TableData {
 									+ " "
 									+ myTable.getItem(i).getText(
 											colNbById.get(COL_CODE)));
+							Utils.messageErreurAppend("expected a numeric value, found \'"+selection + "'");// TODO
 							break;
 
 						}

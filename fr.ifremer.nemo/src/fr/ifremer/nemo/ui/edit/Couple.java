@@ -133,6 +133,7 @@ public class Couple implements UIobject
 					Utils.invalidEtapes();
 				}
 			});
+			valueText.setToolTipText(valueText.getText()); // TODO 20755 tooltip does not work
 
 		}
 		else if (valueCombo != null)

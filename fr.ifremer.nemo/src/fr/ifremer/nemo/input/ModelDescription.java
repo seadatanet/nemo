@@ -56,6 +56,7 @@ public class ModelDescription extends NLS {
 	public static String node_availability;
 	public static String node_comment;
 	public static String node_correspondingURL;
+	public static String node_correspondingURLAutoCheck;
 	public static String node_listDatatypes;
 	public static String node_datatypeModel;
 	public static String node_nbprofiles;
@@ -156,6 +157,7 @@ public class ModelDescription extends NLS {
 	public static String setter_availability;
 	public static String setter_comment;
 	public static String setter_correspondingURL;
+	public static String setter_correspondingURLAutoCheck;
 	public static String setter_nbprofiles;
 	public static String setter_qc;
 	public static String setter_sensor;

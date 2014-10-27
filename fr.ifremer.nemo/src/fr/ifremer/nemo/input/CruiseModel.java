@@ -46,6 +46,8 @@ import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Global.E_Availability;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
+import fr.ifremer.sismer_tools.seadatanet.SDNXLinkException;
+import fr.ifremer.sismer_tools.seadatanet.SdnXLinkReference;
 
 /**
  * Class CruiseModel.java
@@ -77,9 +79,11 @@ public class CruiseModel extends AbstractModel {
 	protected String _comment;
 
 	/**
-	 * Corresponding URL (NETCDF)
+	 * Corresponding URL for Cruise SDN reference 
 	 */
 	protected String _correspondingURL;
+	// default: auto compute the CSR
+	protected Boolean _correspondingURLAutoCheck = true;
 
 	/**
 	 * Code pays du laboratoire source (MEDATLAS: 2 char max)
@@ -171,6 +175,7 @@ public class CruiseModel extends AbstractModel {
 		_chiefScientist = Intern.unknown;
 		_comment = Global.EMPTY_STRING;
 		_correspondingURL = Global.EMPTY_STRING;
+		_correspondingURLAutoCheck = true;
 		_countryCode = Global.EMPTY_STRING;
 		_countryName = null;
 		_dataCentre = Global.EMPTY_STRING;
@@ -291,6 +296,10 @@ public class CruiseModel extends AbstractModel {
 			Element2Field setter = new Element2Field(this, ModelDescription.setter_correspondingURL);
 			return setter;
 		}
+		if (a_LocalName.equals(ModelDescription.node_correspondingURLAutoCheck)) {
+			Element2Field setter = new Element2Field(this, ModelDescription.setter_correspondingURLAutoCheck);
+			return setter;
+		}
 
 		if (a_LocalName.equals(ModelDescription.node_listDatatypes)) {
 			return new PathElementConsumer(ModelDescription.node_listDatatypes, this);
@@ -337,6 +346,7 @@ public class CruiseModel extends AbstractModel {
 		a_Writer.putTag(ModelDescription.node_availability, getAvailability().toString());
 		a_Writer.putCDATATag(ModelDescription.node_comment, getComment());
 		a_Writer.putCDATATag(ModelDescription.node_correspondingURL, getCorrespondingURL());
+		a_Writer.putTag(ModelDescription.node_correspondingURLAutoCheck, getCorrespondingURLAutoCheck());
 		a_Writer.openTag(ModelDescription.node_listDatatypes);
 		for (DataType t : getDataTypes()) {
 			t.writeXMLOn(a_Writer);
@@ -628,9 +638,41 @@ public class CruiseModel extends AbstractModel {
 	 * @see CruiseModel.java#_correspondingURL
 	 */
 	public String getCorrespondingURL() {
-		return _correspondingURL;
+		if (_correspondingURLAutoCheck){
+			return getCorrespondingURLDefault();
+		}else{
+			return _correspondingURL;
+		}
+	}
+	
+	public String  getCorrespondingURLDefault()
+	{
+		
+		SdnXLinkReference csr = new SdnXLinkReference();
+		try {
+			// TODO 20755 check if edmo is the good one
+			csr.setAsCsr(Integer.valueOf(Nemo.getInstance().getConfig().getIdEdmoRespCdi()), 
+					_reference);
+		} catch (NumberFormatException e) {
+			// TODO 20755 Auto-generated catch block
+			e.printStackTrace();
+		} catch (SDNXLinkException e) {
+			// TODO 20755 Auto-generated catch block
+			e.printStackTrace();
+		}
+		return csr.toString();
 	}
 
+	public Boolean getCorrespondingURLAutoCheck() {
+		return _correspondingURLAutoCheck;
+	}
+
+	public void setCorrespondingURLAutoCheck(String x) {
+		_correspondingURLAutoCheck = Boolean.valueOf(x);
+	}
+	public void setCorrespondingURLAutoCheck(Boolean  correspondingURLAutoCheck) {
+		_correspondingURLAutoCheck = correspondingURLAutoCheck;
+	}
 	/**
 	 * Setter pour _comment
 	 * @param x : nouvelle valeur pour _comment

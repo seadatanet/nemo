@@ -52,12 +52,11 @@ public class LabelParameterManager
 	/**
 	 * 
 	 */
-	public LabelParameterManager()
+	private LabelParameterManager()
 	{
 		super();
 		labelsMap = new HashMap<String, String>();
 		loadUserLabels();
-		// TODO Auto-generated constructor stub
 	}
 
 	public static LabelParameterManager getInstance()

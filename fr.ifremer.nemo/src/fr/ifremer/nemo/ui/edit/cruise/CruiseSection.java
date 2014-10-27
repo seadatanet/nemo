@@ -1,11 +1,3 @@
-/*
- * ============================================================================
- * Nom du fichier : SurveySection.java
- * Auteur : dboulang
- * Date : 28 mai 2009
- * Copyright : Altran
- * ============================================================================
- */
 package fr.ifremer.nemo.ui.edit.cruise;
 
 import java.util.ArrayList;
@@ -18,7 +10,7 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 
-import fr.ifremer.nemo.ui.Utils;
+import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.ui.edit.ComboType;
 import fr.ifremer.nemo.ui.edit.Couple;
 import fr.ifremer.nemo.ui.edit.NemoSection;
@@ -33,22 +25,12 @@ public class CruiseSection extends NemoSection
 {
 	protected Composite compo;
 	protected List<Couple> items;
+	protected List<Button> checkButtons;
 	protected EditCruiseForm myForm;
 	private final List<Boolean> checks;
+	private final List<Boolean> checkDefaults;
 	private final List<String> checksLabels;
 
-
-	//	radNextStationIsRegexpCheckbox = new Button(compoNext, SWT.CHECK);
-	//	radNextStationIsRegexpCheckbox.setText(Messages.edit_file_idcNextStationRegexp);
-	//	radNextStationIsRegexpCheckbox.setBackground(Nemo.getInstance().getViewMain().getBackgroundEdit());
-	//	radNextStationIsRegexpCheckbox.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter()
-	//	{
-	//		@Override
-	//		public void widgetSelected(org.eclipse.swt.events.SelectionEvent g)
-	//		{
-	//			Utils.invalidEtapes();
-	//		}
-	//	});
 
 	/**
 	 * @param shell
@@ -61,15 +43,17 @@ public class CruiseSection extends NemoSection
 		super(name, title, description, form);
 		myForm = form;
 		items = new ArrayList<Couple>();
+		checkButtons = new ArrayList<Button>();
 		checks = new ArrayList<Boolean>();
+		checkDefaults = new ArrayList<Boolean>();
 		checksLabels = new ArrayList<String>();
 	}
 
 	public void addItem(String label, ComboType type, String defaultValue)
 	{
-		addItem(label, type, defaultValue, false, null);
+		addItem(label, type, defaultValue, false, false, null);
 	}
-	public void addItem(String label, ComboType type, String defaultValue, boolean check, String checkLabel)
+	public void addItem(String label, ComboType type, String defaultValue, boolean check, boolean checkDefaultValue, String checkLabel)
 	{
 		Couple item = new Couple(null, label, type, defaultValue);
 		if (type == ComboType.BLOCK)
@@ -78,6 +62,7 @@ public class CruiseSection extends NemoSection
 
 		items.add(item);
 		checks.add(check);
+		checkDefaults.add(checkDefaultValue);
 		checksLabels.add(checkLabel);
 
 	}
@@ -117,20 +102,34 @@ public class CruiseSection extends NemoSection
 				GridDataFactory.fillDefaults().grab(true, false).applyTo(group);
 				item.draw(group, filled);
 				Button check = new Button(group, SWT.CHECK);
+				checkButtons.add(check);
+				check.setSelection(checkDefaults.get(cpt));
 				check.setText(checksLabels.get(cpt));
 				check.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter()
 				{
 					@Override
 					public void widgetSelected(org.eclipse.swt.events.SelectionEvent g)
 					{
-						Utils.invalidEtapes();
+						for ( int cpt=0; cpt<items.size(); cpt++){
+							//		for (Couple item : items)
+
+							Couple item = items.get(cpt);
+							if (checks.get(cpt)){
+								if (((Button)g.getSource()).getSelection()){
+									items.get(cpt).setEnabled(false);
+									items.get(cpt).setText(Nemo.getInstance().getDomain().getCruise().getModel().getCorrespondingURLDefault());
+								}else{
+									items.get(cpt).setEnabled(true);
+								}
+							}
+						}
 					}
 				});
 			} else{
 				item.draw(compo, filled);
 			}
 
-			
+
 		}
 	}
 
@@ -152,10 +151,36 @@ public class CruiseSection extends NemoSection
 		}
 	}
 
+
+	public int getItemIndex(String label){
+		for ( int cpt=0; cpt<items.size(); cpt++){
+
+			Couple item = items.get(cpt);
+			// cas particulier des commentaires
+			if (item.getType() == ComboType.BLOCK)
+			{
+				return cpt;
+			} else if (item.getLabelString() != null
+					&& item.getLabelString().equals(label))
+			{
+				return cpt;
+			}
+		}
+		return -1;
+	}
+
+	public Couple getItem(int index){
+		return items.get(index);
+	}
+	public Button getCheckBox(int index){
+		return checkButtons.get(index);
+	}
 	public Couple getItem(String label)
 	{
-		for (Couple item : items)
-		{
+		//		for (Couple item : items)
+		for ( int cpt=0; cpt<items.size(); cpt++){
+
+			Couple item = items.get(cpt);
 			// cas particulier des commentaires
 			if (item.getType() == ComboType.BLOCK)
 			{

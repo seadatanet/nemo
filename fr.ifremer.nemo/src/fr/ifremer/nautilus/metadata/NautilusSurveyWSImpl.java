@@ -36,6 +36,7 @@ public class NautilusSurveyWSImpl implements Cloneable, NautilusSurveyWS {
 	 * 
 	 * @return a copy of this object
 	 */
+	@Override
 	public Object clone() throws CloneNotSupportedException {
 		NautilusSurveyWSImpl copy = null;
 		copy = (NautilusSurveyWSImpl) super.clone();
@@ -217,7 +218,7 @@ public class NautilusSurveyWSImpl implements Cloneable, NautilusSurveyWS {
 				survey.setProjectName(getProjectName(cprj, conn));
 				survey.setDataTypes(getDataTypeFor(crno, conn));
 				
-				System.out.println("reference >>>>>"+ref);
+				_logger.debug("reference >>>>>"+ref);
 				_logger.error("reference >>>>" + ref);
 			}
 			return survey;
