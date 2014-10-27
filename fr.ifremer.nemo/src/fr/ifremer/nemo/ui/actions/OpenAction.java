@@ -66,7 +66,7 @@ public class OpenAction extends Action implements ISelectionListener,
                 try
                 {
                     // FAE 9656 si model non validé affichage d'un warning
-                    if (!Nemo.getInstance().openModel(nomModele, Application.batchLogger))
+                    if (!Nemo.getInstance().openModel(nomModele, null))
                     {
                         MessageBox mb =
                             new MessageBox(Utils.getMainShell(),

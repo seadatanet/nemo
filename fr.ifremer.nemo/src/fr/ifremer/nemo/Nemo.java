@@ -40,6 +40,8 @@ import fr.ifremer.nemo.ui.RulesManager;
 import fr.ifremer.nemo.ui.view.ViewMain;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Global.DataListTypeEnum;
+import fr.ifremer.nemo.util.Global.E_InputType;
+import fr.ifremer.nemo.util.Global.E_TypeConversion;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
 
@@ -145,9 +147,13 @@ public class Nemo {
 			model.getCruiseModel().setRegionName(C19RegionName);
 		}
 		// models for profiles, MEDATLAS are invalids if older than 1.6.0 
-		if (compareVersion(model.getVersion(), "1.6.0") == -1) {
-			logger.error("models for medatlas profiles older than 1.6.0 shall be validated in Nemo before be used in batch mode");// TODO 20755
-			return false;
+		if (compareVersion(model.getVersion(), "1.6.0") == -1
+				&& model.getConversionModel().getOutputFormat()==E_TypeConversion.MEDATLAS
+				&& model.getMediaModel().getInputType() == E_InputType.PROFILE) {// TODO check conversion and type
+			if (logger != null){
+				logger.error("models for medatlas profiles older than 1.6.0 shall be validated in Nemo before be used in batch mode");// TODO 20755
+			}
+			model.setIsValid(false);
 		}
 		completeDataList(model, isBeforeP011);
 		domain.update(model);
