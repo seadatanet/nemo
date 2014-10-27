@@ -74,6 +74,7 @@ public class ViewMain extends ViewPart
 		myFilteredTableFactory = new FilteredTableFactory();
 		Nemo.getInstance().setViewMain(this);
 		
+		
 
 	}
 
@@ -150,6 +151,8 @@ public class ViewMain extends ViewPart
 		tabConversion = new TabItem(tabFolder, SWT.NONE);
 		tabConversion.setText(Messages.onglet_convert);
 		tabConversion.setControl(contentConversion);
+		
+		
 
 	}
 
@@ -299,6 +302,9 @@ public class ViewMain extends ViewPart
 		// --- le contenu du fichier
 		editFileForm.init();
 		editDataForm.init();
+		
+		
+		
 
 	}
 

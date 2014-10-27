@@ -57,12 +57,12 @@ import fr.ifremer.sismer_tools.seadatanet.SdnXLinkReference;
 public class CruiseModel extends AbstractModel {
 	private static String CSR_DATE_FORMAT = "yyyy-MM-dd"; //$NON-NLS-1$
 	public static String MED_DATE_FORMAT = "dd/MM/yyyy"; //$NON-NLS-1$
-	
+
 	/**
 	 * xml actuellement autorise pour initialisation xml
 	 */
 	public static enum XmlVersion {ISO_19139, ISO_19115};
-	
+
 	/**
 	 * Code d'accessibilité des données (MEDATLAS: 1 char = P/L/C)
 	 */
@@ -149,13 +149,13 @@ public class CruiseModel extends AbstractModel {
 	 * Date de début de campagne (MEDATLAS: DD/MM/YYYY)
 	 */
 	protected long _startDate;
-	
-	
+
+
 	/**
 	 * version xml du fichier charger depuis xml initialisation
 	 */
 	private XmlVersion xmlVersion;
-	
+
 	/**
 	 * Liste , ordonnee, des types de donnees
 	 */
@@ -196,9 +196,9 @@ public class CruiseModel extends AbstractModel {
 	 * @see AbstractModel.java#fromElement
 	 */
 	public static SAXConsumer fromElement(String a_URI,
-											String a_LocalName,
-											String a_QName,
-											Attributes a_Attributes) {
+			String a_LocalName,
+			String a_QName,
+			Attributes a_Attributes) {
 		CruiseModel el = new CruiseModel();
 		el.buildFromElement(a_URI, a_LocalName, a_QName, a_Attributes);
 		return el;
@@ -209,9 +209,9 @@ public class CruiseModel extends AbstractModel {
 	 */
 	@Override
 	public void buildFromElement(String a_URI,
-									String a_LocalName,
-									String a_QName,
-									Attributes a_Attributes) {
+			String a_LocalName,
+			String a_QName,
+			Attributes a_Attributes) {
 		// l'élément n'a pas d'attributs
 	}
 
@@ -220,9 +220,9 @@ public class CruiseModel extends AbstractModel {
 	 */
 	@Override
 	public SAXConsumer consumeElement(String a_URI,
-										String a_LocalName,
-										String a_QName,
-										Attributes a_Attributes) {
+			String a_LocalName,
+			String a_QName,
+			Attributes a_Attributes) {
 
 		if (a_LocalName.equals(ModelDescription.node_cref)) {
 			Element2Field setter = new Element2Field(this, ModelDescription.setter_cref);
@@ -312,10 +312,10 @@ public class CruiseModel extends AbstractModel {
 	 */
 	@Override
 	public SAXConsumer handlePathElement(String path,
-											String a_URI,
-											String a_LocalName,
-											String a_QName,
-											Attributes a_Attributes) {
+			String a_URI,
+			String a_LocalName,
+			String a_QName,
+			Attributes a_Attributes) {
 		SAXConsumer el = null;
 		if (path.equals(ModelDescription.node_listDatatypes)) {
 			el = DataType.fromElement(a_URI, a_LocalName, a_QName, a_Attributes);
@@ -364,8 +364,8 @@ public class CruiseModel extends AbstractModel {
 	public void fillFromSISMER(String a_Reference) throws ServiceException, MalformedURLException, RemoteException {
 
 		NautilusSurveyWS service = new NautilusSurveyWSServiceLocator()
-										.getNAUTILUS(new java.net.URL(Nemo.getInstance().getConfig()
-												.getNautilusWebServiceURL()));
+		.getNAUTILUS(new java.net.URL(Nemo.getInstance().getConfig()
+				.getNautilusWebServiceURL()));
 		WSSurvey wssurvey = service.getSurvey(a_Reference);
 
 		// initialisation avec les valeurs par défaut
@@ -448,9 +448,9 @@ public class CruiseModel extends AbstractModel {
 		}
 		return RegionName;
 	}
-	
-	
-	
+
+
+
 
 	/**
 	 * Methode de creation d'instance a partir d'un fichier XML
@@ -461,7 +461,7 @@ public class CruiseModel extends AbstractModel {
 	 * @exception java.io.FileNotFoundException
 	 */
 	public void importFromXML(File xmlFile) throws SAXException, TransformerException {
-		
+
 		//verifie si input xml est SDN2_CSR_ISO19139_3.0.0.xsd complieant
 		if(checkSchema( new StreamSource(xmlFile), Intern.CruiseShemaLocationISO19139))
 		{
@@ -479,12 +479,12 @@ public class CruiseModel extends AbstractModel {
 			//erreur si fichier n'est pas en ISO_19139 ou ISO_19115
 			Utils.messageErreurAppend(Messages.error_cruise_invalidXML);
 		}
-		
-		
-		
+
+
+
 	}
-	
-	
+
+
 	/**
 	 * Methode de creation d'instance a partir d'un fichier XML
 	 * @param xmlFile : Schéma XML
@@ -498,7 +498,7 @@ public class CruiseModel extends AbstractModel {
 
 		StreamSource xmlSource = new StreamSource(xmlFile);
 		StreamSource xslSource = new StreamSource(xslFile);
-		
+
 		XMLBootstrapParser parser = new XMLBootstrapParser(this);
 		Result result = new SAXResult(parser);
 		TransformerFactory factory = TransformerFactory.newInstance();
@@ -640,14 +640,14 @@ public class CruiseModel extends AbstractModel {
 	public String getCorrespondingURL() {
 		if (_correspondingURLAutoCheck){
 			return getCorrespondingURLDefault();
-		}else{
-			return _correspondingURL;
 		}
+		return _correspondingURL;
+
 	}
-	
+
 	public String  getCorrespondingURLDefault()
 	{
-		
+
 		SdnXLinkReference csr = new SdnXLinkReference();
 		try {
 			// TODO 20755 check if edmo is the good one
@@ -941,7 +941,7 @@ public class CruiseModel extends AbstractModel {
 	public long getStartDate() {
 		return _startDate;
 	}
-	
+
 	/**
 	 * Getter pour xmlVersion.
 	 * @return XmlVersion

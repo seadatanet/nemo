@@ -47,10 +47,11 @@ public class ConversionSelectionListener implements SelectionListener
         try
         {
             // Test si la config est bien remplie
-            if (!convForm.checkConfig())
-            {
-                throw new Exception("CDI cancelled"); //$NON-NLS-1$
-            }
+        	// INFO BGT: deja testé sur bouton browse
+//            if (!convForm.checkConfig())
+//            {
+//                throw new Exception("CDI cancelled"); //$NON-NLS-1$
+//            }
             EditFileForm editFileForm = Nemo.getInstance().getViewMain().getEditFileForm();
             // RaZ
             Nemo.getInstance().getDomain().getCruise().setDataSetRef(Global.EMPTY_STRING);

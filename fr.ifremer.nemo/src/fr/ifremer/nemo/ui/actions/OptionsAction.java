@@ -344,8 +344,8 @@ public class OptionsAction extends Action implements ISelectionListener, ActionF
 		radDateJulian.setSelection(!config.isDateISO());
 
 		// CDI and CSR HREF
-		textCdiHrefPrefix.setText(config.getCdiHrefPrefix());
-		textCsrHrefPrefix.setText(config.getCsrHrefPrefix());
+//		textCdiHrefPrefix.setText(config.getCdiHrefPrefix());
+//		textCsrHrefPrefix.setText(config.getCsrHrefPrefix());
 		
 		// Flags
 		selectDefaultFlagsTab(config.getDefaultCode());
@@ -1450,7 +1450,7 @@ public class OptionsAction extends Action implements ISelectionListener, ActionF
 		createSection(toolkitOption, formOption, Messages.settings_general, ExpandableComposite.EXPANDED);
 		createSection(toolkitOption, formOption, Messages.settings_web, ExpandableComposite.COMPACT);
 		createSection(toolkitOption, formOption, Messages.settings_cdi, ExpandableComposite.COMPACT);
-		createSection(toolkitOption, formOption, Messages.settings_sdnReferences, ExpandableComposite.COMPACT);
+//		createSection(toolkitOption, formOption, Messages.settings_sdnReferences, ExpandableComposite.COMPACT);
 		createSection(toolkitOption, formOption, Messages.settings_flags, ExpandableComposite.EXPANDED);
 
 		Label sep = new Label(parent, SWT.SEPARATOR | SWT.HORIZONTAL);
@@ -1781,8 +1781,8 @@ public class OptionsAction extends Action implements ISelectionListener, ActionF
 
 		
 		// CDI and CSR Href prefixes
-		configuration.setCdiHrefPrefix(textCdiHrefPrefix.getText());
-		configuration.setCsrHrefPrefix(textCsrHrefPrefix.getText());
+//		configuration.setCdiHrefPrefix(textCdiHrefPrefix.getText());
+//		configuration.setCsrHrefPrefix(textCsrHrefPrefix.getText());
 		
 		// Flags qualite
 		configuration.setDefaultCode(getDefaultCode());

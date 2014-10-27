@@ -53,6 +53,9 @@ public class InputFileBrowseListener extends SelectionAdapter
 
 	@Override
 	public void widgetSelected(SelectionEvent e) {
+		
+		if(Nemo.getInstance().getViewMain().getEditConversionForm().checkConfig()){
+		
 		// boolean ti indicate if a file or directory has been choosen (false if
 		// user clicked on Cancel)
 		boolean fileChoosen = false;
@@ -87,6 +90,7 @@ public class InputFileBrowseListener extends SelectionAdapter
 
 			myEditFileForm.nomRepertoire = myEditFileForm.nomRepertoireOrigin;
 			myEditFileForm.nomFichier = myEditFileForm.nomFichierOrigin;
+		}
 		}
 	}
 

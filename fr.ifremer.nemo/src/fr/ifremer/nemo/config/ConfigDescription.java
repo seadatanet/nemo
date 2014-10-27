@@ -165,8 +165,8 @@ public class ConfigDescription extends NLS {
 
 	public static String setter_defaultConversionType;
 
-	public static String setter_cdiHrefPrefix;
-	public static String setter_csrHrefPrefix;
+//	public static String setter_cdiHrefPrefix;
+//	public static String setter_csrHrefPrefix;
 
 	static {
 		// initialize resource bundle

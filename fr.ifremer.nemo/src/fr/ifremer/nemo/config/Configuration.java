@@ -98,10 +98,10 @@ public class Configuration extends AbstractModel {
 
 	protected boolean dateISO;
 	
-	private String cdiHrefPrefix;
+//	private String cdiHrefPrefix;
 
 
-	private String csrHrefPrefix;
+//	private String csrHrefPrefix;
 
 	/**
 	 * format d'export par défaut choisi dans les settings
@@ -184,8 +184,8 @@ public class Configuration extends AbstractModel {
 		proxy = new Proxy();
 
 		dateISO = true;
-		cdiHrefPrefix = Global.EMPTY_STRING;
-		csrHrefPrefix = Global.EMPTY_STRING;
+//		cdiHrefPrefix = Global.EMPTY_STRING;
+//		csrHrefPrefix = Global.EMPTY_STRING;
 	}
 
 	/**
@@ -410,17 +410,17 @@ public class Configuration extends AbstractModel {
 		
 		
 		// CDI href prefix
-		if (a_LocalName.equals(ConfigDescription.node_cdiHrefPrefix)) {
-			Element2Field setter =
-					new Element2Field(this, ConfigDescription.setter_cdiHrefPrefix);
-			return setter;
-		}
-		// csr href prefix
-		if (a_LocalName.equals(ConfigDescription.node_csrHrefPrefix)) {
-			Element2Field setter =
-					new Element2Field(this, ConfigDescription.setter_csrHrefPrefix);
-			return setter;
-		}
+//		if (a_LocalName.equals(ConfigDescription.node_cdiHrefPrefix)) {
+//			Element2Field setter =
+//					new Element2Field(this, ConfigDescription.setter_cdiHrefPrefix);
+//			return setter;
+//		}
+//		// csr href prefix
+//		if (a_LocalName.equals(ConfigDescription.node_csrHrefPrefix)) {
+//			Element2Field setter =
+//					new Element2Field(this, ConfigDescription.setter_csrHrefPrefix);
+//			return setter;
+//		}
 
 		return null;
 	}
@@ -474,8 +474,8 @@ public class Configuration extends AbstractModel {
 		a_Writer.putTag(ConfigDescription.node_cdiURL, getCdiURL());
 		
 		// CDI & CRS href prefixes
-		a_Writer.putTag(ConfigDescription.node_cdiHrefPrefix, getCdiHrefPrefix());
-		a_Writer.putTag(ConfigDescription.node_csrHrefPrefix, getCsrHrefPrefix());
+//		a_Writer.putTag(ConfigDescription.node_cdiHrefPrefix, getCdiHrefPrefix());
+//		a_Writer.putTag(ConfigDescription.node_csrHrefPrefix, getCsrHrefPrefix());
 		
 		a_Writer.putTag(ConfigDescription.node_odvVersion, getODVFormatVersion());
 		a_Writer.putTag(ConfigDescription.node_medatlasVersion, getMedatlasVersion());
@@ -1183,20 +1183,20 @@ public class Configuration extends AbstractModel {
 		return _medatlasVersion;
 	}
 
-	public void setCdiHrefPrefix(String text) {
-		this.cdiHrefPrefix=text;
-		
-	}
-
-	public void setCsrHrefPrefix(String text) {
-		this.csrHrefPrefix=text;
-		
-	}
-	public String getCdiHrefPrefix() {
-		return cdiHrefPrefix;
-	}
-
-	public String getCsrHrefPrefix() {
-		return csrHrefPrefix;
-	}
+//	public void setCdiHrefPrefix(String text) {
+//		this.cdiHrefPrefix=text;
+//		
+//	}
+//
+//	public void setCsrHrefPrefix(String text) {
+//		this.csrHrefPrefix=text;
+//		
+//	}
+//	public String getCdiHrefPrefix() {
+//		return cdiHrefPrefix;
+//	}
+//
+//	public String getCsrHrefPrefix() {
+//		return csrHrefPrefix;
+//	}
 }

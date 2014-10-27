@@ -112,7 +112,7 @@ public class Nemo {
 
 	public boolean openModel(String pathModel, Logger logger) throws FileNotFoundException,
 			TransformerException {
-
+		
 		// nom du model
 		nomModele = new File(pathModel).getName();
 
@@ -149,7 +149,7 @@ public class Nemo {
 		// models for profiles, MEDATLAS are invalids if older than 1.6.0 
 		if (compareVersion(model.getVersion(), "1.6.0") == -1
 				&& model.getConversionModel().getOutputFormat()==E_TypeConversion.MEDATLAS
-				&& model.getMediaModel().getInputType() == E_InputType.PROFILE) {// TODO check conversion and type
+				&& model.getMediaModel().getInputType() == E_InputType.PROFILE) {
 			if (logger != null){
 				logger.error("models for medatlas profiles older than 1.6.0 shall be validated in Nemo before be used in batch mode");// TODO 20755
 			}
