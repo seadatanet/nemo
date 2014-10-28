@@ -83,7 +83,7 @@ public class CruiseModel extends AbstractModel {
 	 */
 	protected String _correspondingURL;
 	// default: auto compute the CSR
-	protected Boolean _correspondingURLAutoCheck = true;
+	protected Boolean _correspondingURLAutoCheck = false;
 
 	/**
 	 * Code pays du laboratoire source (MEDATLAS: 2 char max)
@@ -175,7 +175,7 @@ public class CruiseModel extends AbstractModel {
 		_chiefScientist = Intern.unknown;
 		_comment = Global.EMPTY_STRING;
 		_correspondingURL = Global.EMPTY_STRING;
-		_correspondingURLAutoCheck = true;
+		_correspondingURLAutoCheck = false;
 		_countryCode = Global.EMPTY_STRING;
 		_countryName = null;
 		_dataCentre = Global.EMPTY_STRING;
