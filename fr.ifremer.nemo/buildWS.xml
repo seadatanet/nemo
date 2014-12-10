@@ -118,7 +118,14 @@ Usage: ant [-f buildWS.xml] option
   <target name="properties" description="Affichage des proprietes">
      <echoproperties/>
   </target>
-
+	
+	
+	<!-- global task to clean and generate wars-->
+	<target name="generateWebServices" depends="clean,compileWS,nemo-war,nautilus-war" description="Compilation des sources">
+		<echo>Generate web services</echo>
+	</target>
+	
+	
   <!-- target: remise a zero projet -->
   <target name="clean" description="RAZ projet NEMO Web Service">
      <delete>
@@ -295,6 +302,7 @@ Usage: ant [-f buildWS.xml] option
         </lib>
      </war>
      <copy file="${jars.dir}/nemo.war" todir="${outputwars.dir}"/>
+  	<!--<copy file="${jars.dir}/nemo.war" todir="${catalina.home}/webapps"/>-->
   </target>
 
   <!-- target: war de nautilus-war -->
@@ -338,7 +346,8 @@ Usage: ant [-f buildWS.xml] option
 <!--                   	<include name="ojdbc14-10.2.0.4.0.jar"/> -->
         </lib>
      </war>
-  	 <copy file="${jars.dir}/nautilus.war" todir="webServices"/>
+  	 <copy file="${jars.dir}/nautilus.war" todir="${outputwars.dir}"/>
+  	<!--<copy file="${jars.dir}/nautilus.war" todir="${catalina.home}/webapps"/>-->
   </target>
 
   <!-- target: deploiement de nemo.war -->
