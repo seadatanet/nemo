@@ -7,8 +7,6 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
 import fr.ifremer.nemo.Nemo;
@@ -422,10 +420,58 @@ public class EditStationForm extends EditForm {
 	public ArrayList<SdnXLinkReference> getSdnReferences() throws SDNXLinkException{
 		return sdnReferences.getSdnReferences();
 	}
-	
+	public void defineMandatorySections(){
+		// mandatory Station Section
+		if (stationNumber != null) {
+			stationNumber.setMandatory(true);
+			/*
+			 * if(myEditFileForm.getRadMedatlas().getSelection() &&
+			 * myEditFileForm.getRadProfilVertical().getSelection())
+			 * myEditStationForm.dataType.setMandatory(false);
+			 * else
+			 */
+			dataType.setMandatory(true);
+			historique.setMandatory(false);
+			comments.setMandatory(false);
+			surfaceSample.setMandatory(false);
+			utConvertion.setMandatory(false);
+			time.setMandatory(true);
+			date.setMandatory(true);
+			latitude.setMandatory(true);
+			longitude.setMandatory(true);
+			depth.setMandatory(false);
+
+			if (sensorDepth.getSection() != null && !sensorDepth.getSection().isDisposed()) {
+				if (
+//						myEditFileForm.getRadSerieTempo().getSelection()
+						RulesManager.getInstance().isTimeSeries()
+						|| 
+						RulesManager.getInstance().isConversionToNetCDF())
+					sensorDepth.setMandatory(true);
+				else
+					sensorDepth.setMandatory(false);
+			}
+
+			if (samplingRate.getSection() != null && !samplingRate.getSection().isDisposed()) {
+				if (
+						RulesManager.getInstance().isTimeSeries()
+//						myEditFileForm.getRadSerieTempo().getSelection() 
+						|| 
+						RulesManager.getInstance().isTrajectory()
+//						myEditFileForm.getRadTrajectoire().getSelection()
+						)
+					samplingRate.setMandatory(true);
+				else
+					samplingRate.setMandatory(false);
+			}
+
+		}
+	}
 	
 	@Override
 	public void actualiseEdition() {
+		
+		
 		RulesManager rulesManager = RulesManager.getInstance();
 		// pour trajectoires et time-series
 		if (rulesManager.isTrajectory() || rulesManager.isTimeSeries()) {
@@ -461,7 +507,7 @@ public class EditStationForm extends EditForm {
 				((StationSection) section).diseableLineInData();
 			}
 		}
-
+		defineMandatorySections();
 	}
 
 	@Override

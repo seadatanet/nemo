@@ -43,8 +43,8 @@ public class OdvWriter extends NemoWriter
         outputFileName = iDomain.getMedia().getOutputFileName();
         if (isProcessType_CollectionDir)
         {
-            cruiseDomain.setDataSetRef(new File(inputFilePath).getName());
-            outputFileName += File.separator + cruiseDomain.getDataSetRef();
+//            cruiseDomain.setDataSetRef(new File(inputFilePath).getName());
+            outputFileName += File.separator + Nemo.getInstance().getDomain().getCruise().getModel().getReference();
         }
         return outputFileName;
     }

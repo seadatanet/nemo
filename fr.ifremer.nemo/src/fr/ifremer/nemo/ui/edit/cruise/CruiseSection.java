@@ -1,7 +1,9 @@
 package fr.ifremer.nemo.ui.edit.cruise;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
@@ -10,7 +12,6 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 
-import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.ui.edit.ComboType;
 import fr.ifremer.nemo.ui.edit.Couple;
 import fr.ifremer.nemo.ui.edit.NemoSection;
@@ -18,6 +19,7 @@ import fr.ifremer.nemo.util.Global;
 
 /**
  * Description: objet graphique représentant une section dans l'onglet Campagne
+ * 
  * 
  * @author dboulang
  */
@@ -30,8 +32,19 @@ public class CruiseSection extends NemoSection
 	private final List<Boolean> checks;
 	private final List<Boolean> checkDefaults;
 	private final List<String> checksLabels;
+	private final Map<itemID, Couple> itemsMap;
 
 
+	/**
+	 * allowed items IDs
+	 * @author altran
+	 *
+	 */
+	public enum itemID {REFERENCE, LOCAL_CSR_ID, NAME, SHIP,
+		START_DATE, END_DATE, REGION,
+		COUNTRY, LAB, CHIEF, PROJECT,
+		DATA_CENTER, CONFIDENTIALITY,
+		COMMENT}
 	/**
 	 * @param shell
 	 * @param name
@@ -47,15 +60,17 @@ public class CruiseSection extends NemoSection
 		checks = new ArrayList<Boolean>();
 		checkDefaults = new ArrayList<Boolean>();
 		checksLabels = new ArrayList<String>();
+		itemsMap = new HashMap<CruiseSection.itemID, Couple>();
 	}
 
-	public void addItem(String label, ComboType type, String defaultValue)
+	public void addItem(itemID id, String label, ComboType type, String defaultValue)
 	{
-		addItem(label, type, defaultValue, false, false, null);
+		addItem(id, label, type, defaultValue, false, false, null);
 	}
-	public void addItem(String label, ComboType type, String defaultValue, boolean check, boolean checkDefaultValue, String checkLabel)
+	public void addItem(itemID id, String label, ComboType type, String defaultValue, boolean check, boolean checkDefaultValue, String checkLabel)
 	{
 		Couple item = new Couple(null, label, type, defaultValue);
+		itemsMap.put(id, item);
 		if (type == ComboType.BLOCK)
 			item.setTextLimit(50000);
 
@@ -117,7 +132,7 @@ public class CruiseSection extends NemoSection
 							if (checks.get(cpt)){
 								if (((Button)g.getSource()).getSelection()){
 									items.get(cpt).setEnabled(false);
-									items.get(cpt).setText(Nemo.getInstance().getDomain().getCruise().getModel().getCorrespondingURLDefault());
+									//									items.get(cpt).setText(Nemo.getInstance().getDomain().getCruise().getModel().getCorrespondingURLDefault().toString());
 								}else{
 									items.get(cpt).setEnabled(true);
 								}
@@ -151,63 +166,28 @@ public class CruiseSection extends NemoSection
 		}
 	}
 
-
-	public int getItemIndex(String label){
-		for ( int cpt=0; cpt<items.size(); cpt++){
-
-			Couple item = items.get(cpt);
-			// cas particulier des commentaires
-			if (item.getType() == ComboType.BLOCK)
-			{
-				return cpt;
-			} else if (item.getLabelString() != null
-					&& item.getLabelString().equals(label))
-			{
-				return cpt;
-			}
-		}
-		return -1;
-	}
-
-	public Couple getItem(int index){
-		return items.get(index);
-	}
 	public Button getCheckBox(int index){
 		return checkButtons.get(index);
 	}
-	public Couple getItem(String label)
-	{
-		//		for (Couple item : items)
-		for ( int cpt=0; cpt<items.size(); cpt++){
 
-			Couple item = items.get(cpt);
-			// cas particulier des commentaires
-			if (item.getType() == ComboType.BLOCK)
-			{
-				return item;
-			} else if (item.getLabelString() != null
-					&& item.getLabelString().equals(label))
-			{
-				return item;
-			}
-		}
-
-		return null;
+	public Couple getItem(itemID id){
+		return itemsMap.get(id);
 	}
+
 
 	public List<Couple> getItems()
 	{
 		return items;
 	}
+	public boolean checkMandatory(itemID id){
 
-	public boolean checkMandatory(String label)
-	{
 		boolean ok = true;
-		Couple item = getItem(label);
-
-		if (item.isMandatory())
-		{
-			ok = !item.isEmpty();
+		if (this.isEnabled()){
+			Couple item = itemsMap.get(id);
+			if (item!=null && item.isMandatory())
+			{
+				ok = !item.isEmpty();
+			}
 		}
 		return ok;
 	}

@@ -93,7 +93,7 @@ public class OutputFormatRadioSelectionListener implements SelectionListener
             }
         }
         
-        rulesMgr.defineSectionMandatory();
+//        rulesMgr.defineSectionMandatory();
      
 //        boolean confirm = MessageDialog.openConfirm(null, 
 //            Messages.edit_data_dataListDialogBox_title,

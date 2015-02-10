@@ -10,6 +10,7 @@ import fr.ifremer.nemo.ui.RulesManager;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.FormValidator;
 import fr.ifremer.nemo.ui.edit.conversion.EditConversionForm;
+import fr.ifremer.nemo.ui.edit.cruise.CruiseSection.itemID;
 import fr.ifremer.nemo.ui.view.ViewLog;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Global.E_TypeConversion;
@@ -55,41 +56,103 @@ public class CruiseFormValidator extends FormValidator {
 		Utils.messageErreur(Global.EMPTY_STRING);
 
 		// check valeurs obligatoires
-		resultat = editCruiseForm.sectionReference.checkMandatory(Messages.edit_cruise_cruiseRef);
-		displayErrorIfNeeded(resultat, Messages.edit_cruise_cruiseRef);
-		ok = ok && resultat;
+		CruiseSection section = editCruiseForm.getSectionReference();
+		if (section != null){
+			resultat = section.checkMandatory(itemID.REFERENCE);
+			displayErrorIfNeeded(resultat, Messages.edit_cruise_cruiseRef);
+			ok = ok && resultat;
+			resultat = section.checkMandatory(itemID.NAME);
+			displayErrorIfNeeded(resultat, Messages.edit_cruise_cruiseName);
+			ok = ok && resultat;
 
-		resultat = editCruiseForm.sectionReference.checkMandatory(Messages.edit_cruise_cruiseName);
-		displayErrorIfNeeded(resultat, Messages.edit_cruise_cruiseName);
-		ok = ok && resultat;
+			resultat = section.checkMandatory(itemID.SHIP);
+			displayErrorIfNeeded(resultat, Messages.edit_cruise_ship);
+			ok = ok && resultat;
+			
+			// FAE 1143 : la référence campagne doit être == 13 caractères pour
+			// MEDATLAS
+			editConversionForm.setWarningCampagne(Global.EMPTY_STRING);
+			String value = section.getItem(itemID.REFERENCE).getText().trim();
+			if (value.length() != 13 && (RulesManager.getInstance().getMyConversionType() == E_TypeConversion.MEDATLAS)) {
+				editConversionForm.setWarningCampagne(Messages.ViewLog_5);
+			} else {
+				editConversionForm.setWarningStation(Global.EMPTY_STRING);
+			}
+		}
 
-		resultat = editCruiseForm.sectionReference.checkMandatory(Messages.edit_cruise_ship);
-		displayErrorIfNeeded(resultat, Messages.edit_cruise_ship);
-		ok = ok && resultat;
+		section = editCruiseForm.getSectionLocalisation();
+		if (section != null && section.isEnabled()){
+			resultat = section.checkMandatory(itemID.START_DATE);
+			displayErrorIfNeeded(resultat, Messages.edit_cruise_startDate);
+			ok = ok && resultat;
 
-		resultat = editCruiseForm.sectionLocalisation.checkMandatory(Messages.edit_cruise_startDate);
-		displayErrorIfNeeded(resultat, Messages.edit_cruise_startDate);
-		ok = ok && resultat;
+			resultat = section.checkMandatory(itemID.END_DATE);
+			displayErrorIfNeeded(resultat, Messages.edit_cruise_endDate);
+			ok = ok && resultat;
 
-		resultat = editCruiseForm.sectionLocalisation.checkMandatory(Messages.edit_cruise_endDate);
-		displayErrorIfNeeded(resultat, Messages.edit_cruise_endDate);
-		ok = ok && resultat;
+			resultat = section.checkMandatory(itemID.REGION);
+			displayErrorIfNeeded(resultat, Messages.edit_cruise_region);
+			ok = ok && resultat;
 
-		resultat = editCruiseForm.sectionLocalisation.checkMandatory(Messages.edit_cruise_region);
-		displayErrorIfNeeded(resultat, Messages.edit_cruise_region);
-		ok = ok && resultat;
+			ok = checkDates(section, ok);
+		}
 
-		resultat = editCruiseForm.sectionSource.checkMandatory(Messages.edit_cruise_country);
-		displayErrorIfNeeded(resultat, Messages.edit_cruise_country);
-		ok = ok && resultat;
+		section = editCruiseForm.getSectionSource();
+		if (section != null){
+			resultat = section.checkMandatory(itemID.COUNTRY);
+			displayErrorIfNeeded(resultat, Messages.edit_cruise_country);
+			ok = ok && resultat;
 
-		resultat = editCruiseForm.sectionSource.checkMandatory(Messages.edit_cruise_chief);
-		displayErrorIfNeeded(resultat, Messages.edit_cruise_chief);
-		ok = ok && resultat;
+			resultat = section.checkMandatory(itemID.CHIEF);
+			displayErrorIfNeeded(resultat, Messages.edit_cruise_chief);
+			ok = ok && resultat;
+		}
 
+		CruiseDatatypeSection sectionType = editCruiseForm.getSectionType();
+		if(sectionType !=null){
+			if (sectionType.isMandatory())
+				ok = ok & sectionType.chekMandatory();
+		}
+		
+
+
+		// check CSR
+		//		int index=editCruiseForm.sectionCorrespondingURL.getItemIndex(Global.EMPTY_STRING);
+		//		String  urlCSR = editCruiseForm.sectionCorrespondingURL.getItem(index).getText();
+		//		try {
+		//			SDNReferenceParser.parseReferenceRow(urlCSR);
+		//		} catch (SismerToolsException e) {
+		//			ok=false;
+		//			Utils.messageErreurAppend("error while parsing reference :"+ e.getMessage()); // TODO 20755 msg
+		//			e.printStackTrace();
+		//		} catch (SDNXLinkException e) {
+		//			ok=false;
+		//			Utils.messageErreurAppend("error on reference: " + e.getMessage()); // TODO 20755 msg
+		//			e.printStackTrace();
+		//		}
+
+		if (ok) {
+			editCruiseForm.setOkApresReset(true);
+			// okCruise();
+			onSuccess();
+		} else {
+			editCruiseForm.initFromNewModel();
+			if (!Nemo.getInstance().getViewMain().tabCruise.isDisposed()) {
+				Nemo.getInstance().getViewMain().tabCruise.setText(Messages.onglet_cruise_error);
+			}
+			Nemo.getInstance().getViewMain().setEtape(1);
+		}
+	}
+
+	/**
+	 * @param editCruiseForm
+	 * @param ok
+	 * @return
+	 */
+	private Boolean checkDates(CruiseSection section, Boolean ok) {
 		// CHECK DATES
-		String startDate = editCruiseForm.sectionLocalisation.getItem(Messages.edit_cruise_startDate).getText();
-		String endDate = editCruiseForm.sectionLocalisation.getItem(Messages.edit_cruise_endDate).getText();
+		String startDate = section.getItem(itemID.START_DATE).getText();
+		String endDate = section.getItem(itemID.END_DATE).getText();
 		Date curDate = new Date(System.currentTimeMillis());
 		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 
@@ -138,30 +201,7 @@ public class CruiseFormValidator extends FormValidator {
 			}
 
 		}
-
-		if (editCruiseForm.sectionType.isMandatory())
-			ok = ok & editCruiseForm.sectionType.chekMandatory();
-
-		// FAE 1143 : la référence campagne doit être == 13 caractères pour
-		// MEDATLAS
-		editConversionForm.setWarningCampagne(Global.EMPTY_STRING);
-		String value = editCruiseForm.sectionReference.getItem(Messages.edit_cruise_cruiseRef).getText().trim();
-		if (value.length() != 13 && (RulesManager.getInstance().getMyConversionType() == E_TypeConversion.MEDATLAS)) {
-			editConversionForm.setWarningCampagne(Messages.ViewLog_5);
-		} else {
-			editConversionForm.setWarningStation(Global.EMPTY_STRING);
-		}
-		if (ok) {
-			editCruiseForm.setOkApresReset(true);
-			// okCruise();
-			onSuccess();
-		} else {
-			editCruiseForm.initFromNewModel();
-			if (!Nemo.getInstance().getViewMain().tabCruise.isDisposed()) {
-				Nemo.getInstance().getViewMain().tabCruise.setText(Messages.onglet_cruise_error);
-			}
-			Nemo.getInstance().getViewMain().setEtape(1);
-		}
+		return ok;
 	}
 
 	@Override

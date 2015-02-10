@@ -28,8 +28,6 @@ import fr.ifremer.nemo.output.medatlas.Elts;
 import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Formatter;
 import fr.ifremer.nemo.util.Global;
-import fr.ifremer.sismer_tools.SismerToolsException;
-import fr.ifremer.sismer_tools.seadatanet.SDNReferenceParser;
 import fr.ifremer.sismer_tools.seadatanet.SDNXLinkException;
 import fr.ifremer.sismer_tools.seadatanet.SdnXLinkReference;
 
@@ -89,7 +87,12 @@ public class CruiseDomain {
 		return cruiseHeader;
 	}
 
-	private StringBuffer getOdvHeader(List<Station> stationsList) throws GenerationException {
+	private StringBuffer getOdvHeader(List<Station> stationsList)  {
+		CruiseDomain cruiseDomain = Nemo.getInstance().getDomain().getCruise();
+		StationDomain stationDomain = Nemo.getInstance().getDomain().getStation();
+		StationModel stationModel = stationDomain.getModel();
+		DataDomain dataDomain = Nemo.getInstance().getDomain().getData();
+		
 		String start = Conversion.ODV.getDebut();
 		StringBuffer odvCruiseHeader = new StringBuffer();
 
@@ -103,43 +106,52 @@ public class CruiseDomain {
 
 		odvCruiseHeader.append(start);
 		odvCruiseHeader.append(Global.RN);
-		StationDomain stationDomain = Nemo.getInstance().getDomain()
-				.getStation();
-		DataDomain dataDomain = Nemo.getInstance().getDomain().getData();
+		
 
 		/**
 		 * SDN references
 		 */
-		StationModel stationModel = Nemo.getInstance().getDomain().getStation().getModel();
+		
 
 
-		List<SdnXLinkReference> refs = stationModel.getSdnXLinkReferences();
-		if (refs !=null){
-			for (SdnXLinkReference ref : refs){
-				odvCruiseHeader.append(start);
-				odvCruiseHeader.append(ref.toString(false));
-				odvCruiseHeader.append(Global.RN);
-			}
+//		List<SdnXLinkReference> refs = stationModel.getSdnXLinkReferences();
+//		if (refs !=null){
+//			for (SdnXLinkReference ref : refs){
+//				odvCruiseHeader.append(start);
+//				odvCruiseHeader.append(ref.toString(false));
+//				odvCruiseHeader.append(Global.RN);
+//			}
+//		}
+		
+		SdnXLinkReference csr = new SdnXLinkReference();
+		try {
+			csr.setAsCsr(Integer.valueOf(Nemo.getInstance().getConfig().getIdEdmoRespCdi()), cruiseDomain.getLocalCsrIdentifier());
+		} catch (NumberFormatException e1) {
+			// TODO 20755 Auto-generated catch block
+			e1.printStackTrace();
+		} catch (SDNXLinkException e1) {
+			// TODO 20755 Auto-generated catch block
+			e1.printStackTrace();
 		}
+		
 		for (Station st : stationsList){
 			SdnXLinkReference cdi = new SdnXLinkReference();
 			// TODO 20755: check if it is the good edmo code
 			String localCdiId;
 			try {
-
-				localCdiId = stationDomain.getLocalCdiId(Nemo.getInstance().getDomain().getCruise(), Conversion.ODV, st.getReference());
+				localCdiId = stationDomain.getLocalCdiId(cruiseDomain, Conversion.ODV, st.getReference());
 				cdi.setAsCdi(Integer.valueOf(Nemo.getInstance().getConfig().getIdEdmoRespCdi()), localCdiId, true);
 			} catch (UnsupportedEncodingException e) {
-				// TODO Auto-generated catch block
+				// TODO 20755 Auto-generated catch block
 				e.printStackTrace();
 			} catch (ParseException e) {
-				// TODO Auto-generated catch block
+				// TODO 20755 Auto-generated catch block
 				e.printStackTrace();
 			} catch (NumberFormatException e) {
-				// TODO Auto-generated catch block
+				// TODO 20755 Auto-generated catch block
 				e.printStackTrace();
 			} catch (SDNXLinkException e) {
-				// TODO Auto-generated catch block
+				// TODO 20755 Auto-generated catch block
 				e.printStackTrace();
 			}
 
@@ -151,7 +163,12 @@ public class CruiseDomain {
 		/**
 		 * SDN semantic header
 		 */
-		odvCruiseHeader.append(dataDomain.getSDNparameters(Conversion.ODV));
+		try {
+			odvCruiseHeader.append(dataDomain.getSDNparameters(Conversion.ODV));
+		} catch (GenerationException e) {
+			// TODO 20755 Auto-generated catch block
+			e.printStackTrace();
+		}
 		odvCruiseHeader.append(start);
 		odvCruiseHeader.append(Global.RN);
 
@@ -264,20 +281,20 @@ public class CruiseDomain {
 	}
 
 
-	public StringBuffer getSDNCSRreference() throws SDNXLinkException, SismerToolsException{
-		StringBuffer sdnRefs = null;
-		SdnXLinkReference ref =null;
-
-
-		if (!_model.getCorrespondingURL().isEmpty()){
-			SDNReferenceParser parser = new SDNReferenceParser();
-			ref = parser.parseReferenceRow(_model.getCorrespondingURL());
-		}
-		if (ref !=null){
-			sdnRefs = new StringBuffer();
-			sdnRefs.append(ref.toString());
-		}
-		return sdnRefs;
+	public String getLocalCsrIdentifier(){
+//		StringBuffer sdnRef = null;
+//
+////		if (_model.getCorrespondingURL()!=null){	
+////			sdnRef = new StringBuffer();
+////			sdnRef.append(_model.getCorrespondingURL().toString());
+////		}
+//		if (_model.getLocalCsrIdentifier()!=null){	
+//			sdnRef = new StringBuffer();
+////			sdnRef.append(_model.getCorrespondingURL().toString());
+//		}
+//		return sdnRef;
+		
+		return _model.getLocalCsrIdentifier();
 
 
 	}
@@ -326,9 +343,9 @@ public class CruiseDomain {
 	 * @return String
 	 * @see CruiseDomain.java#_dataSetRef
 	 */
-	public String getDataSetRef() {
-		return _dataSetRef;
-	}
+//	public String getDataSetRef() {
+//		return _dataSetRef;
+//	}
 
 	/**
 	 * Setter pour _dataSetRef
@@ -337,7 +354,7 @@ public class CruiseDomain {
 	 *            : nouvelle valeur pour dataSetRef
 	 * @see CruiseDomain.java#_dataSetRef
 	 */
-	public void setDataSetRef(String dataSetRef) {
-		_dataSetRef = dataSetRef;
-	}
+//	public void setDataSetRef(String dataSetRef) {
+//		_dataSetRef = dataSetRef;
+//	}
 }

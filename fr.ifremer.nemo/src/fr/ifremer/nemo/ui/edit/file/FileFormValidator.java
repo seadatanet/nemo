@@ -1,13 +1,3 @@
-/*
- * ============================================================================
- * Nom du fichier : EtapeFile.java
- * Application : NEMO version 1.2.20
- * Auteur : dboulang
- * Date de création : 31 déc. 09
- * Client : Ifremer
- * Copyright : Altran
- * ============================================================================
- */
 package fr.ifremer.nemo.ui.edit.file;
 
 import java.io.File;
@@ -139,7 +129,7 @@ public class FileFormValidator extends FormValidator
                 Nemo.getInstance().getDomain().getMedia()
                     .buildInputFilesNames();
             }
-            RulesManager.getInstance().defineSectionMandatory();
+//            RulesManager.getInstance().defineSectionMandatory();
 
         }
         catch (Exception e)

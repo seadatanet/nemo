@@ -425,7 +425,7 @@ public class EditConversionForm extends EditForm {
 	public boolean askDataSetRef() {
 		boolean asDataSetRef = false;
 		CruiseDomain cruiseDomain = Nemo.getInstance().getDomain().getCruise();
-		if (cruiseDomain.getDataSetRef().equals(Global.EMPTY_STRING)) {
+		if (Nemo.getInstance().getDomain().getCruise().getModel().getReference().equals(Global.EMPTY_STRING)) {
 			String strDefault = Global.EMPTY_STRING;
 			strDefault = cruiseDomain.getModel().getReference();
 			if (strDefault.equals(Global.EMPTY_STRING))
@@ -438,10 +438,10 @@ public class EditConversionForm extends EditForm {
 			inputDataSetRef.open();
 
 			if (inputDataSetRef.getReturnCode() == Window.OK) {
-				cruiseDomain.setDataSetRef(inputDataSetRef.getValue());
+//				cruiseDomain.setDataSetRef(inputDataSetRef.getValue());
 				asDataSetRef = true;
 			} else {
-				cruiseDomain.setDataSetRef(Global.EMPTY_STRING);
+//				cruiseDomain.setDataSetRef(Global.EMPTY_STRING);
 				asDataSetRef = false;
 			}
 		} else {
@@ -627,15 +627,14 @@ public class EditConversionForm extends EditForm {
 
 		// datasetRef
 		String dataSetRef =
-				Nemo.getInstance().getDomain().getCruise().getDataSetRef();
+				Nemo.getInstance().getDomain().getCruise().getModel().getReference();
 		if (!dataSetRef.equals(Global.EMPTY_STRING)) {
 			command += Global.SPACE;
 			command += Global.MOINS + Global.optDatasetRef;
 			command += Global.SPACE;
 			command +=
 					"\""
-							+ Nemo.getInstance().getDomain().getCruise()
-									.getDataSetRef() + "\"";
+							+ Nemo.getInstance().getDomain().getCruise().getModel().getReference() + "\"";
 		}
 
 		// cdisummary

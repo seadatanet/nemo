@@ -118,6 +118,7 @@ public class Couple implements UIobject
 
 		// Text or Combo
 		chooseValue(parent, type);
+		
 		if (valueText != null)
 		{
 			valueText.setParent(parent);

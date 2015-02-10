@@ -232,15 +232,15 @@ public class SdnReferencesTableEditor {
 	}
 
 	public void fillFromModel(StationModel stationModel) {
-		if (stationModel.getSdnXLinkReferences() != null) {
-			for (SdnXLinkReference reference : stationModel
-					.getSdnXLinkReferences()) {
-
-				addRow(reference);
-			}
-		} else {
-			addRow();
-		}
+//		if (stationModel.getSdnXLinkReferences() != null) {
+//			for (SdnXLinkReference reference : stationModel
+//					.getSdnXLinkReferences()) {
+//
+//				addRow(reference);
+//			}
+//		} else {
+//			addRow();
+//		}
 	}
 
 }

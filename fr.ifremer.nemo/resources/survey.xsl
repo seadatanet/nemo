@@ -21,6 +21,8 @@
         <!-- tag root -->
         <CruiseModel>
             <reference><xsl:value-of select="Metadata/dataIdInfo/idCitation/resAltTitle"/></reference>
+             <localCSRIdentifier><xsl:value-of select="Metadata/mdFileID"/></localCSRIdentifier>
+             
             <name><xsl:value-of select="Metadata/dataIdInfo/idCitation/resTitle"/></name>
 			
 			

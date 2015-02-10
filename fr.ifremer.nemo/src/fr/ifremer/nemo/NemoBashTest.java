@@ -49,20 +49,26 @@ import fr.ifremer.nemo.util.Global.E_TypeConversion;
 import fr.ifremer.nemo.util.Intern;
 
 /**
- * Description: classe de tests - generation auto en appelant le mode batch -
- * comparaison avec des fichiers de référence Structure des repertoires:
- * dataRootPath/xxxx/versionDirName/dataList/conversion/tyyy où - xxx est un nom
- * representant le type de données (ex: diapalis,...) - choix libre - yyy est un
- * nom quelconque, nb de char quelconque pour xxx: si le repertoire commence par
+ * <pre>
+ * Description: classe de tests - 
+ * generation auto en appelant le mode batch - comparaison avec des fichiers de référence 
+ * Structure des repertoires:
+ * dataRootPath/xxxx/versionDirName/dataList/conversion/tyyy 
+ * où 
+ * - xxx est un nom representant le type de données (ex: diapalis,...) 
+ * choix libre 
+ * - yyy est un nom quelconque, nb de char quelconque pour xxx: si le repertoire commence par
  * "_", il est ignoré pour tyyy: si ce répertoire commence par "t", il est
  * considéré comme un test. S'il commence par "_", il est considéré comme un
- * test désactivé. S'il commence par un autre caractère, il est ignoré. Pour ne
- * lancer les tests que sur un répertoire, utiliser testDirAlone ex: public
- * static String[] testDirAlone={"cruiseFile_trajectory_6959"}; ne lancera les
- * tests que sur cruiseFile_trajectory_6959 utiliser - time ODV = ISO Le EDMO
- * code est forcé automatiquement à 486 (code IFREMER utilisé dans les fichiers
- * reference)
+ * test désactivé. S'il commence par un autre caractère, il est ignoré. 
+ * Pour ne lancer les tests que sur un répertoire, utiliser testDirAlone 
+ * ex: public static String[] testDirAlone={"cruiseFile_trajectory_6959"}; ne lancera les
+ * tests que sur cruiseFile_trajectory_6959 
+ * utiliser - time ODV = ISO 
+ * Le EDMO code est forcé automatiquement à 486 (code IFREMER utilisé dans les fichiers reference)
  * 
+ * Les résultats sont synthétisés dans un fichier CSV results_YYYY_MM_DD-hh-ss.csv à la racine du projet
+ * </pre>
  * @author sbregent
  */
 public class NemoBashTest {

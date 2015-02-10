@@ -59,6 +59,8 @@ public abstract class EditForm
 
 	public void afficheEdition()
 	{
+		
+		System.out.println("EditForm.AfficheEdition " );
 		// raz message erreur
 		Utils.messageErreur(Global.EMPTY_STRING);
 
@@ -211,6 +213,8 @@ public abstract class EditForm
 
 	public void invalidEtape(int current)
 	{
+		// TODO debug
+		System.out.println("EditForm - invalid etape " + current);
 		okApresReset = false;
 		validated = false;
 

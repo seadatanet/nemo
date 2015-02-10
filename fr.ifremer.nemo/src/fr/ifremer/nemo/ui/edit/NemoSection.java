@@ -19,9 +19,7 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.ScrolledForm;
 import org.eclipse.ui.forms.widgets.Section;
 
-import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.input.StationModel;
-import fr.ifremer.nemo.ui.RulesManager;
 import fr.ifremer.nemo.util.Global;
 
 /**
@@ -83,7 +81,7 @@ public abstract class NemoSection
 		});
 
 
-		RulesManager.getInstance().defineSectionMandatory();
+//		RulesManager.getInstance().defineSectionMandatory();
 
 		if (!isMandatory)
 			section.setText(title);

@@ -243,7 +243,6 @@ public class TableDataSurvey {
 
 								// invalidation de l'etape quand modif
 								Utils.invalidEtapes();
-
 								text.setFocus();
 								return;
 							}
@@ -519,7 +518,7 @@ public class TableDataSurvey {
 		// refresh de la table
 		creationTable();
 
-		Composite c = Nemo.getInstance().getViewMain().getEditCruiseForm().sectionType.getSection();
+		Composite c = Nemo.getInstance().getViewMain().getEditCruiseForm().getSectionType().getSection();
 		while (c != null) {
 			// c.setRedraw(false);
 			c = c.getParent();
@@ -527,7 +526,7 @@ public class TableDataSurvey {
 				break;
 			}
 		}
-		c = Nemo.getInstance().getViewMain().getEditCruiseForm().sectionType.getSection();
+		c = Nemo.getInstance().getViewMain().getEditCruiseForm().getSectionType().getSection();
 		while (c != null) {
 			// c.layout(true);
 			c = c.getParent();
@@ -536,7 +535,7 @@ public class TableDataSurvey {
 				break;
 			}
 		}
-		c = Nemo.getInstance().getViewMain().getEditCruiseForm().sectionType.getSection();
+		c = Nemo.getInstance().getViewMain().getEditCruiseForm().getSectionType().getSection();
 		while (c != null) {
 			// c.setRedraw(true);
 			c = c.getParent();

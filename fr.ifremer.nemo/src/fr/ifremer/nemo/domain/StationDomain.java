@@ -127,7 +127,7 @@ public class StationDomain {
 		odvStationHeader.append(Global.TAB);
 		odvStationHeader.append("Type");
 		odvStationHeader.append(Global.TAB);
-		odvStationHeader.append("yyyy-mm-ddThh:mm:ss.sss");
+		odvStationHeader.append("yyyy-mm-ddThh:mm:ss.sss");// TODO 20486
 		odvStationHeader.append(Global.TAB);
 		odvStationHeader.append("Longitude [degrees_east]");
 		odvStationHeader.append(Global.TAB);
@@ -158,8 +158,8 @@ public class StationDomain {
 		StringBuffer odvStationHeader = new StringBuffer();
 		String stationRef = currentStation.getReference();
 		// Cruise
-		String cruiseName = Nemo.getInstance().getDomain().getCruise()
-				.getDataSetRef();
+//		String cruiseName = Nemo.getInstance().getDomain().getCruise().getDataSetRef();
+		String cruiseName =Nemo.getInstance().getDomain().getCruise().getModel().getReference();
 		odvStationHeader.append(form.limitString(cruiseName, 20));
 		odvStationHeader.append(Global.TAB);
 
@@ -301,8 +301,9 @@ public class StationDomain {
 			// .getCruise().getModel().getName() ==
 			// "" on met la référence
 			errorMessage = "cruise reference";
-			cruiseName = Nemo.getInstance().getDomain().getCruise()
-					.getDataSetRef();
+//			cruiseName = Nemo.getInstance().getDomain().getCruise()
+//					.getDataSetRef();
+			cruiseName = Nemo.getInstance().getDomain().getCruise().getModel().getReference();
 
 			odvStationHeader.append(form.limitString(cruiseName, 20));
 			odvStationHeader.append(Global.TAB);
@@ -423,7 +424,8 @@ public class StationDomain {
 			// == E_ProcessType.COLLECTION_FILES)
 			// cruiseRef = cDomain.getModel().getName();
 			// else
-			cruiseRef = cDomain.getDataSetRef();
+//			cruiseRef = cDomain.getDataSetRef();
+			cruiseRef = Nemo.getInstance().getDomain().getCruise().getModel().getReference();
 			// [Numero station]si < 5 : code sur 5 caracteres il est
 			// complete a 
 			// gauche par des '0'.
@@ -661,34 +663,38 @@ public class StationDomain {
 			medStationHeader.append(Global.RN);
 
 			// SDN references
+			// CSR
 			medStationHeader.append(start);
 			errorMessage = "SDN CSR REFERENCE";
-			StringBuffer csr = Nemo.getInstance().getDomain().getCruise().getSDNCSRreference();
-			if (csr !=null){
+			String localCsrId = Nemo.getInstance().getDomain().getCruise().getModel().getLocalCsrIdentifier();
+			if (localCsrId!=null && !localCsrId.isEmpty()){
+				SdnXLinkReference csr = new SdnXLinkReference();
+				csr.setAsCsr(Integer.valueOf(edmoCode), localCsrId);
 				medStationHeader.append(csr);
 				medStationHeader.append(Global.RN);
 			}
-			errorMessage = "SDN REFERENCES";
-			List<SdnXLinkReference> refs = _model.getSdnXLinkReferences();
-			boolean isCdiFound = false;
-			if (refs !=null){
-				for (SdnXLinkReference ref : refs){
-					medStationHeader.append(start);
-					medStationHeader.append(ref.toString(false));
-					medStationHeader.append(Global.RN);
-					if(ref.isCdiReference(Integer.valueOf(edmoCode), localCdiId)){
-						isCdiFound=true;
-					}
-				}
-			}
+			//			errorMessage = "SDN REFERENCES";
+			//			List<SdnXLinkReference> refs = _model.getSdnXLinkReferences();
+			//			boolean isCdiFound = false;
+			//			if (refs !=null){
+			//				for (SdnXLinkReference ref : refs){
+			//					medStationHeader.append(start);
+			//					medStationHeader.append(ref.toString(false));
+			//					medStationHeader.append(Global.RN);
+			//					if(ref.isCdiReference(Integer.valueOf(edmoCode), localCdiId)){
+			//						isCdiFound=true;
+			//					}
+			//				}
+			//			}
+			// CDI
 			errorMessage = "SDN CDI REFERENCES";
-			if (!isCdiFound){
-				SdnXLinkReference cdi = new SdnXLinkReference();
-				cdi.setAsCdi(Integer.valueOf(edmoCode), localCdiId, false);
-				medStationHeader.append(start);
-				medStationHeader.append(cdi.toString(false));
-				medStationHeader.append(Global.RN);
-			}
+			//			if (!isCdiFound){
+			SdnXLinkReference cdi = new SdnXLinkReference();
+			cdi.setAsCdi(Integer.valueOf(edmoCode), localCdiId, false);
+			medStationHeader.append(start);
+			medStationHeader.append(cdi.toString(false));
+			medStationHeader.append(Global.RN);
+			//			}
 
 			// *SURFACE SAMPLES=
 			medStationHeader.append(start);

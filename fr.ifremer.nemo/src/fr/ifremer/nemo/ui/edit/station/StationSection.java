@@ -29,7 +29,6 @@ import fr.ifremer.nemo.input.DataType;
 import fr.ifremer.nemo.input.Fragment;
 import fr.ifremer.nemo.input.PropertyModel;
 import fr.ifremer.nemo.input.StationModel;
-import fr.ifremer.nemo.ui.RulesManager;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.ComboType;
 import fr.ifremer.nemo.ui.edit.Couple;
@@ -1165,6 +1164,7 @@ public class StationSection extends NemoSection {
 		// creation d'un nouveau Datatype avec les infos recuperees au
 		// dessus.
 		newDataType.setCode(fr.ifremer.nemo.util.Utils.extraitCode(code));
+		if (TableDataSurvey.types !=null){
 		for (int i = 0; i < TableDataSurvey.types.size(); i++) {
 			if (typeCombo.contentEquals(TableDataSurvey.types.get(i)
 					.getCode())) {
@@ -1176,6 +1176,7 @@ public class StationSection extends NemoSection {
 				newDataType.setSensor(TableDataSurvey.types.get(i)
 						.getSensor());
 			}
+		}
 		}
 		stationModel.setDataType(newDataType);
 		// }
@@ -1368,28 +1369,29 @@ public class StationSection extends NemoSection {
 		// SECTION type de donnee
 		CCombo combo = myForm.dataType.getDatatype().getValueCombo();
 
-		Boolean isCruiseEnabled =
-				 RulesManager.getInstance()
-						.isCruiseEnabled();
-		Boolean isNetCDF =  RulesManager.getInstance()
-				.isConversionToNetCDF();
+//		Boolean isCruiseEnabled =
+//				 RulesManager.getInstance()
+//						.isCruiseEnabled();
+//		Boolean isNetCDF =  RulesManager.getInstance()
+//				.isConversionToNetCDF();
 		Boolean addOk = true;
 		DataType dataType = station.getDataType();
 
-		// FAE 6536 - si pas d'onglet Cruise, ni de dataType dans le modele, on
-		// remplit la combo avec tous les dataTypes avec sensor true
-		if (!isCruiseEnabled || isNetCDF) {
+		// FAE 6536 +20755
+		// si  champ data type de onglet cruise est optionnel, 
+		// on remplit la combo avec tous les dataTypes avec sensor true
+		if (Nemo.getInstance().getViewMain().getEditCruiseForm().getSectionDataType()==null
+				||
+				!Nemo.getInstance().getViewMain().getEditCruiseForm().getSectionDataType().isMandatory()){
 			fillDataTypeWithDataTypesIsSensor();
 		}
 
 		if (dataType != null) {
 			String code = dataType.getCode();
 
-			// si l'onglet cruise existe, on verifie que le dataType est bien
-			// dans la liste des datatypes de cet onglet
-			if (isCruiseEnabled && !isNetCDF) {
+//			if (Nemo.getInstance().getViewMain().getEditCruiseForm().getSectionDataType().isMandatory()){
 				addOk = checkAddDatatypeOk(code);
-			}
+//			}
 
 			// ajout du parametre ou non du coup, ajoute que si c'est un capteur
 			if (addOk) {

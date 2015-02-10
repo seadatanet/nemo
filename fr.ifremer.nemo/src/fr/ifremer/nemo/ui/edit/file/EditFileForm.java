@@ -415,8 +415,14 @@ public class EditFileForm extends EditForm
 		sectionDataTerminator = new FileEndData(Messages.edit_file_indicFinDonnees_title, Messages.edit_file_indicFinDonnees_title, Messages.edit_file_indicFinDonnees, this);
 		sectionDataTerminator.addSetter(Messages.edit_file_sectionRuptureDonnees_end_with, Global.EMPTY_STRING);
 		listeSections.add(sectionDataTerminator);
+		defineMandatorySections();
 	}
-
+	public void defineMandatorySections(){
+		sectionFileHeader.setMandatory(true);
+		sectionStationHeader.setMandatory(true);
+		sectionEndOfStation.setMandatory(true);
+		sectionDataTerminator.setMandatory(true);
+	}
 	@Override
 	protected void disposeElements()
 	{

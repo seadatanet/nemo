@@ -27,6 +27,8 @@ public class WSSurvey  implements java.io.Serializable {
     private java.lang.String projectName;
 
     private java.lang.String reference;
+    
+    private java.lang.String crno;
 
     private java.lang.String regionName;
 
@@ -50,6 +52,7 @@ public class WSSurvey  implements java.io.Serializable {
            java.lang.String name,
            java.lang.String projectName,
            java.lang.String reference,
+           java.lang.String crno,
            java.lang.String regionName,
            java.lang.String shipCode,
            java.lang.String shipName,
@@ -64,6 +67,7 @@ public class WSSurvey  implements java.io.Serializable {
            this.name = name;
            this.projectName = projectName;
            this.reference = reference;
+           this.crno = crno;
            this.regionName = regionName;
            this.shipCode = shipCode;
            this.shipName = shipName;
@@ -71,7 +75,15 @@ public class WSSurvey  implements java.io.Serializable {
     }
 
 
-    /**
+    public java.lang.String getCrno() {
+		return crno;
+	}
+
+	public void setCrno(java.lang.String crno) {
+		this.crno = crno;
+	}
+
+	/**
      * Gets the chiefScientist value for this WSSurvey.
      * 
      * @return chiefScientist
@@ -351,7 +363,8 @@ public class WSSurvey  implements java.io.Serializable {
     }
 
     private java.lang.Object __equalsCalc = null;
-    public synchronized boolean equals(java.lang.Object obj) {
+    @Override
+	public synchronized boolean equals(java.lang.Object obj) {
         if (!(obj instanceof WSSurvey)) return false;
         WSSurvey other = (WSSurvey) obj;
         if (obj == null) return false;
@@ -405,7 +418,8 @@ public class WSSurvey  implements java.io.Serializable {
     }
 
     private boolean __hashCodeCalc = false;
-    public synchronized int hashCode() {
+    @Override
+	public synchronized int hashCode() {
         if (__hashCodeCalc) {
             return 0;
         }

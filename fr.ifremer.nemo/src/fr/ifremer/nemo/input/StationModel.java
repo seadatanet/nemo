@@ -1,8 +1,6 @@
 package fr.ifremer.nemo.input;
 
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
@@ -15,9 +13,6 @@ import com.ago.xml.XMLOutputWriter;
 import fr.ifremer.nemo.config.ConfigDescription;
 import fr.ifremer.nemo.config.Flag;
 import fr.ifremer.nemo.config.FlagTable;
-import fr.ifremer.nemo.ui.edit.station.SdnReferencesTableEditor;
-import fr.ifremer.sismer_tools.seadatanet.SDNXLinkException;
-import fr.ifremer.sismer_tools.seadatanet.SdnXLinkReference;
 
 /**
  * Class StationModel 
@@ -48,7 +43,7 @@ public class StationModel extends AbstractModel {
 	 */
 	protected FlagTable _flagTable;
 
-	private List<SdnXLinkReference> sdnXLinkReferences;
+//	private List<SdnXLinkReference> sdnXLinkReferences;
 
 
 
@@ -99,7 +94,6 @@ public class StationModel extends AbstractModel {
 			String a_LocalName,
 			String a_QName, 
 			Attributes a_Attributes){
-
 		if (a_LocalName.equals(ModelDescription.node_reference)){
 			return new PathElementConsumer(ModelDescription.node_reference, this);
 		}
@@ -136,30 +130,30 @@ public class StationModel extends AbstractModel {
 			}
 			return this;
 		}
-		if (a_LocalName.equals("sdnXLinkReferences")) {// TODO 20755
-			return this;
-		}
+//		if (a_LocalName.equals("sdnXLinkReferences")) {// TODO 20755 delete
+//			return this;
+//		}
 		// Sdn XLinks references
-		if (a_LocalName.equals("sdn_reference")) {// TODO 20755
-			{
-				String type = a_Attributes.getValue(SdnReferencesTableEditor.DATA_KEY.TYPE.toString());
-				String role = a_Attributes.getValue(SdnReferencesTableEditor.DATA_KEY.ROLE.toString());
-				String href = a_Attributes.getValue(SdnReferencesTableEditor.DATA_KEY.HREF.toString());
-				if (this.sdnXLinkReferences == null){
-					this.sdnXLinkReferences = new ArrayList<SdnXLinkReference>();
-				}
-				SdnXLinkReference ref;
-				try {
-					ref = new SdnXLinkReference(type, role, href);
-					this.sdnXLinkReferences.add(ref);
-				} catch (SDNXLinkException e) {
-					// TODO 20755 msg
-					logger.error("error reading reference");
-				}
-
-			}
-			return this;
-		}
+//		if (a_LocalName.equals("sdn_reference")) {// TODO 20755 delete
+//			{
+//				String type = a_Attributes.getValue(SdnReferencesTableEditor.DATA_KEY.TYPE.toString());
+//				String role = a_Attributes.getValue(SdnReferencesTableEditor.DATA_KEY.ROLE.toString());
+//				String href = a_Attributes.getValue(SdnReferencesTableEditor.DATA_KEY.HREF.toString());
+//				if (this.sdnXLinkReferences == null){
+//					this.sdnXLinkReferences = new ArrayList<SdnXLinkReference>();
+//				}
+//				SdnXLinkReference ref;
+//				try {
+//					ref = new SdnXLinkReference(type, role, href);
+//					this.sdnXLinkReferences.add(ref);
+//				} catch (SDNXLinkException e) {
+//					// TODO 20755 msg
+//					logger.error("error reading reference");
+//				}
+//
+//			}
+//			return this;
+//		}
 		return null;
 	}
 
@@ -220,21 +214,21 @@ public class StationModel extends AbstractModel {
 			a_Writer.closeTag();
 		}
 
-		if (getSdnXLinkReferences() != null){
-			a_Writer.openTag(ModelDescription.node_sdnXlinks);
-			for (SdnXLinkReference ref : getSdnXLinkReferences()){
-				a_Writer.openTag("sdn_reference");// TODO 20755
-				a_Writer.putAttribute(SdnReferencesTableEditor.DATA_KEY.TYPE.toString(), ref.getTypeWithL23Prefix());
-				if (ref.getRole()!= null){
-					a_Writer.putAttribute(SdnReferencesTableEditor.DATA_KEY.ROLE.toString(), ref.getRole().toString());
-				}else{
-					a_Writer.putAttribute(SdnReferencesTableEditor.DATA_KEY.ROLE.toString(), "");// TODO 20755
-				}
-				a_Writer.putAttribute(SdnReferencesTableEditor.DATA_KEY.HREF.toString(), ref.getHref());
-				a_Writer.closeTag();
-			}
-			a_Writer.closeTag();
-		}
+//		if (getSdnXLinkReferences() != null){
+//			a_Writer.openTag(ModelDescription.node_sdnXlinks);
+//			for (SdnXLinkReference ref : getSdnXLinkReferences()){
+//				a_Writer.openTag("sdn_reference");// TODO 20755
+//				a_Writer.putAttribute(SdnReferencesTableEditor.DATA_KEY.TYPE.toString(), ref.getTypeWithL23Prefix());
+//				if (ref.getRole()!= null){
+//					a_Writer.putAttribute(SdnReferencesTableEditor.DATA_KEY.ROLE.toString(), ref.getRole().toString());
+//				}else{
+//					a_Writer.putAttribute(SdnReferencesTableEditor.DATA_KEY.ROLE.toString(), "");// TODO 20755
+//				}
+//				a_Writer.putAttribute(SdnReferencesTableEditor.DATA_KEY.HREF.toString(), ref.getHref());
+//				a_Writer.closeTag();
+//			}
+//			a_Writer.closeTag();
+//		}
 	}
 
 
@@ -410,13 +404,13 @@ public class StationModel extends AbstractModel {
 	}
 
 
-	public List<SdnXLinkReference> getSdnXLinkReferences() {
-		return sdnXLinkReferences;
-	}
+//	public List<SdnXLinkReference> getSdnXLinkReferences() {
+//		return sdnXLinkReferences;
+//	}
 
 
-	public void setSdnXLinkReferences( List<SdnXLinkReference> references) throws Exception {
-		sdnXLinkReferences = references;
-
-	}
+//	public void setSdnXLinkReferences( List<SdnXLinkReference> references) throws Exception {
+//		sdnXLinkReferences = references;
+//
+//	}
 }

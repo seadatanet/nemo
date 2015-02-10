@@ -146,12 +146,17 @@ public class Nemo {
 			String C19RegionName = CruiseModel.getTranscodeRegionName(regionName);
 			model.getCruiseModel().setRegionName(C19RegionName);
 		}
-		// models for profiles, MEDATLAS are invalids if older than 1.6.0 
-		if (compareVersion(model.getVersion(), "1.6.0") == -1
-				&& model.getConversionModel().getOutputFormat()==E_TypeConversion.MEDATLAS
-				&& model.getMediaModel().getInputType() == E_InputType.PROFILE) {
-			if (logger != null){
-				logger.error("models for medatlas profiles older than 1.6.0 shall be validated in Nemo before be used in batch mode");// TODO 20755
+		
+		if (compareVersion(model.getVersion(), "1.6.0") == -1){
+			// do not keep corresponding URL (field now used for CSR SDN reference)
+//			model.getCruiseModel().setCorrespondingURLAutoCheck(true);
+			// models for profiles, MEDATLAS are invalids if older than 1.6.0 
+			if( model.getConversionModel().getOutputFormat()==E_TypeConversion.MEDATLAS
+					&& model.getMediaModel().getInputType() == E_InputType.PROFILE) {
+				if (logger != null){
+					logger.error("models for medatlas profiles older than 1.6.0 shall be validated in Nemo before be used in batch mode");// TODO 20755 msg
+				}
+				
 			}
 			model.setIsValid(false);
 		}
@@ -289,15 +294,15 @@ public class Nemo {
 			File fich = new File(myViewMain.getEditFileForm().nomRepertoire);
 			if (!Global.EMPTY_STRING.equals(modelName)) {
 				ApplicationWorkbenchWindowAdvisor.configurer_titre
-						.setTitle(Messages.application_directoryTitle
-								+ fich.getAbsolutePath()
-								+ Messages.application_modelTitle + modelName
-								+ " ]"); //$NON-NLS-1$
+				.setTitle(Messages.application_directoryTitle
+						+ fich.getAbsolutePath()
+						+ Messages.application_modelTitle + modelName
+						+ " ]"); //$NON-NLS-1$
 
 			} else {
 				ApplicationWorkbenchWindowAdvisor.configurer_titre
-						.setTitle(Messages.application_directoryTitle
-								+ fich.getAbsolutePath() + " ]"); //$NON-NLS-1$ 
+				.setTitle(Messages.application_directoryTitle
+						+ fich.getAbsolutePath() + " ]"); //$NON-NLS-1$ 
 			}
 
 		} else {
@@ -307,14 +312,14 @@ public class Nemo {
 
 			if (!Global.EMPTY_STRING.equals(modelName)) {
 				ApplicationWorkbenchWindowAdvisor.configurer_titre
-						.setTitle(Messages.application_fileTitle
-								+ fich.getAbsolutePath()
-								+ Messages.application_modelTitle + modelName
-								+ " ]"); //$NON-NLS-1$
+				.setTitle(Messages.application_fileTitle
+						+ fich.getAbsolutePath()
+						+ Messages.application_modelTitle + modelName
+						+ " ]"); //$NON-NLS-1$
 			} else {
 				ApplicationWorkbenchWindowAdvisor.configurer_titre
-						.setTitle(Messages.application_fileTitle
-								+ fich.getAbsolutePath() + " ]"); //$NON-NLS-1$ 
+				.setTitle(Messages.application_fileTitle
+						+ fich.getAbsolutePath() + " ]"); //$NON-NLS-1$ 
 			}
 		}
 	}

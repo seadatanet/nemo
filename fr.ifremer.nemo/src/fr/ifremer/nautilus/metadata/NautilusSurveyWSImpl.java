@@ -210,10 +210,13 @@ public class NautilusSurveyWSImpl implements Cloneable, NautilusSurveyWS {
 				survey.setLaboratories(result.getString(8));
 				survey.setDataCentre(result.getString(9));
 				survey.setChiefScientist(result.getString(10));
+				
 				String cprj = result.getString(11);
 				String crno = result.getString(12);
 				String ref = result.getString(13);
+				
 				survey.setReference(ref);
+				survey.setCrno(crno);
 				survey.setComment("");
 				survey.setProjectName(getProjectName(cprj, conn));
 				survey.setDataTypes(getDataTypeFor(crno, conn));

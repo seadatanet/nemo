@@ -98,13 +98,13 @@ public class SdnReferenceSection extends NemoSection {
 
 	@Override
 	public void initModel(StationModel stationModel) {
-		try {
-			stationModel.setSdnXLinkReferences(sdnXLinkReferences);
-		} catch (Exception e) {
-			// TODO manage error
-			e.printStackTrace();
-
-		}
+//		try {
+//			stationModel.setSdnXLinkReferences(sdnXLinkReferences);
+//		} catch (Exception e) {
+//			// TODO manage error
+//			e.printStackTrace();
+//
+//		}
 	}
 
 	@Override

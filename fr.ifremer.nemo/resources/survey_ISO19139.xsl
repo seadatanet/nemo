@@ -31,7 +31,7 @@
         <CruiseModel>
         	<!--reference campagne-->
             <reference><xsl:value-of select="gmi:MI_Metadata/gmd:identificationInfo/sdn:SDN_DataIdentification/gmd:citation/gmd:CI_Citation/gmd:alternateTitle/gco:CharacterString"/></reference>
-            
+              <localCSRIdentifier><xsl:value-of select="gmi:MI_Metadata/gmd:fileIdentifier/gco:CharacterString"/></localCSRIdentifier>
             <!--nom campagne-->
             <name><xsl:value-of select="gmi:MI_Metadata/gmd:identificationInfo/sdn:SDN_DataIdentification/gmd:citation/gmd:CI_Citation/gmd:title/gco:CharacterString"/></name>
         	

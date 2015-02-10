@@ -142,11 +142,11 @@ public class CDIResumeWriter {
 		if (cDomain.getModel().getName().isEmpty()
 				|| cDomain.getModel().getName().equals(
 						Intern.unknown)) {
-			if (cDomain.getDataSetRef().isEmpty()) {
+			if (cDomain.getModel().getReference().isEmpty()) {
 				writer.write(sep
 						+ Intern.CDIResumeWriter_notSpecified);
 			} else {
-				writer.write(sep + cDomain.getDataSetRef());
+				writer.write(sep + cDomain.getModel().getReference());
 			}
 		} else {
 			writer.write(sep + cDomain.getModel().getName());
@@ -158,10 +158,10 @@ public class CDIResumeWriter {
 			// FAE 4525 (retour 03/01/2011)
 			if (iDomain.getMedia().getModel().getProcessType().equals(E_ProcessType.COLLECTION_DIR)) {
 				writer.write(sep + cDomain.getModel().getName());
-			} else if (cDomain.getDataSetRef().isEmpty()) {
+			} else if (cDomain.getModel().getReference().isEmpty()) {
 				writer.write(sep + Intern.CDIResumeWriter_notSpecified);
 			} else {
-				writer.write(sep + cDomain.getDataSetRef());
+				writer.write(sep + cDomain.getModel().getReference());
 			}
 		} else {
 			writer.write(sep + cDomain.getModel().getReference());

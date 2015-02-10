@@ -46,8 +46,6 @@ import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Global.E_Availability;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
-import fr.ifremer.sismer_tools.seadatanet.SDNXLinkException;
-import fr.ifremer.sismer_tools.seadatanet.SdnXLinkReference;
 
 /**
  * Class CruiseModel.java
@@ -81,9 +79,9 @@ public class CruiseModel extends AbstractModel {
 	/**
 	 * Corresponding URL for Cruise SDN reference 
 	 */
-	protected String _correspondingURL;
+//	protected SdnXLinkReference _correspondingURL;
 	// default: auto compute the CSR
-	protected Boolean _correspondingURLAutoCheck = false;
+//	protected Boolean _correspondingURLAutoCheck = true;
 
 	/**
 	 * Code pays du laboratoire source (MEDATLAS: 2 char max)
@@ -124,6 +122,13 @@ public class CruiseModel extends AbstractModel {
 	 * Référence campagne (MEDATLAS: 13 char max)
 	 */
 	protected String _reference;
+
+	/**
+	 * Local CSR ID = CRNO
+	 */
+	protected String _localCsrIdentifier="";
+
+
 
 	/**
 	 * Nom de la région [table GF3] (MEDATLAS: 35 char max)
@@ -174,8 +179,8 @@ public class CruiseModel extends AbstractModel {
 		_availability = E_Availability.publicly;
 		_chiefScientist = Intern.unknown;
 		_comment = Global.EMPTY_STRING;
-		_correspondingURL = Global.EMPTY_STRING;
-		_correspondingURLAutoCheck = false;
+//		_correspondingURL = null;
+//		_correspondingURLAutoCheck = true;
 		_countryCode = Global.EMPTY_STRING;
 		_countryName = null;
 		_dataCentre = Global.EMPTY_STRING;
@@ -184,6 +189,7 @@ public class CruiseModel extends AbstractModel {
 		_name = Global.EMPTY_STRING;
 		_projectName = Global.EMPTY_STRING;
 		_reference = Global.EMPTY_STRING;
+		_localCsrIdentifier=Global.EMPTY_STRING;
 		_regionName = Global.EMPTY_STRING;
 		_regionCode = Global.EMPTY_STRING;
 		_shipCode = "XXXX"; //$NON-NLS-1$
@@ -228,6 +234,12 @@ public class CruiseModel extends AbstractModel {
 			Element2Field setter = new Element2Field(this, ModelDescription.setter_cref);
 			return setter;
 		}
+		if (a_LocalName.equals(ModelDescription.node_localCSRIdentifier)) {
+			Element2Field setter = new Element2Field(this, ModelDescription.setter_localCSRIdentifier);
+			return setter;
+		}
+
+
 		if (a_LocalName.equals(ModelDescription.node_cname)) {
 			Element2Field setter = new Element2Field(this, ModelDescription.setter_cname);
 			return setter;
@@ -292,14 +304,14 @@ public class CruiseModel extends AbstractModel {
 			Element2Field setter = new Element2Field(this, ModelDescription.setter_comment);
 			return setter;
 		}
-		if (a_LocalName.equals(ModelDescription.node_correspondingURL)) {
-			Element2Field setter = new Element2Field(this, ModelDescription.setter_correspondingURL);
-			return setter;
-		}
-		if (a_LocalName.equals(ModelDescription.node_correspondingURLAutoCheck)) {
-			Element2Field setter = new Element2Field(this, ModelDescription.setter_correspondingURLAutoCheck);
-			return setter;
-		}
+		//		if (a_LocalName.equals(ModelDescription.node_correspondingURL)) {
+		//			Element2Field setter = new Element2Field(this, ModelDescription.setter_correspondingURL);
+		//			return setter;
+		//		}
+		//		if (a_LocalName.equals(ModelDescription.node_correspondingURLAutoCheck)) {
+		//			Element2Field setter = new Element2Field(this, ModelDescription.setter_correspondingURLAutoCheck);
+		//			return setter;
+		//		}
 
 		if (a_LocalName.equals(ModelDescription.node_listDatatypes)) {
 			return new PathElementConsumer(ModelDescription.node_listDatatypes, this);
@@ -331,6 +343,7 @@ public class CruiseModel extends AbstractModel {
 	@Override
 	public void writeXMLBodyOn(XMLOutputWriter a_Writer) {
 		a_Writer.putTag(ModelDescription.node_cref, getReference());
+		a_Writer.putTag(ModelDescription.node_localCSRIdentifier, getLocalCsrIdentifier());
 		a_Writer.putTag(ModelDescription.node_cname, getName());
 		a_Writer.putTag(ModelDescription.node_shipcode, getShipCode());
 		a_Writer.putTag(ModelDescription.node_shipname, getShipName());
@@ -345,8 +358,8 @@ public class CruiseModel extends AbstractModel {
 		a_Writer.putTag(ModelDescription.node_datacenter, getDataCentre());
 		a_Writer.putTag(ModelDescription.node_availability, getAvailability().toString());
 		a_Writer.putCDATATag(ModelDescription.node_comment, getComment());
-		a_Writer.putCDATATag(ModelDescription.node_correspondingURL, getCorrespondingURL());
-		a_Writer.putTag(ModelDescription.node_correspondingURLAutoCheck, getCorrespondingURLAutoCheck());
+		//		a_Writer.putCDATATag(ModelDescription.node_correspondingURL, getCorrespondingURL().toString());
+		//		a_Writer.putTag(ModelDescription.node_correspondingURLAutoCheck, getCorrespondingURLAutoCheck());
 		a_Writer.openTag(ModelDescription.node_listDatatypes);
 		for (DataType t : getDataTypes()) {
 			t.writeXMLOn(a_Writer);
@@ -374,6 +387,11 @@ public class CruiseModel extends AbstractModel {
 		if (wssurvey.getReference() != null) {
 			// force à 13 caractères
 			setReference(Formatter.getSingleton().padString(wssurvey.getReference(), 13));
+		}
+		if (wssurvey.getCrno() != null) {
+			setLocalCSRIdentifier(wssurvey.getCrno());
+		}else{
+			System.out.println("ERROR CRNO null from nautilus web service");// TODO BGT
 		}
 		if (wssurvey.getName() != null) {
 			setName(wssurvey.getName());
@@ -637,42 +655,42 @@ public class CruiseModel extends AbstractModel {
 	 * @return String
 	 * @see CruiseModel.java#_correspondingURL
 	 */
-	public String getCorrespondingURL() {
-		if (_correspondingURLAutoCheck){
-			return getCorrespondingURLDefault();
-		}
-		return _correspondingURL;
+//	public SdnXLinkReference getCorrespondingURL() {
+//		if (_correspondingURLAutoCheck){
+//			return getCorrespondingURLDefault();
+//		}
+//		return _correspondingURL;
+//
+//	}
 
-	}
+//	public SdnXLinkReference  getCorrespondingURLDefault()
+//	{
+//
+//		SdnXLinkReference csr = new SdnXLinkReference();
+//		try {
+//			// TODO 20755 check if edmo is the good one
+//			csr.setAsCsr(Integer.valueOf(Nemo.getInstance().getConfig().getIdEdmoRespCdi()), 
+//					_reference);
+//		} catch (NumberFormatException e) {
+//			// TODO 20755 Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (SDNXLinkException e) {
+//			// TODO 20755 Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		return csr;
+//	}
 
-	public String  getCorrespondingURLDefault()
-	{
-
-		SdnXLinkReference csr = new SdnXLinkReference();
-		try {
-			// TODO 20755 check if edmo is the good one
-			csr.setAsCsr(Integer.valueOf(Nemo.getInstance().getConfig().getIdEdmoRespCdi()), 
-					_reference);
-		} catch (NumberFormatException e) {
-			// TODO 20755 Auto-generated catch block
-			e.printStackTrace();
-		} catch (SDNXLinkException e) {
-			// TODO 20755 Auto-generated catch block
-			e.printStackTrace();
-		}
-		return csr.toString();
-	}
-
-	public Boolean getCorrespondingURLAutoCheck() {
-		return _correspondingURLAutoCheck;
-	}
-
-	public void setCorrespondingURLAutoCheck(String x) {
-		_correspondingURLAutoCheck = Boolean.valueOf(x);
-	}
-	public void setCorrespondingURLAutoCheck(Boolean  correspondingURLAutoCheck) {
-		_correspondingURLAutoCheck = correspondingURLAutoCheck;
-	}
+//	public Boolean getCorrespondingURLAutoCheck() {
+//		return _correspondingURLAutoCheck;
+//	}
+//
+//	public void setCorrespondingURLAutoCheck(String x) {
+//		_correspondingURLAutoCheck = Boolean.valueOf(x);
+//	}
+//	public void setCorrespondingURLAutoCheck(Boolean  correspondingURLAutoCheck) {
+//		_correspondingURLAutoCheck = correspondingURLAutoCheck;
+//	}
 	/**
 	 * Setter pour _comment
 	 * @param x : nouvelle valeur pour _comment
@@ -687,9 +705,28 @@ public class CruiseModel extends AbstractModel {
 	 * @param x : nouvelle valeur pour _correspondingURL
 	 * @see CruiseModel.java#_correspondingURL
 	 */
-	public void setCorrespondingURL(String x) {
-		_correspondingURL = x;
-	}
+//	public void setCorrespondingURL(SdnXLinkReference x) {
+//		_correspondingURL = x;
+//	}
+	/**
+	 * Setter pour _correspondingURL
+	 * @param x : nouvelle valeur pour _correspondingURL
+	 * @throws SDNXLinkException 
+	 * @throws SismerToolsException 
+	 * @see CruiseModel.java#_correspondingURL
+	 */
+//	public void setCorrespondingURL(String x) throws SismerToolsException, SDNXLinkException {
+//		if (!x.isEmpty()){
+//			try{
+//				SdnXLinkReference ref = SDNReferenceParser.parseReferenceRow(x);
+//				_correspondingURL = ref;
+//			}catch(Exception e){
+//				// unparsable URL - ignore it
+//			}
+//
+//		}
+//	}
+
 
 	/**
 	 * Getter pour _countryCode.
@@ -864,6 +901,8 @@ public class CruiseModel extends AbstractModel {
 	public void setReference(String x) {
 		_reference = x;
 	}
+
+
 
 	/**
 	 * Getter pour _regionName.
@@ -1048,6 +1087,24 @@ public class CruiseModel extends AbstractModel {
 					return;
 			}
 			_dataTypes.add(x);
+		}
+	}
+
+
+
+	public String getLocalCsrIdentifier() {
+		return _localCsrIdentifier;
+	}
+	/**
+	 * set local CSR identifier from XML. Remove urn:SDN:CSR:LOCAL: prefix for 19139 CSRs or SDN:CSR:LOCAL: prefix for 19115 CSRs
+	 * @param localCsrIdentifier
+	 */
+	public void setLocalCSRIdentifier(String localCsrIdentifier) {
+		if (localCsrIdentifier.contains("SDN:CSR:LOCAL:")){
+			this._localCsrIdentifier = localCsrIdentifier.split("SDN:CSR:LOCAL:")[1];
+//			System.out.println("local CSR :" + this.localCsrIdentifier);
+		}else{
+			this._localCsrIdentifier = localCsrIdentifier;
 		}
 	}
 }

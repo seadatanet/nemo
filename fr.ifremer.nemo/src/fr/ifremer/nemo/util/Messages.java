@@ -183,6 +183,7 @@ public class Messages {
 	public static String edit_cruise_sectionReference;
 	public static String edit_cruise_sectionReference_lib;
 	public static String edit_cruise_cruiseRef;
+	public static String edit_cruise_cruiseLocalCsrId;
 	public static String edit_cruise_cruiseName;
 	public static String edit_cruise_ship;
 	public static String edit_cruise_sectionLocation;
@@ -269,7 +270,7 @@ public class Messages {
 
 	// MESSAGES D'INFORMATIONS REGLES INPUT/CONV (onglet File)
 	public static String edit_file_info_medatlasForbiddenBecauseCollection;
-	public static String edit_file_info_cruiseDisabledBecauseODV;
+//	public static String edit_file_info_cruiseDisabledBecauseODV;
 	public static String edit_file_info_conversionNotApplicable;
 	public static String edit_file_info_P011viaP021_disabled;
 	public static String edit_file_info_AboveSeaLevel_disabled;
