@@ -17,7 +17,6 @@ import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.conversion.EditConversionForm;
 import fr.ifremer.nemo.ui.edit.file.EditFileForm;
 import fr.ifremer.nemo.util.Global;
-import fr.ifremer.nemo.util.Global.E_ProcessType;
 import fr.ifremer.nemo.util.Global.E_TypeConversion;
 import fr.ifremer.nemo.util.Messages;
 
@@ -54,7 +53,7 @@ public class ConversionSelectionListener implements SelectionListener
 //            }
             EditFileForm editFileForm = Nemo.getInstance().getViewMain().getEditFileForm();
             // RaZ
-            Nemo.getInstance().getDomain().getCruise().setDataSetRef(Global.EMPTY_STRING);
+//            Nemo.getInstance().getDomain().getCruise().setDataSetRef(Global.EMPTY_STRING);
             Nemo.getInstance().getDomain().getMedia().initOutput();
             Nemo.getInstance().getDomain().getConversion().setNomMappingHorsPrefix(Global.EMPTY_STRING);
             Utils.messageErreur(Global.EMPTY_STRING);
@@ -77,16 +76,19 @@ public class ConversionSelectionListener implements SelectionListener
                     Utils.messageErreur(Messages.error_convert_cancel);
                     throw new Exception("Cancelled"); //$NON-NLS-1$
                 }
+                
+                // TODO BGT: on affiche l'onglet Cruise en ODV et Netcdf -> plus besoin de demander le cruise ref
+                // -> supprimer askDataSetRef, CDIResumeWriter_idMessage et tout ce qui est lie
                 //FAE 6399 correction: process != E_ProcessType.COLLECTION_DIR
                 // et non == 
-                if ((currentConversion != E_TypeConversion.MEDATLAS)
-                    && RulesManager.getInstance().getMyProcessType() != E_ProcessType.COLLECTION_DIR)
-                {
-                    if (!convForm.askDataSetRef())
-                    {
-                        throw new Exception("Cancelled"); //$NON-NLS-1$
-                    }
-                }
+//                if ((currentConversion != E_TypeConversion.MEDATLAS)
+//                    && RulesManager.getInstance().getMyProcessType() != E_ProcessType.COLLECTION_DIR)
+//                {
+//                    if (!convForm.askDataSetRef())
+//                    {
+//                        throw new Exception("Cancelled"); //$NON-NLS-1$
+//                    }
+//                }
 
                 // On demande les infos pour faire le résumé CDI,
                 // qui sera fait plus tard
