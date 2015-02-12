@@ -51,8 +51,10 @@ public class Value {
 	}
 	
 	
+	@Override
 	public String toString()
 	{
 		return "Value= "+this.value + " QC= "+this.qualityValue;
 	}
 }
+
