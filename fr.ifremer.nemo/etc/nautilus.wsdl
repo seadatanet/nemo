@@ -35,6 +35,7 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
      <element name="shipCode" nillable="true" type="xsd:string"/>
      <element name="shipName" nillable="true" type="xsd:string"/>
      <element name="startDate" type="xsd:long"/>
+     <element name="crno" nillable="true" type="xsd:string"/>
     </sequence>
    </complexType>
   </schema>
