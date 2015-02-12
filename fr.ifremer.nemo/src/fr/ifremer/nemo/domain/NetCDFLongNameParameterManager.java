@@ -57,7 +57,6 @@ public class NetCDFLongNameParameterManager {
 		file = new File(fileName);
 		longNamesMap = new HashMap<String, String>();
 		loadUserlongNames();
-		// TODO Auto-generated constructor stub
 	}
 
 	public static NetCDFLongNameParameterManager getInstance() {

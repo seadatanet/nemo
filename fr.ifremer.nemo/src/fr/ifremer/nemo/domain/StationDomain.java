@@ -35,7 +35,6 @@ import fr.ifremer.nemo.util.Global.E_MesureType;
 import fr.ifremer.nemo.util.Global.E_TypeConversion;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
-import fr.ifremer.sismer_tools.seadatanet.SdnXLinkReference;
 
 /**
  * Class StationDomain.java Description: classe pour la description des données
@@ -111,7 +110,7 @@ public class StationDomain {
 		if (_model.getReferenceProperty() != null
 				&& _model.getReferenceProperty().isUserProvided()
 				&& !_model.getReferenceProperty().getUserValue().trim()
-				.equals(Global.EMPTY_STRING))
+						.equals(Global.EMPTY_STRING))
 			_ref = Integer.parseInt(_model.getReferenceProperty()
 					.getUserValue());
 		else
@@ -127,7 +126,7 @@ public class StationDomain {
 		odvStationHeader.append(Global.TAB);
 		odvStationHeader.append("Type");
 		odvStationHeader.append(Global.TAB);
-		odvStationHeader.append("yyyy-mm-ddThh:mm:ss.sss");// TODO 20486
+		odvStationHeader.append("yyyy-mm-ddThh:mm:ss.sss");
 		odvStationHeader.append(Global.TAB);
 		odvStationHeader.append("Longitude [degrees_east]");
 		odvStationHeader.append(Global.TAB);
@@ -158,7 +157,6 @@ public class StationDomain {
 		StringBuffer odvStationHeader = new StringBuffer();
 		String stationRef = currentStation.getReference();
 		// Cruise
-//		String cruiseName = Nemo.getInstance().getDomain().getCruise().getDataSetRef();
 		String cruiseName =Nemo.getInstance().getDomain().getCruise().getModel().getReference();
 		odvStationHeader.append(form.limitString(cruiseName, 20));
 		odvStationHeader.append(Global.TAB);
@@ -180,13 +178,13 @@ public class StationDomain {
 		// Longitude [degrees_east]
 		odvStationHeader.append(form.formatLongitude("+DDD.dddddd",
 				(Double) _model.getProperty(Intern.S_LON)
-				.applyOnLine(inputLine)));
+						.applyOnLine(inputLine)));
 		odvStationHeader.append(Global.TAB);
 
 		// Latitude [degrees_north]
 		odvStationHeader.append(form.formatLatitude("+DD.dddddd ",
 				(Double) _model.getProperty(Intern.S_LAT)
-				.applyOnLine(inputLine)));
+						.applyOnLine(inputLine)));
 		odvStationHeader.append(Global.TAB);
 
 		// LOCAL_CDI_ID
@@ -205,17 +203,17 @@ public class StationDomain {
 		// FAE 4615
 		if (_model.getProperty(Intern.S_DEPTH).getFragment() == null
 				&& Nemo.getInstance().getDomain().getMedia().getModel()
-				.getInputType() == E_InputType.TRAJECTORY)
+						.getInputType() == E_InputType.TRAJECTORY)
 			botDepth = Float.NaN;
 		else
 			botDepth = _model.getProperty(Intern.S_DEPTH)
-			.applyOnLine(inputLine);
+					.applyOnLine(inputLine);
 
 		// 6998
 		// if (botDepth.equals("Default"))
 		// botDepth = 0f;
 		if ((!botDepth.equals("Default")) && !((Float) botDepth).isNaN())
-			// if (!((Float) botDepth).isNaN())
+		// if (!((Float) botDepth).isNaN())
 		{
 			odvStationHeader.append(botDepth);
 		} else {
@@ -228,9 +226,10 @@ public class StationDomain {
 
 		return odvStationHeader;
 	}
+
 	public String getReference(String inputFileName,
 			String[] inputStationHeader, boolean mustIncrement)
-					throws ParseException {
+			throws ParseException {
 		// STATION NUMBER
 		String ref = Global.EMPTY_STRING;
 		if (_model.getReferenceProperty().isUserProvided()) {
@@ -301,8 +300,6 @@ public class StationDomain {
 			// .getCruise().getModel().getName() ==
 			// "" on met la référence
 			errorMessage = "cruise reference";
-//			cruiseName = Nemo.getInstance().getDomain().getCruise()
-//					.getDataSetRef();
 			cruiseName = Nemo.getInstance().getDomain().getCruise().getModel().getReference();
 
 			odvStationHeader.append(form.limitString(cruiseName, 20));
@@ -314,7 +311,7 @@ public class StationDomain {
 					.getInputType() == E_InputType.TRAJECTORY) {
 				if (Nemo.getInstance().getDomain().getConversion().getCurrent() != E_TypeConversion.ODV_MULTISTATIONS
 						|| Nemo.getInstance().getDomain().getConversion()
-						.getCurrent() != E_TypeConversion.NETCDF_MULTISTATIONS)
+								.getCurrent() != E_TypeConversion.NETCDF_MULTISTATIONS)
 					_ref = 1;
 				odvStationHeader.append(form.limitString(getRef(true), 20));
 			} else {
@@ -424,7 +421,6 @@ public class StationDomain {
 			// == E_ProcessType.COLLECTION_FILES)
 			// cruiseRef = cDomain.getModel().getName();
 			// else
-//			cruiseRef = cDomain.getDataSetRef();
 			cruiseRef = Nemo.getInstance().getDomain().getCruise().getModel().getReference();
 			// [Numero station]si < 5 : code sur 5 caracteres il est
 			// complete a 
@@ -549,7 +545,7 @@ public class StationDomain {
 			medStationHeader.append(Global.SPACE);
 			medStationHeader.append(Elts.getKeyword(Elts.qc));
 			medStationHeader
-			.append(currentStation.getMetaFlag(Intern.DATETIME));
+					.append(currentStation.getMetaFlag(Intern.DATETIME));
 			medStationHeader.append(currentStation.getMetaFlag(Intern.S_LAT));
 			medStationHeader.append(currentStation.getMetaFlag(Intern.S_LON));
 
@@ -599,7 +595,7 @@ public class StationDomain {
 				medStationHeader.append(Elts
 						.limit((String) _model.getProperty(
 								Intern.S_DCHIST + "2").applyOn(
-										inputStationHeader), Elts.station_line));
+								inputStationHeader), Elts.station_line));
 			} catch (Exception nulException) {
 				// this is authorized: only DCHistory1 is used, DC History2 is
 				// empty
@@ -649,52 +645,18 @@ public class StationDomain {
 			// *EDMO_CODE=1
 			medStationHeader.append(start);
 			errorMessage = "EDMO_CODE";
-			String edmoCode = Nemo.getInstance().getConfig().getIdEdmoRespCdi();
-			medStationHeader.append(Elts.getElt(Elts.station_edmo, edmoCode));
+			medStationHeader.append(Elts.getElt(Elts.station_edmo, Nemo
+					.getInstance().getConfig().getIdEdmoRespCdi()));
 			medStationHeader.append(Global.RN);
 
 			// *LOCAL_CDI_ID=FI35199810007_00001_D09
 			medStationHeader.append(start);
 			errorMessage = "LOCAL_CDI_ID";
-			String localCdiId = getLocalCdiId(Nemo.getInstance().getDomain().getCruise(),Conversion.MEDATLAS, stationRef);
 			medStationHeader.append(Elts.getElt(
 					Elts.station_localCdiId,
-					localCdiId));
+					getLocalCdiId(Nemo.getInstance().getDomain().getCruise(),
+							Conversion.MEDATLAS, stationRef)));
 			medStationHeader.append(Global.RN);
-
-			// SDN references
-			// CSR
-			medStationHeader.append(start);
-			errorMessage = "SDN CSR REFERENCE";
-			String localCsrId = Nemo.getInstance().getDomain().getCruise().getModel().getLocalCsrIdentifier();
-			if (localCsrId!=null && !localCsrId.isEmpty()){
-				SdnXLinkReference csr = new SdnXLinkReference();
-				csr.setAsCsr(Integer.valueOf(edmoCode), localCsrId);
-				medStationHeader.append(csr);
-				medStationHeader.append(Global.RN);
-			}
-			//			errorMessage = "SDN REFERENCES";
-			//			List<SdnXLinkReference> refs = _model.getSdnXLinkReferences();
-			//			boolean isCdiFound = false;
-			//			if (refs !=null){
-			//				for (SdnXLinkReference ref : refs){
-			//					medStationHeader.append(start);
-			//					medStationHeader.append(ref.toString(false));
-			//					medStationHeader.append(Global.RN);
-			//					if(ref.isCdiReference(Integer.valueOf(edmoCode), localCdiId)){
-			//						isCdiFound=true;
-			//					}
-			//				}
-			//			}
-			// CDI
-			errorMessage = "SDN CDI REFERENCES";
-			//			if (!isCdiFound){
-			SdnXLinkReference cdi = new SdnXLinkReference();
-			cdi.setAsCdi(Integer.valueOf(edmoCode), localCdiId, false);
-			medStationHeader.append(start);
-			medStationHeader.append(cdi.toString(false));
-			medStationHeader.append(Global.RN);
-			//			}
 
 			// *SURFACE SAMPLES=
 			medStationHeader.append(start);
@@ -710,7 +672,7 @@ public class StationDomain {
 				medStationHeader.append(Elts
 						.limit((String) _model.getProperty(
 								Intern.S_SURFACE + "2").applyOn(
-										inputStationHeader), Elts.station_line));
+								inputStationHeader), Elts.station_line));
 			} catch (Exception nulException) {
 				// this is authorized: only DCHistory1 is used, DC History2 is
 				// empty
@@ -734,7 +696,7 @@ public class StationDomain {
 	private String[] getCommentLines(String[] inputFile) throws ParseException {
 		LineNumberReader reader = new LineNumberReader(new StringReader(
 				(String) _model.getProperty(Intern.S_COMMENT)
-				.applyOn(inputFile)));
+						.applyOn(inputFile)));
 		String line = null;
 		java.util.Vector<String> lines = new java.util.Vector<String>();
 		try {
@@ -794,7 +756,7 @@ public class StationDomain {
 		if (Double.isNaN(endlat)) {
 			if (_model.getProperty(Intern.S_ELAT).isUserProvided()
 					&& _model.getProperty(Intern.S_ELAT).getUserValue()
-					.equals(Global.EMPTY_STRING)) {
+							.equals(Global.EMPTY_STRING)) {
 				endlat = (Double) _model.getProperty(Intern.S_LAT).applyOn(
 						inputFile);
 			} else {
@@ -808,7 +770,7 @@ public class StationDomain {
 		if (Double.isNaN(endlon)) {
 			if (_model.getProperty(Intern.S_ELON).isUserProvided()
 					&& _model.getProperty(Intern.S_ELON).getUserValue()
-					.equals(Global.EMPTY_STRING)) {
+							.equals(Global.EMPTY_STRING)) {
 				endlon = (Double) _model.getProperty(Intern.S_LON).applyOn(
 						inputFile);
 			} else {
@@ -822,17 +784,17 @@ public class StationDomain {
 		if (Float.isNaN(endDepth)) {
 			if (_model.getProperty(Intern.S_EDEPTH).isUserProvided()
 					&& _model.getProperty(Intern.S_EDEPTH).getUserValue()
-					.equals(Global.EMPTY_STRING)) {
+							.equals(Global.EMPTY_STRING)) {
 				endDepth = (Float) _model.getProperty(Intern.S_DEPTH).applyOn(
 						inputFile);
 			} else {
 				if (_model.getProperty(Intern.S_EDEPTH).getFragment() == null
 						&& Nemo.getInstance().getDomain().getMedia().getModel()
-						.getInputType() == E_InputType.TRAJECTORY)
+								.getInputType() == E_InputType.TRAJECTORY)
 					endDepth = Float.NaN;
 				else
 					endDepth = (Float) _model.getProperty(Intern.S_EDEPTH)
-					.applyOn(inputFile);
+							.applyOn(inputFile);
 			}
 		}
 

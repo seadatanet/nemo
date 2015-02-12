@@ -266,6 +266,7 @@ public class ParameterManager {
 
 		if (isMedatlas) {
 			// ordre: PRES, YMDT, LAT LON, nemo parameters, BATH
+// 20755: DEPTH is allowed instead of pres -> remove P3 rule
 //			if (isProfile) {
 //				/** aap_p3 */
 //				if (!exist_p_pressure && exist_p_depthBSSurf && existPSAL && existTEMP) {

@@ -27,8 +27,6 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.sax.SAXResult;
 import javax.xml.transform.stream.StreamSource;
 
-import org.apache.log4j.Logger;
-
 import com.ago.xml.XMLBootstrapParser;
 
 import fr.ifremer.nemo.config.Configuration;
@@ -110,9 +108,9 @@ public class Nemo {
 		domain.update(model);
 	}
 
-	public boolean openModel(String pathModel, Logger logger) throws FileNotFoundException,
+	public boolean openModel(String pathModel) throws FileNotFoundException,
 			TransformerException {
-		
+
 		// nom du model
 		nomModele = new File(pathModel).getName();
 
@@ -146,16 +144,13 @@ public class Nemo {
 			String C19RegionName = CruiseModel.getTranscodeRegionName(regionName);
 			model.getCruiseModel().setRegionName(C19RegionName);
 		}
-		
 		if (compareVersion(model.getVersion(), "1.6.0") == -1){
-			// do not keep corresponding URL (field now used for CSR SDN reference)
-//			model.getCruiseModel().setCorrespondingURLAutoCheck(true);
-			// models for profiles, MEDATLAS are invalids if older than 1.6.0 
+			// models for profiles, MEDATLAS are invalids if older than 1.6.0
+			// because DEPH is now allowed as Z parameter, but could be not the first param in olds models
+			// (rules data70, data75 and p3 deleted, new rule data 76)
 			if( model.getConversionModel().getOutputFormat()==E_TypeConversion.MEDATLAS
 					&& model.getMediaModel().getInputType() == E_InputType.PROFILE) {
-				if (logger != null){
-					logger.error("models for medatlas profiles older than 1.6.0 shall be validated in Nemo before be used in batch mode");// TODO 20755 msg
-				}
+					System.out.println("models for medatlas profiles older than 1.6.0 shall be validated in Nemo before be used in batch mode");// TODO 20755 msg
 				
 			}
 			model.setIsValid(false);
@@ -294,15 +289,15 @@ public class Nemo {
 			File fich = new File(myViewMain.getEditFileForm().nomRepertoire);
 			if (!Global.EMPTY_STRING.equals(modelName)) {
 				ApplicationWorkbenchWindowAdvisor.configurer_titre
-				.setTitle(Messages.application_directoryTitle
-						+ fich.getAbsolutePath()
-						+ Messages.application_modelTitle + modelName
-						+ " ]"); //$NON-NLS-1$
+						.setTitle(Messages.application_directoryTitle
+								+ fich.getAbsolutePath()
+								+ Messages.application_modelTitle + modelName
+								+ " ]"); //$NON-NLS-1$
 
 			} else {
 				ApplicationWorkbenchWindowAdvisor.configurer_titre
-				.setTitle(Messages.application_directoryTitle
-						+ fich.getAbsolutePath() + " ]"); //$NON-NLS-1$ 
+						.setTitle(Messages.application_directoryTitle
+								+ fich.getAbsolutePath() + " ]"); //$NON-NLS-1$ 
 			}
 
 		} else {
@@ -312,14 +307,14 @@ public class Nemo {
 
 			if (!Global.EMPTY_STRING.equals(modelName)) {
 				ApplicationWorkbenchWindowAdvisor.configurer_titre
-				.setTitle(Messages.application_fileTitle
-						+ fich.getAbsolutePath()
-						+ Messages.application_modelTitle + modelName
-						+ " ]"); //$NON-NLS-1$
+						.setTitle(Messages.application_fileTitle
+								+ fich.getAbsolutePath()
+								+ Messages.application_modelTitle + modelName
+								+ " ]"); //$NON-NLS-1$
 			} else {
 				ApplicationWorkbenchWindowAdvisor.configurer_titre
-				.setTitle(Messages.application_fileTitle
-						+ fich.getAbsolutePath() + " ]"); //$NON-NLS-1$ 
+						.setTitle(Messages.application_fileTitle
+								+ fich.getAbsolutePath() + " ]"); //$NON-NLS-1$ 
 			}
 		}
 	}

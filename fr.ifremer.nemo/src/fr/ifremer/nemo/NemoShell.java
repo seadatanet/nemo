@@ -44,8 +44,10 @@ public class NemoShell {
 	/**
 	 * @param args
 	 */
-	public static boolean main(String inputFile, String outputFile,	String modelFile, Conversion conv, boolean sortDatas,
-			E_TypeConversion odvConv, String datasetRef, String cdiSummaryFile,	boolean couplingTableUpdate, String couplingTablePrefix,
+	public static boolean main(String inputFile, String outputFile,
+			String modelFile, Conversion conv, boolean sortDatas,
+			E_TypeConversion odvConv, String datasetRef, String cdiSummaryFile,
+			boolean couplingTableUpdate, String couplingTablePrefix,
 			Logger logger) {
 
 		try {
@@ -62,19 +64,20 @@ public class NemoShell {
 
 			boolean sort = sortDatas;
 
-			if (!nemo.openModel(modelFile, logger)) {
+			if (!nemo.openModel(modelFile)) {
 				// ERREUR les deux sont UNKNOWN
 				logger.error("Error, model file not valid");
 				return false;
 			}
-			
 			InputDomain inputDomain = Nemo.getInstance().getDomain();
 			if (inputDomain.getMedia().getModel().getSeparator() != Global.EMPTY_STRING)
-				inputFile =	Preformat.run(new File(inputFile)).getAbsolutePath();
+				inputFile =
+						Preformat.run(new File(inputFile)).getAbsolutePath();
 
 			nemo.getDomain().getMedia().getModel().setSourcePath(inputFile);
 
-			E_TypeConversion convertModel =	inputDomain.getConversion().getModel().getOutputFormat();
+			E_TypeConversion convertModel =
+					inputDomain.getConversion().getModel().getOutputFormat();
 			E_TypeConversion convertArgument = odvConv;
 
 			// les deux sont égaux et différents de UNKNOWN
@@ -136,8 +139,6 @@ public class NemoShell {
 			if (strDefault.equals(Global.EMPTY_STRING))
 				strDefault = inputDomain.getCruise().getModel().getName();
 
-//			if (odvConv != E_TypeConversion.MEDATLAS)
-//				inputDomain.getCruise().setDataSetRef(strDefault);
 
 			// Is a station property in file
 			int nbLignes =

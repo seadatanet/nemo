@@ -52,7 +52,7 @@ public class LabelParameterManager
 	/**
 	 * 
 	 */
-	private LabelParameterManager()
+	public LabelParameterManager()
 	{
 		super();
 		labelsMap = new HashMap<String, String>();
