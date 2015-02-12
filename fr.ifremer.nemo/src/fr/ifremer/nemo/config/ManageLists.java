@@ -388,24 +388,6 @@ public class ManageLists
             }
             iteration--;
         } while (permut);
-        
-        
-        // debug
-//        System.out.println("______ SENSOR___________"); 
-//        for (WSDataType dt : _dataTypes){
-//        	if (dt.isSensor())
-//        	{
-//        		System.out.println(dt.getCode());
-//        	}
-//        }
-//        System.out.println("______ NO SENSOR___________"); 
-//        for (WSDataType dt : _dataTypes){
-//        	if (!dt.isSensor())
-//        	{
-//        		System.out.println(dt.getCode());
-//        	}
-//        }
-//        System.out.println("");
     }
     
     /**
