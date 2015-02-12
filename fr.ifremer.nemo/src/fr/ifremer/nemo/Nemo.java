@@ -151,9 +151,9 @@ public class Nemo {
 			if( model.getConversionModel().getOutputFormat()==E_TypeConversion.MEDATLAS
 					&& model.getMediaModel().getInputType() == E_InputType.PROFILE) {
 					System.out.println("models for medatlas profiles older than 1.6.0 shall be validated in Nemo before be used in batch mode");// TODO 20755 msg
-				
+					model.setIsValid(false);
 			}
-			model.setIsValid(false);
+			
 		}
 		completeDataList(model, isBeforeP011);
 		domain.update(model);
