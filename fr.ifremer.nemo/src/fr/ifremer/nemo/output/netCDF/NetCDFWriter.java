@@ -1,10 +1,3 @@
-/* ============================================================================
- * Nom du fichier	: NetCDFWriter.java
- * Auteur			: dcapitai
- * Date				: 15 oct. 2012
- * Copyright		: Altran
- * ============================================================================
- */
 package fr.ifremer.nemo.output.netCDF;
 
 import java.io.File;
@@ -110,7 +103,7 @@ public class NetCDFWriter extends NemoWriter {
 	protected String getOutputFileName(String inputFilePath) {
 		outputFileName = iDomain.getMedia().getOutputFileName();
 		if (isProcessType_CollectionDir) {
-//			cruiseDomain.setDataSetRef(new File(inputFilePath).getName());
+			//			cruiseDomain.setDataSetRef(new File(inputFilePath).getName());
 			outputFileName += File.separator +Nemo.getInstance().getDomain().getCruise().getModel().getReference();
 		}
 		return outputFileName;
@@ -160,7 +153,7 @@ public class NetCDFWriter extends NemoWriter {
 					}
 					writeStation(st, inputFilePath, 0);
 
-					// TODO 20755 update dims 
+
 					updateDimensions(stringMetadataLength, stringLinksLength, maxNbRefs);
 
 
@@ -197,7 +190,6 @@ public class NetCDFWriter extends NemoWriter {
 					writeStation(st, inputFilePath, indiceStation);
 					indiceStation++;
 				}
-				// TODO 20755 update dims 
 				updateDimensions(stringMetadataLength, stringLinksLength, maxNbRefs);
 
 				writeDataToNetCDFFile();
@@ -229,38 +221,28 @@ public class NetCDFWriter extends NemoWriter {
 	{
 		ArrayList<SdnXLinkReference> references = new ArrayList<SdnXLinkReference>();
 		int nbRefs=0;
-		boolean isCdiRefPresent = false;
+		int edmoCode = Integer.valueOf(Nemo.getInstance().getConfig().getIdEdmoRespCdi());
 
-		// add station tab references
-//		if (stationDomain.getModel().getSdnXLinkReferences() != null ){
-//			references.addAll(stationDomain.getModel().getSdnXLinkReferences());
-//		}
-		// add cruise reference
-//		if (cruiseDomain.getModel().getCorrespondingURL() !=null){
-//			SdnXLinkReference refCsr = cruiseDomain.getModel().getCorrespondingURL();
-////			SdnXLinkReference csr = new SdnXLinkReference(SdnXLinkReference.SDN_L23_PREFIX + SdnXLinkReference.SDN_L23_CSR, SdnXLinkReference.SDN_REFERENCE_ROLE.isDescribedBy.name(), );
-//			references.add(refCsr);
-//		}
+		//CSR
 		if (cruiseDomain.getModel().getLocalCsrIdentifier() !=null && !cruiseDomain.getModel().getLocalCsrIdentifier().isEmpty()){
 			SdnXLinkReference csr = new SdnXLinkReference();
-			csr.setAsCsr(Integer.valueOf(Nemo.getInstance().getConfig()
-					.getIdEdmoRespCdi()), cruiseDomain.getModel().getLocalCsrIdentifier());
+			csr.setAsCsr(edmoCode, cruiseDomain.getModel().getLocalCsrIdentifier());
 			computeSdnXlinkdims(csr);
 			references.add(csr);
 			nbRefs++;
 		}
+		if ( Nemo.getInstance().getDomain().getCruise().getModel().getShipCode()!=null
+				&& !Nemo.getInstance().getDomain().getCruise().getModel().getShipCode().isEmpty())
+		{
+			String href = "http://vocab.nerc.ac.uk/collection/C17/" 
 
-		// add cdi if not present
-//			for (SdnXLinkReference ref :references ){
-//				isCdiRefPresent = ref.isCdiReference(Integer.valueOf(Nemo.getInstance().getConfig()
-//						.getIdEdmoRespCdi()),	localCdiId);
-//				computeSdnXlinkdims(ref);
-//				nbRefs++;
-//			}
+				+ Nemo.getInstance().getDomain().getCruise().getModel().getShipCode() ;
+			SdnXLinkReference shipRef = new SdnXLinkReference("SDN:L23::NVS2CON", "isObservedBy", href);
+			computeSdnXlinkdims(shipRef);
+			references.add(shipRef);
+			nbRefs++;
+		}
 
-
-
-		
 
 		if (forceCDIReference ){
 			SdnXLinkReference cdiRef = new SdnXLinkReference();
@@ -279,7 +261,7 @@ public class NetCDFWriter extends NemoWriter {
 		}
 		return references;
 	}
-	
+
 	private void computeSdnXlinkdims(SdnXLinkReference ref){
 		if (stringLinksLength<ref.toString(!isConversionTo_NetCDFMonostation).length()){
 			stringLinksLength = ref.toString(!isConversionTo_NetCDFMonostation).length();
@@ -553,10 +535,7 @@ public class NetCDFWriter extends NemoWriter {
 	public void writeDataToNetCDFFile() throws Exception {
 
 		for (Entry<String, Object> currentStationData : stationData.entrySet()) {
-			
-//			System.out.println(currentStationData.getKey() + " >> "+currentStationData.getValue());
 			myCFPointWriterManager.writeDataToVariable(dims, mapVariables.get(currentStationData.getKey()), currentStationData.getValue());
-
 		}
 		// close file after write all data
 		myCFPointWriterManager.finish();
@@ -609,14 +588,7 @@ public class NetCDFWriter extends NemoWriter {
 
 		// add to net CDF
 		myCFPointWriterManager.addMandatoryDimensions(dims);
-//		if (stationDomain.getModel().getSdnXLinkReferences() != null ||		cruiseDomain.getModel().getCorrespondingURL()!=null){
-//			myCFPointWriterManager.addSdnReferenceDimension(dims);
-//		}
-//		if (
-//				stationDomain.getModel().getSdnXLinkReferences() != null ||
-//				cruiseDomain.getModel().getLocalCsrIdentifier()!=null){
-			myCFPointWriterManager.addSdnReferenceDimension(dims);
-//		}
+		myCFPointWriterManager.addSdnReferenceDimension(dims);
 		// create Global Attributes
 		String title = "NetCDF " + mediaModel.getInputType() + " - Generated by NEMO, version " + Nemo.getInstance().getVersion(); //$NON-NLS-1$//$NON-NLS-2$
 		SdnGlobalAttribute globattr = new SdnGlobalAttribute(getFeatureType(), title, new SimpleDateFormat("yyyy-MM-dd'T'HH:mmZ").format(new Date())); //$NON-NLS-1$
@@ -719,11 +691,9 @@ public class NetCDFWriter extends NemoWriter {
 		mapVariables.put(SdnLocalCdi.getVarName(), SdnLocalCdi);
 		addVariableToNetCDF(SdnLocalCdi);
 
-//		if (!cruiseDomain.getDataSetRef().isEmpty()) {
-			SdnXLinkVariable srnRef = new SdnXLinkVariable(getSDNXlinkDimensions());
-			mapVariables.put(srnRef.getVarName(), srnRef);
-			addVariableToNetCDF(srnRef);
-//		}
+		SdnXLinkVariable srnRef = new SdnXLinkVariable(getSDNXlinkDimensions());
+		mapVariables.put(srnRef.getVarName(), srnRef);
+		addVariableToNetCDF(srnRef);
 
 		mapVariables.put(SdnBotDepth.getVarName(), SdnBotDepth);
 		addVariableToNetCDF(SdnBotDepth);
