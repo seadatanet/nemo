@@ -143,8 +143,6 @@ public class Intern extends NLS {
 	public static String S_STATIONNUMBER;
 	public static String S_DATATYPE;
 	public static String S_QCFLAG;
-	
-	public static String S_SDNREFERENCES;
 
 	// Types de metadonnee
 	public static String DATETIME;

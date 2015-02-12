@@ -61,7 +61,6 @@ public class ViewMain extends ViewPart
 
     private final FilteredTableFactory myFilteredTableFactory;
 
-	
     
 
 	public ViewMain()
@@ -73,8 +72,6 @@ public class ViewMain extends ViewPart
 		editConversionForm = new EditConversionForm();
 		myFilteredTableFactory = new FilteredTableFactory();
 		Nemo.getInstance().setViewMain(this);
-		
-		
 
 	}
 
@@ -106,7 +103,7 @@ public class ViewMain extends ViewPart
 			{
 				int tmp = tabFolder.getSelectionIndex();
 
-				if ((! RulesManager.getInstance().isCruiseEnabled())
+				if ((!RulesManager.getInstance().isCruiseEnabled())
 						&& tmp > 0)
 				{
 					tmp++;
@@ -138,7 +135,7 @@ public class ViewMain extends ViewPart
 		tabCruise.setText(Messages.onglet_cruise);
 		tabCruise.setControl(contentCruise);
 		// FAE 6739
-		enableCruiseTab( RulesManager.getInstance().isCruiseEnabled());
+		enableCruiseTab(RulesManager.getInstance().isCruiseEnabled());
 
 		tabStation = new TabItem(tabFolder, SWT.NONE);
 		tabStation.setText(Messages.onglet_station);
@@ -151,8 +148,6 @@ public class ViewMain extends ViewPart
 		tabConversion = new TabItem(tabFolder, SWT.NONE);
 		tabConversion.setText(Messages.onglet_convert);
 		tabConversion.setControl(contentConversion);
-		
-		
 
 	}
 
@@ -276,7 +271,7 @@ public class ViewMain extends ViewPart
 
 	public void init()
 	{
-		 RulesManager.getInstance().init();
+		RulesManager.getInstance().init();
 		// reinitialisation de la conversion
 		Nemo.getInstance().resetModel();
 
@@ -302,9 +297,6 @@ public class ViewMain extends ViewPart
 		// --- le contenu du fichier
 		editFileForm.init();
 		editDataForm.init();
-		
-		
-		
 
 	}
 
@@ -400,6 +392,5 @@ public class ViewMain extends ViewPart
 		return myFilteredTableFactory;
 	}
 
-	
 
 }

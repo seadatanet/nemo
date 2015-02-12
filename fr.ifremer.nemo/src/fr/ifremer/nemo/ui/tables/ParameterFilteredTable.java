@@ -153,7 +153,7 @@ public class ParameterFilteredTable extends AbstractFilteredTable
 	protected String getDialogTitle()
 	{
 
-		DataListTypeEnum listToUse =  RulesManager.getInstance().getMyDataListType();
+		DataListTypeEnum listToUse = RulesManager.getInstance().getMyDataListType();
 		String title = Messages.table_parameters;
 		title += Global.SPACE;
 		// title += listToUse.name();
@@ -183,7 +183,7 @@ public class ParameterFilteredTable extends AbstractFilteredTable
 		int index = myFiltreTable.getSelectionIndex();
 		typeData = listeFiltree.get(index);
 
-		DataListTypeEnum typeToUse =  RulesManager.getInstance().getMyDataListType();
+		DataListTypeEnum typeToUse = RulesManager.getInstance().getMyDataListType();
 		if (typeToUse == DataListTypeEnum.P011_VIA_P021 || typeToUse == DataListTypeEnum.P011_VIA_P091)
 		{
 			SubParameterFilteredTable subTable = new SubParameterFilteredTable(typeData, typeToUse);

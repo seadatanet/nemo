@@ -326,7 +326,8 @@ public class QCflagsSection extends NemoSection
 
         MenuItem itemTestFlag = new MenuItem(menuFlag, SWT.NONE);
         itemTestFlag.setText(Messages.label_test);
-        if ( RulesManager.getInstance().isProfile())
+
+        if (RulesManager.getInstance().isProfile())
         {
             final FlagMenuItem childDateTime =
                 new FlagMenuItem(subFlag, tabFlagQC, Intern.DATETIME, Messages

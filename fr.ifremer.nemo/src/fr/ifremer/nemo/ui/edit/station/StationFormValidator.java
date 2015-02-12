@@ -1,7 +1,6 @@
 package fr.ifremer.nemo.ui.edit.station;
 
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 import org.eclipse.swt.widgets.Shell;
@@ -20,8 +19,6 @@ import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.util.format.DateTimeFormat;
 import fr.ifremer.nemo.util.format.LatitudeFormat;
 import fr.ifremer.nemo.util.format.LongitudeFormat;
-import fr.ifremer.sismer_tools.seadatanet.SDNXLinkException;
-import fr.ifremer.sismer_tools.seadatanet.SdnXLinkReference;
 
 /**
  * Description: validation de l'onglet station
@@ -41,7 +38,7 @@ public class StationFormValidator extends FormValidator {
 			EditStationForm editStationForm = Nemo.getInstance().getViewMain().getEditStationForm();
 			EditFileForm editFileForm = Nemo.getInstance().getViewMain().getEditFileForm();
 			EditConversionForm editConversionForm = Nemo.getInstance().getViewMain().getEditConversionForm();
-			RulesManager rulesManager =  RulesManager.getInstance();
+			RulesManager rulesManager = RulesManager.getInstance();
 
 			// test des valeurs de Station
 
@@ -85,7 +82,7 @@ public class StationFormValidator extends FormValidator {
 
 			} else {
 				value = editStationForm.stationNumber.getManualValue();
-				if ( RulesManager.getInstance().isTrajectory()) {
+				if (RulesManager.getInstance().isTrajectory()) {
 					// saisie manuelle - obligatoire
 					if (value.trim().equals("") || value.equals("NaN")) { //$NON-NLS-1$ //$NON-NLS-2$
 						ok = ok && false;
@@ -111,7 +108,7 @@ public class StationFormValidator extends FormValidator {
 			if (value != null) {
 				value = value.trim();
 			}
-			if (! RulesManager.getInstance().isProcessCollection() &&  RulesManager.getInstance().isConversionToMedatlas() && value.length() > 5) {
+			if (!RulesManager.getInstance().isProcessCollection() && RulesManager.getInstance().isConversionToMedatlas() && value.length() > 5) {
 				editConversionForm
 						.setWarningStation(Messages.ViewLog_6);
 			} else {
@@ -897,14 +894,6 @@ public class StationFormValidator extends FormValidator {
 				line.dispose();
 			}
 
-			/**
-			 * ==============================================================================================
-			 * SdnReferences
-			 * ==============================================================================================
-			 */
-			
-			ok = ok && validateSdnReferences(editStationForm);
-			
 			if (ok) {
 				editStationForm.setOkApresReset(true);
 				//                okStation();
@@ -919,33 +908,6 @@ public class StationFormValidator extends FormValidator {
 			Nemo.getInstance().getViewMain().setEtape(2);
 			e.printStackTrace();
 		}
-	}
-
-	private boolean validateSdnReferences(EditStationForm editStationForm) {
-
-
-		int i=1;
-		boolean valid = true;
-		
-		ArrayList<SdnXLinkReference> refs;
-		try {
-			refs = editStationForm.getSdnReferences();
-			for (SdnXLinkReference ref : refs)
-			{
-				try{
-					valid &= ref.check();
-				}catch (SDNXLinkException e)
-				{
-					valid = false;
-					Utils.messageErreurAppend(e.getMessage()+ " ref. no  " + i);// TODO
-				}
-				i++;
-			}
-		} catch (SDNXLinkException e1) {
-			Utils.messageErreurAppend(e1.getMessage());
-		}
-		
-		return valid ;
 	}
 
 	@Override

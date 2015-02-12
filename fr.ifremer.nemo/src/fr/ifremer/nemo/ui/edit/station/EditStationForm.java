@@ -1,7 +1,5 @@
 package fr.ifremer.nemo.ui.edit.station;
 
-import java.util.ArrayList;
-
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
@@ -26,21 +24,18 @@ import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Global.E_InputType;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
-import fr.ifremer.sismer_tools.seadatanet.SDNXLinkException;
-import fr.ifremer.sismer_tools.seadatanet.SdnXLinkReference;
 
 public class EditStationForm extends EditForm {
 
 	public StationSection stationNumber;
 	public StationSection dataType, historique, comments,
-	surfaceSample, utConvertion, time, date, latitude, endLatitude,
-	longitude, endLongitude, depth, sensorDepth,
-	magneticDeclin, samplingRate;
+			surfaceSample, utConvertion, time, date, latitude, endLatitude,
+			longitude, endLongitude, depth, sensorDepth,
+			magneticDeclin, samplingRate;
 
 	public StationSection endDepth;
 
 	public QCflagsSection qcFlags;
-	private SdnReferenceSection sdnReferences;
 
 	private StyledText textAreaStation;
 
@@ -63,15 +58,15 @@ public class EditStationForm extends EditForm {
 			// bouton validate
 			createButtonValidate();
 			buttonValidate
-			.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
-				@Override
-				public void widgetSelected(
-						org.eclipse.swt.events.SelectionEvent e)
+					.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+						@Override
+						public void widgetSelected(
+								org.eclipse.swt.events.SelectionEvent e)
 				{
 
 					validate();
 				}
-			});
+					});
 
 			// bouton reset
 			createButtonRaz();
@@ -126,7 +121,7 @@ public class EditStationForm extends EditForm {
 		if (!RulesManager.getInstance().isConversionToNetCDF()) {
 			Text textCommentaire = comments.getManualInput().getLines().get(0).getValueText();
 			GridDataFactory.fillDefaults().grab(true, true).hint(Global.SIZE_SECTION, SWT.DEFAULT).minSize(Global.SIZE_SECTION, 200)
-			.applyTo(textCommentaire);
+					.applyTo(textCommentaire);
 		}
 		// remplissage de l'IHM par le modèle chargé
 		// if (!Nemo.getInstance().getNomModele().isEmpty())
@@ -223,12 +218,12 @@ public class EditStationForm extends EditForm {
 		 */
 
 		utConvertion =
-				new StationSection(Intern.S_OFFSETTU, Messages
-						.getString(Intern.S_OFFSETTU), Global.EMPTY_STRING, true,
-						false, 1, this);
+					new StationSection(Intern.S_OFFSETTU, Messages
+							.getString(Intern.S_OFFSETTU), Global.EMPTY_STRING, true,
+							false, 1, this);
 		utConvertion.addManualInput(null, ComboType.NONE, "0.0"); //$NON-NLS-1$
 		utConvertion.addAutoInput(null, false, MetaInData.INTERDIT, false,
-				false);
+					false);
 		listeSections.add(utConvertion);
 
 		/**
@@ -377,14 +372,13 @@ public class EditStationForm extends EditForm {
 			 */
 
 			samplingRate =
-					new StationSection(Intern.S_SAMPLINGRATE, 
-							Messages.getString(Intern.S_SAMPLINGRATE),
-							Messages.edit_station_sectionSampling_lib, 
-							true, true, 1, this);
+						new StationSection(Intern.S_SAMPLINGRATE, Messages
+								.getString(Intern.S_SAMPLINGRATE),
+								Messages.edit_station_sectionSampling_lib, true, true, 1, this);
 			samplingRate.addConverter(ComboType.FRQ, "*1"); //$NON-NLS-1$
 			samplingRate.addManualInput(null, ComboType.NONE, "0"); //$NON-NLS-1$
 			samplingRate.addAutoInput(null, false, MetaInData.INTERDIT, false,
-					false);
+						false);
 			samplingRate.setTimeSeriesInfo(true);
 			listeSections.add(samplingRate);
 
@@ -396,82 +390,15 @@ public class EditStationForm extends EditForm {
 		 */
 
 		qcFlags =
-				new QCflagsSection(Intern.S_QCFLAG, Messages
-						.getString(Intern.S_QCFLAG),
-						Messages.edit_station_sectionQCflags_lib, this);
+					new QCflagsSection(Intern.S_QCFLAG, Messages
+							.getString(Intern.S_QCFLAG),
+							Messages.edit_station_sectionQCflags_lib, this);
 		listeSections.add(qcFlags);
 
-
-		/**
-		 * ==============================================================================================
-		 * SDN References
-		 * ==============================================================================================
-		 */
-
-		sdnReferences =
-				new SdnReferenceSection(Intern.S_SDNREFERENCES, Messages
-						.getString(Intern.S_SDNREFERENCES),
-						Messages.edit_station_sectionSdnReferences_lib, this);
-		listeSections.add(sdnReferences);
 	}
-	
-	
-	
-	public ArrayList<SdnXLinkReference> getSdnReferences() throws SDNXLinkException{
-		return sdnReferences.getSdnReferences();
-	}
-	public void defineMandatorySections(){
-		// mandatory Station Section
-		if (stationNumber != null) {
-			stationNumber.setMandatory(true);
-			/*
-			 * if(myEditFileForm.getRadMedatlas().getSelection() &&
-			 * myEditFileForm.getRadProfilVertical().getSelection())
-			 * myEditStationForm.dataType.setMandatory(false);
-			 * else
-			 */
-			dataType.setMandatory(true);
-			historique.setMandatory(false);
-			comments.setMandatory(false);
-			surfaceSample.setMandatory(false);
-			utConvertion.setMandatory(false);
-			time.setMandatory(true);
-			date.setMandatory(true);
-			latitude.setMandatory(true);
-			longitude.setMandatory(true);
-			depth.setMandatory(false);
 
-			if (sensorDepth.getSection() != null && !sensorDepth.getSection().isDisposed()) {
-				if (
-//						myEditFileForm.getRadSerieTempo().getSelection()
-						RulesManager.getInstance().isTimeSeries()
-						|| 
-						RulesManager.getInstance().isConversionToNetCDF())
-					sensorDepth.setMandatory(true);
-				else
-					sensorDepth.setMandatory(false);
-			}
-
-			if (samplingRate.getSection() != null && !samplingRate.getSection().isDisposed()) {
-				if (
-						RulesManager.getInstance().isTimeSeries()
-//						myEditFileForm.getRadSerieTempo().getSelection() 
-						|| 
-						RulesManager.getInstance().isTrajectory()
-//						myEditFileForm.getRadTrajectoire().getSelection()
-						)
-					samplingRate.setMandatory(true);
-				else
-					samplingRate.setMandatory(false);
-			}
-
-		}
-	}
-	
 	@Override
 	public void actualiseEdition() {
-		
-		
 		RulesManager rulesManager = RulesManager.getInstance();
 		// pour trajectoires et time-series
 		if (rulesManager.isTrajectory() || rulesManager.isTimeSeries()) {
@@ -507,7 +434,7 @@ public class EditStationForm extends EditForm {
 				((StationSection) section).diseableLineInData();
 			}
 		}
-		defineMandatorySections();
+
 	}
 
 	@Override
@@ -550,7 +477,7 @@ public class EditStationForm extends EditForm {
 			PropertyModel propertyModel = sModel.propertiesAt(Intern.S_EDATE);
 			qcFlags.setFlagFragment(propertyModel
 					.getFlag(), Intern.ENDDATETIME, Messages.getString(
-							Intern.ENDDATETIME).trim());
+					Intern.ENDDATETIME).trim());
 		}
 	}
 
@@ -651,5 +578,47 @@ public class EditStationForm extends EditForm {
 	public void setTextAreaStation(StyledText textAreaStation) {
 		this.textAreaStation = textAreaStation;
 	}
+	
+	public void defineMandatorySections(){
+		if (stationNumber != null) {
+			stationNumber.setMandatory(true);
+			/*
+			 * if(myEditFileForm.getRadMedatlas().getSelection() &&
+			 * myEditFileForm.getRadProfilVertical().getSelection())
+			 * myEditStationForm.dataType.setMandatory(false); else
+			 */
+			dataType.setMandatory(true);
+			historique.setMandatory(false);
+			comments.setMandatory(false);
+			surfaceSample.setMandatory(false);
+			utConvertion.setMandatory(false);
+			time.setMandatory(true);
+			date.setMandatory(true);
+			latitude.setMandatory(true);
+			longitude.setMandatory(true);
+			depth.setMandatory(false);
 
+			if (sensorDepth.getSection() != null
+					&& !sensorDepth.getSection().isDisposed()) {
+				if (
+				RulesManager.getInstance().isTimeSeries()
+						|| RulesManager.getInstance().isConversionToNetCDF())
+					sensorDepth.setMandatory(true);
+				else
+					sensorDepth.setMandatory(false);
+			}
+
+			if (samplingRate.getSection() != null
+					&& !samplingRate.getSection().isDisposed()) {
+				if (RulesManager.getInstance().isTimeSeries()
+						|| RulesManager.getInstance().isTrajectory()
+				)
+					samplingRate.setMandatory(true);
+				else
+					samplingRate.setMandatory(false);
+			}
+
+		}
+	}
+	
 }

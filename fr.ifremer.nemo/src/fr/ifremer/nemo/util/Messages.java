@@ -226,7 +226,6 @@ public class Messages {
 	public static String edit_station_sectionMagn_lib;
 	public static String edit_station_sectionSampling_lib;
 	public static String edit_station_sectionQCflags_lib;
-	public static String edit_station_sectionSdnReferences_lib;
 
 	// DATA
 	public static String edit_data_title;
@@ -270,7 +269,6 @@ public class Messages {
 
 	// MESSAGES D'INFORMATIONS REGLES INPUT/CONV (onglet File)
 	public static String edit_file_info_medatlasForbiddenBecauseCollection;
-//	public static String edit_file_info_cruiseDisabledBecauseODV;
 	public static String edit_file_info_conversionNotApplicable;
 	public static String edit_file_info_P011viaP021_disabled;
 	public static String edit_file_info_AboveSeaLevel_disabled;
@@ -372,7 +370,6 @@ public class Messages {
 	public static String settings_EDMO_choice_button;
 	public static String settings_EDMO_search_label;
 	public static String settings_cdi;
-	public static String settings_sdnReferences;
 	public static String settings_mapping;
 	public static String settings_dateODV;
 	public static String error_settings_cdi;
@@ -589,7 +586,6 @@ public class Messages {
 	public static String SWTProcess_CDIresume;
 	public static String CDIResumeWriter_choixFichier;
 	public static String CDIResumeWriter_idTitle;
-	public static String CDIResumeWriter_idMessage;
 	public static String CDIResumeWriter_configMessage;
 	public static String StationModel_1;
 	public static String StationModel_2;
