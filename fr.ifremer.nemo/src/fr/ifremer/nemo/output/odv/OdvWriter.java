@@ -40,13 +40,12 @@ public class OdvWriter extends NemoWriter
     @Override
     protected String getOutputFileName(String inputFilePath)
     {
-        outputFileName = iDomain.getMedia().getOutputFileName();
-        if (isProcessType_CollectionDir)
-        {
-//            cruiseDomain.setDataSetRef(new File(inputFilePath).getName());
-            outputFileName += File.separator + Nemo.getInstance().getDomain().getCruise().getModel().getReference();
-        }
-        return outputFileName;
+    	   outputFileName = iDomain.getMedia().getOutputFileName();
+           if (isProcessType_CollectionDir)
+           {
+               outputFileName += File.separator + Nemo.getInstance().getDomain().getCruise().getModel().getReference();
+           }
+           return outputFileName;
     }
 
     /*

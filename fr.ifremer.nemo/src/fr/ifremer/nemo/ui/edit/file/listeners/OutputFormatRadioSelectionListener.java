@@ -39,7 +39,6 @@ public class OutputFormatRadioSelectionListener implements SelectionListener
     public void widgetSelected(SelectionEvent g)
     {
 
-        RulesManager rulesMgr = RulesManager.getInstance();
         E_TypeConversion currentConv =E_TypeConversion.UNKNOWN;
 
         if (g.getSource().equals(myEditFileForm.getRadMedatlas()))
@@ -93,7 +92,7 @@ public class OutputFormatRadioSelectionListener implements SelectionListener
             }
         }
         
-//        rulesMgr.defineSectionMandatory();
+        RulesManager.getInstance().defineSectionMandatory();
      
 //        boolean confirm = MessageDialog.openConfirm(null, 
 //            Messages.edit_data_dataListDialogBox_title,
@@ -105,7 +104,7 @@ public class OutputFormatRadioSelectionListener implements SelectionListener
         
         Nemo.getInstance().getDomain().getConversion().getModel().setOutputFormat(currentConv);
         Nemo.getInstance().getViewMain().getEditConversionForm().fillSummary();
-        rulesMgr.updateFromIHM(currentConv);
+        RulesManager.getInstance().updateFromIHM(currentConv);
         // invalidation de l'etape quand modif
         Utils.invalidEtapes();
     }

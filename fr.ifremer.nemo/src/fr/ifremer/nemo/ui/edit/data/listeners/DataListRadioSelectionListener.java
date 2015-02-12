@@ -22,7 +22,7 @@ import fr.ifremer.nemo.util.Global.DataListTypeEnum;
 public class DataListRadioSelectionListener implements SelectionListener
 {
     // reference sur l'editeur
-    private EditDataForm myEditDataForm;
+    private final EditDataForm myEditDataForm;
     
     
     public DataListRadioSelectionListener(EditDataForm editDataForm)

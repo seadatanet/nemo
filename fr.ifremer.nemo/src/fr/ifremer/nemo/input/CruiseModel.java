@@ -55,12 +55,20 @@ import fr.ifremer.nemo.util.Messages;
 public class CruiseModel extends AbstractModel {
 	private static String CSR_DATE_FORMAT = "yyyy-MM-dd"; //$NON-NLS-1$
 	public static String MED_DATE_FORMAT = "dd/MM/yyyy"; //$NON-NLS-1$
+	public static String DEFAULT_SHIP_VALUE = "XXXX";
 
 	/**
 	 * xml actuellement autorise pour initialisation xml
 	 */
 	public static enum XmlVersion {ISO_19139, ISO_19115};
+	
 
+	/**
+	 * Local CSR ID = CRNO
+	 */
+	protected String _localCsrIdentifier;
+	
+	
 	/**
 	 * Code d'accessibilité des données (MEDATLAS: 1 char = P/L/C)
 	 */
@@ -76,12 +84,6 @@ public class CruiseModel extends AbstractModel {
 	 */
 	protected String _comment;
 
-	/**
-	 * Corresponding URL for Cruise SDN reference 
-	 */
-//	protected SdnXLinkReference _correspondingURL;
-	// default: auto compute the CSR
-//	protected Boolean _correspondingURLAutoCheck = true;
 
 	/**
 	 * Code pays du laboratoire source (MEDATLAS: 2 char max)
@@ -124,13 +126,6 @@ public class CruiseModel extends AbstractModel {
 	protected String _reference;
 
 	/**
-	 * Local CSR ID = CRNO
-	 */
-	protected String _localCsrIdentifier="";
-
-
-
-	/**
 	 * Nom de la région [table GF3] (MEDATLAS: 35 char max)
 	 */
 	protected String _regionName;
@@ -154,13 +149,13 @@ public class CruiseModel extends AbstractModel {
 	 * Date de début de campagne (MEDATLAS: DD/MM/YYYY)
 	 */
 	protected long _startDate;
-
-
+	
+	
 	/**
 	 * version xml du fichier charger depuis xml initialisation
 	 */
 	private XmlVersion xmlVersion;
-
+	
 	/**
 	 * Liste , ordonnee, des types de donnees
 	 */
@@ -179,8 +174,6 @@ public class CruiseModel extends AbstractModel {
 		_availability = E_Availability.publicly;
 		_chiefScientist = Intern.unknown;
 		_comment = Global.EMPTY_STRING;
-//		_correspondingURL = null;
-//		_correspondingURLAutoCheck = true;
 		_countryCode = Global.EMPTY_STRING;
 		_countryName = null;
 		_dataCentre = Global.EMPTY_STRING;
@@ -189,10 +182,10 @@ public class CruiseModel extends AbstractModel {
 		_name = Global.EMPTY_STRING;
 		_projectName = Global.EMPTY_STRING;
 		_reference = Global.EMPTY_STRING;
-		_localCsrIdentifier=Global.EMPTY_STRING;
+		_localCsrIdentifier = Global.EMPTY_STRING;
 		_regionName = Global.EMPTY_STRING;
 		_regionCode = Global.EMPTY_STRING;
-		_shipCode = "XXXX"; //$NON-NLS-1$
+		_shipCode = DEFAULT_SHIP_VALUE;
 		_shipName = Intern.unknown;
 		_startDate = System.currentTimeMillis();
 		_dataTypes = new ArrayList<DataType>();
@@ -202,9 +195,9 @@ public class CruiseModel extends AbstractModel {
 	 * @see AbstractModel.java#fromElement
 	 */
 	public static SAXConsumer fromElement(String a_URI,
-			String a_LocalName,
-			String a_QName,
-			Attributes a_Attributes) {
+											String a_LocalName,
+											String a_QName,
+											Attributes a_Attributes) {
 		CruiseModel el = new CruiseModel();
 		el.buildFromElement(a_URI, a_LocalName, a_QName, a_Attributes);
 		return el;
@@ -215,9 +208,9 @@ public class CruiseModel extends AbstractModel {
 	 */
 	@Override
 	public void buildFromElement(String a_URI,
-			String a_LocalName,
-			String a_QName,
-			Attributes a_Attributes) {
+									String a_LocalName,
+									String a_QName,
+									Attributes a_Attributes) {
 		// l'élément n'a pas d'attributs
 	}
 
@@ -226,20 +219,19 @@ public class CruiseModel extends AbstractModel {
 	 */
 	@Override
 	public SAXConsumer consumeElement(String a_URI,
-			String a_LocalName,
-			String a_QName,
-			Attributes a_Attributes) {
+										String a_LocalName,
+										String a_QName,
+										Attributes a_Attributes) {
 
 		if (a_LocalName.equals(ModelDescription.node_cref)) {
 			Element2Field setter = new Element2Field(this, ModelDescription.setter_cref);
 			return setter;
 		}
 		if (a_LocalName.equals(ModelDescription.node_localCSRIdentifier)) {
-			Element2Field setter = new Element2Field(this, ModelDescription.setter_localCSRIdentifier);
+			Element2Field setter = new Element2Field(this,
+					ModelDescription.setter_localCSRIdentifier);
 			return setter;
 		}
-
-
 		if (a_LocalName.equals(ModelDescription.node_cname)) {
 			Element2Field setter = new Element2Field(this, ModelDescription.setter_cname);
 			return setter;
@@ -304,14 +296,6 @@ public class CruiseModel extends AbstractModel {
 			Element2Field setter = new Element2Field(this, ModelDescription.setter_comment);
 			return setter;
 		}
-		//		if (a_LocalName.equals(ModelDescription.node_correspondingURL)) {
-		//			Element2Field setter = new Element2Field(this, ModelDescription.setter_correspondingURL);
-		//			return setter;
-		//		}
-		//		if (a_LocalName.equals(ModelDescription.node_correspondingURLAutoCheck)) {
-		//			Element2Field setter = new Element2Field(this, ModelDescription.setter_correspondingURLAutoCheck);
-		//			return setter;
-		//		}
 
 		if (a_LocalName.equals(ModelDescription.node_listDatatypes)) {
 			return new PathElementConsumer(ModelDescription.node_listDatatypes, this);
@@ -324,10 +308,10 @@ public class CruiseModel extends AbstractModel {
 	 */
 	@Override
 	public SAXConsumer handlePathElement(String path,
-			String a_URI,
-			String a_LocalName,
-			String a_QName,
-			Attributes a_Attributes) {
+											String a_URI,
+											String a_LocalName,
+											String a_QName,
+											Attributes a_Attributes) {
 		SAXConsumer el = null;
 		if (path.equals(ModelDescription.node_listDatatypes)) {
 			el = DataType.fromElement(a_URI, a_LocalName, a_QName, a_Attributes);
@@ -343,7 +327,8 @@ public class CruiseModel extends AbstractModel {
 	@Override
 	public void writeXMLBodyOn(XMLOutputWriter a_Writer) {
 		a_Writer.putTag(ModelDescription.node_cref, getReference());
-		a_Writer.putTag(ModelDescription.node_localCSRIdentifier, getLocalCsrIdentifier());
+		a_Writer.putTag(ModelDescription.node_localCSRIdentifier,
+				getLocalCsrIdentifier());
 		a_Writer.putTag(ModelDescription.node_cname, getName());
 		a_Writer.putTag(ModelDescription.node_shipcode, getShipCode());
 		a_Writer.putTag(ModelDescription.node_shipname, getShipName());
@@ -358,8 +343,6 @@ public class CruiseModel extends AbstractModel {
 		a_Writer.putTag(ModelDescription.node_datacenter, getDataCentre());
 		a_Writer.putTag(ModelDescription.node_availability, getAvailability().toString());
 		a_Writer.putCDATATag(ModelDescription.node_comment, getComment());
-		//		a_Writer.putCDATATag(ModelDescription.node_correspondingURL, getCorrespondingURL().toString());
-		//		a_Writer.putTag(ModelDescription.node_correspondingURLAutoCheck, getCorrespondingURLAutoCheck());
 		a_Writer.openTag(ModelDescription.node_listDatatypes);
 		for (DataType t : getDataTypes()) {
 			t.writeXMLOn(a_Writer);
@@ -377,8 +360,8 @@ public class CruiseModel extends AbstractModel {
 	public void fillFromSISMER(String a_Reference) throws ServiceException, MalformedURLException, RemoteException {
 
 		NautilusSurveyWS service = new NautilusSurveyWSServiceLocator()
-		.getNAUTILUS(new java.net.URL(Nemo.getInstance().getConfig()
-				.getNautilusWebServiceURL()));
+										.getNAUTILUS(new java.net.URL(Nemo.getInstance().getConfig()
+												.getNautilusWebServiceURL()));
 		WSSurvey wssurvey = service.getSurvey(a_Reference);
 
 		// initialisation avec les valeurs par défaut
@@ -466,9 +449,9 @@ public class CruiseModel extends AbstractModel {
 		}
 		return RegionName;
 	}
-
-
-
+	
+	
+	
 
 	/**
 	 * Methode de creation d'instance a partir d'un fichier XML
@@ -479,7 +462,7 @@ public class CruiseModel extends AbstractModel {
 	 * @exception java.io.FileNotFoundException
 	 */
 	public void importFromXML(File xmlFile) throws SAXException, TransformerException {
-
+		
 		//verifie si input xml est SDN2_CSR_ISO19139_3.0.0.xsd complieant
 		if(checkSchema( new StreamSource(xmlFile), Intern.CruiseShemaLocationISO19139))
 		{
@@ -497,12 +480,12 @@ public class CruiseModel extends AbstractModel {
 			//erreur si fichier n'est pas en ISO_19139 ou ISO_19115
 			Utils.messageErreurAppend(Messages.error_cruise_invalidXML);
 		}
-
-
-
+		
+		
+		
 	}
-
-
+	
+	
 	/**
 	 * Methode de creation d'instance a partir d'un fichier XML
 	 * @param xmlFile : Schéma XML
@@ -516,7 +499,7 @@ public class CruiseModel extends AbstractModel {
 
 		StreamSource xmlSource = new StreamSource(xmlFile);
 		StreamSource xslSource = new StreamSource(xslFile);
-
+		
 		XMLBootstrapParser parser = new XMLBootstrapParser(this);
 		Result result = new SAXResult(parser);
 		TransformerFactory factory = TransformerFactory.newInstance();
@@ -650,47 +633,8 @@ public class CruiseModel extends AbstractModel {
 		return _comment;
 	}
 
-	/**
-	 * Getter pour _correspondingURL.
-	 * @return String
-	 * @see CruiseModel.java#_correspondingURL
-	 */
-//	public SdnXLinkReference getCorrespondingURL() {
-//		if (_correspondingURLAutoCheck){
-//			return getCorrespondingURLDefault();
-//		}
-//		return _correspondingURL;
-//
-//	}
 
-//	public SdnXLinkReference  getCorrespondingURLDefault()
-//	{
-//
-//		SdnXLinkReference csr = new SdnXLinkReference();
-//		try {
-//			// TODO 20755 check if edmo is the good one
-//			csr.setAsCsr(Integer.valueOf(Nemo.getInstance().getConfig().getIdEdmoRespCdi()), 
-//					_reference);
-//		} catch (NumberFormatException e) {
-//			// TODO 20755 Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (SDNXLinkException e) {
-//			// TODO 20755 Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		return csr;
-//	}
 
-//	public Boolean getCorrespondingURLAutoCheck() {
-//		return _correspondingURLAutoCheck;
-//	}
-//
-//	public void setCorrespondingURLAutoCheck(String x) {
-//		_correspondingURLAutoCheck = Boolean.valueOf(x);
-//	}
-//	public void setCorrespondingURLAutoCheck(Boolean  correspondingURLAutoCheck) {
-//		_correspondingURLAutoCheck = correspondingURLAutoCheck;
-//	}
 	/**
 	 * Setter pour _comment
 	 * @param x : nouvelle valeur pour _comment
@@ -700,32 +644,6 @@ public class CruiseModel extends AbstractModel {
 		_comment = x;
 	}
 
-	/**
-	 * Setter pour _correspondingURL
-	 * @param x : nouvelle valeur pour _correspondingURL
-	 * @see CruiseModel.java#_correspondingURL
-	 */
-//	public void setCorrespondingURL(SdnXLinkReference x) {
-//		_correspondingURL = x;
-//	}
-	/**
-	 * Setter pour _correspondingURL
-	 * @param x : nouvelle valeur pour _correspondingURL
-	 * @throws SDNXLinkException 
-	 * @throws SismerToolsException 
-	 * @see CruiseModel.java#_correspondingURL
-	 */
-//	public void setCorrespondingURL(String x) throws SismerToolsException, SDNXLinkException {
-//		if (!x.isEmpty()){
-//			try{
-//				SdnXLinkReference ref = SDNReferenceParser.parseReferenceRow(x);
-//				_correspondingURL = ref;
-//			}catch(Exception e){
-//				// unparsable URL - ignore it
-//			}
-//
-//		}
-//	}
 
 
 	/**
@@ -902,8 +820,6 @@ public class CruiseModel extends AbstractModel {
 		_reference = x;
 	}
 
-
-
 	/**
 	 * Getter pour _regionName.
 	 * @return String
@@ -980,7 +896,7 @@ public class CruiseModel extends AbstractModel {
 	public long getStartDate() {
 		return _startDate;
 	}
-
+	
 	/**
 	 * Getter pour xmlVersion.
 	 * @return XmlVersion
@@ -1090,20 +1006,20 @@ public class CruiseModel extends AbstractModel {
 		}
 	}
 
-
-
 	public String getLocalCsrIdentifier() {
 		return _localCsrIdentifier;
 	}
 	/**
-	 * set local CSR identifier from XML. Remove urn:SDN:CSR:LOCAL: prefix for 19139 CSRs or SDN:CSR:LOCAL: prefix for 19115 CSRs
+	 * set local CSR identifier from XML. Remove urn:SDN:CSR:LOCAL: prefix for
+	 * 19139 CSRs or SDN:CSR:LOCAL: prefix for 19115 CSRs
+	 * 
 	 * @param localCsrIdentifier
 	 */
 	public void setLocalCSRIdentifier(String localCsrIdentifier) {
-		if (localCsrIdentifier.contains("SDN:CSR:LOCAL:")){
-			this._localCsrIdentifier = localCsrIdentifier.split("SDN:CSR:LOCAL:")[1];
-//			System.out.println("local CSR :" + this.localCsrIdentifier);
-		}else{
+		if (localCsrIdentifier.contains("SDN:CSR:LOCAL:")) {
+			this._localCsrIdentifier = localCsrIdentifier
+					.split("SDN:CSR:LOCAL:")[1];
+		} else {
 			this._localCsrIdentifier = localCsrIdentifier;
 		}
 	}

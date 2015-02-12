@@ -243,6 +243,7 @@ public class TableDataSurvey {
 
 								// invalidation de l'etape quand modif
 								Utils.invalidEtapes();
+
 								text.setFocus();
 								return;
 							}

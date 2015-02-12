@@ -357,7 +357,8 @@ public abstract class NemoWriter {
 	protected void printCruiseHeader() throws ParseException,UnsupportedEncodingException, GenerationException {
 		printCruiseHeader(null);
 	}
-	protected void printCruiseHeader(List<Station> stationsList) throws ParseException,	UnsupportedEncodingException, GenerationException {
+	protected void printCruiseHeader(List<Station> stationsList) throws ParseException,
+			UnsupportedEncodingException, GenerationException {
 		// écriture de l'entête campagne
 		StringBuffer cruiseHeader = cruiseDomain.getHeader(myConversion, stationsList);
 		outputFileWriter.println(cruiseHeader);

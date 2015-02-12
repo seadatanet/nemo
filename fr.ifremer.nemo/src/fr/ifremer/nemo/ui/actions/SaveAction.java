@@ -92,7 +92,6 @@ public class SaveAction extends Action implements ISelectionListener,
 
         Nemo.getInstance().refreshNomNemo();
         Nemo.getInstance().getViewMain().getEditFileForm().actualiseEdition();
-        Nemo.getInstance().getViewMain().getEditConversionForm().fillSummary();
         Utils.messageOK(Messages.SaveAction_4);
 
     }

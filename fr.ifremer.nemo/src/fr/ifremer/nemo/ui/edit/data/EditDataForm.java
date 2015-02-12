@@ -246,7 +246,6 @@ public class EditDataForm extends EditForm {
 	}
 
 	public void selectDataList(DataListTypeEnum theDataList) {
-		RulesManager rulesManager = RulesManager.getInstance();
 		button_P091.setSelection(false);
 		button_P011viaP091.setSelection(false);
 		button_P011viaP021.setSelection(false);

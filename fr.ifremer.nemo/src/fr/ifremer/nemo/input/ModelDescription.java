@@ -56,8 +56,6 @@ public class ModelDescription extends NLS {
 	public static String node_datacenter;
 	public static String node_availability;
 	public static String node_comment;
-//	public static String node_correspondingURL;
-//	public static String node_correspondingURLAutoCheck;
 	public static String node_listDatatypes;
 	public static String node_datatypeModel;
 	public static String node_nbprofiles;
@@ -77,10 +75,6 @@ public class ModelDescription extends NLS {
 	public static String node_lastline;
 	public static String node_firstoffset;
 	public static String node_lastoffset;
-	
-	public static String node_sdnXlinks;
-	
-	
 	public static String node_parameterModel;
 	public static String node_formula;
 	public static String node_isText;
@@ -94,8 +88,7 @@ public class ModelDescription extends NLS {
 	public static String node_unit;
 	public static String node_unitCode;
 	public static String node_outdefault;
-	public static String node_reference;// for station
-
+	public static String node_reference;
 	public static String node_listProperties;
 	public static String node_listParameters;
 	public static String node_verticalParametersList;
@@ -159,8 +152,6 @@ public class ModelDescription extends NLS {
 	public static String setter_datacenter;
 	public static String setter_availability;
 	public static String setter_comment;
-//	public static String setter_correspondingURL;
-//	public static String setter_correspondingURLAutoCheck;
 	public static String setter_nbprofiles;
 	public static String setter_qc;
 	public static String setter_sensor;
@@ -168,9 +159,6 @@ public class ModelDescription extends NLS {
 	public static String setter_firstline;
 	public static String setter_lastline;
 	public static String setter_firstoffset;
-	
-	public static String setter_sdnXlinks;
-	
 	public static String setter_lastoffset;
 	public static String setter_formula;
 	public static String setter_isText;

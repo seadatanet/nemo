@@ -15,7 +15,6 @@ import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Text;
 
 import fr.ifremer.nemo.Nemo;
-import fr.ifremer.nemo.domain.CruiseDomain;
 import fr.ifremer.nemo.input.CruiseModel;
 import fr.ifremer.nemo.input.parameters.addedParameters.AP_CJDY;
 import fr.ifremer.nemo.input.parameters.addedParameters.AP_DTUT;
@@ -422,34 +421,6 @@ public class EditConversionForm extends EditForm {
 		return message;
 	}
 
-	public boolean askDataSetRef() {
-		boolean asDataSetRef = false;
-		CruiseDomain cruiseDomain = Nemo.getInstance().getDomain().getCruise();
-		if (Nemo.getInstance().getDomain().getCruise().getModel().getReference().equals(Global.EMPTY_STRING)) {
-			String strDefault = Global.EMPTY_STRING;
-			strDefault = cruiseDomain.getModel().getReference();
-			if (strDefault.equals(Global.EMPTY_STRING))
-				strDefault = cruiseDomain.getModel().getName();
-
-			InputDialog inputDataSetRef =
-					new InputDialog(Utils.getMainShell(),
-							Messages.CDIResumeWriter_idTitle,
-							Messages.CDIResumeWriter_idMessage, strDefault, null);
-			inputDataSetRef.open();
-
-			if (inputDataSetRef.getReturnCode() == Window.OK) {
-//				cruiseDomain.setDataSetRef(inputDataSetRef.getValue());
-				asDataSetRef = true;
-			} else {
-//				cruiseDomain.setDataSetRef(Global.EMPTY_STRING);
-				asDataSetRef = false;
-			}
-		} else {
-			asDataSetRef = true;
-			// return true;
-		}
-		return asDataSetRef;
-	}
 
 	public void definePrefixDossier() {
 		if (Nemo.getInstance().getConfig().isWriteMapping()) {
@@ -572,7 +543,8 @@ public class EditConversionForm extends EditForm {
 
 	public String calcBatchCommandLine() {
 		RulesManager rm = RulesManager.getInstance();
-		EditFileForm editFileForm =	Nemo.getInstance().getViewMain().getEditFileForm();
+		EditFileForm editFileForm =
+				Nemo.getInstance().getViewMain().getEditFileForm();
 		String command = "nemo_batch";
 		command += Global.SPACE;
 
@@ -583,7 +555,7 @@ public class EditConversionForm extends EditForm {
 		if (editFileForm.isCruiseIsAFile()) {
 			command += editFileForm.nomFichierOrigin;
 		}
-		if (RulesManager.getInstance().isCruiseInADirectory()) {
+		if (rm.isCruiseInADirectory()) {
 			command += editFileForm.nomRepertoireOrigin;
 		}
 		command += "\"";
@@ -626,15 +598,15 @@ public class EditConversionForm extends EditForm {
 		}
 
 		// datasetRef
-		String dataSetRef =
-				Nemo.getInstance().getDomain().getCruise().getModel().getReference();
+		String dataSetRef =	Nemo.getInstance().getDomain().getCruise().getModel().getReference();
 		if (!dataSetRef.equals(Global.EMPTY_STRING)) {
 			command += Global.SPACE;
 			command += Global.MOINS + Global.optDatasetRef;
 			command += Global.SPACE;
 			command +=
 					"\""
-							+ Nemo.getInstance().getDomain().getCruise().getModel().getReference() + "\"";
+							+ Nemo.getInstance().getDomain().getCruise()
+									.getModel().getReference() + "\"";
 		}
 
 		// cdisummary

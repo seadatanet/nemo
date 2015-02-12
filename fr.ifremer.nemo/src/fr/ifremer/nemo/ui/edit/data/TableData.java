@@ -466,7 +466,8 @@ public class TableData {
 		// medatlas
 		// verticaux sauf si la liste de paramètres à utiliser est la P011
 		if (RulesManager.getInstance().isProfile()
-				&& RulesManager.getInstance().isConversionToMedatlas()
+				&& RulesManager.getInstance()
+						.isConversionToMedatlas()
 				&& RulesManager.getInstance()
 						.getMyDataListType() == DataListTypeEnum.P091) {
 			for (TypeData type : typesWS) {

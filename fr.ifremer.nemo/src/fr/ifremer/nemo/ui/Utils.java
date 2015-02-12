@@ -1254,8 +1254,6 @@ public class Utils {
 	}
 
 	public static void invalidEtapes() {
-		
-		System.out.println("----------invalid etapes all");
 		EditFileForm editFileForm = Nemo.getInstance().getViewMain().getEditFileForm();
 		EditCruiseForm editCruiseForm = Nemo.getInstance().getViewMain().getEditCruiseForm();
 		EditStationForm editStationForm = Nemo.getInstance().getViewMain().getEditStationForm();

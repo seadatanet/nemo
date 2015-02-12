@@ -36,7 +36,6 @@ public class FileTypeSelectionListener  implements SelectionListener
     
     public void widgetSelected( SelectionEvent e)
     {
-        RulesManager rulesMgr = RulesManager.getInstance();
 
         E_InputType currentFileType = E_InputType.PROFILE ;
         if (e.getSource().equals(myEditFileForm.getRadProfilVertical()))
@@ -52,8 +51,8 @@ public class FileTypeSelectionListener  implements SelectionListener
             currentFileType = E_InputType.TRAJECTORY;
         }
 
-        rulesMgr.updateFromIHM(currentFileType);
-//        rulesMgr.defineSectionMandatory();
+        RulesManager.getInstance().updateFromIHM(currentFileType);
+        RulesManager.getInstance().defineSectionMandatory();
     }
     
 }

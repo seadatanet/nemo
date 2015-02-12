@@ -61,6 +61,9 @@ public class CruiseFormValidator extends FormValidator {
 			resultat = section.checkMandatory(itemID.REFERENCE);
 			displayErrorIfNeeded(resultat, Messages.edit_cruise_cruiseRef);
 			ok = ok && resultat;
+			resultat = section.checkMandatory(itemID.LOCAL_CSR_ID);
+			displayErrorIfNeeded(resultat, Messages.edit_cruise_cruiseLocalCsrId);
+			ok = ok && resultat;
 			resultat = section.checkMandatory(itemID.NAME);
 			displayErrorIfNeeded(resultat, Messages.edit_cruise_cruiseName);
 			ok = ok && resultat;
@@ -116,20 +119,6 @@ public class CruiseFormValidator extends FormValidator {
 		
 
 
-		// check CSR
-		//		int index=editCruiseForm.sectionCorrespondingURL.getItemIndex(Global.EMPTY_STRING);
-		//		String  urlCSR = editCruiseForm.sectionCorrespondingURL.getItem(index).getText();
-		//		try {
-		//			SDNReferenceParser.parseReferenceRow(urlCSR);
-		//		} catch (SismerToolsException e) {
-		//			ok=false;
-		//			Utils.messageErreurAppend("error while parsing reference :"+ e.getMessage()); // TODO 20755 msg
-		//			e.printStackTrace();
-		//		} catch (SDNXLinkException e) {
-		//			ok=false;
-		//			Utils.messageErreurAppend("error on reference: " + e.getMessage()); // TODO 20755 msg
-		//			e.printStackTrace();
-		//		}
 
 		if (ok) {
 			editCruiseForm.setOkApresReset(true);
@@ -143,7 +132,6 @@ public class CruiseFormValidator extends FormValidator {
 			Nemo.getInstance().getViewMain().setEtape(1);
 		}
 	}
-
 	/**
 	 * @param editCruiseForm
 	 * @param ok
@@ -203,7 +191,6 @@ public class CruiseFormValidator extends FormValidator {
 		}
 		return ok;
 	}
-
 	@Override
 	protected void onSuccess() {
 		EditConversionForm editConversionForm = Nemo.getInstance().getViewMain().getEditConversionForm();

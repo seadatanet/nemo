@@ -42,7 +42,6 @@ public class EditCruiseForm extends EditForm {
 	private CruiseSection sectionReference;
 	private CruiseSection sectionLocalisation, sectionSource, sectionCentre;
 	private CruiseSection sectionCommentaire;
-	//	public CruiseSection sectionCorrespondingURL;
 	private CruiseDatatypeSection sectionType;
 	private Composite _parent;
 	private StyledText textAreaCruise;
@@ -116,8 +115,8 @@ public class EditCruiseForm extends EditForm {
 
 	@Override
 	public void afficheEdition() {
-		System.out.println("EditCruiseForm.AfficheEdition " );
 		super.afficheEdition();
+
 		ViewLog.aideCruise();
 
 		// affichage du texte dans la zone de gauche
@@ -208,18 +207,74 @@ public class EditCruiseForm extends EditForm {
 
 	@Override
 	public void actualiseEdition() {
-		System.out.println("EditCruiseForm.actualiseEdition");
-		defineMandatorySections();
-		//		RulesManager rulesManager = RulesManager.getInstance();
-		// TODO CSR enabled
-		//		sectionCorrespondingURL.setEnabled(rulesManager.isConversionToNetCDF()||rulesManager.isConversionToMedatlas());
-		//		int correpsondingURLIndex = sectionCorrespondingURL.getItemIndex(Global.EMPTY_STRING);
-		//		Couple correspondingURL = sectionCorrespondingURL.getItem(correpsondingURLIndex);
-		//		Button correspondingURLCheck = sectionCorrespondingURL.getCheckBox(correpsondingURLIndex);
-
-		//		correspondingURL.setEnabled(!correspondingURLCheck.getSelection());
 	}
+	public void defineMandatorySections() {
+		Couple item;
+		if (sectionReference!=null){
+		// REFERENCE
+		sectionReference.setMandatory(true);
+		item = sectionReference.getItem(itemID.REFERENCE);
+		item.setMandatory(true);
+		item = sectionReference.getItem(itemID.LOCAL_CSR_ID);
+		item.setMandatory(false);
+		item = sectionReference.getItem(itemID.NAME);
+		item.setMandatory(RulesManager.getInstance().isConversionToMedatlas()
+				|| RulesManager.getInstance().isConversionToNetCDF());
+		item = sectionReference.getItem(itemID.SHIP);
+		item.setMandatory(RulesManager.getInstance().isConversionToMedatlas());
 
+		// LOCALISATION
+		sectionLocalisation.setEnabled(RulesManager.getInstance()
+				.isConversionToMedatlas()
+				|| RulesManager.getInstance().isConversionToNetCDF());
+
+		sectionLocalisation.setMandatory(RulesManager.getInstance()
+				.isConversionToMedatlas());
+		for (int i = 0; i < sectionLocalisation.getItems().size(); i++) {
+			sectionLocalisation
+					.getItems()
+					.get(i)
+					.setMandatory(
+							RulesManager.getInstance().isConversionToMedatlas());
+		}
+
+		// SOURCE
+		sectionSource.setEnabled(RulesManager.getInstance()
+				.isConversionToMedatlas()
+				|| RulesManager.getInstance().isConversionToNetCDF());
+		sectionSource.setMandatory(RulesManager.getInstance()
+				.isConversionToMedatlas());
+
+		item = sectionSource.getItem(itemID.COUNTRY);
+		item.setMandatory(RulesManager.getInstance().isConversionToMedatlas());// country
+
+		item = sectionSource.getItem(itemID.CHIEF);
+		item.setMandatory(RulesManager.getInstance().isConversionToMedatlas());// chief
+		// scientist
+
+		// ARCHIVING CENTER
+		sectionCentre.setEnabled(RulesManager.getInstance()
+				.isConversionToMedatlas()
+				|| RulesManager.getInstance().isConversionToNetCDF());
+		sectionCentre.setMandatory(RulesManager.getInstance()
+				.isConversionToMedatlas());
+		item = sectionCentre.getItems().get(0);
+		item.setMandatory(RulesManager.getInstance().isConversionToMedatlas());// data
+		// center
+		item = sectionCentre.getItems().get(1);
+		sectionCentre
+				.getItems()
+				.get(1)
+				.setMandatory(
+						RulesManager.getInstance().isConversionToMedatlas());// confidentiality
+		// DATA TYPE
+		sectionType.setEnabled(RulesManager.getInstance()
+				.isConversionToMedatlas()
+				|| RulesManager.getInstance().isConversionToNetCDF());
+		sectionType.setMandatory(RulesManager.getInstance()
+				.isConversionToMedatlas());
+		}
+	}
 	public void init_webService() {
 		// selection de la ref campagne dans une liste
 		Nemo.getInstance().getViewMain().getMyFilteredTableFactory().go(_parent, Global.WSSURVEY, null);
@@ -289,13 +344,13 @@ public class EditCruiseForm extends EditForm {
 		// cruiseDomain.getModel().reset();
 
 		CruiseModel cruiseModel = importXML(fichier);
-
+		
 		//chargement de la liste via le nom car le fichier ne contient que l'information par nom
 		if (cruiseModel.getCountryName() != null) {
 			Couple pays = sectionSource.getItem(itemID.COUNTRY);
 			Utils.selectComboLibelle(pays.getValueCombo(), cruiseModel.getCountryName());
 		}
-
+		
 		//transcode seulement en ISO_19115
 		//19139 contient deja des nom de region en C19
 		if(cruiseModel.getXmlVersion() == CruiseModel.XmlVersion.ISO_19115)
@@ -303,7 +358,7 @@ public class EditCruiseForm extends EditForm {
 			String C19RegionName = CruiseModel.getTranscodeRegionName(cruiseModel.getRegionName());
 			cruiseModel.setRegionName(C19RegionName);
 		}
-
+		
 		cruiseDomain.updateCruise(cruiseModel);
 
 		// mise à jour de l'onglet courant
@@ -331,7 +386,7 @@ public class EditCruiseForm extends EditForm {
 			cruise.dataTypesAt(index).setSensor(listSensor.contains(cruise.dataTypesAt(index).getCode().substring(0, 3)));
 		}
 
-
+		
 
 		return cruise;
 	}
@@ -343,141 +398,116 @@ public class EditCruiseForm extends EditForm {
 		ViewLog.aideCruise();
 		Nemo.getInstance().getViewMain().setAffiche(1);
 	}
+
 	@Override
 	public void initSections() {
-		System.out.println("EditCruiseForm.initSections");
-
-		//		if (!RulesManager.getInstance().isConversionUnknown()){
+		
 		initReferenceSection();
 		initLocalisationSection();
 		initSourceSection();
 		initArchivingCenterSection();
 		initDataTypeSection();
 		initCommentSection();
-		//		}
+
 	}
 
-
-	private void initReferenceSection(){
-		sectionReference = new CruiseSection(Messages.edit_cruise_sectionReference, Messages.edit_cruise_sectionReference, Messages.edit_cruise_sectionReference_lib, this);
-		sectionReference.addItem(itemID.REFERENCE, Messages.edit_cruise_cruiseRef, ComboType.NONE, Global.EMPTY_STRING);
-		sectionReference.addItem(itemID.LOCAL_CSR_ID, Messages.edit_cruise_cruiseLocalCsrId, ComboType.NONE, Global.EMPTY_STRING);
-		//		if (! RulesManager.getInstance().isConversionToODV()){
-		sectionReference.addItem(itemID.NAME, Messages.edit_cruise_cruiseName, ComboType.NONE, Global.EMPTY_STRING);
-		//		}
-		sectionReference.addItem(itemID.SHIP, Messages.edit_cruise_ship, ComboType.SHIP, Global.EMPTY_STRING);
-		listeSections.add(sectionReference);
+	private void initReferenceSection() {
+		if (sectionReference == null) {
+			sectionReference = new CruiseSection(
+					Messages.edit_cruise_sectionReference,
+					Messages.edit_cruise_sectionReference,
+					Messages.edit_cruise_sectionReference_lib, this);
+			sectionReference.addItem(itemID.REFERENCE,
+					Messages.edit_cruise_cruiseRef, ComboType.NONE,
+					Global.EMPTY_STRING);
+			sectionReference.addItem(itemID.LOCAL_CSR_ID,
+					Messages.edit_cruise_cruiseLocalCsrId, ComboType.NONE,
+					Global.EMPTY_STRING);
+			sectionReference.addItem(itemID.NAME,
+					Messages.edit_cruise_cruiseName, ComboType.NONE,
+					Global.EMPTY_STRING);
+			sectionReference.addItem(itemID.SHIP, Messages.edit_cruise_ship,
+					ComboType.SHIP, CruiseModel.DEFAULT_SHIP_VALUE);
+			listeSections.add(sectionReference);
+		}
 	}
 
-	private void initLocalisationSection(){
-		//		if (! RulesManager.getInstance().isConversionToODV() ){
-		//LOCALISATION
-		sectionLocalisation = new CruiseSection(Messages.edit_cruise_sectionLocation, Messages.edit_cruise_sectionLocation, Messages.edit_cruise_sectionLocation_lib, this);
-		sectionLocalisation.addItem(itemID.START_DATE, Messages.edit_cruise_startDate, ComboType.NONE, Global.EMPTY_STRING);
-		sectionLocalisation.addItem(itemID.END_DATE, Messages.edit_cruise_endDate, ComboType.NONE, Global.EMPTY_STRING);
-		sectionLocalisation.addItem(itemID.REGION, Messages.edit_cruise_region, ComboType.REGION, Global.EMPTY_STRING);
+	private void initLocalisationSection() {
+		// LOCALISATION
+		sectionLocalisation = new CruiseSection(
+				Messages.edit_cruise_sectionLocation,
+				Messages.edit_cruise_sectionLocation,
+				Messages.edit_cruise_sectionLocation_lib, this);
+		sectionLocalisation.addItem(itemID.START_DATE,
+				Messages.edit_cruise_startDate, ComboType.NONE,
+				Global.EMPTY_STRING);
+		sectionLocalisation.addItem(itemID.END_DATE,
+				Messages.edit_cruise_endDate, ComboType.NONE,
+				Global.EMPTY_STRING);
+		sectionLocalisation.addItem(itemID.REGION, Messages.edit_cruise_region,
+				ComboType.REGION, Global.EMPTY_STRING);
 		listeSections.add(sectionLocalisation);
-		//		}
 	}
-	private void initSourceSection(){
-		//		if (! RulesManager.getInstance().isConversionToODV() ){
+
+	private void initSourceSection() {
 		// DATASOURCE
-		sectionSource = new CruiseSection(Messages.edit_cruise_sectionDataSource, Messages.edit_cruise_sectionDataSource, Messages.edit_cruise_sectionDataSource_lib, this);
-		sectionSource.addItem(itemID.COUNTRY, Messages.edit_cruise_country, ComboType.COUNTRY, Global.EMPTY_STRING);
-		sectionSource.addItem(itemID.LAB, Messages.edit_cruise_lab, ComboType.NONE, Global.EMPTY_STRING);
-		sectionSource.addItem(itemID.CHIEF, Messages.edit_cruise_chief, ComboType.NONE, Global.EMPTY_STRING);
-		sectionSource.addItem(itemID.PROJECT, Messages.edit_cruise_project, ComboType.NONE, Global.EMPTY_STRING);
+		sectionSource = new CruiseSection(
+				Messages.edit_cruise_sectionDataSource,
+				Messages.edit_cruise_sectionDataSource,
+				Messages.edit_cruise_sectionDataSource_lib, this);
+		sectionSource.addItem(itemID.COUNTRY, Messages.edit_cruise_country,
+				ComboType.COUNTRY, Global.EMPTY_STRING);
+		sectionSource.addItem(itemID.LAB, Messages.edit_cruise_lab,
+				ComboType.NONE, Global.EMPTY_STRING);
+		sectionSource.addItem(itemID.CHIEF, Messages.edit_cruise_chief,
+				ComboType.NONE, Global.EMPTY_STRING);
+		sectionSource.addItem(itemID.PROJECT, Messages.edit_cruise_project,
+				ComboType.NONE, Global.EMPTY_STRING);
 		listeSections.add(sectionSource);
-		//		}
 	}
-	private void initArchivingCenterSection(){
-		//		if (! RulesManager.getInstance().isConversionToODV() ){
-		//ARCHIVING CENTER
-		sectionCentre = new CruiseSection(Messages.edit_cruise_sectionArchiving, Messages.edit_cruise_sectionArchiving, Messages.edit_cruise_sectionArchiving_lib, this);
-		sectionCentre.addItem(itemID.DATA_CENTER, Messages.edit_cruise_dataCenter, ComboType.DATACENTER, Nemo.getInstance().getConfig().getDataCenter());
-		sectionCentre.addItem(itemID.CONFIDENTIALITY, Messages.edit_cruise_confident, ComboType.CONFIDENT, "P"); //$NON-NLS-1$
+
+	private void initArchivingCenterSection() {
+		// ARCHIVING CENTER
+		sectionCentre = new CruiseSection(
+				Messages.edit_cruise_sectionArchiving,
+				Messages.edit_cruise_sectionArchiving,
+				Messages.edit_cruise_sectionArchiving_lib, this);
+		sectionCentre.addItem(itemID.DATA_CENTER,
+				Messages.edit_cruise_dataCenter, ComboType.DATACENTER, Nemo
+						.getInstance().getConfig().getDataCenter());
+		sectionCentre.addItem(itemID.CONFIDENTIALITY,
+				Messages.edit_cruise_confident, ComboType.CONFIDENT, "P"); //$NON-NLS-1$
 		listeSections.add(sectionCentre);
-		//		}
 
 	}
-	private void initDataTypeSection(){
-		//		if (! RulesManager.getInstance().isConversionToODV() ){
-		//DATATYPE
-		sectionType = new CruiseDatatypeSection(Messages.edit_cruise_sectionDataTypes, Messages.edit_cruise_sectionDataTypes, Messages.edit_cruise_sectionDataTypes_lib, this);
+
+	private void initDataTypeSection() {
+		// DATATYPE
+		sectionType = new CruiseDatatypeSection(
+				Messages.edit_cruise_sectionDataTypes,
+				Messages.edit_cruise_sectionDataTypes,
+				Messages.edit_cruise_sectionDataTypes_lib, this);
 		listeSections.add(sectionType);
-		//		}
 	}
+
 	private void initCommentSection() {
 
-		sectionCommentaire = new CruiseSection(Messages.edit_cruise_sectionComments, Messages.edit_cruise_sectionComments, Messages.edit_cruise_sectionComments_lib, this);
-		sectionCommentaire.addItem(itemID.COMMENT, Global.EMPTY_STRING, ComboType.BLOCK, Global.EMPTY_STRING);
+		sectionCommentaire = new CruiseSection(
+				Messages.edit_cruise_sectionComments,
+				Messages.edit_cruise_sectionComments,
+				Messages.edit_cruise_sectionComments_lib, this);
+		sectionCommentaire.addItem(itemID.COMMENT, Global.EMPTY_STRING,
+				ComboType.BLOCK, Global.EMPTY_STRING);
 		listeSections.add(sectionCommentaire);
 
 		// TODO 20755 change labels
-		//		sectionCorrespondingURL = new CruiseSection(Messages.edit_cruise_sectionCorrespondingUrl, Messages.edit_cruise_sectionCorrespondingUrl, Messages.edit_cruise_sectionCorrespondingUrl_lib, this);
-		//		sectionCorrespondingURL.addItem(Global.EMPTY_STRING, ComboType.NONE, Global.EMPTY_STRING, true, true, "auto"); // TODO 20755
-		//		listeSections.add(sectionCorrespondingURL);
-	}
-
-
-
-	public void defineMandatorySections(){
-		Couple item ;
-		// REFERENCE
-		sectionReference.setMandatory(true);
-//		item = sectionReference.getItem(sectionReference.getItemIndex(Messages.edit_cruise_cruiseRef));
-		item = sectionReference.getItem(itemID.REFERENCE);
-		item.setMandatory(true);
-		item = sectionReference.getItem(itemID.LOCAL_CSR_ID);
-//		item = sectionReference.getItem(sectionReference.getItemIndex(Messages.edit_cruise_cruiseLocalCsrId));
-		item.setMandatory(false);
-//		item = sectionReference.getItem(sectionReference.getItemIndex(Messages.edit_cruise_cruiseName));
-		item = sectionReference.getItem(itemID.NAME);
-		item.setMandatory(RulesManager.getInstance().isConversionToMedatlas()
-				||RulesManager.getInstance().isConversionToNetCDF() );
-//		item = sectionReference.getItem(sectionReference.getItemIndex(Messages.edit_cruise_ship));
-		item = sectionReference.getItem(itemID.SHIP);
-		item.setMandatory(RulesManager.getInstance().isConversionToMedatlas());
-
-
-		//LOCALISATION
-		sectionLocalisation.setEnabled(
-				RulesManager.getInstance().isConversionToMedatlas()
-				||RulesManager.getInstance().isConversionToNetCDF());
-
-		sectionLocalisation.setMandatory(RulesManager.getInstance().isConversionToMedatlas());
-		for (int i = 0; i < sectionLocalisation.getItems().size(); i++) {
-			sectionLocalisation.getItems().get(i).setMandatory(RulesManager.getInstance().isConversionToMedatlas());
-		}
-
-		//SOURCE
-		sectionSource.setEnabled(
-				RulesManager.getInstance().isConversionToMedatlas()
-				||RulesManager.getInstance().isConversionToNetCDF());
-		sectionSource.setMandatory(RulesManager.getInstance().isConversionToMedatlas());
-//		item = sectionSource.getItems().get(0);
-		item = sectionSource.getItem(itemID.COUNTRY);
-		item.setMandatory(RulesManager.getInstance().isConversionToMedatlas());//country
-//		item = sectionSource.getItems().get(2);
-		item = sectionSource.getItem(itemID.CHIEF);
-		item.setMandatory(RulesManager.getInstance().isConversionToMedatlas());//chief scientist
-
-		//ARCHIVING CENTER
-		sectionCentre.setEnabled(
-				RulesManager.getInstance().isConversionToMedatlas()
-				||RulesManager.getInstance().isConversionToNetCDF());
-		sectionCentre.setMandatory(RulesManager.getInstance().isConversionToMedatlas());
-		item = sectionCentre.getItems().get(0);
-		item.setMandatory(RulesManager.getInstance().isConversionToMedatlas());//data center
-		item = sectionCentre.getItems().get(1);
-		sectionCentre.getItems().get(1).setMandatory(RulesManager.getInstance().isConversionToMedatlas());//confidentiality
-		//DATA TYPE
-		sectionType.setEnabled(
-				RulesManager.getInstance().isConversionToMedatlas()
-				||RulesManager.getInstance().isConversionToNetCDF());
-		sectionType.setMandatory(RulesManager.getInstance().isConversionToMedatlas());
-
-
+		// sectionCorrespondingURL = new
+		// CruiseSection(Messages.edit_cruise_sectionCorrespondingUrl,
+		// Messages.edit_cruise_sectionCorrespondingUrl,
+		// Messages.edit_cruise_sectionCorrespondingUrl_lib, this);
+		// sectionCorrespondingURL.addItem(Global.EMPTY_STRING, ComboType.NONE,
+		// Global.EMPTY_STRING, true, true, "auto"); // TODO 20755
+		// listeSections.add(sectionCorrespondingURL);
 	}
 	public CruiseSection getSectionReference() {
 		return sectionReference;
@@ -495,11 +525,9 @@ public class EditCruiseForm extends EditForm {
 		return sectionType;
 	}
 
-	public CruiseDatatypeSection getSectionDataType()
-	{
+	public CruiseDatatypeSection getSectionDataType() {
 		return sectionType;
 	}
-
 	@Override
 	protected void disposeElements() {
 		if (buttonInitServeur != null)
@@ -509,7 +537,6 @@ public class EditCruiseForm extends EditForm {
 	}
 
 	public void invalidEtape() {
-//		System.out.println("EditCruiseForm.invalidEtape");
 		if (!Nemo.getInstance().getViewMain().tabCruise.isDisposed()) {
 			super.invalidEtape(1);
 			Nemo.getInstance().getViewMain().tabCruise.setText(Messages.onglet_cruise);
@@ -518,13 +545,8 @@ public class EditCruiseForm extends EditForm {
 
 	@Override
 	public void initFromNewModel() {
-		System.out.println("EditCruiseForm.initFromNewModel");
 		// recuperation du model correspondant
 		CruiseModel cruiseModel = new CruiseModel();
-
-		//		int correpsondingURLIndex = sectionCorrespondingURL.getItemIndex(Global.EMPTY_STRING);
-		//		Couple correspondingURL = sectionCorrespondingURL.getItem(correpsondingURLIndex);
-		//		Button correspondingURLCheck = sectionCorrespondingURL.getCheckBox(correpsondingURLIndex);
 
 		// maj des dataTypes
 		TableDataSurvey.majTypeData();
@@ -535,7 +557,9 @@ public class EditCruiseForm extends EditForm {
 			setValidated(true);
 			return;
 		}
-		if (sectionReference.isEnabled()){
+
+
+		if (sectionReference.isEnabled()) {
 			Couple refCampagne = sectionReference.getItem(itemID.REFERENCE);
 			Couple localCsrId = sectionReference.getItem(itemID.LOCAL_CSR_ID);
 			Couple nomCampagne = sectionReference.getItem(itemID.NAME);
@@ -543,13 +567,14 @@ public class EditCruiseForm extends EditForm {
 			cruiseModel.setReference(refCampagne.getText());
 			cruiseModel.setLocalCSRIdentifier(localCsrId.getText());
 			cruiseModel.setName(nomCampagne.getText());
-			cruiseModel.setShipCode(fr.ifremer.nemo.util.Utils.extraitCode(navire.getText()));
-			cruiseModel.setShipName(fr.ifremer.nemo.util.Utils.extraitValeur(navire.getText()));
+			cruiseModel.setShipCode(fr.ifremer.nemo.util.Utils
+					.extraitCode(navire.getText()));
+			cruiseModel.setShipName(fr.ifremer.nemo.util.Utils
+					.extraitValeur(navire.getText()));
 		}
-
-
 		// Localisation
-		if (sectionLocalisation.isEnabled()){
+
+		if (sectionLocalisation.isEnabled()) {
 			Couple dateDebut = sectionLocalisation.getItem(itemID.START_DATE);
 			Couple dateFin = sectionLocalisation.getItem(itemID.END_DATE);
 			Couple region = sectionLocalisation.getItem(itemID.REGION);
@@ -557,7 +582,8 @@ public class EditCruiseForm extends EditForm {
 			try {
 				DateTimeFormat dateFormat = new DateTimeFormat();
 				dateFormat.setFormatString("dd/MM/yyyy"); //$NON-NLS-1$
-				Long dateLong = (Long) dateFormat.parseObject(dateDebut.getText());
+				Long dateLong = (Long) dateFormat.parseObject(dateDebut
+						.getText());
 				cruiseModel.setStartDate(dateLong);
 			} catch (ParseException e) {
 				e.printStackTrace();
@@ -570,7 +596,8 @@ public class EditCruiseForm extends EditForm {
 			try {
 				DateTimeFormat dateFormat = new DateTimeFormat();
 				dateFormat.setFormatString("dd/MM/yyyy"); //$NON-NLS-1$
-				Long dateLong = (Long) dateFormat.parseObject(dateFin.getText());
+				Long dateLong = (Long) dateFormat
+						.parseObject(dateFin.getText());
 				cruiseModel.setEndDate(dateLong);
 			} catch (ParseException e) {
 				e.printStackTrace();
@@ -579,11 +606,13 @@ public class EditCruiseForm extends EditForm {
 				e.printStackTrace();
 			}
 
-			cruiseModel.setRegionName(fr.ifremer.nemo.util.Utils.extraitValeur(region.getText()));
-			cruiseModel.setRegionCode(fr.ifremer.nemo.util.Utils.extraitCode(region.getText()));
+			cruiseModel.setRegionName(fr.ifremer.nemo.util.Utils
+					.extraitValeur(region.getText()));
+			cruiseModel.setRegionCode(fr.ifremer.nemo.util.Utils
+					.extraitCode(region.getText()));
 		}
 		// Source de données
-		if (sectionSource.isEnabled()){
+		if (sectionSource.isEnabled()) {
 			Couple pays = sectionSource.getItem(itemID.COUNTRY);
 			Couple labo = sectionSource.getItem(itemID.LAB);
 			Couple chef = sectionSource.getItem(itemID.CHIEF);
@@ -593,9 +622,8 @@ public class EditCruiseForm extends EditForm {
 			cruiseModel.setChiefScientist(chef.getText());
 			cruiseModel.setProjectName(projet.getText());
 		}
-
 		// Centre d'archivage
-		if (sectionCentre.isEnabled()){
+		if (sectionCentre.isEnabled()) {
 			Couple centreDonnee = sectionCentre.getItem(itemID.DATA_CENTER);
 			Couple confidentialite = sectionCentre.getItem(itemID.CONFIDENTIALITY);
 
@@ -613,30 +641,16 @@ public class EditCruiseForm extends EditForm {
 			}
 		}
 		// Commentaire
-		if (sectionCommentaire.isEnabled()){
+		if (sectionCommentaire.isEnabled()) {
 			Couple commentaires = sectionCommentaire.getItem(itemID.COMMENT);
 			cruiseModel.setComment(commentaires.getText());
 		}
-		//Corresponding URL
-		//		String url = correspondingURL.getText();
-		//		if (!url.isEmpty()){
-		//			try {
-		//				cruiseModel.setCorrespondingURL(url);
-		//			} catch (SismerToolsException e) {
-		//				// TODO Auto-generated catch block
-		//				e.printStackTrace();
-		//			} catch (SDNXLinkException e) {
-		//				// TODO Auto-generated catch block
-		//				e.printStackTrace();
-		//			}
-		//		}
-		//		cruiseModel.setCorrespondingURLAutoCheck(correspondingURLCheck.getSelection());
 
 		// Mise à jour du model
 		Nemo.getInstance().getDomain().getCruise().updateCruise(cruiseModel);
 
 		// remplissage de la liste des dataTypes de la campagne
-		if (sectionType.isEnabled()){
+		if (sectionType.isEnabled()) {
 			sectionType.initModel(cruiseModel);
 		}
 		setValidated(true);
@@ -646,9 +660,10 @@ public class EditCruiseForm extends EditForm {
 	public void fillFromModel() {
 		System.out.println("EditCruiseForm.fillFromModel");
 		// recuperation du model correspondant
-		CruiseModel cruiseModel = Nemo.getInstance().getDomain().getCruise().getModel();
+		CruiseModel cruiseModel = Nemo.getInstance().getDomain().getCruise()
+				.getModel();
 		// recupération des items
-		if (sectionReference!=null){
+		if (sectionReference != null) {
 			Couple refCampagne = sectionReference.getItem(itemID.REFERENCE);
 			Couple localCsrId = sectionReference.getItem(itemID.LOCAL_CSR_ID);
 			Couple nomCampagne = sectionReference.getItem(itemID.NAME);
@@ -656,25 +671,26 @@ public class EditCruiseForm extends EditForm {
 
 			// injection des valeurs de l'IHM -> datamodel
 			// reference
-			if (refCampagne != null){
+			if (refCampagne != null) {
 				refCampagne.setText(cruiseModel.getReference());
 			}
-			if (localCsrId != null){
+			if (localCsrId != null) {
 				localCsrId.setText(cruiseModel.getLocalCsrIdentifier());
 			}
-			if (nomCampagne != null){
+			if (nomCampagne != null) {
 				nomCampagne.setText(cruiseModel.getName());
 			}
-			if (navire != null){
-				Utils.selectComboCodePlus(navire.getValueCombo(), cruiseModel.getShipCode(), cruiseModel.getShipName());
+			if (navire != null) {
+				Utils.selectComboCodePlus(navire.getValueCombo(),
+						cruiseModel.getShipCode(), cruiseModel.getShipName());
 			}
 		}
 
-		if (sectionLocalisation!=null){
+		if (sectionLocalisation != null) {
 			Couple dateDebut = sectionLocalisation.getItem(itemID.START_DATE);
 			Couple dateFin = sectionLocalisation.getItem(itemID.END_DATE);
 			Couple region = sectionLocalisation.getItem(itemID.REGION);
-			if (dateDebut != null && dateFin != null && region != null){
+			if (dateDebut != null && dateFin != null && region != null) {
 
 				// DATES
 				// FAE 2607
@@ -685,59 +701,64 @@ public class EditCruiseForm extends EditForm {
 				Date endValue = new Date(cruiseModel.getEndDate());
 				dateFin.setText(dateFormat.format(endValue));
 
-				Utils.selectComboLibelle(region.getValueCombo(), cruiseModel.getRegionName());
+				Utils.selectComboLibelle(region.getValueCombo(),
+						cruiseModel.getRegionName());
 			}
 
 		}
-		if (sectionSource != null){
+		if (sectionSource != null) {
 			Couple pays = sectionSource.getItem(itemID.COUNTRY);
 			Couple labo = sectionSource.getItem(itemID.LAB);
 			Couple chef = sectionSource.getItem(itemID.CHIEF);
 			Couple projet = sectionSource.getItem(itemID.PROJECT);
-			if (pays != null){
+			if (pays != null) {
 				// Source de donnees
 				if (cruiseModel.getCountryName() != null) {
-					Utils.selectComboLibelle(pays.getValueCombo(), cruiseModel.getCountryName());
+					Utils.selectComboLibelle(pays.getValueCombo(),
+							cruiseModel.getCountryName());
 				} else {
-					Utils.selectComboCode(pays.getValueCombo(), cruiseModel.getCountryCode());
+					Utils.selectComboCode(pays.getValueCombo(),
+							cruiseModel.getCountryCode());
 				}
 			}
-			if (labo != null){
+			if (labo != null) {
 				labo.setText(cruiseModel.getLaboratories());
 			}
-			if (chef != null){
+			if (chef != null) {
 				chef.setText(cruiseModel.getChiefScientist());
 			}
-			if (projet != null){
+			if (projet != null) {
 				projet.setText(cruiseModel.getProjectName());
 			}
 
 		}
-		if (sectionCentre != null){
+		if (sectionCentre != null) {
 			Couple centreDonnee = sectionCentre.getItem(itemID.DATA_CENTER);
-			Couple confidentialite = sectionCentre.getItem(itemID.CONFIDENTIALITY);
+			Couple confidentialite = sectionCentre
+					.getItem(itemID.CONFIDENTIALITY);
 
 			// Centre d'archivage
-			if (centreDonnee != null){
-				Utils.selectComboCode(centreDonnee.getValueCombo(), cruiseModel.getDataCentre());
+			if (centreDonnee != null) {
+				Utils.selectComboCode(centreDonnee.getValueCombo(),
+						cruiseModel.getDataCentre());
 			}
 			// confidentialite
-			if (confidentialite != null){
+			if (confidentialite != null) {
 				String code = cruiseModel.getAvailability().getCode();
 				Utils.selectComboCode(confidentialite.getValueCombo(), code);
 			}
 
 		}
-		if (sectionCommentaire != null){
+		if (sectionCommentaire != null) {
 			Couple commentaires = sectionCommentaire.getItem(itemID.COMMENT);
 			// Commentaire
-			if (commentaires != null){
+			if (commentaires != null) {
 				commentaires.setText(cruiseModel.getComment());
 			}
 		}
 
 		// Remplissage de la liste des dataTypes de la campagne
-		if (sectionType != null){
+		if (sectionType != null) {
 			sectionType.fillFromModel(cruiseModel);
 		}
 	}

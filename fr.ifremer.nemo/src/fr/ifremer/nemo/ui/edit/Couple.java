@@ -43,7 +43,6 @@ public class Couple implements UIobject
 	private CCombo valueCombo;
 	private int textLimit;
 	private boolean isMandatory=false;
-	
 
 
 	public Couple(String groupTitle, String labelText, ComboType type,
@@ -118,7 +117,6 @@ public class Couple implements UIobject
 
 		// Text or Combo
 		chooseValue(parent, type);
-		
 		if (valueText != null)
 		{
 			valueText.setParent(parent);
@@ -134,7 +132,6 @@ public class Couple implements UIobject
 					Utils.invalidEtapes();
 				}
 			});
-			valueText.setToolTipText(valueText.getText()); // TODO 20755 tooltip does not work
 
 		}
 		else if (valueCombo != null)

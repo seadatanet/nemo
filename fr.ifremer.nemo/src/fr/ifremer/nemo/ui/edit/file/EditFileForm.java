@@ -157,7 +157,7 @@ public class EditFileForm extends EditForm
 		radNetCDF.setEnabled(rulesMgr.isNetCDFMonostationEnabled() || rulesMgr.isNetCDFMultistationEnabled());
 		radODVMonoFichier.setEnabled(rulesMgr.isOdvMultistationEnabled() || rulesMgr.isNetCDFMultistationEnabled());
 		radODVMonoStation.setEnabled(rulesMgr.isOdvMonostationEnabled() || rulesMgr.isNetCDFMonostationEnabled());
-		
+
 	}
 
 	public void selectConversion(E_TypeConversion conversionType)
@@ -179,16 +179,16 @@ public class EditFileForm extends EditForm
 			radODV.setSelection(true);
 			radODVMonoFichier.setSelection(true);
 		} else if (conversionType == E_TypeConversion.NETCDF_MONOSTATION)
-        {
-            radNetCDF.setSelection(true);
-            radODVMonoStation.setSelection(true);
-        }
+		{
+			radNetCDF.setSelection(true);
+			radODVMonoStation.setSelection(true);
+		}
 		else if (conversionType == E_TypeConversion.NETCDF_MULTISTATIONS)
 		{
-		    radNetCDF.setSelection(true);
-		    radODVMonoFichier.setSelection(true);
+			radNetCDF.setSelection(true);
+			radODVMonoFichier.setSelection(true);
 		}
-		
+
 		// else, conversion=UNKNOWN
 		afficheGrpODV();
 	}
@@ -226,7 +226,7 @@ public class EditFileForm extends EditForm
 	public void resetDefaultSelectionFileType()
 	{
 		enableFileTypeChoice(true);
-		RulesManager rulesMgr = RulesManager.getInstance();
+		RulesManager rulesMgr =RulesManager.getInstance();
 		radSerieTempo.setSelection(rulesMgr.DEFAULT_FILETYPE == E_InputType.TIMESERIES);
 		radTrajectoire.setSelection(rulesMgr.DEFAULT_FILETYPE == E_InputType.TRAJECTORY);
 		radProfilVertical.setSelection(rulesMgr.DEFAULT_FILETYPE == E_InputType.PROFILE);
@@ -252,10 +252,10 @@ public class EditFileForm extends EditForm
 
 		// output
 		createGroupOutputParameters(formViewFile.getBody());
-		
+
 		//en pourcentage defini la taille de formViewFile
 		((SashForm) parent).setWeights(new int[]
-		{ 35, 65 });
+				{ 35, 65 });
 
 	}
 
@@ -393,7 +393,7 @@ public class EditFileForm extends EditForm
 			super.drawingBack();
 			ViewLog.aideFile();
 			Nemo.getInstance().getViewMain().setAffiche(0);
-	        Nemo.getInstance().refreshNomNemo();
+			Nemo.getInstance().refreshNomNemo();
 		}
 	}
 
@@ -415,14 +415,8 @@ public class EditFileForm extends EditForm
 		sectionDataTerminator = new FileEndData(Messages.edit_file_indicFinDonnees_title, Messages.edit_file_indicFinDonnees_title, Messages.edit_file_indicFinDonnees, this);
 		sectionDataTerminator.addSetter(Messages.edit_file_sectionRuptureDonnees_end_with, Global.EMPTY_STRING);
 		listeSections.add(sectionDataTerminator);
-		defineMandatorySections();
 	}
-	public void defineMandatorySections(){
-		sectionFileHeader.setMandatory(true);
-		sectionStationHeader.setMandatory(true);
-		sectionEndOfStation.setMandatory(true);
-		sectionDataTerminator.setMandatory(true);
-	}
+
 	@Override
 	protected void disposeElements()
 	{
@@ -497,15 +491,15 @@ public class EditFileForm extends EditForm
 		sectionDataTerminator.setEndData(mediaModel.getEndData(), mediaModel.getEndDataPattern(), mediaModel.getEndDataPatternIsRegexp());
 
 		// conversion:
-		RulesManager rulesMgr = RulesManager.getInstance();
+
 		// si un modele est ouvert, on affecte la valeur de ce modèle. Sinon on
 		// affecte la valeur choisie dans les settings
 		if (Nemo.getInstance().getNomModele().equals(Global.EMPTY_STRING))
 		{
-			rulesMgr.updateFromModel(Nemo.getInstance().getConfig().getDefaultConversionType());
+			RulesManager.getInstance().updateFromModel(Nemo.getInstance().getConfig().getDefaultConversionType());
 		} else
 		{
-			rulesMgr.updateFromModel(Nemo.getInstance().getDomain().getConversion().getModel().getOutputFormat());
+			RulesManager.getInstance().updateFromModel(Nemo.getInstance().getDomain().getConversion().getModel().getOutputFormat());
 		}
 
 		// activation option serie tempo
@@ -575,7 +569,7 @@ public class EditFileForm extends EditForm
 		radODV.setText(Conversion.ODV.getName());
 		radODV.setSelection(false);
 		radODV.addSelectionListener(outputFormatRadioSelectionListener);
-		
+
 		radNetCDF= new Button(medOrOdvGroup, SWT.RADIO);
 		radNetCDF.setText(Conversion.NETCDF.getName());
 		radNetCDF.setSelection(false);
@@ -599,7 +593,7 @@ public class EditFileForm extends EditForm
 		radODVMonoStation.setText(Messages.view_convert_monoStation);
 		radODVMonoStation.setSelection(false);
 		radODVMonoStation.addSelectionListener(outputFormatRadioSelectionListener);
-		
+
 		radODVMonoFichier = new Button(grpODV, SWT.RADIO);
 		radODVMonoFichier.setText(Messages.view_convert_monoFichier);
 		radODVMonoFichier.setSelection(false);
@@ -741,7 +735,7 @@ public class EditFileForm extends EditForm
 
 		GridLayout processLayout = new GridLayout();
 		processLayout.numColumns = 3; // en realite 3 colonnes, mais bug si on
-										// met 3
+		// met 3
 		processLayout.marginHeight = 1;
 
 		Group processGroup = new Group(mainBoxGroup, SWT.NONE);
@@ -1217,12 +1211,12 @@ public class EditFileForm extends EditForm
 	{
 		return radODV;
 	}
-	
+
 	public Button getRadNetCDF()
-    {
-        return radNetCDF;
-    }
-	
+	{
+		return radNetCDF;
+	}
+
 	public Button getRadODVMonoFichier()
 	{
 		return radODVMonoFichier;
@@ -1266,6 +1260,16 @@ public class EditFileForm extends EditForm
 	public void setNomRepertoire(String nomRepertoire)
 	{
 		this.nomRepertoire = nomRepertoire;
+	}
+
+	public void defineMandatorySections() {
+		if (sectionFileHeader != null) {
+			sectionFileHeader.setMandatory(true);
+			sectionStationHeader.setMandatory(true);
+			sectionEndOfStation.setMandatory(true);
+			sectionDataTerminator.setMandatory(true);
+		}
+
 	}
 
 }

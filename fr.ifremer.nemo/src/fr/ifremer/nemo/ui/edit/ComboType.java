@@ -120,7 +120,7 @@ public enum ComboType {
 			break;
 		case DATATYPE:
 			// FAE022
-			if (! RulesManager.getInstance().isProcessCollection()
+			if (!RulesManager.getInstance().isProcessCollection()
 							&& TableDataSurvey.types != null) {
 				int taille = TableDataSurvey.types.size();
 				for (int i = 0; i < taille; i++) {

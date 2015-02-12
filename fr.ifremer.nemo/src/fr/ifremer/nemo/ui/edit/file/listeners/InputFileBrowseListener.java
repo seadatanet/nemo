@@ -53,14 +53,10 @@ public class InputFileBrowseListener extends SelectionAdapter
 
 	@Override
 	public void widgetSelected(SelectionEvent e) {
-		
-		if(Nemo.getInstance().getViewMain().getEditConversionForm().checkConfig()){
-		
 		// boolean ti indicate if a file or directory has been choosen (false if
 		// user clicked on Cancel)
 		boolean fileChoosen = false;
-		E_ProcessType currentProcessType = RulesManager.getInstance()
-				.getMyProcessType();
+		E_ProcessType currentProcessType = RulesManager.getInstance().getMyProcessType();
 
 		Preformat.setPreformat(false);
 
@@ -82,15 +78,12 @@ public class InputFileBrowseListener extends SelectionAdapter
 			myEditFileForm.nomRepertoireOrigin = myEditFileForm.nomRepertoire;
 			myEditFileForm.nomFichierOrigin = myEditFileForm.nomFichier;
 			// reinitialisation de la conversion et de l'affichage
-			RulesManager.getInstance()
-					.updateFromBrowse();
-			Nemo.getInstance().getViewMain().getEditConversionForm()
-					.fillSummary();
+			RulesManager.getInstance().updateFromBrowse();
+			Nemo.getInstance().getViewMain().getEditConversionForm().fillSummary();
 		} else {
 
 			myEditFileForm.nomRepertoire = myEditFileForm.nomRepertoireOrigin;
 			myEditFileForm.nomFichier = myEditFileForm.nomFichierOrigin;
-		}
 		}
 	}
 

@@ -20,7 +20,7 @@ import fr.ifremer.nemo.util.Global.E_ProcessType;
 public class InputFileRadioSelectionListener implements SelectionListener
 {
     // reference sur l'editeur
-    private EditFileForm myEditFileForm;
+    private final EditFileForm myEditFileForm;
     
     public InputFileRadioSelectionListener(   EditFileForm editFileForm)
     {
@@ -35,7 +35,6 @@ public class InputFileRadioSelectionListener implements SelectionListener
     public void widgetSelected(SelectionEvent g)
     {
       
-        RulesManager rulesMgr = RulesManager.getInstance();
         E_ProcessType processType=E_ProcessType.CRUISE_FILE;
         
         if (g.getSource().equals(myEditFileForm.getRadioFichier()))
@@ -54,7 +53,7 @@ public class InputFileRadioSelectionListener implements SelectionListener
         {
             processType=E_ProcessType.COLLECTION_DIR;
         } 
-        rulesMgr.updateFromIHM(processType);
+        RulesManager.getInstance().updateFromIHM(processType);
         selectTypeProcess(g.getSource());
        
     }

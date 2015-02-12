@@ -126,7 +126,10 @@ public class OptionsAction extends Action implements ISelectionListener, ActionF
 	private static Shell shelloptions;
 
 	private Composite /* top, */compo, compo01, compo02;
-	private Group group, groupDirModel, groupDirData;
+	private Group group, 
+	group01, // dir models 
+	group02; // dir data
+	
 	// choix du format d'export
 	private Button radMedatlas;
 	private Button radNetCDF;
@@ -144,12 +147,8 @@ public class OptionsAction extends Action implements ISelectionListener, ActionF
 	private EdmoViewer edmoViewer;
 
 	// -- options necessitant un redemarrage
-	private String configLanguage;
+	private String configLangage;
 	private Proxy configProxy;
-
-	private Text textCdiHrefPrefix;
-
-	private Text textCsrHrefPrefix;
 
 	public OptionsAction(IWorkbenchWindow window) {
 		this.window = window;
@@ -170,7 +169,7 @@ public class OptionsAction extends Action implements ISelectionListener, ActionF
 		Configuration config = Nemo.getInstance().getConfig();
 
 		// sauvegarde des options necessitant un redemarrage
-		configLanguage = config.getLang();
+		configLangage = config.getLang();
 		configProxy = config.getProxy();
 		loadEdmoConfig();
 		// lancement IHM options
@@ -343,10 +342,6 @@ public class OptionsAction extends Action implements ISelectionListener, ActionF
 		radDateISO.setSelection(config.isDateISO());
 		radDateJulian.setSelection(!config.isDateISO());
 
-		// CDI and CSR HREF
-//		textCdiHrefPrefix.setText(config.getCdiHrefPrefix());
-//		textCsrHrefPrefix.setText(config.getCsrHrefPrefix());
-		
 		// Flags
 		selectDefaultFlagsTab(config.getDefaultCode());
 
@@ -511,17 +506,17 @@ public class OptionsAction extends Action implements ISelectionListener, ActionF
 		// groupDossier.setLayout(null);
 		group.setText(Messages.settings_dir);
 
-		groupDirModel = new Group(group, SWT.NONE);
-		groupDirModel.setFont(Utils.font08);
-		GridLayoutFactory.fillDefaults().numColumns(2).applyTo(groupDirModel);
-		GridDataFactory.fillDefaults().grab(true, true).applyTo(groupDirModel);
-		groupDirModel.setText(Messages.settings_dir_model);
-		groupDirModel.pack();
+		group01 = new Group(group, SWT.NONE);
+		group01.setFont(Utils.font08);
+		GridLayoutFactory.fillDefaults().numColumns(2).applyTo(group01);
+		GridDataFactory.fillDefaults().grab(true, true).applyTo(group01);
+		group01.setText(Messages.settings_dir_model);
+		group01.pack();
 
-		textDossierModele = new Text(groupDirModel, SWT.BORDER);
+		textDossierModele = new Text(group01, SWT.BORDER);
 		textDossierModele.setFont(Utils.font08);
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(textDossierModele);
-		buttonParcourirModele = new Button(groupDirModel, SWT.NONE);
+		buttonParcourirModele = new Button(group01, SWT.NONE);
 		buttonParcourirModele.setFont(Utils.font08);
 		buttonParcourirModele.setText(Messages.button_browse);
 		buttonParcourirModele.pack();
@@ -541,17 +536,17 @@ public class OptionsAction extends Action implements ISelectionListener, ActionF
 			}
 		});
 
-		groupDirData = new Group(group, SWT.NONE);
-		groupDirData.setFont(Utils.font08);
-		GridLayoutFactory.fillDefaults().numColumns(2).applyTo(groupDirData);
-		GridDataFactory.fillDefaults().grab(true, true).applyTo(groupDirData);
-		groupDirData.setText(Messages.settings_dir_data);
-		groupDirData.pack();
+		group02 = new Group(group, SWT.NONE);
+		group02.setFont(Utils.font08);
+		GridLayoutFactory.fillDefaults().numColumns(2).applyTo(group02);
+		GridDataFactory.fillDefaults().grab(true, true).applyTo(group02);
+		group02.setText(Messages.settings_dir_data);
+		group02.pack();
 
-		textDossierCampagne = new Text(groupDirData, SWT.BORDER);
+		textDossierCampagne = new Text(group02, SWT.BORDER);
 		textDossierCampagne.setFont(Utils.font08);
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(textDossierCampagne);
-		buttonParcourirCampagne = new Button(groupDirData, SWT.NONE);
+		buttonParcourirCampagne = new Button(group02, SWT.NONE);
 		buttonParcourirCampagne.setFont(Utils.font08);
 		buttonParcourirCampagne.setText(Messages.button_browse);
 		buttonParcourirCampagne.pack();
@@ -749,41 +744,6 @@ public class OptionsAction extends Action implements ISelectionListener, ActionF
 		}
 	}
 
-	private void createGroupSDNReferences(Composite parent) {
-		compo = new Composite(parent, SWT.NONE);
-		compo.setFont(Utils.font08);
-		GridLayoutFactory.fillDefaults().margins(0, 0).numColumns(2).applyTo(compo);
-		GridDataFactory.fillDefaults().grab(false, true).hint(600, SWT.DEFAULT).applyTo(compo);
-		
-		// CDI
-		Label labelCdiHrefPrefix = new Label(compo, SWT.NONE);
-		labelCdiHrefPrefix.setFont(Utils.font08);
-		labelCdiHrefPrefix.setText("CDI HREF prefix"); // TODO
-		labelCdiHrefPrefix.pack();
-
-		textCdiHrefPrefix = new Text(compo, SWT.BORDER);
-		textCdiHrefPrefix.setFont(Utils.font08);
-		textCdiHrefPrefix.setEditable(true);
-		textCdiHrefPrefix.setEnabled(true);
-		textCdiHrefPrefix.setText("http://seadatanet.maris2.nl/v_cdi_v3/print_xml.asp?");// TODO
-		GridDataFactory.fillDefaults().grab(true, false).applyTo(textCdiHrefPrefix);
-		
-		
-		// CSR
-		//http://seadata.bsh.de/cgi-csr/XML/xmlDownload_V2.pl?edmo=486&identifier=12210030
-		Label labelCsrHrefPrefix = new Label(compo, SWT.NONE);
-		labelCsrHrefPrefix.setFont(Utils.font08);
-		labelCsrHrefPrefix.setText("CSR HREF prefix"); // TODO
-		labelCsrHrefPrefix.pack();
-
-		textCsrHrefPrefix = new Text(compo, SWT.BORDER);
-		textCsrHrefPrefix.setFont(Utils.font08);
-		textCsrHrefPrefix.setEditable(true);
-		textCsrHrefPrefix.setEnabled(true);
-		textCsrHrefPrefix.setText("http://seadata.bsh.de/cgi-csr/XML/xmlDownload_V2.pl?");// TODO
-		GridDataFactory.fillDefaults().grab(true, false).applyTo(textCsrHrefPrefix);
-		
-	}
 	/**
 	 * This method initializes groupCDI
 	 */
@@ -1450,7 +1410,6 @@ public class OptionsAction extends Action implements ISelectionListener, ActionF
 		createSection(toolkitOption, formOption, Messages.settings_general, ExpandableComposite.EXPANDED);
 		createSection(toolkitOption, formOption, Messages.settings_web, ExpandableComposite.COMPACT);
 		createSection(toolkitOption, formOption, Messages.settings_cdi, ExpandableComposite.COMPACT);
-//		createSection(toolkitOption, formOption, Messages.settings_sdnReferences, ExpandableComposite.COMPACT);
 		createSection(toolkitOption, formOption, Messages.settings_flags, ExpandableComposite.EXPANDED);
 
 		Label sep = new Label(parent, SWT.SEPARATOR | SWT.HORIZONTAL);
@@ -1539,8 +1498,6 @@ public class OptionsAction extends Action implements ISelectionListener, ActionF
 			createGroupCDI(sectionClient);
 		} else if (title.equals(Messages.settings_flags)) {
 			createGroupFlag(sectionClient);
-		}else if(title.equals(Messages.settings_sdnReferences)){
-			createGroupSDNReferences(sectionClient);
 		}
 
 		section.setClient(sectionClient);
@@ -1668,10 +1625,10 @@ public class OptionsAction extends Action implements ISelectionListener, ActionF
 		StringBuffer message = new StringBuffer();
 
 		if (comboLangue.getText().equals(Messages.settings_lang_EN)) {
-			if (configLanguage.equals(Intern.lang_fr))
+			if (configLangage.equals(Intern.lang_fr))
 				message.append(Global.RN + Global.SEP + Messages.settings_lang);
 		} else {
-			if (configLanguage.equals(Intern.lang_en))
+			if (configLangage.equals(Intern.lang_en))
 				message.append(Global.RN + Global.SEP + Messages.settings_lang);
 		}
 
@@ -1779,11 +1736,6 @@ public class OptionsAction extends Action implements ISelectionListener, ActionF
 		// DATE ODV
 		configuration.setDateISO(radDateISO.getSelection());
 
-		
-		// CDI and CSR Href prefixes
-//		configuration.setCdiHrefPrefix(textCdiHrefPrefix.getText());
-//		configuration.setCsrHrefPrefix(textCsrHrefPrefix.getText());
-		
 		// Flags qualite
 		configuration.setDefaultCode(getDefaultCode());
 		ArrayList<FlagTable> flagTables = new ArrayList<FlagTable>();

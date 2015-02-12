@@ -21,11 +21,10 @@ import fr.ifremer.nemo.util.Messages;
  * @author sbregent
  */
 public class DataFormValidator extends FormValidator {
-	private RulesManager rm;
 	private GroupVerticalParameters verticalParamGroup;
 	private ParameterManager myParameterManager;
 	private Combo comboDBSBed, comboDBBSurf, comboP, comboHASLvl;
-
+	RulesManager rm ;
 	public DataFormValidator() {
 		super();
 
@@ -34,10 +33,8 @@ public class DataFormValidator extends FormValidator {
 	@Override
 	public void validate() {
 		rm = RulesManager.getInstance();
-		EditDataForm editDataForm =
-				Nemo.getInstance().getViewMain().getEditDataForm();
-		EditConversionForm editConversionForm =
-				Nemo.getInstance().getViewMain().getEditConversionForm();
+		EditDataForm editDataForm =	Nemo.getInstance().getViewMain().getEditDataForm();
+		EditConversionForm editConversionForm =	Nemo.getInstance().getViewMain().getEditConversionForm();
 
 		verticalParamGroup = editDataForm.getMyGroupeVerticalParameters();
 		comboDBSBed = verticalParamGroup.getComboDBSBed();
@@ -45,8 +42,7 @@ public class DataFormValidator extends FormValidator {
 		comboHASLvl = verticalParamGroup.getComboHASLvl();
 		comboP = verticalParamGroup.getComboP();
 
-		myParameterManager =
-				Nemo.getInstance().getDomain().getData().getMyParameterManager();
+		myParameterManager = Nemo.getInstance().getDomain().getData().getMyParameterManager();
 
 		Boolean ok = true;
 
@@ -145,8 +141,7 @@ public class DataFormValidator extends FormValidator {
 					/** data70/75 Medatlas( FAE 3228/7257 ) **/
 
 					if (ok
-							&& RulesManager.getInstance()
-									.isConversionToMedatlas()
+							&& RulesManager.getInstance().isConversionToMedatlas()
 							&& rm.getMyMesureType() == E_MesureType.BSSURF) {
 //						// data70 Si on a PRES dans le tableau, il faut qu'il
 //						// soit en 1ère position
@@ -175,8 +170,6 @@ public class DataFormValidator extends FormValidator {
 //							}
 //							ok = ok && data75;
 //						}
-						
-						
 						// data 76
 						// primary parameter must be DEPH or PRES
 						ok = getFirstParameterCode().equals(
@@ -428,9 +421,7 @@ public class DataFormValidator extends FormValidator {
 				Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData()
 						.getTypes().get(0);
 		String firstParameterCode = premierType.getCodeToUse();
-		E_MesureType mesureType =
-				RulesManager.getInstance()
-						.getMyMesureType();
+		E_MesureType mesureType = rm.getMyMesureType();
 
 		// cas below sea bed (data85)
 		if (mesureType == E_MesureType.BSBED
@@ -534,7 +525,6 @@ public class DataFormValidator extends FormValidator {
 	}
 
 	private boolean detectVerticalParameters() {
-		RulesManager rm = RulesManager.getInstance();
 
 		if (rm.isDataListTypeP091()) {
 			detectVerticalParametersForP091();

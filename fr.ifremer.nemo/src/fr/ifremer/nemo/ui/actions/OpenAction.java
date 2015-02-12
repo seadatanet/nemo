@@ -43,16 +43,13 @@ public class OpenAction extends Action implements ISelectionListener,
     @Override
     public void run()
     {
-    	
         // verifier que un fichier est charge avant d'ouvrir un modele
-    	if (!Nemo.getInstance().getViewMain().getEditFileForm().isLoaded())
+        if (!Nemo.getInstance().getViewMain().getEditFileForm().isLoaded())
         {
             Utils.messageErreurAppend(Messages.error_openModel);
         }
         else
         {
-        	
-        	
             Shell shell = Utils.getMainShell();
             FileDialog dialog = new FileDialog(shell, SWT.OPEN | SWT.APPLICATION_MODAL);
             dialog.setFilterPath(Nemo.getInstance().getConfig().getModelsDirectory() + File.separator);
@@ -68,10 +65,8 @@ public class OpenAction extends Action implements ISelectionListener,
             {
                 try
                 {
-                	
-                	
                     // FAE 9656 si model non validé affichage d'un warning
-                    if (!Nemo.getInstance().openModel(nomModele, null))
+                    if (!Nemo.getInstance().openModel(nomModele))
                     {
                         MessageBox mb =
                             new MessageBox(Utils.getMainShell(),
