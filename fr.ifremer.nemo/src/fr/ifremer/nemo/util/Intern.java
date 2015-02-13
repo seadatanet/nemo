@@ -40,12 +40,13 @@ public class Intern extends NLS {
 	public static String list_typePlatform;
 	public static String list_accesDonnees;
 	public static String list_flagsSDN;
-	public static String list_BODCpdv;
 	public static String list_P091;
 	public static String list_P011;
 	public static String list_P021;
 	public static String list_P061;
 	public static String list_P07;
+	public static String list_L22;
+	public static String list_L33;
 	public static String list_nemo_parameters;
 	public static String list_nemo_survey;
 	public static String list_edmo;

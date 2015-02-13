@@ -117,16 +117,16 @@ public class StandardNameFilteredTable extends AbstractFilteredTable
         Collection<IElement> listP07 = new ArrayList<IElement>();
         if(_typeToUse == DataListTypeEnum.P011_VIA_P021)
         {
-            listP07 = VocabLists.getVocabMatchs(Intern.list_BODCpdv, 
+            listP07 = VocabLists.getVocabMatchs(Intern.list_P021, 
                 Intern.list_P07, _typeParameter.getEntryKey());
         }
         else
         {
-            List<IElement> listeP091_P021 = VocabLists.getVocabMatchs(Intern.list_P091, Intern.list_BODCpdv, _typeParameter.getEntryKey());
+            List<IElement> listeP091_P021 = VocabLists.getVocabMatchs(Intern.list_P091, Intern.list_P021, _typeParameter.getEntryKey());
 
             for (IElement liste : listeP091_P021)
             {
-                listP07 = VocabLists.getVocabMatchs(Intern.list_BODCpdv, 
+                listP07 = VocabLists.getVocabMatchs(Intern.list_P021, 
                     Intern.list_P07, liste.getKey());
             }
         }

@@ -99,7 +99,7 @@ public class SubParameterFilteredTable extends AbstractFilteredTable
     private void createDataList_P011_via_P021()
     {
         List<IElement> listeP021_P011 =
-            VocabLists.getVocabMatchs(Intern.list_BODCpdv, Intern.list_P011, _typeParameter.getEntryKey());
+            VocabLists.getVocabMatchs(Intern.list_P021, Intern.list_P011, _typeParameter.getEntryKey());
 
         for (IElement record : listeP021_P011)
         {
@@ -123,11 +123,11 @@ public class SubParameterFilteredTable extends AbstractFilteredTable
     private void createDataList_P011_via_P091()
     {
         List<IElement> listeCompleteP091_P021_P011 = new ArrayList<IElement>();
-        List<IElement> listeP091_P021 = VocabLists.getVocabMatchs(Intern.list_P091, Intern.list_BODCpdv, _typeParameter.getEntryKey());
+        List<IElement> listeP091_P021 = VocabLists.getVocabMatchs(Intern.list_P091, Intern.list_P021, _typeParameter.getEntryKey());
 
         for (IElement liste : listeP091_P021)
         {
-            listeCompleteP091_P021_P011.addAll(VocabLists.getVocabMatchs(Intern.list_BODCpdv, 
+            listeCompleteP091_P021_P011.addAll(VocabLists.getVocabMatchs(Intern.list_P021, 
                 Intern.list_P011, liste.getKey())); 
         }
 

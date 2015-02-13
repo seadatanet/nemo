@@ -12,6 +12,7 @@ import com.ago.xml.XMLOutputWriter;
 
 import fr.ifremer.nemo.input.parameters.ParameterModel;
 import fr.ifremer.nemo.input.parameters.VerticalParametersList;
+import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Global.DataListTypeEnum;
 import fr.ifremer.nemo.util.Global.E_MesureType;
 
@@ -32,7 +33,8 @@ public class DataModel extends AbstractModel {
 	private DataListTypeEnum _dataListType;
 	private E_MesureType _mesureType;
 	private VerticalParametersList _verticalParametersList;
-
+	protected String _fallrate;
+	
 	public DataModel() {
 		_tagName = ModelDescription.node_dataModel;
 		initValues();
@@ -47,6 +49,7 @@ public class DataModel extends AbstractModel {
 		_parameterModels = new ArrayList<ParameterModel>();
 		_dataListType = DataListTypeEnum.UNKNOWN;
 		_mesureType = E_MesureType.UNKNOWN;
+		_fallrate = Global.EMPTY_STRING;
 	}
 
 	public DataListTypeEnum getDataListType() {
@@ -98,6 +101,11 @@ public class DataModel extends AbstractModel {
 			setVerticalParametersList((VerticalParametersList) el);
 			return el;
 		}
+		if (a_LocalName.equals(ModelDescription.node_fallrate)) {
+			Element2Field setter = new Element2Field(this,
+					ModelDescription.setter_fallrate);
+			return setter;
+		}
 		return null;
 	}
 
@@ -126,6 +134,7 @@ public class DataModel extends AbstractModel {
 	public void writeXMLBodyOn(XMLOutputWriter a_Writer) {
 		a_Writer.putTag(ModelDescription.node_dataListType, getDataListType().toString());
 		a_Writer.putTag(ModelDescription.node_mesureType, getMesureType().toString());
+		a_Writer.putTag(ModelDescription.node_fallrate, getFallrate().toString());
 
 		// ref parametres verticaux
 		getVerticalParametersList().writeXMLOn(a_Writer);
@@ -260,10 +269,17 @@ public class DataModel extends AbstractModel {
 		return _mesureType;
 	}
 
+
 	public void setMesureType(E_MesureType mesureType) {
 		_mesureType = mesureType;
 	}
-
+	public String getFallrate()
+	{
+		return _fallrate;
+	}
+	public void setFallrate(String fallrate){
+		_fallrate = fallrate;
+	}
 	public void setMesureType(String mesureType) {
 
 		if (mesureType.equals(E_MesureType.BSSURF.toString())) {

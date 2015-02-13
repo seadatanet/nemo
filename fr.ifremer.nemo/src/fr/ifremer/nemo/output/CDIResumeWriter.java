@@ -195,7 +195,7 @@ public class CDIResumeWriter {
 			// P091 -> P021
 			// 6542
 			p02Code = VocabLists.getVocabMatch(
-							Intern.mapping_subject, Intern.list_BODCpdv,
+							Intern.mapping_subject, Intern.list_P021,
 							param.getParameter().getCode(),
 							Intern.NemoLists_unknown);
 		}

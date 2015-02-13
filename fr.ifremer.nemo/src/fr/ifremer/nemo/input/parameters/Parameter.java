@@ -69,6 +69,11 @@ public class Parameter extends AbstractModel {
 	protected String _unit;
 	// FAE 6542
 	protected String _unitCode;
+	
+	protected String _instrument;
+
+
+	
 
 	public Parameter() {
 		_tagName = ModelDescription.node_parameter;
@@ -93,6 +98,9 @@ public class Parameter extends AbstractModel {
 
 		setDefault(typeData.getSortie());
 		setFormat(typeData.getFormat());
+		
+		setInstrument(typeData.getInstrument());
+
 	}
 
 	/**
@@ -109,6 +117,9 @@ public class Parameter extends AbstractModel {
 		_codeP011 = Global.EMPTY_STRING;
 		_nameP011 = Global.EMPTY_STRING;
 		_P011 = false;
+		_instrument = Global.EMPTY_STRING;
+
+		
 	}
 
 	/**
@@ -184,6 +195,12 @@ public class Parameter extends AbstractModel {
 					ModelDescription.setter_P011);
 			return setter;
 		}
+		if (a_LocalName.equals(ModelDescription.node_instrument)) {
+			Element2Field setter = new Element2Field(this,
+					ModelDescription.setter_instrument);
+			return setter;
+		}
+	
 		return null;
 	}
 
@@ -211,6 +228,8 @@ public class Parameter extends AbstractModel {
 		a_Writer.putTag(ModelDescription.node_codeP011, getCodeP011());
 		a_Writer.putTag(ModelDescription.node_nameP011, getNameP011());
 		a_Writer.putTag(ModelDescription.node_P011, isP011());
+		a_Writer.putTag(ModelDescription.node_instrument, getInstrument());
+		
 	}
 
 	/**
@@ -535,4 +554,13 @@ public class Parameter extends AbstractModel {
 	public void setUnitCode(String unitCode) {
 		_unitCode = unitCode;
 	}
+	public String getInstrument() {
+		return _instrument;
+	}
+
+	public void setInstrument(String instrument) {
+		this._instrument = instrument;
+	}
+
+
 }

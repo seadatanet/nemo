@@ -24,6 +24,18 @@ public class TypeData extends Object {
 	private String entree;
 	private String sortie;
 	private String test;
+	
+	private String instrument;
+
+
+	public String getInstrument() {
+		return instrument;
+	}
+
+	public void setInstrument(String instrument) {
+		this.instrument = instrument;
+	}
+
 
 	private int position, debut, fin;
 
@@ -62,6 +74,7 @@ public class TypeData extends Object {
 		} else {
 			this.setSortie(typeData.sortie);
 		}
+		this.setInstrument(typeData.instrument);
 		this.setUnite(typeData.unite);
 		this.setEntryKey(typeData.getEntryKey());
 		this.setEntryTerm(typeData.getEntryTerm());
@@ -109,6 +122,10 @@ public class TypeData extends Object {
 
 		setUnite(parameter.getUnit());
 		setUniteCode(parameter.getUnitCode());
+		
+		
+		setInstrument(parameter.getInstrument());
+		
 		setFormat(parameter.getFormat());
 		// 11976
 		if (isODV() || isNetCDF()) {
@@ -130,6 +147,7 @@ public class TypeData extends Object {
 		this.setFormat("Format"); //$NON-NLS-1$
 		this.setSortie("Sortie"); //$NON-NLS-1$
 		this.setUnite("Unite"); //$NON-NLS-1$
+		this.setInstrument(Global.EMPTY_STRING); 
 		this.setTest(Global.EMPTY_STRING);
 		// this.setFullname(Global.EMPTY_STRING);
 		this.setEntryKey(Global.EMPTY_STRING);
@@ -148,6 +166,7 @@ public class TypeData extends Object {
 		setEntree(Global.EMPTY_STRING);
 		setSortie(Global.EMPTY_STRING);
 		setUnite(Global.EMPTY_STRING);
+		setInstrument(Global.EMPTY_STRING);
 		setConversion(DEFAULT_CONVERT);
 		setIsText(false);
 	}

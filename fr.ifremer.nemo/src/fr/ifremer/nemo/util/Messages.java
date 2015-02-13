@@ -100,6 +100,8 @@ public class Messages {
 	public static String table_label_number;
 	public static String table_label_sensor;
 	public static String table_label_qc;
+	public static String table_label_intrument;
+	public static String table_label_fallRate;
 	public static String table_checkColumn_tooltip;
 
 	public static String unitTable_label_unit;
@@ -126,6 +128,8 @@ public class Messages {
 	public static String menu_label_removeFlag;
 	public static String menu_label_deleteAllParameters;
 	public static String menu_label_list;
+	public static String menu_label_instrumentList;
+	public static String menu_label_fallRateList;
 
 	public static String label_manual_01;
 	public static String label_noValue_01;
@@ -250,6 +254,8 @@ public class Messages {
 	public static String edit_data_P021;
 	public static String edit_data_P011;
 	public static String edit_data_P061;
+	public static String edit_data_L22;
+	public static String edit_data_L33;
 	public static String edit_data_P07;
 	public static String edit_data_error_dataListUnknown;
 	public static String edit_data_dataListDialogBox_title;
