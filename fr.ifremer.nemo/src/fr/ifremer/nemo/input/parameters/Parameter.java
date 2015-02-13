@@ -71,9 +71,18 @@ public class Parameter extends AbstractModel {
 	protected String _unitCode;
 	
 	protected String _instrument;
+	protected String _instrumentCode;
 
 
 	
+
+	public String getInstrumentCode() {
+		return _instrumentCode;
+	}
+
+	public void setInstrumentCode(String instrumentCode) {
+		_instrumentCode = instrumentCode;
+	}
 
 	public Parameter() {
 		_tagName = ModelDescription.node_parameter;
@@ -100,6 +109,7 @@ public class Parameter extends AbstractModel {
 		setFormat(typeData.getFormat());
 		
 		setInstrument(typeData.getInstrument());
+		setInstrumentCode(typeData.getInstrumentCode());
 
 	}
 
@@ -118,6 +128,7 @@ public class Parameter extends AbstractModel {
 		_nameP011 = Global.EMPTY_STRING;
 		_P011 = false;
 		_instrument = Global.EMPTY_STRING;
+		_instrumentCode = Global.EMPTY_STRING;
 
 		
 	}
@@ -200,6 +211,11 @@ public class Parameter extends AbstractModel {
 					ModelDescription.setter_instrument);
 			return setter;
 		}
+		if (a_LocalName.equals(ModelDescription.node_instrument_code)) {
+			Element2Field setter = new Element2Field(this,
+					ModelDescription.setter_instrument_code);
+			return setter;
+		}
 	
 		return null;
 	}
@@ -229,6 +245,7 @@ public class Parameter extends AbstractModel {
 		a_Writer.putTag(ModelDescription.node_nameP011, getNameP011());
 		a_Writer.putTag(ModelDescription.node_P011, isP011());
 		a_Writer.putTag(ModelDescription.node_instrument, getInstrument());
+		a_Writer.putTag(ModelDescription.node_instrument_code, getInstrumentCode());
 		
 	}
 

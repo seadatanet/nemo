@@ -174,12 +174,7 @@ public class FallRateFilteredTable extends AbstractFilteredTable
 
 		// reinit validation
 		Utils.invalidEtapes();
-
-		myTableDataRef.setFallRate(type);
-		myTableDataRef.majTypeData();
-
-		// refresh de la table
-		myTableDataRef.razAndRecreateTable();
+// TODO fall rate
 		shell.close();
 	}
 }

@@ -26,17 +26,12 @@ public class TypeData extends Object {
 	private String test;
 	
 	private String instrument;
+	private String instrumentCode;
 
 
-	public String getInstrument() {
-		return instrument;
+	public String getInstrumentCode() {
+		return instrumentCode;
 	}
-
-	public void setInstrument(String instrument) {
-		this.instrument = instrument;
-	}
-
-
 	private int position, debut, fin;
 
 	private String debutFlag, finFlag, testIn, testOut;
@@ -75,6 +70,7 @@ public class TypeData extends Object {
 			this.setSortie(typeData.sortie);
 		}
 		this.setInstrument(typeData.instrument);
+		this.setInstrumentCode(typeData.instrumentCode);
 		this.setUnite(typeData.unite);
 		this.setEntryKey(typeData.getEntryKey());
 		this.setEntryTerm(typeData.getEntryTerm());
@@ -125,6 +121,7 @@ public class TypeData extends Object {
 		
 		
 		setInstrument(parameter.getInstrument());
+		setInstrumentCode(parameter.getInstrumentCode());
 		
 		setFormat(parameter.getFormat());
 		// 11976
@@ -148,6 +145,7 @@ public class TypeData extends Object {
 		this.setSortie("Sortie"); //$NON-NLS-1$
 		this.setUnite("Unite"); //$NON-NLS-1$
 		this.setInstrument(Global.EMPTY_STRING); 
+		this.setInstrumentCode(Global.EMPTY_STRING); 
 		this.setTest(Global.EMPTY_STRING);
 		// this.setFullname(Global.EMPTY_STRING);
 		this.setEntryKey(Global.EMPTY_STRING);
@@ -391,6 +389,16 @@ public class TypeData extends Object {
 
 	public void setEntryTerm(String entryTerm) {
 		this.entryTerm = entryTerm;
+	}
+	public String getInstrument() {
+		return instrument;
+	}
+
+	public void setInstrument(String instrument) {
+		this.instrument = instrument;
+	}
+	public void setInstrumentCode(String instrumentCode) {
+		this.instrumentCode = instrumentCode;
 	}
 
 }

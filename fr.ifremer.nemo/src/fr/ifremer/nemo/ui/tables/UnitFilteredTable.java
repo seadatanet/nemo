@@ -88,7 +88,7 @@ public class UnitFilteredTable extends AbstractFilteredTable
 		
 		TableColumn tableColumn3 = new TableColumn(myFiltreTable, SWT.NONE);
 		tableColumn3.setWidth(200);
-		tableColumn3.setText(Messages.unitTable_label_unitDef);
+		tableColumn3.setText(Messages.unitTable_label_unitDef); // TODO units: column is empty
 
 		for (int i = 0; i < listeFiltree.size(); i++)
 		{

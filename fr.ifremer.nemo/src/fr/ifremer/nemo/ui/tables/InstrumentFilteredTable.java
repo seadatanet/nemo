@@ -83,18 +83,14 @@ public class InstrumentFilteredTable extends AbstractFilteredTable
 		
 		TableColumn tableColumn2 = new TableColumn(myFiltreTable, SWT.NONE);
 		tableColumn2.setWidth(300);
-		tableColumn2.setText("Alt. label");// TODO
+		tableColumn2.setText("label");// TODO
 		
-		TableColumn tableColumn3 = new TableColumn(myFiltreTable, SWT.NONE);
-		tableColumn3.setWidth(300);
-		tableColumn3.setText("Preferred label");// TODO
 
 		for (int i = 0; i < listeFiltree.size(); i++)
 		{
 			TableItem item = new TableItem(myFiltreTable, SWT.NONE);
             item.setText(new String[] {
-					listeFiltree.get(i).getKey(),// TODO
-					listeFiltree.get(i).getTermAbbr(),
+					listeFiltree.get(i).getKey(),
 					listeFiltree.get(i).getTerm()
 					});
 		}

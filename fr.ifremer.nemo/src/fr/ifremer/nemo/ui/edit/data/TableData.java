@@ -125,14 +125,14 @@ public class TableData {
 	private static String COL_STANDARD_NAME = "COL_STANDARD_NAME"; //$NON-NLS-1$
 	private static String COL_LONG_NAME = "COL_LONG_NAME"; //$NON-NLS-1$
 	private static String COL_INSTRUMENT = "COL_INSTRUMENT"; //$NON-NLS-1$
-	private static String COL_FALL_RATE = "COL_FALL_RATE"; //$NON-NLS-1$
+	private static String COL_INSTRUMENT_CODE = "COL_INSTRUMENT_CODE"; //$NON-NLS-1$
 
 
 	private final String[] colOrder =
 		{ COL_IS_STRING, COL_CODE, COL_STANDARD_NAME, COL_LONG_NAME, COL_USERLABEL, COL_UNIT,
 			COL_CONVERSION, COL_TEST, COL_START, COL_END, COL_FORMAT,
 			COL_VALUE_IN, COL_VALUE_OUT, COL_TEST_IN, COL_TEST_OUT,
-			COL_START_FLAG, COL_END_FLAG, COL_UNIT_CODE,COL_INSTRUMENT
+			COL_START_FLAG, COL_END_FLAG, COL_UNIT_CODE,COL_INSTRUMENT,COL_INSTRUMENT_CODE
 			};
 
 	/**
@@ -301,7 +301,11 @@ public class TableData {
 				new TableDataColumn(COL_INSTRUMENT, colNbById.get(COL_INSTRUMENT),
 						Messages.table_label_intrument, 50, false, false);
 		columnsMap.put(col.pos, col);
-
+		
+		col =
+				new TableDataColumn(COL_INSTRUMENT_CODE, colNbById.get(COL_INSTRUMENT_CODE),
+						Global.EMPTY_STRING, 0, false, false);
+		columnsMap.put(col.pos, col);
 
 	}
 
@@ -1120,7 +1124,8 @@ public class TableData {
 							types.get(i).getFinFlag(),
 							// FAE 6542
 							types.get(i).getUniteCode() ,
-							types.get(i).getInstrument()
+							types.get(i).getInstrument(),
+							types.get(i).getInstrumentCode()
 							});
 			if (isCheckBoxWritable())
 				item.setChecked(types.get(i).isText());
@@ -1701,6 +1706,9 @@ public class TableData {
 			types.get(i).setInstrument(
 					myTable.getItem(i).getText(colNbById.get(COL_INSTRUMENT)));
 			
+			types.get(i).setInstrumentCode(
+					myTable.getItem(i).getText(colNbById.get(COL_INSTRUMENT_CODE)));
+			
 
 			
 			types.get(i).setIsText(isSelected(i));
@@ -1780,14 +1788,8 @@ public class TableData {
 		int selectedRow = myTable.getSelectionIndex();
 		if (selectedRow > -1) {
 			TableItem item = myTable.getItem(selectedRow);
-			item.setText(colNbById.get(COL_INSTRUMENT), type.getKey()+":"+type.getTermAbbr());
-		}
-	}
-	public void setFallRate(TypeFallRate type) {
-		int selectedRow = myTable.getSelectionIndex();
-		if (selectedRow > -1) {
-			TableItem item = myTable.getItem(selectedRow);
-			item.setText(colNbById.get(COL_FALL_RATE),  type.getKey()+":"+type.getTermAbbr());
+			item.setText(colNbById.get(COL_INSTRUMENT), type.getTerm());
+			item.setText(colNbById.get(COL_INSTRUMENT_CODE), type.getKey());
 		}
 	}
 
