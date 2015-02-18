@@ -482,12 +482,12 @@ public class NetCDFWriter extends NemoWriter {
 	}
 
 	public void setDataValue(String variableName, Value value) throws CFPointException {
-		System.out.println("st=0 / rec=0 / val = "+variableName+"="+ value.getValue());
+//		System.out.println("st=0 / rec=0 / val = "+variableName+"="+ value.getValue());
 		setDataValue(variableName, value, 0, 0);
 	}
 
 	public void setDataValue(String variableName, Value value, int indiceStation) throws CFPointException {
-		System.out.println("st="+indiceStation+" / rec=0 / val = "+variableName+"="+ value.getValue());
+//		System.out.println("st="+indiceStation+" / rec=0 / val = "+variableName+"="+ value.getValue());
 		setDataValue(variableName, value, indiceStation, 0);
 	}
 
@@ -500,7 +500,7 @@ public class NetCDFWriter extends NemoWriter {
 	 * @throws Exception
 	 */
 	public void setDataValue(String variableName, Value value, int indiceStation, int indiceRecord) throws CFPointException{
-		System.out.println("st="+indiceStation+" / rec="+indiceRecord+" / val = "+variableName+"="+ value.getValue());
+//		System.out.println("st="+indiceStation+" / rec="+indiceRecord+" / val = "+variableName+"="+ value.getValue());
 		myCFPointWriterManager.setDataValue(dims, 
 				mapVariables,
 				stationData,
