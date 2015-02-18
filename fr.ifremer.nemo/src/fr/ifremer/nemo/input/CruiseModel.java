@@ -374,7 +374,7 @@ public class CruiseModel extends AbstractModel {
 		if (wssurvey.getCrno() != null) {
 			setLocalCSRIdentifier(wssurvey.getCrno());
 		}else{
-			System.out.println("ERROR CRNO null from nautilus web service");// TODO BGT
+			System.out.println("ERROR :nautilus web service returned a null CRNO");// TODO BGT
 		}
 		if (wssurvey.getName() != null) {
 			setName(wssurvey.getName());
