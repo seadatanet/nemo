@@ -300,9 +300,11 @@ public class StationDomain {
 			// en ODV plus d'onglet cruise donc
 			// .getCruise().getModel().getName() ==
 			// "" on met la référence
-			errorMessage = "cruise reference";
+			errorMessage = "cruise reference can not be empty: fill the field in Nemo or add -datasetRef argument in batch mode";
 			cruiseName = Nemo.getInstance().getDomain().getCruise().getModel().getReference();
-
+			if (cruiseName.isEmpty()){
+				throw new GenerationException(errorMessage);
+			}
 			odvStationHeader.append(form.limitString(cruiseName, 20));
 			odvStationHeader.append(Global.TAB);
 

@@ -83,17 +83,21 @@ public class NetCDFWriter extends NemoWriter {
 	SdnDimensionManager dims;
 	Map<String, Object> stationData;
 	Map<String, ISdnVariable> mapVariables;
+
+	Map<String, String> map_P011_VarName;
 	int nbStations;
 	private int stringMetadataLength = 0;
 	private int stringLinksLength = 0;
 	private int maxNbRefs = 0;
-	private final boolean forceCDIReference = true;;
+	private final boolean forceCDIReference = true;
+	private String zVarName;;
 
 	public NetCDFWriter() {
 		super();
 		myConversion = Conversion.NETCDF;
 		mapVariables = new HashMap<String, ISdnVariable>();
 		stationData = new HashMap<String, Object>();
+		map_P011_VarName = new HashMap<String, String>();
 	}
 
 	/**
@@ -143,6 +147,7 @@ public class NetCDFWriter extends NemoWriter {
 
 					myCFPointWriterManager = new CFPointWriterManager(mOutputFileName);
 					mapVariables = new HashMap<String, ISdnVariable>();
+					map_P011_VarName = new HashMap<String, String>();
 					stationData = new HashMap<String, Object>();
 
 					// écriture de l'entête campagne
@@ -179,6 +184,7 @@ public class NetCDFWriter extends NemoWriter {
 					myCFPointWriterManager = new CFPointWriterManager(outputFileName);
 					// écriture de l'entête campagne
 					mapVariables = new HashMap<String, ISdnVariable>();
+					map_P011_VarName = new HashMap<String, String>();
 					stationData = new HashMap<String, Object>();
 					setNetCDFMetadata(inputFilePath, null);
 				}
@@ -234,10 +240,10 @@ public class NetCDFWriter extends NemoWriter {
 		if ( Nemo.getInstance().getDomain().getCruise().getModel().getShipCode()!=null
 				&& !Nemo.getInstance().getDomain().getCruise().getModel().getShipCode().isEmpty())
 		{
-			String href = "http://vocab.nerc.ac.uk/collection/C17/" 
+			String href = "http://vocab.nerc.ac.uk/collection/C17/" // TODO 20755
 
-				+ Nemo.getInstance().getDomain().getCruise().getModel().getShipCode() ;
-			SdnXLinkReference shipRef = new SdnXLinkReference("SDN:L23::NVS2CON", "isObservedBy", href);
+					+ Nemo.getInstance().getDomain().getCruise().getModel().getShipCode() ;
+			SdnXLinkReference shipRef = new SdnXLinkReference("SDN:L23::NVS2CON", "isObservedBy", href);// TODO 20755
 			computeSdnXlinkdims(shipRef);
 			references.add(shipRef);
 			nbRefs++;
@@ -337,7 +343,6 @@ public class NetCDFWriter extends NemoWriter {
 				}
 
 				if (inputStationHeader != null && currentStation.getReference().equals(stRef)) {
-
 					iDomain.getStation().getHeader(myConversion, currentStation, inputStationHeader);
 
 					// FAE 4673 Pb si une seule ligne données et pas d'entête
@@ -358,12 +363,12 @@ public class NetCDFWriter extends NemoWriter {
 						}
 
 						// Longitude
-						setDataValue(ParameterNames.LONGITUDE, new Value( String.valueOf(currentLongitude), currentStation.getMetaFlag(Intern.S_LON).toCharArray()[0]),indiceStation);
+						setDataValue(ParameterNames.LONGITUDE, new Value( String.valueOf(currentLongitude), currentStation.getMetaFlag(Intern.S_LON).toCharArray()[0]),indiceStation, indexRecord);
 						// Latitude
-						setDataValue( ParameterNames.LATITUDE, new Value(String.valueOf(currentLatitude),currentStation.getMetaFlag(Intern.S_LAT).toCharArray()[0]),indiceStation);
+						setDataValue( ParameterNames.LATITUDE, new Value(String.valueOf(currentLatitude),currentStation.getMetaFlag(Intern.S_LAT).toCharArray()[0]),indiceStation, indexRecord);
 
 						Double julianDay = DateTimeUtils.getJulianDay(currentDate);
-						setDataValue(ParameterNames.TIME, new Value(julianDay.toString(),  currentStation.getMetaFlag(Intern.S_DATE).toCharArray()[0]),indiceStation);
+						setDataValue(ParameterNames.TIME, new Value(julianDay.toString(),  currentStation.getMetaFlag(Intern.S_DATE).toCharArray()[0]),indiceStation, indexRecord);
 
 						// SDN_BOT_DEPTH
 						Object botDepth = stationDomain.getModel().getProperty(Intern.S_DEPTH).applyOn(inputStationHeader);
@@ -373,9 +378,9 @@ public class NetCDFWriter extends NemoWriter {
 							String bottomDepth = stationDomain.getModel().getProperty(Intern.S_DEPTH).getUserValue();
 							if (bottomDepth.isEmpty()) {
 								SdnBotDepthVariable SdnBotDepth = (SdnBotDepthVariable) mapVariables.get(ParameterNames.SDN_BOT_DEPTH);
-								setDataValue(ParameterNames.SDN_BOT_DEPTH,new Value( String.valueOf(SdnBotDepth.getFillValue())), indiceStation);
+								setDataValue(ParameterNames.SDN_BOT_DEPTH,new Value( String.valueOf(SdnBotDepth.getFillValue())), indiceStation, indexRecord);
 							} else
-								setDataValue(ParameterNames.SDN_BOT_DEPTH, new Value( bottomDepth), indiceStation);
+								setDataValue(ParameterNames.SDN_BOT_DEPTH, new Value( bottomDepth), indiceStation, indexRecord);
 						}
 
 						writeDataLine(currentStation, readedLine, indiceStation);
@@ -386,47 +391,69 @@ public class NetCDFWriter extends NemoWriter {
 					break;
 				}
 			} else if (stationWrited) {
+
 				// ligne de données : à ne prendre en compte que si on est sur
 				// la bonne station
 				if (mediaDomain.getModel().getInputType() == E_InputType.TIMESERIES) {
 					if (stationDomain.getModel().getProperty(Intern.S_DATE).isInData())
 						currentDate = Long.valueOf(DateTimeUtils.convertTimestamp(readedLine));
+					Double julianDay = DateTimeUtils.getJulianDay(currentDate);
+					setDataValue( ParameterNames.TIME,new Value(julianDay.toString(),  
+							currentStation.getMetaFlag(Intern.S_DATE).toCharArray()[0]),indiceStation,indexRecord);
 				}
 
-				if (mediaDomain.getModel().getInputType() == E_InputType.TRAJECTORY) {
-					if (stationDomain.getModel().getProperty(Intern.S_LON).isInData())
+				else if (mediaDomain.getModel().getInputType() == E_InputType.TRAJECTORY) {
+					if (stationDomain.getModel().getProperty(Intern.S_LON).isInData()){
 						currentLongitude = ((Double) stationDomain.getModel().getProperty(Intern.S_LON).applyOnLine(readedLine.toString())).doubleValue();
-					if (stationDomain.getModel().getProperty(Intern.S_LAT).isInData())
+						// longitude
+						setDataValue(ParameterNames.LONGITUDE,new Value( String.valueOf(currentLongitude),  
+								currentStation.getMetaFlag(Intern.S_LON).toCharArray()[0]),indiceStation, indexRecord);
+					}
+					if (stationDomain.getModel().getProperty(Intern.S_LAT).isInData()){
 						currentLatitude = ((Double) stationDomain.getModel().getProperty(Intern.S_LAT).applyOnLine(readedLine.toString())).doubleValue();
+						// Latitude
+						setDataValue(ParameterNames.LATITUDE, new Value(String.valueOf(currentLatitude),  
+								currentStation.getMetaFlag(Intern.S_LAT).toCharArray()[0]),indiceStation,indexRecord);
+					}
 					if (stationDomain.getModel().getProperty(Intern.S_DATE).isInData())
 						currentDate = Long.valueOf(DateTimeUtils.convertTimestamp(readedLine));
+					// TIME
+					Double julianDay = DateTimeUtils.getJulianDay(currentDate);
+					setDataValue( ParameterNames.TIME,new Value(julianDay.toString(),  
+							currentStation.getMetaFlag(Intern.S_DATE).toCharArray()[0]),indiceStation,indexRecord);
 
 					if (station.getModel().getProperty(Intern.S_DEPTH).isInData()) {
 						Object botDepth = stationDomain.getModel().getProperty(Intern.S_DEPTH).applyOnLine(readedLine.toString());
 						if (!botDepth.equals("Default") && !botDepth.equals(Float.NaN)) {
-							setDataValue(ParameterNames.SDN_BOT_DEPTH,  new Value(botDepth.toString()), indiceStation);
+							setDataValue(ParameterNames.SDN_BOT_DEPTH,  new Value(botDepth.toString()), indiceStation,indexRecord);
 						}
 					} else {
 						String bottomDepth = stationDomain.getModel().getProperty(Intern.S_DEPTH).getUserValue();
 						if (bottomDepth.isEmpty()) {
 							SdnBotDepthVariable SdnBotDepth = (SdnBotDepthVariable) mapVariables.get(ParameterNames.SDN_BOT_DEPTH);
-							setDataValue(ParameterNames.SDN_BOT_DEPTH, new Value(String.valueOf(SdnBotDepth.getFillValue())),indiceStation);
+							setDataValue(ParameterNames.SDN_BOT_DEPTH, new Value(String.valueOf(SdnBotDepth.getFillValue())),indiceStation,indexRecord);
 						} else
-							setDataValue(ParameterNames.SDN_BOT_DEPTH,  new Value(bottomDepth),  indiceStation);
+							setDataValue(ParameterNames.SDN_BOT_DEPTH,  new Value(bottomDepth),  indiceStation,indexRecord);
 					}
+				}else if(mediaDomain.getModel().getInputType() == E_InputType.PROFILE){
+					// longitude
+					setDataValue(ParameterNames.LONGITUDE,new Value( String.valueOf(currentLongitude),  
+							currentStation.getMetaFlag(Intern.S_LON).toCharArray()[0]),indiceStation);
+					// Latitude
+					setDataValue(ParameterNames.LATITUDE, new Value(String.valueOf(currentLatitude),  
+							currentStation.getMetaFlag(Intern.S_LAT).toCharArray()[0]),indiceStation);
+					// TIME
+					Double julianDay = DateTimeUtils.getJulianDay(currentDate);
+					setDataValue( ParameterNames.TIME,new Value(julianDay.toString(),  
+							currentStation.getMetaFlag(Intern.S_DATE).toCharArray()[0]),indiceStation);
 				}
 
-				// longitude
-				setDataValue(ParameterNames.LONGITUDE,new Value( String.valueOf(currentLongitude),  currentStation.getMetaFlag(Intern.S_LON).toCharArray()[0]),indiceStation);
-				// Latitude
-				setDataValue(ParameterNames.LATITUDE, new Value(String.valueOf(currentLatitude),  currentStation.getMetaFlag(Intern.S_LAT).toCharArray()[0]),indiceStation);
-				// TIME
-				Double julianDay = DateTimeUtils.getJulianDay(currentDate);
-				setDataValue( ParameterNames.TIME,new Value(julianDay.toString(),  currentStation.getMetaFlag(Intern.S_DATE).toCharArray()[0]),indiceStation);
+
 
 				writeDataLine(currentStation, readedLine, indiceStation);
 				station.getOdvEmptyStationHeader();
 			}
+
 
 		}
 
@@ -455,10 +482,12 @@ public class NetCDFWriter extends NemoWriter {
 	}
 
 	public void setDataValue(String variableName, Value value) throws CFPointException {
+		System.out.println("st=0 / rec=0 / val = "+variableName+"="+ value.getValue());
 		setDataValue(variableName, value, 0, 0);
 	}
 
 	public void setDataValue(String variableName, Value value, int indiceStation) throws CFPointException {
+		System.out.println("st="+indiceStation+" / rec=0 / val = "+variableName+"="+ value.getValue());
 		setDataValue(variableName, value, indiceStation, 0);
 	}
 
@@ -471,7 +500,7 @@ public class NetCDFWriter extends NemoWriter {
 	 * @throws Exception
 	 */
 	public void setDataValue(String variableName, Value value, int indiceStation, int indiceRecord) throws CFPointException{
-
+		System.out.println("st="+indiceStation+" / rec="+indiceRecord+" / val = "+variableName+"="+ value.getValue());
 		myCFPointWriterManager.setDataValue(dims, 
 				mapVariables,
 				stationData,
@@ -489,6 +518,11 @@ public class NetCDFWriter extends NemoWriter {
 		// parametre ajouté
 		for (ParameterModel pModel : dataDomain.getMyParameterManager().getNetCDFParameterModels()) {
 			varName = pModel.getParameter().getCodeP011();
+			if(map_P011_VarName.get(varName)!=null){
+				varName=map_P011_VarName.get(varName);
+			}else{
+				varName = pModel.getParameter().getCodeP011();
+			}
 
 			pModel.computeAddedParameterValue(currentStation, inputLine, currentDate);
 
@@ -496,12 +530,12 @@ public class NetCDFWriter extends NemoWriter {
 			String stringValue = pModel.getLineValue().getValue().trim();
 			String inputDefaultValue = pModel.getInputDefault().trim();
 			if (!stringValue.equals(inputDefaultValue))
-				setDataValue(varName,new Value( stringValue,  pModel.getLineValue().getQc().toCharArray()[0]), indiceStation);
+				setDataValue(varName,new Value( stringValue,  pModel.getLineValue().getQc().toCharArray()[0]), indiceStation, indexRecord);
 			else {
 				if (defaultValue != null && !defaultValue.isEmpty())
-					setDataValue(varName, new Value(defaultValue, pModel.getLineValue().getQc().toCharArray()[0]), indiceStation);
+					setDataValue(varName, new Value(defaultValue, pModel.getLineValue().getQc().toCharArray()[0]), indiceStation,indexRecord);
 				else
-					setDataValue(varName,new Value( null,  pModel.getLineValue().getQc().toCharArray()[0]), indiceStation);
+					setDataValue(varName,new Value( null,  pModel.getLineValue().getQc().toCharArray()[0]), indiceStation,indexRecord);
 			}
 
 		}
@@ -510,6 +544,11 @@ public class NetCDFWriter extends NemoWriter {
 		for (ParameterModel pModel : dataDomain.getModel().getParameterModels()) {
 
 			varName = pModel.getParameter().getCodeP011();
+			if(map_P011_VarName.get(varName)!=null){
+				varName=map_P011_VarName.get(varName);
+			}else{
+				varName = pModel.getParameter().getCodeP011();
+			}
 
 			pModel.computeParameterValue(inputLine);
 			String inputDefaultValue = pModel.getInputDefault().trim();
@@ -518,16 +557,23 @@ public class NetCDFWriter extends NemoWriter {
 			if (!pModel.getLineValue().getValue().isEmpty()) {
 				stringValue = Formatter.getSingleton().formatParameter(pModel.getParameter().getFormat(), pModel.getLineValue().getValue()).trim();
 			}
-
-			if (!stringValue.equals(inputDefaultValue))
-				setDataValue(varName, new Value( stringValue, pModel.getLineValue().getQc().toCharArray()[0]), indiceStation);
-			else {
-				if (defaultValue != null && !defaultValue.isEmpty())
-					setDataValue(varName, new Value(defaultValue, pModel.getLineValue().getQc().toCharArray()[0]), indiceStation);
-				else
-					setDataValue(varName, new Value(null,  pModel.getLineValue().getQc().toCharArray()[0]),indiceStation);
+			try{
+				if (!stringValue.equals(inputDefaultValue)){
+					// TODO BGT: pb si varName Z est modifié -> les valeurs sont incorrectes
+					setDataValue(varName, new Value( stringValue, pModel.getLineValue().getQc().toCharArray()[0]), indiceStation,indexRecord);
+					//				setDataValue(getZVarName(getZParameterModel()), new Value( stringValue, pModel.getLineValue().getQc().toCharArray()[0]), indiceStation);
+				}
+				else {
+					if (defaultValue != null && !defaultValue.isEmpty())
+						setDataValue(varName, new Value(defaultValue, pModel.getLineValue().getQc().toCharArray()[0]), indiceStation,indexRecord);
+					else
+						setDataValue(varName, new Value(null,  pModel.getLineValue().getQc().toCharArray()[0]),indiceStation,indexRecord);
+				}
+			}catch(Exception e){
+				e.printStackTrace();
+				System.out.println(e.getMessage());
+				throw new GenerationException("error on data for variable "+varName+ " data="+stringValue + " station nb="+indiceStation + "indexRecord " + indexRecord);
 			}
-
 		}
 		indexRecord++;
 	}
@@ -599,17 +645,12 @@ public class NetCDFWriter extends NemoWriter {
 		SdnZ z = null;
 
 		// z Variable
-		ParameterModel zParameterModel = null;
-		if (mediaModel.getInputType() != E_InputType.TIMESERIES || dataDomain.getModel().getMesureType() == E_MesureType.ASLVL)
-			zParameterModel = dataDomain.getModel().getParameterModelByP011(getZLocalName());
+		ParameterModel zParameterModel = getZParameterModel();
 
-		// Si Parametre vertical non selectionné prendre le premiser parametre
-		// mesuré
-		if (zParameterModel == null) {
-			zParameterModel = dataDomain.getMyParameterManager().getNetCDFParameterModels()[0];
-		}
+		zVarName = getZVarName(zParameterModel);
+		map_P011_VarName.put(zParameterModel.getParameter().getCodeP011(), zVarName);
 
-		String varName = getZVarName(zParameterModel);
+
 		String standardName = getZStandardName(zParameterModel);
 		String longName = NetCDFLongNameParameterManager.getInstance().getUserLongName(zParameterModel.getParameter().getCodeP011());
 		if (longName == null) {
@@ -640,23 +681,38 @@ public class NetCDFWriter extends NemoWriter {
 			longitude = new SdnX(geoDim);
 			latitude = new SdnY(geoDim);
 			time = new SdnT(geoDim);
-			z = new SdnZ(varName, geoDim, longName, standardName, unit, sdnParameterUrn, sdnParameterName, sdnUomUrn, sdnUomName);
+			z = new SdnZ(zVarName, geoDim, longName, standardName, unit, sdnParameterUrn, sdnParameterName, sdnUomUrn, sdnUomName);
 			SdnBotDepth = new SdnBotDepthVariable(geoDim, sdnBotDepthLongName);
 		} else if (mediaModel.getInputType() == E_InputType.PROFILE) {
 			sdnBotDepthLongName = Messages.typeFile_profile;
 			longitude = new SdnX(instanceDim);
 			latitude = new SdnY(instanceDim);
 			time = new SdnT(instanceDim);
-			z = new SdnZ(varName, geoDim, longName, standardName, unit, sdnParameterUrn, sdnParameterName, sdnUomUrn, sdnUomName);
+			z = new SdnZ(zVarName, geoDim, longName, standardName, unit, sdnParameterUrn, sdnParameterName, sdnUomUrn, sdnUomName);
 		} else {
 			sdnBotDepthLongName = Messages.typeFile_timeseries;
 			longitude = new SdnX(instanceDim);
 			latitude = new SdnY(instanceDim);
 			time = new SdnT(geoDim);
-			z = new SdnZ(varName, instanceDim, longName, standardName, unit, sdnParameterUrn, sdnParameterName, sdnUomUrn, sdnUomName);
+			z = new SdnZ(zVarName, instanceDim, longName, standardName, unit, sdnParameterUrn, sdnParameterName, sdnUomUrn, sdnUomName);
 
 		}
 
+
+		String instrumentCode = zParameterModel.getParameter().getInstrumentCode() ;
+		if (instrumentCode!=null && !instrumentCode.isEmpty()){
+			z.addVariableAttribute(ParameterNames.SDN_INSTRUMENT_URN,instrumentCode);
+			z.addVariableAttribute(ParameterNames.SDN_INSTRUMENT_NAME,zParameterModel.getParameter().getInstrument() );
+		}
+
+		String fallrateCode = Nemo.getInstance().getDomain().getData().getModel().getFallrateCode();
+		if (fallrateCode!=null && !fallrateCode.isEmpty()){
+			z.addVariableAttribute(ParameterNames.SDN_FALLRATE_URN,fallrateCode );
+			z.addVariableAttribute(ParameterNames.SDN_FALLRATE_NAME,
+					Nemo.getInstance().getDomain().getData().getModel().getFallrateLabel() );
+		}
+
+		map_P011_VarName.put(longitude.getSdnParameterName(), longitude.getVarName());
 		// add DefaultFillValue
 		longitude.addVariableAttribute(ParameterNames.FILLVALUE, convertValue(DataType.DOUBLE, ParameterValues.DEFAULT_FILLVALUE));
 		latitude.addVariableAttribute(ParameterNames.FILLVALUE, convertValue(DataType.DOUBLE, ParameterValues.DEFAULT_FILLVALUE));
@@ -668,9 +724,9 @@ public class NetCDFWriter extends NemoWriter {
 			z.addVariableAttribute(ParameterNames.FILLVALUE, convertValue(DataType.DOUBLE, zParameterModel.getParameter().getDefault()));
 
 		// 14771
-		if (varName.equals(ParameterNames.DEPTH) || varName == ParameterNames.PRESS)
+		if (zVarName.equals(ParameterNames.DEPTH) || zVarName == ParameterNames.PRESS)
 			z.addVariableAttribute(ParameterNames.POSITIVE, ParameterValues.Z_POSITIVE_DOWN);
-		else if (varName == ParameterNames.HEIGHT)
+		else if (zVarName == ParameterNames.HEIGHT)
 			z.addVariableAttribute(ParameterNames.POSITIVE, ParameterValues.Z_POSITIVE_UP);
 
 		// Sdn variable
@@ -711,7 +767,9 @@ public class NetCDFWriter extends NemoWriter {
 
 		mapVariables.put(time.getVarName(), time);
 		addVariableToNetCDF(time);
-		mapVariables.put(zParameterModel.getParameter().getCodeP011(), z);
+		//		mapVariables.put(zParameterModel.getParameter().getCodeP011(), z);
+		mapVariables.put(z.getVarName(), z);
+
 		addVariableToNetCDF(z);
 
 		// Geophysical variable
@@ -725,7 +783,7 @@ public class NetCDFWriter extends NemoWriter {
 		String coordinates = longitude.getVarName() + Global.SPACE + latitude.getVarName() + Global.SPACE + time.getVarName() + Global.SPACE + z.getVarName();
 		for (ParameterModel param : params) {
 			// varName = param.getParameter().getLocalCode();
-			varName = param.getParameter().getCodeP011();
+			String varName = param.getParameter().getCodeP011();
 			longName = NetCDFLongNameParameterManager.getInstance().getUserLongName(param.getParameter().getCodeP011());
 			if (longName == null) {
 				if (zParameterModel.getParameter().getNameP011() != null) {
@@ -755,12 +813,33 @@ public class NetCDFWriter extends NemoWriter {
 					current.addVariableAttribute(ParameterNames.FILLVALUE, convertValue(DataType.DOUBLE, ParameterValues.DEFAULT_FILLVALUE));
 				if (!param.getParameter().getStandardName().isEmpty())
 					current.addVariableAttribute(ParameterNames.STANDARD_NAME, param.getParameter().getStandardName());
+				
+				
+				instrumentCode = param.getParameter().getInstrumentCode() ;
+				if (instrumentCode!=null && !instrumentCode.isEmpty()){
+					current.addVariableAttribute(ParameterNames.SDN_INSTRUMENT_URN,instrumentCode);
+					current.addVariableAttribute(ParameterNames.SDN_INSTRUMENT_NAME,param.getParameter().getInstrument() );
+				}
+				
 				mapVariables.put(current.getVarName(), current);
 				addVariableToNetCDF(current);
 
 			}
 		}
 
+	}
+
+	private ParameterModel getZParameterModel() {
+		ParameterModel zParameterModel = null;
+		if (mediaModel.getInputType() != E_InputType.TIMESERIES || dataDomain.getModel().getMesureType() == E_MesureType.ASLVL)
+			zParameterModel = dataDomain.getModel().getParameterModelByP011(getZLocalName());
+
+		// Si Parametre vertical non selectionné prendre le premiser parametre
+		// mesuré
+		if (zParameterModel == null) {
+			zParameterModel = dataDomain.getMyParameterManager().getNetCDFParameterModels()[0];
+		}
+		return zParameterModel;
 	}
 
 	/**
@@ -891,16 +970,20 @@ public class NetCDFWriter extends NemoWriter {
 	}
 
 	private String getZVarName(ParameterModel zParameterModel) {
-		if (!dataDomain.getModel().getVerticalParametersList().getP_depthBSBed().isEmpty() && dataDomain.getModel().getMesureType() == E_MesureType.BSBED)
+		if (!dataDomain.getModel().getVerticalParametersList().getP_depthBSBed().isEmpty() 
+				&& dataDomain.getModel().getMesureType() == E_MesureType.BSBED)
 			return ParameterNames.DEPTH;
 
-		if (!dataDomain.getModel().getVerticalParametersList().getP_depthBSSurf().isEmpty() && dataDomain.getModel().getMesureType() == E_MesureType.BSSURF)
+		if (!dataDomain.getModel().getVerticalParametersList().getP_depthBSSurf().isEmpty() 
+				&& dataDomain.getModel().getMesureType() == E_MesureType.BSSURF)
 			return ParameterNames.DEPTH;
 
-		if (!dataDomain.getModel().getVerticalParametersList().getP_heightASLvl().isEmpty() && dataDomain.getModel().getMesureType() == E_MesureType.ASLVL)
+		if (!dataDomain.getModel().getVerticalParametersList().getP_heightASLvl().isEmpty() 
+				&& dataDomain.getModel().getMesureType() == E_MesureType.ASLVL)
 			return ParameterNames.HEIGHT;
 
-		if (!dataDomain.getModel().getVerticalParametersList().getP_pressure().isEmpty() && dataDomain.getModel().getMesureType() == E_MesureType.BSSURF)
+		if (!dataDomain.getModel().getVerticalParametersList().getP_pressure().isEmpty() 
+				&& dataDomain.getModel().getMesureType() == E_MesureType.BSSURF)
 			return ParameterNames.PRESS;
 
 		// si parametre vertical non selection alors z peut etre un parametre

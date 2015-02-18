@@ -78,13 +78,13 @@ public class GroupVerticalParameters {
 			@Override
 			public void widgetSelected(SelectionEvent e)
 			{
-				controlNetCDFSelection((Combo) e.widget);
+				controlVerticalReferenceSelection((Combo) e.widget);
 			}
 
 			@Override
 			public void widgetDefaultSelected(SelectionEvent e)
 			{
-				controlNetCDFSelection((Combo) e.widget);
+				controlVerticalReferenceSelection((Combo) e.widget);
 			}
 		};
 
@@ -192,6 +192,7 @@ public class GroupVerticalParameters {
 	}
 
 	public void select(VerticalParametersList list) {
+		
 		for (int i = 0; i < comboDBSSurf.getItemCount(); i++) {
 			if (comboDBSSurf.getItem(i).equals(list.getP_depthBSSurf())) {
 				comboDBSSurf.select(i);
@@ -215,7 +216,8 @@ public class GroupVerticalParameters {
 		}
 	}
 
-	public void controlNetCDFSelection(Combo current) {
+	public void controlVerticalReferenceSelection(Combo current) {
+		
 		if (RulesManager.getInstance().isConversionToNetCDF()) {
 			if (!current.equals(comboDBSSurf))
 				comboDBSSurf.select(0);
@@ -229,5 +231,15 @@ public class GroupVerticalParameters {
 			if (!current.equals(comboHASLvl))
 				comboHASLvl.select(0);
 		}
+		
+		boolean verticalReferenceSelected = comboDBSSurf.getSelectionIndex()>0||
+				comboDBSBed.getSelectionIndex()>0|
+				comboP.getSelectionIndex()>0||
+				comboHASLvl.getSelectionIndex()>0;
+				
+				
+		Nemo.getInstance().getViewMain().getEditDataForm().setFallrateGroupEnabled(verticalReferenceSelected && RulesManager.getInstance().isProfile());
+		
+		
 	}
 }

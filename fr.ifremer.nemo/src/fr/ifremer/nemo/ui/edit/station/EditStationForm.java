@@ -17,7 +17,6 @@ import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.ComboType;
 import fr.ifremer.nemo.ui.edit.EditForm;
 import fr.ifremer.nemo.ui.edit.NemoSection;
-import fr.ifremer.nemo.ui.edit.cruise.TableDataSurvey;
 import fr.ifremer.nemo.ui.edit.station.AutoLine.MetaInData;
 import fr.ifremer.nemo.ui.view.ViewLog;
 import fr.ifremer.nemo.util.Global;
@@ -74,10 +73,6 @@ public class EditStationForm extends EditForm {
 			// bouton collapse all / expand all
 			createButtonExpand();
 
-			// TODO BGT tjs utile 6536?
-			if (RulesManager.getInstance().isProcessCollection()) {
-				TableDataSurvey.initTypes();
-			}
 
 			// Draw Station Sections
 			drawSections();

@@ -489,6 +489,21 @@ public class TableData {
 
 	}
 	/**
+	 * initialize the L22
+	 */
+	public void initTypesL33() {
+		if (typesL33 == null) {
+			typesL33 = new ArrayList<TypeFallRate>();
+			Collection<IElement> listL33 = VocabLists.getVocabList(Intern.list_L33).getElements();
+			TypeFallRate typeFallrate;
+			for (IElement record : listL33) {
+				typeFallrate = new TypeFallRate(record);
+				typesL33.add(typeFallrate);
+			}
+		}
+
+	}
+	/**
 	 * fill types - add PRES automatically for Medatlas in P091 (see param rules table, data01) 
 	 */
 	public void fillTypes() {
@@ -1825,6 +1840,10 @@ public class TableData {
 	 * @return
 	 */
 	public ArrayList<TypeFallRate> getTypesL33() {
+		
+		if (typesL33 == null){
+			initTypesL33();
+		}
 		return typesL33;
 	}
 	

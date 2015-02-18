@@ -18,6 +18,7 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 
 import fr.ifremer.nemo.Nemo;
+import fr.ifremer.nemo.ui.RulesManager;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.data.TableData;
 import fr.ifremer.nemo.ui.edit.data.TypeFallRate;
@@ -78,16 +79,16 @@ public class FallRateFilteredTable extends AbstractFilteredTable
 
 		// creation des colonnes...
 		TableColumn tableColumn = new TableColumn(myFiltreTable, SWT.NONE);
-		tableColumn.setWidth(200);
-		tableColumn.setText("Key");// TODO
+		tableColumn.setWidth(50); 
+		tableColumn.setText("Key");// TODO internationaliser fall rate
 		
 		TableColumn tableColumn2 = new TableColumn(myFiltreTable, SWT.NONE);
-		tableColumn2.setWidth(300);
-		tableColumn2.setText("Alt. label");// TODO
+		tableColumn2.setWidth(100);
+		tableColumn2.setText("Alt. label");// TODO internationaliser fall rate
 		
 		TableColumn tableColumn3 = new TableColumn(myFiltreTable, SWT.NONE);
 		tableColumn3.setWidth(300);
-		tableColumn3.setText("Preferred label");// TODO
+		tableColumn3.setText("Preferred label");// TODO internationaliser fall rate
 		
 		
 
@@ -95,7 +96,7 @@ public class FallRateFilteredTable extends AbstractFilteredTable
 		{
 			TableItem item = new TableItem(myFiltreTable, SWT.NONE);
             item.setText(new String[] {
-            		listeFiltree.get(i).getKey(),// TODO
+            		listeFiltree.get(i).getKey(),
 					listeFiltree.get(i).getTermAbbr(),
 					listeFiltree.get(i).getTerm()
 					});
@@ -109,7 +110,6 @@ public class FallRateFilteredTable extends AbstractFilteredTable
 	private void reloadListeFiltree()
 	{
 		listeFiltree = new ArrayList<TypeFallRate>();
-		// liste filtree initialisee e typesWS au depart
 		int taille = myTableDataRef.getTypesL33().size();
 		for (int i = 0; i < taille; i++)
 		{
@@ -174,7 +174,9 @@ public class FallRateFilteredTable extends AbstractFilteredTable
 
 		// reinit validation
 		Utils.invalidEtapes();
-// TODO fall rate
+		
+		
+		 RulesManager.getInstance().updateFromIHM(type);
 		shell.close();
 	}
 }

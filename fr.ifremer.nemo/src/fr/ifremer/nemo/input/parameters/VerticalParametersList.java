@@ -157,5 +157,13 @@ public class VerticalParametersList extends AbstractModel {
 	public void setP_heightASLvl(String p_heightASLvl) {
 		_p_heightASLvl = p_heightASLvl;
 	}
+	
+	public boolean isVerticalReferenceSet(){
+		return  ! _p_depthBSBed.equals(Global.EMPTY_STRING)
+				||!_p_depthBSSurf.equals(Global.EMPTY_STRING)
+				||!_p_heightASLvl.equals(Global.EMPTY_STRING)
+				||!_p_pressure.equals(Global.EMPTY_STRING);
+	}
+
 
 }

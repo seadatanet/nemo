@@ -1343,19 +1343,24 @@ public class StationSection extends NemoSection {
 		// avant de charger le type de donnees, verifier qu'il existe
 		// bien
 		// dans la liste mise à jour!!
-		int taille = TableDataSurvey.types.size();
+
+		int taille = ManageLists.getDataTypes().length;
+		WSDataType[] wsDataTypes = ManageLists.getDataTypes();
 		Boolean ok = false;
 		Boolean capteur = false;
 		for (int i = 0; i < taille; i++) {
 			// check si le type existe toujours ou pas
 			Pattern pat = Pattern.compile(Global.SEP);
 			String motsType[] =
-					pat.split(TableDataSurvey.types.get(i).getCode());
+					pat.split(
+							wsDataTypes[i].getCode()
+							);
 			String vraiCodeType = motsType[0];
 
 			if (vraiCode.equals(vraiCodeType)) {
 				ok = true;
-				if (TableDataSurvey.types.get(i).getSensor()) {
+				if (
+						wsDataTypes[i].isSensor()) {
 					capteur = true;
 				}
 			}
@@ -1369,13 +1374,18 @@ public class StationSection extends NemoSection {
 		CCombo combo = myForm.dataType.getDatatype().getValueCombo();
 
 		Boolean isCruiseEnabled = RulesManager.getInstance().isCruiseEnabled();
-		Boolean isNetCDF = RulesManager.getInstance().isConversionToNetCDF();
 		Boolean addOk = true;
 		DataType dataType = station.getDataType();
+		
+		boolean isCruiseDataTypeEnabled = Nemo.getInstance().getViewMain().getEditCruiseForm().getSectionDataType().isEnabled();
 
 		// FAE 6536 - si pas d'onglet Cruise, ni de dataType dans le modele, on
 		// remplit la combo avec tous les dataTypes avec sensor true
-		if (!isCruiseEnabled || isNetCDF) {
+
+		if ( !isCruiseEnabled 
+				|| 
+				(isCruiseEnabled && !isCruiseDataTypeEnabled)
+				){
 			fillDataTypeWithDataTypesIsSensor();
 		}
 
@@ -1384,7 +1394,7 @@ public class StationSection extends NemoSection {
 
 			// si l'onglet cruise existe, on verifie que le dataType est bien
 			// dans la liste des datatypes de cet onglet
-			if (isCruiseEnabled && !isNetCDF) {
+			if (isCruiseDataTypeEnabled){
 				addOk = checkAddDatatypeOk(code);
 			}
 

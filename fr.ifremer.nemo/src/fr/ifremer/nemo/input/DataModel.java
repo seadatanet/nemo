@@ -33,8 +33,9 @@ public class DataModel extends AbstractModel {
 	private DataListTypeEnum _dataListType;
 	private E_MesureType _mesureType;
 	private VerticalParametersList _verticalParametersList;
-	protected String _fallrate;
-	
+	private String fallrateCode;
+	private String fallrateLabel;
+
 	public DataModel() {
 		_tagName = ModelDescription.node_dataModel;
 		initValues();
@@ -49,7 +50,8 @@ public class DataModel extends AbstractModel {
 		_parameterModels = new ArrayList<ParameterModel>();
 		_dataListType = DataListTypeEnum.UNKNOWN;
 		_mesureType = E_MesureType.UNKNOWN;
-		_fallrate = Global.EMPTY_STRING;
+		fallrateCode = Global.EMPTY_STRING;
+		fallrateLabel= Global.EMPTY_STRING;
 	}
 
 	public DataListTypeEnum getDataListType() {
@@ -60,9 +62,9 @@ public class DataModel extends AbstractModel {
 	 * @see AbstractModel.java#fromElement
 	 */
 	public static SAXConsumer fromElement(String a_URI,
-											String a_LocalName,
-											String a_QName,
-											Attributes a_Attributes) {
+			String a_LocalName,
+			String a_QName,
+			Attributes a_Attributes) {
 		DataModel el = new DataModel();
 		el.buildFromElement(a_URI, a_LocalName, a_QName, a_Attributes);
 		return el;
@@ -73,9 +75,9 @@ public class DataModel extends AbstractModel {
 	 */
 	@Override
 	public void buildFromElement(String a_URI,
-									String a_LocalName,
-									String a_QName,
-									Attributes a_Attributes) {
+			String a_LocalName,
+			String a_QName,
+			Attributes a_Attributes) {
 		// l'élément n'a pas d'attributs
 	}
 
@@ -84,9 +86,9 @@ public class DataModel extends AbstractModel {
 	 */
 	@Override
 	public SAXConsumer consumeElement(String a_URI,
-										String a_LocalName,
-										String a_QName,
-										Attributes a_Attributes) {
+			String a_LocalName,
+			String a_QName,
+			Attributes a_Attributes) {
 		SAXConsumer el = null;
 		if (a_LocalName.equals(ModelDescription.node_listParameters)) {
 			return new PathElementConsumer(ModelDescription.node_listParameters, this);
@@ -101,9 +103,14 @@ public class DataModel extends AbstractModel {
 			setVerticalParametersList((VerticalParametersList) el);
 			return el;
 		}
-		if (a_LocalName.equals(ModelDescription.node_fallrate)) {
+		if (a_LocalName.equals(ModelDescription.node_fallrateCode)) {
 			Element2Field setter = new Element2Field(this,
-					ModelDescription.setter_fallrate);
+					ModelDescription.setter_fallrateCode);
+			return setter;
+		}
+		if (a_LocalName.equals(ModelDescription.node_fallrateLabel)) {
+			Element2Field setter = new Element2Field(this,
+					ModelDescription.setter_fallrateLabel);
 			return setter;
 		}
 		return null;
@@ -114,10 +121,10 @@ public class DataModel extends AbstractModel {
 	 */
 	@Override
 	public SAXConsumer handlePathElement(String path,
-											String a_URI,
-											String a_LocalName,
-											String a_QName,
-											Attributes a_Attributes) {
+			String a_URI,
+			String a_LocalName,
+			String a_QName,
+			Attributes a_Attributes) {
 		SAXConsumer el = null;
 		if (path.equals(ModelDescription.node_listParameters)) {
 			el = ParameterModel.fromElement(a_URI, a_LocalName, a_QName, a_Attributes);
@@ -134,8 +141,8 @@ public class DataModel extends AbstractModel {
 	public void writeXMLBodyOn(XMLOutputWriter a_Writer) {
 		a_Writer.putTag(ModelDescription.node_dataListType, getDataListType().toString());
 		a_Writer.putTag(ModelDescription.node_mesureType, getMesureType().toString());
-		a_Writer.putTag(ModelDescription.node_fallrate, getFallrate().toString());
-
+		a_Writer.putTag(ModelDescription.node_fallrateCode, getFallrateCode());
+		a_Writer.putTag(ModelDescription.node_fallrateLabel, getFallrateLabel());
 		// ref parametres verticaux
 		getVerticalParametersList().writeXMLOn(a_Writer);
 
@@ -145,6 +152,22 @@ public class DataModel extends AbstractModel {
 			el.writeXMLOn(a_Writer);
 		}
 		a_Writer.closeTag();
+	}
+
+	public String getFallrateCode() {
+		return fallrateCode;
+	}
+
+	public void setFallrateCode(String fallrateCode) {
+		this.fallrateCode = fallrateCode;
+	}
+
+	public String getFallrateLabel() {
+		return fallrateLabel;
+	}
+
+	public void setFallrateLabel(String fallrateLabel) {
+		this.fallrateLabel = fallrateLabel;
 	}
 
 	/**
@@ -273,13 +296,7 @@ public class DataModel extends AbstractModel {
 	public void setMesureType(E_MesureType mesureType) {
 		_mesureType = mesureType;
 	}
-	public String getFallrate()
-	{
-		return _fallrate;
-	}
-	public void setFallrate(String fallrate){
-		_fallrate = fallrate;
-	}
+
 	public void setMesureType(String mesureType) {
 
 		if (mesureType.equals(E_MesureType.BSSURF.toString())) {

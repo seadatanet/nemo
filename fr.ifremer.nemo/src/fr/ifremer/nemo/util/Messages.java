@@ -558,6 +558,7 @@ public class Messages {
 	public static String SaveAction_4;
 	public static String SaveAction_5;
 	public static String SaveAction_6;
+	public static String SaveAction_7;
 	public static String ViewLog_2;
 	public static String ViewLog_3;
 	public static String ViewLog_4;

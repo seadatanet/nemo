@@ -5,11 +5,15 @@ import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Group;
+import org.eclipse.swt.widgets.Text;
 
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.input.parameters.ParameterModel;
@@ -21,6 +25,7 @@ import fr.ifremer.nemo.ui.edit.data.listeners.DataListRadioSelectionListener;
 import fr.ifremer.nemo.ui.edit.data.listeners.MesureTypeAboveSeaLevelSelectionListener;
 import fr.ifremer.nemo.ui.edit.data.listeners.MesureTypeBelowSeaBedSelectionListener;
 import fr.ifremer.nemo.ui.edit.data.listeners.MesureTypeBelowSeaSurfaceSelectionListener;
+import fr.ifremer.nemo.ui.tables.FallRateFilteredTable;
 import fr.ifremer.nemo.ui.view.ViewLog;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Global.DataListTypeEnum;
@@ -44,7 +49,41 @@ public class EditDataForm extends EditForm {
 	private Button mesType_belowSeaBed;
 	private Button mesType_AboveSeaLevel;
 
+	private FallRateFilteredTable fallrateTable;
+
+
 	private GroupVerticalParameters myGroupeVerticalParameters;
+	private Group groupFallrate;
+	private Text fallrateCode;
+	private Text fallrateLabel;
+
+	
+	public void setFallrateGroupEnabled(boolean enabled){
+		groupFallrate.setEnabled(enabled);
+		for (Control child : groupFallrate.getChildren())
+			  child.setEnabled(enabled);
+		
+	
+		if (!enabled){
+			fallrateCode.setText(Global.EMPTY_STRING);
+			fallrateLabel.setText(Global.EMPTY_STRING);
+		}
+	}
+	public String getFallrateCode() {
+		return fallrateCode.getText();
+	}
+
+	public void setFallrateCode(String fallrateCode) {
+		this.fallrateCode.setText(fallrateCode);
+	}
+
+	public String getFallrateLabel() {
+		return fallrateLabel.getText();
+	}
+
+	public void setFallrateLabel(String fallrateLabel) {
+		this.fallrateLabel.setText(fallrateLabel);
+	}
 
 	public EditDataForm() {
 		super();
@@ -72,15 +111,15 @@ public class EditDataForm extends EditForm {
 		// bouton validate
 		createButtonValidate();
 		buttonValidate
-				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter()
-				{
-					@Override
-					public void widgetSelected(
-							org.eclipse.swt.events.SelectionEvent e)
-				{
-					validate();
-				}
-				});
+		.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter()
+		{
+			@Override
+			public void widgetSelected(
+					org.eclipse.swt.events.SelectionEvent e)
+			{
+				validate();
+			}
+		});
 		// reset
 		createButtonRaz();
 
@@ -96,6 +135,9 @@ public class EditDataForm extends EditForm {
 		// groupe de selection des paramètres verticaux
 		createGroupVerticalParametersChoices();
 
+
+		createGroupFallrate();
+
 		drawSections();
 	}
 
@@ -110,7 +152,7 @@ public class EditDataForm extends EditForm {
 		reinitTableData();
 		//FAE 18259
 		reinitParameters();
-		
+
 		ViewLog.aideData();
 
 		// affichage du texte dans la zone de gauche
@@ -145,8 +187,8 @@ public class EditDataForm extends EditForm {
 	public void razText() {
 		boolean confirm = true;
 		confirm = MessageDialog.openConfirm(null,
-					Messages.edit_data_dataListDialogBox_title,
-					Messages.edit_data_dataListDialogBox_text);
+				Messages.edit_data_dataListDialogBox_title,
+				Messages.edit_data_dataListDialogBox_text);
 		if (confirm) {
 			reset();
 		}
@@ -229,6 +271,13 @@ public class EditDataForm extends EditForm {
 		VerticalParametersList verticParams =
 				Nemo.getInstance().getDomain().getData().getModel().getVerticalParametersList();
 		RulesManager.getInstance().updateFromModel(verticParams);
+
+		TypeFallRate typeFallrate = new TypeFallRate(
+				Nemo.getInstance().getDomain().getData().getModel().getFallrateLabel(),
+				"", "", Nemo.getInstance().getDomain().getData().getModel().getFallrateCode());
+		RulesManager.getInstance().updateFromModel(
+				typeFallrate);
+
 		// refresh de la table de l'onglet Data
 		myTableData.razAndRecreateTable();
 	}
@@ -347,7 +396,7 @@ public class EditDataForm extends EditForm {
 		group.setFont(Utils.font08);
 		group.setText(Messages.edit_data_parametersList);
 		GridLayoutFactory.fillDefaults().numColumns(1).equalWidth(true)
-				.margins(4, 4).applyTo(group);
+		.margins(4, 4).applyTo(group);
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(group);
 
 		DataListRadioSelectionListener listener = new DataListRadioSelectionListener(this);
@@ -375,7 +424,7 @@ public class EditDataForm extends EditForm {
 		group.setFont(Utils.font08);
 		group.setText(Messages.edit_data_mesureType_label);
 		GridLayoutFactory.fillDefaults().numColumns(1).equalWidth(true)
-				.margins(4, 4).applyTo(group);
+		.margins(4, 4).applyTo(group);
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(group);
 
 		MesureTypeBelowSeaSurfaceSelectionListener surfListener = new MesureTypeBelowSeaSurfaceSelectionListener();
@@ -401,6 +450,65 @@ public class EditDataForm extends EditForm {
 	private void createGroupVerticalParametersChoices() {
 
 		myGroupeVerticalParameters.createGroup(formEdition);
+	}
+
+	private void createGroupFallrate(){
+		groupFallrate = new Group(formEdition.getBody(), SWT.NONE);
+		groupFallrate.setEnabled(false);
+		groupFallrate.setFont(Utils.font08);
+		groupFallrate.setText("fall rate");// TODO internationaliser fall rate
+		GridLayoutFactory.fillDefaults().numColumns(1).equalWidth(true)
+		.margins(4, 4).applyTo(groupFallrate);
+		GridDataFactory.fillDefaults().grab(true, false).applyTo(groupFallrate);
+
+		SelectionListener fallrateListener = new SelectionListener() {
+
+			@Override
+			public void widgetSelected(SelectionEvent arg0) {
+				fallrateTable = new FallRateFilteredTable();
+				fallrateTable.open(Nemo.getInstance().getViewMain().getEditDataForm()
+						.getCompositeData().getParent());
+
+
+			}
+
+			@Override
+			public void widgetDefaultSelected(SelectionEvent arg0) {
+				widgetSelected(arg0);
+
+			}
+		};
+		SelectionListener fallrateResetListener = new SelectionListener() {
+
+			@Override
+			public void widgetSelected(SelectionEvent arg0) {
+				setFallrateCode(Global.EMPTY_STRING);
+				setFallrateLabel(Global.EMPTY_STRING);
+
+			}
+
+			@Override
+			public void widgetDefaultSelected(SelectionEvent arg0) {
+				widgetSelected(arg0);
+
+			}
+		};
+		Button button_chooseFallRate = new Button(groupFallrate, SWT.PUSH);
+		button_chooseFallRate.setText("select fall rate"); // TODO internationaliser fall rate
+		button_chooseFallRate.addSelectionListener(fallrateListener);
+		GridDataFactory.fillDefaults().grab(true, false).applyTo(button_chooseFallRate);
+
+		fallrateCode = new Text(groupFallrate, SWT.READ_ONLY);
+		GridDataFactory.fillDefaults().grab(true, true).applyTo(fallrateCode);
+		fallrateLabel = new Text(groupFallrate, SWT.READ_ONLY);
+		GridDataFactory.fillDefaults().grab(true, true).applyTo(fallrateLabel);
+
+		Button button_resetFallRate = new Button(groupFallrate, SWT.PUSH);
+		button_resetFallRate.setText("reset"); // TODO internationaliser fall rate
+		button_resetFallRate.addSelectionListener(fallrateResetListener);
+		GridDataFactory.fillDefaults().grab(true, false).applyTo(button_resetFallRate);
+
+
 	}
 
 	public TableData getMyTableData() {

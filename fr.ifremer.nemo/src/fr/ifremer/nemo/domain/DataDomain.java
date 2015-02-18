@@ -300,14 +300,28 @@ public class DataDomain {
 		/**
 		 * parameters
 		 */
+		int i=0;
 		for (ParameterModel param : _model.getParameterModels()) {
-			sdnParams.append(parameterMap(c.getDebut(), param.getParameter(), c, param.isText()));
+			String fallrateCode=null;
+			if (i==0){
+				fallrateCode = getModel().getFallrateCode();
+				if (fallrateCode.isEmpty()){
+					fallrateCode=null;
+				}
+			}
+			sdnParams.append(parameterMap(c.getDebut(), param.getParameter(), c, param.isText(), fallrateCode));
+			i++;
 		}
 
 		return sdnParams;
 	}
 
-	private StringBuffer parameterMap(String start, Parameter param, Conversion c, boolean isText) throws GenerationException {
+	private Object parameterMap(String debut, Parameter parameter,
+			Conversion c, boolean text) throws GenerationException {
+		return parameterMap(debut, parameter, c, text, null);
+	}
+
+	private StringBuffer parameterMap(String start, Parameter param, Conversion c, boolean isText,String fallrateCode) throws GenerationException {
 		String code = param.getCode();
 		StringBuffer sdnMapping = new StringBuffer();
 		sdnMapping.append(start);
@@ -355,6 +369,15 @@ public class DataDomain {
 				// FAE 6542
 				sdnMapping.append(getURNSyntaxe(URNtype.units, param.getUnitCode(), null, Intern.mapping_unit, isText));
 			}
+		}
+		
+		// instrument
+		if (param.getInstrumentCode()!=null && !param.getInstrumentCode().isEmpty()){
+			sdnMapping.append("<instrument>"+param.getInstrumentCode()+"</instrument>"); // TODO BGT instrument
+		}
+		// fall rate
+		if (fallrateCode!=null){
+			sdnMapping.append("<fallrate>"+fallrateCode+"</fallrate>"); // TODO BGT fall rate
 		}
 		sdnMapping.append(Global.RN);
 		return sdnMapping;

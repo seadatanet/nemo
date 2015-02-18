@@ -169,7 +169,7 @@ public class InstrumentFilteredTable extends AbstractFilteredTable
 		// reinit validation
 		Utils.invalidEtapes();
 
-		myTableDataRef.setInstrument(type);// TODO
+		myTableDataRef.setInstrument(type);
 		myTableDataRef.majTypeData();
 
 		// refresh de la table
