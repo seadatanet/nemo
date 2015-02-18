@@ -139,7 +139,7 @@ public class VocabLists {
 	}
 
 	public static String getVocabMatch(String list1, String list2, String value, String errorMessage) {
-		String strReturn = errorMessage;
+		String strReturn = null;
 
 		ICollectionMapping tableMap = getVocabMap(list1, list2);
 

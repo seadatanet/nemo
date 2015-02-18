@@ -89,7 +89,7 @@ public class NetCDFWriter extends NemoWriter {
 	private int stringMetadataLength = 0;
 	private int stringLinksLength = 0;
 	private int maxNbRefs = 0;
-	private final boolean forceCDIReference = true;
+	private final boolean forceReferences = true;
 	private String zVarName;;
 
 	public NetCDFWriter() {
@@ -250,17 +250,15 @@ public class NetCDFWriter extends NemoWriter {
 		}
 
 
-		if (forceCDIReference ){
-			SdnXLinkReference cdiRef = new SdnXLinkReference();
-			try {
-				cdiRef.setAsCdi(Integer.valueOf(Nemo.getInstance().getConfig()
-						.getIdEdmoRespCdi()), localCdiId, false);
-				references.add(cdiRef);
-				computeSdnXlinkdims(cdiRef);
-				nbRefs++;
-			} catch (SDNXLinkException e) {
-				throw new SDNXLinkException("error while setting automatic CDI reference"); // TODO
-			}
+		SdnXLinkReference cdiRef = new SdnXLinkReference();
+		try {
+			cdiRef.setAsCdi(Integer.valueOf(Nemo.getInstance().getConfig()
+					.getIdEdmoRespCdi()), localCdiId, false);
+			references.add(cdiRef);
+			computeSdnXlinkdims(cdiRef);
+			nbRefs++;
+		} catch (SDNXLinkException e) {
+			throw new SDNXLinkException("error while setting automatic CDI reference"); // TODO
 		}
 		if (maxNbRefs<nbRefs){
 			maxNbRefs = nbRefs;
@@ -310,17 +308,17 @@ public class NetCDFWriter extends NemoWriter {
 		double currentLatitude = currentStation.getLatitude();
 
 		// SDN_REFERENCE
+		if (forceReferences){
+			ArrayList<SdnXLinkReference> references = getReferences(localCdiId, currentStation);
 
-		ArrayList<SdnXLinkReference> references = getReferences(localCdiId, currentStation);
+			if (references != null && !references.isEmpty()){
 
-		if (references != null && !references.isEmpty()){
-
-			setDataValue(ParameterNames.SDN_XLINK, new Value(references), indiceStation);
+				setDataValue(ParameterNames.SDN_XLINK, new Value(references), indiceStation);
+			}
+			else{
+				setDataValue(ParameterNames.SDN_XLINK, null,indiceStation);
+			}
 		}
-		else{
-			setDataValue(ParameterNames.SDN_XLINK, null,indiceStation);
-		}
-
 
 
 		// scan the InputFile line by line
@@ -482,12 +480,12 @@ public class NetCDFWriter extends NemoWriter {
 	}
 
 	public void setDataValue(String variableName, Value value) throws CFPointException {
-//		System.out.println("st=0 / rec=0 / val = "+variableName+"="+ value.getValue());
+		//		System.out.println("st=0 / rec=0 / val = "+variableName+"="+ value.getValue());
 		setDataValue(variableName, value, 0, 0);
 	}
 
 	public void setDataValue(String variableName, Value value, int indiceStation) throws CFPointException {
-//		System.out.println("st="+indiceStation+" / rec=0 / val = "+variableName+"="+ value.getValue());
+		//		System.out.println("st="+indiceStation+" / rec=0 / val = "+variableName+"="+ value.getValue());
 		setDataValue(variableName, value, indiceStation, 0);
 	}
 
@@ -500,7 +498,7 @@ public class NetCDFWriter extends NemoWriter {
 	 * @throws Exception
 	 */
 	public void setDataValue(String variableName, Value value, int indiceStation, int indiceRecord) throws CFPointException{
-//		System.out.println("st="+indiceStation+" / rec="+indiceRecord+" / val = "+variableName+"="+ value.getValue());
+		//		System.out.println("st="+indiceStation+" / rec="+indiceRecord+" / val = "+variableName+"="+ value.getValue());
 		myCFPointWriterManager.setDataValue(dims, 
 				mapVariables,
 				stationData,
@@ -746,11 +744,11 @@ public class NetCDFWriter extends NemoWriter {
 		SdnLocalCdiIdVariable SdnLocalCdi = new SdnLocalCdiIdVariable(sdnDim, getFeatureType().toLowerCase() + "_id");
 		mapVariables.put(SdnLocalCdi.getVarName(), SdnLocalCdi);
 		addVariableToNetCDF(SdnLocalCdi);
-
-		SdnXLinkVariable srnRef = new SdnXLinkVariable(getSDNXlinkDimensions());
-		mapVariables.put(srnRef.getVarName(), srnRef);
-		addVariableToNetCDF(srnRef);
-
+		if (forceReferences){
+			SdnXLinkVariable srnRef = new SdnXLinkVariable(getSDNXlinkDimensions());
+			mapVariables.put(srnRef.getVarName(), srnRef);
+			addVariableToNetCDF(srnRef);
+		}
 		mapVariables.put(SdnBotDepth.getVarName(), SdnBotDepth);
 		addVariableToNetCDF(SdnBotDepth);
 
@@ -813,14 +811,14 @@ public class NetCDFWriter extends NemoWriter {
 					current.addVariableAttribute(ParameterNames.FILLVALUE, convertValue(DataType.DOUBLE, ParameterValues.DEFAULT_FILLVALUE));
 				if (!param.getParameter().getStandardName().isEmpty())
 					current.addVariableAttribute(ParameterNames.STANDARD_NAME, param.getParameter().getStandardName());
-				
-				
+
+
 				instrumentCode = param.getParameter().getInstrumentCode() ;
 				if (instrumentCode!=null && !instrumentCode.isEmpty()){
 					current.addVariableAttribute(ParameterNames.SDN_INSTRUMENT_URN,instrumentCode);
 					current.addVariableAttribute(ParameterNames.SDN_INSTRUMENT_NAME,param.getParameter().getInstrument() );
 				}
-				
+
 				mapVariables.put(current.getVarName(), current);
 				addVariableToNetCDF(current);
 
@@ -1082,7 +1080,7 @@ public class NetCDFWriter extends NemoWriter {
 			else
 				pdvCodeobject = code;
 
-			if (pdvCodeobject.endsWith(Intern.NemoLists_unknown)) {
+			if (pdvCodeobject==null) {
 
 				throw new GenerationException(MessageFormat.format(Messages.error_convert_sdnmapping_paramcode, code, list1, list2));
 			}
@@ -1099,7 +1097,7 @@ public class NetCDFWriter extends NemoWriter {
 				pdvCodeunits = VocabLists.getVocabMatch(list1, list2, code, Intern.NemoLists_unknown);
 			else
 				pdvCodeunits = code;
-			if (pdvCodeunits.endsWith(Intern.NemoLists_unknown)) {
+			if (pdvCodeunits==null) {
 				throw new GenerationException(MessageFormat.format(Messages.error_convert_sdnmapping_paramunit, code, list1, list2));
 			}
 			// FAE 10755

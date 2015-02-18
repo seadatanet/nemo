@@ -408,7 +408,7 @@ public class DataDomain {
 				pdvCodeobject = VocabLists.getVocabMatch(list1, list2, code, Intern.NemoLists_unknown);
 			else
 				pdvCodeobject = code;
-			if (pdvCodeobject.equals(Intern.NemoLists_unknown)) {
+			if (pdvCodeobject==null) {
 				throw new GenerationException(MessageFormat.format(Messages.error_convert_sdnmapping_paramcode, code, list1, list2));
 			}
 			urnSyntaxe.append(pdvCodeobject);
@@ -422,7 +422,7 @@ public class DataDomain {
 				pdvCodeunits = VocabLists.getVocabMatch(list1, list2, code, Intern.NemoLists_unknown);
 			else
 				pdvCodeunits = code;
-			if (pdvCodeunits.equals(Intern.NemoLists_unknown)) {
+			if (pdvCodeunits==null) {
 				throw new GenerationException(MessageFormat.format(Messages.error_convert_sdnmapping_paramunit, code, list1, list2));
 			}
 			// FAE 10755
