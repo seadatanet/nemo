@@ -286,7 +286,7 @@ public class Application implements IPlatformRunnable
         opt.addOption(optInputFile, true, "Input file / directory");
         opt.addOption(optOutputFile, true, "Output file / directory");
         opt.addOption(optModelFile, true, "Model file (xml)");
-        opt.addOption(optConv, true, "Conversion type (ovd or medatlas)");
+        opt.addOption(optConv, true, "Conversion type (ovd, medatlas or NETCDF)");
         opt.addOption(
             optOdvMono,
             false,
@@ -298,7 +298,7 @@ public class Application implements IPlatformRunnable
         opt.addOption(
             optDatasetRef,
             true,
-            "Optional dataset reference, default value is the cruise reference or the cruise name");
+            "Optional dataset reference, default value is the cruise reference or the cruise name if reference is empty");
 
         opt.addOption(optCdiSummary, true, "CDI Summary file path (mandatory)");
         opt.addOption(optCouplingTableUpdate, false,
@@ -338,7 +338,7 @@ public class Application implements IPlatformRunnable
                 .equals(Conversion.NETCDF.name())))
             {
                 batchLogger
-                    .info("Error, Conversion type must be \"medatlas\" or \"odv\"");
+                    .info("Error, Conversion type must be \"medatlas\" , \"odv\" or \"NETCDF\" ");
                 checkOptionsOk = false;
             }
         }
