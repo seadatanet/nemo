@@ -77,6 +77,7 @@ public class SaveAction extends Action implements ISelectionListener,
         }
 
         choixFichierSortie();
+        if (fichierSortieXML != null){
         try
         {
             fileOutputStream = new FileOutputStream(fichierSortieXML);
@@ -93,6 +94,9 @@ public class SaveAction extends Action implements ISelectionListener,
         Nemo.getInstance().refreshNomNemo();
         Nemo.getInstance().getViewMain().getEditFileForm().actualiseEdition();
         Utils.messageOK(Messages.SaveAction_4);
+        }else{
+        	 Utils.messageOK(Messages.SaveAction_7);
+        }
 
     }
 
@@ -148,13 +152,14 @@ public class SaveAction extends Action implements ISelectionListener,
 
         nomFichierSortieXML = dialog.open();
 
-        if (!nomFichierSortieXML.endsWith(Global.EXT_XML))
-        {
-            nomFichierSortieXML += Global.EXT_XML;
-        }
+       
 
         if (nomFichierSortieXML != null)
         {
+        	 if (!nomFichierSortieXML.endsWith(Global.EXT_XML))
+             {
+                 nomFichierSortieXML += Global.EXT_XML;
+             }
             fichierSortieXML = new File(nomFichierSortieXML);
             if (fichierSortieXML.exists())
             {
