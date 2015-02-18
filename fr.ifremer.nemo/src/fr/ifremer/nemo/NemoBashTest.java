@@ -155,7 +155,7 @@ public class NemoBashTest {
 	}
 
 	private static void initResultWriter() {
-		SimpleDateFormat df = new SimpleDateFormat("yyyy_MM_dd-hh-mm-ss"); //$NON-NLS-1$
+		SimpleDateFormat df = new SimpleDateFormat("yyyy_MM_dd-HH-mm-ss"); //$NON-NLS-1$
 		String resFileName = "results_" + df.format(new Date()) + ".csv";
 		_resFile = new File(resFileName);
 		try {
@@ -758,7 +758,7 @@ public class NemoBashTest {
 				message.conversionError = e.getMessage();
 			}
 
-		}
+		
 		batchCmd = "nemo_batch";
 		batchCmd += Global.SPACE + Global.MOINS + Global.optInputFile;
 		batchCmd += Global.SPACE + inputAbsolutePath;
@@ -785,6 +785,7 @@ public class NemoBashTest {
 			batchCmd += Global.SPACE + couplingTablePrefix;
 		}
 		batchCommands += Global.RN + batchCmd;
+	}
 
 		message.conversionRes = res;
 		return res;
@@ -954,7 +955,10 @@ public class NemoBashTest {
 			ref = NetcdfFileWriteable.open(outputAbsolutePath+"/"+outputNCReferenceName);
 			junit  = NetcdfFileWriteable.open(outputAbsolutePath+"/"+outputTestName);
 		} catch (IOException e) {
-			e.printStackTrace();
+//			e.printStackTrace();
+			System.out.println("NOT A VALID NETCDF FILE!");
+			message.isReferenceFound = false;
+			return false;
 		} 
 
 
@@ -1072,6 +1076,7 @@ public class NemoBashTest {
 					if (!identical){
 						System.out.println("REF >>  "+ refFileLine);
 						System.out.println("OUT >>  "+ outputLine);
+						message.diff+="#REF# : "+refFileLine + "#OUT# : " +outputLine; 
 					}
 
 				}
