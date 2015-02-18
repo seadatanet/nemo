@@ -105,6 +105,8 @@ public class InstrumentFilteredTable extends AbstractFilteredTable
 		listeFiltree = new ArrayList<TypeInstrument>();
 		// liste filtree initialisee e typesWS au depart
 		int taille = myTableDataRef.getTypesL22().size();
+		// add an empty instrument line to allow user to remove an instrument on a parameter
+		listeFiltree.add(new TypeInstrument("", "", "", ""));
 		for (int i = 0; i < taille; i++)
 		{
 			listeFiltree.add(myTableDataRef.getTypesL22().get(i));

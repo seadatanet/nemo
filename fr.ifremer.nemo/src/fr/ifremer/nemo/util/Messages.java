@@ -262,6 +262,11 @@ public class Messages {
 	public static String edit_data_dataListDialogBox_text;
 	public static String edit_data_parameterIsText;
 	public static String edit_data_parameterIsNumeric;
+	public static String edit_data_fallrate_grouplabel;
+	public static String edit_data_fallrate_selectButtonLabel;
+	public static String edit_data_fallrate_resetButtonLabel;
+	
+	
 
 	// CONVERSION
 	public static String edit_convert_title;

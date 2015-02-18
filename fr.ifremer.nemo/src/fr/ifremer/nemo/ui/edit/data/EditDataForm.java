@@ -456,7 +456,7 @@ public class EditDataForm extends EditForm {
 		groupFallrate = new Group(formEdition.getBody(), SWT.NONE);
 		groupFallrate.setEnabled(false);
 		groupFallrate.setFont(Utils.font08);
-		groupFallrate.setText("fall rate");// TODO internationaliser fall rate
+		groupFallrate.setText(Messages.edit_data_fallrate_grouplabel);
 		GridLayoutFactory.fillDefaults().numColumns(1).equalWidth(true)
 		.margins(4, 4).applyTo(groupFallrate);
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(groupFallrate);
@@ -494,7 +494,7 @@ public class EditDataForm extends EditForm {
 			}
 		};
 		Button button_chooseFallRate = new Button(groupFallrate, SWT.PUSH);
-		button_chooseFallRate.setText("select fall rate"); // TODO internationaliser fall rate
+		button_chooseFallRate.setText(Messages.edit_data_fallrate_selectButtonLabel); 
 		button_chooseFallRate.addSelectionListener(fallrateListener);
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(button_chooseFallRate);
 
@@ -504,7 +504,7 @@ public class EditDataForm extends EditForm {
 		GridDataFactory.fillDefaults().grab(true, true).applyTo(fallrateLabel);
 
 		Button button_resetFallRate = new Button(groupFallrate, SWT.PUSH);
-		button_resetFallRate.setText("reset"); // TODO internationaliser fall rate
+		button_resetFallRate.setText(Messages.edit_data_fallrate_resetButtonLabel); 
 		button_resetFallRate.addSelectionListener(fallrateResetListener);
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(button_resetFallRate);
 
