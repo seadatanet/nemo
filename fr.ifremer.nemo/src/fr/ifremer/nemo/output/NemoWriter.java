@@ -9,11 +9,13 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.domain.CruiseDomain;
@@ -38,8 +40,8 @@ import fr.ifremer.nemo.util.Utils;
  * 
  */
 public abstract class NemoWriter {
-
-	protected HashMap<String, String> stationDatas;
+	protected final NumberFormat nf ;
+	protected HashMap<Long, String> stationDatas;
 
 	/**
 	 * Input File Reader
@@ -92,6 +94,7 @@ public abstract class NemoWriter {
 	protected boolean isBeginningOfStation = false;
 
 	protected NemoWriter() {
+		nf = NumberFormat.getInstance(Locale.US);
 		stationsList = new HashSet<String>();
 		iDomain = Nemo.getInstance().getDomain();
 		mediaDomain = iDomain.getMedia();
@@ -99,7 +102,7 @@ public abstract class NemoWriter {
 		stationDomain = iDomain.getStation();
 		cruiseDomain = iDomain.getCruise();
 		dataDomain = iDomain.getData();
-		stationDatas = new HashMap<String, String>();
+		stationDatas = new HashMap<Long, String>();
 		isRefIncremented = iDomain.getStation().getModel()
 				.getReferenceProperty().isUserProvided();
 		isProcessType_CruiseFile = mediaDomain.getModel().getProcessType() == E_ProcessType.CRUISE_FILE;

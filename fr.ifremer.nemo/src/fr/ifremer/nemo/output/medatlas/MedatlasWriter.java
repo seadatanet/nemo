@@ -4,10 +4,12 @@ import java.io.BufferedWriter;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.domain.DataDomain;
@@ -230,19 +232,19 @@ public class MedatlasWriter extends NemoWriter
 		if (iDomain.getConversion().isSortData())
 		{
 			// préparation des données pour le tri
-			String key;
+			Long key;
 			if (iDomain.getMedia().getModel().getInputType() == E_InputType.PROFILE)
 			{
 				ParameterModel keyParam = data.getModel().getParameterModels()[0];
 				keyParam.computeParameterValue(inputLine);
-				key = keyParam.getLineValue().getValue();
+				key=(Long) nf.parse(keyParam.getLineValue().getValue());
 			} else
 			{
-				key = Long.valueOf(DateTimeUtils.getCurrentDate(currentStation, indexRecord)).toString();
+				key = DateTimeUtils.getCurrentDate(currentStation, indexRecord);
 				//FAE 11356
                 if(Nemo.getInstance().getDomain().getMedia().getModel().getInputType() == E_InputType.TIMESERIES 
                         && Nemo.getInstance().getDomain().getStation().getModel().getProperty(Intern.S_DATE).isInData())
-                    key = Long.valueOf(DateTimeUtils.convertTimestamp(inputLine)).toString();
+                    key = DateTimeUtils.convertTimestamp(inputLine);
 			}
 
 			stationDatas.put(key, data.getDataLine(myConversion, currentStation, inputLine, indexRecord).toString());
@@ -260,10 +262,10 @@ public class MedatlasWriter extends NemoWriter
 		if (iDomain.getConversion().isSortData())
 		{
 			// écriture des données après tri
-			List<String> keys = new ArrayList<String>();
+			List<Long> keys = new ArrayList<Long>();
 			keys.addAll(stationDatas.keySet());
 			Collections.sort(keys);
-			for (String key : keys)
+			for (Long key : keys)
 			{
 				outputFileWriter.println(stationDatas.get(key));
 			}
