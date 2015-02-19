@@ -156,15 +156,14 @@ public class NetCDFWriter extends NemoWriter {
 					if (isProcessType_CruiseFile) {
 						iDomain.getStation().updateRef();
 					}
-					writeStation(st, inputFilePath, 0);
+					writeStation(st, inputFilePath, 0, false);
 
 
-					updateDimensions(stringMetadataLength, stringLinksLength, maxNbRefs);
+					updateDimensions();
 
 
 
 					writeDataToNetCDFFile();
-
 
 
 
@@ -193,10 +192,10 @@ public class NetCDFWriter extends NemoWriter {
 					if (isProcessType_CruiseFile) {
 						iDomain.getStation().updateRef();
 					}
-					writeStation(st, inputFilePath, indiceStation);
+					writeStation(st, inputFilePath, indiceStation, indiceStation>0);
 					indiceStation++;
 				}
-				updateDimensions(stringMetadataLength, stringLinksLength, maxNbRefs);
+				updateDimensions();
 
 				writeDataToNetCDFFile();
 			}
@@ -214,13 +213,18 @@ public class NetCDFWriter extends NemoWriter {
 	 * @param maxNbRefs
 	 * @throws Exception
 	 */
-	private void updateDimensions(int stringMetadataLength,  int stringLinksLength,int maxNbRefs) throws Exception {
-		//REFMAX
-		dims = myCFPointWriterManager.updateRefmaxDimension(dims, maxNbRefs);
+	private void updateDimensions() throws Exception {
+
+		if (forceReferences){
+			//REFMAX
+			dims = myCFPointWriterManager.updateRefmaxDimension(dims, maxNbRefs);
+
+			// STRING_SDNREF
+			dims = myCFPointWriterManager.updateStringSdnRefDimension(dims, stringMetadataLength, stringLinksLength);
+		}
 		// STRING_METADATA
 		dims = myCFPointWriterManager.updateStringMetadataDimension(dims, stringMetadataLength);
-		// STRING_SDNREF
-		dims = myCFPointWriterManager.updateStringSdnRefDimension(dims, stringMetadataLength, stringLinksLength);
+
 	}
 
 	private ArrayList<SdnXLinkReference> getReferences(String localCdiId, Station currentStation) throws SDNXLinkException
@@ -278,14 +282,18 @@ public class NetCDFWriter extends NemoWriter {
 	 * @throws ParseException
 	 * @throws FileNotFoundException
 	 */
-	private void writeStation(Station currentStation, String inputFilePath, int indiceStation) throws Exception {
-		StationDomain station = iDomain.getStation();
+	private boolean writeStation(Station currentStation, String inputFilePath, int indiceStation, boolean isOnNStationHeader) throws Exception {
 
-		bufferedReader = getBufferReader(inputFilePath, currentStation);
+
+		StationDomain station = iDomain.getStation();
+		if (indiceStation==0){
+			bufferedReader = getBufferReader(inputFilePath, currentStation);
+			numLine=0;
+		}
 		boolean stationWrited = false;
 		indexRecord = 0;
 		stationDatas.clear();
-		station.getOdvEmptyStationHeader();
+
 
 		// Local CDI ID
 		String localCdiId = stationDomain.getLocalCdiId(cruiseDomain, Conversion.NETCDF, currentStation.getReference());
@@ -319,75 +327,30 @@ public class NetCDFWriter extends NemoWriter {
 				setDataValue(ParameterNames.SDN_XLINK, null,indiceStation);
 			}
 		}
-
+		if (isOnNStationHeader){
+			stationWrited=readStationHeader(currentStation, indiceStation, currentDate, currentLongitude, currentLatitude);
+		}
 
 		// scan the InputFile line by line
 		while ((readedLine = bufferedReader.readLine()) != null) {
-			currentDate = DateTimeUtils.getCurrentDate(currentStation, indexRecord);
+
+			currentDate = DateTimeUtils.getCurrentDate(currentStation, indexRecord);// TODO ne pas lire a chaque ligne
 			incrementLine();
 			if (inFileHeader())
 				continue;
 			if (isStartStationHeader()) {
-				String[] inputStationHeader = consumeStationHeader(mediaModel.getStationHeader() > 0);
 
-				String stRef = null;
-				// si inputStationHeader est null, c'est qu'on a terminé la
-				// derniere station
-				if (inputStationHeader != null) {
-					if (isInputType_Trajectory)
-						stRef = currentStation.getReference();
-					else
-						stRef = iDomain.getStation().getReference(currentStation.getFileName(), inputStationHeader, true);
-				}
-
-				if (inputStationHeader != null && currentStation.getReference().equals(stRef)) {
-					iDomain.getStation().getHeader(myConversion, currentStation, inputStationHeader);
-
-					// FAE 4673 Pb si une seule ligne données et pas d'entête
-					// station
-					if (!isEndData() || (mediaModel.getEndData() == E_EndData.NEXT_START_WITH && mediaModel.getStationHeader() == 0)) {
-						if (mediaDomain.getModel().getInputType() == E_InputType.TIMESERIES) {
-							if (stationDomain.getModel().getProperty(Intern.S_DATE).isInData())
-								currentDate = Long.valueOf(DateTimeUtils.convertTimestamp(readedLine));
-						}
-
-						if (mediaDomain.getModel().getInputType() == E_InputType.TRAJECTORY) {
-							if (stationDomain.getModel().getProperty(Intern.S_LON).isInData())
-								currentLongitude = ((Double) stationDomain.getModel().getProperty(Intern.S_LON).applyOnLine(readedLine.toString())).doubleValue();
-							if (stationDomain.getModel().getProperty(Intern.S_LAT).isInData())
-								currentLatitude = ((Double) stationDomain.getModel().getProperty(Intern.S_LAT).applyOnLine(readedLine.toString())).doubleValue();
-							if (stationDomain.getModel().getProperty(Intern.S_DATE).isInData())
-								currentDate = Long.valueOf(DateTimeUtils.convertTimestamp(readedLine));
-						}
-
-						// Longitude
-						setDataValue(ParameterNames.LONGITUDE, new Value( String.valueOf(currentLongitude), currentStation.getMetaFlag(Intern.S_LON).toCharArray()[0]),indiceStation, indexRecord);
-						// Latitude
-						setDataValue( ParameterNames.LATITUDE, new Value(String.valueOf(currentLatitude),currentStation.getMetaFlag(Intern.S_LAT).toCharArray()[0]),indiceStation, indexRecord);
-
-						Double julianDay = DateTimeUtils.getJulianDay(currentDate);
-						setDataValue(ParameterNames.TIME, new Value(julianDay.toString(),  currentStation.getMetaFlag(Intern.S_DATE).toCharArray()[0]),indiceStation, indexRecord);
-
-						// SDN_BOT_DEPTH
-						Object botDepth = stationDomain.getModel().getProperty(Intern.S_DEPTH).applyOn(inputStationHeader);
-						if (!botDepth.equals("Default") && !botDepth.equals(Float.NaN)) {
-							setDataValue(ParameterNames.SDN_BOT_DEPTH,  new Value(botDepth.toString()),indiceStation);
-						} else {
-							String bottomDepth = stationDomain.getModel().getProperty(Intern.S_DEPTH).getUserValue();
-							if (bottomDepth.isEmpty()) {
-								SdnBotDepthVariable SdnBotDepth = (SdnBotDepthVariable) mapVariables.get(ParameterNames.SDN_BOT_DEPTH);
-								setDataValue(ParameterNames.SDN_BOT_DEPTH,new Value( String.valueOf(SdnBotDepth.getFillValue())), indiceStation, indexRecord);
-							} else
-								setDataValue(ParameterNames.SDN_BOT_DEPTH, new Value( bottomDepth), indiceStation, indexRecord);
-						}
-
-						writeDataLine(currentStation, readedLine, indiceStation);
-						station.getOdvEmptyStationHeader();
+				if (!isOnNStationHeader){
+					if (stationWrited){
+						return true;
 					}
-					stationWrited = true;
-				} else if (stationWrited || inputStationHeader == null) {
-					break;
+					stationWrited=readStationHeader(currentStation, indiceStation,currentDate, currentLongitude, currentLatitude);
+				}else{
+					if (stationWrited){
+						return true;
+					}
 				}
+
 			} else if (stationWrited) {
 
 				// ligne de données : à ne prendre en compte que si on est sur
@@ -449,7 +412,7 @@ public class NetCDFWriter extends NemoWriter {
 
 
 				writeDataLine(currentStation, readedLine, indiceStation);
-				station.getOdvEmptyStationHeader();
+			
 			}
 
 
@@ -460,9 +423,76 @@ public class NetCDFWriter extends NemoWriter {
 			iDomain.getMedia().addStationInOutput(myCFPointWriterManager.getFileName(), currentStation.getReference());
 		}
 
-		numLine = 0;
+		return false;
 	}
+	private boolean readStationHeader(Station currentStation, int indiceStation, Long currentDate, 
+			double currentLongitude, double currentLatitude) throws Exception
+			{
+		String[] inputStationHeader = null;
+		boolean stationWrited=false;
+		inputStationHeader = consumeStationHeader(mediaModel.getStationHeader() > 0);
+		String stRef = null;
+		// si inputStationHeader est null, c'est qu'on a terminé la
+		// derniere station
+		if (inputStationHeader != null) {
+			if (isInputType_Trajectory)
+				stRef = currentStation.getReference();
+			else
+				stRef = iDomain.getStation().getReference(currentStation.getFileName(), inputStationHeader, true);
+		}
 
+		if (inputStationHeader != null && currentStation.getReference().equals(stRef)) {
+			//					iDomain.getStation().getHeader(myConversion, currentStation, inputStationHeader);
+
+			// FAE 4673 Pb si une seule ligne données et pas d'entête
+			// station
+			if (!isEndData() || (mediaModel.getEndData() == E_EndData.NEXT_START_WITH && mediaModel.getStationHeader() == 0)) {
+				if (mediaDomain.getModel().getInputType() == E_InputType.TIMESERIES) {
+					if (stationDomain.getModel().getProperty(Intern.S_DATE).isInData())
+						currentDate = Long.valueOf(DateTimeUtils.convertTimestamp(readedLine));
+				}
+
+
+				if (mediaDomain.getModel().getInputType() == E_InputType.TRAJECTORY) {
+					if (stationDomain.getModel().getProperty(Intern.S_LON).isInData())
+						currentLongitude = ((Double) stationDomain.getModel().getProperty(Intern.S_LON).applyOnLine(readedLine.toString())).doubleValue();
+					if (stationDomain.getModel().getProperty(Intern.S_LAT).isInData())
+						currentLatitude = ((Double) stationDomain.getModel().getProperty(Intern.S_LAT).applyOnLine(readedLine.toString())).doubleValue();
+					if (stationDomain.getModel().getProperty(Intern.S_DATE).isInData())
+						currentDate = Long.valueOf(DateTimeUtils.convertTimestamp(readedLine));
+				}
+
+				// Longitude
+				setDataValue(ParameterNames.LONGITUDE, new Value( String.valueOf(currentLongitude), currentStation.getMetaFlag(Intern.S_LON).toCharArray()[0]),indiceStation, indexRecord);
+				// Latitude
+				setDataValue( ParameterNames.LATITUDE, new Value(String.valueOf(currentLatitude),currentStation.getMetaFlag(Intern.S_LAT).toCharArray()[0]),indiceStation, indexRecord);
+
+				Double julianDay = DateTimeUtils.getJulianDay(currentDate);
+				setDataValue(ParameterNames.TIME, new Value(julianDay.toString(),  currentStation.getMetaFlag(Intern.S_DATE).toCharArray()[0]),indiceStation, indexRecord);
+
+				// SDN_BOT_DEPTH
+				Object botDepth = stationDomain.getModel().getProperty(Intern.S_DEPTH).applyOn(inputStationHeader);
+				if (!botDepth.equals("Default") && !botDepth.equals(Float.NaN)) {
+					setDataValue(ParameterNames.SDN_BOT_DEPTH,  new Value(botDepth.toString()),indiceStation);
+				} else {
+					String bottomDepth = stationDomain.getModel().getProperty(Intern.S_DEPTH).getUserValue();
+					if (bottomDepth.isEmpty()) {
+						SdnBotDepthVariable SdnBotDepth = (SdnBotDepthVariable) mapVariables.get(ParameterNames.SDN_BOT_DEPTH);
+						setDataValue(ParameterNames.SDN_BOT_DEPTH,new Value( String.valueOf(SdnBotDepth.getFillValue())), indiceStation, indexRecord);
+					} else
+						setDataValue(ParameterNames.SDN_BOT_DEPTH, new Value( bottomDepth), indiceStation, indexRecord);
+				}
+
+				writeDataLine(currentStation, readedLine, indiceStation);
+				//						station.getOdvEmptyStationHeader();
+			}
+			stationWrited = true;
+		} 
+		//				else if (stationWrited || inputStationHeader == null) {
+		//					break;
+		//				}
+		return stationWrited;
+			}
 
 
 	private void computeMaxStringMetadataLength(String localCdiId, String stationRef, String dataSetRef) {
