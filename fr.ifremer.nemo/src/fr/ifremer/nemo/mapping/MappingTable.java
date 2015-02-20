@@ -188,6 +188,8 @@ public class MappingTable
 			em = emf.createEntityManager();
 
 			em.getTransaction().begin();
+			
+			System.out.println("transaction active: "+em.getTransaction().isActive());
 		}catch(Exception e){
 			System.out.println("can not open coupling Nemo HSQL Database");
 			e.printStackTrace();  
@@ -197,8 +199,11 @@ public class MappingTable
 		{  
 			try
 			{
+				System.out.println("merge");
 				em.merge(object); 
-				em.getTransaction().commit();  
+				System.out.println("commit");
+				em.getTransaction().commit();
+				System.out.println("transaction active: "+em.getTransaction().isActive());
 			} catch (javax.persistence.EntityExistsException e)
 			{
 				fr.ifremer.nemo.ui.Utils.messageErreurAppend("Already exist: "+object.mappingPK.getLocalCdiId()+ " en "+ object.mappingPK.getFormat());
