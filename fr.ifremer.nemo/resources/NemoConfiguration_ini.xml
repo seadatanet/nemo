@@ -54,61 +54,6 @@
     <Flag local="4" SDN="3 - probably bad value"/>
     <Flag local="8" SDN="4 - bad value"/>
   </FlagTable>
-  <FlagTable code="C1" label="SeaDataNet">
-    <Flag local="0" SDN="0 - no quality control"/>
-    <Flag local="1" SDN="1 - good value"/>
-    <Flag local="2" SDN="2 - probably good value"/>
-    <Flag local="3" SDN="3 - probably bad value"/>
-    <Flag local="4" SDN="4 - bad value"/>
-    <Flag local="5" SDN="5 - changed value"/>
-    <Flag local="6" SDN="6 - value below detection"/>
-    <Flag local="7" SDN="7 - value in excess"/>
-    <Flag local="8" SDN="8 - interpolated value"/>
-    <Flag local="9" SDN="9 - missing value"/>
-    <Flag local="A" SDN="A - value phenomenon uncertain"/>
-  </FlagTable>
-  <FlagTable code="C2" label="MEDATLAS">
-    <Flag local="1" SDN="1 - good value"/>
-    <Flag local="0" SDN="0 - no quality control"/>
-    <Flag local="2" SDN="2 - probably good value"/>
-    <Flag local="3" SDN="3 - probably bad value"/>
-    <Flag local="4" SDN="4 - bad value"/>
-    <Flag local="5" SDN="5 - changed value"/>
-    <Flag local="9" SDN="9 - missing value"/>
-  </FlagTable>
-  <FlagTable code="C3" label="ODV">
-    <Flag local="0" SDN="1 - good value"/>
-    <Flag local="1" SDN="9 - missing value"/>
-    <Flag local="4" SDN="3 - probably bad value"/>
-    <Flag local="8" SDN="4 - bad value"/>
-  </FlagTable>
-  <FlagTable code="C1" label="SeaDataNet">
-    <Flag local="0" SDN="0 - no quality control"/>
-    <Flag local="1" SDN="1 - good value"/>
-    <Flag local="2" SDN="2 - probably good value"/>
-    <Flag local="3" SDN="3 - probably bad value"/>
-    <Flag local="4" SDN="4 - bad value"/>
-    <Flag local="5" SDN="5 - changed value"/>
-    <Flag local="6" SDN="6 - value below detection"/>
-    <Flag local="7" SDN="7 - value in excess"/>
-    <Flag local="8" SDN="8 - interpolated value"/>
-    <Flag local="9" SDN="9 - missing value"/>
-    <Flag local="A" SDN="A - value phenomenon uncertain"/>
-  </FlagTable>
-  <FlagTable code="C2" label="MEDATLAS">
-    <Flag local="1" SDN="1 - good value"/>
-    <Flag local="0" SDN="0 - no quality control"/>
-    <Flag local="2" SDN="2 - probably good value"/>
-    <Flag local="3" SDN="3 - probably bad value"/>
-    <Flag local="4" SDN="4 - bad value"/>
-    <Flag local="5" SDN="5 - changed value"/>
-    <Flag local="9" SDN="9 - missing value"/>
-  </FlagTable>
-  <FlagTable code="C3" label="ODV">
-    <Flag local="0" SDN="1 - good value"/>
-    <Flag local="1" SDN="9 - missing value"/>
-    <Flag local="4" SDN="3 - probably bad value"/>
-    <Flag local="8" SDN="4 - bad value"/>
-  </FlagTable>
+  
   <defaultFlag>0</defaultFlag>
 </NemoConfiguration>
