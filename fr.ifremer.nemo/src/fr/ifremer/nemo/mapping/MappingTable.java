@@ -189,7 +189,7 @@ public class MappingTable
 
 			em.getTransaction().begin();
 		}catch(Exception e){
-			System.out.println("enable to open coupling Nemo base");
+			System.out.println("can not open coupling Nemo HSQL Database");
 			e.printStackTrace();  
 			return;
 		}
@@ -210,7 +210,6 @@ public class MappingTable
 			em.getTransaction().rollback();  
 		} finally 
 		{  
-			em.flush();
 			em.close();  
 		}  
 	}   
