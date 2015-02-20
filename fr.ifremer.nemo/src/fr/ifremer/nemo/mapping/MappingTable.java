@@ -205,10 +205,12 @@ public class MappingTable
 			}
 		} catch (Exception e) 
 		{
+			System.out.println("rollback");
 			e.printStackTrace();  
 			em.getTransaction().rollback();  
 		} finally 
 		{  
+			em.flush();
 			em.close();  
 		}  
 	}   
