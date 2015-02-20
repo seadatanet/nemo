@@ -15,6 +15,7 @@ import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Text;
 
 import fr.ifremer.nemo.Nemo;
+import fr.ifremer.nemo.domain.ConversionDomain;
 import fr.ifremer.nemo.input.CruiseModel;
 import fr.ifremer.nemo.input.parameters.addedParameters.AP_CJDY;
 import fr.ifremer.nemo.input.parameters.addedParameters.AP_DTUT;
@@ -31,7 +32,6 @@ import fr.ifremer.nemo.ui.edit.file.EditFileForm;
 import fr.ifremer.nemo.ui.view.ViewLog;
 import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Global;
-import fr.ifremer.nemo.util.Global.E_ProcessType;
 import fr.ifremer.nemo.util.Messages;
 
 public class EditConversionForm extends EditForm {
@@ -70,7 +70,6 @@ public class EditConversionForm extends EditForm {
 	private String warningStation = Global.EMPTY_STRING;
 	private String warningData = Global.EMPTY_STRING;
 
-	private String _mappingTablePrefix = Global.EMPTY_STRING;
 
 	/*
 	 * Methodes de création de l'onglet (héritées de EditForm)
@@ -424,46 +423,29 @@ public class EditConversionForm extends EditForm {
 
 	public void definePrefixDossier() {
 		if (Nemo.getInstance().getConfig().isWriteMapping()) {
-			File output =
-					new File(Nemo.getInstance().getDomain().getMedia()
-							.getOutputFileName());
-			String cheminComplet = output.getParentFile().getPath();
-			//FAE 17128
-			if (RulesManager.getInstance().isConversionToNetCDFMonoStation()
-					|| RulesManager.getInstance().isConversionToODVMonoStation()
-					|| Nemo.getInstance().getDomain().getMedia().getModel().getProcessType() == E_ProcessType.COLLECTION_DIR) {
-				cheminComplet = output.getAbsolutePath();
-			}
+			
+			ConversionDomain convDomain = Nemo.getInstance().getDomain().getConversion();
+			
+			
+			String cheminComplet = convDomain.getOutputPath();
 
 			InputDialog inputPrefixDossier =
 					new InputDialog(Utils.getMainShell(),
 							Messages.InputPrefixDossier_idTitle,
 							Messages.InputPrefixDossier_idMessage, cheminComplet, null);
 			inputPrefixDossier.open();
-			String nomHorsPrefix = Global.EMPTY_STRING;
+	
 			if (inputPrefixDossier.getReturnCode() == Window.OK) {
-				if (inputPrefixDossier.getValue().endsWith(File.separator)
-						|| inputPrefixDossier.getValue().equals(cheminComplet)) {
-					nomHorsPrefix =
-							cheminComplet.replace(inputPrefixDossier.getValue(),
-									Global.EMPTY_STRING);
-				} else {
-					nomHorsPrefix =
-							cheminComplet.replace(inputPrefixDossier.getValue()
-									+ File.separator, Global.EMPTY_STRING);
+				String couplingPrefix = convDomain.getValidPrefix(inputPrefixDossier.getValue(), cheminComplet);
+				if(couplingPrefix!=null){
+					convDomain.setCouplingTablePrefix(couplingPrefix);
+				}else{
+					definePrefixDossier();
 				}
+
 			}
 
-			// On affiche la boite de dialogue tant que l'utilisateur saisie une
-			// donnée incorrecte
-			if (!cheminComplet.endsWith(nomHorsPrefix)) {
-				definePrefixDossier();
-			} else {
-				_mappingTablePrefix = inputPrefixDossier.getValue();
-			}
-			//nomHorsPrefix = nomHorsPrefix + File.separator + output.getName();
-			Nemo.getInstance().getDomain().getConversion()
-					.setNomMappingHorsPrefix(nomHorsPrefix);
+
 		}
 	}
 
@@ -627,7 +609,7 @@ public class EditConversionForm extends EditForm {
 			command += Global.MOINS + Global.optCouplingTablePrefix;
 			command += Global.SPACE;
 			command += "\"";
-			command += _mappingTablePrefix;
+			command += Nemo.getInstance().getDomain().getConversion().getCouplingTablePrefix();
 			command += "\"";
 		}
 		return command;

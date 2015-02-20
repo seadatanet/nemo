@@ -17,6 +17,7 @@ import java.util.Date;
 import org.apache.log4j.Logger;
 
 import fr.ifremer.nemo.config.ManageLists;
+import fr.ifremer.nemo.domain.ConversionDomain;
 import fr.ifremer.nemo.domain.CruiseDomain;
 import fr.ifremer.nemo.domain.InputDomain;
 import fr.ifremer.nemo.domain.Station;
@@ -238,55 +239,36 @@ public class NemoShell {
 		InputDomain inputDomain = Nemo.getInstance().getDomain();
 		CruiseDomain cDomain = inputDomain.getCruise();
 		StationDomain sDomain = inputDomain.getStation();
-		String nomHorsPrefix;
+		ConversionDomain convDomain =Nemo.getInstance().getDomain().getConversion();
+		String localCdiId;
 		try {
-			for (String outputPath : inputDomain.getMedia().getOutputFiles()
-					.keySet()) {
-				File outputFile = new File(outputPath);
-				if (!outputPath.startsWith(couplingTablePrefix)) {
-					logger
-							.error("Error: couplingTablePrefix is not consistent with output path");
-					throw new Exception();
-				}
-				if (couplingTablePrefix.endsWith(File.separator)
-						|| couplingTablePrefix.equals(outputPath)) {
-					nomHorsPrefix =
-							outputPath.replace(couplingTablePrefix,
-									Global.EMPTY_STRING);
-				} else {
-					nomHorsPrefix =
-							outputPath.replace(
-									couplingTablePrefix + File.separator,
-									Global.EMPTY_STRING);
-				}
-
-				for (String stRef : inputDomain.getMedia().getOutputFiles()
-						.get(outputPath)) {
+			
+			String cheminComplet = convDomain.getOutputPath();
+			String couplingTablValidPrefix = convDomain.getValidPrefix(couplingTablePrefix, cheminComplet);
+			if (couplingTablValidPrefix!=null) {
+				convDomain.setCouplingTablePrefix(couplingTablValidPrefix);
+			}else{
+				throw new Exception("Error: couplingTablePrefix is not consistent with output path");
+			}
+			
+			for (String outputPath : inputDomain.getMedia().getOutputFiles().keySet()) {
+				
+				
+				
+				
+				for (String stRef : inputDomain.getMedia().getOutputFiles().get(outputPath)) {
 					Station st = sDomain.getStationByRef(stRef);
-					String localCdiId;
-
-					localCdiId =
-							sDomain.getLocalCdiId(cDomain, conv, st.getReference());
-
+					localCdiId = sDomain.getLocalCdiId(cDomain, conv, st.getReference());
 					mapping = new Mapping(localCdiId, conv.getFormatName());
 
 					String modus = Mapping.MODUS_MULTISTATIONS;
-
-					StringBuffer filename = new StringBuffer();
-					filename.append(inputDomain.getConversion().getNomMappingHorsPrefix());
-
 					if (inputDomain.getConversion().getCurrent() == E_TypeConversion.ODV_MONOSTATION
 							|| inputDomain.getConversion().getCurrent() == E_TypeConversion.NETCDF_MONOSTATION) {
 						modus = Mapping.MODUS_MONOSTATION;
 					}
 
-					if (!filename.toString().equals(Global.EMPTY_STRING) && !filename.toString().endsWith(File.separator)) {
-						filename.append(File.separator);
-					}
 
-					filename.append(outputFile.getName());
-
-					mapping.setFilename(filename.toString());
+					mapping.setFilename(convDomain.getFileNameInCoupling(outputPath));
 					mapping.setDate(new Date());
 					mapping.setModus(modus);
 

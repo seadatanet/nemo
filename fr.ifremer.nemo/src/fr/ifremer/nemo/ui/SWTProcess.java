@@ -9,6 +9,7 @@ import org.eclipse.jface.operation.IRunnableWithProgress;
 
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.config.Configuration;
+import fr.ifremer.nemo.domain.ConversionDomain;
 import fr.ifremer.nemo.domain.CruiseDomain;
 import fr.ifremer.nemo.domain.InputDomain;
 import fr.ifremer.nemo.domain.Station;
@@ -20,7 +21,6 @@ import fr.ifremer.nemo.output.NemoWriter;
 import fr.ifremer.nemo.output.NemoWriterFactory;
 import fr.ifremer.nemo.output.ProgressNotification;
 import fr.ifremer.nemo.util.Conversion;
-import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Global.E_TypeConversion;
 import fr.ifremer.nemo.util.Messages;
 
@@ -39,21 +39,32 @@ public class SWTProcess implements IRunnableWithProgress {
 		InputDomain iDomain = Nemo.getInstance().getDomain();
 		CruiseDomain cDomain = iDomain.getCruise();
 		StationDomain sDomain = iDomain.getStation();
+		ConversionDomain convDomain = iDomain.getConversion();
 
 		Configuration config = Nemo.getInstance().getConfig();
 
 		Conversion formatConversion = Conversion.MEDATLAS;
+		String modus = Mapping.MODUS_MULTISTATIONS;
 
-		if (iDomain.getConversion().getCurrent() == E_TypeConversion.ODV_MONOSTATION
-				|| iDomain.getConversion().getCurrent() == E_TypeConversion.ODV_MULTISTATIONS)
+		if (convDomain.getCurrent() == E_TypeConversion.ODV_MONOSTATION
+				|| convDomain.getCurrent() == E_TypeConversion.ODV_MULTISTATIONS)
 			formatConversion = Conversion.ODV;
 
-		if (iDomain.getConversion().getCurrent() == E_TypeConversion.NETCDF_MONOSTATION
-				|| iDomain.getConversion().getCurrent() == E_TypeConversion.NETCDF_MULTISTATIONS)
+		if (convDomain.getCurrent() == E_TypeConversion.NETCDF_MONOSTATION
+				|| convDomain.getCurrent() == E_TypeConversion.NETCDF_MULTISTATIONS)
 			formatConversion = Conversion.NETCDF;
+		
+		
+		
+		if (convDomain.getCurrent() == E_TypeConversion.ODV_MONOSTATION
+				|| convDomain.getCurrent() == E_TypeConversion.NETCDF_MONOSTATION) {
+			modus = Mapping.MODUS_MONOSTATION;
+		}
+		
 
 		try {
 			System.out.println("Conversion START at " + new Date()); //$NON-NLS-1$
+			
 			monitor.beginTask(Messages.SWTProcess_1, IProgressMonitor.UNKNOWN);
 
 			if (!monitor.isCanceled()) {
@@ -65,31 +76,30 @@ public class SWTProcess implements IRunnableWithProgress {
 
 				// mapping
 				if (config.isWriteMapping()) {
-					monitor.setTaskName("enregistrement du mapping"); //$NON-NLS-1$
+					monitor.setTaskName("enregistrement du mapping"); //TODO msg
+					String localCdiId;
 					for (String outputPath : iDomain.getMedia().getOutputFiles().keySet()) {
 						File outputFile = new File(outputPath);
 						for (String stRef : iDomain.getMedia().getOutputFiles().get(outputPath)) {
+							
 							Station st = sDomain.getStationByRef(stRef);
-							String localCdiId = sDomain.getLocalCdiId(cDomain, formatConversion, st.getReference());
+							localCdiId = sDomain.getLocalCdiId(cDomain, formatConversion, st.getReference());
 							mapping = new Mapping(localCdiId, formatConversion.getFormatName());
 
-							String modus = Mapping.MODUS_MULTISTATIONS;
+							
 
-							StringBuffer filename = new StringBuffer();
-							filename.append(iDomain.getConversion().getNomMappingHorsPrefix());
+//							StringBuffer filename = new StringBuffer();
+//							filename.append(iDomain.getConversion().getNomMappingHorsPrefix());
 
-							if (iDomain.getConversion().getCurrent() == E_TypeConversion.ODV_MONOSTATION
-									|| iDomain.getConversion().getCurrent() == E_TypeConversion.NETCDF_MONOSTATION) {
-								modus = Mapping.MODUS_MONOSTATION;
-							}
+							
 
-							if (!filename.toString().equals(Global.EMPTY_STRING) && !filename.toString().endsWith(File.separator)) {
-								filename.append(File.separator);
-							}
+//							if (!filename.toString().equals(Global.EMPTY_STRING) && !filename.toString().endsWith(File.separator)) {
+//								filename.append(File.separator);
+//							}
+//
+//							filename.append(outputFile.getName());
 
-							filename.append(outputFile.getName());
-
-							mapping.setFilename(filename.toString());
+							mapping.setFilename(convDomain.getFileNameInCoupling(outputFile.getAbsolutePath()));
 							mapping.setDate(new Date());
 							mapping.setModus(modus);
 

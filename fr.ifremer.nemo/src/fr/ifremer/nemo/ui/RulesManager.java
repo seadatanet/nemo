@@ -101,10 +101,12 @@ public class RulesManager {
 		return instance;
 	}
 	private RulesManager() {
-		myEditFileForm = Nemo.getInstance().getViewMain().getEditFileForm();
-		myEditDataForm = Nemo.getInstance().getViewMain().getEditDataForm();
-		myEditCruiseForm = Nemo.getInstance().getViewMain().getEditCruiseForm();
-		myEditStationForm = Nemo.getInstance().getViewMain().getEditStationForm();
+		if (!Nemo.getInstance().isBatchMode()){
+			myEditFileForm = Nemo.getInstance().getViewMain().getEditFileForm();
+			myEditDataForm = Nemo.getInstance().getViewMain().getEditDataForm();
+			myEditCruiseForm = Nemo.getInstance().getViewMain().getEditCruiseForm();
+			myEditStationForm = Nemo.getInstance().getViewMain().getEditStationForm();
+		}
 		setDefaultValues();
 	}
 
@@ -330,7 +332,7 @@ public class RulesManager {
 
 	private boolean isFallrateEnabled() {
 		return myVerticalParametersList.isVerticalReferenceSet()
-		&& RulesManager.getInstance().isProfile();
+				&& RulesManager.getInstance().isProfile();
 	}
 	/**
 	 * RECEPTION MAJ CONVERSION
@@ -439,8 +441,8 @@ public class RulesManager {
 		myVerticalParametersList = verticalParametersList;
 		Nemo.getInstance().getViewMain().getEditDataForm()
 		.getMyGroupeVerticalParameters().select(myVerticalParametersList);
-		
-		
+
+
 		myEditDataForm.setFallrateGroupEnabled(isFallrateEnabled());
 	}
 

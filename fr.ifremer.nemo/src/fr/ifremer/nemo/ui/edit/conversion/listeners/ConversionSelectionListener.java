@@ -54,7 +54,6 @@ public class ConversionSelectionListener implements SelectionListener
             EditFileForm editFileForm = Nemo.getInstance().getViewMain().getEditFileForm();
             // RaZ
             Nemo.getInstance().getDomain().getMedia().initOutput();
-            Nemo.getInstance().getDomain().getConversion().setNomMappingHorsPrefix(Global.EMPTY_STRING);
             Utils.messageErreur(Global.EMPTY_STRING);
 
             // type de la conversion
