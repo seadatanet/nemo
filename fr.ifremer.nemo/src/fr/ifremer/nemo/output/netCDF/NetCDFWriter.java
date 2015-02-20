@@ -334,7 +334,6 @@ public class NetCDFWriter extends NemoWriter {
 		// scan the InputFile line by line
 		while ((readedLine = bufferedReader.readLine()) != null) {
 
-			currentDate = DateTimeUtils.getCurrentDate(currentStation, indexRecord);// TODO ne pas lire a chaque ligne
 			incrementLine();
 			if (inFileHeader())
 				continue;
@@ -342,11 +341,14 @@ public class NetCDFWriter extends NemoWriter {
 
 				if (!isOnNStationHeader){
 					if (stationWrited){
+						iDomain.getMedia().addStationInOutput(myCFPointWriterManager.getFileName(), currentStation.getReference());
 						return true;
 					}
+					currentDate = DateTimeUtils.getCurrentDate(currentStation, indexRecord);
 					stationWrited=readStationHeader(currentStation, indiceStation,currentDate, currentLongitude, currentLatitude);
 				}else{
 					if (stationWrited){
+						iDomain.getMedia().addStationInOutput(myCFPointWriterManager.getFileName(), currentStation.getReference());
 						return true;
 					}
 				}
@@ -418,10 +420,6 @@ public class NetCDFWriter extends NemoWriter {
 
 		}
 
-		if (stationWrited) {
-			// enregistrement de la station
-			iDomain.getMedia().addStationInOutput(myCFPointWriterManager.getFileName(), currentStation.getReference());
-		}
 
 		return false;
 	}
