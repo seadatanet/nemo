@@ -125,6 +125,8 @@ public class Application implements IPlatformRunnable
                 String edmoCode = Nemo.getInstance().getConfig().getIdEdmoRespCdi();
                 if (edmoCode==null || edmoCode.isEmpty()){
                 	batchLogger.error(Messages.error_batch_edmo); 
+                	System.out.println(Messages.error_batch_edmo);
+                	 System.exit(1);
                 }
                 if (checkBatchOptionsOk(cl))
                 {
