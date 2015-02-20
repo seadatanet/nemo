@@ -317,6 +317,8 @@ public class Messages {
 
 	public static String error_fileName_message;
 	public static String error_lineNumber_message;
+	
+	public static String error_batch_edmo;
 
 	// ACTIONS
 	public static String settings_typePlateForme;

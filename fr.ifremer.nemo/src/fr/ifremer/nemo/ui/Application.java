@@ -22,6 +22,7 @@ import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Global.E_TypeConversion;
 import fr.ifremer.nemo.util.Intern;
+import fr.ifremer.nemo.util.Messages;
 
 /**
  * This class controls all aspects of the application's execution
@@ -120,6 +121,11 @@ public class Application implements IPlatformRunnable
                 batchLogger = Logger.getLogger("nemoBatch");//$NON-NLS-1$
                 batchLogger.setLevel(Level.DEBUG);
 
+                
+                String edmoCode = Nemo.getInstance().getConfig().getIdEdmoRespCdi();
+                if (edmoCode==null || edmoCode.isEmpty()){
+                	batchLogger.error(Messages.error_batch_edmo); 
+                }
                 if (checkBatchOptionsOk(cl))
                 {
                     inputFile = cl.getOptionValue(optInputFile);
