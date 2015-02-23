@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry excluding="fr/ifremer/nemo/input/CopyOfFragment.java" kind="src" path="src"/>
+	<classpathentry exported="true" kind="lib" path="lib/hsqldb-2.2.6.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/cfpointLib-0.16.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/sismertoolslib-1.1.8.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/sdnVocabulary-1.1.jar"/>
@@ -29,7 +30,6 @@
 	<classpathentry kind="lib" path="lib/swing-worker-1.1.jar"/>
 	<classpathentry kind="lib" path="lib/toplink-essentials.jar"/>
 	<classpathentry kind="lib" path="lib/toplink-essentials-agent.jar"/>
-	<classpathentry kind="lib" path="lib/hsqldb-1.8.0.7.jar"/>
 	<classpathentry kind="lib" path="lib/junit.jar"/>
 	<classpathentry kind="lib" path="lib/mockito-all-1.8.0.jar"/>
 	<classpathentry kind="lib" path="lib/org.apache.common.cli_1.2.0.jar"/>

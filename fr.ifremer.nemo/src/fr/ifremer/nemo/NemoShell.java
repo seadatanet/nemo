@@ -218,8 +218,7 @@ public class NemoShell {
 				// update coupling table (FAE 4525)
 				MappingTable mappingTable = new MappingTable();
 				mapping(logger, conv, mappingTable, couplingTablePrefix);
-				// TODO : test BGT pour voir si le findAll force le commit
-				mappingTable.findAll();
+
 			}
 
 			return true;
