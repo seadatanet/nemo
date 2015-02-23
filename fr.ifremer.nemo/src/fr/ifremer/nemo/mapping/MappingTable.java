@@ -35,10 +35,17 @@ public class MappingTable
     @éContext
     EntityManager em = emf.createEntityManager(); */
 
+	private EntityManagerFactory emf ;
+	private EntityManager em ;
 
+	public EntityManagerFactory getEmf() {
+		return emf;
+	}
+	public EntityManager getEm() {
+		return em;
+	}
 	public List<Mapping> findAll() {
-		EntityManagerFactory emf = javax.persistence.Persistence.createEntityManagerFactory("nemoPU"); 
-		EntityManager em = emf.createEntityManager(); 
+
 		return em.createQuery("SELECT m FROM Mapping m").getResultList();
 
 	}
@@ -179,16 +186,11 @@ public class MappingTable
 
 	public void persist(Mapping object)
 	{
-		EntityManagerFactory emf;
-		EntityManager em;
 		try{
-			System.out.println("start persist "+ object.getMappingPK().getLocalCdiId());
 			emf = javax.persistence.Persistence.createEntityManagerFactory("nemoPU"); 
-			System.out.println("emf.isOpen() "+ emf.isOpen());
-			em = emf.createEntityManager();
-
+			em = emf.createEntityManager(); 
 			em.getTransaction().begin();
-			
+
 			System.out.println("transaction active: "+em.getTransaction().isActive());
 		}catch(Exception e){
 			System.out.println("can not open coupling Nemo HSQL Database");

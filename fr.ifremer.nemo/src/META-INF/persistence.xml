@@ -4,11 +4,13 @@
     <provider>oracle.toplink.essentials.PersistenceProvider</provider>
     <class>fr.ifremer.nemo.mapping.Mapping</class>
     <properties>
-      <property name="toplink.jdbc.url" value="jdbc:hsqldb:file:db/nemo"/>
+      <property name="toplink.jdbc.url" value="jdbc:hsqldb:file:db/nemo;hsqldb.write_delay=false"/>
       <property name="toplink.jdbc.user" value="sa"/>
       <property name="toplink.jdbc.driver" value="org.hsqldb.jdbcDriver"/>
       <property name="toplink.jdbc.password" value=""/>
       <property name="toplink.ddl-generation" value="create-tables"/>
+      <property name="hsqldb.write_delay" value="false"/>
+     
     </properties>
   </persistence-unit>
 </persistence>
