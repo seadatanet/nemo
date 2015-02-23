@@ -34,7 +34,7 @@
 	lib_axis_14/wsdl4j-1.5.1.jar:
 	${lib.dir}/appframework-1.0.3.jar:
 	${lib.dir}/beansbinding-1.2.1.jar:
-	${lib.dir}/hsqldb-1.8.0.7.jar:
+	${lib.dir}/hsqldb-2.2.6.jar:
 	${lib.dir}/junit-3.8.2.jar:
 	${lib.dir}/swing-layout-1.0.3.jar:
 	${lib.dir}/swing-worker-1.1.jar:
