@@ -4,7 +4,7 @@
 <product name="NEMO" id="fr.ifremer.nemo.productnemo" application="fr.ifremer.nemo.nemoid" useFeatures="false" includeLaunchers="true">
 
    <aboutInfo>
-      <image path="/fr.ifremer.nemo/nemoAbout.gif"/>
+      <image path="/NEMO_product/nemoAbout.gif"/>
       <text>
          %aboutText
       </text>
@@ -16,7 +16,7 @@
    <launcherArgs>
    </launcherArgs>
 
-   <windowImages i16="/fr.ifremer.nemo/nemo16.gif" i32="/fr.ifremer.nemo/nemo32.gif"/>
+   <windowImages i16="/NEMO_product/nemo16.gif" i32="/NEMO_product/nemo32.gif"/>
 
 
    <launcher name="nemo">
