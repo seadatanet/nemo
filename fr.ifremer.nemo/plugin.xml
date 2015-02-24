@@ -43,10 +43,10 @@
             name="NEMO">
          <property
                name="windowImages"
-               value="/NEMO_product/nemo16.gif,/NEMO_product/nemo32.gif"/>
+               value="nemo16.gif,nemo32.gif"/>
          <property
                name="aboutImage"
-               value="/NEMO_product/nemoAbout.gif"/>
+               value="nemoAbout.gif"/>
          <property
                name="aboutText"
                value="%aboutText"/>
