@@ -28,10 +28,10 @@ import fr.ifremer.nemo.ui.edit.data.listeners.MesureTypeBelowSeaSurfaceSelection
 import fr.ifremer.nemo.ui.tables.FallRateFilteredTable;
 import fr.ifremer.nemo.ui.view.ViewLog;
 import fr.ifremer.nemo.util.Global;
+import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.util.Global.DataListTypeEnum;
 import fr.ifremer.nemo.util.Global.E_MesureType;
 import fr.ifremer.nemo.util.Global.E_TypeConversion;
-import fr.ifremer.nemo.util.Messages;
 
 public class EditDataForm extends EditForm {
 
@@ -57,13 +57,13 @@ public class EditDataForm extends EditForm {
 	private Text fallrateCode;
 	private Text fallrateLabel;
 
-	
+
 	public void setFallrateGroupEnabled(boolean enabled){
 		groupFallrate.setEnabled(enabled);
 		for (Control child : groupFallrate.getChildren())
-			  child.setEnabled(enabled);
-		
-	
+			child.setEnabled(enabled);
+
+
 		if (!enabled){
 			fallrateCode.setText(Global.EMPTY_STRING);
 			fallrateLabel.setText(Global.EMPTY_STRING);
@@ -482,8 +482,7 @@ public class EditDataForm extends EditForm {
 
 			@Override
 			public void widgetSelected(SelectionEvent arg0) {
-				setFallrateCode(Global.EMPTY_STRING);
-				setFallrateLabel(Global.EMPTY_STRING);
+				resetFallRate();
 
 			}
 
@@ -510,7 +509,11 @@ public class EditDataForm extends EditForm {
 
 
 	}
-
+	public void resetFallRate()
+	{
+		setFallrateCode(Global.EMPTY_STRING);
+		setFallrateLabel(Global.EMPTY_STRING);
+	}
 	public TableData getMyTableData() {
 		return myTableData;
 	}
@@ -546,5 +549,6 @@ public class EditDataForm extends EditForm {
 	public GroupVerticalParameters getMyGroupeVerticalParameters() {
 		return myGroupeVerticalParameters;
 	}
+	
 
 }

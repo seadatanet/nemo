@@ -330,7 +330,7 @@ public class RulesManager {
 		}
 	}
 
-	private boolean isFallrateEnabled() {
+	public boolean isFallrateEnabled() {
 		return myVerticalParametersList.isVerticalReferenceSet()
 				&& RulesManager.getInstance().isProfile();
 	}
@@ -510,8 +510,11 @@ public class RulesManager {
 				.reinitTableData();
 				Nemo.getInstance().getViewMain().getEditDataForm()
 				.getMyGroupeVerticalParameters().removeAllToAllCombos();
-				// !!! le fillTypes doit être appelé APRES le removeToAllcombos,
-				// car il peut ajouter PRES automatiquement
+				
+				Nemo.getInstance().getViewMain().getEditDataForm().resetFallRate();
+				
+				
+				// !!! le fillTypes doit être appelé APRES le removeToAllcombos
 				Nemo.getInstance().getViewMain().getEditDataForm()
 				.getMyTableData().fillTypes();
 			} else {

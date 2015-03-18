@@ -8,6 +8,9 @@
  */
 package fr.ifremer.nemo.ui.edit.data;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.swt.SWT;
@@ -52,7 +55,7 @@ public class GroupVerticalParameters {
 		group.setFont(Utils.font08);
 		group.setText(Messages.edit_data_verticalParameters_label);
 		GridLayoutFactory.fillDefaults().numColumns(1).equalWidth(true)
-				.margins(4, 4).applyTo(group);
+		.margins(4, 4).applyTo(group);
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(group);
 
 		// Depth below sea surface
@@ -92,6 +95,9 @@ public class GroupVerticalParameters {
 		comboDBSBed.addSelectionListener(selectionListener);
 		comboP.addSelectionListener(selectionListener);
 		comboHASLvl.addSelectionListener(selectionListener);
+
+
+
 		init();
 	}
 
@@ -121,23 +127,23 @@ public class GroupVerticalParameters {
 
 	public void removeToAllCombo(TypeData typeData) {
 		String code = typeData.getCodeToUse();
-		try {
-			comboDBSSurf.remove(code);
-		} catch (Exception e) {
-		}
-		try {
-			comboDBSBed.remove(code);
-		} catch (Exception e) {
-		}
-		try {
-			comboP.remove(code);
-		} catch (Exception e) {
-		}
-		try {
-			comboHASLvl.remove(code);
-		} catch (Exception e) {
-		}
-	}
+				try {
+					comboDBSSurf.remove(code);
+				} catch (Exception e) {
+				}
+				try {
+					comboDBSBed.remove(code);
+				} catch (Exception e) {
+				}
+				try {
+					comboP.remove(code);
+				} catch (Exception e) {
+				}
+				try {
+					comboHASLvl.remove(code);
+				} catch (Exception e) {
+				}
+			}
 
 	public void removeAllToAllCombos() {
 		try {
@@ -192,7 +198,7 @@ public class GroupVerticalParameters {
 	}
 
 	public void select(VerticalParametersList list) {
-		
+
 		for (int i = 0; i < comboDBSSurf.getItemCount(); i++) {
 			if (comboDBSSurf.getItem(i).equals(list.getP_depthBSSurf())) {
 				comboDBSSurf.select(i);
@@ -217,7 +223,7 @@ public class GroupVerticalParameters {
 	}
 
 	public void controlVerticalReferenceSelection(Combo current) {
-		
+
 		if (RulesManager.getInstance().isConversionToNetCDF()) {
 			if (!current.equals(comboDBSSurf))
 				comboDBSSurf.select(0);
@@ -231,15 +237,43 @@ public class GroupVerticalParameters {
 			if (!current.equals(comboHASLvl))
 				comboHASLvl.select(0);
 		}
-		
+
 		boolean verticalReferenceSelected = comboDBSSurf.getSelectionIndex()>0||
 				comboDBSBed.getSelectionIndex()>0|
 				comboP.getSelectionIndex()>0||
 				comboHASLvl.getSelectionIndex()>0;
-				
-				
-		Nemo.getInstance().getViewMain().getEditDataForm().setFallrateGroupEnabled(verticalReferenceSelected && RulesManager.getInstance().isProfile());
-		
-		
+
+
+				Nemo.getInstance().getViewMain().getEditDataForm().setFallrateGroupEnabled(verticalReferenceSelected && RulesManager.getInstance().isProfile());
+
+
+	}
+
+	public List<String> getSelection(){
+		List<String> list = new ArrayList<String>();
+		int index;
+		String item;
+
+		index = comboDBSSurf.getSelectionIndex();
+		if (index != -1){
+			item = comboDBSSurf.getItem(index);
+			list.add(item);
+		}
+		index = comboDBSBed.getSelectionIndex();
+		if (index != -1){
+			item = comboDBSBed.getItem(index);
+			list.add(item);
+		}
+		index = comboP.getSelectionIndex();
+		if (index != -1){
+			item = comboP.getItem(index);
+			list.add(item);
+		}
+		index = comboHASLvl.getSelectionIndex();
+		if (index != -1){
+			item = comboHASLvl.getItem(index);
+			list.add(item);
+		}
+		return list;
 	}
 }

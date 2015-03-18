@@ -122,6 +122,9 @@ public class DataFormValidator extends FormValidator {
 			// ----------------------------------------------------------
 			ok = ok && detectVerticalParameters();
 			if (ok) {
+				
+				// enable Fall rate group
+				editDataForm.setFallrateGroupEnabled(RulesManager.getInstance().isFallrateEnabled());
 				/**
 				 * ***************************************************** tests
 				 * sur params (cf. tableau excel doc technique)

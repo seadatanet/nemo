@@ -1350,6 +1350,11 @@ public class TableData {
 		//
 		//
 		System.out.println("suppr " + typeData.getEntryKey());
+		
+		if(myGroupVerticalParameters.getSelection().contains(typeData.getEntryKey())){
+			Nemo.getInstance().getViewMain().getEditDataForm().resetFallRate();
+			Nemo.getInstance().getViewMain().getEditDataForm().setFallrateGroupEnabled(false);
+		}
 
 		types.remove(indice);
 
