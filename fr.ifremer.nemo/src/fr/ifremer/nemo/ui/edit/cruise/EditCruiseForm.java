@@ -211,12 +211,8 @@ public class EditCruiseForm extends EditForm {
 	public void defineMandatorySections() {
 		Couple item;
 		
-		buttonInitServeur.setEnabled(RulesManager.getInstance()
-				.isConversionToMedatlas()
-				|| RulesManager.getInstance().isConversionToNetCDF());
-		buttonXML.setEnabled(RulesManager.getInstance()
-				.isConversionToMedatlas()
-				|| RulesManager.getInstance().isConversionToNetCDF());
+		buttonInitServeur.setEnabled(true);
+		buttonXML.setEnabled(true);
 		
 		if (sectionReference!=null){
 		// REFERENCE
