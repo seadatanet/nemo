@@ -8,7 +8,6 @@ import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import javax.xml.parsers.SAXParserFactory;
@@ -42,13 +41,11 @@ public class NemoLists implements Cloneable {
 
 	static protected List<WSSurveyDescription> _surveys = new java.util.ArrayList<WSSurveyDescription>();
 
-	static protected HashMap<Integer, String> _edmo = new java.util.HashMap<Integer, String>();
 
 	/**
 	 * list of updates
 	 */
 
-	// static protected String _sdnParameters;
 
 	public static Table filtreTable;
 
@@ -468,16 +465,8 @@ public class NemoLists implements Cloneable {
 
 	}
 
-	public static java.util.HashMap<Integer, String> getEdmo() {
-		return _edmo;
-	}
-
-	/*
-	 * Initialisation des listes
-	 */
-
 	/**
-	 * 
+	 * init all lists
 	 */
 	public static void initLists() {
 
@@ -536,9 +525,8 @@ public class NemoLists implements Cloneable {
 
 			SAXParserFactory.newInstance().newSAXParser().parse(new FileInputStream(Intern.dir_resources + File.separator + Intern.list_edmo), edmoH);
 
-			_edmo.putAll(edmoH.get_valeurs());
-			edmoSize = _edmo.size();
 			_edmoList = edmoH.getEdmoList();
+			edmoSize = _edmoList.size();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
