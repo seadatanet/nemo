@@ -511,24 +511,7 @@ public class TableData {
 		types = null;
 		types = new ArrayList<TypeData>();
 
-		// On ajoute systématiquement le paramètre pression pour les profils en
-		// medatlas
-		// verticaux sauf si la liste de paramètres à utiliser est la P011
-		if (RulesManager.getInstance().isProfile()
-				&& RulesManager.getInstance()
-				.isConversionToMedatlas()
-				&& RulesManager.getInstance()
-				.getMyDataListType() == DataListTypeEnum.P091) {
-			for (TypeData type : typesWS) {
-				// ajout systematique de PRES
-				if (type.getEntryKey().equals(Intern.paramPRES)
-						&& RulesManager.getInstance()
-						.isProfile()) {
-					// on rajoute PRES
-					addType(type);
-				}
-			}
-		}
+
 		razAndRecreateTable();
 	}
 
