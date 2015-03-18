@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<vocabularies>
-   <vocabulary list="SDN:C77:3:"  version="3"  date="2011-12-09T02:00:14.000"  title="SeaDataNet Cruise Summary Report data categories"  />
-   <vocabulary list="SDN:L22:163:"  version="163"  date="2014-05-09T01:00:03.000"  title="SeaVoX Device Catalogue"  />
-   <vocabulary list="SDN:L05:41:"  version="41"  date="2014-02-05T02:00:15.000"  title="SeaDataNet device categories"  />
-   <vocabulary list="SDN:L19:1:"  version="1"  date="2008-01-17T02:00:03.000"  title="SeaDataNet keyword types"  />
-   <vocabulary list="SDN:L21:5:"  version="5"  date="2012-07-17T01:00:03.000"  title="SeaDataNet device category types"  />
-   <vocabulary list="SDN:P25:5:"  version="5"  date="2012-07-26T01:00:03.000"  title="NETMAR aggregation parameters"  />
-</vocabularies>

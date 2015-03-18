@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<vocabularies>
-   <vocabulary list="SDN:P01:451:"  version="451"  date="2014-05-09T01:00:03.000"  title="BODC Parameter Usage Vocabulary"  />
-   <vocabulary list="SDN:P09:40:"  version="40"  date="2012-01-11T07:46:54.000"  title="MEDATLAS Parameter Usage Vocabulary"  />
-   <vocabulary list="SDN:P02:83:"  version="83"  date="2014-05-02T01:00:04.000"  title="SeaDataNet Parameter Discovery Vocabulary"  />
-   <vocabulary list="SDN:P06:52:"  version="52"  date="2014-05-07T07:19:59.000"  title="BODC data storage units"  />
-</vocabularies>

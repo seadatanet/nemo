@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<vocabulary list="SDN:L05:41:"  version="41"  date="2014-02-05T02:00:15.000"  title="SeaDataNet device categories" >
+<vocabulary list="SDN:L05:49:"  version="49"  date="2015-02-12T02:00:03.000"  title="SeaDataNet device categories" >
    <element  key="SDN:L05::33"  label="sediment traps"   date="2013-02-26T17:11:07.000"  />
    <element  key="SDN:L05::159"  label="magnetometers"   date="2013-02-26T17:11:07.000"  />
    <element  key="SDN:L05::158"  label="gravimeters"   date="2013-02-26T17:11:07.000"  />
@@ -66,8 +66,8 @@
    <element  key="SDN:L05::68"  label="multinet"   date="2011-11-25T11:47:24.000"  />
    <element  key="SDN:L05::302"  label="water body temperature sensor"   date="2010-11-19T14:27:24.000"  />
    <element  key="SDN:L05::121"  label="satellite tracking system"   date="2007-11-20T09:03:34.000"  />
-   <element  key="SDN:L05::122"  label="radiometers"   date="2013-02-26T17:11:07.000"  />
    <element  key="SDN:L05::301"  label="satellite positioning systems"   date="2007-11-20T09:03:34.000"  />
+   <element  key="SDN:L05::122"  label="radiometers"   date="2013-02-26T17:11:07.000"  />
    <element  key="SDN:L05::POS09"  label="Toran receivers"  shortLabel="Toran"  date="2013-02-26T17:11:07.000"  />
    <element  key="SDN:L05::304"  label="ocean colour radiometers"   date="2008-01-10T16:19:34.000"  />
    <element  key="SDN:L05::123"  label="optical backscatter sensors"   date="2007-11-20T09:34:40.000"  />
@@ -89,11 +89,11 @@
    <element  key="SDN:L05::POS19"  label="inertial navigation systems"  shortLabel="INS"  date="2013-02-26T17:11:07.000"  />
    <element  key="SDN:L05::132"  label="bathythermographs"   date="2007-11-20T09:34:40.000"  />
    <element  key="SDN:L05::133"  label="thermosalinographs"   date="2007-11-20T09:34:40.000"  />
-   <element  key="SDN:L05::59"  label="sampling extent markers"   date="2010-04-22T13:56:30.000"  />
-   <element  key="SDN:L05::58"  label="continuous air samplers"   date="2013-02-26T17:11:07.000"  />
+   <element  key="SDN:L05::59"  label="sampling extent markers"   date="2014-06-05T08:44:31.000"  />
    <element  key="SDN:L05::POS16"  label="Argos GPS-localised transmitters"  shortLabel="Argos GPS"  date="2013-02-26T17:11:07.000"  />
-   <element  key="SDN:L05::CSEM"  label="controlled-source elecromagnetic systems"  shortLabel="CSEM"  date="2011-09-16T10:41:30.000"  />
+   <element  key="SDN:L05::58"  label="continuous air samplers"   date="2013-02-26T17:11:07.000"  />
    <element  key="SDN:L05::POS15"  label="Omega receivers"  shortLabel="Omega"  date="2013-02-26T17:11:07.000"  />
+   <element  key="SDN:L05::CSEM"  label="controlled-source elecromagnetic systems"  shortLabel="CSEM"  date="2011-09-16T10:41:30.000"  />
    <element  key="SDN:L05::57"  label="manual rock samplers"   date="2013-02-26T17:11:07.000"  />
    <element  key="SDN:L05::56"  label="snow and ice samplers"   date="2013-02-26T17:11:07.000"  />
    <element  key="SDN:L05::POS18"  label="Navy Navigation Satellite System receivers"  shortLabel="Navsat"  date="2013-02-26T17:11:07.000"  />
@@ -129,9 +129,10 @@
    <element  key="SDN:L05::MOD02"  label="Regional models"   date="2012-07-16T13:13:37.000"  />
    <element  key="SDN:L05::MOD03"  label="Atmosphere models"   date="2012-07-16T13:14:53.000"  />
    <element  key="SDN:L05::ARAG"  label="airgun array"   date="2010-10-18T12:23:56.000"  />
-   <element  key="SDN:L05::51"  label="unconsolidated sediment corers"   date="2010-07-20T07:03:37.000"  />
+   <element  key="SDN:L05::51"  label="unconsolidated sediment corers"   date="2014-11-12T11:08:53.000"  />
    <element  key="SDN:L05::52"  label="sediment porewater samplers"   date="2007-11-20T08:50:03.000"  />
    <element  key="SDN:L05::53"  label="rock corers"   date="2013-02-26T17:11:07.000"  />
+   <element  key="SDN:L05::COLCMP"  label="Colour comparators"   date="2014-09-01T07:01:41.000"  />
    <element  key="SDN:L05::54"  label="rock dredges"   date="2007-11-20T08:50:03.000"  />
    <element  key="SDN:L05::CCOV"  label="cloud cover quantifiers"   date="2013-04-23T12:40:00.000"  />
    <element  key="SDN:L05::50"  label="sediment grabs"   date="2007-11-20T08:50:03.000"  />
@@ -141,6 +142,7 @@
    <element  key="SDN:L05::LAB07"  label="electron microscopes"   date="2008-01-10T16:10:12.000"  />
    <element  key="SDN:L05::LAB06"  label="fluorescence microscopes"   date="2008-01-10T16:10:12.000"  />
    <element  key="SDN:L05::LAB05"  label="optical microscopes"   date="2008-01-10T16:10:12.000"  />
+   <element  key="SDN:L05::WPS"  label="water pressure sensors"   date="2015-02-11T09:24:01.000"  />
    <element  key="SDN:L05::LAB04"  label="autoanalysers"   date="2008-01-10T16:10:12.000"  />
    <element  key="SDN:L05::LAB03"  label="colorimeters"   date="2008-01-10T16:10:12.000"  />
    <element  key="SDN:L05::TRTG"  label="tracking tags"   date="2013-02-18T08:20:49.000"  />
@@ -168,9 +170,10 @@
    <element  key="SDN:L05::LAB27"  label="particle sizers"   date="2008-01-10T16:10:12.000"  />
    <element  key="SDN:L05::LAB26"  label="X-ray diffractometers"   date="2008-01-10T16:10:12.000"  />
    <element  key="SDN:L05::LAB25"  label="X-ray fluorescence analysers"   date="2008-01-10T16:10:12.000"  />
-   <element  key="SDN:L05::91"  label="observers"   date="2013-02-26T17:11:07.000"  />
    <element  key="SDN:L05::LAB29"  label="rulers"   date="2010-04-22T14:04:00.000"  />
+   <element  key="SDN:L05::91"  label="observers"   date="2014-11-18T00:21:30.000"  />
    <element  key="SDN:L05::90"  label="manual biota samplers"   date="2013-02-26T17:11:07.000"  />
+   <element  key="SDN:L05::PERMON"  label="Performance monitors"   date="2014-07-22T08:29:48.000"  />
    <element  key="SDN:L05::LAB20"  label="spectrophotometers"   date="2011-04-15T13:18:31.000"  />
    <element  key="SDN:L05::EQUIL"  label="equilibrators"   date="2013-04-23T12:37:39.000"  />
    <element  key="SDN:L05::LAB23"  label="bench fluorometers"   date="2008-01-10T16:10:12.000"  />
@@ -185,7 +188,7 @@
    <element  key="SDN:L05::LAB36"  label="flow injection analysers"   date="2012-08-02T13:44:24.000"  />
    <element  key="SDN:L05::380"  label="submarine cables"   date="2010-09-15T09:32:05.000"  />
    <element  key="SDN:L05::LAB37"  label="flow cytometers"   date="2012-08-02T13:45:33.000"  />
-   <element  key="SDN:L05::LAB38"  label="cavity ring-down spectroscopes"  shortLabel="CRDS"  date="2012-08-21T09:19:38.000"  />
+   <element  key="SDN:L05::LAB38"  label="cavity enhanced absorption spectrometers"  shortLabel="CEAS"  date="2014-12-16T08:36:22.000"  />
    <element  key="SDN:L05::LBTG"  label="labelling tags"   date="2013-02-26T17:11:07.000"  />
    <element  key="SDN:L05::LAB39"  label="Geiger counters"   date="2012-08-30T13:13:49.000"  />
    <element  key="SDN:L05::LAB33"  label="laboratory autosamplers"   date="2012-03-01T16:00:54.000"  />
@@ -196,14 +199,16 @@
    <element  key="SDN:L05::387"  label="Aethalometers"   date="2010-10-01T09:29:09.000"  />
    <element  key="SDN:L05::386"  label="Aerosol physical characterisers"   date="2010-10-01T09:36:44.000"  />
    <element  key="SDN:L05::LAB31"  label="magnetic susceptibility systems"   date="2013-02-26T17:11:07.000"  />
+   <element  key="SDN:L05::LAB30"  label="salinometers"   date="2015-02-11T09:18:46.000"  />
    <element  key="SDN:L05::385"  label="platform attitude sensors"   date="2010-09-15T10:00:32.000"  />
-   <element  key="SDN:L05::LAB30"  label="salinometers"   date="2010-09-15T09:19:17.000"  />
    <element  key="SDN:L05::370"  label="geothermometers"   date="2010-11-18T11:35:46.000"  />
    <element  key="SDN:L05::371"  label="60 Hz top-bandwidth single-channel seismic reflection systems"   date="2010-02-19T11:52:56.000"  />
    <element  key="SDN:L05::372"  label="2000 Hz top-bandwidth single-channel seismic reflection systems"   date="2010-02-19T11:52:56.000"  />
    <element  key="SDN:L05::373"  label="&gt;2000 Hz top-bandwidth single-channel seismic reflection systems"   date="2010-02-19T11:52:56.000"  />
    <element  key="SDN:L05::379"  label="altimeters"   date="2012-12-18T15:18:17.000"  />
    <element  key="SDN:L05::378"  label="sediment profile imagers"   date="2010-04-22T14:18:44.000"  />
+   <element  key="SDN:L05::LAB44"  label="refractometers"   date="2015-02-11T09:21:48.000"  />
+   <element  key="SDN:L05::LAB43"  label="plate readers"   date="2015-02-03T10:32:36.000"  />
    <element  key="SDN:L05::375"  label="250 Hz top-bandwidth multi-channel seismic reflection systems"   date="2010-02-19T11:52:56.000"  />
    <element  key="SDN:L05::LAB42"  label="laboratory optical rangefinders"   date="2013-12-19T09:08:24.000"  />
    <element  key="SDN:L05::374"  label="60 Hz top-bandwidth multi-channel seismic reflection systems"   date="2010-02-19T11:52:56.000"  />
@@ -222,8 +227,8 @@
    <element  key="SDN:L05::368"  label="seismometers"   date="2010-02-19T11:52:56.000"  />
    <element  key="SDN:L05::367"  label="&gt;2000 Hz top-bandwidth sub-bottom penetrator and mud profiler systems"   date="2010-11-18T11:16:45.000"  />
    <element  key="SDN:L05::VSHC"  label="Vaporchoc"   date="2010-10-18T12:23:56.000"  />
-   <element  key="SDN:L05::SPRK"  label="Sparker"   date="2013-02-26T17:11:07.000"  />
    <element  key="SDN:L05::350"  label="salinity sensor"   date="2013-02-26T17:11:07.000"  />
+   <element  key="SDN:L05::SPRK"  label="Sparker"   date="2013-02-26T17:11:07.000"  />
    <element  key="SDN:L05::351"  label="dissolved gas sensors"   date="2013-02-26T17:11:07.000"  />
    <element  key="SDN:L05::353"  label="active fluorometers"   date="2013-02-26T17:11:07.000"  />
    <element  key="SDN:L05::352"  label="plankton counters"   date="2013-02-26T17:11:07.000"  />
