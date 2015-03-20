@@ -82,6 +82,8 @@ public class Intern extends NLS {
 	public static String mapping_subject;
 	public static String mapping_objet;
 	public static String mapping_unit;
+	public static String mapping_instrument;
+	public static String mapping_fallrate;
 	public static String file_mapping;
 	public static String file_mapping_sdn;
 	public static String file_mapping_subject;
@@ -153,6 +155,7 @@ public class Intern extends NLS {
 	public static String DISTANCETOBOTTOM;
 
 	public static String TEXT;
+	public static String INDEXED_TEXT;
 
 	public static String defaultODVFormatVersion;
 	public static String defaultNetCDFFormatVersion;

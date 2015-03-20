@@ -506,12 +506,24 @@ public class Parameter extends AbstractModel {
 		_unit = x;
 	}
 
-	public String getOutputCode(Conversion c, boolean lastParam,
-			Integer parameterSize, Boolean isText) {
+	@Deprecated //24408: use INDEXED_TEXT instead of TEXT:size
+	public String getOutputCode(Conversion c, boolean lastParam, Integer parameterSize, Boolean isText) {
 		String code = null;
 		switch (c) {
 		case ODV:
 			code = getOutputOdvCode(lastParam, parameterSize, isText);
+			break;
+		case MEDATLAS:
+			code = getOutputMedatlasCode();
+			break;
+		}
+		return code;
+	}
+	public String getOutputCode(Conversion c, boolean lastParam,  Boolean isText) {
+		String code = null;
+		switch (c) {
+		case ODV:
+			code = getOutputOdvCode(lastParam,  isText);
 			break;
 		case MEDATLAS:
 			code = getOutputMedatlasCode();
@@ -527,7 +539,8 @@ public class Parameter extends AbstractModel {
 		}
 		return Formatter.getSingleton().padString(_code, len);
 	}
-
+	
+	@Deprecated
 	private String getOutputOdvCode(boolean lastParam, Integer parameterSize,
 			Boolean isText) {
 		StringBuffer paramHeader = new StringBuffer();
@@ -553,6 +566,35 @@ public class Parameter extends AbstractModel {
 				paramHeader.append((parameterSize + 1));
 			else
 				paramHeader.append(2);
+		}
+
+		paramHeader.append(Global.TAB);
+		paramHeader.append("QV:SEADATANET"); //$NON-NLS-1$
+
+		if (!lastParam)
+			paramHeader.append(Global.TAB);
+
+		return paramHeader.toString();
+	}
+	private String getOutputOdvCode(boolean lastParam, Boolean isText) {
+		StringBuffer paramHeader = new StringBuffer();
+		String code;
+		// on ne fabrique le code qu'à un seul endroit comme ca on sera sur que
+		// c'est le meme!!!!
+		code = getLocalCode();
+
+		if (!isText) {
+			paramHeader.append(code);
+			paramHeader.append(Global.SPACE);
+			paramHeader.append('[');
+			paramHeader.append(_unit);
+			paramHeader.append(']');
+
+		} else {
+			// FAE 10755
+			paramHeader.append(code);
+			paramHeader.append(Global.DBL_PT);
+			paramHeader.append(Intern.INDEXED_TEXT);
 		}
 
 		paramHeader.append(Global.TAB);

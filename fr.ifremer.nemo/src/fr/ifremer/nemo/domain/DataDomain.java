@@ -39,7 +39,7 @@ import fr.ifremer.nemo.util.Messages;
 public class DataDomain {
 
 	private enum URNtype {
-		subject, object, units;
+		subject, object, units, fallrate, instrument;
 	}
 
 	/**
@@ -93,8 +93,8 @@ public class DataDomain {
 		for (ParameterModel pModel : _model.getParameterModels()) {
 			cptParam++;
 			Parameter param = pModel.getParameter();
-			int parameterSize = pModel.getFragment().getLastCharOffset() - pModel.getFragment().getFirstCharOffset() + 1;
-			dataHeader.append(param.getOutputCode(c, (cptParam == nbParamTot), parameterSize, pModel.isText()));
+//			int parameterSize = pModel.getFragment().getLastCharOffset() - pModel.getFragment().getFirstCharOffset() + 1;
+			dataHeader.append(param.getOutputCode(c, (cptParam == nbParamTot), pModel.isText()));
 		}
 		return dataHeader;
 	}
@@ -373,11 +373,11 @@ public class DataDomain {
 		
 		// instrument
 		if (param.getInstrumentCode()!=null && !param.getInstrumentCode().isEmpty()){
-			sdnMapping.append("<instrument>"+param.getInstrumentCode()+"</instrument>"); // TODO BGT instrument
+			sdnMapping.append(getURNSyntaxe(URNtype.instrument, param.getInstrumentCode(), null, Intern.mapping_instrument, isText));
 		}
 		// fall rate
 		if (fallrateCode!=null){
-			sdnMapping.append("<fallrate>"+fallrateCode+"</fallrate>"); // TODO BGT fall rate
+			sdnMapping.append(getURNSyntaxe(URNtype.fallrate, fallrateCode, null, Intern.mapping_fallrate, isText));
 		}
 		sdnMapping.append(Global.RN);
 		return sdnMapping;
@@ -430,6 +430,34 @@ public class DataDomain {
 				urnSyntaxe.append(Intern.NemoLists_unknown);
 			else
 				urnSyntaxe.append(pdvCodeunits);
+			break;
+		case fallrate:
+			urnSyntaxe.append(list2);
+			urnSyntaxe.append(Global.DBL_PT);
+			urnSyntaxe.append(Global.DBL_PT);
+			String pdvCodefallrate;
+			if (list1 != null)
+				pdvCodefallrate = VocabLists.getVocabMatch(list1, list2, code, Intern.NemoLists_unknown);
+			else
+				pdvCodefallrate = code;
+			if (pdvCodefallrate==null) {
+				throw new GenerationException(MessageFormat.format(Messages.error_convert_sdnmapping_paramcode, code, list1, list2));
+			}
+			urnSyntaxe.append(pdvCodefallrate);
+			break;
+		case instrument:
+			urnSyntaxe.append(list2);
+			urnSyntaxe.append(Global.DBL_PT);
+			urnSyntaxe.append(Global.DBL_PT);
+			String pdvCodeinstrument;
+			if (list1 != null)
+				pdvCodeinstrument = VocabLists.getVocabMatch(list1, list2, code, Intern.NemoLists_unknown);
+			else
+				pdvCodeinstrument = code;
+			if (pdvCodeinstrument==null) {
+				throw new GenerationException(MessageFormat.format(Messages.error_convert_sdnmapping_paramcode, code, list1, list2));
+			}
+			urnSyntaxe.append(pdvCodeinstrument);
 			break;
 		}
 

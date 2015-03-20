@@ -70,7 +70,7 @@ public class CruiseDomain {
 	}
 
 	public StringBuffer getHeader(Conversion c, List<Station> stationsList) throws ParseException,
-			UnsupportedEncodingException, GenerationException {
+	UnsupportedEncodingException, GenerationException {
 		StringBuffer cruiseHeader = new StringBuffer();
 		switch (c) {
 		case ODV:
@@ -85,7 +85,7 @@ public class CruiseDomain {
 
 	private StringBuffer getOdvHeader(List<Station> stationsList) throws GenerationException {
 		StationDomain stationDomain = Nemo.getInstance().getDomain().getStation();
-		
+
 		String start = Conversion.ODV.getDebut();
 		StringBuffer odvCruiseHeader = new StringBuffer();
 
@@ -99,7 +99,7 @@ public class CruiseDomain {
 
 		odvCruiseHeader.append(start);
 		odvCruiseHeader.append(Global.RN);
-		
+
 		// SDN REFERENCES
 		if (_model.getLocalCsrIdentifier() != null && !_model.getLocalCsrIdentifier().isEmpty()){
 			SdnXLinkReference csr = new SdnXLinkReference();
@@ -116,15 +116,19 @@ public class CruiseDomain {
 				e1.printStackTrace();
 			}
 		}
-		if (Nemo.getInstance().getDomain().getCruise().getModel().getShipCode() != null
-				&& !Nemo.getInstance().getDomain().getCruise().getModel().getShipCode().isEmpty()){
+
+		String shipCode =  Nemo.getInstance().getDomain().getCruise().getModel().getShipCode();
+		if (shipCode != null
+				&& !shipCode.isEmpty()
+				&& !CruiseModel.DEFAULT_SHIP_VALUE.equals(shipCode)){
 			try {
-				String href = "http://vocab.nerc.ac.uk/collection/C17/" 
-						+ Nemo.getInstance().getDomain().getCruise().getModel().getShipCode() ;
-				SdnXLinkReference shipRef = new SdnXLinkReference("SDN:L23::NVS2CON", "isObservedBy", href);
-				odvCruiseHeader.append(start);
-				odvCruiseHeader.append(shipRef.toString(true));
-				odvCruiseHeader.append(Global.RN);
+
+					String href = "http://vocab.nerc.ac.uk/collection/C17/current/" 
+							+ Nemo.getInstance().getDomain().getCruise().getModel().getShipCode() ;
+					SdnXLinkReference shipRef = new SdnXLinkReference("SDN:L23::NVS2CON", "isObservedBy", href);
+					odvCruiseHeader.append(start);
+					odvCruiseHeader.append(shipRef.toString(true));
+					odvCruiseHeader.append(Global.RN);
 			} catch (NumberFormatException e1) {
 				// TODO 20755 Auto-generated catch block
 				e1.printStackTrace();
@@ -135,7 +139,6 @@ public class CruiseDomain {
 		}
 		for (Station st : stationsList){
 			SdnXLinkReference cdi = new SdnXLinkReference();
-			// TODO 20755: check if it is the good edmo code
 			String localCdiId;
 			try {
 				localCdiId = stationDomain.getLocalCdiId(this, Conversion.ODV, st.getReference());
@@ -159,7 +162,7 @@ public class CruiseDomain {
 			odvCruiseHeader.append(cdi.toString(true));
 			odvCruiseHeader.append(Global.RN);
 		}
-		
+
 		// SDN PARAMETERS
 		DataDomain dataDomain = Nemo.getInstance().getDomain().getData();
 		odvCruiseHeader.append(dataDomain.getSDNparameters(Conversion.ODV));
@@ -174,7 +177,7 @@ public class CruiseDomain {
 	}
 
 	private StringBuffer getMedatlasHeader() throws ParseException,
-			UnsupportedEncodingException {
+	UnsupportedEncodingException {
 		String start = Conversion.MEDATLAS.getDebut();
 		SimpleDateFormat fmt = new SimpleDateFormat(CruiseModel.MED_DATE_FORMAT);
 

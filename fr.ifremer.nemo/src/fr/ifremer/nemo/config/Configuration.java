@@ -21,6 +21,7 @@ import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Global.E_TypeConversion;
 import fr.ifremer.nemo.util.Intern;
+import fr.ifremer.nemo.util.Messages;
 
 /**
  * Class Configuration
@@ -111,10 +112,10 @@ public class Configuration extends AbstractModel {
 		XMLBootstrapParser parser = new XMLBootstrapParser(this);
 		try {
 			parser.parse(new FileInputStream(Intern.dir_resources +
-												File.separator +
-												ConfigDescription.node_root +
-												Global.EXT_XML),
-							false);
+					File.separator +
+					ConfigDescription.node_root +
+					Global.EXT_XML),
+					false);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -132,11 +133,11 @@ public class Configuration extends AbstractModel {
 		XMLBootstrapParser parser = new XMLBootstrapParser(this);
 		try {
 			parser.parse(new FileInputStream(Intern.dir_resources +
-												File.separator +
-												ConfigDescription.node_root +
-												"_ini" +
-												Global.EXT_XML),
-							false);
+					File.separator +
+					ConfigDescription.node_root +
+					"_ini" +
+					Global.EXT_XML),
+					false);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -185,9 +186,9 @@ public class Configuration extends AbstractModel {
 	 * @see AbstractModel.java#fromElement
 	 */
 	public static SAXConsumer fromElement(String a_URI,
-											String a_LocalName,
-											String a_QName,
-											Attributes a_Attributes) {
+			String a_LocalName,
+			String a_QName,
+			Attributes a_Attributes) {
 		Configuration el = Nemo.getInstance().getConfig();
 		el.buildFromElement(a_URI, a_LocalName, a_QName, a_Attributes);
 		return el;
@@ -355,7 +356,7 @@ public class Configuration extends AbstractModel {
 					new Element2Field(this, ConfigDescription.setter_EdmoURL);
 			return setter;
 		}
-	
+
 		if (a_LocalName.equals(ConfigDescription.node_defaultFlagTable)) {
 			Element2Field setter =
 					new Element2Field(this, ConfigDescription.setter_DefaultCode);
@@ -409,10 +410,10 @@ public class Configuration extends AbstractModel {
 	 */
 	@Override
 	public SAXConsumer handlePathElement(String path,
-											String a_URI,
-											String a_LocalName,
-											String a_QName,
-											Attributes a_Attributes) {
+			String a_URI,
+			String a_LocalName,
+			String a_QName,
+			Attributes a_Attributes) {
 		SAXConsumer el = null;
 		if (path.equals(ConfigDescription.node_proxy)) {
 			el = Proxy.fromElement(a_URI, a_LocalName, a_QName, a_Attributes);
@@ -508,10 +509,10 @@ public class Configuration extends AbstractModel {
 		XMLBootstrapParser parser = new XMLBootstrapParser(this);
 		try {
 			parser.parse(new FileInputStream(Intern.dir_resources +
-												File.separator +
-												Intern.fileName_configIni +
-												Global.EXT_XML),
-							false);
+					File.separator +
+					Intern.fileName_configIni +
+					Global.EXT_XML),
+					false);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -525,9 +526,9 @@ public class Configuration extends AbstractModel {
 		try {
 			// creation nouveau dossier puis creation fichier config
 			File fich2 = new java.io.File(Intern.dir_resources +
-											File.separator +
-											ConfigDescription.node_root +
-											Global.EXT_XML);
+					File.separator +
+					ConfigDescription.node_root +
+					Global.EXT_XML);
 			stream = new FileOutputStream(fich2.toString());
 			writeXMLOn(stream);
 		} catch (Exception e) {
@@ -556,8 +557,8 @@ public class Configuration extends AbstractModel {
 		}
 		if (tokens[2] != null) {
 			setLocale(new Locale(tokens[0], tokens[1], tokens[2])); // language,
-																	// country,
-																	// variant
+			// country,
+			// variant
 		} else if (tokens[1] != null) {
 			setLocale(new Locale(tokens[0], tokens[1])); // language, country
 		} else {
@@ -1155,6 +1156,59 @@ public class Configuration extends AbstractModel {
 
 	public String getMedatlasVersion() {
 		return _medatlasVersion;
+	}
+
+	public String checkConfig() {
+		boolean blnOK = true;
+		String message="";
+
+		if (Nemo.getInstance().getConfig().getIdEdmoRespCdi().trim().equals(
+				Global.EMPTY_STRING)) {
+			message += Global.RN + Global.SEP + Messages.settings_EDMOauthor;
+			blnOK = false;
+		}
+
+		if (Nemo.getInstance().getConfig().isWriteCdi()) {
+			if (Nemo.getInstance().getConfig().getCodeEdmoDonnees().trim()
+					.equals(Global.EMPTY_STRING)) {
+				message += Global.RN + Global.SEP + Messages.settings_EDMOori;
+				blnOK = false;
+			}
+
+			if (Nemo.getInstance().getConfig().getIdEdmoRespDonnees().trim()
+					.equals(Global.EMPTY_STRING)) {
+				message +=
+						Global.RN + Global.SEP + Messages.settings_EDMOcustodian;
+				blnOK = false;
+			}
+
+			if (Nemo.getInstance().getConfig().getIdEdmoDistDonnees().trim()
+					.equals(Global.EMPTY_STRING)) {
+				message += Global.RN + Global.SEP + Messages.settings_EDMOdist;
+				blnOK = false;
+			}
+
+			if (Nemo.getInstance().getConfig().getCdiURL().trim().equals(
+					Global.EMPTY_STRING)) {
+				message +=
+						Global.RN + Global.SEP + Messages.settings_dataDist_web;
+				blnOK = false;
+			}
+
+			if (Nemo.getInstance().getConfig().getCdiMethod().trim().equals(
+					Global.EMPTY_STRING)) {
+				message +=
+						Global.RN + Global.SEP + Messages.settings_dataDist_met;
+				blnOK = false;
+			}
+		}
+
+		if (!blnOK){
+			message=  Messages.CDIResumeWriter_configMessage + message;
+		}else{
+			return message;
+		}
+		return message;
 	}
 
 }

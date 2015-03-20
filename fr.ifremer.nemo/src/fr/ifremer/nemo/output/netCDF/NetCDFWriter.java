@@ -75,7 +75,7 @@ public class NetCDFWriter extends NemoWriter {
 
 
 	private enum URNtype {
-		subject, object, units;
+		subject, object, units, fallrate, instrument;
 	}
 
 	int indexRecord;
@@ -727,13 +727,17 @@ public class NetCDFWriter extends NemoWriter {
 
 		String instrumentCode = zParameterModel.getParameter().getInstrumentCode() ;
 		if (instrumentCode!=null && !instrumentCode.isEmpty()){
+			sdnParameterUrn = getURNSyntaxe(URNtype.instrument, instrumentCode, null, Intern.mapping_instrument, false);
 			z.addVariableAttribute(ParameterNames.SDN_INSTRUMENT_URN,instrumentCode);
 			z.addVariableAttribute(ParameterNames.SDN_INSTRUMENT_NAME,zParameterModel.getParameter().getInstrument() );
 		}
 
 		String fallrateCode = Nemo.getInstance().getDomain().getData().getModel().getFallrateCode();
 		if (fallrateCode!=null && !fallrateCode.isEmpty()){
-			z.addVariableAttribute(ParameterNames.SDN_FALLRATE_URN,fallrateCode );
+			
+			sdnParameterUrn = getURNSyntaxe(URNtype.fallrate, fallrateCode, null, Intern.mapping_fallrate, false);
+			
+			z.addVariableAttribute(ParameterNames.SDN_FALLRATE_URN,sdnParameterUrn);
 			z.addVariableAttribute(ParameterNames.SDN_FALLRATE_NAME,
 					Nemo.getInstance().getDomain().getData().getModel().getFallrateLabel() );
 		}
@@ -840,10 +844,12 @@ public class NetCDFWriter extends NemoWriter {
 				if (!param.getParameter().getStandardName().isEmpty())
 					current.addVariableAttribute(ParameterNames.STANDARD_NAME, param.getParameter().getStandardName());
 
-
+				
+				
 				instrumentCode = param.getParameter().getInstrumentCode() ;
 				if (instrumentCode!=null && !instrumentCode.isEmpty()){
-					current.addVariableAttribute(ParameterNames.SDN_INSTRUMENT_URN,instrumentCode);
+					sdnParameterUrn = getURNSyntaxe(URNtype.instrument, instrumentCode, null, Intern.mapping_instrument, false);
+					current.addVariableAttribute(ParameterNames.SDN_INSTRUMENT_URN,sdnParameterUrn);
 					current.addVariableAttribute(ParameterNames.SDN_INSTRUMENT_NAME,param.getParameter().getInstrument() );
 				}
 
@@ -1133,6 +1139,38 @@ public class NetCDFWriter extends NemoWriter {
 				urnSyntaxe.append(Intern.NemoLists_unknown);
 			else
 				urnSyntaxe.append(pdvCodeunits);
+			break;
+		case fallrate:
+			urnSyntaxe.append(Global.SDN);
+			urnSyntaxe.append(Global.DBL_PT);
+			urnSyntaxe.append(list2);
+			urnSyntaxe.append(Global.DBL_PT);
+			urnSyntaxe.append(Global.DBL_PT);
+			String pdvCodefallrate;
+			if (list1 != null)
+				pdvCodefallrate = VocabLists.getVocabMatch(list1, list2, code, Intern.NemoLists_unknown);
+			else
+				pdvCodefallrate = code;
+			if (pdvCodefallrate==null) {
+				throw new GenerationException(MessageFormat.format(Messages.error_convert_sdnmapping_paramcode, code, list1, list2));
+			}
+			urnSyntaxe.append(pdvCodefallrate);
+			break;
+		case instrument:
+			urnSyntaxe.append(Global.SDN);
+			urnSyntaxe.append(Global.DBL_PT);
+			urnSyntaxe.append(list2);
+			urnSyntaxe.append(Global.DBL_PT);
+			urnSyntaxe.append(Global.DBL_PT);
+			String pdvCodeinstrument;
+			if (list1 != null)
+				pdvCodeinstrument = VocabLists.getVocabMatch(list1, list2, code, Intern.NemoLists_unknown);
+			else
+				pdvCodeinstrument = code;
+			if (pdvCodeinstrument==null) {
+				throw new GenerationException(MessageFormat.format(Messages.error_convert_sdnmapping_paramcode, code, list1, list2));
+			}
+			urnSyntaxe.append(pdvCodeinstrument);
 			break;
 		}
 

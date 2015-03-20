@@ -3,7 +3,6 @@ package fr.ifremer.nemo.ui.edit.conversion;
 import java.io.File;
 
 import org.eclipse.jface.dialogs.InputDialog;
-import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridLayout;
@@ -22,7 +21,6 @@ import fr.ifremer.nemo.input.parameters.addedParameters.AP_DTUT;
 import fr.ifremer.nemo.input.parameters.addedParameters.AddedParam;
 import fr.ifremer.nemo.output.CDIResumeWriter;
 import fr.ifremer.nemo.output.ProgressNotification;
-import fr.ifremer.nemo.ui.ApplicationActionBarAdvisor;
 import fr.ifremer.nemo.ui.RulesManager;
 import fr.ifremer.nemo.ui.SWTProgress;
 import fr.ifremer.nemo.ui.Utils;
@@ -449,70 +447,7 @@ public class EditConversionForm extends EditForm {
 		}
 	}
 
-	public boolean checkConfig() {
-		boolean blnOK = true;
-		String message = Messages.CDIResumeWriter_configMessage;
-
-		if (Nemo.getInstance().getConfig().getIdEdmoRespCdi().trim().equals(
-				Global.EMPTY_STRING)) {
-			message += Global.RN + Global.SEP + Messages.settings_EDMOauthor;
-			blnOK = false;
-		}
-
-		if (Nemo.getInstance().getConfig().isWriteCdi()) {
-			if (Nemo.getInstance().getConfig().getCodeEdmoDonnees().trim()
-					.equals(Global.EMPTY_STRING)) {
-				message += Global.RN + Global.SEP + Messages.settings_EDMOori;
-				blnOK = false;
-			}
-
-			if (Nemo.getInstance().getConfig().getIdEdmoRespDonnees().trim()
-					.equals(Global.EMPTY_STRING)) {
-				message +=
-						Global.RN + Global.SEP + Messages.settings_EDMOcustodian;
-				blnOK = false;
-			}
-
-			if (Nemo.getInstance().getConfig().getIdEdmoDistDonnees().trim()
-					.equals(Global.EMPTY_STRING)) {
-				message += Global.RN + Global.SEP + Messages.settings_EDMOdist;
-				blnOK = false;
-			}
-
-			if (Nemo.getInstance().getConfig().getCdiURL().trim().equals(
-					Global.EMPTY_STRING)) {
-				message +=
-						Global.RN + Global.SEP + Messages.settings_dataDist_web;
-				blnOK = false;
-			}
-
-			if (Nemo.getInstance().getConfig().getCdiMethod().trim().equals(
-					Global.EMPTY_STRING)) {
-				message +=
-						Global.RN + Global.SEP + Messages.settings_dataDist_met;
-				blnOK = false;
-			}
-		}
-
-		if (!blnOK) {
-			try {
-				String[] buttons = new String[1];
-				buttons[0] = Messages.success;
-				MessageDialog dialog =
-						new MessageDialog(Utils.getMainShell(),
-								Messages.error_missing, null, message,
-								MessageDialog.NONE, buttons, 0);
-				dialog.open();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-
-			ApplicationActionBarAdvisor.optionsAction.run();
-
-			return false;
-		}
-		return true;
-	}
+	
 
 	private void createSummary() {
 
