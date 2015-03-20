@@ -20,6 +20,7 @@ import fr.ifremer.nemo.domain.DateTimeUtils;
 import fr.ifremer.nemo.domain.NetCDFLongNameParameterManager;
 import fr.ifremer.nemo.domain.Station;
 import fr.ifremer.nemo.domain.StationDomain;
+import fr.ifremer.nemo.input.CruiseModel;
 import fr.ifremer.nemo.input.ModelDescription;
 import fr.ifremer.nemo.input.parameters.ParameterModel;
 import fr.ifremer.nemo.input.parameters.addedParameters.AP_ADEPZZ01;
@@ -241,12 +242,13 @@ public class NetCDFWriter extends NemoWriter {
 			references.add(csr);
 			nbRefs++;
 		}
-		if ( Nemo.getInstance().getDomain().getCruise().getModel().getShipCode()!=null
-				&& !Nemo.getInstance().getDomain().getCruise().getModel().getShipCode().isEmpty())
+		
+		String shipCode = Nemo.getInstance().getDomain().getCruise().getModel().getShipCode();
+		if ( shipCode!=null
+				&& !shipCode.isEmpty()
+				&& !CruiseModel.DEFAULT_SHIP_VALUE.equals(shipCode))
 		{
-			String href = "http://vocab.nerc.ac.uk/collection/C17/" // TODO 20755
-
-					+ Nemo.getInstance().getDomain().getCruise().getModel().getShipCode() ;
+			String href = "http://vocab.nerc.ac.uk/collection/C17/current/" + shipCode;
 			SdnXLinkReference shipRef = new SdnXLinkReference("SDN:L23::NVS2CON", "isObservedBy", href);// TODO 20755
 			computeSdnXlinkdims(shipRef);
 			references.add(shipRef);

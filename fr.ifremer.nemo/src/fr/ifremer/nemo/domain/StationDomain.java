@@ -20,6 +20,7 @@ import java.util.HashSet;
 import java.util.List;
 
 import fr.ifremer.nemo.Nemo;
+import fr.ifremer.nemo.input.CruiseModel;
 import fr.ifremer.nemo.input.DataType;
 import fr.ifremer.nemo.input.Fragment;
 import fr.ifremer.nemo.input.InputModel;
@@ -674,13 +675,12 @@ public class StationDomain {
 			// SHIP
 			errorMessage = "SDN SHIP REFERENCES";
 			//eg: <sdn_reference xlink:type="SDN:L23::NVS2CON" xlink:role="isObservedBy" xlink:href=http://vocab.nerc.ac.uk/collection/C17/74E3"
-
-			if ( Nemo.getInstance().getDomain().getCruise().getModel().getShipCode()!=null
-					&& !Nemo.getInstance().getDomain().getCruise().getModel().getShipCode().isEmpty())
+			String shipCode =  Nemo.getInstance().getDomain().getCruise().getModel().getShipCode();
+			if (shipCode!=null
+					&& !shipCode.isEmpty()
+					&& !CruiseModel.DEFAULT_SHIP_VALUE.equals(shipCode))
 			{
-				String href = "http://vocab.nerc.ac.uk/collection/C17/" 
-
-								+ Nemo.getInstance().getDomain().getCruise().getModel().getShipCode() ;
+				String href = "http://vocab.nerc.ac.uk/collection/C17/current/"+shipCode;
 				SdnXLinkReference shipRef = new SdnXLinkReference("SDN:L23::NVS2CON", "isObservedBy", href);
 				medStationHeader.append(start);
 				medStationHeader.append(shipRef.toString(false));

@@ -123,8 +123,7 @@ public class CruiseDomain {
 				&& !CruiseModel.DEFAULT_SHIP_VALUE.equals(shipCode)){
 			try {
 
-					String href = "http://vocab.nerc.ac.uk/collection/C17/current/" 
-							+ Nemo.getInstance().getDomain().getCruise().getModel().getShipCode() ;
+					String href = "http://vocab.nerc.ac.uk/collection/C17/current/" +shipCode ;
 					SdnXLinkReference shipRef = new SdnXLinkReference("SDN:L23::NVS2CON", "isObservedBy", href);
 					odvCruiseHeader.append(start);
 					odvCruiseHeader.append(shipRef.toString(true));
