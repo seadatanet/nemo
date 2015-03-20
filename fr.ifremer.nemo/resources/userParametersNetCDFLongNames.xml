@@ -1,3 +1,8 @@
 <?xml version="1.0" encoding="ISO-8859-15"?>
 <root>
+<PSSTZZ01>sea_water_temperature</PSSTZZ01>
+<CNDCST01>sea_water_electrical_conductivity</CNDCST01>
+<DEPHPM01>Depth</DEPHPM01>
+<PRESPR01>fd</PRESPR01>
+<NTRAYYDZ>fds</NTRAYYDZ>
 </root>

@@ -96,7 +96,7 @@ public class NemoBashTest {
 	 * ********************************************************
 	 */
 	boolean REPLACE=false;// WARNING!!!
-	boolean REMOVE_JUNIT=true;
+	boolean REMOVE_JUNIT=false;
 	public static String[] testDirAlone = {};
 	/**
 	 * ********************************************************

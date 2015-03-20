@@ -728,7 +728,7 @@ public class NetCDFWriter extends NemoWriter {
 		String instrumentCode = zParameterModel.getParameter().getInstrumentCode() ;
 		if (instrumentCode!=null && !instrumentCode.isEmpty()){
 			sdnParameterUrn = getURNSyntaxe(URNtype.instrument, instrumentCode, null, Intern.mapping_instrument, false);
-			z.addVariableAttribute(ParameterNames.SDN_INSTRUMENT_URN,instrumentCode);
+			z.addVariableAttribute(ParameterNames.SDN_INSTRUMENT_URN,sdnParameterUrn);
 			z.addVariableAttribute(ParameterNames.SDN_INSTRUMENT_NAME,zParameterModel.getParameter().getInstrument() );
 		}
 
