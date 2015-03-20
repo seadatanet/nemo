@@ -238,13 +238,7 @@ public class GroupVerticalParameters {
 				comboHASLvl.select(0);
 		}
 
-		boolean verticalReferenceSelected = comboDBSSurf.getSelectionIndex()>0||
-				comboDBSBed.getSelectionIndex()>0|
-				comboP.getSelectionIndex()>0||
-				comboHASLvl.getSelectionIndex()>0;
 
-
-				Nemo.getInstance().getViewMain().getEditDataForm().setFallrateGroupEnabled(verticalReferenceSelected && RulesManager.getInstance().isProfile());
 
 
 	}

@@ -332,7 +332,8 @@ public class RulesManager {
 
 	public boolean isFallrateEnabled() {
 		return myVerticalParametersList.isVerticalReferenceSet()
-				&& RulesManager.getInstance().isProfile();
+				&& RulesManager.getInstance().isProfile()
+				&& myMesureType==E_MesureType.BSSURF;
 	}
 	/**
 	 * RECEPTION MAJ CONVERSION
@@ -555,6 +556,8 @@ public class RulesManager {
 		verticGroup.enable_pDepthBSSurf(isP_depthBSSurf_enabled());
 		verticGroup.enable_pPressure(isP_pressure_enabled());
 		verticGroup.enable_pHeightASLvl(isP_heightASLvl_enabled());
+		
+		myEditDataForm.setFallrateGroupEnabled(isFallrateEnabled());
 	}
 
 	public void updateFromModel(E_MesureType mesureType) {
