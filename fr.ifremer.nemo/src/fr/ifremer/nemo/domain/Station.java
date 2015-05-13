@@ -371,8 +371,8 @@ public class Station implements Comparable {
 	}
 
 	public String getMetaFlag(String key) {
-		String flag = Global.ZERO;
-
+		String flag = Nemo.getInstance().getConfig().getDefaultFlag(); // 25307
+		
 		if (getMetaFlags() != null) {
 			if ((getMetaFlags().containsKey(key)) && (getMetaFlags().get(key) != null)) {
 				flag = getMetaFlags().get(key);
