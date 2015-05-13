@@ -78,7 +78,7 @@ public class NetCDFWriter extends NemoWriter {
 	private enum URNtype {
 		subject, object, units, fallrate, instrument;
 	}
-
+	int indiceStation = 0;
 	int indexRecord;
 	CFPointWriterManager myCFPointWriterManager;
 	SdnDimensionManager dims;
@@ -124,12 +124,15 @@ public class NetCDFWriter extends NemoWriter {
 			outputFileName = getOutputFileName(inputFilePath);
 
 			if (isConversionTo_NetCDFMonostation) {
+				System.out.println("convert to n MONOstation files");
 				// Conversion NETCDF - fichiers monostation => N fichiers de
 				// sortie
 				Integer ref = 0;
 				nbStations = 1;
 
 				for (Station st : stationDomain.getStations(inputFilePath)) {
+					
+					
 					stringMetadataLength = 0;
 					stringLinksLength = 0;
 					maxNbRefs = 0;
@@ -157,7 +160,8 @@ public class NetCDFWriter extends NemoWriter {
 					if (isProcessType_CruiseFile) {
 						iDomain.getStation().updateRef();
 					}
-					writeStation(st, inputFilePath, 0, false);
+					System.out.println("write station "+indiceStation + " - "+ st.getFileName() + "["+localCdiId+"]");
+					writeStation(st, inputFilePath);
 
 
 					updateDimensions();
@@ -170,6 +174,7 @@ public class NetCDFWriter extends NemoWriter {
 
 				}
 			} else {
+				System.out.println("convert to 1 MULTIstation file");
 				// conversion NETCDF multistations => 1 fichier de sortie
 				nbStations = stationDomain.getStations(inputFilePath).size();
 				stringMetadataLength = 0;
@@ -188,12 +193,13 @@ public class NetCDFWriter extends NemoWriter {
 					stationData = new HashMap<String, Object>();
 					setNetCDFMetadata(inputFilePath, null);
 				}
-				int indiceStation = 0;
+				
 				for (Station st : stationDomain.getStations(inputFilePath)) {
 					if (isProcessType_CruiseFile) {
 						iDomain.getStation().updateRef();
 					}
-					writeStation(st, inputFilePath, indiceStation, indiceStation>0);
+					System.out.println("write station "+indiceStation+ " - "+ st.getFileName() );
+					writeStation(st, inputFilePath);
 					indiceStation++;
 				}
 				updateDimensions();
@@ -284,13 +290,21 @@ public class NetCDFWriter extends NemoWriter {
 	 * @throws ParseException
 	 * @throws FileNotFoundException
 	 */
-	private boolean writeStation(Station currentStation, String inputFilePath, int indiceStation, boolean isOnNStationHeader) throws Exception {
+	private boolean writeStation(Station currentStation, String inputFilePath) throws Exception {
 
-
+		boolean isOnNStationHeader = false;
+		
+		
 		StationDomain station = iDomain.getStation();
-		if (indiceStation==0){
+		if (indiceStation==0 || new File(inputFilePath).isDirectory()){
+			if (bufferedReader !=null){
+				bufferedReader.close();
+			}
 			bufferedReader = getBufferReader(inputFilePath, currentStation);
 			numLine=0;
+			isOnNStationHeader = false;
+		}else{
+			isOnNStationHeader = true;
 		}
 		boolean stationWrited = false;
 		indexRecord = 0;
@@ -330,7 +344,7 @@ public class NetCDFWriter extends NemoWriter {
 			}
 		}
 		if (isOnNStationHeader){
-			stationWrited=readStationHeader(currentStation, indiceStation, currentDate, currentLongitude, currentLatitude);
+			stationWrited=readStationHeader(currentStation,  currentDate, currentLongitude, currentLatitude);
 		}
 
 		// scan the InputFile line by line
@@ -347,7 +361,7 @@ public class NetCDFWriter extends NemoWriter {
 						return true;
 					}
 					currentDate = DateTimeUtils.getCurrentDate(currentStation, indexRecord);
-					stationWrited=readStationHeader(currentStation, indiceStation,currentDate, currentLongitude, currentLatitude);
+					stationWrited=readStationHeader(currentStation, currentDate, currentLongitude, currentLatitude);
 				}else{
 					if (stationWrited){
 						iDomain.getMedia().addStationInOutput(myCFPointWriterManager.getFileName(), currentStation.getReference());
@@ -400,18 +414,8 @@ public class NetCDFWriter extends NemoWriter {
 						} else
 							setDataValue(ParameterNames.SDN_BOT_DEPTH,  new Value(bottomDepth),  indiceStation,indexRecord);
 					}
-				}else if(mediaDomain.getModel().getInputType() == E_InputType.PROFILE){
-					// longitude
-					setDataValue(ParameterNames.LONGITUDE,new Value( String.valueOf(currentLongitude),  
-							currentStation.getMetaFlag(Intern.S_LON).toCharArray()[0]),indiceStation);
-					// Latitude
-					setDataValue(ParameterNames.LATITUDE, new Value(String.valueOf(currentLatitude),  
-							currentStation.getMetaFlag(Intern.S_LAT).toCharArray()[0]),indiceStation);
-					// TIME
-					Double julianDay = DateTimeUtils.getJulianDay(currentDate);
-					setDataValue( ParameterNames.TIME,new Value(julianDay.toString(),  
-							currentStation.getMetaFlag(Intern.S_DATE).toCharArray()[0]),indiceStation);
 				}
+				// profile: no metadata to be read in data
 
 
 
@@ -425,7 +429,7 @@ public class NetCDFWriter extends NemoWriter {
 
 		return false;
 	}
-	private boolean readStationHeader(Station currentStation, int indiceStation, Long currentDate, 
+	private boolean readStationHeader(Station currentStation,  Long currentDate, 
 			double currentLongitude, double currentLatitude) throws Exception
 			{
 		String[] inputStationHeader = null;
@@ -484,13 +488,9 @@ public class NetCDFWriter extends NemoWriter {
 				}
 
 				writeDataLine(currentStation, readedLine, indiceStation);
-				//						station.getOdvEmptyStationHeader();
 			}
 			stationWrited = true;
 		} 
-		//				else if (stationWrited || inputStationHeader == null) {
-		//					break;
-		//				}
 		return stationWrited;
 			}
 
