@@ -326,7 +326,7 @@ public class NetCDFWriter extends NemoWriter {
 		// SDN EDMO_CODE
 		setDataValue(ParameterNames.SDN_EDMO_CODE , new Value(Nemo.getInstance().getConfig().getIdEdmoRespCdi().trim()), indiceStation);
 		// TIME
-		long currentDate = DateTimeUtils.getCurrentDate(currentStation, indexRecord);
+		long currentDate = DateTimeUtils.getCurrentDate(currentStation, indexRecord); // get current date (computed with sample rate)
 
 		double currentLongitude = currentStation.getLongitude();
 		double currentLatitude = currentStation.getLatitude();
@@ -374,8 +374,12 @@ public class NetCDFWriter extends NemoWriter {
 				// ligne de données : à ne prendre en compte que si on est sur
 				// la bonne station
 				if (mediaDomain.getModel().getInputType() == E_InputType.TIMESERIES) {
-					if (stationDomain.getModel().getProperty(Intern.S_DATE).isInData())
+					if (stationDomain.getModel().getProperty(Intern.S_DATE).isInData()){
 						currentDate = Long.valueOf(DateTimeUtils.convertTimestamp(readedLine));
+					}else{
+						 currentDate = DateTimeUtils.getCurrentDate(currentStation, indexRecord); // 25255 get current date (computed with sample rate)
+					}
+					
 					Double julianDay = DateTimeUtils.getJulianDay(currentDate);
 					setDataValue( ParameterNames.TIME,new Value(julianDay.toString(),  
 							currentStation.getMetaFlag(Intern.S_DATE).toCharArray()[0]),indiceStation,indexRecord);
