@@ -19,6 +19,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Formatter;
 import java.util.HashMap;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -35,8 +36,10 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import ucar.ma2.Array;
 import ucar.nc2.NetcdfFile;
 import ucar.nc2.NetcdfFileWriteable;
+import ucar.nc2.Variable;
 import ucar.nc2.util.CompareNetcdf2;
 import fr.ifremer.nemo.config.Configuration;
 import fr.ifremer.nemo.config.Proxy;
@@ -1034,8 +1037,40 @@ public class NemoBashTest {
 					testLogger.error(diffEntry);
 					message.diff+=diffEntry;
 					message.batchCompRes = false;
+					System.out.println(diffEntry);
 
 				}
+			}
+		}
+		if (message.batchCompRes ){
+			try{
+			List<Variable> refVars = ref.getVariables();
+			List<Variable> junitVars = junit.getVariables();
+			HashMap<String, Variable> refVarsMap = new HashMap<String, Variable>();
+			HashMap<String, Variable> junitVarsMap = new HashMap<String, Variable>();
+			
+			for (Variable var : refVars){
+				refVarsMap.put(var.getName(), var);
+			}
+			for (Variable var : junitVars){
+				junitVarsMap.put(var.getName(), var);
+			}
+			for (Variable var : refVars){
+			
+			
+			Array aVar = refVarsMap.get(var.getName()).read();
+			Array bVar = junitVarsMap.get(var.getName()).read();
+//			System.out.println(refVars.get(i).getName()+"------------------------");
+			if (!aVar.toString().equals(bVar.toString())){
+				message.batchCompRes = false;
+				System.out.println("VAR " +var.getName()+" data are different");
+				message.diff+=System.lineSeparator()+"VAR " +var.getName()+" data are different";
+			}
+			
+			
+		}
+			}catch(Exception e){
+				e.printStackTrace();
 			}
 		}
 		/**
