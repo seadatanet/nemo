@@ -39,7 +39,17 @@ import fr.ifremer.nemo.util.Messages;
 public class DataDomain {
 
 	private enum URNtype {
-		subject, object, units, fallrate, instrument;
+		subject("subject"), object("object"), units("units"), fallrate("fall_rate"), instrument("instrument");
+		
+		private String tag;
+		private  URNtype(String tag){
+			this.tag = tag;
+		}
+		
+		@Override
+		public String toString(){
+			return tag;
+		}
 	}
 
 	/**
