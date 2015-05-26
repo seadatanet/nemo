@@ -145,6 +145,7 @@ public abstract class NemoWriter {
 			throws GenerationException {
 
 		stationDomain.updateRef();
+		stationDomain.resetStations();
 
 		try {
 
@@ -175,7 +176,7 @@ public abstract class NemoWriter {
 
 							Nemo.getInstance().setLog_currentInputFile(
 									inputFilePath + File.separator
-											+ inputFileName);
+									+ inputFileName);
 
 							File inputFile = new File(inputFilePath
 									+ File.separator + inputFileName);
@@ -187,100 +188,98 @@ public abstract class NemoWriter {
 									.intValue();
 							bufferedReader.mark(readerSize + 1);
 
-							if (!stationDomain.stationIsRegistered(
-									inputFilePath, inputFileName)) {
-								// première lecture pour obtenir le nombre de
-								// valeurs
-								// par stations
-								Station st = null;
-								int nbrecords = 0;
-								boolean isRateCalculated = false;
-								while ((readedLine = bufferedReader.readLine()) != null) {
-									incrementLine();
 
-									if (inFileHeader()) {
-										continue;
-									}
-									if (isEndData() && (st != null)) {
+							Station st = null;
 
-										st.setNbRecords(nbrecords);
-										stationDomain.addStation(inputFilePath,
-												st);
-										st = null;
-									}
+							int nbrecords = 0;
+							boolean isRateCalculated = false;
+							while ((readedLine = bufferedReader.readLine()) != null) {
+								incrementLine();
 
-									if (isStartStationHeader()) {
-										nbrecords = 0;
-										String[] inputStationHeader = null;
-										inputStationHeader = consumeStationHeader(mediaModel
-												.getStationHeader() > 0);
-										if (inputStationHeader != null) {
+								if (inFileHeader()) {
+									continue;
+								}
+								if (isEndData() && (st != null)) {
+
+									st.setNbRecords(nbrecords);
+									stationDomain.addStation(inputFilePath,
+											st);
+									st = null;
+								}
+
+								if (isStartStationHeader()) {
+									nbrecords = 0;
+									String[] inputStationHeader = null;
+									inputStationHeader = consumeStationHeader(mediaModel
+											.getStationHeader() > 0);
+									if (inputStationHeader != null) {
+
 											st = new Station(
 													inputFile.getName(),
 													inputStationHeader);
-											String ref = stationDomain
-													.getReference(
-															inputFile.getName(),
-															inputStationHeader,
-															true);
 
-											st.setReference(ref);
+										String ref = stationDomain
+												.getReference(
+														inputFile.getName(),
+														inputStationHeader,
+														true);
 
-											// FAE 18333
-											// calcul start et end date of
-											// cruise
-											updateStartEndDate(st);
+										st.setReference(ref);
 
-											if (stationDomain.isSomeInData()) {
+										// FAE 18333
+										// calcul start et end date of
+										// cruise
+										updateStartEndDate(st);
 
-											}
-											if (!isEndData()) // FAE 4673 Pb si
-																// une
-												// seule ligne données et pas
-												// d'entête
-												// station
-												st.updateGlobalParamQc(readedLine);
+										if (stationDomain.isSomeInData()) {
 
-											nbrecords++;
-										} else {
-											break;
 										}
-									} else if (st != null) {
-										if (mediaDomain.getModel()
-												.getInputType() == E_InputType.TRAJECTORY) {
-											st.completeMedatlasTrajectory(readedLine);
-										}
+										if (!isEndData()) // FAE 4673 Pb si
+											// une
+											// seule ligne données et pas
+											// d'entête
+											// station
+											st.updateGlobalParamQc(readedLine);
 
-										if (mediaDomain.getModel()
-												.getInputType() != E_InputType.PROFILE) {
-
-											// FAE 18333
-											// calcul min et max date of cruise
-											updateStartEndDate(st);
-
-											// sampling rate peut etre à
-											// calculer
-											if (stationDomain.getModel()
-													.getProperty(Intern.S_DATE)
-													.isInData()
-													&& !isRateCalculated) {
-												st.calculSamplingRate(readedLine);
-												isRateCalculated = true;
-											}
-										}
-										st.updateGlobalParamQc(readedLine);
 										nbrecords++;
+									} else {
+										break;
 									}
-								}
+								} else if (st != null) {
+									if (mediaDomain.getModel()
+											.getInputType() == E_InputType.TRAJECTORY) {
+										st.completeMedatlasTrajectory(readedLine);
+									}
 
-								if (st != null) {
-									// endData = EOF : la station n'a pas été
-									// enregistrée
-									st.setNbRecords(nbrecords);
-									stationDomain.addStation(inputFilePath, st);
-								}
+									if (mediaDomain.getModel()
+											.getInputType() != E_InputType.PROFILE) {
 
+										// FAE 18333
+										// calcul min et max date of cruise
+										updateStartEndDate(st);
+
+										// sampling rate peut etre à
+										// calculer
+										if (stationDomain.getModel()
+												.getProperty(Intern.S_DATE)
+												.isInData()
+												&& !isRateCalculated) {
+											st.calculSamplingRate(readedLine);
+											isRateCalculated = true;
+										}
+									}
+									st.updateGlobalParamQc(readedLine);
+									nbrecords++;
+								}
 							}
+
+							if (st != null) {
+								// endData = EOF : la station n'a pas été
+								// enregistrée
+								st.setNbRecords(nbrecords);
+								stationDomain.addStation(inputFilePath, st);
+							}
+
 
 							// FAE1105 : tri des stations selon Nom Fichier -
 							// Date -
@@ -361,7 +360,7 @@ public abstract class NemoWriter {
 		printCruiseHeader(null);
 	}
 	protected void printCruiseHeader(List<Station> stationsList) throws ParseException,
-			UnsupportedEncodingException, GenerationException {
+	UnsupportedEncodingException, GenerationException {
 		// écriture de l'entête campagne
 		StringBuffer cruiseHeader = cruiseDomain.getHeader(myConversion, stationsList);
 		outputFileWriter.println(cruiseHeader);

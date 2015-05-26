@@ -948,16 +948,6 @@ public class StationDomain {
 		}
 	}
 
-	public boolean stationIsRegistered(String inputFilePath,
-			String inputFileName) {
-		if (_listStations.containsKey(inputFilePath)) {
-			for (Station st : _listStations.get(inputFilePath)) {
-				if (st.getFileName().equals(inputFileName))
-					return true;
-			}
-		}
-		return false;
-	}
 
 	public List<Station> getStations(String inputFilePath) {
 		return _listStations.get(inputFilePath);

@@ -89,7 +89,6 @@ public class MedatlasWriter extends NemoWriter
 			boolean lastLineWrited = false;
 			for (Station currentStation : stationDomain.getStations(inputFilePath))
 			{
-				currentStation.initQCs();
 				// FAE 6143 check doublons
 				stationDomain.getAndCheckLocalCDI(cruiseDomain, Conversion.ODV, currentStation.getReference());
 				CalcPres.init();
