@@ -2,6 +2,7 @@ package fr.ifremer.nemo.ui.edit.data;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 
 import org.eclipse.swt.SWT;
@@ -486,7 +487,8 @@ public class TableData {
 				typesL22.add(typeInstrument);
 			}
 		}
-
+		Collections.sort(typesL22);
+		
 	}
 	/**
 	 * initialize the L22
@@ -501,7 +503,7 @@ public class TableData {
 				typesL33.add(typeFallrate);
 			}
 		}
-
+		Collections.sort(typesL33);
 	}
 	/**
 	 * fill types - add PRES automatically for Medatlas in P091 (see param rules table, data01) 

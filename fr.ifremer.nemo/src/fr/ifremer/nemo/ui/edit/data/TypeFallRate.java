@@ -2,7 +2,7 @@ package fr.ifremer.nemo.ui.edit.data;
 
 import sdn.vocabulary.interfaces.IElement;
 
-public class TypeFallRate extends Object {
+public class TypeFallRate implements Comparable<TypeFallRate> {
 
     
     private String term, def, key, termAbbr;
@@ -61,5 +61,10 @@ public class TypeFallRate extends Object {
     {
         this.key = key;
     }
+
+	@Override
+	public int compareTo(TypeFallRate fall_rate) {
+		return Integer.parseInt(this.getKey())-Integer.parseInt(fall_rate.getKey());
+	}
     
 }

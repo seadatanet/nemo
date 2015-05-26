@@ -75,7 +75,7 @@ public class FallRateFilteredTable extends AbstractFilteredTable
 
 		myFiltreTable.setHeaderVisible(true);
 		myFiltreTable.setLinesVisible(true);
-		myFiltreTable.setBounds(new Rectangle(3, 45, 298, 237));
+		myFiltreTable.setBounds(new Rectangle(3, 45, 500, 237));
 
 		// creation des colonnes...
 		TableColumn tableColumn = new TableColumn(myFiltreTable, SWT.NONE);
@@ -83,7 +83,7 @@ public class FallRateFilteredTable extends AbstractFilteredTable
 		tableColumn.setText("Key");// TODO internationaliser fall rate
 		
 		TableColumn tableColumn2 = new TableColumn(myFiltreTable, SWT.NONE);
-		tableColumn2.setWidth(100);
+		tableColumn2.setWidth(130);
 		tableColumn2.setText("Alt. label");// TODO internationaliser fall rate
 		
 		TableColumn tableColumn3 = new TableColumn(myFiltreTable, SWT.NONE);
@@ -141,6 +141,20 @@ public class FallRateFilteredTable extends AbstractFilteredTable
 			{
 				// ajout dans la liste filtree
 				filtree.add(origine.get(i));
+			}else{
+				m = p.matcher(origine.get(i).getKey());
+				if (m.matches())
+				{
+					// ajout dans la liste filtree
+					filtree.add(origine.get(i));
+				}	else{
+					m = p.matcher(origine.get(i).getTermAbbr());
+					if (m.matches())
+					{
+						// ajout dans la liste filtree
+						filtree.add(origine.get(i));
+					}	
+				}
 			}
 		}
 		listeFiltree = filtree;

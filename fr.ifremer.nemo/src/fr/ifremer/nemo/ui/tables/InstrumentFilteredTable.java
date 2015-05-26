@@ -37,9 +37,9 @@ public class InstrumentFilteredTable extends AbstractFilteredTable
 	private Table myFiltreTable;
 
 	/**
-     *  reference sur la tableData (de l'onglet data) depuis laquelle cette table a été ouverte
+	 *  reference sur la tableData (de l'onglet data) depuis laquelle cette table a été ouverte
 	 */
-    private final TableData myTableDataRef;
+	private final TableData myTableDataRef;
 
 	/**
 	 * copie de la liste des parametres typesWS pouvant être filtrée
@@ -74,25 +74,25 @@ public class InstrumentFilteredTable extends AbstractFilteredTable
 
 		myFiltreTable.setHeaderVisible(true);
 		myFiltreTable.setLinesVisible(true);
-		myFiltreTable.setBounds(new Rectangle(3, 45, 298, 237));
+		myFiltreTable.setBounds(new Rectangle(3, 45, 600, 237));
 
 		// creation des colonnes...
 		TableColumn tableColumn = new TableColumn(myFiltreTable, SWT.NONE);
 		tableColumn.setWidth(80);
 		tableColumn.setText("ID");// TODO
-		
+
 		TableColumn tableColumn2 = new TableColumn(myFiltreTable, SWT.NONE);
-		tableColumn2.setWidth(300);
+		tableColumn2.setWidth(1000);
 		tableColumn2.setText("label");// TODO
-		
+
 
 		for (int i = 0; i < listeFiltree.size(); i++)
 		{
 			TableItem item = new TableItem(myFiltreTable, SWT.NONE);
-            item.setText(new String[] {
+			item.setText(new String[] {
 					listeFiltree.get(i).getKey(),
 					listeFiltree.get(i).getTerm()
-					});
+			});
 		}
 	}
 
@@ -133,10 +133,18 @@ public class InstrumentFilteredTable extends AbstractFilteredTable
 			regexp = "^.*" + chaine + ".*$"; //$NON-NLS-1$ //$NON-NLS-2$
 			Pattern p = Pattern.compile(regexp, Pattern.CASE_INSENSITIVE);
 			Matcher m = p.matcher(origine.get(i).getTerm());
+
 			if (m.matches())
 			{
 				// ajout dans la liste filtree
 				filtree.add(origine.get(i));
+			}else{
+				m = p.matcher(origine.get(i).getKey());
+				if (m.matches())
+				{
+					// ajout dans la liste filtree
+					filtree.add(origine.get(i));
+				}
 			}
 		}
 		listeFiltree = filtree;
@@ -155,9 +163,9 @@ public class InstrumentFilteredTable extends AbstractFilteredTable
 	}
 
 	/**
-     * action appelée lorsqu'un parametre est selectionné dans le panneau ParameterFilteredTable
-     * -> ajoute la parametre au tableau des data ou ouvre la liste des SubParameters
-     * {@inheritDoc}
+	 * action appelée lorsqu'un parametre est selectionné dans le panneau ParameterFilteredTable
+	 * -> ajoute la parametre au tableau des data ou ouvre la liste des SubParameters
+	 * {@inheritDoc}
 	 */
 	@Override
 	protected void selectAction()
