@@ -4,12 +4,10 @@ import java.io.BufferedWriter;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
-import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Locale;
 
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.domain.DataDomain;
@@ -91,7 +89,7 @@ public class MedatlasWriter extends NemoWriter
 			boolean lastLineWrited = false;
 			for (Station currentStation : stationDomain.getStations(inputFilePath))
 			{
-
+				currentStation.initQCs();
 				// FAE 6143 check doublons
 				stationDomain.getAndCheckLocalCDI(cruiseDomain, Conversion.ODV, currentStation.getReference());
 				CalcPres.init();

@@ -143,20 +143,25 @@ public class Station implements Comparable {
 				addMetaFlag(Intern.DURATION, calculateMetaFlag(Intern.DATETIME, Intern.ENDDATETIME));
 			}
 
-			_globalParamQc = new HashMap<String, String>();
-			_missingValueParams = new HashMap<String, Boolean>();
-			DataDomain dataDomain = Nemo.getInstance().getDomain().getData();
-			for (ParameterModel paramModel : dataDomain.getMyParameterManager().getMedParameterModels()) {
-				_globalParamQc.put(paramModel.getParameter().getCode(), ((AddedParam) paramModel.getParameter()).getFlag(this, null));
-				_missingValueParams.put(paramModel.getParameter().getCode(), true);
-			}
-			for (ParameterModel paramModel : dataDomain.getModel().getParameterModels()) {
-				_globalParamQc.put(paramModel.getParameter().getCode(), Global.WORSE_FLAG);
-				_missingValueParams.put(paramModel.getParameter().getCode(), true);
-			}
+			initQCs();
 
 		} catch (Exception e) {
 			throw new GenerationException(errorMessage + " " + e.getMessage());
+		}
+	}
+	
+	public void initQCs()
+	{
+		_globalParamQc = new HashMap<String, String>();
+		_missingValueParams = new HashMap<String, Boolean>();
+		DataDomain dataDomain = Nemo.getInstance().getDomain().getData();
+		for (ParameterModel paramModel : dataDomain.getMyParameterManager().getMedParameterModels()) {
+			_globalParamQc.put(paramModel.getParameter().getCode(), ((AddedParam) paramModel.getParameter()).getFlag(this, null));
+			_missingValueParams.put(paramModel.getParameter().getCode(), true);
+		}
+		for (ParameterModel paramModel : dataDomain.getModel().getParameterModels()) {
+			_globalParamQc.put(paramModel.getParameter().getCode(), Global.WORSE_FLAG);
+			_missingValueParams.put(paramModel.getParameter().getCode(), true);
 		}
 	}
 
