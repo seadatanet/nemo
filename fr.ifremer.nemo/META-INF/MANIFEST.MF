@@ -24,8 +24,6 @@ Bundle-ClassPath: .,
  lib/slf4j-log4j12-1.5.6.jar,
  lib/netcdf-4.2.jar,
  lib/odvToNetCDF.jar,
- lib/xercesImpl.jar,
- lib/xmlParserAPIs.jar,
  lib_axis_14/axis.jar,
  lib_axis_14/axis-ant.jar,
  lib_axis_14/commons-discovery-0.2.jar,
@@ -54,8 +52,8 @@ Bundle-ClassPath: .,
  axis2-1.5.4/lib/XmlSchema-1.4.3.jar,
  axis2-1.5.4/lib/axiom-api-1.2.10.jar,
  lib/sdnVocabulary-1.1.jar,
- lib/sismertoolslib-1.1.8.jar,
- lib/cfpointLib-0.16.jar,
- lib/hsqldb-2.2.6.jar
+ lib/hsqldb-2.2.6.jar,
+ lib/cfpointLib-0.17-SNAPSHOT.jar,
+ lib/sismertoolslib-1.1.9-SNAPSHOT.jar
 Bundle-Vendor: IFREMER
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7

@@ -733,19 +733,13 @@ public class NetCDFWriter extends NemoWriter {
 
 		String instrumentCode = zParameterModel.getParameter().getInstrumentCode() ;
 		if (instrumentCode!=null && !instrumentCode.isEmpty()){
-			sdnParameterUrn = getURNSyntaxe(URNtype.instrument, instrumentCode, null, Intern.mapping_instrument, false);
-			z.addVariableAttribute(ParameterNames.SDN_INSTRUMENT_URN,sdnParameterUrn);
-			z.addVariableAttribute(ParameterNames.SDN_INSTRUMENT_NAME,zParameterModel.getParameter().getInstrument() );
+			z.setInstrument(zParameterModel.getParameter().getInstrument(), instrumentCode);
 		}
 
 		String fallrateCode = Nemo.getInstance().getDomain().getData().getModel().getFallrateCode();
 		if (fallrateCode!=null && !fallrateCode.isEmpty()){
 			
-			sdnParameterUrn = getURNSyntaxe(URNtype.fallrate, fallrateCode, null, Intern.mapping_fallrate, false);
-			
-			z.addVariableAttribute(ParameterNames.SDN_FALLRATE_URN,sdnParameterUrn);
-			z.addVariableAttribute(ParameterNames.SDN_FALLRATE_NAME,
-					Nemo.getInstance().getDomain().getData().getModel().getFallrateLabel() );
+			z.setFall_rate(Nemo.getInstance().getDomain().getData().getModel().getFallrateLabel(), fallrateCode);
 		}
 
 		map_P011_VarName.put(longitude.getSdnParameterName(), longitude.getVarName());
@@ -816,7 +810,6 @@ public class NetCDFWriter extends NemoWriter {
 		System.arraycopy(paramAdded, 0, params, 0, paramAdded.length);
 		System.arraycopy(paramMesured, 0, params, paramAdded.length, paramMesured.length);
 
-		String coordinates = longitude.getVarName() + Global.SPACE + latitude.getVarName() + Global.SPACE + time.getVarName() + Global.SPACE + z.getVarName();
 		for (ParameterModel param : params) {
 			// varName = param.getParameter().getLocalCode();
 			String varName = param.getParameter().getCodeP011();
@@ -840,6 +833,7 @@ public class NetCDFWriter extends NemoWriter {
 			unit = unitConversion.getUnitConversion(param.getParameter().getUnit());
 
 			if (!sdnParameterUrn.equals(z.getSdnParameterUrn())) {
+				String coordinates = myCFPointWriterManager.getCoordinatesAttributeString(longitude, latitude, z, time);
 				GeophysicalVariable current = new GeophysicalVariable(varName, getUnits(param.getParameter().getFormat()), geoDim, longName, coordinates, unit, sdnParameterUrn, sdnParameterName, sdnUomUrn, sdnUomName);
 
 				// add default value if existe
@@ -854,9 +848,7 @@ public class NetCDFWriter extends NemoWriter {
 				
 				instrumentCode = param.getParameter().getInstrumentCode() ;
 				if (instrumentCode!=null && !instrumentCode.isEmpty()){
-					sdnParameterUrn = getURNSyntaxe(URNtype.instrument, instrumentCode, null, Intern.mapping_instrument, false);
-					current.addVariableAttribute(ParameterNames.SDN_INSTRUMENT_URN,sdnParameterUrn);
-					current.addVariableAttribute(ParameterNames.SDN_INSTRUMENT_NAME,param.getParameter().getInstrument() );
+					current.setInstrument(param.getParameter().getInstrument() , instrumentCode);
 				}
 
 				mapVariables.put(current.getVarName(), current);
