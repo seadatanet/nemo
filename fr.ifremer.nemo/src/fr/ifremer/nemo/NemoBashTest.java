@@ -106,9 +106,9 @@ public class NemoBashTest {
 	 * ********************************************************
 	 * ********************************************************
 	 */
-	
-	
-	
+
+
+
 	public String inputName = "input";
 	public String outputName = "output_junit";
 	public static String outputManualName = "output_junit_batch";
@@ -187,6 +187,7 @@ public class NemoBashTest {
 			_writer.append("nemo convert ended;");
 			_writer.append("comparison ok;");
 			_writer.append("diff;");
+			_writer.append("processTime;");
 			_writer.append('\n');
 
 		} catch (IOException e) {
@@ -206,6 +207,7 @@ public class NemoBashTest {
 			_writer.append(message.conversionRes + ";");
 			_writer.append(message.batchCompRes + ";");
 			_writer.append(message.diff + ";");
+			_writer.append(message.processTime + ";");
 			_writer.append('\n');
 
 		} catch (IOException e) {
@@ -528,51 +530,63 @@ public class NemoBashTest {
 	 * methodes
 	 * =================================================================
 	 */
-	private void cleanDirectories(){
+	@Test
+	public void cleanDirectories(){
 
-		// TODO BGT: methode a revoir!!
-		//
-		//		File toBeDeleted;
-		//		System.out.println("dataRootPath" + dataRootPath + "--------");
-		//		File root = new File(dataRootPath);
-		//		for (File testDir : root.listFiles()) {
-		//			System.out.println("testDir: " + testDir.toString());
-		//			if (testDir.isDirectory()){
-		//				for (File paramListDir : testDir.listFiles()) {
-		//					if (paramListDir.isFile() && paramListDir.getName().equalsIgnoreCase("PF_INPUT")){
-		//						paramListDir.delete();
-		//					}
-		//					else if (paramListDir.isDirectory()){
-		//						if (paramListDir.getName().equalsIgnoreCase("PF_INPUT"))
-		//						{
-		//							paramListDir.delete();
-		//						}else{
-		//							for (File convDir : paramListDir.listFiles()) {
-		//								if (convDir.isDirectory()&&
-		//										(convDir.getName().equals(E_TypeConversion.MEDATLAS.toString())
-		//												||convDir.getName().equals(E_TypeConversion.ODV_MONOSTATION.toString()) 
-		//												||convDir.getName().equals(E_TypeConversion.ODV_MULTISTATIONS.toString()) 
-		//												||convDir.getName().equals(E_TypeConversion.NETCDF_MONOSTATION.toString()) 
-		//												||convDir.getName().equals(E_TypeConversion.NETCDF_MULTISTATIONS.toString())
-		//												)
-		//										){
-		//
-		//									for (File unitTest : convDir.listFiles()) {
-		//										System.out.println(unitTest.getAbsolutePath()+File.separator+outputName);
-		//										toBeDeleted = new File(unitTest.getAbsolutePath()+File.separator+outputName);
-		//										toBeDeleted.delete();
-		//										System.out.println(unitTest.getAbsolutePath()+File.separator+"cdiSummary_junit");
-		//										toBeDeleted = new File(unitTest.getAbsolutePath()+File.separator+"cdiSummary_junit");
-		//										toBeDeleted.delete();
-		//
-		//									}
-		//								}
-		//							}
-		//						}
-		//					}
-		//				}
-		//			}
-		//		}
+	
+
+		System.out.println("dataRootPath" + dataRootPath + "--------");
+		File root = new File(dataRootPath);
+		for (File testDir : root.listFiles()) {
+			System.out.println("testDir: " + testDir.toString());
+			if (testDir.isDirectory()){
+				for (File paramListDir : testDir.listFiles()) {
+					if (paramListDir.isFile() && paramListDir.getName().equalsIgnoreCase("PF_INPUT")){
+						paramListDir.delete();
+						System.out.println("delete file " + paramListDir.getAbsolutePath());
+					}
+					else if (paramListDir.isDirectory()){
+						if (paramListDir.getName().equalsIgnoreCase("PF_INPUT"))
+						{
+							paramListDir.delete();
+							System.out.println("delete file " + paramListDir.getAbsolutePath());
+						}else{
+							for (File convDir : paramListDir.listFiles()) {
+								if (convDir.isDirectory()&&
+										(convDir.getName().equals(E_TypeConversion.MEDATLAS.toString())
+												||convDir.getName().equals(E_TypeConversion.ODV_MONOSTATION.toString()) 
+												||convDir.getName().equals(E_TypeConversion.ODV_MULTISTATIONS.toString()) 
+												||convDir.getName().equals(E_TypeConversion.NETCDF_MONOSTATION.toString()) 
+												||convDir.getName().equals(E_TypeConversion.NETCDF_MULTISTATIONS.toString())
+												)
+										){
+
+									for (File unitTest : convDir.listFiles()) {
+										if (unitTest.listFiles() == null){
+
+											System.out
+											.println("BAD DIR ORG!!!!!!!!! " +unitTest.getAbsolutePath());
+										}else{
+											for (File f : unitTest.listFiles()){
+												if (f.getName().equals(outputName)){
+													System.out.println("delete file " + f);
+													f.delete();
+												}else if(f.getName().equals("cdiSummary_junit")){
+													System.out.println("delete file " + f);
+													f.delete();
+												}
+											}
+										}
+
+
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
 	}
 	public boolean testOneType_ListConv(DataListTypeEnum dataList,Conversion conversion, E_TypeConversion convType) {
 
@@ -616,12 +630,7 @@ public class NemoBashTest {
 										// + ";");
 										res = false;
 										comp = false;
-										message.testName = paramListDir
-												.getName()
-												+ " "
-												+ convDir.getName()
-												+ " "
-												+ unitTest.getName();
+										message.testName = unitTest.getName();
 										String inputAbsolutePath = testDir.getAbsolutePath()+ File.separator + inputName;
 										String outputAbsolutePath = unitTest.getAbsolutePath();
 										cptTests++;
@@ -632,31 +641,28 @@ public class NemoBashTest {
 											message.isReferenceFound = fileExist(
 													outputAbsolutePath,
 													outputReferenceName);
-											// writeInResultsFile(message.isReferenceFound
-											// + ";");
-
-											res = convertWithNemoBatch(
-													conversion, convType,
-													inputAbsolutePath,
-													outputAbsolutePath,
-													!unitTest.getName()
-													.startsWith("tj"));
-											// writeInResultsFile(res + ";");
+											testLogger.info(">>>>>>>>>>>>>>>>>> process "+ message.dirName +  " " + message.testName);
+											try{
+												long t0=System.currentTimeMillis();
+												res = convertWithNemoBatch(
+														conversion, convType,
+														inputAbsolutePath,
+														outputAbsolutePath,
+														!unitTest.getName()
+														.startsWith("tj"));
+												long t1 = System.currentTimeMillis();
+												testLogger.info("time: "+ (t1-t0));
+												message.processTime = String.valueOf( ((t1-t0)/1000));
+											}catch (Exception e) {
+												testLogger.error(e.getMessage());
+											}
 											ok = res && ok;
 											if (res) {
-												//												if (conversion == Conversion.NETCDF) {
-												//													comp = compareWithODVReference(
-												//															outputAbsolutePath,
-												//															outputName);
-												//												} else {
 												comp = compareWithReference(
 														outputAbsolutePath,
 														outputName,
 														conversion);
-												//												}
 												message.batchCompRes = comp;
-												// writeInResultsFile(comp +
-												// "\n");
 												ok = comp && ok;
 											}
 											if (ok) {
@@ -695,12 +701,12 @@ public class NemoBashTest {
 												+ unitTest.getName();
 										message.isActivated = false;
 									}
-									if (!testFound) {
-										message.isTestFound = false;
-									} else {
+									//									if (!testFound) {
+									//										message.isTestFound = false;
+									//									} else {
 
-										message.print();
-									}
+									message.print();
+									//									}
 
 								}
 
@@ -1044,31 +1050,31 @@ public class NemoBashTest {
 		}
 		if (message.batchCompRes ){
 			try{
-			List<Variable> refVars = ref.getVariables();
-			List<Variable> junitVars = junit.getVariables();
-			HashMap<String, Variable> refVarsMap = new HashMap<String, Variable>();
-			HashMap<String, Variable> junitVarsMap = new HashMap<String, Variable>();
-			
-			for (Variable var : refVars){
-				refVarsMap.put(var.getName(), var);
-			}
-			for (Variable var : junitVars){
-				junitVarsMap.put(var.getName(), var);
-			}
-			for (Variable var : refVars){
-			
-			
-			Array aVar = refVarsMap.get(var.getName()).read();
-			Array bVar = junitVarsMap.get(var.getName()).read();
-//			System.out.println(refVars.get(i).getName()+"------------------------");
-			if (!aVar.toString().equals(bVar.toString())){
-				message.batchCompRes = false;
-				System.out.println("VAR " +var.getName()+" data are different");
-				message.diff+=System.lineSeparator()+"VAR " +var.getName()+" data are different";
-			}
-			
-			
-		}
+				List<Variable> refVars = ref.getVariables();
+				List<Variable> junitVars = junit.getVariables();
+				HashMap<String, Variable> refVarsMap = new HashMap<String, Variable>();
+				HashMap<String, Variable> junitVarsMap = new HashMap<String, Variable>();
+
+				for (Variable var : refVars){
+					refVarsMap.put(var.getName(), var);
+				}
+				for (Variable var : junitVars){
+					junitVarsMap.put(var.getName(), var);
+				}
+				for (Variable var : refVars){
+
+
+					Array aVar = refVarsMap.get(var.getName()).read();
+					Array bVar = junitVarsMap.get(var.getName()).read();
+					//			System.out.println(refVars.get(i).getName()+"------------------------");
+					if (!aVar.toString().equals(bVar.toString())){
+						message.batchCompRes = false;
+						System.out.println("VAR " +var.getName()+" data are different");
+						message.diff+=System.lineSeparator()+"VAR " +var.getName()+" data are different";
+					}
+
+
+				}
 			}catch(Exception e){
 				e.printStackTrace();
 			}
@@ -1253,6 +1259,7 @@ public class NemoBashTest {
 		public String manualCompName;
 		public boolean isManualFound;
 		public String diff;
+		public String processTime;
 
 		public Message() {
 
@@ -1262,7 +1269,7 @@ public class NemoBashTest {
 			String mes = "";
 			mes += completeTitle(dirName);
 			if (testName != null) {
-				mes += "\r\n" + testName;
+				mes += " " + testName;
 				if (!isActivated) {
 					mes += ("- DESACTIVATED -");
 					write(mes);
@@ -1279,21 +1286,21 @@ public class NemoBashTest {
 					return;
 				}
 				if (!conversionRes) {
-					mes += "\r\nconversion: " + getString(conversionRes);
+					mes += " | conversion: " + getString(conversionRes);
 					mes += " " + conversionError;
 				}else{
-					mes += "\r\nconversion: " + getString(conversionRes);
+					mes += " | conversion: " + getString(conversionRes);
 				}
 				if (testBatchs) {
 					if (isReferenceFound) {
-						if (batchCompRes) {
-							mes += " " + getString(conversionRes);
-						} else {
-							mes += "\r\nbatch comparison: "
-									+ getString(batchCompRes);
-						}
+						//						if (batchCompRes) {
+						//							mes += " " + getString(batchCompRes);
+						//						} else {
+						mes += " | batch comparison: "
+								+ getString(batchCompRes);
+						//						}
 					} else {
-						mes += "\r\nReference file not found";
+						mes += " | Reference file not found";
 					}
 				}
 				if (compareManualFiles && isManualFound) {
@@ -1306,13 +1313,11 @@ public class NemoBashTest {
 
 				}
 				if (!(batchCompRes && conversionRes)) {
-					write(mes);
 				}
 			} else {
 				mes += " no test found";
-				write(mes);
 			}
-
+			write(mes);
 		}
 
 		private String getString(boolean res) {
