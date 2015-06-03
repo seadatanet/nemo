@@ -27,6 +27,7 @@ import fr.ifremer.nemo.input.parameters.ParameterModel;
 import fr.ifremer.nemo.mapping.Mapping;
 import fr.ifremer.nemo.mapping.MappingTable;
 import fr.ifremer.nemo.output.CDIResumeWriter;
+import fr.ifremer.nemo.output.GenerationException;
 import fr.ifremer.nemo.output.NemoWriter;
 import fr.ifremer.nemo.output.NemoWriterFactory;
 import fr.ifremer.nemo.util.Conversion;
@@ -140,8 +141,12 @@ public class NemoShell {
 			if (strDefault.equals(Global.EMPTY_STRING))
 				strDefault = inputDomain.getCruise().getModel().getName();
 			
-			if (odvConv != E_TypeConversion.MEDATLAS)
+			if (odvConv != E_TypeConversion.MEDATLAS){
+				if (strDefault.isEmpty()){
+					throw new GenerationException(Messages.error_missing_cruise_reference);
+				}
 				inputDomain.getCruise().getModel().setReference(strDefault);
+			}
 
 			// Is a station property in file
 			int nbLignes =

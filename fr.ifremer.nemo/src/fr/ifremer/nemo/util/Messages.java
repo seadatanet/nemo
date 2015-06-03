@@ -290,6 +290,7 @@ public class Messages {
 	public static String progress_file_preformat;
 	public static String progress_file_preformat_analyse;
 	public static String progress_file_preformat_write;
+	public static String error_missing_cruise_reference;
 	public static String error_notValid;
 	public static String error_file_preformat;
 	public static String error_file_selectFile;
