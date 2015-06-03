@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
+	<classpathentry exported="true" kind="lib" path="lib/SdnVocabulary-1.2.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/sismertoolslib-1.1.9-SNAPSHOT.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/cfpointLib-0.17-SNAPSHOT.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
@@ -44,7 +45,6 @@
 	<classpathentry exported="true" kind="lib" path="axis2-1.5.4/lib/neethi-2.0.4.jar"/>
 	<classpathentry exported="true" kind="lib" path="axis2-1.5.4/lib/XmlSchema-1.4.3.jar"/>
 	<classpathentry exported="true" kind="lib" path="axis2-1.5.4/lib/axiom-api-1.2.10.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/sdnVocabulary-1.1.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/hsqldb-2.2.6.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

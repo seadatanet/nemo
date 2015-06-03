@@ -49,6 +49,8 @@ public class InputFileBrowseListener extends SelectionAdapter
 	{
 		// 6414
 		Nemo.getInstance().getViewMain().getEditFileForm().reinitAllButProcess();
+		// 25574
+		Nemo.getInstance().resetModel();
 	}
 
 	@Override

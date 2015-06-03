@@ -417,8 +417,8 @@ public class RulesManager {
 	public void updateFromModel(E_TypeConversion convType) {
 
 		reinitRules();
-		rule_process(true);
-		rule_fileType(true);
+		rule_process(false);
+		rule_fileType(false);
 		myConversionType = convType;
 		rule_conversionType(true);
 
@@ -637,10 +637,11 @@ public class RulesManager {
 
 	private void rule_conversionType(boolean addToLog) {
 		m_aboveSeaLevel_Enabled = true;
-		if (!isProcessCollection())
-			cruiseEnabled = true;
-		else
-			cruiseEnabled = false;
+		cruiseEnabled = true;//25572
+//		if (!isProcessCollection())
+//			cruiseEnabled = true;
+//		else
+//			cruiseEnabled = true;
 
 
 		if (myConversionType == E_TypeConversion.ODV_MONOSTATION

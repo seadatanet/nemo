@@ -20,7 +20,6 @@ import java.util.HashSet;
 import java.util.List;
 
 import fr.ifremer.nemo.Nemo;
-import fr.ifremer.nemo.input.CruiseModel;
 import fr.ifremer.nemo.input.DataType;
 import fr.ifremer.nemo.input.Fragment;
 import fr.ifremer.nemo.input.InputModel;
@@ -153,13 +152,22 @@ public class StationDomain {
 
 	public StringBuffer getOdvTrajectoryHeader(Station currentStation,
 			String inputLine, int indexRecord) throws ParseException,
-			UnsupportedEncodingException {
+			UnsupportedEncodingException, GenerationException {
 		_currentStation = currentStation;
 
 		StringBuffer odvStationHeader = new StringBuffer();
 		String stationRef = currentStation.getReference();
 		// Cruise
-		String cruiseName =Nemo.getInstance().getDomain().getCruise().getModel().getReference();
+		String cruiseName = Nemo.getInstance().getDomain().getCruise().getModel().getName();
+		if (cruiseName.isEmpty()){
+			cruiseName = Nemo.getInstance().getDomain().getCruise().getModel().getReference();
+		}
+		if (cruiseName.isEmpty()){
+			String errorMessage = "cruise reference can not be empty: fill the field in Nemo or add -datasetRef argument in batch mode";
+			throw new GenerationException(errorMessage);
+		}
+		
+
 		odvStationHeader.append(form.limitString(cruiseName, 20));
 		odvStationHeader.append(Global.TAB);
 
@@ -302,7 +310,10 @@ public class StationDomain {
 			// .getCruise().getModel().getName() ==
 			// "" on met la référence
 			errorMessage = "cruise reference can not be empty: fill the field in Nemo or add -datasetRef argument in batch mode";
-			cruiseName = Nemo.getInstance().getDomain().getCruise().getModel().getReference();
+			cruiseName = Nemo.getInstance().getDomain().getCruise().getModel().getName();
+			if (cruiseName.isEmpty()){
+				cruiseName = Nemo.getInstance().getDomain().getCruise().getModel().getReference();
+			}
 			if (cruiseName.isEmpty()){
 				throw new GenerationException(errorMessage);
 			}
@@ -675,13 +686,12 @@ public class StationDomain {
 			// SHIP
 			errorMessage = "SDN SHIP REFERENCES";
 			//eg: <sdn_reference xlink:type="SDN:L23::NVS2CON" xlink:role="isObservedBy" xlink:href=http://vocab.nerc.ac.uk/collection/C17/74E3"
-			String shipCode =  Nemo.getInstance().getDomain().getCruise().getModel().getShipCode();
-			if (shipCode!=null
-					&& !shipCode.isEmpty()
-					&& !CruiseModel.DEFAULT_SHIP_VALUE.equals(shipCode))
+			String[] shipCodeAndName = Nemo.getInstance().getDomain().getCruise().getModel().getValidShipCodeAndName();
+			if ( ! shipCodeAndName[0].isEmpty()	)
 			{
-				String href = "http://vocab.nerc.ac.uk/collection/C17/current/"+shipCode;
-				SdnXLinkReference shipRef = new SdnXLinkReference("SDN:L23::NVS2CON", "isObservedBy", href);
+				SdnXLinkReference shipRef = new SdnXLinkReference();
+				shipRef.setAsShipReference(shipCodeAndName[0] );
+				
 				medStationHeader.append(start);
 				medStationHeader.append(shipRef.toString(false));
 				medStationHeader.append(Global.RN);

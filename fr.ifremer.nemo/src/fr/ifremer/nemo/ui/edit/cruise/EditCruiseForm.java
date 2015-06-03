@@ -210,73 +210,76 @@ public class EditCruiseForm extends EditForm {
 	}
 	public void defineMandatorySections() {
 		Couple item;
-		
-		buttonInitServeur.setEnabled(true);
-		buttonXML.setEnabled(true);
-		
+
+		buttonInitServeur.setEnabled(!RulesManager.getInstance().isProcessCollection());
+		buttonXML.setEnabled(!RulesManager.getInstance().isProcessCollection());
+
 		if (sectionReference!=null){
-		// REFERENCE
-		sectionReference.setMandatory(true);
-		item = sectionReference.getItem(itemID.REFERENCE);
-		item.setMandatory(true);
-		item = sectionReference.getItem(itemID.LOCAL_CSR_ID);
-		item.setMandatory(false);
-		item = sectionReference.getItem(itemID.NAME);
-		item.setMandatory(RulesManager.getInstance().isConversionToMedatlas()
-				|| RulesManager.getInstance().isConversionToNetCDF());
-		item = sectionReference.getItem(itemID.SHIP);
-		item.setMandatory(RulesManager.getInstance().isConversionToMedatlas());
+			// REFERENCE
+			sectionReference.setMandatory(true);
+			item = sectionReference.getItem(itemID.REFERENCE);
+			item.setMandatory(true);
+			
+			item = sectionReference.getItem(itemID.LOCAL_CSR_ID);
+			item.setMandatory(false);
+			item.setEnabled(!RulesManager.getInstance().isProcessCollection());
 
-		// LOCALISATION
-		sectionLocalisation.setEnabled(RulesManager.getInstance()
-				.isConversionToMedatlas()
-				|| RulesManager.getInstance().isConversionToNetCDF());
+			item = sectionReference.getItem(itemID.NAME);
+			item.setMandatory(RulesManager.getInstance().isConversionToMedatlas()
+					|| RulesManager.getInstance().isConversionToNetCDF());
+			item = sectionReference.getItem(itemID.SHIP);
+			item.setMandatory(RulesManager.getInstance().isConversionToMedatlas());
 
-		sectionLocalisation.setMandatory(RulesManager.getInstance()
-				.isConversionToMedatlas());
-		for (int i = 0; i < sectionLocalisation.getItems().size(); i++) {
-			sectionLocalisation
-					.getItems()
-					.get(i)
-					.setMandatory(
-							RulesManager.getInstance().isConversionToMedatlas());
-		}
+			// LOCALISATION
+			sectionLocalisation.setEnabled(RulesManager.getInstance()
+					.isConversionToMedatlas()
+					|| RulesManager.getInstance().isConversionToNetCDF());
 
-		// SOURCE
-		sectionSource.setEnabled(RulesManager.getInstance()
-				.isConversionToMedatlas()
-				|| RulesManager.getInstance().isConversionToNetCDF());
-		sectionSource.setMandatory(RulesManager.getInstance()
-				.isConversionToMedatlas());
-
-		item = sectionSource.getItem(itemID.COUNTRY);
-		item.setMandatory(RulesManager.getInstance().isConversionToMedatlas());// country
-
-		item = sectionSource.getItem(itemID.CHIEF);
-		item.setMandatory(RulesManager.getInstance().isConversionToMedatlas());// chief
-		// scientist
-
-		// ARCHIVING CENTER
-		sectionCentre.setEnabled(RulesManager.getInstance()
-				.isConversionToMedatlas()
-				|| RulesManager.getInstance().isConversionToNetCDF());
-		sectionCentre.setMandatory(RulesManager.getInstance()
-				.isConversionToMedatlas());
-		item = sectionCentre.getItems().get(0);
-		item.setMandatory(RulesManager.getInstance().isConversionToMedatlas());// data
-		// center
-		item = sectionCentre.getItems().get(1);
-		sectionCentre
+			sectionLocalisation.setMandatory(RulesManager.getInstance()
+					.isConversionToMedatlas());
+			for (int i = 0; i < sectionLocalisation.getItems().size(); i++) {
+				sectionLocalisation
 				.getItems()
-				.get(1)
+				.get(i)
 				.setMandatory(
-						RulesManager.getInstance().isConversionToMedatlas());// confidentiality
-		// DATA TYPE
-		sectionType.setEnabled(RulesManager.getInstance()
-				.isConversionToMedatlas()
-				|| RulesManager.getInstance().isConversionToNetCDF());
-		sectionType.setMandatory(RulesManager.getInstance()
-				.isConversionToMedatlas());
+						RulesManager.getInstance().isConversionToMedatlas());
+			}
+
+			// SOURCE
+			sectionSource.setEnabled(RulesManager.getInstance()
+					.isConversionToMedatlas()
+					|| RulesManager.getInstance().isConversionToNetCDF());
+			sectionSource.setMandatory(RulesManager.getInstance()
+					.isConversionToMedatlas());
+
+			item = sectionSource.getItem(itemID.COUNTRY);
+			item.setMandatory(RulesManager.getInstance().isConversionToMedatlas());// country
+
+			item = sectionSource.getItem(itemID.CHIEF);
+			item.setMandatory(RulesManager.getInstance().isConversionToMedatlas());// chief
+			// scientist
+
+			// ARCHIVING CENTER
+			sectionCentre.setEnabled(RulesManager.getInstance()
+					.isConversionToMedatlas()
+					|| RulesManager.getInstance().isConversionToNetCDF());
+			sectionCentre.setMandatory(RulesManager.getInstance()
+					.isConversionToMedatlas());
+			item = sectionCentre.getItems().get(0);
+			item.setMandatory(RulesManager.getInstance().isConversionToMedatlas());// data
+			// center
+			item = sectionCentre.getItems().get(1);
+			sectionCentre
+			.getItems()
+			.get(1)
+			.setMandatory(
+					RulesManager.getInstance().isConversionToMedatlas());// confidentiality
+			// DATA TYPE
+			sectionType.setEnabled(RulesManager.getInstance()
+					.isConversionToMedatlas()
+					|| RulesManager.getInstance().isConversionToNetCDF());
+			sectionType.setMandatory(RulesManager.getInstance()
+					.isConversionToMedatlas());
 		}
 	}
 	public void init_webService() {
@@ -348,13 +351,13 @@ public class EditCruiseForm extends EditForm {
 		// cruiseDomain.getModel().reset();
 
 		CruiseModel cruiseModel = importXML(fichier);
-		
+
 		//chargement de la liste via le nom car le fichier ne contient que l'information par nom
 		if (cruiseModel.getCountryName() != null) {
 			Couple pays = sectionSource.getItem(itemID.COUNTRY);
 			Utils.selectComboLibelle(pays.getValueCombo(), cruiseModel.getCountryName());
 		}
-		
+
 		//transcode seulement en ISO_19115
 		//19139 contient deja des nom de region en C19
 		if(cruiseModel.getXmlVersion() == CruiseModel.XmlVersion.ISO_19115)
@@ -362,7 +365,7 @@ public class EditCruiseForm extends EditForm {
 			String C19RegionName = CruiseModel.getTranscodeRegionName(cruiseModel.getRegionName());
 			cruiseModel.setRegionName(C19RegionName);
 		}
-		
+
 		cruiseDomain.updateCruise(cruiseModel);
 
 		// mise à jour de l'onglet courant
@@ -390,7 +393,7 @@ public class EditCruiseForm extends EditForm {
 			cruise.dataTypesAt(index).setSensor(listSensor.contains(cruise.dataTypesAt(index).getCode().substring(0, 3)));
 		}
 
-		
+
 
 		return cruise;
 	}
@@ -405,7 +408,7 @@ public class EditCruiseForm extends EditForm {
 
 	@Override
 	public void initSections() {
-		
+
 		initReferenceSection();
 		initLocalisationSection();
 		initSourceSection();
@@ -431,7 +434,7 @@ public class EditCruiseForm extends EditForm {
 					Messages.edit_cruise_cruiseName, ComboType.NONE,
 					Global.EMPTY_STRING);
 			sectionReference.addItem(itemID.SHIP, Messages.edit_cruise_ship,
-					ComboType.SHIP, CruiseModel.DEFAULT_SHIP_VALUE);
+					ComboType.SHIP, Global.EMPTY_STRING);
 			listeSections.add(sectionReference);
 		}
 	}
@@ -478,7 +481,7 @@ public class EditCruiseForm extends EditForm {
 				Messages.edit_cruise_sectionArchiving_lib, this);
 		sectionCentre.addItem(itemID.DATA_CENTER,
 				Messages.edit_cruise_dataCenter, ComboType.DATACENTER, Nemo
-						.getInstance().getConfig().getDataCenter());
+				.getInstance().getConfig().getDataCenter());
 		sectionCentre.addItem(itemID.CONFIDENTIALITY,
 				Messages.edit_cruise_confident, ComboType.CONFIDENT, "P"); //$NON-NLS-1$
 		listeSections.add(sectionCentre);
@@ -684,9 +687,12 @@ public class EditCruiseForm extends EditForm {
 			if (nomCampagne != null) {
 				nomCampagne.setText(cruiseModel.getName());
 			}
+
+
+
 			if (navire != null) {
-				Utils.selectComboCodePlus(navire.getValueCombo(),
-						cruiseModel.getShipCode(), cruiseModel.getShipName());
+				String[] codeAndName = cruiseModel.getValidShipCodeAndName();
+				Utils.selectComboCodePlus(navire.getValueCombo(),codeAndName[0], codeAndName[1]);
 			}
 		}
 

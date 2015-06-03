@@ -20,7 +20,6 @@ import fr.ifremer.nemo.domain.DateTimeUtils;
 import fr.ifremer.nemo.domain.NetCDFLongNameParameterManager;
 import fr.ifremer.nemo.domain.Station;
 import fr.ifremer.nemo.domain.StationDomain;
-import fr.ifremer.nemo.input.CruiseModel;
 import fr.ifremer.nemo.input.ModelDescription;
 import fr.ifremer.nemo.input.parameters.ParameterModel;
 import fr.ifremer.nemo.input.parameters.addedParameters.AP_ADEPZZ01;
@@ -124,7 +123,7 @@ public class NetCDFWriter extends NemoWriter {
 			outputFileName = getOutputFileName(inputFilePath);
 
 			if (isConversionTo_NetCDFMonostation) {
-				System.out.println("convert to n MONOstation files");
+//				System.out.println("convert to n MONOstation files");
 				// Conversion NETCDF - fichiers monostation => N fichiers de
 				// sortie
 				Integer ref = 0;
@@ -160,7 +159,7 @@ public class NetCDFWriter extends NemoWriter {
 					if (isProcessType_CruiseFile) {
 						iDomain.getStation().updateRef();
 					}
-					System.out.println("write station "+indiceStation + " - "+ st.getFileName() + "["+localCdiId+"]");
+//					System.out.println("write station "+indiceStation + " - "+ st.getFileName() + "["+localCdiId+"]");
 					writeStation(st, inputFilePath);
 
 
@@ -174,7 +173,7 @@ public class NetCDFWriter extends NemoWriter {
 
 				}
 			} else {
-				System.out.println("convert to 1 MULTIstation file");
+//				System.out.println("convert to 1 MULTIstation file");
 				// conversion NETCDF multistations => 1 fichier de sortie
 				nbStations = stationDomain.getStations(inputFilePath).size();
 				stringMetadataLength = 0;
@@ -198,7 +197,7 @@ public class NetCDFWriter extends NemoWriter {
 					if (isProcessType_CruiseFile) {
 						iDomain.getStation().updateRef();
 					}
-					System.out.println("write station "+indiceStation+ " - "+ st.getFileName() );
+//					System.out.println("write station "+indiceStation+ " - "+ st.getFileName() );
 					writeStation(st, inputFilePath);
 					indiceStation++;
 				}
@@ -249,13 +248,12 @@ public class NetCDFWriter extends NemoWriter {
 			nbRefs++;
 		}
 		
-		String shipCode = Nemo.getInstance().getDomain().getCruise().getModel().getShipCode();
-		if ( shipCode!=null
-				&& !shipCode.isEmpty()
-				&& !CruiseModel.DEFAULT_SHIP_VALUE.equals(shipCode))
+		String[] shipCodeAndName = Nemo.getInstance().getDomain().getCruise().getModel().getValidShipCodeAndName();
+		if ( ! shipCodeAndName[0].isEmpty()	)
 		{
-			String href = "http://vocab.nerc.ac.uk/collection/C17/current/" + shipCode;
-			SdnXLinkReference shipRef = new SdnXLinkReference("SDN:L23::NVS2CON", "isObservedBy", href);// TODO 20755
+			SdnXLinkReference shipRef = new SdnXLinkReference();
+			shipRef.setAsShipReference(shipCodeAndName[0] );
+			
 			computeSdnXlinkdims(shipRef);
 			references.add(shipRef);
 			nbRefs++;

@@ -1332,7 +1332,22 @@ public class StationSection extends NemoSection {
 
 		myForm.dataType.getDatatype().getValueCombo().select(-1);
 	}
+	public void fillDataTypeWithDataTypes() {
+		CCombo combo = myForm.dataType.getDatatype().getValueCombo();
+		combo.removeAll();
+		combo.add(Global.EMPTY_STRING);
 
+		WSDataType[] dataTypeList = ManageLists.getDataTypes();
+		for (WSDataType dataType : dataTypeList) {
+			// ajout dans la combo (on affiche le libelle qui sera
+			// automatiquement retiré dans
+			// fr.ifremer.nemo.ui.edit.station.StationSection.initDataTypeModel(StationModel)
+			combo.add(dataType.getCode() + Global.SPACE + Global.DBL_PT
+					+ Global.SPACE + dataType.getLibelle());
+		}
+
+		myForm.dataType.getDatatype().getValueCombo().select(-1);
+	}
 	private boolean checkAddDatatypeOk(String code) {
 		// faire un split sur - au cas oe et n'avoir QUE le code
 
@@ -1380,13 +1395,13 @@ public class StationSection extends NemoSection {
 		boolean isCruiseDataTypeEnabled = Nemo.getInstance().getViewMain().getEditCruiseForm().getSectionDataType().isEnabled();
 
 		// FAE 6536 - si pas d'onglet Cruise, ni de dataType dans le modele, on
-		// remplit la combo avec tous les dataTypes avec sensor true
+		// remplit la combo avec tous les dataTypes (pas uniquement avec sensor true, cf 25528)
 
 		if ( !isCruiseEnabled 
 				|| 
 				(isCruiseEnabled && !isCruiseDataTypeEnabled)
 				){
-			fillDataTypeWithDataTypesIsSensor();
+			fillDataTypeWithDataTypes();
 		}
 
 		if (dataType != null) {

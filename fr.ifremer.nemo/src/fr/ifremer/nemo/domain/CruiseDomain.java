@@ -41,7 +41,6 @@ public class CruiseDomain {
 	 * Informations descrivant l'onglet Cuise
 	 */
 	protected CruiseModel _model;
-	// protected StationDomain _station; //onglet Station
 	final private Formatter form;
 
 
@@ -60,12 +59,9 @@ public class CruiseDomain {
 
 	public void updateCruise(CruiseModel cruiseModel) {
 		_model = cruiseModel;
-		// TODO update Domain
 	}
 
-	// RELEASE
 	public void release() {
-		// _station.release();
 		_model.release();
 	}
 
@@ -117,14 +113,13 @@ public class CruiseDomain {
 			}
 		}
 
-		String shipCode =  Nemo.getInstance().getDomain().getCruise().getModel().getShipCode();
-		if (shipCode != null
-				&& !shipCode.isEmpty()
-				&& !CruiseModel.DEFAULT_SHIP_VALUE.equals(shipCode)){
+		String[] shipCodeAndName = Nemo.getInstance().getDomain().getCruise().getModel().getValidShipCodeAndName();
+		if ( ! shipCodeAndName[0].isEmpty()	)
+		{
 			try {
 
-					String href = "http://vocab.nerc.ac.uk/collection/C17/current/" +shipCode ;
-					SdnXLinkReference shipRef = new SdnXLinkReference("SDN:L23::NVS2CON", "isObservedBy", href);
+					SdnXLinkReference shipRef = new SdnXLinkReference();
+					shipRef.setAsShipReference(shipCodeAndName[0] );
 					odvCruiseHeader.append(start);
 					odvCruiseHeader.append(shipRef.toString(true));
 					odvCruiseHeader.append(Global.RN);
@@ -241,7 +236,6 @@ public class CruiseDomain {
 		if (!_model.getComment().equals(Global.EMPTY_STRING)) {
 			medCruiseHeader.append(Global.RN);
 			medCruiseHeader.append(Elts.kw_cruise_comment);
-			// medCruiseHeader.append(Global.RN);
 
 			for (String line : getCommentLines()) {
 				medCruiseHeader.append(Global.RN);
