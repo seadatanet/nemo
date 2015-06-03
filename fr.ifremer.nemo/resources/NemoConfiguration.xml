@@ -4,14 +4,14 @@
   <nautilusWsURL>http://www.ifremer.fr/WSnautilus/services/NAUTILUS</nautilusWsURL>
   <showRule>true</showRule>
   <contact></contact>
-  <modelsDirectory>/home/altran/Documents/IFREMER/NEMO/24417</modelsDirectory>
-  <cruisesDirectory>/home/altran/Documents/IFREMER/NEMO/24417</cruisesDirectory>
+  <modelsDirectory>/home/altran/workspaces/nemoAndCoIndigo/ifremer_datatest</modelsDirectory>
+  <cruisesDirectory>/home/altran/workspaces/nemoAndCoIndigo/ifremer_datatest</cruisesDirectory>
   <outputDirectory></outputDirectory>
   <writeCdi>false</writeCdi>
-  <idEdmoRespCdi></idEdmoRespCdi>
-  <codeEdmoDonnees></codeEdmoDonnees>
-  <idEdmoRespDonnees></idEdmoRespDonnees>
-  <idEdmoDistDonnees></idEdmoDistDonnees>
+  <idEdmoRespCdi>486</idEdmoRespCdi>
+  <codeEdmoDonnees>0</codeEdmoDonnees>
+  <idEdmoRespDonnees>0</idEdmoRespDonnees>
+  <idEdmoDistDonnees>0</idEdmoDistDonnees>
   <cdiURL>http://www.sdn-taskmanager.org/</cdiURL>
   <odvVersion>0.4</odvVersion>
   <medatlasVersion>2.0</medatlasVersion>

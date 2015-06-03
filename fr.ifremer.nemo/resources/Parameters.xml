@@ -7699,6 +7699,25 @@
   <void method="add">
    <object class="fr.ifremer.nemo.ws.WSParameter">
     <void property="code">
+     <string>UVCT</string>
+    </void>
+    <void property="defaultValue">
+     <string>-99.999</string>
+    </void>
+    <void property="format">
+     <string>%+7.3f</string>
+    </void>
+    <void property="name">
+     <string>UPWARD CURRENT VELOCITY</string>
+    </void>
+    <void property="unit">
+     <string>meter/second</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="fr.ifremer.nemo.ws.WSParameter">
+    <void property="code">
      <string>V63X</string>
     </void>
     <void property="defaultValue">
