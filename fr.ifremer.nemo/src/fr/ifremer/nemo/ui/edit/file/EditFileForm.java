@@ -458,7 +458,7 @@ public class EditFileForm extends EditForm
 		MediaModel mediaModel = Nemo.getInstance().getDomain().getMedia().getModel();
 		// Séparateur
 		setSeparateur(mediaModel.getSeparator());
-
+		chkMultiStations.setSelection(mediaModel.isMultiStations());
 		// Type de fichier
 		RulesManager.getInstance().updateFromModel(mediaModel.getInputType());
 
