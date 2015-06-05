@@ -52,8 +52,8 @@ Bundle-ClassPath: .,
  axis2-1.5.4/lib/XmlSchema-1.4.3.jar,
  axis2-1.5.4/lib/axiom-api-1.2.10.jar,
  lib/hsqldb-2.2.6.jar,
- lib/cfpointLib-0.17-SNAPSHOT.jar,
- lib/sismertoolslib-1.1.9-SNAPSHOT.jar,
- lib/SdnVocabulary-1.2.jar
+ lib/SdnVocabulary-1.2.jar,
+ lib/cfpointLib-0.17.jar,
+ lib/sismertoolslib-1.1.9.jar
 Bundle-Vendor: IFREMER
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
