@@ -159,6 +159,7 @@ public class StationDomain {
 		String stationRef = currentStation.getReference();
 		// Cruise
 		String cruiseName = Nemo.getInstance().getDomain().getCruise().getModel().getName();
+		
 		if (cruiseName.isEmpty()){
 			cruiseName = Nemo.getInstance().getDomain().getCruise().getModel().getReference();
 		}
@@ -613,7 +614,7 @@ public class StationDomain {
 				// this is authorized: only DCHistory1 is used, DC History2 is
 				// empty
 				// so this is not an error
-				System.out.println("no value for " + Intern.S_DCHIST + "2");
+//				System.out.println("no value for " + Intern.S_DCHIST + "2");
 			}
 
 			// FAE 5803 Sortie du try catch du passage à la ligne
@@ -722,7 +723,7 @@ public class StationDomain {
 				// this is authorized: only DCHistory1 is used, DC History2 is
 				// empty
 				// so this is not an error
-				System.out.println("no value for " + Intern.S_SURFACE + "2");
+//				System.out.println("no value for " + Intern.S_SURFACE + "2");
 			}
 
 			return medStationHeader;
@@ -947,6 +948,7 @@ public class StationDomain {
 	}
 
 	public void addStation(String inputFilePath, Station st) {
+		//System.out.println("add station "+ inputFilePath +"  "+  st.getReference());
 		if (_listStations.containsKey(inputFilePath)) {
 			_listStations.get(inputFilePath).add(st);
 		} else {
@@ -960,7 +962,9 @@ public class StationDomain {
 	public List<Station> getStations(String inputFilePath) {
 		return _listStations.get(inputFilePath);
 	}
-
+	public HashMap<String, List<Station>> getStations() {
+		return _listStations;
+	}
 	public Station getStationByRef(String ref) {
 		Station selected = null;
 		for (String inputFilePath : _listStations.keySet()) {

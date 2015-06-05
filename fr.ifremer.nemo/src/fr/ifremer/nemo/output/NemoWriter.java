@@ -202,8 +202,20 @@ public abstract class NemoWriter {
 								if (isEndData() && (st != null)) {
 
 									st.setNbRecords(nbrecords);
-									stationDomain.addStation(inputFilePath,
-											st);
+									stationDomain.addStation(inputFilePath,st);
+									if (
+											(
+													!Nemo.getInstance().isBatchMode() 
+													&& Nemo.getInstance().getConfig().isWriteCdi()
+													)
+													|| 
+													(
+															Nemo.getInstance().isBatchMode()
+															&& CDIResumeWriter.getInstance().getNomFichierSortie() !=null
+															&& !CDIResumeWriter.getInstance().getNomFichierSortie().isEmpty())
+											){
+										CDIResumeWriter.getInstance().addStation(inputFilePath,st);
+									}
 									st = null;
 								}
 
@@ -214,9 +226,9 @@ public abstract class NemoWriter {
 											.getStationHeader() > 0);
 									if (inputStationHeader != null) {
 
-											st = new Station(
-													inputFile.getName(),
-													inputStationHeader);
+										st = new Station(
+												inputFile.getName(),
+												inputStationHeader);
 
 										String ref = stationDomain
 												.getReference(
@@ -278,6 +290,19 @@ public abstract class NemoWriter {
 								// enregistrée
 								st.setNbRecords(nbrecords);
 								stationDomain.addStation(inputFilePath, st);
+								if (
+										(
+												!Nemo.getInstance().isBatchMode() 
+												&& Nemo.getInstance().getConfig().isWriteCdi()
+												)
+												|| 
+												(
+														Nemo.getInstance().isBatchMode()
+														&& CDIResumeWriter.getInstance().getNomFichierSortie() !=null
+														&& !CDIResumeWriter.getInstance().getNomFichierSortie().isEmpty())
+										){
+									CDIResumeWriter.getInstance().addStation(inputFilePath,st);
+								}
 							}
 
 

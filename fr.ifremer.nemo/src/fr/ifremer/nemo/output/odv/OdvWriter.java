@@ -17,6 +17,7 @@ import fr.ifremer.nemo.domain.StationDomain;
 import fr.ifremer.nemo.input.parameters.ParameterModel;
 import fr.ifremer.nemo.output.GenerationException;
 import fr.ifremer.nemo.output.NemoWriter;
+import fr.ifremer.nemo.ui.RulesManager;
 import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Global.E_EndData;
@@ -43,7 +44,7 @@ public class OdvWriter extends NemoWriter
     	   outputFileName = iDomain.getMedia().getOutputFileName();
            if (isProcessType_CollectionDir)
            {
-               outputFileName += File.separator + Nemo.getInstance().getDomain().getCruise().getModel().getReference();
+   			outputFileName += File.separator + new File(inputFilePath).getName();
            }
            return outputFileName;
     }
@@ -61,7 +62,9 @@ public class OdvWriter extends NemoWriter
         {
             stationDomain.updateRef();
             outputFileName = getOutputFileName(inputFilePath);
-
+            if (RulesManager.getInstance().isProcessCollectionDir()){
+            	Nemo.getInstance().getDomain().getCruise().getModel().setName(new File(inputFilePath).getName());
+            }
             if (isConversionTo_ODVMonostation)
             {
                 // Conversion ODV - fichiers monostation => N fichiers de sortie

@@ -65,6 +65,13 @@ public class NemoShell {
 			}
 
 			boolean sort = sortDatas;
+			// export CDI summary (FAE 4525)
+			if (!cdiSummaryFile.equals(Global.EMPTY_STRING)) {
+				CDIResumeWriter.getInstance().reset();
+				CDIResumeWriter.getInstance().setNomFichierSortie(
+						cdiSummaryFile);
+			}
+
 
 			if (!nemo.openModel(modelFile)) {
 				// ERREUR les deux sont UNKNOWN
@@ -74,7 +81,7 @@ public class NemoShell {
 			InputDomain inputDomain = Nemo.getInstance().getDomain();
 			if (inputDomain.getMedia().getModel().getSeparator() != Global.EMPTY_STRING)
 				inputFile =
-						Preformat.run(new File(inputFile)).getAbsolutePath();
+				Preformat.run(new File(inputFile)).getAbsolutePath();
 
 			nemo.getDomain().getMedia().getModel().setSourcePath(inputFile);
 
@@ -86,7 +93,7 @@ public class NemoShell {
 			if (convertModel == convertArgument) {
 				if (convertModel != E_TypeConversion.UNKNOWN) {
 					nemo.getDomain().getConversion()
-							.setCurrentConversion(convertArgument);
+					.setCurrentConversion(convertArgument);
 				} else {
 					// ERREUR les deux sont UNKNOWN
 					logger.error("Error, Conversion format must be set");
@@ -120,7 +127,7 @@ public class NemoShell {
 			} else {
 				// ERREUR argument et modele sont différents !!
 				logger
-						.error("Error, Conversion format incompatible with the model");
+				.error("Error, Conversion format incompatible with the model");
 				return false;
 			}
 
@@ -140,7 +147,7 @@ public class NemoShell {
 
 			if (strDefault.equals(Global.EMPTY_STRING))
 				strDefault = inputDomain.getCruise().getModel().getName();
-			
+
 			if (odvConv != E_TypeConversion.MEDATLAS){
 				if (strDefault.isEmpty()){
 					throw new GenerationException(Messages.error_missing_cruise_reference);
@@ -151,8 +158,8 @@ public class NemoShell {
 			// Is a station property in file
 			int nbLignes =
 					inputDomain.getMedia().getModel().getFileHeader()
-							+ Nemo.getInstance().getDomain().getMedia()
-									.getShellStationHeaderNumberLines();
+					+ Nemo.getInstance().getDomain().getMedia()
+					.getShellStationHeaderNumberLines();
 
 			// FAE 7239
 			PropertyModel prefModel =
@@ -195,7 +202,7 @@ public class NemoShell {
 			// a ce stade, il manque notamment la taille du stationHeader si
 			// celui-ci est variable
 			nemo.getDomain().getData().getMyParameterManager()
-					.setAddedParameterModel();
+			.setAddedParameterModel();
 			File repertory = null;
 
 			if (odvConv.equals(E_TypeConversion.ODV_MONOSTATION) || odvConv.equals(E_TypeConversion.NETCDF_MONOSTATION)) {
@@ -213,9 +220,6 @@ public class NemoShell {
 
 			// export CDI summary (FAE 4525)
 			if (!cdiSummaryFile.equals(Global.EMPTY_STRING)) {
-				CDIResumeWriter.getInstance().reset();
-				CDIResumeWriter.getInstance().setNomFichierSortie(
-						cdiSummaryFile);
 				CDIResumeWriter.getInstance().writeResume(conv);
 			}
 
@@ -238,7 +242,7 @@ public class NemoShell {
 
 	private static void mapping(Logger logger, Conversion conv,
 			MappingTable mappingTable, String couplingTablePrefix)
-			throws Exception {
+					throws Exception {
 		Mapping mapping;
 
 		InputDomain inputDomain = Nemo.getInstance().getDomain();
@@ -247,7 +251,7 @@ public class NemoShell {
 		ConversionDomain convDomain =Nemo.getInstance().getDomain().getConversion();
 		String localCdiId;
 		try {
-			
+
 			String cheminComplet = convDomain.getOutputPath();
 			String couplingTablValidPrefix = convDomain.getValidPrefix(couplingTablePrefix, cheminComplet);
 			if (couplingTablValidPrefix!=null) {
@@ -255,12 +259,12 @@ public class NemoShell {
 			}else{
 				throw new Exception("Error: couplingTablePrefix is not consistent with output path");
 			}
-			
+
 			for (String outputPath : inputDomain.getMedia().getOutputFiles().keySet()) {
-				
-				
-				
-				
+
+
+
+
 				for (String stRef : inputDomain.getMedia().getOutputFiles().get(outputPath)) {
 					Station st = sDomain.getStationByRef(stRef);
 					localCdiId = sDomain.getLocalCdiId(cDomain, conv, st.getReference());

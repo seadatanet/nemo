@@ -136,7 +136,7 @@ public class Preformat {
 
 	}
 
-	public static void runExGUI() throws IOException {
+	public static void runExGUI() throws Exception {
 		isCollectionGroupedByCruise = false;
 		EditFileForm editFileForm = Nemo.getInstance().getViewMain().getEditFileForm();
 
@@ -202,7 +202,7 @@ public class Preformat {
 
 	}
 
-	public static File run(File inputFile) throws IOException {
+	public static File run(File inputFile) throws Exception {
 		isCollectionGroupedByCruise = false;
 		boolean isBatch = Nemo.getInstance().isBatchMode();
 		MediaDomain mediaDom = Nemo.getInstance().getDomain().getMedia();
@@ -269,7 +269,7 @@ public class Preformat {
 		} else {
 
 			processPreformat(new File[]
-			{ inputFile }, null, inputFile.getParentFile(), isBatch);
+					{ inputFile }, null, inputFile.getParentFile(), isBatch);
 
 			ficSortie = new File(inputFile.getParent() + PF + inputFile.getName());
 
@@ -279,7 +279,7 @@ public class Preformat {
 
 	}
 
-	private static void processPreformatFile(String outputDirectory, String inputFile, boolean batchMode) throws IOException {
+	private static void processPreformatFile(String outputDirectory, String inputFile, boolean batchMode) throws Exception {
 		nombreColonnes(inputFile);
 		// /////////////////////////////////////////////////
 		// Recuperation des entiers et decimales maximum //
@@ -294,7 +294,7 @@ public class Preformat {
 		ecritureFichier(inputFile, outputDirectory, outputDirectory);
 	}
 
-	private static void processPreformat(File[] lstRepertoires, String[] listeFichiers, File repSortie, boolean batchMode) throws IOException {
+	private static void processPreformat(File[] lstRepertoires, String[] listeFichiers, File repSortie, boolean batchMode) throws Exception {
 
 		Double pourcentEtape1 = 0d;
 		Double pourcentEtape2 = 0d;
@@ -306,9 +306,9 @@ public class Preformat {
 		// /////////////////////////////////////////////////
 		for (File repertoire : lstRepertoires) {
 			_repEntree = repertoire.getAbsolutePath();
-			if (listeFichiers == null) {
-				listeFichiers = new File(_repEntree).list();
-			}
+
+			listeFichiers = new File(_repEntree).list();
+
 			// on enleve le repertoire .svn s'il existe
 			listeFichiers = fr.ifremer.nemo.util.Utils.getFilesWithoutSVN(listeFichiers);
 
@@ -330,9 +330,9 @@ public class Preformat {
 
 		for (File repertoire : lstRepertoires) {
 			_repEntree = repertoire.getAbsolutePath();
-			if (listeFichiers == null) {
-				listeFichiers = new File(_repEntree).list();
-			}
+
+			listeFichiers = new File(_repEntree).list();
+
 
 			for (String fichier : listeFichiers) {
 				if (!batchMode) {
@@ -424,7 +424,7 @@ public class Preformat {
 		}
 	}
 
-	private static void nombreColonnes(String fichier) throws IOException {
+	private static void nombreColonnes(String fichier) throws Exception {
 		BufferedReader lecteurAvecBuffer = null;
 		String ligneLue = Global.EMPTY_STRING;
 		int i;
@@ -450,7 +450,11 @@ public class Preformat {
 			}
 
 		} catch (FileNotFoundException exc) {
+			if (Nemo.getInstance().isBatchMode()){
+				throw new Exception(Messages.error_file_preformat + Global.SPACE + fichier);
+			}
 			Utils.messageErreurAppend(Messages.error_file_preformat + Global.SPACE + fichier);
+
 		} finally {
 			if (lecteurAvecBuffer != null)
 				lecteurAvecBuffer.close();

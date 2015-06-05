@@ -5,8 +5,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.FileDialog;
@@ -37,16 +40,16 @@ import fr.ifremer.nemo.util.Messages;
 public class CDIResumeWriter {
 	private static CDIResumeWriter instance;
 
-	// private final Nemo nemo;
-
 	private String nomFichierSortie;
-
 	private FileWriter writer;
 	private final String sep;
-
+	// keep FULL stations list here (list in station model is not complete, because must be reset fo input directories)
+	protected HashMap<String, List<Station>> _listStations;
+	
+	
 	private CDIResumeWriter() {
-		// nemo = Nemo.getInstance();
 		sep = Intern.CDIResumeWriter_separateur;
+		_listStations = new HashMap<String, List<Station>>();
 	}
 
 	public static CDIResumeWriter getInstance() {
@@ -60,7 +63,16 @@ public class CDIResumeWriter {
 		nomFichierSortie = Global.EMPTY_STRING;
 
 	}
-
+	public void addStation(String inputFilePath, Station st) {
+//		System.out.println("add station CDI "+ inputFilePath +"  "+  st.getReference());
+		if (_listStations.containsKey(inputFilePath)) {
+			_listStations.get(inputFilePath).add(st);
+		} else {
+			List<Station> stations = new ArrayList<Station>();
+			stations.add(st);
+			_listStations.put(inputFilePath, stations);
+		}
+	}
 	@SuppressWarnings("nls")
 	public void writeResume(Conversion formatConversion) throws IOException {
 		// 1 ligne par paramètres mesurés
@@ -88,19 +100,16 @@ public class CDIResumeWriter {
 			DataDomain dataDomain = iDomain.getData();
 			sDomain.resetlocalCDIList();
 
-			for (String outputPath : iDomain.getMedia().getOutputFiles()
-					.keySet()) {
+			for (String outputPath : iDomain.getMedia().getOutputFiles().keySet()) {
 
-				for (String stRef : iDomain.getMedia().getOutputFiles().get(
-						outputPath)) {
+				for (String stRef : iDomain.getMedia().getOutputFiles().get(outputPath)) {
+
 					// for (Station st :
 					// sDomain.getStations(outputFile.getName())){
-					Station st = sDomain.getStationByRef(stRef);
+					Station st = getStationByRef(stRef);
 					// seuls les paramètres mesurés sont à prendre en compte
 					for (ParameterModel param : dataDomain.getModel().getParameterModels()) {
-						String localCDIId = sDomain.getLocalCdiId(cDomain,
-								formatConversion, st.getReference());
-
+						String localCDIId = sDomain.getLocalCdiId(cDomain,formatConversion, st.getReference());
 						writeCDILine(st, param, formatConversion, localCDIId, outputPath);
 						if (formatConversion == Conversion.MEDATLAS) {
 							writeCDILine(st, param, Conversion.ODV, localCDIId, outputPath);
@@ -117,7 +126,18 @@ public class CDIResumeWriter {
 				writer.close();
 		}
 	}
-
+	public Station getStationByRef(String ref) {
+		Station selected = null;
+		for (String inputFilePath : _listStations.keySet()) {
+			for (Station st : _listStations.get(inputFilePath)) {
+				if (ref.equals(st.getReference())) {
+					selected = st;
+					break;
+				}
+			}
+		}
+		return selected;
+	}
 	private void writeCDILine(Station st, ParameterModel param, Conversion formatConversion, String localCDIId, String outputPath) throws IOException, ParseException {
 
 		InputDomain iDomain = Nemo.getInstance().getDomain();
