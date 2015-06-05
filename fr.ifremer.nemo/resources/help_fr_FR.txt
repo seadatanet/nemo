@@ -79,7 +79,7 @@ Les parties qui doivent être obligatoirement renseignées sont marquées par un
 **********
 Pour plus de détails, se référer au manuel utilisateur de NEMO.
 
-==DESCRIPTION DE CAMPAGNE===========================
+==DESCRIPTION DE CAMPAGNE / COLLECTION ===========================
 
 Les informations de cet écran sont nécessaires pour le format MEDATLAS. Cette étape est sautée si le format de sortie sélectionné est ODV.
  - Bouton "Valider étape" : Une étape doit être validée avant de passer à la suivante.

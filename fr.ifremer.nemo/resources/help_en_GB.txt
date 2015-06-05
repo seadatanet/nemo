@@ -82,7 +82,7 @@ The mandatory sections are highligted by a '*', in this step they are filled by 
 **********
 For detailed explanation, please see NEMO user manual.
 
-==CRUISE DESCRIPTION==
+==CRUISE / COLLECTION DESCRIPTION==
 
 The information on this screen is necessary for MEDATLAS format, this step is skipped if the chosen output format is ODV.
  - Validate Button: One step must be validated once all information has been input, before moving to the next one.
