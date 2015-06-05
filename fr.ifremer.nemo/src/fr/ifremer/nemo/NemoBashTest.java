@@ -530,12 +530,12 @@ public class NemoBashTest {
 	 * methodes
 	 * =================================================================
 	 */
-	@Test
+	//	@Test
 	public void cleanDirectories(){
 
-	
 
-		System.out.println("dataRootPath" + dataRootPath + "--------");
+
+		System.out.println("dataRootPath " + dataRootPath + "--------");
 		File root = new File(dataRootPath);
 		for (File testDir : root.listFiles()) {
 			System.out.println("testDir: " + testDir.toString());
@@ -949,22 +949,67 @@ public class NemoBashTest {
 		return f.exists();
 	}
 
-	public boolean compareWithReference(String outputAbsolutePath, String outputTestName, Conversion conv) {
-		boolean comp = false;
+	public boolean compareWithReference( String outputAbsolutePath, String outputTestName, Conversion conv) {
+		return compareWithReference(true, outputAbsolutePath, outputTestName, conv);
+	}
+	public boolean compareWithReference(boolean currentComp,String outputAbsolutePath, String outputTestName, Conversion conv) {
+		//		boolean comp = false;
+		File ref = new File (outputAbsolutePath+"/"+outputReferenceName);
+		File test = new File (outputAbsolutePath+"/"+outputTestName);
+
+
 		if (conv == Conversion.NETCDF){
-			comp = compareCFPoint(outputAbsolutePath, outputTestName, outputReferenceName);
+
+			if ( test.isDirectory()){
+				if (!ref.exists() ||ref.listFiles().length==0){
+					message.isReferenceFound = false;
+					return false;
+				}
+				for (File f : test.listFiles()){
+					currentComp &= compareCFPoint(
+							outputAbsolutePath+File.separator+ outputName+File.separator+ f.getName(), 
+							f.getAbsolutePath());
+				}
+			}else{
+				currentComp &= compareCFPoint( 
+						outputAbsolutePath+File.separator+outputTestName, 
+						outputAbsolutePath+File.separator+outputReferenceName);
+			}
 		}else{
-			comp = compare_____TwoFiles(outputAbsolutePath, outputTestName, outputReferenceName);
+
+			if ( test.isDirectory()){
+				if (!ref.exists() ||ref.listFiles().length==0){
+					message.isReferenceFound = false;
+					return false;
+				}
+				for (File f : test.listFiles()){
+					currentComp &= compare_____TwoFiles(
+							f.getAbsolutePath(),
+							outputAbsolutePath+File.separator+ outputName+File.separator+ f.getName()
+
+							);
+				}
+			}else{
+				currentComp = compare_____TwoFiles(
+						outputAbsolutePath+File.separator+ outputTestName, 
+						outputAbsolutePath+File.separator+ outputReferenceName);
+			}
 		}
-		return comp;
+		return currentComp;
 	}
 
-	private boolean compareCFPoint(String outputAbsolutePath, String outputTestName,String  outputNCReferenceName){
+	private boolean compareCFPoint(
+//			String outputAbsolutePath, 
+			String outputTestName,String  outputNCReferenceName){
 
 		NetcdfFile ref = null;
 		NetcdfFile junit = null ;
-		String refPath =outputAbsolutePath+"/"+outputNCReferenceName;
-		String junitPath=outputAbsolutePath+"/"+outputTestName;
+//		String refPath =outputAbsolutePath+"/"+outputNCReferenceName;
+//		String junitPath=outputAbsolutePath+"/"+outputTestName;
+		
+		String refPath =outputNCReferenceName;
+		String junitPath=outputTestName;
+		
 		Formatter formatter = new Formatter();
 
 		message.batchCompRes = true;
@@ -1103,15 +1148,15 @@ public class NemoBashTest {
 		return message.batchCompRes;
 
 	}
-	public boolean compare_____TwoFiles(String outputAbsolutePath,
-			String fileA, String fileB) {
+	public boolean compare_____TwoFiles(String fileA, String fileB) {
 
 		BufferedReader bufOut = null;
 		BufferedReader bufRef = null;
 		String outputLine = "";
 		String refFileLine;
-		String outputTest = outputAbsolutePath + File.separator + fileA;
-		String output_REFERENCE = outputAbsolutePath + File.separator + fileB;
+		String outputTest =   fileA;
+		String output_REFERENCE =   fileB;
+
 		boolean identical = true;
 
 		try {
@@ -1287,7 +1332,7 @@ public class NemoBashTest {
 				}
 				if (!conversionRes) {
 					mes += " | conversion: " + getString(conversionRes);
-					mes += " " + conversionError;
+					mes += " !!!! " + conversionError;
 				}else{
 					mes += " | conversion: " + getString(conversionRes);
 				}
@@ -1331,7 +1376,7 @@ public class NemoBashTest {
 		}
 
 		private void write(String mes) {
-			testLogger.info(mes + "\r\n");
+			testLogger.info(mes );//+ "\r\n");
 		}
 	}
 
