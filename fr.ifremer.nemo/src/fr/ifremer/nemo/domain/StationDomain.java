@@ -244,7 +244,10 @@ public class StationDomain {
 		String ref = Global.EMPTY_STRING;
 		if (_model.getReferenceProperty().isUserProvided()) {
 			if (Nemo.getInstance().getDomain().getMedia().getModel()
-					.getInputType() == E_InputType.TRAJECTORY) {
+					.getInputType() == E_InputType.TRAJECTORY 
+					&& Nemo.getInstance().getDomain().getConversion().getCurrent()!= E_TypeConversion.NETCDF_MULTISTATIONS
+					&& Nemo.getInstance().getDomain().getConversion().getCurrent()!= E_TypeConversion.NETCDF_MONOSTATION
+					) {
 				ref = _model.getReferenceProperty().getUserValue();
 			} else {
 				ref = getRef(mustIncrement);
