@@ -829,8 +829,8 @@ public class NetCDFWriter extends NemoWriter {
 			String varName = param.getParameter().getCodeP011();
 			longName = NetCDFLongNameParameterManager.getInstance().getUserLongName(param.getParameter().getCodeP011());
 			if (longName == null) {
-				if (zParameterModel.getParameter().getNameP011() != null) {
-					longName = zParameterModel.getParameter().getNameP011();
+				if (param.getParameter().getNameP011() != null) {
+					longName = param.getParameter().getNameP011();
 				} else {
 					throw new Exception(Messages.Etape_134 + Global.SPACE + zParameterModel.getParameter().getCodeP011());
 				}
