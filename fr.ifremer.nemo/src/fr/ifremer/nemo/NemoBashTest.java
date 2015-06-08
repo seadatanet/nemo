@@ -530,7 +530,7 @@ public class NemoBashTest {
 	 * methodes
 	 * =================================================================
 	 */
-	//	@Test
+		@Test
 	public void cleanDirectories(){
 
 
@@ -856,7 +856,7 @@ public class NemoBashTest {
 		longNames.put("TPHSXFP2", "Concentration of phosphorus"); //$NON-NLS-1$//$NON-NLS-2$
 		longNames.put("DEPHPM01", "Depth"); //$NON-NLS-1$//$NON-NLS-2$
 		longNames.put("NTRAZZXX", "Concentration of nitrite"); //$NON-NLS-1$//$NON-NLS-2$
-		longNames.put("CNDCST01", "Electrical conductivity"); //$NON-NLS-1$//$NON-NLS-2$
+		longNames.put("CNDCST0P1", "Electrical conductivity"); //$NON-NLS-1$//$NON-NLS-2$
 		longNames.put("TEMPSZ01", "Temperature"); //$NON-NLS-1$//$NON-NLS-2$
 		longNames.put("SSALSG01", "Salinity"); //$NON-NLS-1$//$NON-NLS-2$
 		longNames.put("TEMPPR01", "Temperature"); //$NON-NLS-1$//$NON-NLS-2$
@@ -1133,7 +1133,7 @@ public class NemoBashTest {
 
 
 		//		String refPath = outputDir.getAbsolutePath()+File.separator+outputRefFileName;
-		if (REPLACE ){
+		if (!message.batchCompRes && REPLACE ){
 			// delete ref nc
 			testLogger.warn("delete "+ refPath);
 			new File(refPath).delete();
@@ -1242,7 +1242,7 @@ public class NemoBashTest {
 
 
 			//			String refPath = outputDir.getAbsolutePath()+File.separator+outputRefFileName;
-			if (REPLACE ){
+			if (!identical && REPLACE ){
 				// delete ref nc
 				testLogger.warn("delete "+ output_REFERENCE);
 				new File(output_REFERENCE).delete();
