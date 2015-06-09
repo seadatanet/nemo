@@ -25,6 +25,7 @@ import fr.ifremer.nemo.input.parameters.ParameterModel;
 import fr.ifremer.nemo.input.parameters.addedParameters.AP_ADEPZZ01;
 import fr.ifremer.nemo.input.parameters.addedParameters.AP_AHGTZZ01;
 import fr.ifremer.nemo.input.parameters.addedParameters.AP_DEPHPR01;
+import fr.ifremer.nemo.input.parameters.addedParameters.AddedParam;
 import fr.ifremer.nemo.output.GenerationException;
 import fr.ifremer.nemo.output.NemoWriter;
 import fr.ifremer.nemo.util.Conversion;
@@ -700,7 +701,8 @@ public class NetCDFWriter extends NemoWriter {
 		String standardName = getZStandardName(zParameterModel);
 		String longName = NetCDFLongNameParameterManager.getInstance().getUserLongName(zParameterModel.getParameter().getCodeP011());
 		if (longName == null) {
-			if (zParameterModel.getParameter().getNameP011() != null) {
+			//17499 + 25656
+			if (zParameterModel.getParameter() instanceof AddedParam && zParameterModel.getParameter().getNameP011() != null) {
 				longName = zParameterModel.getParameter().getNameP011();
 			} else {
 				throw new Exception(Messages.Etape_134 + Global.SPACE + zParameterModel.getParameter().getCodeP011());
@@ -828,11 +830,11 @@ public class NetCDFWriter extends NemoWriter {
 			// varName = param.getParameter().getLocalCode();
 			String varName = param.getParameter().getCodeP011();
 			longName = NetCDFLongNameParameterManager.getInstance().getUserLongName(param.getParameter().getCodeP011());
-			if (longName == null) {
-				if (param.getParameter().getNameP011() != null) {
+			if (longName == null) {//17499 + 25656
+				if (param.getParameter() instanceof AddedParam &&   param.getParameter().getNameP011() != null) {
 					longName = param.getParameter().getNameP011();
 				} else {
-					throw new Exception(Messages.Etape_134 + Global.SPACE + zParameterModel.getParameter().getCodeP011());
+					throw new Exception(Messages.Etape_134 + Global.SPACE + param.getParameter().getCodeP011());
 				}
 			}
 			sdnParameterUrn = getURNSyntaxe(URNtype.object, param.getParameter().getCodeP011(), null, Intern.mapping_objet, param.isText());
