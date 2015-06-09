@@ -826,6 +826,8 @@ public class NemoBashTest {
 		longNames.put("PSSTZZ01", "Temperature"); //$NON-NLS-1$//$NON-NLS-2$
 		longNames.put("ODSDM021", "Salinity"); //$NON-NLS-1$//$NON-NLS-2$
 		longNames.put("DOXYZZ01", "Concentration of oxygen"); //$NON-NLS-1$//$NON-NLS-2$
+		longNames.put("DOXMZZXX", "Concentration of oxygen per unit mass of the water body"); //$NON-NLS-1$//$NON-NLS-2$
+		longNames.put("DOXYZZXX", "Concentration of oxygen per unit volume of the water body"); //$NON-NLS-1$//$NON-NLS-2$
 		longNames.put("FLUOZZZZ", "Fluorescence"); //$NON-NLS-1$//$NON-NLS-2$
 		longNames.put("TEMPET01", "Temperature"); //$NON-NLS-1$//$NON-NLS-2$
 		longNames.put("NTRIZZXX", "Concentration of nitrite"); //$NON-NLS-1$//$NON-NLS-2$
@@ -880,7 +882,12 @@ public class NemoBashTest {
 		longNames.put("EWEWSS01", "Eastward wind Velocity"); //$NON-NLS-1$//$NON-NLS-2$
 		longNames.put("EWNSSS01", "Northward wind Velocity"); //$NON-NLS-1$//$NON-NLS-2$
 		longNames.put("CBTASS01", "Temperature"); //$NON-NLS-1$//$NON-NLS-2$
-
+		longNames.put("CNDCST01", "Electrical Conductivity by CTD"); //$NON-NLS-1$//$NON-NLS-2$
+		longNames.put("CNDCZZ01", "Electrical Conductivity"); //$NON-NLS-1$//$NON-NLS-2$
+		longNames.put("CDTAPS01", "Temperature of the atmosphere by psychrometer dry bulb"); //$NON-NLS-1$//$NON-NLS-2$
+		longNames.put("SVELXXXX", "Sound velocity in the water body"); //$NON-NLS-1$//$NON-NLS-2$
+		longNames.put("ASLVZZ01", "Surface elevation (unspecified datum) of the water body"); //$NON-NLS-1$//$NON-NLS-2$
+		
 		return longNames;
 	}
 
@@ -892,7 +899,7 @@ public class NemoBashTest {
 		standardNames.put("PRESPR01", "sea_water_pressure"); //$NON-NLS-1$//$NON-NLS-2$
 		standardNames.put(
 				"NTRAYYDZ", "mole_concentration_of_nitrate_in_sea_water"); //$NON-NLS-1$//$NON-NLS-2$
-		standardNames.put("ADEPZZ01", "depth"); //$NON-NLS-1$//$NON-NLS-2$
+//		standardNames.put("ADEPZZ01", "depth"); //$NON-NLS-1$//$NON-NLS-2$
 		standardNames.put("PSSTZZ01", "sea_water_temperature"); //$NON-NLS-1$//$NON-NLS-2$
 		standardNames.put("ODSDM021", "sea_water_salinity"); //$NON-NLS-1$//$NON-NLS-2$
 		standardNames
