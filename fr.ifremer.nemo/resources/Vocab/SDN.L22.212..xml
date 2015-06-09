@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<vocabulary list="SDN:L22:211:"  version="211"  date="2015-06-05T01:00:02.000"  title="SeaVoX Device Catalogue" >
+<vocabulary list="SDN:L22:212:"  version="212"  date="2015-06-09T01:00:01.000"  title="SeaVoX Device Catalogue" >
    <element  key="SDN:L22::TOOL0532"  label="ThermoFinnigan EA 1112 Flash Elemental Analyser"  shortLabel="ThermoF EA 1112"  date="2012-08-20T23:05:06.000"  />
    <element  key="SDN:L22::TOOL0727"  label="Pico Technologies PT-104 Platinum Resistance Data Logger"  shortLabel="Pico Technologies Pt104"  date="2014-07-09T15:23:06.000"  />
    <element  key="SDN:L22::TOOL0533"  label="DTU Nutech GM-25-5A beta Multicounter system"  shortLabel="DTU Nutech GM-25-5A"  date="2012-08-20T23:05:06.000"  />
@@ -71,8 +71,8 @@
    <element  key="SDN:L22::TOOL0745"  label="Kongsberg EM 300 multibeam echosounder"  shortLabel="Kongsberg EM300"  date="2014-07-17T14:46:36.000"  />
    <element  key="SDN:L22::TOOL0746"  label="Kongsberg EM 710 multibeam echosounder"  shortLabel="Kongsberg EM710"  date="2014-07-17T14:46:36.000"  />
    <element  key="SDN:L22::TOOL0551"  label="High Volume Air Sampler"  shortLabel="HVAS"  date="2012-09-26T15:33:22.000"  />
-   <element  key="SDN:L22::TOOL0552"  label="Nereides 300l sample bottle"  shortLabel="Nereides 300l bottle"  date="2012-09-26T16:11:56.000"  />
    <element  key="SDN:L22::TOOL0747"  label="Teledyne RDI Ocean Surveyor 38kHz ADCP"  shortLabel="RDI OS-38"  date="2014-07-17T14:46:36.000"  />
+   <element  key="SDN:L22::TOOL0552"  label="Nereides 300l sample bottle"  shortLabel="Nereides 300l bottle"  date="2012-09-26T16:11:56.000"  />
    <element  key="SDN:L22::TOOL0748"  label="Teledyne RDI Workhorse Mariner 1200kHz ADCP"  shortLabel="RDI WM-1200"  date="2014-07-17T14:46:36.000"  />
    <element  key="SDN:L22::TOOL0553"  label="DGT Research Diffusive Gradients in Thin Films trace metal sampler"  shortLabel="DGT trace metal sampler"  date="2012-11-15T10:40:15.000"  />
    <element  key="SDN:L22::TOOL0554"  label="University of Manchester 4-stage Compact Cascade Impactor"  shortLabel="UMA 4-stage CCI"  date="2012-09-28T08:56:09.000"  />
@@ -343,7 +343,10 @@
    <element  key="SDN:L22::NETT0174"  label="KC Denmark AS small plankton net"  shortLabel="KC Denmark 25 cm small plankton net"  date="2014-09-12T16:20:07.000"  />
    <element  key="SDN:L22::NETT0173"  label="Plankton pump sampler"  shortLabel="Plankton pump sampler"  date="2012-10-12T13:13:09.000"  />
    <element  key="SDN:L22::NETT0175"  label="Lindahl dividable phytoplankton sampling hose"  shortLabel="Lindahl sampling hose"  date="2014-09-12T16:20:07.000"  />
+   <element  key="SDN:L22::TOOL0875"  label="Simrad GC80 and GC85 gyrocompass"  shortLabel="Simrad GC80 and GC85"  date="2015-06-08T14:32:54.000"  />
+   <element  key="SDN:L22::TOOL0876"  label="LaCoste and Romberg S33 gravity meter"  shortLabel="L and R S33"  date="2015-06-08T14:32:54.000"  />
    <element  key="SDN:L22::TOOL0873"  label="SMRU GPS Satellite Relay Data Logger (Argos)"  shortLabel="SMRU GPS SRDL"  date="2015-06-04T14:56:46.000"  />
+   <element  key="SDN:L22::TOOL0874"  label="IXSea Magis magnetometer"  shortLabel="IXSea Magis"  date="2015-06-08T14:32:54.000"  />
    <element  key="SDN:L22::TOOL0871"  label="Sea-Bird SBE 19plus V2 SEACAT CTD"  shortLabel="SBE 19+ V2 SEACAT"  date="2015-05-31T23:45:41.000"  />
    <element  key="SDN:L22::TOOL0872"  label="Teledyne RDI Workhorse Navigator 1200kHz Doppler Velocity Log"  shortLabel="RDI Workhorse Navigator 1200kHz DVL"  date="2015-06-03T15:27:53.000"  />
    <element  key="SDN:L22::TOOL0870"  label="Sea-Bird SBE 16Plus V2 SEACAT C-T Recorder"  shortLabel="SBE 16+ V2 SEACAT"  date="2015-05-31T23:35:45.000"  />
