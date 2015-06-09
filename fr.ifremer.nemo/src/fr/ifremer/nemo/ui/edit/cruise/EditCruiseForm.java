@@ -277,7 +277,8 @@ public class EditCruiseForm extends EditForm {
 			// DATA TYPE
 			sectionType.setEnabled(RulesManager.getInstance()
 					.isConversionToMedatlas()
-					|| RulesManager.getInstance().isConversionToNetCDF());
+//					|| RulesManager.getInstance().isConversionToNetCDF() // 25528 disable for netcdf
+					);
 			sectionType.setMandatory(RulesManager.getInstance()
 					.isConversionToMedatlas());
 		}
