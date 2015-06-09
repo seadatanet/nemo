@@ -972,11 +972,12 @@ public class NetCDFWriter extends NemoWriter {
 			if (cruiseDomain.getModel().getAvailability() != null)
 				sdnCruise.addVariableAttribute(ModelDescription.node_availability, cruiseDomain.getModel().getAvailability().name());
 
-			// Comment
-			if (cruiseDomain.getModel().getComment() != null && !cruiseDomain.getModel().getComment().isEmpty())
-				sdnCruise.addVariableAttribute(ModelDescription.node_comment, cruiseDomain.getModel().getComment());
+			
 
 		}
+		// Comment
+					if (cruiseDomain.getModel().getComment() != null && !cruiseDomain.getModel().getComment().isEmpty())
+						sdnCruise.addVariableAttribute(ModelDescription.node_comment, cruiseDomain.getModel().getComment());
 	}
 
 	private String getFeatureType() {
