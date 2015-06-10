@@ -128,7 +128,7 @@ public class Application implements IPlatformRunnable
                 	System.out.println(Messages.error_batch_edmo);
                 	 System.exit(1);
                 }
-                if (checkBatchOptionsOk(cl))
+                else if (checkBatchOptionsOk(cl))
                 {
                     inputFile = cl.getOptionValue(optInputFile);
                     outputFile = cl.getOptionValue(optOutputFile);

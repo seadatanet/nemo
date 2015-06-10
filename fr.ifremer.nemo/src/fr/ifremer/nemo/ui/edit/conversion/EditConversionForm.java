@@ -514,17 +514,6 @@ public class EditConversionForm extends EditForm {
 			command += Global.MOINS + Global.optOdvMulti;
 		}
 
-		// datasetRef
-		String dataSetRef =	Nemo.getInstance().getDomain().getCruise().getModel().getReference();
-		if (!dataSetRef.equals(Global.EMPTY_STRING)) {
-			command += Global.SPACE;
-			command += Global.MOINS + Global.optDatasetRef;
-			command += Global.SPACE;
-			command +=
-					"\""
-							+ Nemo.getInstance().getDomain().getCruise()
-									.getModel().getReference() + "\"";
-		}
 
 		// cdisummary
 		if (Nemo.getInstance().getConfig().isWriteCdi()) {
