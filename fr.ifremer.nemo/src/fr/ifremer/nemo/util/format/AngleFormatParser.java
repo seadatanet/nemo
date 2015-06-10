@@ -235,7 +235,7 @@ public class AngleFormatParser extends AbstractParser implements Cloneable
 			typeTable['}'] = XLETTER;
 			typeTable['^'] = XLETTER;
 			typeTable['|'] = XLETTER;
-			typeTable['°'] = XLETTER;
+			typeTable['Â°'] = XLETTER;
 
 			typeTable['N'] = XHEMISPHERE;
 			typeTable['D'] = XDEGREE;

@@ -182,6 +182,7 @@ public class LatitudeFormat extends ExternalizableFormat implements Cloneable
 			}
 		} catch (Exception e)
 		{
+			e.printStackTrace();
 			throw new SAXException(e);
 		}
 	}
