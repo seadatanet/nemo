@@ -682,7 +682,7 @@ public class EditCruiseForm extends EditForm {
 			if (refCampagne != null) {
 				refCampagne.setText(cruiseModel.getReference());
 			}
-			if (localCsrId != null) {
+			if (localCsrId != null && !RulesManager.getInstance().isProcessCollection() ) {
 				localCsrId.setText(cruiseModel.getLocalCsrIdentifier());
 			}
 			if (nomCampagne != null) {
