@@ -769,11 +769,8 @@ public class NetCDFWriter extends NemoWriter {
 		if (!zParameterModel.getParameter().getDefault().isEmpty())
 			z.addVariableAttribute(ParameterNames.FILLVALUE, convertValue(DataType.DOUBLE, zParameterModel.getParameter().getDefault()));
 
-		// 14771
-		if (zVarName.equals(ParameterNames.DEPTH) || zVarName == ParameterNames.PRESS)
-			z.addVariableAttribute(ParameterNames.POSITIVE, ParameterValues.Z_POSITIVE_DOWN);
-		else if (zVarName == ParameterNames.HEIGHT)
-			z.addVariableAttribute(ParameterNames.POSITIVE, ParameterValues.Z_POSITIVE_UP);
+		
+		// POSITIVE attribute is now automatically managed in cfpointLib
 
 		// Sdn variable
 		SdnEdmoCodeVariable sdnEdmoCode = new SdnEdmoCodeVariable(instanceDim);
