@@ -147,7 +147,7 @@ public class EditConversionForm extends EditForm {
 
 	@Override
 	public void actualiseEdition() {
-		// pas d'actualisation nécessaire pour cet onglet
+		fillSummary();
 	}
 
 	@Override
