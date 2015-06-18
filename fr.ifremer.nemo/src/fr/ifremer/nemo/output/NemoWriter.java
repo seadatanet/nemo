@@ -153,6 +153,8 @@ public abstract class NemoWriter {
 			// pour chaque repertoire d'entree
 			for (String inputFilePath : mediaDomain.getInputFilesNames()
 					.keySet()) {
+				
+//				System.out.println("inputFilePath " + inputFilePath);
 				if (!inputFilePath.endsWith(Global.SVN_DIR)) {
 
 					// FAE 6087
@@ -166,6 +168,9 @@ public abstract class NemoWriter {
 						CruiseModel cruiseModel = cruiseDomain.getModel();
 						cruiseModel.setStartDate(System.currentTimeMillis());
 						cruiseModel.setEndDate(0);
+						cruiseModel.setReference(null);
+						cruiseModel.setName(null);
+						stationDomain.resetlocalCDIList();
 					}
 
 					// pour chaque fichier de ce repertoire d'entree
@@ -203,6 +208,7 @@ public abstract class NemoWriter {
 
 									st.setNbRecords(nbrecords);
 									stationDomain.addStation(inputFilePath,st);
+//									System.out.println("add station " + inputFilePath + "  --  " + st.getReference());
 									if (
 											(
 													!Nemo.getInstance().isBatchMode() 
@@ -214,7 +220,7 @@ public abstract class NemoWriter {
 															&& CDIResumeWriter.getInstance().getNomFichierSortie() !=null
 															&& !CDIResumeWriter.getInstance().getNomFichierSortie().isEmpty())
 											){
-										CDIResumeWriter.getInstance().addStation(inputFilePath,st);
+//										CDIResumeWriter.getInstance().addStation(inputFilePath,st);
 									}
 									st = null;
 								}
@@ -229,7 +235,7 @@ public abstract class NemoWriter {
 										st = new Station(
 												inputFile.getName(),
 												inputStationHeader);
-
+										// get reference
 										String ref = stationDomain
 												.getReference(
 														inputFile.getName(),
@@ -290,6 +296,7 @@ public abstract class NemoWriter {
 								// enregistrée
 								st.setNbRecords(nbrecords);
 								stationDomain.addStation(inputFilePath, st);
+//								System.out.println("add station " + inputFilePath + "  --  " + st.getReference());
 								if (
 										(
 												!Nemo.getInstance().isBatchMode() 
@@ -301,7 +308,6 @@ public abstract class NemoWriter {
 														&& CDIResumeWriter.getInstance().getNomFichierSortie() !=null
 														&& !CDIResumeWriter.getInstance().getNomFichierSortie().isEmpty())
 										){
-									CDIResumeWriter.getInstance().addStation(inputFilePath,st);
 								}
 							}
 
@@ -311,15 +317,18 @@ public abstract class NemoWriter {
 							// Référence Station
 							Collections.sort(stationDomain
 									.getStations(inputFilePath));
+//							System.out.println("sort ok");
 
 							numLine = 0;
+//							System.out.println("numline=  " + numLine);
 							bufferedReader.reset();
 						}
 
 					}
 					bufferedReader.close();
-
+//					System.out.println("write file " + inputFilePath);
 					writeFile(inputFilePath);
+					numLine=0;
 				}
 			}
 

@@ -26,8 +26,10 @@ import fr.ifremer.nemo.input.parameters.addedParameters.AP_ADEPZZ01;
 import fr.ifremer.nemo.input.parameters.addedParameters.AP_AHGTZZ01;
 import fr.ifremer.nemo.input.parameters.addedParameters.AP_DEPHPR01;
 import fr.ifremer.nemo.input.parameters.addedParameters.AddedParam;
+import fr.ifremer.nemo.output.CDIResumeWriter;
 import fr.ifremer.nemo.output.GenerationException;
 import fr.ifremer.nemo.output.NemoWriter;
+import fr.ifremer.nemo.ui.RulesManager;
 import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Formatter;
 import fr.ifremer.nemo.util.Global;
@@ -109,8 +111,8 @@ public class NetCDFWriter extends NemoWriter {
 	protected String getOutputFileName(String inputFilePath) {
 		outputFileName = iDomain.getMedia().getOutputFileName();
 		if (isProcessType_CollectionDir) {
-			//			cruiseDomain.setDataSetRef(new File(inputFilePath).getName());
-			outputFileName += File.separator +new File(inputFilePath).getName();
+			cruiseDomain.getModel().setReference(new File(inputFilePath).getName());
+			outputFileName += File.separator + cruiseDomain.getModel().getReference();
 		}
 		return outputFileName;
 	}
@@ -123,14 +125,15 @@ public class NetCDFWriter extends NemoWriter {
 		try {
 			stationDomain.updateRef();
 			outputFileName = getOutputFileName(inputFilePath);
-
+			 if (RulesManager.getInstance().isProcessCollectionDir()){
+	            	stationDomain.resetlocalCDIList();
+	            }
 			if (isConversionTo_NetCDFMonostation) {
 //				System.out.println("convert to n MONOstation files");
 				// Conversion NETCDF - fichiers monostation => N fichiers de
 				// sortie
 				Integer ref = 0;
 				nbStations = 1;
-
 				for (Station st : stationDomain.getStations(inputFilePath)) {
 					
 					
@@ -147,8 +150,10 @@ public class NetCDFWriter extends NemoWriter {
 						st.setReference(ref.toString());
 					}
 
-					String localCdiId = stationDomain.getAndCheckLocalCDI(cruiseDomain, Conversion.ODV, st.getReference());
-					String mOutputFileName = outputFileName + File.separator + localCdiId + Conversion.NETCDF.getExt();
+					st=stationDomain.getAndCheckLocalCDI(cruiseDomain, Conversion.NETCDF, st);
+					// WARNING: CDIResumeWriter stations list is also used for coupling table -> never delete this addstation line
+					CDIResumeWriter.getInstance().addStation(inputFilePath,st);
+					String mOutputFileName = outputFileName + File.separator + st.getLocal_cdi_id()+ Conversion.NETCDF.getExt();
 
 					myCFPointWriterManager = new CFPointWriterManager(mOutputFileName);
 					mapVariables = new HashMap<String, ISdnVariable>();
@@ -199,6 +204,9 @@ public class NetCDFWriter extends NemoWriter {
 					if (isProcessType_CruiseFile) {
 						iDomain.getStation().updateRef();
 					}
+					st=stationDomain.getAndCheckLocalCDI(cruiseDomain, Conversion.NETCDF, st);
+					CDIResumeWriter.getInstance().addStation(inputFilePath,st);
+					
 //					System.out.println("write station "+indiceStation+ " - "+ st.getFileName() );
 					writeStation(st, inputFilePath);
 					indiceStation++;
@@ -372,14 +380,14 @@ public class NetCDFWriter extends NemoWriter {
 
 				if (!isOnNStationHeader){
 					if (stationWrited){
-						iDomain.getMedia().addStationInOutput(myCFPointWriterManager.getFileName(), currentStation.getReference());
 						return true;
 					}
 					currentDate = DateTimeUtils.getCurrentDate(currentStation, indexRecord);
 					stationWrited=readStationHeader(currentStation, currentDate, currentLongitude, currentLatitude);
+					iDomain.getMedia().addStationInOutput(myCFPointWriterManager.getFileName(), currentStation.getLocal_cdi_id());
 				}else{
 					if (stationWrited){
-						iDomain.getMedia().addStationInOutput(myCFPointWriterManager.getFileName(), currentStation.getReference());
+						iDomain.getMedia().addStationInOutput(myCFPointWriterManager.getFileName(), currentStation.getLocal_cdi_id());
 						return true;
 					}
 				}

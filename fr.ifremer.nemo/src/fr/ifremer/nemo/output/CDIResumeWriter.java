@@ -7,6 +7,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -43,10 +44,11 @@ public class CDIResumeWriter {
 	private String nomFichierSortie;
 	private FileWriter writer;
 	private final String sep;
-	// keep FULL stations list here (list in station model is not complete, because must be reset fo input directories)
+	// keep FULL stations list here (list in station model is not complete, because must be reset for input directories)
+	// WARNING: this list is also used to fill the coupling table!!
 	protected HashMap<String, List<Station>> _listStations;
-	
-	
+
+
 	private CDIResumeWriter() {
 		sep = Intern.CDIResumeWriter_separateur;
 		_listStations = new HashMap<String, List<Station>>();
@@ -61,10 +63,11 @@ public class CDIResumeWriter {
 
 	public void reset() {
 		nomFichierSortie = Global.EMPTY_STRING;
+		_listStations = new HashMap<String, List<Station>>();
 
 	}
 	public void addStation(String inputFilePath, Station st) {
-//		System.out.println("add station CDI "+ inputFilePath +"  "+  st.getReference());
+
 		if (_listStations.containsKey(inputFilePath)) {
 			_listStations.get(inputFilePath).add(st);
 		} else {
@@ -100,19 +103,33 @@ public class CDIResumeWriter {
 			DataDomain dataDomain = iDomain.getData();
 			sDomain.resetlocalCDIList();
 
-			for (String outputPath : iDomain.getMedia().getOutputFiles().keySet()) {
 
-				for (String stRef : iDomain.getMedia().getOutputFiles().get(outputPath)) {
+			ArrayList<String> oututFilesList = new ArrayList<>( iDomain.getMedia().getOutputFiles().keySet());
+			Collections.sort(oututFilesList);
+			
+			for (String outputPath : oututFilesList) {
+
+				ArrayList<String> cdiList = new ArrayList<>( iDomain.getMedia().getOutputFiles().get(outputPath));
+				Collections.sort(cdiList);
+				
+				
+				
+				for (String local_cdi_id : cdiList) {
 
 					// for (Station st :
 					// sDomain.getStations(outputFile.getName())){
-					Station st = getStationByRef(stRef);
+					//					Station st = getStationByReference(ref);
+					Station st = getStationByLocalCdiId(local_cdi_id);
 					// seuls les paramètres mesurés sont à prendre en compte
 					for (ParameterModel param : dataDomain.getModel().getParameterModels()) {
-						String localCDIId = sDomain.getLocalCdiId(cDomain,formatConversion, st.getReference());
-						writeCDILine(st, param, formatConversion, localCDIId, outputPath);
+						//						String localCDIId = sDomain.getLocalCdiId(cDomain,formatConversion, st.getReference());
+						writeCDILine(st, param, formatConversion, local_cdi_id, outputPath);
 						if (formatConversion == Conversion.MEDATLAS) {
-							writeCDILine(st, param, Conversion.ODV, localCDIId, outputPath);
+							writeCDILine(st, param, Conversion.ODV, local_cdi_id, outputPath);
+							writeCDILine(st, param, Conversion.NETCDF, local_cdi_id, outputPath);//25816
+						}
+						if (formatConversion == Conversion.ODV) {
+							writeCDILine(st, param, Conversion.NETCDF, local_cdi_id, outputPath);//25816
 						}
 
 					}
@@ -126,11 +143,23 @@ public class CDIResumeWriter {
 				writer.close();
 		}
 	}
-	public Station getStationByRef(String ref) {
+	public Station getStationByReference(String ref) {
 		Station selected = null;
 		for (String inputFilePath : _listStations.keySet()) {
 			for (Station st : _listStations.get(inputFilePath)) {
 				if (ref.equals(st.getReference())) {
+					selected = st;
+					break;
+				}
+			}
+		}
+		return selected;
+	}
+	public Station getStationByLocalCdiId(String local_cdi_id) {
+		Station selected = null;
+		for (String inputFilePath : _listStations.keySet()) {
+			for (Station st : _listStations.get(inputFilePath)) {
+				if (local_cdi_id.equals(st.getLocal_cdi_id())) {
 					selected = st;
 					break;
 				}
@@ -144,7 +173,7 @@ public class CDIResumeWriter {
 		CruiseDomain cDomain = iDomain.getCruise();
 		Configuration config = Nemo.getInstance().getConfig();
 		File outputFile = new File(outputPath);
-
+		
 		writer.write(Global.RN);
 
 		// CDI ID
@@ -159,34 +188,36 @@ public class CDIResumeWriter {
 			writer.write(sep + "Point");
 
 		// Dataset name
-		if (cDomain.getModel().getName().isEmpty()
-				|| cDomain.getModel().getName().equals(
+
+		if (st.getCruiseName()==null
+				||st.getCruiseName().isEmpty()
+				|| st.getCruiseName().equals(
 						Intern.unknown)) {
-			if (cDomain.getModel().getReference().isEmpty()) {
+			if (st.getCruiseRef()==null||st.getCruiseRef().isEmpty()) {
 				writer.write(sep
 						+ Intern.CDIResumeWriter_notSpecified);
 			} else {
-				writer.write(sep + cDomain.getModel().getReference());
+				writer.write(sep + st.getCruiseRef());
 			}
 		} else {
-			writer.write(sep + cDomain.getModel().getName());
+			writer.write(sep + st.getCruiseName());
 		}
 
 		// Dataset ID
-		if (cDomain.getModel().getReference().isEmpty()) {
+
+		if (st.getCruiseRef()==null||st.getCruiseRef().isEmpty()) {
 
 			// FAE 4525 (retour 03/01/2011)
 			if (iDomain.getMedia().getModel().getProcessType().equals(E_ProcessType.COLLECTION_DIR)) {
-				writer.write(sep + cDomain.getModel().getName());
-			} else if (cDomain.getModel().getReference().isEmpty()) {
+				writer.write(sep + st.getCruiseName());
+			} else if (st.getCruiseRef().isEmpty()) {
 				writer.write(sep + Intern.CDIResumeWriter_notSpecified);
 			} else {
-				writer.write(sep + cDomain.getModel().getReference());
+				writer.write(sep + st.getCruiseRef());
 			}
 		} else {
-			writer.write(sep + cDomain.getModel().getReference());
+			writer.write(sep + st.getCruiseRef());
 		}
-
 		// Dataset Rev Date
 		Calendar calendrier = Calendar.getInstance();
 		Date dateEcriture = calendrier.getTime();
@@ -215,9 +246,9 @@ public class CDIResumeWriter {
 			// P091 -> P021
 			// 6542
 			p02Code = VocabLists.getVocabMatch(
-							Intern.mapping_subject, Intern.list_P021,
-							param.getParameter().getCode(),
-							Intern.NemoLists_unknown);
+					Intern.mapping_subject, Intern.list_P021,
+					param.getParameter().getCode(),
+					Intern.NemoLists_unknown);
 		}
 		writer.write(sep + p02Code + Global.EMPTY_STRING);
 
@@ -228,12 +259,15 @@ public class CDIResumeWriter {
 		writer.write(sep + config.getAccesDonnees());
 
 		// Cruise name
-		if (!cDomain.getModel().getName().isEmpty())
-			writer.write(sep + cDomain.getModel().getName());
-		else
+		if (
+//				!cDomain.getModel().getName().isEmpty())
+				!(st.getCruiseName()==null || st.getCruiseName().isEmpty())){
+			writer.write(sep + st.getCruiseName());
+				}
+		else{
 			writer.write(sep
 					+ Intern.CDIResumeWriter_notSpecified);
-
+		}
 		// Station name
 		writer.write(sep + st.getReference().trim());
 

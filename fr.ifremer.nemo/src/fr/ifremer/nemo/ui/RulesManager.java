@@ -19,6 +19,7 @@ import fr.ifremer.nemo.ui.edit.data.TypeFallRate;
 import fr.ifremer.nemo.ui.edit.file.EditFileForm;
 import fr.ifremer.nemo.ui.edit.station.EditStationForm;
 import fr.ifremer.nemo.ui.view.ViewLog;
+import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Global.DataListTypeEnum;
 import fr.ifremer.nemo.util.Global.E_InputType;
@@ -638,11 +639,6 @@ public class RulesManager {
 	private void rule_conversionType(boolean addToLog) {
 		m_aboveSeaLevel_Enabled = true;
 		cruiseEnabled = true;//25572
-//		if (!isProcessCollection())
-//			cruiseEnabled = true;
-//		else
-//			cruiseEnabled = true;
-
 
 		if (myConversionType == E_TypeConversion.ODV_MONOSTATION
 				|| myConversionType == E_TypeConversion.ODV_MULTISTATIONS) {
@@ -745,6 +741,20 @@ public class RulesManager {
 	}
 
 	// CONVERSION
+	public Conversion getConversion(){
+		switch (myConversionType) {
+		case ODV_MONOSTATION:
+		case ODV_MULTISTATIONS:
+			return  Conversion.ODV;
+		case MEDATLAS:
+			return Conversion.MEDATLAS;
+		case NETCDF_MONOSTATION:
+		case NETCDF_MULTISTATIONS:
+			return  Conversion.NETCDF;
+		default:
+			return null;
+		}
+	}
 	public boolean isConversionToODVMonoStation() {
 		return myConversionType == E_TypeConversion.ODV_MONOSTATION;
 	}

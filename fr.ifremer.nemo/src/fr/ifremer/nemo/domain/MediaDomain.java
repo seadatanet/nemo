@@ -21,7 +21,6 @@ import java.util.List;
 import fr.ifremer.nemo.input.InputModel;
 import fr.ifremer.nemo.input.MediaModel;
 import fr.ifremer.nemo.ui.Utils;
-import fr.ifremer.nemo.ui.view.ViewMain;
 import fr.ifremer.nemo.util.Global;
 
 /**
@@ -175,13 +174,18 @@ public class MediaDomain
         return _inputFilesNames;
     }
     
-    public void addStationInOutput(String key, String refStation){
+    /**
+     * 
+     * @param key: outputFileName
+     * @param refStation: station reference
+     */
+    public void addStationInOutput(String key, String local_cdi_id){
         if (_outputFiles.containsKey(key)){
-            _outputFiles.get(key).add(refStation);
+            _outputFiles.get(key).add(local_cdi_id);
         }
         else{
             List<String> stations = new ArrayList<String>();
-            stations.add(refStation);
+            stations.add(local_cdi_id);
             _outputFiles.put(key, stations);
         }
     }

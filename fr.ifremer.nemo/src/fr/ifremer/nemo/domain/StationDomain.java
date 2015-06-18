@@ -486,17 +486,20 @@ public class StationDomain {
 	}
 
 	// FAE 6143
-	public String getAndCheckLocalCDI(CruiseDomain cDomain, Conversion c,
-			String ref) throws ParseException, GenerationException,
+	public Station getAndCheckLocalCDI(CruiseDomain cDomain, Conversion c,
+			Station st) throws ParseException, GenerationException,
 			UnsupportedEncodingException {
-		String localCdi = getLocalCdiId(cDomain, c, ref);
+		String localCdi = getLocalCdiId(cDomain, c, st.getReference());
 		if (stationsLocalCDIList.contains(localCdi)) {
 			throw new GenerationException(
 					Messages.error_convert_stationsDoubles + " " + localCdi);
 		}
+		st.setLocal_cdi_id(localCdi);
+		st.setCruiseName(cDomain.getModel().getName());
+		st.setCruiseRef(cDomain.getModel().getReference());
 		stationsLocalCDIList.add(localCdi);
 
-		return localCdi;
+		return st;
 	}
 
 	public void resetlocalCDIList() {

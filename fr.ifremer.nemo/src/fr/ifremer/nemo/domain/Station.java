@@ -30,6 +30,13 @@ import fr.ifremer.nemo.util.Intern;
  */
 public class Station implements Comparable {
 
+	
+	private String local_cdi_id;
+	// need to keep associate cruise ref and name for collections, because model consider only one cruise, and value is override
+	// if we do not keep them, we can not write CDI summary
+	private String cruiseRef;
+	private String cruiseName;
+
 	protected String _reference;
 	protected int _nbRecords;
 
@@ -575,5 +582,27 @@ public class Station implements Comparable {
 	public double getEndlongitude() {
 		return _endlongitude;
 	}
+	public String getLocal_cdi_id() {
+		return local_cdi_id;
+	}
 
+	public void setLocal_cdi_id(String local_cdi_id) {
+		this.local_cdi_id = local_cdi_id;
+	}
+
+	public String getCruiseRef() {
+		return cruiseRef;
+	}
+
+	public void setCruiseRef(String cruiseRef) {
+		this.cruiseRef = cruiseRef;
+	}
+
+	public String getCruiseName() {
+		return cruiseName;
+	}
+
+	public void setCruiseName(String cruiseName) {
+		this.cruiseName = cruiseName;
+	}
 }

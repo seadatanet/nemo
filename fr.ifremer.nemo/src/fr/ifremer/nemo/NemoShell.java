@@ -20,7 +20,6 @@ import fr.ifremer.nemo.config.ManageLists;
 import fr.ifremer.nemo.domain.ConversionDomain;
 import fr.ifremer.nemo.domain.CruiseDomain;
 import fr.ifremer.nemo.domain.InputDomain;
-import fr.ifremer.nemo.domain.Station;
 import fr.ifremer.nemo.domain.StationDomain;
 import fr.ifremer.nemo.input.PropertyModel;
 import fr.ifremer.nemo.input.parameters.ParameterModel;
@@ -262,13 +261,8 @@ public class NemoShell {
 
 			for (String outputPath : inputDomain.getMedia().getOutputFiles().keySet()) {
 
-
-
-
-				for (String stRef : inputDomain.getMedia().getOutputFiles().get(outputPath)) {
-					Station st = sDomain.getStationByRef(stRef);
-					localCdiId = sDomain.getLocalCdiId(cDomain, conv, st.getReference());
-					mapping = new Mapping(localCdiId, conv.getFormatName());
+				for (String local_cdi_id: inputDomain.getMedia().getOutputFiles().get(outputPath)) {
+					mapping = new Mapping(local_cdi_id, conv.getFormatName());
 
 					String modus = Mapping.MODUS_MULTISTATIONS;
 					if (inputDomain.getConversion().getCurrent() == E_TypeConversion.ODV_MONOSTATION

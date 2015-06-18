@@ -14,6 +14,7 @@ import fr.ifremer.nemo.domain.DataDomain;
 import fr.ifremer.nemo.domain.DateTimeUtils;
 import fr.ifremer.nemo.domain.Station;
 import fr.ifremer.nemo.input.parameters.ParameterModel;
+import fr.ifremer.nemo.output.CDIResumeWriter;
 import fr.ifremer.nemo.output.GenerationException;
 import fr.ifremer.nemo.output.NemoWriter;
 import fr.ifremer.nemo.util.Conversion;
@@ -90,7 +91,9 @@ public class MedatlasWriter extends NemoWriter
 			for (Station currentStation : stationDomain.getStations(inputFilePath))
 			{
 				// FAE 6143 check doublons
-				stationDomain.getAndCheckLocalCDI(cruiseDomain, Conversion.ODV, currentStation.getReference());
+				currentStation=stationDomain.getAndCheckLocalCDI(cruiseDomain, Conversion.ODV, currentStation);
+				// WARNING: CDIResumeWriter stations list is also used for coupling table -> never delete this addstation line
+				CDIResumeWriter.getInstance().addStation(inputFilePath,currentStation);
 				CalcPres.init();
 
 				bufferedReader = getBufferReader(inputFilePath, currentStation);
@@ -193,7 +196,7 @@ public class MedatlasWriter extends NemoWriter
 				// qui n'est pas appelée dans tous les cas (slmt si endData=EOF)
 				if (stationWrited)
 				{
-					mediaDomain.addStationInOutput(outputFileName, currentStation.getReference());
+					mediaDomain.addStationInOutput(outputFileName, currentStation.getLocal_cdi_id());
 				}
 
 				numLine = 0;

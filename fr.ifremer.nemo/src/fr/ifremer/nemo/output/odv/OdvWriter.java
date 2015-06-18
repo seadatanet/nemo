@@ -15,6 +15,7 @@ import fr.ifremer.nemo.domain.DateTimeUtils;
 import fr.ifremer.nemo.domain.Station;
 import fr.ifremer.nemo.domain.StationDomain;
 import fr.ifremer.nemo.input.parameters.ParameterModel;
+import fr.ifremer.nemo.output.CDIResumeWriter;
 import fr.ifremer.nemo.output.GenerationException;
 import fr.ifremer.nemo.output.NemoWriter;
 import fr.ifremer.nemo.ui.RulesManager;
@@ -44,7 +45,9 @@ public class OdvWriter extends NemoWriter
     	   outputFileName = iDomain.getMedia().getOutputFileName();
            if (isProcessType_CollectionDir)
            {
-   			outputFileName += File.separator + new File(inputFilePath).getName();
+        		cruiseDomain.getModel().setReference(new File(inputFilePath).getName());
+    			outputFileName += File.separator + cruiseDomain.getModel().getReference();
+   			
            }
            return outputFileName;
     }
@@ -64,6 +67,7 @@ public class OdvWriter extends NemoWriter
             outputFileName = getOutputFileName(inputFilePath);
             if (RulesManager.getInstance().isProcessCollectionDir()){
             	Nemo.getInstance().getDomain().getCruise().getModel().setName(new File(inputFilePath).getName());
+            	stationDomain.resetlocalCDIList();
             }
             if (isConversionTo_ODVMonostation)
             {
@@ -85,12 +89,12 @@ public class OdvWriter extends NemoWriter
                     }
 
                     // FAE 6143
-                    String localCdiId =
-                        stationDomain.getAndCheckLocalCDI(cruiseDomain,
-                            Conversion.ODV, st.getReference());
-
+                        st=stationDomain.getAndCheckLocalCDI(cruiseDomain,
+                            Conversion.ODV, st);
+                     // WARNING: CDIResumeWriter stations list is also used for coupling table -> never delete this addstation line
+                      CDIResumeWriter.getInstance().addStation(inputFilePath,st);
                     String mOutputFileName =
-                        outputFileName + File.separator + localCdiId
+                        outputFileName + File.separator + st.getLocal_cdi_id()
                                 + Conversion.ODV.getExt();
                     // outputFileWriter = new PrintWriter(new BufferedWriter(new
                     // FileWriter(mOutputFileName)));
@@ -134,6 +138,7 @@ public class OdvWriter extends NemoWriter
 
                 for (Station st : stationDomain.getStations(inputFilePath))
                 {
+                	
                     // FAE 6087 reinitialisation de la reference à lecture le
                     // fichier entree (car pour ecrire une station on lit tout
                     // le fichier)
@@ -143,6 +148,12 @@ public class OdvWriter extends NemoWriter
                     {
                         iDomain.getStation().updateRef();
                     }
+                    
+                  
+                    st=stationDomain.getAndCheckLocalCDI(cruiseDomain,
+                            Conversion.ODV, st);
+                      CDIResumeWriter.getInstance().addStation(inputFilePath,st);
+                      
                     writeStation(st, inputFilePath, outputFileName);
                 }
 
@@ -303,8 +314,8 @@ public class OdvWriter extends NemoWriter
                 }
             }
             // enregistrement de la station
-            iDomain.getMedia().addStationInOutput(outputFileName,
-                currentStation.getReference());
+              iDomain.getMedia().addStationInOutput(outputFileName,
+                      currentStation.getLocal_cdi_id()); 
         }
 
         numLine = 0;

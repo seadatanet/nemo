@@ -80,25 +80,10 @@ public class SWTProcess implements IRunnableWithProgress {
 					String localCdiId;
 					for (String outputPath : iDomain.getMedia().getOutputFiles().keySet()) {
 						File outputFile = new File(outputPath);
-						for (String stRef : iDomain.getMedia().getOutputFiles().get(outputPath)) {
+						for (String local_cdi_id : iDomain.getMedia().getOutputFiles().get(outputPath)) {
 							
-							Station st = sDomain.getStationByRef(stRef);
-							localCdiId = sDomain.getLocalCdiId(cDomain, formatConversion, st.getReference());
-							mapping = new Mapping(localCdiId, formatConversion.getFormatName());
-
-							
-
-//							StringBuffer filename = new StringBuffer();
-//							filename.append(iDomain.getConversion().getNomMappingHorsPrefix());
-
-							
-
-//							if (!filename.toString().equals(Global.EMPTY_STRING) && !filename.toString().endsWith(File.separator)) {
-//								filename.append(File.separator);
-//							}
-//
-//							filename.append(outputFile.getName());
-
+							Station st = CDIResumeWriter.getInstance().getStationByLocalCdiId(local_cdi_id);
+							mapping = new Mapping(local_cdi_id, formatConversion.getFormatName());
 							mapping.setFilename(convDomain.getFileNameInCoupling(outputFile.getAbsolutePath()));
 							mapping.setDate(new Date());
 							mapping.setModus(modus);
