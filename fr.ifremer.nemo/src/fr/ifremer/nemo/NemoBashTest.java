@@ -779,82 +779,84 @@ public class NemoBashTest {
 	}
 
 	private boolean compareCdiSummary(String outputAbsolutePath) {
-		return true;
-//		BufferedReader bufOut = null;
-//		BufferedReader bufRef = null;
-//		String outputLine = "";
-//		String refFileLine;
-//		String outputTest =   outputAbsolutePath+File.separator+"cdiSummary_junit";
-//		String output_REFERENCE =   outputAbsolutePath+File.separator+"cdiSummary_REFERENCE";;
-//
-//		boolean identical = true;
-//
-//		try {
-//			bufOut = new BufferedReader(new FileReader(outputTest));
-//		} catch (FileNotFoundException e1) {
-//			testLogger.error("CDISummary junit file not found");
-//			return false;
-//		}
-//		try {
-//			bufRef = new BufferedReader(new FileReader(output_REFERENCE));
-//		} catch (FileNotFoundException e1) {
-//			testLogger.error("CDISummary reference file not found");
-//			return false;
-//		}
-//
-//		try {
-//			String newRefLine = "";
-//			if (bufOut != null && bufRef != null) {
-//				while (bufRef.ready() && bufOut.ready() && identical) {
-//					outputLine = bufOut.readLine();
-//					refFileLine = bufRef.readLine();
-//					String format = "";
-//
-//					identical = outputLine.equals(refFileLine);
-//					String[] splitOutput = outputLine.split("\t");
-//					String[] splitRef = refFileLine.split("\t");
-//					for (int i=0; i<splitRef.length; i++){
-//						if (i!=5){// col 5 = generation date -> changes
-//							identical= identical&& splitOutput[i].equals(splitRef[i]);
-//							if (!identical){
-//								testLogger.error("cdi diff col. "+ i+1 + ": out: " +splitOutput[i]+ "!= ref: " +splitRef[i] );
-//								testLogger.error("CDI REF >>  "+ refFileLine);
-//								testLogger.error("CDI OUT >>  "+ outputLine);
-//								message.diff+="#REF# : "+refFileLine + "#OUT# : " +outputLine; 
-//							}
+		BufferedReader bufOut = null;
+		BufferedReader bufRef = null;
+		String outputLine = "";
+		String refFileLine;
+		String outputTest =   outputAbsolutePath+File.separator+"cdiSummary_junit";
+		String output_REFERENCE =   outputAbsolutePath+File.separator+"cdiSummary_REFERENCE";;
+//		new File(output_REFERENCE).delete();
+		// move junit to ref as nc
+//		testLogger.warn("rename " +outputTest + " --> " +output_REFERENCE);
+//		new File(outputTest).renameTo(new File(output_REFERENCE));
+		boolean identical = true;
+
+		try {
+			bufOut = new BufferedReader(new FileReader(outputTest));
+		} catch (FileNotFoundException e1) {
+			testLogger.error("CDISummary junit file not found");
+			return false;
+		}
+		try {
+			bufRef = new BufferedReader(new FileReader(output_REFERENCE));
+		} catch (FileNotFoundException e1) {
+			testLogger.error("CDISummary reference file not found");
+			return false;
+		}
+
+		try {
+			String newRefLine = "";
+			if (bufOut != null && bufRef != null) {
+				while (bufRef.ready() && bufOut.ready() && identical) {
+					outputLine = bufOut.readLine();
+					refFileLine = bufRef.readLine();
+					String format = "";
+
+					identical = outputLine.equals(refFileLine);
+					String[] splitOutput = outputLine.split("\t");
+					String[] splitRef = refFileLine.split("\t");
+					for (int i=0; i<splitRef.length; i++){
+						if (i!=5){// col 5 = generation date -> changes
+							identical= identical&& splitOutput[i].equals(splitRef[i]);
+							if (!identical){
+								testLogger.error("cdi diff col. "+ i+1 + ": out: " +splitOutput[i]+ "!= ref: " +splitRef[i] );
+								testLogger.error("CDI REF >>  "+ refFileLine);
+								testLogger.error("CDI OUT >>  "+ outputLine);
+								message.diff+="#REF# : "+refFileLine + "#OUT# : " +outputLine; 
+							}
+						}
+					}
+					
+					
+					// depuis le 17/01/2012, le mapping BODC a changé : PRESPS02
+					// remplace par PRESPR01
+//					Pattern p;
+//					Matcher m;
+//					if (!identical) {
+//						p = Pattern.compile("PRESPS02");
+//						m = p.matcher(refFileLine);
+//						if (m.find()) {
+//							refFileLine = m.replaceAll("PRESPR01");
+//							identical = outputLine.equals(refFileLine);
 //						}
 //					}
-//					
-//					
-//					// depuis le 17/01/2012, le mapping BODC a changé : PRESPS02
-//					// remplace par PRESPR01
-////					Pattern p;
-////					Matcher m;
-////					if (!identical) {
-////						p = Pattern.compile("PRESPS02");
-////						m = p.matcher(refFileLine);
-////						if (m.find()) {
-////							refFileLine = m.replaceAll("PRESPR01");
-////							identical = outputLine.equals(refFileLine);
-////						}
-////					}
-//					if (!identical){
-//						testLogger.error("CDI REF >>  "+ refFileLine);
-//						testLogger.error("CDI OUT >>  "+ outputLine);
-//						message.diff+="#REF# : "+refFileLine + "#OUT# : " +outputLine; 
-//					}
-//
-//				}
-//				// normalement les 2 fichier doivent etre a la fin si identique.
-//				if (bufRef.ready() || bufOut.ready()) {
-//					identical = false;
-//				}
-//			}
-//			return identical;
-//		}catch (Exception e) {
-//			testLogger.error("CDISummary comparison failed");
-//			return false;
-//		}
+					if (!identical){
+						testLogger.error("CDI REF >>  "+ refFileLine);
+						testLogger.error("CDI OUT >>  "+ outputLine);
+						message.diff+="#REF# : "+refFileLine + "#OUT# : " +outputLine; 
+					}
+
+				}
+				// normalement les 2 fichier doivent etre a la fin si identique.
+				if (bufRef.ready() || bufOut.ready()) {
+					identical = false;
+				}
+			}
+			return identical;
+		}catch (Exception e) {
+			testLogger.error("CDISummary comparison failed");
+			return false;
+		}
 		
 	}
 
