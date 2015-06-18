@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mapping>
-   <vocabulary list="SDN:P01:534:"  version="534"  date="2015-06-05T01:00:02.000"  title="BODC Parameter Usage Vocabulary"  />
+   <vocabulary list="SDN:P01:536:"  version="536"  date="2015-06-17T01:00:02.000"  title="BODC Parameter Usage Vocabulary"  />
    <mapped>
       <vocabulary list="SDN:P09:45:"  version="45"  date="2015-03-31T01:00:02.000"  title="MEDATLAS Parameter Usage Vocabulary"  />
    </mapped>
