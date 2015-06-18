@@ -313,47 +313,75 @@ public class NemoBashTest {
 	}
 
 	/**
-	 * ================================================================= ODV
+	 * ================================================================= 
+	 * ODV
 	 * =================================================================
 	 */
 	@Test
 	public final void test_P091_ODVMULTI() {
 		testLogger
 		.info("\r\n\r\n\r\n\r\n____________________________test_P091_ODVMULTI____________________________\r\n\r\n\r\n\r\n");
-		// writeInResultsFile("P091_ODVMULTI;");
 		Assert.assertTrue(testOneType_ListConv(DataListTypeEnum.P091,Conversion.ODV, E_TypeConversion.ODV_MULTISTATIONS));
 	}
-
+	@Test
+	public final void test_P091_ODVMONO() {
+		testLogger
+		.info("\r\n\r\n\r\n\r\n____________________________test_P091_ODVMONO____________________________\r\n\r\n\r\n\r\n");
+		Assert.assertTrue(testOneType_ListConv(DataListTypeEnum.P091,Conversion.ODV, E_TypeConversion.ODV_MONOSTATION));
+	}
 	@Test
 	public final void test_P011viaP091_ODVMULTI() {
 		testLogger
 		.info("\r\n\r\n\r\n\r\n____________________________test_P011viaP091_ODVMULTI____________________________\r\n\r\n\r\n\r\n");
-		// writeInResultsFile("P011viaP091_ODVMULTI;");
 		Assert.assertTrue(testOneType_ListConv(DataListTypeEnum.P011_VIA_P091,	Conversion.ODV, E_TypeConversion.ODV_MULTISTATIONS));
 	}
-
+	@Test
+	public final void test_P011viaP091_ODVMONO() {
+		testLogger
+		.info("\r\n\r\n\r\n\r\n____________________________test_P011viaP091_ODVMONO____________________________\r\n\r\n\r\n\r\n");
+		Assert.assertTrue(testOneType_ListConv(DataListTypeEnum.P011_VIA_P091,	Conversion.ODV, E_TypeConversion.ODV_MONOSTATION));
+	}
 	@Test
 	public final void test_P011viaP021_ODVMULTI() {
 		testLogger
 		.info("\r\n\r\n\r\n\r\n__________________________test_P011viaP021_ODVMULTI_____________________________\r\n\r\n\r\n\r\n");
-		// writeInResultsFile("P011viaP021_ODVMULTI;");
 		Assert.assertTrue(testOneType_ListConv(DataListTypeEnum.P011_VIA_P021,	Conversion.ODV, E_TypeConversion.ODV_MULTISTATIONS));
 	}
-
+	@Test
+	public final void test_P011viaP021_ODVMONO() {
+		testLogger
+		.info("\r\n\r\n\r\n\r\n__________________________test_P011viaP021_ODVMONO_____________________________\r\n\r\n\r\n\r\n");
+		Assert.assertTrue(testOneType_ListConv(DataListTypeEnum.P011_VIA_P021,	Conversion.ODV, E_TypeConversion.ODV_MONOSTATION));
+	}
+	/**
+	 * ================================================================= 
+	 * ODV
+	 * =================================================================
+	 */
 	@Test
 	public final void test_P011viaP091_NETCDFMULTI() {
 		testLogger
 		.info("\r\n\r\n\r\n\r\n____________________________test_P011viaP091_NETCDFMULTI____________________________\r\n\r\n\r\n\r\n");
-		// writeInResultsFile("P011viaP091_NETCDFMULTI;");
 		Assert.assertTrue(testOneType_ListConv(DataListTypeEnum.P011_VIA_P091,	Conversion.NETCDF, E_TypeConversion.NETCDF_MULTISTATIONS));
+	}
+	@Test
+	public final void test_P011viaP091_NETCDFMONO() {
+		testLogger
+		.info("\r\n\r\n\r\n\r\n____________________________test_P011viaP091_NETCDFMONO____________________________\r\n\r\n\r\n\r\n");
+		Assert.assertTrue(testOneType_ListConv(DataListTypeEnum.P011_VIA_P091,	Conversion.NETCDF, E_TypeConversion.NETCDF_MONOSTATION));
 	}
 
 	@Test
 	public final void test_P011viaP021_NETCDFMULTI() {
 		testLogger
 		.info("\r\n\r\n\r\n\r\n__________________________test_P011viaP021_NETCDFMULTI_____________________________\r\n\r\n\r\n\r\n");
-		// writeInResultsFile("P011viaP021_NETCDFMULTI;");
 		Assert.assertTrue(testOneType_ListConv(DataListTypeEnum.P011_VIA_P021,	Conversion.NETCDF, E_TypeConversion.NETCDF_MULTISTATIONS));
+	}
+	@Test
+	public final void test_P011viaP021_NETCDFMONO() {
+		testLogger
+		.info("\r\n\r\n\r\n\r\n__________________________test_P011viaP021_NETCDFMONO_____________________________\r\n\r\n\r\n\r\n");
+		Assert.assertTrue(testOneType_ListConv(DataListTypeEnum.P011_VIA_P021,	Conversion.NETCDF, E_TypeConversion.NETCDF_MONOSTATION));
 	}
 
 	/**
@@ -530,7 +558,7 @@ public class NemoBashTest {
 	 * methodes
 	 * =================================================================
 	 */
-		@Test
+//			@Test
 	public void cleanDirectories(){
 
 
@@ -574,6 +602,11 @@ public class NemoBashTest {
 												}else if(f.getName().equals("cdiSummary_junit")){
 													System.out.println("delete file " + f);
 													f.delete();
+												}
+												else if(f.getName().equals("pf_input")){
+													System.out.println("delete file " + f);
+													f.delete();
+													
 												}
 											}
 										}
@@ -633,6 +666,7 @@ public class NemoBashTest {
 										message.testName = unitTest.getName();
 										String inputAbsolutePath = testDir.getAbsolutePath()+ File.separator + inputName;
 										String outputAbsolutePath = unitTest.getAbsolutePath();
+										cleanCDISummary(outputAbsolutePath);
 										cptTests++;
 										nbTotalTests++;
 										testFound = true;
@@ -664,6 +698,9 @@ public class NemoBashTest {
 														conversion);
 												message.batchCompRes = comp;
 												ok = comp && ok;
+											}
+											if (ok){
+												ok = compareCdiSummary(outputAbsolutePath);
 											}
 											if (ok) {
 												nbTotalSuccess++;
@@ -729,6 +766,96 @@ public class NemoBashTest {
 				+ "=========================================" + "\r\n");
 
 		return cptFail == 0;
+	}
+
+	private void cleanCDISummary(String outputAbsolutePath) {
+		File cdi= new File( outputAbsolutePath+File.separator+"cdiSummary_junit");
+		try {
+			cdi.delete();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+	}
+
+	private boolean compareCdiSummary(String outputAbsolutePath) {
+		return true;
+//		BufferedReader bufOut = null;
+//		BufferedReader bufRef = null;
+//		String outputLine = "";
+//		String refFileLine;
+//		String outputTest =   outputAbsolutePath+File.separator+"cdiSummary_junit";
+//		String output_REFERENCE =   outputAbsolutePath+File.separator+"cdiSummary_REFERENCE";;
+//
+//		boolean identical = true;
+//
+//		try {
+//			bufOut = new BufferedReader(new FileReader(outputTest));
+//		} catch (FileNotFoundException e1) {
+//			testLogger.error("CDISummary junit file not found");
+//			return false;
+//		}
+//		try {
+//			bufRef = new BufferedReader(new FileReader(output_REFERENCE));
+//		} catch (FileNotFoundException e1) {
+//			testLogger.error("CDISummary reference file not found");
+//			return false;
+//		}
+//
+//		try {
+//			String newRefLine = "";
+//			if (bufOut != null && bufRef != null) {
+//				while (bufRef.ready() && bufOut.ready() && identical) {
+//					outputLine = bufOut.readLine();
+//					refFileLine = bufRef.readLine();
+//					String format = "";
+//
+//					identical = outputLine.equals(refFileLine);
+//					String[] splitOutput = outputLine.split("\t");
+//					String[] splitRef = refFileLine.split("\t");
+//					for (int i=0; i<splitRef.length; i++){
+//						if (i!=5){// col 5 = generation date -> changes
+//							identical= identical&& splitOutput[i].equals(splitRef[i]);
+//							if (!identical){
+//								testLogger.error("cdi diff col. "+ i+1 + ": out: " +splitOutput[i]+ "!= ref: " +splitRef[i] );
+//								testLogger.error("CDI REF >>  "+ refFileLine);
+//								testLogger.error("CDI OUT >>  "+ outputLine);
+//								message.diff+="#REF# : "+refFileLine + "#OUT# : " +outputLine; 
+//							}
+//						}
+//					}
+//					
+//					
+//					// depuis le 17/01/2012, le mapping BODC a changé : PRESPS02
+//					// remplace par PRESPR01
+////					Pattern p;
+////					Matcher m;
+////					if (!identical) {
+////						p = Pattern.compile("PRESPS02");
+////						m = p.matcher(refFileLine);
+////						if (m.find()) {
+////							refFileLine = m.replaceAll("PRESPR01");
+////							identical = outputLine.equals(refFileLine);
+////						}
+////					}
+//					if (!identical){
+//						testLogger.error("CDI REF >>  "+ refFileLine);
+//						testLogger.error("CDI OUT >>  "+ outputLine);
+//						message.diff+="#REF# : "+refFileLine + "#OUT# : " +outputLine; 
+//					}
+//
+//				}
+//				// normalement les 2 fichier doivent etre a la fin si identique.
+//				if (bufRef.ready() || bufOut.ready()) {
+//					identical = false;
+//				}
+//			}
+//			return identical;
+//		}catch (Exception e) {
+//			testLogger.error("CDISummary comparison failed");
+//			return false;
+//		}
+		
 	}
 
 	public boolean isToTest(String dirName) {
@@ -973,9 +1100,18 @@ public class NemoBashTest {
 					return false;
 				}
 				for (File f : test.listFiles()){
+					if (f.isDirectory()){
+						for (File ff: f.listFiles()){
+							currentComp &= compareCFPoint(
+									ff.getAbsolutePath(),
+									ff.getAbsolutePath().replace("junit","REFERENCE")
+									);
+						}
+					}else{
 					currentComp &= compareCFPoint(
 							outputAbsolutePath+File.separator+ outputName+File.separator+ f.getName(), 
 							f.getAbsolutePath());
+					}
 				}
 			}else{
 				currentComp &= compareCFPoint( 
@@ -989,12 +1125,23 @@ public class NemoBashTest {
 					message.isReferenceFound = false;
 					return false;
 				}
-				for (File f : test.listFiles()){
-					currentComp &= compare_____TwoFiles(
-							f.getAbsolutePath(),
-							outputAbsolutePath+File.separator+ outputName+File.separator+ f.getName()
 
-							);
+				for (File f : test.listFiles()){
+					if (f.isDirectory()){
+						for (File ff: f.listFiles()){
+							currentComp &= compare_____TwoFiles(
+									ff.getAbsolutePath(),
+									ff.getAbsolutePath().replace("junit","REFERENCE")
+
+									);
+						}
+					}else{
+						currentComp &= compare_____TwoFiles(
+								f.getAbsolutePath(),
+								outputAbsolutePath+File.separator+ outputName+File.separator+ f.getName()
+
+								);
+					}
 				}
 			}else{
 				currentComp = compare_____TwoFiles(
@@ -1006,14 +1153,10 @@ public class NemoBashTest {
 	}
 
 	private boolean compareCFPoint(
-//			String outputAbsolutePath, 
 			String outputTestName,String  outputNCReferenceName){
 
 		NetcdfFile ref = null;
 		NetcdfFile junit = null ;
-//		String refPath =outputAbsolutePath+"/"+outputNCReferenceName;
-//		String junitPath=outputAbsolutePath+"/"+outputTestName;
-		
 		String refPath =outputNCReferenceName;
 		String junitPath=outputTestName;
 		
