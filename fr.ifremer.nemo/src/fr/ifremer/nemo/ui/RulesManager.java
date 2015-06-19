@@ -512,10 +512,10 @@ public class RulesManager {
 				.reinitTableData();
 				Nemo.getInstance().getViewMain().getEditDataForm()
 				.getMyGroupeVerticalParameters().removeAllToAllCombos();
-				
+
 				Nemo.getInstance().getViewMain().getEditDataForm().resetFallRate();
-				
-				
+
+
 				// !!! le fillTypes doit être appelé APRES le removeToAllcombos
 				Nemo.getInstance().getViewMain().getEditDataForm()
 				.getMyTableData().fillTypes();
@@ -557,7 +557,7 @@ public class RulesManager {
 		verticGroup.enable_pDepthBSSurf(isP_depthBSSurf_enabled());
 		verticGroup.enable_pPressure(isP_pressure_enabled());
 		verticGroup.enable_pHeightASLvl(isP_heightASLvl_enabled());
-		
+
 		myEditDataForm.setFallrateGroupEnabled(isFallrateEnabled());
 	}
 
@@ -671,17 +671,26 @@ public class RulesManager {
 		return myProcessType == E_ProcessType.COLLECTION_DIR
 				|| myProcessType == E_ProcessType.CRUISE_DIR || myProcessType == E_ProcessType.COLLECTION_FILES;
 	}
-
+	/**
+	 * 
+	 * @return true if CollectionGrouped By Cruise
+	 */
 	public boolean isProcessCollectionDir() {
 		// CollectionGroupedByCruise
 		return myProcessType == E_ProcessType.COLLECTION_DIR;
 	}
-
+	/**
+	 * 
+	 * @return true if Collection NOT Grouped By Cruise
+	 */
 	public boolean isProcessCollectionFiles() {
 		// Collection NOT GroupedByCruise
 		return myProcessType == E_ProcessType.COLLECTION_FILES;
 	}
-
+	/**
+	 * 
+	 * @return true if Collection (Grouped or NOT grouped) By Cruise
+	 */
 	public boolean isProcessCollection() {
 		return (myProcessType == E_ProcessType.COLLECTION_DIR || myProcessType == E_ProcessType.COLLECTION_FILES);
 	}
