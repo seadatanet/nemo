@@ -215,22 +215,38 @@ public class EditCruiseForm extends EditForm {
 		buttonXML.setEnabled(!RulesManager.getInstance().isProcessCollection());
 
 		if (sectionReference!=null){
-			// REFERENCE
-			sectionReference.setMandatory(true);
-			item = sectionReference.getItem(itemID.REFERENCE);
-			item.setMandatory(true);
+			/** 
+			 * REFERENCE 
+			 **/
 			
+			sectionReference.setEnabled(true);
+			sectionReference.setMandatory(!RulesManager.getInstance().isProcessCollectionDir());
+			
+			// Reference
+			item = sectionReference.getItem(itemID.REFERENCE);
+			item.setEnabled(!RulesManager.getInstance().isProcessCollectionDir());
+			item.setMandatory(!RulesManager.getInstance().isProcessCollectionDir());
+			
+			// CSR
 			item = sectionReference.getItem(itemID.LOCAL_CSR_ID);
 			item.setMandatory(false);
 			item.setEnabled(!RulesManager.getInstance().isProcessCollection());
-
+			//Name
 			item = sectionReference.getItem(itemID.NAME);
-			item.setMandatory(RulesManager.getInstance().isConversionToMedatlas()
-					|| RulesManager.getInstance().isConversionToNetCDF());
+			item.setEnabled(!RulesManager.getInstance().isProcessCollectionDir());
+			item.setMandatory(
+					!RulesManager.getInstance().isProcessCollectionDir()
+					&&(
+					RulesManager.getInstance().isConversionToMedatlas()
+					|| RulesManager.getInstance().isConversionToNetCDF()
+					)
+					);
+			// Ship
 			item = sectionReference.getItem(itemID.SHIP);
 			item.setMandatory(RulesManager.getInstance().isConversionToMedatlas());
-
-			// LOCALISATION
+			/** 
+			 * LOCALISATION 
+			 **/
 			sectionLocalisation.setEnabled(RulesManager.getInstance()
 					.isConversionToMedatlas()
 					|| RulesManager.getInstance().isConversionToNetCDF());
@@ -244,8 +260,9 @@ public class EditCruiseForm extends EditForm {
 				.setMandatory(
 						RulesManager.getInstance().isConversionToMedatlas());
 			}
-
-			// SOURCE
+			/** 
+			 * SOURCE 
+			 **/
 			sectionSource.setEnabled(RulesManager.getInstance()
 					.isConversionToMedatlas()
 					|| RulesManager.getInstance().isConversionToNetCDF());
@@ -259,7 +276,9 @@ public class EditCruiseForm extends EditForm {
 			item.setMandatory(RulesManager.getInstance().isConversionToMedatlas());// chief
 			// scientist
 
-			// ARCHIVING CENTER
+			/** 
+			 * ARCHIVING CENTER 
+			 **/
 			sectionCentre.setEnabled(RulesManager.getInstance()
 					.isConversionToMedatlas()
 					|| RulesManager.getInstance().isConversionToNetCDF());
@@ -274,7 +293,9 @@ public class EditCruiseForm extends EditForm {
 			.get(1)
 			.setMandatory(
 					RulesManager.getInstance().isConversionToMedatlas());// confidentiality
-			// DATA TYPE
+			/** 
+			 * DATA TYPE
+			 **/
 			sectionType.setEnabled(RulesManager.getInstance()
 					.isConversionToMedatlas()
 //					|| RulesManager.getInstance().isConversionToNetCDF() // 25528 disable for netcdf
@@ -677,21 +698,24 @@ public class EditCruiseForm extends EditForm {
 			Couple nomCampagne = sectionReference.getItem(itemID.NAME);
 			Couple navire = sectionReference.getItem(itemID.SHIP);
 
+			
+			
+			
 			// injection des valeurs de l'IHM -> datamodel
 			// reference
-			if (refCampagne != null) {
+			if (refCampagne != null && refCampagne.isEnabled()) {
 				refCampagne.setText(cruiseModel.getReference());
 			}
-			if (localCsrId != null && !RulesManager.getInstance().isProcessCollection() ) {
+			if (localCsrId != null && localCsrId.isEnabled()) {
 				localCsrId.setText(cruiseModel.getLocalCsrIdentifier());
 			}
-			if (nomCampagne != null) {
+			if (nomCampagne != null && nomCampagne.isEnabled()) {
 				nomCampagne.setText(cruiseModel.getName());
 			}
 
 
 
-			if (navire != null) {
+			if (navire != null && navire.isEnabled()) {
 				String[] codeAndName = cruiseModel.getValidShipCodeAndName();
 				Utils.selectComboCodePlus(navire.getValueCombo(),codeAndName[0], codeAndName[1]);
 			}

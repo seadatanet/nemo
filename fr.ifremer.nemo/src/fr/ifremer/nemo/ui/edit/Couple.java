@@ -221,6 +221,7 @@ public class Couple implements UIobject
 	// valueCombo = cType.fillCombo(valueCombo);
 	// }
 
+	@Override
 	public void setEnabled(boolean enabled)
 	{
 		// Text or Combo
@@ -231,6 +232,20 @@ public class Couple implements UIobject
 		else if (valueCombo != null)
 		{
 			valueCombo.setEnabled(enabled);
+		}
+	}
+	public boolean isEnabled()
+	{
+		// Text or Combo
+		if (valueText != null)
+		{
+			return valueText.isEnabled();
+		}
+		else if (valueCombo != null)
+		{
+			return valueCombo.isEnabled();
+		}else{
+			return false;
 		}
 	}
 
