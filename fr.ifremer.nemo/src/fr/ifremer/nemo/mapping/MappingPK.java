@@ -9,8 +9,6 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 
 /**
  *
@@ -18,10 +16,10 @@ import javax.persistence.GenerationType;
  */
 @Embeddable
 public class MappingPK implements Serializable {
-    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "LOCAL_CDI_ID", nullable = false)
     private String localCdiId;
-    @GeneratedValue(strategy = GenerationType.AUTO)    
+//    @GeneratedValue(strategy = GenerationType.AUTO)    
     @Column(name = "FORMAT", nullable = false)
     private String format;
 
