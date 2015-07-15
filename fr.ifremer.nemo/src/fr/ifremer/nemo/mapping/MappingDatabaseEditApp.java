@@ -20,15 +20,27 @@ public class MappingDatabaseEditApp extends SingleFrameApplication {
      * At startup create and show the main frame of the application.
      */
     @Override protected void startup() {
-        if(this.vue==null)
-        {
+    	
+    	/**
+    	 * 
+    	 * 
+    	 * BGT 15/07/2015:
+    	 * always create new view because of a bug on linux:
+    	 * [xcb] Unknown request in queue while dequeuing
+		 * [xcb] Most likely this is a multi-threaded client and XInitThreads has not been called
+		 * [xcb] Aborting, sorry about that.
+		 * java: ../../src/xcb_io.c:179: dequeue_pending_request: Assertion `!xcb_xlib_unknown_req_in_deq' failed.
+
+    	 */
+//        if(this.vue==null)
+//        {
             fr.ifremer.nemo.ui.Utils.messageOK(Messages.CouplingTable_launch);
             this.vue=new MappingDatabaseEditView(this);
             show(vue);
-        } else
-        {
-        show();
-        }
+//        } else
+//        {
+//        show();
+//        }
 
     }
 
