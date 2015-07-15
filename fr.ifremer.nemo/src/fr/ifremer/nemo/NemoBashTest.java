@@ -817,7 +817,7 @@ public class NemoBashTest {
 					String[] splitRef = refFileLine.split("\t");
 					for (int i=0; i<splitRef.length; i++){
 						if (i!=5){// col 5 = generation date -> changes
-							identical= identical&& splitOutput[i].equals(splitRef[i]);
+							identical=  splitOutput[i].equals(splitRef[i]);
 							if (!identical){
 								testLogger.error("cdi diff col. "+ i+1 + ": out: " +splitOutput[i]+ "!= ref: " +splitRef[i] );
 								testLogger.error("CDI REF >>  "+ refFileLine);
