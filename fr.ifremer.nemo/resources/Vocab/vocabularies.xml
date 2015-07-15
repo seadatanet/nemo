@@ -8,13 +8,12 @@
    <vocabulary list="SDN:B03:2:"  version="2"  date="2014-03-27T02:00:03.000"  title="BODC annotated reference material classifiers"  />
    <vocabulary list="SDN:B04:3:"  version="3"  date="2014-07-10T01:00:02.000"  title="BODC people titles"  />
    <vocabulary list="SDN:B05:3:"  version="3"  date="2014-07-24T01:00:03.000"  title="BODC governance roles"  />
-   <vocabulary list="SDN:B06:3:"  version="3"  date="2015-05-30T01:00:01.000"  title="BODC data and metadata integrity checks"  />
+   <vocabulary list="SDN:B06:4:"  version="4"  date="2015-06-24T01:00:02.000"  title="BODC data and metadata integrity checks"  />
    <vocabulary list="SDN:B07:1:"  version="1"  date="2014-10-15T01:00:02.000"  title="Sampling net gear deployment vocabulary"  />
-   <vocabulary list="SDN:B08:0:"  version="0"  date="2015-02-18T09:58:17.000"  title="BODC data collection activity types"  />
    <vocabulary list="SDN:C00:6:"  version="6"  date="2014-12-04T02:00:03.000"  title="BODC Seafloor Depth Data Sources"  />
    <vocabulary list="SDN:C10:9:"  version="9"  date="2015-01-29T02:00:03.000"  title="BODC series feature types"  />
    <vocabulary list="SDN:C16:9:"  version="9"  date="2012-11-07T02:00:06.000"  title="SeaDataNet sea areas"  />
-   <vocabulary list="SDN:C17:453:"  version="453"  date="2015-06-09T01:00:01.000"  title="ICES Platform Codes"  />
+   <vocabulary list="SDN:C17:460:"  version="460"  date="2015-07-15T01:00:03.000"  title="ICES Platform Codes"  />
    <vocabulary list="SDN:C18:6:"  version="6"  date="2008-10-03T01:00:04.000"  title="Intergovernmental Oceanographic Commission countries"  />
    <vocabulary list="SDN:C19:16:"  version="16"  date="2015-02-19T02:00:03.000"  title="SeaVoX salt and fresh water body gazetteer"  />
    <vocabulary list="SDN:C30:17:"  version="17"  date="2015-06-02T01:00:02.000"  title="Active vocabulary content governance authorities"  />
@@ -35,25 +34,24 @@
    <vocabulary list="SDN:C47:1:"  version="1"  date="2010-11-11T02:00:07.000"  title="Marine Strategy Framework Directive indicators"  />
    <vocabulary list="SDN:C48:3:"  version="3"  date="2012-05-01T01:00:02.000"  title="MEDIN Data Guidelines"  />
    <vocabulary list="SDN:C60:7:"  version="7"  date="2008-09-09T01:00:06.000"  title="NERC DataGrid vocabulary term relationships"  />
-   <vocabulary list="SDN:C61:123:"  version="123"  date="2015-06-17T01:00:02.000"  title="BODC post town names"  />
+   <vocabulary list="SDN:C61:126:"  version="126"  date="2015-07-15T01:00:03.000"  title="BODC post town names"  />
    <vocabulary list="SDN:C62:40:"  version="40"  date="2014-12-06T02:00:02.000"  title="BODC administrative region names"  />
    <vocabulary list="SDN:C64:1:"  version="1"  date="2011-06-07T01:00:24.000"  title="United Kingdom Charting Progress 2 sea regions"  />
    <vocabulary list="SDN:C67:3:"  version="3"  date="2012-12-19T02:00:06.000"  title="BODC series parameter collection names"  />
    <vocabulary list="SDN:C71:0:"  version="0"  date="2011-11-12T00:00:00.000"  title="BODC organisation categories"  />
    <vocabulary list="SDN:C72:0:"  version="0"  date="2012-03-08T00:00:00.000"  title="BODC core failure codes"  />
-   <vocabulary list="SDN:C75:271:"  version="271"  date="2015-05-29T01:00:01.000"  title="BODC Organisations"  />
+   <vocabulary list="SDN:C75:273:"  version="273"  date="2015-07-15T01:00:03.000"  title="BODC Organisations"  />
    <vocabulary list="SDN:C77:3:"  version="3"  date="2011-12-09T02:00:14.000"  title="SeaDataNet Cruise Summary Report data categories"  />
    <vocabulary list="SDN:C86:4:"  version="4"  date="2011-01-20T02:00:00.000"  title="SeaDataNet contact and security access roles"  />
    <vocabulary list="SDN:C87:0:"  version="0"  date="2011-12-13T00:00:00.000"  title="BODC project roles"  />
    <vocabulary list="SDN:C88:12:"  version="12"  date="2014-08-21T01:00:05.000"  title="BODC asset access right roles"  />
    <vocabulary list="SDN:C89:0:"  version="0"  date="2011-12-13T00:00:00.000"  title="BODC dataset roles"  />
    <vocabulary list="SDN:C96:1:"  version="1"  date="2012-10-04T01:00:03.000"  title="BODC data model spatial objects"  />
-   <vocabulary list="SDN:C97:767:"  version="767"  date="2015-06-18T01:00:09.000"  title="NERC Vocabulary Server Version 1 mappings index"  />
+   <vocabulary list="SDN:C97:781:"  version="781"  date="2015-07-15T01:00:03.000"  title="NERC Vocabulary Server Version 1 mappings index"  />
    <vocabulary list="SDN:C98:10:"  version="10"  date="2013-08-23T01:00:03.000"  title="Vocabulary Server list subject categories"  />
-   <vocabulary list="SDN:C99:90:"  version="90"  date="2015-04-12T01:00:02.000"  title="BODC USERIDS"  />
+   <vocabulary list="SDN:C99:91:"  version="91"  date="2015-07-08T01:00:12.000"  title="BODC USERIDS"  />
    <vocabulary list="SDN:E01:7:"  version="7"  date="2014-06-25T01:00:03.000"  title="ESEAS active tide gauge sites"  />
    <vocabulary list="SDN:EVO:1:"  version="1"  date="2007-11-23T02:00:03.000"  title="Environment of the Organism (EnvO) ontology base terms"  />
-   <vocabulary list="SDN:F01:1:"  version="1"  date="2014-03-25T00:21:40.000"  title="IFREMER Biocean system dive themes"  />
    <vocabulary list="SDN:G01:1:"  version="1"  date="2012-07-05T01:00:09.000"  title="CI_DateTypeCode"  />
    <vocabulary list="SDN:G02:3:"  version="3"  date="2013-05-21T01:00:03.000"  title="CI_OnlineFunctionCode"  />
    <vocabulary list="SDN:G03:1:"  version="1"  date="2012-07-05T01:00:09.000"  title="CI_PresentationFormCode"  />
@@ -114,7 +112,7 @@
    <vocabulary list="SDN:L19:3:"  version="3"  date="2015-03-13T02:00:02.000"  title="SeaDataNet keyword types"  />
    <vocabulary list="SDN:L20:3:"  version="3"  date="2009-05-13T01:00:03.000"  title="SeaDataNet measurand qualifier flags"  />
    <vocabulary list="SDN:L21:5:"  version="5"  date="2012-07-17T01:00:03.000"  title="SeaDataNet device category types"  />
-   <vocabulary list="SDN:L22:217:"  version="217"  date="2015-06-18T01:00:09.000"  title="SeaVoX Device Catalogue"  />
+   <vocabulary list="SDN:L22:223:"  version="223"  date="2015-07-14T01:00:03.000"  title="SeaVoX Device Catalogue"  />
    <vocabulary list="SDN:L23:7:"  version="7"  date="2014-05-27T13:55:47.000"  title="SeaDataNet metadata entities"  />
    <vocabulary list="SDN:L24:7:"  version="7"  date="2014-11-27T02:00:02.000"  title="SeaDataNet data transport formats"  />
    <vocabulary list="SDN:L26:1:"  version="1"  date="2014-05-07T07:19:59.000"  title="EDIOS permitted sampling interval units"  />
@@ -135,13 +133,13 @@
    <vocabulary list="SDN:N03:1:"  version="1"  date="2007-01-10T09:39:32.000"  title="Climate Science Modelling Language supported feature types"  />
    <vocabulary list="SDN:N04:3:"  version="3"  date="2007-08-18T01:00:04.000"  title="NERC DataGrid on-line reference types"  />
    <vocabulary list="SDN:N05:2:"  version="2"  date="2011-05-14T01:00:05.000"  title="NERC data discovery service input metadata document standards"  />
-   <vocabulary list="SDN:P01:536:"  version="536"  date="2015-06-17T01:00:02.000"  title="BODC Parameter Usage Vocabulary"  />
+   <vocabulary list="SDN:P01:544:"  version="544"  date="2015-07-10T01:00:02.000"  title="BODC Parameter Usage Vocabulary"  />
    <vocabulary list="SDN:P02:88:"  version="88"  date="2015-04-09T01:00:13.000"  title="SeaDataNet Parameter Discovery Vocabulary"  />
    <vocabulary list="SDN:P03:22:"  version="22"  date="2015-02-04T02:00:02.000"  title="SeaDataNet Agreed Parameter Groups"  />
    <vocabulary list="SDN:P04:4:"  version="4"  date="2007-04-18T13:55:46.000"  title="Global Change Master Directory Science Keywords V5"  />
    <vocabulary list="SDN:P05:0:"  version="0"  date="2005-04-27T23:00:00.000"  title="International Standards Organisation ISO19115 Topic Categories"  />
-   <vocabulary list="SDN:P06:65:"  version="65"  date="2015-06-11T01:00:02.000"  title="BODC data storage units"  />
-   <vocabulary list="SDN:P07:28:"  version="28"  date="2015-01-08T02:00:03.000"  title="Climate and Forecast Standard Names"  />
+   <vocabulary list="SDN:P06:66:"  version="66"  date="2015-06-23T01:00:01.000"  title="BODC data storage units"  />
+   <vocabulary list="SDN:P07:29:"  version="29"  date="2015-07-09T07:02:39.000"  title="Climate and Forecast Standard Names"  />
    <vocabulary list="SDN:P08:3:"  version="3"  date="2008-05-01T01:00:03.000"  title="SeaDataNet Parameter Disciplines"  />
    <vocabulary list="SDN:P09:45:"  version="45"  date="2015-03-31T01:00:02.000"  title="MEDATLAS Parameter Usage Vocabulary"  />
    <vocabulary list="SDN:P10:3:"  version="3"  date="2008-01-22T17:55:28.000"  title="Global Change Master Directory Instrument Keywords"  />
@@ -150,7 +148,7 @@
    <vocabulary list="SDN:P13:4:"  version="4"  date="2007-04-18T13:55:46.000"  title="Global Change Master Directory Science Keyword terms"  />
    <vocabulary list="SDN:P14:4:"  version="4"  date="2007-04-18T13:55:46.000"  title="Global Change Master Directory Science Keyword variables"  />
    <vocabulary list="SDN:P15:1:"  version="1"  date="2007-05-18T05:45:02.000"  title="Climate and Forecast Cell Methods"  />
-   <vocabulary list="SDN:P17:21:"  version="21"  date="2015-06-06T01:00:01.000"  title="Partnership for Observation of the Global Ocean ships of interest"  />
+   <vocabulary list="SDN:P17:22:"  version="22"  date="2015-06-25T01:00:02.000"  title="Partnership for Observation of the Global Ocean ships of interest"  />
    <vocabulary list="SDN:P18:1:"  version="1"  date="2005-08-22T20:01:16.000"  title="Global Change Master Directory Chronostratigraphic Units"  />
    <vocabulary list="SDN:P19:1:"  version="1"  date="2008-02-05T11:24:56.000"  title="Global Change Master Directory platforms"  />
    <vocabulary list="SDN:P20:1:"  version="1"  date="2006-10-05T09:00:00.000"  title="Global Change Master Directory URL content types"  />
@@ -162,7 +160,7 @@
    <vocabulary list="SDN:P26:1:"  version="1"  date="2012-05-31T01:00:02.000"  title="ISO19119 geographic services taxonomy"  />
    <vocabulary list="SDN:P27:1:"  version="1"  date="2012-07-21T01:00:03.000"  title="Oil spill spillet location"  />
    <vocabulary list="SDN:P28:1:"  version="1"  date="2012-07-21T01:00:03.000"  title="Cedre pollution site cleanup operational stati"  />
-   <vocabulary list="SDN:P29:2:"  version="2"  date="2013-07-12T01:00:03.000"  title="Climate and Forecast Area Types"  />
+   <vocabulary list="SDN:P29:3:"  version="3"  date="2015-07-09T07:02:39.000"  title="Climate and Forecast Area Types"  />
    <vocabulary list="SDN:P30:2:"  version="2"  date="2013-07-12T01:00:03.000"  title="Climate and Forecast Standardized Region Names"  />
    <vocabulary list="SDN:P35:8:"  version="8"  date="2014-11-12T02:00:02.000"  title="EMODNET chemistry lot aggregated parameter names"  />
    <vocabulary list="SDN:P36:3:"  version="3"  date="2014-10-02T01:00:02.000"  title="EMODNET Chemistry Lot chemical themes"  />
@@ -186,7 +184,7 @@
    <vocabulary list="SDN:S21:12:"  version="12"  date="2015-02-06T02:00:02.000"  title="BODC parameter semantic model sphere names"  />
    <vocabulary list="SDN:S22:5:"  version="5"  date="2015-01-22T02:00:04.000"  title="BODC parameter semantic model sphere subgroup names"  />
    <vocabulary list="SDN:S23:5:"  version="5"  date="2014-06-05T01:00:02.000"  title="BODC semantic model sphere phase names"  />
-   <vocabulary list="SDN:S25:59:"  version="59"  date="2015-06-17T01:00:02.000"  title="BODC parameter semantic model biological entity names"  />
+   <vocabulary list="SDN:S25:60:"  version="60"  date="2015-06-25T01:00:02.000"  title="BODC parameter semantic model biological entity names"  />
    <vocabulary list="SDN:S26:10:"  version="10"  date="2015-04-02T01:00:01.000"  title="BODC parameter semantic model matrices"  />
    <vocabulary list="SDN:V12:12:"  version="12"  date="2015-03-11T02:00:03.000"  title="SeaDataNet Vocabularies"  />
    <vocabulary list="SDN:V22:4:"  version="4"  date="2013-07-06T01:00:03.000"  title="SeaDataNet CDI/CSR ISO Code List collections"  />

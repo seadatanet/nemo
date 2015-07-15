@@ -1,37 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mapping>
-   <vocabulary list="SDN:P01:536:"  version="536"  date="2015-06-17T01:00:02.000"  title="BODC Parameter Usage Vocabulary"  />
+   <vocabulary list="SDN:P01:544:"  version="544"  date="2015-07-10T01:00:02.000"  title="BODC Parameter Usage Vocabulary"  />
    <mapped>
       <vocabulary list="SDN:P09:45:"  version="45"  date="2015-03-31T01:00:02.000"  title="MEDATLAS Parameter Usage Vocabulary"  />
    </mapped>
    <match>
       <element  key="SDN:P09:45:CUPW"  label="14C PRODUCTION FILTER UNSPECIF"    />
       <exact>
-         <element  key="SDN:P01:45:TCUPDZZZ"  label="Uptake rate (daily) of carbon {primary production} per unit time per unit volume of the water body [particulate &gt;unknown phase]"    />
+         <element  key="SDN:P01:45:TCUPDZZZ"  label="Uptake rate (daily) of carbon {primary production CAS 7440-44-0} per unit time per unit volume of the water body [particulate &gt;unknown phase]"    />
       </exact>
    </match>
    <match>
       <element  key="SDN:P09:45:CUPH"  label="14C PRODUCTION FILTER UNSPECIF"    />
       <exact>
-         <element  key="SDN:P01:45:TCUPHZZZ"  label="Uptake rate (hourly) of carbon {primary production} per unit time per unit volume of the water body [particulate &gt;unknown phase]"    />
+         <element  key="SDN:P01:45:TCUPHZZZ"  label="Uptake rate (hourly) of carbon {primary production CAS 7440-44-0} per unit time per unit volume of the water body [particulate &gt;unknown phase]"    />
       </exact>
    </match>
    <match>
       <element  key="SDN:P09:45:C4UW"  label="14C PRODUCTION/10 MICRON FILT."    />
       <exact>
-         <element  key="SDN:P01:45:SCUPII10"  label="Uptake rate (daily) of carbon {primary production} per unit time per unit volume of the water body [particulate &gt;10um phase] by isotope-labelled tracer addition, incubation at unspecified light level, filtration and counting residue"    />
+         <element  key="SDN:P01:45:SCUPII10"  label="Uptake rate (daily) of carbon {primary production CAS 7440-44-0} per unit time per unit volume of the water body [particulate &gt;10um phase] by isotope-labelled tracer addition, incubation at unspecified light level, filtration and counting residue"    />
       </exact>
    </match>
    <match>
       <element  key="SDN:P09:45:C2UW"  label="14C PRODUCTION/2 MICRON FILT."    />
       <exact>
-         <element  key="SDN:P01:45:SCUPIIPB"  label="Uptake rate (daily) of carbon {primary production} per unit time per unit volume of the water body [particulate &gt;2um phase] by isotope-labelled tracer addition, incubation at unspecified light level, filtration and counting residue"    />
+         <element  key="SDN:P01:45:SCUPIIPB"  label="Uptake rate (daily) of carbon {primary production CAS 7440-44-0} per unit time per unit volume of the water body [particulate &gt;2um phase] by isotope-labelled tracer addition, incubation at unspecified light level, filtration and counting residue"    />
       </exact>
    </match>
    <match>
       <element  key="SDN:P09:45:C1UW"  label="14C UPTAKE 0.2-1 MICRON"    />
       <exact>
-         <element  key="SDN:P01:45:SCUPIIPE"  label="Uptake rate (daily) of carbon {primary production} per unit time per unit volume of the water body [particulate 0.2-1um phase] by isotope-labelled tracer addition, incubation at unspecified light level, cascade filtration and counting residue"    />
+         <element  key="SDN:P01:45:SCUPIIPE"  label="Uptake rate (daily) of carbon {primary production CAS 7440-44-0} per unit time per unit volume of the water body [particulate 0.2-1um phase] by isotope-labelled tracer addition, incubation at unspecified light level, cascade filtration and counting residue"    />
       </exact>
    </match>
    <match>
@@ -79,19 +79,19 @@
    <match>
       <element  key="SDN:P09:45:AMON"  label="AMMONIUM (NH4-N) CONTENT"    />
       <broad>
-         <element  key="SDN:P01:45:AMONZZXX"  label="Concentration of ammonium {NH4} per unit volume of the water body [unknown phase]"    />
+         <element  key="SDN:P01:45:AMONZZXX"  label="Concentration of ammonium {NH4+ CAS 14798-03-9} per unit volume of the water body [unknown phase]"    />
       </broad>
    </match>
    <match>
       <element  key="SDN:P09:45:AMOW"  label="AMMONIUM (NH4-N) CONTENT"    />
       <broad>
-         <element  key="SDN:P01:45:MDMAP004"  label="Concentration of ammonium {NH4} per unit mass of the water body [unknown phase]"    />
+         <element  key="SDN:P01:45:MDMAP004"  label="Concentration of ammonium {NH4+ CAS 14798-03-9} per unit mass of the water body [unknown phase]"    />
       </broad>
    </match>
    <match>
       <element  key="SDN:P09:45:NHRW"  label="AMMONIUM REGENERATION"    />
       <broad>
-         <element  key="SDN:P01:45:NAREZZZZ"  label="Regeneration rate (daily) of ammonium per unit time per unit volume of the water body"    />
+         <element  key="SDN:P01:45:NAREZZZZ"  label="Regeneration rate (daily) of ammonium {NH4+ CAS 14798-03-9} per unit time per unit volume of the water body"    />
       </broad>
    </match>
    <match>
@@ -103,7 +103,7 @@
    <match>
       <element  key="SDN:P09:45:AMOP"  label="AMONIUM IN SEDIMENT PORE WATER"    />
       <narrow>
-         <element  key="SDN:P01:45:AMONAADC"  label="Concentration of ammonium {NH4} per unit volume of the sediment pore water [dissolved plus reactive particulate phase] by centrifugal extraction and colorimetric autoanalysis"    />
+         <element  key="SDN:P01:45:AMONAADC"  label="Concentration of ammonium {NH4+ CAS 14798-03-9} per unit volume of the sediment pore water [dissolved plus reactive particulate phase] by centrifugal extraction and colorimetric autoanalysis"    />
       </narrow>
    </match>
    <match>
@@ -157,13 +157,13 @@
    <match>
       <element  key="SDN:P09:45:AGSX"  label="Ag IN DRY WEIGHT SEDIMENT"    />
       <exact>
-         <element  key="SDN:P01:45:SEDSAGXX"  label="Concentration of silver {Ag} per unit dry weight of sediment"    />
+         <element  key="SDN:P01:45:SEDSAGXX"  label="Concentration of silver {Ag CAS 7440-22-4} per unit dry weight of sediment"    />
       </exact>
    </match>
    <match>
       <element  key="SDN:P09:45:AG63"  label="Ag&lt;63um IN DRY WEIGHT SEDIMENT"    />
       <exact>
-         <element  key="SDN:P01:45:RWSSED03"  label="Concentration of silver {Ag} per unit dry weight of sediment &lt;63um"    />
+         <element  key="SDN:P01:45:RWSSED03"  label="Concentration of silver {Ag CAS 7440-22-4} per unit dry weight of sediment &lt;63um"    />
       </exact>
    </match>
    <match>
@@ -187,7 +187,7 @@
    <match>
       <element  key="SDN:P09:45:ASSX"  label="As IN DRY WEIGHT SEDIMENT"    />
       <exact>
-         <element  key="SDN:P01:45:MASSP012"  label="Concentration of arsenic {As} per unit dry weight of sediment"    />
+         <element  key="SDN:P01:45:MASSP012"  label="Concentration of arsenic {As CAS 7440-38-2} per unit dry weight of sediment"    />
       </exact>
    </match>
    <match>
@@ -223,13 +223,13 @@
    <match>
       <element  key="SDN:P09:45:MBAP"  label="Ba IN SUSPENDED MATTER"    />
       <exact>
-         <element  key="SDN:P01:45:MBAPP012"  label="Concentration of barium {Ba} per unit dry weight of suspended particulate material"    />
+         <element  key="SDN:P01:45:MBAPP012"  label="Concentration of barium {Ba CAS 7440-39-3} per unit dry weight of suspended particulate material"    />
       </exact>
    </match>
    <match>
       <element  key="SDN:P09:45:MBAS"  label="Ba IN THE SEDIMENT"    />
       <exact>
-         <element  key="SDN:P01:45:MBASP012"  label="Concentration of barium {Ba} per unit dry weight of sediment"    />
+         <element  key="SDN:P01:45:MBASP012"  label="Concentration of barium {Ba CAS 7440-39-3} per unit dry weight of sediment"    />
       </exact>
    </match>
    <match>
@@ -409,7 +409,7 @@
    <match>
       <element  key="SDN:P09:45:MCUF"  label="CU FLUX IN SETTLING PARTICLES"    />
       <exact>
-         <element  key="SDN:P01:45:SFXCUZZZ"  label="Particle-bound sedimentation flux of copper {Cu} per unit time per unit area of the water body"    />
+         <element  key="SDN:P01:45:SFXCUZZZ"  label="Particle-bound sedimentation flux of copper {Cu CAS 7440-50-8} per unit time per unit area of the water body"    />
       </exact>
    </match>
    <match>
@@ -463,25 +463,25 @@
    <match>
       <element  key="SDN:P09:45:CDSX"  label="Cd IN DRY WEIGHT SEDIMENT"    />
       <exact>
-         <element  key="SDN:P01:45:MCDSP012"  label="Concentration of cadmium {Cd} per unit dry weight of sediment"    />
+         <element  key="SDN:P01:45:MCDSP012"  label="Concentration of cadmium {Cd CAS 7440-43-9} per unit dry weight of sediment"    />
       </exact>
    </match>
    <match>
       <element  key="SDN:P09:45:CD45"  label="Cd&lt;0.4/0.45um IN WATER BODY"    />
       <exact>
-         <element  key="SDN:P01:45:MTWD0009"  label="Concentration of cadmium {Cd} per unit volume of the water body [dissolved plus reactive particulate &lt;0.4/0.45um phase]"    />
+         <element  key="SDN:P01:45:MTWD0009"  label="Concentration of cadmium {Cd CAS 7440-43-9} per unit volume of the water body [dissolved plus reactive particulate &lt;0.4/0.45um phase]"    />
       </exact>
    </match>
    <match>
       <element  key="SDN:P09:45:CD63"  label="Cd&lt;63um IN DRY WEIGHT SEDIMENT"    />
       <exact>
-         <element  key="SDN:P01:45:CONCDS02"  label="Concentration of cadmium {Cd} per unit dry weight of sediment &lt;63um"    />
+         <element  key="SDN:P01:45:CONCDS02"  label="Concentration of cadmium {Cd CAS 7440-43-9} per unit dry weight of sediment &lt;63um"    />
       </exact>
    </match>
    <match>
       <element  key="SDN:P09:45:CD40"  label="Cd&gt;0.4/0.45um IN WATER BODY"    />
       <exact>
-         <element  key="SDN:P01:45:CDXXAAP2"  label="Concentration of cadmium {Cd} per unit volume of the water body [particulate &gt;0.4/0.45um phase] by acid leaching of filter residue and atomic absorption spectroscopy"    />
+         <element  key="SDN:P01:45:CDXXAAP2"  label="Concentration of cadmium {Cd CAS 7440-43-9} per unit volume of the water body [particulate &gt;0.4/0.45um phase] by acid leaching of filter residue and atomic absorption spectroscopy"    />
       </exact>
    </match>
    <match>
@@ -511,55 +511,55 @@
    <match>
       <element  key="SDN:P09:45:COSX"  label="Co IN DRY WEIGHT SEDIMENT"    />
       <exact>
-         <element  key="SDN:P01:45:MCOSP012"  label="Concentration of cobalt {Co} per unit dry weight of sediment"    />
+         <element  key="SDN:P01:45:MCOSP012"  label="Concentration of cobalt {Co CAS 7440-48-4} per unit dry weight of sediment"    />
       </exact>
    </match>
    <match>
       <element  key="SDN:P09:45:CO63"  label="Co&lt;63um IN DRY WEIGHT SEDIMENT"    />
       <exact>
-         <element  key="SDN:P01:45:RWSSED36"  label="Concentration of cobalt {Co} per unit dry weight of sediment &lt;63um"    />
+         <element  key="SDN:P01:45:RWSSED36"  label="Concentration of cobalt {Co CAS 7440-48-4} per unit dry weight of sediment &lt;63um"    />
       </exact>
    </match>
    <match>
       <element  key="SDN:P09:45:MCRS"  label="Cr IN THE SEDIMENT"    />
       <exact>
-         <element  key="SDN:P01:45:MCRSP012"  label="Concentration of chromium {Cr} per unit dry weight of sediment"    />
+         <element  key="SDN:P01:45:MCRSP012"  label="Concentration of chromium {Cr CAS 7440-47-3} per unit dry weight of sediment"    />
       </exact>
    </match>
    <match>
       <element  key="SDN:P09:45:CR63"  label="Cr&lt;63um IN DRY WEIGHT SEDIMENT"    />
       <exact>
-         <element  key="SDN:P01:45:RWSSED29"  label="Concentration of chromium {Cr} per unit dry weight of sediment &lt;63um"    />
+         <element  key="SDN:P01:45:RWSSED29"  label="Concentration of chromium {Cr CAS 7440-47-3} per unit dry weight of sediment &lt;63um"    />
       </exact>
    </match>
    <match>
       <element  key="SDN:P09:45:CSSX"  label="Cs  IN DRY WEIGHT SEDIMENT"    />
       <exact>
-         <element  key="SDN:P01:45:SEDSCSXX"  label="Concentration of caesium {Cs} per unit dry weight of sediment"    />
+         <element  key="SDN:P01:45:SEDSCSXX"  label="Concentration of caesium {Cs CAS 7440-46-2} per unit dry weight of sediment"    />
       </exact>
    </match>
    <match>
       <element  key="SDN:P09:45:CS63"  label="Cs&lt;63um IN DRY WEIGHT SEDIMENT"    />
       <exact>
-         <element  key="SDN:P01:45:RWSSED07"  label="Concentration of caesium {Cs} per unit dry weight of sediment &lt;63um"    />
+         <element  key="SDN:P01:45:RWSSED07"  label="Concentration of caesium {Cs CAS 7440-46-2} per unit dry weight of sediment &lt;63um"    />
       </exact>
    </match>
    <match>
       <element  key="SDN:P09:45:MCUS"  label="Cu IN THE SEDIMENT"    />
       <exact>
-         <element  key="SDN:P01:45:MCUSP012"  label="Concentration of copper {Cu} per unit dry weight of sediment"    />
+         <element  key="SDN:P01:45:MCUSP012"  label="Concentration of copper {Cu CAS 7440-50-8} per unit dry weight of sediment"    />
       </exact>
    </match>
    <match>
       <element  key="SDN:P09:45:CU63"  label="Cu&lt;63um IN DRY WEIGHT SEDIMENT"    />
       <exact>
-         <element  key="SDN:P01:45:RWSSED30"  label="Concentration of copper {Cu} per unit dry weight of sediment &lt;63um"    />
+         <element  key="SDN:P01:45:RWSSED30"  label="Concentration of copper {Cu CAS 7440-50-8} per unit dry weight of sediment &lt;63um"    />
       </exact>
    </match>
    <match>
       <element  key="SDN:P09:45:CDFW"  label="DARK FIXATION"    />
       <exact>
-         <element  key="SDN:P01:45:SCUPDARK"  label="Uptake rate (daily) of carbon {primary production} per unit time per unit volume of the water body [particulate &gt;unknown phase] by isotope-labelled tracer addition, incubation in the dark, filtration and counting residue"    />
+         <element  key="SDN:P01:45:SCUPDARK"  label="Uptake rate (daily) of carbon {primary production CAS 7440-44-0} per unit time per unit volume of the water body [particulate &gt;unknown phase] by isotope-labelled tracer addition, incubation in the dark, filtration and counting residue"    />
       </exact>
    </match>
    <match>
@@ -733,7 +733,7 @@
    <match>
       <element  key="SDN:P09:45:MCUW"  label="DISSOLVED COPPER (Cu)"    />
       <exact>
-         <element  key="SDN:P01:45:CUXXZZZZ"  label="Concentration of copper {Cu} per unit volume of the water body [dissolved plus reactive particulate phase]"    />
+         <element  key="SDN:P01:45:CUXXZZZZ"  label="Concentration of copper {Cu CAS 7440-50-8} per unit volume of the water body [dissolved plus reactive particulate phase]"    />
       </exact>
    </match>
    <match>
@@ -769,7 +769,7 @@
    <match>
       <element  key="SDN:P09:45:MNIW"  label="DISSOLVED NICKEL (Ni)"    />
       <exact>
-         <element  key="SDN:P01:45:NIXXZZZZ"  label="Concentration of nickel {Ni} per unit volume of the water body [dissolved plus reactive particulate &lt;unknown phase]"    />
+         <element  key="SDN:P01:45:NIXXZZZZ"  label="Concentration of nickel {Ni CAS 7440-02-0} per unit volume of the water body [dissolved plus reactive particulate &lt;unknown phase]"    />
       </exact>
    </match>
    <match>
@@ -919,7 +919,7 @@
    <match>
       <element  key="SDN:P09:45:MFEF"  label="FE FLUX IN SETTLING PARTICLES"    />
       <exact>
-         <element  key="SDN:P01:45:SFXFEZZZ"  label="Particle-bound sedimentation flux of iron (total) {total Fe} per unit time per unit area of the water body"    />
+         <element  key="SDN:P01:45:SFXFEZZZ"  label="Particle-bound sedimentation flux of iron (total) {total Fe CAS 7439-89-6} per unit time per unit area of the water body"    />
       </exact>
    </match>
    <match>
@@ -961,19 +961,19 @@
    <match>
       <element  key="SDN:P09:45:MFEP"  label="Fe IN SUSPENDED MATTER"    />
       <exact>
-         <element  key="SDN:P01:45:MFEPP012"  label="Concentration of iron (total) {total Fe} per unit dry weight of suspended particulate material"    />
+         <element  key="SDN:P01:45:MFEPP012"  label="Concentration of iron (total) {total Fe CAS 7439-89-6} per unit dry weight of suspended particulate material"    />
       </exact>
    </match>
    <match>
       <element  key="SDN:P09:45:MFES"  label="Fe IN THE SEDIMENT"    />
       <exact>
-         <element  key="SDN:P01:45:MFESP012"  label="Concentration of iron (total) {total Fe} per unit dry weight of sediment"    />
+         <element  key="SDN:P01:45:MFESP012"  label="Concentration of iron (total) {total Fe CAS 7439-89-6} per unit dry weight of sediment"    />
       </exact>
    </match>
    <match>
       <element  key="SDN:P09:45:FE63"  label="Fe&lt;63um IN DRY WEIGHT SEDIMENT"    />
       <exact>
-         <element  key="SDN:P01:45:RWSSED38"  label="Concentration of iron (total) {total Fe} per unit dry weight of sediment &lt;63um"    />
+         <element  key="SDN:P01:45:RWSSED38"  label="Concentration of iron (total) {total Fe CAS 7439-89-6} per unit dry weight of sediment &lt;63um"    />
       </exact>
    </match>
    <match>
@@ -1225,13 +1225,13 @@
    <match>
       <element  key="SDN:P09:45:LISX"  label="Li IN DRY WEIGHT SEDIMENT"    />
       <exact>
-         <element  key="SDN:P01:45:LISEDXD1"  label="Concentration of lithium {Li} per unit dry weight of sediment"    />
+         <element  key="SDN:P01:45:LISEDXD1"  label="Concentration of lithium {Li CAS 7439-93-2} per unit dry weight of sediment"    />
       </exact>
    </match>
    <match>
       <element  key="SDN:P09:45:LI63"  label="Li&lt;63um IN DRY WEIGHT SEDIMENT"    />
       <exact>
-         <element  key="SDN:P01:45:LISEDAD1"  label="Concentration of lithium {Li} per unit dry weight of sediment &lt;63um"    />
+         <element  key="SDN:P01:45:LISEDAD1"  label="Concentration of lithium {Li CAS 7439-93-2} per unit dry weight of sediment &lt;63um"    />
       </exact>
    </match>
    <match>
@@ -1321,19 +1321,19 @@
    <match>
       <element  key="SDN:P09:45:MMNP"  label="Mn IN SUSPENDED MATTER"    />
       <exact>
-         <element  key="SDN:P01:45:MMNPP012"  label="Concentration of manganese (total) {total Mn} per unit dry weight of suspended particulate material"    />
+         <element  key="SDN:P01:45:MMNPP012"  label="Concentration of manganese (total) {total Mn CAS 7439-96-5} per unit dry weight of suspended particulate material"    />
       </exact>
    </match>
    <match>
       <element  key="SDN:P09:45:MMNS"  label="Mn IN THE SEDIMENT"    />
       <exact>
-         <element  key="SDN:P01:45:MMNSP012"  label="Concentration of manganese (total) {total Mn} per unit dry weight of sediment"    />
+         <element  key="SDN:P01:45:MMNSP012"  label="Concentration of manganese (total) {total Mn CAS 7439-96-5} per unit dry weight of sediment"    />
       </exact>
    </match>
    <match>
       <element  key="SDN:P09:45:MN63"  label="Mn&lt;63um IN DRY WEIGHT SEDIMENT"    />
       <exact>
-         <element  key="SDN:P01:45:RWSSED37"  label="Concentration of manganese (total) {total Mn} per unit dry weight of sediment &lt;63um"    />
+         <element  key="SDN:P01:45:RWSSED37"  label="Concentration of manganese (total) {total Mn CAS 7439-96-5} per unit dry weight of sediment &lt;63um"    />
       </exact>
    </match>
    <match>
@@ -1393,13 +1393,13 @@
    <match>
       <element  key="SDN:P09:45:NOUW"  label="NITRATE UPTAKE"    />
       <exact>
-         <element  key="SDN:P01:45:AMUWXXXX"  label="Uptake rate (daily) of ammonium {regenerated production} per unit time per unit volume of the water body [particulate &gt;unknown phase]"    />
+         <element  key="SDN:P01:45:AMUWXXXX"  label="Uptake rate (daily) of ammonium {regenerated production NH4+ CAS 14798-03-9} per unit time per unit volume of the water body [particulate &gt;unknown phase]"    />
       </exact>
    </match>
    <match>
       <element  key="SDN:P09:45:NORW"  label="NITRIFICATION"    />
       <broad>
-         <element  key="SDN:P01:45:NTRFZZZZ"  label="Oxidation rate (daily) of ammonium {nitrification rate} per unit time per unit volume of the water body"    />
+         <element  key="SDN:P01:45:NTRFZZZZ"  label="Oxidation rate (daily) of ammonium {nitrification rate NH4+ CAS 14798-03-9} per unit time per unit volume of the water body"    />
       </broad>
    </match>
    <match>
@@ -1549,13 +1549,13 @@
    <match>
       <element  key="SDN:P09:45:NISX"  label="Ni IN DRY WEIGHT SEDIMENT"    />
       <exact>
-         <element  key="SDN:P01:45:RWSSED31"  label="Concentration of nickel {Ni} per unit dry weight of sediment &lt;63um"    />
+         <element  key="SDN:P01:45:RWSSED31"  label="Concentration of nickel {Ni CAS 7440-02-0} per unit dry weight of sediment &lt;63um"    />
       </exact>
    </match>
    <match>
       <element  key="SDN:P09:45:MNIS"  label="Ni IN THE SEDIMENT"    />
       <exact>
-         <element  key="SDN:P01:45:MNISP012"  label="Concentration of nickel {Ni} per unit dry weight of sediment"    />
+         <element  key="SDN:P01:45:MNISP012"  label="Concentration of nickel {Ni CAS 7440-02-0} per unit dry weight of sediment"    />
       </exact>
    </match>
    <match>
@@ -1645,7 +1645,7 @@
    <match>
       <element  key="SDN:P09:45:TCCF"  label="PART. TOTAL CARBON FLUX"    />
       <exact>
-         <element  key="SDN:P01:45:OCFXCZXX"  label="Particle-bound sedimentation flux of carbon {&apos;POC&apos;} per unit time per unit area of the water body by sediment trapping and elemental analysis"    />
+         <element  key="SDN:P01:45:OCFXCZXX"  label="Particle-bound sedimentation flux of carbon {&apos;POC&apos; CAS 7440-44-0} per unit time per unit area of the water body by sediment trapping and elemental analysis"    />
       </exact>
    </match>
    <match>
@@ -1705,7 +1705,7 @@
    <match>
       <element  key="SDN:P09:45:MPBF"  label="PB FLUX IN SETTLING PARTICLES"    />
       <exact>
-         <element  key="SDN:P01:45:SFXPBZZZ"  label="Particle-bound sedimentation flux of lead {Pb} per unit time per unit area of the water body"    />
+         <element  key="SDN:P01:45:SFXPBZZZ"  label="Particle-bound sedimentation flux of lead {Pb CAS 7439-92-1} per unit time per unit area of the water body"    />
       </exact>
    </match>
    <match>
@@ -1867,25 +1867,25 @@
    <match>
       <element  key="SDN:P09:45:MPBS"  label="Pb IN THE SEDIMENT"    />
       <exact>
-         <element  key="SDN:P01:45:MPBSP012"  label="Concentration of lead {Pb} per unit dry weight of sediment"    />
+         <element  key="SDN:P01:45:MPBSP012"  label="Concentration of lead {Pb CAS 7439-92-1} per unit dry weight of sediment"    />
       </exact>
    </match>
    <match>
       <element  key="SDN:P09:45:PB45"  label="Pb&lt;0.4/0.45um IN WATER BODY"    />
       <exact>
-         <element  key="SDN:P01:45:MTWD0046"  label="Concentration of lead {Pb} per unit volume of the water body [dissolved plus reactive particulate &lt;0.4/0.45um phase]"    />
+         <element  key="SDN:P01:45:MTWD0046"  label="Concentration of lead {Pb CAS 7439-92-1} per unit volume of the water body [dissolved plus reactive particulate &lt;0.4/0.45um phase]"    />
       </exact>
    </match>
    <match>
       <element  key="SDN:P09:45:PB63"  label="Pb&lt;63um IN DRY WEIGHT SEDIMENT"    />
       <exact>
-         <element  key="SDN:P01:45:CONPBS02"  label="Concentration of lead {Pb} per unit dry weight of sediment &lt;63um"    />
+         <element  key="SDN:P01:45:CONPBS02"  label="Concentration of lead {Pb CAS 7439-92-1} per unit dry weight of sediment &lt;63um"    />
       </exact>
    </match>
    <match>
       <element  key="SDN:P09:45:PB40"  label="Pb&gt;0.4/0.45um IN WATER BODY"    />
       <exact>
-         <element  key="SDN:P01:45:PBXXAAP2"  label="Concentration of lead {Pb} per unit volume of the water body [particulate &gt;0.4/0.45um phase] by acid leaching of filter residue and atomic absorption spectroscopy"    />
+         <element  key="SDN:P01:45:PBXXAAP2"  label="Concentration of lead {Pb CAS 7439-92-1} per unit volume of the water body [particulate &gt;0.4/0.45um phase] by acid leaching of filter residue and atomic absorption spectroscopy"    />
       </exact>
    </match>
    <match>
@@ -2192,13 +2192,13 @@
    <match>
       <element  key="SDN:P09:45:SBSX"  label="Sb IN DRY WEIGHT SEDIMENT"    />
       <exact>
-         <element  key="SDN:P01:45:HCMR0032"  label="Concentration of antimony {Sb} per unit dry weight of sediment"    />
+         <element  key="SDN:P01:45:HCMR0032"  label="Concentration of antimony {Sb CAS 7440-36-0} per unit dry weight of sediment"    />
       </exact>
    </match>
    <match>
       <element  key="SDN:P09:45:SB63"  label="Sb&lt;63um IN DRY WEIGHT SEDIMENT"    />
       <exact>
-         <element  key="SDN:P01:45:HCMR0010"  label="Concentration of antimony {Sb} per unit dry weight of sediment &lt;63um"    />
+         <element  key="SDN:P01:45:HCMR0010"  label="Concentration of antimony {Sb CAS 7440-36-0} per unit dry weight of sediment &lt;63um"    />
       </exact>
    </match>
    <match>
@@ -2258,13 +2258,13 @@
    <match>
       <element  key="SDN:P09:45:MSRS"  label="Sr IN THE SEDIMENT"    />
       <exact>
-         <element  key="SDN:P01:45:MSRSP012"  label="Concentration of strontium {Sr} per unit dry weight of sediment"    />
+         <element  key="SDN:P01:45:MSRSP012"  label="Concentration of strontium {Sr CAS 7440-24-6} per unit dry weight of sediment"    />
       </exact>
    </match>
    <match>
       <element  key="SDN:P09:45:SR63"  label="Sr&lt;63um IN DRY WEIGHT SEDIMENT"    />
       <exact>
-         <element  key="SDN:P01:45:RWSSED05"  label="Concentration of strontium {Sr} per unit dry weight of sediment &lt;63um"    />
+         <element  key="SDN:P01:45:RWSSED05"  label="Concentration of strontium {Sr CAS 7440-24-6} per unit dry weight of sediment &lt;63um"    />
       </exact>
    </match>
    <match>
@@ -2426,37 +2426,37 @@
    <match>
       <element  key="SDN:P09:45:TLSX"  label="Tl IN DRY WEIGHT SEDIMENT"    />
       <exact>
-         <element  key="SDN:P01:45:HCMR0035"  label="Concentration of thallium {Tl} per unit dry weight of sediment"    />
+         <element  key="SDN:P01:45:HCMR0035"  label="Concentration of thallium {Tl CAS 7440-28-0} per unit dry weight of sediment"    />
       </exact>
    </match>
    <match>
       <element  key="SDN:P09:45:TL63"  label="Tl&lt;63um IN DRY WEIGHT SEDIMENT"    />
       <exact>
-         <element  key="SDN:P01:45:HCMR0014"  label="Concentration of thallium {Tl} per unit dry weight of sediment &lt;63um"    />
+         <element  key="SDN:P01:45:HCMR0014"  label="Concentration of thallium {Tl CAS 7440-28-0} per unit dry weight of sediment &lt;63um"    />
       </exact>
    </match>
    <match>
       <element  key="SDN:P09:45:TMSX"  label="Tm IN DRY WEIGHT SEDIMENT"    />
       <exact>
-         <element  key="SDN:P01:45:HCMR0036"  label="Concentration of thulium {Tm} per unit dry weight of sediment"    />
+         <element  key="SDN:P01:45:HCMR0036"  label="Concentration of thulium {Tm CAS 7440-30-4} per unit dry weight of sediment"    />
       </exact>
    </match>
    <match>
       <element  key="SDN:P09:45:TM63"  label="Tm&lt;63um IN DRY WEIGHT SEDIMENT"    />
       <exact>
-         <element  key="SDN:P01:45:HCMR0015"  label="Concentration of thulium {Tm} per unit dry weight of sediment &lt;63um"    />
+         <element  key="SDN:P01:45:HCMR0015"  label="Concentration of thulium {Tm CAS 7440-30-4} per unit dry weight of sediment &lt;63um"    />
       </exact>
    </match>
    <match>
       <element  key="SDN:P09:45:MUUS"  label="U IN THE SEDIMENT"    />
       <exact>
-         <element  key="SDN:P01:45:MUUSP012"  label="Concentration of uranium {U} per unit dry weight of sediment"    />
+         <element  key="SDN:P01:45:MUUSP012"  label="Concentration of uranium {U CAS 7440-61-1} per unit dry weight of sediment"    />
       </exact>
    </match>
    <match>
       <element  key="SDN:P09:45:U63X"  label="U&lt;63um IN DRY WEIGHT SEDIMENT"    />
       <exact>
-         <element  key="SDN:P01:45:RWSSED14"  label="Concentration of uranium {U} per unit dry weight of sediment &lt;63um"    />
+         <element  key="SDN:P01:45:RWSSED14"  label="Concentration of uranium {U CAS 7440-61-1} per unit dry weight of sediment &lt;63um"    />
       </exact>
    </match>
    <match>
@@ -2468,19 +2468,19 @@
    <match>
       <element  key="SDN:P09:45:UREA"  label="UREA"    />
       <exact>
-         <element  key="SDN:P01:45:UREAZZZZ"  label="Concentration of urea per unit volume of the water body [unknown phase]"    />
+         <element  key="SDN:P01:45:UREAZZZZ"  label="Concentration of urea {CAS 57-13-6} per unit volume of the water body [unknown phase]"    />
       </exact>
    </match>
    <match>
       <element  key="SDN:P09:45:MVVS"  label="V IN THE SEDIMENT"    />
       <exact>
-         <element  key="SDN:P01:45:MVVSP012"  label="Concentration of vanadium {V} per unit dry weight of sediment"    />
+         <element  key="SDN:P01:45:MVVSP012"  label="Concentration of vanadium {V CAS 7440-62-2} per unit dry weight of sediment"    />
       </exact>
    </match>
    <match>
       <element  key="SDN:P09:45:V63X"  label="V&lt;63um IN DRY WEIGHT SEDIMENT"    />
       <exact>
-         <element  key="SDN:P01:45:RWSSED02"  label="Concentration of vanadium {V} per unit dry weight of sediment &lt;63um"    />
+         <element  key="SDN:P01:45:RWSSED02"  label="Concentration of vanadium {V CAS 7440-62-2} per unit dry weight of sediment &lt;63um"    />
       </exact>
    </match>
    <match>
@@ -2516,7 +2516,7 @@
    <match>
       <element  key="SDN:P09:45:WO63"  label="W&lt;63um IN DRY WEIGHT SEDIMENT"    />
       <exact>
-         <element  key="SDN:P01:45:HCMR0016"  label="Concentration of tungsten {W} per unit dry weight of sediment &lt;63um"    />
+         <element  key="SDN:P01:45:HCMR0016"  label="Concentration of tungsten {W CAS 7440-33-7} per unit dry weight of sediment &lt;63um"    />
       </exact>
    </match>
    <match>
@@ -2582,13 +2582,13 @@
    <match>
       <element  key="SDN:P09:45:MYYS"  label="Y IN THE SEDIMENT"    />
       <exact>
-         <element  key="SDN:P01:45:MYYSP012"  label="Concentration of yttrium {Y} per unit dry weight of sediment"    />
+         <element  key="SDN:P01:45:MYYSP012"  label="Concentration of yttrium {Y CAS 7440-65-5} per unit dry weight of sediment"    />
       </exact>
    </match>
    <match>
       <element  key="SDN:P09:45:Y63X"  label="Y&lt;63um IN DRY WEIGHT SEDIMENT"    />
       <exact>
-         <element  key="SDN:P01:45:RWSSED15"  label="Concentration of yttrium {Y} per unit dry weight of sediment &lt;63um"    />
+         <element  key="SDN:P01:45:RWSSED15"  label="Concentration of yttrium {Y CAS 7440-65-5} per unit dry weight of sediment &lt;63um"    />
       </exact>
    </match>
    <match>
@@ -2600,49 +2600,49 @@
    <match>
       <element  key="SDN:P09:45:YBSX"  label="Yb IN DRY WEIGHT SEDIMENT"    />
       <exact>
-         <element  key="SDN:P01:45:HCMR0037"  label="Concentration of ytterbium {Yb} per unit dry weight of sediment"    />
+         <element  key="SDN:P01:45:HCMR0037"  label="Concentration of ytterbium {Yb CAS 7440-64-4} per unit dry weight of sediment"    />
       </exact>
    </match>
    <match>
       <element  key="SDN:P09:45:YB63"  label="Yb&lt;63um IN DRY WEIGHT SEDIMENT"    />
       <exact>
-         <element  key="SDN:P01:45:HCMR0017"  label="Concentration of ytterbium {Yb} per unit dry weight of sediment &lt;63um"    />
+         <element  key="SDN:P01:45:HCMR0017"  label="Concentration of ytterbium {Yb CAS 7440-64-4} per unit dry weight of sediment &lt;63um"    />
       </exact>
    </match>
    <match>
       <element  key="SDN:P09:45:ZXAP"  label="ZEAXANTHINE"    />
       <exact>
-         <element  key="SDN:P01:45:ZEAXXXXX"  label="Concentration of zeaxanthin per unit volume of the water body"    />
+         <element  key="SDN:P01:45:ZEAXXXXX"  label="Concentration of zeaxanthin {CAS 144-68-3} per unit volume of the water body"    />
       </exact>
    </match>
    <match>
       <element  key="SDN:P09:45:MZNF"  label="ZN FLUX IN SETTLING PARTICLES"    />
       <exact>
-         <element  key="SDN:P01:45:SFXZNZZZ"  label="Particle-bound sedimentation flux of zinc {Zn} per unit time per unit area of the water body"    />
+         <element  key="SDN:P01:45:SFXZNZZZ"  label="Particle-bound sedimentation flux of zinc {Zn CAS 7440-66-6} per unit time per unit area of the water body"    />
       </exact>
    </match>
    <match>
       <element  key="SDN:P09:45:MZNS"  label="Zn IN THE SEDIMENT"    />
       <exact>
-         <element  key="SDN:P01:45:MZNSP012"  label="Concentration of zinc {Zn} per unit dry weight of sediment"    />
+         <element  key="SDN:P01:45:MZNSP012"  label="Concentration of zinc {Zn CAS 7440-66-6} per unit dry weight of sediment"    />
       </exact>
    </match>
    <match>
       <element  key="SDN:P09:45:ZN63"  label="Zn&lt;63um IN DRY WEIGHT SEDIMENT"    />
       <exact>
-         <element  key="SDN:P01:45:RWSSED32"  label="Concentration of zinc {Zn} per unit dry weight of sediment &lt;63um"    />
+         <element  key="SDN:P01:45:RWSSED32"  label="Concentration of zinc {Zn CAS 7440-66-6} per unit dry weight of sediment &lt;63um"    />
       </exact>
    </match>
    <match>
       <element  key="SDN:P09:45:MZRS"  label="Zr IN THE SEDIMENT"    />
       <exact>
-         <element  key="SDN:P01:45:MZRSP012"  label="Concentration of zirconium {Zr} per unit dry weight of sediment"    />
+         <element  key="SDN:P01:45:MZRSP012"  label="Concentration of zirconium {Zr CAS 7440-67-7} per unit dry weight of sediment"    />
       </exact>
    </match>
    <match>
       <element  key="SDN:P09:45:ZR63"  label="Zr&lt;63um IN DRY WEIGHT SEDIMENT"    />
       <exact>
-         <element  key="SDN:P01:45:HCMR0018"  label="Concentration of zirconium {Zr} per unit dry weight of sediment &lt;63um"    />
+         <element  key="SDN:P01:45:HCMR0018"  label="Concentration of zirconium {Zr CAS 7440-67-7} per unit dry weight of sediment &lt;63um"    />
       </exact>
    </match>
 </mapping>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mapping>
-   <vocabulary list="SDN:P06:65:"  version="65"  date="2015-06-11T01:00:02.000"  title="BODC data storage units"  />
+   <vocabulary list="SDN:P06:66:"  version="66"  date="2015-06-23T01:00:01.000"  title="BODC data storage units"  />
    <mapped>
       <vocabulary list="SDN:P09:45:"  version="45"  date="2015-03-31T01:00:02.000"  title="MEDATLAS Parameter Usage Vocabulary"  />
    </mapped>
