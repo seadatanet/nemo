@@ -39,14 +39,21 @@ public class MappingTable
 	private EntityManager em ;
 
 	public EntityManagerFactory getEmf() {
+		if (emf==null){
+			emf = javax.persistence.Persistence.createEntityManagerFactory("nemoPU"); 
+		}
 		return emf;
 	}
 	public EntityManager getEm() {
+		getEmf();
+		if (em==null){
+			em = emf.createEntityManager(); 
+		}
 		return em;
 	}
 	public List<Mapping> findAll() {
 
-		return em.createQuery("SELECT m FROM Mapping m").getResultList();
+		return getEm().createQuery("SELECT m FROM Mapping m").getResultList();
 
 	}
 
