@@ -428,18 +428,19 @@ public class DataDomain {
 			urnSyntaxe.append(Global.DBL_PT);
 			urnSyntaxe.append(Global.DBL_PT);
 			String pdvCodeunits;
-			if (list1 != null || isText)
+			if (isText){
+				pdvCodeunits = Intern.NemoLists_unknown;
+			}
+			else if (list1 != null ){
 				pdvCodeunits = VocabLists.getVocabMatch(list1, list2, code, Intern.NemoLists_unknown);
-			else
+			}
+			else{
 				pdvCodeunits = code;
+			}
 			if (pdvCodeunits==null) {
 				throw new GenerationException(MessageFormat.format(Messages.error_convert_sdnmapping_paramunit, code, list1, list2));
 			}
-			// FAE 10755
-			if (isText)
-				urnSyntaxe.append(Intern.NemoLists_unknown);
-			else
-				urnSyntaxe.append(pdvCodeunits);
+			urnSyntaxe.append(pdvCodeunits);
 			break;
 		case fallrate:
 			urnSyntaxe.append(list2);
