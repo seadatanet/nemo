@@ -14,7 +14,6 @@ import javax.xml.parsers.SAXParserFactory;
 import javax.xml.rpc.ServiceException;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.swt.widgets.Table;
 
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.config.UpdateStatus.EtatUpdate;
@@ -47,7 +46,7 @@ public class NemoLists implements Cloneable {
 	 */
 
 
-	public static Table filtreTable;
+//	public static Table filtreTable;
 
 	public static ArrayList<String> listeNavire, listeCentreDonnees,
 			listeRegion;

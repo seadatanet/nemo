@@ -14,10 +14,6 @@ import java.util.regex.Pattern;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CCombo;
-import org.eclipse.swt.graphics.Rectangle;
-import org.eclipse.swt.widgets.Event;
-import org.eclipse.swt.widgets.Listener;
-import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 
@@ -44,7 +40,7 @@ public class WSSurveyFilteredTable extends AbstractFilteredTable
 	 */
 	public WSSurveyFilteredTable(CCombo comboRecherche)
 	{
-		_comboRecherche = comboRecherche;
+		//		_comboRecherche = comboRecherche;
 	}
 
 	/**
@@ -92,38 +88,50 @@ public class WSSurveyFilteredTable extends AbstractFilteredTable
 	@Override
 	protected void createTable()
 	{
-		final Table table;
-		int nbre;
 
-		TableWS_Survey.filtreTable = new Table(top, SWT.FULL_SELECTION);
-		table = TableWS_Survey.filtreTable;
-		table.setHeaderVisible(true);
-		table.setLinesVisible(true);
-		table.setBounds(new Rectangle(3, 45, 298, 237));
+		super.createTable();
+		//		TableWS_Survey.filtreTable = new Table(top, SWT.FULL_SELECTION);
+		//		myFiltreTable = TableWS_Survey.filtreTable;
+		//		myFiltreTable.setHeaderVisible(true);
+		//		myFiltreTable.setLinesVisible(true);
+		//				myFiltreTable.setBounds(new Rectangle(3, 45, 298, 237));
 
-		nbre = TableWS_Survey.listeFiltree.size();
 		// creation des colonnes...
-		TableColumn tableColumn = new TableColumn(table, SWT.NONE);
+		TableColumn tableColumn = new TableColumn(myFiltreTable, SWT.NONE);
 		tableColumn.setWidth(290);
 		tableColumn.setText(Messages.table_label_refName);
 
+
+		populateTableWithFilteredList();
+		// ajout listeners sur la table
+		//		myFiltreTable.addListener(SWT.MouseDown, new Listener()
+		//		{
+		//			public void handleEvent(Event event)
+		//			{
+		//
+		//			}
+		//		});
+
+	}
+	@Override
+	protected void populateTableWithFilteredList(){
+		int nbre= TableWS_Survey.listeFiltree.size();
+
 		for (int i = 0; i < nbre; i++)
 		{
-			TableItem item = new TableItem(table, SWT.NONE);
+			TableItem item = new TableItem(myFiltreTable, SWT.NONE);
 			item.setText(new String[] { TableWS_Survey.listeFiltree.get(i) });
 		}
 
-		// ajout listeners sur la table
-		table.addListener(SWT.MouseDown, new Listener()
+		/** TODO BGT: le tableau plante si le nb de lignes est entre 8000 et 10000 (pourquoi???)
+		 * il faudrait utiliser un table view. En attendant, onn rajoute des lignes vide pour combler jusqu'à 10000
+		 */
+		for (int i = nbre; i < 10000; i++)
 		{
-			public void handleEvent(Event event)
-			{
-
-			}
-		});
-
+			TableItem item = new TableItem(myFiltreTable, SWT.NONE);
+			item.setText(	"");
+		}
 	}
-
 	/**
 	 * {@inheritDoc}
 	 */
@@ -155,8 +163,9 @@ public class WSSurveyFilteredTable extends AbstractFilteredTable
 		TableWS_Survey.listeFiltree = filtree;
 		// affichage de la liste filtree
 
-		razTable(TableWS_Survey.filtreTable);
-		createTable();
+		//		razTable(TableWS_Survey.filtreTable);
+		//		createTable();
+		refreshTable();
 	}
 
 	/**
@@ -176,7 +185,7 @@ public class WSSurveyFilteredTable extends AbstractFilteredTable
 	{
 
 		// selection d'une reference campagne
-		int index = TableWS_Survey.filtreTable.getSelectionIndex();
+		int index = myFiltreTable.getSelectionIndex();
 		String reference = TableWS_Survey.listeFiltree.get(index);
 		Pattern p = Pattern.compile(Global.SEP);
 

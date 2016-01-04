@@ -13,8 +13,6 @@ import java.util.regex.Pattern;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CCombo;
-import org.eclipse.swt.graphics.Rectangle;
-import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 
@@ -55,29 +53,31 @@ public class RegionFilteredTable extends AbstractFilteredTable
     @Override
     protected void createTable()
     {
-        final Table table;
-        int nbre;
+    	super.createTable();
 
-        NemoLists.filtreTable = new Table(top, SWT.FULL_SELECTION);
+//        NemoLists.filtreTable = new Table(top, SWT.FULL_SELECTION);
+//
+//        myFiltreTable = NemoLists.filtreTable;
+//        myFiltreTable.setHeaderVisible(true);
+//        myFiltreTable.setLinesVisible(true);
+//        myFiltreTable.setBounds(new Rectangle(3, 45, 298, 237));
 
-        table = NemoLists.filtreTable;
-        table.setHeaderVisible(true);
-        table.setLinesVisible(true);
-        table.setBounds(new Rectangle(3, 45, 298, 237));
-
-        nbre = NemoLists.listeFiltree.size();
         // creation des colonnes...
-        TableColumn tableColumn = new TableColumn(table, SWT.NONE);
+        TableColumn tableColumn = new TableColumn(myFiltreTable, SWT.NONE);
         tableColumn.setWidth(280);
         tableColumn.setText(Messages.table_label_codeName);
 
-        for (int i = 0; i < nbre; i++)
-        {
-            TableItem item = new TableItem(table, SWT.NONE);
-            item.setText(NemoLists.listeFiltree.get(i));
-        }
+        populateTableWithFilteredList();
     }
-
+    @Override
+    protected void populateTableWithFilteredList(){
+    	 int nbre = NemoLists.listeFiltree.size();
+    	 for (int i = 0; i < nbre; i++)
+         {
+             TableItem item = new TableItem(myFiltreTable, SWT.NONE);
+             item.setText(NemoLists.listeFiltree.get(i));
+         }
+    }
     /**
      * {@inheritDoc}
      */
@@ -114,8 +114,9 @@ public class RegionFilteredTable extends AbstractFilteredTable
         NemoLists.listeFiltree = filtree;
         // affichage de la liste filtree
 
-        razTable(NemoLists.filtreTable);
-        createTable();
+//        razTable(NemoLists.filtreTable);
+//        createTable();
+        refreshTable();
     }
 
     /**
@@ -133,8 +134,8 @@ public class RegionFilteredTable extends AbstractFilteredTable
     @Override
     protected void selectAction()
     {
-        Utils.selectComboValeur(_comboRecherche, NemoLists.filtreTable.getItem(
-            NemoLists.filtreTable.getSelectionIndex()).getText());
+        Utils.selectComboValeur(_comboRecherche, myFiltreTable.getItem(
+        		myFiltreTable.getSelectionIndex()).getText());
         shell.close();
     }
 

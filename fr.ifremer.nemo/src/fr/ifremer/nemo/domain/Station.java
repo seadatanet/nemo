@@ -30,7 +30,7 @@ import fr.ifremer.nemo.util.Intern;
  */
 public class Station implements Comparable {
 
-	
+
 	private String local_cdi_id;
 	// need to keep associate cruise ref and name for collections, because model consider only one cruise, and value is override
 	// if we do not keep them, we can not write CDI summary
@@ -156,7 +156,7 @@ public class Station implements Comparable {
 			throw new GenerationException(errorMessage + " " + e.getMessage());
 		}
 	}
-	
+
 	public void initQCs()
 	{
 		_globalParamQc = new HashMap<String, String>();
@@ -384,7 +384,7 @@ public class Station implements Comparable {
 
 	public String getMetaFlag(String key) {
 		String flag = Nemo.getInstance().getConfig().getDefaultFlag(); // 25307
-		
+
 		if (getMetaFlags() != null) {
 			if ((getMetaFlags().containsKey(key)) && (getMetaFlags().get(key) != null)) {
 				flag = getMetaFlags().get(key);
@@ -515,21 +515,52 @@ public class Station implements Comparable {
 		}
 	}
 
+	@Override
 	public int compareTo(Object other) {
+//		int orig=99999;
 		Integer refIniInteger;
 		Integer refOtherInteger;
-
-		try {
-			refIniInteger = Integer.valueOf(this.getReference());
-			refOtherInteger = Integer.valueOf(((Station) other).getReference());
-		} catch (NumberFormatException e) {
-			String refIni = this.getReference();
-			String refOther = ((Station) other).getReference();
-
-			return refIni.compareTo(refOther);
+//
+//		try {
+//			refIniInteger = Integer.valueOf(this.getReference());
+//			refOtherInteger = Integer.valueOf(((Station) other).getReference());
+//			orig=  refIniInteger.compareTo(refOtherInteger);
+//		} catch (NumberFormatException e) {
+//			String refIni = this.getReference();
+//			String refOther = ((Station) other).getReference();
+//
+//			orig= refIni.compareTo(refOther);
+//		}
+//
+//		System.out.println("orig: " + this.getReference() + " compTo " + ((Station) other).getReference() + " >> " + orig);
+//		
+		
+		//+++++++++++++++++++++++++++++++++++++++++++++++++
+		int comp = 0;
+		try{
+			Long thisDate = this.getDate()+this.getTime();
+			Long otherDate = ((Station)other).getDate()+((Station)other).getTime();
+			
+			comp = thisDate.compareTo(otherDate);
+		}catch (Exception e) {
+			// TODO: handle exception
 		}
 
-		return refIniInteger.compareTo(refOtherInteger);
+
+		if (comp==0){
+			try {
+				refIniInteger = Integer.valueOf(this.getReference().trim());
+				refOtherInteger = Integer.valueOf(((Station)other).getReference().trim());
+				comp=refIniInteger.compareTo(refOtherInteger);
+			} catch (NumberFormatException e) {
+				String refIni = this.getReference();
+				String refOther = ((Station)other).getReference();
+				comp=refIni.compareTo(refOther);
+			}
+		}
+		
+//		System.out.println("new : " + this.getReference() + " compTo " + ((Station) other).getReference() + " >> " + comp);
+		return comp;
 	}
 
 	/**
@@ -604,5 +635,9 @@ public class Station implements Comparable {
 
 	public void setCruiseName(String cruiseName) {
 		this.cruiseName = cruiseName;
+	}
+	@Override
+	public String toString(){
+		return this.getReference() + " - " + this.getLocal_cdi_id() + " - "+this.getDate()+" "+this.getTime();
 	}
 }

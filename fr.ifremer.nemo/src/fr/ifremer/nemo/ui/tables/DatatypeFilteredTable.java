@@ -13,8 +13,6 @@ import java.util.regex.Pattern;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CCombo;
-import org.eclipse.swt.graphics.Rectangle;
-import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 
@@ -96,39 +94,42 @@ public class DatatypeFilteredTable extends AbstractFilteredTable
     @Override
     protected void createTable()
     {
-        final Table table;
-        int nbre;
-
-        TableDataSurvey.filtreTable = new Table(top, SWT.FULL_SELECTION);
-        nbre = TableDataSurvey.listeFiltree.size();
-
-        table = TableDataSurvey.filtreTable;
-        table.setHeaderVisible(true);
-        table.setLinesVisible(true);
-        table.setBounds(new Rectangle(3, 45, 298, 237));
-
-        table.setHeaderVisible(true);
-        table.setLinesVisible(true);
-        TableColumn tableColumn = new TableColumn(table, SWT.NONE);
+       
+    	super.createTable();
+//        TableDataSurvey.filtreTable = new Table(top, SWT.FULL_SELECTION);
+//      
+//
+//        myFiltreTable = TableDataSurvey.filtreTable;
+//        myFiltreTable.setHeaderVisible(true);
+//        myFiltreTable.setLinesVisible(true);
+//        myFiltreTable.setBounds(new Rectangle(3, 45, 298, 237));
+//
+//        myFiltreTable.setHeaderVisible(true);
+//        myFiltreTable.setLinesVisible(true);
+        TableColumn tableColumn = new TableColumn(myFiltreTable, SWT.NONE);
         tableColumn.setWidth(100);
         tableColumn.setText(Messages.table_label_code.toUpperCase());
-        TableColumn tableColumn1 = new TableColumn(table, SWT.NONE);
+        TableColumn tableColumn1 = new TableColumn(myFiltreTable, SWT.NONE);
         tableColumn1.setWidth(100);
         tableColumn1.setText(Messages.table_label_number);
-        TableColumn tableColumn2 = new TableColumn(table, SWT.NONE);
+        TableColumn tableColumn2 = new TableColumn(myFiltreTable, SWT.NONE);
         tableColumn2.setWidth(100);
         tableColumn2.setText(Messages.table_label_qc);
 
-        for (int i = 0; i < nbre; i++)
+        populateTableWithFilteredList();
+    }
+    @Override
+    protected void populateTableWithFilteredList(){
+    	 int nbre  = TableDataSurvey.listeFiltree.size();
+    	for (int i = 0; i < nbre; i++)
         {
-            TableItem item = new TableItem(table, SWT.NONE);
+            TableItem item = new TableItem(myFiltreTable, SWT.NONE);
             item.setText(new String[] {
                     TableDataSurvey.listeFiltree.get(i).getCode(),
                     "" + TableDataSurvey.listeFiltree.get(i).getNombre(), //$NON-NLS-1$
                     TableDataSurvey.listeFiltree.get(i).getQc()});
         }
     }
-
     /**
      * {@inheritDoc}
      */
@@ -161,8 +162,9 @@ public class DatatypeFilteredTable extends AbstractFilteredTable
         TableDataSurvey.listeFiltree = filtree;
         // affichage de la liste filtree
 
-        razTable(TableDataSurvey.filtreTable);
-        createTable();
+//        razTable(TableDataSurvey.filtreTable);
+//        createTable();
+        refreshTable();
     }
 
     /**
@@ -183,7 +185,7 @@ public class DatatypeFilteredTable extends AbstractFilteredTable
         // ajout d'un dataType dans l'onglet Survey
         TypeSurvey typeSurvey = new TypeSurvey();
 
-        int index = TableDataSurvey.filtreTable.getSelectionIndex();
+        int index = myFiltreTable.getSelectionIndex();
         typeSurvey = TableDataSurvey.listeFiltree.get(index);
 
         // test avant ajout pour doublons

@@ -315,8 +315,7 @@ public abstract class NemoWriter {
 							// FAE1105 : tri des stations selon Nom Fichier -
 							// Date -
 							// Référence Station
-							Collections.sort(stationDomain
-									.getStations(inputFilePath));
+//							Collections.sort(stationDomain.getStations(inputFilePath));
 //							System.out.println("sort ok");
 
 							numLine = 0;
@@ -327,6 +326,15 @@ public abstract class NemoWriter {
 					}
 					bufferedReader.close();
 //					System.out.println("write file " + inputFilePath);
+					Collections.sort(stationDomain.getStations(inputFilePath));
+					if (iDomain.getStation().getModel().getReferenceProperty().isUserProvided())
+					{
+						int stNb=Integer.valueOf(iDomain.getStation().getModel().getReferenceProperty().getUserValue());
+						for (Station s : stationDomain.getStations(inputFilePath)){
+							s.setReference(String.valueOf(stNb));
+							stNb++;
+						}
+					}
 					writeFile(inputFilePath);
 					numLine=0;
 				}

@@ -106,7 +106,8 @@ public class Messages {
 
 	public static String unitTable_label_unit;
 	public static String unitTable_label_unitAbbr;
-	public static String unitTable_label_unitDef;
+//	public static String unitTable_label_unitDef;
+	public static String unitTable_label_unitKey;
 
 	public static String menu_label_setValue;
 	public static String menu_label_updateTest;

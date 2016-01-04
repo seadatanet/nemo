@@ -12,8 +12,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.graphics.Rectangle;
-import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 
@@ -31,15 +29,12 @@ import fr.ifremer.nemo.util.Messages;
  */
 public class UnitFilteredTable extends AbstractFilteredTable
 {
-	/**
-	 * la table permettant d'afficher les parametres
-	 */
-	private Table myFiltreTable;
+	
 
 	/**
-     *  reference sur la tableData (de l'onglet data) depuis laquelle cette table a été ouverte
+	 *  reference sur la tableData (de l'onglet data) depuis laquelle cette table a été ouverte
 	 */
-    private final TableData myTableDataRef;
+	private final TableData myTableDataRef;
 
 	/**
 	 * copie de la liste des parametres typesWS pouvant être filtrée
@@ -70,35 +65,51 @@ public class UnitFilteredTable extends AbstractFilteredTable
 	@Override
 	protected void createTable()
 	{
-		myFiltreTable = new Table(top, SWT.FULL_SELECTION);
-
-		myFiltreTable.setHeaderVisible(true);
-		myFiltreTable.setLinesVisible(true);
-		myFiltreTable.setBounds(new Rectangle(3, 45, 298, 237));
-
+		super.createTable();
+//		myFiltreTable = new Table(top, SWT.FULL_SELECTION|SWT.V_SCROLL);
+//
+//		myFiltreTable.setHeaderVisible(true);
+//		myFiltreTable.setLinesVisible(true);
+//		myFiltreTable.setSize(30, 30);
+//		//		myFiltreTable.setBounds(new Rectangle(3, 45, 300, 300));
+//		GridData gd_table = new GridData(SWT.FILL, SWT.TOP, true, true, 2, 1);
+//		myFiltreTable.setLayoutData(gd_table);
 		// creation des colonnes...
 		TableColumn tableColumn = new TableColumn(myFiltreTable, SWT.NONE);
 		tableColumn.setWidth(200);
 		tableColumn.setText(Messages.unitTable_label_unit);
-		
+
 		TableColumn tableColumn2 = new TableColumn(myFiltreTable, SWT.NONE);
 		tableColumn2.setWidth(81);
 		tableColumn2.setText(Messages.unitTable_label_unitAbbr);
-		
-		
+
+
 		TableColumn tableColumn3 = new TableColumn(myFiltreTable, SWT.NONE);
 		tableColumn3.setWidth(200);
-		tableColumn3.setText(Messages.unitTable_label_unitDef); // TODO units: column is empty
+		tableColumn3.setText(Messages.unitTable_label_unitKey); 
 
+		populateTableWithFilteredList();
+	}
+	@Override
+	protected void populateTableWithFilteredList(){
 		for (int i = 0; i < listeFiltree.size(); i++)
 		{
 			TableItem item = new TableItem(myFiltreTable, SWT.NONE);
-            item.setText(new String[] {
+			item.setText(new String[] {
 					listeFiltree.get(i).getTerm(),
 					listeFiltree.get(i).getTermAbbr(),
-					listeFiltree.get(i).getUntiDef()
-					});
+					listeFiltree.get(i).getUnitKey()
+			});
 		}
+//		for (int i = 0; i < 10000; i++)
+//		{
+//			TableItem item = new TableItem(myFiltreTable, SWT.NONE);
+//			item.setText(new String[] {
+//					String.valueOf(i),
+//					"b",
+//					"c"
+//			});
+//		}
 	}
 
 	/**
@@ -107,6 +118,7 @@ public class UnitFilteredTable extends AbstractFilteredTable
 	 */
 	private void reloadListeFiltree()
 	{
+
 		listeFiltree = new ArrayList<TypeUnit>();
 		// liste filtree initialisee e typesWS au depart
 		int taille = myTableDataRef.getTypesP061().size();
@@ -135,7 +147,7 @@ public class UnitFilteredTable extends AbstractFilteredTable
 		{
 			regexp = "^.*" + chaine + ".*$"; //$NON-NLS-1$ //$NON-NLS-2$
 			Pattern p = Pattern.compile(regexp, Pattern.CASE_INSENSITIVE);
-			Matcher m = p.matcher(origine.get(i).getTerm());
+			Matcher m = p.matcher(origine.get(i).getTerm() + " "+origine.get(i).getTermAbbr()+" "+origine.get(i).getUnitKey() );
 			if (m.matches())
 			{
 				// ajout dans la liste filtree
@@ -144,8 +156,9 @@ public class UnitFilteredTable extends AbstractFilteredTable
 		}
 		listeFiltree = filtree;
 		// affichage de la liste filtree
-		razTable(myFiltreTable);
-		createTable();
+		//		razTable(myFiltreTable);
+		//		createTable();
+		refreshTable();
 	}
 
 	/**
@@ -158,9 +171,9 @@ public class UnitFilteredTable extends AbstractFilteredTable
 	}
 
 	/**
-     * action appelée lorsqu'un parametre est selectionné dans le panneau ParameterFilteredTable
-     * -> ajoute la parametre au tableau des data ou ouvre la liste des SubParameters
-     * {@inheritDoc}
+	 * action appelée lorsqu'un parametre est selectionné dans le panneau ParameterFilteredTable
+	 * -> ajoute la parametre au tableau des data ou ouvre la liste des SubParameters
+	 * {@inheritDoc}
 	 */
 	@Override
 	protected void selectAction()

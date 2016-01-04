@@ -262,7 +262,8 @@ public class OdvWriter extends NemoWriter
                 }
 
                 if (inputStationHeader != null
-                        && currentStation.getReference().equals(stRef))
+                        && currentStation.getReference().equals(stRef)
+                        )
                 {
 
                     stationHeader =

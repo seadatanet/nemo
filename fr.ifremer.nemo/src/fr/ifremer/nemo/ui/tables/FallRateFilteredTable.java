@@ -12,8 +12,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.graphics.Rectangle;
-import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 
@@ -32,10 +30,6 @@ import fr.ifremer.nemo.util.Messages;
  */
 public class FallRateFilteredTable extends AbstractFilteredTable
 {
-	/**
-	 * la table permettant d'afficher les parametres
-	 */
-	private Table myFiltreTable;
 
 	/**
      *  reference sur la tableData (de l'onglet data) depuis laquelle cette table a été ouverte
@@ -71,11 +65,12 @@ public class FallRateFilteredTable extends AbstractFilteredTable
 	@Override
 	protected void createTable()
 	{
-		myFiltreTable = new Table(top, SWT.FULL_SELECTION);
-
-		myFiltreTable.setHeaderVisible(true);
-		myFiltreTable.setLinesVisible(true);
-		myFiltreTable.setBounds(new Rectangle(3, 45, 500, 237));
+		super.createTable();
+//		myFiltreTable = new Table(top, SWT.FULL_SELECTION);
+//
+//		myFiltreTable.setHeaderVisible(true);
+//		myFiltreTable.setLinesVisible(true);
+//		myFiltreTable.setBounds(new Rectangle(3, 45, 500, 237));
 
 		// creation des colonnes...
 		TableColumn tableColumn = new TableColumn(myFiltreTable, SWT.NONE);
@@ -91,7 +86,11 @@ public class FallRateFilteredTable extends AbstractFilteredTable
 		tableColumn3.setText("Preferred label");// TODO internationaliser fall rate
 		
 		
-
+		populateTableWithFilteredList();
+		
+	}
+	@Override
+    protected void populateTableWithFilteredList(){
 		for (int i = 0; i < listeFiltree.size(); i++)
 		{
 			TableItem item = new TableItem(myFiltreTable, SWT.NONE);
@@ -102,7 +101,6 @@ public class FallRateFilteredTable extends AbstractFilteredTable
 					});
 		}
 	}
-
 	/**
 	 * recharge la liste des paramètres filtrée depuis la liste des typesWS
 	 * (= annule le filtre)
@@ -159,8 +157,9 @@ public class FallRateFilteredTable extends AbstractFilteredTable
 		}
 		listeFiltree = filtree;
 		// affichage de la liste filtree
-		razTable(myFiltreTable);
-		createTable();
+//		razTable(myFiltreTable);
+//		createTable();
+		refreshTable();
 	}
 
 	/**

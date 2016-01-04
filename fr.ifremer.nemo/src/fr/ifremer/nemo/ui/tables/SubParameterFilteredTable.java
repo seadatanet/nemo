@@ -15,8 +15,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.graphics.Rectangle;
-import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 
@@ -43,7 +41,7 @@ public class SubParameterFilteredTable extends AbstractFilteredTable
 
     private final TypeData _typeParameter;
 
-    private Table _table;
+//    private Table _table;
 
     private boolean _validate;
 
@@ -156,36 +154,37 @@ public class SubParameterFilteredTable extends AbstractFilteredTable
     @Override
     protected void createTable()
     {
-        _table = new Table(top, SWT.FULL_SELECTION);
-
-        _table.setHeaderVisible(true);
-        _table.setLinesVisible(true);
-        _table.setBounds(new Rectangle(3, 45, 720, 237));
+    	super.createTable();
+//        _table = new Table(top, SWT.FULL_SELECTION);
+//
+//        _table.setHeaderVisible(true);
+//        _table.setLinesVisible(true);
+//        _table.setBounds(new Rectangle(3, 45, 720, 237));
 
         // creation des colonnes...
-        TableColumn tableColumn = new TableColumn(_table, SWT.NONE);
+        TableColumn tableColumn = new TableColumn(myFiltreTable, SWT.NONE);
         tableColumn.setWidth(700);
         tableColumn.setText(Messages.table_label_codeName);
 
         // comme la fenetre est plus large on decale egalement les boutons.
-        Rectangle bounds = filtreButtonSelectionner.getBounds();
-        bounds.x+=480;
-        filtreButtonSelectionner.setBounds(bounds);
+//        Rectangle bounds = filtreButtonSelectionner.getBounds();
+//        bounds.x+=480;
+//        filtreButtonSelectionner.setBounds(bounds);
+//        
+//        bounds = filtreButtonCancel.getBounds();
+//        bounds.x+=480;
+//        filtreButtonCancel.setBounds(bounds);
         
-        bounds = filtreButtonCancel.getBounds();
-        bounds.x+=480;
-        filtreButtonCancel.setBounds(bounds);
-        
-        refreshTable();
+        populateTableWithFilteredList();
     }
 
-    protected void refreshTable()
-    {
-        _table.removeAll();
+    @Override
+    protected void populateTableWithFilteredList(){
+    
 
         for (int i = 0; i < _datasFiltered.size(); i++)
         {
-            TableItem item = new TableItem(_table, SWT.NONE);
+            TableItem item = new TableItem(myFiltreTable, SWT.NONE);
             TypeData currentTypeData = _datasFiltered.get(i);
             item.setText(new String[] {
                     currentTypeData.getEntryKeyP011() + Global.SEP
@@ -252,7 +251,7 @@ public class SubParameterFilteredTable extends AbstractFilteredTable
     @Override
     protected void selectAction()
     {
-        int index = _table.getSelectionIndex();
+        int index = myFiltreTable.getSelectionIndex();
         if (index != -1)
         {
             _selectedData = _datasFiltered.get(index);

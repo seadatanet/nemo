@@ -7,7 +7,6 @@ import org.eclipse.swt.widgets.Composite;
 import fr.ifremer.nemo.ui.tables.AbstractFilteredTable;
 import fr.ifremer.nemo.ui.tables.DatacentreFilteredTable;
 import fr.ifremer.nemo.ui.tables.DatatypeFilteredTable;
-import fr.ifremer.nemo.ui.tables.IdEDMOFilteredTable;
 import fr.ifremer.nemo.ui.tables.ParameterFilteredTable;
 import fr.ifremer.nemo.ui.tables.RegionFilteredTable;
 import fr.ifremer.nemo.ui.tables.ShipFilteredTable;
@@ -23,11 +22,12 @@ public class FilteredTableFactory{
     public  AbstractFilteredTable go(Composite parent, String table, CCombo comboRech){
         AbstractFilteredTable theTable=null;
         
-        if (table.equals(Global.IDEDMO)){
-            theTable =  new IdEDMOFilteredTable(comboRech);
-            theTable.open(parent);
-        }
-        else if (table.equals(Global.WSSURVEY)){
+//        if (table.equals(Global.IDEDMO)){
+//            theTable =  new IdEDMOFilteredTable(comboRech);
+//            theTable.open(parent);
+//        }
+//        else
+        	if (table.equals(Global.WSSURVEY)){
             theTable =  new WSSurveyFilteredTable(comboRech);
             theTable.open(parent);
             }
