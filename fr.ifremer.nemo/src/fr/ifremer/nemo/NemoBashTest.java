@@ -101,6 +101,9 @@ public class NemoBashTest {
 	boolean REPLACE=false;// WARNING!!!
 	boolean REMOVE_JUNIT=false;
 	public static String[] testDirAlone = {};
+//	public static String[] testDirAlone = {"CollectionCAMP_profile"};
+//	public static String[] testDirAlone = {"cruiseDir_profile_diap_stationsOrder"};
+//	public static String[] testDirAlone = {"cruiseDir_profile_mona"};
 	/**
 	 * ********************************************************
 	 * ********************************************************
@@ -1016,7 +1019,7 @@ public class NemoBashTest {
 		longNames.put("CDTAPS01", "Temperature of the atmosphere by psychrometer dry bulb"); //$NON-NLS-1$//$NON-NLS-2$
 		longNames.put("SVELXXXX", "Sound velocity in the water body"); //$NON-NLS-1$//$NON-NLS-2$
 		longNames.put("ASLVZZ01", "Surface elevation (unspecified datum) of the water body"); //$NON-NLS-1$//$NON-NLS-2$
-		
+		longNames.put("NTRIAAD1", "ntri"); //$NON-NLS-1$//$NON-NLS-2$
 		return longNames;
 	}
 
@@ -1076,7 +1079,6 @@ public class NemoBashTest {
 				"CPHLPM01", "mass_concentration_of_chlorophyll_a_in_sea_water"); //$NON-NLS-1$//$NON-NLS-2$
 		standardNames.put("AHSLZZ01", "height"); //$NON-NLS-1$//$NON-NLS-2$
 		standardNames.put("AHGTZZ01", "height"); //$NON-NLS-1$//$NON-NLS-2$
-
 		return standardNames;
 	}
 

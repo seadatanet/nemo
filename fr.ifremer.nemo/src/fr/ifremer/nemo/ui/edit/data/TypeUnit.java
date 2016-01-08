@@ -2,7 +2,7 @@ package fr.ifremer.nemo.ui.edit.data;
 
 import sdn.vocabulary.interfaces.IElement;
 
-public class TypeUnit extends Object {
+public class TypeUnit extends Object implements Comparable<TypeUnit> {
 
     
     private String term, untiDef, unitKey, termAbbr;
@@ -24,6 +24,10 @@ public class TypeUnit extends Object {
         this.term = record.getLabel();
         this.termAbbr = record.getShortLabel();
         this.untiDef = "";
+    }
+    @Override
+	public int compareTo(TypeUnit other) {
+    	return term.compareTo(other.getTerm());
     }
     public String getTerm()
     {

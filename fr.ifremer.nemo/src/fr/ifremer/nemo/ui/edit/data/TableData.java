@@ -472,7 +472,7 @@ public class TableData {
 				typesP061.add(typeUnit);
 			}
 		}
-
+		Collections.sort(typesP061);
 	}
 	/**
 	 * initialize the L22

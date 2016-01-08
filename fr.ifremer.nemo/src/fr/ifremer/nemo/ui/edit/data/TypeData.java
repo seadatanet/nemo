@@ -11,7 +11,7 @@ import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Global.E_TypeConversion;
 import fr.ifremer.nemo.ws.WSParameter;
 
-public class TypeData extends Object {
+public class TypeData extends Object implements Comparable<TypeData> {
 
 	// code P091 ou P021
 	private String entryKey; // le vrai entryKey
@@ -197,7 +197,10 @@ public class TypeData extends Object {
 		setEntryKey(mots[0]);
 		setEntryTerm(mots[1]);
 	}
-
+	 @Override
+		public int compareTo(TypeData other) {
+	    	return entryKey.compareTo(other.getEntryKey());
+	    }
 	// FAE 6537
 	public String getCodeToUse() {
 		String code;

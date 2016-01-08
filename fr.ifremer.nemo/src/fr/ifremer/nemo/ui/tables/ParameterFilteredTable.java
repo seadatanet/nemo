@@ -8,6 +8,7 @@
 package fr.ifremer.nemo.ui.tables;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -80,11 +81,11 @@ public class ParameterFilteredTable extends AbstractFilteredTable
 
 		// creation des colonnes...
 		TableColumn tableColumn = new TableColumn(myFiltreTable, SWT.NONE);
-		tableColumn.setWidth(200);
+		tableColumn.setWidth(500);
 		tableColumn.setText(Messages.table_label_codeName);
 
 		TableColumn tableColumn2 = new TableColumn(myFiltreTable, SWT.NONE);
-		tableColumn2.setWidth(81);
+		tableColumn2.setWidth(100);
 		tableColumn2.setText(Messages.table_label_unit);
 
 		populateTableWithFilteredList();
@@ -111,6 +112,8 @@ public class ParameterFilteredTable extends AbstractFilteredTable
 		{
 			listeFiltree.add(myTableDataRef.getTypesWS().get(i));
 		}
+		
+		Collections.sort(listeFiltree);
 	}
 
 	/**
