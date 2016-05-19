@@ -179,16 +179,20 @@ public class DataDomain {
 	private StringBuffer getMedatlasDataLine(Station currentStation, String inputLine, int indexRecord) throws Exception {
 
 		StringBuffer medatlasDataLine = new StringBuffer();
+		E_InputType inputType = Nemo.getInstance().getDomain().getMedia().getModel().getInputType();
 
 		// -- VALEURS
 		// paramètres ajoutés
 		long currentDate = 0;
-		if (Nemo.getInstance().getDomain().getMedia().getModel().getInputType() != E_InputType.PROFILE)
+		if (inputType != E_InputType.PROFILE)
 			currentDate = DateTimeUtils.getCurrentDate(currentStation, indexRecord);
 
 		// FAE 11356
-		if (Nemo.getInstance().getDomain().getMedia().getModel().getInputType() == E_InputType.TIMESERIES && Nemo.getInstance().getDomain().getStation().getModel().getProperty(Intern.S_DATE).isInData())
+		if (
+				(inputType == E_InputType.TIMESERIES || inputType == E_InputType.TRAJECTORY)
+				&& Nemo.getInstance().getDomain().getStation().getModel().getProperty(Intern.S_DATE).isInData()){
 			currentDate = Long.valueOf(DateTimeUtils.convertTimestamp(inputLine));
+		}
 		for (ParameterModel pModel : myParameterManager.getMedParameterModels()) {
 			pModel.computeAddedParameterValue(currentStation, inputLine, currentDate);
 

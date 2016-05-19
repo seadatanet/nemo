@@ -158,7 +158,7 @@ public class InstrumentFilteredTable extends AbstractFilteredTable
 	@Override
 	protected String getDialogTitle()
 	{
-		return Messages.edit_data_L33;
+		return Messages.edit_data_L22;
 	}
 
 	/**
