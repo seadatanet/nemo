@@ -564,10 +564,18 @@ public class NetCDFWriter extends NemoWriter {
 	}
 	private void writeDataLine(Station currentStation, String inputLine, int indiceStation) throws Exception {
 		long currentDate = DateTimeUtils.getCurrentDate(currentStation, indexRecord);
-
-		if (mediaDomain.getModel().getInputType() == E_InputType.TIMESERIES && Nemo.getInstance().getDomain().getStation().getModel().getProperty(Intern.S_DATE).isInData())
+		//30378
+		E_InputType inputType = mediaDomain.getModel().getInputType() ;
+		
+		
+		if ((inputType== E_InputType.TIMESERIES || inputType == E_InputType.TRAJECTORY)
+				&& Nemo.getInstance().getDomain().getStation().getModel().getProperty(Intern.S_DATE).isInData()){
 			currentDate = Long.valueOf(DateTimeUtils.convertTimestamp(inputLine));
+		}
 
+		
+		
+		
 		Object[][] paramData;
 		String varName;
 		// parametre ajouté

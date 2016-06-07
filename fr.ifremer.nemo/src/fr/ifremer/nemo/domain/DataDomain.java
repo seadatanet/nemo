@@ -131,9 +131,16 @@ public class DataDomain {
 
 		// paramètres ajoutés
 		long currentDate = DateTimeUtils.getCurrentDate(currentStation, indexRecord);
-		// FAE 11356
-		if (Nemo.getInstance().getDomain().getMedia().getModel().getInputType() == E_InputType.TIMESERIES && Nemo.getInstance().getDomain().getStation().getModel().getProperty(Intern.S_DATE).isInData())
+		E_InputType inputType = Nemo.getInstance().getDomain().getMedia().getModel().getInputType();
+		
+		// FAE 11356 - 30378
+		if (
+				(inputType == E_InputType.TIMESERIES || inputType == E_InputType.TRAJECTORY)
+				&& Nemo.getInstance().getDomain().getStation().getModel().getProperty(Intern.S_DATE).isInData()){
 			currentDate = Long.valueOf(DateTimeUtils.convertTimestamp(inputLine));
+		}
+		
+		
 		for (ParameterModel pModel : myParameterManager.getOdvParameterModels()) {
 			cptParam++;
 			pModel.computeAddedParameterValue(currentStation, inputLine, currentDate);

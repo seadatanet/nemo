@@ -180,8 +180,13 @@ public class StationDomain {
 		odvStationHeader.append(Global.TAB);
 
 		// yyyy-mm-ddThh:mm:ss.sss
-		long currentDate = DateTimeUtils.getCurrentDate(currentStation,
-				indexRecord);
+		long currentDate = DateTimeUtils.getCurrentDate(currentStation,	indexRecord);
+		//30378
+		if ( Nemo.getInstance().getDomain().getStation().getModel().getProperty(Intern.S_DATE).isInData()){
+			currentDate = Long.valueOf(DateTimeUtils.convertTimestamp(inputLine));
+		}
+		
+		
 		odvStationHeader.append(DateTimeUtils.getVariantDateTime(currentDate));
 		odvStationHeader.append(Global.TAB);
 
