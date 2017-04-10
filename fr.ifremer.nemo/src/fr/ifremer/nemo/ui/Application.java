@@ -294,7 +294,7 @@ public class Application implements IPlatformRunnable
         opt.addOption(optInputFile, true, "Input file / directory");
         opt.addOption(optOutputFile, true, "Output file / directory");
         opt.addOption(optModelFile, true, "Model file (xml)");
-        opt.addOption(optConv, true, "Conversion type (ovd, medatlas or NETCDF)");
+        opt.addOption(optConv, true, "Conversion type (odv, medatlas or NETCDF)");
         opt.addOption(
             optOdvMono,
             false,
