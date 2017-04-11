@@ -1,5 +1,7 @@
 package fr.ifremer.nemo.ui.edit.data;
 
+import java.math.BigDecimal;
+
 import org.eclipse.swt.widgets.Combo;
 
 import fr.ifremer.nemo.Nemo;
@@ -496,19 +498,40 @@ public class DataFormValidator extends FormValidator {
 			} else {
 				index = indexSign + 1;
 			}
-			int totLength =
-					Integer.parseInt(formatString.substring(index, index + 1));
+//			int totLength =
+//					Integer.parseInt(formatString.substring(index, index + 1));
+			int totLength;
+			if (formatString.indexOf(".")==-1){
+			 totLength =
+					Integer.parseInt(formatString.substring(index, formatString.length() - 1));
+			}else{
+				 totLength =
+						Integer.parseInt(formatString.substring(index, formatString.lastIndexOf(".")));
+			}
 
 			// Float ou Decimal ?
 			String type = formatString.substring(formatString.length() - 1);
 			if (type.equals("f") || type.equals("F")) { //$NON-NLS-1$ //$NON-NLS-2$
+//				fmOut =
+//						String.format(java.util.Locale.US, formatString,
+//								Float.parseFloat(typeCourant.getSortie()));
+				// 33045 use bigInt to avoid round value
 				fmOut =
 						String.format(java.util.Locale.US, formatString,
-								Float.parseFloat(typeCourant.getSortie()));
+								new BigDecimal(typeCourant.getSortie()));
 			} else if (type.equals("d") || type.equals("D")) { //$NON-NLS-1$ //$NON-NLS-2$
-				fmOut =
-						String.format(java.util.Locale.US, formatString,
-								Integer.parseInt(typeCourant.getSortie()));
+				try{
+					int resInt = Integer.parseInt(typeCourant.getSortie());
+					 fmOut =
+								String.format(java.util.Locale.US, formatString,
+										resInt);
+				}catch (Exception e) {
+					long resLong= Long.parseLong(typeCourant.getSortie());
+					fmOut =
+							String.format(java.util.Locale.US, formatString,
+									resLong);
+				}
+				
 			}
 
 			if ((fmOut.equals(typeCourant.getSortie())) && (typeCourant.getSortie().length() == totLength)) {

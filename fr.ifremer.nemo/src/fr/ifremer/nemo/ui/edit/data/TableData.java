@@ -1496,6 +1496,12 @@ public class TableData {
 											formatString,
 											Integer
 											.parseInt(outputDefaultValue));
+						} else if ((type.equals("l") || type.equals("L")) && !outputDefaultValue.trim().isEmpty()) { //$NON-NLS-1$ //$NON-NLS-2$
+							fmOut =
+									String.format(java.util.Locale.US,
+											formatString,
+											Long
+											.parseLong(outputDefaultValue));
 						}
 
 						if (fmOut.equals(outputDefaultValue)) {
