@@ -26,9 +26,9 @@ import java.util.regex.Pattern;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
-import org.apache.log4j.xml.DOMConfigurator;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.core.LoggerContext;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -145,14 +145,20 @@ public class NemoBashTest {
 	 */
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		DOMConfigurator.configure("resources/log4jBatch.xml"); //$NON-NLS-1$
-		batchLogger = Logger.getLogger("nemoBatch");//$NON-NLS-1$
-		batchLogger.setLevel(Level.DEBUG);
-		// LOGGER
-		DOMConfigurator.configure("resources/log4jBatch.xml"); //$NON-NLS-1$
-		testLogger = Logger.getLogger("nemoJunits");//$NON-NLS-1$
-		testLogger.setLevel(Level.DEBUG);
+		 LoggerContext context = (org.apache.logging.log4j.core.LoggerContext) LogManager.getContext(false);
+         File file = new File( "resources/log4j2.xml");
 
+context.setConfigLocation(file.toURI());
+//		DOMConfigurator.configure("resources/log4jBatch.xml"); //$NON-NLS-1$
+//		batchLogger = Logger.getLogger("nemoBatch");//$NON-NLS-1$
+//		batchLogger.setLevel(Level.DEBUG);
+		batchLogger = LogManager.getLogger("nemoBatch");
+		// LOGGER
+//		DOMConfigurator.configure("resources/log4jBatch.xml"); //$NON-NLS-1$
+//		testLogger = Logger.getLogger("nemoJunits");//$NON-NLS-1$
+//		testLogger.setLevel(Level.DEBUG);
+		testLogger = LogManager.getLogger("nemoJunits");
+		
 		// // LOGGER
 		//		DOMConfigurator.configure("resources/log4j.xml"); //$NON-NLS-1$
 		//		netCDFLogger = Logger.getLogger("nemoJunits");//$NON-NLS-1$

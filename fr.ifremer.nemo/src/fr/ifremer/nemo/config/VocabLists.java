@@ -13,7 +13,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.eclipse.core.runtime.IProgressMonitor;
 
 import sdn.vocabulary.implementations.CollectionFactory;
@@ -42,7 +43,7 @@ public class VocabLists {
 	static protected HashMap<String, ICollectionMapping> _vocabMap = new HashMap<String, ICollectionMapping>();
 
 	static {
-		logger = Logger.getLogger("nemoGui");//$NON-NLS-1$
+		logger = LogManager.getLogger("nemoGui");
 		String vocabDir = Intern.dir_resources + File.separator + Intern.dir_vocabLists;
 		File aRep = new File(vocabDir);
 
@@ -324,6 +325,10 @@ public class VocabLists {
 		}
 
 		return updateMap;
+	}
+
+	public static ICollectionFactory getCf() {
+		return cf;
 	}
 
 }

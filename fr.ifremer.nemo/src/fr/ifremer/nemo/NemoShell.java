@@ -14,7 +14,7 @@ import java.io.File;
 import java.text.ParseException;
 import java.util.Date;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
 
 import fr.ifremer.nemo.config.ManageLists;
 import fr.ifremer.nemo.domain.ConversionDomain;

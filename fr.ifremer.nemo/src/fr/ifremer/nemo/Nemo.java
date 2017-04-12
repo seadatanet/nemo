@@ -27,12 +27,19 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.sax.SAXResult;
 import javax.xml.transform.stream.StreamSource;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import sdn.vocabulary.interfaces.VocabularyException;
+
 import com.ago.xml.XMLBootstrapParser;
 
 import fr.ifremer.nemo.config.Configuration;
+import fr.ifremer.nemo.config.VocabLists;
 import fr.ifremer.nemo.domain.InputDomain;
 import fr.ifremer.nemo.input.CruiseModel;
 import fr.ifremer.nemo.input.InputModel;
+import fr.ifremer.nemo.input.parameters.ParameterModel;
 import fr.ifremer.nemo.ui.ApplicationWorkbenchWindowAdvisor;
 import fr.ifremer.nemo.ui.RulesManager;
 import fr.ifremer.nemo.ui.view.ViewMain;
@@ -42,6 +49,8 @@ import fr.ifremer.nemo.util.Global.E_InputType;
 import fr.ifremer.nemo.util.Global.E_TypeConversion;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
+import fr.ifremer.sismer_tools.SismerToolsException;
+import fr.ifremer.sismer_tools.seadatanet.SdnVocabularyManager;
 
 /**
  * Class Nemo.java Description: Classe principale de l'application - utilisée en
@@ -51,6 +60,10 @@ import fr.ifremer.nemo.util.Messages;
  */
 public class Nemo {
 	private static Nemo instance;
+
+	private static Logger guiLogger;
+
+	private static Logger batchLogger;
 
 	private Configuration config;
 	private InputDomain domain;
@@ -77,6 +90,8 @@ public class Nemo {
 	public static Nemo getInstance() {
 		if (null == instance) { // Premier appel
 			instance = new Nemo();
+			guiLogger = LogManager.getLogger("nemoGui");
+			batchLogger = LogManager.getLogger("nemoBatch");
 		}
 		return instance;
 	}
@@ -109,7 +124,7 @@ public class Nemo {
 	}
 
 	public boolean openModel(String pathModel) throws FileNotFoundException,
-			TransformerException {
+	TransformerException {
 
 		// nom du model
 		nomModele = new File(pathModel).getName();
@@ -138,6 +153,36 @@ public class Nemo {
 			Transformer transformer = factory.newTransformer(xslSource);
 			transformer.transform(xmlSource, result);
 		}
+		// 25794
+		for (int paramsNb=0;  paramsNb< model.getDataModel().getParameterModels().length;paramsNb++){
+			String p06Code;
+			ParameterModel param = model.getDataModel().getParameterModels()[paramsNb];
+			if (!param.getParameter().getUnitCode().isEmpty()){
+				p06Code=param.getParameter().getUnitCode();
+			}else{
+				SdnVocabularyManager sdnMgr = new SdnVocabularyManager(VocabLists.getCf());
+				try {
+					p06Code= sdnMgr.getBestVocabMatchCode(
+							SdnVocabularyManager.LIST_P06, 
+							SdnVocabularyManager.LIST_P09, 
+							param.getParameter().getCode());
+					param.getParameter().setUnitCode(p06Code);
+					param.getParameter().setUnit(sdnMgr.getP06UnitLabel(p06Code));
+				} catch (VocabularyException e) {
+					// TODO 25794: log in logview
+					guiLogger.error(e.getMessage());
+					batchLogger.error(e.getMessage());
+					guiLogger.warn("unable to get P06 unit label from parameter ");
+					batchLogger.warn("unable to get P06 unit label from parameter ");
+				} catch (SismerToolsException e) {
+					// TODO 25794: log in logview
+					guiLogger.error(e.getMessage());
+					batchLogger.error(e.getMessage());
+					guiLogger.warn("unable to get P06 unit label from parameter ");
+					batchLogger.warn("unable to get P06 unit label from parameter ");
+				}
+			}
+		}
 		//FAE 16868
 		if (compareVersion(model.getVersion(), "1.5.1") == -1) {
 			String regionName = model.getCruiseModel().getRegionName();
@@ -150,10 +195,12 @@ public class Nemo {
 			// (rules data70, data75 and p3 deleted, new rule data 76)
 			if( model.getConversionModel().getOutputFormat()==E_TypeConversion.MEDATLAS
 					&& model.getMediaModel().getInputType() == E_InputType.PROFILE) {
-					System.out.println("models for medatlas profiles older than 1.6.0 shall be validated in Nemo before be used in batch mode");// TODO 20755 msg
-					model.setIsValid(false);
+				System.out.println("models for medatlas profiles older than 1.6.0 shall be validated in Nemo before be used in batch mode");// TODO 20755 msg
+				guiLogger.warn("models for medatlas profiles older than 1.6.0 shall be validated in Nemo before be used in batch mode");
+				batchLogger.warn("models for medatlas profiles older than 1.6.0 shall be validated in Nemo before be used in batch mode");
+				model.setIsValid(false);
 			}
-			
+
 		}
 		completeDataList(model, isBeforeP011);
 		domain.update(model);
@@ -289,15 +336,15 @@ public class Nemo {
 			File fich = new File(myViewMain.getEditFileForm().nomRepertoire);
 			if (!Global.EMPTY_STRING.equals(modelName)) {
 				ApplicationWorkbenchWindowAdvisor.configurer_titre
-						.setTitle(Messages.application_directoryTitle
-								+ fich.getAbsolutePath()
-								+ Messages.application_modelTitle + modelName
-								+ " ]"); //$NON-NLS-1$
+				.setTitle(Messages.application_directoryTitle
+						+ fich.getAbsolutePath()
+						+ Messages.application_modelTitle + modelName
+						+ " ]"); //$NON-NLS-1$
 
 			} else {
 				ApplicationWorkbenchWindowAdvisor.configurer_titre
-						.setTitle(Messages.application_directoryTitle
-								+ fich.getAbsolutePath() + " ]"); //$NON-NLS-1$ 
+				.setTitle(Messages.application_directoryTitle
+						+ fich.getAbsolutePath() + " ]"); //$NON-NLS-1$ 
 			}
 
 		} else {
@@ -307,14 +354,14 @@ public class Nemo {
 
 			if (!Global.EMPTY_STRING.equals(modelName)) {
 				ApplicationWorkbenchWindowAdvisor.configurer_titre
-						.setTitle(Messages.application_fileTitle
-								+ fich.getAbsolutePath()
-								+ Messages.application_modelTitle + modelName
-								+ " ]"); //$NON-NLS-1$
+				.setTitle(Messages.application_fileTitle
+						+ fich.getAbsolutePath()
+						+ Messages.application_modelTitle + modelName
+						+ " ]"); //$NON-NLS-1$
 			} else {
 				ApplicationWorkbenchWindowAdvisor.configurer_titre
-						.setTitle(Messages.application_fileTitle
-								+ fich.getAbsolutePath() + " ]"); //$NON-NLS-1$ 
+				.setTitle(Messages.application_fileTitle
+						+ fich.getAbsolutePath() + " ]"); //$NON-NLS-1$ 
 			}
 		}
 	}

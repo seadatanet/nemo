@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Nemo Plug-in
 Bundle-SymbolicName: fr.ifremer.nemo; singleton:=true
-Bundle-Version: 1.6.2
+Bundle-Version: 1.6.4
 Bundle-Localization: plugin
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.ui,
@@ -52,8 +52,10 @@ Bundle-ClassPath: .,
  lib/hsqldb-2.2.6.jar,
  lib/eclipselink.jar,
  lib/javax.persistence_2.1.0.v201304241213.jar,
- lib/cfpointLib-0.21.jar,
  lib/sismertoolslib-1.1.12.jar,
- lib/sdnVocabulary-1.4.jar
+ lib/cfpointLib-0.21.jar,
+ lib/sdnVocabulary-1.4.jar,
+ lib/log4j-api-2.3.jar,
+ lib/log4j-core-2.3.jar
 Bundle-Vendor: IFREMER
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7

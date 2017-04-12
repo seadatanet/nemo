@@ -882,5 +882,11 @@ public class RulesManager {
 	public E_MesureType getMyMesureType() {
 		return myMesureType;
 	}
+	public String getMessageLog() {
+		return messageLog;
+	}
+	public void addMessageLog(String messageLogPart) {
+		this.messageLog = this.messageLog+ Global.RN+ messageLogPart;
+	}
 
 }

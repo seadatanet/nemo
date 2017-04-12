@@ -94,7 +94,7 @@ public class TableData {
 	 * reference sur le panneau de choix des parametres
 	 */
 	private ParameterFilteredTable myParameterFilteredTable;
-	
+
 	private InstrumentFilteredTable myInstrumentTable;
 
 	/**
@@ -134,7 +134,7 @@ public class TableData {
 			COL_CONVERSION, COL_TEST, COL_START, COL_END, COL_FORMAT,
 			COL_VALUE_IN, COL_VALUE_OUT, COL_TEST_IN, COL_TEST_OUT,
 			COL_START_FLAG, COL_END_FLAG, COL_UNIT_CODE,COL_INSTRUMENT,COL_INSTRUMENT_CODE
-			};
+		};
 
 	/**
 	 * Indexes for contextual menu items
@@ -302,7 +302,7 @@ public class TableData {
 				new TableDataColumn(COL_INSTRUMENT, colNbById.get(COL_INSTRUMENT),
 						Messages.table_label_intrument, 50, false, false);
 		columnsMap.put(col.pos, col);
-		
+
 		col =
 				new TableDataColumn(COL_INSTRUMENT_CODE, colNbById.get(COL_INSTRUMENT_CODE),
 						Global.EMPTY_STRING, 0, false, false);
@@ -488,7 +488,7 @@ public class TableData {
 			}
 		}
 		Collections.sort(typesL22);
-		
+
 	}
 	/**
 	 * initialize the L22
@@ -824,7 +824,7 @@ public class TableData {
 				openMyInstrumentTable();
 			}
 		});
-	
+
 		// ========= Liste des unités P061 (P011 via P021 seulement)
 		if (RulesManager.getInstance().getMyDataListType() == DataListTypeEnum.P011_VIA_P021) {
 			MenuItem itemAddP061Unit =	new MenuItem(menu, SWT.NONE, index);
@@ -852,7 +852,7 @@ public class TableData {
 			{
 				public void handleEvent(Event e)
 				{
-//					initTypesP061();
+					//					initTypesP061();
 					int indice = myTable.getSelectionIndex();
 					openMyFormatFilteredTable(indice);
 				}
@@ -1041,7 +1041,7 @@ public class TableData {
 				Nemo.getInstance().getViewMain().getEditDataForm()
 				.getCompositeData().getParent());
 	}
-	
+
 	public void openMyUnitFilteredTable(int rowIndex) {
 		getMyUnitFilteredTable().open(
 				Nemo.getInstance().getViewMain().getEditDataForm()
@@ -1126,7 +1126,7 @@ public class TableData {
 							types.get(i).getUniteCode() ,
 							types.get(i).getInstrument(),
 							types.get(i).getInstrumentCode()
-							});
+					});
 			if (isCheckBoxWritable())
 				item.setChecked(types.get(i).isText());
 			else
@@ -1352,7 +1352,7 @@ public class TableData {
 		//
 		//
 		System.out.println("suppr " + typeData.getEntryKey());
-		
+
 		if(myGroupVerticalParameters.getSelection().contains(typeData.getEntryKey())){
 			Nemo.getInstance().getViewMain().getEditDataForm().resetFallRate();
 			Nemo.getInstance().getViewMain().getEditDataForm().setFallrateGroupEnabled(false);
@@ -1707,15 +1707,15 @@ public class TableData {
 			types.get(i).setUniteCode(
 					myTable.getItem(i).getText(colNbById.get(COL_UNIT_CODE)));
 
-			
+
 			types.get(i).setInstrument(
 					myTable.getItem(i).getText(colNbById.get(COL_INSTRUMENT)));
-			
+
 			types.get(i).setInstrumentCode(
 					myTable.getItem(i).getText(colNbById.get(COL_INSTRUMENT_CODE)));
-			
 
-			
+
+
 			types.get(i).setIsText(isSelected(i));
 
 		}
@@ -1752,7 +1752,7 @@ public class TableData {
 	}
 	public InstrumentFilteredTable getMyInstrumentTable() {
 		if (myInstrumentTable == null) {
-		myInstrumentTable = new InstrumentFilteredTable();
+			myInstrumentTable = new InstrumentFilteredTable();
 		}
 		return myInstrumentTable;
 	}
@@ -1830,14 +1830,14 @@ public class TableData {
 	 * @return
 	 */
 	public ArrayList<TypeFallRate> getTypesL33() {
-		
+
 		if (typesL33 == null){
 			initTypesL33();
 		}
 		return typesL33;
 	}
-	
-	
+
+
 
 	// FAE 9670 surlignage de la position des paramètres dans le fichier
 	public void selectInViewFile(int debut, int fin) {

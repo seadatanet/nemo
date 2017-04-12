@@ -8,9 +8,9 @@ import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
-import org.apache.log4j.xml.DOMConfigurator;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.core.LoggerContext;
 import org.eclipse.core.runtime.IPlatformRunnable;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.PlatformUI;
@@ -23,7 +23,6 @@ import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Global.E_TypeConversion;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
-
 /**
  * This class controls all aspects of the application's execution
  */
@@ -116,10 +115,14 @@ public class Application implements IPlatformRunnable
                 String couplingTablePrefix = Global.EMPTY_STRING;
 
                 // LOGGER
-                DOMConfigurator.configure(appDir + File.separator
-                        + "resources/log4jBatch.xml"); //$NON-NLS-1$
-                batchLogger = Logger.getLogger("nemoBatch");//$NON-NLS-1$
-                batchLogger.setLevel(Level.DEBUG);
+                
+                LoggerContext context = (org.apache.logging.log4j.core.LoggerContext) LogManager.getContext(false);
+                File file = new File(appDir + File.separator  + "resources/log4j2.xml");
+                 
+                // this will force a reconfiguration
+                context.setConfigLocation(file.toURI());
+                
+                batchLogger = LogManager.getLogger("nemoBatch");
 
                 
                 String edmoCode = Nemo.getInstance().getConfig().getIdEdmoRespCdi();
@@ -232,10 +235,13 @@ public class Application implements IPlatformRunnable
                 display = PlatformUI.createDisplay();
                 
                 // LOGGER
-                DOMConfigurator.configure(appDir + File.separator
-                        + "resources/log4jBatch.xml"); //$NON-NLS-1$
-                guiLogger = Logger.getLogger("nemoGui");//$NON-NLS-1$
-                guiLogger.setLevel(Level.DEBUG);
+                LoggerContext context = (org.apache.logging.log4j.core.LoggerContext) LogManager.getContext(false);
+                File file = new File(appDir + File.separator  + "resources/log4j2.xml");
+
+                context.setConfigLocation(file.toURI());
+
+            	guiLogger = LogManager.getLogger("nemoGui");
+            	
                 try
                 {
                      

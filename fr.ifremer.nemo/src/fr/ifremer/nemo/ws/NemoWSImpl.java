@@ -9,7 +9,8 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * Class NemoWSImpl
@@ -23,7 +24,7 @@ public class NemoWSImpl implements Cloneable, NemoWS {
 
 	static {
 		if (_logger == null) {
-			_logger = Logger.getLogger(NemoWSImpl.class);
+			_logger = LogManager.getLogger(NemoWSImpl.class);
 		}
 	}
 
@@ -35,6 +36,7 @@ public class NemoWSImpl implements Cloneable, NemoWS {
 	 * 
 	 * @return a copy of this object
 	 */
+	@Override
 	public Object clone() throws CloneNotSupportedException {
 		NemoWSImpl copy = null;
 		copy = (NemoWSImpl) super.clone();
