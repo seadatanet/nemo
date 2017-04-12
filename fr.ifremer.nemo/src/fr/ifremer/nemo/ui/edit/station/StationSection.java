@@ -243,9 +243,10 @@ public class StationSection extends NemoSection {
 	 */
 
 	public void setManualValueInput(String value, int i) {
-		autoInput.setEnabled(false);
-		autoInput.razValues();
-
+		if (autoInput!=null){
+			autoInput.setEnabled(false);
+			autoInput.razValues();
+		}
 		if (!isNoValue()) {
 			manualInput.setValue(value, i);
 		}
@@ -262,8 +263,10 @@ public class StationSection extends NemoSection {
 			String defaultValue) {
 		manualInput.setEnabled(false);
 		manualInput.razDefaultValues();
+		if (autoInput!=null){
 		autoInput.setValue(line, start, end, posVariable, valueVariable, i,
 				hasDefaultValue, isDefaultValueSeceted, defaultValue);
+		}
 	}
 
 	public void setAutoValueInput(String line, String start, String end, int i) {

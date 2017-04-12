@@ -143,15 +143,19 @@ public class EditStationForm extends EditForm {
 				new StationSection(Intern.S_STATIONNUMBER, Messages
 						.getString(Intern.S_STATIONNUMBER),
 						Messages.edit_station_sectionReference_lib, true, true, 1, this);
-		stationNumber.addManualInput(null, ComboType.NONE, "1"); //$NON-NLS-1$ 
-		if (!rulesManager.isTrajectory()) {
+		
+			stationNumber.addManualInput(null, ComboType.NONE, "1"); //$NON-NLS-1$ 
 			stationNumber.getManualInput().setNbColumns(2);
 			stationNumber.getManualInput().setLabelButton(
 					Messages.edit_station_refIncrement);
+		
+			if (!rulesManager.isTrajectory()) {
+			stationNumber.addAutoInput(Messages.label_auto_02, false,
+					MetaInData.FACULTATIF, false, false);
 		}
-		stationNumber.addAutoInput(Messages.label_auto_02, false,
-				MetaInData.FACULTATIF, false, false);
+			
 		listeSections.add(stationNumber);
+		
 		/**
 		 * ==============================================================================================
 		 * data type
