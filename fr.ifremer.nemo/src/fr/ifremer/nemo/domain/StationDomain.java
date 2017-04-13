@@ -794,9 +794,16 @@ public class StationDomain {
 			UnsupportedEncodingException {
 		StringBuffer timeseriesHeader = new StringBuffer();
 		String start = Conversion.MEDATLAS.getDebut();
+		
 
 		float sensorDepth = currentStation.getSensorDepth();
+		
+		
 		long endTime = DateTimeUtils.computeEndTime(currentStation);
+		//33044 manage offset in end date time
+		long endTimeWithOffset = 
+				DateTimeUtils.getGMTDate(endTime,
+						currentStation.getOffsetTU());
 
 		// *ADDITIONAL INFORMATION - TIME SERIES
 		timeseriesHeader.append(start);
@@ -806,8 +813,8 @@ public class StationDomain {
 		// *EDATE=19091998 ETIME=1110 ELAT=S18 08.55 ELON=E178 27.21 EDEPTH=
 		// QC=0000
 		timeseriesHeader.append(start);
-		timeseriesHeader.append(Elts.getElt(Elts.station_endDate, endTime));
-		timeseriesHeader.append(Elts.getElt(Elts.station_endTime, endTime));
+		timeseriesHeader.append(Elts.getElt(Elts.station_endDate, endTimeWithOffset));
+		timeseriesHeader.append(Elts.getElt(Elts.station_endTime, endTimeWithOffset));
 
 		double endlat = currentStation.getEndlatitude();
 		if (Double.isNaN(endlat)) {

@@ -94,7 +94,7 @@ public class DateTimeUtils {
 		return time;
 	}
 
-	private static long getGMTDate(long a_Date, float offsetTU) {
+	public static long getGMTDate(long a_Date, float offsetTU) {
 		return a_Date + (Float.valueOf(offsetTU).longValue() * 3600 * 1000);
 	}
 
