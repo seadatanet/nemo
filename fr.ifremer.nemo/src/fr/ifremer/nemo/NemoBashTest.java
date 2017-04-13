@@ -1349,36 +1349,36 @@ context.setConfigLocation(file.toURI());
 					// remplace par PRESPR01
 					Pattern p;
 					Matcher m;
-					if (!identical) {
-						p = Pattern.compile("PRESPS02");
-						m = p.matcher(refFileLine);
-						if (m.find()) {
-							refFileLine = m.replaceAll("PRESPR01");
-							identical = outputLine.equals(refFileLine);
-						}
-					}
+//					if (!identical) {
+//						p = Pattern.compile("PRESPS02");
+//						m = p.matcher(refFileLine);
+//						if (m.find()) {
+//							refFileLine = m.replaceAll("PRESPR01");
+//							identical = outputLine.equals(refFileLine);
+//						}
+//					}
 					// depuisles vocab v2, le mapping BODC a changé : P011
 					// remplace par P01
-					if (!identical) {
-						p = Pattern.compile("P011");
-						m = p.matcher(refFileLine);
-						if (m.find()) {
-							refFileLine = m.replaceAll("P01");
-							identical = outputLine.equals(refFileLine);
-							isVocabV2 = true;
-						}
-					}
+//					if (!identical) {
+//						p = Pattern.compile("P011");
+//						m = p.matcher(refFileLine);
+//						if (m.find()) {
+//							refFileLine = m.replaceAll("P01");
+//							identical = outputLine.equals(refFileLine);
+//							isVocabV2 = true;
+//						}
+//					}
 					// depuisles vocab v2, le mapping BODC a changé : P061
 					// remplace par P06
-					if (!identical) {
-						p = Pattern.compile("P061");
-						m = p.matcher(refFileLine);
-						if (m.find()) {
-							refFileLine = m.replaceAll("P06");
-							identical = outputLine.equals(refFileLine);
-							isVocabV2 = true;
-						}
-					}
+//					if (!identical) {
+//						p = Pattern.compile("P061");
+//						m = p.matcher(refFileLine);
+//						if (m.find()) {
+//							refFileLine = m.replaceAll("P06");
+//							identical = outputLine.equals(refFileLine);
+//							isVocabV2 = true;
+//						}
+//					}
 					if (!identical){
 						testLogger.error("REF >>  "+ refFileLine);
 						testLogger.error("OUT >>  "+ outputLine);
