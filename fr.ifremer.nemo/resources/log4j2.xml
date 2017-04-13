@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+
+
+	<Appenders>
+
+		<Console name="Console" target="SYSTEM_OUT" follow="true">
+			<PatternLayout pattern="%d{HH:mm:ss} [sismerTools] %-5level %c{1} - %msg%n" />
+		</Console>
+		
+		
+		<RollingFile name="nemoGUIFile" fileName="./Logs/nemoGui.log"
+			filePattern="./Logs/nemoGui-%d{MM-dd-yyyy}-%i.log.gz">
+			<PatternLayout>
+				<Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
+			</PatternLayout>
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+				<SizeBasedTriggeringPolicy size="2 MB" />
+			</Policies>
+		</RollingFile>
+		
+		<RollingFile name="nemoBATCHFile" fileName="./Logs/nemoBatch.log"
+			filePattern="./Logs/nemoBatch-%d{MM-dd-yyyy}-%i.log.gz">
+			<PatternLayout>
+				<Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
+			</PatternLayout>
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+				<SizeBasedTriggeringPolicy size="2 MB" />
+			</Policies>
+		</RollingFile>
+		
+		
+		<RollingFile name="nemoJUNITFile" fileName="./Logs/nemoJunits.log"
+			filePattern="./Logs/nemoJunits-%d{MM-dd-yyyy}-%i.log.gz">
+			<PatternLayout>
+				<Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
+			</PatternLayout>
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+				<SizeBasedTriggeringPolicy size="2 MB" />
+			</Policies>
+		</RollingFile>
+		
+		
+	</Appenders>
+
+
+	<Loggers>
+		<Root level="info">
+			<AppenderRef ref="Console" level="DEBUG" />
+<!-- 			<AppenderRef ref="RollingFile" level="INFO" /> -->
+		</Root>
+		<Logger name="nemoGui" level="INFO">
+     	 	<AppenderRef ref="nemoGUIFile"/>
+    	</Logger>
+    	<Logger name="nemoBatch" level="INFO">
+     	 	<AppenderRef ref="nemoBATCHFile"/>
+    	</Logger>
+		<Logger name="nemoJunits" level="INFO">
+     	 	<AppenderRef ref="nemoJUNITFile"/>
+    	</Logger>
+	</Loggers>
+</Configuration>
