@@ -172,9 +172,6 @@ public class TableData {
 				.getMyGroupeVerticalParameters();
 	}
 
-	/**
-	 * @return true if conversion is Medatlas
-	 */
 	private boolean isValueOutWritable() {
 		return (RulesManager.getInstance().isConversionToMedatlas() || RulesManager.getInstance().isConversionToNetCDF());
 	}
@@ -631,6 +628,15 @@ public class TableData {
 					int indice = myTable.getSelectionIndex();
 					if (indice >= 0)
 					{
+						if (RulesManager.getInstance().isInputWithSeparatorsAndModelUpToDate()){
+							//33278: split as columns
+							int col = Integer.valueOf(myTable.getItem(indice)
+									.getText(
+											colNbById.get(COL_START)));
+							Nemo.getInstance().getViewMain().getEditDataForm().getInputTableData().setIndexSelected(col);
+							Nemo.getInstance().getViewMain().getEditDataForm().getInputTableData().getViewer().refresh();
+							
+						}else{
 						selectInViewFile(
 								Integer.valueOf(myTable.getItem(indice)
 										.getText(
@@ -638,6 +644,7 @@ public class TableData {
 												Integer.valueOf(myTable.getItem(indice)
 														.getText(
 																colNbById.get(COL_END))));
+						}
 					}
 				}
 
@@ -758,6 +765,8 @@ public class TableData {
 
 		Menu menu = new Menu(table.getShell(), SWT.POP_UP);
 		int index = 0;
+		
+		
 		// ========= Injecter debut/fin
 		MenuItem itemInject = new MenuItem(menu, SWT.NONE, index);
 		menuMap.put(MENU_ITEM_SETVALUE, index);
@@ -767,14 +776,30 @@ public class TableData {
 		{
 			public void handleEvent(Event e)
 			{
-				// table.forceFocus();
-				Utils.injectData(Nemo.getInstance().getViewMain()
-						.getEditDataForm().getTextAreaData(),
-						colNbById.get(COL_START), colNbById.get(COL_END));
-				majTypeData();
-				// refresh de la table
-				razAndRecreateTable();
-				Utils.invalidEtapes();
+				if (RulesManager.getInstance().isInputWithSeparatorsAndModelUpToDate()){
+					// 33278 CSV files
+					int selectionIndex = myTable.getSelectionIndex();
+					int selectColumn = Nemo.getInstance().getViewMain().getEditDataForm().getInputTableData().getIndexSelected();
+					// remplissage debut et fin dans interface
+					Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().getMyTable().getItems()[selectionIndex].setText(colNbById.get(COL_START), String.valueOf(selectColumn));
+					Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().getMyTable().getItems()[selectionIndex].setText(colNbById.get(COL_END), String.valueOf(selectColumn));
+					majTypeData();
+					// refresh de la table
+					razAndRecreateTable();
+					Utils.invalidEtapes();
+					
+				}else{
+					// text files
+					// table.forceFocus();
+					Utils.injectData(Nemo.getInstance().getViewMain()
+							.getEditDataForm().getTextAreaData(),
+							colNbById.get(COL_START), colNbById.get(COL_END));
+					majTypeData();
+
+					// refresh de la table
+					razAndRecreateTable();
+					Utils.invalidEtapes();
+				}
 			}
 		});
 		// ========= Maj champ test
@@ -1429,19 +1454,34 @@ public class TableData {
 
 		nbre = myTable.getItemCount();
 		MediaDomain mediaDomain = Nemo.getInstance().getDomain().getMedia();
-		ligne = Utils.lignesBrutes.get(mediaDomain.getModel().getFileHeader()
-				+ mediaDomain.getStationHeaderNumberLines());
-
+		if (RulesManager.getInstance().isInputWithSeparatorsAndModelUpToDate()){
+			// 33278: split as columns
+			ArrayList<String> input = (ArrayList<String>)Nemo.getInstance().getViewMain().getEditDataForm().getInputTableData().getViewer().getInput();
+			ligne=input.get(0);
+		
+		}else{
+		
+			ligne = Utils.lignesBrutes.get(mediaDomain.getModel().getFileHeader()
+					+ mediaDomain.getStationHeaderNumberLines());
+		}
+		
 		for (int i = 0; i < nbre; i++) {
 
 			if (isParameterReady(i)) {
 				try {
+					if (Nemo.getInstance().getDomain().getMedia().getModel().getSeparator().isEmpty() || !RulesManager.getInstance().isInputWithSeparatorsAndModelUpToDate()){
 					selection =
 							ligne.substring(
 									Integer.valueOf(myTable.getItem(i).getText(
 											colNbById.get(COL_START))) - 1,
 											Integer.valueOf(myTable.getItem(i).getText(
 													colNbById.get(COL_END)))).trim();
+					}else{
+						// 33278: split as columns
+						selection = ligne.split(
+								Nemo.getInstance().getDomain().getMedia().getModel().getSeparator())
+								[Integer.valueOf(myTable.getItem(i).getText(colNbById.get(COL_START)))];
+					}
 
 				} catch (Exception e) {
 					System.out.println("erreur substring "
@@ -1841,6 +1881,9 @@ public class TableData {
 
 	// FAE 9670 surlignage de la position des paramètres dans le fichier
 	public void selectInViewFile(int debut, int fin) {
+		
+		
+		// TODO 33278: on garde la colonne start pour stocker le no de colonne pour les csv. La colonne end ne sert a rien et sera masquée
 		int lign = 0;
 		if (!RulesManager.getInstance()
 				.isCruiseInADirectory()

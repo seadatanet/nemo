@@ -5,6 +5,8 @@ import org.xml.sax.Attributes;
 import com.ago.xml.SAXConsumer;
 import com.ago.xml.XMLOutputWriter;
 
+import fr.ifremer.nemo.Nemo;
+import fr.ifremer.nemo.ui.RulesManager;
 import fr.ifremer.nemo.util.Global;
 
 
@@ -128,10 +130,18 @@ public class LineFragment extends AbstractModel
      * @return String
      */
     public String retreive(String a_Line) {
-        if (_lastCharOffset == -1) {
-            return a_Line.substring(_firstCharOffset - 1).trim();
-        }
-        return a_Line.substring(_firstCharOffset - 1, _lastCharOffset).trim();
+    	String res;
+    	if (Nemo.getInstance().getDomain().getMedia().getModel().getSeparator().isEmpty() || !RulesManager.getInstance().isInputWithSeparatorsAndModelUpToDate()){
+    		if (_lastCharOffset == -1) {
+    			res= a_Line.substring(_firstCharOffset - 1).trim();
+    		}
+    		res= a_Line.substring(_firstCharOffset - 1, _lastCharOffset).trim();
+    	}else{
+    		//33278: split as columns
+    		String[] splittedLine = a_Line.split(Nemo.getInstance().getDomain().getMedia().getModel().getSeparator());
+    		res= splittedLine[_lastCharOffset];
+    	}
+    	return res;
     }
 
     /**

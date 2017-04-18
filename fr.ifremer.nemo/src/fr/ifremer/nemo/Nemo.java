@@ -49,6 +49,7 @@ import fr.ifremer.nemo.util.Global.E_InputType;
 import fr.ifremer.nemo.util.Global.E_TypeConversion;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
+import fr.ifremer.nemo.util.Utils;
 import fr.ifremer.sismer_tools.SismerToolsException;
 import fr.ifremer.sismer_tools.seadatanet.SdnVocabularyManager;
 
@@ -184,12 +185,12 @@ public class Nemo {
 			}
 		}
 		//FAE 16868
-		if (compareVersion(model.getVersion(), "1.5.1") == -1) {
+		if (Utils.compareVersion(model.getVersion(), "1.5.1") == -1) { // older than 1.5.1
 			String regionName = model.getCruiseModel().getRegionName();
 			String C19RegionName = CruiseModel.getTranscodeRegionName(regionName);
 			model.getCruiseModel().setRegionName(C19RegionName);
 		}
-		if (compareVersion(model.getVersion(), "1.6.0") == -1){
+		if (Utils.compareVersion(model.getVersion(), "1.6.0") == -1){ // older than 1.6.0
 			// models for profiles, MEDATLAS are invalids if older than 1.6.0
 			// because DEPH is now allowed as Z parameter, but could be not the first param in olds models
 			// (rules data70, data75 and p3 deleted, new rule data 76)
@@ -204,24 +205,10 @@ public class Nemo {
 		}
 		completeDataList(model, isBeforeP011);
 		domain.update(model);
+		RulesManager.getInstance().setModelVersion(model.getVersion());
 		return model.isValid();
 	}
 
-	private Integer compareVersion(String version1, String version2) {
-		String[] vals1 = version1.split("\\.");
-		String[] vals2 = version2.split("\\.");
-		int i = 0;
-		while (i < vals1.length && i < vals2.length && vals1[i].equals(vals2[i])) {
-			i++;
-		}
-
-		if (i < vals1.length && i < vals2.length) {
-			int diff = Integer.valueOf(vals1[i]).compareTo(Integer.valueOf(vals2[i]));
-			return diff < 0 ? -1 : diff == 0 ? 0 : 1;
-		}
-
-		return vals1.length < vals2.length ? -1 : vals1.length == vals2.length ? 0 : 1;
-	}
 
 	private void completeDataList(InputModel model, boolean isBeforeP011) {
 		DataListTypeEnum dataList = model.getDataModel().getDataListType();

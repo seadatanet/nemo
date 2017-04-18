@@ -21,6 +21,7 @@ import fr.ifremer.nemo.input.parameters.VerticalParametersList;
 import fr.ifremer.nemo.ui.RulesManager;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.EditForm;
+import fr.ifremer.nemo.ui.edit.data.inputData.InputTableData;
 import fr.ifremer.nemo.ui.edit.data.listeners.DataListRadioSelectionListener;
 import fr.ifremer.nemo.ui.edit.data.listeners.MesureTypeAboveSeaLevelSelectionListener;
 import fr.ifremer.nemo.ui.edit.data.listeners.MesureTypeBelowSeaBedSelectionListener;
@@ -28,16 +29,19 @@ import fr.ifremer.nemo.ui.edit.data.listeners.MesureTypeBelowSeaSurfaceSelection
 import fr.ifremer.nemo.ui.tables.FallRateFilteredTable;
 import fr.ifremer.nemo.ui.view.ViewLog;
 import fr.ifremer.nemo.util.Global;
-import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.util.Global.DataListTypeEnum;
 import fr.ifremer.nemo.util.Global.E_MesureType;
 import fr.ifremer.nemo.util.Global.E_TypeConversion;
+import fr.ifremer.nemo.util.Messages;
 
 public class EditDataForm extends EditForm {
 
 	// les données utilisées dans cette table myTable
 	private TableData myTableData;
 	private StyledText textAreaData;
+	private InputTableData inputTableData;
+
+
 	private Composite compositeData;
 
 	// choix du format des parametres
@@ -56,6 +60,7 @@ public class EditDataForm extends EditForm {
 	private Group groupFallrate;
 	private Text fallrateCode;
 	private Text fallrateLabel;
+	private Composite inputComposite;
 
 
 	public void setFallrateGroupEnabled(boolean enabled){
@@ -154,9 +159,27 @@ public class EditDataForm extends EditForm {
 		reinitParameters();
 
 		ViewLog.aideData();
+		
+		if (textAreaData != null)
+			textAreaData.dispose();
+		if (inputTableData != null)
+			inputTableData.dispose();
 
+		// 33278: now we have the model -> we can display depending on separator check
 		// affichage du texte dans la zone de gauche
-		textAreaData.setText(Utils.texteBrut);
+		//		if (Nemo.getInstance().getDomain().getMedia().getModel().getSeparator().isEmpty()){
+		if (RulesManager.getInstance().isInputWithSeparatorsAndModelUpToDate()){
+			inputTableData = new InputTableData(this.inputComposite);
+			inputTableData.init(Utils.lignesBrutes);
+		}else{
+
+			// text area
+			setTextAreaData(new StyledText(this.inputComposite, SWT.MULTI | SWT.READ_ONLY | SWT.H_SCROLL
+					| SWT.V_SCROLL));
+			getTextAreaData().setFont(Utils.fontCourier);
+
+			textAreaData.setText(Utils.texteBrut);
+		}
 
 		setLoaded(true);
 		Nemo.getInstance().getViewMain().setAffiche(3);
@@ -366,14 +389,13 @@ public class EditDataForm extends EditForm {
 	}
 
 	public void createLeft(Composite left) {
-
+		// 	WARNING: here the model is not set.
 		left.setLayout(new FillLayout(SWT.VERTICAL));
 
 		Composite textFile = new Composite(left, SWT.NONE);
 		textFile.setLayout(new FillLayout());
-		setTextAreaData(new StyledText(textFile, SWT.MULTI | SWT.READ_ONLY | SWT.H_SCROLL
-				| SWT.V_SCROLL));
-		getTextAreaData().setFont(Utils.fontCourier);
+		this.inputComposite = textFile;
+
 		setCompositeData(new Composite(left, SWT.NONE));
 		compositeData.setLayout(new FillLayout());
 
@@ -549,6 +571,9 @@ public class EditDataForm extends EditForm {
 	public GroupVerticalParameters getMyGroupeVerticalParameters() {
 		return myGroupeVerticalParameters;
 	}
-	
+	public InputTableData getInputTableData() {
+		return inputTableData;
+	}
+
 
 }

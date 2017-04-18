@@ -37,6 +37,7 @@ import fr.ifremer.nemo.util.Messages;
  */
 public class RulesManager {
 
+	private String modelVersion;
 	/**
 	 * references sur les onglets
 	 */
@@ -887,6 +888,22 @@ public class RulesManager {
 	}
 	public void addMessageLog(String messageLogPart) {
 		this.messageLog = this.messageLog+ Global.RN+ messageLogPart;
+	}
+	public boolean isInputWithSeparatorsAndModelUpToDate(){
+		//33278: split as columns since 1.6.4
+
+		if(Nemo.getInstance().getDomain().getMedia().getModel().getSeparator().isEmpty()){
+			return false;
+		}
+		// else, there is a separator. Is model up to date to use table?
+		return fr.ifremer.nemo.util.Utils.compareVersion(modelVersion, "1.6.4")>=0;
+
+	}
+	public String getModelVersion() {
+		return modelVersion;
+	}
+	public void setModelVersion(String modelVersion) {
+		this.modelVersion = modelVersion;
 	}
 
 }

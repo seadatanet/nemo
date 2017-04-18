@@ -99,11 +99,11 @@ public class NemoBashTest {
 	 * ********************************************************
 	 */
 	boolean REPLACE=false;// WARNING!!!
-	boolean REMOVE_JUNIT=false;
-	public static String[] testDirAlone = {};
-//	public static String[] testDirAlone = {"CollectionCAMP_profile"};
+	boolean REMOVE_JUNIT=true;
+//	public static String[] testDirAlone = {};
+//	public static String[] testDirAlone = {"30378"};
 //	public static String[] testDirAlone = {"cruiseDir_profile_diap_stationsOrder"};
-//	public static String[] testDirAlone = {"cruiseDir_profile_mona"};
+	public static String[] testDirAlone = {"CollectionCAMP_profile"};
 	/**
 	 * ********************************************************
 	 * ********************************************************
@@ -644,7 +644,7 @@ context.setConfigLocation(file.toURI());
 			// writeInResultsFile(testDir.getName() + ";");
 			if (isToTest(testDir.getName())) {
 				// writeInResultsFile("yes" + ";");
-				//				testLogger.info("___ testDir: " + testDir.toString());
+								testLogger.info("___ testDir: " + testDir.toString());
 				message = new Message();
 				message.dirName = testDir.getName();
 				testFound = false;

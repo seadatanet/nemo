@@ -156,4 +156,26 @@ public class Utils
 		res = m.matches();
 		return res;
 	}
+	
+	/**
+	 * 
+	 * @param version1
+	 * @param version2
+	 * @return 0 if versions are equal, -1 if version1<version2, & if version1>version2
+	 */
+		public static Integer compareVersion(String version1, String version2) {
+			String[] vals1 = version1.split("\\.");
+			String[] vals2 = version2.split("\\.");
+			int i = 0;
+			while (i < vals1.length && i < vals2.length && vals1[i].equals(vals2[i])) {
+				i++;
+			}
+
+			if (i < vals1.length && i < vals2.length) {
+				int diff = Integer.valueOf(vals1[i]).compareTo(Integer.valueOf(vals2[i]));
+				return diff < 0 ? -1 : diff == 0 ? 0 : 1;
+			}
+
+			return vals1.length < vals2.length ? -1 : vals1.length == vals2.length ? 0 : 1;
+		}
 }
