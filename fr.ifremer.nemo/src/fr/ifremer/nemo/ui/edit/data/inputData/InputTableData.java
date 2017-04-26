@@ -172,16 +172,36 @@ public class InputTableData {
 		int fileHeaderSize = Nemo.getInstance().getDomain().getMedia().getModel().getFileHeader();
 		int stationHeaderSize = Nemo.getInstance().getDomain().getMedia().getStationHeaderNumberLines();
 		int header = fileHeaderSize + stationHeaderSize;
-
+		boolean columnsTitlesCreated=false;
 		for (String line : lignesBrutes){
-			if (cpt<header-1){
-
-			}else if (cpt==header-1)
+			
+			if (cpt<fileHeaderSize){
+				// 	skip file header
+			}
+			else if (cpt==header-1)
 			{
-				split = line.split(separator);
-				createColumns(split);
+				// last station header line. If station header>0, we suppose that last station header line contains columns titles
+				if (stationHeaderSize>0){
+					split = line.split(separator);
+					createColumns(split);
+					columnsTitlesCreated=true;
+				}
+				// if station header is 0, we do not have column titles -> columnsTitlesCreated=false
+				
+				
 			}
 			else{
+				if (!columnsTitlesCreated){
+					split = line.split(separator);
+					String[] colTitles = new String[split.length];
+
+					for (int colNb=0; colNb<split.length; colNb++)
+					{
+						colTitles[colNb] = String.valueOf(colNb);
+					}
+					createColumns(colTitles);
+					columnsTitlesCreated=true;
+				}
 				linesWithoutFileHeader.add(line);
 			}
 			cpt++;

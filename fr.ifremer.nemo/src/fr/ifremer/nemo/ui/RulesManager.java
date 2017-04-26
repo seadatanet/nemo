@@ -891,12 +891,20 @@ public class RulesManager {
 	}
 	public boolean isInputWithSeparatorsAndModelUpToDate(){
 		//33278: split as columns since 1.6.4
+		// new model currently edited
+		if(modelVersion==null){
+			if(Nemo.getInstance().getViewMain().getEditFileForm().getSeparateur().isEmpty()){
+				return false;
+			}
+			return true;
 
+		}
 		if(Nemo.getInstance().getDomain().getMedia().getModel().getSeparator().isEmpty()){
 			return false;
 		}
 		// else, there is a separator. Is model up to date to use table?
 		return fr.ifremer.nemo.util.Utils.compareVersion(modelVersion, "1.6.4")>=0;
+
 
 	}
 	public String getModelVersion() {
