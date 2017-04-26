@@ -1866,7 +1866,7 @@ public class TableData {
 		return typesL22;
 	}
 	/**
-	 * L33 list for instruments
+	 * L33 list for fall rates
 	 * @return
 	 */
 	public ArrayList<TypeFallRate> getTypesL33() {
