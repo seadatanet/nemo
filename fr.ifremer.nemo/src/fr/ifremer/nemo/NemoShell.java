@@ -29,6 +29,7 @@ import fr.ifremer.nemo.output.CDIResumeWriter;
 import fr.ifremer.nemo.output.GenerationException;
 import fr.ifremer.nemo.output.NemoWriter;
 import fr.ifremer.nemo.output.NemoWriterFactory;
+import fr.ifremer.nemo.ui.RulesManager;
 import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Global.E_TypeConversion;
@@ -78,8 +79,10 @@ public class NemoShell {
 				return false;
 			}
 			InputDomain inputDomain = Nemo.getInstance().getDomain();
-			if (inputDomain.getMedia().getModel().getSeparator() != Global.EMPTY_STRING)
-				inputFile =
+//			if (inputDomain.getMedia().getModel().getSeparator() != Global.EMPTY_STRING)
+//				inputFile =
+			 // 33278: format only for models < 1.6.4
+            if (inputDomain.getMedia().getModel().getSeparator() != Global.EMPTY_STRING &&! RulesManager.getInstance().isInputWithSeparatorsAndModelUpToDate())
 				Preformat.run(new File(inputFile)).getAbsolutePath();
 
 			nemo.getDomain().getMedia().getModel().setSourcePath(inputFile);
