@@ -100,10 +100,10 @@ public class NemoBashTest {
 	 */
 	boolean REPLACE=false;// WARNING!!!
 	boolean REMOVE_JUNIT=true;
-//	public static String[] testDirAlone = {};
+	public static String[] testDirAlone = {};
 //	public static String[] testDirAlone = {"30378"};
 //	public static String[] testDirAlone = {"cruiseDir_profile_diap_stationsOrder"};
-	public static String[] testDirAlone = {"CollectionCAMP_profile"};
+//	public static String[] testDirAlone = {"33278_separators_withCruiseHeader"};
 	/**
 	 * ********************************************************
 	 * ********************************************************
@@ -720,7 +720,7 @@ context.setConfigLocation(file.toURI());
 											}
 
 										}
-
+										cleanCDISummary(outputAbsolutePath);
 										if (compareManualFiles) {
 											message.isManualFound = fileExist(
 													outputAbsolutePath,
