@@ -191,6 +191,15 @@ public class TypeData extends Object implements Comparable<TypeData> {
 		return entryKey + Global.SEP + entryTerm;
 	}
 
+	public String getFormattedCodeAndNameToUse() {
+		if (isP011()) {
+			return entryKeyP011 + Global.SEP + entryTermP011;
+		} 
+			// code = getFormattedCodeAndName();//P021 ou P091 selon le contexte
+			// d'utilisation
+			return entryKey + Global.SEP + entryTerm;
+		
+	}
 	public void setEntryKeyAndEntryTerm(String formattedCodeAndName) {
 		Pattern p = Pattern.compile(Global.SEP);
 		String mots[] = p.split(formattedCodeAndName);

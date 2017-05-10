@@ -98,7 +98,7 @@ public class NemoBashTest {
 	 * *************** CONFIG *********************************
 	 * ********************************************************
 	 */
-	boolean REPLACE=false;// WARNING!!!
+	boolean REPLACE=true;// WARNING!!!
 	boolean REMOVE_JUNIT=true;
 	public static String[] testDirAlone = {};
 //	public static String[] testDirAlone = {"30378"};
@@ -1295,8 +1295,10 @@ context.setConfigLocation(file.toURI());
 		//		String refPath = outputDir.getAbsolutePath()+File.separator+outputRefFileName;
 		if (!message.batchCompRes && REPLACE ){
 			// delete ref nc
-			testLogger.warn("delete "+ refPath);
-			new File(refPath).delete();
+//			testLogger.warn("delete "+ refPath);
+//			new File(refPath).delete();
+			testLogger.warn("rename " +refPath + " --> " +refPath+".old");
+			new File(refPath).renameTo(new File(refPath+".old"));
 			// move junit to ref as nc
 			testLogger.warn("rename " +junitPath + " --> " +refPath);
 			new File(junitPath).renameTo(new File(refPath));

@@ -166,6 +166,7 @@ public class Messages {
 	public static String edit_file_enteteStation_radIndicator;
 	public static String edit_file_enteteStation_indicator;
 	public static String edit_file_enteteStation_linesBeforeData;
+	public static String edit_file_enteteStation_colTitle;
 	public static String edit_file_finStation_title;
 	public static String edit_file_finStation;
 	public static String edit_file_indicFinDonnees_title;

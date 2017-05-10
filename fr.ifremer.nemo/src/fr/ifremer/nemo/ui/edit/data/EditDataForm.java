@@ -229,7 +229,7 @@ public class EditDataForm extends EditForm {
 		}
 	}
 
-	private void reset() {
+	public void reset() {
 		RulesManager.getInstance().resetDataForm();
 		// !!! le fillTypes doit être appelé APRES le removeToAllcombos, car
 		// il
@@ -257,6 +257,10 @@ public class EditDataForm extends EditForm {
 		ParameterModel[] parameterModels =
 				Nemo.getInstance().getDomain().getData().getModel().getParameterModels();
 
+		
+		
+			
+			
 		// update dataList to use
 
 		DataListTypeEnum dataList = Nemo.getInstance().getDomain().getData().getModel().getDataListType();
@@ -304,7 +308,23 @@ public class EditDataForm extends EditForm {
 		// refresh de la table de l'onglet Data
 		myTableData.razAndRecreateTable();
 	}
-
+	
+	
+	public void fillFromModelTableOnly(){
+		myTableData.reinitTypes();
+		ParameterModel[] parameterModels =
+				Nemo.getInstance().getDomain().getData().getModel().getParameterModels();
+		DataListTypeEnum dataList = Nemo.getInstance().getDomain().getData().getModel().getDataListType();
+		if (dataList != DataListTypeEnum.UNKNOWN) {
+			// remplissage des parametres mesures APRES le datatype
+			for (ParameterModel paraCourant : parameterModels) {
+				TypeData typeData = new TypeData(paraCourant);
+				myTableData.addType(typeData);
+			}
+		}
+		// refresh de la table de l'onglet Data
+				myTableData.razAndRecreateTable();
+	}
 	public void enableP011viaP021(boolean enabled) {
 		button_P011viaP021.setEnabled(enabled);
 	}
@@ -373,9 +393,12 @@ public class EditDataForm extends EditForm {
 		fr.ifremer.nemo.input.DataModel dataModel = new fr.ifremer.nemo.input.DataModel();
 		dataModel.setVerticalParametersList(rulesManager.getMyVerticalParametersList());
 		dataModel.setMesureType(rulesManager.getMyMesureType());
-
+		dataModel.setFallrateCode(this.getFallrateCode());
+		dataModel.setFallrateLabel(this.getFallrateLabel());
+		
 		// mise e jour des types avant validation
 		myTableData.majTypeData();
+		
 
 		for (TypeData typeCourant : myTableData.getTypes()) {
 			ParameterModel parameterModel = new ParameterModel(typeCourant);

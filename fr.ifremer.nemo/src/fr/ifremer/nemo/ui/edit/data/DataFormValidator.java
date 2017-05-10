@@ -13,6 +13,9 @@ import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.FormValidator;
 import fr.ifremer.nemo.ui.edit.conversion.EditConversionForm;
 import fr.ifremer.nemo.ui.view.ViewLog;
+import fr.ifremer.nemo.util.BODCResult;
+import fr.ifremer.nemo.util.BODCResult.BODC_RES_STATUS;
+import fr.ifremer.nemo.util.BodcChecker;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Global.E_MesureType;
 import fr.ifremer.nemo.util.Messages;
@@ -36,6 +39,7 @@ public class DataFormValidator extends FormValidator {
 	public void validate() {
 		rm = RulesManager.getInstance();
 		EditDataForm editDataForm =	Nemo.getInstance().getViewMain().getEditDataForm();
+		editDataForm.drawingBack();// needed to display the scroll bar in the right panel
 		EditConversionForm editConversionForm =	Nemo.getInstance().getViewMain().getEditConversionForm();
 
 		verticalParamGroup = editDataForm.getMyGroupeVerticalParameters();
@@ -45,6 +49,11 @@ public class DataFormValidator extends FormValidator {
 		comboP = verticalParamGroup.getComboP();
 
 		myParameterManager = Nemo.getInstance().getDomain().getData().getMyParameterManager();
+		int unitCodeColNb=Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().getColNb(TableData.COL_UNIT_CODE);
+		int unitColNb=Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().getColNb(TableData.COL_UNIT);
+		int paramCodeColNb=Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().getColNb(TableData.COL_CODE);
+		int instrumentCodeColNb=Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().getColNb(TableData.COL_INSTRUMENT_CODE);
+		int instrumentColNb=Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().getColNb(TableData.COL_INSTRUMENT);
 
 		Boolean ok = true;
 
@@ -64,8 +73,15 @@ public class DataFormValidator extends FormValidator {
 		 * --- data05 presence d'au moins 1 paramètre dans le tableau
 		 */
 		ok = checkNbParams(nbreParam);
+		if (!ok){
+			return;
+		}
 		// -------------------------------------------------------------------------
 
+
+		
+
+		boolean bodcReplaced = false;
 		if (ok) {
 			/** data10 */
 			ok = ok && updateTestValues();
@@ -110,7 +126,55 @@ public class DataFormValidator extends FormValidator {
 					/** check des valeurs standarNames pour NetCDF */
 					checkStandardName(typeCourant);
 				}
-
+				// 35230 check parameters codes
+				BODCResult bodcRes = BodcChecker.getInstance().checkParameterCode(typeCourant);
+				if (bodcRes.getResStatus() == BODC_RES_STATUS.KO){
+					Utils.messageErreurAppend(bodcRes.getErrorMsg());
+					ok=false;
+				}else if (bodcRes.getResStatus() == BODC_RES_STATUS.WARNING){
+					typeCourant = bodcRes.getTypeData();
+					Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().getMyTable().getItems()[i].setText(paramCodeColNb, String.valueOf(typeCourant.getFormattedCodeAndNameToUse()));
+					Utils.messageWarningAppend(bodcRes.getWarningMsg());
+					bodcReplaced=true;
+				}
+				// 35230 check unit
+				bodcRes = BodcChecker.getInstance().checkP06(typeCourant);
+				if (bodcRes.getResStatus() == BODC_RES_STATUS.KO){
+					Utils.messageErreurAppend(bodcRes.getErrorMsg());
+					ok=false;
+				}else if (bodcRes.getResStatus() == BODC_RES_STATUS.WARNING){
+					typeCourant = bodcRes.getTypeData();
+					Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().getMyTable().getItems()[i].setText(unitCodeColNb, String.valueOf(typeCourant.getUniteCode()));
+					Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().getMyTable().getItems()[i].setText(unitColNb, String.valueOf(typeCourant.getUnite()));
+					Utils.messageWarningAppend(bodcRes.getWarningMsg());
+					bodcReplaced=true;
+				}
+				// 35230 check instrument
+				bodcRes = BodcChecker.getInstance().checkInstrument(typeCourant);
+				if (bodcRes.getResStatus() == BODC_RES_STATUS.KO){
+					ok=false;
+					Utils.messageErreurAppend(bodcRes.getErrorMsg());
+				}else if (bodcRes.getResStatus() == BODC_RES_STATUS.WARNING){
+					typeCourant = bodcRes.getTypeData();
+					Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().getMyTable().getItems()[i].setText(instrumentCodeColNb, String.valueOf(typeCourant.getInstrumentCode()));
+					Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().getMyTable().getItems()[i].setText(instrumentColNb, String.valueOf(typeCourant.getInstrument()));
+					Utils.messageWarningAppend(bodcRes.getWarningMsg());
+					bodcReplaced=true;
+				}
+			}
+			
+			
+			// 35230 check fall rate
+		
+			BODCResult bodcRes = BodcChecker.getInstance().checkFallRate(	editDataForm.getFallrateCode(), editDataForm.getFallrateLabel());
+			if (bodcRes.getResStatus() == BODC_RES_STATUS.KO){
+				ok=false;
+				Utils.messageErreurAppend(bodcRes.getErrorMsg());
+			}else if (bodcRes.getResStatus() == BODC_RES_STATUS.WARNING){
+				editDataForm.setFallrateCode(bodcRes.getFallrateCode());
+				editDataForm.setFallrateLabel(bodcRes.getFallrateLabel());
+				Utils.messageWarningAppend(bodcRes.getWarningMsg());
+				bodcReplaced=true;
 			}
 
 			/**
@@ -122,9 +186,10 @@ public class DataFormValidator extends FormValidator {
 			// ----------------------------------------------------------
 			// PARAMETRES
 			// ----------------------------------------------------------
+			
 			ok = ok && detectVerticalParameters();
 			if (ok) {
-				
+
 				// enable Fall rate group
 				editDataForm.setFallrateGroupEnabled(RulesManager.getInstance().isFallrateEnabled());
 				/**
@@ -201,23 +266,29 @@ public class DataFormValidator extends FormValidator {
 				 */
 			}
 		}
-
-		/**
-		 * 
-		 */
-		if (ok) {
-			// FAE 9656
-			// les donnees du model doivent etre presente.
-			// 10594: on a besoin que le formulaire soit valide pour lancer la
-			// conversion
-			editDataForm.setOkApresReset(true);
-			onSuccess();
-		} else {
-			editDataForm.initFromNewModel();
-			Nemo.getInstance().getViewMain().tabData
-					.setText(Messages.onglet_data_error);
-			Nemo.getInstance().getViewMain().setEtape(3);
+			/**
+			 * 
+			 */
+		if (bodcReplaced){
+			ok=false;
+			Utils.messageWarningAppend("Some bodc terms has been replaced. Please verify and validate. Save your model to avoid this warning next time."); // TODO 35230 message
 		}
+		
+			if (ok) {
+				// FAE 9656
+				// les donnees du model doivent etre presente.
+				// 10594: on a besoin que le formulaire soit valide pour lancer la
+				// conversion
+				editDataForm.setOkApresReset(true);
+				onSuccess();
+			} else {
+				Nemo.getInstance().getViewMain().tabData
+				.setText(Messages.onglet_data_error);
+				editDataForm.initFromNewModel();
+				Nemo.getInstance().getViewMain().setEtape(3);
+			}
+
+			
 
 	}
 
@@ -231,13 +302,13 @@ public class DataFormValidator extends FormValidator {
 		editDataForm.initFromNewModel();
 
 		Nemo.getInstance().getViewMain().tabData
-				.setText(Messages.onglet_data_valid);
+		.setText(Messages.onglet_data_valid);
 		Nemo.getInstance().getViewMain().setEtape(4);
 
 		Nemo.getInstance().getDomain().getData().getModel()
-				.setMesureType(rm.getMyMesureType());
+		.setMesureType(rm.getMyMesureType());
 
-		
+
 		Nemo.getInstance().getDomain().getData().getModel()
 		.setFallrateCode(editDataForm.getFallrateCode());
 		Nemo.getInstance().getDomain().getData().getModel()

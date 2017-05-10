@@ -46,9 +46,6 @@ public class NemoLists implements Cloneable {
 	 * list of updates
 	 */
 
-
-//	public static Table filtreTable;
-
 	public static ArrayList<String> listeNavire, listeCentreDonnees,
 			listeRegion;
 

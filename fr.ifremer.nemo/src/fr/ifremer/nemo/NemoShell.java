@@ -30,6 +30,10 @@ import fr.ifremer.nemo.output.GenerationException;
 import fr.ifremer.nemo.output.NemoWriter;
 import fr.ifremer.nemo.output.NemoWriterFactory;
 import fr.ifremer.nemo.ui.RulesManager;
+import fr.ifremer.nemo.ui.edit.data.TypeData;
+import fr.ifremer.nemo.util.BODCResult;
+import fr.ifremer.nemo.util.BODCResult.BODC_RES_STATUS;
+import fr.ifremer.nemo.util.BodcChecker;
 import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Global.E_TypeConversion;
@@ -83,7 +87,7 @@ public class NemoShell {
 //				inputFile =
 			 // 33278: format only for models < 1.6.4
             if (inputDomain.getMedia().getModel().getSeparator() != Global.EMPTY_STRING &&! RulesManager.getInstance().isInputWithSeparatorsAndModelUpToDate())
-				Preformat.run(new File(inputFile)).getAbsolutePath();
+            	inputFile = Preformat.run(new File(inputFile)).getAbsolutePath();
 
 			nemo.getDomain().getMedia().getModel().setSourcePath(inputFile);
 
@@ -215,7 +219,14 @@ public class NemoShell {
 
 			if (!(repertory == null) && !repertory.exists())
 				repertory.mkdirs();
+			
+			boolean ok =  checkBodc(logger, inputDomain);
 
+			if (!ok){
+				logger.error("errors in BODC parameters. Please check your model.");// TODO 35230 msg
+				return false;
+			}
+			//*************************************************
 			NemoWriter writer = NemoWriterFactory.createWriter(conv);
 
 			writer.write(null);
@@ -240,6 +251,105 @@ public class NemoShell {
 			return false;
 		}
 
+	}
+
+	private static boolean checkBodc(Logger logger, InputDomain inputDomain) {
+		// 35230********************
+		boolean ok = true;
+		// SHIP
+		String shipCode = fr.ifremer.nemo.util.Utils.extraitCode(inputDomain.getCruise().getModel().getShipCode());
+		String shipName = fr.ifremer.nemo.util.Utils.extraitCode(inputDomain.getCruise().getModel().getShipName());
+		BODCResult bodcRes = BodcChecker.getInstance().checkShip(	shipCode, shipName);
+		if (bodcRes.getResStatus() == BODC_RES_STATUS.KO){
+			ok=false;
+			logger.error(bodcRes.getErrorMsg());
+		}else if (bodcRes.getResStatus() == BODC_RES_STATUS.WARNING){
+			inputDomain.getCruise().getModel().setShipCode(bodcRes.getShipCode());
+			inputDomain.getCruise().getModel().setShipName(bodcRes.getShipLabel());
+			logger.warn(bodcRes.getWarningMsg());
+		}
+		
+		// 35230 region
+		String regionCode = fr.ifremer.nemo.util.Utils.extraitCode(inputDomain.getCruise().getModel().getRegionCode());
+		String regionName = fr.ifremer.nemo.util.Utils.extraitValeur(inputDomain.getCruise().getModel().getRegionName());
+
+
+		bodcRes = BodcChecker.getInstance().checkRegion(regionCode, regionName);
+		if (bodcRes.getResStatus() == BODC_RES_STATUS.KO){
+			ok=false;
+			logger.error(bodcRes.getErrorMsg());
+		}else if (bodcRes.getResStatus() == BODC_RES_STATUS.WARNING){
+			inputDomain.getCruise().getModel().setRegionCode(bodcRes.getRegionCode());
+			inputDomain.getCruise().getModel().setRegionName(bodcRes.getRegionLabel());
+			logger.warn(bodcRes.getWarningMsg());
+		}
+		// 35230 country
+		String countryCode = fr.ifremer.nemo.util.Utils.extraitCode(inputDomain.getCruise().getModel().getCountryCode());
+
+
+		bodcRes = BodcChecker.getInstance().checkCountry(countryCode);
+		if (bodcRes.getResStatus() == BODC_RES_STATUS.KO){
+			ok=false;
+			logger.error(bodcRes.getErrorMsg());
+		}else if (bodcRes.getResStatus() == BODC_RES_STATUS.WARNING){
+			inputDomain.getCruise().getModel().setCountryCode(bodcRes.getCountryCode());
+			inputDomain.getCruise().getModel().setCountryName(bodcRes.getCountryLabel());
+			logger.warn(bodcRes.getWarningMsg());
+		}
+		for (ParameterModel pModel : inputDomain.getData().getModel().getParameterModels()) {
+			TypeData typeCourant = new TypeData(pModel);
+
+			// check parameters codes
+			bodcRes = BodcChecker.getInstance().checkParameterCode(typeCourant);
+			if (bodcRes.getResStatus() == BODC_RES_STATUS.KO){
+				logger.error(bodcRes.getErrorMsg());
+				ok=false;
+			}else if (bodcRes.getResStatus() == BODC_RES_STATUS.WARNING){
+				typeCourant = bodcRes.getTypeData();
+				if (typeCourant.isP011()){
+					pModel.getParameter().setCodeP011(typeCourant.getEntryKeyP011());
+					pModel.getParameter().setNameP011(typeCourant.getEntryTermP011());
+				}else{
+					pModel.getParameter().setCode(typeCourant.getEntryKey());
+					pModel.getParameter().setFullName(typeCourant.getEntryTerm());
+				}
+				logger.warn(bodcRes.getWarningMsg());
+			}
+			// 35230 check unit
+			bodcRes = BodcChecker.getInstance().checkP06(typeCourant);
+			if (bodcRes.getResStatus() == BODC_RES_STATUS.KO){
+				logger.error(bodcRes.getErrorMsg());
+				ok=false;
+			}else if (bodcRes.getResStatus() == BODC_RES_STATUS.WARNING){
+				typeCourant = bodcRes.getTypeData();
+				pModel.getParameter().setUnitCode(typeCourant.getUniteCode());
+				pModel.getParameter().setUnit(typeCourant.getUnite());
+				logger.warn(bodcRes.getWarningMsg());
+			}
+			// 35230 check instrument
+			bodcRes = BodcChecker.getInstance().checkInstrument(typeCourant);
+			if (bodcRes.getResStatus() == BODC_RES_STATUS.KO){
+				ok=false;
+				logger.error(bodcRes.getErrorMsg());
+			}else if (bodcRes.getResStatus() == BODC_RES_STATUS.WARNING){
+				typeCourant = bodcRes.getTypeData();
+				pModel.getParameter().setInstrumentCode(typeCourant.getInstrumentCode());
+				pModel.getParameter().setInstrument(typeCourant.getInstrument());
+				logger.warn(bodcRes.getWarningMsg());
+			}
+		}
+		// 35230 check fall rate
+		
+			bodcRes = BodcChecker.getInstance().checkFallRate(inputDomain.getData().getModel().getFallrateCode(), inputDomain.getData().getModel().getFallrateLabel());
+			if (bodcRes.getResStatus() == BODC_RES_STATUS.KO){
+				ok=false;
+				logger.error(bodcRes.getErrorMsg());
+			}else if (bodcRes.getResStatus() == BODC_RES_STATUS.WARNING){
+				inputDomain.getData().getModel().setFallrateCode(bodcRes.getFallrateCode());
+				inputDomain.getData().getModel().setFallrateLabel(bodcRes.getFallrateLabel());
+				logger.warn(bodcRes.getWarningMsg());
+			}
+		return ok;
 	}
 
 	private static void mapping(Logger logger, Conversion conv,

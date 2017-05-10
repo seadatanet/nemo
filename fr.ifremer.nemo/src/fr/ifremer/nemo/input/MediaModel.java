@@ -58,6 +58,11 @@ public class MediaModel extends AbstractModel
 	 * indicateur de fin d'entête station
 	 */
 	protected String _stationHeaderPattern;
+	
+	/**
+	 * indique si le titre des colonnes est dispo dans la derniere ligne de l'entete station (pour input avec separateur uniquement)
+	 */
+	protected boolean _colTitlesInStationHeader;
 
 	/**
 	 * nombre de lignes séparant la fin d'une station et le début de la suivante
@@ -99,6 +104,7 @@ public class MediaModel extends AbstractModel
 		_endData = E_EndData.EOF;
 		_endDataPattern = Global.EMPTY_STRING;
 		_endDataPatternIsRegexp = false;
+		_colTitlesInStationHeader=false;
 	}
 
 	/**
@@ -157,7 +163,14 @@ public class MediaModel extends AbstractModel
 		{
 			String attribute = a_Attributes.getValue(ModelDescription.a_pattern);
 			setStationHeaderPattern(attribute);
-
+			
+			try{
+				String attributeColTitle = a_Attributes.getValue(ModelDescription.a_colTitleInStationHeader);
+				setColTitlesInStationHeader(Boolean.parseBoolean(attributeColTitle));
+			}catch (Exception e) {
+				setColTitlesInStationHeader(false);
+			}
+			
 			Element2Field setter = new Element2Field(this, ModelDescription.setter_stationHeader);
 			return setter;
 		}
@@ -207,6 +220,7 @@ public class MediaModel extends AbstractModel
 		a_Writer.putTag(ModelDescription.node_fileHeader, getFileHeader());
 		a_Writer.openTag(ModelDescription.node_stationHeader);
 		a_Writer.putAttribute(ModelDescription.a_pattern, getStationHeaderPattern());
+		a_Writer.putAttribute(ModelDescription.a_colTitleInStationHeader, isColTitlesInStationHeader());
 		a_Writer.closeTag(getStationHeader());
 		a_Writer.putTag(ModelDescription.node_endStation, getEndStation());
 		a_Writer.openTag(ModelDescription.node_endData);
@@ -628,6 +642,14 @@ public class MediaModel extends AbstractModel
 	public void setStationHeaderPattern(String x)
 	{
 		_stationHeaderPattern = x;
+	}
+
+	public boolean isColTitlesInStationHeader() {
+		return _colTitlesInStationHeader;
+	}
+
+	public void setColTitlesInStationHeader(boolean colTitlesInStationHeader) {
+		_colTitlesInStationHeader = colTitlesInStationHeader;
 	}
 
 }

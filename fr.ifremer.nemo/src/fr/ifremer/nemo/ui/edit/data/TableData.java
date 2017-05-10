@@ -108,9 +108,9 @@ public class TableData {
 	 * columns IDs
 	 */
 	private static String COL_IS_STRING = "COL_IS_STRING"; //$NON-NLS-1$
-	private static String COL_CODE = "COL_CODE"; //$NON-NLS-1$
+	public static String COL_CODE = "COL_CODE"; //$NON-NLS-1$
 	private static String COL_USERLABEL = "COL_USERLABEL"; //$NON-NLS-1$
-	private static String COL_UNIT = "COL_UNIT"; //$NON-NLS-1$
+	public static String COL_UNIT = "COL_UNIT"; //$NON-NLS-1$
 	private static String COL_CONVERSION = "COL_CONVERSION"; //$NON-NLS-1$
 	private static String COL_TEST = "COL_TEST"; //$NON-NLS-1$
 	private static String COL_START = "COL_START"; //$NON-NLS-1$
@@ -122,11 +122,11 @@ public class TableData {
 	private static String COL_TEST_OUT = "COL_TEST_OUT"; //$NON-NLS-1$
 	private static String COL_START_FLAG = "COL_START_FLAG"; //$NON-NLS-1$
 	private static String COL_END_FLAG = "COL_END_FLAG"; //$NON-NLS-1$
-	private static String COL_UNIT_CODE = "COL_UNIT_CODE"; //$NON-NLS-1$
+	public static String COL_UNIT_CODE = "COL_UNIT_CODE"; //$NON-NLS-1$
 	private static String COL_STANDARD_NAME = "COL_STANDARD_NAME"; //$NON-NLS-1$
 	private static String COL_LONG_NAME = "COL_LONG_NAME"; //$NON-NLS-1$
-	private static String COL_INSTRUMENT = "COL_INSTRUMENT"; //$NON-NLS-1$
-	private static String COL_INSTRUMENT_CODE = "COL_INSTRUMENT_CODE"; //$NON-NLS-1$
+	public static String COL_INSTRUMENT = "COL_INSTRUMENT"; //$NON-NLS-1$
+	public static String COL_INSTRUMENT_CODE = "COL_INSTRUMENT_CODE"; //$NON-NLS-1$
 
 
 	private final String[] colOrder =
@@ -305,6 +305,9 @@ public class TableData {
 						Global.EMPTY_STRING, 0, false, false);
 		columnsMap.put(col.pos, col);
 
+	}
+	public int getColNb(String columnID){
+		return colNbById.get(columnID);
 	}
 
 	public void reinitTable() {
@@ -988,6 +991,22 @@ public class TableData {
 		{
 			public void handleEvent(Event e)
 			{
+				
+
+				if (RulesManager.getInstance().isInputWithSeparatorsAndModelUpToDate()){
+					// 33278 CSV files
+					int selectionIndex = myTable.getSelectionIndex();
+					int selectColumn = Nemo.getInstance().getViewMain().getEditDataForm().getInputTableData().getIndexSelected();
+					// remplissage debut et fin dans interface
+					Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().getMyTable().getItems()[selectionIndex].setText(colNbById.get(COL_START_FLAG), String.valueOf(selectColumn));
+					Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().getMyTable().getItems()[selectionIndex].setText(colNbById.get(COL_END_FLAG), String.valueOf(selectColumn));
+					majTypeData();
+					// refresh de la table
+					razAndRecreateTable();
+					Utils.invalidEtapes();
+					
+				}else{
+				
 				table.forceFocus();
 				Utils.injectData(Nemo.getInstance().getViewMain()
 						.getEditDataForm().getTextAreaData(),
@@ -995,6 +1014,7 @@ public class TableData {
 						.get(COL_END_FLAG));
 
 				Utils.invalidEtapes();
+				}
 			}
 		});
 		// ========= supprimer flag
@@ -1480,7 +1500,7 @@ public class TableData {
 						// 33278: split as columns
 						selection = ligne.split(
 								Nemo.getInstance().getDomain().getMedia().getModel().getSeparator())
-								[Integer.valueOf(myTable.getItem(i).getText(colNbById.get(COL_START)))];
+								[Integer.valueOf(myTable.getItem(i).getText(colNbById.get(COL_START)))].trim();
 					}
 
 				} catch (Exception e) {

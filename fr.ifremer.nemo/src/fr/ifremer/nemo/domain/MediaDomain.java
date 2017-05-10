@@ -217,7 +217,9 @@ public class MediaDomain
         numLine+=_model.getStationHeader();
         return numLine;   
     }
-    
+    public boolean isColTitleInStationHeader(){
+    	return _model.isColTitlesInStationHeader();
+    }
     public int getShellStationHeaderNumberLines() throws IOException{
         // nombre lignes entete station
         String stationPattern = _model.getStationHeaderPattern();

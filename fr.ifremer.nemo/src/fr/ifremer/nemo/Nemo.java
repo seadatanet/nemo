@@ -30,16 +30,12 @@ import javax.xml.transform.stream.StreamSource;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import sdn.vocabulary.interfaces.VocabularyException;
-
 import com.ago.xml.XMLBootstrapParser;
 
 import fr.ifremer.nemo.config.Configuration;
-import fr.ifremer.nemo.config.VocabLists;
 import fr.ifremer.nemo.domain.InputDomain;
 import fr.ifremer.nemo.input.CruiseModel;
 import fr.ifremer.nemo.input.InputModel;
-import fr.ifremer.nemo.input.parameters.ParameterModel;
 import fr.ifremer.nemo.ui.ApplicationWorkbenchWindowAdvisor;
 import fr.ifremer.nemo.ui.RulesManager;
 import fr.ifremer.nemo.ui.view.ViewMain;
@@ -50,8 +46,6 @@ import fr.ifremer.nemo.util.Global.E_TypeConversion;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.util.Utils;
-import fr.ifremer.sismer_tools.SismerToolsException;
-import fr.ifremer.sismer_tools.seadatanet.SdnVocabularyManager;
 
 /**
  * Class Nemo.java Description: Classe principale de l'application - utilisée en
@@ -124,6 +118,13 @@ public class Nemo {
 		domain.update(model);
 	}
 
+	/**
+	 * 
+	 * @param pathModel
+	 * @return true if model is validated, false otherwise
+	 * @throws FileNotFoundException
+	 * @throws TransformerException
+	 */
 	public boolean openModel(String pathModel) throws FileNotFoundException,
 	TransformerException {
 
@@ -154,36 +155,7 @@ public class Nemo {
 			Transformer transformer = factory.newTransformer(xslSource);
 			transformer.transform(xmlSource, result);
 		}
-		// 25794
-		for (int paramsNb=0;  paramsNb< model.getDataModel().getParameterModels().length;paramsNb++){
-			String p06Code;
-			ParameterModel param = model.getDataModel().getParameterModels()[paramsNb];
-			if (!param.getParameter().getUnitCode().isEmpty()){
-				p06Code=param.getParameter().getUnitCode();
-			}else{
-				SdnVocabularyManager sdnMgr = new SdnVocabularyManager(VocabLists.getCf());
-				try {
-					p06Code= sdnMgr.getBestVocabMatchCode(
-							SdnVocabularyManager.LIST_P06, 
-							SdnVocabularyManager.LIST_P09, 
-							param.getParameter().getCode());
-					param.getParameter().setUnitCode(p06Code);
-					param.getParameter().setUnit(sdnMgr.getP06UnitLabel(p06Code));
-				} catch (VocabularyException e) {
-					// TODO 25794: log in logview
-					guiLogger.error(e.getMessage());
-					batchLogger.error(e.getMessage());
-					guiLogger.warn("unable to get P06 unit label from parameter ");
-					batchLogger.warn("unable to get P06 unit label from parameter ");
-				} catch (SismerToolsException e) {
-					// TODO 25794: log in logview
-					guiLogger.error(e.getMessage());
-					batchLogger.error(e.getMessage());
-					guiLogger.warn("unable to get P06 unit label from parameter ");
-					batchLogger.warn("unable to get P06 unit label from parameter ");
-				}
-			}
-		}
+		
 		//FAE 16868
 		if (Utils.compareVersion(model.getVersion(), "1.5.1") == -1) { // older than 1.5.1
 			String regionName = model.getCruiseModel().getRegionName();

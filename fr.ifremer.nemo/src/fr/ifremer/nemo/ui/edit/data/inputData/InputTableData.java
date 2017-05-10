@@ -111,12 +111,12 @@ public class InputTableData {
 
 				@Override
 				public Color getBackground(Object element) {
-					System.out.println("getBackground");
+//					System.out.println("getBackground");
 					return red;//here gray is color object defined somewhere in class
 				}
 				@Override
 				public void update(ViewerCell cell) {
-					System.out.println("update createColumns");
+//					System.out.println("update createColumns");
 					if (cell.getColumnIndex() == indexSelected){
 						cell.setBackground(red );
 					}else{
@@ -175,13 +175,13 @@ public class InputTableData {
 		boolean columnsTitlesCreated=false;
 		for (String line : lignesBrutes){
 			
-			if (cpt<fileHeaderSize){
+			if (cpt<header-1){
 				// 	skip file header
 			}
-			else if (cpt==header-1)
+			else if (cpt==header-1 )
 			{
-				// last station header line. If station header>0, we suppose that last station header line contains columns titles
-				if (stationHeaderSize>0){
+				// last station header line. 
+				if (stationHeaderSize>0 && Nemo.getInstance().getDomain().getMedia().isColTitleInStationHeader()){
 					split = line.split(separator);
 					createColumns(split);
 					columnsTitlesCreated=true;

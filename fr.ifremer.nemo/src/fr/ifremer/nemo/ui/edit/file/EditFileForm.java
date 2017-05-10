@@ -482,7 +482,9 @@ public class EditFileForm extends EditForm
 			sectionStationHeader.selectNumber(false);
 			sectionStationHeader.setIndicatorText(mediaModel.getStationHeaderPattern());
 			sectionStationHeader.setNbLinesBeforeData(String.valueOf(mediaModel.getStationHeader()));
+			
 		}
+		sectionStationHeader.setColTitlesInStationHeader(mediaModel.isColTitlesInStationHeader());
 
 		// Fin de Station
 		sectionEndOfStation.setValue(String.valueOf(mediaModel.getEndStation()));
@@ -856,7 +858,7 @@ public class EditFileForm extends EditForm
 		{
 			mediaModel.setStationHeader(sectionStationHeader.getValue());
 		}
-
+		mediaModel.setColTitlesInStationHeader(sectionStationHeader.isColTitlesInStationHeader());
 		// Fin de Station
 		mediaModel.setEndStation(getSectionEndOfStation().getValue());
 
