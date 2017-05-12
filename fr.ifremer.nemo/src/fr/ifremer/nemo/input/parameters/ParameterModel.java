@@ -33,16 +33,16 @@ public class ParameterModel extends AbstractModel
 	 * mathematiques de base (cos, sin, log, etc...)
 	 */
 	protected String _conversionFormula;
-	
+
 	/**
-     * Definie si la valeur du parametre est du texte ou non.
-     */
-    protected Boolean _isText;
-	
-	
-    /**
-     * Valeur par défaut dans le fichier
-     */
+	 * Definie si la valeur du parametre est du texte ou non.
+	 */
+	protected Boolean _isText;
+
+
+	/**
+	 * Valeur par défaut dans le fichier
+	 */
 	public String _inputDefault;
 
 	/**
@@ -56,158 +56,158 @@ public class ParameterModel extends AbstractModel
 	 * peut etre lue
 	 */
 	protected LineFragment _flag;
-    
+
 	/**
 	 * Represente le parametre modelise par ce ParameterModel
 	 */
 	protected Parameter _parameter;
-    
-    protected ParameterValue _lineValue;
-    
-    protected JEP _jepParser;
-    
+
+	protected ParameterValue _lineValue;
+
+	protected JEP _jepParser;
+
 	public ParameterModel() {
-        _tagName = ModelDescription.node_parameterModel;
-        initValues();
+		_tagName = ModelDescription.node_parameterModel;
+		initValues();
 	}
-    
-    public ParameterModel(TypeData typeData)
-    {
-        _tagName = ModelDescription.node_parameterModel;
-        Parameter para = new Parameter(typeData);
-        this.setParameter(para);
-        _isText= typeData.isText();
 
-        // conversion / entree
-        this.setConversionFormula(typeData.getConversion());
-        this.setInputDefault(typeData.getEntree());
+	public ParameterModel(TypeData typeData)
+	{
+		_tagName = ModelDescription.node_parameterModel;
+		Parameter para = new Parameter(typeData);
+		this.setParameter(para);
+		_isText= typeData.isText();
 
-        // fragment du parametre
-        LineFragment frag = new LineFragment();
-        frag.setFirstCharOffset(typeData.getDebut());
-        frag.setLastCharOffset(typeData.getFin());
-        this.setFragment(frag);
+		// conversion / entree
+		this.setConversionFormula(typeData.getConversion());
+		this.setInputDefault(typeData.getEntree());
 
-        if (!typeData.getDebutFlag().equals(Global.EMPTY_STRING)
-                && !typeData.getFinFlag().equals(Global.EMPTY_STRING))
-        {
-            LineFragment flag = new LineFragment();
-            flag.setFirstCharOffset(typeData.getDebutFlag());
-            flag.setLastCharOffset(typeData.getFinFlag());
-            this.setFlag(flag);
-        }
+		// fragment du parametre
+		LineFragment frag = new LineFragment();
+		frag.setFirstCharOffset(typeData.getDebut());
+		frag.setLastCharOffset(typeData.getFin());
+		this.setFragment(frag);
 
-    }
-    
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void initValues(){
-        _conversionFormula = Global.EMPTY_STRING;
-        _inputDefault = Global.EMPTY_STRING;
-        _fragment = new LineFragment();
-        _flag = null;
-        _parameter = new Parameter();
-        _lineValue = null;
-        _isText = false;
-    }
+		if (!typeData.getDebutFlag().equals(Global.EMPTY_STRING)
+				&& !typeData.getFinFlag().equals(Global.EMPTY_STRING))
+		{
+			LineFragment flag = new LineFragment();
+			flag.setFirstCharOffset(typeData.getDebutFlag());
+			flag.setLastCharOffset(typeData.getFinFlag());
+			this.setFlag(flag);
+		}
+
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void initValues(){
+		_conversionFormula = Global.EMPTY_STRING;
+		_inputDefault = Global.EMPTY_STRING;
+		_fragment = new LineFragment();
+		_flag = null;
+		_parameter = new Parameter();
+		_lineValue = null;
+		_isText = false;
+	}
 
 
-    /**
-     * @see AbstractModel.java#fromElement
-     */
+	/**
+	 * @see AbstractModel.java#fromElement
+	 */
 	public static SAXConsumer fromElement(String a_URI, 
-                                          String a_LocalName,
-                                          String a_QName, 
-                                          Attributes a_Attributes){
+			String a_LocalName,
+			String a_QName, 
+			Attributes a_Attributes){
 		ParameterModel el = new ParameterModel();
 		el.buildFromElement(a_URI, a_LocalName, a_QName, a_Attributes);
 		return el;
 	}
-    
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-	public void buildFromElement(String a_URI, 
-                                 String a_LocalName,
-                                 String a_QName, 
-                                 Attributes a_Attributes){
-        // l'élément n'a pas d'attribut
-	}
-    
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-	public SAXConsumer consumeElement(String a_URI, 
-                                      String a_LocalName,
-                                      String a_QName, 
-                                      Attributes a_Attributes){
 
-        SAXConsumer el = null;
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void buildFromElement(String a_URI, 
+			String a_LocalName,
+			String a_QName, 
+			Attributes a_Attributes){
+		// l'élément n'a pas d'attribut
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public SAXConsumer consumeElement(String a_URI, 
+			String a_LocalName,
+			String a_QName, 
+			Attributes a_Attributes){
+
+		SAXConsumer el = null;
 		if (a_LocalName.equals(ModelDescription.node_formula)) {
 			Element2Field setter = new Element2Field(this, ModelDescription.setter_formula);
 			return setter;
 		}
 		if (a_LocalName.equals(ModelDescription.node_isText)) {
-            Element2Field setter = new Element2Field(this, ModelDescription.setter_isText);
-            return setter;
-        }
+			Element2Field setter = new Element2Field(this, ModelDescription.setter_isText);
+			return setter;
+		}
 		if (a_LocalName.equals(ModelDescription.node_indefault)) {
 			Element2Field setter = new Element2Field(this, ModelDescription.setter_indefault);
 			return setter;
 		}        
 		if (a_LocalName.equals(ModelDescription.node_dataFragment)) {
-            el = LineFragment.fromElement(a_URI, a_LocalName, a_QName, a_Attributes);
-            setFragment((LineFragment) el);
-            return el;
-            //return new PathElementConsumer(ModelDescription.node_dataFragment, this);
+			el = LineFragment.fromElement(a_URI, a_LocalName, a_QName, a_Attributes);
+			setFragment((LineFragment) el);
+			return el;
+			//return new PathElementConsumer(ModelDescription.node_dataFragment, this);
 		}
 		if (a_LocalName.equals(ModelDescription.node_parameter)) {
-            el = Parameter.fromElement(a_URI, a_LocalName, a_QName, a_Attributes);
-            setParameter((Parameter) el);
-            return el;
-            //return new PathElementConsumer(ModelDescription.node_parameter, this);
+			el = Parameter.fromElement(a_URI, a_LocalName, a_QName, a_Attributes);
+			setParameter((Parameter) el);
+			return el;
+			//return new PathElementConsumer(ModelDescription.node_parameter, this);
 		}
 		if (a_LocalName.equals(ModelDescription.node_flag)) {
-            el = LineFragment.fromElement(a_URI, a_LocalName, a_QName, a_Attributes);
-            setFlag((LineFragment) el);
-            return el;
-            //return new PathElementConsumer(ModelDescription.node_flag, this);
+			el = LineFragment.fromElement(a_URI, a_LocalName, a_QName, a_Attributes);
+			setFlag((LineFragment) el);
+			return el;
+			//return new PathElementConsumer(ModelDescription.node_flag, this);
 		}
 		return null;
 	}
-    
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public SAXConsumer handlePathElement(String path, 
-                                         String a_URI,
-                                         String a_LocalName, 
-                                         String a_QName, 
-                                         Attributes a_Attributes){
-        // non utilisé
-        return null;
-    }
-    
-    /**
-     * {@inheritDoc}
-     */
-    @Override
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public SAXConsumer handlePathElement(String path, 
+			String a_URI,
+			String a_LocalName, 
+			String a_QName, 
+			Attributes a_Attributes){
+		// non utilisé
+		return null;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public void writeXMLBodyOn(XMLOutputWriter a_Writer) {
 		a_Writer.putTag(ModelDescription.node_formula, getConversionFormula());
 		if(isText())
-		    a_Writer.putTag(ModelDescription.node_isText,isText());
+			a_Writer.putTag(ModelDescription.node_isText,isText());
 		a_Writer.putTag(ModelDescription.node_indefault, getInputDefault());
 		if (getFragment() != null) {
-            getFragment().setTagName(ModelDescription.node_dataFragment);
-            getFragment().writeXMLOn(a_Writer);
+			getFragment().setTagName(ModelDescription.node_dataFragment);
+			getFragment().writeXMLOn(a_Writer);
 		}
 		if (getFlag() != null) {
-            getFlag().setTagName(ModelDescription.node_flag);
+			getFlag().setTagName(ModelDescription.node_flag);
 			getFlag().writeXMLOn(a_Writer);
 		}
 		if (getParameter() != null) {
@@ -215,12 +215,12 @@ public class ParameterModel extends AbstractModel
 		}
 	}
 
-    
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Object clone() throws CloneNotSupportedException {
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Object clone() throws CloneNotSupportedException {
 		ParameterModel copy = null;
 		copy = (ParameterModel) super.clone();
 		copy._fragment = null;
@@ -229,7 +229,7 @@ public class ParameterModel extends AbstractModel
 		}
 		copy._parameter = null;
 		if (getParameter() != null) {
-            copy.setParameter((Parameter) getParameter().clone());
+			copy.setParameter((Parameter) getParameter().clone());
 		}
 		copy._flag = null;
 		if (getFlag() != null) {
@@ -237,346 +237,349 @@ public class ParameterModel extends AbstractModel
 		}
 		return copy;
 	}
-    
-    public boolean hasDefaultValue(String inputLine)
-    {
-        boolean hasDefaultValue=false;
-        String value = _fragment.retreive(inputLine);
-        if (_inputDefault.trim().equals(value)) {
-            hasDefaultValue=true;
-        }
-        return hasDefaultValue;
-    }
-    public boolean hasNaNValue(String inputLine)
-    {
-        boolean hasNaNValue=false;
-        String value = _fragment.retreive(inputLine);
-        if (value.equals(Global.EMPTY_STRING) && !_inputDefault.trim().equals(Global.EMPTY_STRING)) {
-            hasNaNValue=true;
-        }
-        return hasNaNValue;
-    }
-    @SuppressWarnings("nls")
-    public void computeParameterValue(String inputLine)
-    {
-        ParameterValue pValue = new ParameterValue();
-        JEP parser = null;
-        String value = _fragment.retreive(inputLine);
 
-        // calcul de la valeur du paramètre
-        if (hasNaNValue(inputLine)) {
-            pValue.setValue("");
-        } 
-        else 
-        {
-            if (hasDefaultValue(inputLine)) {
-                pValue.setValue(_parameter.getDefault());
-            }
-            else 
-            {
-                //teste sur le parametre est un chaine ou non.
-                if(!isText())
-                {
-                    Double val;
-                    try 
-                    {
-                        val = Double.parseDouble(value);
-                    } 
-                    catch (NumberFormatException e)
-                    {
-                        throw new NumberFormatException(Messages
-                            .ParameterModel_1
-                            + e.getMessage().substring(
-                                e.getMessage().indexOf("\""),
-                                e.getMessage().lastIndexOf("\""))
-                                + Messages.ParameterModel_2 + Global.RN);
-                    }
-                    if (_conversionFormula.trim().length() > 0) 
-                    {
-                        if (getJepParser() == null) 
-                        {
-                            parser = new org.nfunk.jep.JEP();
-                            parser.addStandardFunctions();
-                            parser.addStandardConstants();
-                            parser.addVariable("x", val);
-                            parser.parseExpression(_conversionFormula.trim());
-                            setJepParser(parser);
-                            Double result = parser.getValue();
-                            pValue.setValue(result.toString());
-                        }
-                        else 
-                        {
-                            parser = getJepParser();
-                            parser.addVariable("x", val);
-                            Double result = parser.getValue();
-                            pValue.setValue(result.toString());
-                        }
-                    } 
-                    else 
-                    {
-                        pValue.setValue(val.toString());
-                    }
-                }
-                else
-                {
-                    pValue.setValue(value);
-                }
-            }
-        }
+	public boolean hasDefaultValue(String inputLine)
+	{
+		boolean hasDefaultValue=false;
+		String value = _fragment.retreive(inputLine);
+		if (_inputDefault.trim().equals(value)) {
+			hasDefaultValue=true;
+		}
+		return hasDefaultValue;
+	}
+	public boolean hasNaNValue(String inputLine)
+	{
+		boolean hasNaNValue=false;
+		String value = _fragment.retreive(inputLine);
+		if (value.equals(Global.EMPTY_STRING) && !_inputDefault.trim().equals(Global.EMPTY_STRING)) {
+			hasNaNValue=true;
+		}
+		return hasNaNValue;
+	}
+	@SuppressWarnings("nls")
+	public void computeParameterValue(String inputLine)
+	{
+		ParameterValue pValue = new ParameterValue();
+		JEP parser = null;
+		String value = _fragment.retreive(inputLine);
 
-        // détermination du flag du paramètre
-        pValue.setQc(retreiveParameterFlag(inputLine));
+		// calcul de la valeur du paramètre
+		if (hasNaNValue(inputLine)) {
+			pValue.setValue("");
+		} 
+		else 
+		{
+			if (hasDefaultValue(inputLine)) {
+				pValue.setValue(_parameter.getDefault());
+			}
+			else 
+			{
+				//teste sur le parametre est un chaine ou non.
+				if(!isText())
+				{
+					Double val;
+					try 
+					{
+						val = Double.parseDouble(value);
+					} 
+					catch (NumberFormatException e)
+					{
+						throw new NumberFormatException(Messages
+								.ParameterModel_1
+								+ e.getMessage().substring(
+										e.getMessage().indexOf("\""),
+										e.getMessage().lastIndexOf("\""))
+										+ Messages.ParameterModel_2 + Global.RN);
+					}
+					if (_conversionFormula.trim().length() > 0) 
+					{
+						if (getJepParser() == null) 
+						{
+							parser = new org.nfunk.jep.JEP();
+							parser.addStandardFunctions();
+							parser.addStandardConstants();
+							parser.addVariable("x", val);
+							parser.parseExpression(_conversionFormula.trim());
+							setJepParser(parser);
+							Double result = parser.getValue();
+							pValue.setValue(result.toString());
+						}
+						else 
+						{
+							parser = getJepParser();
+							parser.addVariable("x", val);
+							Double result = parser.getValue();
+							pValue.setValue(result.toString());
+						}
+					} 
+					else 
+					{
+						pValue.setValue(val.toString());
+					}
+				}
+				else
+				{
+					pValue.setValue(value);
+				}
+			}
+		}
 
-        _lineValue = pValue;
-    }
-    
-    public String retreiveParameterFlag(String inputLine)
-    {
-        String value = _fragment.retreive(inputLine);
-        
-        //FAE 4431 Flag qualité par défault configurable
-        String flagConfig = Nemo.getInstance().getConfig().getDefaultFlag();
-        String flagQc = flagConfig==null?Global.ZERO:flagConfig;
-     
-        if (_inputDefault.trim().equals(value)  || value.equals(Global.EMPTY_STRING)){
-            // la valeur est celle par défaut ou la valeur est manquante
-            flagQc = Global.DEFAULT_FLAG;
-        }
-        else{
-            if (_flag != null) {
-                // le flag est a récupérer dans fichier
-                // table de correspondance SDN
-                FlagTable flagTable = Nemo.getInstance().getDomain().getStation().getModel().getFlagTable();
-                flagQc = flagTable.getFlagSDN(_flag.retreive(inputLine));
-            }
-                
-            // sinon, on laisse le flag à 0
-        }
-        return flagQc;
-    }
-    
-    public void computeAddedParameterValue(Station currentStation,
-                                           String inputLine,
-                                           long currentDate) throws Exception{
-        ParameterValue pValue = new ParameterValue();
-        AddedParam p = (AddedParam) _parameter;
-        
-        String stringValue = null;
-        
-        if (p.isMesured()){
-            stringValue = p.compute(_fragment.fullRetreive(inputLine));
-        }
-        else{
-            stringValue = p.getValue(currentStation, inputLine, currentDate);
-        }
-        
-        if (stringValue != null){
-            pValue.setValue(stringValue);
-            pValue.setQc(((AddedParam)_parameter).getFlag(currentStation, inputLine));
-        }
+		// détermination du flag du paramètre
+		pValue.setQc(retreiveParameterFlag(inputLine));
 
-        _lineValue = pValue;
-    }    
+		_lineValue = pValue;
+	}
 
-    
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String toString() {
-        return getParameter().toString();
-    }
+	public String retreiveParameterFlag(String inputLine)
+	{
+		String value = _fragment.retreive(inputLine);
 
-    
-    /**
-     * {@inheritDoc}
-     */
-    @Override
+		//FAE 4431 Flag qualité par défault configurable
+		String flagConfig = Nemo.getInstance().getConfig().getDefaultFlag();
+		String flagQc = flagConfig==null?Global.ZERO:flagConfig;
+
+		if (_inputDefault.trim().equals(value)  || value.equals(Global.EMPTY_STRING)){
+			// la valeur est celle par défaut ou la valeur est manquante
+			flagQc = Global.DEFAULT_FLAG;
+		}
+		else{
+			if (_flag != null) {
+				// le flag est a récupérer dans fichier
+				// table de correspondance SDN
+				FlagTable flagTable = Nemo.getInstance().getDomain().getStation().getModel().getFlagTable();
+				flagQc = flagTable.getFlagSDN(_flag.retreive(inputLine));
+			}
+
+			// sinon, on laisse le flag à 0
+		}
+		return flagQc;
+	}
+
+	public void computeAddedParameterValue(Station currentStation,
+			String inputLine,
+			long currentDate) throws Exception{
+		ParameterValue pValue = new ParameterValue();
+		AddedParam p = (AddedParam) _parameter;
+
+		String stringValue = null;
+
+		if (p.isMesured()){
+			stringValue = p.compute(_fragment.fullRetreive(inputLine));
+		}
+		else{
+			stringValue = p.getValue(currentStation, inputLine, currentDate);
+		}
+
+		if (stringValue != null){
+			pValue.setValue(stringValue);
+			pValue.setQc(((AddedParam)_parameter).getFlag(currentStation, inputLine));
+		}
+
+		_lineValue = pValue;
+	}    
+
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String toString() {
+		return getParameter().toString();
+	}
+
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public void release() {
 		releaseFragment();
 		releaseFlag();
-        releaseParameter();
-        releaseLineValue();
+		releaseParameter();
+		releaseLineValue();
 	}
 
-    /**
-     * Supprime _fragment
-     */
-    public void releaseFragment() {
-        if (_fragment != null)
-            _fragment.release();
-        _fragment = null;
-    }
+	/**
+	 * Supprime _fragment
+	 */
+	public void releaseFragment() {
+		if (_fragment != null)
+			_fragment.release();
+		_fragment = null;
+	}
 
-    /**
-     * Supprime _flag
-     */
-    public void releaseFlag() {
-        if (_flag != null)
-            _flag.release();
-        _flag = null;
-    }
+	/**
+	 * Supprime _flag
+	 */
+	public void releaseFlag() {
+		if (_flag != null)
+			_flag.release();
+		_flag = null;
+	}
 
-    /**
-     * Supprime _parameter
-     */
-    public void releaseParameter() {
-        if (_parameter != null)
-            _parameter.release();
-        _parameter = null;
-    }
+	/**
+	 * Supprime _parameter
+	 */
+	public void releaseParameter() {
+		if (_parameter != null)
+			_parameter.release();
+		_parameter = null;
+	}
 
-    /**
-     * Supprime _lineValue
-     */
-    public void releaseLineValue() {
-        if (_lineValue != null)
-            _lineValue.release();
-        _lineValue = null;
-    }
+	/**
+	 * Supprime _lineValue
+	 */
+	public void releaseLineValue() {
+		if (_lineValue != null)
+			_lineValue.release();
+		_lineValue = null;
+	}
 
-    protected JEP getJepParser() {
-        return _jepParser;
-    }
+	protected JEP getJepParser() {
+		return _jepParser;
+	}
 
-    protected void setJepParser(JEP parser) {
-        _jepParser = parser;
-    }
+	protected void setJepParser(JEP parser) {
+		_jepParser = parser;
+	}
 
 
-    
-    /**
-     * Getter pour _isText.
-     * @return boolean
-     * @see ParameterModel.java#_isText
-     */
-    public boolean isText() {
-        return _isText;
-    }
 
-    /**
-     * Setter pour _isText
-     * @param x : nouvelle valeur pour _isText
-     * @see ParameterModel.java#_isText
-     */
-    public void setIsText(String x) {
-        _isText = Boolean.parseBoolean(x);;
-    }
-    
-    /**
-     * Getter pour _conversionFormula.
-     * @return String
-     * @see ParameterModel.java#_conversionFormula
-     */
+	/**
+	 * Getter pour _isText.
+	 * @return boolean
+	 * @see ParameterModel.java#_isText
+	 */
+	public boolean isText() {
+		return _isText;
+	}
+
+	/**
+	 * Setter pour _isText
+	 * @param x : nouvelle valeur pour _isText
+	 * @see ParameterModel.java#_isText
+	 */
+	public void setIsText(String x) {
+		_isText = Boolean.parseBoolean(x);;
+	}
+
+	/**
+	 * Getter pour _conversionFormula.
+	 * @return String
+	 * @see ParameterModel.java#_conversionFormula
+	 */
 	public String getConversionFormula() {
 		return _conversionFormula;
 	}
 
-    /**
-     * Setter pour _conversionFormula
-     * @param x : nouvelle valeur pour _conversionFormula
-     * @see ParameterModel.java#_conversionFormula
-     */
+	/**
+	 * Setter pour _conversionFormula
+	 * @param x : nouvelle valeur pour _conversionFormula
+	 * @see ParameterModel.java#_conversionFormula
+	 */
 	public void setConversionFormula(String x) {
 		_conversionFormula = x;
 	}
 
-    /**
-     * Getter pour _inputDefault.
-     * @return String
-     * @see ParameterModel.java#_inputDefault
-     */
+	/**
+	 * Getter pour _inputDefault.
+	 * @return String
+	 * @see ParameterModel.java#_inputDefault
+	 */
 	public String getInputDefault() {
 		return _inputDefault;
 	}
 
-    /**
-     * Setter pour _inputDefault
-     * @param x : nouvelle valeur pour _inputDefault
-     * @see ParameterModel.java#_inputDefault
-     */
+	/**
+	 * Setter pour _inputDefault
+	 * @param x : nouvelle valeur pour _inputDefault
+	 * @see ParameterModel.java#_inputDefault
+	 */
 	public void setInputDefault(String x) {
 		_inputDefault = x;
 	}
 
-    /**
-     * Getter pour _fragment.
-     * @return LineFragment
-     * @see ParameterModel.java#_fragment
-     */
+	/**
+	 * Getter pour _fragment.
+	 * @return LineFragment
+	 * @see ParameterModel.java#_fragment
+	 */
 	public LineFragment getFragment() {
 		return _fragment;
 	}
 
-    /**
-     * Setter pour _fragment
-     * @param x : nouvelle valeur pour _fragment
-     * @see ParameterModel.java#_fragment
-     */
+	/**
+	 * Setter pour _fragment
+	 * @param x : nouvelle valeur pour _fragment
+	 * @see ParameterModel.java#_fragment
+	 */
 	public void setFragment(LineFragment x) {
 		if (_fragment == x)
 			return;
 		_fragment = x;
 	}
 
-    /**
-     * Getter pour _flag.
-     * @return LineFragment
-     * @see ParameterModel.java#_flag
-     */
+	/**
+	 * Getter pour _flag.
+	 * @return LineFragment
+	 * @see ParameterModel.java#_flag
+	 */
 	public LineFragment getFlag() {
 		return _flag;
 	}
 
-    /**
-     * Setter pour _flag
-     * @param x : nouvelle valeur pour _flag
-     * @see ParameterModel.java#_flag
-     */
+	/**
+	 * Setter pour _flag
+	 * @param x : nouvelle valeur pour _flag
+	 * @see ParameterModel.java#_flag
+	 */
 	public void setFlag(LineFragment x) {
 		if (_flag == x)
 			return;
 		_flag = x;
 	}
 
-    /**
-     * Getter pour _parameter.
-     * @return Parameter
-     * @see ParameterModel.java#_parameter
-     */
+	/**
+	 * Getter pour _parameter.
+	 * @return Parameter
+	 * @see ParameterModel.java#_parameter
+	 */
 	public Parameter getParameter() {
 		return _parameter;
 	}
 
-    /**
-     * Setter pour _parameter
-     * @param x : nouvelle valeur pour _parameter
-     * @see ParameterModel.java#_parameter
-     */
+	/**
+	 * Setter pour _parameter
+	 * @param x : nouvelle valeur pour _parameter
+	 * @see ParameterModel.java#_parameter
+	 */
 	public void setParameter(Parameter x) {
 		if (_parameter == x)
 			return;
-        _parameter = x;
+		_parameter = x;
+	}
+	public void setParameter(TypeData typeData){
+		Parameter para = new Parameter(typeData);
+		setParameter(para);
+	}
+	/**
+	 * Getter pour _lineValue.
+	 * @return ParameterValue
+	 * @see ParameterModel.java#_lineValue
+	 */
+	public ParameterValue getLineValue()
+	{
+		return _lineValue;
 	}
 
-    /**
-     * Getter pour _lineValue.
-     * @return ParameterValue
-     * @see ParameterModel.java#_lineValue
-     */
-    public ParameterValue getLineValue()
-    {
-        return _lineValue;
-    }
+	/**
+	 * Setter pour _lineValue
+	 * @param lineValue : nouvelle valeur pour lineValue
+	 * @see ParameterModel.java#_lineValue
+	 */
+	public void setLineValue(ParameterValue lineValue)
+	{
+		_lineValue = lineValue;
+	}
 
-    /**
-     * Setter pour _lineValue
-     * @param lineValue : nouvelle valeur pour lineValue
-     * @see ParameterModel.java#_lineValue
-     */
-    public void setLineValue(ParameterValue lineValue)
-    {
-        _lineValue = lineValue;
-    }
-  
 }

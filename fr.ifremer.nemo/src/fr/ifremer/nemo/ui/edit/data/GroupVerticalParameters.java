@@ -124,26 +124,35 @@ public class GroupVerticalParameters {
 		}
 
 	}
-
-	public void removeToAllCombo(TypeData typeData) {
+/**
+ * 
+ * @param typeData
+ * @return true if datatype was found and removed
+ */
+	public boolean removeToAllCombo(TypeData typeData) {
 		String code = typeData.getCodeToUse();
-				try {
-					comboDBSSurf.remove(code);
-				} catch (Exception e) {
-				}
-				try {
-					comboDBSBed.remove(code);
-				} catch (Exception e) {
-				}
-				try {
-					comboP.remove(code);
-				} catch (Exception e) {
-				}
-				try {
-					comboHASLvl.remove(code);
-				} catch (Exception e) {
-				}
-			}
+		try {
+			comboDBSSurf.remove(code);
+			return true;
+		} catch (Exception e) {
+		}
+		try {
+			comboDBSBed.remove(code);
+			return true;
+		} catch (Exception e) {
+		}
+		try {
+			comboP.remove(code);
+			return true;
+		} catch (Exception e) {
+		}
+		try {
+			comboHASLvl.remove(code);
+			return true;
+		} catch (Exception e) {
+		}
+		return false;
+	}
 
 	public void removeAllToAllCombos() {
 		try {

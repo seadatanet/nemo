@@ -1,7 +1,10 @@
 package fr.ifremer.nemo.util;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import fr.ifremer.nemo.config.VocabLists;
-import fr.ifremer.nemo.ui.RulesManager;
+import fr.ifremer.nemo.output.GenerationException;
 import fr.ifremer.nemo.ui.edit.data.TypeData;
 import fr.ifremer.nemo.util.BODCResult.BODC_RES_STATUS;
 import fr.ifremer.nemo.util.Global.DataListTypeEnum;
@@ -22,11 +25,22 @@ public class BodcChecker {
 		return bodcChecker;
 	}
 
-	public BODCResult checkParameterCode(TypeData typeData){
-		if (typeData.isP011()){
-			return checkP01(typeData);
+	public List<BODCResult> checkParameterCode(TypeData typeData, DataListTypeEnum dataListTypeEnum) throws GenerationException{
+		List<BODCResult> results = new ArrayList<BODCResult>();
+		if (dataListTypeEnum==DataListTypeEnum.P091){
+			results.add( checkP09(typeData));
+		}else if(dataListTypeEnum==DataListTypeEnum.P011_VIA_P091){
+			results.add( checkP09(typeData));
+			results.add( checkP01(typeData));
+		}else if(dataListTypeEnum==DataListTypeEnum.P011_VIA_P021){
+			results.add( checkP02(typeData));
+			results.add( checkP01(typeData));
+		}else{
+			throw new GenerationException("invalid data type list: " + dataListTypeEnum); // TODO 35230 msg
 		}
-		return checkP09(typeData);
+			
+		return results;
+	
 	}
 	
 	public BODCResult checkP09(TypeData typeData){
@@ -34,13 +48,20 @@ public class BodcChecker {
 		String replaceMsg="";
 		String errorMsg="";
 		boolean ok=true;
-
+//		TypeData typeDataNew = new TypeData(typeData);
 		try {
 			String replacement = sdnMgr.getReplacedByCode(typeData.getEntryKey(), SdnVocabularyManager.LIST_P09);
 			if (replacement != null){
 				String replacementLabel= sdnMgr.getLabel(replacement, SdnVocabularyManager.LIST_P09);
-				replaceMsg+="Parameter "+ typeData.getFormattedCodeAndName() 
-						+ " is deprecated. It has been replaced with \"" + replacement+"\" ("+ replacementLabel+")"+Global.RN;// TODO 35230 message
+				String parameterName ;
+				if (typeData.isP011()){
+					replaceMsg+="Parameter "+ typeData.getEntryKeyP011() + " from P09 " + typeData.getFormattedCodeAndName() 
+							+ ": P09 code "+ typeData.getEntryKey()+" is deprecated. It has been replaced with \"" + replacement+"\" ("+ replacementLabel+")"+Global.RN;// TODO 35230 message
+				}else{
+					replaceMsg+="Parameter "+ typeData.getFormattedCodeAndName() 
+							+ " is deprecated. It has been replaced with \"" + replacement+"\" ("+ replacementLabel+")"+Global.RN;// TODO 35230 message
+				}
+				
 				typeData.setEntryKey(replacement);
 				typeData.setEntryTerm(replacementLabel);
 			}
@@ -63,13 +84,47 @@ public class BodcChecker {
 		}
 		return res;
 	}
+	public BODCResult checkP02(TypeData typeData){
+		//  TODO 35230: check label if code is OK
+		String replaceMsg="";
+		String errorMsg="";
+		boolean ok=true;
+//		TypeData typeDataNew = new TypeData(typeData);
+		try {
+			String replacement = sdnMgr.getReplacedByCode(typeData.getEntryKey(), SdnVocabularyManager.LIST_P02);
+			if (replacement != null){
+				String replacementLabel= sdnMgr.getLabel(replacement, SdnVocabularyManager.LIST_P02);
+				replaceMsg+="Parameter "+ typeData.getFormattedCodeAndName() 
+						+ " is deprecated. It has been replaced with \"" + replacement+"\" ("+ replacementLabel+")"+Global.RN;// TODO 35230 message
+				typeData.setEntryKey(replacement);
+				typeData.setEntryTerm(replacementLabel);
+			}
+		} catch (Exception e) {
+			errorMsg="Parameter "+ typeData.getEntryKey() 
+					+" ("+typeData.getEntryTerm()+") does not exist in BODC list " + SdnVocabularyManager.LIST_P02;// TODO 35230 message
+			ok=false;
+		} 
+		BODCResult res= new BODCResult(typeData);
+		if (ok){
+			if(replaceMsg.isEmpty()){
+				res.setResStatus(BODC_RES_STATUS.OK);
+			}else{
+				res.setWarningMsg(replaceMsg);
+				res.setResStatus(BODC_RES_STATUS.WARNING);
+			}
+		}else{
+			res.setErrorMsg(errorMsg);
+			res.setResStatus(BODC_RES_STATUS.KO);	
+		}
+		return res;
+	}
 	
 	public BODCResult checkP01(TypeData typeData){
 		//  TODO 35230: check label if code is OK
 		String replaceMsg="";
 		String errorMsg="";
 		boolean ok=true;
-
+//		TypeData typeDataNew = new TypeData(typeData);
 
 		try {
 			String replacement = sdnMgr.getReplacedByCode(typeData.getEntryKeyP011(), SdnVocabularyManager.LIST_P01);// TODO 35230 message
@@ -102,16 +157,16 @@ public class BodcChecker {
 		return res;
 	}
 
-	public BODCResult checkP06(TypeData typeData)
+	public BODCResult checkP06(TypeData typeData, DataListTypeEnum dataListTypeEnum)
 	{
 		//		boolean p06replaced=false;
 		String replaceMsg="";
 		String errorMsg="";
 		String p06Code;
 		boolean ok=true;
-
+//		TypeData typeDataNew = new TypeData(typeData);
 		// CHECK P06 CODE AND LABEL
-		if (RulesManager.getInstance().getMyDataListType()==DataListTypeEnum.P011_VIA_P021){
+		if (dataListTypeEnum==DataListTypeEnum.P011_VIA_P021){
 			p06Code=typeData.getUniteCode();
 			String replacement;
 			//			p06Code="UPDS";
@@ -144,7 +199,7 @@ public class BodcChecker {
 						+" ("+typeData.getUnite()+") does not exist in BODC list " + SdnVocabularyManager.LIST_P06;// TODO 35230 message
 			}
 		}
-		else if (RulesManager.getInstance().getMyDataListType()==DataListTypeEnum.P011_VIA_P091){
+		else if (dataListTypeEnum==DataListTypeEnum.P011_VIA_P091){
 			try {
 				p06Code= sdnMgr.getBestVocabMatchCode(
 						SdnVocabularyManager.LIST_P06, 
@@ -224,7 +279,8 @@ public class BodcChecker {
 		String replaceMsg="";
 		String errorMsg="";
 		boolean ok=true;
-
+//		TypeData typeDataNew = new TypeData(typeData);
+		res= new BODCResult(typeData, BODC_RES_STATUS.OK);
 		try {
 			String replacement = sdnMgr.getReplacedByCode(typeData.getInstrumentCode(), SdnVocabularyManager.LIST_L22);
 			if (replacement != null){
@@ -264,6 +320,7 @@ public class BodcChecker {
 		if (fallrateCode.isEmpty()){
 			return res;
 		}
+		
 		String replaceMsg="";
 		String errorMsg="";
 		boolean ok=true;

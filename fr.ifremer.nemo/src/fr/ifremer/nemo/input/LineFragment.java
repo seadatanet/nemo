@@ -139,7 +139,7 @@ public class LineFragment extends AbstractModel
     	}else{
     		//33278: split as columns
     		String[] splittedLine = a_Line.split(Nemo.getInstance().getDomain().getMedia().getModel().getSeparator());
-    		res= splittedLine[_lastCharOffset].trim();
+    		res= splittedLine[_lastCharOffset-1].trim();
     	}
     	return res;
     }

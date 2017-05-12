@@ -13,6 +13,7 @@ package fr.ifremer.nemo;
 import java.io.File;
 import java.text.ParseException;
 import java.util.Date;
+import java.util.List;
 
 import org.apache.logging.log4j.Logger;
 
@@ -36,6 +37,7 @@ import fr.ifremer.nemo.util.BODCResult.BODC_RES_STATUS;
 import fr.ifremer.nemo.util.BodcChecker;
 import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Global;
+import fr.ifremer.nemo.util.Global.DataListTypeEnum;
 import fr.ifremer.nemo.util.Global.E_TypeConversion;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.util.Preformat;
@@ -300,30 +302,35 @@ public class NemoShell {
 			TypeData typeCourant = new TypeData(pModel);
 
 			// check parameters codes
-			bodcRes = BodcChecker.getInstance().checkParameterCode(typeCourant);
-			if (bodcRes.getResStatus() == BODC_RES_STATUS.KO){
-				logger.error(bodcRes.getErrorMsg());
-				ok=false;
-			}else if (bodcRes.getResStatus() == BODC_RES_STATUS.WARNING){
-				typeCourant = bodcRes.getTypeData();
-				if (typeCourant.isP011()){
-					pModel.getParameter().setCodeP011(typeCourant.getEntryKeyP011());
-					pModel.getParameter().setNameP011(typeCourant.getEntryTermP011());
-				}else{
-					pModel.getParameter().setCode(typeCourant.getEntryKey());
-					pModel.getParameter().setFullName(typeCourant.getEntryTerm());
+			try{
+				TypeData typeCourantOrig = new TypeData(typeCourant);
+				List<BODCResult> bodcResList = BodcChecker.getInstance().checkParameterCode(typeCourant, 	inputDomain.getData().getModel().getDataListType());
+				for (BODCResult res :bodcResList){
+					//			bodcRes = BodcChecker.getInstance().checkParameterCode(typeCourant);
+					if (res.getResStatus() == BODC_RES_STATUS.KO){
+						logger.error(res.getErrorMsg());
+						ok=false;
+					}else if (res.getResStatus() == BODC_RES_STATUS.WARNING){
+						typeCourant = res.getTypeData();
+						pModel.setParameter(typeCourant);
+						logger.warn(res.getWarningMsg());
+						
+						// TODO: replace vertical ref or display an error
+						replaceVerticalParameters(typeCourantOrig, typeCourant,inputDomain);
+						
+					}
 				}
-				logger.warn(bodcRes.getWarningMsg());
+			}catch (Exception e) {
+				logger.error(e.getMessage());
 			}
 			// 35230 check unit
-			bodcRes = BodcChecker.getInstance().checkP06(typeCourant);
+			bodcRes = BodcChecker.getInstance().checkP06(typeCourant, inputDomain.getData().getModel().getDataListType());
 			if (bodcRes.getResStatus() == BODC_RES_STATUS.KO){
 				logger.error(bodcRes.getErrorMsg());
 				ok=false;
 			}else if (bodcRes.getResStatus() == BODC_RES_STATUS.WARNING){
 				typeCourant = bodcRes.getTypeData();
-				pModel.getParameter().setUnitCode(typeCourant.getUniteCode());
-				pModel.getParameter().setUnit(typeCourant.getUnite());
+				pModel.setParameter(typeCourant);
 				logger.warn(bodcRes.getWarningMsg());
 			}
 			// 35230 check instrument
@@ -333,8 +340,7 @@ public class NemoShell {
 				logger.error(bodcRes.getErrorMsg());
 			}else if (bodcRes.getResStatus() == BODC_RES_STATUS.WARNING){
 				typeCourant = bodcRes.getTypeData();
-				pModel.getParameter().setInstrumentCode(typeCourant.getInstrumentCode());
-				pModel.getParameter().setInstrument(typeCourant.getInstrument());
+				pModel.setParameter(typeCourant);
 				logger.warn(bodcRes.getWarningMsg());
 			}
 		}
@@ -350,6 +356,32 @@ public class NemoShell {
 				logger.warn(bodcRes.getWarningMsg());
 			}
 		return ok;
+	}
+
+	private static void replaceVerticalParameters(TypeData typeCourantOrig,
+			TypeData typeCourant, InputDomain inputDomain) {
+		String oldParamCode;
+		String newParamCode;
+		if (inputDomain.getData().getModel().getDataListType()==DataListTypeEnum.P091){
+			oldParamCode = typeCourantOrig.getEntryKey();
+			newParamCode =  typeCourant.getEntryKey();
+		}else{
+			oldParamCode = typeCourantOrig.getEntryKeyP011();
+			newParamCode =  typeCourant.getEntryKeyP011();
+		}
+		if (inputDomain.getData().getModel().getVerticalParametersList().getP_depthBSBed().equals(oldParamCode)){
+			inputDomain.getData().getModel().getVerticalParametersList().setP_depthBSBed(newParamCode);
+		}
+		if (inputDomain.getData().getModel().getVerticalParametersList().getP_depthBSSurf().equals(oldParamCode)){
+			inputDomain.getData().getModel().getVerticalParametersList().setP_depthBSSurf(newParamCode);
+		}
+		if (inputDomain.getData().getModel().getVerticalParametersList().getP_heightASLvl().equals(oldParamCode)){
+			inputDomain.getData().getModel().getVerticalParametersList().setP_heightASLvl(newParamCode);
+		}
+		if (inputDomain.getData().getModel().getVerticalParametersList().getP_pressure().equals(oldParamCode)){
+			inputDomain.getData().getModel().getVerticalParametersList().setP_pressure(newParamCode);
+		}
+		
 	}
 
 	private static void mapping(Logger logger, Conversion conv,

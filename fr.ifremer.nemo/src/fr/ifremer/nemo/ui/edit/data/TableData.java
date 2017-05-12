@@ -633,10 +633,8 @@ public class TableData {
 					{
 						if (RulesManager.getInstance().isInputWithSeparatorsAndModelUpToDate()){
 							//33278: split as columns
-							int col = Integer.valueOf(myTable.getItem(indice)
-									.getText(
-											colNbById.get(COL_START)));
-							Nemo.getInstance().getViewMain().getEditDataForm().getInputTableData().setIndexSelected(col);
+							int colNb = Integer.valueOf(myTable.getItem(indice).getText(colNbById.get(COL_START)));
+							Nemo.getInstance().getViewMain().getEditDataForm().getInputTableData().setIndexSelected(colNb-1);
 							Nemo.getInstance().getViewMain().getEditDataForm().getInputTableData().getViewer().refresh();
 							
 						}else{
@@ -782,10 +780,11 @@ public class TableData {
 				if (RulesManager.getInstance().isInputWithSeparatorsAndModelUpToDate()){
 					// 33278 CSV files
 					int selectionIndex = myTable.getSelectionIndex();
-					int selectColumn = Nemo.getInstance().getViewMain().getEditDataForm().getInputTableData().getIndexSelected();
+					int selectedColumnIndex = Nemo.getInstance().getViewMain().getEditDataForm().getInputTableData().getIndexSelected();
+					int selectedColumnNumber = selectedColumnIndex+1;
 					// remplissage debut et fin dans interface
-					Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().getMyTable().getItems()[selectionIndex].setText(colNbById.get(COL_START), String.valueOf(selectColumn));
-					Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().getMyTable().getItems()[selectionIndex].setText(colNbById.get(COL_END), String.valueOf(selectColumn));
+					Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().getMyTable().getItems()[selectionIndex].setText(colNbById.get(COL_START), String.valueOf(selectedColumnNumber));
+					Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().getMyTable().getItems()[selectionIndex].setText(colNbById.get(COL_END), String.valueOf(selectedColumnNumber));
 					majTypeData();
 					// refresh de la table
 					razAndRecreateTable();
@@ -996,10 +995,11 @@ public class TableData {
 				if (RulesManager.getInstance().isInputWithSeparatorsAndModelUpToDate()){
 					// 33278 CSV files
 					int selectionIndex = myTable.getSelectionIndex();
-					int selectColumn = Nemo.getInstance().getViewMain().getEditDataForm().getInputTableData().getIndexSelected();
+					int selectedColumnIndex = Nemo.getInstance().getViewMain().getEditDataForm().getInputTableData().getIndexSelected();
+					int selectedColumnNumber = selectedColumnIndex+1;
 					// remplissage debut et fin dans interface
-					Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().getMyTable().getItems()[selectionIndex].setText(colNbById.get(COL_START_FLAG), String.valueOf(selectColumn));
-					Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().getMyTable().getItems()[selectionIndex].setText(colNbById.get(COL_END_FLAG), String.valueOf(selectColumn));
+					Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().getMyTable().getItems()[selectionIndex].setText(colNbById.get(COL_START_FLAG), String.valueOf(selectedColumnNumber));
+					Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().getMyTable().getItems()[selectionIndex].setText(colNbById.get(COL_END_FLAG), String.valueOf(selectedColumnNumber));
 					majTypeData();
 					// refresh de la table
 					razAndRecreateTable();

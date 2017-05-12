@@ -1,6 +1,7 @@
 package fr.ifremer.nemo.ui.edit.data;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import org.eclipse.swt.widgets.Combo;
 
@@ -126,19 +127,32 @@ public class DataFormValidator extends FormValidator {
 					/** check des valeurs standarNames pour NetCDF */
 					checkStandardName(typeCourant);
 				}
+				/**
+				 * WARNING: be sure to check parameters BEFORE units, because parameters can be replaced if deprecated
+				 */
 				// 35230 check parameters codes
-				BODCResult bodcRes = BodcChecker.getInstance().checkParameterCode(typeCourant);
-				if (bodcRes.getResStatus() == BODC_RES_STATUS.KO){
-					Utils.messageErreurAppend(bodcRes.getErrorMsg());
-					ok=false;
-				}else if (bodcRes.getResStatus() == BODC_RES_STATUS.WARNING){
-					typeCourant = bodcRes.getTypeData();
-					Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().getMyTable().getItems()[i].setText(paramCodeColNb, String.valueOf(typeCourant.getFormattedCodeAndNameToUse()));
-					Utils.messageWarningAppend(bodcRes.getWarningMsg());
-					bodcReplaced=true;
+				try{
+					TypeData typeCourantOrig = new TypeData(typeCourant);
+					List<BODCResult> bodcResList = BodcChecker.getInstance().checkParameterCode(typeCourant, rm.getMyDataListType());
+					for (BODCResult res :bodcResList){
+						if (res.getResStatus() == BODC_RES_STATUS.KO){
+							Utils.messageErreurAppend(res.getErrorMsg());
+							ok=false;
+						}else if (res.getResStatus() == BODC_RES_STATUS.WARNING){
+							if (verticalParamGroup.removeToAllCombo(typeCourantOrig)){
+								verticalParamGroup.addTypeData(res.getTypeData());
+							}
+							typeCourant = res.getTypeData();
+							Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().getMyTable().getItems()[i].setText(paramCodeColNb, String.valueOf(typeCourant.getFormattedCodeAndNameToUse()));
+							Utils.messageWarningAppend(res.getWarningMsg());
+							bodcReplaced=true;
+						}
+					}
+				}catch (Exception e) {
+					Utils.messageErreurAppend(e.getMessage());
 				}
 				// 35230 check unit
-				bodcRes = BodcChecker.getInstance().checkP06(typeCourant);
+				BODCResult bodcRes = BodcChecker.getInstance().checkP06(typeCourant, rm.getMyDataListType());
 				if (bodcRes.getResStatus() == BODC_RES_STATUS.KO){
 					Utils.messageErreurAppend(bodcRes.getErrorMsg());
 					ok=false;
