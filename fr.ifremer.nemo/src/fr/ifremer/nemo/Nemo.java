@@ -87,6 +87,7 @@ public class Nemo {
 			instance = new Nemo();
 			guiLogger = LogManager.getLogger("nemoGui");
 			batchLogger = LogManager.getLogger("nemoBatch");
+			guiLogger.info("Nemo instanciated");
 		}
 		return instance;
 	}

@@ -1,5 +1,6 @@
 package fr.ifremer.nemo.ui.edit.cruise;
 
+
 import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -26,6 +27,8 @@ import fr.ifremer.nemo.util.format.DateTimeFormat;
  * @author sbregent
  */
 public class CruiseFormValidator extends FormValidator {
+	
+
 	private String warningCruise = "";
 
 	public CruiseFormValidator() {
@@ -33,6 +36,7 @@ public class CruiseFormValidator extends FormValidator {
 	}
 
 	private void displayErrorIfNeeded(boolean checkResult, String fieldName) {
+		
 		if (!checkResult) {
 			Utils.messageErreurAppend(Messages.Regexp_3 + fieldName + Messages.Regexp_5);
 		}
@@ -40,6 +44,7 @@ public class CruiseFormValidator extends FormValidator {
 
 	@Override
 	public void validate() {
+		guiLogger.info("validate cruise tab");
 		warningCruise = "";
 		EditCruiseForm editCruiseForm = Nemo.getInstance().getViewMain().getEditCruiseForm();
 		EditConversionForm editConversionForm = Nemo.getInstance().getViewMain().getEditConversionForm();
@@ -78,7 +83,9 @@ public class CruiseFormValidator extends FormValidator {
 			// 35230 SHIP
 			String shipCode = fr.ifremer.nemo.util.Utils.extraitCode(section.getItem(itemID.SHIP).getText());
 			String shipName = fr.ifremer.nemo.util.Utils.extraitValeur(section.getItem(itemID.SHIP).getText());
-			BODCResult bodcRes = BodcChecker.getInstance().checkShip(	shipCode, shipName);
+			
+		
+			BODCResult bodcRes = BodcChecker.getInstance().checkShip(shipCode, shipName);
 			if (bodcRes.getResStatus() == BODC_RES_STATUS.KO){
 				ok=false;
 				Utils.messageErreurAppend(bodcRes.getErrorMsg());
@@ -162,12 +169,13 @@ public class CruiseFormValidator extends FormValidator {
 		
 
 
-
 		if (ok) {
+			guiLogger.info("Cruise validation result: OK");
 			editCruiseForm.setOkApresReset(true);
 			// okCruise();
 			onSuccess();
 		} else {
+			guiLogger.info("Cruise validation result: KO");
 			editCruiseForm.initFromNewModel();
 			if (!Nemo.getInstance().getViewMain().tabCruise.isDisposed()) {
 				Nemo.getInstance().getViewMain().tabCruise.setText(Messages.onglet_cruise_error);

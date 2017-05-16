@@ -114,13 +114,7 @@ public class Application implements IPlatformRunnable
                 boolean couplingTableUpdate = false;
                 String couplingTablePrefix = Global.EMPTY_STRING;
 
-                // LOGGER
-                
-                LoggerContext context = (org.apache.logging.log4j.core.LoggerContext) LogManager.getContext(false);
-                File file = new File(appDir + File.separator  + "resources/log4j2.xml");
-                 
-                // this will force a reconfiguration
-                context.setConfigLocation(file.toURI());
+          
                 
                 batchLogger = LogManager.getLogger("nemoBatch");
 
@@ -231,17 +225,19 @@ public class Application implements IPlatformRunnable
              **************************************************************************/
             else
             {
-                Nemo.getInstance().setBatchMode(false);
-                display = PlatformUI.createDisplay();
-                
-                // LOGGER
+            	 // LOGGER
                 LoggerContext context = (org.apache.logging.log4j.core.LoggerContext) LogManager.getContext(false);
                 File file = new File(appDir + File.separator  + "resources/log4j2.xml");
 
                 context.setConfigLocation(file.toURI());
 
             	guiLogger = LogManager.getLogger("nemoGui");
+            	guiLogger.info("Nemo GUI Mode");
             	
+                Nemo.getInstance().setBatchMode(false);
+                display = PlatformUI.createDisplay();
+                
+               
                 try
                 {
                      
@@ -260,7 +256,7 @@ public class Application implements IPlatformRunnable
                 }
                 finally
                 {
-                    guiLogger.info("Gui mode successfully ended.");
+                    guiLogger.info("GUI mode successfully ended.");
                     display.dispose();
                 }
             }
@@ -269,7 +265,7 @@ public class Application implements IPlatformRunnable
         {
             exitPrintingUsage();
             e.printStackTrace();
-            guiLogger.debug("Gui mode ended with errors.", e);
+            guiLogger.debug("GUI mode ended with errors.", e);
         }
 
         return null;

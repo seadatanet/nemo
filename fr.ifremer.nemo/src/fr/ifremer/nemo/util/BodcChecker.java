@@ -3,6 +3,9 @@ package fr.ifremer.nemo.util;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import fr.ifremer.nemo.config.VocabLists;
 import fr.ifremer.nemo.output.GenerationException;
 import fr.ifremer.nemo.ui.edit.data.TypeData;
@@ -11,11 +14,12 @@ import fr.ifremer.nemo.util.Global.DataListTypeEnum;
 import fr.ifremer.sismer_tools.seadatanet.SdnVocabularyManager;
 
 public class BodcChecker {
-
+	private static Logger guiLogger;
 	private static BodcChecker bodcChecker;
 	private final SdnVocabularyManager sdnMgr;
 
 	private BodcChecker(){
+		guiLogger = LogManager.getLogger("nemoGui");
 		sdnMgr = new SdnVocabularyManager(VocabLists.getCf());
 	}
 	public static BodcChecker getInstance(){
@@ -26,6 +30,7 @@ public class BodcChecker {
 	}
 
 	public List<BODCResult> checkParameterCode(TypeData typeData, DataListTypeEnum dataListTypeEnum) throws GenerationException{
+		guiLogger.info("BODC check: parameter code");
 		List<BODCResult> results = new ArrayList<BODCResult>();
 		if (dataListTypeEnum==DataListTypeEnum.P091){
 			results.add( checkP09(typeData));
@@ -36,6 +41,8 @@ public class BodcChecker {
 			results.add( checkP02(typeData));
 			results.add( checkP01(typeData));
 		}else{
+			guiLogger.error("invalid data type list: " + dataListTypeEnum);
+			
 			throw new GenerationException("invalid data type list: " + dataListTypeEnum); // TODO 35230 msg
 		}
 			
@@ -44,6 +51,7 @@ public class BodcChecker {
 	}
 	
 	public BODCResult checkP09(TypeData typeData){
+		guiLogger.info("BODC check: P09 parameter code");
 		//  TODO 35230: check label if code is OK
 		String replaceMsg="";
 		String errorMsg="";
@@ -68,6 +76,8 @@ public class BodcChecker {
 		} catch (Exception e) {
 			errorMsg="Parameter "+ typeData.getEntryKey() 
 					+" ("+typeData.getEntryTerm()+") does not exist in BODC list " + SdnVocabularyManager.LIST_P09;// TODO 35230 message
+			guiLogger.error(errorMsg);
+			guiLogger.error(e.getMessage());
 			ok=false;
 		} 
 		BODCResult res= new BODCResult(typeData);
@@ -85,6 +95,7 @@ public class BodcChecker {
 		return res;
 	}
 	public BODCResult checkP02(TypeData typeData){
+		guiLogger.info("BODC check: P02 parameter code");
 		//  TODO 35230: check label if code is OK
 		String replaceMsg="";
 		String errorMsg="";
@@ -102,6 +113,8 @@ public class BodcChecker {
 		} catch (Exception e) {
 			errorMsg="Parameter "+ typeData.getEntryKey() 
 					+" ("+typeData.getEntryTerm()+") does not exist in BODC list " + SdnVocabularyManager.LIST_P02;// TODO 35230 message
+			guiLogger.error(errorMsg);
+			guiLogger.error(e.getMessage());
 			ok=false;
 		} 
 		BODCResult res= new BODCResult(typeData);
@@ -120,6 +133,7 @@ public class BodcChecker {
 	}
 	
 	public BODCResult checkP01(TypeData typeData){
+		guiLogger.info("BODC check: P01 parameter code");
 		//  TODO 35230: check label if code is OK
 		String replaceMsg="";
 		String errorMsg="";
@@ -138,6 +152,8 @@ public class BodcChecker {
 		} catch (Exception e) {
 			errorMsg="Parameter "+ typeData.getEntryKeyP011() 
 					+" ("+typeData.getEntryTermP011()+") does not exist in BODC list " + SdnVocabularyManager.LIST_P01;// TODO 35230 message
+			guiLogger.error(errorMsg);
+			guiLogger.error(e.getMessage());
 			ok=false;
 		} 
 
@@ -159,6 +175,7 @@ public class BodcChecker {
 
 	public BODCResult checkP06(TypeData typeData, DataListTypeEnum dataListTypeEnum)
 	{
+		guiLogger.info("BODC check: P06 unit code");
 		//		boolean p06replaced=false;
 		String replaceMsg="";
 		String errorMsg="";
@@ -197,6 +214,8 @@ public class BodcChecker {
 				ok=false;
 				errorMsg="error on parameter "+ typeData.getCodeToUse() + " : unit "+typeData.getUniteCode()
 						+" ("+typeData.getUnite()+") does not exist in BODC list " + SdnVocabularyManager.LIST_P06;// TODO 35230 message
+				guiLogger.error(e.getMessage());
+				guiLogger.error(errorMsg);
 			}
 		}
 		else if (dataListTypeEnum==DataListTypeEnum.P011_VIA_P091){
@@ -222,6 +241,8 @@ public class BodcChecker {
 				errorMsg="unable to get P06 unit label for parameter P01 " + typeData.getEntryKeyP011() + " selected from P09 " + typeData.getEntryKey()+" / " + e.getMessage();// TODO 35230 message
 				typeData.setUnite("");
 				typeData.setUniteCode("");
+				guiLogger.error(errorMsg);
+				guiLogger.error(e.getMessage());
 				ok=false;
 			} 
 		}else{
@@ -248,6 +269,8 @@ public class BodcChecker {
 				errorMsg="unable to get P06 unit label for parameter " + typeData.getEntryKey()+" / " + e.getMessage();// TODO 35230 message
 				typeData.setUnite("");
 				typeData.setUniteCode("");
+				guiLogger.error(errorMsg);
+				guiLogger.error(e.getMessage());
 				ok=false;
 			} 
 		}
@@ -271,6 +294,7 @@ public class BodcChecker {
 
 
 	public BODCResult checkInstrument(TypeData typeData){
+		guiLogger.info("BODC check: L22 instrument code");
 		//  TODO 35230: check label if code is OK
 		BODCResult res= new BODCResult(typeData, BODC_RES_STATUS.OK);
 		if (typeData.getInstrumentCode().isEmpty()){
@@ -294,6 +318,8 @@ public class BodcChecker {
 		} catch (Exception e) {
 			errorMsg="Parameter "+typeData.getCodeToUse() +":"
 					+" instrument code \""+typeData.getInstrumentCode()+"\" ("+typeData.getInstrument()+") does not exist in BODC list " + SdnVocabularyManager.LIST_L22;// TODO 35230 message
+			guiLogger.error(errorMsg);
+			guiLogger.error(e.getMessage());
 			ok=false;
 		} 
 
@@ -312,6 +338,7 @@ public class BodcChecker {
 		return res;
 	}
 	public BODCResult checkFallRate(String fallrateCode, String fallrateLabel) {
+		guiLogger.info("BODC check: L33 fall rate code");
 		BODCResult res= new BODCResult(BODC_RES_STATUS.OK);
 		res.setFallrateCode(fallrateCode);
 		res.setFallrateLabel(fallrateLabel);
@@ -337,6 +364,8 @@ public class BodcChecker {
 			}
 		} catch (Exception e) {
 			errorMsg+=" Fall rate \""+fallrateCode+"\" ("+fallrateLabel+") does not exist in BODC list " + SdnVocabularyManager.LIST_L33;// TODO 35230 message
+			guiLogger.error(errorMsg);
+			guiLogger.error(e.getMessage());
 			ok=false;
 		} 
 
@@ -356,7 +385,7 @@ public class BodcChecker {
 		return res;
 	}
 	public BODCResult checkShip(String shipCode, String shipLabel) {
-
+		guiLogger.info("BODC check: C17 ship code");
 		//  TODO 35230: check label if code is OK
 		BODCResult res= new BODCResult(BODC_RES_STATUS.OK);
 		res.setShipCode(shipCode);
@@ -380,6 +409,8 @@ public class BodcChecker {
 			}
 		} catch (Exception e) {
 			errorMsg+=" Ship \""+shipCode+"\" ("+shipLabel+") does not exist in BODC list " + SdnVocabularyManager.LIST_C17;// TODO 35230 message
+			guiLogger.error(errorMsg);
+			guiLogger.error(e.getMessage());
 			ok=false;
 		} 
 
@@ -399,7 +430,7 @@ public class BodcChecker {
 		return res;
 	}
 	public BODCResult checkRegion(String regionCode, String regionLabel) {
-
+		guiLogger.info("BODC check: C19 region code");
 		//  TODO 35230: check label if code is OK
 		BODCResult res= new BODCResult(BODC_RES_STATUS.OK);
 		res.setRegionCode(regionCode);
@@ -424,6 +455,8 @@ public class BodcChecker {
 			}
 		} catch (Exception e) {
 			errorMsg+=" Region \""+regionCode+"\" ("+regionLabel+") does not exist in BODC list " + SdnVocabularyManager.LIST_C19;// TODO 35230 message
+			guiLogger.error(errorMsg);
+			guiLogger.error(e.getMessage());
 			ok=false;
 		} 
 
@@ -446,6 +479,7 @@ public class BodcChecker {
 		return checkCountry(countryCode, null);
 	}
 	public BODCResult checkCountry(String countryCode, String countryLabel) {
+		guiLogger.info("BODC check: C18 country code");
 		//  TODO 35230: check label if code is OK
 		BODCResult res= new BODCResult(BODC_RES_STATUS.OK);
 		res.setCountryCode(countryCode);
@@ -470,6 +504,8 @@ public class BodcChecker {
 			}
 		} catch (Exception e) {
 			errorMsg+="Country \""+countryCode+"\" ("+countryLabel+") does not exist in BODC list " + SdnVocabularyManager.LIST_C18;// TODO 35230 message
+			guiLogger.error(errorMsg);
+			guiLogger.error(e.getMessage());
 			ok=false;
 		} 
 
