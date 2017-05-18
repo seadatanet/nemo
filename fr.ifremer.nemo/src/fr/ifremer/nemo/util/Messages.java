@@ -166,7 +166,11 @@ public class Messages {
 	public static String edit_file_enteteStation_radIndicator;
 	public static String edit_file_enteteStation_indicator;
 	public static String edit_file_enteteStation_linesBeforeData;
-	public static String edit_file_enteteStation_colTitle;
+	
+	public static String edit_file_columnTitlesSection;
+	public static String edit_file_columnTitlesSection_title;
+	public static String edit_file_columnTitlesSection_desc;
+	
 	public static String edit_file_finStation_title;
 	public static String edit_file_finStation;
 	public static String edit_file_indicFinDonnees_title;
@@ -615,6 +619,59 @@ public class Messages {
 	public static String ParameterModel_2;
 
 	public static String errorParseChar;
+	
+	
+	
+	
+	public static String warning_model_old;
+	
+	// BODC CHECKS
+	public static String BODC_check_param;
+	public static String BODC_check_invalidDataTypeList;
+	public static String BODC_check_param_p09;
+	public static String BODC_check_param_p09_deprecated;
+	public static String BODC_check_param_p01fromp09_deprecated;
+	public static String BODC_check_param_p09_notExist;
+	public static String BODC_check_param_p01fromp09_notExist;
+	
+	public static String BODC_check_param_p01;
+	public static String BODC_check_param_p01_deprecated;
+	public static String BODC_check_param_p01_notExist;
+	
+	public static String BODC_check_param_p02;
+	public static String BODC_check_param_p02_deprecated;
+	public static String BODC_check_param_p02_notExist;
+	
+	public static String BODC_check_unit_p06;
+	public static String BODC_check_param_p06_deprecated;
+	public static String BODC_check_param_p06_notExist;
+	public static String BODC_check_param_p06_labelUpdate;
+	public static String BODC_check_param_p06_p01fromp09;
+	
+	public static String BODC_check_instrument_l22;
+	public static String BODC_check_intrument_l22_deprecated;
+	public static String BODC_check_intrument_l22_notExist;
+	
+	public static String BODC_check_fallrate_l33;
+	public static String BODC_check_fallrate_l33_deprecated;
+	public static String BODC_check_fallrate_l33_notExist;
+	
+	public static String BODC_check_ship_c17;
+	public static String BODC_check_ship_c17_deprecated;
+	public static String BODC_check_ship_c17_notExist;
+	
+	public static String BODC_check_region_c19;
+	public static String BODC_check_region_c19_deprecated;
+	public static String BODC_check_region_c19_notExist;
+	
+	public static String BODC_check_country_c18;
+	public static String BODC_check_country_c18_deprecated;
+	public static String BODC_check_countryNoLabel_c18_deprecated;
+	public static String BODC_check_country_c18_notExist;
+	public static String BODC_check_countryNoLabel_c18_notExist;
+
+	
+	
 	static {
 		// check config de la langue
 		String langue = Nemo.getInstance().getConfig().getLang();

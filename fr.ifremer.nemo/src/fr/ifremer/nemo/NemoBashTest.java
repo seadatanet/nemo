@@ -45,6 +45,11 @@ import fr.ifremer.nemo.config.Configuration;
 import fr.ifremer.nemo.config.Proxy;
 import fr.ifremer.nemo.domain.NetCDFLongNameParameterManager;
 import fr.ifremer.nemo.domain.StandardNameParameterManager;
+import fr.ifremer.nemo.output.GenerationException;
+import fr.ifremer.nemo.ui.edit.data.TypeData;
+import fr.ifremer.nemo.util.BODCResult;
+import fr.ifremer.nemo.util.BODCResult.BODC_RES_STATUS;
+import fr.ifremer.nemo.util.BodcChecker;
 import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Global.DataListTypeEnum;
@@ -98,12 +103,12 @@ public class NemoBashTest {
 	 * *************** CONFIG *********************************
 	 * ********************************************************
 	 */
-	boolean REPLACE=true;// WARNING!!!
-	boolean REMOVE_JUNIT=true;
+	boolean REPLACE=false;// WARNING!!!
+	boolean REMOVE_JUNIT=false;
 	public static String[] testDirAlone = {};
-//	public static String[] testDirAlone = {"30378"};
-//	public static String[] testDirAlone = {"cruiseDir_profile_diap_stationsOrder"};
-//	public static String[] testDirAlone = {"33278_separators_withCruiseHeader"};
+	//		public static String[] testDirAlone = {"18333_traj_collectionGroupByCruise"};
+	//	public static String[] testDirAlone = {"cruiseDir_profile_diap_stationsOrder"};
+	//	public static String[] testDirAlone = {"33278_separators_withCruiseHeader"};
 	/**
 	 * ********************************************************
 	 * ********************************************************
@@ -145,20 +150,20 @@ public class NemoBashTest {
 	 */
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		 LoggerContext context = (org.apache.logging.log4j.core.LoggerContext) LogManager.getContext(false);
-         File file = new File( "resources/log4j2.xml");
+		LoggerContext context = (org.apache.logging.log4j.core.LoggerContext) LogManager.getContext(false);
+		File file = new File( "resources/log4j2.xml");
 
-context.setConfigLocation(file.toURI());
-//		DOMConfigurator.configure("resources/log4jBatch.xml"); //$NON-NLS-1$
-//		batchLogger = Logger.getLogger("nemoBatch");//$NON-NLS-1$
-//		batchLogger.setLevel(Level.DEBUG);
+		context.setConfigLocation(file.toURI());
+		//		DOMConfigurator.configure("resources/log4jBatch.xml"); //$NON-NLS-1$
+		//		batchLogger = Logger.getLogger("nemoBatch");//$NON-NLS-1$
+		//		batchLogger.setLevel(Level.DEBUG);
 		batchLogger = LogManager.getLogger("nemoBatch");
 		// LOGGER
-//		DOMConfigurator.configure("resources/log4jBatch.xml"); //$NON-NLS-1$
-//		testLogger = Logger.getLogger("nemoJunits");//$NON-NLS-1$
-//		testLogger.setLevel(Level.DEBUG);
+		//		DOMConfigurator.configure("resources/log4jBatch.xml"); //$NON-NLS-1$
+		//		testLogger = Logger.getLogger("nemoJunits");//$NON-NLS-1$
+		//		testLogger.setLevel(Level.DEBUG);
 		testLogger = LogManager.getLogger("nemoJunits");
-		
+
 		// // LOGGER
 		//		DOMConfigurator.configure("resources/log4j.xml"); //$NON-NLS-1$
 		//		netCDFLogger = Logger.getLogger("nemoJunits");//$NON-NLS-1$
@@ -562,12 +567,265 @@ context.setConfigLocation(file.toURI());
 		Assert.assertTrue(res);
 	}
 
+	
+	
+	private void logBODCTitle(String title){
+		testLogger.info("=========== "+title+"==========================");
+	}
+	
+	private void logResBodc(BODCResult res){
+		if (res.getResStatus()==BODC_RES_STATUS.OK){
+			testLogger.info("   -> OK");
+		}else if(res.getResStatus()==BODC_RES_STATUS.WARNING){
+			testLogger.warn("   -> WARN");
+			testLogger.warn(res.getWarningMsg());
+		}else{
+			testLogger.error("   -> ERROR");
+			testLogger.error(res.getErrorMsg());
+		}
+	}
+	private void logResListBodc(List<BODCResult> bodcResList){
+		for (BODCResult res : bodcResList){
+			logResBodc(res);
+		}
+	}
+
+
+	@Test
+	public void testBODCSHip(){
+		Nemo.getInstance().setLogger(testLogger);
+		logBODCTitle("C17 OK");
+		BODCResult res = BodcChecker.getInstance().checkShip("35AY", "Alis");
+		logResBodc(res);
+		
+		logBODCTitle("C17 KO: code not exist");
+		res = BodcChecker.getInstance().checkShip("zzzz", "Alis");
+		logResBodc(res);
+		
+		logBODCTitle("C17 KO: bad label");
+		res = BodcChecker.getInstance().checkShip("35AY", "zzzzz");
+		logResBodc(res);
+		
+	}
+	
+	@Test
+	public void testBODCRegion(){
+		Nemo.getInstance().setLogger(testLogger);
+		logBODCTitle("C19 OK");
+		BODCResult res = BodcChecker.getInstance().checkRegion("8_3", "Coral Sea");
+		logResBodc(res);
+		
+		logBODCTitle("C19 KO: code not exist");
+		 res = BodcChecker.getInstance().checkRegion("0_0", "Coral Sea");
+		logResBodc(res);
+		
+		logBODCTitle("C19 KO: bad label");
+		 res = BodcChecker.getInstance().checkRegion("8_3", "zzzz");
+		logResBodc(res);
+		
+	}
+	@Test
+	public void testBODCCountry(){
+		Nemo.getInstance().setLogger(testLogger);
+		logBODCTitle("C18 OK");
+		BODCResult res = BodcChecker.getInstance().checkCountry("35");
+		logResBodc(res);
+		
+		logBODCTitle("C18 KO: code not exist");
+		 res = BodcChecker.getInstance().checkCountry("00");
+		logResBodc(res);
+		
+		logBODCTitle("C18 KO: bad label");
+		 res = BodcChecker.getInstance().checkCountry("35", "zzzz");
+		logResBodc(res);
+		
+	}
+	@Test
+	public void testBODCFallrate(){
+		Nemo.getInstance().setLogger(testLogger);
+		logBODCTitle("L33 OK");
+		BODCResult res = BodcChecker.getInstance().checkFallRate("904", "AML oceanographic CTD");
+		logResBodc(res);
+		
+		logBODCTitle("L33 KO: code not exist");
+		res = BodcChecker.getInstance().checkFallRate("0", "AML oceanographic CTD");
+		logResBodc(res);
+		
+		logBODCTitle("L33 KO: bad label");
+		res = BodcChecker.getInstance().checkFallRate("904", "zzz");
+		logResBodc(res);
+		
+	}
+	
+	@Test
+	public void testBODCCheckParameterP09(){
+		Nemo.getInstance().setLogger(testLogger);
+		TypeData typeCourant ;
+
+//		typeCourant = new TypeData(theEntryKey, theEntryTerm, theCodeP01, theNameP01, theUniteCode, theUniteLabel, theInstrumentCode, theInstrumentLabel, itheIsP011)
+		logBODCTitle("P09 OK");
+		typeCourant = new TypeData("PHOS", "PHOSPHATE (PO4-P) CONTENT", null, null, null, "millimole/m3", null, null, false);
+		try {
+			List<BODCResult> bodcResList = BodcChecker.getInstance().checkParameterCode(typeCourant , 	DataListTypeEnum.P091);
+			logResListBodc(bodcResList);
+		} catch (GenerationException e) {
+			testLogger.error(e.getMessage());
+		}
+		logBODCTitle("P09 KO: deprecated");
+		typeCourant = new TypeData("TUR1", "LIGHT DIFFUSION COEFFICIENT", null, null, null, "millimole/m3", null, null, false);
+		try {
+			List<BODCResult> bodcResList = BodcChecker.getInstance().checkParameterCode(typeCourant , 	DataListTypeEnum.P091);
+			logResListBodc(bodcResList);
+		} catch (GenerationException e) {
+			testLogger.error(e.getMessage());
+		}
+
+		logBODCTitle("P09 KO: code not exist");
+		typeCourant = new TypeData("XXXX", "PHOSPHATE (PO4-P) CONTENT", null, null, null, "millimole/m3", null, null, false);
+		try {
+			List<BODCResult> bodcResList = BodcChecker.getInstance().checkParameterCode(typeCourant , 	DataListTypeEnum.P091);
+			logResListBodc(bodcResList);
+		} catch (GenerationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		logBODCTitle("P09 KO: bad P09 label"); // TODO a tester, ou a corriger automatiquement dans le fichier de sortie?
+		typeCourant = new TypeData("PHOS", "dddd", null, null, null, "millimole/m3", null, null, false);
+		try {
+			List<BODCResult> bodcResList = BodcChecker.getInstance().checkParameterCode(typeCourant , 	DataListTypeEnum.P091);
+			logResListBodc(bodcResList);
+		} catch (GenerationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		logBODCTitle("P09 KO: bad P06 label"); 
+		typeCourant = new TypeData("PHOS", "PHOSPHATE (PO4-P) CONTENT", null, null, null, "sss", null, null, false);
+		BODCResult res = BodcChecker.getInstance().checkP06(typeCourant , 	DataListTypeEnum.P091);
+		logResBodc(res);
+		
+		logBODCTitle("P09 KO: bad L22 instrument code"); 
+		typeCourant = new TypeData("PHOS", "PHOSPHATE (PO4-P) CONTENT", null, null, null,"millimole/m3", "xxx", "xxx", false);
+		res = BodcChecker.getInstance().checkInstrument(typeCourant);
+		logResBodc(res);
+		
+		logBODCTitle("P09 KO: deprecated L22 instrument code"); 
+		typeCourant = new TypeData("PHOS", "PHOSPHATE (PO4-P) CONTENT", null, null, null,"Micromoles per litre", "TOOL0697", "xxx", false);
+		res = BodcChecker.getInstance().checkInstrument(typeCourant );
+		logResBodc(res);
+		
+		logBODCTitle("P09 KO: bad L22 instrument label"); // TODO non testé
+		typeCourant = new TypeData("PHOS", "PHOSPHATE (PO4-P) CONTENT", null, null, null,"millimole/m3", "TOOL000X", "xxx", false);
+		res = BodcChecker.getInstance().checkInstrument(typeCourant);
+		logResBodc(res);
+	}
+	@Test
+	public void testBODCCheckParameterP01fromP09(){
+		Nemo.getInstance().setLogger(testLogger);
+		TypeData typeCourant ;
+
+//		typeCourant = new TypeData(theEntryKey, theEntryTerm, theCodeP01, theNameP01, theUniteCode, theUniteLabel, theInstrumentCode, theInstrumentLabel, itheIsP011)
+		logBODCTitle("P01fromP09 OK");
+		typeCourant = new TypeData("PRES","SEA PRESSURE sea surface=0" ,
+				"PRESCX01", "Pressure (spatial co-ordinate) exerted by the water body by computation of depth using unspecified drop rate algorithm converted to pressure using UNESCO algorithm", 
+				null, "millimole/m3",
+				null, null, true);
+		try {
+			List<BODCResult> bodcResList = BodcChecker.getInstance().checkParameterCode(typeCourant , 	DataListTypeEnum.P011_VIA_P091);
+			logResListBodc(bodcResList);
+		} catch (GenerationException e) {
+			testLogger.error(e.getMessage());
+		}
+		
+		logBODCTitle("P01fromP09 KO: code P09 TUR1 deprecated");
+		typeCourant = new TypeData("TUR1","SEA PRESSURE sea surface=0" ,
+				"PRESCX01", "Pressure (spatial co-ordinate) exerted by the water body by computation of depth using unspecified drop rate algorithm converted to pressure using UNESCO algorithm", 
+				null, "millimole/m3",
+				null, null, true);
+		try {
+			List<BODCResult> bodcResList = BodcChecker.getInstance().checkParameterCode(typeCourant , 	DataListTypeEnum.P011_VIA_P091);
+			logResListBodc(bodcResList);
+		} catch (GenerationException e) {
+			testLogger.error(e.getMessage());
+		}
+
+		logBODCTitle("P01fromP09 KO: code P09 xxx not exist");
+		typeCourant = new TypeData("xxx","SEA PRESSURE sea surface=0" ,
+				"PRESCX01", "Pressure (spatial co-ordinate) exerted by the water body by computation of depth using unspecified drop rate algorithm converted to pressure using UNESCO algorithm", 
+				null, "millimole/m3",
+				null, null, true);
+		try {
+			List<BODCResult> bodcResList = BodcChecker.getInstance().checkParameterCode(typeCourant , 	DataListTypeEnum.P011_VIA_P091);
+			logResListBodc(bodcResList);
+		} catch (GenerationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		logBODCTitle("P01fromP09 KO: code  P01 PSSTZZ01 deprecated");
+		typeCourant = new TypeData("PRES","SEA PRESSURE sea surface=0" ,
+				"PSSTZZ01", "Pressure (spatial co-ordinate) exerted by the water body by computation of depth using unspecified drop rate algorithm converted to pressure using UNESCO algorithm", 
+				null, "millimole/m3",
+				null, null, true);
+		try {
+			List<BODCResult> bodcResList = BodcChecker.getInstance().checkParameterCode(typeCourant , 	DataListTypeEnum.P011_VIA_P091);
+			logResListBodc(bodcResList);
+		} catch (GenerationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		logBODCTitle("P01fromP09 KO: code  P01 xxxxxxxx does not exist");
+		typeCourant = new TypeData("PRES","SEA PRESSURE sea surface=0" ,
+				"xxxxxxxx", "Pressure (spatial co-ordinate) exerted by the water body by computation of depth using unspecified drop rate algorithm converted to pressure using UNESCO algorithm", 
+				null, "millimole/m3",
+				null, null, true);
+		try {
+			List<BODCResult> bodcResList = BodcChecker.getInstance().checkParameterCode(typeCourant , 	DataListTypeEnum.P011_VIA_P091);
+			logResListBodc(bodcResList);
+		} catch (GenerationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		logBODCTitle("P01fromP09 KO: bad P06 label xxx"); 
+		typeCourant = new TypeData("PRES","SEA PRESSURE sea surface=0" ,
+				"PRESCX01", "Pressure (spatial co-ordinate) exerted by the water body by computation of depth using unspecified drop rate algorithm converted to pressure using UNESCO algorithm", 
+				null, "xxxxx",
+				null, null, true);
+		BODCResult res = BodcChecker.getInstance().checkP06(typeCourant , 	DataListTypeEnum.P011_VIA_P091);
+		logResBodc(res);
+		
+		logBODCTitle("P01fromP09 KO: bad L22 instrument code"); 
+		typeCourant = new TypeData("PRES","SEA PRESSURE sea surface=0" ,
+				"PRESCX01", "Pressure (spatial co-ordinate) exerted by the water body by computation of depth using unspecified drop rate algorithm converted to pressure using UNESCO algorithm", 
+				null, "millimole/m3",
+				"xxx", null, true);
+		res = BodcChecker.getInstance().checkInstrument(typeCourant);
+		logResBodc(res);
+		
+		logBODCTitle("P01fromP09 KO: deprecated L22 instrument code"); 
+		typeCourant = new TypeData("PRES","SEA PRESSURE sea surface=0" ,
+				"PRESCX01", "Pressure (spatial co-ordinate) exerted by the water body by computation of depth using unspecified drop rate algorithm converted to pressure using UNESCO algorithm", 
+				null, "millimole/m3",
+				"TOOL0697", "xxx", true);
+		res = BodcChecker.getInstance().checkInstrument(typeCourant );
+		logResBodc(res);
+		
+		logBODCTitle("P01fromP09 KO: bad L22 instrument label"); // TODO non testé
+		typeCourant = new TypeData("PRES","SEA PRESSURE sea surface=0" ,
+				"PRESCX01", "Pressure (spatial co-ordinate) exerted by the water body by computation of depth using unspecified drop rate algorithm converted to pressure using UNESCO algorithm", 
+				null, "millimole/m3",
+				"xxx", "xxx", true);
+		res = BodcChecker.getInstance().checkInstrument(typeCourant);
+		logResBodc(res);
+	}
 	/**
 	 * =================================================================
 	 * methodes
 	 * =================================================================
 	 */
-//			@Test
+	//			@Test
 	public void cleanDirectories(){
 
 
@@ -615,7 +873,7 @@ context.setConfigLocation(file.toURI());
 												else if(f.getName().equals("pf_input")){
 													System.out.println("delete file " + f);
 													f.delete();
-													
+
 												}
 											}
 										}
@@ -638,13 +896,16 @@ context.setConfigLocation(file.toURI());
 		int cptTests = 0;
 		int cptFail = 0;
 		boolean testFound;
+		if (testDirAlone.length > 0){
+			testLogger.info("WARNING: TEST ONLY DIRECTORY set in testDirAlone" );
+		}
 		//		testLogger.info("dataRootPath" + dataRootPath );
 		File root = new File(dataRootPath);
 		for (File testDir : root.listFiles()) {
 			// writeInResultsFile(testDir.getName() + ";");
 			if (isToTest(testDir.getName())) {
 				// writeInResultsFile("yes" + ";");
-								testLogger.info("___ testDir: " + testDir.toString());
+				testLogger.info("___ testDir: " + testDir.toString());
 				message = new Message();
 				message.dirName = testDir.getName();
 				testFound = false;
@@ -778,13 +1039,15 @@ context.setConfigLocation(file.toURI());
 	}
 
 	private void cleanCDISummary(String outputAbsolutePath) {
-		File cdi= new File( outputAbsolutePath+File.separator+"cdiSummary_junit");
-		try {
-			cdi.delete();
-		} catch (Exception e) {
-			// TODO: handle exception
+		if (REMOVE_JUNIT){
+			File cdi= new File( outputAbsolutePath+File.separator+"cdiSummary_junit");
+			try {
+				cdi.delete();
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
 		}
-		
+
 	}
 
 	private boolean compareCdiSummary(String outputAbsolutePath) {
@@ -794,10 +1057,10 @@ context.setConfigLocation(file.toURI());
 		String refFileLine;
 		String outputTest =   outputAbsolutePath+File.separator+"cdiSummary_junit";
 		String output_REFERENCE =   outputAbsolutePath+File.separator+"cdiSummary_REFERENCE";;
-//		new File(output_REFERENCE).delete();
+		//		new File(output_REFERENCE).delete();
 		// move junit to ref as nc
-//		testLogger.warn("rename " +outputTest + " --> " +output_REFERENCE);
-//		new File(outputTest).renameTo(new File(output_REFERENCE));
+		//		testLogger.warn("rename " +outputTest + " --> " +output_REFERENCE);
+		//		new File(outputTest).renameTo(new File(output_REFERENCE));
 		boolean identical = true;
 
 		try {
@@ -821,34 +1084,35 @@ context.setConfigLocation(file.toURI());
 					refFileLine = bufRef.readLine();
 					String format = "";
 
-					identical = outputLine.equals(refFileLine);
+					identical = true;//outputLine.equals(refFileLine);
 					String[] splitOutput = outputLine.split("\t");
 					String[] splitRef = refFileLine.split("\t");
 					for (int i=0; i<splitRef.length; i++){
 						if (i!=5){// col 5 = generation date -> changes
-							identical=  splitOutput[i].equals(splitRef[i]);
-							if (!identical){
+							boolean subidentical=  splitOutput[i].equals(splitRef[i]);
+							if (!subidentical){
 								testLogger.error("cdi diff col. "+ i+1 + ": out: " +splitOutput[i]+ "!= ref: " +splitRef[i] );
 								testLogger.error("CDI REF >>  "+ refFileLine);
 								testLogger.error("CDI OUT >>  "+ outputLine);
 								message.diff+="#REF# : "+refFileLine + "#OUT# : " +outputLine; 
+								identical=false;
 							}
 						}
 					}
-					
-					
+
+
 					// depuis le 17/01/2012, le mapping BODC a changé : PRESPS02
 					// remplace par PRESPR01
-//					Pattern p;
-//					Matcher m;
-//					if (!identical) {
-//						p = Pattern.compile("PRESPS02");
-//						m = p.matcher(refFileLine);
-//						if (m.find()) {
-//							refFileLine = m.replaceAll("PRESPR01");
-//							identical = outputLine.equals(refFileLine);
-//						}
-//					}
+					//					Pattern p;
+					//					Matcher m;
+					//					if (!identical) {
+					//						p = Pattern.compile("PRESPS02");
+					//						m = p.matcher(refFileLine);
+					//						if (m.find()) {
+					//							refFileLine = m.replaceAll("PRESPR01");
+					//							identical = outputLine.equals(refFileLine);
+					//						}
+					//					}
 					if (!identical){
 						testLogger.error("CDI REF >>  "+ refFileLine);
 						testLogger.error("CDI OUT >>  "+ outputLine);
@@ -866,7 +1130,7 @@ context.setConfigLocation(file.toURI());
 			testLogger.error("CDISummary comparison failed");
 			return false;
 		}
-		
+
 	}
 
 	public boolean isToTest(String dirName) {
@@ -895,6 +1159,7 @@ context.setConfigLocation(file.toURI());
 		cdiSummaryFile = outputAbsolutePath + File.separator+ "cdiSummary_junit";
 		File mod = new File(model);
 		Nemo.getInstance().resetInstance();
+		Nemo.getInstance().setBatchMode(true);
 		Nemo.getInstance().getConfig().setIdEdmoRespCdi("486");// 486 is ifremer
 		Nemo.getInstance().getConfig().setDateISO(isDateIso);
 		// add long Name for test
@@ -910,7 +1175,7 @@ context.setConfigLocation(file.toURI());
 			message.isModelFound = false;
 		} else {
 			message.isModelFound = true;
-			Nemo.getInstance().setBatchMode(true);
+
 			try {
 				res = shell.main(inputAbsolutePath, output, model, conversion,
 						sortDatas, convType, datasetRef, cdiSummaryFile,
@@ -1037,7 +1302,7 @@ context.setConfigLocation(file.toURI());
 		standardNames.put("PRESPR01", "sea_water_pressure"); //$NON-NLS-1$//$NON-NLS-2$
 		standardNames.put(
 				"NTRAYYDZ", "mole_concentration_of_nitrate_in_sea_water"); //$NON-NLS-1$//$NON-NLS-2$
-//		standardNames.put("ADEPZZ01", "depth"); //$NON-NLS-1$//$NON-NLS-2$
+		//		standardNames.put("ADEPZZ01", "depth"); //$NON-NLS-1$//$NON-NLS-2$
 		standardNames.put("PSSTZZ01", "sea_water_temperature"); //$NON-NLS-1$//$NON-NLS-2$
 		standardNames.put("ODSDM021", "sea_water_salinity"); //$NON-NLS-1$//$NON-NLS-2$
 		standardNames
@@ -1118,9 +1383,9 @@ context.setConfigLocation(file.toURI());
 									);
 						}
 					}else{
-					currentComp &= compareCFPoint(
-							outputAbsolutePath+File.separator+ outputName+File.separator+ f.getName(), 
-							f.getAbsolutePath());
+						currentComp &= compareCFPoint(
+								outputAbsolutePath+File.separator+ outputName+File.separator+ f.getName(), 
+								f.getAbsolutePath());
 					}
 				}
 			}else{
@@ -1169,7 +1434,7 @@ context.setConfigLocation(file.toURI());
 		NetcdfFile junit = null ;
 		String refPath =outputNCReferenceName;
 		String junitPath=outputTestName;
-		
+
 		Formatter formatter = new Formatter();
 
 		message.batchCompRes = true;
@@ -1178,6 +1443,7 @@ context.setConfigLocation(file.toURI());
 			message.isReferenceFound = true;
 		}else{
 			message.isReferenceFound = false;
+			testLogger.error("reference file not found " + refPath);
 			return false;
 		}
 		if (new File(junitPath).exists()){
@@ -1295,8 +1561,8 @@ context.setConfigLocation(file.toURI());
 		//		String refPath = outputDir.getAbsolutePath()+File.separator+outputRefFileName;
 		if (!message.batchCompRes && REPLACE ){
 			// delete ref nc
-//			testLogger.warn("delete "+ refPath);
-//			new File(refPath).delete();
+			//			testLogger.warn("delete "+ refPath);
+			//			new File(refPath).delete();
 			testLogger.warn("rename " +refPath + " --> " +refPath+".old");
 			new File(refPath).renameTo(new File(refPath+".old"));
 			// move junit to ref as nc
@@ -1306,7 +1572,11 @@ context.setConfigLocation(file.toURI());
 			// delete junit result files
 			new File(junitPath).delete();
 		}
-
+		if (REMOVE_JUNIT){
+			// delete junit result files
+			testLogger.warn("delete "+ junitPath);
+			new File(junitPath).delete();
+		}
 		return message.batchCompRes;
 
 	}
@@ -1351,36 +1621,36 @@ context.setConfigLocation(file.toURI());
 					// remplace par PRESPR01
 					Pattern p;
 					Matcher m;
-//					if (!identical) {
-//						p = Pattern.compile("PRESPS02");
-//						m = p.matcher(refFileLine);
-//						if (m.find()) {
-//							refFileLine = m.replaceAll("PRESPR01");
-//							identical = outputLine.equals(refFileLine);
-//						}
-//					}
+					//					if (!identical) {
+					//						p = Pattern.compile("PRESPS02");
+					//						m = p.matcher(refFileLine);
+					//						if (m.find()) {
+					//							refFileLine = m.replaceAll("PRESPR01");
+					//							identical = outputLine.equals(refFileLine);
+					//						}
+					//					}
 					// depuisles vocab v2, le mapping BODC a changé : P011
 					// remplace par P01
-//					if (!identical) {
-//						p = Pattern.compile("P011");
-//						m = p.matcher(refFileLine);
-//						if (m.find()) {
-//							refFileLine = m.replaceAll("P01");
-//							identical = outputLine.equals(refFileLine);
-//							isVocabV2 = true;
-//						}
-//					}
+					//					if (!identical) {
+					//						p = Pattern.compile("P011");
+					//						m = p.matcher(refFileLine);
+					//						if (m.find()) {
+					//							refFileLine = m.replaceAll("P01");
+					//							identical = outputLine.equals(refFileLine);
+					//							isVocabV2 = true;
+					//						}
+					//					}
 					// depuisles vocab v2, le mapping BODC a changé : P061
 					// remplace par P06
-//					if (!identical) {
-//						p = Pattern.compile("P061");
-//						m = p.matcher(refFileLine);
-//						if (m.find()) {
-//							refFileLine = m.replaceAll("P06");
-//							identical = outputLine.equals(refFileLine);
-//							isVocabV2 = true;
-//						}
-//					}
+					//					if (!identical) {
+					//						p = Pattern.compile("P061");
+					//						m = p.matcher(refFileLine);
+					//						if (m.find()) {
+					//							refFileLine = m.replaceAll("P06");
+					//							identical = outputLine.equals(refFileLine);
+					//							isVocabV2 = true;
+					//						}
+					//					}
 					if (!identical){
 						testLogger.error("REF >>  "+ refFileLine);
 						testLogger.error("OUT >>  "+ outputLine);
@@ -1559,5 +1829,7 @@ context.setConfigLocation(file.toURI());
 
 		return false;
 	}
+
+
 
 }

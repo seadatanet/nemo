@@ -1,7 +1,5 @@
 package fr.ifremer.nemo.ui.edit.data.inputData;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.jface.viewers.ITableLabelProvider;
 import org.eclipse.swt.graphics.Image;
@@ -9,7 +7,6 @@ import org.eclipse.swt.graphics.Image;
 import fr.ifremer.nemo.Nemo;
 
 public class DataProvider implements ITableLabelProvider{
-	final Logger logger = LogManager.getLogger("nemoGui");
 	private final String separator;
 
 	public DataProvider() {
@@ -51,7 +48,7 @@ public class DataProvider implements ITableLabelProvider{
 		try{
 			res= ((String)element).split(separator)[columnIndex];
 		}catch (Exception e) {
-			logger.debug("error on data, maybe a station header " + e);
+			Nemo.getInstance().getLogger().debug("error on data, maybe a station header " + e);
 		}
 		return res;
 	}

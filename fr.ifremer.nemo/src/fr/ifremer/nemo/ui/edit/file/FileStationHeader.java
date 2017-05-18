@@ -28,7 +28,7 @@ public class FileStationHeader extends FileSection
     protected Composite subCompo, col01, col02;
     protected Button radNumber, radIndicator;
     protected SetText setterIndicator, setterLinesBeforeData;
-    protected Button checkColTitlesInStationHeader;
+   
     
 
     /**
@@ -82,12 +82,7 @@ public class FileStationHeader extends FileSection
     {
         return radNumber.getSelection();
     }
-    public boolean isColTitlesInStationHeader(){
-    	return checkColTitlesInStationHeader.getSelection();
-    }
-    public void setColTitlesInStationHeader(boolean select){
-    	checkColTitlesInStationHeader.setSelection(select);
-    }
+   
     /**
      * {@inheritDoc}
      */
@@ -124,9 +119,7 @@ public class FileStationHeader extends FileSection
 
         setterLinesBeforeData.draw(col02, filled);
         
-        checkColTitlesInStationHeader = new Button(compo, SWT.CHECK);
-        checkColTitlesInStationHeader.setBackground(Nemo.getInstance().getViewMain().getBackgroundEdit());
-        checkColTitlesInStationHeader.setText(Messages.edit_file_enteteStation_colTitle);
+       
 
         selectNumber(true);
         addRadListener(radNumber);

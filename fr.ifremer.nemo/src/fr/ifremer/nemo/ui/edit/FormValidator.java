@@ -7,9 +7,9 @@
  */
 package fr.ifremer.nemo.ui.edit;
 
-import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.util.Messages;
 
@@ -23,7 +23,7 @@ public class FormValidator
 	protected static Logger guiLogger;
     public FormValidator()
     {
-    	guiLogger = LogManager.getLogger("nemoGui");
+    	guiLogger =Nemo.getInstance().getLogger();
     }
     
     public void validate()

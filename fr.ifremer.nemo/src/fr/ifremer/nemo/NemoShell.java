@@ -306,7 +306,6 @@ public class NemoShell {
 				TypeData typeCourantOrig = new TypeData(typeCourant);
 				List<BODCResult> bodcResList = BodcChecker.getInstance().checkParameterCode(typeCourant, 	inputDomain.getData().getModel().getDataListType());
 				for (BODCResult res :bodcResList){
-					//			bodcRes = BodcChecker.getInstance().checkParameterCode(typeCourant);
 					if (res.getResStatus() == BODC_RES_STATUS.KO){
 						logger.error(res.getErrorMsg());
 						ok=false;
@@ -315,7 +314,6 @@ public class NemoShell {
 						pModel.setParameter(typeCourant);
 						logger.warn(res.getWarningMsg());
 						
-						// TODO: replace vertical ref or display an error
 						replaceVerticalParameters(typeCourantOrig, typeCourant,inputDomain);
 						
 					}

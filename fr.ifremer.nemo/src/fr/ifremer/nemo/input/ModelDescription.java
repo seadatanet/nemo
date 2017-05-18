@@ -128,7 +128,10 @@ public class ModelDescription extends NLS {
 	public static String a_enable;
 	public static String a_string;
 	public static String a_vari;
-	public static String a_colTitleInStationHeader;
+	
+	public static String node_colTitleInInputFile;
+	public static String a_colTitleInInputFileCheck;
+	public static String a_colTitleInInputFileLineNb;
 
 	public static String setter_formattedEndDate;
 

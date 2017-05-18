@@ -56,6 +56,7 @@ public class EditFileForm extends EditForm
 	public FileStationHeader sectionStationHeader;
 	public FileSection sectionEndOfStation;
 	public FileEndData sectionDataTerminator;
+	public FileDataColumnTitlesSection  sectionDataColumnTitles;
 
 	// zone de texte pour l'affichage des données en entrée
 	private StyledText textAreaFile;
@@ -415,6 +416,12 @@ public class EditFileForm extends EditForm
 		sectionDataTerminator = new FileEndData(Messages.edit_file_indicFinDonnees_title, Messages.edit_file_indicFinDonnees_title, Messages.edit_file_indicFinDonnees, this);
 		sectionDataTerminator.addSetter(Messages.edit_file_sectionRuptureDonnees_end_with, Global.EMPTY_STRING);
 		listeSections.add(sectionDataTerminator);
+		
+		//33278
+		sectionDataColumnTitles = new FileDataColumnTitlesSection(Messages.edit_file_columnTitlesSection_title, Messages.edit_file_columnTitlesSection_title, Messages.edit_file_columnTitlesSection_desc, this);
+		sectionDataColumnTitles.addSetter(null, Global.ZERO);
+		listeSections.add(sectionDataColumnTitles);
+		
 	}
 
 	@Override
@@ -431,6 +438,7 @@ public class EditFileForm extends EditForm
 		// TODO BGT fonctionnement ok mais a deplacer dans rules
 		sectionFileHeader.setEnabled(radioFichier.getSelection() || isMultiStationFileChecked());
 		buttonValidateAll.setEnabled(!Nemo.getInstance().getNomModele().equals(Global.EMPTY_STRING));
+		sectionDataColumnTitles.setEnabled(RulesManager.getInstance().isInputWithSeparatorsAndModelUpToDate());
 	}
 
 	/**
@@ -484,7 +492,8 @@ public class EditFileForm extends EditForm
 			sectionStationHeader.setNbLinesBeforeData(String.valueOf(mediaModel.getStationHeader()));
 			
 		}
-		sectionStationHeader.setColTitlesInStationHeader(mediaModel.isColTitlesInStationHeader());
+		sectionDataColumnTitles.setColTitlesInInputFile(mediaModel.isColTitlesInInputFile());
+		sectionDataColumnTitles.setValue(String.valueOf(mediaModel.getColTitlesInInputFilesLineNb()));
 
 		// Fin de Station
 		sectionEndOfStation.setValue(String.valueOf(mediaModel.getEndStation()));
@@ -643,6 +652,7 @@ public class EditFileForm extends EditForm
 				setSeparatorVisible();
 				Utils.invalidEtapes();
 				Utils.messageErreur(Global.EMPTY_STRING);
+				  RulesManager.getInstance().updateFromIHMSeparatorChecked();
 			}
 		});
 
@@ -858,7 +868,8 @@ public class EditFileForm extends EditForm
 		{
 			mediaModel.setStationHeader(sectionStationHeader.getValue());
 		}
-		mediaModel.setColTitlesInStationHeader(sectionStationHeader.isColTitlesInStationHeader());
+		mediaModel.setColTitlesInInputFile(sectionDataColumnTitles.isColTitlesInStationHeader());
+		mediaModel.setColTitlesInInputFilesLineNb(Integer.parseInt(sectionDataColumnTitles.getValue()));
 		// Fin de Station
 		mediaModel.setEndStation(getSectionEndOfStation().getValue());
 

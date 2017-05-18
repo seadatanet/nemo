@@ -254,6 +254,15 @@ public class RulesManager {
 		ViewLog.styledTextLogErreurs.setText(messageLog);
 		resetDataForm();
 	}
+	
+	public void updateFromIHMSeparatorChecked(){
+		if (isInputWithSeparatorsAndModelUpToDate()){
+			myEditFileForm.sectionDataColumnTitles.setEnabled(true);
+		}else{
+			myEditFileForm.sectionDataColumnTitles.setEnabled(false);
+		}
+		
+	}
 	public void updateFromIHM(TypeFallRate typeFallrate) {
 		Nemo.getInstance().getViewMain().getEditDataForm().setFallrateCode(typeFallrate.getKey());
 		Nemo.getInstance().getViewMain().getEditDataForm().setFallrateLabel(typeFallrate.getTerm());

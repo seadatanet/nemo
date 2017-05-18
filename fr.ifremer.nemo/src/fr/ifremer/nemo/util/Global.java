@@ -1,6 +1,8 @@
 package fr.ifremer.nemo.util;
 
 public interface Global {
+	public static final String LOGGER_NAME_GUI = "nemoGui";
+	public static final String LOGGER_NAME_BATCH = "nemoBatch";
 	public static final String NEMO_ENCODING = "ISO-8859-15";
 	public static final int SIZE_SECTION = 270;
 	public static final String SDN = "SDN"; //$NON-NLS-1$

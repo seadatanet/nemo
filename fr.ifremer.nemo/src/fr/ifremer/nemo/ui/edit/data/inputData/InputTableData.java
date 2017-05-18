@@ -2,8 +2,6 @@ package fr.ifremer.nemo.ui.edit.data.inputData;
 
 import java.util.ArrayList;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.eclipse.jface.layout.TableColumnLayout;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
@@ -32,7 +30,6 @@ import fr.ifremer.nemo.ui.Utils;
  */
 public class InputTableData {
 
-	final Logger logger = LogManager.getLogger("nemoGui");
 
 
 	final Color red = new Color(null, 239,180,110);
@@ -127,7 +124,7 @@ public class InputTableData {
 						try{
 							res= ((String)cell.getElement()).split(separator)[cell.getColumnIndex()];
 						}catch (Exception e) {
-							logger.debug("error on data, maybe a station header " + e);
+							Nemo.getInstance().getLogger().debug("error on data, maybe a station header " + e);
 						}
 					}
 					cell.setText(res);
@@ -151,7 +148,7 @@ public class InputTableData {
 			public void widgetSelected(SelectionEvent e) {
 				indexSelected = index;
 				viewer.refresh();
-				logger.info("column selected : " + index);
+				Nemo.getInstance().getLogger().debug("column selected : " + index);
 
 			}
 		};
@@ -173,22 +170,20 @@ public class InputTableData {
 		int stationHeaderSize = Nemo.getInstance().getDomain().getMedia().getStationHeaderNumberLines();
 		int header = fileHeaderSize + stationHeaderSize;
 		boolean columnsTitlesCreated=false;
+		
+		for (String line : lignesBrutes){
+			if  (Nemo.getInstance().getDomain().getMedia().isColTitleInInputFile() && cpt==Nemo.getInstance().getDomain().getMedia().getColTitlesLineNb()-1 ){
+				split = line.split(separator);
+				createColumns(split);
+				columnsTitlesCreated=true;
+			}
+			cpt++;
+		}
+		 cpt = 0;
 		for (String line : lignesBrutes){
 			
-			if (cpt<header-1){
-				// 	skip file header
-			}
-			else if (cpt==header-1 )
-			{
-				// last station header line. 
-				if (stationHeaderSize>0 && Nemo.getInstance().getDomain().getMedia().isColTitleInStationHeader()){
-					split = line.split(separator);
-					createColumns(split);
-					columnsTitlesCreated=true;
-				}
-				// if station header is 0, we do not have column titles -> columnsTitlesCreated=false
-				
-				
+			if (cpt<header){
+				// 	skip file and station header
 			}
 			else{
 				if (!columnsTitlesCreated){
@@ -197,7 +192,7 @@ public class InputTableData {
 
 					for (int colNb=0; colNb<split.length; colNb++)
 					{
-						colTitles[colNb] = String.valueOf(colNb);
+						colTitles[colNb] = String.valueOf(colNb+1);
 					}
 					createColumns(colTitles);
 					columnsTitlesCreated=true;
@@ -209,7 +204,7 @@ public class InputTableData {
 		try{
 			viewer.setInput(linesWithoutFileHeader);
 		}catch (Exception e) {
-			logger.error("error while setting input data in table");
+			Nemo.getInstance().getLogger().error("error while setting input data in table");
 		}
 
 

@@ -60,9 +60,10 @@ public class MediaModel extends AbstractModel
 	protected String _stationHeaderPattern;
 	
 	/**
-	 * indique si le titre des colonnes est dispo dans la derniere ligne de l'entete station (pour input avec separateur uniquement)
+	 * indique si le titre des colonnes est dispo dans le fichier (pour input avec separateur uniquement)
 	 */
-	protected boolean _colTitlesInStationHeader;
+	protected boolean _colTitlesInInputFiles;
+	protected int _colTitlesInInputFilesLineNb;
 
 	/**
 	 * nombre de lignes séparant la fin d'une station et le début de la suivante
@@ -104,7 +105,8 @@ public class MediaModel extends AbstractModel
 		_endData = E_EndData.EOF;
 		_endDataPattern = Global.EMPTY_STRING;
 		_endDataPatternIsRegexp = false;
-		_colTitlesInStationHeader=false;
+		_colTitlesInInputFiles=false;
+		_colTitlesInInputFilesLineNb = 0;
 	}
 
 	/**
@@ -149,6 +151,23 @@ public class MediaModel extends AbstractModel
 			Element2Field setter = new Element2Field(this, ModelDescription.setter_separator);
 			return setter;
 		}
+		/**
+		 * column titles for CSV files
+		 */
+		if (a_LocalName.equals(ModelDescription.node_colTitleInInputFile)){
+			try{
+				String attributeColTitleCheck = a_Attributes.getValue(ModelDescription.a_colTitleInInputFileCheck);
+				setColTitlesInInputFile(Boolean.parseBoolean(attributeColTitleCheck));
+			}catch (Exception e) {
+				setColTitlesInInputFile(false);
+			}
+			try{
+				String attributeColTitleLineNb = a_Attributes.getValue(ModelDescription.a_colTitleInInputFileLineNb);
+				setColTitlesInInputFilesLineNb(Integer.parseInt(attributeColTitleLineNb));
+			}catch (Exception e) {
+				setColTitlesInInputFilesLineNb(0);
+			}
+		}
 		if (a_LocalName.equals(ModelDescription.node_type))
 		{
 			Element2Field setter = new Element2Field(this, ModelDescription.setter_type);
@@ -164,16 +183,10 @@ public class MediaModel extends AbstractModel
 			String attribute = a_Attributes.getValue(ModelDescription.a_pattern);
 			setStationHeaderPattern(attribute);
 			
-			try{
-				String attributeColTitle = a_Attributes.getValue(ModelDescription.a_colTitleInStationHeader);
-				setColTitlesInStationHeader(Boolean.parseBoolean(attributeColTitle));
-			}catch (Exception e) {
-				setColTitlesInStationHeader(false);
-			}
-			
 			Element2Field setter = new Element2Field(this, ModelDescription.setter_stationHeader);
 			return setter;
 		}
+		
 		if (a_LocalName.equals(ModelDescription.node_endStation))
 		{
 			Element2Field setter = new Element2Field(this, ModelDescription.setter_endStation);
@@ -211,17 +224,33 @@ public class MediaModel extends AbstractModel
 	{
 
 		a_Writer.putAttribute(ModelDescription.a_sourcepath, getSourcePath());
-
+		
+		// 	PROCESS TYPE
 		a_Writer.openTag(ModelDescription.node_process);
 		a_Writer.putAttribute(ModelDescription.a_multistations, isMultiStations());
 		a_Writer.closeTag(getProcessType().toString());
+		
+		// SEPARATOR
 		a_Writer.putTag(ModelDescription.node_separator, getSeparator());
+		
+		// INPUT TYPE
 		a_Writer.putTag(ModelDescription.node_type, getInputType().toString());
+
+		// FILE HEADER
 		a_Writer.putTag(ModelDescription.node_fileHeader, getFileHeader());
+		
+		// STATION HEADER
 		a_Writer.openTag(ModelDescription.node_stationHeader);
 		a_Writer.putAttribute(ModelDescription.a_pattern, getStationHeaderPattern());
-		a_Writer.putAttribute(ModelDescription.a_colTitleInStationHeader, isColTitlesInStationHeader());
-		a_Writer.closeTag(getStationHeader());
+		a_Writer.closeTag();
+
+		// COLUMN TITLES
+		a_Writer.openTag(ModelDescription.node_colTitleInInputFile);
+		a_Writer.putAttribute(ModelDescription.a_colTitleInInputFileCheck, isColTitlesInInputFile());
+		a_Writer.putAttribute(ModelDescription.a_colTitleInInputFileLineNb, getColTitlesInInputFilesLineNb());
+		a_Writer.closeTag(getEndData().toString());
+		
+		// END STATION
 		a_Writer.putTag(ModelDescription.node_endStation, getEndStation());
 		a_Writer.openTag(ModelDescription.node_endData);
 		a_Writer.putAttribute(ModelDescription.a_pattern, getEndDataPattern());
@@ -644,12 +673,20 @@ public class MediaModel extends AbstractModel
 		_stationHeaderPattern = x;
 	}
 
-	public boolean isColTitlesInStationHeader() {
-		return _colTitlesInStationHeader;
+	public boolean isColTitlesInInputFile() {
+		return _colTitlesInInputFiles;
 	}
 
-	public void setColTitlesInStationHeader(boolean colTitlesInStationHeader) {
-		_colTitlesInStationHeader = colTitlesInStationHeader;
+	public void setColTitlesInInputFile(boolean colTitlesInInputFile) {
+		_colTitlesInInputFiles = colTitlesInInputFile;
+	}
+
+	public int getColTitlesInInputFilesLineNb() {
+		return _colTitlesInInputFilesLineNb;
+	}
+
+	public void setColTitlesInInputFilesLineNb(int colTitlesInInputFilesLineNb) {
+		_colTitlesInInputFilesLineNb = colTitlesInInputFilesLineNb;
 	}
 
 }

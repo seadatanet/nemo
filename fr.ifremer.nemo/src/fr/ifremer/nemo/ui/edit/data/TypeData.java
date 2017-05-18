@@ -24,14 +24,10 @@ public class TypeData extends Object implements Comparable<TypeData> {
 	private String entree;
 	private String sortie;
 	private String test;
-	
 	private String instrument;
 	private String instrumentCode;
 
 
-	public String getInstrumentCode() {
-		return instrumentCode;
-	}
 	private int position, debut, fin;
 
 	private String debutFlag, finFlag, testIn, testOut;
@@ -51,14 +47,23 @@ public class TypeData extends Object implements Comparable<TypeData> {
 	private String entryTermP011;
 	private boolean isP011;
 
-	public Boolean getSensor() {
-		return sensor;
+	
+	public TypeData(String theEntryKey, String theEntryTerm, 
+			String theCodeP01,String theNameP01 ,
+			String theUniteCode,String theUniteLabel,
+			String theInstrumentCode,String theInstrumentLabel ,
+			boolean itheIsP011) {
+		this.setEntryKey(theEntryKey);
+		this.setEntryTerm(theEntryTerm);
+		this.setEntryKeyP011(theCodeP01);
+		this.setEntryTermP011(theNameP01);
+		this.setUniteCode(theUniteCode);
+		this.setUnite(theUniteLabel);
+		this.setInstrumentCode(theInstrumentCode);
+		this.setInstrument(theInstrumentLabel);
+		this.setIsP011(itheIsP011);
 	}
-
-	public void setSensor(Boolean sensor) {
-		this.sensor = sensor;
-	}
-
+	
 	public TypeData(TypeData typeData) {
 		this.setConversion(typeData.conversion);
 		this.setEntree(typeData.entree);
@@ -409,8 +414,17 @@ public class TypeData extends Object implements Comparable<TypeData> {
 	public void setInstrument(String instrument) {
 		this.instrument = instrument;
 	}
+	public String getInstrumentCode() {
+		return instrumentCode;
+	}
 	public void setInstrumentCode(String instrumentCode) {
 		this.instrumentCode = instrumentCode;
 	}
+	public Boolean getSensor() {
+		return sensor;
+	}
 
+	public void setSensor(Boolean sensor) {
+		this.sensor = sensor;
+	}
 }

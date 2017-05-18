@@ -529,14 +529,6 @@ public class EditCruiseForm extends EditForm {
 				ComboType.BLOCK, Global.EMPTY_STRING);
 		listeSections.add(sectionCommentaire);
 
-		// TODO 20755 change labels
-		// sectionCorrespondingURL = new
-		// CruiseSection(Messages.edit_cruise_sectionCorrespondingUrl,
-		// Messages.edit_cruise_sectionCorrespondingUrl,
-		// Messages.edit_cruise_sectionCorrespondingUrl_lib, this);
-		// sectionCorrespondingURL.addItem(Global.EMPTY_STRING, ComboType.NONE,
-		// Global.EMPTY_STRING, true, true, "auto"); // TODO 20755
-		// listeSections.add(sectionCorrespondingURL);
 	}
 	public CruiseSection getSectionReference() {
 		return sectionReference;

@@ -9,7 +9,6 @@ import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.core.LoggerContext;
 import org.eclipse.core.runtime.IPlatformRunnable;
 import org.eclipse.swt.widgets.Display;
@@ -33,9 +32,6 @@ public class Application implements IPlatformRunnable
 
     public static Display display;
 
-    public static Logger batchLogger;
-    
-    public static Logger guiLogger;
 
     public static Options opt;
 
@@ -96,13 +92,19 @@ public class Application implements IPlatformRunnable
                 Intern.dir_resources =
                     appDir + File.separator + Intern.dir_resources;
             }
+        	 // LOGGER
+            LoggerContext context = (org.apache.logging.log4j.core.LoggerContext) LogManager.getContext(false);
+            File file = new File(appDir + File.separator  + "resources/log4j2.xml");
 
+            context.setConfigLocation(file.toURI());
             /**************************************************************************
              * BATCH MODE
              **************************************************************************/
             if (cl.hasOption(optBatchMode))
             {
                 Nemo.getInstance().setBatchMode(true);
+                Nemo.getInstance().setLogger(LogManager.getLogger(Global.LOGGER_NAME_BATCH));
+                
                 String inputFile;
                 String outputFile;
                 String modelFile;
@@ -114,14 +116,11 @@ public class Application implements IPlatformRunnable
                 boolean couplingTableUpdate = false;
                 String couplingTablePrefix = Global.EMPTY_STRING;
 
-          
-                
-                batchLogger = LogManager.getLogger("nemoBatch");
-
+              
                 
                 String edmoCode = Nemo.getInstance().getConfig().getIdEdmoRespCdi();
                 if (edmoCode==null || edmoCode.isEmpty()){
-                	batchLogger.error(Messages.error_batch_edmo); 
+                	Nemo.getInstance().getLogger().error(Messages.error_batch_edmo); 
                 	System.out.println(Messages.error_batch_edmo);
                 	 System.exit(1);
                 }
@@ -190,26 +189,26 @@ public class Application implements IPlatformRunnable
                     }
 
                     // print arguments in the log file
-                    batchLogger.info("Batch mode starting. Arguments :");
+                    Nemo.getInstance().getLogger().info("Batch mode starting. Arguments :");
                     StringBuilder sb = new StringBuilder();
                     for (String s : strArgs)
                         sb.append(s + " ");
-                    batchLogger.info(sb.toString());
+                    Nemo.getInstance().getLogger().info(sb.toString());
 
                     boolean success =
                         NemoShell.main(inputFile, outputFile, modelFile,
                             convType, sortDatas, convOdv, datasetReference,
                             cdiSummaryFile, couplingTableUpdate,
-                            couplingTablePrefix, batchLogger);
+                            couplingTablePrefix, Nemo.getInstance().getLogger());
 
                     if (success)
                     {
-                        batchLogger.info("Batch mode successfully ended.");
+                    	Nemo.getInstance().getLogger().info("Batch mode successfully ended.");
                         System.exit(0);
                     }
                     else
                     {
-                        batchLogger.info("Batch mode ended with errors.");
+                    	Nemo.getInstance().getLogger().info("Batch mode ended with errors.");
                         System.exit(0);
                     }
                 }
@@ -225,15 +224,8 @@ public class Application implements IPlatformRunnable
              **************************************************************************/
             else
             {
-            	 // LOGGER
-                LoggerContext context = (org.apache.logging.log4j.core.LoggerContext) LogManager.getContext(false);
-                File file = new File(appDir + File.separator  + "resources/log4j2.xml");
-
-                context.setConfigLocation(file.toURI());
-
-            	guiLogger = LogManager.getLogger("nemoGui");
-            	guiLogger.info("Nemo GUI Mode");
-            	
+           
+            	 Nemo.getInstance().setLogger(LogManager.getLogger(Global.LOGGER_NAME_GUI));
                 Nemo.getInstance().setBatchMode(false);
                 display = PlatformUI.createDisplay();
                 
@@ -256,7 +248,7 @@ public class Application implements IPlatformRunnable
                 }
                 finally
                 {
-                    guiLogger.info("GUI mode successfully ended.");
+                	Nemo.getInstance().getLogger().info("GUI mode successfully ended.");
                     display.dispose();
                 }
             }
@@ -265,7 +257,7 @@ public class Application implements IPlatformRunnable
         {
             exitPrintingUsage();
             e.printStackTrace();
-            guiLogger.debug("GUI mode ended with errors.", e);
+            Nemo.getInstance().getLogger().debug("GUI mode ended with errors.", e);
         }
 
         return null;
@@ -277,7 +269,7 @@ public class Application implements IPlatformRunnable
      */
     private void exitPrintingUsage()
     {
-        batchLogger.error("Arguments error. Nemo batch stopped.");
+    	Nemo.getInstance().getLogger().error("Arguments error. Nemo batch stopped.");
         HelpFormatter hf = new HelpFormatter();
         PrintWriter pw = new PrintWriter(System.out);
         hf.printUsage(pw, 200, "nemo_batch", opt);
@@ -332,7 +324,7 @@ public class Application implements IPlatformRunnable
                 || cl.getOptionValue(optOutputFile) == null
                 || cl.getOptionValue(optModelFile) == null)
         {
-            batchLogger
+        	Nemo.getInstance().getLogger()
                 .info("Error, input output and model file are mandatory options");
             checkOptionsOk = false;
         }
@@ -347,7 +339,7 @@ public class Application implements IPlatformRunnable
                 .getOptionValue(optConv).toUpperCase()
                 .equals(Conversion.NETCDF.name())))
             {
-                batchLogger
+            	Nemo.getInstance().getLogger()
                     .info("Error, Conversion type must be \"medatlas\" , \"odv\" or \"NETCDF\" ");
                 checkOptionsOk = false;
             }

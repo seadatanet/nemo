@@ -36,11 +36,11 @@ public class SetText implements UIobject
     protected Text text;
     protected Button buttonSet;
 
-    private final String stringLabel;
-    private final String defaultValue;
+    protected final String stringLabel;
+    protected final String defaultValue;
 
     protected final boolean inText;
-    private int textSize;
+    protected int textSize;
 
     public SetText(String stringLabel, String defaultValue, final boolean inText)
     {

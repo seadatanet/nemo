@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.eclipse.core.runtime.IProgressMonitor;
 
@@ -23,6 +22,7 @@ import sdn.vocabulary.interfaces.ICollectionFactory;
 import sdn.vocabulary.interfaces.ICollectionMapping;
 import sdn.vocabulary.interfaces.IElement;
 import sdn.vocabulary.interfaces.VocabularyException;
+import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.config.UpdateStatus.EtatUpdate;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Intern;
@@ -36,14 +36,12 @@ import fr.ifremer.nemo.util.Messages;
  * 
  */
 public class VocabLists {
-	static private Logger logger;
 	static private ICollectionFactory cf;
 
 	static protected HashMap<String, ICollection> _vocabList = new HashMap<String, ICollection>();
 	static protected HashMap<String, ICollectionMapping> _vocabMap = new HashMap<String, ICollectionMapping>();
 
 	static {
-		logger = LogManager.getLogger("nemoGui");
 		String vocabDir = Intern.dir_resources + File.separator + Intern.dir_vocabLists;
 		File aRep = new File(vocabDir);
 
@@ -53,7 +51,7 @@ public class VocabLists {
 			cf = CollectionFactory.getInstance();
 		} catch (VocabularyException ve) {
 			System.out.println("ERROR : " + ve.getMessage()); //$NON-NLS-1$
-			logger.error(ve.getMessage());
+			Nemo.getInstance().getLogger().error(ve.getMessage());
 		}
 	}
 
@@ -66,6 +64,7 @@ public class VocabLists {
 	 * Loading all the vocab list of Parameter vocabLists
 	 */
 	public static void initVocabList() {
+		Logger logger = Nemo.getInstance().getLogger();
 		String[] listNames = Intern.vocabLists.split(Global.COMMA);
 		for (String listName : listNames) {
 			try {
@@ -87,6 +86,7 @@ public class VocabLists {
 	 * Loading all the vocab mapping of Parameter vocabMaps
 	 */
 	public static void initVocabMaps() {
+		Logger logger = Nemo.getInstance().getLogger();
 		String[] mapNames = Intern.vocabMaps.split(Global.COMMA);
 		for (String mapName : mapNames) {
 			String[] listNames = mapName.split(Global.UNDERSCORE);
@@ -208,7 +208,7 @@ public class VocabLists {
 		try {
 			cf.reload();
 		} catch (VocabularyException e1) {
-			logger.error(e1.getMessage());
+			Nemo.getInstance().getLogger().error(e1.getMessage());
 			e1.printStackTrace();
 		}
 		for (String listName : listNames) {
@@ -237,7 +237,7 @@ public class VocabLists {
 			} catch (Exception e) {
 				updateLists.setEtat(EtatUpdate.FAILED);
 				e.printStackTrace();
-				logger.error(e.getMessage());
+				Nemo.getInstance().getLogger().error(e.getMessage());
 			}
 		}
 	}

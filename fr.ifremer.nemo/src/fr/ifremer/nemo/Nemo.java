@@ -27,7 +27,6 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.sax.SAXResult;
 import javax.xml.transform.stream.StreamSource;
 
-import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.ago.xml.XMLBootstrapParser;
@@ -56,9 +55,7 @@ import fr.ifremer.nemo.util.Utils;
 public class Nemo {
 	private static Nemo instance;
 
-	private static Logger guiLogger;
-
-	private static Logger batchLogger;
+	private static Logger logger;
 
 	private Configuration config;
 	private InputDomain domain;
@@ -85,9 +82,6 @@ public class Nemo {
 	public static Nemo getInstance() {
 		if (null == instance) { // Premier appel
 			instance = new Nemo();
-			guiLogger = LogManager.getLogger("nemoGui");
-			batchLogger = LogManager.getLogger("nemoBatch");
-			guiLogger.info("Nemo instanciated");
 		}
 		return instance;
 	}
@@ -169,9 +163,7 @@ public class Nemo {
 			// (rules data70, data75 and p3 deleted, new rule data 76)
 			if( model.getConversionModel().getOutputFormat()==E_TypeConversion.MEDATLAS
 					&& model.getMediaModel().getInputType() == E_InputType.PROFILE) {
-				System.out.println("models for medatlas profiles older than 1.6.0 shall be validated in Nemo before be used in batch mode");// TODO 20755 msg
-				guiLogger.warn("models for medatlas profiles older than 1.6.0 shall be validated in Nemo before be used in batch mode");
-				batchLogger.warn("models for medatlas profiles older than 1.6.0 shall be validated in Nemo before be used in batch mode");
+				logger.warn(Messages.warning_model_old);
 				model.setIsValid(false);
 			}
 
@@ -408,5 +400,13 @@ public class Nemo {
 			e.printStackTrace();
 		}
 		return version;
+	}
+
+	public Logger getLogger() {
+		return logger;
+	}
+
+	public void setLogger(Logger logger) {
+		Nemo.logger = logger;
 	}
 }

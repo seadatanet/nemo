@@ -149,7 +149,6 @@ public class CruiseFormValidator extends FormValidator {
 			String countryCode = fr.ifremer.nemo.util.Utils.extraitCode(section.getItem(itemID.COUNTRY).getText());
 			String countryName = fr.ifremer.nemo.util.Utils.extraitValeur(section.getItem(itemID.COUNTRY).getText());
 
-
 			BODCResult bodcRes = BodcChecker.getInstance().checkCountry(countryCode, countryName);
 			if (bodcRes.getResStatus() == BODC_RES_STATUS.KO){
 				ok=false;

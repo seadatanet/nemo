@@ -14,7 +14,6 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.actions.ActionFactory;
 
 import fr.ifremer.nemo.Nemo;
-import fr.ifremer.nemo.ui.Application;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.view.ViewLog;
 import fr.ifremer.nemo.util.Global;
@@ -109,7 +108,7 @@ public class OpenAction extends Action implements ISelectionListener,
                 catch (Exception e)
                 {
                     Utils.messageErreurAppend(Messages.error);
-                    Application.batchLogger.debug(Messages.error, e);
+                    Nemo.getInstance().getLogger().debug(Messages.error, e);
                     e.printStackTrace();
                 }
             }
