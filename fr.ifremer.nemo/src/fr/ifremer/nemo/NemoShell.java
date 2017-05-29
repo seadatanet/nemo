@@ -78,13 +78,17 @@ public class NemoShell {
 						cdiSummaryFile);
 			}
 
-
-			if (!nemo.openModel(modelFile)) {
-				// ERREUR les deux sont UNKNOWN
+			List<String> resmsg = nemo.openModel(modelFile);
+			if (!resmsg.isEmpty()) {
+				for (String msg : resmsg){
+					logger.warn(msg);
+				}
+			}
+			InputDomain inputDomain = Nemo.getInstance().getDomain();
+			if (!inputDomain.isValid()){
 				logger.error("Error, model file not valid");
 				return false;
 			}
-			InputDomain inputDomain = Nemo.getInstance().getDomain();
 //			if (inputDomain.getMedia().getModel().getSeparator() != Global.EMPTY_STRING)
 //				inputFile =
 			 // 33278: format only for models < 1.6.4

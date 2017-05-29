@@ -624,6 +624,7 @@ public class Messages {
 	
 	
 	public static String warning_model_old;
+	public static String warning_model_stationNumberFixedForTrajectory;
 	
 	// BODC CHECKS
 	public static String BODC_check_param;

@@ -17,6 +17,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -116,13 +118,14 @@ public class Nemo {
 	/**
 	 * 
 	 * @param pathModel
-	 * @return true if model is validated, false otherwise
+	 * @return warning messages
 	 * @throws FileNotFoundException
 	 * @throws TransformerException
 	 */
-	public boolean openModel(String pathModel) throws FileNotFoundException,
+	public List<String> openModel(String pathModel) throws FileNotFoundException,
 	TransformerException {
-
+		List<String> messages= new ArrayList<>();
+		
 		// nom du model
 		nomModele = new File(pathModel).getName();
 
@@ -168,10 +171,22 @@ public class Nemo {
 			}
 
 		}
+		
+		
+		if(model.getMediaModel().getInputType() == E_InputType.TRAJECTORY){
+			if (!model.getStationModel().getReferenceProperty().isUserProvided()){
+				messages.add(Messages.warning_model_stationNumberFixedForTrajectory);
+				model.getStationModel().getReferenceProperty().setUserProvided(true);
+				model.getStationModel().getReferenceProperty().setUserValue("1");
+			}
+		}
 		completeDataList(model, isBeforeP011);
 		domain.update(model);
 		RulesManager.getInstance().setModelVersion(model.getVersion());
-		return model.isValid();
+		if (!model.isValid()){
+			messages.add(Messages.warning_unvalid_openModel);
+		}
+		return messages;
 	}
 
 

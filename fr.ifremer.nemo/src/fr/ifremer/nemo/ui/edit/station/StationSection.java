@@ -380,6 +380,9 @@ public class StationSection extends NemoSection {
 	}
 
 	public boolean checkAutoInputValues(String nomSection) {
+		if (autoInput==null){
+			return false;
+		}
 		return autoInput.checkAutoLine(0, nomSection);
 	}
 

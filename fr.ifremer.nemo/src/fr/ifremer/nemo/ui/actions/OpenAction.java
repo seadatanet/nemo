@@ -1,6 +1,7 @@
 package fr.ifremer.nemo.ui.actions;
 
 import java.io.File;
+import java.util.List;
 
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.viewers.ISelection;
@@ -64,14 +65,20 @@ public class OpenAction extends Action implements ISelectionListener,
             {
                 try
                 {
+                	List<String> resmsg = Nemo.getInstance().openModel(nomModele);
                     // FAE 9656 si model non validé affichage d'un warning
-                    if (!Nemo.getInstance().openModel(nomModele))
+                    if (!resmsg.isEmpty())
                     {
                         MessageBox mb =
                             new MessageBox(Utils.getMainShell(),
                                 SWT.ICON_WARNING | SWT.OK
                                         | SWT.APPLICATION_MODAL);
-                        mb.setMessage(Messages.warning_unvalid_openModel);
+                        String msgToString="";
+                        for (String msg : resmsg){
+                        	msgToString+=msg+Global.RN;
+
+        				}
+                        mb.setMessage(msgToString);
                         mb.open();
                     }
 

@@ -24,8 +24,10 @@ public class InputDomain
     protected StationDomain _station; //onglet Station
     protected DataDomain _data; // onglet Data
     protected ConversionDomain _conversion; // onglet Conversion
+    private boolean valid;
         
     public InputDomain(){
+    	valid=false;
         _media = new MediaDomain();
         _cruise = new CruiseDomain();
         _station = new StationDomain();
@@ -40,6 +42,7 @@ public class InputDomain
     }*/
     
     public void update(InputModel model){
+    	valid=model.isValid();
         _media.update(model);
         _cruise.update(model);
         _station.update(model);
@@ -50,6 +53,7 @@ public class InputDomain
     
     //RELEASE
     public void release(){
+    	valid=false;
         _media.release();
         _cruise.release();
         _station.release();
@@ -148,4 +152,8 @@ public class InputDomain
     {
         _data = data;
     }
+
+	public boolean isValid() {
+		return valid;
+	}
 }

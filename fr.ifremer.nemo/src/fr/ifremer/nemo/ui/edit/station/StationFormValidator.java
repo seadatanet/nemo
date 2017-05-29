@@ -77,6 +77,8 @@ public class StationFormValidator extends FormValidator {
 									.checkInDataOrHeader(lign, Messages
 											.getString(Intern.S_STATIONNUMBER));
 					ok = ok && ligneOK;
+				}else{
+					Utils.messageErreurAppend(Messages.Etape_129);
 				}
 				ok = ok && resultat1;
 
