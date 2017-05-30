@@ -571,6 +571,11 @@ public class NetCDFWriter extends NemoWriter {
 		if ((inputType== E_InputType.TIMESERIES || inputType == E_InputType.TRAJECTORY)
 				&& Nemo.getInstance().getDomain().getStation().getModel().getProperty(Intern.S_DATE).isInData()){
 			currentDate = Long.valueOf(DateTimeUtils.convertTimestamp(inputLine));
+			//33044 manage offset in end date time
+			long currentDateWithOffset = 
+					DateTimeUtils.getGMTDate(currentDate,
+							currentStation.getOffsetTU());
+			currentDate = currentDateWithOffset;
 		}
 
 		

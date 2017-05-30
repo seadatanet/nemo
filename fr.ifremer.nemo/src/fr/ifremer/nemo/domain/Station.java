@@ -96,7 +96,7 @@ public class Station implements Comparable {
 				_time = -1;
 			else
 				_time = (Long) time;
-			if (!isNetCDF) {
+			if (stationDomain.getModel().getProperty(Intern.S_OFFSETTU)!=null){
 				errorMessage = Intern.S_OFFSETTU;
 				_offsetTU = ((Float) stationDomain.getModel().getProperty(Intern.S_OFFSETTU).applyOn(inputStationHeader)).floatValue();
 			}
