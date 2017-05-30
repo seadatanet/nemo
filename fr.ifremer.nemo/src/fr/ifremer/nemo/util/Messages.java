@@ -130,7 +130,7 @@ public class Messages {
 	public static String menu_label_deleteAllParameters;
 	public static String menu_label_list;
 	public static String menu_label_instrumentList;
-	public static String menu_label_fallRateList;
+//	public static String menu_label_fallRateList;
 
 	public static String label_manual_01;
 	public static String label_noValue_01;
@@ -215,8 +215,8 @@ public class Messages {
 	public static String edit_cruise_sectionDataTypes_lib;
 	public static String edit_cruise_sectionComments;
 	public static String edit_cruise_sectionComments_lib;
-	public static String edit_cruise_sectionCorrespondingUrl;
-	public static String edit_cruise_sectionCorrespondingUrl_lib;
+//	public static String edit_cruise_sectionCorrespondingUrl;
+//	public static String edit_cruise_sectionCorrespondingUrl_lib;
 	public static String edit_cruise_openXML;
 
 	// STATION
