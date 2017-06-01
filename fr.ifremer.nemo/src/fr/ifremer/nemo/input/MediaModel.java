@@ -242,7 +242,7 @@ public class MediaModel extends AbstractModel
 		// STATION HEADER
 		a_Writer.openTag(ModelDescription.node_stationHeader);
 		a_Writer.putAttribute(ModelDescription.a_pattern, getStationHeaderPattern());
-		a_Writer.closeTag();
+		a_Writer.closeTag(getStationHeader());
 
 		// COLUMN TITLES
 		a_Writer.openTag(ModelDescription.node_colTitleInInputFile);
