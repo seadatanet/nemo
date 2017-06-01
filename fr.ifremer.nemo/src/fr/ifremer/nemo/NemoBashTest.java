@@ -106,9 +106,7 @@ public class NemoBashTest {
 	boolean REPLACE=false;// WARNING!!!
 	boolean REMOVE_JUNIT=false;
 	public static String[] testDirAlone = {};
-	//		public static String[] testDirAlone = {"18333_traj_collectionGroupByCruise"};
-	//	public static String[] testDirAlone = {"cruiseDir_profile_diap_stationsOrder"};
-	//	public static String[] testDirAlone = {"33278_separators_withCruiseHeader"};
+//			public static String[] testDirAlone = {"cruiseFile_traj_coriolis_6839"};
 	/**
 	 * ********************************************************
 	 * ********************************************************
@@ -184,6 +182,7 @@ public class NemoBashTest {
 		testLogger.info("comp manual files : " + compareManualFiles + "("
 				+ outputManualName + ")");
 		initResultWriter();
+		Nemo.getInstance().setLogger(testLogger);
 	}
 
 	private static void initResultWriter() {
@@ -311,6 +310,7 @@ public class NemoBashTest {
 	 */
 	@Test
 	public final void test_P091_Medatlas() {
+		
 		testLogger
 		.info("\r\n\r\n\r\n\r\n___________________________test_P091_Medatlas_____________________________\r\n\r\n\r\n\r\n");
 		// writeInResultsFile("P091_Medatlas;");
@@ -912,13 +912,13 @@ public class NemoBashTest {
 
 				for (File paramListDir : testDir.listFiles()) {
 
-					if (paramListDir.getName().equals(dataList.toString())) {
+					if (paramListDir.getName().equalsIgnoreCase(dataList.toString())) {
 						// writeInResultsFile(dataList.toString() + ";");
 
 						for (File convDir : paramListDir.listFiles()) {
 							// writeInResultsFile(convDir.getName() + ";");
 
-							if (convDir.getName().equals(convType.toString())) {
+							if (convDir.getName().equalsIgnoreCase(convType.toString())) {
 
 								for (File unitTest : convDir.listFiles()) {
 									ok = true;
@@ -1291,6 +1291,8 @@ public class NemoBashTest {
 		longNames.put("SVELXXXX", "Sound velocity in the water body"); //$NON-NLS-1$//$NON-NLS-2$
 		longNames.put("ASLVZZ01", "Surface elevation (unspecified datum) of the water body"); //$NON-NLS-1$//$NON-NLS-2$
 		longNames.put("NTRIAAD1", "ntri"); //$NON-NLS-1$//$NON-NLS-2$
+		longNames.put("CSERTFBL", "CSERTFBL"); //$NON-NLS-1$//$NON-NLS-2$
+		longNames.put("ANTHHPP1", "ANTHHPP1"); //$NON-NLS-1$//$NON-NLS-2$
 		return longNames;
 	}
 
