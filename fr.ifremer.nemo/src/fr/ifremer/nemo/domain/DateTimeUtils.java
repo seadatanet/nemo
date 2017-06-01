@@ -151,7 +151,7 @@ public class DateTimeUtils {
 		MediaDomain mediaDomain = Nemo.getInstance().getDomain().getMedia();
 		boolean badConvertion = false;
 		if (mediaDomain.getModel().getInputType() == E_InputType.TIMESERIES) {
-			int lastFileLine = mediaDomain.getStationHeaderNumberLines() + currentStation.getNbRecords() - 1;
+			int lastFileLine = mediaDomain.getStationHeaderNumberLines() + currentStation.getNbRecords() - 1; // TODO 36265: prendre en compte le nb de lignes des stations precedentes si entree multistations!!!
 			String endLigne;
 			String fileName = mediaDomain.getModel().getSourcePath();
 			String name = currentStation.getFileName();
