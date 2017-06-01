@@ -671,6 +671,15 @@ public class Messages {
 	public static String BODC_check_country_c18_notExist;
 	public static String BODC_check_countryNoLabel_c18_notExist;
 
+	public static String BODC_check_datacenter_L30;
+	public static String BODC_check_datacenterNoLabel_l30_deprecated;
+	public static String BODC_check_datacenter_l30_deprecated;
+	public static String BODC_check_datacenterNoLabel_l30_notExist;
+	public static String BODC_check_datacenter_l30_notExist;
+	
+	public static String BODC_check_datatype_C77;
+	public static String BODC_check_datatype_c77_deprecated;
+	public static String BODC_check_datatype_c77_notExist;
 	
 	
 	static {

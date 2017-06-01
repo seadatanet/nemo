@@ -20,6 +20,10 @@ public class BODCResult{
 	private String countryCode;
 	private String countryLabel;
 	
+	private String centerCode;
+	private String centerLabel;
+	
+	private String dataTypeCode;
 	
 	public BODCResult(BODC_RES_STATUS resStatus) {
 		this.resStatus = resStatus;
@@ -120,5 +124,29 @@ public class BODCResult{
 
 	public void setCountryLabel(String countryLabel) {
 		this.countryLabel = countryLabel;
+	}
+
+	public String getCenterLabel() {
+		return centerLabel;
+	}
+
+	public void setCenterLabel(String centerLabel) {
+		this.centerLabel = centerLabel;
+	}
+
+	public String getCenterCode() {
+		return centerCode;
+	}
+
+	public void setCenterCode(String centerCode) {
+		this.centerCode = centerCode;
+	}
+
+	public String getDataTypeCode() {
+		return dataTypeCode;
+	}
+
+	public void setDataTypeCode(String dataTypeCode) {
+		this.dataTypeCode = dataTypeCode;
 	}
 }

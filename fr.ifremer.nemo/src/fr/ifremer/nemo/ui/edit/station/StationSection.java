@@ -37,6 +37,9 @@ import fr.ifremer.nemo.ui.edit.Cursor;
 import fr.ifremer.nemo.ui.edit.NemoSection;
 import fr.ifremer.nemo.ui.edit.cruise.TableDataSurvey;
 import fr.ifremer.nemo.ui.edit.station.AutoLine.MetaInData;
+import fr.ifremer.nemo.util.BODCResult;
+import fr.ifremer.nemo.util.BODCResult.BODC_RES_STATUS;
+import fr.ifremer.nemo.util.BodcChecker;
 import fr.ifremer.nemo.util.Formatter;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Intern;
@@ -1186,7 +1189,24 @@ public class StationSection extends NemoSection {
 		stationModel.setDataType(newDataType);
 		// }
 	}
-
+private DataType getDataTypeFromCruiseTableDataSurvey(String code) throws Exception{
+	for (int i = 0; i < TableDataSurvey.types.size(); i++) {
+		if (code.contentEquals(TableDataSurvey.types.get(i)
+				.getCode())) {
+			DataType newDataType = new DataType();
+			newDataType.setCode(code);
+			// c'est le bon dataType
+			// on recupere le nombre de mesures et le QC
+			newDataType.setNumberOfProfiles(TableDataSurvey.types
+					.get(i).getNombre());
+			newDataType.setQc(TableDataSurvey.types.get(i).getQc());
+			newDataType.setSensor(TableDataSurvey.types.get(i)
+					.getSensor());
+			return newDataType;
+		}
+	}
+	throw new Exception("datatype not found in cruise data types table"); // TODO 35230 msg
+}
 	@Override
 	public void fillFromModel(StationModel stationModel) {
 		// Station station = stationModel.getModel();
@@ -1412,6 +1432,19 @@ public class StationSection extends NemoSection {
 
 		if (dataType != null) {
 			String code = dataType.getCode();
+			
+				BODCResult bodcRes = BodcChecker.getInstance().checkDataType(code);
+				if (bodcRes.getResStatus() == BODC_RES_STATUS.KO){
+					Utils.messageErreurAppend(bodcRes.getErrorMsg());
+				}else if (bodcRes.getResStatus() == BODC_RES_STATUS.WARNING){
+					try {
+						station.setDataType(getDataTypeFromCruiseTableDataSurvey(bodcRes.getDataTypeCode()));
+					} catch (Exception e) {
+						Utils.messageErreurAppend(e.getMessage());
+						station.setDataType(null);
+					}
+					Utils.messageWarningAppend(bodcRes.getWarningMsg());
+				}
 
 			// si l'onglet cruise existe, on verifie que le dataType est bien
 			// dans la liste des datatypes de cet onglet

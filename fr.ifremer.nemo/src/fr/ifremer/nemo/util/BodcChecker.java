@@ -577,4 +577,104 @@ public class BodcChecker {
 
 		return res;
 	}
+	
+	public BODCResult checkDataCenter(String centerCode) {
+		return checkDataCenter(centerCode, null);
+	}
+	public BODCResult checkDataCenter(String centerCode, String centerLabel) {
+		logger.debug(Messages.BODC_check_datacenter_L30);
+		//  TODO 35230: check label if code is OK
+		BODCResult res= new BODCResult(BODC_RES_STATUS.OK);
+		res.setCenterCode(centerCode);
+		res.setCenterLabel(centerLabel);
+		
+		if (centerCode==null || centerCode.isEmpty()){
+			return res;
+		}
+		String replaceMsg="";
+		String errorMsg="";
+		boolean ok=true;
+		try {
+			String replacement = sdnMgr.getReplacedByCode(centerCode, SdnVocabularyManager.LIST_L30);
+			if (replacement != null){
+				String replacementLabel= sdnMgr.getLabel(replacement, SdnVocabularyManager.LIST_L30);
+				if (centerLabel==null){
+					replaceMsg+=MessageFormat.format(Messages.BODC_check_datacenterNoLabel_l30_deprecated, centerCode, replacement, replacementLabel, SdnVocabularyManager.LIST_L30 )+Global.RN;
+				}else{
+					replaceMsg+=MessageFormat.format(Messages.BODC_check_datacenter_l30_deprecated, centerCode,centerLabel, replacement, replacementLabel, SdnVocabularyManager.LIST_L30 )+Global.RN;;
+				}
+				res.setCenterCode(replacement);
+				res.setCenterLabel(replacementLabel);
+				
+			}
+		} catch (Exception e) {
+			if (centerLabel==null){
+				errorMsg+=MessageFormat.format(Messages.BODC_check_datacenterNoLabel_l30_notExist, centerCode, SdnVocabularyManager.LIST_L30);
+			}else{
+				errorMsg+=MessageFormat.format(Messages.BODC_check_datacenter_l30_notExist, centerCode, centerLabel, SdnVocabularyManager.LIST_L30);
+			}
+			logger.error(errorMsg);
+			ok=false;
+		} 
+
+		
+		if (ok){
+			if(replaceMsg.isEmpty()){
+				res.setResStatus(BODC_RES_STATUS.OK);
+			}else{
+				res.setWarningMsg(replaceMsg);
+				res.setResStatus(BODC_RES_STATUS.WARNING);
+			}
+		}else{
+			res.setErrorMsg(errorMsg);
+			res.setResStatus(BODC_RES_STATUS.KO);	
+		}
+
+		return res;
+	}
+	public BODCResult checkDataType(String code) {
+		logger.debug(Messages.BODC_check_datatype_C77);
+		BODCResult res= new BODCResult(BODC_RES_STATUS.OK);
+		res.setDataTypeCode(code);
+		
+		if (code==null || code.isEmpty()){
+			return res;
+		}
+		String replaceMsg="";
+		String errorMsg="";
+		boolean ok=true;
+		try {
+			String replacement;
+//			if (code.equals("ZZZ")){
+//				replacement="H09";
+//				
+//			}else{
+				replacement = sdnMgr.getReplacedByCode(code, SdnVocabularyManager.LIST_C77);
+//			}
+			if (replacement != null){
+					replaceMsg+=MessageFormat.format(Messages.BODC_check_datatype_c77_deprecated, code, replacement,  SdnVocabularyManager.LIST_C77 )+Global.RN;
+				res.setDataTypeCode(replacement);
+				
+			}
+		} catch (Exception e) {
+				errorMsg+=MessageFormat.format(Messages.BODC_check_datatype_c77_notExist, code, SdnVocabularyManager.LIST_C77);
+			logger.error(errorMsg);
+			ok=false;
+		} 
+
+		
+		if (ok){
+			if(replaceMsg.isEmpty()){
+				res.setResStatus(BODC_RES_STATUS.OK);
+			}else{
+				res.setWarningMsg(replaceMsg);
+				res.setResStatus(BODC_RES_STATUS.WARNING);
+			}
+		}else{
+			res.setErrorMsg(errorMsg);
+			res.setResStatus(BODC_RES_STATUS.KO);	
+		}
+
+		return res;
+	}
 }

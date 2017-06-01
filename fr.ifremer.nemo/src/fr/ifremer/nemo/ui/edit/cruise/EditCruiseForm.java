@@ -541,9 +541,8 @@ public class EditCruiseForm extends EditForm {
 	public CruiseSection getSectionSource() {
 		return sectionSource;
 	}
-
-	public CruiseDatatypeSection getSectionType() {
-		return sectionType;
+	public CruiseSection getSectionCentre() {
+		return sectionCentre;
 	}
 
 	public CruiseDatatypeSection getSectionDataType() {

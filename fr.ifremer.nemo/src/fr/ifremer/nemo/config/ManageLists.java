@@ -112,6 +112,16 @@ public class ManageLists
         _dataTypes.toArray(v);
         return v;
     }
+    
+    public static WSDataType getDataType(String code) throws Exception
+    {
+        for (WSDataType dt : _dataTypes){
+        	if (dt.getCode().equals(code)){
+        		return dt;
+        	}
+        }
+        throw new Exception("datatype " + code + "not found in Nemo list"); // TODO 35230 msg
+    }
 
     /**
      * Returns the collection of linked objects for role "dataTypes"

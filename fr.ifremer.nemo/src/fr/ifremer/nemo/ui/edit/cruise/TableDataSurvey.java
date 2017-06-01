@@ -519,7 +519,7 @@ public class TableDataSurvey {
 		// refresh de la table
 		creationTable();
 
-		Composite c = Nemo.getInstance().getViewMain().getEditCruiseForm().getSectionType().getSection();
+		Composite c = Nemo.getInstance().getViewMain().getEditCruiseForm().getSectionDataType().getSection();
 		while (c != null) {
 			// c.setRedraw(false);
 			c = c.getParent();
@@ -527,7 +527,7 @@ public class TableDataSurvey {
 				break;
 			}
 		}
-		c = Nemo.getInstance().getViewMain().getEditCruiseForm().getSectionType().getSection();
+		c = Nemo.getInstance().getViewMain().getEditCruiseForm().getSectionDataType().getSection();
 		while (c != null) {
 			// c.layout(true);
 			c = c.getParent();
@@ -536,7 +536,7 @@ public class TableDataSurvey {
 				break;
 			}
 		}
-		c = Nemo.getInstance().getViewMain().getEditCruiseForm().getSectionType().getSection();
+		c = Nemo.getInstance().getViewMain().getEditCruiseForm().getSectionDataType().getSection();
 		while (c != null) {
 			// c.setRedraw(true);
 			c = c.getParent();
@@ -546,9 +546,9 @@ public class TableDataSurvey {
 		}
 	}
 
-	public static void ajouterCode(int indice) {
-		// 
-
-	}
+//	public static void ajouterCode(int indice) {
+//		// 
+//
+//	}
 
 }

@@ -22,6 +22,7 @@ import fr.ifremer.nemo.domain.ConversionDomain;
 import fr.ifremer.nemo.domain.CruiseDomain;
 import fr.ifremer.nemo.domain.InputDomain;
 import fr.ifremer.nemo.domain.StationDomain;
+import fr.ifremer.nemo.input.DataType;
 import fr.ifremer.nemo.input.PropertyModel;
 import fr.ifremer.nemo.input.parameters.ParameterModel;
 import fr.ifremer.nemo.mapping.Mapping;
@@ -41,6 +42,7 @@ import fr.ifremer.nemo.util.Global.DataListTypeEnum;
 import fr.ifremer.nemo.util.Global.E_TypeConversion;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.util.Preformat;
+import fr.ifremer.nemo.ws.WSDataType;
 
 /**
  * Class NemoShell.java Description: Main class to launch nemo in batch mode.
@@ -89,11 +91,11 @@ public class NemoShell {
 				logger.error("Error, model file not valid");
 				return false;
 			}
-//			if (inputDomain.getMedia().getModel().getSeparator() != Global.EMPTY_STRING)
-//				inputFile =
-			 // 33278: format only for models < 1.6.4
-            if (inputDomain.getMedia().getModel().getSeparator() != Global.EMPTY_STRING &&! RulesManager.getInstance().isInputWithSeparatorsAndModelUpToDate())
-            	inputFile = Preformat.run(new File(inputFile)).getAbsolutePath();
+			//			if (inputDomain.getMedia().getModel().getSeparator() != Global.EMPTY_STRING)
+			//				inputFile =
+			// 33278: format only for models < 1.6.4
+			if (inputDomain.getMedia().getModel().getSeparator() != Global.EMPTY_STRING &&! RulesManager.getInstance().isInputWithSeparatorsAndModelUpToDate())
+				inputFile = Preformat.run(new File(inputFile)).getAbsolutePath();
 
 			nemo.getDomain().getMedia().getModel().setSourcePath(inputFile);
 
@@ -225,7 +227,7 @@ public class NemoShell {
 
 			if (!(repertory == null) && !repertory.exists())
 				repertory.mkdirs();
-			
+
 			boolean ok =  checkBodc(logger, inputDomain);
 
 			if (!ok){
@@ -263,9 +265,11 @@ public class NemoShell {
 		// 35230********************
 		boolean ok = true;
 		// SHIP
+
 		String shipCode = fr.ifremer.nemo.util.Utils.extraitCode(inputDomain.getCruise().getModel().getShipCode());
 		String shipName = fr.ifremer.nemo.util.Utils.extraitCode(inputDomain.getCruise().getModel().getShipName());
 		BODCResult bodcRes = BodcChecker.getInstance().checkShip(	shipCode, shipName);
+
 		if (bodcRes.getResStatus() == BODC_RES_STATUS.KO){
 			ok=false;
 			logger.error(bodcRes.getErrorMsg());
@@ -274,34 +278,109 @@ public class NemoShell {
 			inputDomain.getCruise().getModel().setShipName(bodcRes.getShipLabel());
 			logger.warn(bodcRes.getWarningMsg());
 		}
-		
+
 		// 35230 region
-		String regionCode = fr.ifremer.nemo.util.Utils.extraitCode(inputDomain.getCruise().getModel().getRegionCode());
-		String regionName = fr.ifremer.nemo.util.Utils.extraitValeur(inputDomain.getCruise().getModel().getRegionName());
+		if (isConversionToMedatlasOrCFPoint(inputDomain) ){
+			String regionCode = fr.ifremer.nemo.util.Utils.extraitCode(inputDomain.getCruise().getModel().getRegionCode());
+			String regionName = fr.ifremer.nemo.util.Utils.extraitValeur(inputDomain.getCruise().getModel().getRegionName());
 
 
-		bodcRes = BodcChecker.getInstance().checkRegion(regionCode, regionName);
-		if (bodcRes.getResStatus() == BODC_RES_STATUS.KO){
-			ok=false;
-			logger.error(bodcRes.getErrorMsg());
-		}else if (bodcRes.getResStatus() == BODC_RES_STATUS.WARNING){
-			inputDomain.getCruise().getModel().setRegionCode(bodcRes.getRegionCode());
-			inputDomain.getCruise().getModel().setRegionName(bodcRes.getRegionLabel());
-			logger.warn(bodcRes.getWarningMsg());
+			bodcRes = BodcChecker.getInstance().checkRegion(regionCode, regionName);
+			if (bodcRes.getResStatus() == BODC_RES_STATUS.KO){
+				ok=false;
+				logger.error(bodcRes.getErrorMsg());
+			}else if (bodcRes.getResStatus() == BODC_RES_STATUS.WARNING){
+				inputDomain.getCruise().getModel().setRegionCode(bodcRes.getRegionCode());
+				inputDomain.getCruise().getModel().setRegionName(bodcRes.getRegionLabel());
+				logger.warn(bodcRes.getWarningMsg());
+			}
 		}
 		// 35230 country
-		String countryCode = fr.ifremer.nemo.util.Utils.extraitCode(inputDomain.getCruise().getModel().getCountryCode());
+		if (isConversionToMedatlasOrCFPoint(inputDomain) ){
+			String countryCode = fr.ifremer.nemo.util.Utils.extraitCode(inputDomain.getCruise().getModel().getCountryCode());
 
 
-		bodcRes = BodcChecker.getInstance().checkCountry(countryCode);
+			bodcRes = BodcChecker.getInstance().checkCountry(countryCode);
+			if (bodcRes.getResStatus() == BODC_RES_STATUS.KO){
+				ok=false;
+				logger.error(bodcRes.getErrorMsg());
+			}else if (bodcRes.getResStatus() == BODC_RES_STATUS.WARNING){
+				inputDomain.getCruise().getModel().setCountryCode(bodcRes.getCountryCode());
+				inputDomain.getCruise().getModel().setCountryName(bodcRes.getCountryLabel());
+				logger.warn(bodcRes.getWarningMsg());
+			}
+		}
+		// 35230 data center
+		if (isConversionToMedatlasOrCFPoint(inputDomain) ){
+			String centerCode = fr.ifremer.nemo.util.Utils.extraitCode(inputDomain.getCruise().getModel().getDataCentre());
+
+			bodcRes = BodcChecker.getInstance().checkDataCenter(centerCode);
+			if (bodcRes.getResStatus() == BODC_RES_STATUS.KO){
+				ok=false;
+				logger.error(bodcRes.getErrorMsg());
+			}else if (bodcRes.getResStatus() == BODC_RES_STATUS.WARNING){
+				inputDomain.getCruise().getModel().setCountryCode(bodcRes.getCenterCode());
+				inputDomain.getCruise().getModel().setCountryName(bodcRes.getCenterLabel());
+				logger.warn(bodcRes.getWarningMsg());
+			}
+		}
+		// 35230 data types in cruise
+		DataType[] dataTypes = null;
+		if (inputDomain.getConversion().getModel().getOutputFormat()==E_TypeConversion.MEDATLAS ){
+			dataTypes = inputDomain.getCruise().getModel().getDataTypes();
+			for (int i=0; i<dataTypes.length; i++){
+
+				bodcRes = BodcChecker.getInstance().checkDataType(fr.ifremer.nemo.util.Utils.extraitCode(dataTypes[i].getCode()));
+				if (bodcRes.getResStatus() == BODC_RES_STATUS.KO){
+					ok=false;
+					logger.error(bodcRes.getErrorMsg());
+				}else if (bodcRes.getResStatus() == BODC_RES_STATUS.WARNING){
+					try {
+						WSDataType newdt = ManageLists.getDataType(bodcRes.getDataTypeCode());
+						dataTypes[i].setCode(bodcRes.getDataTypeCode());
+						dataTypes[i].setSensor(newdt.isSensor());
+					} catch (Exception e) {
+						logger.error(e.getMessage());
+						ok=false;
+					}
+
+					logger.warn(bodcRes.getWarningMsg());
+				}
+
+			}
+		}
+		// 35230 data types in station
+		boolean newCodeFoundInCruiseDataTypes=false;
+		DataType dataType = inputDomain.getStation().getModel().getDataType();
+		bodcRes = BodcChecker.getInstance().checkDataType(dataType.getCode());
 		if (bodcRes.getResStatus() == BODC_RES_STATUS.KO){
 			ok=false;
 			logger.error(bodcRes.getErrorMsg());
 		}else if (bodcRes.getResStatus() == BODC_RES_STATUS.WARNING){
-			inputDomain.getCruise().getModel().setCountryCode(bodcRes.getCountryCode());
-			inputDomain.getCruise().getModel().setCountryName(bodcRes.getCountryLabel());
-			logger.warn(bodcRes.getWarningMsg());
+			String newCode=bodcRes.getDataTypeCode();
+			
+			if (inputDomain.getConversion().getModel().getOutputFormat()==E_TypeConversion.MEDATLAS ){
+				for (int i=0; i<dataTypes.length; i++){
+					if (dataTypes[i].getCode().equals(newCode)){
+						inputDomain.getStation().getModel().setDataType(dataTypes[i]);
+						if (!dataTypes[i].isSensor()){
+							logger.error("dataType "+ dataType.getCode() + " is deprecated and shall be replaced by " + newCode + " but this dataType has not sensor. Please check your model with Nemo GUI");
+							ok = false;
+						}
+						newCodeFoundInCruiseDataTypes=true;
+					}
+				}
+			}else{
+				newCodeFoundInCruiseDataTypes=true; // IF conv is not medatlas, no datatypes in cruise tab, so no need to find them
+			}
+			if (newCodeFoundInCruiseDataTypes){
+				logger.warn(bodcRes.getWarningMsg());
+			}else{
+				ok=false;
+				logger.error("dataType "+ dataType.getCode() + " is deprecated and shall be replaced by " + newCode + " but this dataType has not been found in Cruise datatypes. Please check your model with Nemo GUI");
+			}
 		}
+
 		for (ParameterModel pModel : inputDomain.getData().getModel().getParameterModels()) {
 			TypeData typeCourant = new TypeData(pModel);
 
@@ -317,9 +396,9 @@ public class NemoShell {
 						typeCourant = res.getTypeData();
 						pModel.setParameter(typeCourant);
 						logger.warn(res.getWarningMsg());
-						
+
 						replaceVerticalParameters(typeCourantOrig, typeCourant,inputDomain);
-						
+
 					}
 				}
 			}catch (Exception e) {
@@ -347,16 +426,16 @@ public class NemoShell {
 			}
 		}
 		// 35230 check fall rate
-		
-			bodcRes = BodcChecker.getInstance().checkFallRate(inputDomain.getData().getModel().getFallrateCode(), inputDomain.getData().getModel().getFallrateLabel());
-			if (bodcRes.getResStatus() == BODC_RES_STATUS.KO){
-				ok=false;
-				logger.error(bodcRes.getErrorMsg());
-			}else if (bodcRes.getResStatus() == BODC_RES_STATUS.WARNING){
-				inputDomain.getData().getModel().setFallrateCode(bodcRes.getFallrateCode());
-				inputDomain.getData().getModel().setFallrateLabel(bodcRes.getFallrateLabel());
-				logger.warn(bodcRes.getWarningMsg());
-			}
+
+		bodcRes = BodcChecker.getInstance().checkFallRate(inputDomain.getData().getModel().getFallrateCode(), inputDomain.getData().getModel().getFallrateLabel());
+		if (bodcRes.getResStatus() == BODC_RES_STATUS.KO){
+			ok=false;
+			logger.error(bodcRes.getErrorMsg());
+		}else if (bodcRes.getResStatus() == BODC_RES_STATUS.WARNING){
+			inputDomain.getData().getModel().setFallrateCode(bodcRes.getFallrateCode());
+			inputDomain.getData().getModel().setFallrateLabel(bodcRes.getFallrateLabel());
+			logger.warn(bodcRes.getWarningMsg());
+		}
 		return ok;
 	}
 
@@ -383,7 +462,7 @@ public class NemoShell {
 		if (inputDomain.getData().getModel().getVerticalParametersList().getP_pressure().equals(oldParamCode)){
 			inputDomain.getData().getModel().getVerticalParametersList().setP_pressure(newParamCode);
 		}
-		
+
 	}
 
 	private static void mapping(Logger logger, Conversion conv,
@@ -430,5 +509,9 @@ public class NemoShell {
 			e.printStackTrace();
 		}
 	}
-
+	private static boolean isConversionToMedatlasOrCFPoint(InputDomain inputDomain){
+		return inputDomain.getConversion().getModel().getOutputFormat()==E_TypeConversion.MEDATLAS
+				|| inputDomain.getConversion().getModel().getOutputFormat()==E_TypeConversion.NETCDF_MONOSTATION
+				||inputDomain.getConversion().getModel().getOutputFormat()==E_TypeConversion.NETCDF_MULTISTATIONS ;
+	}
 }

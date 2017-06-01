@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import fr.ifremer.nemo.Nemo;
+import fr.ifremer.nemo.config.ManageLists;
 import fr.ifremer.nemo.ui.RulesManager;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.FormValidator;
@@ -20,6 +21,7 @@ import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Global.E_TypeConversion;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.util.format.DateTimeFormat;
+import fr.ifremer.nemo.ws.WSDataType;
 
 /**
  * Description: validation de l'onget cruise
@@ -44,6 +46,8 @@ public class CruiseFormValidator extends FormValidator {
 
 	@Override
 	public void validate() {
+		boolean bodcReplaced=false;
+		BODCResult bodcRes;
 		guiLogger.info("validate cruise tab");
 		warningCruise = "";
 		EditCruiseForm editCruiseForm = Nemo.getInstance().getViewMain().getEditCruiseForm();
@@ -84,16 +88,16 @@ public class CruiseFormValidator extends FormValidator {
 			String shipCode = fr.ifremer.nemo.util.Utils.extraitCode(section.getItem(itemID.SHIP).getText());
 			String shipName = fr.ifremer.nemo.util.Utils.extraitValeur(section.getItem(itemID.SHIP).getText());
 			
-		
-			BODCResult bodcRes = BodcChecker.getInstance().checkShip(shipCode, shipName);
-			if (bodcRes.getResStatus() == BODC_RES_STATUS.KO){
-				ok=false;
-				Utils.messageErreurAppend(bodcRes.getErrorMsg());
-			}else if (bodcRes.getResStatus() == BODC_RES_STATUS.WARNING){
-				Utils.selectComboCodePlus(section.getItem(itemID.SHIP).getValueCombo(),bodcRes.getShipCode(), bodcRes.getShipLabel());
-				Utils.messageWarningAppend(bodcRes.getWarningMsg());
+			if(section.isEnabled()){
+				bodcRes = BodcChecker.getInstance().checkShip(shipCode, shipName);
+				if (bodcRes.getResStatus() == BODC_RES_STATUS.KO){
+					ok=false;
+					Utils.messageErreurAppend(bodcRes.getErrorMsg());
+				}else if (bodcRes.getResStatus() == BODC_RES_STATUS.WARNING){
+					Utils.selectComboCodePlus(section.getItem(itemID.SHIP).getValueCombo(),bodcRes.getShipCode(), bodcRes.getShipLabel());
+					Utils.messageWarningAppend(bodcRes.getWarningMsg());
+				}
 			}
-		
 			// FAE 1143 : la référence campagne doit être == 13 caractères pour
 			// MEDATLAS
 			editConversionForm.setWarningCampagne(Global.EMPTY_STRING);
@@ -120,18 +124,20 @@ public class CruiseFormValidator extends FormValidator {
 			ok = ok && resultat;
 
 			ok = checkDates(section, ok);
-			// 35230 region
-			String regionCode = fr.ifremer.nemo.util.Utils.extraitCode(section.getItem(itemID.REGION).getText());
-			String regionName = fr.ifremer.nemo.util.Utils.extraitValeur(section.getItem(itemID.REGION).getText());
-			
-			
-			BODCResult bodcRes = BodcChecker.getInstance().checkRegion(regionCode, regionName);
-			if (bodcRes.getResStatus() == BODC_RES_STATUS.KO){
-				ok=false;
-				Utils.messageErreurAppend(bodcRes.getErrorMsg());
-			}else if (bodcRes.getResStatus() == BODC_RES_STATUS.WARNING){
-				Utils.selectComboCodePlus(section.getItem(itemID.REGION).getValueCombo(),bodcRes.getRegionCode(), bodcRes.getRegionLabel());
-				Utils.messageWarningAppend(bodcRes.getWarningMsg());
+			if (section.isEnabled()){
+				// 35230 region
+				String regionCode = fr.ifremer.nemo.util.Utils.extraitCode(section.getItem(itemID.REGION).getText());
+				String regionName = fr.ifremer.nemo.util.Utils.extraitValeur(section.getItem(itemID.REGION).getText());
+
+
+				bodcRes = BodcChecker.getInstance().checkRegion(regionCode, regionName);
+				if (bodcRes.getResStatus() == BODC_RES_STATUS.KO){
+					ok=false;
+					Utils.messageErreurAppend(bodcRes.getErrorMsg());
+				}else if (bodcRes.getResStatus() == BODC_RES_STATUS.WARNING){
+					Utils.selectComboCodePlus(section.getItem(itemID.REGION).getValueCombo(),bodcRes.getRegionCode(), bodcRes.getRegionLabel());
+					Utils.messageWarningAppend(bodcRes.getWarningMsg());
+				}
 			}
 		}
 
@@ -146,28 +152,81 @@ public class CruiseFormValidator extends FormValidator {
 			ok = ok && resultat;
 			
 			// 35230 country
-			String countryCode = fr.ifremer.nemo.util.Utils.extraitCode(section.getItem(itemID.COUNTRY).getText());
-			String countryName = fr.ifremer.nemo.util.Utils.extraitValeur(section.getItem(itemID.COUNTRY).getText());
+			if (section.isEnabled()){
+				String countryCode = fr.ifremer.nemo.util.Utils.extraitCode(section.getItem(itemID.COUNTRY).getText());
+				String countryName = fr.ifremer.nemo.util.Utils.extraitValeur(section.getItem(itemID.COUNTRY).getText());
 
-			BODCResult bodcRes = BodcChecker.getInstance().checkCountry(countryCode, countryName);
+				bodcRes = BodcChecker.getInstance().checkCountry(countryCode, countryName);
+				if (bodcRes.getResStatus() == BODC_RES_STATUS.KO){
+					ok=false;
+					Utils.messageErreurAppend(bodcRes.getErrorMsg());
+				}else if (bodcRes.getResStatus() == BODC_RES_STATUS.WARNING){
+					Utils.selectComboCodePlus(section.getItem(itemID.COUNTRY).getValueCombo(),bodcRes.getCountryCode(), bodcRes.getCountryLabel());
+					Utils.messageWarningAppend(bodcRes.getWarningMsg());
+				}
+			}
+						
+		}
+		
+
+		CruiseSection sectionCentre = editCruiseForm.getSectionCentre();
+		// 35230 DATA CENTER
+		String centreCode = fr.ifremer.nemo.util.Utils.extraitCode(sectionCentre.getItem(itemID.DATA_CENTER).getText());
+		String centreName = fr.ifremer.nemo.util.Utils.extraitValeur(sectionCentre.getItem(itemID.DATA_CENTER).getText());
+
+		if (sectionCentre.isEnabled()){
+			bodcRes = BodcChecker.getInstance().checkDataCenter(centreCode, centreName);
 			if (bodcRes.getResStatus() == BODC_RES_STATUS.KO){
 				ok=false;
 				Utils.messageErreurAppend(bodcRes.getErrorMsg());
 			}else if (bodcRes.getResStatus() == BODC_RES_STATUS.WARNING){
-				Utils.selectComboCodePlus(section.getItem(itemID.COUNTRY).getValueCombo(),bodcRes.getCountryCode(), bodcRes.getCountryLabel());
+				Utils.selectComboCodePlus(sectionCentre.getItem(itemID.DATA_CENTER).getValueCombo(),bodcRes.getCenterCode(), bodcRes.getCenterLabel());
 				Utils.messageWarningAppend(bodcRes.getWarningMsg());
 			}
-						
 		}
 
-		CruiseDatatypeSection sectionType = editCruiseForm.getSectionType();
-		if(sectionType !=null){
-			if (sectionType.isMandatory())
-				ok = ok & sectionType.chekMandatory();
+
+		// DATA TYPE
+		CruiseDatatypeSection sectionDataType = editCruiseForm.getSectionDataType();
+		if(sectionDataType !=null){
+			if (sectionDataType.isMandatory()){
+				ok = ok & sectionDataType.chekMandatory();
+			}
+			if(sectionDataType.isEnabled()){
+				String code;
+				for (int i=0; i<TableDataSurvey.types.size(); i++){
+					TypeSurvey tds = TableDataSurvey.types.get(i);
+					code = fr.ifremer.nemo.util.Utils.extraitCode(tds.getCode());
+					bodcRes = BodcChecker.getInstance().checkDataType(code);
+					if (bodcRes.getResStatus() == BODC_RES_STATUS.KO){
+						ok=false;
+						Utils.messageErreurAppend(bodcRes.getErrorMsg());
+					}else if (bodcRes.getResStatus() == BODC_RES_STATUS.WARNING){
+						WSDataType newdt;
+						try {
+							newdt = ManageLists.getDataType(bodcRes.getDataTypeCode());
+							tds.setCode(newdt.getCode());
+							tds.setSensor(newdt.isSensor());
+							Utils.messageWarningAppend(bodcRes.getWarningMsg());
+							bodcReplaced=true;
+						} catch (Exception e) {
+							ok=false;
+							Utils.messageErreurAppend(e.getMessage());
+						}
+
+					}
+				}
+				if (bodcReplaced){
+					TableDataSurvey.majIHM();
+				}
+			}
 		}
 		
 
-
+		if (bodcReplaced){
+			ok=false;
+			Utils.messageWarningAppend("Some bodc terms has been replaced. Please verify and validate. Save your model to avoid this warning next time."); // TODO 35230 message
+		}
 		if (ok) {
 			guiLogger.info("Cruise validation result: OK");
 			editCruiseForm.setOkApresReset(true);
