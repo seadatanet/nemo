@@ -120,15 +120,13 @@ public class StationFormValidator extends FormValidator {
 
 			// FAE022 : TYPE DE DONNEES
 			// FAE 6536 : on exige un dataType même si pas onglet Cruise
-			//            if ( !Nemo.getInstance().getViewMain().getMyRulesManager().isProcessCollection())
-			//            {
 			if (editStationForm.dataType.getDatatype()
 						.getValueCombo().getSelectionIndex() == -1) {
 				Utils.messageErreurAppend(Messages.Etape_32);
 				ok = ok && false;
 			}
-			//            }
-
+			
+		
 			// HISTORIQUE ACQUISITION
 			if (!rulesManager.isConversionToNetCDF() && !editStationForm.historique.isManual()) {
 				// position dans fichier, verif des valeurs
