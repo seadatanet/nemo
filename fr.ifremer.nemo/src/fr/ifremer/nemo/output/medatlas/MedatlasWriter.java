@@ -129,9 +129,9 @@ public class MedatlasWriter extends NemoWriter
 					 */
 					if (isStartStationHeader())
 					{
-
 						// écriture de l'entête station
 						String[] inputStationHeader = consumeStationHeader(mediaModel.getStationHeader() > 0);
+						currentStation.setStartLine(numLine);
 						String readedRef = "";
 						if (inputStationHeader != null)
 						{

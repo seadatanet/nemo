@@ -61,11 +61,14 @@ public class Station implements Comparable {
 
 	protected String _fileName;
 
+	protected int startLine;
+	
 	public Station(String fileName, String[] inputStationHeader) throws GenerationException {
 		// TODO BGT supprimer errorMsg
 		String errorMessage = "";
 		boolean isNetCDF = false;
-
+		startLine=-1;
+		
 		//isNetCDF = Nemo.getInstance().getViewMain().getMyRulesManager().isConversionToNetCDF();
 		E_TypeConversion convertion = Nemo.getInstance().getDomain().getConversion().getCurrent();
 		if (convertion == E_TypeConversion.NETCDF_MONOSTATION || convertion == E_TypeConversion.NETCDF_MULTISTATIONS)
@@ -639,5 +642,13 @@ public class Station implements Comparable {
 	@Override
 	public String toString(){
 		return this.getReference() + " - " + this.getLocal_cdi_id() + " - "+this.getDate()+" "+this.getTime();
+	}
+
+	public int getStartLine() {
+		return startLine;
+	}
+
+	public void setStartLine(int startLine) {
+		this.startLine = startLine;
 	}
 }

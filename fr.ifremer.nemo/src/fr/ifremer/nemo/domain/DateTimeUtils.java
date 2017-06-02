@@ -147,11 +147,11 @@ public class DateTimeUtils {
 		cal.clear();
 
 		// FAE 13195: Calcul de la date de fin d'une série temporelle
-		// la dete de fin n'est plus calculer mais lu lorsque c'est possible.
+		// la date de fin n'est plus calculee mais lue lorsque c'est possible.
 		MediaDomain mediaDomain = Nemo.getInstance().getDomain().getMedia();
-		boolean badConvertion = false;
+		boolean badConversion = false;
 		if (mediaDomain.getModel().getInputType() == E_InputType.TIMESERIES) {
-			int lastFileLine = mediaDomain.getStationHeaderNumberLines() + currentStation.getNbRecords() - 1; // TODO 36265: prendre en compte le nb de lignes des stations precedentes si entree multistations!!!
+			int lastFileLine =currentStation.getStartLine()-1+currentStation.getNbRecords()-1;
 			String endLigne;
 			String fileName = mediaDomain.getModel().getSourcePath();
 			String name = currentStation.getFileName();
@@ -176,10 +176,10 @@ public class DateTimeUtils {
 			} catch (Exception e) {
 				// convertion impossible du fichier non compatible.
 				// donc passage au calcul.
-				badConvertion = true;
+				badConversion = true;
 			}
 		}
-		if (mediaDomain.getModel().getInputType() != E_InputType.TIMESERIES || badConvertion) {
+		if (mediaDomain.getModel().getInputType() != E_InputType.TIMESERIES || badConversion) {
 
 			long rate = new Float(currentStation.getSamplingRate() * 1000.0f).longValue();
 			int size = currentStation.getNbRecords() - 1;
