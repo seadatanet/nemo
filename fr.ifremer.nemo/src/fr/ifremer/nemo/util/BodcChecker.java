@@ -279,7 +279,7 @@ public class BodcChecker {
 			} catch (Exception e) {
 				errorMsg=MessageFormat.format(Messages.BODC_check_param_p06_p01fromp09,
 						typeData.getEntryKeyP011()+ "(P09 "+typeData.getEntryKey()+")",
-						SdnVocabularyManager.LIST_P06+"/"+SdnVocabularyManager.LIST_P09)
+						SdnVocabularyManager.LIST_P06,SdnVocabularyManager.LIST_P09)
 						+ " - " + e.getMessage();
 				
 						
@@ -315,7 +315,7 @@ public class BodcChecker {
 			} catch (Exception e) {
 				errorMsg=MessageFormat.format(Messages.BODC_check_param_p06_p01fromp09,
 						typeData.getEntryKey(),
-						SdnVocabularyManager.LIST_P06+"/"+SdnVocabularyManager.LIST_P09)
+						SdnVocabularyManager.LIST_P06,SdnVocabularyManager.LIST_P09)
 						+ " - " + e.getMessage();
 				typeData.setUnite("");
 				typeData.setUniteCode("");
