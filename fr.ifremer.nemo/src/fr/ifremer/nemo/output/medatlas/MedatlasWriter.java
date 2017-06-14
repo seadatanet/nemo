@@ -131,7 +131,7 @@ public class MedatlasWriter extends NemoWriter
 					{
 						// écriture de l'entête station
 						String[] inputStationHeader = consumeStationHeader(mediaModel.getStationHeader() > 0);
-						currentStation.setStartLine(numLine);
+//						currentStation.setStartLine(numLine);//36265
 						String readedRef = "";
 						if (inputStationHeader != null)
 						{
@@ -141,7 +141,8 @@ public class MedatlasWriter extends NemoWriter
 							readedRef = readReference(currentStation.getFileName(), inputStationHeader);
 						}
 
-						if (inputStationHeader != null && currentStation.getReference().equals(readedRef))
+//						if (inputStationHeader != null && currentStation.getReference().equals(readedRef))
+							if (inputStationHeader != null && currentStation.getStartLine()==numLine)//36265
 						{
 
 							outputFileWriter.println(stationDomain.getHeader(myConversion, currentStation, inputStationHeader));

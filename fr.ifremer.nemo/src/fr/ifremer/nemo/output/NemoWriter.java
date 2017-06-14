@@ -235,6 +235,7 @@ public abstract class NemoWriter {
 										st = new Station(
 												inputFile.getName(),
 												inputStationHeader);
+										isRateCalculated = false;//36463
 										// get reference
 										String ref = stationDomain
 												.getReference(
@@ -243,7 +244,7 @@ public abstract class NemoWriter {
 														true);
 
 										st.setReference(ref);
-
+										st.setStartLine(numLine);//36265
 										// FAE 18333
 										// calcul start et end date of
 										// cruise
@@ -326,7 +327,9 @@ public abstract class NemoWriter {
 					}
 					bufferedReader.close();
 //					System.out.println("write file " + inputFilePath);
+
 					Collections.sort(stationDomain.getStations(inputFilePath));
+
 					if (iDomain.getStation().getModel().getReferenceProperty().isUserProvided())
 					{
 						int stNb=Integer.valueOf(iDomain.getStation().getModel().getReferenceProperty().getUserValue());
@@ -335,6 +338,7 @@ public abstract class NemoWriter {
 							stNb++;
 						}
 					}
+
 					writeFile(inputFilePath);
 					numLine=0;
 				}
