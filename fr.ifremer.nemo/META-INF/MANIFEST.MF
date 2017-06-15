@@ -52,10 +52,10 @@ Bundle-ClassPath: .,
  lib/hsqldb-2.2.6.jar,
  lib/eclipselink.jar,
  lib/javax.persistence_2.1.0.v201304241213.jar,
- lib/cfpointLib-0.21.jar,
- lib/sdnVocabulary-1.4.jar,
  lib/log4j-api-2.3.jar,
  lib/log4j-core-2.3.jar,
- lib/sismertoolslib-1.1.13.jar
+ lib/cfpointLib-0.24.jar,
+ lib/sismertoolslib-1.1.15.jar,
+ lib/sdnVocabulary-1.5.jar
 Bundle-Vendor: IFREMER
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
