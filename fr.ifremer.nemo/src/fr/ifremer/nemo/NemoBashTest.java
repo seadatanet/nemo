@@ -106,7 +106,11 @@ public class NemoBashTest {
 	boolean REPLACE=false;// WARNING!!!
 	boolean REMOVE_JUNIT=false;
 	public static String[] testDirAlone = {};
-//			public static String[] testDirAlone = {"cruiseFile_traj_coriolis_6839"};
+//			public static String[] testDirAlone = {"CollectionCAMP_profile"};
+//	public static String[] testDirAlone = {"cruiseFile_ts_multi_36265"};
+//	public static String[] testDirAlone = {"cruiseFile_ts_multi_dateNonOrdered_36265"};
+//	public static String[] testDirAlone = {"cruiseFile_profile_diap_stationsOrderBis"};
+			
 	/**
 	 * ********************************************************
 	 * ********************************************************
@@ -1379,10 +1383,12 @@ public class NemoBashTest {
 				for (File f : test.listFiles()){
 					if (f.isDirectory()){
 						for (File ff: f.listFiles()){
+							if (ff.getName().endsWith(".cf")){ // ignore dumps
 							currentComp &= compareCFPoint(
 									ff.getAbsolutePath(),
 									ff.getAbsolutePath().replace("junit","REFERENCE")
 									);
+							}
 						}
 					}else{
 						currentComp &= compareCFPoint(
