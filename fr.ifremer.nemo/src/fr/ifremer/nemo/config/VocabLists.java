@@ -308,6 +308,37 @@ public class VocabLists {
 				e.printStackTrace();
 			}
 		}
+		String[] listNames = Intern.vocabLists.split(Global.COMMA);
+		for (String listName : listNames) {
+			String mapName = listName+Global.UNDERSCORE+listName;
+			try {
+				if (!monitor.isCanceled()) {
+					StringBuffer msg = new StringBuffer();
+					msg.append(Messages.getString(Intern.id_lists));
+					msg.append(Global.SPACE);
+					msg.append(mapName);
+					msg.append(" [");//$NON-NLS-1$
+					msg.append((idxCurrent));
+					msg.append(" / ");//$NON-NLS-1$
+					msg.append(keySetSize);
+					msg.append("]");//$NON-NLS-1$
+					monitor.subTask(msg.toString());
+
+					UpdateStatusBODC updateMap = updateMapLists(mapName);
+					updateMaps.addUpdateStatus(updateMap);
+					if (updateMaps.getEtat().compareTo(updateMap.getEtat()) < 0) {
+						updateMaps.setEtat(updateMap.getEtat());
+					}
+
+				} else {
+					updateMaps.setEtat(EtatUpdate.INTERRUPTED);
+				}
+
+			} catch (Exception e) {
+				updateMaps.setEtat(EtatUpdate.FAILED);
+				e.printStackTrace();
+			}
+		}
 	}
 
 	public static UpdateStatusBODC updateMapLists(String mapName) {
