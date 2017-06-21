@@ -1,5 +1,8 @@
 package fr.ifremer.nemo.ui.edit.data;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
@@ -168,9 +171,10 @@ public class EditDataForm extends EditForm {
 		// 33278: now we have the model -> we can display depending on separator check
 		// affichage du texte dans la zone de gauche
 		//		if (Nemo.getInstance().getDomain().getMedia().getModel().getSeparator().isEmpty()){
-		if (RulesManager.getInstance().isInputWithSeparatorsAndModelUpToDate()){
+		if (RulesManager.getInstance().isUsingTableForCsvData()){
 			inputTableData = new InputTableData(this.inputComposite);
-			inputTableData.init(Utils.lignesBrutes);
+			List<String> list =  Arrays.asList(Utils.texteBrut.split("\n"));
+			inputTableData.init(list);
 		}else{
 
 			// text area

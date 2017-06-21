@@ -223,6 +223,10 @@ public class MediaDomain
     public int getColTitlesLineNb(){
     	return _model.getColTitlesInInputFilesLineNb();
     }
+    public boolean useTableForCsvData(){
+    	return _model.getUseTableForCsvData();
+    }
+   
     public int getShellStationHeaderNumberLines() throws IOException{
         // nombre lignes entete station
         String stationPattern = _model.getStationHeaderPattern();

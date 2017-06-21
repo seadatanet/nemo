@@ -265,6 +265,9 @@ public abstract class NemoWriter {
 										break;
 									}
 								} else if (st != null) {
+									 if(readedLine.trim().isEmpty()){
+										 continue;
+									 }
 									if (mediaDomain.getModel()
 											.getInputType() == E_InputType.TRAJECTORY) {
 										st.completeMedatlasTrajectory(readedLine);
@@ -297,6 +300,10 @@ public abstract class NemoWriter {
 								// enregistrée
 								st.setNbRecords(nbrecords);
 								stationDomain.addStation(inputFilePath, st);
+//								if (isConversionTo_ODVMultistations && isInputType_Trajectory){  30829 TODO?
+//									Nemo.getInstance().getLogger().error("ODV files with multiple trajectories ar not supported");
+//									throw new Exception("ODV files with multiple trajectories ar not supported");
+//								}
 //								System.out.println("add station " + inputFilePath + "  --  " + st.getReference());
 								if (
 										(

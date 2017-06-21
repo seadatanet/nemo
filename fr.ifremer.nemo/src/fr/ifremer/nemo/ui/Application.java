@@ -97,6 +97,7 @@ public class Application implements IPlatformRunnable
             File file = new File(appDir + File.separator  + "resources/log4j2.xml");
 
             context.setConfigLocation(file.toURI());
+            Nemo.getInstance().setLogger(LogManager.getLogger(Global.LOGGER_NAME_GUI));
             /**************************************************************************
              * BATCH MODE
              **************************************************************************/

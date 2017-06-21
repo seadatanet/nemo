@@ -160,6 +160,14 @@ public class EditFileForm extends EditForm
 		radODVMonoStation.setEnabled(rulesMgr.isOdvMonostationEnabled() || rulesMgr.isNetCDFMonostationEnabled());
 
 	}
+	public void resetFileDataColumnTitles(boolean separatorChecked){
+		
+		sectionDataColumnTitles.setEnabled(separatorChecked);
+		
+		sectionDataColumnTitles.setTableEnabledForCsv(false);
+		sectionDataColumnTitles.setColTitlesInInputFile(false);
+		sectionDataColumnTitles.enableTextSetter(false);
+	}
 
 	public void selectConversion(E_TypeConversion conversionType)
 	{
@@ -438,7 +446,7 @@ public class EditFileForm extends EditForm
 		// TODO BGT fonctionnement ok mais a deplacer dans rules
 		sectionFileHeader.setEnabled(radioFichier.getSelection() || isMultiStationFileChecked());
 		buttonValidateAll.setEnabled(!Nemo.getInstance().getNomModele().equals(Global.EMPTY_STRING));
-		sectionDataColumnTitles.setEnabled(RulesManager.getInstance().isInputWithSeparatorsAndModelUpToDate());
+		sectionDataColumnTitles.setEnabled(!Nemo.getInstance().getViewMain().getEditFileForm().getSeparateur().isEmpty());
 	}
 
 	/**
@@ -494,6 +502,7 @@ public class EditFileForm extends EditForm
 		}
 		sectionDataColumnTitles.setColTitlesInInputFile(mediaModel.isColTitlesInInputFile());
 		sectionDataColumnTitles.setValue(String.valueOf(mediaModel.getColTitlesInInputFilesLineNb()));
+		sectionDataColumnTitles.setTableEnabledForCsv(mediaModel.getUseTableForCsvData());
 
 		// Fin de Station
 		sectionEndOfStation.setValue(String.valueOf(mediaModel.getEndStation()));
@@ -868,6 +877,8 @@ public class EditFileForm extends EditForm
 		{
 			mediaModel.setStationHeader(sectionStationHeader.getValue());
 		}
+		
+		mediaModel.setUseTableForCsvData(sectionDataColumnTitles.isTableEnabledForCsv());
 		mediaModel.setColTitlesInInputFile(sectionDataColumnTitles.isColTitlesInStationHeader());
 		mediaModel.setColTitlesInInputFilesLineNb(Integer.parseInt(sectionDataColumnTitles.getValue()));
 		// Fin de Station
@@ -1174,7 +1185,9 @@ public class EditFileForm extends EditForm
 	{
 		return chkSeparateur.getSelection();
 	}
-
+	public boolean useTableForCsvData(){
+		return sectionDataColumnTitles.isTableEnabledForCsv();
+	}
 	public FileEndData getSectionDataTerminator()
 	{
 		return sectionDataTerminator;
@@ -1283,6 +1296,10 @@ public class EditFileForm extends EditForm
 			sectionDataTerminator.setMandatory(true);
 		}
 
+	}
+
+	public FileDataColumnTitlesSection getSectionDataColumnTitles() {
+		return sectionDataColumnTitles;
 	}
 
 }

@@ -170,6 +170,7 @@ public class Messages {
 	public static String edit_file_columnTitlesSection;
 	public static String edit_file_columnTitlesSection_title;
 	public static String edit_file_columnTitlesSection_desc;
+	public static String edit_file_columnTitlesSectionOnOff;
 	
 	public static String edit_file_finStation_title;
 	public static String edit_file_finStation;

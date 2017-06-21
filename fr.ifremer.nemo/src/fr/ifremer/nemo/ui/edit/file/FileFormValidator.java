@@ -69,7 +69,7 @@ public class FileFormValidator extends FormValidator
             }
             // Fichier avec séparateur
             // 33278: format only for models < 1.6.4
-            if (editFileForm.isSeparatorChecked() &&! RulesManager.getInstance().isInputWithSeparatorsAndModelUpToDate())
+            if (editFileForm.isSeparatorChecked() && !editFileForm.useTableForCsvData())
             {
                 // si on a deja preformate une fois, on repart sur les vrais
                 // noms d'origine (et pas les PF_...)
@@ -110,6 +110,10 @@ public class FileFormValidator extends FormValidator
                     Utils.messageErreurAppend(Messages.error);
                     ex.printStackTrace();
                 }
+            }else{
+            	 editFileForm.nomRepertoire = editFileForm.nomRepertoireOrigin;
+                 editFileForm.nomFichier = editFileForm.nomFichierOrigin;
+                 Utils.reloadLignesBrutes( editFileForm.nomFichier);
             }
 
             for (NemoSection desc : editFileForm.getListeSections())

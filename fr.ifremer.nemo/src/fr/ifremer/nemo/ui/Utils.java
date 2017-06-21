@@ -65,6 +65,35 @@ public class Utils {
 
 	private static FlagTable _blank;
 
+	public static void reloadLignesBrutes(String fich) throws IOException{
+		int nbreLignes;
+		String ligne;
+		texteBrut = Global.EMPTY_STRING;
+		texteFinal = Global.EMPTY_STRING;
+		nbreLignes = 0;
+
+		lignesBrutes = new ArrayList<String>();
+		stringBuffer = new StringBuffer();
+
+		// lecture et concatenation
+		BufferedReader entree = new BufferedReader(new InputStreamReader(new FileInputStream(fich), Global.NEMO_ENCODING));
+		do {
+			ligne = entree.readLine();
+
+			if (ligne != null) {
+
+				lignesBrutes.add(ligne);
+				stringBuffer.append(ligne);
+				stringBuffer.append("\n"); //$NON-NLS-1$
+
+				nbreLignes = nbreLignes + 1;
+
+			}
+
+		} while (ligne != null);
+		entree.close();
+		texteBrut = stringBuffer.toString();
+	}
 	public static void insertTextFich(String fich, StyledText zone, boolean raz) throws IOException {
 
 		int nbreLignes, i, cumul, indexMax;

@@ -161,6 +161,7 @@ public class RulesManager {
 		myEditFileForm.resetDefaultEnableConversionTypes();
 		myConversionType = getDefaultConversionTypeWithRules();
 		myEditFileForm.selectConversion(myConversionType);
+		myEditFileForm.resetFileDataColumnTitles(false);
 
 	}
 
@@ -256,11 +257,16 @@ public class RulesManager {
 	}
 	
 	public void updateFromIHMSeparatorChecked(){
-		if (isInputWithSeparatorsAndModelUpToDate()){
+		if (myEditFileForm.isSeparatorChecked()){
 			myEditFileForm.sectionDataColumnTitles.setEnabled(true);
 		}else{
 			myEditFileForm.sectionDataColumnTitles.setEnabled(false);
 		}
+		updateFromIHMColumnTitlesInInputFile();
+		
+	}
+	public void updateFromIHMColumnTitlesInInputFile(){
+			myEditFileForm.resetFileDataColumnTitles(myEditFileForm.isSeparatorChecked());
 		
 	}
 	public void updateFromIHM(TypeFallRate typeFallrate) {
@@ -898,23 +904,12 @@ public class RulesManager {
 	public void addMessageLog(String messageLogPart) {
 		this.messageLog = this.messageLog+ Global.RN+ messageLogPart;
 	}
-	public boolean isInputWithSeparatorsAndModelUpToDate(){
-		//33278: split as columns since 1.6.4
-		// new model currently edited
-		if(modelVersion==null){
-			if(Nemo.getInstance().getViewMain().getEditFileForm().getSeparateur().isEmpty()){
-				return false;
-			}
+	public boolean isUsingTableForCsvData(){
+
+		if (!Nemo.getInstance().getViewMain().getEditFileForm().getSeparateur().isEmpty() && Nemo.getInstance().getViewMain().getEditFileForm().useTableForCsvData()){
 			return true;
-
 		}
-		if(Nemo.getInstance().getDomain().getMedia().getModel().getSeparator().isEmpty()){
-			return false;
-		}
-		// else, there is a separator. Is model up to date to use table?
-		return fr.ifremer.nemo.util.Utils.compareVersion(modelVersion, "1.6.4")>=0;
-
-
+		return false;
 	}
 	public String getModelVersion() {
 		return modelVersion;

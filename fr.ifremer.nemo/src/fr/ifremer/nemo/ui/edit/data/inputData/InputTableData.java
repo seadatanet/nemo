@@ -1,6 +1,7 @@
 package fr.ifremer.nemo.ui.edit.data.inputData;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.eclipse.jface.layout.TableColumnLayout;
 import org.eclipse.jface.viewers.ArrayContentProvider;
@@ -50,7 +51,7 @@ public class InputTableData {
 		this.parent=parent;
 	}
 
-	public void init(ArrayList<String> lignesBrutes){
+	public void init(List<String> lignesBrutes){
 		separator = Nemo.getInstance().getDomain().getMedia().getModel().getSeparator();
 
 		createCompoTable();
@@ -158,7 +159,7 @@ public class InputTableData {
 
 
 
-	private void fill(ArrayList<String> lignesBrutes) {
+	private void fill(List<String> lignesBrutes) {
 		ArrayList<String> linesWithoutFileHeader = new ArrayList<>();
 		viewer.setContentProvider(new ArrayContentProvider());
 		viewer.setLabelProvider(new DataProvider());

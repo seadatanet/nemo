@@ -631,7 +631,7 @@ public class TableData {
 					int indice = myTable.getSelectionIndex();
 					if (indice >= 0)
 					{
-						if (RulesManager.getInstance().isInputWithSeparatorsAndModelUpToDate()){
+						if (RulesManager.getInstance().isUsingTableForCsvData()){
 							//33278: split as columns
 							int colNb = Integer.valueOf(myTable.getItem(indice).getText(colNbById.get(COL_START)));
 							Nemo.getInstance().getViewMain().getEditDataForm().getInputTableData().setIndexSelected(colNb-1);
@@ -777,7 +777,7 @@ public class TableData {
 		{
 			public void handleEvent(Event e)
 			{
-				if (RulesManager.getInstance().isInputWithSeparatorsAndModelUpToDate()){
+				if (RulesManager.getInstance().isUsingTableForCsvData()){
 					// 33278 CSV files
 					int selectionIndex = myTable.getSelectionIndex();
 					int selectedColumnIndex = Nemo.getInstance().getViewMain().getEditDataForm().getInputTableData().getIndexSelected();
@@ -992,7 +992,7 @@ public class TableData {
 			{
 				
 
-				if (RulesManager.getInstance().isInputWithSeparatorsAndModelUpToDate()){
+				if (RulesManager.getInstance().isUsingTableForCsvData()){
 					// 33278 CSV files
 					int selectionIndex = myTable.getSelectionIndex();
 					int selectedColumnIndex = Nemo.getInstance().getViewMain().getEditDataForm().getInputTableData().getIndexSelected();
@@ -1474,7 +1474,7 @@ public class TableData {
 
 		nbre = myTable.getItemCount();
 		MediaDomain mediaDomain = Nemo.getInstance().getDomain().getMedia();
-		if (RulesManager.getInstance().isInputWithSeparatorsAndModelUpToDate()){
+		if (RulesManager.getInstance().isUsingTableForCsvData()){
 			// 33278: split as columns
 			ArrayList<String> input = (ArrayList<String>)Nemo.getInstance().getViewMain().getEditDataForm().getInputTableData().getViewer().getInput();
 			ligne=input.get(0);
@@ -1489,7 +1489,7 @@ public class TableData {
 
 			if (isParameterReady(i)) {
 				try {
-					if (Nemo.getInstance().getDomain().getMedia().getModel().getSeparator().isEmpty() || !RulesManager.getInstance().isInputWithSeparatorsAndModelUpToDate()){
+					if (Nemo.getInstance().getDomain().getMedia().getModel().getSeparator().isEmpty() || !RulesManager.getInstance().isUsingTableForCsvData()){
 					selection =
 							ligne.substring(
 									Integer.valueOf(myTable.getItem(i).getText(

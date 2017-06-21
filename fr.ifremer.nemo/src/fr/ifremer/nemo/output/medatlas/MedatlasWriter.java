@@ -90,6 +90,7 @@ public class MedatlasWriter extends NemoWriter
 			boolean lastLineWrited = false;
 			for (Station currentStation : stationDomain.getStations(inputFilePath))
 			{
+				Nemo.getInstance().getLogger().debug("current station: " + currentStation);
 				// FAE 6143 check doublons
 				currentStation=stationDomain.getAndCheckLocalCDI(cruiseDomain, Conversion.ODV, currentStation);
 				// WARNING: CDIResumeWriter stations list is also used for coupling table -> never delete this addstation line
@@ -169,6 +170,9 @@ public class MedatlasWriter extends NemoWriter
 					 */
 					else if (stationWrited)
 					{
+						if(readedLine.trim().isEmpty()){
+							 continue;
+						 }
 						// écriture de la ligne de données
 						writeDataLine(dataDomain, currentStation, readedLine);
 					}
@@ -260,6 +264,7 @@ public class MedatlasWriter extends NemoWriter
 
 	private void writeLastDataLine(DataDomain data)
 	{
+		Nemo.getInstance().getLogger().debug("write last data line");
 		if (iDomain.getConversion().isSortData())
 		{
 			// écriture des données après tri

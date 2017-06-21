@@ -132,6 +132,7 @@ public class ModelDescription extends NLS {
 	public static String node_colTitleInInputFile;
 	public static String a_colTitleInInputFileCheck;
 	public static String a_colTitleInInputFileLineNb;
+	public static String a_useTableForCsv;
 
 	public static String setter_formattedEndDate;
 

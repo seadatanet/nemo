@@ -60,6 +60,10 @@ public class MediaModel extends AbstractModel
 	protected String _stationHeaderPattern;
 	
 	/**
+	 * indique si l'utilisateur souhaite utiliser un tableau pour afficher les donnees (csv uniquement)
+	 */
+	protected boolean _useTableForCsvData;
+	/**
 	 * indique si le titre des colonnes est dispo dans le fichier (pour input avec separateur uniquement)
 	 */
 	protected boolean _colTitlesInInputFiles;
@@ -107,6 +111,7 @@ public class MediaModel extends AbstractModel
 		_endDataPatternIsRegexp = false;
 		_colTitlesInInputFiles=false;
 		_colTitlesInInputFilesLineNb = 0;
+		_useTableForCsvData=false;
 	}
 
 	/**
@@ -167,6 +172,13 @@ public class MediaModel extends AbstractModel
 			}catch (Exception e) {
 				setColTitlesInInputFilesLineNb(0);
 			}
+			try{
+				String useTableForCsv = a_Attributes.getValue(ModelDescription.a_useTableForCsv);
+				setUseTableForCsvData(Boolean.parseBoolean(useTableForCsv));
+			}catch (Exception e) {
+				setUseTableForCsvData(false);
+			}
+
 		}
 		if (a_LocalName.equals(ModelDescription.node_type))
 		{
@@ -248,7 +260,8 @@ public class MediaModel extends AbstractModel
 		a_Writer.openTag(ModelDescription.node_colTitleInInputFile);
 		a_Writer.putAttribute(ModelDescription.a_colTitleInInputFileCheck, isColTitlesInInputFile());
 		a_Writer.putAttribute(ModelDescription.a_colTitleInInputFileLineNb, getColTitlesInInputFilesLineNb());
-		a_Writer.closeTag(getEndData().toString());
+		a_Writer.putAttribute(ModelDescription.a_useTableForCsv, getUseTableForCsvData());
+		a_Writer.closeTag();
 		
 		// END STATION
 		a_Writer.putTag(ModelDescription.node_endStation, getEndStation());
@@ -688,5 +701,11 @@ public class MediaModel extends AbstractModel
 	public void setColTitlesInInputFilesLineNb(int colTitlesInInputFilesLineNb) {
 		_colTitlesInInputFilesLineNb = colTitlesInInputFilesLineNb;
 	}
+	public boolean getUseTableForCsvData() {
+		return _useTableForCsvData;
+	}
 
+	public void setUseTableForCsvData(boolean useTableForCsvData) {
+		_useTableForCsvData = useTableForCsvData;
+	}
 }

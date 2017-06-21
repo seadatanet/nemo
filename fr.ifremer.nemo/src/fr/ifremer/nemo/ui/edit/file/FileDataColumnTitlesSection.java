@@ -27,6 +27,7 @@ public class FileDataColumnTitlesSection extends FileSection
 {
     protected Composite compo;
     protected SetText setter;
+    protected Button checkUseTableForCsv;
     protected Button checkColTitlesInInputFile;
 
     public FileDataColumnTitlesSection(String name, String title, String description, EditFileForm form)
@@ -50,10 +51,35 @@ public class FileDataColumnTitlesSection extends FileSection
         compo = new Composite(parent, SWT.NONE);
         GridLayoutFactory.fillDefaults().numColumns(1).applyTo(compo);
         GridDataFactory.fillDefaults().grab(false, false).applyTo(compo);
+
+        checkUseTableForCsv = new Button(compo, SWT.CHECK);
+        checkUseTableForCsv.setBackground(Nemo.getInstance().getViewMain().getBackgroundEdit());
+        checkUseTableForCsv.setText(Messages.edit_file_columnTitlesSectionOnOff);
+        checkUseTableForCsv.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter()
+		{
+			@Override
+			public void widgetSelected(org.eclipse.swt.events.SelectionEvent g)
+			{
+				Utils.invalidEtapes();
+			}
+		});
+
         checkColTitlesInInputFile = new Button(compo, SWT.CHECK);
         checkColTitlesInInputFile.setBackground(Nemo.getInstance().getViewMain().getBackgroundEdit());
         checkColTitlesInInputFile.setText(Messages.edit_file_columnTitlesSection);
+        checkColTitlesInInputFile.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter()
+		{
+			@Override
+			public void widgetSelected(org.eclipse.swt.events.SelectionEvent g)
+			{
+				Utils.invalidEtapes();
+				setter.setEnabled(checkColTitlesInInputFile.getSelection());
+			}
+		});
+
+       
         setter.draw(compo, filled);
+        setter.setEnabled(false);
     }
 
     /**
@@ -114,5 +140,16 @@ public class FileDataColumnTitlesSection extends FileSection
     }
     public void setColTitlesInInputFile(boolean select){
     	checkColTitlesInInputFile.setSelection(select);
+    }
+    
+    
+    public boolean isTableEnabledForCsv(){
+    	return checkUseTableForCsv.getSelection();
+    }
+    public void setTableEnabledForCsv(boolean select){
+    	checkUseTableForCsv.setSelection(select);
+    }
+    public void enableTextSetter(boolean enabled){
+    	setter.setEnabled(enabled);
     }
 }

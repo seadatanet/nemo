@@ -6,7 +6,6 @@ import com.ago.xml.SAXConsumer;
 import com.ago.xml.XMLOutputWriter;
 
 import fr.ifremer.nemo.Nemo;
-import fr.ifremer.nemo.ui.RulesManager;
 import fr.ifremer.nemo.util.Global;
 
 
@@ -131,7 +130,9 @@ public class LineFragment extends AbstractModel
      */
     public String retreive(String a_Line) {
     	String res;
-    	if (Nemo.getInstance().getDomain().getMedia().getModel().getSeparator().isEmpty() || !RulesManager.getInstance().isInputWithSeparatorsAndModelUpToDate()){
+    	if (Nemo.getInstance().getDomain().getMedia().getModel().getSeparator().isEmpty() ||
+    			!Nemo.getInstance().getDomain().getMedia().getModel().getUseTableForCsvData()
+    			){
     		if (_lastCharOffset == -1) {
     			res= a_Line.substring(_firstCharOffset - 1).trim();
     		}

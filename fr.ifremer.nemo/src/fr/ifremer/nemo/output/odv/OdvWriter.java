@@ -261,9 +261,8 @@ public class OdvWriter extends NemoWriter
                                 inputStationHeader, true);
                 }
 
-                if (inputStationHeader != null
-                        && currentStation.getReference().equals(stRef)
-                        )
+//                if (inputStationHeader != null  && currentStation.getReference().equals(stRef)  )
+                	if (inputStationHeader != null && currentStation.getStartLine()==numLine)//36265
                 {
 
                     stationHeader =
@@ -294,6 +293,9 @@ public class OdvWriter extends NemoWriter
             }
             else if (stationWrited)
             {
+            	 if(readedLine.trim().isEmpty()){
+    				 continue;
+    			 }
                 // ligne de données : à ne prendre en compte qua si on est sur
                 // la bonne station
                 writeDataLine(stationHeader, currentStation, readedLine);

@@ -31,7 +31,6 @@ import fr.ifremer.nemo.output.CDIResumeWriter;
 import fr.ifremer.nemo.output.GenerationException;
 import fr.ifremer.nemo.output.NemoWriter;
 import fr.ifremer.nemo.output.NemoWriterFactory;
-import fr.ifremer.nemo.ui.RulesManager;
 import fr.ifremer.nemo.ui.edit.data.TypeData;
 import fr.ifremer.nemo.util.BODCResult;
 import fr.ifremer.nemo.util.BODCResult.BODC_RES_STATUS;
@@ -94,7 +93,7 @@ public class NemoShell {
 			//			if (inputDomain.getMedia().getModel().getSeparator() != Global.EMPTY_STRING)
 			//				inputFile =
 			// 33278: format only for models < 1.6.4
-			if (inputDomain.getMedia().getModel().getSeparator() != Global.EMPTY_STRING &&! RulesManager.getInstance().isInputWithSeparatorsAndModelUpToDate())
+			if (inputDomain.getMedia().getModel().getSeparator() != Global.EMPTY_STRING && !inputDomain.getMedia().getModel().getUseTableForCsvData())
 				inputFile = Preformat.run(new File(inputFile)).getAbsolutePath();
 
 			nemo.getDomain().getMedia().getModel().setSourcePath(inputFile);
