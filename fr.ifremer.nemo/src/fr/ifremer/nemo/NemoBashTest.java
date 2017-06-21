@@ -106,7 +106,7 @@ public class NemoBashTest {
 	boolean REPLACE=false;// WARNING!!!
 	boolean REMOVE_JUNIT=false;
 	public static String[] testDirAlone = {};
-//			public static String[] testDirAlone = {"CollectionCAMP_profile"};
+//			public static String[] testDirAlone = {"33278_separators_withCruiseHeader"};
 //	public static String[] testDirAlone = {"cruiseFile_ts_multi_36265"};
 //	public static String[] testDirAlone = {"cruiseFile_ts_multi_dateNonOrdered_36265"};
 //	public static String[] testDirAlone = {"cruiseFile_profile_diap_stationsOrderBis"};
@@ -975,6 +975,7 @@ public class NemoBashTest {
 											}
 											if (ok){
 												ok = compareCdiSummary(outputAbsolutePath);
+												message.diff="error in CDI summary";
 											}
 											if (ok) {
 												nbTotalSuccess++;
