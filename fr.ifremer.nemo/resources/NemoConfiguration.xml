@@ -4,11 +4,11 @@
   <nautilusWsURL>http://www.ifremer.fr/WSnautilus/services/NAUTILUS</nautilusWsURL>
   <showRule>true</showRule>
   <contact></contact>
-  <modelsDirectory>/home/altran/workspaces/nemoAndCoIndigo/ifremer_datatest</modelsDirectory>
-  <cruisesDirectory>/home/altran/workspaces/nemoAndCoIndigo/ifremer_datatest</cruisesDirectory>
+  <modelsDirectory></modelsDirectory>
+  <cruisesDirectory></cruisesDirectory>
   <outputDirectory></outputDirectory>
   <writeCdi>false</writeCdi>
-  <idEdmoRespCdi>486</idEdmoRespCdi>
+  <idEdmoRespCdi>0</idEdmoRespCdi>
   <codeEdmoDonnees>0</codeEdmoDonnees>
   <idEdmoRespDonnees>0</idEdmoRespDonnees>
   <idEdmoDistDonnees>0</idEdmoDistDonnees>
