@@ -1500,7 +1500,7 @@ public class TableData {
 						// 33278: split as columns
 						selection = ligne.split(
 								Nemo.getInstance().getDomain().getMedia().getModel().getSeparator())
-								[Integer.valueOf(myTable.getItem(i).getText(colNbById.get(COL_START)))].trim();
+								[Integer.valueOf(myTable.getItem(i).getText(colNbById.get(COL_START)))-1].trim();
 					}
 
 				} catch (Exception e) {
