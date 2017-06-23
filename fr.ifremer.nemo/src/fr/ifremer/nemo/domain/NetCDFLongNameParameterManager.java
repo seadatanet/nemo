@@ -30,6 +30,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Intern;
 
@@ -154,15 +155,21 @@ public class NetCDFLongNameParameterManager {
 					longNamesMap.put(P011, userLongName);
 				}
 			} catch (ParserConfigurationException pce) {
-				System.out.println("Erreur de configuration du parseur DOM");
-				System.out
-						.println("lors de l'appel à fabrique.newDocumentBuilder();");
+//				System.out.println("Erreur de configuration du parseur DOM");
+//				System.out.println("lors de l'appel à fabrique.newDocumentBuilder();");
+				Nemo.getInstance().getLogger().error("Erreur de configuration du parseur DOM");
+				Nemo.getInstance().getLogger().error("lors de l'appel à fabrique.newDocumentBuilder();");
+				
 			} catch (SAXException se) {
-				System.out.println("Erreur lors du parsing du document");
-				System.out.println("lors de l'appel à construteur.parse(xml)");
+//				System.out.println("Erreur lors du parsing du document");
+//				System.out.println("lors de l'appel à construteur.parse(xml)");
+				Nemo.getInstance().getLogger().error("Erreur lors du parsing du document");
+				Nemo.getInstance().getLogger().error("lors de l'appel à construteur.parse(xml)");
 			} catch (IOException ioe) {
-				System.out.println("Erreur d'entrée/sortie");
-				System.out.println("lors de l'appel à construteur.parse(xml)");
+//				System.out.println("Erreur d'entrée/sortie");
+//				System.out.println("lors de l'appel à construteur.parse(xml)");
+				Nemo.getInstance().getLogger().error("Erreur d'entrée/sortie");
+				Nemo.getInstance().getLogger().error("lors de l'appel à construteur.parse(xml)");
 			}
 
 		}

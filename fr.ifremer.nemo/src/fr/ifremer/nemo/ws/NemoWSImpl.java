@@ -443,7 +443,7 @@ public class NemoWSImpl implements Cloneable, NemoWS {
 			_logger.debug("NemoWSImpl.getSurveyList()");
 		}
 		try {
-			System.out.println("AVANT REQ");
+			_logger.debug("getSurveyList - before request");
 			
 			Context initCtx = new InitialContext();
 			Context envCtx = (Context) initCtx.lookup("java:comp/env");
@@ -455,7 +455,7 @@ public class NemoWSImpl implements Cloneable, NemoWS {
 			String statement = "select CAM_CRNO, CAM_CRNOM " + "from CAM "
 					+ "where CAM_CAMTYP != 'PV' " + "order by CAM_DATDEB desc ";
 			
-			System.out.println("APRES REQ");
+			_logger.debug("getSurveyList - after request");
 			
 			stmt = conn.createStatement();
 			result = stmt.executeQuery(statement);

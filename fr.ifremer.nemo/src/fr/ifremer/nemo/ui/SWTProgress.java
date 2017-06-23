@@ -4,6 +4,7 @@ import java.lang.reflect.InvocationTargetException;
 
 import org.eclipse.jface.window.ApplicationWindow;
 
+import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.output.ProgressNotification;
 import fr.ifremer.nemo.util.Messages;
 
@@ -31,7 +32,8 @@ public class SWTProgress extends ApplicationWindow
         }
         catch (InterruptedException e)
         {
-            System.out.println("Interrompu !\n------------"); //$NON-NLS-1$
+//            System.out.println("Interrompu !\n------------"); //$NON-NLS-1$
+            Nemo.getInstance().getLogger().debug("Interrompu !\n------------"); //$NON-NLS-1$
             throw e;
         }
 

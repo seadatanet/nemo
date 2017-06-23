@@ -154,7 +154,7 @@ public abstract class NemoWriter {
 			for (String inputFilePath : mediaDomain.getInputFilesNames()
 					.keySet()) {
 				
-//				System.out.println("inputFilePath " + inputFilePath);
+				Nemo.getInstance().getLogger().debug("inputFilePath " + inputFilePath);
 				if (!inputFilePath.endsWith(Global.SVN_DIR)) {
 
 					// FAE 6087

@@ -193,7 +193,8 @@ public class Preformat {
 			}
 
 		} else {
-			System.out.println("pb runGUI: on aurait du passer dans un des cas precedents");
+//			System.out.println("pb runGUI: on aurait du passer dans un des cas precedents");
+			Nemo.getInstance().getLogger().warn("Error in Preformat - runExGUI - unknown case");
 		}
 		if (_nbColonne == 0)
 			setPreformat(false);

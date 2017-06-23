@@ -86,11 +86,6 @@ public class NemoBashTest {
 	private static File _resFile;
 
 	// racine du repertoire contenant les tests
-	// public static String dataRootPath = "C:\\Documents" + Global.SPACE +
-	// "and" + Global.SPACE + "Settings" + File.separator + "sbregent" +
-	// File.separator + "Mes" + Global.SPACE + "documents" + File.separator +
-	// "SOPHIE\\NEMO\\NEMO\\workspaceEclipse361\\ifremer_datatest";
-
 	public static String dataRootPath = "";
 	// générer les fichiers en batch et les comparer aux fichiers REFERENCE
 	public static boolean testBatchs = true;
@@ -104,11 +99,9 @@ public class NemoBashTest {
 	 * ********************************************************
 	 */
 	boolean REPLACE=false;// WARNING!!!
-	boolean REMOVE_JUNIT=false;
+	boolean REMOVE_JUNIT=true;
+	
 	public static String[] testDirAlone = {};
-//			public static String[] testDirAlone = {"33278_separators_withCruiseHeader"};
-//	public static String[] testDirAlone = {"cruiseFile_ts_multi_36265"};
-//	public static String[] testDirAlone = {"cruiseFile_ts_multi_dateNonOrdered_36265"};
 //	public static String[] testDirAlone = {"cruiseFile_profile_diap_stationsOrderBis"};
 			
 	/**
@@ -834,7 +827,7 @@ public class NemoBashTest {
 
 
 
-		System.out.println("dataRootPath " + dataRootPath + "--------");
+		testLogger.info("dataRootPath " + dataRootPath + "--------");
 		File root = new File(dataRootPath);
 		for (File testDir : root.listFiles()) {
 			System.out.println("testDir: " + testDir.toString());
@@ -842,13 +835,13 @@ public class NemoBashTest {
 				for (File paramListDir : testDir.listFiles()) {
 					if (paramListDir.isFile() && paramListDir.getName().equalsIgnoreCase("PF_INPUT")){
 						paramListDir.delete();
-						System.out.println("delete file " + paramListDir.getAbsolutePath());
+						testLogger.info("delete file " + paramListDir.getAbsolutePath());
 					}
 					else if (paramListDir.isDirectory()){
 						if (paramListDir.getName().equalsIgnoreCase("PF_INPUT"))
 						{
 							paramListDir.delete();
-							System.out.println("delete file " + paramListDir.getAbsolutePath());
+							testLogger.info("delete file " + paramListDir.getAbsolutePath());
 						}else{
 							for (File convDir : paramListDir.listFiles()) {
 								if (convDir.isDirectory()&&
@@ -863,19 +856,18 @@ public class NemoBashTest {
 									for (File unitTest : convDir.listFiles()) {
 										if (unitTest.listFiles() == null){
 
-											System.out
-											.println("BAD DIR ORG!!!!!!!!! " +unitTest.getAbsolutePath());
+											testLogger.error("BAD DIR ORG!!!!!!!!! " +unitTest.getAbsolutePath());
 										}else{
 											for (File f : unitTest.listFiles()){
 												if (f.getName().equals(outputName)){
-													System.out.println("delete file " + f);
+													testLogger.info("delete file " + f);
 													f.delete();
 												}else if(f.getName().equals("cdiSummary_junit")){
-													System.out.println("delete file " + f);
+													testLogger.info("delete file " + f);
 													f.delete();
 												}
 												else if(f.getName().equals("pf_input")){
-													System.out.println("delete file " + f);
+													testLogger.info("delete file " + f);
 													f.delete();
 
 												}
@@ -901,7 +893,16 @@ public class NemoBashTest {
 		int cptFail = 0;
 		boolean testFound;
 		if (testDirAlone.length > 0){
-			testLogger.info("WARNING: TEST ONLY DIRECTORY set in testDirAlone" );
+			testLogger.warn("\n\nWARNING: TEST ONLY DIRECTORY set in testDirAlone\n\n" );
+		}
+		if (REPLACE){
+			testLogger.warn("\n\nWARNING: REFERENCES WILL BE REPLACED!!!\n\n" );
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		//		testLogger.info("dataRootPath" + dataRootPath );
 		File root = new File(dataRootPath);
@@ -1523,7 +1524,7 @@ public class NemoBashTest {
 					testLogger.error(diffEntry);
 					message.diff+=diffEntry;
 					message.batchCompRes = false;
-					System.out.println(diffEntry);
+					testLogger.error(diffEntry);
 
 				}
 			}
@@ -1546,10 +1547,9 @@ public class NemoBashTest {
 
 					Array aVar = refVarsMap.get(var.getName()).read();
 					Array bVar = junitVarsMap.get(var.getName()).read();
-					//			System.out.println(refVars.get(i).getName()+"------------------------");
 					if (!aVar.toString().equals(bVar.toString())){
 						message.batchCompRes = false;
-						System.out.println("VAR " +var.getName()+" data are different");
+						testLogger.error("VAR " +var.getName()+" data are different");
 						message.diff+=System.lineSeparator()+"VAR " +var.getName()+" data are different";
 					}
 

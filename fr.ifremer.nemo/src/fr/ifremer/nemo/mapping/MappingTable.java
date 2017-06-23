@@ -62,8 +62,8 @@ public class MappingTable
 		//On determine l'extension du fichier, qui certe, est filtré via la boite d'ouverture 
 		//de fichier, mais qui peut etre changé dans la ligne texte
 		String fileExtension = (filename.lastIndexOf(".")==-1)?"":filename.substring(filename.lastIndexOf(".")+1,filename.length()); 
-		System.out.println(Messages.CouplingTableImport_1 + fileExtension + "\n\r");
-
+//		System.out.println(Messages.CouplingTableImport_1 + fileExtension + "\n\r");
+		Nemo.getInstance().getLogger().debug(Messages.CouplingTableImport_1 + fileExtension + "\n\r");
 		if(fileExtension.matches("txt") || fileExtension.matches("Txt") || fileExtension.matches("TXT"))
 		{
 			try {
@@ -110,10 +110,10 @@ public class MappingTable
 					{
 						fr.ifremer.nemo.ui.Utils.messageErreurAppend(Messages.CouplingTableImport_6+"\n\r");
 					}
-
-					System.out.println(e.toString());
-					System.out.println("ma cause" + e.getCause().toString());
-
+					Nemo.getInstance().getLogger().error(e.toString());
+//					System.out.println(e.toString());
+//					System.out.println("ma cause" + e.getCause().toString());
+					Nemo.getInstance().getLogger().error(e.getCause().toString());
 
 				}
 				correctFile.close();
@@ -124,7 +124,8 @@ public class MappingTable
 
 			}
 			catch(IOException e) { 
-				System.out.println("exception IOException : " + e);
+//				System.out.println("exception IOException : " + e);
+				Nemo.getInstance().getLogger().error(e.getMessage());
 			}
 
 		} else
@@ -177,11 +178,15 @@ public class MappingTable
 			catch (FileNotFoundException e)
 			{
 				System.out.println(Messages.CouplingTableImport_7);
+				Nemo.getInstance().getLogger().error(Messages.CouplingTableImport_7);
+				Nemo.getInstance().getLogger().error(e.getMessage());
 			}
 		}
 		catch (IOException e)
 		{
-			System.out.println(Messages.CouplingTableExport_2+"\n\r");
+//			System.out.println(Messages.CouplingTableExport_2+"\n\r");
+			Nemo.getInstance().getLogger().error(Messages.CouplingTableExport_2+"\n\r");
+			Nemo.getInstance().getLogger().error(e.getMessage());
 		}
 
 
@@ -198,9 +203,11 @@ public class MappingTable
 			em = emf.createEntityManager(); 
 			em.getTransaction().begin();
 
-			System.out.println("transaction active: "+em.getTransaction().isActive());
+//			System.out.println("transaction active: "+em.getTransaction().isActive());
+			Nemo.getInstance().getLogger().info("transaction active: "+em.getTransaction().isActive());
 		}catch(Exception e){
-			System.out.println("can not open coupling Nemo HSQL Database");
+//			System.out.println("can not open coupling Nemo HSQL Database");
+			Nemo.getInstance().getLogger().error("can not open coupling Nemo HSQL Database");
 			e.printStackTrace();  
 			return;
 		}
@@ -208,18 +215,22 @@ public class MappingTable
 		{  
 			try
 			{
-				System.out.println("merge");
+//				System.out.println("merge");
+				Nemo.getInstance().getLogger().debug("merge");
 				em.merge(object); 
-				System.out.println("commit");
+//				System.out.println("commit");
+				Nemo.getInstance().getLogger().debug("commit");
 				em.getTransaction().commit();
-				System.out.println("transaction active: "+em.getTransaction().isActive());
+//				System.out.println("transaction active: "+em.getTransaction().isActive());
+				Nemo.getInstance().getLogger().debug("transaction active: "+em.getTransaction().isActive());
 			} catch (javax.persistence.EntityExistsException e)
 			{
 				fr.ifremer.nemo.ui.Utils.messageErreurAppend("Already exist: "+object.mappingPK.getLocalCdiId()+ " en "+ object.mappingPK.getFormat());
 			}
 		} catch (Exception e) 
 		{
-			System.out.println("rollback");
+			//System.out.println("rollback");
+			Nemo.getInstance().getLogger().error("rollback");
 			e.printStackTrace();  
 			em.getTransaction().rollback();  
 		} finally 
