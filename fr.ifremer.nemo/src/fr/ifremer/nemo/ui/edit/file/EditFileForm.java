@@ -161,9 +161,9 @@ public class EditFileForm extends EditForm
 
 	}
 	public void resetFileDataColumnTitles(boolean separatorChecked){
-		
+
 		sectionDataColumnTitles.setEnabled(separatorChecked);
-		
+
 		sectionDataColumnTitles.setTableEnabledForCsv(false);
 		sectionDataColumnTitles.setColTitlesInInputFile(false);
 		sectionDataColumnTitles.enableTextSetter(false);
@@ -424,12 +424,12 @@ public class EditFileForm extends EditForm
 		sectionDataTerminator = new FileEndData(Messages.edit_file_indicFinDonnees_title, Messages.edit_file_indicFinDonnees_title, Messages.edit_file_indicFinDonnees, this);
 		sectionDataTerminator.addSetter(Messages.edit_file_sectionRuptureDonnees_end_with, Global.EMPTY_STRING);
 		listeSections.add(sectionDataTerminator);
-		
+
 		//33278
 		sectionDataColumnTitles = new FileDataColumnTitlesSection(Messages.edit_file_columnTitlesSection_title, Messages.edit_file_columnTitlesSection_title, Messages.edit_file_columnTitlesSection_desc, this);
 		sectionDataColumnTitles.addSetter(null, Global.ZERO);
 		listeSections.add(sectionDataColumnTitles);
-		
+
 	}
 
 	@Override
@@ -498,7 +498,7 @@ public class EditFileForm extends EditForm
 			sectionStationHeader.selectNumber(false);
 			sectionStationHeader.setIndicatorText(mediaModel.getStationHeaderPattern());
 			sectionStationHeader.setNbLinesBeforeData(String.valueOf(mediaModel.getStationHeader()));
-			
+
 		}
 		sectionDataColumnTitles.setColTitlesInInputFile(mediaModel.isColTitlesInInputFile());
 		sectionDataColumnTitles.setValue(String.valueOf(mediaModel.getColTitlesInInputFilesLineNb()));
@@ -520,8 +520,9 @@ public class EditFileForm extends EditForm
 		} else
 		{
 			RulesManager.getInstance().updateFromModel(Nemo.getInstance().getDomain().getConversion().getModel().getOutputFormat());
-		}
 
+		}
+		setSortForced(Nemo.getInstance().getDomain().getConversion().getModel().isSortStations());
 		// activation option serie tempo
 		enableSeparatorChoice(true);
 		enableFileTypeChoice(true);
@@ -626,6 +627,7 @@ public class EditFileForm extends EditForm
 		chkForcerTri = new Button(mainBoxGroup, SWT.CHECK);
 		chkForcerTri.setFont(Utils.font08);
 		chkForcerTri.setText(Messages.view_convert_sort);
+		
 	}
 
 	private Composite createSubGroupSeparatorAndFileType(Composite parent)
@@ -661,7 +663,7 @@ public class EditFileForm extends EditForm
 				setSeparatorVisible();
 				Utils.invalidEtapes();
 				Utils.messageErreur(Global.EMPTY_STRING);
-				  RulesManager.getInstance().updateFromIHMSeparatorChecked();
+				RulesManager.getInstance().updateFromIHMSeparatorChecked();
 			}
 		});
 
@@ -877,7 +879,7 @@ public class EditFileForm extends EditForm
 		{
 			mediaModel.setStationHeader(sectionStationHeader.getValue());
 		}
-		
+
 		mediaModel.setUseTableForCsvData(sectionDataColumnTitles.isTableEnabledForCsv());
 		mediaModel.setColTitlesInInputFile(sectionDataColumnTitles.isColTitlesInStationHeader());
 		mediaModel.setColTitlesInInputFilesLineNb(Integer.parseInt(sectionDataColumnTitles.getValue()));
@@ -909,6 +911,8 @@ public class EditFileForm extends EditForm
 			mediaModel.setEndDataPattern(tmpString);
 			mediaModel.setEndDataPatternIsRegexp(false);
 		}
+		Nemo.getInstance().getDomain().getConversion().setSortData(isSortForced());
+		Nemo.getInstance().getDomain().getConversion().getModel().setSortStations(isSortForced());
 		Nemo.getInstance().getDomain().getConversion().setCurrentConversion(RulesManager.getInstance().getMyConversionType());
 		Nemo.getInstance().getDomain().getConversion().getModel().setOutputFormat(RulesManager.getInstance().getMyConversionType());
 
@@ -1035,6 +1039,8 @@ public class EditFileForm extends EditForm
 		}
 		return Global.EMPTY_STRING;
 	}
+
+
 
 	public void setSeparateur(String sep)
 	{
@@ -1196,6 +1202,9 @@ public class EditFileForm extends EditForm
 	public boolean isSortForced()
 	{
 		return chkForcerTri.getSelection();
+	}
+	public void setSortForced(boolean selected){
+		chkForcerTri.setSelection(selected);
 	}
 
 	public boolean isMultiStationFileChecked()
