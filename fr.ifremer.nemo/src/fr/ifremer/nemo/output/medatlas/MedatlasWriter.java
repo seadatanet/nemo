@@ -237,19 +237,19 @@ public class MedatlasWriter extends NemoWriter
 		if (iDomain.getConversion().isSortData())
 		{
 			// préparation des données pour le tri
-			Long key;
+			Double key;
 			if (iDomain.getMedia().getModel().getInputType() == E_InputType.PROFILE)
 			{
 				ParameterModel keyParam = data.getModel().getParameterModels()[0];
 				keyParam.computeParameterValue(inputLine);
-				key=(Long) nf.parse(keyParam.getLineValue().getValue());
+				key=Double.valueOf(keyParam.getLineValue().getValue());
 			} else
 			{
-				key = DateTimeUtils.getCurrentDate(currentStation, indexRecord);
+				key = Double.valueOf(DateTimeUtils.getCurrentDate(currentStation, indexRecord));
 				//FAE 11356
                 if(Nemo.getInstance().getDomain().getMedia().getModel().getInputType() == E_InputType.TIMESERIES 
                         && Nemo.getInstance().getDomain().getStation().getModel().getProperty(Intern.S_DATE).isInData())
-                    key = DateTimeUtils.convertTimestamp(inputLine);
+                    key = Double.valueOf(DateTimeUtils.convertTimestamp(inputLine));
 			}
 
 			stationDatas.put(key, data.getDataLine(myConversion, currentStation, inputLine, indexRecord).toString());
@@ -268,10 +268,10 @@ public class MedatlasWriter extends NemoWriter
 		if (iDomain.getConversion().isSortData())
 		{
 			// écriture des données après tri
-			List<Long> keys = new ArrayList<Long>();
+			List<Double> keys = new ArrayList<Double>();
 			keys.addAll(stationDatas.keySet());
 			Collections.sort(keys);
-			for (Long key : keys)
+			for (Double key : keys)
 			{
 				outputFileWriter.println(stationDatas.get(key));
 			}
