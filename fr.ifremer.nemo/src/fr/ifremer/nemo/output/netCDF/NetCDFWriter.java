@@ -6,6 +6,7 @@ import java.text.MessageFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -125,18 +126,18 @@ public class NetCDFWriter extends NemoWriter {
 		try {
 			stationDomain.updateRef();
 			outputFileName = getOutputFileName(inputFilePath);
-			 if (RulesManager.getInstance().isProcessCollectionDir()){
-	            	stationDomain.resetlocalCDIList();
-	            }
+			if (RulesManager.getInstance().isProcessCollectionDir()){
+				stationDomain.resetlocalCDIList();
+			}
 			if (isConversionTo_NetCDFMonostation) {
-//				System.out.println("convert to n MONOstation files");
+				//				System.out.println("convert to n MONOstation files");
 				// Conversion NETCDF - fichiers monostation => N fichiers de
 				// sortie
 				Integer ref = 0;
 				nbStations = 1;
 				for (Station st : stationDomain.getStations(inputFilePath)) {
-					
-					
+
+
 					stringMetadataLength = 0;
 					stringLinksLength = 0;
 					maxNbRefs = 0;
@@ -166,7 +167,7 @@ public class NetCDFWriter extends NemoWriter {
 					if (isProcessType_CruiseFile) {
 						iDomain.getStation().updateRef();
 					}
-//					System.out.println("write station "+indiceStation + " - "+ st.getFileName() + "["+localCdiId+"]");
+					//					System.out.println("write station "+indiceStation + " - "+ st.getFileName() + "["+localCdiId+"]");
 					writeStation(st, inputFilePath);
 
 
@@ -180,7 +181,7 @@ public class NetCDFWriter extends NemoWriter {
 
 				}
 			} else {
-//				System.out.println("convert to 1 MULTIstation file");
+				//				System.out.println("convert to 1 MULTIstation file");
 				// conversion NETCDF multistations => 1 fichier de sortie
 				nbStations = stationDomain.getStations(inputFilePath).size();
 				stringMetadataLength = 0;
@@ -199,19 +200,27 @@ public class NetCDFWriter extends NemoWriter {
 					stationData = new HashMap<String, Object>();
 					setNetCDFMetadata(inputFilePath, null);
 				}
-				
+
 				for (Station st : stationDomain.getStations(inputFilePath)) {
 					if (isProcessType_CruiseFile) {
 						iDomain.getStation().updateRef();
 					}
 					st=stationDomain.getAndCheckLocalCDI(cruiseDomain, Conversion.NETCDF, st);
 					CDIResumeWriter.getInstance().addStation(inputFilePath,st);
-					
-//					System.out.println("write station "+indiceStation+ " - "+ st.getFileName() );
+
+					//					System.out.println("write station "+indiceStation+ " - "+ st.getFileName() );
+
+
 					writeStation(st, inputFilePath);
 					indiceStation++;
 				}
 				updateDimensions();
+
+				// SORT DATA IF NEEDED 
+				if (iDomain.getConversion().isSortData())
+				{
+					sortDataWithinStation(inputFilePath);
+				}
 
 				writeDataToNetCDFFile();
 				stationDomain.resetStations();
@@ -223,6 +232,58 @@ public class NetCDFWriter extends NemoWriter {
 			throw new GenerationException(e);
 		}
 
+	}
+
+	private void sortDataWithinStation(String inputFilePath)
+	{
+		Object[][] primaryVarValues = null;
+		Object[][] varValues = null;
+
+		String primaryVarName = null;
+		if (mediaModel.getInputType() == E_InputType.PROFILE) {
+			primaryVarName = zVarName;
+		}else{
+			primaryVarName = ParameterNames.TIME;
+		}
+
+		primaryVarValues = (Object[][]) stationData.get(primaryVarName);
+
+		int indexStation=0;
+		for (Station st : stationDomain.getStations(inputFilePath)) {
+
+			Double[] pv = new Double[primaryVarValues[indexStation].length];
+			for (int i=0; i<primaryVarValues[indexStation].length; i++){ 
+				pv[i] = (Double) primaryVarValues[indexStation][i];
+			}
+			ArrayIndexComparator comparator = new ArrayIndexComparator(pv);
+			Integer[] indexes = comparator.createIndexArray();
+			Arrays.sort(indexes, comparator);
+			// Now the indexes are in appropriate order.
+
+			// sort primary var
+			Object[] primaryVarValuesSorted = new Object[primaryVarValues[indexStation].length];
+			for (int i=0; i<indexes.length; i++){ 
+				primaryVarValuesSorted[i] = primaryVarValues[indexStation][indexes[i]];
+			}
+			primaryVarValues[indexStation]=primaryVarValuesSorted;
+
+			// sort all other vars
+			Object[] sortedValues =null;
+			// loop on all variables
+			for (Entry<String, Object> currentStationData : stationData.entrySet()) {
+				ISdnVariable sdnVar = mapVariables.get(currentStationData.getKey());
+				if(!sdnVar.getVarName().equals(primaryVarName)&& sdnVar.getDims().contains(dims.getDimMax())){
+					varValues = (Object[][]) stationData.get(sdnVar.getVarName());
+					sortedValues = new Object[varValues[indexStation].length];
+					for (int i=0; i<indexes.length; i++){ 
+						sortedValues[i] = varValues[indexStation][indexes[i]];
+					}
+
+					varValues[indexStation]=sortedValues;
+				}
+			}
+			indexStation++;
+		}
 	}
 
 	/**
@@ -260,13 +321,13 @@ public class NetCDFWriter extends NemoWriter {
 			references.add(csr);
 			nbRefs++;
 		}
-		
+
 		String[] shipCodeAndName = Nemo.getInstance().getDomain().getCruise().getModel().getValidShipCodeAndName();
 		if ( ! shipCodeAndName[0].isEmpty()	)
 		{
 			SdnXLinkReference shipRef = new SdnXLinkReference();
 			shipRef.setAsShipReference(shipCodeAndName[0] );
-			
+
 			computeSdnXlinkdims(shipRef);
 			references.add(shipRef);
 			nbRefs++;
@@ -304,8 +365,8 @@ public class NetCDFWriter extends NemoWriter {
 	private boolean writeStation(Station currentStation, String inputFilePath) throws Exception {
 		//System.out.println(currentStation.getReference() + "indice= " + indiceStation);
 		boolean isOnNStationHeader = false;
-		
-		
+
+
 		StationDomain station = iDomain.getStation();
 		if (indiceStation==0 ||
 				new File(inputFilePath).isDirectory() 
@@ -320,7 +381,7 @@ public class NetCDFWriter extends NemoWriter {
 		}else{
 			isOnNStationHeader = true;
 		}
-		
+
 		currentInputFilePath= inputFilePath;
 		boolean stationWrited = false;
 		indexRecord = 0;
@@ -337,7 +398,7 @@ public class NetCDFWriter extends NemoWriter {
 		}else{
 			cruise = Nemo.getInstance().getDomain().getCruise().getModel().getReference();
 		}
-		
+
 		setDataValue(ParameterNames.SDN_CRUISE, new Value(cruise),	indiceStation);
 		// SDN Station
 		setDataValue(ParameterNames.SDN_STATION, new Value(currentStation.getReference().trim()), indiceStation);
@@ -372,7 +433,7 @@ public class NetCDFWriter extends NemoWriter {
 
 		// scan the InputFile line by line
 		while ((readedLine = bufferedReader.readLine()) != null) {
-//			System.out.println(readedLine);
+			//			System.out.println(readedLine);
 			incrementLine();
 			if (inFileHeader())
 				continue;
@@ -400,9 +461,9 @@ public class NetCDFWriter extends NemoWriter {
 					if (stationDomain.getModel().getProperty(Intern.S_DATE).isInData()){
 						currentDate = Long.valueOf(DateTimeUtils.convertTimestamp(readedLine));
 					}else{
-						 currentDate = DateTimeUtils.getCurrentDate(currentStation, indexRecord); // 25255 get current date (computed with sample rate)
+						currentDate = DateTimeUtils.getCurrentDate(currentStation, indexRecord); // 25255 get current date (computed with sample rate)
 					}
-					
+
 					Double julianDay = DateTimeUtils.getJulianDay(currentDate);
 					setDataValue( ParameterNames.TIME,new Value(julianDay.toString(),  
 							currentStation.getMetaFlag(Intern.S_DATE).toCharArray()[0]),indiceStation,indexRecord);
@@ -447,7 +508,7 @@ public class NetCDFWriter extends NemoWriter {
 
 
 				writeDataLine(currentStation, readedLine, indiceStation);
-			
+
 			}
 
 
@@ -566,8 +627,8 @@ public class NetCDFWriter extends NemoWriter {
 		long currentDate = DateTimeUtils.getCurrentDate(currentStation, indexRecord);
 		//30378
 		E_InputType inputType = mediaDomain.getModel().getInputType() ;
-		
-		
+
+
 		if ((inputType== E_InputType.TIMESERIES || inputType == E_InputType.TRAJECTORY)
 				&& Nemo.getInstance().getDomain().getStation().getModel().getProperty(Intern.S_DATE).isInData()){
 			currentDate = Long.valueOf(DateTimeUtils.convertTimestamp(inputLine));
@@ -578,9 +639,9 @@ public class NetCDFWriter extends NemoWriter {
 			currentDate = currentDateWithOffset;
 		}
 
-		
-		
-		
+
+
+
 		Object[][] paramData;
 		String varName;
 		// parametre ajouté
@@ -775,7 +836,7 @@ public class NetCDFWriter extends NemoWriter {
 
 		String fallrateCode = Nemo.getInstance().getDomain().getData().getModel().getFallrateCode();
 		if (fallrateCode!=null && !fallrateCode.isEmpty()){
-			
+
 			z.setFall_rate(Nemo.getInstance().getDomain().getData().getModel().getFallrateLabel(), fallrateCode);
 		}
 
@@ -790,7 +851,7 @@ public class NetCDFWriter extends NemoWriter {
 		if (!zParameterModel.getParameter().getDefault().isEmpty())
 			z.addVariableAttribute(ParameterNames.FILLVALUE, convertValue(DataType.DOUBLE, zParameterModel.getParameter().getDefault()));
 
-		
+
 		// POSITIVE attribute is now automatically managed in cfpointLib
 
 		// Sdn variable
@@ -878,8 +939,8 @@ public class NetCDFWriter extends NemoWriter {
 				if (!param.getParameter().getStandardName().isEmpty())
 					current.addVariableAttribute(ParameterNames.STANDARD_NAME, param.getParameter().getStandardName());
 
-				
-				
+
+
 				instrumentCode = param.getParameter().getInstrumentCode() ;
 				if (instrumentCode!=null && !instrumentCode.isEmpty()){
 					current.setInstrument(param.getParameter().getInstrument() , instrumentCode);
@@ -992,12 +1053,12 @@ public class NetCDFWriter extends NemoWriter {
 			if (cruiseDomain.getModel().getAvailability() != null)
 				sdnCruise.addVariableAttribute(ModelDescription.node_availability, cruiseDomain.getModel().getAvailability().name());
 
-			
+
 
 		}
 		// Comment
-					if (cruiseDomain.getModel().getComment() != null && !cruiseDomain.getModel().getComment().isEmpty())
-						sdnCruise.addVariableAttribute(ModelDescription.node_comment, cruiseDomain.getModel().getComment());
+		if (cruiseDomain.getModel().getComment() != null && !cruiseDomain.getModel().getComment().isEmpty())
+			sdnCruise.addVariableAttribute(ModelDescription.node_comment, cruiseDomain.getModel().getComment());
 	}
 
 	private String getFeatureType() {
