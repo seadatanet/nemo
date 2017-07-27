@@ -104,7 +104,9 @@ public class DataFormValidator extends FormValidator {
 				//FAE 10755 l'unité n'est pas present pour les chaine de type text.
 				if (!typeCourant.isText())
 					ok = ok && checkUniteIsPresent(typeCourant);
-
+				if (!ok){
+					return;
+				}
 				/**
 				 * data30 verif compatibilité valeur par defaut et valeur output
 				 * FAE 7241: pas de test pour ODV (outputDef optionelle car ne
