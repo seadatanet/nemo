@@ -635,7 +635,7 @@ public class TableData {
 							//33278: split as columns
 							int colNb = Integer.valueOf(myTable.getItem(indice).getText(colNbById.get(COL_START)));
 							Nemo.getInstance().getViewMain().getEditDataForm().getInputTableData().setIndexSelected(colNb-1);
-							Nemo.getInstance().getViewMain().getEditDataForm().getInputTableData().getViewer().refresh();
+							Nemo.getInstance().getViewMain().getEditDataForm().getInputTableData().getViewer().refresh(); // TODO BGT: trouver plus leger que le refresh + aussi qd selection dans tableau data
 							
 						}else{
 						selectInViewFile(
@@ -1548,8 +1548,7 @@ public class TableData {
 									String
 									.format(java.util.Locale.US,
 											formatString,
-											Float
-											.parseFloat(outputDefaultValue));
+											Double.parseDouble(outputDefaultValue));
 						} else if ((type.equals("d") || type.equals("D")) && !outputDefaultValue.trim().isEmpty()) { //$NON-NLS-1$ //$NON-NLS-2$
 							fmOut =
 									String.format(java.util.Locale.US,
