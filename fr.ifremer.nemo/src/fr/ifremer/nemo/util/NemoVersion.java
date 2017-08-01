@@ -27,7 +27,7 @@ public class NemoVersion {
 				Nemo.getInstance().getLogger().info ( state.getDescription());
 			}else{
 				Nemo.getInstance().getLogger().warn("You are currently using Nemo version " + state.getVersion()  
-						+ ". A new version is available since "+state.getLastVersionDay()+". Please udate to " + state.getLastVersion());  
+						+ ". A new version is available since "+state.getLastVersionDay()+". Please update to " + state.getLastVersion());  
 			}
 
 
