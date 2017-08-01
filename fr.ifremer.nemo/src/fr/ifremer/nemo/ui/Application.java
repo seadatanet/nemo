@@ -13,6 +13,7 @@ import org.apache.logging.log4j.core.LoggerContext;
 import org.eclipse.core.runtime.IPlatformRunnable;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.PlatformUI;
+import org.osgi.framework.FrameworkUtil;
 
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.NemoShell;
@@ -22,6 +23,7 @@ import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Global.E_TypeConversion;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
+import fr.ifremer.nemo.util.NemoVersion;
 /**
  * This class controls all aspects of the application's execution
  */
@@ -97,14 +99,21 @@ public class Application implements IPlatformRunnable
             File file = new File(appDir + File.separator  + "resources/log4j2.xml");
 
             context.setConfigLocation(file.toURI());
-            Nemo.getInstance().setLogger(LogManager.getLogger(Global.LOGGER_NAME_GUI));
+            if (cl.hasOption(optBatchMode))
+            {
+            	  Nemo.getInstance().setLogger(LogManager.getLogger(Global.LOGGER_NAME_BATCH));
+            }else{
+            	Nemo.getInstance().setLogger(LogManager.getLogger(Global.LOGGER_NAME_GUI));
+            }
+           
+            
             /**************************************************************************
              * BATCH MODE
              **************************************************************************/
             if (cl.hasOption(optBatchMode))
             {
                 Nemo.getInstance().setBatchMode(true);
-                Nemo.getInstance().setLogger(LogManager.getLogger(Global.LOGGER_NAME_BATCH));
+                NemoVersion.check(FrameworkUtil.getBundle(getClass()).getVersion());
                 
                 String inputFile;
                 String outputFile;

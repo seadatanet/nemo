@@ -7,16 +7,22 @@
  */
 package fr.ifremer.nemo.ui.view;
 
+import org.eclipse.jface.dialogs.IDialogConstants;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.ui.part.ViewPart;
+import org.osgi.framework.FrameworkUtil;
 
+import software.version.SoftwareState;
+import software.version.SoftwareState.STATE;
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.ui.ApplicationWorkbenchWindowAdvisor;
 import fr.ifremer.nemo.ui.FilteredTableFactory;
@@ -30,6 +36,7 @@ import fr.ifremer.nemo.ui.edit.station.EditStationForm;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
+import fr.ifremer.nemo.util.NemoVersion;
 import fr.ifremer.nemo.util.Preformat;
 
 /**
@@ -81,7 +88,26 @@ public class ViewMain extends ViewPart
 	@Override
 	public void createPartControl(Composite parent)
 	{
+		SoftwareState state = NemoVersion.check(FrameworkUtil.getBundle(getClass()).getVersion());
+		int defaultIndex = 0;
+		String[] dialogButtonLabels =  new String[] { IDialogConstants.OK_LABEL };
+		int dialogImageType = MessageDialog.NONE;
+		String dialogMessage = "";
+		Image dialogTitleImage = null;
+		String dialogTitle="Nemo version check";
+		if(state.getState() == STATE.LAST_VERSION){
+//			dialogMessage = state.getDescription();
+		}else{
+			dialogMessage= "You are currently using Nemo version " + state.getVersion()  
+					+ " \nA new version is available since "+state.getLastVersionDay()+". Please udate to " + state.getLastVersion();  
+		}
 
+		
+		NemoVersionDialog dialog = new NemoVersionDialog(parent.getShell(), dialogTitle, dialogTitleImage, dialogMessage, dialogImageType, dialogButtonLabels, defaultIndex);
+		dialog.create();
+		dialog.open();
+
+		     
 		// etape de depart
 		setEtape(0);
 
