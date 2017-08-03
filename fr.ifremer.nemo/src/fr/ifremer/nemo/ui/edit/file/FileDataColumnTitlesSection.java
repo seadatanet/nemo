@@ -60,6 +60,9 @@ public class FileDataColumnTitlesSection extends FileSection
 			@Override
 			public void widgetSelected(org.eclipse.swt.events.SelectionEvent g)
 			{
+				if (!checkUseTableForCsv.getSelection()){
+		    		checkColTitlesInInputFile.setSelection(false);
+		    	}
 				Utils.invalidEtapes();
 			}
 		});

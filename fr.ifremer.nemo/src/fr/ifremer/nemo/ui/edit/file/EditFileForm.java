@@ -164,7 +164,7 @@ public class EditFileForm extends EditForm
 
 		sectionDataColumnTitles.setEnabled(separatorChecked);
 
-		sectionDataColumnTitles.setTableEnabledForCsv(false);
+		sectionDataColumnTitles.setTableEnabledForCsv(separatorChecked);
 		sectionDataColumnTitles.setColTitlesInInputFile(false);
 		sectionDataColumnTitles.enableTextSetter(false);
 	}
