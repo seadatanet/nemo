@@ -252,7 +252,11 @@ public class MedatlasWriter extends NemoWriter
                     key = Double.valueOf(DateTimeUtils.convertTimestamp(inputLine));
 			}
 
-			stationDatas.put(key, data.getDataLine(myConversion, currentStation, inputLine, indexRecord).toString());
+			if (!stationDatas.containsKey(key)){
+				stationDatas.put(key, new ArrayList<String>());
+			}
+				stationDatas.get(key).add(data.getDataLine(myConversion, currentStation, inputLine, indexRecord).toString());
+//			stationDatas.put(key, data.getDataLine(myConversion, currentStation, inputLine, indexRecord).toString());
 
 		} else
 		{
@@ -273,7 +277,10 @@ public class MedatlasWriter extends NemoWriter
 			Collections.sort(keys);
 			for (Double key : keys)
 			{
-				outputFileWriter.println(stationDatas.get(key));
+				for (String line : stationDatas.get(key)){
+					
+					outputFileWriter.println(line);
+				}
 			}
 		}
 		// écriture de la dernière ligne de données

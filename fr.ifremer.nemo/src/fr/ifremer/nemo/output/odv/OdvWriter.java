@@ -211,8 +211,12 @@ public class OdvWriter extends NemoWriter
                     key = Double.valueOf(DateTimeUtils.convertTimestamp(line));
             }
 
-            stationDatas.put(key, dataLine.toString());
+            //stationDatas.put(key, dataLine.toString());
 
+			if (!stationDatas.containsKey(key)){
+				stationDatas.put(key, new ArrayList<String>());
+			}
+				stationDatas.get(key).add(dataLine.toString());
         }
         else
         {
@@ -313,7 +317,11 @@ public class OdvWriter extends NemoWriter
                 Collections.sort(keys);
                 for (Double key : keys)
                 {
-                    outputFileWriter.println(stationDatas.get(key));
+                	for (String line : stationDatas.get(key)){
+    					
+    					outputFileWriter.println(line);
+    				}
+//                    outputFileWriter.println(stationDatas.get(key));
                 }
             }
             // enregistrement de la station
