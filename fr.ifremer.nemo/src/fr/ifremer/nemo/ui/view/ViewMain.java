@@ -96,16 +96,16 @@ public class ViewMain extends ViewPart
 		Image dialogTitleImage = null;
 		String dialogTitle="Nemo version check";
 		if(state.getState() == STATE.LAST_VERSION){
-//			dialogMessage = state.getDescription();
+			// do not show pop-up (info in the log file)
 		}else{
 			dialogMessage= "You are currently using Nemo version " + state.getVersion()  
 					+ " \nA new version is available since "+state.getLastVersionDay()+". Please udate to " + state.getLastVersion();  
-		}
 
-		
-		NemoVersionDialog dialog = new NemoVersionDialog(parent.getShell(), dialogTitle, dialogTitleImage, dialogMessage, dialogImageType, dialogButtonLabels, defaultIndex);
-		dialog.create();
-		dialog.open();
+
+			NemoVersionDialog dialog = new NemoVersionDialog(parent.getShell(), dialogTitle, dialogTitleImage, dialogMessage, dialogImageType, dialogButtonLabels, defaultIndex);
+			dialog.create();
+			dialog.open();
+		}
 
 		     
 		// etape de depart
