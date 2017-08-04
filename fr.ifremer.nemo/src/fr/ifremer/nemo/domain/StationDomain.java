@@ -127,7 +127,7 @@ public class StationDomain {
 		odvStationHeader.append(Global.TAB);
 		odvStationHeader.append("Type");
 		odvStationHeader.append(Global.TAB);
-		odvStationHeader.append("yyyy-mm-ddThh:mm:ss.sss");
+		odvStationHeader.append("YYYY-MM-DDThh:mm:ss.sss");
 		odvStationHeader.append(Global.TAB);
 		odvStationHeader.append("Longitude [degrees_east]");
 		odvStationHeader.append(Global.TAB);

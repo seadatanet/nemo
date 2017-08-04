@@ -29,9 +29,9 @@ public class AP_DTUT extends AddedParam
 	{
 		super();
 		_code = "DTUT";
-		_format = "yyyy-MM-dd'T'HH:mm:ss.SSS";
+		_format = "YYYY-MM-DD'T'HH:mm:ss.SSS";
 		_fullName = "time_ISO8601";
-		_unit = "yyyy-mm-ddThh:mm:ss.sss";
+		_unit = "YYYY-MM-DDThh:mm:ss.sss";
 		cible = Conversion.ODV;
 		isMesured = false;
 	}
