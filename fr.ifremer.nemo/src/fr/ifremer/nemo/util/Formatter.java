@@ -188,7 +188,7 @@ public class Formatter implements Cloneable
 	        
     	        String type = format.substring(format.length() - 1);
     	        if (type.equals("d") || type.equals("D")) { //$NON-NLS-1$ //$NON-NLS-2$
-    	            return String.format(java.util.Locale.US, format, value.intValue());
+    	            return String.format(java.util.Locale.US, format, value.longValue());
     	        }
     	        return String.format(java.util.Locale.US, format, value);
 	        }

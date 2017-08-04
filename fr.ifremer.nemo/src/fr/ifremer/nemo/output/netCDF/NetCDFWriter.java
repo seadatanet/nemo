@@ -701,7 +701,7 @@ public class NetCDFWriter extends NemoWriter {
 			}catch(Exception e){
 				e.printStackTrace();
 				System.out.println(e.getMessage());
-				throw new GenerationException("error on data for variable "+varName+ " data="+stringValue + " station nb="+indiceStation + "indexRecord " + indexRecord);
+				throw new GenerationException("error on data for variable "+varName+ " data="+stringValue + " station nb="+indiceStation + "indexRecord " + indexRecord +". "+ e.getMessage());
 			}
 		}
 		indexRecord++;

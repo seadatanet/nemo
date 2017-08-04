@@ -1609,8 +1609,11 @@ public class TableData {
 									String.format(
 											myTable.getItem(i).getText(
 													colNbById.get(COL_FORMAT)),
+//													(Double.valueOf(resultJEP))
+//													.intValue()
 													(Double.valueOf(resultJEP))
-													.intValue());
+													.longValue()
+													);
 						} else {
 							// error
 							ok = false;

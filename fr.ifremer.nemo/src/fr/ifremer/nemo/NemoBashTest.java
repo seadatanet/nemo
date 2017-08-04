@@ -102,7 +102,7 @@ public class NemoBashTest {
 	boolean REMOVE_JUNIT=true;
 	
 	public static String[] testDirAlone = {};
-//	public static String[] testDirAlone = {"cruiseFile_profile_diap_stationsOrderBis"};
+//	public static String[] testDirAlone = {"22733_nolwenn"};
 			
 	/**
 	 * ********************************************************
@@ -927,6 +927,7 @@ public class NemoBashTest {
 
 								for (File unitTest : convDir.listFiles()) {
 									ok = true;
+									boolean okCDI;
 									message = new Message();
 
 									message.dirName = testDir.getName();
@@ -975,8 +976,11 @@ public class NemoBashTest {
 												ok = comp && ok;
 											}
 											if (ok){
-												ok = compareCdiSummary(outputAbsolutePath);
-												message.diff="error in CDI summary";
+												okCDI = compareCdiSummary(outputAbsolutePath);
+												if (!okCDI){
+													message.diff="error in CDI summary";
+												}
+												ok =okCDI&&ok;
 											}
 											if (ok) {
 												nbTotalSuccess++;
@@ -1299,6 +1303,10 @@ public class NemoBashTest {
 		longNames.put("NTRIAAD1", "ntri"); //$NON-NLS-1$//$NON-NLS-2$
 		longNames.put("CSERTFBL", "CSERTFBL"); //$NON-NLS-1$//$NON-NLS-2$
 		longNames.put("ANTHHPP1", "ANTHHPP1"); //$NON-NLS-1$//$NON-NLS-2$
+		longNames.put("SSALST01", "psal"); //$NON-NLS-1$//$NON-NLS-2$
+		longNames.put("BCCDSP01", "flu2"); //$NON-NLS-1$//$NON-NLS-2$
+		
+		
 		return longNames;
 	}
 
