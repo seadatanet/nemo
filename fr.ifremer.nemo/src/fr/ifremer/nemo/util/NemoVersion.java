@@ -2,6 +2,7 @@ package fr.ifremer.nemo.util;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.MessageFormat;
 
 import org.osgi.framework.Version;
 
@@ -26,8 +27,7 @@ public class NemoVersion {
 			if(state.getState() == STATE.LAST_VERSION){
 				Nemo.getInstance().getLogger().info ( state.getDescription());
 			}else{
-				Nemo.getInstance().getLogger().warn("You are currently using Nemo version " + state.getVersion()  
-						+ ". A new version is available since "+state.getLastVersionDay()+". Please update to " + state.getLastVersion());  
+				Nemo.getInstance().getLogger().warn(MessageFormat.format(Messages.NemoVersionUpdateAvailable, state.getVersion()  , state.getLastVersionDay(), state.getLastVersion()));
 			}
 
 

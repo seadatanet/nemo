@@ -682,6 +682,7 @@ public class Messages {
 	public static String BODC_check_datatype_c77_deprecated;
 	public static String BODC_check_datatype_c77_notExist;
 	
+	public static String NemoVersionUpdateAvailable;
 	
 	static {
 		// check config de la langue

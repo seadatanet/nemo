@@ -7,6 +7,8 @@
  */
 package fr.ifremer.nemo.ui.view;
 
+import java.text.MessageFormat;
+
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.SWT;
@@ -98,10 +100,8 @@ public class ViewMain extends ViewPart
 		if(state.getState() == STATE.LAST_VERSION){
 			// do not show pop-up (info in the log file)
 		}else{
-			dialogMessage= "You are currently using Nemo version " + state.getVersion()  
-					+ " \nA new version is available since "+state.getLastVersionDay()+". Please udate to " + state.getLastVersion();  
-
-
+			String[] lastDate = state.getLastVersionDay().split("-");
+			dialogMessage=MessageFormat.format(Messages.NemoVersionUpdateAvailable, state.getVersion()  , state.getLastVersion(), lastDate[0], lastDate[1], lastDate[2]);
 			NemoVersionDialog dialog = new NemoVersionDialog(parent.getShell(), dialogTitle, dialogTitleImage, dialogMessage, dialogImageType, dialogButtonLabels, defaultIndex);
 			dialog.create();
 			dialog.open();
