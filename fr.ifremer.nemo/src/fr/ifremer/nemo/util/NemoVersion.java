@@ -27,7 +27,8 @@ public class NemoVersion {
 			if(state.getState() == STATE.LAST_VERSION){
 				Nemo.getInstance().getLogger().info ( state.getDescription());
 			}else{
-				Nemo.getInstance().getLogger().warn(MessageFormat.format(Messages.NemoVersionUpdateAvailable, state.getVersion()  , state.getLastVersionDay(), state.getLastVersion()));
+				String[] lastDate = state.getLastVersionDay().split("-");
+				Nemo.getInstance().getLogger().warn(MessageFormat.format(Messages.NemoVersionUpdateAvailable, state.getVersion()  , state.getLastVersion(), lastDate[0], lastDate[1], lastDate[2]));
 			}
 
 
