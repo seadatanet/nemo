@@ -174,7 +174,7 @@ public class OdvWriter extends NemoWriter
         DataDomain data = iDomain.getData();
 
         StringBuffer dataLine = new StringBuffer();
-        if (indexRecord == 0)
+        if (indexRecord == 0 &&  !iDomain.getConversion().isSortData())
         {
             dataLine.append(stationHeader);
         }
@@ -279,14 +279,14 @@ public class OdvWriter extends NemoWriter
                     )
                     {
                         writeDataLine(stationHeader, currentStation, readedLine);
-                        stationHeader = station.getOdvEmptyStationHeader();
+//                        stationHeader = station.getOdvEmptyStationHeader();
                     }
                     // FAE 11978 - cas des fichiers ODV en entree
                     if (mediaModel.getEndData() == E_EndData.NEXT_START_WITH
                             && mediaModel.getStationHeader() == 0)
                     {
                         writeDataLine(stationHeader, currentStation, readedLine);
-                        stationHeader = station.getOdvEmptyStationHeader();
+//                        stationHeader = station.getOdvEmptyStationHeader();
                     }
                     stationWrited = true;
                 }
@@ -303,7 +303,7 @@ public class OdvWriter extends NemoWriter
                 // ligne de données : à ne prendre en compte qua si on est sur
                 // la bonne station
                 writeDataLine(stationHeader, currentStation, readedLine);
-                stationHeader = station.getOdvEmptyStationHeader();
+//                stationHeader = station.getOdvEmptyStationHeader();
             }
         }
 
@@ -311,15 +311,23 @@ public class OdvWriter extends NemoWriter
         {
             if (iDomain.getConversion().isSortData())
             {
+            	int index=0;
                 // écriture des données après tri
                 List<Double> keys = new ArrayList<Double>();
                 keys.addAll(stationDatas.keySet());
                 Collections.sort(keys);
+                
                 for (Double key : keys)
                 {
                 	for (String line : stationDatas.get(key)){
-    					
-    					outputFileWriter.println(line);
+    					if (index==0){
+    						int nbCol=iDomain.getStation().getOdvStationHeaderColumnsNumber();
+    						line = line.substring(nbCol, line.length());
+    						outputFileWriter.println(stationHeader + line);
+    					}else{
+    						outputFileWriter.println(line);
+    					}
+    					index++;
     				}
 //                    outputFileWriter.println(stationDatas.get(key));
                 }

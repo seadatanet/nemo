@@ -144,10 +144,14 @@ public class StationDomain {
 
 	public StringBuffer getOdvEmptyStationHeader() {
 		StringBuffer odvStationHeader = new StringBuffer();
-		for (int i = 0; i < 9; i++) {
+		int max=getOdvStationHeaderColumnsNumber();
+		for (int i = 0; i < max; i++) {
 			odvStationHeader.append(Global.TAB);
 		}
 		return odvStationHeader;
+	}
+	public int getOdvStationHeaderColumnsNumber(){
+		return 9;
 	}
 
 	public StringBuffer getOdvTrajectoryHeader(Station currentStation,
