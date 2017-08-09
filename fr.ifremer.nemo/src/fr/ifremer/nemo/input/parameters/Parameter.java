@@ -69,6 +69,7 @@ public class Parameter extends AbstractModel {
 	protected String _unit;
 	// FAE 6542
 	protected String _unitCode;
+	protected String _p06Label;
 	
 	protected String _instrument;
 	protected String _instrumentCode;
@@ -99,6 +100,7 @@ public class Parameter extends AbstractModel {
 		setUnit(typeData.getUnite());
 		// FAE 6542
 		setUnitCode(typeData.getUniteCode());
+		setP06Label(typeData.getP06Label());
 
 		// specific P011
 		setCodeP011(typeData.getEntryKeyP011());
@@ -124,6 +126,7 @@ public class Parameter extends AbstractModel {
 		_fullName = Global.EMPTY_STRING;
 		_unit = Global.EMPTY_STRING;
 		_unitCode = Global.EMPTY_STRING;
+		_p06Label= Global.EMPTY_STRING;
 		_codeP011 = Global.EMPTY_STRING;
 		_nameP011 = Global.EMPTY_STRING;
 		_P011 = false;
@@ -619,6 +622,12 @@ public class Parameter extends AbstractModel {
 
 	public void setInstrument(String instrument) {
 		this._instrument = instrument;
+	}
+
+
+
+	public void setP06Label(String p06Label) {
+		_p06Label = p06Label;
 	}
 
 

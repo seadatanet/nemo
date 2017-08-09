@@ -1150,7 +1150,12 @@ public class TableData {
 					longName = userLongName;
 				}
 			}
-
+			String unitLabel;
+			if (RulesManager.getInstance().isDataListTypeP091()){
+				unitLabel=types.get(i).getUnite();
+			}else{
+				unitLabel=types.get(i).getP06Label();
+			}
 			item.setText(new String[]
 					{
 					null,
@@ -1158,7 +1163,7 @@ public class TableData {
 					standardName,
 					longName,
 					label,
-					types.get(i).getUnite(),
+					unitLabel,
 					(types.get(i).isText() ? null : types.get(i)
 							.getConversion()), types.get(i).getTest(),
 							String.valueOf(types.get(i).getDebut()),

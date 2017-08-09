@@ -19,6 +19,7 @@ public class TypeData extends Object implements Comparable<TypeData> {
 
 	private String unite;
 	private String uniteCode;
+	private String P06Label;
 	private String conversion;
 	private String format;
 	private String entree;
@@ -50,6 +51,22 @@ public class TypeData extends Object implements Comparable<TypeData> {
 	
 	public TypeData(String theEntryKey, String theEntryTerm, 
 			String theCodeP01,String theNameP01 ,
+			String theUniteCode,String theUniteLabel,String theP06Label,
+			String theInstrumentCode,String theInstrumentLabel ,
+			boolean itheIsP011) {
+		this.setEntryKey(theEntryKey);
+		this.setEntryTerm(theEntryTerm);
+		this.setEntryKeyP011(theCodeP01);
+		this.setEntryTermP011(theNameP01);
+		this.setUniteCode(theUniteCode);
+		this.setUnite(theUniteLabel);
+		this.setP06Label(theP06Label);
+		this.setInstrumentCode(theInstrumentCode);
+		this.setInstrument(theInstrumentLabel);
+		this.setIsP011(itheIsP011);
+	}
+	public TypeData(String theEntryKey, String theEntryTerm, 
+			String theCodeP01,String theNameP01 ,
 			String theUniteCode,String theUniteLabel,
 			String theInstrumentCode,String theInstrumentLabel ,
 			boolean itheIsP011) {
@@ -77,6 +94,7 @@ public class TypeData extends Object implements Comparable<TypeData> {
 		this.setInstrument(typeData.instrument);
 		this.setInstrumentCode(typeData.instrumentCode);
 		this.setUnite(typeData.unite);
+		this.setP06Label(typeData.P06Label);
 		this.setEntryKey(typeData.getEntryKey());
 		this.setEntryTerm(typeData.getEntryTerm());
 		this.setEntryTermP011(typeData.entryTermP011);
@@ -89,6 +107,7 @@ public class TypeData extends Object implements Comparable<TypeData> {
 		setEntryKey(wsParameter.getCode());
 		setEntryTerm(wsParameter.getName());
 		setUnite(wsParameter.getUnit());
+		setP06Label(wsParameter.getUnitP06());
 		setFormat(wsParameter.getFormat());
 		setEntree(Global.EMPTY_STRING);
 		setSortie(wsParameter.getDefaultValue());
@@ -120,7 +139,9 @@ public class TypeData extends Object implements Comparable<TypeData> {
 		String inputDefault = parameterModel.getInputDefault();
 		if (inputDefault == null || inputDefault.equals("null"))inputDefault = Global.EMPTY_STRING; //$NON-NLS-1$
 		setEntree(inputDefault);
-
+		if (parameter.isP011()){
+			setP06Label(parameter.getUnit());
+		}
 		setUnite(parameter.getUnit());
 		setUniteCode(parameter.getUnitCode());
 		
@@ -426,5 +447,13 @@ public class TypeData extends Object implements Comparable<TypeData> {
 
 	public void setSensor(Boolean sensor) {
 		this.sensor = sensor;
+	}
+
+	public String getP06Label() {
+		return P06Label;
+	}
+
+	public void setP06Label(String p06Label) {
+		P06Label = p06Label;
 	}
 }

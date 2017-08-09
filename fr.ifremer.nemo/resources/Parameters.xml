@@ -16,6 +16,9 @@
      <string>ABUNDANCE OF BIO PER VOLUME</string>
     </void>
     <void property="unit">
+     <string>number/ml</string>
+    </void>
+    <void property="unitP06">
      <string>Number per millilitre</string>
     </void>
    </object>
@@ -35,6 +38,9 @@
      <string>ABUNDANCE OF BIO PER AREA</string>
     </void>
     <void property="unit">
+     <string>number/m2</string>
+    </void>
+    <void property="unitP06">
      <string>Number per square metre</string>
     </void>
    </object>
@@ -54,6 +60,9 @@
      <string>ABUNDANCE BIO PER VOL IN SED</string>
     </void>
     <void property="unit">
+     <string>number/ml</string>
+    </void>
+    <void property="unitP06">
      <string>Number per millilitre</string>
     </void>
    </object>
@@ -73,6 +82,9 @@
      <string>ALPHA BETA CAROTENES</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per cubic metre</string>
     </void>
    </object>
@@ -92,6 +104,9 @@
      <string>SURFACE SAMPLED OR OBSERVED</string>
     </void>
     <void property="unit">
+     <string>m2</string>
+    </void>
+    <void property="unitP06">
      <string>Square metres</string>
     </void>
    </object>
@@ -111,6 +126,9 @@
      <string>ACENAPHTHYLENE IN SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -130,6 +148,9 @@
      <string>ACENAPHTHYLENE IN WATER BODY</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Micrograms per litre</string>
     </void>
    </object>
@@ -149,6 +170,9 @@
      <string>Ag&lt;63um IN DRY WEIGHT SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -168,6 +192,9 @@
      <string>Ag IN DRY WEIGHT SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -187,6 +214,9 @@
      <string>Al&lt;63um IN DRY WEIGHT SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -206,6 +236,9 @@
      <string>ALKALINITY</string>
     </void>
     <void property="unit">
+     <string>micromole/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Micromoles per kilogram</string>
     </void>
    </object>
@@ -225,6 +258,9 @@
      <string>ALKALINITY</string>
     </void>
     <void property="unit">
+     <string>millimole/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Micromoles per litre</string>
     </void>
    </object>
@@ -244,6 +280,9 @@
      <string>HEIGHT ABOVE MEAN SEA LEVEL</string>
     </void>
     <void property="unit">
+     <string>meter</string>
+    </void>
+    <void property="unitP06">
      <string>Metres</string>
     </void>
    </object>
@@ -263,6 +302,9 @@
      <string>ALUMINIUM IN WATER BODY</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Micrograms per litre</string>
     </void>
    </object>
@@ -282,6 +324,9 @@
      <string>SEDIMENT AMINO-ACIDS</string>
     </void>
     <void property="unit">
+     <string>microgram/g</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -301,6 +346,9 @@
      <string>AMMONIUM (NH4-N) CONTENT</string>
     </void>
     <void property="unit">
+     <string>millimole/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Micromoles per litre</string>
     </void>
    </object>
@@ -320,6 +368,9 @@
      <string>AMONIUM IN SEDIMENT PORE WATER</string>
     </void>
     <void property="unit">
+     <string>millimole/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Micromoles per litre</string>
     </void>
    </object>
@@ -339,6 +390,9 @@
      <string>AMMONIUM (NH4-N) CONTENT</string>
     </void>
     <void property="unit">
+     <string>micromole/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Micromoles per kilogram</string>
     </void>
    </object>
@@ -358,6 +412,9 @@
      <string>AMMONIUM IN SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>millimole/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Millimoles per cubic metre</string>
     </void>
    </object>
@@ -377,6 +434,9 @@
      <string>ANTHRACENE IN BIOTA</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -396,6 +456,9 @@
      <string>ANTHRACENE IN SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -415,6 +478,9 @@
      <string>ANTHRACENE IN WATER BODY</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Micrograms per litre</string>
     </void>
    </object>
@@ -434,6 +500,9 @@
      <string>ANTHERAXANTHIN</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per cubic metre</string>
     </void>
    </object>
@@ -453,6 +522,9 @@
      <string>ARSENIC IN WATER BODY</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Micrograms per litre</string>
     </void>
    </object>
@@ -472,6 +544,9 @@
      <string>ABSORPTION STANDARD DEVIATION</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per cubic metre</string>
     </void>
    </object>
@@ -491,6 +566,9 @@
      <string>As IN DRY WEIGHT SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -510,6 +588,9 @@
      <string>ATMOSPHERIC PRESSURE</string>
     </void>
     <void property="unit">
+     <string>hectopascal</string>
+    </void>
+    <void property="unitP06">
      <string>Millibars</string>
     </void>
    </object>
@@ -529,6 +610,9 @@
      <string>ATMOSPHERIC PRESSURE - SEA LEV</string>
     </void>
     <void property="unit">
+     <string>hectopascal</string>
+    </void>
+    <void property="unitP06">
      <string>Millibars</string>
     </void>
    </object>
@@ -548,6 +632,9 @@
      <string>ATMOSPHERIC PRESSURE TENDENCY</string>
     </void>
     <void property="unit">
+     <string>hectopascal/hour</string>
+    </void>
+    <void property="unitP06">
      <string>Hectopascals per hour</string>
     </void>
    </object>
@@ -567,6 +654,9 @@
      <string>ALLOXANTHINE</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per cubic metre</string>
     </void>
    </object>
@@ -586,6 +676,9 @@
      <string>BENZ(A)ANTHRACENE IN SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -605,6 +698,9 @@
      <string>BENZ(A)ANTHRACENE IN WATER</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Micrograms per litre</string>
     </void>
    </object>
@@ -624,6 +720,9 @@
      <string>BENZO(A)PYRENE IN SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -643,6 +742,9 @@
      <string>BENZO(A)PYRENE IN WATER BODY</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Micrograms per litre</string>
     </void>
    </object>
@@ -662,6 +764,9 @@
      <string>BATHYMETRIC DEPTH</string>
     </void>
     <void property="unit">
+     <string>meter</string>
+    </void>
+    <void property="unitP06">
      <string>Metres</string>
     </void>
    </object>
@@ -681,6 +786,9 @@
      <string>BENZO(B)FLUORANTHENE SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -700,6 +808,9 @@
      <string>BENZO(B)FLUORANTHENE IN WATER</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Micrograms per litre</string>
     </void>
    </object>
@@ -719,6 +830,9 @@
      <string>NUMBER OF BACTERIA IN SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>10+9 cell/dm3</string>
+    </void>
+    <void property="unitP06">
      <string>Number per nanolitre</string>
     </void>
    </object>
@@ -738,6 +852,9 @@
      <string>NUMBER OF SW BACTERIA</string>
     </void>
     <void property="unit">
+     <string>10+9 cell/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Number per microlitre</string>
     </void>
    </object>
@@ -757,6 +874,9 @@
      <string>BACTERIAL BIOMASS IN SEA WATER</string>
     </void>
     <void property="unit">
+     <string>milligram carbon/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per cubic metre</string>
     </void>
    </object>
@@ -776,6 +896,9 @@
      <string>BENZENE IN WATER BODY</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Micrograms per litre</string>
     </void>
    </object>
@@ -795,6 +918,9 @@
      <string>19&apos;BUTANOYLOXYFUCOXANTHINE</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per cubic metre</string>
     </void>
    </object>
@@ -814,6 +940,9 @@
      <string>BENZO(G,H,I)PERYLENE SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -833,6 +962,9 @@
      <string>BENZO(G,H,I)PERYLENE IN WATER</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Micrograms per litre</string>
     </void>
    </object>
@@ -852,6 +984,9 @@
      <string>Bi&lt;63um IN DRY WEIGHT SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -871,6 +1006,9 @@
      <string>Bi IN DRY WEIGHT SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -890,6 +1028,9 @@
      <string>BENZO(K)FLUORANTHENE SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -909,6 +1050,9 @@
      <string>BENZO(K)FLUORANTHENE IN WATER</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Micrograms per litre</string>
     </void>
    </object>
@@ -928,6 +1072,9 @@
      <string>DELTA 13C (13C/12C)</string>
     </void>
     <void property="unit">
+     <string>per thousand</string>
+    </void>
+    <void property="unitP06">
      <string>Parts per thousand</string>
     </void>
    </object>
@@ -947,6 +1094,9 @@
      <string>14C UPTAKE 0.2-1 MICRON</string>
     </void>
     <void property="unit">
+     <string>milligram carbon/(m3.day)</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per cubic metre per day</string>
     </void>
    </object>
@@ -966,6 +1116,9 @@
      <string>14C PRODUCTION &gt;2 MICRON</string>
     </void>
     <void property="unit">
+     <string>milligram carbon/(m3.day)</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per cubic metre per day</string>
     </void>
    </object>
@@ -985,6 +1138,9 @@
      <string>CO3&lt;63um IN DRY WGHT SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -1004,6 +1160,9 @@
      <string>14C PRODUCTION &gt;10 MICRON</string>
     </void>
     <void property="unit">
+     <string>milligram carbon/(m3.day)</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per cubic metre per day</string>
     </void>
    </object>
@@ -1023,6 +1182,9 @@
      <string>Ca&lt;63um IN DRY WEIGHT SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -1042,6 +1204,9 @@
      <string>CADMIUM IN BIOTA </string>
     </void>
     <void property="unit">
+     <string>microgram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Micrograms per kilogram</string>
     </void>
    </object>
@@ -1061,6 +1226,9 @@
      <string>CADMIUM IN SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -1080,6 +1248,9 @@
      <string>CADMIUM IN WATER BODY</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Micrograms per litre</string>
     </void>
    </object>
@@ -1099,6 +1270,9 @@
      <string>CARBON BIOMASS OF BIO ENTITY</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per cubic metre</string>
     </void>
    </object>
@@ -1118,6 +1292,9 @@
      <string>Cd&gt;0.4/0.45um IN WATER BODY</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Micrograms per litre</string>
     </void>
    </object>
@@ -1137,6 +1314,9 @@
      <string>Cd&lt;0.4/0.45um IN WATER BODY</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Micrograms per litre</string>
     </void>
    </object>
@@ -1156,6 +1336,9 @@
      <string>Cd&lt;63um IN DRY WEIGHT SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -1175,6 +1358,9 @@
      <string>DARK FIXATION</string>
     </void>
     <void property="unit">
+     <string>milligram carbon/(m3.day)</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per cubic metre per day</string>
     </void>
    </object>
@@ -1194,6 +1380,9 @@
      <string>COLORED DISS. ORGANIC MATTER</string>
     </void>
     <void property="unit">
+     <string>ppb</string>
+    </void>
+    <void property="unitP06">
      <string>Parts per billion</string>
     </void>
    </object>
@@ -1213,6 +1402,9 @@
      <string>Cd IN DRY WEIGHT SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -1232,6 +1424,9 @@
      <string>DISSOLVED CFC11 ERROR</string>
     </void>
     <void property="unit">
+     <string>picomole/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Picomoles per kilogram</string>
     </void>
    </object>
@@ -1251,6 +1446,9 @@
      <string>DISSOLVED CFC12 ERROR</string>
     </void>
     <void property="unit">
+     <string>picomole/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Picomoles per kilogram</string>
     </void>
    </object>
@@ -1270,6 +1468,9 @@
      <string>DISSOLVED CFC113 ERROR</string>
     </void>
     <void property="unit">
+     <string>picomole/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Picomoles per kilogram</string>
     </void>
    </object>
@@ -1289,6 +1490,9 @@
      <string>Ce&lt;63um IN DRY WEIGHT SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -1308,6 +1512,9 @@
      <string>DISSOLVED CFC11</string>
     </void>
     <void property="unit">
+     <string>picomole/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Picomoles per kilogram</string>
     </void>
    </object>
@@ -1327,6 +1534,9 @@
      <string>DISSOLVED CFC12</string>
     </void>
     <void property="unit">
+     <string>picomole/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Picomoles per kilogram</string>
     </void>
    </object>
@@ -1346,6 +1556,9 @@
      <string>DISSOLVED CFC113</string>
     </void>
     <void property="unit">
+     <string>picomole/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Picomoles per kilogram</string>
     </void>
    </object>
@@ -1365,6 +1578,9 @@
      <string>CHL-A(LESS DIVINYLCHL-A)</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per cubic metre</string>
     </void>
    </object>
@@ -1384,6 +1600,9 @@
      <string>CHLOROPHYLL TOTAL</string>
     </void>
     <void property="unit">
+     <string>microgram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Micrograms per kilogram</string>
     </void>
    </object>
@@ -1403,6 +1622,9 @@
      <string>CHL-B(LESS DIVINYLCHL-B)</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per cubic metre</string>
     </void>
    </object>
@@ -1422,6 +1644,9 @@
      <string>DIVINYL CHLOROPHYLL-A</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per cubic metre</string>
     </void>
    </object>
@@ -1441,6 +1666,9 @@
      <string>EPIMERE CHLOROPHYLL-A</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per cubic metre</string>
     </void>
    </object>
@@ -1460,6 +1688,9 @@
      <string>CHLOROPHYLL-A VERTICAL FLUX</string>
     </void>
     <void property="unit">
+     <string>milligram/(m2.day)</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per square metre per day</string>
     </void>
    </object>
@@ -1479,6 +1710,9 @@
      <string>CHLOROPHYLL-A IN SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -1498,6 +1732,9 @@
      <string>DIVINYL-CHLOROPHYLL-B</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per cubic metre</string>
     </void>
    </object>
@@ -1517,6 +1754,9 @@
      <string>CHLOROPHYLL-C3</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per cubic metre</string>
     </void>
    </object>
@@ -1536,6 +1776,9 @@
      <string>CHLOROPHYLL-C1+C2</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per cubic metre</string>
     </void>
    </object>
@@ -1555,6 +1798,9 @@
      <string>CHLOROPHYLL-B TOTAL</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per cubic metre</string>
     </void>
    </object>
@@ -1574,6 +1820,9 @@
      <string>CHLOROPHYLL-C TOTAL</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per cubic metre</string>
     </void>
    </object>
@@ -1593,6 +1842,9 @@
      <string>Chlorine IN DRY WGHT SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -1612,6 +1864,9 @@
      <string>CHLOROPHYLL-TOTAL</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per cubic metre</string>
     </void>
    </object>
@@ -1631,6 +1886,9 @@
      <string>CHRYSENE IN SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -1650,6 +1908,9 @@
      <string>STD DEVIATION CHLOROPHYLL-A</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -1669,6 +1930,9 @@
      <string>PART. TOTAL CARBOHYDRATES FLUX</string>
     </void>
     <void property="unit">
+     <string>milligram/(m2.day)</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per square metre per day</string>
     </void>
    </object>
@@ -1688,6 +1952,9 @@
      <string>SEDIMENT CARBOHYDRATES</string>
     </void>
     <void property="unit">
+     <string>microgram/g</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -1707,6 +1974,9 @@
      <string>NUMBER OF SW CILIATES</string>
     </void>
     <void property="unit">
+     <string>10+3 cell/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Number per litre</string>
     </void>
    </object>
@@ -1726,6 +1996,9 @@
      <string>DISSOLVED C-TETRACHLORIDE</string>
     </void>
     <void property="unit">
+     <string>picomole/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Picomoles per kilogram</string>
     </void>
    </object>
@@ -1745,6 +2018,9 @@
      <string>CLAY IN THE SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>%</string>
+    </void>
+    <void property="unitP06">
      <string>Percent</string>
     </void>
    </object>
@@ -1764,6 +2040,9 @@
      <string>ELECTRICAL CONDUCTIVITY</string>
     </void>
     <void property="unit">
+     <string>mho/meter</string>
+    </void>
+    <void property="unitP06">
      <string>Siemens per metre</string>
     </void>
    </object>
@@ -1783,6 +2062,9 @@
      <string>DISSOLVED CARBON DIOXYD (CO2)</string>
     </void>
     <void property="unit">
+     <string>millimole/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Micromoles per litre</string>
     </void>
    </object>
@@ -1802,6 +2084,9 @@
      <string>PART. CaCO3 FLUX</string>
     </void>
     <void property="unit">
+     <string>milligram/(m2.day)</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per square metre per day</string>
     </void>
    </object>
@@ -1821,6 +2106,9 @@
      <string>CARBONATES CONTENT</string>
     </void>
     <void property="unit">
+     <string>%</string>
+    </void>
+    <void property="unitP06">
      <string>Percent</string>
     </void>
    </object>
@@ -1840,6 +2128,9 @@
      <string>SEDIMENT CARBONATES</string>
     </void>
     <void property="unit">
+     <string>%</string>
+    </void>
+    <void property="unitP06">
      <string>Percent</string>
     </void>
    </object>
@@ -1859,6 +2150,9 @@
      <string>Co&lt;63um IN DRY WEIGHT SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -1878,6 +2172,9 @@
      <string>NUMBER OF SW COCCOLITHOPHORIDS</string>
     </void>
     <void property="unit">
+     <string>10+3 cell/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Number per litre</string>
     </void>
    </object>
@@ -1897,6 +2194,9 @@
      <string>CHEMICAL OXYGEN DEMAND</string>
     </void>
     <void property="unit">
+     <string>millimole/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Micromoles per litre</string>
     </void>
    </object>
@@ -1916,6 +2216,9 @@
      <string>COCCOLITHOPHORIDAE PPC FLUX</string>
     </void>
     <void property="unit">
+     <string>milligram carbon/(m2.day)</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per square metre per day</string>
     </void>
    </object>
@@ -1935,6 +2238,9 @@
      <string>NUMBER OF COPEPODS</string>
     </void>
     <void property="unit">
+     <string>number/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Number per cubic metre</string>
     </void>
    </object>
@@ -1954,6 +2260,9 @@
      <string>COPPER IN SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -1973,6 +2282,9 @@
      <string>DISSOLVED ORGANIC CARBON</string>
     </void>
     <void property="unit">
+     <string>millimole/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Micromoles per litre</string>
     </void>
    </object>
@@ -1992,6 +2304,9 @@
      <string>Co IN DRY WEIGHT SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -2011,6 +2326,9 @@
      <string>CHLOROPHYLL-A TOTAL</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per cubic metre</string>
     </void>
    </object>
@@ -2030,6 +2348,9 @@
      <string>CHLOROPHYLL-A &gt;2 MICRON </string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per cubic metre</string>
     </void>
    </object>
@@ -2049,6 +2370,9 @@
      <string>CHLOROPHYLL-A &gt;20 MICRON</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per cubic metre</string>
     </void>
    </object>
@@ -2068,6 +2392,9 @@
      <string>CHLOROPHYLL-A &gt;10 MICRON</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per cubic metre</string>
     </void>
    </object>
@@ -2087,6 +2414,9 @@
      <string>CHLOROPHYLL-A &gt;3 &lt;20 MICRON</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per cubic metre</string>
     </void>
    </object>
@@ -2106,6 +2436,9 @@
      <string>CHLOROPHYLL-A &lt;3 MICRON</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per cubic metre</string>
     </void>
    </object>
@@ -2125,6 +2458,9 @@
      <string>CHLOROPHYLL-A &gt;3 &lt;10 MICRON</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per cubic metre</string>
     </void>
    </object>
@@ -2144,6 +2480,9 @@
      <string>CHLOROPHYLL-A TOTAL</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per cubic metre</string>
     </void>
    </object>
@@ -2163,6 +2502,9 @@
      <string>Cr&lt;63um IN DRY WEIGHT SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -2182,6 +2524,9 @@
      <string>CHROMIUM IN WATER BODY</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Micrograms per litre</string>
     </void>
    </object>
@@ -2201,6 +2546,9 @@
      <string>CHRYSENE IN WATER BODY</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Micrograms per litre</string>
     </void>
    </object>
@@ -2220,6 +2568,9 @@
      <string>Cs&lt;63um IN DRY WEIGHT SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -2239,6 +2590,9 @@
      <string>Cs  IN DRY WEIGHT SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -2258,6 +2612,9 @@
      <string>Cu&lt;63um IN DRY WEIGHT SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -2277,6 +2634,9 @@
      <string>14C PRODUCTION FILTER UNSPECIF</string>
     </void>
     <void property="unit">
+     <string>milligram carbon/(m3.hour)</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per cubic metre per hour</string>
     </void>
    </object>
@@ -2296,6 +2656,9 @@
      <string>14C PRODUCTION FILTER UNSPECIF</string>
     </void>
     <void property="unit">
+     <string>milligram carbon/(m3.day)</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per cubic metre per day</string>
     </void>
    </object>
@@ -2315,6 +2678,9 @@
      <string>NUMBER OF CYANOBACTERIA</string>
     </void>
     <void property="unit">
+     <string>10+6 cell/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Number per millilitre</string>
     </void>
    </object>
@@ -2334,6 +2700,9 @@
      <string>DAY WITHIN MONTH</string>
     </void>
     <void property="unit">
+     <string>dd</string>
+    </void>
+    <void property="unitP06">
      <string>Dimensionless</string>
     </void>
    </object>
@@ -2353,6 +2722,9 @@
      <string>DIBENZO(AH)ANTHRACENE SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -2372,6 +2744,9 @@
      <string>DIBENZO(AH)ANTHRACENE IN WATER</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Micrograms per litre</string>
     </void>
    </object>
@@ -2391,6 +2766,9 @@
      <string>DRY WEIGHT BIOMASS OF ENTITY</string>
     </void>
     <void property="unit">
+     <string>gram/m2</string>
+    </void>
+    <void property="unitP06">
      <string>Grams per square metre</string>
     </void>
    </object>
@@ -2410,6 +2788,9 @@
      <string>DARK CARBON ABSORPTION</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per cubic metre</string>
     </void>
    </object>
@@ -2429,6 +2810,9 @@
      <string>DENSITY (Sigma-theta)</string>
     </void>
     <void property="unit">
+     <string>kg/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Kilograms per cubic metre</string>
     </void>
    </object>
@@ -2448,6 +2832,9 @@
      <string>DEPTH BELOW SEA SURFACE</string>
     </void>
     <void property="unit">
+     <string>meter</string>
+    </void>
+    <void property="unitP06">
      <string>Metres</string>
     </void>
    </object>
@@ -2467,6 +2854,9 @@
      <string>DEW POINT TEMPERATURE</string>
     </void>
     <void property="unit">
+     <string>Celsius degree</string>
+    </void>
+    <void property="unitP06">
      <string>Degrees Celsius</string>
     </void>
    </object>
@@ -2486,6 +2876,9 @@
      <string>NUMBER OF SW DINOFLAGELLATES</string>
     </void>
     <void property="unit">
+     <string>10+3 cell/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Number per litre</string>
     </void>
    </object>
@@ -2505,6 +2898,9 @@
      <string>DINOFLAGELLATES PPC FLUX</string>
     </void>
     <void property="unit">
+     <string>milligram carbon/(m2.day)</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per square metre per day</string>
     </void>
    </object>
@@ -2524,6 +2920,9 @@
      <string>DIC IN SEDIMENT PORE WATER</string>
     </void>
     <void property="unit">
+     <string>gram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per litre</string>
     </void>
    </object>
@@ -2543,6 +2942,9 @@
      <string>NUMBER OF SW DYNOPHYSIS</string>
     </void>
     <void property="unit">
+     <string>10+3 specimen/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Number per litre</string>
     </void>
    </object>
@@ -2562,6 +2964,9 @@
      <string>DIATOMS PPC FLUX</string>
     </void>
     <void property="unit">
+     <string>milligram carbon/(m2.day)</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per square metre per day</string>
     </void>
    </object>
@@ -2581,6 +2986,9 @@
      <string>1,3-1,4DIMETHYLBENZENE WATER</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Micrograms per litre</string>
     </void>
    </object>
@@ -2600,6 +3008,9 @@
      <string>DOC IN SEDIMENT PORE WATER</string>
     </void>
     <void property="unit">
+     <string>gram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per litre</string>
     </void>
    </object>
@@ -2619,6 +3030,9 @@
      <string>ORGANIC CARBON DOC IN SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>gram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per litre</string>
     </void>
    </object>
@@ -2638,6 +3052,9 @@
      <string>DISSOLVED ORGANIC PHOSPHORUS</string>
     </void>
     <void property="unit">
+     <string>millimole/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Micromoles per litre</string>
     </void>
    </object>
@@ -2657,6 +3074,9 @@
      <string>DISSOLVED OXYGEN</string>
     </void>
     <void property="unit">
+     <string>ml/l</string>
+    </void>
+    <void property="unitP06">
      <string>Millilitres per litre</string>
     </void>
    </object>
@@ -2676,6 +3096,9 @@
      <string>DISSOLVED OXYGEN</string>
     </void>
     <void property="unit">
+     <string>micromole/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Micromoles per kilogram</string>
     </void>
    </object>
@@ -2695,6 +3118,9 @@
      <string>DISSOLVED OXYGEN</string>
     </void>
     <void property="unit">
+     <string>millimole/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Micromoles per litre</string>
     </void>
    </object>
@@ -2714,6 +3140,9 @@
      <string>DEPTH BELOW BOTTOM-LOWER LIMIT</string>
     </void>
     <void property="unit">
+     <string>meter</string>
+    </void>
+    <void property="unitP06">
      <string>Metres</string>
     </void>
    </object>
@@ -2733,6 +3162,9 @@
      <string>DEPTH BELOW SEA FLOOR</string>
     </void>
     <void property="unit">
+     <string>meter</string>
+    </void>
+    <void property="unitP06">
      <string>Metres</string>
     </void>
    </object>
@@ -2752,6 +3184,9 @@
      <string>DURATION (DAYS)</string>
     </void>
     <void property="unit">
+     <string>ddd</string>
+    </void>
+    <void property="unitP06">
      <string>Days</string>
     </void>
    </object>
@@ -2771,6 +3206,9 @@
      <string>DRY BULB TEMPERATURE</string>
     </void>
     <void property="unit">
+     <string>Celsius degree</string>
+    </void>
+    <void property="unitP06">
      <string>Degrees Celsius</string>
     </void>
    </object>
@@ -2790,6 +3228,9 @@
      <string>NUMBER OF SW DIATOMS</string>
     </void>
     <void property="unit">
+     <string>10+3 cell/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Number per litre</string>
     </void>
    </object>
@@ -2809,6 +3250,9 @@
      <string>DIADINOXANTHINE</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per cubic metre</string>
     </void>
    </object>
@@ -2828,6 +3272,9 @@
      <string>Dy&lt;63um IN DRY WEIGHT SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -2847,6 +3294,9 @@
      <string>Dy IN DRY WEIGHT SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -2866,6 +3316,9 @@
      <string>TOTAL SUSP. PART. MATTER/ESTER</string>
     </void>
     <void property="unit">
+     <string>gram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per litre</string>
     </void>
    </object>
@@ -2885,6 +3338,9 @@
      <string>Er&lt;63um IN DRY WEIGHT SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -2904,6 +3360,9 @@
      <string>Er IN DRY WEIGHT SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -2923,6 +3382,9 @@
      <string>ETHYLBENZENE IN WATER BODY</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Micrograms per litre</string>
     </void>
    </object>
@@ -2942,6 +3404,9 @@
      <string>ELLAPSED TIME</string>
     </void>
     <void property="unit">
+     <string>decimal day</string>
+    </void>
+    <void property="unitP06">
      <string>Days</string>
     </void>
    </object>
@@ -2961,6 +3426,9 @@
      <string>PARTICULATE 234 TH ACT. ERROR</string>
     </void>
     <void property="unit">
+     <string>Bequerel/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Millibecquerels per litre</string>
     </void>
    </object>
@@ -2980,6 +3448,9 @@
      <string>DISSOLVED 234 TH ACT. ERROR</string>
     </void>
     <void property="unit">
+     <string>Bq/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Millibecquerels per litre</string>
     </void>
    </object>
@@ -2999,6 +3470,9 @@
      <string>BIS(ETHYLHEXYL)PHTHALATE WATER</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Micrograms per litre</string>
     </void>
    </object>
@@ -3018,6 +3492,9 @@
      <string>Eu&lt;63um IN DRY WEIGHT SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -3037,6 +3514,9 @@
      <string>Eu IN DRY WEIGHT SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -3056,6 +3536,9 @@
      <string>CURRENT EAST  STD. DEVIATION</string>
     </void>
     <void property="unit">
+     <string>meter/second</string>
+    </void>
+    <void property="unitP06">
      <string>Metres per second</string>
     </void>
    </object>
@@ -3075,6 +3558,9 @@
      <string>CURRENT EAST COMPONENT</string>
     </void>
     <void property="unit">
+     <string>meter/second</string>
+    </void>
+    <void property="unitP06">
      <string>Metres per second</string>
     </void>
    </object>
@@ -3094,6 +3580,9 @@
      <string>CO2 FUGACITY</string>
     </void>
     <void property="unit">
+     <string>microatmosphere</string>
+    </void>
+    <void property="unitP06">
      <string>Microatmospheres</string>
     </void>
    </object>
@@ -3113,6 +3602,9 @@
      <string>Fe&lt;63um IN DRY WEIGHT SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -3132,6 +3624,9 @@
      <string>Fe IN SUSPENDED MATTER</string>
     </void>
     <void property="unit">
+     <string>millimole/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Millimoles per kilogram</string>
     </void>
    </object>
@@ -3151,6 +3646,9 @@
      <string>FLAGELLATES PPC FLUX</string>
     </void>
     <void property="unit">
+     <string>milligram carbon/(m2.day)</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per square metre per day</string>
     </void>
    </object>
@@ -3170,6 +3668,9 @@
      <string>FLUORANTHENE IN SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -3189,6 +3690,9 @@
      <string>FLUORANTHENE IN WATER BODY</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Micrograms per litre</string>
     </void>
    </object>
@@ -3208,6 +3712,9 @@
      <string>FLUORESCENCE</string>
     </void>
     <void property="unit">
+     <string>volt</string>
+    </void>
+    <void property="unitP06">
      <string>Volts</string>
     </void>
    </object>
@@ -3227,6 +3734,9 @@
      <string>FLUORESCENCE</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per cubic metre</string>
     </void>
    </object>
@@ -3246,6 +3756,9 @@
      <string>FLUORESCENCE</string>
     </void>
     <void property="unit">
+     <string>FFU Fluoresceine Fluores. Unit</string>
+    </void>
+    <void property="unitP06">
      <string>Fluorescein Fluorescence Units</string>
     </void>
    </object>
@@ -3265,6 +3778,9 @@
      <string>FLUORESCENCE</string>
     </void>
     <void property="unit">
+     <string>relative unit</string>
+    </void>
+    <void property="unitP06">
      <string>Dimensionless</string>
     </void>
    </object>
@@ -3284,6 +3800,9 @@
      <string>FLUORENE IN SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -3303,6 +3822,9 @@
      <string>FLUORENE IN WATER BODY</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Micrograms per litre</string>
     </void>
    </object>
@@ -3322,6 +3844,9 @@
      <string>FUCOXANTHINE</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per cubic metre</string>
     </void>
    </object>
@@ -3341,6 +3866,9 @@
      <string>Ga&lt;63um IN DRY WEIGHT SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -3360,6 +3888,9 @@
      <string>Ga IN DRY WEIGHT SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -3379,6 +3910,9 @@
      <string>Gd&lt;63um IN DRY WEIGHT SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -3398,6 +3932,9 @@
      <string>GUST WIND DIRECTION</string>
     </void>
     <void property="unit">
+     <string>degree</string>
+    </void>
+    <void property="unitP06">
      <string>Degrees</string>
     </void>
    </object>
@@ -3417,6 +3954,9 @@
      <string>Gd IN DRY WEIGHT SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -3436,6 +3976,9 @@
      <string>CARBOHYDRATE</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per cubic metre</string>
     </void>
    </object>
@@ -3455,6 +3998,9 @@
      <string>TOTAL SUSP. PART. MATTER/GLASS</string>
     </void>
     <void property="unit">
+     <string>gram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per litre</string>
     </void>
    </object>
@@ -3474,6 +4020,9 @@
      <string>GUST WIND SPEED</string>
     </void>
     <void property="unit">
+     <string>meter/second</string>
+    </void>
+    <void property="unitP06">
      <string>Metres per second</string>
     </void>
    </object>
@@ -3493,6 +4042,9 @@
      <string>NUMBER OF SW GYRODINIUM</string>
     </void>
     <void property="unit">
+     <string>10+3 specimen/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Number per litre</string>
     </void>
    </object>
@@ -3512,6 +4064,9 @@
      <string>WATER CONTENT</string>
     </void>
     <void property="unit">
+     <string>%</string>
+    </void>
+    <void property="unitP06">
      <string>Percent</string>
     </void>
    </object>
@@ -3531,6 +4086,9 @@
      <string>NB OF HETEROTROPHIC BACTERIA</string>
     </void>
     <void property="unit">
+     <string>10+6 cell/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Number per millilitre</string>
     </void>
    </object>
@@ -3550,6 +4108,9 @@
      <string>DIRECTION REL. TRUE NORTH</string>
     </void>
     <void property="unit">
+     <string>degree</string>
+    </void>
+    <void property="unitP06">
      <string>Degrees</string>
     </void>
    </object>
@@ -3569,6 +4130,9 @@
      <string>HORIZONTAL CURRENT SPEED</string>
     </void>
     <void property="unit">
+     <string>meter/second</string>
+    </void>
+    <void property="unitP06">
      <string>Metres per second</string>
     </void>
    </object>
@@ -3588,6 +4152,9 @@
      <string>HORIZ. CURRENT SPEED STD DEV</string>
     </void>
     <void property="unit">
+     <string>meter/second</string>
+    </void>
+    <void property="unitP06">
      <string>Metres per second</string>
     </void>
    </object>
@@ -3607,6 +4174,9 @@
      <string>PLAT. HEADING REL. TRUE NORTH</string>
     </void>
     <void property="unit">
+     <string>degree</string>
+    </void>
+    <void property="unitP06">
      <string>Degrees</string>
     </void>
    </object>
@@ -3626,6 +4196,9 @@
      <string>HELIUM ISOTOPIC RATIO ERROR</string>
     </void>
     <void property="unit">
+     <string>%</string>
+    </void>
+    <void property="unitP06">
      <string>Percent</string>
     </void>
    </object>
@@ -3645,6 +4218,9 @@
      <string>HELIUM DEV. OF ISOTOPIC RATIO</string>
     </void>
     <void property="unit">
+     <string>%</string>
+    </void>
+    <void property="unitP06">
      <string>Percent</string>
     </void>
    </object>
@@ -3664,6 +4240,9 @@
      <string>DISSOLVED HELIUM ERROR</string>
     </void>
     <void property="unit">
+     <string>nanomole/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Nanomoles per kilogram</string>
     </void>
    </object>
@@ -3683,6 +4262,9 @@
      <string>DELTA HELIUM 3</string>
     </void>
     <void property="unit">
+     <string>%</string>
+    </void>
+    <void property="unitP06">
      <string>Percent</string>
     </void>
    </object>
@@ -3702,6 +4284,9 @@
      <string>DISSOLVED HELIUM</string>
     </void>
     <void property="unit">
+     <string>nanomole/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Nanomoles per kilogram</string>
     </void>
    </object>
@@ -3721,6 +4306,9 @@
      <string>Hf&lt;63um IN DRY WEIGHT SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -3740,6 +4328,9 @@
      <string>Hf IN DRY WEIGHT SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -3759,6 +4350,9 @@
      <string>19&apos;HEXANOYLOXYFUCOXANTHINE</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per cubic metre</string>
     </void>
    </object>
@@ -3778,6 +4372,9 @@
      <string>Hg IN DRY WEIGHT SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -3797,6 +4394,9 @@
      <string>Ho&lt;63um IN DRY WEIGHT SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -3816,6 +4416,9 @@
      <string>Ho IN DRY WEIGHT SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -3835,6 +4438,9 @@
      <string>HYDROGEN SULPHIDE (H2S)</string>
     </void>
     <void property="unit">
+     <string>millimole/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Micromoles per litre</string>
     </void>
    </object>
@@ -3854,6 +4460,9 @@
      <string>HEXACHLOROBIPHENYL128 SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -3873,6 +4482,9 @@
      <string>HEXACHLOROBIPHENYL138 SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -3892,6 +4504,9 @@
      <string>HEXACHLOROBIPHENYL153 SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -3911,6 +4526,9 @@
      <string>HEXACHLOROBIPHENYL156 SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -3930,6 +4548,9 @@
      <string>DIC DELTA 13C</string>
     </void>
     <void property="unit">
+     <string>per thousand</string>
+    </void>
+    <void property="unitP06">
      <string>Parts per thousand</string>
     </void>
    </object>
@@ -3949,6 +4570,9 @@
      <string>INDENO(1,2,3CD)PYRENE IN WATER</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Micrograms per litre</string>
     </void>
    </object>
@@ -3968,6 +4592,9 @@
      <string>INORGANIC CARBON IN SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/g</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per gram</string>
     </void>
    </object>
@@ -3987,6 +4614,9 @@
      <string>INDENO(1,2,3CD)PYRENE SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -4006,6 +4636,9 @@
      <string>IODINE</string>
     </void>
     <void property="unit">
+     <string>millimole/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Micromoles per litre</string>
     </void>
    </object>
@@ -4025,6 +4658,9 @@
      <string>TOTAL IRON IN SEDIMENT </string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -4044,6 +4680,9 @@
      <string>TOTAL IRON IN WATER BODY</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Micrograms per litre</string>
     </void>
    </object>
@@ -4063,6 +4702,9 @@
      <string>INORGANIC SUSPENDED MATTER</string>
     </void>
     <void property="unit">
+     <string>gram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per litre</string>
     </void>
    </object>
@@ -4082,6 +4724,9 @@
      <string>La&lt;63um IN DRY WEIGHT SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -4101,6 +4746,9 @@
      <string>LATITUDE</string>
     </void>
     <void property="unit">
+     <string>decimal degree</string>
+    </void>
+    <void property="unitP06">
      <string>Degrees</string>
     </void>
    </object>
@@ -4120,6 +4768,9 @@
      <string>LIGHT CARBON ABSORPTION</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per cubic metre</string>
     </void>
    </object>
@@ -4139,6 +4790,9 @@
      <string>LEAD IN BIOTA</string>
     </void>
     <void property="unit">
+     <string>microgram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Micrograms per kilogram</string>
     </void>
    </object>
@@ -4158,6 +4812,9 @@
      <string>LEAD IN SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -4177,6 +4834,9 @@
      <string>LEAD IN WATER BODY</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Micrograms per litre</string>
     </void>
    </object>
@@ -4196,6 +4856,9 @@
      <string>PAR ATTENUATION COEFFICIENT</string>
     </void>
     <void property="unit">
+     <string>m-1</string>
+    </void>
+    <void property="unitP06">
      <string>per metre</string>
     </void>
    </object>
@@ -4215,6 +4878,9 @@
      <string>LIGHT IRRADIANCE CORRECTED PAR</string>
     </void>
     <void property="unit">
+     <string>micromole photon/(m2.second)</string>
+    </void>
+    <void property="unitP06">
      <string>MicroEinsteins per square metre per second</string>
     </void>
    </object>
@@ -4234,6 +4900,9 @@
      <string>LIGHT IRRADIANCE SURFACE PAR</string>
     </void>
     <void property="unit">
+     <string>micromole photon/(m2.second)</string>
+    </void>
+    <void property="unitP06">
      <string>MicroEinsteins per square metre per second</string>
     </void>
    </object>
@@ -4253,6 +4922,9 @@
      <string>IMMERGED/SURF IRRADIANCE RATIO</string>
     </void>
     <void property="unit">
+     <string>%</string>
+    </void>
+    <void property="unitP06">
      <string>Percent</string>
     </void>
    </object>
@@ -4272,6 +4944,9 @@
      <string>LIGHT IRRADIANCE IMMERGED PAR</string>
     </void>
     <void property="unit">
+     <string>micromole photon/(m2.second)</string>
+    </void>
+    <void property="unitP06">
      <string>MicroEinsteins per square metre per second</string>
     </void>
    </object>
@@ -4291,6 +4966,9 @@
      <string>Li&lt;63um IN DRY WEIGHT SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -4310,6 +4988,9 @@
      <string>LONG-WAVE INCOMING RADIATION</string>
     </void>
     <void property="unit">
+     <string>watt/m2</string>
+    </void>
+    <void property="unitP06">
      <string>Watts per square metre</string>
     </void>
    </object>
@@ -4329,6 +5010,9 @@
      <string>LIPIDS IN THE WATER COLUMN</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per cubic metre</string>
     </void>
    </object>
@@ -4348,6 +5032,9 @@
      <string>SEDIMENT LIPIDS</string>
     </void>
     <void property="unit">
+     <string>microgram/g</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -4367,6 +5054,9 @@
      <string>Li IN DRY WEIGHT SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -4386,6 +5076,9 @@
      <string>LONGITUDE</string>
     </void>
     <void property="unit">
+     <string>decimal degree</string>
+    </void>
+    <void property="unitP06">
      <string>Degrees</string>
     </void>
    </object>
@@ -4405,6 +5098,9 @@
      <string>LIGHT SCATTERING</string>
     </void>
     <void property="unit">
+     <string>%</string>
+    </void>
+    <void property="unitP06">
      <string>Percent</string>
     </void>
    </object>
@@ -4424,6 +5120,9 @@
      <string>LITHOGENIC CONTENT</string>
     </void>
     <void property="unit">
+     <string>%</string>
+    </void>
+    <void property="unitP06">
      <string>Percent</string>
     </void>
    </object>
@@ -4443,6 +5142,9 @@
      <string>LITHOGENIC FRACTION FLUX</string>
     </void>
     <void property="unit">
+     <string>milligram/(m2.day)</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per square metre per day</string>
     </void>
    </object>
@@ -4462,6 +5164,9 @@
      <string>LEUCINE UPTAKE RATE</string>
     </void>
     <void property="unit">
+     <string>microgram carbon/(m3.hour)</string>
+    </void>
+    <void property="unitP06">
      <string>Micrograms per cubic metre per hour</string>
     </void>
    </object>
@@ -4481,6 +5186,9 @@
      <string>Lu&lt;63um IN DRY WEIGHT SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -4500,6 +5208,9 @@
      <string>Lu IN DRY WEIGHT SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -4519,6 +5230,9 @@
      <string>LUTEIN</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per cubic metre</string>
     </void>
    </object>
@@ -4538,6 +5252,9 @@
      <string>TOTAL PARTICULATE SILVER</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -4557,6 +5274,9 @@
      <string>DISSOLVED SILVER (Ag)</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per cubic metre</string>
     </void>
    </object>
@@ -4576,6 +5296,9 @@
      <string>AL FLUX IN SETTLING PARTICLES</string>
     </void>
     <void property="unit">
+     <string>milligram/(m2.day)</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per square metre per day</string>
     </void>
    </object>
@@ -4595,6 +5318,9 @@
      <string>Al IN SUSPENDED MATTER</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per cubic metre</string>
     </void>
    </object>
@@ -4614,6 +5340,9 @@
      <string>Al IN THE SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>%</string>
+    </void>
+    <void property="unitP06">
      <string>Percent</string>
     </void>
    </object>
@@ -4633,6 +5362,9 @@
      <string>TOTAL MANGANESE IN WATER BODY</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Micrograms per litre</string>
     </void>
    </object>
@@ -4652,6 +5384,9 @@
      <string>MAX. DEPTH BELOW SEA SURFACE</string>
     </void>
     <void property="unit">
+     <string>meter</string>
+    </void>
+    <void property="unitP06">
      <string>Metres</string>
     </void>
    </object>
@@ -4671,6 +5406,9 @@
      <string>Ba IN SUSPENDED MATTER</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per cubic metre</string>
     </void>
    </object>
@@ -4690,6 +5428,9 @@
      <string>Ba IN THE SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>ppm</string>
+    </void>
+    <void property="unitP06">
      <string>Parts per million</string>
     </void>
    </object>
@@ -4709,6 +5450,9 @@
      <string>Br IN THE SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>ppm</string>
+    </void>
+    <void property="unitP06">
      <string>Parts per million</string>
     </void>
    </object>
@@ -4728,6 +5472,9 @@
      <string>Ca IN SUSPENDED MATTER</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per cubic metre</string>
     </void>
    </object>
@@ -4747,6 +5494,9 @@
      <string>Ca IN THE SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>%</string>
+    </void>
+    <void property="unitP06">
      <string>Percent</string>
     </void>
    </object>
@@ -4766,6 +5516,9 @@
      <string>DISSOLVED CADMIUM (Cd)</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per cubic metre</string>
     </void>
    </object>
@@ -4785,6 +5538,9 @@
      <string>Ce IN THE SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>ppm</string>
+    </void>
+    <void property="unitP06">
      <string>Parts per million</string>
     </void>
    </object>
@@ -4804,6 +5560,9 @@
      <string>Cl IN SUSPENDED MATTER</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per cubic metre</string>
     </void>
    </object>
@@ -4823,6 +5582,9 @@
      <string>DISSOLVED COBALT (Co)</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per cubic metre</string>
     </void>
    </object>
@@ -4842,6 +5604,9 @@
      <string>Cr IN THE SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>ppm</string>
+    </void>
+    <void property="unitP06">
      <string>Parts per million</string>
     </void>
    </object>
@@ -4861,6 +5626,9 @@
      <string>DISSOLVED COPPER (Cu)</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per cubic metre</string>
     </void>
    </object>
@@ -4880,6 +5648,9 @@
      <string>CU FLUX IN SETTLING PARTICLES</string>
     </void>
     <void property="unit">
+     <string>microgram/(m2.day)</string>
+    </void>
+    <void property="unitP06">
      <string>Micrograms per square metre per day</string>
     </void>
    </object>
@@ -4899,6 +5670,9 @@
      <string>Cu IN THE SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>ppm</string>
+    </void>
+    <void property="unitP06">
      <string>Parts per million</string>
     </void>
    </object>
@@ -4918,6 +5692,9 @@
      <string>DISSOLVED COPPER (Cu)</string>
     </void>
     <void property="unit">
+     <string>micromole/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Nanomoles per litre</string>
     </void>
    </object>
@@ -4937,6 +5714,9 @@
      <string>TOTAL MERCURY IN BIOTA</string>
     </void>
     <void property="unit">
+     <string>microgram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Micrograms per kilogram</string>
     </void>
    </object>
@@ -4956,6 +5736,9 @@
      <string>TOTAL MERCURY IN WATER BODY</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Micrograms per litre</string>
     </void>
    </object>
@@ -4975,6 +5758,9 @@
      <string>METHYLBENZENE IN WATER BODY</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Micrograms per litre</string>
     </void>
    </object>
@@ -4994,6 +5780,9 @@
      <string>FE FLUX IN SETTLING PARTICLES</string>
     </void>
     <void property="unit">
+     <string>milligram/(m2.day)</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per square metre per day</string>
     </void>
    </object>
@@ -5013,6 +5802,9 @@
      <string>Fe IN SUSPENDED MATTER</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per cubic metre</string>
     </void>
    </object>
@@ -5032,6 +5824,9 @@
      <string>Fe IN THE SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>%</string>
+    </void>
+    <void property="unitP06">
      <string>Percent</string>
     </void>
    </object>
@@ -5051,6 +5846,9 @@
      <string>Mg&lt;63um IN DRY WEIGHT SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -5070,6 +5868,9 @@
      <string>I IN THE SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>ppm</string>
+    </void>
+    <void property="unitP06">
      <string>Parts per million</string>
     </void>
    </object>
@@ -5089,6 +5890,9 @@
      <string>MIN. DEPTH BELOW SEA SURFACE</string>
     </void>
     <void property="unit">
+     <string>meter</string>
+    </void>
+    <void property="unitP06">
      <string>Metres</string>
     </void>
    </object>
@@ -5108,6 +5912,9 @@
      <string>K IN SUSPENDED MATTER</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per cubic metre</string>
     </void>
    </object>
@@ -5127,6 +5934,9 @@
      <string>K IN THE SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>%</string>
+    </void>
+    <void property="unitP06">
      <string>Percent</string>
     </void>
    </object>
@@ -5146,6 +5956,9 @@
      <string>La IN THE SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>ppm</string>
+    </void>
+    <void property="unitP06">
      <string>Parts per million</string>
     </void>
    </object>
@@ -5165,6 +5978,9 @@
      <string>Mg IN SUSPENDED MATTER</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per cubic metre</string>
     </void>
    </object>
@@ -5184,6 +6000,9 @@
      <string>Mg IN THE SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>%</string>
+    </void>
+    <void property="unitP06">
      <string>Percent</string>
     </void>
    </object>
@@ -5203,6 +6022,9 @@
      <string>MN FLUX IN SETTLING PARTICLES</string>
     </void>
     <void property="unit">
+     <string>microgram/(m2.day)</string>
+    </void>
+    <void property="unitP06">
      <string>Micrograms per square metre per day</string>
     </void>
    </object>
@@ -5222,6 +6044,9 @@
      <string>Mn IN SUSPENDED MATTER</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per cubic metre</string>
     </void>
    </object>
@@ -5241,6 +6066,9 @@
      <string>Mn IN THE SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>%</string>
+    </void>
+    <void property="unitP06">
      <string>Percent</string>
     </void>
    </object>
@@ -5260,6 +6088,9 @@
      <string>Mo IN THE SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>ppm</string>
+    </void>
+    <void property="unitP06">
      <string>Parts per million</string>
     </void>
    </object>
@@ -5279,6 +6110,9 @@
      <string>Mn&lt;63um IN DRY WEIGHT SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -5298,6 +6132,9 @@
      <string>Na IN THE SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>%</string>
+    </void>
+    <void property="unitP06">
      <string>Percent</string>
     </void>
    </object>
@@ -5317,6 +6154,9 @@
      <string>Nb IN THE SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>ppm</string>
+    </void>
+    <void property="unitP06">
      <string>Parts per million</string>
     </void>
    </object>
@@ -5336,6 +6176,9 @@
      <string>Nd IN THE SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>ppm</string>
+    </void>
+    <void property="unitP06">
      <string>Parts per million</string>
     </void>
    </object>
@@ -5355,6 +6198,9 @@
      <string>DISSOLVED NICKEL (Ni)</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per cubic metre</string>
     </void>
    </object>
@@ -5374,6 +6220,9 @@
      <string>Ni IN THE SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>ppm</string>
+    </void>
+    <void property="unitP06">
      <string>Parts per million</string>
     </void>
    </object>
@@ -5393,6 +6242,9 @@
      <string>DISSOLVED NICKEL (Ni)</string>
     </void>
     <void property="unit">
+     <string>micromole/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Nanomoles per litre</string>
     </void>
    </object>
@@ -5412,6 +6264,9 @@
      <string>Mn IN SUSPENDED MATTER</string>
     </void>
     <void property="unit">
+     <string>millimole/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Millimoles per kilogram</string>
     </void>
    </object>
@@ -5431,6 +6286,9 @@
      <string>MONTH</string>
     </void>
     <void property="unit">
+     <string>mm</string>
+    </void>
+    <void property="unitP06">
      <string>Dimensionless</string>
     </void>
    </object>
@@ -5450,6 +6308,9 @@
      <string>Mo&lt;63um IN DRY WEIGHT SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -5469,6 +6330,9 @@
      <string>PB FLUX IN SETTLING PARTICLES</string>
     </void>
     <void property="unit">
+     <string>microgram/(m2.day)</string>
+    </void>
+    <void property="unitP06">
      <string>Micrograms per square metre per day</string>
     </void>
    </object>
@@ -5488,6 +6352,9 @@
      <string>Pb IN THE SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>ppm</string>
+    </void>
+    <void property="unitP06">
      <string>Parts per million</string>
     </void>
    </object>
@@ -5507,6 +6374,9 @@
      <string>DISSOLVED LEAD (Pb)</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per cubic metre</string>
     </void>
    </object>
@@ -5526,6 +6396,9 @@
      <string>P IN SUSPENDED MATTER</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per cubic metre</string>
     </void>
    </object>
@@ -5545,6 +6418,9 @@
      <string>P IN THE SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>%</string>
+    </void>
+    <void property="unitP06">
      <string>Percent</string>
     </void>
    </object>
@@ -5564,6 +6440,9 @@
      <string>Rb IN THE SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>ppm</string>
+    </void>
+    <void property="unitP06">
      <string>Parts per million</string>
     </void>
    </object>
@@ -5583,6 +6462,9 @@
      <string>MESOZOOPLANKTON ASH-FREE DRY W</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per cubic metre</string>
     </void>
    </object>
@@ -5602,6 +6484,9 @@
      <string>Sc IN THE SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>ppm</string>
+    </void>
+    <void property="unitP06">
      <string>Parts per million</string>
     </void>
    </object>
@@ -5621,6 +6506,9 @@
      <string>MEAN SPHERIC DIAM. OF PARTICLE</string>
     </void>
     <void property="unit">
+     <string>millimeter</string>
+    </void>
+    <void property="unitP06">
      <string>Millimetres</string>
     </void>
    </object>
@@ -5640,6 +6528,9 @@
      <string>Si IN SUSPENDED MATTER</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per cubic metre</string>
     </void>
    </object>
@@ -5659,6 +6550,9 @@
      <string>Si IN THE SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>%</string>
+    </void>
+    <void property="unitP06">
      <string>Percent</string>
     </void>
    </object>
@@ -5678,6 +6572,9 @@
      <string>MEAN SPHERIC DIAM. MEDIAN</string>
     </void>
     <void property="unit">
+     <string>millimeter</string>
+    </void>
+    <void property="unitP06">
      <string>Millimetres</string>
     </void>
    </object>
@@ -5697,6 +6594,9 @@
      <string>Sr IN THE SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>ppm</string>
+    </void>
+    <void property="unitP06">
      <string>Parts per million</string>
     </void>
    </object>
@@ -5716,6 +6616,9 @@
      <string>S IN SUSPENDED MATTER</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per cubic metre</string>
     </void>
    </object>
@@ -5735,6 +6638,9 @@
      <string>MESOZOOPLANCTON DRY WEIGHT</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per cubic metre</string>
     </void>
    </object>
@@ -5754,6 +6660,9 @@
      <string>Th IN THE SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>ppm</string>
+    </void>
+    <void property="unitP06">
      <string>Parts per million</string>
     </void>
    </object>
@@ -5773,6 +6682,9 @@
      <string>Ti IN SUSPENDED MATTER</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per cubic metre</string>
     </void>
    </object>
@@ -5792,6 +6704,9 @@
      <string>Ti IN THE SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>%</string>
+    </void>
+    <void property="unitP06">
      <string>Percent</string>
     </void>
    </object>
@@ -5811,6 +6726,9 @@
      <string>U IN THE SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>ppm</string>
+    </void>
+    <void property="unitP06">
      <string>Parts per million</string>
     </void>
    </object>
@@ -5830,6 +6748,9 @@
      <string>V IN THE SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>ppm</string>
+    </void>
+    <void property="unitP06">
      <string>Parts per million</string>
     </void>
    </object>
@@ -5849,6 +6770,9 @@
      <string>Y IN THE SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>ppm</string>
+    </void>
+    <void property="unitP06">
      <string>Parts per million</string>
     </void>
    </object>
@@ -5868,6 +6792,9 @@
      <string>ZN FLUX IN SETTLING PARTICLES</string>
     </void>
     <void property="unit">
+     <string>microgram/(m2.day)</string>
+    </void>
+    <void property="unitP06">
      <string>Micrograms per square metre per day</string>
     </void>
    </object>
@@ -5887,6 +6814,9 @@
      <string>Zn IN THE SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>ppm</string>
+    </void>
+    <void property="unitP06">
      <string>Parts per million</string>
     </void>
    </object>
@@ -5906,6 +6836,9 @@
      <string>DISSOLVED ZINC (Zn)</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per cubic metre</string>
     </void>
    </object>
@@ -5925,6 +6858,9 @@
      <string>Zr IN THE SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>ppm</string>
+    </void>
+    <void property="unitP06">
      <string>Parts per million</string>
     </void>
    </object>
@@ -5944,6 +6880,9 @@
      <string>DELTA 15N (15N/14N)</string>
     </void>
     <void property="unit">
+     <string>per thousand</string>
+    </void>
+    <void property="unitP06">
      <string>Parts per thousand</string>
     </void>
    </object>
@@ -5963,6 +6902,9 @@
      <string>N&lt;63um IN DRY WEIGHT SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -5982,6 +6924,9 @@
      <string>NAPHTHALENE IN SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -6001,6 +6946,9 @@
      <string>NAPHTHALENE IN WATER BODY</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Micrograms per litre</string>
     </void>
    </object>
@@ -6020,6 +6968,9 @@
      <string>AVERAGED DATA CYCLE NUMBER</string>
     </void>
     <void property="unit">
+     <string>number</string>
+    </void>
+    <void property="unitP06">
      <string>Dimensionless</string>
     </void>
    </object>
@@ -6039,6 +6990,9 @@
      <string>Nd&lt;63um IN DRY WEIGHT SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -6058,6 +7012,9 @@
      <string>DISSOLVED NEON ERROR</string>
     </void>
     <void property="unit">
+     <string>nanomole/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Nanomoles per kilogram</string>
     </void>
    </object>
@@ -6077,6 +7034,9 @@
      <string>DISSOLVED NEON</string>
     </void>
     <void property="unit">
+     <string>nanomole/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Nanomoles per kilogram</string>
     </void>
    </object>
@@ -6096,6 +7056,9 @@
      <string>NEOXANTHIN</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per cubic metre</string>
     </void>
    </object>
@@ -6115,6 +7078,9 @@
      <string>AUTOTROPHIC NANOFLAGELLATES</string>
     </void>
     <void property="unit">
+     <string>10+3 cell/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Number per litre</string>
     </void>
    </object>
@@ -6134,6 +7100,9 @@
      <string>NUMBER OF SW NANOFLAGELLATES</string>
     </void>
     <void property="unit">
+     <string>10+3 cell/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Number per litre</string>
     </void>
    </object>
@@ -6153,6 +7122,9 @@
      <string>HETEROTROPHIC NANOFLAGELLATES</string>
     </void>
     <void property="unit">
+     <string>10+3 cell/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Number per litre</string>
     </void>
    </object>
@@ -6172,6 +7144,9 @@
      <string>AMMONIUM REGENERATION</string>
     </void>
     <void property="unit">
+     <string>micromole nitrogen/(m3.day)</string>
+    </void>
+    <void property="unitP06">
      <string>Nanomoles per litre per day</string>
     </void>
    </object>
@@ -6191,6 +7166,9 @@
      <string>AMMONIUM UPTAKE</string>
     </void>
     <void property="unit">
+     <string>micromole nitrogen/(m3.day)</string>
+    </void>
+    <void property="unitP06">
      <string>Nanomoles per litre per day</string>
     </void>
    </object>
@@ -6210,6 +7188,9 @@
      <string>NICKEL IN SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -6229,6 +7210,9 @@
      <string>NICKEL IN WATER BODY</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Micrograms per litre</string>
     </void>
    </object>
@@ -6248,6 +7232,9 @@
      <string>Ni IN DRY WEIGHT SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -6267,6 +7254,9 @@
      <string>NITROGEN IN SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/g</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per gram</string>
     </void>
    </object>
@@ -6286,6 +7276,9 @@
      <string>NITROGEN UPTAKE (FIXATION)</string>
     </void>
     <void property="unit">
+     <string>micromole nitrogen/(m3.day)</string>
+    </void>
+    <void property="unitP06">
      <string>Nanomoles per litre per day</string>
     </void>
    </object>
@@ -6305,6 +7298,9 @@
      <string>NUMBER OF NANOEUKARYOTES</string>
     </void>
     <void property="unit">
+     <string>10+6 cell/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Number per millilitre</string>
     </void>
    </object>
@@ -6324,6 +7320,9 @@
      <string>DISSOLVED ORGANIC NITROGEN</string>
     </void>
     <void property="unit">
+     <string>micromole/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Micromoles per kilogram</string>
     </void>
    </object>
@@ -6343,6 +7342,9 @@
      <string>4-NONYLPHENOL IN WATER BODY</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Micrograms per litre</string>
     </void>
    </object>
@@ -6362,6 +7364,9 @@
      <string>DISSOLVED ORGANIC NITROGEN</string>
     </void>
     <void property="unit">
+     <string>millimole/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Micromoles per litre</string>
     </void>
    </object>
@@ -6381,6 +7386,9 @@
      <string>NITRIFICATION</string>
     </void>
     <void property="unit">
+     <string>micromole nitrogen/(m3.day)</string>
+    </void>
+    <void property="unitP06">
      <string>Nanomoles per litre per day</string>
     </void>
    </object>
@@ -6400,6 +7408,9 @@
      <string>NITRATE UPTAKE</string>
     </void>
     <void property="unit">
+     <string>micromole nitrogen/(m3.day)</string>
+    </void>
+    <void property="unitP06">
      <string>Nanomoles per litre per day</string>
     </void>
    </object>
@@ -6419,6 +7430,9 @@
      <string>NUMBER OF NANOPROKARYOTES</string>
     </void>
     <void property="unit">
+     <string>10+6 cell/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Number per millilitre</string>
     </void>
    </object>
@@ -6438,6 +7452,9 @@
      <string>CURRENT NORTH STD. DEVIATION</string>
     </void>
     <void property="unit">
+     <string>meter/second</string>
+    </void>
+    <void property="unitP06">
      <string>Metres per second</string>
     </void>
    </object>
@@ -6457,6 +7474,9 @@
      <string>CURRENT NORTH COMPONENT</string>
     </void>
     <void property="unit">
+     <string>meter/second</string>
+    </void>
+    <void property="unitP06">
      <string>Metres per second</string>
     </void>
    </object>
@@ -6476,6 +7496,9 @@
      <string>TOTAL PARTICULATE NITROGEN</string>
     </void>
     <void property="unit">
+     <string>micromole/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Micromoles per kilogram</string>
     </void>
    </object>
@@ -6495,6 +7518,9 @@
      <string>NITRATE IN SEDIMENT PORE WATER</string>
     </void>
     <void property="unit">
+     <string>millimole/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Micromoles per litre</string>
     </void>
    </object>
@@ -6514,6 +7540,9 @@
      <string>NITRATE (NO3-N) CONTENT</string>
     </void>
     <void property="unit">
+     <string>micromole/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Micromoles per kilogram</string>
     </void>
    </object>
@@ -6533,6 +7562,9 @@
      <string>NITRITE IN SEDIMENT PORE WATER</string>
     </void>
     <void property="unit">
+     <string>millimole/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Micromoles per litre</string>
     </void>
    </object>
@@ -6552,6 +7584,9 @@
      <string>NITRITE (NO2-N) CONTENT</string>
     </void>
     <void property="unit">
+     <string>micromole/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Micromoles per kilogram</string>
     </void>
    </object>
@@ -6571,6 +7606,9 @@
      <string>TOTAL NITROGEN (N) CONTENT</string>
     </void>
     <void property="unit">
+     <string>millimole/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Micromoles per litre</string>
     </void>
    </object>
@@ -6590,6 +7628,9 @@
      <string>NITRATE IN SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>millimole/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Millimoles per cubic metre</string>
     </void>
    </object>
@@ -6609,6 +7650,9 @@
      <string>NITRATE (NO3-N) CONTENT</string>
     </void>
     <void property="unit">
+     <string>millimole/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Micromoles per litre</string>
     </void>
    </object>
@@ -6628,6 +7672,9 @@
      <string>NITRITE (NO2-N) CONTENT</string>
     </void>
     <void property="unit">
+     <string>millimole/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Micromoles per litre</string>
     </void>
    </object>
@@ -6647,6 +7694,9 @@
      <string>NITRITE IN SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>millimole/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Millimoles per cubic metre</string>
     </void>
    </object>
@@ -6666,6 +7716,9 @@
      <string>NITRATE + NITRITE CONTENT</string>
     </void>
     <void property="unit">
+     <string>millimole/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Micromoles per litre</string>
     </void>
    </object>
@@ -6685,6 +7738,9 @@
      <string>NITRATE + NITRITE CONTENT </string>
     </void>
     <void property="unit">
+     <string>micromole/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Micromoles per kilogram</string>
     </void>
    </object>
@@ -6704,6 +7760,9 @@
      <string>NUMBER OF PARTICLES &gt; 0.7 UM</string>
     </void>
     <void property="unit">
+     <string>number/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Number per cubic metre</string>
     </void>
    </object>
@@ -6723,6 +7782,9 @@
      <string>NUMBER OF PARTICLES 3-80UM</string>
     </void>
     <void property="unit">
+     <string>number/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Number per cubic metre</string>
     </void>
    </object>
@@ -6742,6 +7804,9 @@
      <string>NUMBER OF PARTICLES &gt;=480UM</string>
     </void>
     <void property="unit">
+     <string>number/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Number per cubic metre</string>
     </void>
    </object>
@@ -6761,6 +7826,9 @@
      <string>ORGANIC CARBON IN SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/g</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per gram</string>
     </void>
    </object>
@@ -6782,6 +7850,9 @@
     <void property="unit">
      <string>Dimensionless</string>
     </void>
+    <void property="unitP06">
+     <string>Dimensionless</string>
+    </void>
    </object>
   </void>
   <void method="add">
@@ -6799,6 +7870,9 @@
      <string>STD DEVIATION ORGANIC CARBON</string>
     </void>
     <void property="unit">
+     <string>milligram/g</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per gram</string>
     </void>
    </object>
@@ -6818,6 +7892,9 @@
      <string>PART. ORGANIC MATTER FLUX</string>
     </void>
     <void property="unit">
+     <string>milligram/(m2.day)</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per square metre per day</string>
     </void>
    </object>
@@ -6837,6 +7914,9 @@
      <string>ORGANIC NITROGEN IN SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/g</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per gram</string>
     </void>
    </object>
@@ -6856,6 +7936,9 @@
      <string>STD DEVIATION ORGANIC NITROGEN</string>
     </void>
     <void property="unit">
+     <string>milligram/g</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per gram</string>
     </void>
    </object>
@@ -6875,6 +7958,9 @@
      <string>OPAL CONTENT</string>
     </void>
     <void property="unit">
+     <string>%</string>
+    </void>
+    <void property="unitP06">
      <string>Percent</string>
     </void>
    </object>
@@ -6894,6 +7980,9 @@
      <string>OXYGEN SATURATION</string>
     </void>
     <void property="unit">
+     <string>%</string>
+    </void>
+    <void property="unitP06">
      <string>Percent</string>
     </void>
    </object>
@@ -6913,6 +8002,9 @@
      <string>ORGANIC SUSPENDED MATTER</string>
     </void>
     <void property="unit">
+     <string>gram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per litre</string>
     </void>
    </object>
@@ -6932,6 +8024,9 @@
      <string>ISOTOPIC RATIO O18/O16</string>
     </void>
     <void property="unit">
+     <string>per thousand</string>
+    </void>
+    <void property="unitP06">
      <string>Parts per thousand</string>
     </void>
    </object>
@@ -6951,6 +8046,9 @@
      <string>Pb&gt;0.4/0.45um IN WATER BODY</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Micrograms per litre</string>
     </void>
    </object>
@@ -6970,6 +8068,9 @@
      <string>Pb&lt;0.4/0.45um IN WATER BODY</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Micrograms per litre</string>
     </void>
    </object>
@@ -6989,6 +8090,9 @@
      <string>Pb&lt;63um IN DRY WEIGHT SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -7008,6 +8112,9 @@
      <string>PARTICULATE ORGANIC CARBON/POC</string>
     </void>
     <void property="unit">
+     <string>millimole/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Micromoles per litre</string>
     </void>
    </object>
@@ -7027,6 +8134,9 @@
      <string>NUMBER OF PICOEUKARYOTES</string>
     </void>
     <void property="unit">
+     <string>10+6 cell/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Number per millilitre</string>
     </void>
    </object>
@@ -7046,6 +8156,9 @@
      <string>NUMBER OF SW PICOEUCARYOTES</string>
     </void>
     <void property="unit">
+     <string>10+6 cell/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Number per millilitre</string>
     </void>
    </object>
@@ -7065,6 +8178,9 @@
      <string>CO2 PART. PRES IN DRY/WET GAS</string>
     </void>
     <void property="unit">
+     <string>microatmosphere</string>
+    </void>
+    <void property="unitP06">
      <string>Microatmospheres</string>
     </void>
    </object>
@@ -7084,6 +8200,9 @@
      <string>CARBON DIOXIDE IN WATER</string>
     </void>
     <void property="unit">
+     <string>microatmosphere</string>
+    </void>
+    <void property="unitP06">
      <string>Microatmospheres</string>
     </void>
    </object>
@@ -7103,6 +8222,9 @@
      <string>PENTACHLOROPHENOL IN WATER</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Micrograms per litre</string>
     </void>
    </object>
@@ -7122,6 +8244,9 @@
      <string>PENTACHLOROBIPHENYL IN WATER</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Micrograms per litre</string>
     </void>
    </object>
@@ -7141,6 +8266,9 @@
      <string>PERIDININE</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per cubic metre</string>
     </void>
    </object>
@@ -7160,6 +8288,9 @@
      <string>POTENTIAL EVAPOTRANSPIRATION</string>
     </void>
     <void property="unit">
+     <string>millimeter/day</string>
+    </void>
+    <void property="unitP06">
      <string>Millimetres per day</string>
     </void>
    </object>
@@ -7179,6 +8310,9 @@
      <string>TOTAL PETROLEUM IN WATER BODY</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Micrograms per litre</string>
     </void>
    </object>
@@ -7198,6 +8332,9 @@
      <string>PHAEOPIGMENTS IN SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -7217,6 +8354,9 @@
      <string>PHYTOPLANKTON ABUNDANCE</string>
     </void>
     <void property="unit">
+     <string>10+3 cell/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Number per litre</string>
     </void>
    </object>
@@ -7236,6 +8376,9 @@
      <string>PHAEOPHYTIN &gt;2 MICRON</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per cubic metre</string>
     </void>
    </object>
@@ -7255,6 +8398,9 @@
      <string>PHAEOPHYTIN &gt;20 MICRON</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per cubic metre</string>
     </void>
    </object>
@@ -7274,6 +8420,9 @@
      <string>PHAEOPHYTIN &gt;10 MICRON</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per cubic metre</string>
     </void>
    </object>
@@ -7293,6 +8442,9 @@
      <string>PHAEOPHYTIN &gt;3 &lt;20 MICRON</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per cubic metre</string>
     </void>
    </object>
@@ -7312,6 +8464,9 @@
      <string>PHAEOPHYTIN &lt;3 MICRON</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per cubic metre</string>
     </void>
    </object>
@@ -7331,6 +8486,9 @@
      <string>PHEOPHYTIN-A</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per cubic metre</string>
     </void>
    </object>
@@ -7350,6 +8508,9 @@
      <string>PHEOPHYTIN-B</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per cubic metre</string>
     </void>
    </object>
@@ -7369,6 +8530,9 @@
      <string>PHEOPHYTIN-C</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per cubic metre</string>
     </void>
    </object>
@@ -7388,6 +8552,9 @@
      <string>PHENANTHRENE IN SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -7407,6 +8574,9 @@
      <string>PHENANTHRENE IN WATER BODY</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Micrograms per litre</string>
     </void>
    </object>
@@ -7426,6 +8596,9 @@
      <string>SEDIMENT PHENOLS</string>
     </void>
     <void property="unit">
+     <string>microgram/g</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -7445,6 +8618,9 @@
      <string>PHOSPHATE IN SEDIMT PORE WATER</string>
     </void>
     <void property="unit">
+     <string>millimole/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Micromoles per litre</string>
     </void>
    </object>
@@ -7464,6 +8640,9 @@
      <string>PHOSPHATE (PO4-P) CONTENT</string>
     </void>
     <void property="unit">
+     <string>millimole/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Micromoles per litre</string>
     </void>
    </object>
@@ -7483,6 +8662,9 @@
      <string>PHOSPHATE (PO4-P) CONTENT</string>
     </void>
     <void property="unit">
+     <string>micromole/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Micromoles per kilogram</string>
     </void>
    </object>
@@ -7502,6 +8684,9 @@
      <string>PH</string>
     </void>
     <void property="unit">
+     <string>pH unit</string>
+    </void>
+    <void property="unitP06">
      <string>pH units</string>
     </void>
    </object>
@@ -7521,6 +8706,9 @@
      <string>PHOSPHORUS IN SUSP. MATT.</string>
     </void>
     <void property="unit">
+     <string>millimole/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Millimoles per kilogram</string>
     </void>
    </object>
@@ -7540,6 +8728,9 @@
      <string>PHOSPHATE IN SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>millimole/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Millimoles per cubic metre</string>
     </void>
    </object>
@@ -7559,6 +8750,9 @@
      <string>PHAEOPIGMENTS VERTICAL FLUX</string>
     </void>
     <void property="unit">
+     <string>milligram/(m2.day)</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per square metre per day</string>
     </void>
    </object>
@@ -7578,6 +8772,9 @@
      <string>TOTAL PHEOPHYTINE</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per cubic metre</string>
     </void>
    </object>
@@ -7597,6 +8794,9 @@
      <string>PARTICULATE ORGANIC NITROGEN</string>
     </void>
     <void property="unit">
+     <string>millimole/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Micromoles per litre</string>
     </void>
    </object>
@@ -7616,6 +8816,9 @@
      <string>PORG&lt;63um in DRY W. SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -7635,6 +8838,9 @@
      <string>PART. ORGANIC CARBON FLUX</string>
     </void>
     <void property="unit">
+     <string>milligram/(m2.day)</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per square metre per day</string>
     </void>
    </object>
@@ -7654,6 +8860,9 @@
      <string>PARTICULATE ORGANIC CARBON/POC</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per cubic metre</string>
     </void>
    </object>
@@ -7673,6 +8882,9 @@
      <string>DISSOLVED ORGANIC PHOSPHORUS</string>
     </void>
     <void property="unit">
+     <string>micromole/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Micromoles per kilogram</string>
     </void>
    </object>
@@ -7692,6 +8904,9 @@
      <string>PARTICULATE ORGANIC NITROGEN</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per cubic metre</string>
     </void>
    </object>
@@ -7711,6 +8926,9 @@
      <string>PART. ORGANIC PHOSPHORUS (P)</string>
     </void>
     <void property="unit">
+     <string>millimole/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Micromoles per litre</string>
     </void>
    </object>
@@ -7730,6 +8948,9 @@
      <string>NUMBER OF PICOPROKARYOTES</string>
     </void>
     <void property="unit">
+     <string>10+6 cell/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Number per millilitre</string>
     </void>
    </object>
@@ -7749,6 +8970,9 @@
      <string>Pr&lt;63um IN DRY WEIGHT SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -7770,6 +8994,9 @@
     <void property="unit">
      <string>Dimensionless</string>
     </void>
+    <void property="unitP06">
+     <string>Dimensionless</string>
+    </void>
    </object>
   </void>
   <void method="add">
@@ -7787,6 +9014,9 @@
      <string>NUMBER OF PROCHLOROCOCCUS</string>
     </void>
     <void property="unit">
+     <string>10+6 cell/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Number per millilitre</string>
     </void>
    </object>
@@ -7806,6 +9036,9 @@
      <string>NUMBER OF SW PROCHLOROCOCCUS</string>
     </void>
     <void property="unit">
+     <string>10+6 cell/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Number per millilitre</string>
     </void>
    </object>
@@ -7825,6 +9058,9 @@
      <string>SEA PRESSURE sea surface=0</string>
     </void>
     <void property="unit">
+     <string>decibar=10000 pascals</string>
+    </void>
+    <void property="unitP06">
      <string>Decibars</string>
     </void>
    </object>
@@ -7844,6 +9080,9 @@
      <string>PROTEIN</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per cubic metre</string>
     </void>
    </object>
@@ -7863,6 +9102,9 @@
      <string>PRECIPITATION RATE</string>
     </void>
     <void property="unit">
+     <string>millimeter/day</string>
+    </void>
+    <void property="unitP06">
      <string>Millimetres per day</string>
     </void>
    </object>
@@ -7882,6 +9124,9 @@
      <string>PRECIPITATION RATE</string>
     </void>
     <void property="unit">
+     <string>millimeter/hour</string>
+    </void>
+    <void property="unitP06">
      <string>Millimetres per hour</string>
     </void>
    </object>
@@ -7901,6 +9146,9 @@
      <string>Pr IN DRY WEIGHT SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -7920,6 +9168,9 @@
      <string>PRACTICAL SALINITY</string>
     </void>
     <void property="unit">
+     <string>P.S.U.</string>
+    </void>
+    <void property="unitP06">
      <string>Dimensionless</string>
     </void>
    </object>
@@ -7939,6 +9190,9 @@
      <string>TOTAL PARTICULATE PHOSPHORUS</string>
     </void>
     <void property="unit">
+     <string>micromole/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Micromoles per kilogram</string>
     </void>
    </object>
@@ -7958,6 +9212,9 @@
      <string>PTOT&lt;63um in DRY W. SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -7977,6 +9234,9 @@
      <string>PENTACHLOROBIPHENYL101 IN SED.</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -7996,6 +9256,9 @@
      <string>PENTACHLOROBIPHENYL118 IN SED.</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -8015,6 +9278,9 @@
      <string>TOTAL PARTICULATE NITROGEN</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per cubic metre</string>
     </void>
    </object>
@@ -8034,6 +9300,9 @@
      <string>TOTAL PARTICULATE PHOSPHORUS</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per cubic metre</string>
     </void>
    </object>
@@ -8053,6 +9322,9 @@
      <string>PROTOZOA PPC FLUX</string>
     </void>
     <void property="unit">
+     <string>milligram carbon/(m2.day)</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per square metre per day</string>
     </void>
    </object>
@@ -8072,6 +9344,9 @@
      <string>PRASINOXANTHINE</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per cubic metre</string>
     </void>
    </object>
@@ -8091,6 +9366,9 @@
      <string>PYRENE IN SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -8110,6 +9388,9 @@
      <string>PYRENE IN WATER BODY</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Micrograms per litre</string>
     </void>
    </object>
@@ -8129,6 +9410,9 @@
      <string>Rb&lt;63um IN DRY WEIGHT SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -8148,6 +9432,9 @@
      <string>INCIDENT RADIATION</string>
     </void>
     <void property="unit">
+     <string>watt/m2</string>
+    </void>
+    <void property="unitP06">
      <string>Watts per square metre</string>
     </void>
    </object>
@@ -8167,6 +9454,9 @@
      <string>REDOX POTENTIAL</string>
     </void>
     <void property="unit">
+     <string>millivolt</string>
+    </void>
+    <void property="unitP06">
      <string>Millivolts</string>
     </void>
    </object>
@@ -8186,6 +9476,9 @@
      <string>RELATIVE HUMIDITY</string>
     </void>
     <void property="unit">
+     <string>%</string>
+    </void>
+    <void property="unitP06">
      <string>Percent</string>
     </void>
    </object>
@@ -8205,6 +9498,9 @@
      <string>RIVER FLOW RATE</string>
     </void>
     <void property="unit">
+     <string>m3/second</string>
+    </void>
+    <void property="unitP06">
      <string>Cubic metres per second</string>
     </void>
    </object>
@@ -8224,6 +9520,9 @@
      <string>SALINITY ACCURACY</string>
     </void>
     <void property="unit">
+     <string>.</string>
+    </void>
+    <void property="unitP06">
      <string>Dimensionless</string>
     </void>
    </object>
@@ -8243,6 +9542,9 @@
      <string>SIGNAL RETURN AMPLITUDE</string>
     </void>
     <void property="unit">
+     <string>decibel</string>
+    </void>
+    <void property="unitP06">
      <string>Decibels</string>
     </void>
    </object>
@@ -8262,6 +9564,9 @@
      <string>SAND IN THE SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>%</string>
+    </void>
+    <void property="unitP06">
      <string>Percent</string>
     </void>
    </object>
@@ -8281,6 +9586,9 @@
      <string>Sb&lt;63um IN DRY WEIGHT SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -8300,6 +9608,9 @@
      <string>Sb IN DRY WEIGHT SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -8319,6 +9630,9 @@
      <string>Sc&lt;63um IN DRY WEIGHT SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -8338,6 +9652,9 @@
      <string>SECCHI DISK DEPTH</string>
     </void>
     <void property="unit">
+     <string>meter</string>
+    </void>
+    <void property="unitP06">
      <string>Metres</string>
     </void>
    </object>
@@ -8357,6 +9674,9 @@
      <string>Si&lt;63um IN DRY WEIGHT SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -8376,6 +9696,9 @@
      <string>SILT IN THE SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>%</string>
+    </void>
+    <void property="unitP06">
      <string>Percent</string>
     </void>
    </object>
@@ -8395,6 +9718,9 @@
      <string>PART. BIOGENIC Si FLUX</string>
     </void>
     <void property="unit">
+     <string>milligram/(m2.day)</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per square metre per day</string>
     </void>
    </object>
@@ -8414,6 +9740,9 @@
      <string>SEDIMENT BIOGENIC SiO2</string>
     </void>
     <void property="unit">
+     <string>%</string>
+    </void>
+    <void property="unitP06">
      <string>Percent</string>
     </void>
    </object>
@@ -8433,6 +9762,9 @@
      <string>SILICATE IN SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>millimole/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Millimoles per cubic metre</string>
     </void>
    </object>
@@ -8452,6 +9784,9 @@
      <string>SILICATE (SIO4-SI) CONTENT</string>
     </void>
     <void property="unit">
+     <string>millimole/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Micromoles per litre</string>
     </void>
    </object>
@@ -8471,6 +9806,9 @@
      <string>PARTICULATE ORGANIC SILICA(SI)</string>
     </void>
     <void property="unit">
+     <string>millimole/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Micromoles per litre</string>
     </void>
    </object>
@@ -8490,6 +9828,9 @@
      <string>SILICATE (SIO4-SI) CONTENT</string>
     </void>
     <void property="unit">
+     <string>micromole/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Micromoles per kilogram</string>
     </void>
    </object>
@@ -8509,6 +9850,9 @@
      <string>OBSERVED SEA LEVEL</string>
     </void>
     <void property="unit">
+     <string>meter</string>
+    </void>
+    <void property="unitP06">
      <string>Metres</string>
     </void>
    </object>
@@ -8528,6 +9872,9 @@
      <string>RESIDUAL(OBS - PRED SEA LEVEL)</string>
     </void>
     <void property="unit">
+     <string>meter</string>
+    </void>
+    <void property="unitP06">
      <string>Metres</string>
     </void>
    </object>
@@ -8547,6 +9894,9 @@
      <string>Sm&lt;63um IN DRY WEIGHT SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -8566,6 +9916,9 @@
      <string>Sm IN DRY WEIGHT SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -8585,6 +9938,9 @@
      <string>Sn&lt;63um IN DRY WEIGHT SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -8604,6 +9960,9 @@
      <string>NUMBER OF SYNECHOCOCCUS</string>
     </void>
     <void property="unit">
+     <string>10+6 cell/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Number per millilitre</string>
     </void>
    </object>
@@ -8623,6 +9982,9 @@
      <string>NUMBER OF SW SYNECHOCOCCUS</string>
     </void>
     <void property="unit">
+     <string>10+6 cell/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Number per millilitre</string>
     </void>
    </object>
@@ -8642,6 +10004,9 @@
      <string>Sn IN DRY WEIGHT SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -8661,6 +10026,9 @@
      <string>PORE WATER SULFATE</string>
     </void>
     <void property="unit">
+     <string>millimole/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Micromoles per litre</string>
     </void>
    </object>
@@ -8680,6 +10048,9 @@
      <string>Sr&lt;63um IN DRY WEIGHT SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -8699,6 +10070,9 @@
      <string>SALINITY (PRE-1978 DEFN)</string>
     </void>
     <void property="unit">
+     <string>P.S.U.</string>
+    </void>
+    <void property="unitP06">
      <string>Parts per thousand</string>
     </void>
    </object>
@@ -8718,6 +10092,9 @@
      <string>S IN DRY WEIGHT SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -8737,6 +10114,9 @@
      <string>STYRENE IN WATER BODY</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Micrograms per litre</string>
     </void>
    </object>
@@ -8756,6 +10136,9 @@
      <string>SOUND VELOCITY</string>
     </void>
     <void property="unit">
+     <string>meter/second</string>
+    </void>
+    <void property="unitP06">
      <string>Metres per second</string>
     </void>
    </object>
@@ -8775,6 +10158,9 @@
      <string>SWELL DIRECTION  REL TRUE N.</string>
     </void>
     <void property="unit">
+     <string>degree</string>
+    </void>
+    <void property="unitP06">
      <string>Degrees</string>
     </void>
    </object>
@@ -8794,6 +10180,9 @@
      <string>SWELL HEIGHT</string>
     </void>
     <void property="unit">
+     <string>meter</string>
+    </void>
+    <void property="unitP06">
      <string>Metres</string>
     </void>
    </object>
@@ -8813,6 +10202,9 @@
      <string>SWELL PERIOD</string>
     </void>
     <void property="unit">
+     <string>second</string>
+    </void>
+    <void property="unitP06">
      <string>Seconds</string>
     </void>
    </object>
@@ -8832,6 +10224,9 @@
      <string>BLUE LIGHT TRANSMISSION 25CM </string>
     </void>
     <void property="unit">
+     <string>%</string>
+    </void>
+    <void property="unitP06">
      <string>Percent</string>
     </void>
    </object>
@@ -8851,6 +10246,9 @@
      <string>Tb&lt;63um IN DRY WEIGHT SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -8870,6 +10268,9 @@
      <string>Tb IN DRY WEIGHT SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -8889,6 +10290,9 @@
      <string>PART. TOTAL CARBON FLUX</string>
     </void>
     <void property="unit">
+     <string>milligram/(m2.day)</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per square metre per day</string>
     </void>
    </object>
@@ -8908,6 +10312,9 @@
      <string>SEDIMENT TOTAL CARBON</string>
     </void>
     <void property="unit">
+     <string>%</string>
+    </void>
+    <void property="unitP06">
      <string>Percent</string>
     </void>
    </object>
@@ -8927,6 +10334,9 @@
      <string>STD DEVIATION TOTAL CARBON</string>
     </void>
     <void property="unit">
+     <string>milligram/g</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per gram</string>
     </void>
    </object>
@@ -8946,6 +10356,9 @@
      <string>TOTAL DISSOLVED PHOSPHORUS</string>
     </void>
     <void property="unit">
+     <string>millimole/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Micromoles per litre</string>
     </void>
    </object>
@@ -8965,6 +10378,9 @@
      <string>SEA TEMPERATURE</string>
     </void>
     <void property="unit">
+     <string>Celsius degree</string>
+    </void>
+    <void property="unitP06">
      <string>Degrees Celsius</string>
     </void>
    </object>
@@ -8984,6 +10400,9 @@
      <string>SEA TEMPERATURE</string>
     </void>
     <void property="unit">
+     <string>Celsius degree</string>
+    </void>
+    <void property="unitP06">
      <string>Degrees Celsius</string>
     </void>
    </object>
@@ -9003,6 +10422,9 @@
      <string>SEA TEMPERATURE</string>
     </void>
     <void property="unit">
+     <string>Celsius degree</string>
+    </void>
+    <void property="unitP06">
      <string>Degrees Celsius</string>
     </void>
    </object>
@@ -9022,6 +10444,9 @@
      <string>SEA TEMPERATURE</string>
     </void>
     <void property="unit">
+     <string>Celsius degree</string>
+    </void>
+    <void property="unitP06">
      <string>Degrees Celsius</string>
     </void>
    </object>
@@ -9041,6 +10466,9 @@
      <string>SEA TEMPERATURE</string>
     </void>
     <void property="unit">
+     <string>Celsius degree</string>
+    </void>
+    <void property="unitP06">
      <string>Degrees Celsius</string>
     </void>
    </object>
@@ -9060,6 +10488,9 @@
      <string>SEA TEMPERATURE</string>
     </void>
     <void property="unit">
+     <string>Celsius degree</string>
+    </void>
+    <void property="unitP06">
      <string>Degrees Celsius</string>
     </void>
    </object>
@@ -9079,6 +10510,9 @@
      <string>SEA TEMPERATURE</string>
     </void>
     <void property="unit">
+     <string>Celsius degree</string>
+    </void>
+    <void property="unitP06">
      <string>Degrees Celsius</string>
     </void>
    </object>
@@ -9098,6 +10532,9 @@
      <string>SEA TEMPERATURE</string>
     </void>
     <void property="unit">
+     <string>Celsius degree</string>
+    </void>
+    <void property="unitP06">
      <string>Degrees Celsius</string>
     </void>
    </object>
@@ -9117,6 +10554,9 @@
      <string>SEA TEMPERATURE</string>
     </void>
     <void property="unit">
+     <string>Celsius degree</string>
+    </void>
+    <void property="unitP06">
      <string>Degrees Celsius</string>
     </void>
    </object>
@@ -9136,6 +10576,9 @@
      <string>SEA TEMPERATURE</string>
     </void>
     <void property="unit">
+     <string>Celsius degree</string>
+    </void>
+    <void property="unitP06">
      <string>Degrees Celsius</string>
     </void>
    </object>
@@ -9155,6 +10598,9 @@
      <string>SEA TEMPERATURE</string>
     </void>
     <void property="unit">
+     <string>Celsius degree</string>
+    </void>
+    <void property="unitP06">
      <string>Degrees Celsius</string>
     </void>
    </object>
@@ -9174,6 +10620,9 @@
      <string>SEA TEMPERATURE</string>
     </void>
     <void property="unit">
+     <string>Celsius degree</string>
+    </void>
+    <void property="unitP06">
      <string>Degrees Celsius</string>
     </void>
    </object>
@@ -9193,6 +10642,9 @@
      <string>SEA TEMPERATURE</string>
     </void>
     <void property="unit">
+     <string>Celsius degree</string>
+    </void>
+    <void property="unitP06">
      <string>Degrees Celsius</string>
     </void>
    </object>
@@ -9212,6 +10664,9 @@
      <string>TETRACHLOROBIPHENYL SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -9231,6 +10686,9 @@
      <string>TETRACHLOROBIPHENYL IN WATER</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Micrograms per litre</string>
     </void>
    </object>
@@ -9250,6 +10708,9 @@
      <string>PARTICULATE 234TH ACTIVTY</string>
     </void>
     <void property="unit">
+     <string>Bq/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Millibecquerels per litre</string>
     </void>
    </object>
@@ -9269,6 +10730,9 @@
      <string>DISSOLVED 234TH</string>
     </void>
     <void property="unit">
+     <string>Bq/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Millibecquerels per litre</string>
     </void>
    </object>
@@ -9288,6 +10752,9 @@
      <string>TOTAL INORGANIC CARBON SEDIMEN</string>
     </void>
     <void property="unit">
+     <string>gram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per litre</string>
     </void>
    </object>
@@ -9307,6 +10774,9 @@
      <string>TOTAL INORGANIC CARBON</string>
     </void>
     <void property="unit">
+     <string>micromole/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Micromoles per kilogram</string>
     </void>
    </object>
@@ -9326,6 +10796,9 @@
      <string>TIME WITHIN DAY</string>
     </void>
     <void property="unit">
+     <string>hhmmss</string>
+    </void>
+    <void property="unitP06">
      <string>Hours Minutes Seconds</string>
     </void>
    </object>
@@ -9345,6 +10818,9 @@
      <string>DISSOLVED INORGANIC NITROGEN</string>
     </void>
     <void property="unit">
+     <string>millimole/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Micromoles per litre</string>
     </void>
    </object>
@@ -9364,6 +10840,9 @@
      <string>Tl&lt;63um IN DRY WEIGHT SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -9383,6 +10862,9 @@
      <string>Tl IN DRY WEIGHT SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -9402,6 +10884,9 @@
      <string>Tm&lt;63um IN DRY WEIGHT SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -9421,6 +10906,9 @@
      <string>Tm IN DRY WEIGHT SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -9440,6 +10928,9 @@
      <string>TOTAL NITROGEN IN SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>millimole/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Millimoles per cubic metre</string>
     </void>
    </object>
@@ -9459,6 +10950,9 @@
      <string>PART. TOTAL NITROGEN FLUX</string>
     </void>
     <void property="unit">
+     <string>milligram/(m2.day)</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per square metre per day</string>
     </void>
    </object>
@@ -9478,6 +10972,9 @@
      <string>SEDIMENT TOTAL NITROGEN</string>
     </void>
     <void property="unit">
+     <string>%</string>
+    </void>
+    <void property="unitP06">
      <string>Percent</string>
     </void>
    </object>
@@ -9497,6 +10994,9 @@
      <string>SEDIMENT TOTAL ORGANIC CARBON</string>
     </void>
     <void property="unit">
+     <string>%</string>
+    </void>
+    <void property="unitP06">
      <string>Percent</string>
     </void>
    </object>
@@ -9516,6 +11016,9 @@
      <string>TOTAL ORGANIC CARBON</string>
     </void>
     <void property="unit">
+     <string>millimole/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Micromoles per litre</string>
     </void>
    </object>
@@ -9535,6 +11038,9 @@
      <string>ORGANIC MATTER CONTENT</string>
     </void>
     <void property="unit">
+     <string>%</string>
+    </void>
+    <void property="unitP06">
      <string>Percent</string>
     </void>
    </object>
@@ -9554,6 +11060,9 @@
      <string>TOTAL CARBON IN SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/g</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per gram</string>
     </void>
    </object>
@@ -9573,6 +11082,9 @@
      <string>DISS. TRIPHOSPHATE ADENOSINE</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per cubic metre</string>
     </void>
    </object>
@@ -9592,6 +11104,9 @@
      <string>TOTAL PARTICULATE CARBON</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per cubic metre</string>
     </void>
    </object>
@@ -9611,6 +11126,9 @@
      <string>TOTAL PHAEOPIGMENTS</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per cubic metre</string>
     </void>
    </object>
@@ -9630,6 +11148,9 @@
      <string>TOTAL PHOSPHORUS (P) CONTENT</string>
     </void>
     <void property="unit">
+     <string>millimole/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Micromoles per litre</string>
     </void>
    </object>
@@ -9649,6 +11170,9 @@
      <string>RED LIGHT TRANSMISSION 10CM</string>
     </void>
     <void property="unit">
+     <string>%</string>
+    </void>
+    <void property="unitP06">
      <string>Percent</string>
     </void>
    </object>
@@ -9668,6 +11192,9 @@
      <string>RED LIGHT TRANSMISSION 25CM</string>
     </void>
     <void property="unit">
+     <string>%</string>
+    </void>
+    <void property="unitP06">
      <string>Percent</string>
     </void>
    </object>
@@ -9687,6 +11214,9 @@
      <string>TRIBUTYLTIN CATION IN BIOTA</string>
     </void>
     <void property="unit">
+     <string>microgram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Micrograms per kilogram</string>
     </void>
    </object>
@@ -9706,6 +11236,9 @@
      <string>TRICHLOROBIPHENYL IN SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -9725,6 +11258,9 @@
      <string>DISSOLVED TRITIUM ERROR</string>
     </void>
     <void property="unit">
+     <string>TU</string>
+    </void>
+    <void property="unitP06">
      <string>Tritium units (10**18H/Tr)</string>
     </void>
    </object>
@@ -9744,6 +11280,9 @@
      <string>DISSOLVED TRITIUM</string>
     </void>
     <void property="unit">
+     <string>TU</string>
+    </void>
+    <void property="unitP06">
      <string>Tritium units (10**18H/Tr)</string>
     </void>
    </object>
@@ -9763,6 +11302,9 @@
      <string>TOTAL MASS FLUX</string>
     </void>
     <void property="unit">
+     <string>milligram/(m2.day)</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per square metre per day</string>
     </void>
    </object>
@@ -9782,6 +11324,9 @@
      <string>TOTAL SUSPENDED MATTER</string>
     </void>
     <void property="unit">
+     <string>gram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per litre</string>
     </void>
    </object>
@@ -9801,6 +11346,9 @@
      <string>LIGHT ATTENUATION COEFFICIENT</string>
     </void>
     <void property="unit">
+     <string>m-1</string>
+    </void>
+    <void property="unitP06">
      <string>per metre</string>
     </void>
    </object>
@@ -9820,6 +11368,9 @@
      <string>LIGHT TRANSMISSION</string>
     </void>
     <void property="unit">
+     <string>%</string>
+    </void>
+    <void property="unitP06">
      <string>Percent</string>
     </void>
    </object>
@@ -9839,6 +11390,9 @@
      <string>TURBIDITY</string>
     </void>
     <void property="unit">
+     <string>N.T.U Nephelo Turb. Unit</string>
+    </void>
+    <void property="unitP06">
      <string>Nephelometric Turbidity Units</string>
     </void>
    </object>
@@ -9858,6 +11412,9 @@
      <string>TURBIDITY</string>
     </void>
     <void property="unit">
+     <string>relative unit</string>
+    </void>
+    <void property="unitP06">
      <string>Dimensionless</string>
     </void>
    </object>
@@ -9877,6 +11434,9 @@
      <string>TURBIDITY</string>
     </void>
     <void property="unit">
+     <string>milliF.T.U Formaz Turb Unit</string>
+    </void>
+    <void property="unitP06">
      <string>Nephelometric Turbidity Units</string>
     </void>
    </object>
@@ -9896,6 +11456,9 @@
      <string>DIATOXANTHINE</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per cubic metre</string>
     </void>
    </object>
@@ -9915,6 +11478,9 @@
      <string>U&lt;63um IN DRY WEIGHT SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -9934,6 +11500,9 @@
      <string>BACTERIAL PRODUCTION(THYM. UP)</string>
     </void>
     <void property="unit">
+     <string>nanomole/m3/hour</string>
+    </void>
+    <void property="unitP06">
      <string>Picomoles per litre per hour</string>
     </void>
    </object>
@@ -9953,6 +11522,9 @@
      <string>BACT. PROD. STANDARD DEVIATION</string>
     </void>
     <void property="unit">
+     <string>nanomole/m3/hour</string>
+    </void>
+    <void property="unitP06">
      <string>Picomoles per litre per hour</string>
     </void>
    </object>
@@ -9972,6 +11544,9 @@
      <string>UREA</string>
     </void>
     <void property="unit">
+     <string>millimole/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Micromoles per litre</string>
     </void>
    </object>
@@ -9991,6 +11566,9 @@
      <string>UPWARD CURRENT VELOCITY</string>
     </void>
     <void property="unit">
+     <string>meter/second</string>
+    </void>
+    <void property="unitP06">
      <string>Metres per second</string>
     </void>
    </object>
@@ -10010,6 +11588,9 @@
      <string>V&lt;63um IN DRY WEIGHT SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -10029,6 +11610,9 @@
      <string>VANADIUM IN WATER BODY</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Micrograms per litre</string>
     </void>
    </object>
@@ -10048,6 +11632,9 @@
      <string>AVER. HEIGHT HIGHEST 1/3 WAVE</string>
     </void>
     <void property="unit">
+     <string>meter</string>
+    </void>
+    <void property="unitP06">
      <string>Metres</string>
     </void>
    </object>
@@ -10067,6 +11654,9 @@
      <string>AVER. PERIOD HIGHEST 1/3 WAVE</string>
     </void>
     <void property="unit">
+     <string>second</string>
+    </void>
+    <void property="unitP06">
      <string>Seconds</string>
     </void>
    </object>
@@ -10086,6 +11676,9 @@
      <string>MAX CREST TROUGH WAVE HEIGHT</string>
     </void>
     <void property="unit">
+     <string>meter</string>
+    </void>
+    <void property="unitP06">
      <string>Metres</string>
     </void>
    </object>
@@ -10105,6 +11698,9 @@
      <string>VERTICAL CURRENT SPEED</string>
     </void>
     <void property="unit">
+     <string>meter/second</string>
+    </void>
+    <void property="unitP06">
      <string>Metres per second</string>
     </void>
    </object>
@@ -10124,6 +11720,9 @@
      <string>WAVE DIRECTION REL. TRUE NORTH</string>
     </void>
     <void property="unit">
+     <string>degree</string>
+    </void>
+    <void property="unitP06">
      <string>Degrees</string>
     </void>
    </object>
@@ -10143,6 +11742,9 @@
      <string>WAVE SPECTRUM PEAK ENERGY</string>
     </void>
     <void property="unit">
+     <string>m2.second</string>
+    </void>
+    <void property="unitP06">
      <string>Square metres per Hertz</string>
     </void>
    </object>
@@ -10162,6 +11764,9 @@
      <string>VELOCITY ERROR</string>
     </void>
     <void property="unit">
+     <string>meter/second</string>
+    </void>
+    <void property="unitP06">
      <string>Metres per second</string>
     </void>
    </object>
@@ -10181,6 +11786,9 @@
      <string>VERTICAL DISPLACEMENT</string>
     </void>
     <void property="unit">
+     <string>meter</string>
+    </void>
+    <void property="unitP06">
      <string>Metres</string>
     </void>
    </object>
@@ -10200,6 +11808,9 @@
      <string>SPECTRAL SIGNIF. WAVE HEIGHT</string>
     </void>
     <void property="unit">
+     <string>meter</string>
+    </void>
+    <void property="unitP06">
      <string>Metres</string>
     </void>
    </object>
@@ -10219,6 +11830,9 @@
      <string>VIRUS ABUNDANCE IN SEA WATER</string>
     </void>
     <void property="unit">
+     <string>10+9 cell/dm3</string>
+    </void>
+    <void property="unitP06">
      <string>Number per nanolitre</string>
     </void>
    </object>
@@ -10238,6 +11852,9 @@
      <string>VIOLAXANTHIN</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per cubic metre</string>
     </void>
    </object>
@@ -10257,6 +11874,9 @@
      <string>MAXIMUM WAVE LEVEL</string>
     </void>
     <void property="unit">
+     <string>meter</string>
+    </void>
+    <void property="unitP06">
      <string>Metres</string>
     </void>
    </object>
@@ -10276,6 +11896,9 @@
      <string>VOLUME CONC. OF PARTICLES</string>
     </void>
     <void property="unit">
+     <string>ppm</string>
+    </void>
+    <void property="unitP06">
      <string>Parts per million</string>
     </void>
    </object>
@@ -10295,6 +11918,9 @@
      <string>SAMPLE VOLUME BY FLOW METER</string>
     </void>
     <void property="unit">
+     <string>m3</string>
+    </void>
+    <void property="unitP06">
      <string>Cubic metres</string>
     </void>
    </object>
@@ -10314,6 +11940,9 @@
      <string>WAVE SPECTRUM PEAK ENERGY DIR.</string>
     </void>
     <void property="unit">
+     <string>degree</string>
+    </void>
+    <void property="unitP06">
      <string>Degrees True</string>
     </void>
    </object>
@@ -10333,6 +11962,9 @@
      <string>DIR. SPREADING AT WAVE PEAK</string>
     </void>
     <void property="unit">
+     <string>degree</string>
+    </void>
+    <void property="unitP06">
      <string>Degrees</string>
     </void>
    </object>
@@ -10352,6 +11984,9 @@
      <string>VOLUME SAMPLED OF WATER BODY</string>
     </void>
     <void property="unit">
+     <string>m3</string>
+    </void>
+    <void property="unitP06">
      <string>Cubic metres</string>
     </void>
    </object>
@@ -10371,6 +12006,9 @@
      <string>SPECT. MOMENT(0,2) WAVE PERIOD</string>
     </void>
     <void property="unit">
+     <string>second</string>
+    </void>
+    <void property="unitP06">
      <string>Seconds</string>
     </void>
    </object>
@@ -10390,6 +12028,9 @@
      <string>SIGNIFICANT WAVE HEIGHT</string>
     </void>
     <void property="unit">
+     <string>meter</string>
+    </void>
+    <void property="unitP06">
      <string>Metres</string>
     </void>
    </object>
@@ -10409,6 +12050,9 @@
      <string>WAVE SPECTRUM PEAK PERIOD</string>
     </void>
     <void property="unit">
+     <string>second</string>
+    </void>
+    <void property="unitP06">
      <string>Seconds</string>
     </void>
    </object>
@@ -10428,6 +12072,9 @@
      <string>AVER ZERO CROSSING WAVE PERIOD</string>
     </void>
     <void property="unit">
+     <string>second</string>
+    </void>
+    <void property="unitP06">
      <string>Seconds</string>
     </void>
    </object>
@@ -10447,6 +12094,9 @@
      <string>MAXI ZERO CROSSING WAVE HEIGHT</string>
     </void>
     <void property="unit">
+     <string>meter</string>
+    </void>
+    <void property="unitP06">
      <string>Metres</string>
     </void>
    </object>
@@ -10466,6 +12116,9 @@
      <string>WIND DIRECTION REL. TRUE NORTH</string>
     </void>
     <void property="unit">
+     <string>degree</string>
+    </void>
+    <void property="unitP06">
      <string>Degrees</string>
     </void>
    </object>
@@ -10485,6 +12138,9 @@
      <string>WIND SPEED - MAX AVER PER 2 MN</string>
     </void>
     <void property="unit">
+     <string>meter/second</string>
+    </void>
+    <void property="unitP06">
      <string>Metres per second</string>
     </void>
    </object>
@@ -10504,6 +12160,9 @@
      <string>W&lt;63um IN DRY WEIGHT SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -10523,6 +12182,9 @@
      <string>HORIZONTAL WIND SPEED</string>
     </void>
     <void property="unit">
+     <string>meter/second</string>
+    </void>
+    <void property="unitP06">
      <string>Metres per second</string>
     </void>
    </object>
@@ -10542,6 +12204,9 @@
      <string>WIND SPEED EASTWARD COMPONENT</string>
     </void>
     <void property="unit">
+     <string>meter/second</string>
+    </void>
+    <void property="unitP06">
      <string>Metres per second</string>
     </void>
    </object>
@@ -10561,6 +12226,9 @@
      <string>WIND SPEED NORTHWARD COMPONENT</string>
     </void>
     <void property="unit">
+     <string>meter/second</string>
+    </void>
+    <void property="unitP06">
      <string>Metres per second</string>
     </void>
    </object>
@@ -10580,6 +12248,9 @@
      <string>WIND STRESS EAST COMPONENT</string>
     </void>
     <void property="unit">
+     <string>newton/m2</string>
+    </void>
+    <void property="unitP06">
      <string>Newtons per square metre</string>
     </void>
    </object>
@@ -10599,6 +12270,9 @@
      <string>WIND STRESS NORTH COMPONENT</string>
     </void>
     <void property="unit">
+     <string>newton/m2</string>
+    </void>
+    <void property="unitP06">
      <string>Newtons per square metre</string>
     </void>
    </object>
@@ -10618,6 +12292,9 @@
      <string>CO2 MOLE FRACTION IN DRY GAS</string>
     </void>
     <void property="unit">
+     <string>ppm</string>
+    </void>
+    <void property="unitP06">
      <string>Parts per million</string>
     </void>
    </object>
@@ -10637,6 +12314,9 @@
      <string>Y&lt;63um IN DRY WEIGHT SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -10656,6 +12336,9 @@
      <string>Yb&lt;63um IN DRY WEIGHT SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -10675,6 +12358,9 @@
      <string>Yb IN DRY WEIGHT SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -10694,6 +12380,9 @@
      <string>YEAR</string>
     </void>
     <void property="unit">
+     <string>yyyy</string>
+    </void>
+    <void property="unitP06">
      <string>Dimensionless</string>
     </void>
    </object>
@@ -10713,6 +12402,9 @@
      <string>ZINC IN SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -10732,6 +12424,9 @@
      <string>ZINC IN WATER BODY</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Micrograms per litre</string>
     </void>
    </object>
@@ -10751,6 +12446,9 @@
      <string>Zn&lt;63um IN DRY WEIGHT SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -10770,6 +12468,9 @@
      <string>TILT OF MEASUREMENT PLATFORM</string>
     </void>
     <void property="unit">
+     <string>degree</string>
+    </void>
+    <void property="unitP06">
      <string>Degrees</string>
     </void>
    </object>
@@ -10789,6 +12490,9 @@
      <string>Zr&lt;63um IN DRY WEIGHT SEDIMENT</string>
     </void>
     <void property="unit">
+     <string>milligram/kg</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per kilogram</string>
     </void>
    </object>
@@ -10808,6 +12512,9 @@
      <string>ZEAXANTHINE</string>
     </void>
     <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
      <string>Milligrams per cubic metre</string>
     </void>
    </object>

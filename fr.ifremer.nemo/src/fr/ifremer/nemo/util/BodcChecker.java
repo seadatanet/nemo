@@ -290,39 +290,7 @@ public class BodcChecker {
 				ok=false;
 			} 
 		}else{
-
-			try {
-				p06Code= sdnMgr.getBestVocabMatchCode(
-						SdnVocabularyManager.LIST_P06, 
-						SdnVocabularyManager.LIST_P09, 
-						typeData.getEntryKey()
-						);
-				String label = sdnMgr.getP06UnitLabel(p06Code);
-
-				if (!typeData.getUnite().equals(label)){
-
-					
-					replaceMsg+=MessageFormat.format(Messages.BODC_check_param_p06_labelUpdate, 
-							typeData.getCodeToUse(),
-							p06Code, typeData.getUnite(),
-							label,
-							SdnVocabularyManager.LIST_P06
-							)+Global.RN;
-					
-					typeData.setUniteCode(p06Code);
-					typeData.setUnite(label);
-				}
-			} catch (Exception e) {
-				errorMsg=MessageFormat.format(Messages.BODC_check_param_p06_p01fromp09,
-						typeData.getEntryKey(),
-						SdnVocabularyManager.LIST_P06,SdnVocabularyManager.LIST_P09)
-						+ " - " + e.getMessage();
-				typeData.setUnite("");
-				typeData.setUniteCode("");
-//				errorMsg=e.getMessage();
-				logger.error(errorMsg);
-				ok=false;
-			} 
+			// no test with P09: units come from scoop database (web service) and no not change
 		}
 
 

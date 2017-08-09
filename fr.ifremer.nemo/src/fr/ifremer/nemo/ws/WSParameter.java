@@ -17,6 +17,7 @@ public class WSParameter  implements java.io.Serializable {
     private java.lang.String name;
 
     private java.lang.String unit;
+    private java.lang.String unitP06;
 
     public WSParameter() {
     }
@@ -26,12 +27,14 @@ public class WSParameter  implements java.io.Serializable {
            java.lang.String defaultValue,
            java.lang.String format,
            java.lang.String name,
-           java.lang.String unit) {
+           java.lang.String unit,
+           java.lang.String unitP06) {
            this.code = code;
            this.defaultValue = defaultValue;
            this.format = format;
            this.name = name;
            this.unit = unit;
+           this.unitP06 = unitP06;
     }
 
 
@@ -135,7 +138,8 @@ public class WSParameter  implements java.io.Serializable {
     }
 
     private java.lang.Object __equalsCalc = null;
-    public synchronized boolean equals(java.lang.Object obj) {
+    @Override
+	public synchronized boolean equals(java.lang.Object obj) {
         if (!(obj instanceof WSParameter)) return false;
         WSParameter other = (WSParameter) obj;
         if (obj == null) return false;
@@ -146,27 +150,20 @@ public class WSParameter  implements java.io.Serializable {
         __equalsCalc = obj;
         boolean _equals;
         _equals = true && 
-            ((this.code==null && other.getCode()==null) || 
-             (this.code!=null &&
-              this.code.equals(other.getCode()))) &&
-            ((this.defaultValue==null && other.getDefaultValue()==null) || 
-             (this.defaultValue!=null &&
-              this.defaultValue.equals(other.getDefaultValue()))) &&
-            ((this.format==null && other.getFormat()==null) || 
-             (this.format!=null &&
-              this.format.equals(other.getFormat()))) &&
-            ((this.name==null && other.getName()==null) || 
-             (this.name!=null &&
-              this.name.equals(other.getName()))) &&
-            ((this.unit==null && other.getUnit()==null) || 
-             (this.unit!=null &&
-              this.unit.equals(other.getUnit())));
+            ((this.code==null && other.getCode()==null) 				||   (this.code!=null 			&&  this.code.equals(other.getCode())) ) 					&&
+            ((this.defaultValue==null && other.getDefaultValue()==null) ||   (this.defaultValue!=null 	&&  this.defaultValue.equals(other.getDefaultValue()))) 	&&
+            ((this.format==null && other.getFormat()==null) 			||   (this.format!=null 		&&  this.format.equals(other.getFormat()))) 				&&
+            ((this.name==null && other.getName()==null) 				||   (this.name!=null 			&&  this.name.equals(other.getName()))) 					&&
+            ((this.unit==null && other.getUnit()==null) 				||   (this.unit!=null 			&&  this.unit.equals(other.getUnit()))) 					&&
+            ((this.unitP06==null && other.getUnitP06()==null)			||   (this.unitP06!=null 		&&  this.unitP06.equals(other.getUnitP06())))	
+            ;
         __equalsCalc = null;
         return _equals;
     }
 
     private boolean __hashCodeCalc = false;
-    public synchronized int hashCode() {
+    @Override
+	public synchronized int hashCode() {
         if (__hashCodeCalc) {
             return 0;
         }
@@ -186,6 +183,9 @@ public class WSParameter  implements java.io.Serializable {
         }
         if (getUnit() != null) {
             _hashCode += getUnit().hashCode();
+        }
+        if (getUnitP06() != null) {
+            _hashCode += getUnitP06().hashCode();
         }
         __hashCodeCalc = false;
         return _hashCode;
@@ -227,6 +227,12 @@ public class WSParameter  implements java.io.Serializable {
         elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
         elemField.setNillable(true);
         typeDesc.addFieldDesc(elemField);
+        elemField = new org.apache.axis.description.ElementDesc();
+        elemField.setFieldName("unitP06");
+        elemField.setXmlName(new javax.xml.namespace.QName("", "unitP06"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
+        elemField.setNillable(true);
+        typeDesc.addFieldDesc(elemField);
     }
 
     /**
@@ -259,5 +265,13 @@ public class WSParameter  implements java.io.Serializable {
           new  org.apache.axis.encoding.ser.BeanDeserializer(
             _javaType, _xmlType, typeDesc);
     }
+
+	public java.lang.String getUnitP06() {
+		return unitP06;
+	}
+
+	public void setUnitP06(java.lang.String unitP06) {
+		this.unitP06 = unitP06;
+	}
 
 }

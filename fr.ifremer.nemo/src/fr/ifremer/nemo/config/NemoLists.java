@@ -140,6 +140,14 @@ public class NemoLists implements Cloneable {
 		return -1;
 	}
 
+	public static String getParameterLabel(String P09Code){
+		for (int i = 0; i < parametersSize(); i++) {
+			if (parametersAt(i).getCode().equals(P09Code)) {
+				return parametersAt(i).getUnit();
+			}
+		}
+		return null; 
+	}
 	/**
 	 * move x one index before in the list for role "parameters"
 	 * 
@@ -577,7 +585,7 @@ public class NemoLists implements Cloneable {
 								SdnVocabularyManager.LIST_P06, 
 								SdnVocabularyManager.LIST_P09, 
 								parameters[i].getCode());
-						parameters[i].setUnit(sdnMgr.getP06UnitLabel(p06));
+						parameters[i].setUnitP06(sdnMgr.getP06UnitLabel(p06));
 						
 						addParameter(parameters[i]);
 					}
