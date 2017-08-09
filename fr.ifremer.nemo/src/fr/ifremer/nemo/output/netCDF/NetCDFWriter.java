@@ -172,7 +172,13 @@ public class NetCDFWriter extends NemoWriter {
 
 
 					updateDimensions();
-
+					// SORT DATA IF NEEDED 
+					if (iDomain.getConversion().isSortData())
+					{
+						List<Station> stations = new ArrayList<>();
+						stations.add(st);
+						sortDataWithinStation(stations);
+					}
 
 
 					writeDataToNetCDFFile();
@@ -219,7 +225,7 @@ public class NetCDFWriter extends NemoWriter {
 				// SORT DATA IF NEEDED 
 				if (iDomain.getConversion().isSortData())
 				{
-					sortDataWithinStation(inputFilePath);
+					sortDataWithinStation(stationDomain.getStations(inputFilePath));
 				}
 
 				writeDataToNetCDFFile();
@@ -234,7 +240,7 @@ public class NetCDFWriter extends NemoWriter {
 
 	}
 
-	private void sortDataWithinStation(String inputFilePath)
+	private void sortDataWithinStation(List<Station> stations)
 	{
 		Object[][] primaryVarValues = null;
 		Object[][] varValues = null;
@@ -249,7 +255,7 @@ public class NetCDFWriter extends NemoWriter {
 		primaryVarValues = (Object[][]) stationData.get(primaryVarName);
 
 		int indexStation=0;
-		for (Station st : stationDomain.getStations(inputFilePath)) {
+		for (Station st : stations) {
 
 			Double[] pv = new Double[primaryVarValues[indexStation].length];
 			for (int i=0; i<primaryVarValues[indexStation].length; i++){ 
