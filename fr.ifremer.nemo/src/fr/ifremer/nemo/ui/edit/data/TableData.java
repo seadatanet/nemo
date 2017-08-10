@@ -1741,6 +1741,8 @@ public class TableData {
 
 			types.get(i).setUnite(
 					myTable.getItem(i).getText(colNbById.get(COL_UNIT)));
+			types.get(i).setP06Label(
+					myTable.getItem(i).getText(colNbById.get(COL_UNIT)));
 			types.get(i).setConversion(
 					myTable.getItem(i).getText(colNbById.get(COL_CONVERSION)));
 			types.get(i).setTest(
