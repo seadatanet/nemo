@@ -67,7 +67,7 @@ public class EditConversionForm extends EditForm {
 	private String warningCampagne = Global.EMPTY_STRING;
 	private String warningStation = Global.EMPTY_STRING;
 	private String warningData = Global.EMPTY_STRING;
-
+	private String nomFichierSortie ;
 
 	/*
 	 * Methodes de création de l'onglet (héritées de EditForm)
@@ -172,7 +172,7 @@ public class EditConversionForm extends EditForm {
 
 		EditFileForm editFileForm =
 				Nemo.getInstance().getViewMain().getEditFileForm();
-		String nomFichierSortie = Global.EMPTY_STRING;
+		nomFichierSortie = null;
 
 		FileDialog dialog =
 				new FileDialog(Utils.getMainShell(), SWT.SAVE
@@ -212,33 +212,7 @@ public class EditConversionForm extends EditForm {
 		nomFichierSortie = dialog.open();
 
 		if (nomFichierSortie != null) {
-			String nomDossierSortie =
-					fr.ifremer.nemo.util.Utils
-							.extraitCheminFichier(nomFichierSortie);
-
-			// Teste si le repertoire de sortie est different du repertoire
-			// d'entree
-			if (editFileForm.isCruiseIsAFile()) {
-				if (nomFichierSortie.equals(editFileForm.nomFichier)) {
-					MessageBox mb =
-							new MessageBox(Utils.getMainShell(), SWT.ICON_ERROR
-									| SWT.OK | SWT.APPLICATION_MODAL);
-					mb.setMessage(Messages.error_convert_outputFile);
-					mb.open();
-
-					choixFichierSortie();
-				}
-			} else {
-				if (nomDossierSortie.equals(editFileForm.nomRepertoire)) {
-					MessageBox mb =
-							new MessageBox(Utils.getMainShell(), SWT.ICON_ERROR
-									| SWT.OK | SWT.APPLICATION_MODAL);
-					mb.setMessage(Messages.error_convert_outputDir);
-					mb.open();
-
-					choixFichierSortie();
-				}
-			}
+			checkNomFichierSortie(editFileForm);
 
 			File fich = new File(nomFichierSortie);
 			if (fich.exists()) {
@@ -251,7 +225,9 @@ public class EditConversionForm extends EditForm {
 				int reponse = mb.open();
 				if (reponse == SWT.NO) {
 					// on n'écrase pas le fichier
-					choixFichierSortie();
+					nomFichierSortie=null;
+//					return false;
+					checkNomFichierSortie(editFileForm);
 				}
 			}
 			Nemo.getInstance().getDomain().getMedia().setOutputFileName(
@@ -260,6 +236,38 @@ public class EditConversionForm extends EditForm {
 			return false;
 		}
 		return true;
+	}
+
+	private void checkNomFichierSortie(EditFileForm editFileForm) {
+		String nomDossierSortie =
+				fr.ifremer.nemo.util.Utils
+						.extraitCheminFichier(nomFichierSortie);
+
+		// Teste si le repertoire de sortie est different du repertoire
+		// d'entree
+		if (editFileForm.isCruiseIsAFile()) {
+			if (nomFichierSortie.equals(editFileForm.nomFichier)) {
+				MessageBox mb =
+						new MessageBox(Utils.getMainShell(), SWT.ICON_ERROR
+								| SWT.OK | SWT.APPLICATION_MODAL);
+				mb.setMessage(Messages.error_convert_outputFile);
+				nomFichierSortie=null;
+				mb.open();
+
+				choixFichierSortie();
+			}
+		} else {
+			if (nomDossierSortie.equals(editFileForm.nomRepertoire)) {
+				MessageBox mb =
+						new MessageBox(Utils.getMainShell(), SWT.ICON_ERROR
+								| SWT.OK | SWT.APPLICATION_MODAL);
+				mb.setMessage(Messages.error_convert_outputDir);
+				nomFichierSortie=null;
+				mb.open();
+
+				choixFichierSortie();
+			}
+		}
 	}
 
 	public boolean choixDossierSortie() {
