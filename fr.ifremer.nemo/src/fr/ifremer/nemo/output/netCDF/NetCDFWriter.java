@@ -466,6 +466,11 @@ public class NetCDFWriter extends NemoWriter {
 				if (mediaDomain.getModel().getInputType() == E_InputType.TIMESERIES) {
 					if (stationDomain.getModel().getProperty(Intern.S_DATE).isInData()){
 						currentDate = Long.valueOf(DateTimeUtils.convertTimestamp(readedLine));
+						//33044 manage offset in end date time
+						long currentDateWithOffset = 
+								DateTimeUtils.getGMTDate(currentDate,
+										currentStation.getOffsetTU());
+						currentDate = currentDateWithOffset;
 					}else{
 						currentDate = DateTimeUtils.getCurrentDate(currentStation, indexRecord); // 25255 get current date (computed with sample rate)
 					}
@@ -488,8 +493,14 @@ public class NetCDFWriter extends NemoWriter {
 						setDataValue(ParameterNames.LATITUDE, new Value(String.valueOf(currentLatitude),  
 								currentStation.getMetaFlag(Intern.S_LAT).toCharArray()[0]),indiceStation,indexRecord);
 					}
-					if (stationDomain.getModel().getProperty(Intern.S_DATE).isInData())
+					if (stationDomain.getModel().getProperty(Intern.S_DATE).isInData()){
 						currentDate = Long.valueOf(DateTimeUtils.convertTimestamp(readedLine));
+						//33044 manage offset in end date time
+						long currentDateWithOffset = 
+								DateTimeUtils.getGMTDate(currentDate,
+										currentStation.getOffsetTU());
+						currentDate = currentDateWithOffset;
+					}
 					// TIME
 					Double julianDay = DateTimeUtils.getJulianDay(currentDate);
 					setDataValue( ParameterNames.TIME,new Value(julianDay.toString(),  
@@ -548,6 +559,10 @@ public class NetCDFWriter extends NemoWriter {
 				if (mediaDomain.getModel().getInputType() == E_InputType.TIMESERIES) {
 					if (stationDomain.getModel().getProperty(Intern.S_DATE).isInData())
 						currentDate = Long.valueOf(DateTimeUtils.convertTimestamp(readedLine));
+					long currentDateWithOffset = 
+							DateTimeUtils.getGMTDate(currentDate,
+									currentStation.getOffsetTU());
+					currentDate = currentDateWithOffset;
 				}
 
 
@@ -558,6 +573,10 @@ public class NetCDFWriter extends NemoWriter {
 						currentLatitude = ((Double) stationDomain.getModel().getProperty(Intern.S_LAT).applyOnLine(readedLine.toString())).doubleValue();
 					if (stationDomain.getModel().getProperty(Intern.S_DATE).isInData())
 						currentDate = Long.valueOf(DateTimeUtils.convertTimestamp(readedLine));
+					long currentDateWithOffset = 
+							DateTimeUtils.getGMTDate(currentDate,
+									currentStation.getOffsetTU());
+					currentDate = currentDateWithOffset;
 				}
 
 				// Longitude
