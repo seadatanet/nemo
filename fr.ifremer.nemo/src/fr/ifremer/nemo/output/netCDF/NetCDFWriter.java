@@ -2,6 +2,7 @@ package fr.ifremer.nemo.output.netCDF;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.UnsupportedEncodingException;
 import java.text.MessageFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -415,11 +416,7 @@ public class NetCDFWriter extends NemoWriter {
 
 		// SDN EDMO_CODE
 		setDataValue(ParameterNames.SDN_EDMO_CODE , new Value(Nemo.getInstance().getConfig().getIdEdmoRespCdi().trim()), indiceStation);
-		// TIME
-		long currentDate = DateTimeUtils.getCurrentDate(currentStation, indexRecord); // get current date (computed with sample rate)
 
-		double currentLongitude = currentStation.getLongitude();
-		double currentLatitude = currentStation.getLatitude();
 
 		// SDN_REFERENCE
 		if (forceReferences){
@@ -434,9 +431,9 @@ public class NetCDFWriter extends NemoWriter {
 			}
 		}
 		if (isOnNStationHeader){
-			stationWrited=readStationHeader(currentStation,  currentDate, currentLongitude, currentLatitude);
+			stationWrited=readStationHeader(currentStation);
 		}
-
+		long currentDate = 0 ;
 		// scan the InputFile line by line
 		while ((readedLine = bufferedReader.readLine()) != null) {
 			//			System.out.println(readedLine);
@@ -449,8 +446,7 @@ public class NetCDFWriter extends NemoWriter {
 					if (stationWrited){
 						return true;
 					}
-					currentDate = DateTimeUtils.getCurrentDate(currentStation, indexRecord);
-					stationWrited=readStationHeader(currentStation, currentDate, currentLongitude, currentLatitude);
+					stationWrited=readStationHeader(currentStation);
 					iDomain.getMedia().addStationInOutput(myCFPointWriterManager.getFileName(), currentStation.getLocal_cdi_id());
 				}else{
 					if (stationWrited){
@@ -463,48 +459,36 @@ public class NetCDFWriter extends NemoWriter {
 
 				// ligne de données : à ne prendre en compte que si on est sur
 				// la bonne station
-				if (mediaDomain.getModel().getInputType() == E_InputType.TIMESERIES) {
-					if (stationDomain.getModel().getProperty(Intern.S_DATE).isInData()){
-						currentDate = Long.valueOf(DateTimeUtils.convertTimestamp(readedLine));
-						//33044 manage offset in end date time
-						long currentDateWithOffset = 
-								DateTimeUtils.getGMTDate(currentDate,
-										currentStation.getOffsetTU());
-						currentDate = currentDateWithOffset;
+				
+				if (mediaDomain.getModel().getInputType() == E_InputType.TRAJECTORY) {
+					double currentLongitude ;
+					double currentLatitude ;
+					if (stationDomain.getModel().getProperty(Intern.S_LON).isInData()){
+						currentLongitude = ((Double) stationDomain.getModel().getProperty(Intern.S_LON).applyOnLine(readedLine.toString())).doubleValue();
 					}else{
-						currentDate = DateTimeUtils.getCurrentDate(currentStation, indexRecord); // 25255 get current date (computed with sample rate)
+						currentLongitude = currentStation.getLongitude();
 					}
-
+					setDataValue(ParameterNames.LONGITUDE,new Value( String.valueOf(currentLongitude),  
+							currentStation.getMetaFlag(Intern.S_LON).toCharArray()[0]),indiceStation, indexRecord);
+					if (stationDomain.getModel().getProperty(Intern.S_LAT).isInData()){
+						currentLatitude = ((Double) stationDomain.getModel().getProperty(Intern.S_LAT).applyOnLine(readedLine.toString())).doubleValue();
+					}else{
+						currentLatitude = currentStation.getLatitude();
+					}
+					setDataValue(ParameterNames.LATITUDE, new Value(String.valueOf(currentLatitude),  
+							currentStation.getMetaFlag(Intern.S_LAT).toCharArray()[0]),indiceStation,indexRecord);
+				}
+				
+				
+				// DAteTime
+				if (mediaDomain.getModel().getInputType() == E_InputType.TIMESERIES || mediaDomain.getModel().getInputType() == E_InputType.TRAJECTORY) {
+					currentDate = getCurrentDate(currentStation);
 					Double julianDay = DateTimeUtils.getJulianDay(currentDate);
 					setDataValue( ParameterNames.TIME,new Value(julianDay.toString(),  
 							currentStation.getMetaFlag(Intern.S_DATE).toCharArray()[0]),indiceStation,indexRecord);
 				}
-
-				else if (mediaDomain.getModel().getInputType() == E_InputType.TRAJECTORY) {
-					if (stationDomain.getModel().getProperty(Intern.S_LON).isInData()){
-						currentLongitude = ((Double) stationDomain.getModel().getProperty(Intern.S_LON).applyOnLine(readedLine.toString())).doubleValue();
-						// longitude
-						setDataValue(ParameterNames.LONGITUDE,new Value( String.valueOf(currentLongitude),  
-								currentStation.getMetaFlag(Intern.S_LON).toCharArray()[0]),indiceStation, indexRecord);
-					}
-					if (stationDomain.getModel().getProperty(Intern.S_LAT).isInData()){
-						currentLatitude = ((Double) stationDomain.getModel().getProperty(Intern.S_LAT).applyOnLine(readedLine.toString())).doubleValue();
-						// Latitude
-						setDataValue(ParameterNames.LATITUDE, new Value(String.valueOf(currentLatitude),  
-								currentStation.getMetaFlag(Intern.S_LAT).toCharArray()[0]),indiceStation,indexRecord);
-					}
-					if (stationDomain.getModel().getProperty(Intern.S_DATE).isInData()){
-						currentDate = Long.valueOf(DateTimeUtils.convertTimestamp(readedLine));
-						//33044 manage offset in end date time
-						long currentDateWithOffset = 
-								DateTimeUtils.getGMTDate(currentDate,
-										currentStation.getOffsetTU());
-						currentDate = currentDateWithOffset;
-					}
-					// TIME
-					Double julianDay = DateTimeUtils.getJulianDay(currentDate);
-					setDataValue( ParameterNames.TIME,new Value(julianDay.toString(),  
-							currentStation.getMetaFlag(Intern.S_DATE).toCharArray()[0]),indiceStation,indexRecord);
+				// Depth, bottom depth
+				if (mediaDomain.getModel().getInputType() == E_InputType.TRAJECTORY) {
 
 					if (station.getModel().getProperty(Intern.S_DEPTH).isInData()) {
 						Object botDepth = stationDomain.getModel().getProperty(Intern.S_DEPTH).applyOnLine(readedLine.toString());
@@ -521,22 +505,18 @@ public class NetCDFWriter extends NemoWriter {
 					}
 				}
 				// profile: no metadata to be read in data
-
-
-
-				writeDataLine(currentStation, readedLine, indiceStation);
+				writeDataLine(currentStation, readedLine, currentDate);
 
 			}
-
-
 		}
-
 
 		return false;
 	}
-	private boolean readStationHeader(Station currentStation,  Long currentDate, 
-			double currentLongitude, double currentLatitude) throws Exception
-			{
+	
+	
+	private boolean readStationHeader(Station currentStation) throws Exception {
+		double currentLongitude;
+		double currentLatitude;
 		String[] inputStationHeader = null;
 		boolean stationWrited=false;
 		inputStationHeader = consumeStationHeader(mediaModel.getStationHeader() > 0);
@@ -556,34 +536,30 @@ public class NetCDFWriter extends NemoWriter {
 			// FAE 4673 Pb si une seule ligne données et pas d'entête
 			// station
 			if (!isEndData() || (mediaModel.getEndData() == E_EndData.NEXT_START_WITH && mediaModel.getStationHeader() == 0)) {
-				if (mediaDomain.getModel().getInputType() == E_InputType.TIMESERIES) {
-					if (stationDomain.getModel().getProperty(Intern.S_DATE).isInData())
-						currentDate = Long.valueOf(DateTimeUtils.convertTimestamp(readedLine));
-					long currentDateWithOffset = 
-							DateTimeUtils.getGMTDate(currentDate,
-									currentStation.getOffsetTU());
-					currentDate = currentDateWithOffset;
-				}
-
-
+				
 				if (mediaDomain.getModel().getInputType() == E_InputType.TRAJECTORY) {
-					if (stationDomain.getModel().getProperty(Intern.S_LON).isInData())
+					if (stationDomain.getModel().getProperty(Intern.S_LON).isInData()){
 						currentLongitude = ((Double) stationDomain.getModel().getProperty(Intern.S_LON).applyOnLine(readedLine.toString())).doubleValue();
-					if (stationDomain.getModel().getProperty(Intern.S_LAT).isInData())
+					}else{
+						currentLongitude = currentStation.getLongitude();
+					}
+					if (stationDomain.getModel().getProperty(Intern.S_LAT).isInData()){
 						currentLatitude = ((Double) stationDomain.getModel().getProperty(Intern.S_LAT).applyOnLine(readedLine.toString())).doubleValue();
-					if (stationDomain.getModel().getProperty(Intern.S_DATE).isInData())
-						currentDate = Long.valueOf(DateTimeUtils.convertTimestamp(readedLine));
-					long currentDateWithOffset = 
-							DateTimeUtils.getGMTDate(currentDate,
-									currentStation.getOffsetTU());
-					currentDate = currentDateWithOffset;
+					}else{
+						currentLatitude = currentStation.getLatitude();
+					}
+				}else{
+					currentLongitude = currentStation.getLongitude();
+					currentLatitude = currentStation.getLatitude();
 				}
-
+					
+				Long currentDate = getCurrentDate(currentStation);
+				
 				// Longitude
 				setDataValue(ParameterNames.LONGITUDE, new Value( String.valueOf(currentLongitude), currentStation.getMetaFlag(Intern.S_LON).toCharArray()[0]),indiceStation, indexRecord);
 				// Latitude
 				setDataValue( ParameterNames.LATITUDE, new Value(String.valueOf(currentLatitude),currentStation.getMetaFlag(Intern.S_LAT).toCharArray()[0]),indiceStation, indexRecord);
-
+				// dateTime
 				Double julianDay = DateTimeUtils.getJulianDay(currentDate);
 				setDataValue(ParameterNames.TIME, new Value(julianDay.toString(),  currentStation.getMetaFlag(Intern.S_DATE).toCharArray()[0]),indiceStation, indexRecord);
 
@@ -600,12 +576,32 @@ public class NetCDFWriter extends NemoWriter {
 						setDataValue(ParameterNames.SDN_BOT_DEPTH, new Value( bottomDepth), indiceStation, indexRecord);
 				}
 
-				writeDataLine(currentStation, readedLine, indiceStation);
+				writeDataLine(currentStation, readedLine, currentDate);
 			}
 			stationWrited = true;
 		} 
 		return stationWrited;
 			}
+
+	private Long getCurrentDate(Station currentStation) throws ParseException,	UnsupportedEncodingException {
+		
+		Long currentDate;
+		if (mediaDomain.getModel().getInputType() == E_InputType.PROFILE){
+			currentDate = DateTimeUtils.getCurrentDate(currentStation, indexRecord); // get current date (computed with sample rate)
+		}
+		else{
+			// 	TIMESERIES AND TRAJECTORIES			
+			if (stationDomain.getModel().getProperty(Intern.S_DATE).isInData()){
+				currentDate = Long.valueOf(DateTimeUtils.convertTimestamp(readedLine));
+				long currentDateWithOffset = DateTimeUtils.getGMTDate(currentDate, currentStation.getOffsetTU());
+				currentDate = currentDateWithOffset;
+			}else{
+				currentDate = DateTimeUtils.getCurrentDate(currentStation, indexRecord);
+			}
+
+		}
+		return currentDate;
+	}
 
 
 	private void computeMaxStringMetadataLength(String localCdiId, String stationRef, String dataSetRef) {
@@ -648,50 +644,41 @@ public class NetCDFWriter extends NemoWriter {
 				variableName, value.getValue(), (byte)value.getQualityValue(),
 				indiceStation, indiceRecord);
 	}
-	private void writeDataLine(Station currentStation, String inputLine, int indiceStation) throws Exception {
-		long currentDate = DateTimeUtils.getCurrentDate(currentStation, indexRecord);
-		//30378
-		E_InputType inputType = mediaDomain.getModel().getInputType() ;
+	
+	
+	private void writeDataLine(Station currentStation, String inputLine, long currentDate) throws Exception {
 
 
-		if ((inputType== E_InputType.TIMESERIES || inputType == E_InputType.TRAJECTORY)
-				&& Nemo.getInstance().getDomain().getStation().getModel().getProperty(Intern.S_DATE).isInData()){
-			currentDate = Long.valueOf(DateTimeUtils.convertTimestamp(inputLine));
-			//33044 manage offset in end date time
-			long currentDateWithOffset = 
-					DateTimeUtils.getGMTDate(currentDate,
-							currentStation.getOffsetTU());
-			currentDate = currentDateWithOffset;
-		}
-
-
-
-
-		Object[][] paramData;
-		String varName;
+		String varName;String defaultValue;String stringValue;String inputDefaultValue;
 		// parametre ajouté
 		for (ParameterModel pModel : dataDomain.getMyParameterManager().getNetCDFParameterModels()) {
+			boolean compute=true;
 			varName = pModel.getParameter().getCodeP011();
 			if(map_P011_VarName.get(varName)!=null){
 				varName=map_P011_VarName.get(varName);
 			}else{
 				varName = pModel.getParameter().getCodeP011();
 			}
-
-			pModel.computeAddedParameterValue(currentStation, inputLine, currentDate);
-
-			String defaultValue = pModel.getParameter().getDefault().trim();
-			String stringValue = pModel.getLineValue().getValue().trim();
-			String inputDefaultValue = pModel.getInputDefault().trim();
-			if (!stringValue.equals(inputDefaultValue))
-				setDataValue(varName,new Value( stringValue,  pModel.getLineValue().getQc().toCharArray()[0]), indiceStation, indexRecord);
-			else {
-				if (defaultValue != null && !defaultValue.isEmpty())
-					setDataValue(varName, new Value(defaultValue, pModel.getLineValue().getQc().toCharArray()[0]), indiceStation,indexRecord);
-				else
-					setDataValue(varName,new Value( null,  pModel.getLineValue().getQc().toCharArray()[0]), indiceStation,indexRecord);
+			
+			// for variables with dimension INSTANCE only, do not compute on each line!
+			if (mapVariables.get(varName).getDims().size()==1 && indexRecord>0){
+				compute=false;
 			}
+			if (compute){
+				pModel.computeAddedParameterValue(currentStation, inputLine, currentDate);
 
+				defaultValue = pModel.getParameter().getDefault().trim();
+				stringValue = pModel.getLineValue().getValue().trim();
+				inputDefaultValue = pModel.getInputDefault().trim();
+				if (!stringValue.equals(inputDefaultValue))
+					setDataValue(varName,new Value( stringValue,  pModel.getLineValue().getQc().toCharArray()[0]), indiceStation, indexRecord);
+				else {
+					if (defaultValue != null && !defaultValue.isEmpty())
+						setDataValue(varName, new Value(defaultValue, pModel.getLineValue().getQc().toCharArray()[0]), indiceStation,indexRecord);
+					else
+						setDataValue(varName,new Value( null,  pModel.getLineValue().getQc().toCharArray()[0]), indiceStation,indexRecord);
+				}
+			}
 		}
 
 		// paramètres mesurés
@@ -705,9 +692,9 @@ public class NetCDFWriter extends NemoWriter {
 			}
 
 			pModel.computeParameterValue(inputLine);
-			String inputDefaultValue = pModel.getInputDefault().trim();
-			String defaultValue = pModel.getParameter().getDefault();
-			String stringValue = Global.EMPTY_STRING;
+			inputDefaultValue = pModel.getInputDefault().trim();
+			defaultValue = pModel.getParameter().getDefault();
+			stringValue = Global.EMPTY_STRING;
 			if (!pModel.getLineValue().getValue().isEmpty()) {
 				stringValue = Formatter.getSingleton().formatParameter(pModel.getParameter().getFormat(), pModel.getLineValue().getValue()).trim();
 			}

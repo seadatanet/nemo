@@ -144,6 +144,7 @@ public abstract class NemoWriter {
 	public void write(ProgressNotification a_Progress)
 			throws GenerationException {
 
+		//long start = System.currentTimeMillis();
 		stationDomain.updateRef();
 		stationDomain.resetStations();
 
@@ -367,7 +368,9 @@ public abstract class NemoWriter {
 				throw new GenerationException(ioe);
 			}
 		}
-
+		//long end = System.currentTimeMillis();
+		//Nemo.getInstance().getLogger().debug("elapsed time:" + (end-start));
+		
 	}
 
 	/**

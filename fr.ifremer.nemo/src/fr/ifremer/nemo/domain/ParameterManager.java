@@ -342,8 +342,10 @@ public class ParameterManager {
 		if (isNetCDF) {
 			/** aap_p 12 */
 			// Ajout du paramètre DEPH ( = Sensor Depth) por TIMESERIES
+			boolean generic_depthBSSurf_FromSensor=false;
 			if (isTimeSeries && getMesureType() != E_MesureType.ASLVL) {
 				addFixedParameterModel(IdParameter.generic_depthBSSurf_FromSensor);
+				generic_depthBSSurf_FromSensor=true;
 			}
 			/** aap_p 13 */
 			if (((isTimeSeries || !exist_p_heightASLvl) && getMesureType() == E_MesureType.ASLVL)) {
@@ -354,7 +356,7 @@ public class ParameterManager {
 				if (isProfile) {
 					/** aap_p 10 */
 					addFixedParameterModel(IdParameter.generic_depthBSSurf_FromPressure);
-				} else {
+				} else if (! generic_depthBSSurf_FromSensor){
 					/** aap_p 11 */
 					addFixedParameterModel(IdParameter.generic_depthBSSurf_FromSensor);
 				}
