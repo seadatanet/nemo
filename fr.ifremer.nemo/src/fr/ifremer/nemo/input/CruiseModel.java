@@ -53,7 +53,7 @@ import fr.ifremer.nemo.util.Messages;
  * @author Delphine BOULANGER
  */
 public class CruiseModel extends AbstractModel {
-	private static String CSR_DATE_FORMAT = "yyyy-MM-dd"; //$NON-NLS-1$
+	public static String CSR_DATE_FORMAT = "yyyy-MM-dd"; //$NON-NLS-1$
 	public static String MED_DATE_FORMAT = "dd/MM/yyyy"; //$NON-NLS-1$
 	
 

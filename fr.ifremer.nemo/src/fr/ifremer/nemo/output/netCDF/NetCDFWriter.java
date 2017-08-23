@@ -22,6 +22,7 @@ import fr.ifremer.nemo.domain.DateTimeUtils;
 import fr.ifremer.nemo.domain.NetCDFLongNameParameterManager;
 import fr.ifremer.nemo.domain.Station;
 import fr.ifremer.nemo.domain.StationDomain;
+import fr.ifremer.nemo.input.CruiseModel;
 import fr.ifremer.nemo.input.ModelDescription;
 import fr.ifremer.nemo.input.parameters.ParameterModel;
 import fr.ifremer.nemo.input.parameters.addedParameters.AP_ADEPZZ01;
@@ -1024,7 +1025,7 @@ public class NetCDFWriter extends NemoWriter {
 	 * @param sdnCruise
 	 */
 	private void addCruiseOptionalAttribute(SdnCruiseVariable sdnCruise) {
-
+		SimpleDateFormat fmt = new SimpleDateFormat(CruiseModel.CSR_DATE_FORMAT);
 		if (!(isProcessType_CollectionFiles || isProcessType_CollectionDir)) {
 			// sous onglet Reference
 			if (cruiseDomain.getModel().getShipCode() != null && !cruiseDomain.getModel().getShipCode().isEmpty())
@@ -1036,11 +1037,11 @@ public class NetCDFWriter extends NemoWriter {
 		if (!isProcessType_CollectionFiles) {
 			// sous onglet Location
 			try {
-				sdnCruise.addVariableAttribute(ModelDescription.node_startdate, DateTimeUtils.getVariantDateTime(cruiseDomain.getModel().getStartDate()));
+				sdnCruise.addVariableAttribute(ModelDescription.node_startdate, fmt.format(new Date(cruiseDomain.getModel().getStartDate())));
 			} catch (Exception e) {
 			}
 			try {
-				sdnCruise.addVariableAttribute(ModelDescription.node_enddate, DateTimeUtils.getVariantDateTime(cruiseDomain.getModel().getEndDate()));
+				sdnCruise.addVariableAttribute(ModelDescription.node_enddate, fmt.format(new Date(cruiseDomain.getModel().getEndDate())));
 			} catch (Exception e) {
 			}
 		}
