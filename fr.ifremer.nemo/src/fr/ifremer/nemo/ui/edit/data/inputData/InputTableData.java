@@ -115,11 +115,6 @@ public class InputTableData {
 				@Override
 				public void update(ViewerCell cell) {
 //					System.out.println("update createColumns");
-					if (cell.getColumnIndex() == indexSelected){
-						cell.setBackground(red );
-					}else{
-						cell.setBackground(null );
-					}
 					String res="";
 					if (separator!=null){
 						try{
@@ -148,9 +143,15 @@ public class InputTableData {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				indexSelected = index;
-				viewer.refresh();
-				Nemo.getInstance().getLogger().debug("column selected : " + index);
 
+				//Nemo.getInstance().getLogger().debug("column selected : " + index);
+
+				try{
+					int correspondingLine = Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().getMapColLineIndexes().get(indexSelected);
+					Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().getMyTable().select(correspondingLine);
+				}catch (Exception ex) {
+					Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().getMyTable().deselectAll();
+				}
 			}
 		};
 		return selectionAdapter;

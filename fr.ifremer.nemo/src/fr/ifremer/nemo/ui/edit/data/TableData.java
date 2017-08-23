@@ -7,6 +7,7 @@ import java.util.HashMap;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.TableEditor;
+import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Event;
@@ -42,6 +43,9 @@ import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.ws.WSParameter;
 
 public class TableData {
+	final Color red = new Color(null, 239,180,110);
+	final Color white = new Color(null, 255,255,255);
+	
 	/**
 	 * Parametres provenant des web services (fichiers xml mis à jour par les
 	 * web services) les parametres P091 sont lus depuis le fichier
@@ -60,7 +64,7 @@ public class TableData {
 	 * formats output
 	 */
 	private ArrayList<TypeFormat> typesFormat;
-
+	HashMap<Integer, Integer> mapColLineIndexes;
 	/**
 	 * Getter sur typesFormat.
 	 * 
@@ -525,7 +529,7 @@ public class TableData {
 		/*
 		 * Remplir la table avec les tableItems avant de linker les editors !
 		 */
-
+		mapColLineIndexes = new HashMap<>();
 		final Table table;
 		table = myTable;
 
@@ -632,11 +636,16 @@ public class TableData {
 					if (indice >= 0)
 					{
 						if (RulesManager.getInstance().isUsingTableForCsvData()){
+							int colCount = Nemo.getInstance().getViewMain().getEditDataForm().getInputTableData().getViewer().getTable().getColumnCount();
 							//33278: split as columns
 							int colNb = Integer.valueOf(myTable.getItem(indice).getText(colNbById.get(COL_START)));
 							Nemo.getInstance().getViewMain().getEditDataForm().getInputTableData().setIndexSelected(colNb-1);
-							Nemo.getInstance().getViewMain().getEditDataForm().getInputTableData().getViewer().refresh(); // TODO BGT: trouver plus leger que le refresh + aussi qd selection dans tableau data
-							
+							Nemo.getInstance().getViewMain().getEditDataForm().getInputTableData().getViewer().getTable().getItem(0).setBackground(colNb-1, red);
+							TableItem item = Nemo.getInstance().getViewMain().getEditDataForm().getInputTableData().getViewer().getTable().getItem(0);
+							for (int colCpt=0; colCpt<colCount-1; colCpt++){
+								item.setBackground(colCpt, white);
+							}
+							item.setBackground(colNb-1, red);
 						}else{
 						selectInViewFile(
 								Integer.valueOf(myTable.getItem(indice)
@@ -785,6 +794,8 @@ public class TableData {
 					// remplissage debut et fin dans interface
 					Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().getMyTable().getItems()[selectionIndex].setText(colNbById.get(COL_START), String.valueOf(selectedColumnNumber));
 					Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().getMyTable().getItems()[selectionIndex].setText(colNbById.get(COL_END), String.valueOf(selectedColumnNumber));
+
+					mapColLineIndexes.put(selectedColumnIndex, selectionIndex);
 					majTypeData();
 					// refresh de la table
 					razAndRecreateTable();
@@ -988,6 +999,7 @@ public class TableData {
 		itemInjectFlag.setText(Messages.menu_label_setFlag);
 		itemInjectFlag.addListener(SWT.Selection, new Listener()
 		{
+			@Override
 			public void handleEvent(Event e)
 			{
 				
@@ -1000,6 +1012,7 @@ public class TableData {
 					// remplissage debut et fin dans interface
 					Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().getMyTable().getItems()[selectionIndex].setText(colNbById.get(COL_START_FLAG), String.valueOf(selectedColumnNumber));
 					Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().getMyTable().getItems()[selectionIndex].setText(colNbById.get(COL_END_FLAG), String.valueOf(selectedColumnNumber));
+					mapColLineIndexes.put(selectedColumnIndex, selectionIndex);
 					majTypeData();
 					// refresh de la table
 					razAndRecreateTable();
@@ -1181,6 +1194,9 @@ public class TableData {
 				item.setChecked(types.get(i).isText());
 			else
 				item.setChecked(false);
+			
+			// fill the map between col index in InputTableData and row index in TableDta
+			mapColLineIndexes.put(types.get(i).getDebut()-1, i);
 		}
 
 	}
@@ -1950,5 +1966,9 @@ public class TableData {
 		}
 
 		return isWritable;
+	}
+
+	public HashMap<Integer, Integer> getMapColLineIndexes() {
+		return mapColLineIndexes;
 	}
 }
