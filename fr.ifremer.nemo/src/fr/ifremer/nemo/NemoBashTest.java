@@ -102,7 +102,7 @@ public class NemoBashTest {
 	boolean REMOVE_JUNIT=true;
 	
 	public static String[] testDirAlone = {};
-//	public static String[] testDirAlone = {"22733_nolwenn"};
+//	public static String[] testDirAlone = {"cruiseFile_profile_diap"};
 			
 	/**
 	 * ********************************************************
@@ -1305,6 +1305,9 @@ public class NemoBashTest {
 		longNames.put("ANTHHPP1", "ANTHHPP1"); //$NON-NLS-1$//$NON-NLS-2$
 		longNames.put("SSALST01", "psal"); //$NON-NLS-1$//$NON-NLS-2$
 		longNames.put("BCCDSP01", "flu2"); //$NON-NLS-1$//$NON-NLS-2$
+		longNames.put("PSALST02", "psal"); //$NON-NLS-1$//$NON-NLS-2$
+		longNames.put("ALKGWX01", "alkg"); //$NON-NLS-1$//$NON-NLS-2$
+		longNames.put("NZTW0009", "NZTW0009"); //$NON-NLS-1$//$NON-NLS-2$
 		
 		
 		return longNames;
