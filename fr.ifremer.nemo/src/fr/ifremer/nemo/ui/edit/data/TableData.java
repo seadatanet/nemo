@@ -1516,6 +1516,7 @@ public class TableData {
 						selection = ligne.split(
 								Nemo.getInstance().getDomain().getMedia().getModel().getSeparator())
 								[Integer.valueOf(myTable.getItem(i).getText(colNbById.get(COL_START)))-1].trim();
+						
 					}
 
 				} catch (Exception e) {
@@ -1990,7 +1991,7 @@ public class TableData {
 		Nemo.getInstance().getViewMain().getEditDataForm().getInputTableData().setIndexSelected(colNb-1);
 		Nemo.getInstance().getViewMain().getEditDataForm().getInputTableData().getViewer().getTable().getItem(0).setBackground(colNb-1, red);
 		TableItem item = Nemo.getInstance().getViewMain().getEditDataForm().getInputTableData().getViewer().getTable().getItem(0);
-		for (int colCpt=0; colCpt<colCount-1; colCpt++){
+		for (int colCpt=0; colCpt<colCount; colCpt++){
 			item.setBackground(colCpt, white);
 		}
 		item.setBackground(colNb-1, red);
