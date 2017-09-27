@@ -1984,6 +1984,28 @@
   <void method="add">
    <object class="fr.ifremer.nemo.ws.WSParameter">
     <void property="code">
+     <string>CJDY</string>
+    </void>
+    <void property="defaultValue">
+     <string>9999999.999999</string>
+    </void>
+    <void property="format">
+     <string>%14.6d</string>
+    </void>
+    <void property="name">
+     <string>JULIAN DATE (CHRONOLOGICAL)</string>
+    </void>
+    <void property="unit">
+     <string>day</string>
+    </void>
+    <void property="unitP06">
+     <string>Days</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="fr.ifremer.nemo.ws.WSParameter">
+    <void property="code">
      <string>CL4W</string>
     </void>
     <void property="defaultValue">
@@ -10360,6 +10382,28 @@
     </void>
     <void property="unitP06">
      <string>Micromoles per litre</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="fr.ifremer.nemo.ws.WSParameter">
+    <void property="code">
+     <string>TDSW</string>
+    </void>
+    <void property="defaultValue">
+     <string>999.99</string>
+    </void>
+    <void property="format">
+     <string>%6.2f</string>
+    </void>
+    <void property="name">
+     <string>TOTAL DISSOLVED SOLID</string>
+    </void>
+    <void property="unit">
+     <string>kg/m3</string>
+    </void>
+    <void property="unitP06">
+     <string>Kilograms per cubic metre</string>
     </void>
    </object>
   </void>
