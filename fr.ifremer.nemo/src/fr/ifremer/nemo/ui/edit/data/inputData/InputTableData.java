@@ -19,6 +19,7 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.TableColumn;
+import org.eclipse.swt.widgets.TableItem;
 
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.ui.Utils;
@@ -83,12 +84,10 @@ public class InputTableData {
 
 			@Override
 			public void widgetSelected(SelectionEvent arg0) {
-
 			}
 
 			@Override
 			public void widgetDefaultSelected(SelectionEvent arg0) {
-
 			}
 		});
 	}
@@ -145,7 +144,15 @@ public class InputTableData {
 				indexSelected = index;
 
 				//Nemo.getInstance().getLogger().debug("column selected : " + index);
-
+				int colCount = viewer.getTable().getColumnCount();
+				
+				Nemo.getInstance().getViewMain().getEditDataForm().getInputTableData().setIndexSelected(indexSelected);
+				Nemo.getInstance().getViewMain().getEditDataForm().getInputTableData().getViewer().getTable().getItem(0).setBackground(indexSelected, red);
+				TableItem item = Nemo.getInstance().getViewMain().getEditDataForm().getInputTableData().getViewer().getTable().getItem(0);
+				for (int colCpt=0; colCpt<colCount; colCpt++){
+					item.setBackground(colCpt, white);
+				}
+				item.setBackground(indexSelected, red);
 				try{
 					int correspondingLine = Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().getMapColLineIndexes().get(indexSelected);
 					Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().getMyTable().select(correspondingLine);

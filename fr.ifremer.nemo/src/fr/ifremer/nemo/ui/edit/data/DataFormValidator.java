@@ -154,19 +154,21 @@ public class DataFormValidator extends FormValidator {
 					Utils.messageErreurAppend(e.getMessage());
 				}
 				// 35230 check unit
-				BODCResult bodcRes = BodcChecker.getInstance().checkP06(typeCourant, rm.getMyDataListType());
-				if (bodcRes.getResStatus() == BODC_RES_STATUS.KO){
-					Utils.messageErreurAppend(bodcRes.getErrorMsg());
-					ok=false;
-				}else if (bodcRes.getResStatus() == BODC_RES_STATUS.WARNING){
-					typeCourant = bodcRes.getTypeData();
-					Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().getMyTable().getItems()[i].setText(unitCodeColNb, String.valueOf(typeCourant.getUniteCode()));
-					Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().getMyTable().getItems()[i].setText(unitColNb, String.valueOf(typeCourant.getUnite()));
-					Utils.messageWarningAppend(bodcRes.getWarningMsg());
-					bodcReplaced=true;
+				if (!typeCourant.isText()){
+					BODCResult bodcRes = BodcChecker.getInstance().checkP06(typeCourant, rm.getMyDataListType());
+					if (bodcRes.getResStatus() == BODC_RES_STATUS.KO){
+						Utils.messageErreurAppend(bodcRes.getErrorMsg());
+						ok=false;
+					}else if (bodcRes.getResStatus() == BODC_RES_STATUS.WARNING){
+						typeCourant = bodcRes.getTypeData();
+						Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().getMyTable().getItems()[i].setText(unitCodeColNb, String.valueOf(typeCourant.getUniteCode()));
+						Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().getMyTable().getItems()[i].setText(unitColNb, String.valueOf(typeCourant.getUnite()));
+						Utils.messageWarningAppend(bodcRes.getWarningMsg());
+						bodcReplaced=true;
+					}
 				}
 				// 35230 check instrument
-				bodcRes = BodcChecker.getInstance().checkInstrument(typeCourant);
+				BODCResult bodcRes = BodcChecker.getInstance().checkInstrument(typeCourant);
 				if (bodcRes.getResStatus() == BODC_RES_STATUS.KO){
 					ok=false;
 					Utils.messageErreurAppend(bodcRes.getErrorMsg());

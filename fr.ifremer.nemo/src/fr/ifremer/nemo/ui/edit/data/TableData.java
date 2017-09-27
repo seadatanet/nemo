@@ -45,7 +45,7 @@ import fr.ifremer.nemo.ws.WSParameter;
 public class TableData {
 	final Color red = new Color(null, 239,180,110);
 	final Color white = new Color(null, 255,255,255);
-	
+
 	/**
 	 * Parametres provenant des web services (fichiers xml mis à jour par les
 	 * web services) les parametres P091 sont lus depuis le fichier
@@ -594,6 +594,8 @@ public class TableData {
 								.get(COL_FORMAT),
 								(String) ((TableItem) event.item)
 								.getData(COL_FORMAT));
+						((TableItem) event.item).setText(colNbById
+								.get(COL_CONVERSION), TypeData.DEFAULT_CONVERT);
 					}
 				}
 			}
@@ -635,25 +637,17 @@ public class TableData {
 					int indice = myTable.getSelectionIndex();
 					if (indice >= 0)
 					{
+						// select data from parameters selection
 						if (RulesManager.getInstance().isUsingTableForCsvData()){
-							int colCount = Nemo.getInstance().getViewMain().getEditDataForm().getInputTableData().getViewer().getTable().getColumnCount();
-							//33278: split as columns
-							int colNb = Integer.valueOf(myTable.getItem(indice).getText(colNbById.get(COL_START)));
-							Nemo.getInstance().getViewMain().getEditDataForm().getInputTableData().setIndexSelected(colNb-1);
-							Nemo.getInstance().getViewMain().getEditDataForm().getInputTableData().getViewer().getTable().getItem(0).setBackground(colNb-1, red);
-							TableItem item = Nemo.getInstance().getViewMain().getEditDataForm().getInputTableData().getViewer().getTable().getItem(0);
-							for (int colCpt=0; colCpt<colCount-1; colCpt++){
-								item.setBackground(colCpt, white);
-							}
-							item.setBackground(colNb-1, red);
+							selectDataFromParameterSelection();
 						}else{
-						selectInViewFile(
-								Integer.valueOf(myTable.getItem(indice)
-										.getText(
-												colNbById.get(COL_START))),
-												Integer.valueOf(myTable.getItem(indice)
-														.getText(
-																colNbById.get(COL_END))));
+							selectInViewFile(
+									Integer.valueOf(myTable.getItem(indice)
+											.getText(
+													colNbById.get(COL_START))),
+													Integer.valueOf(myTable.getItem(indice)
+															.getText(
+																	colNbById.get(COL_END))));
 						}
 					}
 				}
@@ -775,8 +769,8 @@ public class TableData {
 
 		Menu menu = new Menu(table.getShell(), SWT.POP_UP);
 		int index = 0;
-		
-		
+
+
 		// ========= Injecter debut/fin
 		MenuItem itemInject = new MenuItem(menu, SWT.NONE, index);
 		menuMap.put(MENU_ITEM_SETVALUE, index);
@@ -800,7 +794,7 @@ public class TableData {
 					// refresh de la table
 					razAndRecreateTable();
 					Utils.invalidEtapes();
-					
+
 				}else{
 					// text files
 					// table.forceFocus();
@@ -1002,7 +996,7 @@ public class TableData {
 			@Override
 			public void handleEvent(Event e)
 			{
-				
+
 
 				if (RulesManager.getInstance().isUsingTableForCsvData()){
 					// 33278 CSV files
@@ -1017,16 +1011,16 @@ public class TableData {
 					// refresh de la table
 					razAndRecreateTable();
 					Utils.invalidEtapes();
-					
-				}else{
-				
-				table.forceFocus();
-				Utils.injectData(Nemo.getInstance().getViewMain()
-						.getEditDataForm().getTextAreaData(),
-						colNbById.get(COL_START_FLAG), colNbById
-						.get(COL_END_FLAG));
 
-				Utils.invalidEtapes();
+				}else{
+
+					table.forceFocus();
+					Utils.injectData(Nemo.getInstance().getViewMain()
+							.getEditDataForm().getTextAreaData(),
+							colNbById.get(COL_START_FLAG), colNbById
+							.get(COL_END_FLAG));
+
+					Utils.invalidEtapes();
 				}
 			}
 		});
@@ -1194,7 +1188,7 @@ public class TableData {
 				item.setChecked(types.get(i).isText());
 			else
 				item.setChecked(false);
-			
+
 			// fill the map between col index in InputTableData and row index in TableDta
 			mapColLineIndexes.put(types.get(i).getDebut()-1, i);
 		}
@@ -1499,24 +1493,24 @@ public class TableData {
 			// 33278: split as columns
 			ArrayList<String> input = (ArrayList<String>)Nemo.getInstance().getViewMain().getEditDataForm().getInputTableData().getViewer().getInput();
 			ligne=input.get(0);
-		
+
 		}else{
-		
+
 			ligne = Utils.lignesBrutes.get(mediaDomain.getModel().getFileHeader()
 					+ mediaDomain.getStationHeaderNumberLines());
 		}
-		
-		for (int i = 0; i < nbre; i++) {
 
+		for (int i = 0; i < nbre; i++) {
+			selection="";defaultValue="";
 			if (isParameterReady(i)) {
 				try {
 					if (Nemo.getInstance().getDomain().getMedia().getModel().getSeparator().isEmpty() || !RulesManager.getInstance().isUsingTableForCsvData()){
-					selection =
-							ligne.substring(
-									Integer.valueOf(myTable.getItem(i).getText(
-											colNbById.get(COL_START))) - 1,
-											Integer.valueOf(myTable.getItem(i).getText(
-													colNbById.get(COL_END)))).trim();
+						selection =
+								ligne.substring(
+										Integer.valueOf(myTable.getItem(i).getText(
+												colNbById.get(COL_START))) - 1,
+												Integer.valueOf(myTable.getItem(i).getText(
+														colNbById.get(COL_END)))).trim();
 					}else{
 						// 33278: split as columns
 						selection = ligne.split(
@@ -1551,8 +1545,20 @@ public class TableData {
 				try {
 					String formatString =
 							myTable.getItem(i).getText(colNbById.get(COL_FORMAT));
-					String type =
-							formatString.substring(formatString.length() - 1);
+					String type ="";
+					try{
+						type = formatString.substring(formatString.length() - 1);
+						if ( !(type.equals("f") || type.equals("F") || type.equals("d") || type.equals("D") )){
+							Utils.messageErreurAppend("Unrecognized format: "+ formatString);// TODO
+							ok = false;
+							resultat = Messages.error;
+						}
+					}catch (Exception e) {
+						Utils.messageErreurAppend("Format is empty, please choose one");// TODO
+						ok = false;
+						resultat = Messages.error;
+						throw e;
+					}
 
 					if (isSelectedValueEqualsToDefaultIn(i, selection)) {
 
@@ -1576,7 +1582,7 @@ public class TableData {
 											formatString,
 											Integer
 											.parseInt(outputDefaultValue));
-						} 
+						}
 
 						if (fmOut.equals(outputDefaultValue)) {
 							// ok
@@ -1630,11 +1636,11 @@ public class TableData {
 									String.format(
 											myTable.getItem(i).getText(
 													colNbById.get(COL_FORMAT)),
-//													(Double.valueOf(resultJEP))
-//													.intValue()
+													//													(Double.valueOf(resultJEP))
+													//													.intValue()
 													(Double.valueOf(resultJEP))
 													.longValue()
-													);
+											);
 						} else {
 							// error
 							ok = false;
@@ -1926,8 +1932,8 @@ public class TableData {
 
 	// FAE 9670 surlignage de la position des paramètres dans le fichier
 	public void selectInViewFile(int debut, int fin) {
-		
-		
+
+
 		// TODO 33278: on garde la colonne start pour stocker le no de colonne pour les csv. La colonne end ne sert a rien et sera masquée
 		int lign = 0;
 		if (!RulesManager.getInstance()
@@ -1945,8 +1951,12 @@ public class TableData {
 
 		debut += Utils.taillesCumLignes[lign - 1];
 		fin += Utils.taillesCumLignes[lign - 1];
-		Nemo.getInstance().getViewMain().getEditDataForm().getTextAreaData()
-		.setSelection(debut - 1, fin);
+		if (RulesManager.getInstance().isUsingTableForCsvData()){
+			selectDataFromParameterSelection();
+		}else{
+			Nemo.getInstance().getViewMain().getEditDataForm().getTextAreaData()
+			.setSelection(debut - 1, fin);
+		}
 	}
 
 	private boolean isCellWritable(int colNumber, TableItem itemTmp) {
@@ -1970,5 +1980,19 @@ public class TableData {
 
 	public HashMap<Integer, Integer> getMapColLineIndexes() {
 		return mapColLineIndexes;
+	}
+
+	private void selectDataFromParameterSelection(){
+		int indice = myTable.getSelectionIndex();
+		int colCount = Nemo.getInstance().getViewMain().getEditDataForm().getInputTableData().getViewer().getTable().getColumnCount();
+		//33278: split as columns
+		int colNb = Integer.valueOf(myTable.getItem(indice).getText(colNbById.get(COL_START)));
+		Nemo.getInstance().getViewMain().getEditDataForm().getInputTableData().setIndexSelected(colNb-1);
+		Nemo.getInstance().getViewMain().getEditDataForm().getInputTableData().getViewer().getTable().getItem(0).setBackground(colNb-1, red);
+		TableItem item = Nemo.getInstance().getViewMain().getEditDataForm().getInputTableData().getViewer().getTable().getItem(0);
+		for (int colCpt=0; colCpt<colCount-1; colCpt++){
+			item.setBackground(colCpt, white);
+		}
+		item.setBackground(colNb-1, red);
 	}
 }
