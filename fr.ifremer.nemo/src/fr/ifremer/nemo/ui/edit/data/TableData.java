@@ -1514,7 +1514,7 @@ public class TableData {
 					}else{
 						// 33278: split as columns
 						selection = ligne.split(
-								Nemo.getInstance().getDomain().getMedia().getModel().getSeparator())
+								Nemo.getInstance().getDomain().getMedia().getModel().getSeparator(), -1)
 								[Integer.valueOf(myTable.getItem(i).getText(colNbById.get(COL_START)))-1].trim();
 						
 					}
