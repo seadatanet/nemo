@@ -1677,20 +1677,19 @@ public class TableData {
 					&& (!myTable.getItem(i)
 							.getText(colNbById.get(COL_END_FLAG))
 							.equals(Global.EMPTY_STRING))) {
-				//FAE 12631
-				//                ligne =
-				//                        Utils.lignesBrutes
-				//                            .get(mediaDomain.getModel()
-				//                                .getFileHeader()
-				//                                    + mediaDomain.getStationHeaderNumberLines()
-				//                                    + 1);
-
-				selection =
-						ligne.substring(
-								Integer.valueOf(myTable.getItem(i).getText(
-										colNbById.get(COL_START_FLAG))) - 1,
-										Integer.valueOf(myTable.getItem(i).getText(
-												colNbById.get(COL_END_FLAG)))).trim();
+			
+				if (Nemo.getInstance().getDomain().getMedia().getModel().getSeparator().isEmpty() || !RulesManager.getInstance().isUsingTableForCsvData()){
+					selection =
+							ligne.substring(
+									Integer.valueOf(myTable.getItem(i).getText(	colNbById.get(COL_START_FLAG))) - 1,
+											Integer.valueOf(myTable.getItem(i).getText(colNbById.get(COL_END_FLAG)))).trim();
+				}else{
+					// 33278: split as columns
+					selection = ligne.split(
+							Nemo.getInstance().getDomain().getMedia().getModel().getSeparator(), -1)
+							[Integer.valueOf(myTable.getItem(i).getText(colNbById.get(COL_START_FLAG)))-1].trim();
+					
+				}
 
 				types.get(i).setTestIn(selection);
 
