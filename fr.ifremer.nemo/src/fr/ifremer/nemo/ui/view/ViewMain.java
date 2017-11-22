@@ -100,8 +100,14 @@ public class ViewMain extends ViewPart
 		if(state.getState() == STATE.LAST_VERSION){
 			// do not show pop-up (info in the log file)
 		}else{
-			String[] lastDate = state.getLastVersionDay().split("-");
-			dialogMessage=MessageFormat.format(Messages.NemoVersionUpdateAvailable, state.getVersion()  , state.getLastVersion(), lastDate[0], lastDate[1], lastDate[2]);
+			try{
+				String[] lastDate = state.getLastVersionDay().split("-");
+				dialogMessage=MessageFormat.format(Messages.NemoVersionUpdateAvailable, state.getVersion()  , state.getLastVersion(), lastDate[0], lastDate[1], lastDate[2]);
+			
+			}catch (Exception e) {
+				dialogMessage=Messages.NemoVersionUnreachable;
+				Nemo.getInstance().getLogger().warn(Messages.NemoVersionUnreachable);
+			}
 			NemoVersionDialog dialog = new NemoVersionDialog(parent.getShell(), dialogTitle, dialogTitleImage, dialogMessage, dialogImageType, dialogButtonLabels, defaultIndex);
 			dialog.create();
 			dialog.open();
