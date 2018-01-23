@@ -533,7 +533,7 @@ public class EditConversionForm extends EditForm {
 			command += "\"";
 		}
 
-		// couppling Table
+		// coupling Table
 		if (Nemo.getInstance().getConfig().isWriteMapping()) {
 			command += Global.SPACE;
 			command += Global.MOINS + Global.optCouplingTableUpdate;
