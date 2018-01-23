@@ -27,6 +27,7 @@ import fr.ifremer.nemo.domain.InputDomain;
 import fr.ifremer.nemo.domain.Station;
 import fr.ifremer.nemo.domain.StationDomain;
 import fr.ifremer.nemo.input.parameters.ParameterModel;
+import fr.ifremer.nemo.ui.RulesManager;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Formatter;
@@ -37,6 +38,7 @@ import fr.ifremer.nemo.util.Global.E_ProcessType;
 import fr.ifremer.nemo.util.Global.E_TypeConversion;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
+import fr.ifremer.sismer_tools.DateTools;
 
 public class CDIResumeWriter {
 	private static CDIResumeWriter instance;
@@ -95,7 +97,7 @@ public class CDIResumeWriter {
 					+ "STATION_LATITUDE" + sep + "STATION_LONGITUDE" + sep
 					+ "STATION_DATE" + sep + "EDMO_DISTRIBUTOR" + sep
 					+ "FORMAT" + sep + "FORMAT_VERSION" + sep + "DATA_SIZE" + sep + "DIST_WEBSITE" + sep
-					+ "DIST_METHODE");
+					+ "DIST_METHODE" + sep + "STATION_END_DATE");
 
 			InputDomain iDomain = Nemo.getInstance().getDomain();
 			CruiseDomain cDomain = iDomain.getCruise();
@@ -285,11 +287,11 @@ public class CDIResumeWriter {
 		Formatter format = new Formatter();
 		SimpleDateFormat dateFormat2 =
 				new SimpleDateFormat("yyyy-MM-dd'T'");
-		writer.write(sep
-				+ dateFormat2.format(new Date(st.getDate()))
+		String stationDateTime = dateFormat2.format(new Date(st.getDate()))
 				+ format.formatDateTime("hh24:mm:ss",
 						DateTimeUtils.getCorrectedTime(
-								st.getTime(), st.getOffsetTU())));
+								st.getTime(), st.getOffsetTU()));
+		writer.write(sep + stationDateTime);
 
 		// st.getOffsetTU();
 		// st.getTime();
@@ -325,6 +327,25 @@ public class CDIResumeWriter {
 
 		// DIST methode
 		writer.write(sep + config.getCdiMethod());
+		
+		
+		// STATION_END_DATE (39448)
+		// for profiles: same as station date
+		if (RulesManager.getInstance().isProfile()){
+			writer.write(sep + stationDateTime);
+		}else
+			// for timeseries and trajectories
+		{
+			try{
+				System.out.println(DateTools.TIMEZONE_GMT);
+			String cruiseDateTime = DateTools.getUTCLongAsString(st.getYougerDate(), "yyyy-MM-dd'T'HH:mm:ss.SSS");
+			writer.write(sep +cruiseDateTime);
+			}
+				catch (Exception e) {
+					// TODO: handle exception
+					e.printStackTrace();
+				}	
+		}
 
 	}
 

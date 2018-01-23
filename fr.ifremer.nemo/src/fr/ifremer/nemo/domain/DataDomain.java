@@ -140,10 +140,14 @@ public class DataDomain {
 			currentDate = Long.valueOf(DateTimeUtils.convertTimestamp(inputLine));
 		}
 		//33044 manage offset in end date time
-				long currentDateWithOffset = 
-						DateTimeUtils.getGMTDate(currentDate,
-								currentStation.getOffsetTU());
-		
+		long currentDateWithOffset = DateTimeUtils.getGMTDate(currentDate,	currentStation.getOffsetTU());
+
+		//39448
+		if (currentStation.getYougerDate()==Long.MIN_VALUE || currentDate>currentStation.getYougerDate()){
+			currentStation.setYougerDate(currentDate);
+		}
+
+
 		for (ParameterModel pModel : myParameterManager.getOdvParameterModels()) {
 			cptParam++;
 			pModel.computeAddedParameterValue(currentStation, inputLine, currentDateWithOffset);
@@ -194,8 +198,9 @@ public class DataDomain {
 		// -- VALEURS
 		// paramètres ajoutés
 		long currentDate = 0;
-		if (inputType != E_InputType.PROFILE)
+		if (inputType != E_InputType.PROFILE){
 			currentDate = DateTimeUtils.getCurrentDate(currentStation, indexRecord);
+		}
 
 		// FAE 11356
 		if (
@@ -205,9 +210,13 @@ public class DataDomain {
 			
 		}
 		//33044 manage offset in end date time
-		long currentDateWithOffset = 
-				DateTimeUtils.getGMTDate(currentDate,
-						currentStation.getOffsetTU());
+		long currentDateWithOffset = DateTimeUtils.getGMTDate(currentDate,	currentStation.getOffsetTU());
+
+		//39448
+		if (currentStation.getYougerDate()==Long.MIN_VALUE || currentDate>currentStation.getYougerDate()){
+			currentStation.setYougerDate(currentDate);
+		}
+
 		for (ParameterModel pModel : myParameterManager.getMedParameterModels()) {
 			pModel.computeAddedParameterValue(currentStation, inputLine, currentDateWithOffset);
 

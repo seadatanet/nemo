@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
+	<classpathentry exported="true" kind="lib" path="lib/sismertoolslib-1.1.17-SNAPSHOT-jar-with-dependencies.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/cfpointLib-0.27.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
@@ -45,8 +46,6 @@
 	<classpathentry exported="true" kind="lib" path="lib/log4j-api-2.3.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/log4j-core-2.3.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/sdnVocabulary-1.5.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/sismertoolslib-1.1.16.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/SoftwareVersionApi-1.0.jar"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/cfpointLib"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

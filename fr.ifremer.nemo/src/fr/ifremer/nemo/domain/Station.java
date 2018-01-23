@@ -62,6 +62,8 @@ public class Station implements Comparable {
 	protected String _fileName;
 
 	protected int startLine;
+	// 39448
+	protected long yougerDate;
 	
 	public Station(String fileName, String[] inputStationHeader) throws GenerationException {
 		// TODO BGT supprimer errorMsg
@@ -650,5 +652,13 @@ public class Station implements Comparable {
 
 	public void setStartLine(int startLine) {
 		this.startLine = startLine;
+	}
+
+	public long getYougerDate() {
+		return yougerDate;
+	}
+
+	public void setYougerDate(long yougerDate) {
+		this.yougerDate = yougerDate;
 	}
 }
