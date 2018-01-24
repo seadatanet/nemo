@@ -82,6 +82,7 @@ public class GroupVerticalParameters {
 			public void widgetSelected(SelectionEvent e)
 			{
 				controlVerticalReferenceSelection((Combo) e.widget);
+				Nemo.getInstance().getViewMain().getEditDataForm().invalidEtape();
 			}
 
 			@Override
