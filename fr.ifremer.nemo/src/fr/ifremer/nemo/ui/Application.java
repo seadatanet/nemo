@@ -77,7 +77,7 @@ public class Application implements IPlatformRunnable
 
         try
         {
-
+        	 Nemo.getInstance().setLogger(LogManager.getLogger(Global.LOGGER_NAME_BATCH));
             CommandLine cl = p.parse(opt, strArgs);
 
             // retrieve application path (FAE 9910)
@@ -317,6 +317,7 @@ public class Application implements IPlatformRunnable
             "update the coupling table database (optional)");
         opt.addOption(optCouplingTablePrefix, true,
             "coupling table database prefix (needed if couplingTableUpdate is present)");
+        opt.addOption(optSortDatas, false, "Sort data within stations by increasing reference parameter");
     }
 
     /**

@@ -103,8 +103,7 @@ public class SWTProcess implements IRunnableWithProgress {
 			}
 
 //			System.out.println("Conversion END   at " + new Date() + "\n---------------"); //$NON-NLS-1$ //$NON-NLS-2$
-			if (Nemo.getInstance().getLogger().isDebugEnabled()){
-			Nemo.getInstance().getLogger().info("Conversion END   at " + new Date() + "\n---------------");} //$NON-NLS-1$ //$NON-NLS-2$
+			Nemo.getInstance().getLogger().info("Conversion END   at " + new Date() + "\n---------------"); //$NON-NLS-1$ //$NON-NLS-2$
 			monitor.done();
 		} catch (Exception e) {
 			throw new InterruptedException(Messages.SWTProcess_5 + e.getMessage());

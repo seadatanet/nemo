@@ -249,11 +249,12 @@ public class NemoShell {
 				mapping(logger, conv, mappingTable, couplingTablePrefix);
 
 			}
-
+			Nemo.getInstance().getLogger().info("Conversion ended with success at " + new Date() + "\n---------------");
 			return true;
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 			e.printStackTrace();
+			Nemo.getInstance().getLogger().info("Conversion ended with errors at " + new Date() + "\n---------------");
 			logger.error(Nemo.getInstance().getErrorMessageWithFileAndLineNumber());
 			return false;
 		}
