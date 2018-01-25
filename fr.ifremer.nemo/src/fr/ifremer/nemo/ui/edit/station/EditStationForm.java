@@ -410,8 +410,8 @@ public class EditStationForm extends EditForm {
 			// => Sampling Rate : disable (car pas nécessaire pour le calcul)
 			if (!samplingRate.getSection().isDisposed())
 				samplingRate.setEnabled(!(dateInData || timeInData));
-			date.setEnabledManual(!(dateInData || timeInData));
-			time.setEnabledManual(!(dateInData || timeInData));
+//			date.setEnabledManual(!(dateInData || timeInData));
+//			time.setEnabledManual(!(dateInData || timeInData));
 		}
 
 		if (rulesManager.isTrajectory()) {
