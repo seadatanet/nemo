@@ -202,7 +202,7 @@ public class StationDomain {
 		odvStationHeader.append(Global.TAB);
 
 		// Latitude [degrees_north]
-		odvStationHeader.append(form.formatLatitude("+DD.dddddd ",
+		odvStationHeader.append(form.formatLatitude("+DD.dddddd",//40439
 				(Double) _model.getProperty(Intern.S_LAT)
 				.applyOnLine(inputLine)));
 		odvStationHeader.append(Global.TAB);
@@ -365,7 +365,7 @@ public class StationDomain {
 
 			// Latitude [degrees_north]
 			errorMessage = "latitude";
-			odvStationHeader.append(form.formatLatitude("+DD.dddddd ",
+			odvStationHeader.append(form.formatLatitude("+DD.dddddd",//40439
 					currentStation.getLatitude()));
 			odvStationHeader.append(Global.TAB);
 

@@ -276,7 +276,7 @@ public class CDIResumeWriter {
 		// station latitude
 		writer.write(sep
 				+ Formatter.getSingleton().formatLatitude(
-						"+DD.dddddd ", st.getLatitude()));
+						"+DD.dddddd", st.getLatitude()));
 
 		// station longitude
 		writer.write(sep
