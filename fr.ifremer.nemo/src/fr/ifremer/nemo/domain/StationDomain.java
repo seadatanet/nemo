@@ -172,7 +172,8 @@ public class StationDomain {
 		}
 		
 
-		odvStationHeader.append(form.limitString(cruiseName, 20));
+//		odvStationHeader.append(form.limitString(cruiseName, 20));//40442: do not limit cruise name length
+		odvStationHeader.append(cruiseName);
 		odvStationHeader.append(Global.TAB);
 
 		// Station
@@ -328,7 +329,8 @@ public class StationDomain {
 			if (cruiseName.isEmpty()){
 				throw new GenerationException(Messages.error_missing_cruise_reference);
 			}
-			odvStationHeader.append(form.limitString(cruiseName, 20));
+//			odvStationHeader.append(form.limitString(cruiseName, 20));//40442: do not limit cruise name length
+			odvStationHeader.append(cruiseName);
 			odvStationHeader.append(Global.TAB);
 
 			// Station
