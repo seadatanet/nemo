@@ -62,6 +62,7 @@ public class CruiseDatatypeSection extends NemoSection
 
     public void fillFromModel(CruiseModel cruise)
     {
+    	razValues();
         DataType[] dataTypes = cruise.getDataTypes();
         int taille = dataTypes.length;
 
