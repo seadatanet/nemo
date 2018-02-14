@@ -1158,7 +1158,8 @@ public class TableData {
 				}
 			}
 			String unitLabel;
-			if (RulesManager.getInstance().isDataListTypeP091()){
+//			if (RulesManager.getInstance().isDataListTypeP091() ){//25794
+			if ( RulesManager.getInstance().isConversionToMedatlas()){//25794
 				unitLabel=types.get(i).getUnite();
 			}else{
 				unitLabel=types.get(i).getP06Label();

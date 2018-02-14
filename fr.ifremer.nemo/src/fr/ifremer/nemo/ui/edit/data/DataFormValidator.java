@@ -160,11 +160,15 @@ public class DataFormValidator extends FormValidator {
 						Utils.messageErreurAppend(bodcRes.getErrorMsg());
 						ok=false;
 					}else if (bodcRes.getResStatus() == BODC_RES_STATUS.WARNING){
-						typeCourant = bodcRes.getTypeData();
-						Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().getMyTable().getItems()[i].setText(unitCodeColNb, String.valueOf(typeCourant.getUniteCode()));
-						Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().getMyTable().getItems()[i].setText(unitColNb, String.valueOf(typeCourant.getUnite()));
-						Utils.messageWarningAppend(bodcRes.getWarningMsg());
-						bodcReplaced=true;
+						if (RulesManager.getInstance().isConversionToMedatlas()){
+							// 25794 DO NOT REPLACE IN MEDATLAS!!
+						}else{
+							typeCourant = bodcRes.getTypeData();
+							Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().getMyTable().getItems()[i].setText(unitCodeColNb, String.valueOf(typeCourant.getUniteCode()));
+							Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().getMyTable().getItems()[i].setText(unitColNb, String.valueOf(typeCourant.getUnite()));
+							Utils.messageWarningAppend(bodcRes.getWarningMsg());
+							bodcReplaced=true;
+						}
 					}
 				}
 				// 35230 check instrument
