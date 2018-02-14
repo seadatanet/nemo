@@ -177,7 +177,8 @@ public class StationDomain {
 		odvStationHeader.append(Global.TAB);
 
 		// Station
-		odvStationHeader.append(form.limitString(getRef(true), 20));
+//		odvStationHeader.append(form.limitString(getRef(true), 20));//40442: do not limit station name length
+		odvStationHeader.append(getRef(true));
 		odvStationHeader.append(Global.TAB);
 
 		// Type
@@ -341,9 +342,9 @@ public class StationDomain {
 						|| Nemo.getInstance().getDomain().getConversion()
 						.getCurrent() != E_TypeConversion.NETCDF_MULTISTATIONS)
 					_ref = 1;
-				odvStationHeader.append(form.limitString(getRef(true), 20));
+				odvStationHeader.append(getRef(true)); //40442
 			} else {
-				odvStationHeader.append(form.limitString(stationRef, 20));
+				odvStationHeader.append(stationRef);//40442
 			}
 			odvStationHeader.append(Global.TAB);
 
