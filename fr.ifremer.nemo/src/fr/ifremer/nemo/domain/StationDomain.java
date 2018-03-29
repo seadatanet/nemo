@@ -567,7 +567,7 @@ public class StationDomain {
 					inputStationHeader);
 
 			boolean depthIsDefault = false;
-			if (value.equals("Default")) {
+			if (value.equals("Default") || value.equals(Float.NaN)) {
 				value = Float.NaN;
 				depthIsDefault = true;
 			}
