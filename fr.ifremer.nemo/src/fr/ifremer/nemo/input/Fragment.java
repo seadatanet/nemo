@@ -290,7 +290,7 @@ public class Fragment extends AbstractModel
     			this._colNb=colNb;
 		}
     	
-		return stringWriter.toString().trim();
+		return stringWriter.toString();
 	}
 
     public String retreiveVariable(String[] a_Header) {
@@ -336,7 +336,7 @@ public class Fragment extends AbstractModel
 			}
 		}
 
-		return stringWriter.toString().trim();
+		return stringWriter.toString();
 	}
 
     public String retreiveVariableInLine(String a_Line) {
@@ -377,7 +377,7 @@ public class Fragment extends AbstractModel
 		}
 		// }
 
-		return stringWriter.toString().trim();
+		return stringWriter.toString();
 	}
 
     public String fullRetreiveInLine(String a_Line){

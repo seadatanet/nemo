@@ -165,7 +165,7 @@ public class StationDomain {
 		String cruiseName = Nemo.getInstance().getDomain().getCruise().getModel().getName();
 		
 		if (cruiseName.isEmpty()){
-			cruiseName = Nemo.getInstance().getDomain().getCruise().getModel().getReference();
+			cruiseName = Nemo.getInstance().getDomain().getCruise().getModel().getReference().trim();
 		}
 		if (cruiseName.isEmpty()){
 			throw new GenerationException(Messages.error_missing_cruise_reference);
@@ -272,7 +272,7 @@ public class StationDomain {
 			ref = (String) _model.getReferenceProperty().applyOn(
 					inputStationHeader);
 		}
-		return ref;
+		return ref.trim();
 	}
 
 	private String getRef(boolean mustIncrement) {
@@ -315,7 +315,7 @@ public class StationDomain {
 		String errorMessage = "";
 		try {
 			StringBuffer odvStationHeader = new StringBuffer();
-			String stationRef = currentStation.getReference();
+			String stationRef = currentStation.getReference().trim();
 			// Cruise
 			String cruiseName = Global.EMPTY_STRING;
 
