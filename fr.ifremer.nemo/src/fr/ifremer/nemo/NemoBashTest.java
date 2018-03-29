@@ -55,6 +55,7 @@ import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Global.DataListTypeEnum;
 import fr.ifremer.nemo.util.Global.E_TypeConversion;
 import fr.ifremer.nemo.util.Intern;
+import fr.ifremer.sismer_tools.DateTools;
 
 /**
  * <pre>
@@ -99,7 +100,7 @@ public class NemoBashTest {
 	 * ********************************************************
 	 */
 	boolean REPLACE=false;// WARNING!!!
-	boolean REMOVE_JUNIT=true;
+	boolean REMOVE_JUNIT=false;
 	
 	public static String[] testDirAlone = {};
 //	public static String[] testDirAlone = {"cruiseFile_profile_diap"};
@@ -228,6 +229,7 @@ public class NemoBashTest {
 	}
 
 	public static void setDataRootPath() {
+		
 		String pwdPath = System.getProperty("user.dir");
 		// hudson: C:\Portail\data\jobs\Nemo\workspace\Nemo_product
 		testLogger.info("pwdPath = " + pwdPath + "--------------");
@@ -300,6 +302,15 @@ public class NemoBashTest {
 
 	}
 
+	
+	
+	@Test
+	public void testDate(){
+		System.out.println(DateTools.TIMEZONE_GMT);
+		long date = 908697600000L;
+		String cruiseDateTime = DateTools.getUTCLongAsString(date, "yyyy-MM-dd'T'HH:mm:ss.SSS");
+		System.out.println(cruiseDateTime);
+	}
 	/**
 	 * =================================================================
 	 * MEDATLAS
@@ -418,7 +429,7 @@ public class NemoBashTest {
 				+ "ODV_MULTISTATIONS" + File.separator;
 		Assert.assertFalse(convertWithNemoBatch(Conversion.ODV,
 				E_TypeConversion.ODV_MULTISTATIONS, inputAbsolutePath,
-				outputAbsolutePath, true));
+				outputAbsolutePath, true, false));
 	}
 
 	/**
@@ -959,7 +970,7 @@ public class NemoBashTest {
 														inputAbsolutePath,
 														outputAbsolutePath,
 														!unitTest.getName()
-														.startsWith("tj"));
+														.startsWith("tj"), false);
 												long t1 = System.currentTimeMillis();
 												testLogger.info("time: "+ (t1-t0));
 												message.processTime = String.valueOf( ((t1-t0)/1000));
@@ -1126,6 +1137,7 @@ public class NemoBashTest {
 					if (!identical){
 						testLogger.error("CDI REF >>  "+ refFileLine);
 						testLogger.error("CDI OUT >>  "+ outputLine);
+						testLogger.error("meld "+outputTest+ " " +output_REFERENCE );
 						message.diff+="#REF# : "+refFileLine + "#OUT# : " +outputLine; 
 					}
 
@@ -1135,6 +1147,27 @@ public class NemoBashTest {
 					identical = false;
 				}
 			}
+			
+			if (!identical && REPLACE ){
+				// delete ref nc
+				//			testLogger.warn("delete "+ refPath);
+				//			new File(refPath).delete();
+				testLogger.warn("rename " +outputTest + " --> " +outputTest+".old");
+				new File(output_REFERENCE).renameTo(new File(output_REFERENCE+".old"));
+				// move junit to ref as nc
+				testLogger.warn("rename " +outputTest + " --> " +output_REFERENCE);
+				new File(outputTest).renameTo(new File(output_REFERENCE));
+				testLogger.warn("delete "+ outputTest);
+				// delete junit result files
+				new File(outputTest).delete();
+			}
+			if (REMOVE_JUNIT){
+				// delete junit result files
+				testLogger.warn("delete "+ outputTest);
+				new File(outputTest).delete();
+			}
+			
+			
 			return identical;
 		}catch (Exception e) {
 			testLogger.error("CDISummary comparison failed");
@@ -1159,7 +1192,7 @@ public class NemoBashTest {
 	}
 
 	public boolean convertWithNemoBatch(Conversion conversion,	E_TypeConversion convType, String inputAbsolutePath,
-			String outputAbsolutePath, boolean isDateIso) {
+			String outputAbsolutePath, boolean isDateIso, boolean sort) {
 
 		boolean res = false;
 		String output = outputAbsolutePath + File.separator + outputName;
