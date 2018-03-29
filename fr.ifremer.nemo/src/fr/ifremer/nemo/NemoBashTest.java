@@ -1204,6 +1204,10 @@ public class NemoBashTest {
 		Nemo.getInstance().resetInstance();
 		Nemo.getInstance().setBatchMode(true);
 		Nemo.getInstance().getConfig().setIdEdmoRespCdi("486");// 486 is ifremer
+		Nemo.getInstance().getConfig().setCodeEdmoDonnees("0");
+		Nemo.getInstance().getConfig().setIdEdmoDistDonnees("0");
+		Nemo.getInstance().getConfig().setIdEdmoRespDonnees("0");
+		
 		Nemo.getInstance().getConfig().setDateISO(isDateIso);
 		// add long Name for test
 		NetCDFLongNameParameterManager.getInstance().getLongNamesMap()
