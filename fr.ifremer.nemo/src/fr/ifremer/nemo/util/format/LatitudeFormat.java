@@ -14,7 +14,9 @@ import org.xml.sax.SAXException;
 import com.ago.xml.SAXConsumer;
 import com.ago.xml.XMLOutputWriter;
 
+import fr.ifremer.nemo.input.Fragment;
 import fr.ifremer.nemo.input.ModelDescription;
+import fr.ifremer.nemo.ui.RulesManager;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
@@ -394,7 +396,11 @@ public class LatitudeFormat extends ExternalizableFormat implements Cloneable
 		Object obj = null;
 		try
 		{
-			if (_variableLength)
+			if (isFreeDecimalDegrees()){//40216
+				pos.setIndex( source.length());
+				return Double.valueOf(source);
+			}
+			else if (_variableLength)
 			{
 				obj = parseObjectVariableLength(source, pos);
 			} else
@@ -409,6 +415,9 @@ public class LatitudeFormat extends ExternalizableFormat implements Cloneable
 		return obj;
 	}
 
+	public boolean isFreeDecimalDegrees(){//40216
+		return _elements[0]._element.equals("#");
+	}
 	/**
 	 * 
 	 * @param source
@@ -462,6 +471,19 @@ public class LatitudeFormat extends ExternalizableFormat implements Cloneable
 				case CHARS:
 				{
 					String tmp = source.substring(index, index + _elements[i]._element.length());
+//					if (_elements[i]._element.equals("#") && RulesManager.getInstance().isSeparatorChecked()){
+//						try{
+//						String separator=RulesManager.getInstance().getSeparator();
+//						if (source.startsWith(separator)){
+//							source = source.substring(source.indexOf(separator)+1, source.length());
+//						}
+//						pos.setIndex(index + source.split(separator)[0].length());
+//						return Double.valueOf(source.split(separator)[0]);
+//						}catch (Exception e) {
+//							// TODO
+//							throw new ParseException(String.format(Intern.errorParseChar, _elements[i]._element, tmp), index);
+//						}
+//					}
 					if (_elements[i]._element.length() == 1 && _elements[i]._element.equals(Global.SPACE))
 					{
 						// cas particulier si on rencontre un espace, n'importe
@@ -765,6 +787,29 @@ public class LatitudeFormat extends ExternalizableFormat implements Cloneable
 	public void setVariableLength(String a_String)
 	{
 		setVariableLength(new Boolean(a_String).booleanValue());
+	}
+
+	
+	/**
+	 * //40216
+	 */
+	public Object parseFreeDecimalDegrees(Fragment fragment, String source) throws ParseException {
+		if (RulesManager.getInstance().isSeparatorChecked()){
+			try{
+			String separator=RulesManager.getInstance().getSeparator();
+			
+			if (source.startsWith(separator)){
+				source = source.substring(source.indexOf(separator)+1, source.length());
+			}
+			return Double.valueOf(source.split(separator)[fragment.getColNb()]);
+			}catch (Exception e) {
+				// TODO
+				throw new ParseException("error", 0);
+			}
+		}else{
+			//TODO error
+			throw new ParseException("error", 0);
+		}
 	}
 
 }

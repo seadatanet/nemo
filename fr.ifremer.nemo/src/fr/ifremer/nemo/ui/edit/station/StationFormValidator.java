@@ -449,7 +449,7 @@ public class StationFormValidator extends FormValidator {
 			// check value (creer une nouvelle latitude)
 			if (checkValue) {
 				value = editStationForm.latitude.getValue();
-				try {
+				try {//40216
 					LatitudeFormat latitudeFormat =
 							new LatitudeFormat(formatSaisi);
 					latitudeFormat
@@ -497,7 +497,7 @@ public class StationFormValidator extends FormValidator {
 			// check value (creer une nouvelle latitude)
 			if (checkValue) {
 				value = editStationForm.longitude.getValue();
-				try {
+				try {//40216
 					LongitudeFormat longitudeFormat =
 							new LongitudeFormat(formatSaisi);
 					longitudeFormat

@@ -73,6 +73,8 @@ public class RulesManager {
 	private boolean p_pressure_enabled;
 	private boolean p_heightASLvl_enabled;
 
+	private String separator=null;
+
 	/**
 	 * valeurs par défaut (à l'ouverture)
 	 */
@@ -255,25 +257,37 @@ public class RulesManager {
 		ViewLog.styledTextLogErreurs.setText(messageLog);
 		resetDataForm();
 	}
-	
+
 	public void updateFromIHMSeparatorChecked(){
 		if (myEditFileForm.isSeparatorChecked()){
 			myEditFileForm.sectionDataColumnTitles.setEnabled(true);
+			separator = myEditFileForm.getSeparateur();//40216
 		}else{
 			myEditFileForm.sectionDataColumnTitles.setEnabled(false);
 		}
 		updateFromIHMColumnTitlesInInputFile();
-		
+
 	}
 	public void updateFromIHMColumnTitlesInInputFile(){
-			myEditFileForm.resetFileDataColumnTitles(myEditFileForm.isSeparatorChecked());
-		
+		myEditFileForm.resetFileDataColumnTitles(myEditFileForm.isSeparatorChecked());
+
 	}
 	public void updateFromIHM(TypeFallRate typeFallrate) {
 		Nemo.getInstance().getViewMain().getEditDataForm().setFallrateCode(typeFallrate.getKey());
 		Nemo.getInstance().getViewMain().getEditDataForm().setFallrateLabel(typeFallrate.getTerm());
 	}
-
+	/**
+	 * //40216
+	 */
+	public boolean isSeparatorChecked(){
+		return separator!=null;
+	}
+	/**
+	 * //40216
+	 */
+	public String getSeparator(){
+		return separator;
+	}
 	/**
 	 * RECEPTION MAJ FILETYPE
 	 */
@@ -916,6 +930,11 @@ public class RulesManager {
 	}
 	public void setModelVersion(String modelVersion) {
 		this.modelVersion = modelVersion;
+	}
+	//40216
+	public void updateFromModel_separator(String separator) {
+		this.separator = separator;
+
 	}
 
 }

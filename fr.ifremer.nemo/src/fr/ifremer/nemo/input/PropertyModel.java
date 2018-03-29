@@ -322,7 +322,26 @@ public class PropertyModel extends AbstractModel {
 					if (_format instanceof DateTimeFormat) {
 						sResult = sResult.replace(' ', '0');
 					}
-					result = _format.parseObject(sResult);
+					
+					if (_format instanceof LatitudeFormat) {
+						//40216
+						LatitudeFormat formatLat=(LatitudeFormat) _format;
+						if ( formatLat.isFreeDecimalDegrees()){
+							result = formatLat.parseFreeDecimalDegrees(_fragment, a_Header[a_Header.length - 1]);
+						}else{
+							result = _format.parseObject(sResult);
+						}
+					}else if(_format instanceof LongitudeFormat){
+						//40216
+						LongitudeFormat formatLon=(LongitudeFormat) _format;
+						if ( formatLon.isFreeDecimalDegrees()){
+							result = formatLon.parseFreeDecimalDegrees(_fragment, a_Header[a_Header.length - 1]);
+						}else{
+							result = _format.parseObject(sResult);
+						}
+					}else{
+						result = _format.parseObject(sResult);
+					}
 				} catch (ParseException e) {
 					if (_format instanceof LatitudeFormat)
 						throw new ParseException(Messages.PropertyModel_1 + sResult + " " + _format.getErrorMessage(), 0);

@@ -9,6 +9,7 @@ import com.ago.xml.Element2Field;
 import com.ago.xml.SAXConsumer;
 import com.ago.xml.XMLOutputWriter;
 
+import fr.ifremer.nemo.ui.RulesManager;
 import fr.ifremer.nemo.util.Global;
 
 /**
@@ -69,6 +70,9 @@ public class Fragment extends AbstractModel
 	 * Valeur par défault
 	 */
 	protected String _defaultValue;
+
+	//40216
+	private int _colNb=-1;
 
     public Fragment() {
 		_tagName = ModelDescription.nodetitle_default;
@@ -251,30 +255,42 @@ public class Fragment extends AbstractModel
 
     public String retreiveInLine(String a_Line) {
 
-		StringWriter stringWriter = new StringWriter();
-		PrintWriter writer = new PrintWriter(stringWriter, true);
+    	StringWriter stringWriter = new StringWriter();
+    	PrintWriter writer = new PrintWriter(stringWriter, true);
 
-		// for (int i = _firstLine - 1; i < _lastLine; i++) {
-		// int start = 0;
-		int end = -1;
 
-		// if (i == _firstLine - 1) {
-		int start = _firstCharOffset - 1;
-		// }
-		// if (i == _lastLine - 1) {
-                if (_lastCharOffset != -1 && !isVariable()) {
-			end = _lastCharOffset - 1;
+    	int end = -1;
+
+    	int start = _firstCharOffset - 1;
+    	if (_lastCharOffset != -1 && !isVariable()) {
+    		end = _lastCharOffset - 1;
+    	}
+
+    	if (end == -1) {
+    		writer.println(a_Line.substring(start));
+    	} else {
+    		writer.println(a_Line.substring(start, end + 1));
+    	}
+    	
+    	//40216: guess the column number from the caracter start number (for files with separator)
+    	if (this._colNb==-1 && RulesManager.getInstance().isSeparatorChecked()){
+    		int colNb=-1;
+        	int currentCol=0;
+        	int indexSearch=0;
+    		String[] split = a_Line.split(RulesManager.getInstance().getSeparator());
+    			for (String colData : split){
+    				indexSearch = indexSearch+ colData.length();
+    				if (start < indexSearch){
+    					colNb = currentCol;
+    					break;
+    				}
+    				currentCol++;
+    				indexSearch++; // add separator
+    			}
+    			this._colNb=colNb;
 		}
-		// }
-
-            if (end == -1) {
-			writer.println(a_Line.substring(start));
-            } else {
-			writer.println(a_Line.substring(start, end + 1));
-		}
-		// }
-
-		return stringWriter.toString();
+    	
+		return stringWriter.toString().trim();
 	}
 
     public String retreiveVariable(String[] a_Header) {
@@ -320,7 +336,7 @@ public class Fragment extends AbstractModel
 			}
 		}
 
-		return stringWriter.toString();
+		return stringWriter.toString().trim();
 	}
 
     public String retreiveVariableInLine(String a_Line) {
@@ -361,7 +377,7 @@ public class Fragment extends AbstractModel
 		}
 		// }
 
-		return stringWriter.toString();
+		return stringWriter.toString().trim();
 	}
 
     public String fullRetreiveInLine(String a_Line){
@@ -631,6 +647,13 @@ public class Fragment extends AbstractModel
 			_defaultValueSelected = new Boolean(s).booleanValue();
         } catch (Exception e) { e.printStackTrace();
 		}
+	}
+
+	/**
+	 * 40216
+	 */
+    public int getColNb() {
+		return _colNb;
 	}
 
 }
