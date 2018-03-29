@@ -394,7 +394,7 @@ public class StationDomain {
 				odvStationHeader.append(botDepth);
 			} else {
 				// odvStationHeader.append(Global.ZERO);
-				odvStationHeader.append(Global.SPACE);
+//				odvStationHeader.append(Global.SPACE); // do not write a space, write nothing!
 			}
 			odvStationHeader.append(Global.TAB);
 
