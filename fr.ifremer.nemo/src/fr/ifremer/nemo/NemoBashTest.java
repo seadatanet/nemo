@@ -99,11 +99,11 @@ public class NemoBashTest {
 	 * *************** CONFIG *********************************
 	 * ********************************************************
 	 */
-	boolean REPLACE=true;// WARNING!!!
+	boolean REPLACE=false;// WARNING!!!
 	boolean REMOVE_JUNIT=false;
 	
-	public static String[] testDirAlone = {};
-//	public static String[] testDirAlone = {"cruiseFile_profile_diap"};
+//	public static String[] testDirAlone = {};
+	public static String[] testDirAlone = {"cruiseFile_profile_diap_stationsOrderBis"};
 			
 	/**
 	 * ********************************************************
