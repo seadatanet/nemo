@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry exported="true" kind="lib" path="lib/sismertoolslib-1.1.17-SNAPSHOT-jar-with-dependencies.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/cfpointLib-0.27.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
+	<classpathentry exported="true" kind="lib" path="lib/cfpointLib-0.30-SNAPSHOT-jar-with-dependencies.jar"/>
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
 	<classpathentry excluding="fr/ifremer/nemo/input/CopyOfFragment.java" kind="src" path="src"/>
 	<classpathentry exported="true" kind="lib" path="lib/activation.jar"/>
@@ -45,7 +43,7 @@
 	<classpathentry exported="true" kind="lib" path="lib/javax.persistence_2.1.0.v201304241213.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/log4j-api-2.3.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/log4j-core-2.3.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/sdnVocabulary-1.5.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/SoftwareVersionApi-1.0.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk1.7.0_51"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
