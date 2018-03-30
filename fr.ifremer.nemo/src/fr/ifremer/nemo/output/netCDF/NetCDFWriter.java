@@ -819,7 +819,7 @@ public class NetCDFWriter extends NemoWriter {
 		}
 		String title = SDNTools.getGeneratedByString(Format.CFPOINT, cfFeatureType.toString(), "Nemo", Nemo.getInstance().getVersion());
 		
-		SdnGlobalAttribute globattr = new SdnGlobalAttribute(cfFeatureType.getLabel(), title, new SimpleDateFormat("yyyy-MM-dd'T'HH:mmZ").format(new Date())); //$NON-NLS-1$
+		SdnGlobalAttribute globattr = new SdnGlobalAttribute(cfFeatureType.getLabel(), title, new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ").format(new Date())); //$NON-NLS-1$
 		myCFPointWriterManager.addGlobalAttributes(globattr);
 		SdnX longitude = null;
 		SdnY latitude = null;
