@@ -244,7 +244,6 @@ public class CruiseDomain {
 				"Nemo", 
 				Nemo.getInstance().getVersion());
 		medCruiseHeader.append(title);
-		medCruiseHeader.append(Global.RN);
 		
 		if (!_model.getComment().equals(Global.EMPTY_STRING)) {
 			for (String line : getCommentLines()) {
