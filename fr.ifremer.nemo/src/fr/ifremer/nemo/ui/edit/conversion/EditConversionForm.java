@@ -545,7 +545,7 @@ public class EditConversionForm extends EditForm {
 			command += "\"";
 		}
 		//sort
-		if( Nemo.getInstance().getDomain().getConversion().getModel().isSortStations()){
+		if(editFileForm.isSortForced()){
 			command += Global.SPACE;
 			command += Global.MOINS + Global.optSortDatas;
 		}
