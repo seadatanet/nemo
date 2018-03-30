@@ -544,6 +544,12 @@ public class EditConversionForm extends EditForm {
 			command += Nemo.getInstance().getDomain().getConversion().getCouplingTablePrefix();
 			command += "\"";
 		}
+		//sort
+		if( Nemo.getInstance().getDomain().getConversion().getModel().isSortStations()){
+			command += Global.SPACE;
+			command += Global.MOINS + Global.optSortDatas;
+		}
+		
 		return command;
 	}
 
