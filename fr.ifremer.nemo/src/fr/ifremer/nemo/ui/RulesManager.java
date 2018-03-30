@@ -549,6 +549,9 @@ public class RulesManager {
 				// !!! le fillTypes doit être appelé APRES le removeToAllcombos
 				Nemo.getInstance().getViewMain().getEditDataForm()
 				.getMyTableData().fillTypes();
+				
+				Nemo.getInstance().getViewMain().getEditDataForm().invalidEtape();
+				
 			} else {
 				// si pas confirmation, et ne touche a rien et on remet la
 				// valeur de depart
