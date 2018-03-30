@@ -99,7 +99,7 @@ public class NemoBashTest {
 	 * *************** CONFIG *********************************
 	 * ********************************************************
 	 */
-	boolean REPLACE=false;// WARNING!!!
+	boolean REPLACE=true;// WARNING!!!
 	boolean REMOVE_JUNIT=false;
 	
 	public static String[] testDirAlone = {};

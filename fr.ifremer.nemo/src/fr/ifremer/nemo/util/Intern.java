@@ -17,6 +17,7 @@ public class Intern extends NLS {
 
 	public static String dir_resources;
 	public static String dir_vocabLists;
+	public static String dir_CsrLists;
 
 	public static String fileName_configIni;
 	public static String fileName_coupling;

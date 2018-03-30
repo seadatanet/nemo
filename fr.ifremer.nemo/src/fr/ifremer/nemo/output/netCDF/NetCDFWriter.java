@@ -47,6 +47,7 @@ import fr.ifremer.seadatanet.cfpoint.SdnDimensionManager;
 import fr.ifremer.seadatanet.cfpoint.SdnDimensionManager.dim_ID;
 import fr.ifremer.seadatanet.cfpoint.SdnGlobalAttribute;
 import fr.ifremer.seadatanet.cfpoint.exceptions.CFPointException;
+import fr.ifremer.seadatanet.cfpoint.input.CFModel.FEATURE_TYPE;
 import fr.ifremer.seadatanet.cfpoint.util.ParameterNames;
 import fr.ifremer.seadatanet.cfpoint.util.ParameterValues;
 import fr.ifremer.seadatanet.cfpoint.util.UnitConversionManager;
@@ -64,6 +65,7 @@ import fr.ifremer.seadatanet.cfpoint.variable.SdnX;
 import fr.ifremer.seadatanet.cfpoint.variable.SdnXLinkVariable;
 import fr.ifremer.seadatanet.cfpoint.variable.SdnY;
 import fr.ifremer.seadatanet.cfpoint.variable.SdnZ;
+import fr.ifremer.sismer_tools.seadatanet.SDNXLinkBODCException;
 import fr.ifremer.sismer_tools.seadatanet.SDNXLinkException;
 import fr.ifremer.sismer_tools.seadatanet.SdnXLinkReference;
 
@@ -324,7 +326,11 @@ public class NetCDFWriter extends NemoWriter {
 		//CSR
 		if (cruiseDomain.getModel().getLocalCsrIdentifier() !=null && !cruiseDomain.getModel().getLocalCsrIdentifier().isEmpty()){
 			SdnXLinkReference csr = new SdnXLinkReference();
-			csr.setAsCsr(edmoCode, cruiseDomain.getModel().getLocalCsrIdentifier());
+			try {
+				csr.setAsCsr(edmoCode, cruiseDomain.getModel().getLocalCsrIdentifier());
+			} catch (SDNXLinkBODCException e) {
+				throw new SDNXLinkException("error while setting automatic CSR reference"); // TODO
+			}
 			computeSdnXlinkdims(csr);
 			references.add(csr);
 			nbRefs++;
@@ -334,7 +340,11 @@ public class NetCDFWriter extends NemoWriter {
 		if ( ! shipCodeAndName[0].isEmpty()	)
 		{
 			SdnXLinkReference shipRef = new SdnXLinkReference();
-			shipRef.setAsShipReference(shipCodeAndName[0] );
+			try {
+				shipRef.setAsShipReference(shipCodeAndName[0] );
+			} catch (SDNXLinkBODCException e) {
+				throw new SDNXLinkException("error while setting automatic CDI reference"); // TODO
+			}
 
 			computeSdnXlinkdims(shipRef);
 			references.add(shipRef);
@@ -350,7 +360,11 @@ public class NetCDFWriter extends NemoWriter {
 			computeSdnXlinkdims(cdiRef);
 			nbRefs++;
 		} catch (SDNXLinkException e) {
-			throw new SDNXLinkException("error while setting automatic CDI reference"); // TODO
+			throw new SDNXLinkException("error while setting automatic CDI reference " + e.getMessage()); // TODO
+		} catch (NumberFormatException e) {
+			throw new SDNXLinkException("error while setting automatic CDI reference " + e.getMessage()); // TODO
+		} catch (SDNXLinkBODCException e) {
+			throw new SDNXLinkException("error while setting automatic CDI reference " + e.getMessage()); // TODO
 		}
 		if (maxNbRefs<nbRefs){
 			maxNbRefs = nbRefs;
@@ -820,31 +834,28 @@ public class NetCDFWriter extends NemoWriter {
 			sdnUomUrn = getURNSyntaxe(URNtype.units, zParameterModel.getParameter().getUnitCode(), null, Intern.mapping_unit, zParameterModel.isText());
 		}
 		String sdnUomName = zParameterModel.getParameter().getUnit();
-		String sdnBotDepthLongName = Global.EMPTY_STRING;
 
-		SdnBotDepthVariable SdnBotDepth = new SdnBotDepthVariable(instanceDim, sdnBotDepthLongName);
+		SdnBotDepthVariable SdnBotDepth ;
 
 		// create Co-ordinate Variable
 		if (mediaModel.getInputType() == E_InputType.TRAJECTORY) {
-			sdnBotDepthLongName = Messages.typeFile_trajectory;
 			longitude = new SdnX(geoDim);
 			latitude = new SdnY(geoDim);
 			time = new SdnT(geoDim);
 			z = new SdnZ(zVarName, geoDim, longName, standardName, unit, sdnParameterUrn, sdnParameterName, sdnUomUrn, sdnUomName);
-			SdnBotDepth = new SdnBotDepthVariable(geoDim, sdnBotDepthLongName);
+			SdnBotDepth = new SdnBotDepthVariable(geoDim,  FEATURE_TYPE.trajectory);
 		} else if (mediaModel.getInputType() == E_InputType.PROFILE) {
-			sdnBotDepthLongName = Messages.typeFile_profile;
 			longitude = new SdnX(instanceDim);
 			latitude = new SdnY(instanceDim);
 			time = new SdnT(instanceDim);
 			z = new SdnZ(zVarName, geoDim, longName, standardName, unit, sdnParameterUrn, sdnParameterName, sdnUomUrn, sdnUomName);
+			SdnBotDepth = new SdnBotDepthVariable(geoDim,  FEATURE_TYPE.profile);
 		} else {
-			sdnBotDepthLongName = Messages.typeFile_timeseries;
 			longitude = new SdnX(instanceDim);
 			latitude = new SdnY(instanceDim);
 			time = new SdnT(geoDim);
 			z = new SdnZ(zVarName, instanceDim, longName, standardName, unit, sdnParameterUrn, sdnParameterName, sdnUomUrn, sdnUomName);
-
+			SdnBotDepth = new SdnBotDepthVariable(geoDim,  FEATURE_TYPE.timeSeries);
 		}
 
 

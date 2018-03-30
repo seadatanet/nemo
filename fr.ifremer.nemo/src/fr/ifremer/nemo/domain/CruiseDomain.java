@@ -27,6 +27,7 @@ import fr.ifremer.nemo.output.medatlas.Elts;
 import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Formatter;
 import fr.ifremer.nemo.util.Global;
+import fr.ifremer.sismer_tools.seadatanet.SDNXLinkBODCException;
 import fr.ifremer.sismer_tools.seadatanet.SDNXLinkException;
 import fr.ifremer.sismer_tools.seadatanet.SdnXLinkReference;
 
@@ -105,11 +106,9 @@ public class CruiseDomain {
 				odvCruiseHeader.append(csr.toString(true));
 				odvCruiseHeader.append(Global.RN);
 			} catch (NumberFormatException e1) {
-				// TODO 20755 Auto-generated catch block
-				e1.printStackTrace();
-			} catch (SDNXLinkException e1) {
-				// TODO 20755 Auto-generated catch block
-				e1.printStackTrace();
+				throw new GenerationException(e1.getMessage());
+			} catch (SDNXLinkBODCException e1) {
+				throw new GenerationException(e1.getMessage());
 			}
 		}
 
@@ -124,11 +123,11 @@ public class CruiseDomain {
 					odvCruiseHeader.append(shipRef.toString(true));
 					odvCruiseHeader.append(Global.RN);
 			} catch (NumberFormatException e1) {
-				// TODO 20755 Auto-generated catch block
-				e1.printStackTrace();
+				throw new GenerationException(e1.getMessage());
 			} catch (SDNXLinkException e1) {
-				// TODO 20755 Auto-generated catch block
-				e1.printStackTrace();
+				throw new GenerationException(e1.getMessage());
+			} catch (SDNXLinkBODCException e) {
+				throw new GenerationException(e.getMessage());
 			}
 		}
 		for (Station st : stationsList){
@@ -138,17 +137,15 @@ public class CruiseDomain {
 				localCdiId = stationDomain.getLocalCdiId(this, Conversion.ODV, st.getReference());
 				cdi.setAsCdi(Integer.valueOf(Nemo.getInstance().getConfig().getIdEdmoRespCdi()), localCdiId, true);
 			} catch (UnsupportedEncodingException e) {
-				// TODO 20755 Auto-generated catch block
-				e.printStackTrace();
+				throw new GenerationException(e.getMessage());
 			} catch (ParseException e) {
-				// TODO 20755 Auto-generated catch block
-				e.printStackTrace();
+				throw new GenerationException(e.getMessage());
 			} catch (NumberFormatException e) {
-				// TODO 20755 Auto-generated catch block
-				e.printStackTrace();
+				throw new GenerationException(e.getMessage());
 			} catch (SDNXLinkException e) {
-				// TODO 20755 Auto-generated catch block
-				e.printStackTrace();
+				throw new GenerationException(e.getMessage());
+			} catch (SDNXLinkBODCException e) {
+				throw new GenerationException(e.getMessage());
 			}
 
 

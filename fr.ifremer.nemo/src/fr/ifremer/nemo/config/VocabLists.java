@@ -27,6 +27,7 @@ import fr.ifremer.nemo.config.UpdateStatus.EtatUpdate;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
+import fr.ifremer.sismer_tools.csr.CSRListManager;
 
 /**
  * Description: Class permettant de gerer les listes BODC via la librairie SDNVocabulary
@@ -37,6 +38,7 @@ import fr.ifremer.nemo.util.Messages;
  */
 public class VocabLists {
 	static private ICollectionFactory cf;
+	protected static CSRListManager csrListManager;
 
 	static protected HashMap<String, ICollection> _vocabList = new HashMap<String, ICollection>();
 	static protected HashMap<String, ICollectionMapping> _vocabMap = new HashMap<String, ICollectionMapping>();
@@ -46,13 +48,20 @@ public class VocabLists {
 		File aRep = new File(vocabDir);
 
 		try {
-
 			CollectionFactory.newInstance(aRep);
 			cf = CollectionFactory.getInstance();
 		} catch (VocabularyException ve) {
 			System.out.println("ERROR : " + ve.getMessage()); //$NON-NLS-1$
 			Nemo.getInstance().getLogger().error(ve.getMessage());
 		}
+		try {
+			String csrDir = Intern.dir_resources + File.separator + Intern.dir_CsrLists;
+			csrListManager = CSRListManager.getInstance(csrDir);
+		} catch (Exception e) {
+			System.out.println("ERROR : " + e.getMessage()); //$NON-NLS-1$
+			Nemo.getInstance().getLogger().error(e.getMessage());
+		} 
+		
 	}
 
 	public static void initVocabs() {
@@ -361,5 +370,8 @@ public class VocabLists {
 	public static ICollectionFactory getCf() {
 		return cf;
 	}
-
+	public static CSRListManager getCSRListManager()
+	{
+		return csrListManager;
+	}
 }
