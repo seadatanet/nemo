@@ -869,13 +869,13 @@ public class NetCDFWriter extends NemoWriter {
 			latitude = new SdnY(instanceDim);
 			time = new SdnT(instanceDim);
 			z = new SdnZ(zVarName, geoDim, longName, standardName, unit, sdnParameterUrn, sdnParameterName, sdnUomUrn, sdnUomName);
-			SdnBotDepth = new SdnBotDepthVariable(geoDim,  FEATURE_TYPE.profile);
+			SdnBotDepth = new SdnBotDepthVariable(instanceDim,  FEATURE_TYPE.profile);
 		} else {
 			longitude = new SdnX(instanceDim);
 			latitude = new SdnY(instanceDim);
 			time = new SdnT(geoDim);
 			z = new SdnZ(zVarName, instanceDim, longName, standardName, unit, sdnParameterUrn, sdnParameterName, sdnUomUrn, sdnUomName);
-			SdnBotDepth = new SdnBotDepthVariable(geoDim,  FEATURE_TYPE.timeSeries);
+			SdnBotDepth = new SdnBotDepthVariable(instanceDim,  FEATURE_TYPE.timeSeries);
 		}
 
 
