@@ -54,9 +54,7 @@ Bundle-ClassPath: .,
  lib/javax.persistence_2.1.0.v201304241213.jar,
  lib/log4j-api-2.3.jar,
  lib/log4j-core-2.3.jar,
- lib/sdnVocabulary-1.5.jar,
  lib/SoftwareVersionApi-1.0.jar,
- lib/cfpointLib-0.27.jar,
- lib/sismertoolslib-1.1.17-SNAPSHOT-jar-with-dependencies.jar
+ lib/cfpointLib-0.30-SNAPSHOT-jar-with-dependencies.jar
 Bundle-Vendor: IFREMER
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
