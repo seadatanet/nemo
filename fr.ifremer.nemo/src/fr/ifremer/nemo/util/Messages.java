@@ -195,6 +195,9 @@ public class Messages {
 	public static String edit_cruise_sectionReference_lib;
 	public static String edit_cruise_cruiseRef;
 	public static String edit_cruise_cruiseLocalCsrId;
+	public static String edit_cruise_cruiseLocalCsrId_unableToCheck;
+	public static String edit_cruise_cruiseLocalCsrId_doesNotExist;
+	
 	public static String edit_cruise_cruiseName;
 	public static String edit_cruise_ship;
 	public static String edit_cruise_sectionLocation;

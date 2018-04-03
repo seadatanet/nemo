@@ -1,13 +1,16 @@
 package fr.ifremer.nemo.ui.edit.cruise;
 
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.text.MessageFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.config.ManageLists;
+import fr.ifremer.nemo.config.VocabLists;
 import fr.ifremer.nemo.ui.RulesManager;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.FormValidator;
@@ -70,6 +73,8 @@ public class CruiseFormValidator extends FormValidator {
 		// check valeurs obligatoires
 		CruiseSection section = editCruiseForm.getSectionReference();
 		if (section != null){
+			
+			
 			resultat = section.checkMandatory(itemID.REFERENCE);
 			displayErrorIfNeeded(resultat, Messages.edit_cruise_cruiseRef);
 			ok = ok && resultat;
@@ -84,6 +89,9 @@ public class CruiseFormValidator extends FormValidator {
 			displayErrorIfNeeded(resultat, Messages.edit_cruise_ship);
 			ok = ok && resultat;
 			
+			
+			
+			
 			// 35230 SHIP
 			String shipCode = fr.ifremer.nemo.util.Utils.extraitCode(section.getItem(itemID.SHIP).getText());
 			String shipName = fr.ifremer.nemo.util.Utils.extraitValeur(section.getItem(itemID.SHIP).getText());
@@ -95,7 +103,7 @@ public class CruiseFormValidator extends FormValidator {
 					Utils.messageErreurAppend(bodcRes.getErrorMsg());
 				}else if (bodcRes.getResStatus() == BODC_RES_STATUS.WARNING){
 					Utils.selectComboCodePlus(section.getItem(itemID.SHIP).getValueCombo(),bodcRes.getShipCode(), bodcRes.getShipLabel());
-					Utils.messageWarningAppend(bodcRes.getWarningMsg());
+					warningCruise+=bodcRes.getWarningMsg()+Global.RN;
 				}
 			}
 			// FAE 1143 : la référence campagne doit être == 13 caractères pour
@@ -107,6 +115,19 @@ public class CruiseFormValidator extends FormValidator {
 			} else {
 				editConversionForm.setWarningStation(Global.EMPTY_STRING);
 			}
+			
+			String csrRef = fr.ifremer.nemo.util.Utils.extraitCode(section.getItem(itemID.LOCAL_CSR_ID).getText());
+			if (!csrRef.trim().isEmpty()){
+				try {
+					boolean exist = VocabLists.getCSRListManager().doesCodeExist(Nemo.getInstance().getConfig().getIdEdmoRespCdi(), csrRef);
+					if (!exist){
+						warningCruise+=MessageFormat.format(Messages.edit_cruise_cruiseLocalCsrId_doesNotExist , csrRef, Nemo.getInstance().getConfig().getIdEdmoRespCdi())+Global.RN;
+					}
+				} catch ( IOException e) {
+					warningCruise+=Messages.edit_cruise_cruiseLocalCsrId_unableToCheck;
+				}
+			}
+			
 		}
 
 		section = editCruiseForm.getSectionLocalisation();
