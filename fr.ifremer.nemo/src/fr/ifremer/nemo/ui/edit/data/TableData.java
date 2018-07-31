@@ -1158,8 +1158,8 @@ public class TableData {
 				}
 			}
 			String unitLabel;
-//			if (RulesManager.getInstance().isDataListTypeP091() ){//25794
-			if ( RulesManager.getInstance().isConversionToMedatlas()){//25794
+			if (RulesManager.getInstance().isDataListTypeP091() ){//25794
+//			if ( RulesManager.getInstance().isConversionToMedatlas()){//25794 NO: we do not have the P06 label if conversion is ODV or CFPoint and datalistType is P09!!
 				unitLabel=types.get(i).getUnite();
 			}else{
 				unitLabel=types.get(i).getP06Label();
