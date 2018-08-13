@@ -91,8 +91,12 @@ public class InputTableData {
 			}
 		});
 	}
-
-
+	private String getSeparatorForSplit(){
+		if (separator.equals("|")){ //$NON-NLS-1$
+			return "\\|"; //$NON-NLS-1$
+		}
+		return separator;
+	}
 	/**
 	 * create the columns for the table
 	 * 
@@ -117,7 +121,8 @@ public class InputTableData {
 					String res="";
 					if (separator!=null){
 						try{
-							res= ((String)cell.getElement()).split(separator)[cell.getColumnIndex()];
+							
+							res= ((String)cell.getElement()).split(getSeparatorForSplit())[cell.getColumnIndex()];
 						}catch (Exception e) {
 							Nemo.getInstance().getLogger().debug("error on data, maybe a station header " + e);
 						}
@@ -182,7 +187,7 @@ public class InputTableData {
 		
 		for (String line : lignesBrutes){
 			if  (Nemo.getInstance().getDomain().getMedia().isColTitleInInputFile() && cpt==Nemo.getInstance().getDomain().getMedia().getColTitlesLineNb()-1 ){
-				split = line.split(separator);
+				split = line.split(getSeparatorForSplit());
 				createColumns(split);
 				columnsTitlesCreated=true;
 			}
@@ -196,7 +201,7 @@ public class InputTableData {
 			}
 			else{
 				if (!columnsTitlesCreated){
-					split = line.split(separator);
+					split = line.split(getSeparatorForSplit());
 					String[] colTitles = new String[split.length];
 
 					for (int colNb=0; colNb<split.length; colNb++)
