@@ -200,11 +200,15 @@ public abstract class NemoWriter {
 							int nbrecords = 0;
 							boolean isRateCalculated = false;
 							while ((readedLine = bufferedReader.readLine()) != null) {
+								 if(readedLine.trim().isEmpty()){
+									 break;
+								 }
 								incrementLine();
-
+								
 								if (inFileHeader()) {
 									continue;
 								}
+								
 								if (isEndData() && (st != null)) {
 
 									st.setNbRecords(nbrecords);
