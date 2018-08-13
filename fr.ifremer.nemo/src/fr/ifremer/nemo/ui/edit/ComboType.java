@@ -22,6 +22,7 @@ import fr.ifremer.nemo.config.VocabLists;
 import fr.ifremer.nemo.ui.RulesManager;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.cruise.TableDataSurvey;
+import fr.ifremer.nemo.ui.edit.station.EditStationForm;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Intern;
 
@@ -109,6 +110,7 @@ public enum ComboType {
 			valueCombo.add("NDD MM.mm"); //$NON-NLS-1$
 			valueCombo.add("NDD.ddd"); //$NON-NLS-1$
 			valueCombo.add("NDDMMSS"); //$NON-NLS-1$
+			valueCombo.add(EditStationForm.LATLON_CHOICE_DEC_DEGREES_FOR_FILES_WITH_SEP);
 			break;
 		case LON:
 			valueCombo.add("+DDD MM.mm"); //$NON-NLS-1$
@@ -117,6 +119,7 @@ public enum ComboType {
 			valueCombo.add("NDDD MM.mm"); //$NON-NLS-1$
 			valueCombo.add("NDDD.ddd"); //$NON-NLS-1$
 			valueCombo.add("NDDDMMSS"); //$NON-NLS-1$
+			valueCombo.add(EditStationForm.LATLON_CHOICE_DEC_DEGREES_FOR_FILES_WITH_SEP);
 			break;
 		case DATATYPE:
 			// FAE022

@@ -17,6 +17,7 @@ import com.ago.xml.XMLOutputWriter;
 import fr.ifremer.nemo.input.Fragment;
 import fr.ifremer.nemo.input.ModelDescription;
 import fr.ifremer.nemo.ui.RulesManager;
+import fr.ifremer.nemo.ui.edit.station.EditStationForm;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Intern;
 
@@ -396,7 +397,7 @@ public class LongitudeFormat extends ExternalizableFormat implements Cloneable
 		}
 	}
 	public boolean isFreeDecimalDegrees(){
-		return _elements[0]._element.equals("#");
+		return _formatString.equals(EditStationForm.LATLON_CHOICE_DEC_DEGREES_FOR_FILES_WITH_SEP);
 	}
 	/**
 	 * 
