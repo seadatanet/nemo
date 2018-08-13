@@ -34,7 +34,10 @@ public class StationFormValidator extends FormValidator {
 	public void validate() {
 
 		try {
-
+			//37866: mise a jour des tous les champs car affichage peut etre a modifier en fonction des selections effectuees 
+			  Nemo.getInstance().getViewMain().getEditStationForm().actualiseEdition();
+			  
+			  
 			EditStationForm editStationForm = Nemo.getInstance().getViewMain().getEditStationForm();
 			EditFileForm editFileForm = Nemo.getInstance().getViewMain().getEditFileForm();
 			EditConversionForm editConversionForm = Nemo.getInstance().getViewMain().getEditConversionForm();
