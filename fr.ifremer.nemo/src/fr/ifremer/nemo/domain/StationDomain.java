@@ -693,9 +693,17 @@ public class StationDomain {
 			
 			errorMessage = "SDN CSR REFERENCE";
 			String localCsrId = Nemo.getInstance().getDomain().getCruise().getModel().getLocalCsrIdentifier();
-			if (localCsrId!=null && !localCsrId.isEmpty()){
+			String bshCsrReference = Nemo.getInstance().getDomain().getCruise().getModel().getBshCsrReference();
+			
+			if (localCsrId!=null && !localCsrId.trim().isEmpty()){
 				SdnXLinkReference csr = new SdnXLinkReference();
-				csr.setAsCsr(Integer.valueOf(edmoCode), localCsrId);
+				csr.setAsCsr(Integer.valueOf(Nemo.getInstance().getConfig().getIdEdmoRespCsr()), localCsrId);
+				medStationHeader.append(start);
+				medStationHeader.append(csr);
+				medStationHeader.append(Global.RN);
+			}else if(bshCsrReference!=null && !bshCsrReference.trim().isEmpty()){
+				SdnXLinkReference csr = new SdnXLinkReference();
+				csr.setAsCsr(bshCsrReference);
 				medStationHeader.append(start);
 				medStationHeader.append(csr);
 				medStationHeader.append(Global.RN);

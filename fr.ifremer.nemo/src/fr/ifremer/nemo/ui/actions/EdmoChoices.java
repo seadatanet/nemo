@@ -3,6 +3,9 @@ package fr.ifremer.nemo.ui.actions;
 public class EdmoChoices {
 
 	private int IdEdmoRespCdi;
+	private int IdEdmoRespCsr;
+	
+	
 	private int CodeEdmoDonnees;
 	private int IdEdmoRespDonnees;
 	private int IdEdmoDistDonnees;
@@ -11,6 +14,7 @@ public class EdmoChoices {
 	public static int CHOICE_CodeEdmoDonnees = 1;
 	public static int CHOICE_IdEdmoRespDonnees = 2;
 	public static int CHOICE_IdEdmoDistDonnees = 3;
+	public static int CHOICE_IdEdmoRespCsr = 4;
 
 	public EdmoChoices() {
 
@@ -46,5 +50,13 @@ public class EdmoChoices {
 
 	public void setIdEdmoDistDonnees(int idEdmoDistDonnees) {
 		IdEdmoDistDonnees = idEdmoDistDonnees;
+	}
+
+	public int getIdEdmoRespCsr() {
+		return IdEdmoRespCsr;
+	}
+
+	public void setIdEdmoRespCsr(int idEdmoRespCsr) {
+		IdEdmoRespCsr = idEdmoRespCsr;
 	}
 }

@@ -81,6 +81,10 @@ public class CruiseFormValidator extends FormValidator {
 			resultat = section.checkMandatory(itemID.LOCAL_CSR_ID);
 			displayErrorIfNeeded(resultat, Messages.edit_cruise_cruiseLocalCsrId);
 			ok = ok && resultat;
+			resultat = section.checkMandatory(itemID.BSH_CSR);
+			displayErrorIfNeeded(resultat, Messages.edit_cruise_cruiseBshCsrReference);
+			ok = ok && resultat;
+			
 			resultat = section.checkMandatory(itemID.NAME);
 			displayErrorIfNeeded(resultat, Messages.edit_cruise_cruiseName);
 			ok = ok && resultat;
@@ -116,12 +120,21 @@ public class CruiseFormValidator extends FormValidator {
 				editConversionForm.setWarningStation(Global.EMPTY_STRING);
 			}
 			
-			String csrRef = fr.ifremer.nemo.util.Utils.extraitCode(section.getItem(itemID.LOCAL_CSR_ID).getText());
-			if (!csrRef.trim().isEmpty()){
+			String localCsrRef = fr.ifremer.nemo.util.Utils.extraitCode(section.getItem(itemID.LOCAL_CSR_ID).getText());
+			String bshCsrRef = fr.ifremer.nemo.util.Utils.extraitCode(section.getItem(itemID.BSH_CSR).getText());
+			
+			if (localCsrRef.trim().isEmpty() && bshCsrRef.trim().isEmpty()){
+				ok=false;
+				Utils.messageErreurAppend("you should set either local_csr_id or bsh_csr reference (at least one)");// TODO 42778
+			}else if (!localCsrRef.trim().isEmpty() && !bshCsrRef.trim().isEmpty()){
+				ok=false;
+				Utils.messageErreurAppend("you should set either local_csr_id or bsh_csr reference (not both)");// TODO 42778
+			}
+			if (!localCsrRef.trim().isEmpty()){
 				try {
-					boolean exist = VocabLists.getCSRListManager().doesCodeExist(Nemo.getInstance().getConfig().getIdEdmoRespCdi(), csrRef);
+					boolean exist = VocabLists.getCSRListManager().doesCodeExist(Nemo.getInstance().getConfig().getIdEdmoRespCdi(), localCsrRef);
 					if (!exist){
-						warningCruise+=MessageFormat.format(Messages.edit_cruise_cruiseLocalCsrId_doesNotExist , csrRef, Nemo.getInstance().getConfig().getIdEdmoRespCdi())+Global.RN;
+						warningCruise+=MessageFormat.format(Messages.edit_cruise_cruiseLocalCsrId_doesNotExist , localCsrRef, Nemo.getInstance().getConfig().getIdEdmoRespCdi())+Global.RN;
 					}
 				} catch ( IOException e) {
 					warningCruise+=Messages.edit_cruise_cruiseLocalCsrId_unableToCheck;

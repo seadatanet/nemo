@@ -112,7 +112,9 @@ public class EdmoViewer {
 				EdmoEntity edmo = (EdmoEntity) arg0.item.getData();
 				if (choice == EdmoChoices.CHOICE_IdEdmoRespCdi) {
 					tmpEdmoChoices.setIdEdmoRespCdi(edmo.getCode());
-				} else if (choice == EdmoChoices.CHOICE_CodeEdmoDonnees) {
+				} else if (choice == EdmoChoices.CHOICE_IdEdmoRespCsr) {
+					tmpEdmoChoices.setIdEdmoRespCsr(edmo.getCode());
+				}  else if (choice == EdmoChoices.CHOICE_CodeEdmoDonnees) {
 					tmpEdmoChoices.setCodeEdmoDonnees(edmo.getCode());
 				} else if (choice == EdmoChoices.CHOICE_IdEdmoRespDonnees) {
 					tmpEdmoChoices.setIdEdmoRespDonnees(edmo.getCode());

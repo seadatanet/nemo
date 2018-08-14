@@ -82,10 +82,11 @@ public class OptionsAction extends Action implements ISelectionListener, ActionF
 	private static CCombo comboLangue, comboCentreDonnees, comboMethodeCdi,
 			comboTypePlateForme, comboAccesDonnees = null;
 
-	private Button buttonEdmoChoiceIdEdmoRespCdi;
-	private Button buttonEdmoChoiceIdCodeEdmoDonnees;
-	private Button buttonEdmoChoiceIdEdmoRespDonnees;
-	private Button buttonEdmoChoiceIdEdmoDistDonnees;
+	Button buttonEdmoChoiceIdEdmoRespCdi;
+	Button buttonEdmoChoiceIdEdmoRespCsr;
+	Button buttonEdmoChoiceIdCodeEdmoDonnees;
+	Button buttonEdmoChoiceIdEdmoRespDonnees;
+	Button buttonEdmoChoiceIdEdmoDistDonnees;
 	private EdmoChoiceListener edmoChoiceListener;
 
 	private EdmoChoices tmpEdmoChoices;
@@ -93,7 +94,7 @@ public class OptionsAction extends Action implements ISelectionListener, ActionF
 			buttonParcourirModele, buttonParcourirCampagne = null;
 
 	private static Label labelNemo, labelNautilus, labelCampagne, lblCDI,
-			labelIdEdmoRespCdi, labelIdEdmoRespDonnees, labelCodeEdmoDonnees,
+			labelIdEdmoRespCdi, labelIdEdmoRespCsr, labelIdEdmoRespDonnees, labelCodeEdmoDonnees,
 			labelIdEdmoDistDonnees, labelUrlCdi, labelMethodeCdi, labelWSVocab,
 			labelFichierMapping, lblOdvFormatVersion, lblNetCDFFormatVersion,
 			lblMedatlasFormatVersion, labelWSEdmo, lblTypePlateForme,
@@ -207,6 +208,10 @@ public class OptionsAction extends Action implements ISelectionListener, ActionF
 		String value = Nemo.getInstance().getConfig().getIdEdmoRespCdi();
 		if (!value.isEmpty()) {
 			tmpEdmoChoices.setIdEdmoRespCdi(Integer.valueOf(value));
+		}
+		value = Nemo.getInstance().getConfig().getIdEdmoRespCsr();
+		if (!value.isEmpty()) {
+			tmpEdmoChoices.setIdEdmoRespCsr(Integer.valueOf(value));
 		}
 		value = Nemo.getInstance().getConfig().getCodeEdmoDonnees();
 		if (!value.isEmpty()) {
@@ -725,6 +730,15 @@ public class OptionsAction extends Action implements ISelectionListener, ActionF
 
 		labelIdEdmoRespCdi = new Label(groupEdmoRespCDI, SWT.NONE);
 		labelIdEdmoRespCdi.setFont(Utils.font08);
+		
+		
+		buttonEdmoChoiceIdEdmoRespCsr= new Button(groupEdmoRespCDI, SWT.PUSH);
+		buttonEdmoChoiceIdEdmoRespCsr.setText(Messages.settings_EDMO_choice_button);
+		buttonEdmoChoiceIdEdmoRespCsr.addListener(SWT.Selection, edmoChoiceListener);
+
+		labelIdEdmoRespCsr = new Label(groupEdmoRespCDI, SWT.NONE);
+		labelIdEdmoRespCsr.setFont(Utils.font08);
+		
 
 	}
 
@@ -732,7 +746,10 @@ public class OptionsAction extends Action implements ISelectionListener, ActionF
 		public void handleEvent(Event event) {
 			if (event.widget == buttonEdmoChoiceIdEdmoRespCdi) {
 				edmoViewer = new EdmoViewer(OptionsAction.this, EdmoChoices.CHOICE_IdEdmoRespCdi);
-			} else if (event.widget == buttonEdmoChoiceIdCodeEdmoDonnees) {
+			} else if (event.widget == buttonEdmoChoiceIdEdmoRespCsr) {
+				edmoViewer = new EdmoViewer(OptionsAction.this, EdmoChoices.CHOICE_IdEdmoRespCsr);
+
+			}  else if (event.widget == buttonEdmoChoiceIdCodeEdmoDonnees) {
 				edmoViewer = new EdmoViewer(OptionsAction.this, EdmoChoices.CHOICE_CodeEdmoDonnees);
 
 			} else if (event.widget == buttonEdmoChoiceIdEdmoRespDonnees) {
@@ -1715,6 +1732,7 @@ public class OptionsAction extends Action implements ISelectionListener, ActionF
 		// CDI
 		configuration.setWriteCdi(checkCDI.getSelection());
 		configuration.setIdEdmoRespCdi(String.valueOf(tmpEdmoChoices.getIdEdmoRespCdi()));
+		configuration.setIdEdmoRespCsr(String.valueOf(tmpEdmoChoices.getIdEdmoRespCsr()));
 		configuration.setCodeEdmoDonnees(String.valueOf(tmpEdmoChoices.getCodeEdmoDonnees()));
 		configuration.setIdEdmoRespDonnees(String.valueOf(tmpEdmoChoices.getIdEdmoRespDonnees()));
 		configuration.setIdEdmoDistDonnees(String.valueOf(tmpEdmoChoices.getIdEdmoDistDonnees()));
@@ -1807,6 +1825,7 @@ public class OptionsAction extends Action implements ISelectionListener, ActionF
 		tmpEdmoChoices = tmpEdmoChoicesNew;
 		// TODO BGT: remplir tmpEdmoChoices avec config a l'ouverture
 		labelIdEdmoRespCdi.setText(Messages.settings_EDMOauthor + ": " + tmpEdmoChoices.getIdEdmoRespCdi());
+		labelIdEdmoRespCsr.setText(Messages.settings_EDMOCSRauthor + ": " + tmpEdmoChoices.getIdEdmoRespCsr());
 
 		labelIdEdmoRespDonnees.setText(Messages.settings_EDMOcustodian + ": " + tmpEdmoChoices.getIdEdmoRespDonnees());
 
@@ -1815,6 +1834,7 @@ public class OptionsAction extends Action implements ISelectionListener, ActionF
 		labelIdEdmoDistDonnees.setText(Messages.settings_EDMOdist + ": " + tmpEdmoChoices.getIdEdmoDistDonnees());
 
 		labelIdEdmoRespCdi.pack();
+		labelIdEdmoRespCsr.pack();
 		labelIdEdmoRespDonnees.pack();
 		labelCodeEdmoDonnees.pack();
 		labelIdEdmoDistDonnees.pack();

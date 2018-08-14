@@ -57,6 +57,8 @@ public class Configuration extends AbstractModel {
 	protected boolean _writeMapping;
 
 	protected String _idEdmoRespCdi;
+	
+	protected String _idEdmoRespCsr;
 
 	protected String _codeEdmoDonnees;
 
@@ -265,6 +267,11 @@ public class Configuration extends AbstractModel {
 					new Element2Field(this, ConfigDescription.setter_IdEdmoRespCdi);
 			return setter;
 		}
+		if (a_LocalName.equals(ConfigDescription.node_idEdmoRespCsr)) {
+			Element2Field setter =
+					new Element2Field(this, ConfigDescription.setter_IdEdmoRespCsr);
+			return setter;
+		}
 		if (a_LocalName.equals(ConfigDescription.node_codeEdmoDonnees)) {
 			Element2Field setter =
 					new Element2Field(this,
@@ -443,10 +450,9 @@ public class Configuration extends AbstractModel {
 		a_Writer.putTag(ConfigDescription.node_outputDirectory,
 				getOutputDirectory());
 		a_Writer.putTag(ConfigDescription.node_writeCdi, isWriteCdi());
-		a_Writer.putTag(ConfigDescription.node_idEdmoRespCdi,
-				getIdEdmoRespCdi());
-		a_Writer.putTag(ConfigDescription.node_codeEdmoDonnees,
-				getCodeEdmoDonnees());
+		a_Writer.putTag(ConfigDescription.node_idEdmoRespCdi,getIdEdmoRespCdi());
+		a_Writer.putTag(ConfigDescription.node_idEdmoRespCsr,getIdEdmoRespCsr());
+		a_Writer.putTag(ConfigDescription.node_codeEdmoDonnees,	getCodeEdmoDonnees());
 		a_Writer.putTag(ConfigDescription.node_idEdmoRespDonnees,
 				getIdEdmoRespDonnees());
 		a_Writer.putTag(ConfigDescription.node_idEdmoDistDonnees,
@@ -1167,6 +1173,11 @@ public class Configuration extends AbstractModel {
 			message += Global.RN + Global.SEP + Messages.settings_EDMOauthor;
 			blnOK = false;
 		}
+		if (Nemo.getInstance().getConfig().getIdEdmoRespCsr().trim().equals(
+				Global.EMPTY_STRING)) {
+			message += Global.RN + Global.SEP + Messages.settings_EDMOCSRauthor;
+			blnOK = false;
+		}
 
 		if (Nemo.getInstance().getConfig().isWriteCdi()) {
 			if (Nemo.getInstance().getConfig().getCodeEdmoDonnees().trim()
@@ -1209,6 +1220,14 @@ public class Configuration extends AbstractModel {
 			return message;
 		}
 		return message;
+	}
+
+	public String getIdEdmoRespCsr() {
+		return _idEdmoRespCsr;
+	}
+
+	public void setIdEdmoRespCsr(String x) {
+		_idEdmoRespCsr = x;
 	}
 
 }

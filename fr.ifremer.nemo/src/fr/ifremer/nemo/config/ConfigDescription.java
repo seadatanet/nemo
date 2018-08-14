@@ -79,6 +79,8 @@ public class ConfigDescription extends NLS {
 	public static String node_idEdmoDistDonnees;
 
 	public static String node_idEdmoRespCdi;
+	
+	public static String node_idEdmoRespCsr;
 
 	public static String node_idEdmoRespDonnees;
 
@@ -137,6 +139,7 @@ public class ConfigDescription extends NLS {
 	public static String setter_IdEdmoDistDonnees;
 
 	public static String setter_IdEdmoRespCdi;
+	public static String setter_IdEdmoRespCsr;
 
 	public static String setter_IdEdmoRespDonnees;
 

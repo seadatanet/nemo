@@ -103,7 +103,19 @@ public class CruiseDomain {
 		if (_model.getLocalCsrIdentifier() != null && !_model.getLocalCsrIdentifier().isEmpty()){
 			SdnXLinkReference csr = new SdnXLinkReference();
 			try {
-				csr.setAsCsr(Integer.valueOf(Nemo.getInstance().getConfig().getIdEdmoRespCdi()), _model.getLocalCsrIdentifier());
+				csr.setAsCsr(Integer.valueOf(Nemo.getInstance().getConfig().getIdEdmoRespCsr()), _model.getLocalCsrIdentifier());
+				odvCruiseHeader.append(start);
+				odvCruiseHeader.append(csr.toString(true));
+				odvCruiseHeader.append(Global.RN);
+			} catch (NumberFormatException e1) {
+				throw new GenerationException(e1.getMessage());
+			} catch (SDNXLinkBODCException e1) {
+				throw new GenerationException(e1.getMessage());
+			}
+		}else if(_model.getBshCsrReference()!= null && !_model.getBshCsrReference().trim().isEmpty()){
+			SdnXLinkReference csr = new SdnXLinkReference();
+			try {
+				csr.setAsCsr( _model.getBshCsrReference());
 				odvCruiseHeader.append(start);
 				odvCruiseHeader.append(csr.toString(true));
 				odvCruiseHeader.append(Global.RN);

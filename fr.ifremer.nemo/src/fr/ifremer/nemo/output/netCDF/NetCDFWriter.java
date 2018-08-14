@@ -324,13 +324,22 @@ public class NetCDFWriter extends NemoWriter {
 	{
 		ArrayList<SdnXLinkReference> references = new ArrayList<SdnXLinkReference>();
 		int nbRefs=0;
-		int edmoCode = Integer.valueOf(Nemo.getInstance().getConfig().getIdEdmoRespCdi());
 
 		//CSR
 		if (cruiseDomain.getModel().getLocalCsrIdentifier() !=null && !cruiseDomain.getModel().getLocalCsrIdentifier().isEmpty()){
 			SdnXLinkReference csr = new SdnXLinkReference();
 			try {
-				csr.setAsCsr(edmoCode, cruiseDomain.getModel().getLocalCsrIdentifier());
+				csr.setAsCsr(Integer.valueOf(Nemo.getInstance().getConfig().getIdEdmoRespCsr()), cruiseDomain.getModel().getLocalCsrIdentifier());
+			} catch (SDNXLinkBODCException e) {
+				throw new SDNXLinkException("error while setting automatic CSR reference"); // TODO
+			}
+			computeSdnXlinkdims(csr);
+			references.add(csr);
+			nbRefs++;
+		}else if(cruiseDomain.getModel().getBshCsrReference() !=null && !cruiseDomain.getModel().getBshCsrReference().isEmpty()){
+			SdnXLinkReference csr = new SdnXLinkReference();
+			try {
+				csr.setAsCsr( cruiseDomain.getModel().getBshCsrReference());
 			} catch (SDNXLinkBODCException e) {
 				throw new SDNXLinkException("error while setting automatic CSR reference"); // TODO
 			}

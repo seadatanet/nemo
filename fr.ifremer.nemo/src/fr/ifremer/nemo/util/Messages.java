@@ -197,6 +197,7 @@ public class Messages {
 	public static String edit_cruise_cruiseLocalCsrId;
 	public static String edit_cruise_cruiseLocalCsrId_unableToCheck;
 	public static String edit_cruise_cruiseLocalCsrId_doesNotExist;
+	public static String edit_cruise_cruiseBshCsrReference;
 	
 	public static String edit_cruise_cruiseName;
 	public static String edit_cruise_ship;
@@ -369,6 +370,7 @@ public class Messages {
 	public static String settings_dir_data;
 	public static String settings_datacenter;
 	public static String settings_EDMOauthor;
+	public static String settings_EDMOCSRauthor;
 	public static String settings_dataDist_web;
 	public static String settings_dataDist_met;
 	public static String settings_EDMOori;

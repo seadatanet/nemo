@@ -227,10 +227,17 @@ public class EditCruiseForm extends EditForm {
 			item.setEnabled(!RulesManager.getInstance().isProcessCollectionDir());
 			item.setMandatory(!RulesManager.getInstance().isProcessCollectionDir());
 			
-			// CSR
+			// Local CSR ID
 			item = sectionReference.getItem(itemID.LOCAL_CSR_ID);
 			item.setMandatory(false);
 			item.setEnabled(!RulesManager.getInstance().isProcessCollection());
+			
+			// BSH CSR reference
+			item = sectionReference.getItem(itemID.BSH_CSR);
+			item.setMandatory(false);
+			item.setEnabled(!RulesManager.getInstance().isProcessCollection());
+						
+			
 			//Name
 			item = sectionReference.getItem(itemID.NAME);
 			item.setEnabled(!RulesManager.getInstance().isProcessCollectionDir());
@@ -452,6 +459,9 @@ public class EditCruiseForm extends EditForm {
 			sectionReference.addItem(itemID.LOCAL_CSR_ID,
 					Messages.edit_cruise_cruiseLocalCsrId, ComboType.NONE,
 					Global.EMPTY_STRING);
+			sectionReference.addItem(itemID.BSH_CSR,
+					Messages.edit_cruise_cruiseBshCsrReference, ComboType.NONE,
+					Global.EMPTY_STRING);
 			sectionReference.addItem(itemID.NAME,
 					Messages.edit_cruise_cruiseName, ComboType.NONE,
 					Global.EMPTY_STRING);
@@ -582,10 +592,12 @@ public class EditCruiseForm extends EditForm {
 		if (sectionReference.isEnabled()) {
 			Couple refCampagne = sectionReference.getItem(itemID.REFERENCE);
 			Couple localCsrId = sectionReference.getItem(itemID.LOCAL_CSR_ID);
+			Couple bshCsrId = sectionReference.getItem(itemID.BSH_CSR);
 			Couple nomCampagne = sectionReference.getItem(itemID.NAME);
 			Couple navire = sectionReference.getItem(itemID.SHIP);
 			cruiseModel.setReference(refCampagne.getText());
 			cruiseModel.setLocalCSRIdentifier(localCsrId.getText());
+			cruiseModel.setBshCsrReference(bshCsrId.getText());
 			cruiseModel.setName(nomCampagne.getText());
 			cruiseModel.setShipCode(fr.ifremer.nemo.util.Utils
 					.extraitCode(navire.getText()));
@@ -686,6 +698,7 @@ public class EditCruiseForm extends EditForm {
 		if (sectionReference != null) {
 			Couple refCampagne = sectionReference.getItem(itemID.REFERENCE);
 			Couple localCsrId = sectionReference.getItem(itemID.LOCAL_CSR_ID);
+			Couple bshCsrId = sectionReference.getItem(itemID.BSH_CSR);
 			Couple nomCampagne = sectionReference.getItem(itemID.NAME);
 			Couple navire = sectionReference.getItem(itemID.SHIP);
 
@@ -699,6 +712,9 @@ public class EditCruiseForm extends EditForm {
 			}
 			if (localCsrId != null && localCsrId.isEnabled()) {
 				localCsrId.setText(cruiseModel.getLocalCsrIdentifier());
+			}
+			if (bshCsrId != null && bshCsrId.isEnabled()) {
+					bshCsrId.setText(cruiseModel.getBshCsrReference());
 			}
 			if (nomCampagne != null && nomCampagne.isEnabled()) {
 				nomCampagne.setText(cruiseModel.getName());

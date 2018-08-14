@@ -67,7 +67,7 @@ public class CruiseModel extends AbstractModel {
 	 * Local CSR ID = CRNO
 	 */
 	protected String _localCsrIdentifier;
-
+	protected String _bshCsrReference;
 
 	/**
 	 * Code d'accessibilité des données (MEDATLAS: 1 char = P/L/C)
@@ -183,6 +183,7 @@ public class CruiseModel extends AbstractModel {
 		_projectName = Global.EMPTY_STRING;
 		_reference = Global.EMPTY_STRING;
 		_localCsrIdentifier = Global.EMPTY_STRING;
+		_bshCsrReference = Global.EMPTY_STRING;
 		_regionName = Global.EMPTY_STRING;
 		_regionCode = Global.EMPTY_STRING;
 		_shipCode = Global.EMPTY_STRING;//DEFAULT_SHIP_VALUE;
@@ -1039,5 +1040,13 @@ public class CruiseModel extends AbstractModel {
 		} else {
 			this._localCsrIdentifier = localCsrIdentifier;
 		}
+	}
+
+	public String getBshCsrReference() {
+		return _bshCsrReference;
+	}
+
+	public void setBshCsrReference(String bshCsrReference) {
+		_bshCsrReference = bshCsrReference;
 	}
 }
