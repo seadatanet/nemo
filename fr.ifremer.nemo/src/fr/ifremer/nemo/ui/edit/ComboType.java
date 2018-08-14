@@ -138,19 +138,18 @@ public enum ComboType {
 		case SHIP:
 			Collection<IElement> navires = VocabLists.getVocabList(Intern.list_ship).getElements();
 
-			TreeMap<String, String> treeNavire =
-					new TreeMap<String, String>();
+			TreeMap<String, String> treeNavire = new TreeMap<String, String>();
 
 			for (IElement record : navires) {
-				treeNavire.put(record.getLabel(), record.getKey());
+//				treeNavire.put(record.getLabel(), record.getKey()); //42715
+				treeNavire.put(record.getKey(), record.getLabel());
 			}
 
 			NemoLists.listeNavire = new ArrayList<String>();
 			temp = Global.EMPTY_STRING;
 			for (Entry<String, String> currentEntry : treeNavire.entrySet()) {
-				temp =
-						currentEntry.getValue() + Global.SEP
-								+ currentEntry.getKey();
+//				temp =	currentEntry.getValue() + Global.SEP + currentEntry.getKey(); //42715
+				temp =	currentEntry.getKey() + Global.SEP + currentEntry.getValue();
 				NemoLists.listeNavire.add(temp);
 				valueCombo.add(temp);
 			}
