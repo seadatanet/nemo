@@ -102,8 +102,8 @@ public class NemoBashTest {
 	boolean REPLACE=false;// WARNING!!!
 	boolean REMOVE_JUNIT=false;
 	
-//	public static String[] testDirAlone = {};
-	public static String[] testDirAlone = {"cruiseFile_profile_diap_stationsOrderBis"};
+	public static String[] testDirAlone = {};
+//	public static String[] testDirAlone = {"7019"};
 			
 	/**
 	 * ********************************************************
