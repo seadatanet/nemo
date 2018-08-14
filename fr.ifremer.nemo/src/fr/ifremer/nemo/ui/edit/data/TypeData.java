@@ -139,9 +139,9 @@ public class TypeData extends Object implements Comparable<TypeData> {
 		String inputDefault = parameterModel.getInputDefault();
 		if (inputDefault == null || inputDefault.equals("null"))inputDefault = Global.EMPTY_STRING; //$NON-NLS-1$
 		setEntree(inputDefault);
-		if (parameter.isP011()){
+//		if (parameter.isP011()){
 			setP06Label(parameter.getUnit());
-		}
+//		}
 		setUnite(parameter.getUnit());
 		setUniteCode(parameter.getUnitCode());
 		
