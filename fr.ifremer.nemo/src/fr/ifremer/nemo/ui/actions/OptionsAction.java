@@ -13,32 +13,17 @@ import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CCombo;
-import org.eclipse.swt.custom.TableEditor;
-import org.eclipse.swt.events.ModifyEvent;
-import org.eclipse.swt.events.ModifyListener;
-import org.eclipse.swt.events.MouseAdapter;
-import org.eclipse.swt.events.MouseEvent;
-import org.eclipse.swt.graphics.Font;
-import org.eclipse.swt.graphics.Point;
-import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.DirectoryDialog;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
-import org.eclipse.swt.widgets.Menu;
-import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.Table;
-import org.eclipse.swt.widgets.TableColumn;
-import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.ISelectionListener;
 import org.eclipse.ui.IWorkbenchPart;
@@ -54,7 +39,6 @@ import org.eclipse.ui.forms.widgets.Section;
 import sdn.vocabulary.interfaces.IElement;
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.config.Configuration;
-import fr.ifremer.nemo.config.Flag;
 import fr.ifremer.nemo.config.FlagTable;
 import fr.ifremer.nemo.config.NemoLists;
 import fr.ifremer.nemo.config.Proxy;
@@ -88,8 +72,14 @@ public class OptionsAction extends Action implements ISelectionListener, ActionF
 	Button buttonEdmoChoiceIdEdmoRespDonnees;
 	Button buttonEdmoChoiceIdEdmoDistDonnees;
 	private EdmoChoiceListener edmoChoiceListener;
-
 	private EdmoChoices tmpEdmoChoices;
+	
+	private Button editFlags; 
+	private EditFlagsListener editFlagsListener;
+	private FlagsChoices tmpFlagsChoices;
+	
+	
+	
 	private static Button buttonCancel, buttonValider, buttonRestore,
 			buttonParcourirModele, buttonParcourirCampagne = null;
 
@@ -107,18 +97,6 @@ public class OptionsAction extends Action implements ISelectionListener, ActionF
 			textFichierMapping, textOdvFormatVersion, textNetCDFFormatVersion,
 			textMedatlasFormatVersion, textWSEdmo = null;
 
-	private static Table tabFlagTable, tabFlag;
-
-	private static String _defaultCode = Global.EMPTY_STRING;
-
-	private static FlagTable _flagTable = new FlagTable();
-
-	private static ArrayList<FlagTable> _flagTables = new ArrayList<FlagTable>();
-
-	private static Label textAreaFlag;
-
-	// FAE 4431 Flag qualité par défault configurable
-	private static Combo _flagDefault;
 
 	private final static String ID = "fr.ifremer.nemo.ui.OptionsAction"; //$NON-NLS-1$
 
@@ -146,6 +124,7 @@ public class OptionsAction extends Action implements ISelectionListener, ActionF
 			textPassProxy;
 
 	private EdmoViewer edmoViewer;
+	private FlagsViewer flagsViewer;
 
 	// -- options necessitant un redemarrage
 	private String configLangage;
@@ -180,12 +159,14 @@ public class OptionsAction extends Action implements ISelectionListener, ActionF
 		shelloptions.setSize(620, 600);
 		shelloptions.setText(Messages.settings_title);
 
-		_flagTables.clear();
-		for (int i = 0; i < config.getFlagTables().size(); i++) {
-			FlagTable flagTable = new FlagTable(config.getFlagTables().get(i));
-			_flagTables.add(flagTable);
-		}
-
+		initFlagsTmpChoices();
+//		tmpFlagsChoices = new FlagsChoices();
+//		tmpFlagsChoices .setFlagTables( FlagTable.getOrderedFlagTables(Nemo.getInstance().getConfig().getFlagTables()));
+//		
+//		tmpFlagsChoices.setDefaultFlag(config.getDefaultFlag());
+//		tmpFlagsChoices.setDefaultFlagTable(config.getDefaultCode());
+		
+		
 		createPartControl(shelloptions);
 
 		shelloptions.pack();
@@ -199,6 +180,15 @@ public class OptionsAction extends Action implements ISelectionListener, ActionF
 		long end = System.currentTimeMillis();
 
 		System.out.println("Temps : run() = " + (end - start) + "ms");
+	}
+	
+	private void initFlagsTmpChoices(){
+		Configuration config = Nemo.getInstance().getConfig();
+		tmpFlagsChoices = new FlagsChoices();
+		tmpFlagsChoices .setFlagTables( FlagTable.getOrderedFlagTables(Nemo.getInstance().getConfig().getFlagTables()));
+		
+		tmpFlagsChoices.setDefaultFlag(config.getDefaultFlag());
+		tmpFlagsChoices.setDefaultFlagTable(config.getDefaultCode());
 	}
 
 	private void loadEdmoConfig() {
@@ -276,12 +266,7 @@ public class OptionsAction extends Action implements ISelectionListener, ActionF
 		for (String champ : champsMethodesCdi)
 			comboAccesDonnees.add(champ);
 
-		fillFlagTable();
 
-		// FAE 4431 Flag qualité par défault configurable
-		_flagDefault.add("0");
-		_flagDefault.add("1");
-		_flagDefault.add("2");
 
 		// long end = System.currentTimeMillis();
 
@@ -347,8 +332,6 @@ public class OptionsAction extends Action implements ISelectionListener, ActionF
 		radDateISO.setSelection(config.isDateISO());
 		radDateJulian.setSelection(!config.isDateISO());
 
-		// Flags
-		selectDefaultFlagsTab(config.getDefaultCode());
 
 		// convert type
 		radMedatlas.setSelection(false);
@@ -387,8 +370,9 @@ public class OptionsAction extends Action implements ISelectionListener, ActionF
 
 		afficheGrpODV();
 
-		// FAE 4431 Flag qualité par défault configurable
-		_flagDefault.select(Integer.valueOf(config.getDefaultFlag()));
+		flagsViewer =null;
+		initFlagsTmpChoices();
+		
 		redLabels();
 
 		long end = System.currentTimeMillis();
@@ -760,6 +744,8 @@ public class OptionsAction extends Action implements ISelectionListener, ActionF
 			}
 		}
 	}
+	
+	
 
 	/**
 	 * This method initializes groupCDI
@@ -1080,23 +1066,22 @@ public class OptionsAction extends Action implements ISelectionListener, ActionF
 		GridLayoutFactory.fillDefaults().numColumns(2).applyTo(compo);
 		GridDataFactory.fillDefaults().grab(false, true).hint(600, 90).applyTo(compo);
 
-		// Creation du tableau des tables de correspondaces
-		createTableFlagTable(compo);
+		
+		editFlags = new Button(compo, SWT.PUSH);
+		editFlags.setText("edit flags");// TODO
+		editFlags.addListener(SWT.Selection, editFlagsListener);
+		editFlags.pack();
+		
+		
 
-		// Creation du tableau des correspondaces
-		createTableFlag(compo);
-
-		// Creation du bouton de flag par defaut
-		textAreaFlag = new Label(compo, SWT.NONE);
-		textAreaFlag.setFont(Utils.font08);
-		textAreaFlag.setText(Messages.settings_flagDefault);
-
-		// FAE 4431 Flag qualité par défault configurable
-		_flagDefault = new Combo(compo, SWT.BORDER | SWT.READ_ONLY);
-		_flagDefault.setFont(Utils.font08);
-		GridDataFactory.fillDefaults().grab(false, false).applyTo(_flagDefault);
 	}
-
+	public class EditFlagsListener implements Listener {
+		public void handleEvent(Event event) {
+			if (event.widget == editFlags) {
+					flagsViewer = new FlagsViewer(OptionsAction.this);
+			} 
+		}
+	}
 	/**
 	 * This method initializes groupTop3
 	 */
@@ -1133,282 +1118,6 @@ public class OptionsAction extends Action implements ISelectionListener, ActionF
 		compo.pack();
 	}
 
-	public void createTableFlagTable(Composite parent) {
-		tabFlagTable = new Table(parent, SWT.FULL_SELECTION | SWT.BORDER);
-		tabFlagTable.setFont(Utils.font08);
-		tabFlagTable.setHeaderVisible(true);
-		tabFlagTable.setLinesVisible(true);
-		GridDataFactory.fillDefaults().grab(true, true).applyTo(tabFlagTable);
-
-		TableColumn tableColumn1 = new TableColumn(tabFlagTable, SWT.NONE);
-		tableColumn1.setWidth(60);
-		tableColumn1.setText(Messages.table_label_code);
-
-		TableColumn tableColumn2 = new TableColumn(tabFlagTable, SWT.NONE);
-		tableColumn2.setWidth(200);
-		tableColumn2.setText(Messages.table_label_label);
-
-		// Menu contextuel
-		Menu menu = new Menu(tabFlagTable.getShell(), SWT.POP_UP);
-		MenuItem itemAdd = new MenuItem(menu, SWT.NONE);
-		itemAdd.setText(Messages.menu_label_add);
-		MenuItem itemRemove = new MenuItem(menu, SWT.NONE);
-		itemRemove.setText(Messages.menu_label_remove);
-		MenuItem itemDefault = new MenuItem(menu, SWT.NONE);
-		itemDefault.setText(Messages.menu_label_default);
-		tabFlagTable.setMenu(menu);
-
-		final TableEditor editor = new TableEditor(tabFlagTable);
-		editor.horizontalAlignment = SWT.LEFT;
-		editor.grabHorizontal = true;
-
-		// final Table table = tabFlagTable;
-
-		tabFlagTable.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseDown(MouseEvent event) {
-				// On affiche les flags correspondants
-				_flagTable = FlagTable.getFlagTable(_flagTables, tabFlagTable.getSelection()[0].getText());
-				_flagTable.fillTable(tabFlag);
-
-				// Saisie
-				if (event.button == 3) {
-					return;
-				}
-				Control old = editor.getEditor();
-				if (old != null)
-					old.dispose();
-
-				Point pt = new Point(event.x, event.y);
-
-				final TableItem item = tabFlagTable.getItem(pt);
-				if (item == null) {
-					return;
-				}
-				int column = -1;
-				for (int i = 0, n = tabFlagTable.getColumnCount(); i < n; i++) {
-					Rectangle rect = item.getBounds(i);
-					if (rect.contains(pt)) {
-						column = i;
-						break;
-					}
-				}
-
-				if (column == -1) {
-					return;
-				}
-
-				final Text text = new Text(tabFlagTable, SWT.NONE);
-				text.setText(item.getText(column));
-				text.setForeground(item.getForeground());
-				text.selectAll();
-				text.setFocus();
-
-				editor.minimumWidth = text.getBounds().width;
-
-				editor.setEditor(text, item, column);
-
-				final int col = column;
-				text.addModifyListener(new ModifyListener() {
-					public void modifyText(ModifyEvent event) {
-						switch (col) {
-						case 0:
-							_flagTable.setCode(text.getText());
-							break;
-						case 1:
-							_flagTable.setLibelle(text.getText());
-							break;
-						default:
-						}
-
-						item.setText(col, text.getText());
-					}
-				});
-			}
-		});
-
-		itemDefault.addListener(SWT.Selection, new Listener() {
-			public void handleEvent(Event e) {
-				selectDefaultFlagsTab(tabFlagTable.getSelection()[0].getText());
-			}
-		});
-
-		itemAdd.addListener(SWT.Selection, new Listener() {
-			public void handleEvent(Event e) {
-				TableItem item = new TableItem(tabFlagTable, SWT.NONE);
-				item.setText(0, Messages.menu_label_new);
-				item.setText(1, Messages.menu_label_new);
-
-				FlagTable temp = new FlagTable();
-				temp.setCode(item.getText(0));
-				temp.setLibelle(item.getText(1));
-				getFlagTables().add(temp);
-			}
-		});
-
-		itemRemove.addListener(SWT.Selection, new Listener() {
-			public void handleEvent(Event e) {
-				getFlagTables().remove(_flagTable);
-				tabFlagTable.remove(tabFlagTable.getSelectionIndex());
-				tabFlag.clearAll();
-			}
-		});
-
-		Utils.forceMenu(tabFlagTable, menu);
-	}
-
-	protected void selectDefaultFlagsTab(String defaultCode) {
-		setDefaultCode(defaultCode);
-		// Mise en gras du flagtable par defaut
-		Font normal = new Font(Application.display, Global.EMPTY_STRING, 8, SWT.NORMAL);
-		Font bold = new Font(Application.display, Global.EMPTY_STRING, 8, SWT.BOLD);
-
-		for (int i = 0; i < tabFlagTable.getItemCount(); i++) {
-			if (tabFlagTable.getItem(i).getText(0).equals(getDefaultCode())) {
-				tabFlagTable.getItem(i).setFont(bold);
-			} else {
-				tabFlagTable.getItem(i).setFont(normal);
-			}
-		}
-	}
-
-	public void createTableFlag(Composite parent) {
-		tabFlag = new Table(parent, SWT.FULL_SELECTION | SWT.BORDER);
-		tabFlag.setFont(Utils.font08);
-		tabFlag.setHeaderVisible(true);
-		tabFlag.setLinesVisible(true);
-		GridDataFactory.fillDefaults().grab(true, true).applyTo(tabFlag);
-		TableColumn flagColumn1 = new TableColumn(tabFlag, SWT.NONE);
-		flagColumn1.setWidth(60);
-		flagColumn1.setText(Messages.table_label_local);
-
-		TableColumn flagColumn2 = new TableColumn(tabFlag, SWT.NONE);
-		flagColumn2.setWidth(210);
-		flagColumn2.setText(Messages.table_label_seadatanet);
-
-		// Menu contextuel
-		Menu menu = new Menu(tabFlag.getShell(), SWT.POP_UP);
-		MenuItem itemAdd = new MenuItem(menu, SWT.NONE);
-		itemAdd.setText(Messages.menu_label_add);
-		MenuItem itemRemove = new MenuItem(menu, SWT.NONE);
-		itemRemove.setText(Messages.menu_label_remove);
-
-		tabFlag.setMenu(menu);
-
-		final Table tab = tabFlag;
-
-		final TableEditor editor = new TableEditor(tabFlag);
-		editor.horizontalAlignment = SWT.LEFT;
-		editor.grabHorizontal = true;
-
-		tabFlag.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseDown(MouseEvent event) {
-				if (event.button == 3) {
-					return;
-				}
-				Control old = editor.getEditor();
-				if (old != null)
-					old.dispose();
-
-				Point pt = new Point(event.x, event.y);
-
-				final TableItem item = tab.getItem(pt);
-				if (item == null) {
-					return;
-				}
-				int column = -1;
-				for (int i = 0, n = tab.getColumnCount(); i < n; i++) {
-					Rectangle rect = item.getBounds(i);
-					if (rect.contains(pt)) {
-						column = i;
-						break;
-					}
-				}
-
-				if (column == -1) {
-					return;
-				}
-
-				final int col = column;
-				final Text text = new Text(tab, SWT.NONE);
-				final CCombo combo = new CCombo(tab, SWT.READ_ONLY);
-
-				String[] flags = Flag.flagSDN();
-				for (int i = 0; i < flags.length; i++) {
-					combo.add(flags[i]);
-				}
-				if (flags.length > 20) {
-					combo.setVisibleItemCount(20);
-				} else {
-					combo.setVisibleItemCount(flags.length);
-				}
-
-				final Flag flag = _flagTable.getFlag(item.getText());
-
-				switch (column) {
-				case 0:
-					text.setForeground(item.getForeground());
-
-					text.setText(item.getText(column));
-					text.setForeground(item.getForeground());
-					text.selectAll();
-					text.setFocus();
-
-					editor.minimumWidth = text.getBounds().width;
-
-					editor.setEditor(text, item, column);
-
-					text.addModifyListener(new ModifyListener() {
-						public void modifyText(ModifyEvent event) {
-							flag.setLocal(text.getText());
-							item.setText(col, text.getText());
-						}
-					});
-
-					break;
-				case 1:
-					combo.setForeground(item.getForeground());
-
-					combo.setText(item.getText(column));
-					combo.setForeground(item.getForeground());
-					editor.minimumWidth = combo.getBounds().width;
-
-					editor.setEditor(combo, item, column);
-
-					combo.addModifyListener(new ModifyListener() {
-						public void modifyText(ModifyEvent event) {
-							flag.setSdn(combo.getText());
-							item.setText(col, combo.getText());
-						}
-					});
-					break;
-				default:
-					return;
-				}
-			}
-		});
-
-		itemAdd.addListener(SWT.Selection, new Listener() {
-			public void handleEvent(Event e) {
-				TableItem item = new TableItem(tab, SWT.NONE);
-				item.setText(0, Messages.menu_label_new);
-				item.setText(1, Messages.menu_label_new);
-
-				Flag temp = new Flag(item.getText(0), item.getText(1));
-				_flagTable.getFlags().add(temp);
-			}
-		});
-
-		itemRemove.addListener(SWT.Selection, new Listener() {
-			public void handleEvent(Event e) {
-				_flagTable.getFlags().remove(_flagTable.getFlag(tab.getSelection()[0].getText()));
-				tab.remove(tab.getSelectionIndex());
-			}
-		});
-
-		Utils.forceMenu(tabFlag, menu);
-	}
 
 	public void createPartControl(Composite parent) {
 		parent.setLayout(new GridLayout());
@@ -1423,7 +1132,8 @@ public class OptionsAction extends Action implements ISelectionListener, ActionF
 		data.grabExcessVerticalSpace = true;
 		formOption.getBody().setLayoutData(data);
 		edmoChoiceListener = new EdmoChoiceListener();
-
+		editFlagsListener = new EditFlagsListener();
+		
 		createSection(toolkitOption, formOption, Messages.settings_general, ExpandableComposite.EXPANDED);
 		createSection(toolkitOption, formOption, Messages.settings_web, ExpandableComposite.COMPACT);
 		createSection(toolkitOption, formOption, Messages.settings_cdi, ExpandableComposite.COMPACT);
@@ -1755,20 +1465,23 @@ public class OptionsAction extends Action implements ISelectionListener, ActionF
 		configuration.setDateISO(radDateISO.getSelection());
 
 		// Flags qualite
-		configuration.setDefaultCode(getDefaultCode());
-		ArrayList<FlagTable> flagTables = new ArrayList<FlagTable>();
-		for (int i = 0; i < getFlagTables().size(); i++) {
-			FlagTable flagTable = new FlagTable(getFlagTables().get(i));
-			flagTables.add(flagTable);
+		// if flagsViewer is null, it is because flags have not been modified -> do not save!
+		if (flagsViewer !=null ){
+			configuration.setDefaultCode(tmpFlagsChoices.getDefaultFlagTable());
+			ArrayList<FlagTable> flagTables = new ArrayList<FlagTable>();
+			for (int i = 0; i < tmpFlagsChoices.getFlagTables().size(); i++) {
+				FlagTable flagTable = new FlagTable(tmpFlagsChoices.getFlagTables().get(i));
+				flagTables.add(flagTable);
+			}
+			configuration.setFlagTables(flagTables);
+			// FAE 4431 Flag qualité par défault configurable
+			configuration.setDefaultFlag(tmpFlagsChoices.getDefaultFlag());
 		}
-		configuration.setFlagTables(flagTables);
 
 		// output conversion format
 		configuration.setDefaultConversionType(getSelectedConversion());
 
-		// FAE 4431 Flag qualité par défault configurable
-		configuration.setDefaultFlag(_flagDefault.getText());
-
+		
 		// Enregistrement de la configuration
 		configuration.save();
 
@@ -1786,40 +1499,6 @@ public class OptionsAction extends Action implements ISelectionListener, ActionF
 		}
 	}
 
-	private void fillFlagTable() {
-		int i;
-		ArrayList<FlagTable> flagTables = new ArrayList<FlagTable>();
-		flagTables = FlagTable.getOrderedFlagTables(Nemo.getInstance().getConfig().getFlagTables());
-
-		for (i = 0; i < flagTables.size(); i++) {
-			TableItem item = new TableItem(tabFlagTable, SWT.NONE);
-			item.setText(0, flagTables.get(i).getCode());
-			item.setText(1, flagTables.get(i).getLibelle());
-		}
-
-		if (flagTables.size() > 0) {
-			tabFlagTable.setSelection(0);
-			_flagTable = FlagTable.getFlagTable(_flagTables, tabFlagTable.getSelection()[0].getText());
-			_flagTable.fillTable(tabFlag);
-
-		}
-	}
-
-	public static ArrayList<FlagTable> getFlagTables() {
-		return _flagTables;
-	}
-
-	public static void setFlagTables(ArrayList<FlagTable> tables) {
-		_flagTables = tables;
-	}
-
-	public static String getDefaultCode() {
-		return _defaultCode;
-	}
-
-	public static void setDefaultCode(String code) {
-		_defaultCode = code;
-	}
 
 	public void updateEdmo(EdmoChoices tmpEdmoChoicesNew) {
 		tmpEdmoChoices = tmpEdmoChoicesNew;
@@ -1843,5 +1522,23 @@ public class OptionsAction extends Action implements ISelectionListener, ActionF
 
 	public EdmoChoices getTmpEdmoChoices() {
 		return tmpEdmoChoices;
+	}
+
+	public FlagsChoices getTmpFlagsChoices() {
+		return tmpFlagsChoices;
+	}
+
+
+	/**
+	 * 
+	 * @param flagTables
+	 * @param defaultFlagTable
+	 * @param defaultFlag
+	 */
+	public void updateFlags( ArrayList<FlagTable> flagTables , String defaultFlagTable, String defaultFlag   ) {
+		tmpFlagsChoices.setFlagTables(flagTables);
+		tmpFlagsChoices.setDefaultFlag(defaultFlag);
+		tmpFlagsChoices.setDefaultFlagTable(defaultFlagTable);
+		
 	}
 }

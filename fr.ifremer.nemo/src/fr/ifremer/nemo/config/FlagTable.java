@@ -45,8 +45,13 @@ public class FlagTable {
 	public FlagTable(FlagTable flagTable) {
 		_code = flagTable.getCode();
 		_libelle = flagTable.getLibelle();
-		_flags = flagTable.getFlags();
+		_flags =  new ArrayList<>();
+		for (Flag f :flagTable.getFlags()){
+			_flags.add(new Flag(f.getLocal(), f.getSdn()));
+		}
 	}
+	
+	
 
 	/**
 	 * Methodes

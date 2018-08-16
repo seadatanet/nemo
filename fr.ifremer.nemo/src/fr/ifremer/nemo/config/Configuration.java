@@ -512,6 +512,9 @@ public class Configuration extends AbstractModel {
 	 * 
 	 */
 	public void restoreDefault() {
+		// need to reinit flag tables, not to keep old ones:
+		_flagTables = new ArrayList<>();
+		
 		XMLBootstrapParser parser = new XMLBootstrapParser(this);
 		try {
 			parser.parse(new FileInputStream(Intern.dir_resources +
