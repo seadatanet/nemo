@@ -604,6 +604,7 @@ public class TableData {
 		 * Listener pour le clic sur la table les colonnes modifiables sont
 		 * format entree sortie conversion
 		 */
+		// 42716 MouseDown
 		table.addListener(SWT.MouseDown, new Listener()
 		{
 			@Override
@@ -613,12 +614,28 @@ public class TableData {
 				// clic 3e bouton (=clic droit): comportement par defaut
 				if (event.button == 3)
 				{
+					Point ptt = new Point(event.x, event.y);
+					TableItem itemTmpt = table.getItem(ptt);
+					if (itemTmpt == null) {
+						//empty item -> only new param menu
+						for (MenuItem  it: table.getMenu().getItems()){
+							it.setEnabled(false);
+						}
+						table.getMenu().getItem(menuMap.get(MENU_ITEM_PARAMLIST)).setEnabled(true);
+					}else{
+						// item existing -> full menu
+						for (MenuItem  it: table.getMenu().getItems()){
+							it.setEnabled(true);
+						}
+					}
+					
 					if (RulesManager.getInstance()
 							.getMyDataListType() == DataListTypeEnum.P011_VIA_P021)
 					{
 						Point pt = new Point(event.x, event.y);
 						TableItem itemTmp = table.getItem(pt);
 						if (itemTmp != null) {
+						
 							table.getMenu()
 							.getItem(menuMap.get(MENU_ITEM_SELECTFORMAT))
 							.setEnabled(!itemTmp.getChecked());
@@ -1057,6 +1074,7 @@ public class TableData {
 		// ========= Suppression de tous les parametres à la fois
 		MenuItem deleteAll =
 				new MenuItem(menu, SWT.NONE, index);
+		deleteAll.setEnabled(false);
 		menuMap.put(MENU_ITEM_DELETEALLPARAMS, index);
 		index++;
 		deleteAll.setText(Messages.menu_label_deleteAllParameters);
@@ -1071,7 +1089,20 @@ public class TableData {
 		});
 
 		table.setMenu(menu);
-		Utils.forceMenu(table, menu);
+//		Utils.forceMenu(table, menu);
+		// Do not show menu, when no item is selected
+		//42716 MenuDetect
+		table.addListener(SWT.MenuDetect, new Listener() {
+		  @Override
+		  public void handleEvent(Event event) {
+			 
+			  	// by default, disable all but new param menu (need this for column header)
+		    	for (MenuItem  it: table.getMenu().getItems()){
+					it.setEnabled(false);
+				}
+				table.getMenu().getItem(menuMap.get(MENU_ITEM_PARAMLIST)).setEnabled(true);
+		  }
+		});
 
 		// agrandissement de la table
 		Nemo.getInstance().getViewMain().getEditDataForm().getCompositeData()
