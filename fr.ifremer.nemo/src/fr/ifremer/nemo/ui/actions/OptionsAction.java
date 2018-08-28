@@ -200,7 +200,7 @@ public class OptionsAction extends Action implements ISelectionListener, ActionF
 			tmpEdmoChoices.setIdEdmoRespCdi(Integer.valueOf(value));
 		}
 		value = Nemo.getInstance().getConfig().getIdEdmoRespCsr();
-		if (!value.isEmpty()) {
+		if (value!=null && !value.isEmpty()) {
 			tmpEdmoChoices.setIdEdmoRespCsr(Integer.valueOf(value));
 		}
 		value = Nemo.getInstance().getConfig().getCodeEdmoDonnees();
