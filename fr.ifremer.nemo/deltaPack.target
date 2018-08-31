@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><?pde version="3.8"?><target includeMode="feature" name="deltaPack">
+	<locations>
+		<location path="/home/sophie/Softs/ECLIPSES/eclipse_photon_RCP" type="Directory"/>
+		<location path="/opt/deltaPack/deltaPack3.7.2/eclipse" type="Directory"/>
+	</locations>
+	<targetJRE path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk1.8.0_151"/>
+</target>
