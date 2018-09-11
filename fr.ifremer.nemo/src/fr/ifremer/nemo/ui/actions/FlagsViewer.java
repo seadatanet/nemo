@@ -77,8 +77,8 @@ public class FlagsViewer {
 
 		shellFlags = new Shell(Application.display, SWT.VIRTUAL);
 		shellFlags.setLocation(20, 20);
-		shellFlags.setSize(gwidth, 220);
-		shellFlags.setMinimumSize(gwidth, 220);
+		shellFlags.setSize(gwidth, 450);
+		shellFlags.setMinimumSize(gwidth, 450);
 		shellFlags.setLayout(new GridLayout());
 
 		
