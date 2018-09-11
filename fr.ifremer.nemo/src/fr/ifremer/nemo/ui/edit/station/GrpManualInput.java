@@ -13,6 +13,7 @@ import java.util.List;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 
@@ -35,12 +36,14 @@ public class GrpManualInput implements UIobject
     protected Button buttonSaisie;
     protected ArrayList<Couple> lines;
     protected int nbColumns = 1;
+    private final SelectionListener listenerManual;
 
     public GrpManualInput(int nbLine, String labelButton, ComboType cType,
-            String defaultValue)
+            String defaultValue, SelectionListener listenerManual)
     {
 
         this.labelButton = labelButton;
+        this.listenerManual=listenerManual;
         if (this.labelButton == null)
         {
             this.labelButton = Messages.label_manual_01;
@@ -62,8 +65,9 @@ public class GrpManualInput implements UIobject
                 couple.setTextLimit(500);
             lines.add(couple);
         }
+       
+    	
     }
-
     public void draw(Composite sectionClient, boolean filled)
     {
 
@@ -75,7 +79,10 @@ public class GrpManualInput implements UIobject
         buttonSaisie.setParent(compo);
         buttonSaisie.setBackground(Nemo.getInstance().getViewMain().getBackgroundEdit());
         buttonSaisie.setText(labelButton);
-
+        if (listenerManual!=null) {
+        	buttonSaisie.addSelectionListener(listenerManual);
+        }
+     		
         for (Couple line : lines)
         {
             line.draw(compo, filled);

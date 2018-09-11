@@ -3,7 +3,10 @@ package fr.ifremer.nemo.ui.edit.station;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
 
@@ -237,11 +240,16 @@ public class EditStationForm extends EditForm {
 						Messages.getString(Intern.S_TIME),
 						Messages.edit_station_sectionTime_lib, false, true, 1, this);
 
+		
 		time.addConverter(ComboType.TIME, Global.EMPTY_STRING);
-		time.addManualInput(null, ComboType.NONE, Global.EMPTY_STRING);
+		time.addManualInput(null, ComboType.NONE, Global.EMPTY_STRING, getTimeManualListenerForSamplingRate());
 
 		boolean defaultValueEnable = rulesManager.isProfile();
-		time.addAutoInput(null, false, MetaInData.FACULTATIF, false, defaultValueEnable);
+		time.addAutoInput(null, false, MetaInData.FACULTATIF, false, defaultValueEnable, getTimeAutoListenerForSamplingRate());
+		
+		
+		
+		
 		listeSections.add(time);
 		/**
 		 * ==============================================================================================
@@ -253,9 +261,11 @@ public class EditStationForm extends EditForm {
 						Messages.getString(Intern.S_DATE),
 						Messages.edit_station_sectionDate_lib, false, true, 1, this);
 		date.addConverter(ComboType.DATE, Global.EMPTY_STRING);
-		date.addManualInput(null, ComboType.NONE, Global.EMPTY_STRING);
-		date.addAutoInput(null, false, MetaInData.FACULTATIF, false, false);
+		date.addManualInput(null, ComboType.NONE, Global.EMPTY_STRING, getDateManualListenerForSamplingRate());
+		date.addAutoInput(null, false, MetaInData.FACULTATIF, false, false, getDateAutoListenerForSamplingRate());
 		listeSections.add(date);
+		
+		
 		/**
 		 * ==============================================================================================
 		 * latitude
@@ -622,4 +632,100 @@ public class EditStationForm extends EditForm {
 		}
 	}
 	
+
+	private SelectionListener getDateAutoListenerForSamplingRate() {
+		SelectionListener listenerManual = new SelectionListener() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				Button btn = (Button) e.getSource();
+				boolean dateAuto =	btn.getSelection();
+				boolean timeAuto =	time.getAutoInput().isSelected();
+				
+//				System.out.println("DateAuto selected="+dateAuto+ " timeAuto="+timeAuto+" -> enabled:" +(!dateAuto && !timeAuto) );
+				if (!samplingRate.getSection().isDisposed())
+					samplingRate.setEnabled(!dateAuto && !timeAuto);
+			}
+			@Override
+			public void widgetDefaultSelected(SelectionEvent e) {
+			}
+		};
+		return listenerManual;
+	}
+	private SelectionListener getTimeAutoListenerForSamplingRate() {
+		SelectionListener listenerManual = new SelectionListener() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				Button btn = (Button) e.getSource();
+				boolean timeAuto =	btn.getSelection();
+				boolean dateAuto =	date.getAutoInput().isSelected();
+				
+//				System.out.println("DateAuto selected="+dateAuto+ " timeAuto="+timeAuto+" -> enabled:" +(!dateAuto && !timeAuto) );
+				if (!samplingRate.getSection().isDisposed())
+					samplingRate.setEnabled(!dateAuto && !timeAuto);
+			}
+			@Override
+			public void widgetDefaultSelected(SelectionEvent e) {
+			}
+		};
+		return listenerManual;
+	}
+
+	private SelectionListener getDateManualListenerForSamplingRate() {
+		SelectionListener listenerManual = new SelectionListener() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				Button btn = (Button) e.getSource();
+				boolean dateManual =	btn.getSelection();
+				boolean timeManual =	time.getManualInput().isSelected();
+				
+//				System.out.println("dateManual selected="+dateManual+ " timeManual="+timeManual+" -> enabled:" +((dateManual && timeManual)) );
+				if (!samplingRate.getSection().isDisposed())
+					samplingRate.setEnabled((dateManual && timeManual));
+			}
+			@Override
+			public void widgetDefaultSelected(SelectionEvent e) {
+			}
+		};
+		return listenerManual;
+	}
+	private SelectionListener getTimeManualListenerForSamplingRate() {
+		SelectionListener listenerManual = new SelectionListener() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				Button btn = (Button) e.getSource();
+				boolean timeManual =	btn.getSelection();
+				boolean dateManual =	date.getManualInput().isSelected();
+				
+//				System.out.println("dateManual selected="+dateManual+ " timeManual="+timeManual+" -> enabled:" +((dateManual && timeManual)) );
+				if (!samplingRate.getSection().isDisposed())
+					samplingRate.setEnabled((dateManual && timeManual));
+			}
+			@Override
+			public void widgetDefaultSelected(SelectionEvent e) {
+			}
+		};
+		return listenerManual;
+	}
+//	private SelectionListener getDateTimeListenerForSamplingRate() {
+//		SelectionListener listenerManual = new SelectionListener() {
+//			@Override
+//			public void widgetSelected(SelectionEvent e) {
+//				// si Date est saisie dans les données
+//				boolean dateInData =	!date.getAutoInput().isSelected();
+//				// si Time est saisie dans les données
+//				boolean timeInData =	!time.getAutoInput().isSelected();
+//				System.out.println("dateInData="+dateInData + " timeInData="+timeInData+" -> enabled:" +(!(dateInData && timeInData)) );
+//				// => Sampling Rate : disable (car pas nécessaire pour le calcul)
+//				if (!samplingRate.getSection().isDisposed())
+//					samplingRate.setEnabled(!(dateInData && timeInData));
+//
+//			}
+//			@Override
+//			public void widgetDefaultSelected(SelectionEvent e) {
+//				System.out.println(" widgetDefaultSelected time");
+//
+//			}
+//		};
+//		return listenerManual;
+//	}
 }

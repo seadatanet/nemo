@@ -7,7 +7,6 @@
  */
 package fr.ifremer.nemo.ui.edit.station;
 
-import java.awt.Stroke;
 import java.util.ArrayList;
 
 import org.eclipse.jface.layout.GridDataFactory;
@@ -28,7 +27,6 @@ import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.UIobject;
 import fr.ifremer.nemo.ui.edit.station.AutoLine.MetaInData;
-import fr.ifremer.nemo.ui.view.ViewMain;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 
@@ -50,12 +48,14 @@ public class GrpAutoInput implements UIobject
     protected boolean defaultValueEnable;
     protected Button checkBoxHasDefaultValue;
     protected Text textDefaultValue;
+    private final  SelectionListener listenerAuto;
 
     public GrpAutoInput(int nbLine, String labelButtonPos, boolean variablePos,
-            MetaInData inData, boolean withCursor, boolean defaultValueEnabled)
+            MetaInData inData, boolean withCursor, boolean defaultValueEnabled,  SelectionListener listenerAuto)
     {
 
         defaultValueEnable = defaultValueEnabled;
+        this.listenerAuto=listenerAuto;
 
         this.labelButtonPos = labelButtonPos;
         if (this.labelButtonPos == null)
@@ -83,6 +83,11 @@ public class GrpAutoInput implements UIobject
         buttonPos = new Button(sectionClient, SWT.RADIO);
         buttonPos.setBackground(backgroundEditColor);
         buttonPos.setText(labelButtonPos);
+        
+        if (listenerAuto!=null) {
+        	buttonPos.addSelectionListener(listenerAuto);
+        }
+        	
 
         Group groupe = new Group(sectionClient, SWT.NONE);
         groupe.setBackground(backgroundEditColor);
@@ -144,6 +149,7 @@ public class GrpAutoInput implements UIobject
 
                     public void widgetSelected(SelectionEvent e)
                     {
+                    
                         if (checkBoxHasDefaultValue.getSelection())
                         {
                             textDefaultValue.setEnabled(true);

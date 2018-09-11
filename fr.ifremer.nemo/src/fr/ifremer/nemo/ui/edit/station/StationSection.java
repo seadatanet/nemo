@@ -19,6 +19,7 @@ import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CCombo;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
@@ -118,16 +119,25 @@ public class StationSection extends NemoSection {
 
 	/**
 	 * add a ManualInput group
-	 * 
-	 * @param shell
 	 * @param manualLabel
-	 * @param cType
+	 * @param type
 	 * @param defaultValue
 	 */
 	public void addManualInput(String manualLabel, ComboType type,
 			String defaultValue) {
+		addManualInput(manualLabel, type, defaultValue, null);
+	}
+	/**
+	 * add a ManualInput group with a listener
+	 * @param manualLabel
+	 * @param type
+	 * @param defaultValue
+	 * @param listenerManual
+	 */
+	public void addManualInput(String manualLabel, ComboType type,
+			String defaultValue, SelectionListener listenerManual) {
 		manualInput =
-				new GrpManualInput(nbLignes, manualLabel, type, defaultValue);
+				new GrpManualInput(nbLignes, manualLabel, type, defaultValue, listenerManual);
 	}
 
 	public void addNoValueInput(String manualLabel, ComboType type,
@@ -136,24 +146,38 @@ public class StationSection extends NemoSection {
 				new GrpNoValueInput(nbLignes, manualLabel, type, defaultValue);
 	}
 
+	
+	
 	/**
 	 * add a AutoInput group
-	 * 
-	 * @param shell
-	 * @param nbAutoLines
 	 * @param autoLabel
 	 * @param variablePos
-	 * @param enableInData
+	 * @param enable
+	 * @param withCursor
+	 * @param defaultValueEnable
 	 */
 	public void addAutoInput(String autoLabel, boolean variablePos,
 			MetaInData enable, boolean withCursor, boolean defaultValueEnable) {
+		addAutoInput(autoLabel, variablePos, enable, withCursor, defaultValueEnable, null);
+	}
+	/**
+	 * add a AutoInput group with a listener
+	 * @param autoLabel
+	 * @param variablePos
+	 * @param enable
+	 * @param withCursor
+	 * @param defaultValueEnable
+	 * @param listenerAuto
+	 */
+	public void addAutoInput(String autoLabel, boolean variablePos,
+			MetaInData enable, boolean withCursor, boolean defaultValueEnable, SelectionListener listenerAuto) {
 		enableInData = enable;
 		// correction retour 5803
 		// correction de l'erreur amenée dans correction du 4471: 1er
 		// arg=nbLignes et non 1
 		autoInput =
 				new GrpAutoInput(nbLignes, autoLabel, variablePos, enableInData,
-						withCursor, defaultValueEnable);
+						withCursor, defaultValueEnable, listenerAuto);
 	}
 
 	/**

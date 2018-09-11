@@ -16,7 +16,6 @@ import org.eclipse.swt.widgets.Composite;
 
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.ui.edit.ComboType;
-import fr.ifremer.nemo.ui.view.ViewMain;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 
@@ -36,7 +35,7 @@ public class GrpNoValueInput extends GrpManualInput
     public GrpNoValueInput(int nbLine, String labelButton, ComboType cType,
             String defaultValue)
     {
-        super(nbLine, labelButton, cType, defaultValue);
+        super(nbLine, labelButton, cType, defaultValue, null);
         this.labelButton = labelButton;
         if (this.labelButton == null)
         {
