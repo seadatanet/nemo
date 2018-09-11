@@ -286,7 +286,11 @@ public class RulesManager {
 	 * //40216
 	 */
 	public String getSeparator(){
+		if (separator.equals("|")){ //$NON-NLS-1$
+			return "\\|"; //$NON-NLS-1$
+		}
 		return separator;
+		
 	}
 	/**
 	 * RECEPTION MAJ FILETYPE
