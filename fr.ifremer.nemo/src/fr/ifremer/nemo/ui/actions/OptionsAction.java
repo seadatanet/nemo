@@ -1207,6 +1207,7 @@ public class OptionsAction extends Action implements ISelectionListener, ActionF
 			@Override
 			public void expansionStateChanged(ExpansionEvent e) {
 				formOption.reflow(true);
+				shelloptions.pack(); // add pack, since update to photon
 			}
 		});
 		section.setText(title);
