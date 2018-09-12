@@ -1,0 +1,1954 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapping>
+   <vocabulary list="SDN:C19:17:"  version="17"  date="2018-02-21T02:00:03.000"  title="SeaVoX salt and fresh water body gazetteer"   />
+   <mapped>
+      <vocabulary list="SDN:C19:17:"  version="17"  date="2018-02-21T02:00:03.000"  title="SeaVoX salt and fresh water body gazetteer"   />
+   </mapped>
+   <match>
+      <element  key="SDN:C19:17:3_1_2_1"  label="Adriatic Sea"    />
+      <broad>
+         <element  key="SDN:C19:17:3_1_2"  label="Mediterranean Sea, Eastern Basin"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:3_1_2_4"  label="Aegean Sea"    />
+      <broad>
+         <element  key="SDN:C19:17:3_1_2"  label="Mediterranean Sea, Eastern Basin"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:SVX00001"  label="African freshwater bodies"    />
+      <broad>
+         <element  key="SDN:C19:17:SVX00025"  label="World"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:3_1_1_2"  label="Alboran Sea"    />
+      <broad>
+         <element  key="SDN:C19:17:3_1_1"  label="Mediterranean Sea, Western Basin"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:10_11"  label="Amundsen Sea"    />
+      <broad>
+         <element  key="SDN:C19:17:10"  label="Southern Ocean"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:7_8_1"  label="Anadyrskiy Zaliv"    />
+      <broad>
+         <element  key="SDN:C19:17:7_8"  label="Bering Sea"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:5_14"  label="Andaman Sea"    />
+      <broad>
+         <element  key="SDN:C19:17:5"  label="Indian Ocean"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:SVX00002"  label="Antarctic freshwater bodies"    />
+      <broad>
+         <element  key="SDN:C19:17:SVX00025"  label="World"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:5_9"  label="Arabian Sea"    />
+      <broad>
+         <element  key="SDN:C19:17:5"  label="Indian Ocean"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:5_16"  label="Arafura Sea"    />
+      <broad>
+         <element  key="SDN:C19:17:5"  label="Indian Ocean"    />
+      </broad>
+      <narrow>
+         <element  key="SDN:C19:17:5_16_1"  label="Gulf of Carpentaria"    />
+      </narrow>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:SVX00003"  label="Aral Sea"    />
+      <broad>
+         <element  key="SDN:C19:17:SVX00004"  label="Asian mainland"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:9"  label="Arctic Ocean"    />
+      <broad>
+         <element  key="SDN:C19:17:SVX00025"  label="World"    />
+      </broad>
+      <narrow>
+         <element  key="SDN:C19:17:9_16"  label="Chukchi Sea"    />
+         <element  key="SDN:C19:17:9_15"  label="Beaufort Sea"    />
+         <element  key="SDN:C19:17:9_2"  label="Laptev Sea"    />
+         <element  key="SDN:C19:17:9_12"  label="Baffin Bay"    />
+         <element  key="SDN:C19:17:9_3"  label="Kara Sea"    />
+         <element  key="SDN:C19:17:9_14"  label="Northwestern Passages"    />
+         <element  key="SDN:C19:17:9_5"  label="White Sea"    />
+         <element  key="SDN:C19:17:9_11"  label="Hudson Bay"    />
+         <element  key="SDN:C19:17:9_8"  label="Iceland Sea"    />
+         <element  key="SDN:C19:17:9_13"  label="Lincoln Sea"    />
+         <element  key="SDN:C19:17:9_9"  label="Davis Strait"    />
+         <element  key="SDN:C19:17:9_7"  label="Norwegian Sea"    />
+         <element  key="SDN:C19:17:9_6"  label="Greenland Sea"    />
+         <element  key="SDN:C19:17:9_10"  label="Hudson Strait"    />
+         <element  key="SDN:C19:17:9_1"  label="East Siberian Sea"    />
+         <element  key="SDN:C19:17:9_4"  label="Barents Sea"    />
+      </narrow>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:6_14"  label="Aru Sea"    />
+      <broad>
+         <element  key="SDN:C19:17:6"  label="South China and Eastern Archipelagic Seas"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:SVX00004"  label="Asian mainland"    />
+      <broad>
+         <element  key="SDN:C19:17:SVX00025"  label="World"    />
+      </broad>
+      <narrow>
+         <element  key="SDN:C19:17:SVX00003"  label="Aral Sea"    />
+         <element  key="SDN:C19:17:SVX00007"  label="Caspian Sea"    />
+      </narrow>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:SVX00005"  label="Atlantic Ocean"    />
+      <broad>
+         <element  key="SDN:C19:17:SVX00025"  label="World"    />
+      </broad>
+      <narrow>
+         <element  key="SDN:C19:17:4"  label="South Atlantic Ocean"    />
+         <element  key="SDN:C19:17:1"  label="North Atlantic Ocean"    />
+      </narrow>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:SVX00006"  label="Australian freshwater bodies"    />
+      <broad>
+         <element  key="SDN:C19:17:SVX00025"  label="World"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:9_12"  label="Baffin Bay"    />
+      <broad>
+         <element  key="SDN:C19:17:9"  label="Arctic Ocean"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:3_1_1_3"  label="Balearic Sea"    />
+      <broad>
+         <element  key="SDN:C19:17:3_1_1"  label="Mediterranean Sea, Western Basin"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:6_10"  label="Bali Sea"    />
+      <broad>
+         <element  key="SDN:C19:17:6"  label="South China and Eastern Archipelagic Seas"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:2"  label="Baltic Sea"    />
+      <broad>
+         <element  key="SDN:C19:17:SVX00025"  label="World"    />
+      </broad>
+      <narrow>
+         <element  key="SDN:C19:17:2_5"  label="Gulf of Riga"    />
+         <element  key="SDN:C19:17:2_7"  label="Storebaelt"    />
+         <element  key="SDN:C19:17:2_2"  label="Gulf of Bothnia"    />
+         <element  key="SDN:C19:17:2_1"  label="Central Baltic Sea"    />
+         <element  key="SDN:C19:17:2_3"  label="Gulf of Finland"    />
+         <element  key="SDN:C19:17:2_9"  label="Kattegat"    />
+         <element  key="SDN:C19:17:2_8"  label="Lillebaelt"    />
+         <element  key="SDN:C19:17:2_4"  label="Sound Sea"    />
+         <element  key="SDN:C19:17:2_6"  label="The Sound"    />
+      </narrow>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:6_15"  label="Banda Sea"    />
+      <broad>
+         <element  key="SDN:C19:17:6"  label="South China and Eastern Archipelagic Seas"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:9_4"  label="Barents Sea"    />
+      <broad>
+         <element  key="SDN:C19:17:9"  label="Arctic Ocean"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:UKMDN009"  label="Barnstaple or Bideford Bay"    />
+      <broad>
+         <element  key="SDN:C19:17:1_5"  label="Bristol Channel"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:8_4_1"  label="Bass Strait"    />
+      <broad>
+         <element  key="SDN:C19:17:8_4_"  label="Tasman Sea"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:5_13"  label="Bay of Bengal"    />
+      <broad>
+         <element  key="SDN:C19:17:5"  label="Indian Ocean"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:1_8"  label="Bay of Biscay"    />
+      <broad>
+         <element  key="SDN:C19:17:SVX00015"  label="Northeast Atlantic Ocean (40W)"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:2_2_2"  label="Bay of Bothnia"    />
+      <broad>
+         <element  key="SDN:C19:17:2_2"  label="Gulf of Bothnia"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:1_13"  label="Bay of Fundy"    />
+      <broad>
+         <element  key="SDN:C19:17:SVX00017"  label="Northwest Atlantic Ocean (40W)"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:GTLAK024"  label="Bay of Quinte"    />
+      <broad>
+         <element  key="SDN:C19:17:SVX00012"  label="Lake Ontario"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:9_15"  label="Beaufort Sea"    />
+      <broad>
+         <element  key="SDN:C19:17:9"  label="Arctic Ocean"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:UKMDN029"  label="Belfast Lough"    />
+      <broad>
+         <element  key="SDN:C19:17:UKMDN030"  label="North Channel"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:10_12"  label="Bellingshausen Sea"    />
+      <broad>
+         <element  key="SDN:C19:17:10"  label="Southern Ocean"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:7_8"  label="Bering Sea"    />
+      <broad>
+         <element  key="SDN:C19:17:SVX00016"  label="Northeast Pacific Ocean (180W)"    />
+         <element  key="SDN:C19:17:SVX00018"  label="Northwest Pacific Ocean (180W)"    />
+      </broad>
+      <narrow>
+         <element  key="SDN:C19:17:7_8_1"  label="Anadyrskiy Zaliv"    />
+      </narrow>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:7_9"  label="Bering Strait"    />
+      <broad>
+         <element  key="SDN:C19:17:SVX00016"  label="Northeast Pacific Ocean (180W)"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:GTLAK021"  label="Big Bay de Noc"    />
+      <broad>
+         <element  key="SDN:C19:17:SVX00011"  label="Lake Michigan"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:8_1"  label="Bismarck Sea"    />
+      <broad>
+         <element  key="SDN:C19:17:SVX00024"  label="Southwest Pacific Ocean (140W)"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:3_3"  label="Black Sea"    />
+      <broad>
+         <element  key="SDN:C19:17:3"  label="Mediterranean Region"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:UKMDN041"  label="Blackwater Estuary"    />
+      <broad>
+         <element  key="SDN:C19:17:1_2"  label="North Sea"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:7_4_1"  label="Bo Hai"    />
+      <broad>
+         <element  key="SDN:C19:17:7_4"  label="Yellow Sea"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:2_2_1"  label="Bothnian Sea"    />
+      <broad>
+         <element  key="SDN:C19:17:2_2"  label="Gulf of Bothnia"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:10_14"  label="Bransfield Strait"    />
+      <broad>
+         <element  key="SDN:C19:17:10"  label="Southern Ocean"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:UKMDN010"  label="Bridgwater Bay"    />
+      <broad>
+         <element  key="SDN:C19:17:1_5"  label="Bristol Channel"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:UKMDN044"  label="Bridlington Bay"    />
+      <broad>
+         <element  key="SDN:C19:17:1_2"  label="North Sea"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:1_5"  label="Bristol Channel"    />
+      <broad>
+         <element  key="SDN:C19:17:SVX00015"  label="Northeast Atlantic Ocean (40W)"    />
+      </broad>
+      <narrow>
+         <element  key="SDN:C19:17:UKMDN013"  label="Severn Estuary"    />
+         <element  key="SDN:C19:17:UKMDN012"  label="Carmarthen Bay"    />
+         <element  key="SDN:C19:17:UKMDN010"  label="Bridgwater Bay"    />
+         <element  key="SDN:C19:17:UKMDN011"  label="Swansea Bay"    />
+         <element  key="SDN:C19:17:UKMDN009"  label="Barnstaple or Bideford Bay"    />
+      </narrow>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:UKMDN016"  label="Caernarfon Bay"    />
+      <broad>
+         <element  key="SDN:C19:17:1_4"  label="Irish Sea"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:UKMDN027"  label="Cardigan Bay"    />
+      <broad>
+         <element  key="SDN:C19:17:1_4"  label="Irish Sea"    />
+      </broad>
+      <narrow>
+         <element  key="SDN:C19:17:UKMDN028"  label="Tremadog Bay"    />
+      </narrow>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:1_10"  label="Caribbean Sea"    />
+      <broad>
+         <element  key="SDN:C19:17:SVX00017"  label="Northwest Atlantic Ocean (40W)"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:UKMDN017"  label="Carlingford Lough"    />
+      <broad>
+         <element  key="SDN:C19:17:1_4"  label="Irish Sea"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:UKMDN012"  label="Carmarthen Bay"    />
+      <broad>
+         <element  key="SDN:C19:17:1_5"  label="Bristol Channel"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:SVX00007"  label="Caspian Sea"    />
+      <broad>
+         <element  key="SDN:C19:17:SVX00004"  label="Asian mainland"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:6_22"  label="Celebes Sea"    />
+      <broad>
+         <element  key="SDN:C19:17:6"  label="South China and Eastern Archipelagic Seas"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:1_6"  label="Celtic Sea"    />
+      <broad>
+         <element  key="SDN:C19:17:SVX00015"  label="Northeast Atlantic Ocean (40W)"    />
+      </broad>
+      <narrow>
+         <element  key="SDN:C19:17:UKMDN014"  label="St. Brides Bay"    />
+         <element  key="SDN:C19:17:UKMDN015"  label="St. George&apos;s Channel"    />
+      </narrow>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:2_1"  label="Central Baltic Sea"    />
+      <broad>
+         <element  key="SDN:C19:17:2"  label="Baltic Sea"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:6_17"  label="Ceram Sea"    />
+      <broad>
+         <element  key="SDN:C19:17:6"  label="South China and Eastern Archipelagic Seas"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:GTLAK025"  label="Chequamegon Bay"    />
+      <broad>
+         <element  key="SDN:C19:17:SVX00013"  label="Lake Superior"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:UKMDN006"  label="Christchurch Bay"    />
+      <broad>
+         <element  key="SDN:C19:17:UKMDN005"  label="Solent"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:9_16"  label="Chukchi Sea"    />
+      <broad>
+         <element  key="SDN:C19:17:9"  label="Arctic Ocean"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:7_11"  label="Coastal Waters of Southeast Alaska and British Columbia"    />
+      <broad>
+         <element  key="SDN:C19:17:SVX00016"  label="Northeast Pacific Ocean (180W)"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:10_5"  label="Cooperation Sea"    />
+      <broad>
+         <element  key="SDN:C19:17:10"  label="Southern Ocean"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:8_3"  label="Coral Sea"    />
+      <broad>
+         <element  key="SDN:C19:17:SVX00024"  label="Southwest Pacific Ocean (140W)"    />
+      </broad>
+      <narrow>
+         <element  key="SDN:C19:17:8_3_1"  label="Torres Strait"    />
+         <element  key="SDN:C19:17:8_3_3"  label="Gulf of Papua"    />
+         <element  key="SDN:C19:17:8_3_2"  label="Great Barrier Reef (Coastal Waters)"    />
+      </narrow>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:10_4"  label="Cosmonauts Sea"    />
+      <broad>
+         <element  key="SDN:C19:17:10"  label="Southern Ocean"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:10_6"  label="Davis Sea"    />
+      <broad>
+         <element  key="SDN:C19:17:10"  label="Southern Ocean"    />
+      </broad>
+      <narrow>
+         <element  key="SDN:C19:17:10_6_1"  label="Tryoshnikova Gulf"    />
+      </narrow>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:9_9"  label="Davis Strait"    />
+      <broad>
+         <element  key="SDN:C19:17:9"  label="Arctic Ocean"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:UKMDN026"  label="Dee Estuary"    />
+      <broad>
+         <element  key="SDN:C19:17:UKMDN023"  label="Liverpool Bay"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:GTLAK010"  label="Detroit River"    />
+      <broad>
+         <element  key="SDN:C19:17:GTLAK001"  label="Laurentian Great Lakes"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:UKMDN049"  label="Dornoch Firth"    />
+      <broad>
+         <element  key="SDN:C19:17:1_2"  label="North Sea"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:1_7_1"  label="Dover Strait"    />
+      <broad>
+         <element  key="SDN:C19:17:1_7"  label="English Channel"    />
+      </broad>
+      <narrow>
+         <element  key="SDN:C19:17:UKMDN008"  label="Rye Bay"    />
+      </narrow>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:4_3"  label="Drake Passage"    />
+      <broad>
+         <element  key="SDN:C19:17:SVX00023"  label="Southwest Atlantic Ocean (20W)"    />
+         <element  key="SDN:C19:17:SVX00022"  label="Southeast Pacific Ocean (140W)"    />
+         <element  key="SDN:C19:17:10"  label="Southern Ocean"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:10_8"  label="Dumont D&apos;Urville Sea"    />
+      <broad>
+         <element  key="SDN:C19:17:10"  label="Southern Ocean"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:7_3"  label="East China Sea"    />
+      <broad>
+         <element  key="SDN:C19:17:SVX00018"  label="Northwest Pacific Ocean (180W)"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:9_1"  label="East Siberian Sea"    />
+      <broad>
+         <element  key="SDN:C19:17:9"  label="Arctic Ocean"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:NSL02"  label="Eastern Scheldt"    />
+      <broad>
+         <element  key="SDN:C19:17:1_2"  label="North Sea"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:1_7"  label="English Channel"    />
+      <broad>
+         <element  key="SDN:C19:17:SVX00015"  label="Northeast Atlantic Ocean (40W)"    />
+      </broad>
+      <narrow>
+         <element  key="SDN:C19:17:UKMDN002"  label="Plymouth Sound"    />
+         <element  key="SDN:C19:17:UKMDN003"  label="Weymouth Bay"    />
+         <element  key="SDN:C19:17:UKMDN005"  label="Solent"    />
+         <element  key="SDN:C19:17:UKMDN007"  label="Poole Bay"    />
+         <element  key="SDN:C19:17:UKMDN001"  label="Mounts Bay"    />
+         <element  key="SDN:C19:17:1_7_1"  label="Dover Strait"    />
+         <element  key="SDN:C19:17:UKMDN004"  label="Lyme Bay"    />
+      </narrow>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:SVX00008"  label="European mainland"    />
+      <broad>
+         <element  key="SDN:C19:17:SVX00025"  label="World"    />
+      </broad>
+      <narrow>
+         <element  key="SDN:C19:17:IJM"  label="IJsselmeer"    />
+         <element  key="SDN:C19:17:MKM"  label="Markermeer"    />
+      </narrow>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:UKMDN034"  label="Firth of Clyde"    />
+      <broad>
+         <element  key="SDN:C19:17:UKMDN030"  label="North Channel"    />
+      </broad>
+      <narrow>
+         <element  key="SDN:C19:17:UKMDN035"  label="Kilbrannan Sound"    />
+      </narrow>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:UKMDN046"  label="Firth of Forth"    />
+      <broad>
+         <element  key="SDN:C19:17:1_2"  label="North Sea"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:UKMDN033"  label="Firth of Lorn"    />
+      <broad>
+         <element  key="SDN:C19:17:1_3"  label="Inner Seas off the West Coast of Scotland"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:UKMDN047"  label="Firth of Tay"    />
+      <broad>
+         <element  key="SDN:C19:17:1_2"  label="North Sea"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:6_11"  label="Flores Sea"    />
+      <broad>
+         <element  key="SDN:C19:17:6"  label="South China and Eastern Archipelagic Seas"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:FRAM"  label="Fram Strait"    />
+      <broad>
+         <element  key="SDN:C19:17:9_6"  label="Greenland Sea"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:GTLAK017"  label="Georgian Bay"    />
+      <broad>
+         <element  key="SDN:C19:17:SVX00010"  label="Lake Huron"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:GTLAK019"  label="Grand Traverse Bay"    />
+      <broad>
+         <element  key="SDN:C19:17:SVX00011"  label="Lake Michigan"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:5_17"  label="Great Australian Bight"    />
+      <broad>
+         <element  key="SDN:C19:17:5"  label="Indian Ocean"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:8_3_2"  label="Great Barrier Reef (Coastal Waters)"    />
+      <broad>
+         <element  key="SDN:C19:17:8_3"  label="Coral Sea"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:GTLAK018"  label="Green Bay"    />
+      <broad>
+         <element  key="SDN:C19:17:SVX00011"  label="Lake Michigan"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:9_6"  label="Greenland Sea"    />
+      <broad>
+         <element  key="SDN:C19:17:9"  label="Arctic Ocean"    />
+      </broad>
+      <narrow>
+         <element  key="SDN:C19:17:FRAM"  label="Fram Strait"    />
+      </narrow>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:5_5"  label="Gulf of Aden"    />
+      <broad>
+         <element  key="SDN:C19:17:5"  label="Indian Ocean"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:7_10"  label="Gulf of Alaska"    />
+      <broad>
+         <element  key="SDN:C19:17:SVX00016"  label="Northeast Pacific Ocean (180W)"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:5_3"  label="Gulf of Aqaba"    />
+      <broad>
+         <element  key="SDN:C19:17:5"  label="Indian Ocean"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:2_2"  label="Gulf of Bothnia"    />
+      <broad>
+         <element  key="SDN:C19:17:2"  label="Baltic Sea"    />
+      </broad>
+      <narrow>
+         <element  key="SDN:C19:17:2_2_1"  label="Bothnian Sea"    />
+         <element  key="SDN:C19:17:2_2_2"  label="Bay of Bothnia"    />
+      </narrow>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:7_12"  label="Gulf of California"    />
+      <broad>
+         <element  key="SDN:C19:17:SVX00016"  label="Northeast Pacific Ocean (180W)"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:5_16_1"  label="Gulf of Carpentaria"    />
+      <broad>
+         <element  key="SDN:C19:17:5_16"  label="Arafura Sea"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:2_3"  label="Gulf of Finland"    />
+      <broad>
+         <element  key="SDN:C19:17:2"  label="Baltic Sea"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:1_9"  label="Gulf of Guinea"    />
+      <broad>
+         <element  key="SDN:C19:17:SVX00015"  label="Northeast Atlantic Ocean (40W)"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:5_11"  label="Gulf of Mannar"    />
+      <broad>
+         <element  key="SDN:C19:17:5"  label="Indian Ocean"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:1_11"  label="Gulf of Mexico"    />
+      <broad>
+         <element  key="SDN:C19:17:SVX00017"  label="Northwest Atlantic Ocean (40W)"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:5_8"  label="Gulf of Oman"    />
+      <broad>
+         <element  key="SDN:C19:17:5"  label="Indian Ocean"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:7_13"  label="Gulf of Panama"    />
+      <broad>
+         <element  key="SDN:C19:17:SVX00016"  label="Northeast Pacific Ocean (180W)"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:8_3_3"  label="Gulf of Papua"    />
+      <broad>
+         <element  key="SDN:C19:17:8_3"  label="Coral Sea"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:2_5"  label="Gulf of Riga"    />
+      <broad>
+         <element  key="SDN:C19:17:2"  label="Baltic Sea"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:1_14"  label="Gulf of St. Lawrence"    />
+      <broad>
+         <element  key="SDN:C19:17:SVX00017"  label="Northwest Atlantic Ocean (40W)"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:5_2"  label="Gulf of Suez"    />
+      <broad>
+         <element  key="SDN:C19:17:5"  label="Indian Ocean"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:6_3"  label="Gulf of Thailand"    />
+      <broad>
+         <element  key="SDN:C19:17:6"  label="South China and Eastern Archipelagic Seas"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:6_2"  label="Gulf of Tonkin"    />
+      <broad>
+         <element  key="SDN:C19:17:6"  label="South China and Eastern Archipelagic Seas"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:6_19"  label="Halmahera Sea"    />
+      <broad>
+         <element  key="SDN:C19:17:6"  label="South China and Eastern Archipelagic Seas"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:9_11"  label="Hudson Bay"    />
+      <broad>
+         <element  key="SDN:C19:17:9"  label="Arctic Ocean"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:9_10"  label="Hudson Strait"    />
+      <broad>
+         <element  key="SDN:C19:17:9"  label="Arctic Ocean"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:UKMDN043"  label="Humber Estuary"    />
+      <broad>
+         <element  key="SDN:C19:17:1_2"  label="North Sea"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:IJM"  label="IJsselmeer"    />
+      <broad>
+         <element  key="SDN:C19:17:SVX00008"  label="European mainland"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:9_8"  label="Iceland Sea"    />
+      <broad>
+         <element  key="SDN:C19:17:9"  label="Arctic Ocean"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:5"  label="Indian Ocean"    />
+      <broad>
+         <element  key="SDN:C19:17:SVX00025"  label="World"    />
+      </broad>
+      <narrow>
+         <element  key="SDN:C19:17:5_2"  label="Gulf of Suez"    />
+         <element  key="SDN:C19:17:5_14"  label="Andaman Sea"    />
+         <element  key="SDN:C19:17:5_12"  label="Palk Strait and Palk Bay"    />
+         <element  key="SDN:C19:17:5_11"  label="Gulf of Mannar"    />
+         <element  key="SDN:C19:17:5_3"  label="Gulf of Aqaba"    />
+         <element  key="SDN:C19:17:5_16"  label="Arafura Sea"    />
+         <element  key="SDN:C19:17:5_7"  label="Strait of Hormuz"    />
+         <element  key="SDN:C19:17:5_13"  label="Bay of Bengal"    />
+         <element  key="SDN:C19:17:5_15"  label="Timor Sea"    />
+         <element  key="SDN:C19:17:5_9"  label="Arabian Sea"    />
+         <element  key="SDN:C19:17:5_17"  label="Great Australian Bight"    />
+         <element  key="SDN:C19:17:5_4"  label="Red Sea"    />
+         <element  key="SDN:C19:17:5_8"  label="Gulf of Oman"    />
+         <element  key="SDN:C19:17:5_5"  label="Gulf of Aden"    />
+         <element  key="SDN:C19:17:5_6"  label="Persian Gulf"    />
+         <element  key="SDN:C19:17:5_10"  label="Lakshadweep Sea"    />
+         <element  key="SDN:C19:17:5_1"  label="Mozambique Channel"    />
+      </narrow>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:1_3"  label="Inner Seas off the West Coast of Scotland"    />
+      <broad>
+         <element  key="SDN:C19:17:SVX00015"  label="Northeast Atlantic Ocean (40W)"    />
+      </broad>
+      <narrow>
+         <element  key="SDN:C19:17:UKMDN036"  label="Little Minch"    />
+         <element  key="SDN:C19:17:UKMDN031"  label="Lough Foyle"    />
+         <element  key="SDN:C19:17:UKMDN032"  label="Sound of Jura"    />
+         <element  key="SDN:C19:17:UKMDN033"  label="Firth of Lorn"    />
+         <element  key="SDN:C19:17:UKMDN030"  label="North Channel"    />
+         <element  key="SDN:C19:17:UKMDN037"  label="Sea of the Hebrides"    />
+         <element  key="SDN:C19:17:UKMDN038"  label="Northern Minch"    />
+      </narrow>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:3_1_2_3"  label="Ionian Sea"    />
+      <broad>
+         <element  key="SDN:C19:17:3_1_2"  label="Mediterranean Sea, Eastern Basin"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:1_4"  label="Irish Sea"    />
+      <broad>
+         <element  key="SDN:C19:17:SVX00015"  label="Northeast Atlantic Ocean (40W)"    />
+      </broad>
+      <narrow>
+         <element  key="SDN:C19:17:UKMDN016"  label="Caernarfon Bay"    />
+         <element  key="SDN:C19:17:UKMDN017"  label="Carlingford Lough"    />
+         <element  key="SDN:C19:17:UKMDN018"  label="Morecambe Bay"    />
+         <element  key="SDN:C19:17:UKMDN020"  label="Solway Firth"    />
+         <element  key="SDN:C19:17:UKMDN056"  label="Menai Strait"    />
+         <element  key="SDN:C19:17:UKMDN027"  label="Cardigan Bay"    />
+         <element  key="SDN:C19:17:UKMDN015"  label="St. George&apos;s Channel"    />
+         <element  key="SDN:C19:17:UKMDN024"  label="Ribble Estuary"    />
+         <element  key="SDN:C19:17:UKMDN023"  label="Liverpool Bay"    />
+      </narrow>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:IRM"  label="Irminger Sea"    />
+      <broad>
+         <element  key="SDN:C19:17:1"  label="North Atlantic Ocean"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:7_6"  label="Japan Sea"    />
+      <broad>
+         <element  key="SDN:C19:17:SVX00018"  label="Northwest Pacific Ocean (180W)"    />
+      </broad>
+      <narrow>
+         <element  key="SDN:C19:17:7_6_1"  label="Tatarskiy Proliv"    />
+      </narrow>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:6_8"  label="Jawa Sea"    />
+      <broad>
+         <element  key="SDN:C19:17:6"  label="South China and Eastern Archipelagic Seas"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:5_15_1"  label="Joseph Bonaparte Gulf"    />
+      <broad>
+         <element  key="SDN:C19:17:5_15"  label="Timor Sea"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:9_3"  label="Kara Sea"    />
+      <broad>
+         <element  key="SDN:C19:17:9"  label="Arctic Ocean"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:2_9"  label="Kattegat"    />
+      <broad>
+         <element  key="SDN:C19:17:2"  label="Baltic Sea"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:GTLAK013"  label="Keweenaw Bay"    />
+      <broad>
+         <element  key="SDN:C19:17:SVX00013"  label="Lake Superior"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:UKMDN035"  label="Kilbrannan Sound"    />
+      <broad>
+         <element  key="SDN:C19:17:UKMDN034"  label="Firth of Clyde"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:1_15"  label="Labrador Sea"    />
+      <broad>
+         <element  key="SDN:C19:17:SVX00017"  label="Northwest Atlantic Ocean (40W)"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:SVX00009"  label="Lake Erie"    />
+      <broad>
+         <element  key="SDN:C19:17:GTLAK001"  label="Laurentian Great Lakes"    />
+      </broad>
+      <narrow>
+         <element  key="SDN:C19:17:GTLAK022"  label="Sandusky Bay"    />
+         <element  key="SDN:C19:17:GTLAK023"  label="Long Point Bay"    />
+      </narrow>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:SVX00010"  label="Lake Huron"    />
+      <broad>
+         <element  key="SDN:C19:17:GTLAK001"  label="Laurentian Great Lakes"    />
+      </broad>
+      <narrow>
+         <element  key="SDN:C19:17:GTLAK016"  label="Saginaw Bay"    />
+         <element  key="SDN:C19:17:GTLAK017"  label="Georgian Bay"    />
+      </narrow>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:SVX00011"  label="Lake Michigan"    />
+      <broad>
+         <element  key="SDN:C19:17:GTLAK001"  label="Laurentian Great Lakes"    />
+      </broad>
+      <narrow>
+         <element  key="SDN:C19:17:GTLAK021"  label="Big Bay de Noc"    />
+         <element  key="SDN:C19:17:GTLAK020"  label="Little Bay de Noc"    />
+         <element  key="SDN:C19:17:GTLAK019"  label="Grand Traverse Bay"    />
+         <element  key="SDN:C19:17:GTLAK018"  label="Green Bay"    />
+      </narrow>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:SVX00012"  label="Lake Ontario"    />
+      <broad>
+         <element  key="SDN:C19:17:GTLAK001"  label="Laurentian Great Lakes"    />
+      </broad>
+      <narrow>
+         <element  key="SDN:C19:17:GTLAK024"  label="Bay of Quinte"    />
+      </narrow>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:GTLAK007"  label="Lake St. Clair"    />
+      <broad>
+         <element  key="SDN:C19:17:GTLAK001"  label="Laurentian Great Lakes"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:SVX00013"  label="Lake Superior"    />
+      <broad>
+         <element  key="SDN:C19:17:GTLAK001"  label="Laurentian Great Lakes"    />
+      </broad>
+      <narrow>
+         <element  key="SDN:C19:17:GTLAK012"  label="St. Louis River Estuary"    />
+         <element  key="SDN:C19:17:GTLAK013"  label="Keweenaw Bay"    />
+         <element  key="SDN:C19:17:GTLAK015"  label="Michipicoten Bay"    />
+         <element  key="SDN:C19:17:GTLAK025"  label="Chequamegon Bay"    />
+         <element  key="SDN:C19:17:GTLAK014"  label="Whitefish Bay"    />
+      </narrow>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:5_10"  label="Lakshadweep Sea"    />
+      <broad>
+         <element  key="SDN:C19:17:5"  label="Indian Ocean"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:9_2"  label="Laptev Sea"    />
+      <broad>
+         <element  key="SDN:C19:17:9"  label="Arctic Ocean"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:GTLAK001"  label="Laurentian Great Lakes"    />
+      <broad>
+         <element  key="SDN:C19:17:SVX00014"  label="North America Mainland"    />
+      </broad>
+      <narrow>
+         <element  key="SDN:C19:17:SVX00013"  label="Lake Superior"    />
+         <element  key="SDN:C19:17:SVX00010"  label="Lake Huron"    />
+         <element  key="SDN:C19:17:SVX00011"  label="Lake Michigan"    />
+         <element  key="SDN:C19:17:SVX00009"  label="Lake Erie"    />
+         <element  key="SDN:C19:17:GTLAK011"  label="Niagara River"    />
+         <element  key="SDN:C19:17:GTLAK007"  label="Lake St. Clair"    />
+         <element  key="SDN:C19:17:GTLAK008"  label="St. Clair River"    />
+         <element  key="SDN:C19:17:GTLAK009"  label="St. Marys River"    />
+         <element  key="SDN:C19:17:GTLAK010"  label="Detroit River"    />
+         <element  key="SDN:C19:17:SVX00012"  label="Lake Ontario"    />
+      </narrow>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:10_2"  label="Lazarev Sea"    />
+      <broad>
+         <element  key="SDN:C19:17:10"  label="Southern Ocean"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:7_4_2"  label="Liaodong Wan"    />
+      <broad>
+         <element  key="SDN:C19:17:7_4"  label="Yellow Sea"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:3_1_1_4"  label="Ligurian Sea"    />
+      <broad>
+         <element  key="SDN:C19:17:3_1_1"  label="Mediterranean Sea, Western Basin"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:2_8"  label="Lillebaelt"    />
+      <broad>
+         <element  key="SDN:C19:17:2"  label="Baltic Sea"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:9_13"  label="Lincoln Sea"    />
+      <broad>
+         <element  key="SDN:C19:17:9"  label="Arctic Ocean"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:GTLAK020"  label="Little Bay de Noc"    />
+      <broad>
+         <element  key="SDN:C19:17:SVX00011"  label="Lake Michigan"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:UKMDN036"  label="Little Minch"    />
+      <broad>
+         <element  key="SDN:C19:17:1_3"  label="Inner Seas off the West Coast of Scotland"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:UKMDN023"  label="Liverpool Bay"    />
+      <broad>
+         <element  key="SDN:C19:17:1_4"  label="Irish Sea"    />
+      </broad>
+      <narrow>
+         <element  key="SDN:C19:17:UKMDN025"  label="Mersey Estuary"    />
+         <element  key="SDN:C19:17:UKMDN026"  label="Dee Estuary"    />
+      </narrow>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:GTLAK023"  label="Long Point Bay"    />
+      <broad>
+         <element  key="SDN:C19:17:SVX00009"  label="Lake Erie"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:UKMDN031"  label="Lough Foyle"    />
+      <broad>
+         <element  key="SDN:C19:17:1_3"  label="Inner Seas off the West Coast of Scotland"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:UKMDN021"  label="Luce Bay"    />
+      <broad>
+         <element  key="SDN:C19:17:UKMDN020"  label="Solway Firth"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:UKMDN004"  label="Lyme Bay"    />
+      <broad>
+         <element  key="SDN:C19:17:1_7"  label="English Channel"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:6_5"  label="Malacca Strait"    />
+      <broad>
+         <element  key="SDN:C19:17:6"  label="South China and Eastern Archipelagic Seas"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:MKM"  label="Markermeer"    />
+      <broad>
+         <element  key="SDN:C19:17:SVX00008"  label="European mainland"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:10_7"  label="Mawson Sea"    />
+      <broad>
+         <element  key="SDN:C19:17:10"  label="Southern Ocean"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:10_10_1"  label="McMurdo Sound"    />
+      <broad>
+         <element  key="SDN:C19:17:10_10"  label="Ross Sea"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:3"  label="Mediterranean Region"    />
+      <broad>
+         <element  key="SDN:C19:17:SVX00025"  label="World"    />
+      </broad>
+      <narrow>
+         <element  key="SDN:C19:17:3_1"  label="Mediterranean Sea"    />
+         <element  key="SDN:C19:17:3_2"  label="Sea of Marmara"    />
+         <element  key="SDN:C19:17:3_3"  label="Black Sea"    />
+         <element  key="SDN:C19:17:3_4"  label="Sea of Azov"    />
+      </narrow>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:3_1"  label="Mediterranean Sea"    />
+      <broad>
+         <element  key="SDN:C19:17:3"  label="Mediterranean Region"    />
+      </broad>
+      <narrow>
+         <element  key="SDN:C19:17:3_1_2"  label="Mediterranean Sea, Eastern Basin"    />
+         <element  key="SDN:C19:17:3_1_1"  label="Mediterranean Sea, Western Basin"    />
+      </narrow>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:3_1_2"  label="Mediterranean Sea, Eastern Basin"    />
+      <broad>
+         <element  key="SDN:C19:17:3_1"  label="Mediterranean Sea"    />
+      </broad>
+      <narrow>
+         <element  key="SDN:C19:17:3_1_2_1"  label="Adriatic Sea"    />
+         <element  key="SDN:C19:17:3_1_2_4"  label="Aegean Sea"    />
+         <element  key="SDN:C19:17:3_1_2_2"  label="Strait of Sicily"    />
+         <element  key="SDN:C19:17:3_1_2_3"  label="Ionian Sea"    />
+      </narrow>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:3_1_1"  label="Mediterranean Sea, Western Basin"    />
+      <broad>
+         <element  key="SDN:C19:17:3_1"  label="Mediterranean Sea"    />
+      </broad>
+      <narrow>
+         <element  key="SDN:C19:17:3_1_1_1"  label="Strait of Gibraltar"    />
+         <element  key="SDN:C19:17:3_1_1_3"  label="Balearic Sea"    />
+         <element  key="SDN:C19:17:3_1_1_4"  label="Ligurian Sea"    />
+         <element  key="SDN:C19:17:3_1_1_5"  label="Tyrrhenian Sea"    />
+         <element  key="SDN:C19:17:3_1_1_2"  label="Alboran Sea"    />
+      </narrow>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:UKMDN056"  label="Menai Strait"    />
+      <broad>
+         <element  key="SDN:C19:17:1_4"  label="Irish Sea"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:UKMDN025"  label="Mersey Estuary"    />
+      <broad>
+         <element  key="SDN:C19:17:UKMDN023"  label="Liverpool Bay"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:GTLAK015"  label="Michipicoten Bay"    />
+      <broad>
+         <element  key="SDN:C19:17:SVX00013"  label="Lake Superior"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:6_20"  label="Molucca Sea"    />
+      <broad>
+         <element  key="SDN:C19:17:6"  label="South China and Eastern Archipelagic Seas"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:UKMDN048"  label="Moray Firth"    />
+      <broad>
+         <element  key="SDN:C19:17:1_2"  label="North Sea"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:UKMDN018"  label="Morecambe Bay"    />
+      <broad>
+         <element  key="SDN:C19:17:1_4"  label="Irish Sea"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:UKMDN001"  label="Mounts Bay"    />
+      <broad>
+         <element  key="SDN:C19:17:1_7"  label="English Channel"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:5_1"  label="Mozambique Channel"    />
+      <broad>
+         <element  key="SDN:C19:17:5"  label="Indian Ocean"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:6_4"  label="Natuna Sea"    />
+      <broad>
+         <element  key="SDN:C19:17:6"  label="South China and Eastern Archipelagic Seas"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:GTLAK011"  label="Niagara River"    />
+      <broad>
+         <element  key="SDN:C19:17:GTLAK001"  label="Laurentian Great Lakes"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:SVX00014"  label="North America Mainland"    />
+      <broad>
+         <element  key="SDN:C19:17:SVX00025"  label="World"    />
+      </broad>
+      <narrow>
+         <element  key="SDN:C19:17:GTLAK001"  label="Laurentian Great Lakes"    />
+      </narrow>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:1"  label="North Atlantic Ocean"    />
+      <broad>
+         <element  key="SDN:C19:17:SVX00005"  label="Atlantic Ocean"    />
+      </broad>
+      <narrow>
+         <element  key="SDN:C19:17:IRM"  label="Irminger Sea"    />
+         <element  key="SDN:C19:17:SVX00017"  label="Northwest Atlantic Ocean (40W)"    />
+         <element  key="SDN:C19:17:SVX00015"  label="Northeast Atlantic Ocean (40W)"    />
+      </narrow>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:UKMDN030"  label="North Channel"    />
+      <broad>
+         <element  key="SDN:C19:17:1_3"  label="Inner Seas off the West Coast of Scotland"    />
+      </broad>
+      <narrow>
+         <element  key="SDN:C19:17:UKMDN034"  label="Firth of Clyde"    />
+         <element  key="SDN:C19:17:UKMDN019"  label="Strangford Lough"    />
+         <element  key="SDN:C19:17:UKMDN029"  label="Belfast Lough"    />
+      </narrow>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:7"  label="North Pacific Ocean"    />
+      <broad>
+         <element  key="SDN:C19:17:SVX00019"  label="Pacific Ocean"    />
+      </broad>
+      <narrow>
+         <element  key="SDN:C19:17:SVX00018"  label="Northwest Pacific Ocean (180W)"    />
+         <element  key="SDN:C19:17:SVX00016"  label="Northeast Pacific Ocean (180W)"    />
+      </narrow>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:1_2"  label="North Sea"    />
+      <broad>
+         <element  key="SDN:C19:17:SVX00015"  label="Northeast Atlantic Ocean (40W)"    />
+      </broad>
+      <narrow>
+         <element  key="SDN:C19:17:UKMDN040"  label="Thames Estuary"    />
+         <element  key="SDN:C19:17:UKMDN041"  label="Blackwater Estuary"    />
+         <element  key="SDN:C19:17:UKMDN042"  label="The Wash"    />
+         <element  key="SDN:C19:17:UKMDN043"  label="Humber Estuary"    />
+         <element  key="SDN:C19:17:UKMDN044"  label="Bridlington Bay"    />
+         <element  key="SDN:C19:17:UKMDN045"  label="Tees Bay"    />
+         <element  key="SDN:C19:17:UKMDN046"  label="Firth of Forth"    />
+         <element  key="SDN:C19:17:UKMDN047"  label="Firth of Tay"    />
+         <element  key="SDN:C19:17:UKMDN048"  label="Moray Firth"    />
+         <element  key="SDN:C19:17:UKMDN049"  label="Dornoch Firth"    />
+         <element  key="SDN:C19:17:UKMDN050"  label="Pentland Firth"    />
+         <element  key="SDN:C19:17:UKMDN051"  label="Scapa Flow"    />
+         <element  key="SDN:C19:17:UKMDN052"  label="Stronsay Firth"    />
+         <element  key="SDN:C19:17:UKMDN053"  label="Westray Firth"    />
+         <element  key="SDN:C19:17:UKMDN054"  label="Yell Sound"    />
+         <element  key="SDN:C19:17:NSL01"  label="Western Scheldt"    />
+         <element  key="SDN:C19:17:NSL02"  label="Eastern Scheldt"    />
+         <element  key="SDN:C19:17:NSL03"  label="Wadden Sea"    />
+      </narrow>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:SVX00015"  label="Northeast Atlantic Ocean (40W)"    />
+      <broad>
+         <element  key="SDN:C19:17:1"  label="North Atlantic Ocean"    />
+      </broad>
+      <narrow>
+         <element  key="SDN:C19:17:1_6"  label="Celtic Sea"    />
+         <element  key="SDN:C19:17:1_7"  label="English Channel"    />
+         <element  key="SDN:C19:17:1_2"  label="North Sea"    />
+         <element  key="SDN:C19:17:UKMDN039"  label="St. Magnus Bay"    />
+         <element  key="SDN:C19:17:1_8"  label="Bay of Biscay"    />
+         <element  key="SDN:C19:17:1_3"  label="Inner Seas off the West Coast of Scotland"    />
+         <element  key="SDN:C19:17:1_5"  label="Bristol Channel"    />
+         <element  key="SDN:C19:17:1_9"  label="Gulf of Guinea"    />
+         <element  key="SDN:C19:17:1_1"  label="Skagerrak"    />
+         <element  key="SDN:C19:17:1_4"  label="Irish Sea"    />
+      </narrow>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:SVX00016"  label="Northeast Pacific Ocean (180W)"    />
+      <broad>
+         <element  key="SDN:C19:17:7"  label="North Pacific Ocean"    />
+      </broad>
+      <narrow>
+         <element  key="SDN:C19:17:7_11"  label="Coastal Waters of Southeast Alaska and British Columbia"    />
+         <element  key="SDN:C19:17:7_9"  label="Bering Strait"    />
+         <element  key="SDN:C19:17:7_10"  label="Gulf of Alaska"    />
+         <element  key="SDN:C19:17:7_13"  label="Gulf of Panama"    />
+         <element  key="SDN:C19:17:7_12"  label="Gulf of California"    />
+         <element  key="SDN:C19:17:7_8"  label="Bering Sea"    />
+      </narrow>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:UKMDN038"  label="Northern Minch"    />
+      <broad>
+         <element  key="SDN:C19:17:1_3"  label="Inner Seas off the West Coast of Scotland"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:SVX00017"  label="Northwest Atlantic Ocean (40W)"    />
+      <broad>
+         <element  key="SDN:C19:17:1"  label="North Atlantic Ocean"    />
+      </broad>
+      <narrow>
+         <element  key="SDN:C19:17:1_15"  label="Labrador Sea"    />
+         <element  key="SDN:C19:17:1_14"  label="Gulf of St. Lawrence"    />
+         <element  key="SDN:C19:17:1_12"  label="Straits of Florida"    />
+         <element  key="SDN:C19:17:1_11"  label="Gulf of Mexico"    />
+         <element  key="SDN:C19:17:1_13"  label="Bay of Fundy"    />
+         <element  key="SDN:C19:17:1_10"  label="Caribbean Sea"    />
+      </narrow>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:SVX00018"  label="Northwest Pacific Ocean (180W)"    />
+      <broad>
+         <element  key="SDN:C19:17:7"  label="North Pacific Ocean"    />
+      </broad>
+      <narrow>
+         <element  key="SDN:C19:17:7_1"  label="Philippine Sea"    />
+         <element  key="SDN:C19:17:7_4"  label="Yellow Sea"    />
+         <element  key="SDN:C19:17:7_5"  label="Seto Naikai"    />
+         <element  key="SDN:C19:17:7_7"  label="Sea of Okhotsk"    />
+         <element  key="SDN:C19:17:7_8"  label="Bering Sea"    />
+         <element  key="SDN:C19:17:7_6"  label="Japan Sea"    />
+         <element  key="SDN:C19:17:7_3"  label="East China Sea"    />
+         <element  key="SDN:C19:17:7_2"  label="Tai-Wan Strait"    />
+      </narrow>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:9_14"  label="Northwestern Passages"    />
+      <broad>
+         <element  key="SDN:C19:17:9"  label="Arctic Ocean"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:9_7"  label="Norwegian Sea"    />
+      <broad>
+         <element  key="SDN:C19:17:9"  label="Arctic Ocean"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:SVX00019"  label="Pacific Ocean"    />
+      <broad>
+         <element  key="SDN:C19:17:SVX00025"  label="World"    />
+      </broad>
+      <narrow>
+         <element  key="SDN:C19:17:7"  label="North Pacific Ocean"    />
+         <element  key="SDN:C19:17:8"  label="South Pacific Ocean"    />
+      </narrow>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:5_12"  label="Palk Strait and Palk Bay"    />
+      <broad>
+         <element  key="SDN:C19:17:5"  label="Indian Ocean"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:UKMDN050"  label="Pentland Firth"    />
+      <broad>
+         <element  key="SDN:C19:17:1_2"  label="North Sea"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:5_6"  label="Persian Gulf"    />
+      <broad>
+         <element  key="SDN:C19:17:5"  label="Indian Ocean"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:7_1"  label="Philippine Sea"    />
+      <broad>
+         <element  key="SDN:C19:17:SVX00018"  label="Northwest Pacific Ocean (180W)"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:UKMDN002"  label="Plymouth Sound"    />
+      <broad>
+         <element  key="SDN:C19:17:1_7"  label="English Channel"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:UKMDN007"  label="Poole Bay"    />
+      <broad>
+         <element  key="SDN:C19:17:1_7"  label="English Channel"    />
+      </broad>
+      <narrow>
+         <element  key="SDN:C19:17:UKMDN055"  label="Poole Harbour"    />
+      </narrow>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:UKMDN055"  label="Poole Harbour"    />
+      <broad>
+         <element  key="SDN:C19:17:UKMDN007"  label="Poole Bay"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:5_4"  label="Red Sea"    />
+      <broad>
+         <element  key="SDN:C19:17:5"  label="Indian Ocean"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:UKMDN024"  label="Ribble Estuary"    />
+      <broad>
+         <element  key="SDN:C19:17:1_4"  label="Irish Sea"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:10_3"  label="Riiser-Larsen Sea"    />
+      <broad>
+         <element  key="SDN:C19:17:10"  label="Southern Ocean"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:4_1"  label="Rio de la Plata"    />
+      <broad>
+         <element  key="SDN:C19:17:SVX00023"  label="Southwest Atlantic Ocean (20W)"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:10_10"  label="Ross Sea"    />
+      <broad>
+         <element  key="SDN:C19:17:10"  label="Southern Ocean"    />
+      </broad>
+      <narrow>
+         <element  key="SDN:C19:17:10_10_1"  label="McMurdo Sound"    />
+      </narrow>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:UKMDN008"  label="Rye Bay"    />
+      <broad>
+         <element  key="SDN:C19:17:1_7_1"  label="Dover Strait"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:GTLAK016"  label="Saginaw Bay"    />
+      <broad>
+         <element  key="SDN:C19:17:SVX00010"  label="Lake Huron"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:GTLAK022"  label="Sandusky Bay"    />
+      <broad>
+         <element  key="SDN:C19:17:SVX00009"  label="Lake Erie"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:6_13"  label="Sawu Sea"    />
+      <broad>
+         <element  key="SDN:C19:17:6"  label="South China and Eastern Archipelagic Seas"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:UKMDN051"  label="Scapa Flow"    />
+      <broad>
+         <element  key="SDN:C19:17:1_2"  label="North Sea"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:4_2"  label="Scotia Sea"    />
+      <broad>
+         <element  key="SDN:C19:17:10"  label="Southern Ocean"    />
+         <element  key="SDN:C19:17:SVX00023"  label="Southwest Atlantic Ocean (20W)"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:3_4"  label="Sea of Azov"    />
+      <broad>
+         <element  key="SDN:C19:17:3"  label="Mediterranean Region"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:3_2"  label="Sea of Marmara"    />
+      <broad>
+         <element  key="SDN:C19:17:3"  label="Mediterranean Region"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:7_7"  label="Sea of Okhotsk"    />
+      <broad>
+         <element  key="SDN:C19:17:SVX00018"  label="Northwest Pacific Ocean (180W)"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:UKMDN037"  label="Sea of the Hebrides"    />
+      <broad>
+         <element  key="SDN:C19:17:1_3"  label="Inner Seas off the West Coast of Scotland"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:6_9"  label="Selat Makasar"    />
+      <broad>
+         <element  key="SDN:C19:17:6"  label="South China and Eastern Archipelagic Seas"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:6_12"  label="Selat Sumba"    />
+      <broad>
+         <element  key="SDN:C19:17:6"  label="South China and Eastern Archipelagic Seas"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:6_7"  label="Selat Sunda"    />
+      <broad>
+         <element  key="SDN:C19:17:6"  label="South China and Eastern Archipelagic Seas"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:7_5"  label="Seto Naikai"    />
+      <broad>
+         <element  key="SDN:C19:17:SVX00018"  label="Northwest Pacific Ocean (180W)"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:UKMDN013"  label="Severn Estuary"    />
+      <broad>
+         <element  key="SDN:C19:17:1_5"  label="Bristol Channel"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:6_6"  label="Singapore Strait"    />
+      <broad>
+         <element  key="SDN:C19:17:6"  label="South China and Eastern Archipelagic Seas"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:1_1"  label="Skagerrak"    />
+      <broad>
+         <element  key="SDN:C19:17:SVX00015"  label="Northeast Atlantic Ocean (40W)"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:UKMDN005"  label="Solent"    />
+      <broad>
+         <element  key="SDN:C19:17:1_7"  label="English Channel"    />
+      </broad>
+      <narrow>
+         <element  key="SDN:C19:17:UKMDN006"  label="Christchurch Bay"    />
+      </narrow>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:8_2"  label="Solomon Sea"    />
+      <broad>
+         <element  key="SDN:C19:17:SVX00024"  label="Southwest Pacific Ocean (140W)"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:UKMDN020"  label="Solway Firth"    />
+      <broad>
+         <element  key="SDN:C19:17:1_4"  label="Irish Sea"    />
+      </broad>
+      <narrow>
+         <element  key="SDN:C19:17:UKMDN021"  label="Luce Bay"    />
+         <element  key="SDN:C19:17:UKMDN022"  label="Wigtown Bay"    />
+      </narrow>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:10_9"  label="Somov Sea"    />
+      <broad>
+         <element  key="SDN:C19:17:10"  label="Southern Ocean"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:2_4"  label="Sound Sea"    />
+      <broad>
+         <element  key="SDN:C19:17:2"  label="Baltic Sea"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:UKMDN032"  label="Sound of Jura"    />
+      <broad>
+         <element  key="SDN:C19:17:1_3"  label="Inner Seas off the West Coast of Scotland"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:SVX00020"  label="South American freshwater bodies"    />
+      <broad>
+         <element  key="SDN:C19:17:SVX00025"  label="World"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:4"  label="South Atlantic Ocean"    />
+      <broad>
+         <element  key="SDN:C19:17:SVX00005"  label="Atlantic Ocean"    />
+      </broad>
+      <narrow>
+         <element  key="SDN:C19:17:SVX00023"  label="Southwest Atlantic Ocean (20W)"    />
+         <element  key="SDN:C19:17:SVX00021"  label="Southeast Atlantic Ocean (20W)"    />
+      </narrow>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:6_1"  label="South China Sea"    />
+      <broad>
+         <element  key="SDN:C19:17:6"  label="South China and Eastern Archipelagic Seas"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:6"  label="South China and Eastern Archipelagic Seas"    />
+      <broad>
+         <element  key="SDN:C19:17:SVX00025"  label="World"    />
+      </broad>
+      <narrow>
+         <element  key="SDN:C19:17:6_12"  label="Selat Sumba"    />
+         <element  key="SDN:C19:17:6_16"  label="Teluk Bone"    />
+         <element  key="SDN:C19:17:6_15"  label="Banda Sea"    />
+         <element  key="SDN:C19:17:6_6"  label="Singapore Strait"    />
+         <element  key="SDN:C19:17:6_17"  label="Ceram Sea"    />
+         <element  key="SDN:C19:17:6_13"  label="Sawu Sea"    />
+         <element  key="SDN:C19:17:6_3"  label="Gulf of Thailand"    />
+         <element  key="SDN:C19:17:6_1"  label="South China Sea"    />
+         <element  key="SDN:C19:17:6_7"  label="Selat Sunda"    />
+         <element  key="SDN:C19:17:6_20"  label="Molucca Sea"    />
+         <element  key="SDN:C19:17:6_19"  label="Halmahera Sea"    />
+         <element  key="SDN:C19:17:6_21"  label="Teluk Tomini"    />
+         <element  key="SDN:C19:17:6_22"  label="Celebes Sea"    />
+         <element  key="SDN:C19:17:6_23"  label="Sulu Sea"    />
+         <element  key="SDN:C19:17:6_8"  label="Jawa Sea"    />
+         <element  key="SDN:C19:17:6_9"  label="Selat Makasar"    />
+         <element  key="SDN:C19:17:6_2"  label="Gulf of Tonkin"    />
+         <element  key="SDN:C19:17:6_11"  label="Flores Sea"    />
+         <element  key="SDN:C19:17:6_5"  label="Malacca Strait"    />
+         <element  key="SDN:C19:17:6_14"  label="Aru Sea"    />
+         <element  key="SDN:C19:17:6_4"  label="Natuna Sea"    />
+         <element  key="SDN:C19:17:6_10"  label="Bali Sea"    />
+         <element  key="SDN:C19:17:6_18"  label="Teluk Berau"    />
+      </narrow>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:8"  label="South Pacific Ocean"    />
+      <broad>
+         <element  key="SDN:C19:17:SVX00019"  label="Pacific Ocean"    />
+      </broad>
+      <narrow>
+         <element  key="SDN:C19:17:SVX00024"  label="Southwest Pacific Ocean (140W)"    />
+         <element  key="SDN:C19:17:SVX00022"  label="Southeast Pacific Ocean (140W)"    />
+      </narrow>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:SVX00021"  label="Southeast Atlantic Ocean (20W)"    />
+      <broad>
+         <element  key="SDN:C19:17:4"  label="South Atlantic Ocean"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:SVX00022"  label="Southeast Pacific Ocean (140W)"    />
+      <broad>
+         <element  key="SDN:C19:17:8"  label="South Pacific Ocean"    />
+      </broad>
+      <narrow>
+         <element  key="SDN:C19:17:4_3"  label="Drake Passage"    />
+      </narrow>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:10"  label="Southern Ocean"    />
+      <broad>
+         <element  key="SDN:C19:17:SVX00025"  label="World"    />
+      </broad>
+      <narrow>
+         <element  key="SDN:C19:17:10_12"  label="Bellingshausen Sea"    />
+         <element  key="SDN:C19:17:10_9"  label="Somov Sea"    />
+         <element  key="SDN:C19:17:10_1"  label="Weddell Sea"    />
+         <element  key="SDN:C19:17:10_7"  label="Mawson Sea"    />
+         <element  key="SDN:C19:17:10_4"  label="Cosmonauts Sea"    />
+         <element  key="SDN:C19:17:10_10"  label="Ross Sea"    />
+         <element  key="SDN:C19:17:10_8"  label="Dumont D&apos;Urville Sea"    />
+         <element  key="SDN:C19:17:4_3"  label="Drake Passage"    />
+         <element  key="SDN:C19:17:10_11"  label="Amundsen Sea"    />
+         <element  key="SDN:C19:17:10_14"  label="Bransfield Strait"    />
+         <element  key="SDN:C19:17:10_6"  label="Davis Sea"    />
+         <element  key="SDN:C19:17:4_2"  label="Scotia Sea"    />
+         <element  key="SDN:C19:17:10_2"  label="Lazarev Sea"    />
+         <element  key="SDN:C19:17:10_3"  label="Riiser-Larsen Sea"    />
+         <element  key="SDN:C19:17:10_5"  label="Cooperation Sea"    />
+      </narrow>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:SVX00023"  label="Southwest Atlantic Ocean (20W)"    />
+      <broad>
+         <element  key="SDN:C19:17:4"  label="South Atlantic Ocean"    />
+      </broad>
+      <narrow>
+         <element  key="SDN:C19:17:4_1"  label="Rio de la Plata"    />
+         <element  key="SDN:C19:17:4_2"  label="Scotia Sea"    />
+         <element  key="SDN:C19:17:4_3"  label="Drake Passage"    />
+      </narrow>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:SVX00024"  label="Southwest Pacific Ocean (140W)"    />
+      <broad>
+         <element  key="SDN:C19:17:8"  label="South Pacific Ocean"    />
+      </broad>
+      <narrow>
+         <element  key="SDN:C19:17:8_4_"  label="Tasman Sea"    />
+         <element  key="SDN:C19:17:8_1"  label="Bismarck Sea"    />
+         <element  key="SDN:C19:17:8_2"  label="Solomon Sea"    />
+         <element  key="SDN:C19:17:8_3"  label="Coral Sea"    />
+      </narrow>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:UKMDN014"  label="St. Brides Bay"    />
+      <broad>
+         <element  key="SDN:C19:17:1_6"  label="Celtic Sea"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:GTLAK008"  label="St. Clair River"    />
+      <broad>
+         <element  key="SDN:C19:17:GTLAK001"  label="Laurentian Great Lakes"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:UKMDN015"  label="St. George&apos;s Channel"    />
+      <broad>
+         <element  key="SDN:C19:17:1_6"  label="Celtic Sea"    />
+         <element  key="SDN:C19:17:1_4"  label="Irish Sea"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:GTLAK012"  label="St. Louis River Estuary"    />
+      <broad>
+         <element  key="SDN:C19:17:SVX00013"  label="Lake Superior"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:UKMDN039"  label="St. Magnus Bay"    />
+      <broad>
+         <element  key="SDN:C19:17:SVX00015"  label="Northeast Atlantic Ocean (40W)"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:GTLAK009"  label="St. Marys River"    />
+      <broad>
+         <element  key="SDN:C19:17:GTLAK001"  label="Laurentian Great Lakes"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:2_7"  label="Storebaelt"    />
+      <broad>
+         <element  key="SDN:C19:17:2"  label="Baltic Sea"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:3_1_1_1"  label="Strait of Gibraltar"    />
+      <broad>
+         <element  key="SDN:C19:17:3_1_1"  label="Mediterranean Sea, Western Basin"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:5_7"  label="Strait of Hormuz"    />
+      <broad>
+         <element  key="SDN:C19:17:5"  label="Indian Ocean"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:3_1_2_2"  label="Strait of Sicily"    />
+      <broad>
+         <element  key="SDN:C19:17:3_1_2"  label="Mediterranean Sea, Eastern Basin"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:1_12"  label="Straits of Florida"    />
+      <broad>
+         <element  key="SDN:C19:17:SVX00017"  label="Northwest Atlantic Ocean (40W)"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:UKMDN019"  label="Strangford Lough"    />
+      <broad>
+         <element  key="SDN:C19:17:UKMDN030"  label="North Channel"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:UKMDN052"  label="Stronsay Firth"    />
+      <broad>
+         <element  key="SDN:C19:17:1_2"  label="North Sea"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:6_23"  label="Sulu Sea"    />
+      <broad>
+         <element  key="SDN:C19:17:6"  label="South China and Eastern Archipelagic Seas"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:UKMDN011"  label="Swansea Bay"    />
+      <broad>
+         <element  key="SDN:C19:17:1_5"  label="Bristol Channel"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:7_2"  label="Tai-Wan Strait"    />
+      <broad>
+         <element  key="SDN:C19:17:SVX00018"  label="Northwest Pacific Ocean (180W)"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:8_4_"  label="Tasman Sea"    />
+      <broad>
+         <element  key="SDN:C19:17:SVX00024"  label="Southwest Pacific Ocean (140W)"    />
+      </broad>
+      <narrow>
+         <element  key="SDN:C19:17:8_4_1"  label="Bass Strait"    />
+      </narrow>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:7_6_1"  label="Tatarskiy Proliv"    />
+      <broad>
+         <element  key="SDN:C19:17:7_6"  label="Japan Sea"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:UKMDN045"  label="Tees Bay"    />
+      <broad>
+         <element  key="SDN:C19:17:1_2"  label="North Sea"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:6_18"  label="Teluk Berau"    />
+      <broad>
+         <element  key="SDN:C19:17:6"  label="South China and Eastern Archipelagic Seas"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:6_16"  label="Teluk Bone"    />
+      <broad>
+         <element  key="SDN:C19:17:6"  label="South China and Eastern Archipelagic Seas"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:6_21"  label="Teluk Tomini"    />
+      <broad>
+         <element  key="SDN:C19:17:6"  label="South China and Eastern Archipelagic Seas"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:UKMDN040"  label="Thames Estuary"    />
+      <broad>
+         <element  key="SDN:C19:17:1_2"  label="North Sea"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:2_6"  label="The Sound"    />
+      <broad>
+         <element  key="SDN:C19:17:2"  label="Baltic Sea"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:UKMDN042"  label="The Wash"    />
+      <broad>
+         <element  key="SDN:C19:17:1_2"  label="North Sea"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:5_15"  label="Timor Sea"    />
+      <broad>
+         <element  key="SDN:C19:17:5"  label="Indian Ocean"    />
+      </broad>
+      <narrow>
+         <element  key="SDN:C19:17:5_15_1"  label="Joseph Bonaparte Gulf"    />
+      </narrow>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:8_3_1"  label="Torres Strait"    />
+      <broad>
+         <element  key="SDN:C19:17:8_3"  label="Coral Sea"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:UKMDN028"  label="Tremadog Bay"    />
+      <broad>
+         <element  key="SDN:C19:17:UKMDN027"  label="Cardigan Bay"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:10_6_1"  label="Tryoshnikova Gulf"    />
+      <broad>
+         <element  key="SDN:C19:17:10_6"  label="Davis Sea"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:3_1_1_5"  label="Tyrrhenian Sea"    />
+      <broad>
+         <element  key="SDN:C19:17:3_1_1"  label="Mediterranean Sea, Western Basin"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:NSL03"  label="Wadden Sea"    />
+      <broad>
+         <element  key="SDN:C19:17:1_2"  label="North Sea"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:10_1"  label="Weddell Sea"    />
+      <broad>
+         <element  key="SDN:C19:17:10"  label="Southern Ocean"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:NSL01"  label="Western Scheldt"    />
+      <broad>
+         <element  key="SDN:C19:17:1_2"  label="North Sea"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:UKMDN053"  label="Westray Firth"    />
+      <broad>
+         <element  key="SDN:C19:17:1_2"  label="North Sea"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:UKMDN003"  label="Weymouth Bay"    />
+      <broad>
+         <element  key="SDN:C19:17:1_7"  label="English Channel"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:9_5"  label="White Sea"    />
+      <broad>
+         <element  key="SDN:C19:17:9"  label="Arctic Ocean"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:GTLAK014"  label="Whitefish Bay"    />
+      <broad>
+         <element  key="SDN:C19:17:SVX00013"  label="Lake Superior"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:UKMDN022"  label="Wigtown Bay"    />
+      <broad>
+         <element  key="SDN:C19:17:UKMDN020"  label="Solway Firth"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:SVX00025"  label="World"    />
+      <narrow>
+         <element  key="SDN:C19:17:9"  label="Arctic Ocean"    />
+         <element  key="SDN:C19:17:SVX00014"  label="North America Mainland"    />
+         <element  key="SDN:C19:17:SVX00006"  label="Australian freshwater bodies"    />
+         <element  key="SDN:C19:17:SVX00001"  label="African freshwater bodies"    />
+         <element  key="SDN:C19:17:SVX00019"  label="Pacific Ocean"    />
+         <element  key="SDN:C19:17:6"  label="South China and Eastern Archipelagic Seas"    />
+         <element  key="SDN:C19:17:SVX00002"  label="Antarctic freshwater bodies"    />
+         <element  key="SDN:C19:17:SVX00004"  label="Asian mainland"    />
+         <element  key="SDN:C19:17:SVX00008"  label="European mainland"    />
+         <element  key="SDN:C19:17:3"  label="Mediterranean Region"    />
+         <element  key="SDN:C19:17:10"  label="Southern Ocean"    />
+         <element  key="SDN:C19:17:5"  label="Indian Ocean"    />
+         <element  key="SDN:C19:17:SVX00020"  label="South American freshwater bodies"    />
+         <element  key="SDN:C19:17:2"  label="Baltic Sea"    />
+         <element  key="SDN:C19:17:SVX00005"  label="Atlantic Ocean"    />
+      </narrow>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:UKMDN054"  label="Yell Sound"    />
+      <broad>
+         <element  key="SDN:C19:17:1_2"  label="North Sea"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:C19:17:7_4"  label="Yellow Sea"    />
+      <broad>
+         <element  key="SDN:C19:17:SVX00018"  label="Northwest Pacific Ocean (180W)"    />
+      </broad>
+      <narrow>
+         <element  key="SDN:C19:17:7_4_2"  label="Liaodong Wan"    />
+         <element  key="SDN:C19:17:7_4_1"  label="Bo Hai"    />
+      </narrow>
+   </match>
+</mapping>

@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapping>
+   <vocabulary list="SDN:P02:109:"  version="109"  date="2018-09-07T01:00:05.000"  title="SeaDataNet Parameter Discovery Vocabulary"   />
+   <mapped>
+      <vocabulary list="SDN:P02:109:"  version="109"  date="2018-09-07T01:00:05.000"  title="SeaDataNet Parameter Discovery Vocabulary"   />
+   </mapped>
+   <match>
+      <element  key="SDN:P02:109:CA11"  label="Concentration of alkanols (alcohols), phenols and ethers in sediment"    />
+      <exact>
+         <element  key="SDN:P02:109:CASD"  label="Concentration of carbohydrates, phenols, alkanols (alcohols), ethers, aldehydes and ketones in sediment"    />
+      </exact>
+      <broad>
+         <element  key="SDN:P02:109:CASD"  label="Concentration of carbohydrates, phenols, alkanols (alcohols), ethers, aldehydes and ketones in sediment"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P02:109:HLIC"  label="Concentration of inorganic halogens in ice"    />
+      <exact>
+         <element  key="SDN:P02:109:ICHM"  label="Snow and ice chemistry"    />
+      </exact>
+      <broad>
+         <element  key="SDN:P02:109:ICHM"  label="Snow and ice chemistry"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P02:109:CLCN"  label="Concentration of inorganic halogens in sediment"    />
+      <exact>
+         <element  key="SDN:P02:109:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </exact>
+      <broad>
+         <element  key="SDN:P02:109:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P02:109:ISIC"  label="Concentration of inorganic sulphur species in ice"    />
+      <exact>
+         <element  key="SDN:P02:109:ICHM"  label="Snow and ice chemistry"    />
+      </exact>
+      <broad>
+         <element  key="SDN:P02:109:ICHM"  label="Snow and ice chemistry"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P02:109:NTIC"  label="Concentration of nitrates in ice"    />
+      <exact>
+         <element  key="SDN:P02:109:ICHM"  label="Snow and ice chemistry"    />
+      </exact>
+      <broad>
+         <element  key="SDN:P02:109:ICHM"  label="Snow and ice chemistry"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P02:109:OSIC"  label="Concentration of organic sulphur species in ice"    />
+      <exact>
+         <element  key="SDN:P02:109:ICHM"  label="Snow and ice chemistry"    />
+      </exact>
+      <broad>
+         <element  key="SDN:P02:109:ICHM"  label="Snow and ice chemistry"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P02:109:SICN"  label="Concentration of silicon species in sediment"    />
+      <exact>
+         <element  key="SDN:P02:109:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </exact>
+      <broad>
+         <element  key="SDN:P02:109:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P02:109:DOXY"  label="Dissolved oxygen parameters in the water column"    />
+      <narrow>
+         <element  key="SDN:P02:109:GOXP"  label="Oxygen production and respiration in the water column"    />
+      </narrow>
+   </match>
+   <match>
+      <element  key="SDN:P02:109:RMAJ"  label="Geological sample major element chemistry"    />
+      <exact>
+         <element  key="SDN:P02:109:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </exact>
+      <broad>
+         <element  key="SDN:P02:109:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P02:109:INLZ"  label="Insect and earthworm taxonomy-related abundance per unit area of the littoral zone"    />
+      <exact>
+         <element  key="SDN:P02:109:IWAB"  label="Insect and earthworm taxonomy-related abundance per unit area of the bed"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P02:109:IALZ"  label="Insect and earthworm taxonomy-related ash-free dry weight biomass per unit area of the littoral zone"    />
+      <exact>
+         <element  key="SDN:P02:109:IWDX"  label="Insect and earthworm taxonomy-related ash-free dry weight biomass per unit area of the bed"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P02:109:MTSD"  label="Metal concentrations in sediment"    />
+      <exact>
+         <element  key="SDN:P02:109:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </exact>
+      <broad>
+         <element  key="SDN:P02:109:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P02:109:MTSP"  label="Metal concentrations in suspended particulate material"    />
+      <exact>
+         <element  key="SDN:P02:109:MTWP"  label="Particulate metal concentrations in the water column"    />
+         <element  key="SDN:P02:109:MTWP"  label="Particulate metal concentrations in the water column"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P02:109:NTRZ"  label="Nitrate+nitrite concentration parameters in the water column"    />
+      <exact>
+         <element  key="SDN:P02:109:NTRA"  label="Nitrate concentration parameters in the water column"    />
+      </exact>
+      <broad>
+         <element  key="SDN:P02:109:NTRA"  label="Nitrate concentration parameters in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P02:109:PXSD"  label="Phosphorus concentrations in sediment"    />
+      <exact>
+         <element  key="SDN:P02:109:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </exact>
+      <broad>
+         <element  key="SDN:P02:109:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P02:109:XRFC"  label="Raw X-Ray fluorometer (XRF) output from sediment samples"    />
+      <exact>
+         <element  key="SDN:P02:109:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </exact>
+      <broad>
+         <element  key="SDN:P02:109:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P02:109:RTMP"  label="Rock temperature"    />
+      <exact>
+         <element  key="SDN:P02:109:STMP"  label="Temperature of geological units"    />
+      </exact>
+      <broad>
+         <element  key="SDN:P02:109:STMP"  label="Temperature of geological units"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P02:109:PREX"  label="Sea level expressed as pressure"    />
+      <exact>
+         <element  key="SDN:P02:109:ASLV"  label="Sea level"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P02:109:SRFL"  label="Seismic reflection"    />
+      <narrow>
+         <element  key="SDN:P02:109:SR2D"  label="Two-dimensional seismic reflection"    />
+         <element  key="SDN:P02:109:SR3D"  label="Three-dimensional seismic reflection"    />
+      </narrow>
+   </match>
+   <match>
+      <element  key="SDN:P02:109:IRIC"  label="Stable isotopes in ice and snow"    />
+      <exact>
+         <element  key="SDN:P02:109:ICHM"  label="Snow and ice chemistry"    />
+      </exact>
+      <broad>
+         <element  key="SDN:P02:109:ICHM"  label="Snow and ice chemistry"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P02:109:SR3D"  label="Three-dimensional seismic reflection"    />
+      <broad>
+         <element  key="SDN:P02:109:SRFL"  label="Seismic reflection"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P02:109:MDSD"  label="Trace metalloid concentrations in sediment"    />
+      <exact>
+         <element  key="SDN:P02:109:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </exact>
+      <broad>
+         <element  key="SDN:P02:109:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P02:109:SR2D"  label="Two-dimensional seismic reflection"    />
+      <broad>
+         <element  key="SDN:P02:109:SRFL"  label="Seismic reflection"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P02:109:MFLZ"  label="Zoobenthos taxonomy-related abundance per unit area of the littoral zone"    />
+      <exact>
+         <element  key="SDN:P02:109:ZBTX"  label="Zoobenthos taxonomic abundance"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P02:109:MFAZ"  label="Zoobenthos taxonomy-related ash-free dry weight biomass per unit area of the littoral zone"    />
+      <exact>
+         <element  key="SDN:P02:109:ZADX"  label="Zoobenthos dry weight biomass"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P02:109:GPIG"  label="Zooplankton gut pigments"    />
+      <exact>
+         <element  key="SDN:P02:109:STGC"  label="Stomach and gut contents"    />
+      </exact>
+   </match>
+</mapping>
