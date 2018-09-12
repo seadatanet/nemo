@@ -19,7 +19,6 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 
-import sdn.vocabulary.interfaces.IElement;
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.config.Flag;
 import fr.ifremer.nemo.config.NemoLists;
@@ -41,6 +40,7 @@ import fr.ifremer.nemo.util.Global.DataListTypeEnum;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.ws.WSParameter;
+import sdn.vocabulary.interfaces.IElement;
 
 public class TableData {
 	final Color red = new Color(null, 239,180,110);
@@ -1091,18 +1091,7 @@ public class TableData {
 		table.setMenu(menu);
 //		Utils.forceMenu(table, menu);
 		// Do not show menu, when no item is selected
-		//42716 MenuDetect
-		table.addListener(SWT.MenuDetect, new Listener() {
-		  @Override
-		  public void handleEvent(Event event) {
-			 
-			  	// by default, disable all but new param menu (need this for column header)
-		    	for (MenuItem  it: table.getMenu().getItems()){
-					it.setEnabled(false);
-				}
-				table.getMenu().getItem(menuMap.get(MENU_ITEM_PARAMLIST)).setEnabled(true);
-		  }
-		});
+
 
 		// agrandissement de la table
 		Nemo.getInstance().getViewMain().getEditDataForm().getCompositeData()
