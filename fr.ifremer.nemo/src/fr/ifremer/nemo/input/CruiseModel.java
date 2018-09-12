@@ -25,9 +25,6 @@ import javax.xml.validation.Validator;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
-import sdn.vocabulary.interfaces.ICollection;
-import sdn.vocabulary.interfaces.IElement;
-
 import com.ago.xml.Element2Field;
 import com.ago.xml.PathElementConsumer;
 import com.ago.xml.SAXConsumer;
@@ -46,6 +43,8 @@ import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Global.E_Availability;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
+import sdn.vocabulary.interfaces.ICollection;
+import sdn.vocabulary.interfaces.IElement;
 
 /**
  * Class CruiseModel.java
@@ -233,6 +232,11 @@ public class CruiseModel extends AbstractModel {
 					ModelDescription.setter_localCSRIdentifier);
 			return setter;
 		}
+		if (a_LocalName.equals(ModelDescription.node_bshCsrReference)) {
+			Element2Field setter = new Element2Field(this,
+					ModelDescription.setter_bshCsrReference);
+			return setter;
+		}
 		if (a_LocalName.equals(ModelDescription.node_cname)) {
 			Element2Field setter = new Element2Field(this, ModelDescription.setter_cname);
 			return setter;
@@ -328,6 +332,8 @@ public class CruiseModel extends AbstractModel {
 	@Override
 	public void writeXMLBodyOn(XMLOutputWriter a_Writer) {
 		a_Writer.putTag(ModelDescription.node_cref, getReference());
+		a_Writer.putTag(ModelDescription.node_bshCsrReference,
+				getBshCsrReference());
 		a_Writer.putTag(ModelDescription.node_localCSRIdentifier,
 				getLocalCsrIdentifier());
 		a_Writer.putTag(ModelDescription.node_cname, getName());

@@ -41,6 +41,7 @@ public class ModelDescription extends NLS {
 	public static String node_stationModel;
 	public static String node_cref;
 	public static String node_localCSRIdentifier;
+	public static String node_bshCsrReference;
 	public static String node_cname;
 	public static String node_shipcode;
 	public static String node_shipname;
@@ -147,6 +148,7 @@ public class ModelDescription extends NLS {
 	public static String setter_endData;
 	public static String setter_cref;
 	public static String setter_localCSRIdentifier;
+	public static String setter_bshCsrReference;
 	public static String setter_cname;
 	public static String setter_shipcode;
 	public static String setter_shipname;
