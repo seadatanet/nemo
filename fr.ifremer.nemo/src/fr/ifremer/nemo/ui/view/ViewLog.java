@@ -163,27 +163,47 @@ public class ViewLog extends ViewPart
 
 	public static void aideFile()
 	{
-		ViewLog.styledTextLogHelp.setText(aideFile.toString());
+		try {
+			ViewLog.styledTextLogHelp.setText(aideFile.toString());
+		}catch (Exception e) {
+			// ViewLog can be null the first time (windows), so no error
+		}
 	}
 
 	public static void aideCruise()
 	{
-		ViewLog.styledTextLogHelp.setText(aideCruise.toString());
+		try {
+			ViewLog.styledTextLogHelp.setText(aideCruise.toString());
+		}catch (Exception e) {
+			// ViewLog can be null the first time (windows), so no error
+		}
 	}
 
 	public static void aideStation()
 	{
-		ViewLog.styledTextLogHelp.setText(aideStation.toString());
+		try {
+			ViewLog.styledTextLogHelp.setText(aideStation.toString());
+		}catch (Exception e) {
+			// ViewLog can be null the first time (windows), so no error
+		}
 	}
 
 	public static void aideData()
 	{
-		ViewLog.styledTextLogHelp.setText(aideData.toString());
+		try {
+			ViewLog.styledTextLogHelp.setText(aideData.toString());
+		}catch (Exception e) {
+			// ViewLog can be null the first time (windows), so no error
+		}
 	}
 
 	public static void aideConversion()
 	{
-		ViewLog.styledTextLogHelp.setText(aideConversion.toString());
+		try {
+			ViewLog.styledTextLogHelp.setText(aideConversion.toString());
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
 	}
 
 }
