@@ -91,8 +91,8 @@ public abstract class NemoSection
 		Composite sectionClient = toolkitEdition.createComposite(section);
 
 		sectionClient.setLayout(new GridLayout());
-		GridDataFactory.fillDefaults().grab(false, false).hint(Global.SIZE_SECTION, SWT.DEFAULT).applyTo(sectionClient);
-		GridDataFactory.fillDefaults().grab(false, false).hint(Global.SIZE_SECTION, SWT.DEFAULT).applyTo(section);
+		GridDataFactory.fillDefaults().grab(true, false).hint(Global.SIZE_SECTION, SWT.DEFAULT).applyTo(sectionClient);
+		GridDataFactory.fillDefaults().grab(true, false).hint(Global.SIZE_SECTION, SWT.DEFAULT).applyTo(section);
 		drawSection(sectionClient, filled);
 
 		section.setClient(sectionClient);
