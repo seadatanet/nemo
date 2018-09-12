@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<java version="1.8.0_25" class="java.beans.XMLDecoder">
+<java version="1.8.0_151" class="java.beans.XMLDecoder">
  <object class="java.util.ArrayList">
+  <void method="add">
+   <object class="fr.ifremer.nemo.ws.WSParameter">
+    <void property="code">
+     <string>AACP</string>
+    </void>
+    <void property="defaultValue">
+     <string>9.9999</string>
+    </void>
+    <void property="format">
+     <string>%6.4f</string>
+    </void>
+    <void property="name">
+     <string>ALPHA-CAROTENE</string>
+    </void>
+    <void property="unit">
+     <string>mg/m3</string>
+    </void>
+    <void property="unitP06">
+     <string>Milligrams per cubic metre</string>
+    </void>
+   </object>
+  </void>
   <void method="add">
    <object class="fr.ifremer.nemo.ws.WSParameter">
     <void property="code">
@@ -768,6 +790,28 @@
     </void>
     <void property="unitP06">
      <string>Metres</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="fr.ifremer.nemo.ws.WSParameter">
+    <void property="code">
+     <string>BBCP</string>
+    </void>
+    <void property="defaultValue">
+     <string>9.9999</string>
+    </void>
+    <void property="format">
+     <string>%6.4f</string>
+    </void>
+    <void property="name">
+     <string>BETA-CAROTENE</string>
+    </void>
+    <void property="unit">
+     <string>mg/m3</string>
+    </void>
+    <void property="unitP06">
+     <string>Milligrams per cubic metre</string>
     </void>
    </object>
   </void>
@@ -2682,6 +2726,28 @@
     </void>
     <void property="unitP06">
      <string>Milligrams per cubic metre per day</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="fr.ifremer.nemo.ws.WSParameter">
+    <void property="code">
+     <string>CXAP</string>
+    </void>
+    <void property="defaultValue">
+     <string>9.9999</string>
+    </void>
+    <void property="format">
+     <string>%6.4f</string>
+    </void>
+    <void property="name">
+     <string>CROCOXANTHIN</string>
+    </void>
+    <void property="unit">
+     <string>mg/m3</string>
+    </void>
+    <void property="unitP06">
+     <string>Milligrams per cubic metre</string>
     </void>
    </object>
   </void>
@@ -8034,6 +8100,28 @@
   <void method="add">
    <object class="fr.ifremer.nemo.ws.WSParameter">
     <void property="code">
+     <string>OXDE</string>
+    </void>
+    <void property="defaultValue">
+     <string>99.999</string>
+    </void>
+    <void property="format">
+     <string>%6.3f</string>
+    </void>
+    <void property="name">
+     <string>ISOTOPIC DEUTERIUM RATIO</string>
+    </void>
+    <void property="unit">
+     <string>per thousand</string>
+    </void>
+    <void property="unitP06">
+     <string>Parts per thousand</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="fr.ifremer.nemo.ws.WSParameter">
+    <void property="code">
      <string>OXIR</string>
     </void>
     <void property="defaultValue">
@@ -8553,6 +8641,28 @@
     </void>
     <void property="unit">
      <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
+     <string>Milligrams per cubic metre</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="fr.ifremer.nemo.ws.WSParameter">
+    <void property="code">
+     <string>PHEP</string>
+    </void>
+    <void property="defaultValue">
+     <string>9.9999</string>
+    </void>
+    <void property="format">
+     <string>%6.4f</string>
+    </void>
+    <void property="name">
+     <string>PHEOPHORBIDE A</string>
+    </void>
+    <void property="unit">
+     <string>mg/m3</string>
     </void>
     <void property="unitP06">
      <string>Milligrams per cubic metre</string>
@@ -11900,6 +12010,50 @@
     </void>
     <void property="unitP06">
      <string>Milligrams per cubic metre</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="fr.ifremer.nemo.ws.WSParameter">
+    <void property="code">
+     <string>VM01</string>
+    </void>
+    <void property="defaultValue">
+     <string>99999.9999</string>
+    </void>
+    <void property="format">
+     <string>%10.4f</string>
+    </void>
+    <void property="name">
+     <string>SPECT. MOMENT(0,1) WAVE PERIOD</string>
+    </void>
+    <void property="unit">
+     <string>seconds</string>
+    </void>
+    <void property="unitP06">
+     <string>Seconds</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="fr.ifremer.nemo.ws.WSParameter">
+    <void property="code">
+     <string>VMDR</string>
+    </void>
+    <void property="defaultValue">
+     <string>999.999</string>
+    </void>
+    <void property="format">
+     <string>%7.3f</string>
+    </void>
+    <void property="name">
+     <string>WAVE SPECTRUM MEAN DIR.</string>
+    </void>
+    <void property="unit">
+     <string>degrees</string>
+    </void>
+    <void property="unitP06">
+     <string>Degrees</string>
     </void>
    </object>
   </void>

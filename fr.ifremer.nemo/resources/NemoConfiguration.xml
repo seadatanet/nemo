@@ -9,6 +9,7 @@
   <outputDirectory></outputDirectory>
   <writeCdi>false</writeCdi>
   <idEdmoRespCdi>0</idEdmoRespCdi>
+  <idEdmoRespCsr></idEdmoRespCsr>
   <codeEdmoDonnees>0</codeEdmoDonnees>
   <idEdmoRespDonnees>0</idEdmoRespDonnees>
   <idEdmoDistDonnees>0</idEdmoDistDonnees>
