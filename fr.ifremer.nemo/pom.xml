@@ -18,6 +18,14 @@
 
 
 	<build>
+	<!-- TODO:
+	pour l'instant les librairies dont depend Nemo sont collees manuellement dans le repertoire lib.
+	Ci-dessous,  maven-clean-plugin et maven-dependency-plugin telechargent 2 libs  via maven dans un repertoire libtest, pour verifier le principe
+	TODO: 
+		1/ declarer TOUTES les dependances dans maven-dependency-plugin
+		2/ supprimer le rep lib actuel
+		3/ renommer le repertoire libtest en lib
+	-->
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
