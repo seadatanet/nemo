@@ -2,6 +2,7 @@ package fr.ifremer.nemo.ui;
 
 import java.io.File;
 import java.io.PrintWriter;
+import java.text.MessageFormat;
 
 import org.apache.commons.cli.BasicParser;
 import org.apache.commons.cli.CommandLine;
@@ -24,6 +25,7 @@ import fr.ifremer.nemo.util.Global.E_TypeConversion;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.util.NemoVersion;
+import fr.ifremer.sismer_tools.JavaVersionDectect;
 /**
  * This class controls all aspects of the application's execution
  */
@@ -105,7 +107,13 @@ public class Application implements IPlatformRunnable
             }else{
             	Nemo.getInstance().setLogger(LogManager.getLogger(Global.LOGGER_NAME_GUI));
             }
-           
+         // check java version
+        	int javaVersion=JavaVersionDectect.getJavaVersion();
+        	if(javaVersion>=9) {
+        		Nemo.getInstance().getLogger().warn(
+        		MessageFormat.format(Messages.JavaVersionHigherThanNine,javaVersion));
+    
+        	}
             
             /**************************************************************************
              * BATCH MODE

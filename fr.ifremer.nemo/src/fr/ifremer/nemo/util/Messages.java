@@ -689,6 +689,7 @@ public class Messages {
 	
 	public static String NemoVersionUpdateAvailable;
 	public static String NemoVersionUnreachable;
+	public static String JavaVersionHigherThanNine;
 	
 	static {
 		// check config de la langue
