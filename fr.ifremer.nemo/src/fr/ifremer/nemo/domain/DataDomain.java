@@ -179,7 +179,7 @@ public class DataDomain {
 			}
 			// odvDataLine.append(Global.TAB);
 			if (!stringValue.equals(defaultValue))
-				odvDataLine.append(stringValue);
+				odvDataLine.append(stringValue.trim());
 			odvDataLine.append(Global.TAB);
 			odvDataLine.append(pModel.getLineValue().getQc());
 
