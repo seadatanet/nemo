@@ -14,9 +14,9 @@ import org.xml.sax.SAXException;
 import com.ago.xml.SAXConsumer;
 import com.ago.xml.XMLOutputWriter;
 
+import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.input.Fragment;
 import fr.ifremer.nemo.input.ModelDescription;
-import fr.ifremer.nemo.ui.RulesManager;
 import fr.ifremer.nemo.ui.edit.station.EditStationForm;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Intern;
@@ -795,10 +795,10 @@ public class LatitudeFormat extends ExternalizableFormat implements Cloneable
 	 * //40216
 	 */
 	public Object parseFreeDecimalDegrees(Fragment fragment, String source) throws ParseException {
-		if (RulesManager.getInstance().isSeparatorChecked()){
+		String separator=Nemo.getInstance().getDomain().getMedia().getModel().getSeparator();
+		
+		if (separator!=null){
 			try{
-			String separator=RulesManager.getInstance().getSeparator();
-			
 			if (source.startsWith(separator)){
 				source = source.substring(source.indexOf(separator)+1, source.length());
 			}
@@ -809,7 +809,7 @@ public class LatitudeFormat extends ExternalizableFormat implements Cloneable
 			}
 		}else{
 			//TODO error
-			throw new ParseException("error", 0);
+			throw new ParseException("error: can not use FreeDecimalDegrees format on files which are not using a separator", 0);
 		}
 	}
 

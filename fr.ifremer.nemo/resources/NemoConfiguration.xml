@@ -1,4 +1,4 @@
-<NemoConfiguration lang="en_GB">
+<NemoConfiguration lang="fr_FR">
   <dataCenter>IL</dataCenter>
   <nemoWsURL>http://www.ifremer.fr/WSnemo/services/NEMO</nemoWsURL>
   <nautilusWsURL>http://www.ifremer.fr/WSnautilus/services/NAUTILUS</nautilusWsURL>
@@ -9,7 +9,7 @@
   <outputDirectory></outputDirectory>
   <writeCdi>false</writeCdi>
   <idEdmoRespCdi>0</idEdmoRespCdi>
-  <idEdmoRespCsr></idEdmoRespCsr>
+  <idEdmoRespCsr>0</idEdmoRespCsr>
   <codeEdmoDonnees>0</codeEdmoDonnees>
   <idEdmoRespDonnees>0</idEdmoRespDonnees>
   <idEdmoDistDonnees>0</idEdmoDistDonnees>

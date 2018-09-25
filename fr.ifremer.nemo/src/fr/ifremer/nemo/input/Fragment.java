@@ -9,7 +9,7 @@ import com.ago.xml.Element2Field;
 import com.ago.xml.SAXConsumer;
 import com.ago.xml.XMLOutputWriter;
 
-import fr.ifremer.nemo.ui.RulesManager;
+import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.util.Global;
 
 /**
@@ -273,11 +273,12 @@ public class Fragment extends AbstractModel
     	}
     	
     	//40216: guess the column number from the caracter start number (for files with separator)
-    	if (this._colNb==-1 && RulesManager.getInstance().isSeparatorChecked()){
+    	String separator=Nemo.getInstance().getDomain().getMedia().getModel().getSeparator();
+    	if (this._colNb==-1 && separator!=null){
     		int colNb=-1;
         	int currentCol=0;
         	int indexSearch=0;
-    		String[] split = a_Line.split(RulesManager.getInstance().getSeparator());
+    		String[] split = a_Line.split(separator);
     			for (String colData : split){
     				indexSearch = indexSearch+ colData.length();
     				if (start < indexSearch){

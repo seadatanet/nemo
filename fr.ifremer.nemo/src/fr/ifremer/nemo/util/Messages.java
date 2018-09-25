@@ -196,6 +196,7 @@ public class Messages {
 	public static String edit_cruise_cruiseRef;
 	public static String edit_cruise_cruiseLocalCsrId;
 	public static String edit_cruise_cruiseLocalCsrId_unableToCheck;
+	public static String edit_cruise_cruiseLocalCsrId_unableToCheckMissingCSREdmoId;
 	public static String edit_cruise_cruiseLocalCsrId_doesNotExist;
 	public static String edit_cruise_cruiseBshCsrReference;
 	public static String edit_cruise_uniqueCSR; 
@@ -289,6 +290,7 @@ public class Messages {
 	public static String edit_convert_outputDir;
 	public static String edit_convert_sortStations;
 	public static String edit_convert_batchInfoTitle;
+	public static String edit_convert_cruiseLocalCsrId_unableToCreateMissingCSREdmoId;
 
 	// MESSAGES D'INFORMATIONS REGLES INPUT/CONV (onglet File)
 	public static String edit_file_info_medatlasForbiddenBecauseCollection;

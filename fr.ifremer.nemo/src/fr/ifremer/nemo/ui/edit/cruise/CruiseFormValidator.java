@@ -128,6 +128,12 @@ public class CruiseFormValidator extends FormValidator {
 				Utils.messageErreurAppend(Messages.edit_cruise_uniqueCSR);
 			}
 			if (!localCsrRef.trim().isEmpty()){
+				
+				if (Nemo.getInstance().getConfig().getIdEdmoRespCsr()==null||
+						Nemo.getInstance().getConfig().getIdEdmoRespCsr().trim().isEmpty() || Nemo.getInstance().getConfig().getIdEdmoRespCsr().equals("0")) {
+					Utils.messageErreurAppend(Messages.edit_cruise_cruiseLocalCsrId_unableToCheckMissingCSREdmoId);
+					ok=false;
+				}else {
 				try {
 					boolean exist = VocabLists.getCSRListManager().doesCodeExist(Nemo.getInstance().getConfig().getIdEdmoRespCsr(), localCsrRef);
 					if (!exist){
@@ -135,6 +141,7 @@ public class CruiseFormValidator extends FormValidator {
 					}
 				} catch ( IOException e) {
 					warningCruise+=Messages.edit_cruise_cruiseLocalCsrId_unableToCheck;
+				}
 				}
 			}
 			

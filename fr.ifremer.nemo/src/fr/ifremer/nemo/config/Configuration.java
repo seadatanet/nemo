@@ -1171,16 +1171,17 @@ public class Configuration extends AbstractModel {
 		boolean blnOK = true;
 		String message="";
 
-		if (Nemo.getInstance().getConfig().getIdEdmoRespCdi().trim().equals(
-				Global.EMPTY_STRING)) {
+		if (Nemo.getInstance().getConfig().getIdEdmoRespCdi()==null ||
+				Nemo.getInstance().getConfig().getIdEdmoRespCdi().trim().equals(Global.EMPTY_STRING)) {
 			message += Global.RN + Global.SEP + Messages.settings_EDMOauthor;
 			blnOK = false;
 		}
-		if (Nemo.getInstance().getConfig().getIdEdmoRespCsr().trim().equals(
-				Global.EMPTY_STRING)) {
-			message += Global.RN + Global.SEP + Messages.settings_EDMOCSRauthor;
-			blnOK = false;
-		}
+// IdEdmoRespCsr is optional
+		//		if (Nemo.getInstance().getConfig().getIdEdmoRespCsr()==null ||
+//				Nemo.getInstance().getConfig().getIdEdmoRespCsr().trim().equals(Global.EMPTY_STRING)) {
+//			message += Global.RN + Global.SEP + Messages.settings_EDMOCSRauthor;
+//			blnOK = false;
+//		}
 
 		if (Nemo.getInstance().getConfig().isWriteCdi()) {
 			if (Nemo.getInstance().getConfig().getCodeEdmoDonnees().trim()
