@@ -123,12 +123,9 @@ public class CruiseFormValidator extends FormValidator {
 			String localCsrRef = fr.ifremer.nemo.util.Utils.extraitCode(section.getItem(itemID.LOCAL_CSR_ID).getText());
 			String bshCsrRef = fr.ifremer.nemo.util.Utils.extraitCode(section.getItem(itemID.BSH_CSR).getText());
 			
-			if (localCsrRef.trim().isEmpty() && bshCsrRef.trim().isEmpty()){
+			if (!localCsrRef.trim().isEmpty() && !bshCsrRef.trim().isEmpty()){
 				ok=false;
-				Utils.messageErreurAppend("you should set either local_csr_id or bsh_csr reference (at least one)");// TODO 42778
-			}else if (!localCsrRef.trim().isEmpty() && !bshCsrRef.trim().isEmpty()){
-				ok=false;
-				Utils.messageErreurAppend("you should set either local_csr_id or bsh_csr reference (not both)");// TODO 42778
+				Utils.messageErreurAppend(Messages.edit_cruise_uniqueCSR);
 			}
 			if (!localCsrRef.trim().isEmpty()){
 				try {

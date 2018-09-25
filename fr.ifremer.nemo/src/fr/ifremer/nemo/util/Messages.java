@@ -198,6 +198,7 @@ public class Messages {
 	public static String edit_cruise_cruiseLocalCsrId_unableToCheck;
 	public static String edit_cruise_cruiseLocalCsrId_doesNotExist;
 	public static String edit_cruise_cruiseBshCsrReference;
+	public static String edit_cruise_uniqueCSR; 
 	
 	public static String edit_cruise_cruiseName;
 	public static String edit_cruise_ship;
