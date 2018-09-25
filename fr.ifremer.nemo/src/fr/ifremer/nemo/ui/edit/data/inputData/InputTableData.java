@@ -134,7 +134,11 @@ public class InputTableData {
 
 			
 			colCode.getColumn().setText(colTitle);
-			((TableColumnLayout) compoTable.getLayout()).setColumnData(colCode.getColumn(), new ColumnWeightData(0,colTitle.length()*10, true));
+			int colWidth = colTitle.length()*10;
+			if (colWidth<100) {
+				colWidth=100;
+			}
+			((TableColumnLayout) compoTable.getLayout()).setColumnData(colCode.getColumn(), new ColumnWeightData(0,colWidth, true));
 			colCode.getColumn().addSelectionListener(getSelectionAdapter(colCode.getColumn(), colNumber));
 
 			colNumber++;
