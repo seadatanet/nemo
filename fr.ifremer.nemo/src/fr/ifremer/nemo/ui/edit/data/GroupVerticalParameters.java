@@ -16,6 +16,7 @@ import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
+import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
@@ -57,26 +58,32 @@ public class GroupVerticalParameters {
 		GridLayoutFactory.fillDefaults().numColumns(1).equalWidth(true)
 		.margins(4, 4).applyTo(group);
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(group);
-
+		GridData comboGridData = new GridData(GridData.FILL_HORIZONTAL);
+		comboGridData.minimumWidth=50;
 		// Depth below sea surface
 		Label labelDBSSurf = new Label(group, SWT.NO_BACKGROUND);
 		labelDBSSurf.setText(Messages.edit_data_verticalParameters_depthBSSurf);
 		comboDBSSurf = new Combo(group, SWT.BORDER | SWT.READ_ONLY);
+		comboDBSSurf.setLayoutData(comboGridData );
+		
 		// Depth below sea bed
 		Label labelDBSBed = new Label(group, SWT.NO_BACKGROUND);
 		labelDBSBed.setText(Messages.edit_data_verticalParameters_depthBSBed);
 		comboDBSBed = new Combo(group, SWT.BORDER | SWT.READ_ONLY);
+		comboDBSBed.setLayoutData(comboGridData );
 
 		// Pressure
 		Label labelP = new Label(group, SWT.NO_BACKGROUND);
 		labelP.setText(Messages.edit_data_verticalParameters_pressure);
 		comboP = new Combo(group, SWT.BORDER | SWT.READ_ONLY);
+		comboP.setLayoutData(comboGridData );
 
 		// Pressure
 		Label labelHASLvl = new Label(group, SWT.NO_BACKGROUND);
 		labelHASLvl.setText(Messages.edit_data_verticalParameters_heightASLvl);
 		comboHASLvl = new Combo(group, SWT.BORDER | SWT.READ_ONLY);
-
+		comboHASLvl.setLayoutData(comboGridData );
+		
 		SelectionListener selectionListener = new SelectionListener() {
 			@Override
 			public void widgetSelected(SelectionEvent e)
