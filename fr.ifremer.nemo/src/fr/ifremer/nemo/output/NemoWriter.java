@@ -200,9 +200,9 @@ public abstract class NemoWriter {
 							int nbrecords = 0;
 							boolean isRateCalculated = false;
 							while ((readedLine = bufferedReader.readLine()) != null) {
-								 if(readedLine.trim().isEmpty()){
-									 break;
-								 }
+//								 if(readedLine.trim().isEmpty()){TODO ko pour fichiers dont fin de station est une ligne vide
+//										 break;
+//								 }
 								incrementLine();
 								
 								if (inFileHeader()) {
@@ -270,9 +270,9 @@ public abstract class NemoWriter {
 										break;
 									}
 								} else if (st != null) {
-									 if(readedLine.trim().isEmpty()){
-										 continue;
-									 }
+//									 if(readedLine.trim().isEmpty()){// TODO ko pour fichiers dont fin de station est une ligne vide
+//										 continue;
+//									 }
 									if (mediaDomain.getModel()
 											.getInputType() == E_InputType.TRAJECTORY) {
 										st.completeMedatlasTrajectory(readedLine);
