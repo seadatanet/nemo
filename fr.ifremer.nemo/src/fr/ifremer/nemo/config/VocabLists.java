@@ -302,7 +302,7 @@ public class VocabLists {
 					msg.append("]");//$NON-NLS-1$
 					monitor.subTask(msg.toString());
 
-					UpdateStatusBODC updateMap = updateMapLists(mapName);
+					UpdateStatusBODC updateMap = updateMapList(mapName);
 					updateMaps.addUpdateStatus(updateMap);
 					if (updateMaps.getEtat().compareTo(updateMap.getEtat()) < 0) {
 						updateMaps.setEtat(updateMap.getEtat());
@@ -333,7 +333,7 @@ public class VocabLists {
 					msg.append("]");//$NON-NLS-1$
 					monitor.subTask(msg.toString());
 
-					UpdateStatusBODC updateMap = updateMapLists(mapName);
+					UpdateStatusBODC updateMap = updateMapList(mapName);
 					updateMaps.addUpdateStatus(updateMap);
 					if (updateMaps.getEtat().compareTo(updateMap.getEtat()) < 0) {
 						updateMaps.setEtat(updateMap.getEtat());
@@ -350,7 +350,7 @@ public class VocabLists {
 		}
 	}
 
-	public static UpdateStatusBODC updateMapLists(String mapName) {
+	public static UpdateStatusBODC updateMapList(String mapName) {
 
 		UpdateStatusBODC updateMap = new UpdateStatusBODC(mapName, mapName);
 		try {
