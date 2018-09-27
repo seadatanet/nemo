@@ -160,7 +160,7 @@ public class Preformat {
 					editFileForm.getTextAreaFile().setText(Utils.texteBrut);
 				}
 			} else {
-				Utils.deleteDir(ficSortie);
+				fr.ifremer.nemo.util.Utils.deleteDir(ficSortie);
 			}
 
 		} else if (editFileForm.isCollectionGroupedByCruise()) {
@@ -174,7 +174,7 @@ public class Preformat {
 					editFileForm.getTextAreaFile().setText(Utils.texteBrut);
 				}
 			} else {
-				Utils.deleteDir(ficSortie);
+				fr.ifremer.nemo.util.Utils.deleteDir(ficSortie);
 			}
 		}
 
@@ -189,7 +189,7 @@ public class Preformat {
 					editFileForm.getTextAreaFile().setText(Utils.texteBrut);
 				}
 			} else {
-				Utils.deleteDir(ficSortie);
+				fr.ifremer.nemo.util.Utils.deleteDir(ficSortie);
 			}
 
 		} else {
@@ -249,7 +249,7 @@ public class Preformat {
 			if (!ficSortie.exists()) {
 				ficSortie.mkdirs();
 			} else {
-				Utils.deleteDir(ficSortie);
+				fr.ifremer.nemo.util.Utils.deleteDir(ficSortie);
 				ficSortie.mkdirs();
 			}
 
@@ -262,7 +262,7 @@ public class Preformat {
 			if (!ficSortie.exists()) {
 				ficSortie.mkdirs();
 			} else {
-				Utils.deleteDir(ficSortie);
+				fr.ifremer.nemo.util.Utils.deleteDir(ficSortie);
 				ficSortie.mkdirs();
 			}
 			processPreformat(new File[] { inputFile }, null, ficSortie, isBatch);

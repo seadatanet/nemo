@@ -3,7 +3,6 @@ package fr.ifremer.nemo.ui;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -770,21 +769,21 @@ public class Utils {
 			break;
 		}
 	}
-
-	public static boolean deleteDir(File dir) {
-		if (dir.isDirectory()) {
-			String[] children = dir.list();
-			for (int i = 0; i < children.length; i++) {
-				boolean success = deleteDir(new File(dir, children[i]));
-				if (!success) {
-					return false;
-				}
-			}
-		}
-
-		// The directory is now empty so delete it
-		return dir.delete();
-	}
+//
+//	public static boolean deleteDir(File dir) {
+//		if (dir.isDirectory()) {
+//			String[] children = dir.list();
+//			for (int i = 0; i < children.length; i++) {
+//				boolean success = deleteDir(new File(dir, children[i]));
+//				if (!success) {
+//					return false;
+//				}
+//			}
+//		}
+//
+//		// The directory is now empty so delete it
+//		return dir.delete();
+//	}
 
 	public static Boolean findFiles(String directoryPath, boolean raz) {
 		File directory = new File(directoryPath);
@@ -1235,24 +1234,24 @@ public class Utils {
 			}
 		});
 	}
-
-	public static int calculNbLigne(File file) {
-		int nbLignes = 0;
-
-		try {
-			FileReader reader = new FileReader(file);
-			BufferedReader readerLigne = new BufferedReader(reader);
-
-			while (readerLigne.readLine() != null) {
-				nbLignes++;
-			}
-			readerLigne.close();
-			return nbLignes;
-		} catch (IOException e) {
-			e.printStackTrace();
-			return -1;
-		}
-	}
+//
+//	public static int calculNbLigne(File file) {
+//		int nbLignes = 0;
+//
+//		try {
+//			FileReader reader = new FileReader(file);
+//			BufferedReader readerLigne = new BufferedReader(reader);
+//
+//			while (readerLigne.readLine() != null) {
+//				nbLignes++;
+//			}
+//			readerLigne.close();
+//			return nbLignes;
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//			return -1;
+//		}
+//	}
 
 	public static FlagTable getBlankFlagTable() {
 		if (_blank == null) {
