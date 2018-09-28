@@ -263,7 +263,7 @@ public class QCflagsSection extends NemoSection
             childItem.addListener(SWT.Selection, new Listener() {
                 public void handleEvent(Event e)
                 {
-                    flagTable = flagTables.get(j);
+                    flagTable = FlagTable.getOrderedFlagTables(Nemo.getInstance().getConfig().getFlagTables()).get(j);
                     flagTable.fillTable(tab);
                     myForm.formEdition.reflow(true);
                     Utils.invalidEtapes();
