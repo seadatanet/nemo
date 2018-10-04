@@ -126,22 +126,32 @@ public class CruiseFormValidator extends FormValidator {
 			if (!localCsrRef.trim().isEmpty() && !bshCsrRef.trim().isEmpty()){
 				ok=false;
 				Utils.messageErreurAppend(Messages.edit_cruise_uniqueCSR);
-			}
-			if (!localCsrRef.trim().isEmpty()){
-				
+			}else if (!localCsrRef.trim().isEmpty()){
+
 				if (Nemo.getInstance().getConfig().getIdEdmoRespCsr()==null||
 						Nemo.getInstance().getConfig().getIdEdmoRespCsr().trim().isEmpty() || Nemo.getInstance().getConfig().getIdEdmoRespCsr().equals("0")) {
 					Utils.messageErreurAppend(Messages.edit_cruise_cruiseLocalCsrId_unableToCheckMissingCSREdmoId);
 					ok=false;
 				}else {
+					try {
+						boolean exist = VocabLists.getCSRListManager().doesCodeExist(Nemo.getInstance().getConfig().getIdEdmoRespCsr(), localCsrRef);
+						if (!exist){
+							warningCruise+=MessageFormat.format(Messages.edit_cruise_cruiseLocalCsrId_doesNotExist , localCsrRef, Nemo.getInstance().getConfig().getIdEdmoRespCsr())+Global.RN;
+						}
+					} catch ( IOException e) {
+						warningCruise+=Messages.edit_cruise_cruiseLocalCsrId_unableToCheck;
+					}
+				}
+			}
+			
+			else if (!bshCsrRef.trim().isEmpty()){
 				try {
-					boolean exist = VocabLists.getCSRListManager().doesCodeExist(Nemo.getInstance().getConfig().getIdEdmoRespCsr(), localCsrRef);
+					boolean exist = VocabLists.getCSRListManager().doesBshCodeExist( bshCsrRef);
 					if (!exist){
-						warningCruise+=MessageFormat.format(Messages.edit_cruise_cruiseLocalCsrId_doesNotExist , localCsrRef, Nemo.getInstance().getConfig().getIdEdmoRespCsr())+Global.RN;
+						warningCruise+=MessageFormat.format(Messages.edit_cruise_cruiseBshCsrId_doesNotExist , bshCsrRef)+Global.RN;
 					}
 				} catch ( IOException e) {
 					warningCruise+=Messages.edit_cruise_cruiseLocalCsrId_unableToCheck;
-				}
 				}
 			}
 			
