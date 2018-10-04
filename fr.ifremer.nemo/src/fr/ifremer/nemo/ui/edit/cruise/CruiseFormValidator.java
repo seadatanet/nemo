@@ -148,10 +148,12 @@ public class CruiseFormValidator extends FormValidator {
 				try {
 					boolean exist = VocabLists.getCSRListManager().doesBshCodeExist( bshCsrRef);
 					if (!exist){
-						warningCruise+=MessageFormat.format(Messages.edit_cruise_cruiseBshCsrId_doesNotExist , bshCsrRef)+Global.RN;
+						Utils.messageErreurAppend(MessageFormat.format(Messages.edit_cruise_cruiseBshCsrId_doesNotExist , bshCsrRef));
+						ok=false;
 					}
 				} catch ( IOException e) {
-					warningCruise+=Messages.edit_cruise_cruiseLocalCsrId_unableToCheck;
+					Utils.messageErreurAppend(Messages.edit_cruise_cruiseLocalCsrId_unableToCheck);
+					ok=false;
 				}
 			}
 			
