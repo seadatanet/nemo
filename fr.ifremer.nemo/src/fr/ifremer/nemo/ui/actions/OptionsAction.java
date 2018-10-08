@@ -36,7 +36,6 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.ScrolledForm;
 import org.eclipse.ui.forms.widgets.Section;
 
-import sdn.vocabulary.interfaces.IElement;
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.config.Configuration;
 import fr.ifremer.nemo.config.FlagTable;
@@ -58,6 +57,7 @@ import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Global.E_TypeConversion;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
+import sdn.vocabulary.interfaces.IElement;
 
 public class OptionsAction extends Action implements ISelectionListener, ActionFactory.IWorkbenchAction {
 
@@ -1068,7 +1068,7 @@ public class OptionsAction extends Action implements ISelectionListener, ActionF
 
 		
 		editFlags = new Button(compo, SWT.PUSH);
-		editFlags.setText("edit flags");// TODO
+		editFlags.setText(Messages.button_edit_flags);
 		editFlags.addListener(SWT.Selection, editFlagsListener);
 		editFlags.pack();
 		
@@ -1466,18 +1466,15 @@ public class OptionsAction extends Action implements ISelectionListener, ActionF
 		configuration.setDateISO(radDateISO.getSelection());
 
 		// Flags qualite
-		// if flagsViewer is null, it is because flags have not been modified -> do not save!
-		if (flagsViewer !=null ){
-			configuration.setDefaultCode(tmpFlagsChoices.getDefaultFlagTable());
-			ArrayList<FlagTable> flagTables = new ArrayList<FlagTable>();
-			for (int i = 0; i < tmpFlagsChoices.getFlagTables().size(); i++) {
-				FlagTable flagTable = new FlagTable(tmpFlagsChoices.getFlagTables().get(i));
-				flagTables.add(flagTable);
-			}
-			configuration.setFlagTables(flagTables);
-			// FAE 4431 Flag qualité par défault configurable
-			configuration.setDefaultFlag(tmpFlagsChoices.getDefaultFlag());
+		configuration.setDefaultCode(tmpFlagsChoices.getDefaultFlagTable());
+		ArrayList<FlagTable> flagTables = new ArrayList<FlagTable>();
+		for (int i = 0; i < tmpFlagsChoices.getFlagTables().size(); i++) {
+			FlagTable flagTable = new FlagTable(tmpFlagsChoices.getFlagTables().get(i));
+			flagTables.add(flagTable);
 		}
+		configuration.setFlagTables(flagTables);
+		// FAE 4431 Flag qualité par défault configurable
+		configuration.setDefaultFlag(tmpFlagsChoices.getDefaultFlag());
 
 		// output conversion format
 		configuration.setDefaultConversionType(getSelectedConversion());
@@ -1485,6 +1482,7 @@ public class OptionsAction extends Action implements ISelectionListener, ActionF
 		
 		// Enregistrement de la configuration
 		configuration.save();
+		Nemo.getInstance().setConfig(configuration);
 
 		// On fait un reset sur les stations certains changement nécessite un
 		// recalcul lors de l'écriture

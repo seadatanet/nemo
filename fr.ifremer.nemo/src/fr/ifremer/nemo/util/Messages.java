@@ -361,6 +361,7 @@ public class Messages {
 	public static String settings_lang_EN;
 	public static String button_cancel;
 	public static String button_validate;
+	public static String button_edit_flags;
 	public static String settings_proxy;
 	public static String settings_proxy_adr;
 	public static String settings_proxy_port;

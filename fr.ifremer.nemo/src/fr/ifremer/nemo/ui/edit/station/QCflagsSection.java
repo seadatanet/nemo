@@ -251,7 +251,7 @@ public class QCflagsSection extends NemoSection
         final Menu submenu =
             new Menu(tabCorrespondance.getShell(), SWT.DROP_DOWN);
         itemLoad.setMenu(submenu);
-        final ArrayList<FlagTable> flagTables =
+        ArrayList<FlagTable> flagTables =
             FlagTable.getOrderedFlagTables(Nemo.getInstance().getConfig().getFlagTables());
 
         for (int i = 0; i < flagTables.size(); i++)
