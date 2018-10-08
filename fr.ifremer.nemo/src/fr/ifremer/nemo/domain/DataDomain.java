@@ -153,7 +153,7 @@ public class DataDomain {
 			pModel.computeAddedParameterValue(currentStation, inputLine, currentDateWithOffset);
 
 			String defaultValue = pModel.getParameter().getDefault();
-			String stringValue = pModel.getLineValue().getValue();
+			String stringValue = pModel.getLineValue().getValue().trim();
 
 			// odvDataLine.append(Global.TAB);
 			if (!stringValue.equals(defaultValue))
