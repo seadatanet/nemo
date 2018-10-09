@@ -1178,8 +1178,7 @@ public class TableData {
 				}
 			}
 			String unitLabel;
-			if (RulesManager.getInstance().isDataListTypeP091() ){//25794
-//			if ( RulesManager.getInstance().isConversionToMedatlas()){//25794 NO: we do not have the P06 label if conversion is ODV or CFPoint and datalistType is P09!!
+			if ( isUnitP09()){ // 25794
 				unitLabel=types.get(i).getUnite();
 			}else{
 				unitLabel=types.get(i).getP06Label();
@@ -1216,6 +1215,10 @@ public class TableData {
 
 	}
 
+	
+	private boolean isUnitP09() {
+		return RulesManager.getInstance().isConversionToMedatlas()||RulesManager.getInstance().isDataListTypeP091();
+	}
 	public void razTableData() {
 		// effacement de tous les items de la table
 		myTable.dispose();
@@ -1784,8 +1787,13 @@ public class TableData {
 
 			types.get(i).setUnite(
 					myTable.getItem(i).getText(colNbById.get(COL_UNIT)));
-			types.get(i).setP06Label(
-					myTable.getItem(i).getText(colNbById.get(COL_UNIT)));
+			
+			if (!isUnitP09()){ // 25794
+			
+				types.get(i).setP06Label(
+						myTable.getItem(i).getText(colNbById.get(COL_UNIT)));
+			}
+			
 			types.get(i).setConversion(
 					myTable.getItem(i).getText(colNbById.get(COL_CONVERSION)));
 			types.get(i).setTest(

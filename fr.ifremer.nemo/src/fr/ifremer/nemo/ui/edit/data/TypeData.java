@@ -2,7 +2,6 @@ package fr.ifremer.nemo.ui.edit.data;
 
 import java.util.regex.Pattern;
 
-import sdn.vocabulary.interfaces.IElement;
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.input.LineFragment;
 import fr.ifremer.nemo.input.parameters.Parameter;
@@ -10,6 +9,7 @@ import fr.ifremer.nemo.input.parameters.ParameterModel;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Global.E_TypeConversion;
 import fr.ifremer.nemo.ws.WSParameter;
+import sdn.vocabulary.interfaces.IElement;
 
 public class TypeData extends Object implements Comparable<TypeData> {
 
@@ -139,9 +139,9 @@ public class TypeData extends Object implements Comparable<TypeData> {
 		String inputDefault = parameterModel.getInputDefault();
 		if (inputDefault == null || inputDefault.equals("null"))inputDefault = Global.EMPTY_STRING; //$NON-NLS-1$
 		setEntree(inputDefault);
-//		if (parameter.isP011()){
+		if (parameter.isP011()){ 
 			setP06Label(parameter.getUnit());
-//		}
+		}
 		setUnite(parameter.getUnit());
 		setUniteCode(parameter.getUnitCode());
 		
