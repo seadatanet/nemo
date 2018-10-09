@@ -16,6 +16,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
+import org.joda.time.DateTime;
 
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.config.Configuration;
@@ -285,8 +286,8 @@ public class CDIResumeWriter {
 
 		// station date
 		Formatter format = new Formatter();
-		SimpleDateFormat dateFormat2 =
-				new SimpleDateFormat("yyyy-MM-dd'T'");
+		SimpleDateFormat dateFormat2 =	new SimpleDateFormat("yyyy-MM-dd'T'");
+		
 		String stationDateTime = dateFormat2.format(new Date(st.getDate()))
 				+ format.formatDateTime("hh24:mm:ss",
 						DateTimeUtils.getCorrectedTime(
@@ -332,13 +333,24 @@ public class CDIResumeWriter {
 		// STATION_END_DATE (39448)
 		// for profiles: same as station date
 		if (RulesManager.getInstance().isProfile()){
-			writer.write(sep + stationDateTime);
+			if (st.getYougerDate()==0 ) {
+				long stDate = DateTools.getUTCDateStringAsLong(stationDateTime, "yyyy-MM-dd'T'HH:mm:ss");
+				DateTime dt = new DateTime(stDate);
+				DateTime added = dt.plusHours(1);
+				String addedStr = DateTools.getUTCLongAsString(added.getMillis(), "yyyy-MM-dd'T'HH:mm:ss");
+				writer.write(sep + addedStr);
+			}else {
+				
+				
+				String cruiseDateTime = DateTools.getUTCLongAsString(st.getYougerDate(), "yyyy-MM-dd'T'HH:mm:ss");
+				writer.write(sep +cruiseDateTime);
+			}
 		}else
 			// for timeseries and trajectories
 		{
 			try{
-				System.out.println(DateTools.TIMEZONE_GMT);
-			String cruiseDateTime = DateTools.getUTCLongAsString(st.getYougerDate(), "yyyy-MM-dd'T'HH:mm:ss.SSS");
+//				System.out.println(DateTools.TIMEZONE_GMT);
+			String cruiseDateTime = DateTools.getUTCLongAsString(st.getYougerDate(), "yyyy-MM-dd'T'HH:mm:ss");
 			writer.write(sep +cruiseDateTime);
 			}
 				catch (Exception e) {
