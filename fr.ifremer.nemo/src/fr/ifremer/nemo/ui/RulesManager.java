@@ -280,7 +280,7 @@ public class RulesManager {
 	 * //40216
 	 */
 	public boolean isSeparatorChecked(){
-		return separator!=null;
+		return separator!=null && !separator.isEmpty();
 	}
 	/**
 	 * //40216

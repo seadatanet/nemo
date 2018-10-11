@@ -16,7 +16,6 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CCombo;
 import org.eclipse.swt.widgets.Composite;
 
-import sdn.vocabulary.interfaces.IElement;
 import fr.ifremer.nemo.config.NemoLists;
 import fr.ifremer.nemo.config.VocabLists;
 import fr.ifremer.nemo.ui.RulesManager;
@@ -25,6 +24,7 @@ import fr.ifremer.nemo.ui.edit.cruise.TableDataSurvey;
 import fr.ifremer.nemo.ui.edit.station.EditStationForm;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Intern;
+import sdn.vocabulary.interfaces.IElement;
 
 /**
  * Description: enumération des types de Combo possibles
@@ -110,7 +110,9 @@ public enum ComboType {
 			valueCombo.add("NDD MM.mm"); //$NON-NLS-1$
 			valueCombo.add("NDD.ddd"); //$NON-NLS-1$
 			valueCombo.add("NDDMMSS"); //$NON-NLS-1$
-			valueCombo.add(EditStationForm.LATLON_CHOICE_DEC_DEGREES_FOR_FILES_WITH_SEP);
+			if (RulesManager.getInstance().isSeparatorChecked()) {
+				valueCombo.add(EditStationForm.LATLON_CHOICE_DEC_DEGREES_FOR_FILES_WITH_SEP);
+			}
 			break;
 		case LON:
 			valueCombo.add("+DDD MM.mm"); //$NON-NLS-1$
@@ -119,7 +121,9 @@ public enum ComboType {
 			valueCombo.add("NDDD MM.mm"); //$NON-NLS-1$
 			valueCombo.add("NDDD.ddd"); //$NON-NLS-1$
 			valueCombo.add("NDDDMMSS"); //$NON-NLS-1$
-			valueCombo.add(EditStationForm.LATLON_CHOICE_DEC_DEGREES_FOR_FILES_WITH_SEP);
+			if (RulesManager.getInstance().isSeparatorChecked()) {
+				valueCombo.add(EditStationForm.LATLON_CHOICE_DEC_DEGREES_FOR_FILES_WITH_SEP);
+			}
 			break;
 		case DATATYPE:
 			// FAE022
