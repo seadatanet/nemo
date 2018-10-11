@@ -414,6 +414,7 @@ public class Messages {
 	public static String error_table;
 	public static String settings_defaultOutputFormat;
 	public static String settings_flagDefault;
+	public static String settings_flags_title;
 
 	public static String settings_edmoCol_code;
 	public static String settings_edmoCol_name;
