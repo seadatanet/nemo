@@ -117,14 +117,15 @@ public class AP_DEPH extends AddedParam {
 			Depth = Depth / Gr;
 
 			
-			// WARNING: Computed Depth is a double: adapt format because it can be an integer format for PRES (36176)
+			// WARNING: Computed Depth is a double: adapt format because it can be an integer format for PRES (36176, 40893)
 			try{
-			if (formatString.contains("d")){
-				formatString = formatString.replace("d","f");
-			}
+				if (formatString.contains("d")){
+					int formatInt= Integer.valueOf(formatString.replace("d", "").replace("%", ""));
+					formatString = "%"+String.valueOf(formatInt+2)+".1f";//40893
+				}
 				stringValue = Formatter.getSingleton().formatDouble(formatString, Depth);
 			}catch (Exception e) {
-				stringValue = String.valueOf(Depth);
+				stringValue = Formatter.getSingleton().formatDouble("%.1f", Depth);//40893
 			}
 		} else {
 			// = SensorDepth
