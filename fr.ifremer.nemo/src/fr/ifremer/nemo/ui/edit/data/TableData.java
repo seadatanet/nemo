@@ -1217,7 +1217,7 @@ public class TableData {
 
 	
 	private boolean isUnitP09() {
-		return RulesManager.getInstance().isConversionToMedatlas()||RulesManager.getInstance().isDataListTypeP091();
+		return RulesManager.getInstance().isDataListTypeP091()||RulesManager.getInstance().isDataListTypeP011viaP091();
 	}
 	public void razTableData() {
 		// effacement de tous les items de la table

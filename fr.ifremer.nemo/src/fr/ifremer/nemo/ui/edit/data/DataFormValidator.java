@@ -154,21 +154,17 @@ public class DataFormValidator extends FormValidator {
 					Utils.messageErreurAppend(e.getMessage());
 				}
 				// 35230 check unit
-				if (!typeCourant.isText()){
+				if (!typeCourant.isText() && !isUnitP09()){
 					BODCResult bodcRes = BodcChecker.getInstance().checkP06(typeCourant, rm.getMyDataListType());
 					if (bodcRes.getResStatus() == BODC_RES_STATUS.KO){
 						Utils.messageErreurAppend(bodcRes.getErrorMsg());
 						ok=false;
 					}else if (bodcRes.getResStatus() == BODC_RES_STATUS.WARNING){
-						if (RulesManager.getInstance().isConversionToMedatlas()){
-							// 25794 DO NOT REPLACE IN MEDATLAS!!
-						}else{
 							typeCourant = bodcRes.getTypeData();
 							Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().getMyTable().getItems()[i].setText(unitCodeColNb, String.valueOf(typeCourant.getUniteCode()));
 							Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().getMyTable().getItems()[i].setText(unitColNb, String.valueOf(typeCourant.getUnite()));
 							Utils.messageWarningAppend(bodcRes.getWarningMsg());
 							bodcReplaced=true;
-						}
 					}
 				}
 				// 35230 check instrument
@@ -313,7 +309,9 @@ public class DataFormValidator extends FormValidator {
 			
 
 	}
-
+	private boolean isUnitP09() {
+		return RulesManager.getInstance().isDataListTypeP091()||RulesManager.getInstance().isDataListTypeP011viaP091();
+	}
 	@Override
 	protected void onSuccess() {
 		super.onSuccess();
