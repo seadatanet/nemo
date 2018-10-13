@@ -14,8 +14,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import ucar.ma2.DataType;
-import ucar.nc2.Dimension;
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.config.VocabLists;
 import fr.ifremer.nemo.domain.DateTimeUtils;
@@ -67,10 +65,14 @@ import fr.ifremer.seadatanet.cfpoint.variable.SdnY;
 import fr.ifremer.seadatanet.cfpoint.variable.SdnZ;
 import fr.ifremer.sismer_tools.resources.CFPointConstants;
 import fr.ifremer.sismer_tools.seadatanet.Format;
+import fr.ifremer.sismer_tools.seadatanet.SDNMappingParameter;
 import fr.ifremer.sismer_tools.seadatanet.SDNTools;
 import fr.ifremer.sismer_tools.seadatanet.SDNXLinkBODCException;
 import fr.ifremer.sismer_tools.seadatanet.SDNXLinkException;
+import fr.ifremer.sismer_tools.seadatanet.SdnVocabularyManager;
 import fr.ifremer.sismer_tools.seadatanet.SdnXLinkReference;
+import ucar.ma2.DataType;
+import ucar.nc2.Dimension;
 
 /**
  * Description: TODO
@@ -784,7 +786,7 @@ public class NetCDFWriter extends NemoWriter {
 	 * @throws Exception
 	 */
 	public void setNetCDFMetadata(String inputFilePath, Station st) throws Exception {
-
+		SdnVocabularyManager sdnMgr = new SdnVocabularyManager(VocabLists.getCf());
 		// create Dimension
 		setSdnDimension(inputFilePath, st);
 
@@ -852,17 +854,20 @@ public class NetCDFWriter extends NemoWriter {
 				throw new Exception(Messages.Etape_134 + Global.SPACE + zParameterModel.getParameter().getCodeP011());
 			}
 		}
-		String unit = unitConversion.getUnitConversion(zParameterModel.getParameter().getUnit());
 		String sdnParameterUrn = getURNSyntaxe(URNtype.object, zParameterModel.getParameter().getCodeP011(), null, Intern.mapping_objet, zParameterModel.isText());
 		String sdnParameterName = zParameterModel.getParameter().getNameP011();
 
 		String sdnUomUrn;
+		String sdnUomName ;
 		if (zParameterModel.getParameter().getUnitCode() == null || zParameterModel.getParameter().getUnitCode().isEmpty()) {
 			sdnUomUrn = getURNSyntaxe(URNtype.units, zParameterModel.getParameter().getCode(), Intern.mapping_subject, Intern.mapping_unit, zParameterModel.isText());
+			sdnUomName = sdnMgr.getP06UnitLabel(sdnUomUrn.replace(SDNMappingParameter.SEMANTIC_HEADER_SDN_P06,""));
 		} else {
 			sdnUomUrn = getURNSyntaxe(URNtype.units, zParameterModel.getParameter().getUnitCode(), null, Intern.mapping_unit, zParameterModel.isText());
+			sdnUomName = zParameterModel.getParameter().getUnit();
 		}
-		String sdnUomName = zParameterModel.getParameter().getUnit();
+		
+		String unit = unitConversion.getUnitConversion(sdnUomName);
 
 		SdnBotDepthVariable SdnBotDepth ;
 
@@ -963,7 +968,7 @@ public class NetCDFWriter extends NemoWriter {
 		ParameterModel[] params = new ParameterModel[paramAdded.length + paramMesured.length];
 		System.arraycopy(paramAdded, 0, params, 0, paramAdded.length);
 		System.arraycopy(paramMesured, 0, params, paramAdded.length, paramMesured.length);
-
+	
 		for (ParameterModel param : params) {
 			// varName = param.getParameter().getLocalCode();
 			String varName = param.getParameter().getCodeP011();
@@ -979,12 +984,14 @@ public class NetCDFWriter extends NemoWriter {
 			sdnParameterName = param.getParameter().getNameP011();
 			if (param.getParameter().getUnitCode() == null || param.getParameter().getUnitCode().isEmpty()) {
 				sdnUomUrn = getURNSyntaxe(URNtype.units, param.getParameter().getCode(), Intern.mapping_subject, Intern.mapping_unit, param.isText());
+				sdnUomName = sdnMgr.getP06UnitLabel(sdnUomUrn.replace(SDNMappingParameter.SEMANTIC_HEADER_SDN_P06,""));
 			} else {
 				sdnUomUrn = getURNSyntaxe(URNtype.units, param.getParameter().getUnitCode(), null, Intern.mapping_unit, param.isText());
+				sdnUomName = param.getParameter().getUnit();
 			}
-			sdnUomName = param.getParameter().getUnit();
+			
 
-			unit = unitConversion.getUnitConversion(param.getParameter().getUnit());
+			unit = unitConversion.getUnitConversion(sdnUomName);
 
 			if (!sdnParameterUrn.equals(z.getSdnParameterUrn())) {
 				String coordinates = myCFPointWriterManager.getCoordinatesAttributeString(longitude, latitude, z, time);
