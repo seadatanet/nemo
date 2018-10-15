@@ -28,7 +28,6 @@ import fr.ifremer.nemo.domain.InputDomain;
 import fr.ifremer.nemo.domain.Station;
 import fr.ifremer.nemo.domain.StationDomain;
 import fr.ifremer.nemo.input.parameters.ParameterModel;
-import fr.ifremer.nemo.ui.RulesManager;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Formatter;
@@ -285,13 +284,24 @@ public class CDIResumeWriter {
 						"+DDD.dddddd", st.getLongitude()));
 
 		// station date
+		// 39448
+		String stationDateTime;
 		Formatter format = new Formatter();
 		SimpleDateFormat dateFormat2 =	new SimpleDateFormat("yyyy-MM-dd'T'");
+		stationDateTime = dateFormat2.format(new Date(st.getDate()))
+				+ format.formatDateTime("hh24:mm:ss",DateTimeUtils.getCorrectedTime(st.getTime(), st.getOffsetTU()));
 		
-		String stationDateTime = dateFormat2.format(new Date(st.getDate()))
-				+ format.formatDateTime("hh24:mm:ss",
-						DateTimeUtils.getCorrectedTime(
-								st.getTime(), st.getOffsetTU()));
+		if(Nemo.getInstance().getDomain().getStation().getModel().getProperty(Intern.S_DATE).isInData()
+				&& st.getOlderDate()!=0) {
+			try {
+				stationDateTime=DateTools.getUTCLongAsString(Long.valueOf(st.getOlderDate()),"yyyy-MM-dd'T'HH:mm:ss");
+			}catch (Exception e) {
+				// TODO: handle exception
+			}
+		}else {
+			System.out.println("!!!");
+			}
+		
 		writer.write(sep + stationDateTime);
 
 		// st.getOffsetTU();
@@ -332,8 +342,9 @@ public class CDIResumeWriter {
 		
 		// STATION_END_DATE (39448)
 		// for profiles: same as station date
-		if (RulesManager.getInstance().isProfile()){
-			if (st.getYougerDate()==0 ) {
+		if (iDomain.getMedia().getModel().getInputType() == E_InputType.PROFILE){
+//			if (st.getYoungerDate()!=0  ) {
+			if(!Nemo.getInstance().getDomain().getStation().getModel().getProperty(Intern.S_DATE).isInData()) {
 				long stDate = DateTools.getUTCDateStringAsLong(stationDateTime, "yyyy-MM-dd'T'HH:mm:ss");
 				DateTime dt = new DateTime(stDate);
 				DateTime added = dt.plusHours(1);
@@ -342,7 +353,7 @@ public class CDIResumeWriter {
 			}else {
 				
 				
-				String cruiseDateTime = DateTools.getUTCLongAsString(st.getYougerDate(), "yyyy-MM-dd'T'HH:mm:ss");
+				String cruiseDateTime = DateTools.getUTCLongAsString(st.getYoungerDate(), "yyyy-MM-dd'T'HH:mm:ss");
 				writer.write(sep +cruiseDateTime);
 			}
 		}else
@@ -350,7 +361,7 @@ public class CDIResumeWriter {
 		{
 			try{
 //				System.out.println(DateTools.TIMEZONE_GMT);
-			String cruiseDateTime = DateTools.getUTCLongAsString(st.getYougerDate(), "yyyy-MM-dd'T'HH:mm:ss");
+			String cruiseDateTime = DateTools.getUTCLongAsString(st.getYoungerDate(), "yyyy-MM-dd'T'HH:mm:ss");
 			writer.write(sep +cruiseDateTime);
 			}
 				catch (Exception e) {

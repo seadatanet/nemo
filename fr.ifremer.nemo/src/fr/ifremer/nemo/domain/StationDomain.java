@@ -35,6 +35,7 @@ import fr.ifremer.nemo.util.Global.E_MesureType;
 import fr.ifremer.nemo.util.Global.E_TypeConversion;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
+import fr.ifremer.sismer_tools.DateTools;
 import fr.ifremer.sismer_tools.seadatanet.SdnXLinkReference;
 
 /**
@@ -336,11 +337,9 @@ public class StationDomain {
 
 			// Station
 			errorMessage = "station reference";
-			if (Nemo.getInstance().getDomain().getMedia().getModel()
-					.getInputType() == E_InputType.TRAJECTORY) {
+			if (Nemo.getInstance().getDomain().getMedia().getModel().getInputType() == E_InputType.TRAJECTORY) {
 				if (Nemo.getInstance().getDomain().getConversion().getCurrent() != E_TypeConversion.ODV_MULTISTATIONS
-						|| Nemo.getInstance().getDomain().getConversion()
-						.getCurrent() != E_TypeConversion.NETCDF_MULTISTATIONS)
+						|| Nemo.getInstance().getDomain().getConversion().getCurrent() != E_TypeConversion.NETCDF_MULTISTATIONS)
 					_ref = 1;
 				odvStationHeader.append(getRef(true)); //40442
 			} else {
@@ -355,7 +354,21 @@ public class StationDomain {
 
 			// yyyy-mm-ddThh:mm:ss.sss
 			errorMessage = "date time";
-			odvStationHeader.append(DateTimeUtils.getDateTime(currentStation));
+			String dateTime=DateTimeUtils.getDateTime(currentStation);
+			if(Nemo.getInstance().getDomain().getStation().getModel().getProperty(Intern.S_DATE).isInData()
+					&& currentStation.getOlderDate()!=0) {
+				try {
+					if (currentStation.getTime() == -1) {
+						dateTime=DateTools.getUTCLongAsString(currentStation.getOlderDate(),"yyyy-MM-dd");
+					}else {
+						dateTime=DateTools.getUTCLongAsString(currentStation.getOlderDate(),"yyyy-MM-dd'T'HH:mm:ss.SSS");
+					}
+				}catch (Exception e) {
+					// TODO: handle exception
+				}
+			}
+				odvStationHeader.append(dateTime);
+			
 			odvStationHeader.append(Global.TAB);
 
 			// Longitude [degrees_east]

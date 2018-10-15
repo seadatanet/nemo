@@ -40,6 +40,7 @@ public class DateTimeUtils {
 
 	@SuppressWarnings("nls")
 	public static String getDateTime(Station currentStation) throws ParseException, UnsupportedEncodingException {
+		// 39448
 		StringBuffer value = new StringBuffer();
 		String s_date = Formatter.getSingleton().formatDateTime("YYYY-MM-DD", getFullDate(currentStation));
 		value.append(s_date);

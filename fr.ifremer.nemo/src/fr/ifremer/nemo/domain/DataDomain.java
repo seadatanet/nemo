@@ -142,12 +142,6 @@ public class DataDomain {
 		//33044 manage offset in end date time
 		long currentDateWithOffset = DateTimeUtils.getGMTDate(currentDate,	currentStation.getOffsetTU());
 
-		//39448
-		if (currentStation.getYougerDate()==Long.MIN_VALUE || currentDate>currentStation.getYougerDate()){
-			currentStation.setYougerDate(currentDate);
-		}
-
-
 		for (ParameterModel pModel : myParameterManager.getOdvParameterModels()) {
 			cptParam++;
 			pModel.computeAddedParameterValue(currentStation, inputLine, currentDateWithOffset);
@@ -211,11 +205,6 @@ public class DataDomain {
 		}
 		//33044 manage offset in end date time
 		long currentDateWithOffset = DateTimeUtils.getGMTDate(currentDate,	currentStation.getOffsetTU());
-
-		//39448
-		if (currentStation.getYougerDate()==Long.MIN_VALUE || currentDate>currentStation.getYougerDate()){
-			currentStation.setYougerDate(currentDate);
-		}
 
 		for (ParameterModel pModel : myParameterManager.getMedParameterModels()) {
 			pModel.computeAddedParameterValue(currentStation, inputLine, currentDateWithOffset);

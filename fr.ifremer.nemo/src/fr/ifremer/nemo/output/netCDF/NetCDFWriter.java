@@ -517,10 +517,7 @@ public class NetCDFWriter extends NemoWriter {
 							currentStation.getMetaFlag(Intern.S_DATE).toCharArray()[0]),indiceStation,indexRecord);
 					
 					
-					//39448
-					if (currentStation.getYougerDate()==Long.MIN_VALUE || currentDate>currentStation.getYougerDate()){
-						currentStation.setYougerDate(currentDate);
-					}
+
 				}
 				// Depth, bottom depth
 				if (mediaDomain.getModel().getInputType() == E_InputType.TRAJECTORY) {

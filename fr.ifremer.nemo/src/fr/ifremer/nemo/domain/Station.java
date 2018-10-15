@@ -63,8 +63,11 @@ public class Station implements Comparable {
 
 	protected int startLine;
 	// 39448
-	protected long yougerDate;
+	protected long youngerDate=0;
+	protected long olderDate=0;
 	
+	
+
 	public Station(String fileName, String[] inputStationHeader) throws GenerationException {
 		// TODO BGT supprimer errorMsg
 		String errorMessage = "";
@@ -654,11 +657,39 @@ public class Station implements Comparable {
 		this.startLine = startLine;
 	}
 
-	public long getYougerDate() {
-		return yougerDate;
+	public long getYoungerDate() {
+		return youngerDate;
 	}
 
-	public void setYougerDate(long yougerDate) {
-		this.yougerDate = yougerDate;
+	public void setYoungerDate(long youngerDate) {
+		this.youngerDate = youngerDate;
+	}
+	public long getOlderDate() {
+		return olderDate;
+	}
+
+	public void setOlderDate(long olderDate) {
+		this.olderDate = olderDate;
+	}
+
+	public void updateStationStartEnd(String readedLine) {
+			Long currentDate;
+			try {
+				currentDate = Long.valueOf(DateTimeUtils.convertTimestamp(readedLine));
+				//33044 manage offset in end date time
+				long currentDateWithOffset = DateTimeUtils.getGMTDate(currentDate,	getOffsetTU());
+				//39448
+				if (getYoungerDate()==0 || currentDateWithOffset>getYoungerDate()){
+					setYoungerDate(currentDateWithOffset);
+				}
+				if (getOlderDate()==0|| currentDateWithOffset<getOlderDate()){
+					setOlderDate(currentDateWithOffset);
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+		
 	}
 }
