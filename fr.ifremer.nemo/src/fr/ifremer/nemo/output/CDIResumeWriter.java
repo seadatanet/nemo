@@ -343,8 +343,9 @@ public class CDIResumeWriter {
 		// STATION_END_DATE (39448)
 		// for profiles: same as station date
 		if (iDomain.getMedia().getModel().getInputType() == E_InputType.PROFILE){
-//			if (st.getYoungerDate()!=0  ) {
-			if(!Nemo.getInstance().getDomain().getStation().getModel().getProperty(Intern.S_DATE).isInData()) {
+			if(!Nemo.getInstance().getDomain().getStation().getModel().getProperty(Intern.S_DATE).isInData()
+					|| (st.getYoungerDate()==st.getOlderDate())
+					) {
 				long stDate = DateTools.getUTCDateStringAsLong(stationDateTime, "yyyy-MM-dd'T'HH:mm:ss");
 				DateTime dt = new DateTime(stDate);
 				DateTime added = dt.plusHours(1);
