@@ -1,1 +1,1 @@
-1.6.7rc1(snapshot)
+1.6.7rc3(snapshot)
