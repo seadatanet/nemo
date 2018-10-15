@@ -672,13 +672,15 @@ public class Station implements Comparable {
 		this.olderDate = olderDate;
 	}
 
-	public void updateStationStartEnd(String readedLine) {
+	public void updateStationStartEnd(String readedLine, int indexRecord) {
 			Long currentDate;
 			try {
-				currentDate = Long.valueOf(DateTimeUtils.convertTimestamp(readedLine));
+//				currentDate = Long.valueOf(DateTimeUtils.convertTimestamp(readedLine));
 				//33044 manage offset in end date time
-				long currentDateWithOffset = DateTimeUtils.getGMTDate(currentDate,	getOffsetTU());
+//				long currentDateWithOffset = DateTimeUtils.getGMTDate(currentDate,	getOffsetTU());
 				//39448
+				long currentDateWithOffset = getCurrentDate(readedLine,indexRecord);
+				
 				if (getYoungerDate()==0 || currentDateWithOffset>getYoungerDate()){
 					setYoungerDate(currentDateWithOffset);
 				}
@@ -691,5 +693,25 @@ public class Station implements Comparable {
 			}
 		
 		
+	}
+	
+private Long getCurrentDate( String readedLine,int indexRecord) throws ParseException,	UnsupportedEncodingException {
+		
+		Long currentDate;
+		if ( Nemo.getInstance().getDomain().getMedia().getModel().getInputType() == E_InputType.PROFILE){
+			currentDate = DateTimeUtils.getCurrentDate(this, indexRecord); // get current date (computed with sample rate)
+		}
+		else{
+			// 	TIMESERIES AND TRAJECTORIES			
+			if (Nemo.getInstance().getDomain().getStation().getModel().getProperty(Intern.S_DATE).isInData()){
+				currentDate = Long.valueOf(DateTimeUtils.convertTimestamp(readedLine));
+				long currentDateWithOffset = DateTimeUtils.getGMTDate(currentDate, this.getOffsetTU());
+				currentDate = currentDateWithOffset;
+			}else{
+				currentDate = DateTimeUtils.getCurrentDate(this, indexRecord);
+			}
+
+		}
+		return currentDate;
 	}
 }
