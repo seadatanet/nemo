@@ -288,8 +288,12 @@ public class CDIResumeWriter {
 		String stationDateTime;
 		Formatter format = new Formatter();
 		SimpleDateFormat dateFormat2 =	new SimpleDateFormat("yyyy-MM-dd'T'");
-		stationDateTime = dateFormat2.format(new Date(st.getDate()))
-				+ format.formatDateTime("hh24:mm:ss",DateTimeUtils.getCorrectedTime(st.getTime(), st.getOffsetTU()));
+		if (DateTimeUtils.getCorrectedTime(st.getTime(), st.getOffsetTU())!=-1){
+			stationDateTime = dateFormat2.format(new Date(st.getDate()))
+					+ format.formatDateTime("hh24:mm:ss",DateTimeUtils.getCorrectedTime(st.getTime(), st.getOffsetTU()));
+		}else {
+			stationDateTime = dateFormat2.format(new Date(st.getDate()))+ "00:00:00";
+		}
 		
 		if(Nemo.getInstance().getDomain().getStation().getModel().getProperty(Intern.S_DATE).isInData()
 				&& st.getOlderDate()!=0) {
