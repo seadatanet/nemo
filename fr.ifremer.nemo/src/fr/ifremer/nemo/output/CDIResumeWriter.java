@@ -300,11 +300,9 @@ public class CDIResumeWriter {
 			try {
 				stationDateTime=DateTools.getUTCLongAsString(Long.valueOf(st.getOlderDate()),"yyyy-MM-dd'T'HH:mm:ss");
 			}catch (Exception e) {
-				// TODO: handle exception
+				e.printStackTrace();
 			}
-		}else {
-			System.out.println("!!!");
-			}
+		}
 		
 		writer.write(sep + stationDateTime);
 
