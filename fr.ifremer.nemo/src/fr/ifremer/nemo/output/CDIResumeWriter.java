@@ -288,22 +288,20 @@ public class CDIResumeWriter {
 		String stationDateTime;
 		Formatter format = new Formatter();
 		SimpleDateFormat dateFormat2 =	new SimpleDateFormat("yyyy-MM-dd'T'");
-		if (DateTimeUtils.getCorrectedTime(st.getTime(), st.getOffsetTU())!=-1){
-			stationDateTime = dateFormat2.format(new Date(st.getDate()))
-					+ format.formatDateTime("hh24:mm:ss",DateTimeUtils.getCorrectedTime(st.getTime(), st.getOffsetTU()));
+		if (st.getTime()==-1) {
+			stationDateTime = dateFormat2.format(new Date(st.getDate()))+"00:00:00";
 		}else {
-			stationDateTime = dateFormat2.format(new Date(st.getDate()))+ "00:00:00";
+		stationDateTime = dateFormat2.format(new Date(st.getDate()))
+				+ format.formatDateTime("hh24:mm:ss",DateTimeUtils.getCorrectedTime(st.getTime(), st.getOffsetTU()));
 		}
-		
 		if(Nemo.getInstance().getDomain().getStation().getModel().getProperty(Intern.S_DATE).isInData()
 				&& st.getOlderDate()!=0) {
 			try {
 				stationDateTime=DateTools.getUTCLongAsString(Long.valueOf(st.getOlderDate()),"yyyy-MM-dd'T'HH:mm:ss");
 			}catch (Exception e) {
-				e.printStackTrace();
+				// TODO: handle exception
 			}
-		}
-		
+		}		
 		writer.write(sep + stationDateTime);
 
 		// st.getOffsetTU();
@@ -345,9 +343,8 @@ public class CDIResumeWriter {
 		// STATION_END_DATE (39448)
 		// for profiles: same as station date
 		if (iDomain.getMedia().getModel().getInputType() == E_InputType.PROFILE){
-			if(!Nemo.getInstance().getDomain().getStation().getModel().getProperty(Intern.S_DATE).isInData()
-					|| (st.getYoungerDate()==st.getOlderDate())
-					) {
+//			if (st.getYoungerDate()!=0  ) {
+			if(!Nemo.getInstance().getDomain().getStation().getModel().getProperty(Intern.S_DATE).isInData()) {
 				long stDate = DateTools.getUTCDateStringAsLong(stationDateTime, "yyyy-MM-dd'T'HH:mm:ss");
 				DateTime dt = new DateTime(stDate);
 				DateTime added = dt.plusHours(1);
@@ -355,8 +352,14 @@ public class CDIResumeWriter {
 				writer.write(sep + addedStr);
 			}else {
 				
-				
-				String cruiseDateTime = DateTools.getUTCLongAsString(st.getYoungerDate(), "yyyy-MM-dd'T'HH:mm:ss");
+				String cruiseDateTime ;
+				if (st.getYoungerDate() == st.getOlderDate()) {
+					DateTime dt = new DateTime(st.getYoungerDate());
+					DateTime added = dt.plusHours(1);
+					cruiseDateTime = DateTools.getUTCLongAsString(added.getMillis(), "yyyy-MM-dd'T'HH:mm:ss");
+				}else {
+					cruiseDateTime = DateTools.getUTCLongAsString(st.getYoungerDate(), "yyyy-MM-dd'T'HH:mm:ss");
+				}
 				writer.write(sep +cruiseDateTime);
 			}
 		}else

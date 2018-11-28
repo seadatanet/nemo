@@ -698,7 +698,8 @@ public class Station implements Comparable {
 private Long getCurrentDate( String readedLine,int indexRecord) throws ParseException,	UnsupportedEncodingException {
 		
 		Long currentDate;
-		if ( Nemo.getInstance().getDomain().getMedia().getModel().getInputType() == E_InputType.PROFILE){
+		if ( Nemo.getInstance().getDomain().getMedia().getModel().getInputType() == E_InputType.PROFILE
+				&& !Nemo.getInstance().getDomain().getStation().getModel().getProperty(Intern.S_DATE).isInData()){
 			currentDate = DateTimeUtils.getCurrentDate(this, indexRecord); // get current date (computed with sample rate)
 		}
 		else{
