@@ -177,7 +177,7 @@ public class TableData {
 	}
 
 	private boolean isValueOutWritable() {
-		return (RulesManager.getInstance().isConversionToMedatlas() || RulesManager.getInstance().isConversionToNetCDF());
+		return (RulesManager.getInstance().isConversionToMedatlas());
 	}
 
 	private boolean isValueOutMandatory() {
