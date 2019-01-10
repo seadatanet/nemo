@@ -681,7 +681,9 @@ public class NetCDFWriter extends NemoWriter {
 	private void writeDataLine(Station currentStation, String inputLine, long currentDate) throws Exception {
 
 
-		String varName;String defaultValue;String stringValue;String inputDefaultValue;
+		String varName;
+		String defaultValue;
+		String stringValue;String inputDefaultValue;
 		// parametre ajouté
 		for (ParameterModel pModel : dataDomain.getMyParameterManager().getNetCDFParameterModels()) {
 			boolean compute=true;
@@ -705,10 +707,13 @@ public class NetCDFWriter extends NemoWriter {
 				if (!stringValue.equals(inputDefaultValue))
 					setDataValue(varName,new Value( stringValue,  pModel.getLineValue().getQc().toCharArray()[0]), indiceStation, indexRecord);
 				else {
-					if (defaultValue != null && !defaultValue.isEmpty())
-						setDataValue(varName, new Value(defaultValue, pModel.getLineValue().getQc().toCharArray()[0]), indiceStation,indexRecord);
-					else
-						setDataValue(varName,new Value( null,  pModel.getLineValue().getQc().toCharArray()[0]), indiceStation,indexRecord);
+					setDataValue(varName, new Value( convertValue(DataType.DOUBLE, ParameterValues.DEFAULT_FILLVALUE)
+							,  pModel.getLineValue().getQc().toCharArray()[0]),indiceStation,indexRecord);
+					
+//					if (defaultValue != null && !defaultValue.isEmpty())//44130
+//						setDataValue(varName, new Value(defaultValue, pModel.getLineValue().getQc().toCharArray()[0]), indiceStation,indexRecord);
+//					else
+//						setDataValue(varName,new Value( null,  pModel.getLineValue().getQc().toCharArray()[0]), indiceStation,indexRecord);
 				}
 			}
 		}
@@ -737,10 +742,16 @@ public class NetCDFWriter extends NemoWriter {
 					//				setDataValue(getZVarName(getZParameterModel()), new Value( stringValue, pModel.getLineValue().getQc().toCharArray()[0]), indiceStation);
 				}
 				else {
-					if (defaultValue != null && !defaultValue.isEmpty())
-						setDataValue(varName, new Value(defaultValue, pModel.getLineValue().getQc().toCharArray()[0]), indiceStation,indexRecord);
-					else
-						setDataValue(varName, new Value(null,  pModel.getLineValue().getQc().toCharArray()[0]),indiceStation,indexRecord);
+					
+					setDataValue(varName, new Value( convertValue(DataType.DOUBLE, ParameterValues.DEFAULT_FILLVALUE)
+							,  pModel.getLineValue().getQc().toCharArray()[0]),indiceStation,indexRecord);
+					
+					
+					
+//					if (defaultValue != null && !defaultValue.isEmpty())//44130
+//						setDataValue(varName, new Value(defaultValue, pModel.getLineValue().getQc().toCharArray()[0]), indiceStation,indexRecord);
+//					else
+//						setDataValue(varName, new Value(null,  pModel.getLineValue().getQc().toCharArray()[0]),indiceStation,indexRecord);
 				}
 			}catch(Exception e){
 				e.printStackTrace();
@@ -908,9 +919,9 @@ public class NetCDFWriter extends NemoWriter {
 		time.addVariableAttribute(ParameterNames.FILLVALUE, convertValue(DataType.DOUBLE, ParameterValues.DEFAULT_FILLVALUE));
 		z.addVariableAttribute(ParameterNames.FILLVALUE, convertValue(DataType.DOUBLE, ParameterValues.DEFAULT_FILLVALUE));
 
-		// add default value if existe
-		if (!zParameterModel.getParameter().getDefault().isEmpty())
-			z.addVariableAttribute(ParameterNames.FILLVALUE, convertValue(DataType.DOUBLE, zParameterModel.getParameter().getDefault()));
+		// add default value if existe 44130
+//		if (!zParameterModel.getParameter().getDefault().isEmpty())
+//			z.addVariableAttribute(ParameterNames.FILLVALUE, convertValue(DataType.DOUBLE, zParameterModel.getParameter().getDefault()));
 
 
 		// POSITIVE attribute is now automatically managed in cfpointLib
@@ -994,10 +1005,10 @@ public class NetCDFWriter extends NemoWriter {
 				String coordinates = myCFPointWriterManager.getCoordinatesAttributeString(longitude, latitude, z, time);
 				GeophysicalVariable current = new GeophysicalVariable(varName, getUnits(param.getParameter().getFormat()), geoDim, longName, coordinates, unit, sdnParameterUrn, sdnParameterName, sdnUomUrn, sdnUomName);
 
-				// add default value if existe
-				if (!param.getParameter().getDefault().isEmpty())
-					current.addVariableAttribute(ParameterNames.FILLVALUE, convertValue(DataType.DOUBLE, param.getParameter().getDefault()));
-				else
+				// add default value if existe 44130
+//				if (!param.getParameter().getDefault().isEmpty())
+//					current.addVariableAttribute(ParameterNames.FILLVALUE, convertValue(DataType.DOUBLE, param.getParameter().getDefault()));
+//				else
 					current.addVariableAttribute(ParameterNames.FILLVALUE, convertValue(DataType.DOUBLE, ParameterValues.DEFAULT_FILLVALUE));
 				if (!param.getParameter().getStandardName().isEmpty())
 					current.addVariableAttribute(ParameterNames.STANDARD_NAME, param.getParameter().getStandardName());
