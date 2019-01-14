@@ -26,8 +26,8 @@
   <defaultConversionType>UNKNOWN</defaultConversionType>
   <proxy use="false" address="" port="" login="" password=""/>
   <edmoURL>http://seadatanet.maris2.nl/ws/ws_edmo.asmx</edmoURL>
-  <defaultFlagTable>C3</defaultFlagTable>
-   <FlagTable code="C1" label="SeaDataNet">
+  <defaultFlagTable>C1</defaultFlagTable>
+  <FlagTable code="C1" label="SeaDataNet">
     <Flag local="0" SDN="0 - no quality control"/>
     <Flag local="1" SDN="1 - good value"/>
     <Flag local="2" SDN="2 - probably good value"/>
@@ -55,7 +55,6 @@
     <Flag local="1" SDN="9 - missing value"/>
     <Flag local="4" SDN="3 - probably bad value"/>
     <Flag local="8" SDN="4 - bad value"/>
- 
   </FlagTable>
   <defaultFlag>0</defaultFlag>
 </NemoConfiguration>
