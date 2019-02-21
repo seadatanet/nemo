@@ -43,6 +43,8 @@ import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Global.E_Availability;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
+import fr.ifremer.util.iso.version.IsoAnalyser;
+import fr.ifremer.util.iso.version.IsoAnalyser.ISO_TYPE;
 import sdn.vocabulary.interfaces.ICollection;
 import sdn.vocabulary.interfaces.IElement;
 
@@ -448,13 +450,16 @@ public class CruiseModel extends AbstractModel {
 	 */
 	public void importFromXML(File xmlFile) throws SAXException, TransformerException {
 
-		// verifie si input xml est SDN2_CSR_ISO19139_3.0.0.xsd complieant
-		if (checkSchema(new StreamSource(xmlFile), Intern.CruiseShemaLocationISO19139)) {
+		// Check XML type
+		ISO_TYPE type = IsoAnalyser.getType(xmlFile);
+		
+		// verifie si input xml est SDN2_CSR_ISO19139_3.0.0.xsd compliant
+		if (type == ISO_TYPE.ISO19139) {
 			importFromXML(xmlFile, new File(Intern.dir_resources + File.separator + Intern.CruiseXSLISO19139));
 			xmlVersion = XmlVersion.ISO_19139;
 		}
 		// verifie si input xml est CSR_sdn_V1.3.xsd complieant
-		else if (checkSchema(new StreamSource(xmlFile), Intern.CruiseShemaLocationISO19115)) {
+		else if (type == ISO_TYPE.ISO19115) {
 			importFromXML(xmlFile, new File(Intern.dir_resources + File.separator + Intern.CruiseXSLISO19115));
 			xmlVersion = XmlVersion.ISO_19115;
 		} else {
