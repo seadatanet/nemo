@@ -47,20 +47,20 @@ import sdn.vocabulary.interfaces.ICollection;
 import sdn.vocabulary.interfaces.IElement;
 
 /**
- * Class CruiseModel.java
- * Description: Informations descrivant l'onglet Cuise
+ * Class CruiseModel.java Description: Informations descrivant l'onglet Cuise
+ * 
  * @author Delphine BOULANGER
  */
 public class CruiseModel extends AbstractModel {
 	public static String CSR_DATE_FORMAT = "yyyy-MM-dd"; //$NON-NLS-1$
 	public static String MED_DATE_FORMAT = "dd/MM/yyyy"; //$NON-NLS-1$
-	
 
 	/**
 	 * xml actuellement autorise pour initialisation xml
 	 */
-	public static enum XmlVersion {ISO_19139, ISO_19115};
-
+	public static enum XmlVersion {
+		ISO_19139, ISO_19115
+	};
 
 	/**
 	 * Local CSR ID = CRNO
@@ -82,7 +82,6 @@ public class CruiseModel extends AbstractModel {
 	 * Commentaires sur la campagne (multi-lines)
 	 */
 	protected String _comment;
-
 
 	/**
 	 * Code pays du laboratoire source (MEDATLAS: 2 char max)
@@ -149,7 +148,6 @@ public class CruiseModel extends AbstractModel {
 	 */
 	protected long _startDate;
 
-
 	/**
 	 * version xml du fichier charger depuis xml initialisation
 	 */
@@ -185,7 +183,7 @@ public class CruiseModel extends AbstractModel {
 		_bshCsrReference = Global.EMPTY_STRING;
 		_regionName = Global.EMPTY_STRING;
 		_regionCode = Global.EMPTY_STRING;
-		_shipCode = Global.EMPTY_STRING;//DEFAULT_SHIP_VALUE;
+		_shipCode = Global.EMPTY_STRING;// DEFAULT_SHIP_VALUE;
 		_shipName = Intern.unknown;
 		_startDate = System.currentTimeMillis();
 		_dataTypes = new ArrayList<DataType>();
@@ -194,10 +192,7 @@ public class CruiseModel extends AbstractModel {
 	/**
 	 * @see AbstractModel.java#fromElement
 	 */
-	public static SAXConsumer fromElement(String a_URI,
-			String a_LocalName,
-			String a_QName,
-			Attributes a_Attributes) {
+	public static SAXConsumer fromElement(String a_URI, String a_LocalName, String a_QName, Attributes a_Attributes) {
 		CruiseModel el = new CruiseModel();
 		el.buildFromElement(a_URI, a_LocalName, a_QName, a_Attributes);
 		return el;
@@ -207,10 +202,7 @@ public class CruiseModel extends AbstractModel {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void buildFromElement(String a_URI,
-			String a_LocalName,
-			String a_QName,
-			Attributes a_Attributes) {
+	public void buildFromElement(String a_URI, String a_LocalName, String a_QName, Attributes a_Attributes) {
 		// l'élément n'a pas d'attributs
 	}
 
@@ -218,23 +210,18 @@ public class CruiseModel extends AbstractModel {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public SAXConsumer consumeElement(String a_URI,
-			String a_LocalName,
-			String a_QName,
-			Attributes a_Attributes) {
+	public SAXConsumer consumeElement(String a_URI, String a_LocalName, String a_QName, Attributes a_Attributes) {
 
 		if (a_LocalName.equals(ModelDescription.node_cref)) {
 			Element2Field setter = new Element2Field(this, ModelDescription.setter_cref);
 			return setter;
 		}
 		if (a_LocalName.equals(ModelDescription.node_localCSRIdentifier)) {
-			Element2Field setter = new Element2Field(this,
-					ModelDescription.setter_localCSRIdentifier);
+			Element2Field setter = new Element2Field(this, ModelDescription.setter_localCSRIdentifier);
 			return setter;
 		}
 		if (a_LocalName.equals(ModelDescription.node_bshCsrReference)) {
-			Element2Field setter = new Element2Field(this,
-					ModelDescription.setter_bshCsrReference);
+			Element2Field setter = new Element2Field(this, ModelDescription.setter_bshCsrReference);
 			return setter;
 		}
 		if (a_LocalName.equals(ModelDescription.node_cname)) {
@@ -312,11 +299,7 @@ public class CruiseModel extends AbstractModel {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public SAXConsumer handlePathElement(String path,
-			String a_URI,
-			String a_LocalName,
-			String a_QName,
-			Attributes a_Attributes) {
+	public SAXConsumer handlePathElement(String path, String a_URI, String a_LocalName, String a_QName, Attributes a_Attributes) {
 		SAXConsumer el = null;
 		if (path.equals(ModelDescription.node_listDatatypes)) {
 			el = DataType.fromElement(a_URI, a_LocalName, a_QName, a_Attributes);
@@ -332,10 +315,8 @@ public class CruiseModel extends AbstractModel {
 	@Override
 	public void writeXMLBodyOn(XMLOutputWriter a_Writer) {
 		a_Writer.putTag(ModelDescription.node_cref, getReference());
-		a_Writer.putTag(ModelDescription.node_bshCsrReference,
-				getBshCsrReference());
-		a_Writer.putTag(ModelDescription.node_localCSRIdentifier,
-				getLocalCsrIdentifier());
+		a_Writer.putTag(ModelDescription.node_bshCsrReference, getBshCsrReference());
+		a_Writer.putTag(ModelDescription.node_localCSRIdentifier, getLocalCsrIdentifier());
 		a_Writer.putTag(ModelDescription.node_cname, getName());
 		a_Writer.putTag(ModelDescription.node_shipcode, getShipCode());
 		a_Writer.putTag(ModelDescription.node_shipname, getShipName());
@@ -359,6 +340,7 @@ public class CruiseModel extends AbstractModel {
 
 	/**
 	 * Methode de creation d'instance a partir du WebService Nautilus
+	 * 
 	 * @param a_Reference : reference de campagne
 	 * @exception ServiceException
 	 * @exception MalformedURLException
@@ -366,9 +348,7 @@ public class CruiseModel extends AbstractModel {
 	 */
 	public void fillFromSISMER(String a_Reference) throws ServiceException, MalformedURLException, RemoteException {
 
-		NautilusSurveyWS service = new NautilusSurveyWSServiceLocator()
-		.getNAUTILUS(new java.net.URL(Nemo.getInstance().getConfig()
-				.getNautilusWebServiceURL()));
+		NautilusSurveyWS service = new NautilusSurveyWSServiceLocator().getNAUTILUS(new java.net.URL(Nemo.getInstance().getConfig().getNautilusWebServiceURL()));
 		WSSurvey wssurvey = service.getSurvey(a_Reference);
 
 		// initialisation avec les valeurs par défaut
@@ -380,7 +360,7 @@ public class CruiseModel extends AbstractModel {
 		}
 		if (wssurvey.getCrno() != null) {
 			setLocalCSRIdentifier(wssurvey.getCrno());
-		}else{
+		} else {
 //			System.out.println("ERROR :nautilus web service returned a null CRNO");// TODO BGT
 			Nemo.getInstance().getLogger().error("ERROR :nautilus web service returned a null CRNO");// TODO BGT
 		}
@@ -418,7 +398,7 @@ public class CruiseModel extends AbstractModel {
 		}
 
 		WSCollectedData[] datas = wssurvey.getDataTypes();
-		//releaseDataTypes();
+		// releaseDataTypes();
 		if (datas != null) {
 			for (int i = 0; i < datas.length; i++) {
 				WSCollectedData data = datas[i];
@@ -433,11 +413,12 @@ public class CruiseModel extends AbstractModel {
 
 	/**
 	 * transcode C16 label to C19 Label
+	 * 
 	 * @param region Name C16
 	 * @return region Name C19
 	 */
 
-	//FAE 16868
+	// FAE 16868
 	public static String getTranscodeRegionName(String regionNameC16) {
 		ICollection regionsRectangles = VocabLists.getVocabList(Intern.list_regionsRectangles);
 		String regionsKey = null;
@@ -449,8 +430,7 @@ public class CruiseModel extends AbstractModel {
 			}
 		}
 		if (regionsKey != null) {
-			List<IElement> c19List = VocabLists.getVocabMatchs(Intern.list_regionsRectangles,
-					Intern.list_regionsPolygones, regionsKey);
+			List<IElement> c19List = VocabLists.getVocabMatchs(Intern.list_regionsRectangles, Intern.list_regionsPolygones, regionsKey);
 			if (!c19List.isEmpty()) {
 				RegionName = c19List.get(0).getLabel();
 			}
@@ -458,12 +438,9 @@ public class CruiseModel extends AbstractModel {
 		return RegionName;
 	}
 
-
-
-
 	/**
-	 * Methode de creation d'instance a partir d'un fichier XML
-	 * il peut charger des fichier ISO 19139 et 19115
+	 * Methode de creation d'instance a partir d'un fichier XML il peut charger des fichier ISO 19139 et 19115
+	 * 
 	 * @param xmlFile : Schéma XML
 	 * @exception SAXException
 	 * @exception TransformerException
@@ -471,31 +448,24 @@ public class CruiseModel extends AbstractModel {
 	 */
 	public void importFromXML(File xmlFile) throws SAXException, TransformerException {
 
-		//verifie si input xml est SDN2_CSR_ISO19139_3.0.0.xsd complieant
-		if(checkSchema( new StreamSource(xmlFile), Intern.CruiseShemaLocationISO19139))
-		{
+		// verifie si input xml est SDN2_CSR_ISO19139_3.0.0.xsd complieant
+		if (checkSchema(new StreamSource(xmlFile), Intern.CruiseShemaLocationISO19139)) {
 			importFromXML(xmlFile, new File(Intern.dir_resources + File.separator + Intern.CruiseXSLISO19139));
 			xmlVersion = XmlVersion.ISO_19139;
 		}
-		//verifie si input xml est CSR_sdn_V1.3.xsd complieant
-		else if (checkSchema( new StreamSource(xmlFile), Intern.CruiseShemaLocationISO19115))
-		{
-			importFromXML(xmlFile,  new File(Intern.dir_resources + File.separator + Intern.CruiseXSLISO19115));
+		// verifie si input xml est CSR_sdn_V1.3.xsd complieant
+		else if (checkSchema(new StreamSource(xmlFile), Intern.CruiseShemaLocationISO19115)) {
+			importFromXML(xmlFile, new File(Intern.dir_resources + File.separator + Intern.CruiseXSLISO19115));
 			xmlVersion = XmlVersion.ISO_19115;
-		}
-		else
-		{
-			//erreur si fichier n'est pas en ISO_19139 ou ISO_19115
+		} else {
+			// erreur si fichier n'est pas en ISO_19139 ou ISO_19115
 			Utils.messageErreurAppend(Messages.error_cruise_invalidXML);
 		}
-
-
-
 	}
-
 
 	/**
 	 * Methode de creation d'instance a partir d'un fichier XML
+	 * 
 	 * @param xmlFile : Schéma XML
 	 * @param xslSource : Schéma XSL
 	 * @param schemaFile : Schéma XSD
@@ -518,6 +488,7 @@ public class CruiseModel extends AbstractModel {
 
 	/**
 	 * Vérifie la validité du Schéma XML passé
+	 * 
 	 * @param xmlFile : Schéma XML
 	 * @return Boolean : true si valide, false sinon
 	 * @throws SAXException
@@ -551,6 +522,7 @@ public class CruiseModel extends AbstractModel {
 
 	/**
 	 * Returns a copy of this Object
+	 * 
 	 * @return a copy of this object
 	 */
 	@Override
@@ -585,6 +557,7 @@ public class CruiseModel extends AbstractModel {
 
 	/**
 	 * Getter pour _availability.
+	 * 
 	 * @return E_Availability
 	 * @see CruiseModel.java#_availability
 	 */
@@ -594,6 +567,7 @@ public class CruiseModel extends AbstractModel {
 
 	/**
 	 * Setter pour _availability
+	 * 
 	 * @param x : nouvelle valeur pour _availability
 	 * @see CruiseModel.java#_availability
 	 */
@@ -603,6 +577,7 @@ public class CruiseModel extends AbstractModel {
 
 	/**
 	 * Setter pour _availability
+	 * 
 	 * @param s : nouvelle valeur pour _availability sous forme de String
 	 * @see CruiseModel.java#_availability
 	 */
@@ -616,6 +591,7 @@ public class CruiseModel extends AbstractModel {
 
 	/**
 	 * Getter pour _chiefScientist.
+	 * 
 	 * @return String
 	 * @see CruiseModel.java#_chiefScientist
 	 */
@@ -625,6 +601,7 @@ public class CruiseModel extends AbstractModel {
 
 	/**
 	 * Setter pour _chiefScientist
+	 * 
 	 * @param x : nouvelle valeur pour _chiefScientist
 	 * @see CruiseModel.java#_chiefScientist
 	 */
@@ -634,6 +611,7 @@ public class CruiseModel extends AbstractModel {
 
 	/**
 	 * Getter pour _comment.
+	 * 
 	 * @return String
 	 * @see CruiseModel.java#_comment
 	 */
@@ -641,10 +619,9 @@ public class CruiseModel extends AbstractModel {
 		return _comment;
 	}
 
-
-
 	/**
 	 * Setter pour _comment
+	 * 
 	 * @param x : nouvelle valeur pour _comment
 	 * @see CruiseModel.java#_comment
 	 */
@@ -652,10 +629,9 @@ public class CruiseModel extends AbstractModel {
 		_comment = x;
 	}
 
-
-
 	/**
 	 * Getter pour _countryCode.
+	 * 
 	 * @return String
 	 * @see CruiseModel.java#_countryCode
 	 */
@@ -665,6 +641,7 @@ public class CruiseModel extends AbstractModel {
 
 	/**
 	 * Setter pour _countryCode
+	 * 
 	 * @param x : nouvelle valeur pour _countryCode
 	 * @see CruiseModel.java#_countryCode
 	 */
@@ -674,6 +651,7 @@ public class CruiseModel extends AbstractModel {
 
 	/**
 	 * Getter pour _countryName.
+	 * 
 	 * @return String
 	 * @see CruiseModel.java#_countryName
 	 */
@@ -683,6 +661,7 @@ public class CruiseModel extends AbstractModel {
 
 	/**
 	 * Setter pour _countryName
+	 * 
 	 * @param countryName : nouvelle valeur pour countryName
 	 * @see CruiseModel.java#_countryName
 	 */
@@ -692,6 +671,7 @@ public class CruiseModel extends AbstractModel {
 
 	/**
 	 * Getter pour _dataCentre.
+	 * 
 	 * @return String
 	 * @see CruiseModel.java#_dataCentre
 	 */
@@ -701,6 +681,7 @@ public class CruiseModel extends AbstractModel {
 
 	/**
 	 * Setter pour _dataCentre
+	 * 
 	 * @param x : nouvelle valeur pour _dataCentre
 	 * @see CruiseModel.java#_dataCentre
 	 */
@@ -710,6 +691,7 @@ public class CruiseModel extends AbstractModel {
 
 	/**
 	 * Getter pour _endDate.
+	 * 
 	 * @return long
 	 * @see CruiseModel.java#_endDate
 	 */
@@ -719,6 +701,7 @@ public class CruiseModel extends AbstractModel {
 
 	/**
 	 * Setter pour _endDate
+	 * 
 	 * @param x : nouvelle valeur pour _endDate
 	 * @see CruiseModel.java#_endDate
 	 */
@@ -728,6 +711,7 @@ public class CruiseModel extends AbstractModel {
 
 	/**
 	 * Setter pour _endDate
+	 * 
 	 * @param s : nouvelle valeur pour _endDate sous forme de String
 	 * @see CruiseModel.java#_endDate
 	 */
@@ -743,6 +727,7 @@ public class CruiseModel extends AbstractModel {
 
 	/**
 	 * Setter pour _endDate
+	 * 
 	 * @param a_EndDate : nouvelle valeur pour _endDate sous forme de String formattée
 	 * @exception ParseException
 	 * @see CruiseModel.java#_endDate
@@ -755,6 +740,7 @@ public class CruiseModel extends AbstractModel {
 
 	/**
 	 * Getter pour _laboratories.
+	 * 
 	 * @return String
 	 * @see CruiseModel.java#_laboratories
 	 */
@@ -764,6 +750,7 @@ public class CruiseModel extends AbstractModel {
 
 	/**
 	 * Setter pour _laboratories
+	 * 
 	 * @param x : nouvelle valeur pour _laboratories
 	 * @see CruiseModel.java#_laboratories
 	 */
@@ -776,6 +763,7 @@ public class CruiseModel extends AbstractModel {
 
 	/**
 	 * Getter pour _name.
+	 * 
 	 * @return String
 	 * @see CruiseModel.java#_name
 	 */
@@ -785,6 +773,7 @@ public class CruiseModel extends AbstractModel {
 
 	/**
 	 * Setter pour _name
+	 * 
 	 * @param x : nouvelle valeur pour _name
 	 * @see CruiseModel.java#_name
 	 */
@@ -794,6 +783,7 @@ public class CruiseModel extends AbstractModel {
 
 	/**
 	 * Getter pour _projectName.
+	 * 
 	 * @return String
 	 * @see CruiseModel.java#_projectName
 	 */
@@ -803,6 +793,7 @@ public class CruiseModel extends AbstractModel {
 
 	/**
 	 * Setter pour _projectName
+	 * 
 	 * @param x : nouvelle valeur pour _projectName
 	 * @see CruiseModel.java#_projectName
 	 */
@@ -812,6 +803,7 @@ public class CruiseModel extends AbstractModel {
 
 	/**
 	 * Getter pour _reference.
+	 * 
 	 * @return String
 	 * @see CruiseModel.java#_reference
 	 */
@@ -821,6 +813,7 @@ public class CruiseModel extends AbstractModel {
 
 	/**
 	 * Setter pour _reference
+	 * 
 	 * @param x : nouvelle valeur pour _reference
 	 * @see CruiseModel.java#_reference
 	 */
@@ -830,6 +823,7 @@ public class CruiseModel extends AbstractModel {
 
 	/**
 	 * Getter pour _regionName.
+	 * 
 	 * @return String
 	 * @see CruiseModel.java#_regionName
 	 */
@@ -839,6 +833,7 @@ public class CruiseModel extends AbstractModel {
 
 	/**
 	 * Setter pour _regionName
+	 * 
 	 * @param x : nouvelle valeur pour _regionName
 	 * @see CruiseModel.java#_regionName
 	 */
@@ -862,6 +857,7 @@ public class CruiseModel extends AbstractModel {
 
 	/**
 	 * Getter pour _shipCode.
+	 * 
 	 * @return String
 	 * @see CruiseModel.java#_shipCode
 	 */
@@ -874,19 +870,17 @@ public class CruiseModel extends AbstractModel {
 	 * @return ship code if code is valid, empty string otherwise (22736)
 	 */
 	public String[] getValidShipCodeAndName() {
-		if (_shipCode != null
-				&& !_shipCode.isEmpty()
-				&& !_shipCode.equals("XXXX")){
-			return new String[] {_shipCode, _shipName};
+		if (_shipCode != null && !_shipCode.isEmpty() && !_shipCode.equals("XXXX")) {
+			return new String[] { _shipCode, _shipName };
 		}
-		//else
-		return new String[] {Global.EMPTY_STRING, Global.EMPTY_STRING};
-
+		// else
+		return new String[] { Global.EMPTY_STRING, Global.EMPTY_STRING };
 
 	}
 
 	/**
 	 * Setter pour _shipCode
+	 * 
 	 * @param x : nouvelle valeur pour _shipCode
 	 * @see CruiseModel.java#_shipCode
 	 */
@@ -896,6 +890,7 @@ public class CruiseModel extends AbstractModel {
 
 	/**
 	 * Getter pour _shipName.
+	 * 
 	 * @return String
 	 * @see CruiseModel.java#_shipName
 	 */
@@ -905,6 +900,7 @@ public class CruiseModel extends AbstractModel {
 
 	/**
 	 * Setter pour _shipName
+	 * 
 	 * @param x : nouvelle valeur pour _shipName
 	 * @see CruiseModel.java#_shipName
 	 */
@@ -914,6 +910,7 @@ public class CruiseModel extends AbstractModel {
 
 	/**
 	 * Getter pour _startDate.
+	 * 
 	 * @return long
 	 * @see CruiseModel.java#_startDate
 	 */
@@ -923,16 +920,17 @@ public class CruiseModel extends AbstractModel {
 
 	/**
 	 * Getter pour xmlVersion.
+	 * 
 	 * @return XmlVersion
 	 * @see CruiseModel.java#xmlVersion
 	 */
-	public XmlVersion getXmlVersion()
-	{
+	public XmlVersion getXmlVersion() {
 		return xmlVersion;
 	}
 
 	/**
 	 * Setter pour _startDate
+	 * 
 	 * @param x : nouvelle valeur pour _startDate
 	 * @see CruiseModel.java#_startDate
 	 */
@@ -942,8 +940,9 @@ public class CruiseModel extends AbstractModel {
 
 	/**
 	 * Setter pour _startDate
+	 * 
 	 * @param s : nouvelle valeur pour _startDate sous forme de String
-	 * @throws ParseException 
+	 * @throws ParseException
 	 * @see CruiseModel.java#_startDate
 	 */
 	public void setStartDate(String s) throws ParseException {
@@ -958,6 +957,7 @@ public class CruiseModel extends AbstractModel {
 
 	/**
 	 * Setter pour _startDate
+	 * 
 	 * @param a_StartDate : nouvelle valeur pour _startDate sous forme de String formattée
 	 * @exception ParseException
 	 * @see CruiseModel.java#_startDate
@@ -970,6 +970,7 @@ public class CruiseModel extends AbstractModel {
 
 	/**
 	 * Getter pour _dataTypes
+	 * 
 	 * @return DataType[] : le tableau des DataType
 	 * @see CruiseModel.java#_dataTypes
 	 */
@@ -996,6 +997,7 @@ public class CruiseModel extends AbstractModel {
 
 	/**
 	 * Renvoit le DataType trouvée à l'index i de _dataTypes
+	 * 
 	 * @param i : index
 	 * @return DataType
 	 * @see CruiseModel.java#_dataTypes
@@ -1006,6 +1008,7 @@ public class CruiseModel extends AbstractModel {
 
 	/**
 	 * Supprime x de _dataTypes
+	 * 
 	 * @param x : DataType à supprimer
 	 * @see CruiseModel.java#_dataTypes
 	 */
@@ -1017,6 +1020,7 @@ public class CruiseModel extends AbstractModel {
 
 	/**
 	 * Ajoute x à _dataTypes
+	 * 
 	 * @param x : DataType à ajouter
 	 * @see CruiseModel.java#_dataTypes
 	 */
@@ -1033,16 +1037,15 @@ public class CruiseModel extends AbstractModel {
 	public String getLocalCsrIdentifier() {
 		return _localCsrIdentifier;
 	}
+
 	/**
-	 * set local CSR identifier from XML. Remove urn:SDN:CSR:LOCAL: prefix for
-	 * 19139 CSRs or SDN:CSR:LOCAL: prefix for 19115 CSRs
+	 * set local CSR identifier from XML. Remove urn:SDN:CSR:LOCAL: prefix for 19139 CSRs or SDN:CSR:LOCAL: prefix for 19115 CSRs
 	 * 
 	 * @param localCsrIdentifier
 	 */
 	public void setLocalCSRIdentifier(String localCsrIdentifier) {
 		if (localCsrIdentifier.contains("SDN:CSR:LOCAL:")) {
-			this._localCsrIdentifier = localCsrIdentifier
-					.split("SDN:CSR:LOCAL:")[1];
+			this._localCsrIdentifier = localCsrIdentifier.split("SDN:CSR:LOCAL:")[1];
 		} else {
 			this._localCsrIdentifier = localCsrIdentifier;
 		}
