@@ -32,23 +32,11 @@ import sdn.vocabulary.interfaces.IElement;
  * @author dboulang
  */
 public enum ComboType {
-	NONE,
-	BLOCK,
-	FRQ,
-	DATE,
-	TIME,
-	LAT,
-	LON,
-	DATATYPE,
-	SHIP,
-	REGION,
-	COUNTRY,
-	DATACENTER,
-	CONFIDENT;
+	NONE, BLOCK, FRQ, DATE, TIME, LAT, LON, DATATYPE, SHIP, REGION, COUNTRY, DATACENTER, CONFIDENT;
 
 	public CCombo createCombo(Composite parent) {
 		/**
-		 *  SHIP, REGION, COUNTRY, DATACENTER, CONFIDENT must be read only
+		 * SHIP, REGION, COUNTRY, DATACENTER, CONFIDENT must be read only
 		 */
 		CCombo valueCombo;
 		switch (this) {
@@ -98,7 +86,7 @@ public enum ComboType {
 			valueCombo.add("hh24mm"); //$NON-NLS-1$
 			valueCombo.add("hh24mmss"); //$NON-NLS-1$
 			valueCombo.add("hh24 mm"); //$NON-NLS-1$
-			// véritable "Decimal Time" : valueCombo.add("cc.cc.cc");                  //$NON-NLS-1$
+			// véritable "Decimal Time" : valueCombo.add("cc.cc.cc"); //$NON-NLS-1$
 			valueCombo.add("hh24.ccc"); //$NON-NLS-1$
 			valueCombo.add("D.dddddd"); //$NON-NLS-1$
 			valueCombo.add("ttttt"); //$NON-NLS-1$
@@ -127,14 +115,12 @@ public enum ComboType {
 			break;
 		case DATATYPE:
 			// FAE022
-			if (!RulesManager.getInstance().isProcessCollection()
-							&& TableDataSurvey.types != null) {
+			if (!RulesManager.getInstance().isProcessCollection() && TableDataSurvey.types != null) {
 				int taille = TableDataSurvey.types.size();
 				for (int i = 0; i < taille; i++) {
 					// on n'ajoute que les sensors
 					if (TableDataSurvey.types.get(i).getSensor()) {
-						valueCombo.add(TableDataSurvey.types.get(i)
-								.getCode());
+						valueCombo.add(TableDataSurvey.types.get(i).getCode());
 					}
 				}
 			}
@@ -153,7 +139,7 @@ public enum ComboType {
 			temp = Global.EMPTY_STRING;
 			for (Entry<String, String> currentEntry : treeNavire.entrySet()) {
 //				temp =	currentEntry.getValue() + Global.SEP + currentEntry.getKey(); //42715
-				temp =	currentEntry.getKey() + Global.SEP + currentEntry.getValue();
+				temp = currentEntry.getKey() + Global.SEP + currentEntry.getValue();
 				NemoLists.listeNavire.add(temp);
 				valueCombo.add(temp);
 			}
@@ -163,8 +149,7 @@ public enum ComboType {
 			NemoLists.listeRegion = new ArrayList<String>();
 			Collection<IElement> regions = VocabLists.getVocabList(Intern.list_regionsPolygones).getElements();
 
-			TreeMap<String, String> treeRegion =
-					new TreeMap<String, String>();
+			TreeMap<String, String> treeRegion = new TreeMap<String, String>();
 
 			for (IElement record : regions) {
 				treeRegion.put(record.getLabel(), record.getKey());
@@ -172,9 +157,7 @@ public enum ComboType {
 
 			temp = Global.EMPTY_STRING;
 			for (Entry<String, String> currentEntry : treeRegion.entrySet()) {
-				temp =
-						currentEntry.getValue() + Global.SEP
-								+ currentEntry.getKey();
+				temp = currentEntry.getValue() + Global.SEP + currentEntry.getKey();
 				NemoLists.listeRegion.add(temp);
 				valueCombo.add(temp);
 			}
@@ -183,36 +166,29 @@ public enum ComboType {
 		case COUNTRY:
 			Collection<IElement> records = VocabLists.getVocabList(Intern.list_countries).getElements();
 
-			TreeMap<String, String> treePays =
-					new TreeMap<String, String>();
+			TreeMap<String, String> treePays = new TreeMap<String, String>();
 
 			for (IElement record : records) {
 				treePays.put(record.getLabel(), record.getKey());
 			}
 
 			for (Entry<String, String> currentEntry : treePays.entrySet()) {
-				valueCombo.add(currentEntry.getValue() + Global.SEP
-							+ currentEntry.getKey());
+				valueCombo.add(currentEntry.getValue() + Global.SEP + currentEntry.getKey());
 			}
 			break;
 		case DATACENTER:
-			Collection<IElement> centres =
-					VocabLists.getVocabList(Intern.list_dataCenter).getElements();
+			Collection<IElement> centres = VocabLists.getVocabList(Intern.list_dataCenter).getElements();
 
-			TreeMap<String, String> treeCentre =
-					new TreeMap<String, String>();
+			TreeMap<String, String> treeCentre = new TreeMap<String, String>();
 
 			for (IElement record : centres) {
-				treeCentre.put(record.getKey(),
-						record.getLabel());
+				treeCentre.put(record.getKey(), record.getLabel());
 			}
 
 			NemoLists.listeCentreDonnees = new ArrayList<String>();
 			temp = Global.EMPTY_STRING;
 			for (Entry<String, String> currentEntry : treeCentre.entrySet()) {
-				temp =
-						currentEntry.getKey() + Global.SEP
-								+ currentEntry.getValue();
+				temp = currentEntry.getKey() + Global.SEP + currentEntry.getValue();
 				NemoLists.listeCentreDonnees.add(temp);
 				valueCombo.add(temp);
 			}
