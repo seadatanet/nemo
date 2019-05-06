@@ -385,6 +385,7 @@ public class LatitudeFormat extends ExternalizableFormat implements Cloneable
 	}
 
 	/**
+	 * Parsing the object from a source. Used to test the value.
 	 * 
 	 * @param source
 	 * @param pos
@@ -792,7 +793,14 @@ public class LatitudeFormat extends ExternalizableFormat implements Cloneable
 
 	
 	/**
+	 * Parsing a free decimal degrees lat value from data, during conversion.
+	 * 
 	 * //40216
+	 * 
+	 * @param fragment
+	 * @param source
+	 * @return
+	 * @throws ParseException
 	 */
 	public Object parseFreeDecimalDegrees(Fragment fragment, String source) throws ParseException {
 		String separator=Nemo.getInstance().getDomain().getMedia().getModel().getSeparator();

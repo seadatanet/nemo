@@ -31,6 +31,7 @@ import fr.ifremer.nemo.util.format.LongitudeFormat;
 /**
  * Class PropertyModel
  * Description : Modélisation d'une Propriété de Station
+ * 
  * @author Gerard BUNEL
  */
 public class PropertyModel extends AbstractModel {
@@ -289,6 +290,8 @@ public class PropertyModel extends AbstractModel {
 		String sResult = Global.EMPTY_STRING;
 
 		if (isUserProvided()) {
+			
+			// Value provided by the user
 			sResult = _userValue;
 			if (_format != null) {
 				if (!sResult.equals(Global.EMPTY_STRING))
@@ -299,47 +302,79 @@ public class PropertyModel extends AbstractModel {
 				result = sResult;
 			}
 		} else {
+			
+			// Value in the file
+			
+			// Get the file separator if exists.
+			String separator = Nemo.getInstance().getDomain().getMedia().getModel().getSeparator();
+	    	boolean isUseTableForCsvData = Nemo.getInstance().getDomain().getMedia().getModel().getUseTableForCsvData();
+
+			// retrieve data from the right place (header or data line)
 			// FAE 7239
 			if (isInData()) {
 				sResult = _fragment.retreiveInLine(a_Header[a_Header.length - 1]);
+
+				// Case of a line with separator
+//				if (separator != null) {
+//					sResult = _fragment.retrieveInLineWithSeparator(a_Header[a_Header.length - 1], separator);
+//				} else {
+//
+//					sResult = _fragment.retreiveInLine(a_Header[a_Header.length - 1]);
+//				}
+
 			} else {
 				sResult = _fragment.retreive(a_Header);
 			}
-			if (_fragment.isDefaultValue())
-				if (_fragment.isDefaultValueSelected())
-					if (sResult.trim().equals(_fragment.getDefaultValue().trim()))
-						return "Default";
 
+			// default value
+			if (_fragment.isDefaultValue()) {
+				if (_fragment.isDefaultValueSelected()) {
+					if (sResult.trim().equals(_fragment.getDefaultValue().trim())) {
+						return "Default";
+					}
+				}
+			}
+
+			// not empty value, known format
 			if (!sResult.trim().equals(Global.EMPTY_STRING) && _format != null) {
 				try {
+					
+					// Other than lat, lon or datetime
 					if (!(_format instanceof LatitudeFormat)
 							&& !(_format instanceof LongitudeFormat)
 							&& !(_format instanceof DateTimeFormat)) {
-						if (_fragment.isVariable())
+	
+						// Rewrite the result only if the data is of variable length AND we aren't in the case of a line with separators.
+						if (!(separator != null && isUseTableForCsvData) && _fragment.isVariable()) {
+							// (separator == null) && 
 							// stop string at next space
 							sResult = _fragment.retreiveVariable(a_Header);
+						}
 					}
+					
 					if (_format instanceof DateTimeFormat) {
 						sResult = sResult.replace(' ', '0');
 					}
-					
+
 					if (_format instanceof LatitudeFormat) {
-						//40216
-						LatitudeFormat formatLat=(LatitudeFormat) _format;
-						if ( formatLat.isFreeDecimalDegrees()){
+						// 40216
+						LatitudeFormat formatLat = (LatitudeFormat) _format;
+//						result = _format.parseObject(sResult);
+						if (formatLat.isFreeDecimalDegrees()) {
 							result = formatLat.parseFreeDecimalDegrees(_fragment, a_Header[a_Header.length - 1]);
-						}else{
+						} else {
 							result = _format.parseObject(sResult);
 						}
-					}else if(_format instanceof LongitudeFormat){
-						//40216
-						LongitudeFormat formatLon=(LongitudeFormat) _format;
-						if ( formatLon.isFreeDecimalDegrees()){
+					} else if (_format instanceof LongitudeFormat) {
+						// 40216
+						LongitudeFormat formatLon = (LongitudeFormat) _format;
+//						result = _format.parseObject(sResult);
+						if (formatLon.isFreeDecimalDegrees()) {
 							result = formatLon.parseFreeDecimalDegrees(_fragment, a_Header[a_Header.length - 1]);
-						}else{
+						} else {
 							result = _format.parseObject(sResult);
 						}
-					}else{
+					} else {
 						result = _format.parseObject(sResult);
 					}
 				} catch (ParseException e) {
@@ -360,6 +395,7 @@ public class PropertyModel extends AbstractModel {
 
 	/**
 	 * Utilisé dans le cas trajectory pour long lat et prof
+	 * 
 	 * @param a_Destination
 	 * @param a_Header
 	 * @exception java.text.ParseException
@@ -553,8 +589,7 @@ public class PropertyModel extends AbstractModel {
 	/**
 	 * Setter pour _property
 	 * 
-	 * @param x
-	 *            : nouvelle valeur pour _property
+	 * @param x nouvelle valeur pour _property
 	 * @see PropertyModel.java#_property
 	 */
 	public void setProperty(String x) {
@@ -580,8 +615,7 @@ public class PropertyModel extends AbstractModel {
 	/**
 	 * Setter pour _userProvided
 	 * 
-	 * @param x
-	 *            : nouvelle valeur pour _userProvided
+	 * @param x nouvelle valeur pour _userProvided
 	 * @see PropertyModel.java#_userProvided
 	 */
 	public void setUserProvided(boolean x) {
@@ -591,8 +625,7 @@ public class PropertyModel extends AbstractModel {
 	/**
 	 * Setter pour _userProvided
 	 * 
-	 * @param s
-	 *            : nouvelle valeur pour _userProvided sous forme de String
+	 * @param s nouvelle valeur pour _userProvided sous forme de String
 	 * @see PropertyModel.java#_userProvided
 	 */
 	public void setUserProvided(String s) {
@@ -612,8 +645,7 @@ public class PropertyModel extends AbstractModel {
 	/**
 	 * Setter pour _fragment
 	 * 
-	 * @param x
-	 *            : nouvelle valeur pour _fragment
+	 * @param x nouvelle valeur pour _fragment
 	 * @see PropertyModel.java#_fragment
 	 */
 	public void setFragment(Fragment x) {
@@ -635,8 +667,7 @@ public class PropertyModel extends AbstractModel {
 	/**
 	 * Setter pour _flag
 	 * 
-	 * @param x
-	 *            : nouvelle valeur pour _flag
+	 * @param x nouvelle valeur pour _flag
 	 * @see PropertyModel.java#_flag
 	 */
 	public void setFlag(Fragment x) {
@@ -658,8 +689,7 @@ public class PropertyModel extends AbstractModel {
 	/**
 	 * Setter pour _format
 	 * 
-	 * @param x
-	 *            : nouvelle valeur pour _format
+	 * @param x nouvelle valeur pour _format
 	 * @see PropertyModel.java#_format
 	 */
 	public void setFormat(ExternalizableFormat x) {
@@ -681,8 +711,7 @@ public class PropertyModel extends AbstractModel {
 	/**
 	 * Setter pour _userValue
 	 * 
-	 * @param x
-	 *            : nouvelle valeur pour _userValue
+	 * @param x nouvelle valeur pour _userValue
 	 * @see PropertyModel.java#_userValue
 	 */
 	public void setUserValue(String x) {
@@ -702,8 +731,7 @@ public class PropertyModel extends AbstractModel {
 	/**
 	 * Setter pour _conversionFormula
 	 * 
-	 * @param x
-	 *            : nouvelle valeur pour _conversionFormula
+	 * @param x nouvelle valeur pour _conversionFormula
 	 * @see PropertyModel.java#_conversionFormula
 	 */
 	public void setConversionFormula(String x) {
@@ -723,8 +751,7 @@ public class PropertyModel extends AbstractModel {
 	/**
 	 * Setter pour _inData
 	 * 
-	 * @param inData
-	 *            : nouvelle valeur pour inData
+	 * @param inData nouvelle valeur pour inData
 	 * @see PropertyModel.java#_inData
 	 */
 	public void setInData(boolean inData) {
@@ -744,8 +771,7 @@ public class PropertyModel extends AbstractModel {
 	/**
 	 * Setter pour _toCompute
 	 * 
-	 * @param toCompute
-	 *            : nouvelle valeur pour toCompute
+	 * @param toCompute nouvelle valeur pour toCompute
 	 * @see PropertyModel.java#_toCompute
 	 */
 	public void setToCompute(boolean toCompute) {

@@ -2,6 +2,7 @@ package fr.ifremer.nemo.input;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.text.ParseException;
 
 import org.xml.sax.Attributes;
 
@@ -255,13 +256,44 @@ public class Fragment extends AbstractModel
 
     public String retreiveInLine(String a_Line) {
 
+		int end = -1;
+
+		int start = _firstCharOffset - 1;
+
+		// 40216: guess the column number from the caracter start number (for files with separator)
+		String separator = Nemo.getInstance().getDomain().getMedia().getModel().getSeparator();
+		boolean isUseTableForCsvData = Nemo.getInstance().getDomain().getMedia().getModel().getUseTableForCsvData();
+
+		if (isUseTableForCsvData && this._colNb == -1 && separator != null) {
+			int colNb = -1;
+			int currentCol = 0;
+			int indexSearch = 0;
+			String[] split = a_Line.split(separator);
+			String foundData = "";
+
+			for (String colData : split) {
+
+				foundData = colData;
+
+				indexSearch = indexSearch + colData.length();
+				if (start < indexSearch) {
+					colNb = currentCol;
+					break;
+				}
+				currentCol++;
+				indexSearch++; // add separator
+			}
+			this._colNb = colNb;
+
+			// The value has been found AND the line is clearly with a separator.
+			return foundData;
+		}
+
+    	// Here, the data has no separators ; must retrieve data by character
     	StringWriter stringWriter = new StringWriter();
     	PrintWriter writer = new PrintWriter(stringWriter, true);
 
 
-    	int end = -1;
-
-    	int start = _firstCharOffset - 1;
     	if (_lastCharOffset != -1 && !isVariable()) {
     		end = _lastCharOffset - 1;
     	}
@@ -271,27 +303,9 @@ public class Fragment extends AbstractModel
     	} else {
     		writer.println(a_Line.substring(start, end + 1));
     	}
-    	
-    	//40216: guess the column number from the caracter start number (for files with separator)
-    	String separator=Nemo.getInstance().getDomain().getMedia().getModel().getSeparator();
-    	if (this._colNb==-1 && separator!=null){
-    		int colNb=-1;
-        	int currentCol=0;
-        	int indexSearch=0;
-    		String[] split = a_Line.split(separator);
-    			for (String colData : split){
-    				indexSearch = indexSearch+ colData.length();
-    				if (start < indexSearch){
-    					colNb = currentCol;
-    					break;
-    				}
-    				currentCol++;
-    				indexSearch++; // add separator
-    			}
-    			this._colNb=colNb;
-		}
-    	
+	
 		return stringWriter.toString();
+    	
 	}
 
     public String retreiveVariable(String[] a_Header) {
@@ -391,6 +405,39 @@ public class Fragment extends AbstractModel
 		return fullFrag;
 
 	}
+    
+    /**
+     * Retrieve data within a line with known separator.
+     * 
+     * The column number of the searched data is given by this fragment.
+     * 
+     * @param a_Line - The source line to search data into.
+     * @param separator - The line separator.
+     * @return the String representing the data.
+     * @throws ParseException
+     */
+	public String retrieveInLineWithSeparator(String a_Line, String separator) throws ParseException {
+		// String separator=Nemo.getInstance().getDomain().getMedia().getModel().getSeparator();
+
+		String lineSubstring = a_Line;
+		
+		if (separator != null) {
+			try {
+				if (lineSubstring.startsWith(separator)) {
+					lineSubstring = lineSubstring.substring(lineSubstring.indexOf(separator) + 1, lineSubstring.length());
+				}
+				return lineSubstring.split(separator)[this.getColNb()];
+			} catch (Exception e) {
+				// TODO
+				throw new ParseException("error", 0);
+			}
+		}
+		
+		// TODO error
+		throw new ParseException("error: can not use FreeDecimalDegrees format on files which are not using a separator", 0);
+	}
+
+    
 
 	/**
 	 * Getter pour _firstCharOffset.
