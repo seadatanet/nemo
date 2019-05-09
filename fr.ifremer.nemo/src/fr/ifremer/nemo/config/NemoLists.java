@@ -41,7 +41,6 @@ public class NemoLists implements Cloneable {
 
 	static protected List<WSSurveyDescription> _surveys = new java.util.ArrayList<WSSurveyDescription>();
 
-
 	/**
 	 * list of updates
 	 */
@@ -81,7 +80,7 @@ public class NemoLists implements Cloneable {
 	 * remove link with x for role "parameters"
 	 * 
 	 * @param x
-	 *            the linked object to unlink
+	 * the linked object to unlink
 	 */
 	public static void removeParameter(WSParameter x) {
 		if (!parametersIncludes(x))
@@ -93,7 +92,7 @@ public class NemoLists implements Cloneable {
 	 * Add a link for role "parameters"
 	 * 
 	 * @param x
-	 *            the object to link with
+	 * the object to link with
 	 */
 	public static void addParameter(WSParameter x) {
 		if (parametersIncludes(x))
@@ -116,7 +115,7 @@ public class NemoLists implements Cloneable {
 	 * Returns linked object for role "parameters" at index i
 	 * 
 	 * @param i
-	 *            the index of the linked object
+	 * the index of the linked object
 	 * @return linked object at index i
 	 */
 	public static WSParameter parametersAt(int i) {
@@ -127,7 +126,7 @@ public class NemoLists implements Cloneable {
 	 * returns index of object x in "parameters"
 	 * 
 	 * @param x
-	 *            the linked object
+	 * the linked object
 	 */
 	public static int parametersIndexOf(WSParameter x) {
 		if (!parametersIncludes(x))
@@ -140,19 +139,20 @@ public class NemoLists implements Cloneable {
 		return -1;
 	}
 
-	public static String getParameterLabel(String P09Code){
+	public static String getParameterLabel(String P09Code) {
 		for (int i = 0; i < parametersSize(); i++) {
 			if (parametersAt(i).getCode().equals(P09Code)) {
 				return parametersAt(i).getUnit();
 			}
 		}
-		return null; 
+		return null;
 	}
+
 	/**
 	 * move x one index before in the list for role "parameters"
 	 * 
 	 * @param x
-	 *            the object to move
+	 * the object to move
 	 */
 	public static void parametersMoveUp(WSParameter x) {
 		int index;
@@ -166,7 +166,7 @@ public class NemoLists implements Cloneable {
 	 * move x to the top of list for role "parameters"
 	 * 
 	 * @param x
-	 *            the object to move
+	 * the object to move
 	 */
 	public static void parametersMoveTop(WSParameter x) {
 		int index;
@@ -180,7 +180,7 @@ public class NemoLists implements Cloneable {
 	 * move x one index more in the list for role "parameters"
 	 * 
 	 * @param x
-	 *            the object to move
+	 * the object to move
 	 */
 	public static void parametersMoveDown(WSParameter x) {
 		int index;
@@ -194,7 +194,7 @@ public class NemoLists implements Cloneable {
 	 * move x to the bottom of list for role "parameters"
 	 * 
 	 * @param x
-	 *            the object to move
+	 * the object to move
 	 */
 	public static void parametersMoveBottom(WSParameter x) {
 		int index;
@@ -208,7 +208,7 @@ public class NemoLists implements Cloneable {
 	 * move x one index more in the list for role "parameters"
 	 * 
 	 * @param x
-	 *            the object to move
+	 * the object to move
 	 */
 	public static void nocheckMoveParameterAt(WSParameter x, int a_Index) {
 		int index;
@@ -225,7 +225,7 @@ public class NemoLists implements Cloneable {
 	 * DO NOT USE. use non privileged method instead
 	 * 
 	 * @param x
-	 *            the object to link with
+	 * the object to link with
 	 * @see NemoLists#removeParameter(WSParameter)
 	 */
 	protected static void nocheckRemoveParameter(WSParameter x) {
@@ -238,7 +238,7 @@ public class NemoLists implements Cloneable {
 	 * DO NOT USE. use non privileged method instead
 	 * 
 	 * @param x
-	 *            the object to link with
+	 * the object to link with
 	 * @see NemoLists#addParameter(WSParameter)
 	 */
 	protected static void nocheckAddParameter(WSParameter x) {
@@ -258,7 +258,7 @@ public class NemoLists implements Cloneable {
 	 * returns true if x is linked to the receiver for role "parameters"
 	 * 
 	 * @param x
-	 *            an instance of WSParameter
+	 * an instance of WSParameter
 	 */
 	public static boolean parametersIncludes(WSParameter x) {
 		return _parameters.contains(x);
@@ -286,7 +286,7 @@ public class NemoLists implements Cloneable {
 	 * remove link with x for role "surveys"
 	 * 
 	 * @param x
-	 *            the linked object to unlink
+	 * the linked object to unlink
 	 */
 	public static void removeSurvey(WSSurveyDescription x) {
 		if (!surveysIncludes(x))
@@ -298,7 +298,7 @@ public class NemoLists implements Cloneable {
 	 * Add a link for role "surveys"
 	 * 
 	 * @param x
-	 *            the object to link with
+	 * the object to link with
 	 */
 	public static void addSurvey(WSSurveyDescription x) {
 		if (surveysIncludes(x))
@@ -321,7 +321,7 @@ public class NemoLists implements Cloneable {
 	 * Returns linked object for role "surveys" at index i
 	 * 
 	 * @param i
-	 *            the index of the linked object
+	 * the index of the linked object
 	 * @return linked object at index i
 	 */
 	public static WSSurveyDescription surveysAt(int i) {
@@ -332,7 +332,7 @@ public class NemoLists implements Cloneable {
 	 * returns index of object x in "surveys"
 	 * 
 	 * @param x
-	 *            the linked object
+	 * the linked object
 	 */
 	public static int surveysIndexOf(WSSurveyDescription x) {
 		if (!surveysIncludes(x))
@@ -349,7 +349,7 @@ public class NemoLists implements Cloneable {
 	 * move x one index before in the list for role "surveys"
 	 * 
 	 * @param x
-	 *            the object to move
+	 * the object to move
 	 */
 	public static void surveysMoveUp(WSSurveyDescription x) {
 		int index;
@@ -363,7 +363,7 @@ public class NemoLists implements Cloneable {
 	 * move x to the top of list for role "surveys"
 	 * 
 	 * @param x
-	 *            the object to move
+	 * the object to move
 	 */
 	public static void surveysMoveTop(WSSurveyDescription x) {
 		int index;
@@ -377,7 +377,7 @@ public class NemoLists implements Cloneable {
 	 * move x one index more in the list for role "surveys"
 	 * 
 	 * @param x
-	 *            the object to move
+	 * the object to move
 	 */
 	public static void surveysMoveDown(WSSurveyDescription x) {
 		int index;
@@ -391,7 +391,7 @@ public class NemoLists implements Cloneable {
 	 * move x to the bottom of list for role "surveys"
 	 * 
 	 * @param x
-	 *            the object to move
+	 * the object to move
 	 */
 	public static void surveysMoveBottom(WSSurveyDescription x) {
 		int index;
@@ -405,7 +405,7 @@ public class NemoLists implements Cloneable {
 	 * move x one index more in the list for role "surveys"
 	 * 
 	 * @param x
-	 *            the object to move
+	 * the object to move
 	 */
 	public static void nocheckMoveSurveyAt(WSSurveyDescription x, int a_Index) {
 		int index;
@@ -422,7 +422,7 @@ public class NemoLists implements Cloneable {
 	 * DO NOT USE. use non privileged method instead
 	 * 
 	 * @param x
-	 *            the object to link with
+	 * the object to link with
 	 * @see NemoLists#removeSurvey(WSSurveyDescription)
 	 */
 	protected static void nocheckRemoveSurvey(WSSurveyDescription x) {
@@ -435,7 +435,7 @@ public class NemoLists implements Cloneable {
 	 * DO NOT USE. use non privileged method instead
 	 * 
 	 * @param x
-	 *            the object to link with
+	 * the object to link with
 	 * @see NemoLists#addSurvey(WSSurveyDescription)
 	 */
 	protected static void nocheckAddSurvey(WSSurveyDescription x) {
@@ -455,7 +455,7 @@ public class NemoLists implements Cloneable {
 	 * returns true if x is linked to the receiver for role "surveys"
 	 * 
 	 * @param x
-	 *            an instance of WSSurveyDescription
+	 * an instance of WSSurveyDescription
 	 */
 	public static boolean surveysIncludes(WSSurveyDescription x) {
 		return _surveys.contains(x);
@@ -582,11 +582,11 @@ public class NemoLists implements Cloneable {
 						// 25794
 						SdnVocabularyManager sdnMgr = new SdnVocabularyManager(VocabLists.getCf());
 						String p06 = sdnMgr.getBestVocabMatchCode(
-								SdnVocabularyManager.LIST_P06, 
-								SdnVocabularyManager.LIST_P09, 
+								SdnVocabularyManager.LIST_P06,
+								SdnVocabularyManager.LIST_P09,
 								parameters[i].getCode());
 						parameters[i].setUnitP06(sdnMgr.getP06UnitLabel(p06));
-						
+
 						addParameter(parameters[i]);
 					}
 					nbParameters = parameters.length;

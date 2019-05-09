@@ -75,14 +75,14 @@ public interface Global {
 	public static final String optCouplingTableUpdate = "couplingTableUpdate";
 	public static final String optCouplingTablePrefix = "couplingTablePrefix";
 	public static final String optUpdateVocabs = "update";
-	
+
 	/*
-	// Types de metadonnee
-	public static final String DATETIME = "dateTime"; //$NON-NLS-1$
-	public static final String ENDDATETIME = "endDateTime"; //$NON-NLS-1$
-	// (Type de metadonnee calcules)
-	public static final String DURATION = "duration"; //$NON-NLS-1$    
-	public static final String DISTANCETOBOTTOM = "distanceToBottom"; //$NON-NLS-1$      
+	 * // Types de metadonnee
+	 * public static final String DATETIME = "dateTime"; //$NON-NLS-1$
+	 * public static final String ENDDATETIME = "endDateTime"; //$NON-NLS-1$
+	 * // (Type de metadonnee calcules)
+	 * public static final String DURATION = "duration"; //$NON-NLS-1$
+	 * public static final String DISTANCETOBOTTOM = "distanceToBottom"; //$NON-NLS-1$
 	 */
 	public enum E_Availability {
 		publicly, limited, confidential;

@@ -16,18 +16,18 @@ import java.util.List;
 import org.apache.logging.log4j.Logger;
 import org.eclipse.core.runtime.IProgressMonitor;
 
-import sdn.vocabulary.implementations.CollectionFactory;
-import sdn.vocabulary.interfaces.ICollection;
-import sdn.vocabulary.interfaces.ICollectionFactory;
-import sdn.vocabulary.interfaces.ICollectionMapping;
-import sdn.vocabulary.interfaces.IElement;
-import sdn.vocabulary.interfaces.VocabularyException;
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.config.UpdateStatus.EtatUpdate;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.sismer_tools.csr.CSRListManager;
+import sdn.vocabulary.implementations.CollectionFactory;
+import sdn.vocabulary.interfaces.ICollection;
+import sdn.vocabulary.interfaces.ICollectionFactory;
+import sdn.vocabulary.interfaces.ICollectionMapping;
+import sdn.vocabulary.interfaces.IElement;
+import sdn.vocabulary.interfaces.VocabularyException;
 
 /**
  * Description: Class permettant de gerer les listes BODC via la librairie SDNVocabulary
@@ -60,8 +60,8 @@ public class VocabLists {
 		} catch (Exception e) {
 			System.out.println("ERROR : " + e.getMessage()); //$NON-NLS-1$
 			Nemo.getInstance().getLogger().error(e.getMessage());
-		} 
-		
+		}
+
 	}
 
 	public static void initVocabs() {
@@ -168,16 +168,16 @@ public class VocabLists {
 	/**
 	 * 
 	 * @param list1
-	 *            nom de la liste de parametres de depart
+	 * nom de la liste de parametres de depart
 	 * @param list2
-	 *            nom de la liste des parametres d'arrivée
+	 * nom de la liste des parametres d'arrivée
 	 * @param value
-	 *            valeur du entryKey
+	 * valeur du entryKey
 	 * @return liste des paramètres d'arrivée qui correspondent à la valeur
-	 *         value dans le liste de départ
+	 * value dans le liste de départ
 	 * 
-	 *         ex: list1=P091 list2=P021, value=BATH renvoie les parametres P021
-	 *         correspondant au parametre BATH en P091
+	 * ex: list1=P091 list2=P021, value=BATH renvoie les parametres P021
+	 * correspondant au parametre BATH en P091
 	 */
 	public static List<IElement> getVocabMatchs(String list1, String list2, String value) {
 		ICollectionMapping tableMap = getVocabMap(list1, list2);
@@ -319,7 +319,7 @@ public class VocabLists {
 		}
 		String[] listNames = Intern.vocabLists.split(Global.COMMA);
 		for (String listName : listNames) {
-			String mapName = listName+Global.UNDERSCORE+listName;
+			String mapName = listName + Global.UNDERSCORE + listName;
 			try {
 				if (!monitor.isCanceled()) {
 					StringBuffer msg = new StringBuffer();
@@ -370,8 +370,8 @@ public class VocabLists {
 	public static ICollectionFactory getCf() {
 		return cf;
 	}
-	public static CSRListManager getCSRListManager()
-	{
+
+	public static CSRListManager getCSRListManager() {
 		return csrListManager;
 	}
 }
