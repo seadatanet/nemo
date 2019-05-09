@@ -65,6 +65,8 @@ public class Application implements IPlatformRunnable
     private static final String optCouplingTablePrefix =
         Global.optCouplingTablePrefix;
 
+    private static final String optUpdateVocabs = Global.optUpdateVocabs;
+    
     /*
      * (non-Javadoc)
      * 

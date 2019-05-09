@@ -74,7 +74,8 @@ public interface Global {
 	public static final String optCdiSummary = "cdiSummary";
 	public static final String optCouplingTableUpdate = "couplingTableUpdate";
 	public static final String optCouplingTablePrefix = "couplingTablePrefix";
-
+	public static final String optUpdateVocabs = "update";
+	
 	/*
 	// Types de metadonnee
 	public static final String DATETIME = "dateTime"; //$NON-NLS-1$

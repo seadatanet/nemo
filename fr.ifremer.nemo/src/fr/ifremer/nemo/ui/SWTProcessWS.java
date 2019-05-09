@@ -20,8 +20,7 @@ import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.ws.NemoWS;
 
-public class SWTProcessWS implements IRunnableWithProgress
-{
+public class SWTProcessWS implements IRunnableWithProgress {
 
 	public static Boolean dossier, fichiersConstantes;
 
@@ -29,55 +28,46 @@ public class SWTProcessWS implements IRunnableWithProgress
 
 	public static String referenceWS;
 
-	public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException
-	{
+	public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
 		monitor.beginTask(Messages.update_title, IProgressMonitor.UNKNOWN);
 		monitor2 = monitor;
 
-		if (fichiersConstantes)
-		{
+		if (fichiersConstantes) {
 			// mise e jour fichiers constantes
 			ManageLists.resetUpdatedLists();
 
-			if (!monitor.isCanceled())
-			{
+			if (!monitor.isCanceled()) {
 				// appel au WebService NEMO
 				monitor.subTask(Messages.connect_nemo);
 				NemoWS service = NemoLists.callNemoWS();
 				UpdateStatusList updateNemo = (UpdateStatusList) ManageLists.getUpdate(Intern.id_nemo);
 
-				if (!monitor.isCanceled())
-				{
+				if (!monitor.isCanceled()) {
 					monitor.subTask(Messages.update_param);
 					NemoLists.updateParameters(monitor, service, updateNemo);
 				}
 
-				if (!monitor.isCanceled())
-				{
+				if (!monitor.isCanceled()) {
 					monitor.subTask(Messages.update_survey);
 					NemoLists.updateSurveys(monitor, service, updateNemo);
 				}
 
-				if (monitor.isCanceled())
-				{
+				if (monitor.isCanceled()) {
 					updateNemo.setEtat(EtatUpdate.INTERRUPTED);
 					throw new InterruptedException();
 				}
 			}
 
-			if (!monitor.isCanceled())
-			{
+			if (!monitor.isCanceled()) {
 				monitor.subTask(Messages.connect_vocab);
 				// VocabSoapBindingStub vocabService = NemoLists.connectVocab();
 
-				if (!monitor.isCanceled())
-				{
+				if (!monitor.isCanceled()) {
 					monitor.subTask(Messages.getString(Intern.id_lists));
 					VocabLists.updateVocabLists(monitor);
 				}
 
-				if (!monitor.isCanceled())
-				{
+				if (!monitor.isCanceled()) {
 					monitor.subTask(Messages.getString(Intern.id_maps));
 					VocabLists.updateMapLists(monitor);
 				}
@@ -85,44 +75,37 @@ public class SWTProcessWS implements IRunnableWithProgress
 				ManageLists.updateDataTypes();
 			}
 
-			if (!monitor.isCanceled())
-			{
+			if (!monitor.isCanceled()) {
 				monitor.subTask(Messages.connect_edmo);
 				NemoLists.updateEdmo(monitor);
 			}
 
 			Nemo.getInstance().getConfig().save();
 
-			if (monitor.isCanceled())
-			{
+			if (monitor.isCanceled()) {
 				throw new InterruptedException();
 			}
 
-		} else
-		{
+		} else {
 
 			// mise à jour onglet campagne (si clic sur bouton
 			// "server initialisation" dans l'onglet cruise)
-			try
-			{
+			try {
 				CruiseModel cruiseModel = new CruiseModel();
 				cruiseModel.fillFromSISMER(referenceWS);
 				Nemo.getInstance().getDomain().getCruise().updateCruise(cruiseModel);
 
-			} catch (MalformedURLException e)
-			{
+			} catch (MalformedURLException e) {
 				//
 				// Utils.messageErreur(Messages.error_updateSurvey_url);
 				// e.printStackTrace();
 				throw new InterruptedException(e.getMessage());
-			} catch (RemoteException e)
-			{
+			} catch (RemoteException e) {
 				//
 				throw new InterruptedException(e.getMessage());
 				// e.printStackTrace();
 				// Utils.messageErreur(Messages.error_updateSurvey_distant);
-			} catch (ServiceException e)
-			{
+			} catch (ServiceException e) {
 				//
 				// e.printStackTrace();
 				throw new InterruptedException(e.getMessage());
