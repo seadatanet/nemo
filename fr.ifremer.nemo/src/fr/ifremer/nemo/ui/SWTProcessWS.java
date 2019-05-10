@@ -1,5 +1,6 @@
 package fr.ifremer.nemo.ui;
 
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
 import java.rmi.RemoteException;
@@ -55,6 +56,21 @@ public class SWTProcessWS implements IRunnableWithProgress {
 				if (monitor.isCanceled()) {
 					updateNemo.setEtat(EtatUpdate.INTERRUPTED);
 					throw new InterruptedException();
+				}
+			}
+			
+			// update CSR
+			if (!monitor.isCanceled()) {
+				try {
+					if (!VocabLists.getCSRListManager().isFileUpToDate()) {
+						VocabLists.getCSRListManager().update();
+					}
+				} catch (MalformedURLException e) {
+
+					throw new InterruptedException(e.getMessage());
+				} catch (IOException e) {
+
+					throw new InterruptedException(e.getMessage());
 				}
 			}
 
