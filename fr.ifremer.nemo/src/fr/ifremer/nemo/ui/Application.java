@@ -131,74 +131,72 @@ public class Application implements IPlatformRunnable {
 					System.out.println(Messages.error_batch_edmo);
 					System.exit(1);
 				} else if (checkBatchOptionsOk(cl)) {
-					inputFile = cl.getOptionValue(optInputFile);
-					outputFile = cl.getOptionValue(optOutputFile);
-					modelFile = cl.getOptionValue(optModelFile);
 
-					if (cl.getOptionValue(optConv) != null) {
-						convType = Conversion.valueOf(cl.getOptionValue(optConv)
-								.toUpperCase());
+					if (cl.hasOption(optUpdateVocabs)) {
+						// Launch only the vocabs update
+						Nemo.getInstance().callListsUpdates();
+					} else {
+						inputFile = cl.getOptionValue(optInputFile);
+						outputFile = cl.getOptionValue(optOutputFile);
+						modelFile = cl.getOptionValue(optModelFile);
+						if (cl.getOptionValue(optConv) != null) {
+							convType = Conversion.valueOf(cl.getOptionValue(optConv)
+									.toUpperCase());
 
-						// CONVERSION TYPE
-						switch (convType) {
-						case MEDATLAS:
-							convOdv = E_TypeConversion.MEDATLAS;
-							break;
-						case ODV:
-							convOdv = E_TypeConversion.ODV_MONOSTATION;
-							if (cl.hasOption(optOdvMulti))
-								convOdv = E_TypeConversion.ODV_MULTISTATIONS;
-							break;
-						case NETCDF:
-							convOdv = E_TypeConversion.NETCDF_MONOSTATION;
-							if (cl.hasOption(optOdvMulti))
-								convOdv = E_TypeConversion.NETCDF_MULTISTATIONS;
-							break;
+							// CONVERSION TYPE
+							switch (convType) {
+							case MEDATLAS:
+								convOdv = E_TypeConversion.MEDATLAS;
+								break;
+							case ODV:
+								convOdv = E_TypeConversion.ODV_MONOSTATION;
+								if (cl.hasOption(optOdvMulti))
+									convOdv = E_TypeConversion.ODV_MULTISTATIONS;
+								break;
+							case NETCDF:
+								convOdv = E_TypeConversion.NETCDF_MONOSTATION;
+								if (cl.hasOption(optOdvMulti))
+									convOdv = E_TypeConversion.NETCDF_MULTISTATIONS;
+								break;
+							}
+
+						} else {
+							convOdv = E_TypeConversion.UNKNOWN;
 						}
-
-					} else {
-						convOdv = E_TypeConversion.UNKNOWN;
-					}
-
-					// DATASET REFERENCE
-					if (cl.hasOption(optDatasetRef)) {
-						datasetReference = cl.getOptionValue(optDatasetRef);
-					}
-
-					// SORT DATA
-					if (cl.hasOption(optSortDatas)) {
-						sortDatas = true;
-					}
-
-					// CDI SUMMARY
-					if (cl.hasOption(optCdiSummary)) {
-						cdiSummaryFile = cl.getOptionValue(optCdiSummary);
-					}
-
-					// COUPLING TABLE
-					if (cl.hasOption(optCouplingTableUpdate)) {
-						couplingTableUpdate = true;
-						couplingTablePrefix = cl.getOptionValue(optCouplingTablePrefix);
-					}
-
-					// print arguments in the log file
-					Nemo.getInstance().getLogger().info("Batch mode starting. Arguments :");
-					StringBuilder sb = new StringBuilder();
-					for (String s : strArgs)
-						sb.append(s + " ");
-					Nemo.getInstance().getLogger().info(sb.toString());
-
-					boolean success = NemoShell.main(inputFile, outputFile, modelFile,
-							convType, sortDatas, convOdv, datasetReference,
-							cdiSummaryFile, couplingTableUpdate,
-							couplingTablePrefix, Nemo.getInstance().getLogger());
-
-					if (success) {
-						Nemo.getInstance().getLogger().info("Batch mode successfully ended.");
-						System.exit(0);
-					} else {
-						Nemo.getInstance().getLogger().info("Batch mode ended with errors.");
-						System.exit(0);
+						// DATASET REFERENCE
+						if (cl.hasOption(optDatasetRef)) {
+							datasetReference = cl.getOptionValue(optDatasetRef);
+						}
+						// SORT DATA
+						if (cl.hasOption(optSortDatas)) {
+							sortDatas = true;
+						}
+						// CDI SUMMARY
+						if (cl.hasOption(optCdiSummary)) {
+							cdiSummaryFile = cl.getOptionValue(optCdiSummary);
+						}
+						// COUPLING TABLE
+						if (cl.hasOption(optCouplingTableUpdate)) {
+							couplingTableUpdate = true;
+							couplingTablePrefix = cl.getOptionValue(optCouplingTablePrefix);
+						}
+						// print arguments in the log file
+						Nemo.getInstance().getLogger().info("Batch mode starting. Arguments :");
+						StringBuilder sb = new StringBuilder();
+						for (String s : strArgs)
+							sb.append(s + " ");
+						Nemo.getInstance().getLogger().info(sb.toString());
+						boolean success = NemoShell.main(inputFile, outputFile, modelFile,
+								convType, sortDatas, convOdv, datasetReference,
+								cdiSummaryFile, couplingTableUpdate,
+								couplingTablePrefix, Nemo.getInstance().getLogger());
+						if (success) {
+							Nemo.getInstance().getLogger().info("Batch mode successfully ended.");
+							System.exit(0);
+						} else {
+							Nemo.getInstance().getLogger().info("Batch mode ended with errors.");
+							System.exit(0);
+						}
 					}
 				} else {
 					exitPrintingUsage();
@@ -259,6 +257,7 @@ public class Application implements IPlatformRunnable {
 	private void defineBatchOptions() {
 		opt = new Options();
 
+		opt.addOption(optUpdateVocabs, false, "Update the vocabs and lists");
 		opt.addOption(optBatchMode, false,
 				"Not necessary using nemo_batch launcher");
 		opt.addOption(optInputFile, true, "Input file / directory");
@@ -295,35 +294,47 @@ public class Application implements IPlatformRunnable {
 	private boolean checkBatchOptionsOk(CommandLine cl) {
 		boolean checkOptionsOk = true;
 
-		// check mandatory options
-		if (cl.getOptionValue(optInputFile) == null
-				|| cl.getOptionValue(optOutputFile) == null
-				|| cl.getOptionValue(optModelFile) == null) {
-			Nemo.getInstance().getLogger()
-					.info("Error, input output and model file are mandatory options");
-			checkOptionsOk = false;
-		}
+		// Special case : update vocabs, etc.
+		if (cl.hasOption(optUpdateVocabs)) {
 
-		if (cl.getOptionValue(optConv) != null) {
-			// check conversion value
-			if (!(cl.getOptionValue(optConv).toUpperCase()
-					.equals(Conversion.MEDATLAS.name())
-					|| cl
-							.getOptionValue(optConv).toUpperCase()
-							.equals(Conversion.ODV.name())
-					|| cl
-							.getOptionValue(optConv).toUpperCase()
-							.equals(Conversion.NETCDF.name()))) {
+//			// this option must be unique
+//			if (cl.getOptions().length > 1) {
+//				Nemo.getInstance().getLogger()
+//						.info("Error, the update option must be unique.");
+//				checkOptionsOk = false;
+//			}
+		} else {
+
+			// check mandatory options
+			if (cl.getOptionValue(optInputFile) == null
+					|| cl.getOptionValue(optOutputFile) == null
+					|| cl.getOptionValue(optModelFile) == null) {
 				Nemo.getInstance().getLogger()
-						.info("Error, Conversion type must be \"medatlas\" , \"odv\" or \"NETCDF\" ");
+						.info("Error, input output and model file are mandatory options");
 				checkOptionsOk = false;
 			}
-		}
 
-		// if update coupling table is used, we must know the prefix to use
-		if (cl.hasOption(optCouplingTableUpdate)) {
-			if (!cl.hasOption(optCouplingTablePrefix)) {
-				checkOptionsOk = false;
+			if (cl.getOptionValue(optConv) != null) {
+				// check conversion value
+				if (!(cl.getOptionValue(optConv).toUpperCase()
+						.equals(Conversion.MEDATLAS.name())
+						|| cl
+								.getOptionValue(optConv).toUpperCase()
+								.equals(Conversion.ODV.name())
+						|| cl
+								.getOptionValue(optConv).toUpperCase()
+								.equals(Conversion.NETCDF.name()))) {
+					Nemo.getInstance().getLogger()
+							.info("Error, Conversion type must be \"medatlas\" , \"odv\" or \"NETCDF\" ");
+					checkOptionsOk = false;
+				}
+			}
+
+			// if update coupling table is used, we must know the prefix to use
+			if (cl.hasOption(optCouplingTableUpdate)) {
+				if (!cl.hasOption(optCouplingTablePrefix)) {
+					checkOptionsOk = false;
+				}
 			}
 		}
 

@@ -574,7 +574,7 @@ public class NemoLists implements Cloneable {
 			FileOutputStream stream = null;
 			XMLEncoder encoder = null;
 			try {
-				if (!monitor.isCanceled()) {
+				if (monitor == null || !monitor.isCanceled()) {
 					WSParameter[] parameters = service.getParameters();
 					releaseParameters();
 					for (int i = 0; i < parameters.length; i++) {
@@ -592,7 +592,7 @@ public class NemoLists implements Cloneable {
 					nbParameters = parameters.length;
 				}
 
-				if (!monitor.isCanceled()) {
+				if (monitor == null || !monitor.isCanceled()) {
 					File file = new java.io.File(Intern.dir_resources + File.separator + listName);
 					stream = new FileOutputStream(file.toString());
 					encoder = new XMLEncoder(stream);
@@ -659,7 +659,7 @@ public class NemoLists implements Cloneable {
 			FileOutputStream stream = null;
 			XMLEncoder encoder = null;
 			try {
-				if (!monitor.isCanceled()) {
+				if (monitor == null || !monitor.isCanceled()) {
 					WSSurveyDescription[] surveys = service.getSurveyList();
 					releaseSurveys();
 					for (int i = 0; i < surveys.length; i++) {
@@ -668,7 +668,7 @@ public class NemoLists implements Cloneable {
 					nbSurveys = surveys.length;
 				}
 
-				if (!monitor.isCanceled()) {
+				if (monitor == null || !monitor.isCanceled()) {
 					File file = new java.io.File(Intern.dir_resources + File.separator + listName);
 					stream = new FileOutputStream(file.toString());
 
@@ -724,16 +724,19 @@ public class NemoLists implements Cloneable {
 		String result = Global.EMPTY_STRING;
 
 		try {
-			if (!monitor.isCanceled()) {
+			if (monitor == null || !monitor.isCanceled()) {
 				// Appel au WebService
 				Edmo_webservice service = new Edmo_webserviceLocator();
 				((Edmo_webserviceLocator) service).setedmo_webserviceSoap12EndpointAddress(Nemo.getInstance().getConfig().getEdmoURL());
 				Edmo_webserviceSoap port = service.getedmo_webserviceSoap12();
 				result = port.ws_edmo_get_list();
 			}
-			if (!monitor.isCanceled()) {
+			if (monitor == null || !monitor.isCanceled()) {
 				if (!result.equals(Global.EMPTY_STRING)) {
-					monitor.subTask(Messages.getString(Intern.id_edmo));
+					
+					if (monitor != null) {
+						monitor.subTask(Messages.getString(Intern.id_edmo));
+					}
 
 					// écriture du nouveau fichier
 					File file = new java.io.File(Intern.dir_resources + File.separator + Intern.list_edmo);

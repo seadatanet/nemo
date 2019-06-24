@@ -74,7 +74,7 @@ public interface Global {
 	public static final String optCdiSummary = "cdiSummary";
 	public static final String optCouplingTableUpdate = "couplingTableUpdate";
 	public static final String optCouplingTablePrefix = "couplingTablePrefix";
-	public static final String optUpdateVocabs = "update";
+	public static final String optUpdateVocabs = "updateVocabs";
 
 	/*
 	 * // Types de metadonnee

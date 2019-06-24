@@ -29,6 +29,7 @@ public class SWTProcessWS implements IRunnableWithProgress {
 
 	public static String referenceWS;
 
+	@Override
 	public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
 		monitor.beginTask(Messages.update_title, IProgressMonitor.UNKNOWN);
 		monitor2 = monitor;

@@ -222,7 +222,7 @@ public class VocabLists {
 		}
 		for (String listName : listNames) {
 			try {
-				if (!monitor.isCanceled()) {
+				if (monitor == null || !monitor.isCanceled()) {
 					StringBuffer msg = new StringBuffer();
 					msg.append(Messages.getString(Intern.id_lists));
 					msg.append(Global.SPACE);
@@ -232,7 +232,10 @@ public class VocabLists {
 					msg.append(" / ");//$NON-NLS-1$
 					msg.append(keySetSize);
 					msg.append("]");//$NON-NLS-1$
-					monitor.subTask(msg.toString());
+
+					if (monitor != null) {
+						monitor.subTask(msg.toString());
+					}
 
 					UpdateStatusBODC updateMap = updateVocabList(listName);
 					updateLists.addUpdateStatus(updateMap);
@@ -290,7 +293,7 @@ public class VocabLists {
 
 		for (String mapName : listMaps) {
 			try {
-				if (!monitor.isCanceled()) {
+				if (monitor == null || !monitor.isCanceled()) {
 					StringBuffer msg = new StringBuffer();
 					msg.append(Messages.getString(Intern.id_lists));
 					msg.append(Global.SPACE);
@@ -300,8 +303,11 @@ public class VocabLists {
 					msg.append(" / ");//$NON-NLS-1$
 					msg.append(keySetSize);
 					msg.append("]");//$NON-NLS-1$
-					monitor.subTask(msg.toString());
-
+					
+					if (monitor != null) {
+						monitor.subTask(msg.toString());
+					}
+					
 					UpdateStatusBODC updateMap = updateMapList(mapName);
 					updateMaps.addUpdateStatus(updateMap);
 					if (updateMaps.getEtat().compareTo(updateMap.getEtat()) < 0) {
@@ -317,11 +323,12 @@ public class VocabLists {
 				e.printStackTrace();
 			}
 		}
+		
 		String[] listNames = Intern.vocabLists.split(Global.COMMA);
 		for (String listName : listNames) {
 			String mapName = listName + Global.UNDERSCORE + listName;
 			try {
-				if (!monitor.isCanceled()) {
+				if (monitor == null || !monitor.isCanceled()) {
 					StringBuffer msg = new StringBuffer();
 					msg.append(Messages.getString(Intern.id_lists));
 					msg.append(Global.SPACE);
@@ -331,7 +338,10 @@ public class VocabLists {
 					msg.append(" / ");//$NON-NLS-1$
 					msg.append(keySetSize);
 					msg.append("]");//$NON-NLS-1$
-					monitor.subTask(msg.toString());
+					
+					if (monitor != null) {
+						monitor.subTask(msg.toString());
+					}
 
 					UpdateStatusBODC updateMap = updateMapList(mapName);
 					updateMaps.addUpdateStatus(updateMap);

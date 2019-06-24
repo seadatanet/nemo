@@ -34,6 +34,10 @@ import org.apache.logging.log4j.Logger;
 import com.ago.xml.XMLBootstrapParser;
 
 import fr.ifremer.nemo.config.Configuration;
+import fr.ifremer.nemo.config.ManageLists;
+import fr.ifremer.nemo.config.NemoLists;
+import fr.ifremer.nemo.config.UpdateStatusList;
+import fr.ifremer.nemo.config.VocabLists;
 import fr.ifremer.nemo.domain.InputDomain;
 import fr.ifremer.nemo.input.CruiseModel;
 import fr.ifremer.nemo.input.InputModel;
@@ -47,6 +51,7 @@ import fr.ifremer.nemo.util.Global.E_TypeConversion;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.util.Utils;
+import fr.ifremer.nemo.ws.NemoWS;
 
 /**
  * Class Nemo.java Description: Classe principale de l'application - utilisée en
@@ -123,9 +128,9 @@ public class Nemo {
 	 * @throws TransformerException
 	 */
 	public List<String> openModel(String pathModel) throws FileNotFoundException,
-	TransformerException {
-		List<String> messages= new ArrayList<>();
-		
+			TransformerException {
+		List<String> messages = new ArrayList<>();
+
 		// nom du model
 		nomModele = new File(pathModel).getName();
 
@@ -144,37 +149,35 @@ public class Nemo {
 			parser = new XMLBootstrapParser(model);
 
 			StreamSource xmlSource = new StreamSource(new File(pathModel));
-			StreamSource xslSource =
-					new StreamSource(new File(Intern.dir_resources + File.separator
-							+ Intern.ModelXSL));
+			StreamSource xslSource = new StreamSource(new File(Intern.dir_resources + File.separator
+					+ Intern.ModelXSL));
 			Result result = new SAXResult(parser);
 
 			TransformerFactory factory = TransformerFactory.newInstance();
 			Transformer transformer = factory.newTransformer(xslSource);
 			transformer.transform(xmlSource, result);
 		}
-		
-		//FAE 16868
+
+		// FAE 16868
 		if (Utils.compareVersion(model.getVersion(), "1.5.1") == -1) { // older than 1.5.1
 			String regionName = model.getCruiseModel().getRegionName();
 			String C19RegionName = CruiseModel.getTranscodeRegionName(regionName);
 			model.getCruiseModel().setRegionName(C19RegionName);
 		}
-		if (Utils.compareVersion(model.getVersion(), "1.6.0") == -1){ // older than 1.6.0
+		if (Utils.compareVersion(model.getVersion(), "1.6.0") == -1) { // older than 1.6.0
 			// models for profiles, MEDATLAS are invalids if older than 1.6.0
 			// because DEPH is now allowed as Z parameter, but could be not the first param in olds models
 			// (rules data70, data75 and p3 deleted, new rule data 76)
-			if( model.getConversionModel().getOutputFormat()==E_TypeConversion.MEDATLAS
+			if (model.getConversionModel().getOutputFormat() == E_TypeConversion.MEDATLAS
 					&& model.getMediaModel().getInputType() == E_InputType.PROFILE) {
 				logger.warn(Messages.warning_model_old);
 				model.setIsValid(false);
 			}
 
 		}
-		
-		
-		if(model.getMediaModel().getInputType() == E_InputType.TRAJECTORY){
-			if (!model.getStationModel().getReferenceProperty().isUserProvided()){
+
+		if (model.getMediaModel().getInputType() == E_InputType.TRAJECTORY) {
+			if (!model.getStationModel().getReferenceProperty().isUserProvided()) {
 				messages.add(Messages.warning_model_stationNumberFixedForTrajectory);
 				model.getStationModel().getReferenceProperty().setUserProvided(true);
 				model.getStationModel().getReferenceProperty().setUserValue("1");
@@ -183,12 +186,11 @@ public class Nemo {
 		completeDataList(model, isBeforeP011);
 		domain.update(model);
 		RulesManager.getInstance().setModelVersion(model.getVersion());
-		if (!model.isValid()){
+		if (!model.isValid()) {
 			messages.add(Messages.warning_unvalid_openModel);
 		}
 		return messages;
 	}
-
 
 	private void completeDataList(InputModel model, boolean isBeforeP011) {
 		DataListTypeEnum dataList = model.getDataModel().getDataListType();
@@ -223,10 +225,11 @@ public class Nemo {
 	}
 
 	public void saveModel(FileOutputStream a_Stream) {
-		InputModel inputModel =
-				new InputModel(domain.getMedia().getModel(), domain.getCruise()
-						.getModel(), domain.getStation().getModel(), domain.getData()
-						.getModel(), domain.getConversion().getModel(), Nemo
+		InputModel inputModel = new InputModel(domain.getMedia().getModel(), domain.getCruise()
+				.getModel(), domain.getStation().getModel(),
+				domain.getData()
+						.getModel(),
+				domain.getConversion().getModel(), Nemo
 						.getInstance().getViewMain().getEditDataForm().isValidated());
 		inputModel.writeXMLOn(a_Stream);
 	}
@@ -245,7 +248,7 @@ public class Nemo {
 	 * Setter pour config
 	 * 
 	 * @param config
-	 *            : nouvelle valeur pour config
+	 * : nouvelle valeur pour config
 	 * @see Nemo.java#config
 	 */
 	public void setConfig(Configuration config) {
@@ -266,7 +269,7 @@ public class Nemo {
 	 * Setter pour domain
 	 * 
 	 * @param domain
-	 *            : nouvelle valeur pour domain
+	 * : nouvelle valeur pour domain
 	 * @see Nemo.java#domain
 	 */
 	public void setDomain(InputDomain domain) {
@@ -303,15 +306,15 @@ public class Nemo {
 			File fich = new File(myViewMain.getEditFileForm().nomRepertoire);
 			if (!Global.EMPTY_STRING.equals(modelName)) {
 				ApplicationWorkbenchWindowAdvisor.configurer_titre
-				.setTitle(Messages.application_directoryTitle
-						+ fich.getAbsolutePath()
-						+ Messages.application_modelTitle + modelName
-						+ " ]"); //$NON-NLS-1$
+						.setTitle(Messages.application_directoryTitle
+								+ fich.getAbsolutePath()
+								+ Messages.application_modelTitle + modelName
+								+ " ]"); //$NON-NLS-1$
 
 			} else {
 				ApplicationWorkbenchWindowAdvisor.configurer_titre
-				.setTitle(Messages.application_directoryTitle
-						+ fich.getAbsolutePath() + " ]"); //$NON-NLS-1$ 
+						.setTitle(Messages.application_directoryTitle
+								+ fich.getAbsolutePath() + " ]"); //$NON-NLS-1$
 			}
 
 		} else {
@@ -321,14 +324,14 @@ public class Nemo {
 
 			if (!Global.EMPTY_STRING.equals(modelName)) {
 				ApplicationWorkbenchWindowAdvisor.configurer_titre
-				.setTitle(Messages.application_fileTitle
-						+ fich.getAbsolutePath()
-						+ Messages.application_modelTitle + modelName
-						+ " ]"); //$NON-NLS-1$
+						.setTitle(Messages.application_fileTitle
+								+ fich.getAbsolutePath()
+								+ Messages.application_modelTitle + modelName
+								+ " ]"); //$NON-NLS-1$
 			} else {
 				ApplicationWorkbenchWindowAdvisor.configurer_titre
-				.setTitle(Messages.application_fileTitle
-						+ fich.getAbsolutePath() + " ]"); //$NON-NLS-1$ 
+						.setTitle(Messages.application_fileTitle
+								+ fich.getAbsolutePath() + " ]"); //$NON-NLS-1$
 			}
 		}
 	}
@@ -382,24 +385,24 @@ public class Nemo {
 
 	public String getVersion() {
 		String version = null;
-		//		try {
-		//			InputStream in = new FileInputStream("META-INF/MANIFEST.MF");
-		//			Manifest manifest = new Manifest(in);
-		//			version = manifest.getMainAttributes().getValue("Bundle-Version");
-		//		} catch (Exception e) {
-		//			e.printStackTrace();
-		//		}
+		// try {
+		// InputStream in = new FileInputStream("META-INF/MANIFEST.MF");
+		// Manifest manifest = new Manifest(in);
+		// version = manifest.getMainAttributes().getValue("Bundle-Version");
+		// } catch (Exception e) {
+		// e.printStackTrace();
+		// }
 		Pattern p;
 		Matcher m;
 		try {
-			// Open the file that is the first 
+			// Open the file that is the first
 			// command line parameter
 			FileInputStream fstream = new FileInputStream("resources/version.txt");
 			// Get the object of DataInputStream
 			DataInputStream in = new DataInputStream(fstream);
 			BufferedReader br = new BufferedReader(new InputStreamReader(in));
 			String strLine;
-			//Read File Line By Line
+			// Read File Line By Line
 			if ((strLine = br.readLine()) != null) {
 				version = strLine;
 				p = Pattern.compile("([a-zA-Z\\s])");
@@ -409,9 +412,9 @@ public class Nemo {
 				}
 
 			}
-			//Close the input stream
+			// Close the input stream
 			in.close();
-		} catch (Exception e) {//Catch exception if any
+		} catch (Exception e) {// Catch exception if any
 			e.printStackTrace();
 		}
 		return version;
@@ -423,5 +426,60 @@ public class Nemo {
 
 	public void setLogger(Logger logger) {
 		Nemo.logger = logger;
+	}
+
+	/**
+	 * Call the WS to update the various parameter lists (EDMO codes, CSR, BODC, ...)
+	 * 
+	 * FIXME réactiver les monitor.subtask() sous une autre forme pour générer des messages. Logger ?
+	 * 
+	 * @return an error message if something went wrong, an empty string if OK.
+	 */
+	public String callListsUpdates() {
+
+		try {
+			// Reset the messages from the calls
+			ManageLists.resetUpdatedLists();
+
+			// Call NEMO WebService
+//				monitor.subTask(Messages.connect_nemo);
+			NemoWS service = NemoLists.callNemoWS();
+			UpdateStatusList updateNemo = (UpdateStatusList) ManageLists.getUpdate(Intern.id_nemo);
+
+//					monitor.subTask(Messages.update_param);
+			NemoLists.updateParameters(null, service, updateNemo);
+
+//		monitor.subTask(Messages.update_survey);
+			NemoLists.updateSurveys(null, service, updateNemo);
+
+			// update CSR
+			if (!VocabLists.getCSRListManager().isFileUpToDate()) {
+				VocabLists.getCSRListManager().update();
+			}
+
+//		monitor.subTask(Messages.connect_vocab);
+			/////// VocabSoapBindingStub vocabService = NemoLists.connectVocab();
+
+//		monitor.subTask(Messages.getString(Intern.id_lists));
+			VocabLists.updateVocabLists(null);
+
+//		monitor.subTask(Messages.getString(Intern.id_maps));
+			VocabLists.updateMapLists(null);
+
+			ManageLists.updateDataTypes();
+
+//			monitor.subTask(Messages.connect_edmo);
+			NemoLists.updateEdmo(null);
+
+			Nemo.getInstance().getConfig().save();
+
+			return "";
+
+		} catch (Exception e) {
+
+			// Something wrong has happened
+			return e.getMessage();
+		}
+
 	}
 }
