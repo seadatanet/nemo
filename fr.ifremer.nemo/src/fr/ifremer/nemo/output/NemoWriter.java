@@ -214,7 +214,9 @@ public abstract class NemoWriter {
 										// FAE 18333 calcul start et end date of cruise
 										updateStartEndDate(st);
 //										if (stationDomain.getModel().getProperty(Intern.S_DATE).isInData()) {
+										if (mediaDomain.getModel().getInputType()!=E_InputType.UNKNOWN) {
 											st.updateStationStartEnd(readedLine, nbrecords);
+										}
 //										}
 										if (!isEndData()) // FAE 4673 Pb si une seule ligne données et pas d'entête station
 											st.updateGlobalParamQc(readedLine);
@@ -225,13 +227,17 @@ public abstract class NemoWriter {
 									}
 								} else if (st != null) {
 //									if (stationDomain.getModel().getProperty(Intern.S_DATE).isInData()) {
+									if (mediaDomain.getModel().getInputType()!=E_InputType.UNKNOWN) {
 										st.updateStationStartEnd(readedLine, nbrecords);
+									}
 //									}
 									if (mediaDomain.getModel().getInputType() == E_InputType.TRAJECTORY) {
 										st.completeMedatlasTrajectory(readedLine);
 									}
 
-									if (mediaDomain.getModel().getInputType() != E_InputType.PROFILE) {
+									if (mediaDomain.getModel().getInputType() == E_InputType.TIMESERIES||
+											mediaDomain.getModel().getInputType() == E_InputType.TRAJECTORY
+											) {
 
 										// FAE 18333 calcul min et max date of cruise
 										updateStartEndDate(st);
