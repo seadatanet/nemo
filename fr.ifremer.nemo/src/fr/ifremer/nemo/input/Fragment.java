@@ -264,29 +264,33 @@ public class Fragment extends AbstractModel
 		String separator = Nemo.getInstance().getDomain().getMedia().getModel().getSeparator();
 		boolean isUseTableForCsvData = Nemo.getInstance().getDomain().getMedia().getModel().getUseTableForCsvData();
 
-		if (isUseTableForCsvData && this._colNb == -1 && separator != null) {
-			int colNb = -1;
-			int currentCol = 0;
-			int indexSearch = 0;
-			String[] split = a_Line.split(separator);
-			String foundData = "";
+		if (isUseTableForCsvData && separator != null) {
+			if (this._colNb == -1 ) {
+				int colNb = -1;
+				int currentCol = 0;
+				int indexSearch = 0;
+				String[] split = a_Line.split(separator);
+				String foundData = "";
 
-			for (String colData : split) {
+				for (String colData : split) {
 
-				foundData = colData;
+					foundData = colData;
 
-				indexSearch = indexSearch + colData.length();
-				if (start < indexSearch) {
-					colNb = currentCol;
-					break;
+					indexSearch = indexSearch + colData.length();
+					if (start < indexSearch) {
+						colNb = currentCol;
+						break;
+					}
+					currentCol++;
+					indexSearch++; // add separator
 				}
-				currentCol++;
-				indexSearch++; // add separator
-			}
-			this._colNb = colNb;
+				this._colNb = colNb;
 
-			// The value has been found AND the line is clearly with a separator.
-			return foundData;
+				// The value has been found AND the line is clearly with a separator.
+				return foundData;
+			}else {
+				return a_Line.split(separator)[_colNb];
+			}
 		}
 
     	// Here, the data has no separators ; must retrieve data by character
