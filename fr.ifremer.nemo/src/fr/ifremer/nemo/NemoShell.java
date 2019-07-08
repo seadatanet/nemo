@@ -39,9 +39,12 @@ import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Global.DataListTypeEnum;
 import fr.ifremer.nemo.util.Global.E_TypeConversion;
+import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.util.Preformat;
 import fr.ifremer.nemo.ws.WSDataType;
+import fr.ifremer.sismer_tools.SismerToolsException;
+import fr.ifremer.sismer_tools.seadatanet.SdnVocabularyManager;
 
 /**
  * Class NemoShell.java Description: Main class to launch nemo in batch mode.
@@ -405,24 +408,33 @@ public class NemoShell {
 				logger.error(e.getMessage());
 			}
 			// 35230 check unit
-			bodcRes = BodcChecker.getInstance().checkP06(typeCourant, inputDomain.getData().getModel().getDataListType());
-			if (bodcRes.getResStatus() == BODC_RES_STATUS.KO){
-				logger.error(bodcRes.getErrorMsg());
-				ok=false;
-			}else if (bodcRes.getResStatus() == BODC_RES_STATUS.WARNING){
-				typeCourant = bodcRes.getTypeData();
-				pModel.setParameter(typeCourant);
-				logger.warn(bodcRes.getWarningMsg());
-			}
-			// 35230 check instrument
-			bodcRes = BodcChecker.getInstance().checkInstrument(typeCourant);
-			if (bodcRes.getResStatus() == BODC_RES_STATUS.KO){
-				ok=false;
-				logger.error(bodcRes.getErrorMsg());
-			}else if (bodcRes.getResStatus() == BODC_RES_STATUS.WARNING){
-				typeCourant = bodcRes.getTypeData();
-				pModel.setParameter(typeCourant);
-				logger.warn(bodcRes.getWarningMsg());
+			if (typeCourant.isText()) { //46457
+				typeCourant.setUniteCode(Intern.NemoLists_unknown);
+				try {
+					typeCourant.setUnite( BodcChecker.getInstance().getSdnMgr().getLabel(Intern.NemoLists_unknown, SdnVocabularyManager.LIST_P06));
+				} catch (SismerToolsException e) {
+					logger.warn(e.getMessage());
+				}
+			}else {
+				bodcRes = BodcChecker.getInstance().checkP06(typeCourant, inputDomain.getData().getModel().getDataListType());
+				if (bodcRes.getResStatus() == BODC_RES_STATUS.KO){
+					logger.error(bodcRes.getErrorMsg());
+					ok=false;
+				}else if (bodcRes.getResStatus() == BODC_RES_STATUS.WARNING){
+					typeCourant = bodcRes.getTypeData();
+					pModel.setParameter(typeCourant);
+					logger.warn(bodcRes.getWarningMsg());
+				}
+				// 35230 check instrument
+				bodcRes = BodcChecker.getInstance().checkInstrument(typeCourant);
+				if (bodcRes.getResStatus() == BODC_RES_STATUS.KO){
+					ok=false;
+					logger.error(bodcRes.getErrorMsg());
+				}else if (bodcRes.getResStatus() == BODC_RES_STATUS.WARNING){
+					typeCourant = bodcRes.getTypeData();
+					pModel.setParameter(typeCourant);
+					logger.warn(bodcRes.getWarningMsg());
+				}
 			}
 		}
 		// 35230 check fall rate
