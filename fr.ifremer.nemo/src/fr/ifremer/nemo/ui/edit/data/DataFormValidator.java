@@ -289,7 +289,7 @@ public class DataFormValidator extends FormValidator {
 			 */
 		if (bodcReplaced){
 			ok=false;
-			Utils.messageWarningAppend("Some bodc terms has been replaced. Please verify and validate. Save your model to avoid this warning next time."); // TODO 35230 message
+			Utils.messageWarningAppend("Some bodc terms have been replaced. Please verify and validate. Save your model to avoid this warning next time."); // TODO 35230 message
 		}
 		
 			if (ok) {
