@@ -26,6 +26,7 @@ import fr.ifremer.nemo.util.Global.E_InputType;
 import fr.ifremer.nemo.util.Global.E_MesureType;
 import fr.ifremer.nemo.util.Global.E_ProcessType;
 import fr.ifremer.nemo.util.Global.E_TypeConversion;
+import fr.ifremer.nemo.util.Global.E_Variant;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
 
@@ -51,6 +52,8 @@ public class RulesManager {
 	private E_ProcessType myProcessType;
 	private E_TypeConversion myConversionType;
 	private E_InputType myFileType;
+	private E_Variant myInputVariant;
+	
 	private DataListTypeEnum myDataListType;
 	private E_MesureType myMesureType;
 	private VerticalParametersList myVerticalParametersList;
@@ -91,6 +94,7 @@ public class RulesManager {
 	public static E_TypeConversion DEFAULT_CONVERSIONTYPE =
 			E_TypeConversion.UNKNOWN;
 	public static E_InputType DEFAULT_FILETYPE = E_InputType.UNKNOWN;
+	public static E_Variant DEFAULT_VARIANT = E_Variant.PHYSICOCHEMICAL;
 	public static DataListTypeEnum DEFAULT_DATALIST = DataListTypeEnum.UNKNOWN;
 	public static E_MesureType DEFAULT_MESURETYPE = E_MesureType.BSSURF;
 
@@ -160,6 +164,7 @@ public class RulesManager {
 		setDefaultValues();
 		myEditFileForm.resetDefaultSelectionSeparator();
 		myEditFileForm.resetDefaultSelectionFileType();
+		myEditFileForm.resetDefaultSelectionDataType();
 		myEditFileForm.resetDefaultEnableConversionTypes();
 		myConversionType = getDefaultConversionTypeWithRules();
 		myEditFileForm.selectConversion(myConversionType);
@@ -358,6 +363,25 @@ public class RulesManager {
 		.enableAboveSeaLevel(!isConversionToMedatlas());
 		ViewLog.styledTextLogErreurs.setText(messageLog);
 	}
+	
+	
+	public void updateFromModel(E_Variant inputVariant) {
+		myInputVariant = inputVariant;
+		myEditFileForm.selectVariant(inputVariant);
+	}
+	
+	
+	public void updateFromIHM(E_Variant currentInputDataType) {
+		myInputVariant = currentInputDataType;
+		if (currentInputDataType == E_Variant.PHYSICOCHEMICAL || currentInputDataType == E_Variant.FLOWCYTO) {
+			Nemo.getInstance().getViewMain().getEditFileForm().enableFileTypeChoice(true);
+		}else {
+			Nemo.getInstance().getViewMain().getEditFileForm().deselectAndDisableSelectionFileType();
+		}
+		
+	}
+	
+	
 	public void updateFromModel(TypeFallRate typeFallRate) {
 		if (typeFallRate != null&& isFallrateEnabled()){
 			Nemo.getInstance().getViewMain().getEditDataForm().setFallrateCode(typeFallRate.getKey());
@@ -510,6 +534,7 @@ public class RulesManager {
 		myEditFileForm.razText();
 		myEditFileForm.resetDefaultSelectionSeparator();
 		myEditFileForm.selectTypeFile(myFileType);
+		myEditFileForm.deselectAndDisableSelectionFileType();
 		myEditFileForm.updateEnableConversionTypes();
 		myEditFileForm.selectConversion(myConversionType);
 		Nemo.getInstance().getViewMain().enableCruiseTab(isCruiseEnabled());
@@ -630,17 +655,29 @@ public class RulesManager {
 		setM_aboveSeaLevel_enabled(false);
 
 		boolean p_depthBSBed =
-				(isProfile() || isTrajectory())
+				myInputVariant==E_Variant.PHYSICOCHEMICAL
+				&& (isProfile() || isTrajectory())
 				&& myMesureType == E_MesureType.BSBED;
+		
+		
+		boolean p_depthBSSurf = false;
+		if (myInputVariant==E_Variant.PHYSICOCHEMICAL) {
+			p_depthBSSurf =
+					(isProfile() && myMesureType == E_MesureType.BSSURF)
+					|| ((isTimeSeries() || isTrajectory())
+					&& (isConversionToODV() || isConversionToNetCDF()) && myMesureType == E_MesureType.BSSURF);
+		}else {
+			 p_depthBSSurf = false;
+		}
 
-		boolean p_depthBSSurf =
-				(isProfile() && myMesureType == E_MesureType.BSSURF)
-				|| ((isTimeSeries() || isTrajectory())
-						&& (isConversionToODV() || isConversionToNetCDF()) && myMesureType == E_MesureType.BSSURF);
-
-		boolean p_pressure = isProfile() && myMesureType == E_MesureType.BSSURF;
-
-		boolean p_heightASLvl = !isConversionToMedatlas() && (isProfile() || isTrajectory()) && myMesureType == E_MesureType.ASLVL;
+		
+		boolean p_pressure = 	myInputVariant==E_Variant.PHYSICOCHEMICAL && isProfile() && myMesureType == E_MesureType.BSSURF;
+		boolean p_heightASLvl = false;
+		if (	myInputVariant==E_Variant.PHYSICOCHEMICAL) {
+			p_heightASLvl = !isConversionToMedatlas() && (isProfile() || isTrajectory()) && myMesureType == E_MesureType.ASLVL;
+		}else {
+			p_heightASLvl = false;
+		}
 
 		setP_depthBSBed_enabled(p_depthBSBed);
 		setP_depthBSSurf_enabled(p_depthBSSurf);
@@ -785,7 +822,11 @@ public class RulesManager {
 	public boolean isTimeSeries() {
 		return myFileType == E_InputType.TIMESERIES;
 	}
-
+	
+	// Input data type (physicoChm, bio, flowcyto, microlitter)
+	public E_Variant getMyInputVariant() {
+		return myInputVariant;
+	}
 	// CONVERSION
 	public Conversion getConversion(){
 		switch (myConversionType) {
@@ -943,5 +984,6 @@ public class RulesManager {
 		this.separator = separator;
 
 	}
+	
 
 }

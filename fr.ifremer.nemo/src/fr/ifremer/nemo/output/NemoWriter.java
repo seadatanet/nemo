@@ -78,6 +78,7 @@ public abstract class NemoWriter {
 
 	protected boolean isInputType_Trajectory;
 	protected boolean isInputType_Profile;
+	protected boolean isInputType_Timeseries;
 
 	protected boolean isEndData_BeginLineChanges = false;
 	protected boolean isEndData_NextStartWith = false;
@@ -117,6 +118,7 @@ public abstract class NemoWriter {
 		E_InputType inputType = iDomain.getMedia().getModel().getInputType();
 		isInputType_Trajectory = inputType == E_InputType.TRAJECTORY;
 		isInputType_Profile = inputType == E_InputType.PROFILE;
+		isInputType_Timeseries = inputType == E_InputType.TIMESERIES;
 
 		isEndData_BeginLineChanges = mediaModel.getEndData() == E_EndData.BEGIN_LINE_CHANGES;
 		isEndData_NextStartWith = mediaModel.getEndData() == E_EndData.NEXT_START_WITH;
@@ -419,6 +421,9 @@ public abstract class NemoWriter {
 
 	private boolean hasBeginLineChanged(String readedLine) {
 		boolean hasChanged = false;
+		if (readedLine==null) {
+			return true;
+		}
 		String beginningOfCurrentLine = readedLine.substring(0, mediaModel
 				.getEndDataPattern().length());
 		hasChanged = !beginningOfCurrentLine.equals(beginningOfPreviousLine);

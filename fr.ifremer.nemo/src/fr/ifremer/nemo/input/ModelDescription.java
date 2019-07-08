@@ -33,6 +33,7 @@ public class ModelDescription extends NLS {
 	public static String node_process;
 	public static String node_separator;
 	public static String node_type;
+	public static String node_variant;
 	public static String node_fileHeader;
 	public static String node_stationHeader;
 	public static String node_endStation;
@@ -142,6 +143,7 @@ public class ModelDescription extends NLS {
 	public static String setter_process;
 	public static String setter_separator;
 	public static String setter_type;
+	public static String setter_variant;
 	public static String setter_fileHeader;
 	public static String setter_stationHeader;
 	public static String setter_endStation;

@@ -25,6 +25,7 @@ import fr.ifremer.nemo.ui.edit.file.listeners.InputFileBrowseListener;
 import fr.ifremer.nemo.ui.edit.file.listeners.InputFileCheckMultistationsListener;
 import fr.ifremer.nemo.ui.edit.file.listeners.InputFileRadioSelectionListener;
 import fr.ifremer.nemo.ui.edit.file.listeners.OutputFormatRadioSelectionListener;
+import fr.ifremer.nemo.ui.edit.file.listeners.VariantSelectionListener;
 import fr.ifremer.nemo.ui.view.ViewLog;
 import fr.ifremer.nemo.ui.view.ViewMain;
 import fr.ifremer.nemo.util.Conversion;
@@ -33,6 +34,7 @@ import fr.ifremer.nemo.util.Global.E_EndData;
 import fr.ifremer.nemo.util.Global.E_InputType;
 import fr.ifremer.nemo.util.Global.E_ProcessType;
 import fr.ifremer.nemo.util.Global.E_TypeConversion;
+import fr.ifremer.nemo.util.Global.E_Variant;
 import fr.ifremer.nemo.util.Messages;
 
 /**
@@ -73,6 +75,10 @@ public class EditFileForm extends EditForm
 	// choix pour File type: profile, time series ou trajectory
 	private Button radProfilVertical, radSerieTempo, radTrajectoire;
 
+	// choix pour variante: physicochemical (historiquement gere par Nemo), biological, flowcytometry, microlitter
+	private Button radPhysicochemical, radBiological, radFlowcytometry, radMicrolitter;
+		
+	
 	// choix du format d'export
 	private Button radMedatlas;
 	private Button radODV;
@@ -235,12 +241,17 @@ public class EditFileForm extends EditForm
 	public void resetDefaultSelectionFileType()
 	{
 		enableFileTypeChoice(true);
-		RulesManager rulesMgr =RulesManager.getInstance();
-		radSerieTempo.setSelection(rulesMgr.DEFAULT_FILETYPE == E_InputType.TIMESERIES);
-		radTrajectoire.setSelection(rulesMgr.DEFAULT_FILETYPE == E_InputType.TRAJECTORY);
-		radProfilVertical.setSelection(rulesMgr.DEFAULT_FILETYPE == E_InputType.PROFILE);
+		radSerieTempo.setSelection(RulesManager.DEFAULT_FILETYPE == E_InputType.TIMESERIES);
+		radTrajectoire.setSelection(RulesManager.DEFAULT_FILETYPE == E_InputType.TRAJECTORY);
+		radProfilVertical.setSelection(RulesManager.DEFAULT_FILETYPE == E_InputType.PROFILE);
 	}
-
+	public void deselectAndDisableSelectionFileType()
+	{
+		radSerieTempo.setSelection(false);
+		radTrajectoire.setSelection(false);
+		radProfilVertical.setSelection(false);
+		enableFileTypeChoice(false);
+	}
 	public void createLeftForm(Composite parent)
 	{
 
@@ -478,6 +489,7 @@ public class EditFileForm extends EditForm
 		chkMultiStations.setSelection(mediaModel.isMultiStations());
 		// Type de fichier
 		RulesManager.getInstance().updateFromModel(mediaModel.getInputType());
+		RulesManager.getInstance().updateFromModel(mediaModel.getVariant());
 
 		// --- remplissage du formulaire de droite (editFileForm)
 		// Entête Fichier
@@ -636,7 +648,7 @@ public class EditFileForm extends EditForm
 		// ****************************************************************************************
 		// principal composite
 		GridLayout mainBoxLayout = new GridLayout();
-		mainBoxLayout.numColumns = 2;
+		mainBoxLayout.numColumns = 3;
 		GridData mainGridData = new GridData();
 		mainGridData.horizontalAlignment = GridData.FILL;
 		mainGridData.verticalAlignment = GridData.FILL;
@@ -720,6 +732,42 @@ public class EditFileForm extends EditForm
 		// Selection du type par defaut
 
 		resetDefaultSelectionFileType();
+	}
+	private void createSubGroupDataType(Composite parent) {
+		Group grpDatatype = new Group(parent, SWT.NONE);
+		grpDatatype.setText(Messages.view_file_variant);
+		GridLayoutFactory.fillDefaults().applyTo(grpDatatype);
+		GridDataFactory.fillDefaults().grab(true, false).applyTo(grpDatatype);
+
+		VariantSelectionListener dataTypeSelectionListener = new VariantSelectionListener(this);
+		radPhysicochemical = new Button(grpDatatype, SWT.RADIO);
+		radPhysicochemical.setText(Messages.variant_physicochemical);
+		radPhysicochemical.addSelectionListener(dataTypeSelectionListener);
+
+		radBiological = new Button(grpDatatype, SWT.RADIO);
+		radBiological.setText(Messages.variant_biological);
+		radBiological.addSelectionListener(dataTypeSelectionListener);
+
+		radFlowcytometry = new Button(grpDatatype, SWT.RADIO);
+		radFlowcytometry.setText(Messages.variant_flowcytometry);
+		radFlowcytometry.addSelectionListener(dataTypeSelectionListener);
+		
+		radMicrolitter = new Button(grpDatatype, SWT.RADIO);
+		radMicrolitter.setText(Messages.variant_microlitter);
+		radMicrolitter.addSelectionListener(dataTypeSelectionListener);
+
+		// Selection du type par defaut
+
+		resetDefaultSelectionDataType();
+		
+	}
+	public void resetDefaultSelectionDataType() {
+		enableFileTypeChoice(true);
+		radPhysicochemical.setSelection(RulesManager.DEFAULT_VARIANT == E_Variant.PHYSICOCHEMICAL);
+		radBiological.setSelection(RulesManager.DEFAULT_VARIANT == E_Variant.BIOLOGICAL);
+		radFlowcytometry.setSelection(RulesManager.DEFAULT_VARIANT == E_Variant.FLOWCYTO);
+		radMicrolitter.setSelection(RulesManager.DEFAULT_VARIANT == E_Variant.MICROLITTER);
+		
 	}
 
 	private void createGroupInputParameters(Composite parent)
@@ -825,7 +873,10 @@ public class EditFileForm extends EditForm
 		Composite separatorAndFileType = createSubGroupSeparatorAndFileType(mainBoxGroup);
 		createSubGroupSeparator(separatorAndFileType);
 		createSubGroupFileType(separatorAndFileType);
+		createSubGroupDataType(separatorAndFileType);
 	}
+
+	
 
 	/**
 	 * initialise avec les valeurs du modèle par défaut {@inheritDoc}
@@ -857,6 +908,9 @@ public class EditFileForm extends EditForm
 
 		// Type de fichier
 		mediaModel.setInputType(RulesManager.getInstance().getMyFileType());
+		
+		// type de donnee
+		mediaModel.setVariant(RulesManager.getInstance().getMyInputVariant());
 
 		// Fichier multiStation ?
 		mediaModel.setMultiStations(isMultiStationFileChecked());
@@ -984,7 +1038,47 @@ public class EditFileForm extends EditForm
 			break;
 		}
 	}
-
+	/**
+	 * select the appropriate radio choice depending on dataType (physicochemical, bio...)
+	 * 
+	 * @param dataType
+	 */
+	public void selectVariant(E_Variant variant)
+	{
+		switch (variant)
+		{
+		case PHYSICOCHEMICAL:
+			radPhysicochemical.setSelection(true);
+			radBiological.setSelection(false);
+			radFlowcytometry.setSelection(false);
+			radMicrolitter.setSelection(false);
+			break;
+		case BIOLOGICAL:
+			radPhysicochemical.setSelection(false);
+			radBiological.setSelection(true);
+			radFlowcytometry.setSelection(false);
+			radMicrolitter.setSelection(false);
+			break;
+		case FLOWCYTO:
+			radPhysicochemical.setSelection(false);
+			radBiological.setSelection(false);
+			radFlowcytometry.setSelection(true);
+			radMicrolitter.setSelection(false);
+			break;
+		case MICROLITTER:
+			radPhysicochemical.setSelection(false);
+			radBiological.setSelection(false);
+			radFlowcytometry.setSelection(false);
+			radMicrolitter.setSelection(true);
+			break;
+		default:
+			radPhysicochemical.setSelection(true);
+			radBiological.setSelection(false);
+			radFlowcytometry.setSelection(false);
+			radMicrolitter.setSelection(false);
+			break;
+		}
+	}
 	/**
 	 * gets the separator choosen by the user in the file tab
 	 * 
@@ -1310,6 +1404,21 @@ public class EditFileForm extends EditForm
 
 	public FileDataColumnTitlesSection getSectionDataColumnTitles() {
 		return sectionDataColumnTitles;
+	}
+	public Button getRadPhysicochemical() {
+		return radPhysicochemical;
+	}
+
+	public Button getRadBiological() {
+		return radBiological;
+	}
+
+	public Button getRadFlowcytometry() {
+		return radFlowcytometry;
+	}
+
+	public Button getRadMicrolitter() {
+		return radMicrolitter;
 	}
 
 }

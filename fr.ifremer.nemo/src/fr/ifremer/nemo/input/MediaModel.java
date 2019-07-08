@@ -10,6 +10,7 @@ import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Global.E_EndData;
 import fr.ifremer.nemo.util.Global.E_InputType;
 import fr.ifremer.nemo.util.Global.E_ProcessType;
+import fr.ifremer.nemo.util.Global.E_Variant;
 
 /**
  * Class MediaModel Description: Informations descrivant l'onglet File
@@ -42,7 +43,10 @@ public class MediaModel extends AbstractModel
 	 * Type de fichier en entrée
 	 */
 	protected E_InputType _inputType;
-
+	/**
+	 * Variante
+	 */
+	protected E_Variant _variant;
 	/**
 	 * nombre de lignes de l'entête fichier
 	 */
@@ -102,6 +106,7 @@ public class MediaModel extends AbstractModel
 		_multiStations = false;
 		_separator = Global.EMPTY_STRING;
 		_inputType = E_InputType.UNKNOWN;
+		_variant= E_Variant.UNKNOWN;
 		_fileHeader = 0;
 		_stationHeader = 0;
 		_stationHeaderPattern = Global.EMPTY_STRING;
@@ -185,6 +190,11 @@ public class MediaModel extends AbstractModel
 			Element2Field setter = new Element2Field(this, ModelDescription.setter_type);
 			return setter;
 		}
+		if (a_LocalName.equals(ModelDescription.node_variant))
+		{
+			Element2Field setter = new Element2Field(this, ModelDescription.setter_variant);
+			return setter;
+		}
 		if (a_LocalName.equals(ModelDescription.node_fileHeader))
 		{
 			Element2Field setter = new Element2Field(this, ModelDescription.setter_fileHeader);
@@ -247,6 +257,9 @@ public class MediaModel extends AbstractModel
 		
 		// INPUT TYPE
 		a_Writer.putTag(ModelDescription.node_type, getInputType().toString());
+		
+		// INPUT VARIANT
+		a_Writer.putTag(ModelDescription.node_variant, getVariant().toString());
 
 		// FILE HEADER
 		a_Writer.putTag(ModelDescription.node_fileHeader, getFileHeader());
@@ -494,6 +507,25 @@ public class MediaModel extends AbstractModel
 		}
 	}
 
+	public E_Variant getVariant() {
+		return _variant;
+	}
+
+	public void setVariant(E_Variant variant) {
+		_variant = variant;
+	}
+	
+	
+	
+	public void setVariant(String  variant) {
+		try
+		{
+			_variant = Enum.valueOf(E_Variant.class, variant.toUpperCase());
+		} catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
 	/**
 	 * Getter pour _multiStations.
 	 * 

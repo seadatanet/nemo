@@ -119,7 +119,9 @@ public class Station implements Comparable {
 			errorMessage = Intern.S_DEPTH;
 			addMetaFlag(Intern.S_DEPTH, stationDomain.getMetaFlag(Intern.S_DEPTH, inputStationHeader));
 
-			if (Nemo.getInstance().getDomain().getMedia().getModel().getInputType() != E_InputType.PROFILE) {
+//			if (Nemo.getInstance().getDomain().getMedia().getModel().getInputType() != E_InputType.PROFILE) {
+			if (Nemo.getInstance().getDomain().getMedia().getModel().getInputType() == E_InputType.TRAJECTORY
+				||Nemo.getInstance().getDomain().getMedia().getModel().getInputType() == E_InputType.TIMESERIES	) {
 				errorMessage = Intern.S_SENSORDEPTH;
 				_sensorDepth = ((Float) stationDomain.getModel().getProperty(Intern.S_SENSORDEPTH).applyOn(inputStationHeader)).floatValue();
 

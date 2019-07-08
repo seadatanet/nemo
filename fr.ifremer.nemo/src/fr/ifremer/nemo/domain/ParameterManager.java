@@ -41,6 +41,7 @@ import fr.ifremer.nemo.ui.edit.data.TypeData;
 import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Global.DataListTypeEnum;
+import fr.ifremer.nemo.util.Global.E_Variant;
 import fr.ifremer.nemo.util.Global.E_InputType;
 import fr.ifremer.nemo.util.Global.E_MesureType;
 import fr.ifremer.nemo.util.Global.E_TypeConversion;
@@ -210,7 +211,10 @@ public class ParameterManager {
 	}
 
 	public void setAddedParameterModel() {
-
+		if (Nemo.getInstance().getDomain().getMedia().getModel().getVariant() != E_Variant.PHYSICOCHEMICAL) {
+			// no parameter to add
+			return;
+		}
 		/**
 		 * ====================================================================
 		 * reset systematique des parametres stockes dans le dataModel

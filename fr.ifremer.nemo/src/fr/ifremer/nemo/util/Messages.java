@@ -51,11 +51,16 @@ public class Messages {
 	public static String typeFile_profile;
 	public static String typeFile_timeseries;
 	public static String typeFile_trajectory;
+	public static String variant_physicochemical;
+	public static String variant_biological;
+	public static String variant_flowcytometry;
+	public static String variant_microlitter;
 
 	// ECRAN PRINCIPAL
 	public static String view_file_inputTitle;
 	public static String view_file_outputTitle;
 	public static String view_file_fileType;
+	public static String view_file_variant;
 	public static String view_file_processCruise;
 	public static String view_file_cruiseFile;
 	public static String view_file_cruiseDir;
@@ -75,7 +80,7 @@ public class Messages {
 	public static String view_convert_sort;
 	public static String view_convert_summary_title;
 	public static String view_convert_summary_dataTypeLabel;
-	public static String view_convert_summary_inputTypeLabel;
+//	public static String view_convert_summary_inputTypeLabel;
 	public static String view_convert_summary_inputFileLabel;
 	public static String view_convert_summary_modelFileLabel;
 	public static String view_convert_summary_modelFileNotSaved;
@@ -190,7 +195,7 @@ public class Messages {
 
 	// CRUISE
 	public static String edit_cruise_title;
-	public static String edit_cruise_reference_title;
+//	public static String edit_cruise_reference_title;
 	public static String edit_cruise_sectionReference;
 	public static String edit_cruise_sectionReference_lib;
 	public static String edit_cruise_cruiseRef;
