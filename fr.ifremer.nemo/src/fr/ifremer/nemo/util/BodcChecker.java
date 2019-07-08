@@ -645,4 +645,7 @@ public class BodcChecker {
 
 		return res;
 	}
+	public SdnVocabularyManager getSdnMgr() {
+		return sdnMgr;
+	}
 }
