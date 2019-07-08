@@ -126,8 +126,14 @@ public class DateTimeUtils {
 			formatFullDate = dateFormat + timeFormat;
 		} else {
 			String frgmntDate = dateModel.getFragment().fullRetreiveInLine(inputLine);
-			String frgmntTime = timeModel.getFragment().fullRetreiveInLine(inputLine);
-
+			if(Nemo.getInstance().getDomain().getStation().getModel().getProperty(Intern.S_TIME).isInData()) {
+				
+			}
+			
+			String frgmntTime ="0000";
+			if (timeModel.getFragment()!=null) {
+				frgmntTime = timeModel.getFragment().fullRetreiveInLine(inputLine);// 46298
+			}
 			// FAE 0001229 : Conversion date et heure : s'il manque des Zeros il
 			// faut que NEMO les mette
 			frgmntDate = frgmntDate.replace(' ', '0');
