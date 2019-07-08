@@ -534,7 +534,7 @@ public class RulesManager {
 		myEditFileForm.razText();
 		myEditFileForm.resetDefaultSelectionSeparator();
 		myEditFileForm.selectTypeFile(myFileType);
-		myEditFileForm.deselectAndDisableSelectionFileType();
+		myEditFileForm.resetDefaultSelectionFileType();
 		myEditFileForm.updateEnableConversionTypes();
 		myEditFileForm.selectConversion(myConversionType);
 		Nemo.getInstance().getViewMain().enableCruiseTab(isCruiseEnabled());
