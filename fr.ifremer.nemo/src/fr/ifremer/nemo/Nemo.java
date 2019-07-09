@@ -48,6 +48,7 @@ import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Global.DataListTypeEnum;
 import fr.ifremer.nemo.util.Global.E_InputType;
 import fr.ifremer.nemo.util.Global.E_TypeConversion;
+import fr.ifremer.nemo.util.Global.E_Variant;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.util.Utils;
@@ -182,6 +183,11 @@ public class Nemo {
 				model.getStationModel().getReferenceProperty().setUserProvided(true);
 				model.getStationModel().getReferenceProperty().setUserValue("1");
 			}
+		}
+		
+		//42483: old models without variants=physicochemical
+		if (model.getMediaModel().getVariant()==E_Variant.UNKNOWN) {
+			model.getMediaModel().setVariant(E_Variant.PHYSICOCHEMICAL);
 		}
 		completeDataList(model, isBeforeP011);
 		domain.update(model);
