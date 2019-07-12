@@ -84,7 +84,6 @@ public class VocabLists {
 					_vocabList.put(listName, cf.getCollection(true, listName));
 					logger.info(MessageFormat.format(Messages.downloadBODCSuccess, listName));
 				} catch (Exception e1) {
-					e.printStackTrace();
 					logger.error(MessageFormat.format(Messages.downloadBODCError, listName));
 				}
 			}
@@ -111,7 +110,6 @@ public class VocabLists {
 					logger.info(MessageFormat.format(Messages.downloadBODCSuccess, vocab + "/" + listNames[0]));
 				} catch (Exception e1) {
 
-					e.printStackTrace();
 					logger.warn(MessageFormat.format(Messages.downloadBODCError, vocab + "/" + listNames[0]));
 				}
 			}
@@ -218,7 +216,6 @@ public class VocabLists {
 			cf.reload();
 		} catch (VocabularyException e1) {
 			Nemo.getInstance().getLogger().error(e1.getMessage());
-			e1.printStackTrace();
 		}
 		for (String listName : listNames) {
 			try {
@@ -248,7 +245,6 @@ public class VocabLists {
 				}
 			} catch (Exception e) {
 				updateLists.setEtat(EtatUpdate.FAILED);
-				e.printStackTrace();
 				Nemo.getInstance().getLogger().error(e.getMessage());
 			}
 		}
@@ -355,7 +351,7 @@ public class VocabLists {
 
 			} catch (Exception e) {
 				updateMaps.setEtat(EtatUpdate.FAILED);
-				e.printStackTrace();
+				Nemo.getInstance().getLogger().warn(e.getMessage());
 			}
 		}
 	}
@@ -371,7 +367,7 @@ public class VocabLists {
 			updateMap.setEtat(EtatUpdate.UPDATED);
 		} catch (VocabularyException e) {
 			updateMap.setEtat(EtatUpdate.FAILED);
-			e.printStackTrace();
+			Nemo.getInstance().getLogger().warn(e.getMessage());
 		}
 
 		return updateMap;

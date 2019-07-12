@@ -134,6 +134,8 @@ public class Application implements IPlatformRunnable {
 
 					if (cl.hasOption(optUpdateVocabs)) {
 						// Launch only the vocabs update
+						Nemo.getInstance().getLogger().info("Update external resources");
+						ManageLists.initLists();
 						Nemo.getInstance().callListsUpdates();
 					} else {
 						inputFile = cl.getOptionValue(optInputFile);
