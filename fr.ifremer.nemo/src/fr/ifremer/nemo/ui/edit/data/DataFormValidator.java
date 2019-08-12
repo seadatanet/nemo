@@ -1,6 +1,7 @@
 package fr.ifremer.nemo.ui.edit.data;
 
 import java.math.BigDecimal;
+import java.text.MessageFormat;
 import java.util.List;
 
 import org.eclipse.swt.widgets.Combo;
@@ -706,10 +707,9 @@ public class DataFormValidator extends FormValidator {
 		if (rm.isP_depthBSBed_enabled()
 				&& rm.getMyVerticalParametersList().getP_depthBSBed()
 						.equals(Global.EMPTY_STRING)) {
-			Utils.messageErreurAppend(Messages.edit_data_verticalParameters_info_chooseDepthBSBed
-							+ Global.SPACE
-							+ "("
-							+ myParameterManager.getP_depthBSBedCode() + ")");
+			
+			Utils.messageErreurAppend(MessageFormat.format(Messages.edit_data_verticalParameters_info_chooseDepthBSBed, myParameterManager.getP_depthBSBedCode()));
+
 			ok = false;
 		}
 
@@ -718,25 +718,16 @@ public class DataFormValidator extends FormValidator {
 						.equals(Global.EMPTY_STRING) && rm
 						.getMyVerticalParametersList().getP_pressure()
 						.equals(Global.EMPTY_STRING))) {
-			String message =
-					Messages.edit_data_verticalParameters_info_chooseDepthBSurfOrPressure;
-			message += Global.SPACE;
-			message += "(";
-			message += myParameterManager.getP_depthBSSurfCode();
-			message += " / ";
-			message += myParameterManager.getP_pressureCode();
-			message += ")";
-			Utils.messageErreurAppend(message);
+			
+			Utils.messageErreurAppend(MessageFormat.format(Messages.edit_data_verticalParameters_info_chooseDepthBSurfOrPressure, myParameterManager.getP_depthBSSurfCode(), myParameterManager.getP_pressureCode()));
+
 			ok = false;
 		}
 
 		if (rm.isP_heightASLvl_enabled() && rm.getMyVerticalParametersList().getP_heightASLvl().equals(Global.EMPTY_STRING) && !rm.isTrajectory()) {
-			String message = Messages.edit_data_verticalParameters_info_chooseHeightASLvl;
-			message += Global.SPACE;
-			message += "(";
-			message += myParameterManager.getP_heightASLvlCode();
-			message += ")";
-			Utils.messageErreurAppend(message);
+
+			Utils.messageErreurAppend(MessageFormat.format(Messages.edit_data_verticalParameters_info_chooseHeightASLvl, myParameterManager.getP_heightASLvlCode()));
+
 			ok = false;
 		}
 
