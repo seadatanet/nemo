@@ -125,23 +125,39 @@ public class DateTimeUtils {
 			String timeFormat = tFormat.substring(tFormat.indexOf(".")); //$NON-NLS-1$
 			formatFullDate = dateFormat + timeFormat;
 		} else {
-			String frgmntDate = dateModel.getFragment().fullRetreiveInLine(inputLine);
-			if(Nemo.getInstance().getDomain().getStation().getModel().getProperty(Intern.S_TIME).isInData()) {
-				
+
+			// retrouver la date (inData ou manuelle)
+			String frgmntDate = "";
+			
+			if (dateModel.isInData()) {
+				// récupération dans la donnée
+				frgmntDate = dateModel.getFragment().fullRetreiveInLine(inputLine);
+			} else {
+				// manuel
+				frgmntDate = dateModel.getUserValue();
 			}
 			
-			String frgmntTime ="0000";
-			if (timeModel.getFragment()!=null) {
-				frgmntTime = timeModel.getFragment().fullRetreiveInLine(inputLine);// 46298
+			// retrouver l'heure (inData ou manuelle)
+			String frgmntTime = "";
+			
+			if (timeModel.isInData()) {
+				// récupération dans la donnée
+				frgmntTime = timeModel.getFragment().fullRetreiveInLine(inputLine);
+			} else {
+				// manuel
+				frgmntTime = timeModel.getUserValue();
 			}
+
 			// FAE 0001229 : Conversion date et heure : s'il manque des Zeros il
 			// faut que NEMO les mette
 			frgmntDate = frgmntDate.replace(' ', '0');
 			frgmntTime = frgmntTime.replace(' ', '0');
+			
 			frgmntFullDate = frgmntDate + Global.SPACE + frgmntTime;
 
 			formatFullDate = dFormat + Global.SPACE + tFormat;
 		}
+		
 		format.setFormatString(formatFullDate);
 		format.setRefDate(0);
 
