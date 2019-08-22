@@ -313,10 +313,8 @@ public class Parameter extends AbstractModel {
 
 	public String getLocalCode() {
 		String localCode = null;
-		DataListTypeEnum dataListType = Nemo.getInstance().getDomain()
-				.getData().getModel().getDataListType();
-		E_TypeConversion conv = Nemo.getInstance().getDomain().getConversion()
-				.getModel().getOutputFormat();
+		DataListTypeEnum dataListType = Nemo.getInstance().getDomain().getData().getModel().getDataListType();
+		E_TypeConversion conv = Nemo.getInstance().getDomain().getConversion().getModel().getOutputFormat();
 
 		// **************************************
 		// MEDATLAS
@@ -334,8 +332,7 @@ public class Parameter extends AbstractModel {
 			if (dataListType == DataListTypeEnum.P091) {
 				localCode = getCode();
 			} else {
-				String userLabel = LabelParameterManager.getInstance()
-						.getUserLabel(getCodeP011());
+				String userLabel = LabelParameterManager.getInstance().getUserLabel(getCodeP011());
 				if (userLabel != null) {
 					localCode = userLabel;
 				} else {
