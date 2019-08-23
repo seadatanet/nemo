@@ -1030,7 +1030,9 @@ public class NetCDFWriter extends NemoWriter {
 
 	private ParameterModel getZParameterModel() {
 		ParameterModel zParameterModel = null;
-		if (mediaModel.getInputType() != E_InputType.TIMESERIES || dataDomain.getModel().getMesureType() == E_MesureType.ASLVL)
+		// TODO 42483: what if unknown type (bio or micro)?
+		if ((mediaModel.getInputType() == E_InputType.PROFILE||mediaModel.getInputType() == E_InputType.TRAJECTORY)
+				|| dataDomain.getModel().getMesureType() == E_MesureType.ASLVL)
 			zParameterModel = dataDomain.getModel().getParameterModelByP011(getZLocalName());
 
 		// Si Parametre vertical non selectionné prendre le premiser parametre
@@ -1201,8 +1203,10 @@ public class NetCDFWriter extends NemoWriter {
 	}
 
 	private String getZStandardName(ParameterModel zParameterModel) {
-		if (!dataDomain.getModel().getVerticalParametersList().getP_pressure().isEmpty() && mediaModel.getInputType() != E_InputType.TIMESERIES)
+		if (!dataDomain.getModel().getVerticalParametersList().getP_pressure().isEmpty() 
+				&& (mediaModel.getInputType() == E_InputType.TRAJECTORY || mediaModel.getInputType() == E_InputType.PROFILE)) {
 			return ParameterValues.Z_PRESSURE;
+		}
 
 		if (!dataDomain.getModel().getVerticalParametersList().getP_depthBSSurf().isEmpty() && dataDomain.getModel().getMesureType() == E_MesureType.BSSURF)
 			return ParameterValues.Z_DEPTH;

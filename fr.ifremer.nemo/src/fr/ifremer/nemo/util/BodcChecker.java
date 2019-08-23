@@ -128,11 +128,11 @@ public class BodcChecker {
 			}
 		} catch (Exception e) {
 			errorMsg+=MessageFormat.format(Messages.BODC_check_param_p02_notExist, 
+					typeData.getEntryKey(),
 					typeData.getFormattedCodeAndName(),
 					typeData.getEntryKey(),
 					SdnVocabularyManager.LIST_P02
 					);
-//			errorMsg=e.getMessage();		
 			logger.error(errorMsg);
 			ok=false;
 		} 
@@ -235,7 +235,8 @@ public class BodcChecker {
 						
 						replaceMsg+=MessageFormat.format(Messages.BODC_check_param_p06_labelUpdate, 
 								typeData.getCodeToUse()  + "(P02  "+typeData.getEntryKey()+")",
-								p06Code, typeData.getUnite(),
+								p06Code, 
+								typeData.getUnite(),
 								label,
 								SdnVocabularyManager.LIST_P06
 								)+Global.RN;

@@ -704,8 +704,10 @@ private Long getCurrentDate( String readedLine,int indexRecord) throws ParseExce
 				&& !Nemo.getInstance().getDomain().getStation().getModel().getProperty(Intern.S_DATE).isInData()){
 			currentDate = DateTimeUtils.getCurrentDate(this, indexRecord); // get current date (computed with sample rate)
 		}
-		else if (Nemo.getInstance().getDomain().getMedia().getModel().getInputType() == E_InputType.TRAJECTORY||
-				Nemo.getInstance().getDomain().getMedia().getModel().getInputType() == E_InputType.TIMESERIES	){
+		else  // TODO 42483: what if unknown type (bio or micro)?
+//			if (Nemo.getInstance().getDomain().getMedia().getModel().getInputType() == E_InputType.TRAJECTORY||
+//				Nemo.getInstance().getDomain().getMedia().getModel().getInputType() == E_InputType.TIMESERIES	)
+		{
 			// 	TIMESERIES AND TRAJECTORIES			
 			if (Nemo.getInstance().getDomain().getStation().getModel().getProperty(Intern.S_DATE).isInData()){
 				currentDate = Long.valueOf(DateTimeUtils.convertTimestamp(readedLine));

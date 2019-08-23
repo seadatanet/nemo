@@ -192,16 +192,13 @@ public class DataDomain {
 		// -- VALEURS
 		// paramètres ajoutés
 		long currentDate = 0;
-		if (inputType != E_InputType.PROFILE){
+		if (inputType == E_InputType.TIMESERIES || inputType == E_InputType.TRAJECTORY) {
 			currentDate = DateTimeUtils.getCurrentDate(currentStation, indexRecord);
-		}
+			// FAE 11356
+			if (Nemo.getInstance().getDomain().getStation().getModel().getProperty(Intern.S_DATE).isInData()){
+				currentDate = Long.valueOf(DateTimeUtils.convertTimestamp(inputLine));
 
-		// FAE 11356
-		if (
-				(inputType == E_InputType.TIMESERIES || inputType == E_InputType.TRAJECTORY)
-				&& Nemo.getInstance().getDomain().getStation().getModel().getProperty(Intern.S_DATE).isInData()){
-			currentDate = Long.valueOf(DateTimeUtils.convertTimestamp(inputLine));
-			
+			}
 		}
 		//33044 manage offset in end date time
 		long currentDateWithOffset = DateTimeUtils.getGMTDate(currentDate,	currentStation.getOffsetTU());

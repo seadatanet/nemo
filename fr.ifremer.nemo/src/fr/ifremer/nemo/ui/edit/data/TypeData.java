@@ -53,7 +53,7 @@ public class TypeData extends Object implements Comparable<TypeData> {
 			String theCodeP01,String theNameP01 ,
 			String theUniteCode,String theUniteLabel,String theP06Label,
 			String theInstrumentCode,String theInstrumentLabel ,
-			boolean itheIsP011) {
+			boolean itheIsP011, boolean isText) {
 		this.setEntryKey(theEntryKey);
 		this.setEntryTerm(theEntryTerm);
 		this.setEntryKeyP011(theCodeP01);
@@ -64,6 +64,7 @@ public class TypeData extends Object implements Comparable<TypeData> {
 		this.setInstrumentCode(theInstrumentCode);
 		this.setInstrument(theInstrumentLabel);
 		this.setIsP011(itheIsP011);
+		this.setIsText(isText);
 	}
 	public TypeData(String theEntryKey, String theEntryTerm, 
 			String theCodeP01,String theNameP01 ,

@@ -169,7 +169,6 @@ public class EditFileForm extends EditForm
 	public void resetFileDataColumnTitles(boolean separatorChecked){
 
 		sectionDataColumnTitles.setEnabled(separatorChecked);
-
 		sectionDataColumnTitles.setTableEnabledForCsv(separatorChecked);
 		sectionDataColumnTitles.setColTitlesInInputFile(false);
 		sectionDataColumnTitles.enableTextSetter(false);
@@ -440,6 +439,8 @@ public class EditFileForm extends EditForm
 		sectionDataColumnTitles = new FileDataColumnTitlesSection(Messages.edit_file_columnTitlesSection_title, Messages.edit_file_columnTitlesSection_title, Messages.edit_file_columnTitlesSection_desc, this);
 		sectionDataColumnTitles.addSetter(null, Global.ZERO);
 		listeSections.add(sectionDataColumnTitles);
+		
+		defineMandatorySections();
 
 	}
 
@@ -758,10 +759,10 @@ public class EditFileForm extends EditForm
 
 		// Selection du type par defaut
 
-		resetDefaultSelectionDataType();
+		resetDefaultSelectionVariant();
 		
 	}
-	public void resetDefaultSelectionDataType() {
+	public void resetDefaultSelectionVariant() {
 		enableFileTypeChoice(true);
 		radPhysicochemical.setSelection(RulesManager.DEFAULT_VARIANT == E_Variant.PHYSICOCHEMICAL);
 		radBiological.setSelection(RulesManager.DEFAULT_VARIANT == E_Variant.BIOLOGICAL);
@@ -981,10 +982,6 @@ public class EditFileForm extends EditForm
 		grpODV.setVisible((radODV.getSelection() || radNetCDF.getSelection()));
 	}
 
-	public void enableMedatlas(boolean enable)
-	{
-		radMedatlas.setEnabled(enable);
-	}
 
 	public void enableSeparatorChoice(boolean enabled)
 	{
@@ -1072,7 +1069,7 @@ public class EditFileForm extends EditForm
 			radMicrolitter.setSelection(true);
 			break;
 		default:
-			radPhysicochemical.setSelection(true);
+			radPhysicochemical.setSelection(false);
 			radBiological.setSelection(false);
 			radFlowcytometry.setSelection(false);
 			radMicrolitter.setSelection(false);
@@ -1392,7 +1389,7 @@ public class EditFileForm extends EditForm
 		this.nomRepertoire = nomRepertoire;
 	}
 
-	public void defineMandatorySections() {
+	private void defineMandatorySections() {
 		if (sectionFileHeader != null) {
 			sectionFileHeader.setMandatory(true);
 			sectionStationHeader.setMandatory(true);

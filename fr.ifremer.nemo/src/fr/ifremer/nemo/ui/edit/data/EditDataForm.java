@@ -64,8 +64,15 @@ public class EditDataForm extends EditForm {
 	private Text fallrateCode;
 	private Text fallrateLabel;
 	private Composite inputComposite;
+	private boolean mustBeReinit;
 
 
+	public boolean isMustBeReinit() {
+		return mustBeReinit;
+	}
+	public void setMustBeReinit(boolean mustBeReinit) {
+		this.mustBeReinit = mustBeReinit;
+	}
 	public void setFallrateGroupEnabled(boolean enabled){
 		groupFallrate.setEnabled(enabled);
 		for (Control child : groupFallrate.getChildren())
@@ -168,6 +175,19 @@ public class EditDataForm extends EditForm {
 		if (inputTableData != null)
 			inputTableData.dispose();
 
+		
+		
+		//**********************************
+		if (isMustBeReinit()) {
+//		Nemo.getInstance().getViewMain().getEditDataForm().reinitTableData();
+		getMyGroupeVerticalParameters().removeAllToAllCombos();
+		resetFallRate();
+		Nemo.getInstance().getViewMain().getEditDataForm().selectDataList(RulesManager.getInstance().getMyDataListType());
+		// !!! le fillTypes doit être appelé APRES le removeToAllcombos
+		getMyTableData().fillTypes();
+		}
+//		Nemo.getInstance().getViewMain().getEditDataForm().invalidEtape();
+		//*********************************
 		// 33278: now we have the model -> we can display depending on separator check
 		// affichage du texte dans la zone de gauche
 		//		if (Nemo.getInstance().getDomain().getMedia().getModel().getSeparator().isEmpty()){
@@ -314,25 +334,13 @@ public class EditDataForm extends EditForm {
 	}
 	
 	
-	public void fillFromModelTableOnly(){
-		myTableData.reinitTypes();
-		ParameterModel[] parameterModels =
-				Nemo.getInstance().getDomain().getData().getModel().getParameterModels();
-		DataListTypeEnum dataList = Nemo.getInstance().getDomain().getData().getModel().getDataListType();
-		if (dataList != DataListTypeEnum.UNKNOWN) {
-			// remplissage des parametres mesures APRES le datatype
-			for (ParameterModel paraCourant : parameterModels) {
-				TypeData typeData = new TypeData(paraCourant);
-				myTableData.addType(typeData);
-			}
-		}
-		// refresh de la table de l'onglet Data
-				myTableData.razAndRecreateTable();
-	}
+
 	public void enableP011viaP021(boolean enabled) {
 		button_P011viaP021.setEnabled(enabled);
 	}
-
+	public void enableP011viaP091(boolean enabled) {
+		button_P011viaP091.setEnabled(enabled);
+	}
 	public void enableP091(boolean enabled) {
 		button_P091.setEnabled(enabled);
 	}

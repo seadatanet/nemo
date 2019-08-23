@@ -677,10 +677,10 @@ public class StationDomain {
 			medStationHeader.append(start);
 			medStationHeader.append(Global.RN);
 			errorMessage = "station header";
-			if (Nemo.getInstance().getDomain().getMedia().getModel()
-					.getInputType() != E_InputType.PROFILE)
-				medStationHeader.append(getMedTimeSeriesHeader(currentStation,
-						inputStationHeader));
+			E_InputType inputType = Nemo.getInstance().getDomain().getMedia().getModel().getInputType();
+			if (inputType==E_InputType.TRAJECTORY || inputType==E_InputType.TIMESERIES) { // TODO 42483: what if unknown type (bio or micro)?
+				medStationHeader.append(getMedTimeSeriesHeader(currentStation,inputStationHeader));
+			}
 
 			// --SDN_parameter_mapping--
 			errorMessage = "SDN_parameter_mapping";

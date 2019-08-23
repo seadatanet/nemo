@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.TableEditor;
@@ -510,12 +511,16 @@ public class TableData {
 		Collections.sort(typesL33);
 	}
 	/**
-	 * fill types - add PRES automatically for Medatlas in P091 (see param rules table, data01) 
+	 * fill types 
 	 */
 	public void fillTypes() {
 		// initialisation de la ArrayList des types des donnees e partir du
 		types = null;
 		types = new ArrayList<TypeData>();
+			List<TypeData> specificParams = VariantsSpecificsParameters.getInstance().getParameters();
+			for (TypeData td : specificParams) {
+				addType(td);
+			}
 
 
 		razAndRecreateTable();
@@ -1153,11 +1158,15 @@ public class TableData {
 
 			if (types.get(i).isP011()) {
 				if (RulesManager.getInstance().isConversionToODV()) {
-					String userLabel =
-							LabelParameterManager.getInstance().getUserLabel(
-									types.get(i).getEntryKeyP011());
+					String userLabel =	LabelParameterManager.getInstance().getUserLabel(types.get(i).getEntryKeyP011());
 					if (userLabel != null) {
 						label = userLabel;
+					}
+					if (label.isEmpty()) {
+						String specificLabel =	LabelParameterManager.getInstance().getSpecificParameterLabel(types.get(i).getEntryKeyP011());
+						if (specificLabel != null) {
+							label = specificLabel;
+						}
 					}
 				}
 			}
@@ -1189,10 +1198,10 @@ public class TableData {
 					code,
 					standardName,
 					longName,
-					label,
+					label, 
 					unitLabel,
-					(types.get(i).isText() ? null : types.get(i)
-							.getConversion()), types.get(i).getTest(),
+					(types.get(i).isText() ? null : types.get(i).getConversion()),
+							types.get(i).getTest(),
 							String.valueOf(types.get(i).getDebut()),
 							String.valueOf(types.get(i).getFin()),
 							types.get(i).getFormat(), types.get(i).getEntree(),

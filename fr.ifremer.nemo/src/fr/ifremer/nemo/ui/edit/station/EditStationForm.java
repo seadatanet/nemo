@@ -374,7 +374,8 @@ public class EditStationForm extends EditForm {
 		}
 
 		// ENDDATETIME flag !!
-		if (mModel.getInputType() != E_InputType.PROFILE) {
+		// TODO 42483: what if unknown type (bio or micro)?
+		if (mModel.getInputType() == E_InputType.TIMESERIES || mModel.getInputType() == E_InputType.TRAJECTORY) {
 			PropertyModel propertyModel = sModel.propertiesAt(Intern.S_EDATE);
 			qcFlags.setFlagFragment(propertyModel.getFlag(), Intern.ENDDATETIME, Messages.getString(Intern.ENDDATETIME).trim());
 		}
@@ -403,8 +404,9 @@ public class EditStationForm extends EditForm {
 		// DM HISTORY 1&2
 		// station.setDmHistory1(Global.EMPTY_STRING);
 		// station.setDmHistory2(Global.EMPTY_STRING);
-
-		if (inputType != E_InputType.PROFILE) {
+		
+		// TODO 42483: what if unknown type (bio or micro)?
+		if (inputType == E_InputType.TIMESERIES || inputType == E_InputType.TRAJECTORY) {
 			// GESTION Time/Date in Data
 			if (!samplingRate.getSection().isDisposed()) {
 				if (samplingRate.isEnabled()) {

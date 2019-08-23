@@ -214,22 +214,36 @@ public class ParameterManager {
 		case  PHYSICOCHEMICAL:
 			setAddedParameterModelForPhysicochemical();
 			break;
-		case  UNKNOWN: // old models TODO VARIANT: set variant to PHYSICOCHEMICAL during model reading
-			setAddedParameterModelForPhysicochemical();
+		case  BIOLOGICAL: 
+			resetParameterModels();
+			break;
+		case  MICROLITTER: 
+			resetParameterModels();
+			break;
+		case  FLOWCYTO: 
+			resetParameterModels();
+			break;
+		case  UNKNOWN: 
+			resetParameterModels();
 			break;
 		default:
 			break;
 		}
 	}
-	public void setAddedParameterModelForPhysicochemical() {
-		
-		
+	
+	private void resetParameterModels() {
 		/**
 		 * ====================================================================
 		 * reset systematique des parametres stockes dans le dataModel
 		 */
 		_odvParameterModels = new ArrayList<ParameterModel>();
 		_medParameterModels = new ArrayList<ParameterModel>();
+	}
+	
+	public void setAddedParameterModelForPhysicochemical() {
+		
+		
+		resetParameterModels();
 
 		/**
 		 * ====================================================================

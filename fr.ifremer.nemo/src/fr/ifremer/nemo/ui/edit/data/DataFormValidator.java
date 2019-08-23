@@ -224,41 +224,12 @@ public class DataFormValidator extends FormValidator {
 					 * premiere position
 					 **/
 					boolean verticProfilParamOk;
-					verticProfilParamOk =
-							checkProfilVerticalParameterIsInFirstPosition();
+					verticProfilParamOk = checkProfilVerticalParameterIsInFirstPosition();
 					ok = ok && verticProfilParamOk;
-					/** data70/75 Medatlas( FAE 3228/7257 ) **/
 
 					if (ok
 							&& RulesManager.getInstance().isConversionToMedatlas()
 							&& rm.getMyMesureType() == E_MesureType.BSSURF) {
-//						// data70 Si on a PRES dans le tableau, il faut qu'il
-//						// soit en 1ère position
-//						if (rm.getMyVerticalParametersList().getP_pressure() != Global.EMPTY_STRING) {
-//							boolean data70 =
-//									getFirstParameterCode().equals(
-//											rm.getMyVerticalParametersList()
-//													.getP_pressure());
-//							if (!data70) {
-//								Utils.messageErreurAppend(Messages.ViewLog_70
-//										+ " (data70)"); //$NON-NLS-1$
-//							}
-//							ok = ok && data70;
-//						}
-						// data75 Si on a DEPH en 1er, il faut TEMP et PSAL
-						// présents
-//						else if (getFirstParameterCode()
-//								.equals(
-//										rm.getMyVerticalParametersList()
-//												.getP_depthBSSurf())) {
-//							boolean data75 =
-//									checkDepthAndSalinityAndTemperature();
-//							if (!data75) {
-//								Utils.messageErreurAppend(Messages.ViewLog_75
-//										+ " (data75)"); //$NON-NLS-1$
-//							}
-//							ok = ok && data75;
-//						}
 						// data 76
 						// primary parameter must be DEPH or PRES
 						ok = getFirstParameterCode().equals(
@@ -441,38 +412,6 @@ public class DataFormValidator extends FormValidator {
 		return premierType.getCodeToUse();
 	}
 
-	/**
-	 * @return
-	 */
-	private boolean checkDepthAndSalinityAndTemperature() {
-		boolean ok;
-		EditDataForm editDataForm =
-				Nemo.getInstance().getViewMain().getEditDataForm();
-		EditConversionForm editConversionForm =
-				Nemo.getInstance().getViewMain().getEditConversionForm();
-		ParameterManager pm =
-				Nemo.getInstance().getDomain().getData().getMyParameterManager();
-
-		boolean isDEPH =
-				!rm.getMyVerticalParametersList().getP_depthBSSurf()
-						.equals(Global.EMPTY_STRING); // false;
-
-		boolean isPSAL = false;
-		boolean isTEMP = false;
-		for (TypeData donnee : editDataForm.getMyTableData().getTypes()) {
-			if (donnee.getEntryKey().equals(pm.getP_salinityCode())) {
-				isPSAL = true;
-			} else if (donnee.getEntryKey().equals(pm.getP_temperatureCode())) {
-				isTEMP = true;
-			}
-		}
-		ok = isPSAL && isTEMP && isDEPH;
-		if (!ok) {
-			editConversionForm.setWarningData(Messages.ViewLog_75);
-		}
-		return ok;
-
-	}
 
 	/**
 	 * verification: un parametre de type pression ou equivalent doit être

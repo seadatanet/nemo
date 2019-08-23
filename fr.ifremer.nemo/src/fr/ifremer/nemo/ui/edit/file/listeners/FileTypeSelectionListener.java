@@ -52,7 +52,7 @@ public class FileTypeSelectionListener  implements SelectionListener
         }
 
         RulesManager.getInstance().updateFromIHM(currentFileType);
-        RulesManager.getInstance().defineSectionMandatory();
+//        RulesManager.getInstance().defineSectionMandatory();
     }
     
 }

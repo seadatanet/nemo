@@ -320,6 +320,7 @@ public class Messages {
 	public static String error_file_idcBeginLineChangeEmpty;
 	public static String error_file_convertFormatUnknown;
 	public static String error_file_inputTypeUnknown;
+	public static String error_file_inputVariantUnknown;
 	public static String error_cruise_openXml;
 	public static String error_cruise_invalidXML;
 	public static String error_data_removePRES;

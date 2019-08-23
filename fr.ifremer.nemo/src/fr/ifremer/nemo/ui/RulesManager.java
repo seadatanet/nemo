@@ -53,7 +53,7 @@ public class RulesManager {
 	private E_TypeConversion myConversionType;
 	private E_InputType myFileType;
 	private E_Variant myInputVariant;
-	
+
 	private DataListTypeEnum myDataListType;
 	private E_MesureType myMesureType;
 	private VerticalParametersList myVerticalParametersList;
@@ -94,7 +94,7 @@ public class RulesManager {
 	public static E_TypeConversion DEFAULT_CONVERSIONTYPE =
 			E_TypeConversion.UNKNOWN;
 	public static E_InputType DEFAULT_FILETYPE = E_InputType.UNKNOWN;
-	public static E_Variant DEFAULT_VARIANT = E_Variant.PHYSICOCHEMICAL;
+	public static E_Variant DEFAULT_VARIANT = E_Variant.UNKNOWN;
 	public static DataListTypeEnum DEFAULT_DATALIST = DataListTypeEnum.UNKNOWN;
 	public static E_MesureType DEFAULT_MESURETYPE = E_MesureType.BSSURF;
 
@@ -122,11 +122,11 @@ public class RulesManager {
 		setDefaultValues();
 	}
 
-	public void defineSectionMandatory() {
-		myEditCruiseForm.defineMandatorySections();
-		myEditFileForm.defineMandatorySections();
-		myEditStationForm.defineMandatorySections();
-	}
+	//	public void defineSectionMandatory() {
+	//		myEditCruiseForm.defineMandatorySections();
+	//		myEditFileForm.defineMandatorySections();
+	//		myEditStationForm.defineMandatorySections();
+	//	}
 
 	private void setDefaultValues() {
 		messageLog = Global.EMPTY_STRING;
@@ -164,7 +164,7 @@ public class RulesManager {
 		setDefaultValues();
 		myEditFileForm.resetDefaultSelectionSeparator();
 		myEditFileForm.resetDefaultSelectionFileType();
-		myEditFileForm.resetDefaultSelectionDataType();
+		myEditFileForm.resetDefaultSelectionVariant();
 		myEditFileForm.resetDefaultEnableConversionTypes();
 		myConversionType = getDefaultConversionTypeWithRules();
 		myEditFileForm.selectConversion(myConversionType);
@@ -249,15 +249,15 @@ public class RulesManager {
 		reinitRules();
 		rule_process(true);
 		rule_fileType(true);
+		
 		myConversionType = getDefaultConversionTypeWithRules();
 		rule_conversionType(true);
 		myEditFileForm.updateEnableConversionTypes();
 		myEditFileForm.selectConversion(myConversionType);
+		
 		Nemo.getInstance().getViewMain().enableCruiseTab(isCruiseEnabled());
-		Nemo.getInstance().getViewMain().getEditDataForm()
-		.enableP011viaP021(isConversionToODV() || isConversionToNetCDF());
-		Nemo.getInstance().getViewMain().getEditDataForm()
-		.enableP091(!isConversionToNetCDF());
+		Nemo.getInstance().getViewMain().getEditDataForm().enableP011viaP021(isConversionToODV() || isConversionToNetCDF());
+		Nemo.getInstance().getViewMain().getEditDataForm().enableP091(!isConversionToNetCDF());
 		Nemo.getInstance().getViewMain().getEditDataForm().enableAboveSeaLevel(!isConversionToMedatlas());
 		ViewLog.styledTextLogErreurs.setText(messageLog);
 		resetDataForm();
@@ -295,7 +295,7 @@ public class RulesManager {
 			return "\\|"; //$NON-NLS-1$
 		}
 		return separator;
-		
+
 	}
 	/**
 	 * RECEPTION MAJ FILETYPE
@@ -317,18 +317,15 @@ public class RulesManager {
 		rule_conversionType(true);
 		myEditFileForm.updateEnableConversionTypes();
 		myEditFileForm.selectConversion(myConversionType);
+		
 		Nemo.getInstance().getViewMain().enableCruiseTab(isCruiseEnabled());
-		Nemo.getInstance().getViewMain().getEditDataForm()
-		.enableP011viaP021(isConversionToODV() || isConversionToNetCDF());
-		Nemo.getInstance().getViewMain().getEditDataForm()
-		.enableP091(!isConversionToNetCDF());
+		Nemo.getInstance().getViewMain().getEditDataForm().enableP011viaP021(isConversionToODV() || isConversionToNetCDF());
+		Nemo.getInstance().getViewMain().getEditDataForm().enableP091(!isConversionToNetCDF());
 		Nemo.getInstance().getViewMain().getEditDataForm().enableAboveSeaLevel(!isConversionToMedatlas());
 		ViewLog.styledTextLogErreurs.setText(messageLog);
 
 		rule_mesureType();
-		GroupVerticalParameters verticGroup =
-				Nemo.getInstance().getViewMain().getEditDataForm()
-				.getMyGroupeVerticalParameters();
+		GroupVerticalParameters verticGroup =	Nemo.getInstance().getViewMain().getEditDataForm().getMyGroupeVerticalParameters();
 		verticGroup.enable_pDepthBSBed(isP_depthBSBed_enabled());
 		verticGroup.enable_pDepthBSSurf(isP_depthBSSurf_enabled());
 		verticGroup.enable_pPressure(isP_pressure_enabled());
@@ -351,9 +348,9 @@ public class RulesManager {
 
 		myConversionType = getCurrentConversionTypeWithRules(myConversionType);
 		rule_conversionType(true);
-
 		myEditFileForm.updateEnableConversionTypes();
 		myEditFileForm.selectConversion(myConversionType);
+		
 		Nemo.getInstance().getViewMain().enableCruiseTab(isCruiseEnabled());
 		Nemo.getInstance().getViewMain().getEditDataForm()
 		.enableP011viaP021(isConversionToODV() || isConversionToNetCDF());
@@ -363,25 +360,73 @@ public class RulesManager {
 		.enableAboveSeaLevel(!isConversionToMedatlas());
 		ViewLog.styledTextLogErreurs.setText(messageLog);
 	}
-	
-	
+
+
 	public void updateFromModel(E_Variant inputVariant) {
 		myInputVariant = inputVariant;
 		myEditFileForm.selectVariant(inputVariant);
+	
 	}
-	
-	
-	public void updateFromIHM(E_Variant currentInputDataType) {
-		myInputVariant = currentInputDataType;
-		if (currentInputDataType == E_Variant.PHYSICOCHEMICAL || currentInputDataType == E_Variant.FLOWCYTO) {
+
+
+	public void updateFromIHM(E_Variant variant) {
+		boolean confirm = true;
+		
+		
+		if (myInputVariant != variant) {
+			if (myDataListType != DataListTypeEnum.P011_VIA_P021
+					&& (variant == E_Variant.BIOLOGICAL || variant == E_Variant.MICROLITTER || variant == E_Variant.FLOWCYTO ) ) {
+				confirm =
+						MessageDialog.openConfirm(null,
+								Messages.edit_data_dataListDialogBox_title,
+								Messages.edit_data_dataListDialogBox_text);
+			}
+		}else {
+			return;// nochange
+		}
+
+		if (confirm) {
+		reinitRules();
+		Nemo.getInstance().getViewMain().getEditDataForm().enableP091(variant == E_Variant.PHYSICOCHEMICAL);
+		Nemo.getInstance().getViewMain().getEditDataForm().enableP011viaP091(variant == E_Variant.PHYSICOCHEMICAL);
+		Nemo.getInstance().getViewMain().getEditDataForm().enableP011viaP021(true);
+		
+		myInputVariant = variant;
+		if (variant == E_Variant.PHYSICOCHEMICAL || variant == E_Variant.FLOWCYTO) {
 			Nemo.getInstance().getViewMain().getEditFileForm().enableFileTypeChoice(true);
 		}else {
 			Nemo.getInstance().getViewMain().getEditFileForm().deselectAndDisableSelectionFileType();
+			myFileType=DEFAULT_FILETYPE;
+		}
+
+		if (variant == E_Variant.BIOLOGICAL
+				|| variant == E_Variant.FLOWCYTO
+				|| variant == E_Variant.MICROLITTER
+				) {
+			myDataListType=DataListTypeEnum.P011_VIA_P021;
 		}
 		
+		rule_variant(true);
+		
+		myConversionType = getCurrentConversionTypeWithRules(myConversionType);
+		rule_conversionType(true);
+		myEditFileForm.updateEnableConversionTypes();
+		myEditFileForm.selectConversion(myConversionType);
+		//***************** TODO a supprimer d'ici - a ne lancer que pour l'affichage de l'onglet data
+		Nemo.getInstance().getViewMain().getEditDataForm().setMustBeReinit(true);
+		//		Nemo.getInstance().getViewMain().getEditDataForm().reinitTableData();
+		//		Nemo.getInstance().getViewMain().getEditDataForm().getMyGroupeVerticalParameters().removeAllToAllCombos();
+		//		Nemo.getInstance().getViewMain().getEditDataForm().resetFallRate();
+		//
+		//		// !!! le fillTypes doit être appelé APRES le removeToAllcombos
+		//		Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().fillTypes();
+				Nemo.getInstance().getViewMain().getEditFileForm().invalidEtape();
+		//*****************
+		}
+		ViewLog.styledTextLogErreurs.setText(messageLog);
 	}
-	
-	
+
+
 	public void updateFromModel(TypeFallRate typeFallRate) {
 		if (typeFallRate != null&& isFallrateEnabled()){
 			Nemo.getInstance().getViewMain().getEditDataForm().setFallrateCode(typeFallRate.getKey());
@@ -403,7 +448,7 @@ public class RulesManager {
 		boolean mustReinitDataForm = false;
 		boolean mustChangeDatalist = false;
 		E_TypeConversion tmp = myConversionType;
-		DataListTypeEnum newDataList = myDataListType;
+//		DataListTypeEnum newDataList = myDataListType;
 		if (myConversionType != convType) {
 			if (myDataListType == DataListTypeEnum.UNKNOWN) {
 				mustChangeDatalist = true;
@@ -415,7 +460,7 @@ public class RulesManager {
 								Messages.edit_data_dataListDialogBox_title,
 								Messages.edit_data_dataListDialogBox_text);
 				myDataListType = DEFAULT_DATALIST;
-				newDataList = myDataListType;
+//				newDataList = myDataListType;
 				mustReinitDataForm = true;
 			}
 			if (myDataListType == DataListTypeEnum.P091
@@ -425,7 +470,7 @@ public class RulesManager {
 								Messages.edit_data_dataListDialogBox_title,
 								Messages.edit_data_dataListDialogBox_text);
 				myDataListType = DEFAULT_DATALIST;
-				newDataList = myDataListType;
+//				newDataList = myDataListType;
 				mustReinitDataForm = true;
 			}
 			if (confirm) {
@@ -434,34 +479,28 @@ public class RulesManager {
 				rule_fileType(true);
 				myConversionType = convType;
 				rule_conversionType(true);
-				Nemo.getInstance().getViewMain()
-				.enableCruiseTab(isCruiseEnabled());
+				Nemo.getInstance().getViewMain().enableCruiseTab(isCruiseEnabled());
 				m_aboveSeaLevel_Enabled = !isConversionToMedatlas();
 				Nemo.getInstance().getViewMain().getEditDataForm().enableAboveSeaLevel(m_aboveSeaLevel_Enabled);
 
 				dataList_P011viaP021_Enabled = isConversionToODV() || isConversionToNetCDF();
-				Nemo.getInstance().getViewMain().getEditDataForm()
-				.enableP011viaP021(dataList_P011viaP021_Enabled);
+				Nemo.getInstance().getViewMain().getEditDataForm().enableP011viaP021(dataList_P011viaP021_Enabled);
 				dataList_P091_Enabled = !isConversionToNetCDF();
-				Nemo.getInstance().getViewMain().getEditDataForm()
-				.enableP091(dataList_P091_Enabled);
+				Nemo.getInstance().getViewMain().getEditDataForm().enableP091(dataList_P091_Enabled);
 
 				// ensuite on selectionne si necessaire
 				if (mustReinitDataForm || mustChangeDatalist) {
-					// reinit
-					Nemo.getInstance().getViewMain().getEditDataForm()
-					.reinitParameters();
-					Nemo.getInstance().getViewMain().getEditDataForm()
-					.reinitTableData();
-					Nemo.getInstance().getViewMain().getEditDataForm()
-					.getMyGroupeVerticalParameters().removeAllToAllCombos();
-					// !!! le fillTypes doit être appelé APRES le
-					// removeToAllcombos, car il peut ajouter PRES
-					// automatiquement
-					Nemo.getInstance().getViewMain().getEditDataForm()
-					.getMyTableData().fillTypes();
-					Nemo.getInstance().getViewMain().getEditDataForm()
-					.selectDataList(newDataList);
+					Nemo.getInstance().getViewMain().getEditDataForm().setMustBeReinit(true);
+					//***************** TODO a supprimer d'ici - a ne lancer que pour l'affichage de l'onglet data
+					//					// reinit
+					//					Nemo.getInstance().getViewMain().getEditDataForm().reinitParameters();
+					//					Nemo.getInstance().getViewMain().getEditDataForm().reinitTableData();
+					//					Nemo.getInstance().getViewMain().getEditDataForm().getMyGroupeVerticalParameters().removeAllToAllCombos();
+					//					// !!! le fillTypes doit être appelé APRES le
+					//					// removeToAllcombos, car il peut ajouter PRES
+					//					// automatiquement
+					//					Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().fillTypes();
+					//					Nemo.getInstance().getViewMain().getEditDataForm().selectDataList(newDataList);
 
 				}
 
@@ -478,21 +517,17 @@ public class RulesManager {
 		reinitRules();
 		rule_process(false);
 		rule_fileType(false);
-		myConversionType = convType;
-		rule_conversionType(true);
-
+		
+		
 		myConversionType = getCurrentConversionTypeWithRules(convType);
-
+		rule_conversionType(true);
 		myEditFileForm.updateEnableConversionTypes();
 		myEditFileForm.selectConversion(myConversionType);
 
 		Nemo.getInstance().getViewMain().enableCruiseTab(isCruiseEnabled());
-		Nemo.getInstance().getViewMain().getEditDataForm()
-		.enableP011viaP021(isConversionToODV() || isConversionToNetCDF());
-		Nemo.getInstance().getViewMain().getEditDataForm()
-		.enableAboveSeaLevel(!isConversionToMedatlas());
-		Nemo.getInstance().getViewMain().getEditDataForm()
-		.enableP091(!isConversionToNetCDF());
+		Nemo.getInstance().getViewMain().getEditDataForm().enableP011viaP021(isConversionToODV() || isConversionToNetCDF());
+		Nemo.getInstance().getViewMain().getEditDataForm().enableAboveSeaLevel(!isConversionToMedatlas());
+		Nemo.getInstance().getViewMain().getEditDataForm().enableP091(!isConversionToNetCDF());
 		ViewLog.styledTextLogErreurs.setText(messageLog);
 
 	}
@@ -529,14 +564,18 @@ public class RulesManager {
 		myFileType = DEFAULT_FILETYPE;
 		rule_process(true);
 		rule_fileType(true);
-		myConversionType = getDefaultConversionTypeWithRules();
-		rule_conversionType(true);
+//		myConversionType = getDefaultConversionTypeWithRules();
+//		rule_conversionType(true);
 		myEditFileForm.razText();
 		myEditFileForm.resetDefaultSelectionSeparator();
 		myEditFileForm.selectTypeFile(myFileType);
 		myEditFileForm.resetDefaultSelectionFileType();
+		
+		myConversionType = getDefaultConversionTypeWithRules();
+		rule_conversionType(true);
 		myEditFileForm.updateEnableConversionTypes();
 		myEditFileForm.selectConversion(myConversionType);
+		
 		Nemo.getInstance().getViewMain().enableCruiseTab(isCruiseEnabled());
 		Nemo.getInstance().getViewMain().getEditDataForm()
 		.enableP011viaP021(isConversionToODV() || isConversionToNetCDF());
@@ -567,25 +606,17 @@ public class RulesManager {
 			}
 			if (confirm) {
 				myDataListType = dataListType;
-				Nemo.getInstance().getViewMain().getEditDataForm()
-				.reinitTableData();
-				Nemo.getInstance().getViewMain().getEditDataForm()
-				.getMyGroupeVerticalParameters().removeAllToAllCombos();
-
+				Nemo.getInstance().getViewMain().getEditDataForm().reinitTableData();
+				Nemo.getInstance().getViewMain().getEditDataForm().getMyGroupeVerticalParameters().removeAllToAllCombos();
 				Nemo.getInstance().getViewMain().getEditDataForm().resetFallRate();
-
-
 				// !!! le fillTypes doit être appelé APRES le removeToAllcombos
-				Nemo.getInstance().getViewMain().getEditDataForm()
-				.getMyTableData().fillTypes();
-				
+				Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().fillTypes();
 				Nemo.getInstance().getViewMain().getEditDataForm().invalidEtape();
-				
+
 			} else {
 				// si pas confirmation, et ne touche a rien et on remet la
 				// valeur de depart
-				Nemo.getInstance().getViewMain().getEditDataForm()
-				.selectDataList(myDataListType);
+				Nemo.getInstance().getViewMain().getEditDataForm().selectDataList(myDataListType);
 			}
 		}
 
@@ -594,13 +625,10 @@ public class RulesManager {
 	public void updateFromModel(DataListTypeEnum dataListType) {
 
 		myDataListType = dataListType;
-		Nemo.getInstance().getViewMain().getEditDataForm()
-		.enableP011viaP021(isConversionToODV() || isConversionToNetCDF());
-		Nemo.getInstance().getViewMain().getEditDataForm()
-		.enableP091(!isConversionToNetCDF());
+		Nemo.getInstance().getViewMain().getEditDataForm().enableP011viaP021(isConversionToODV() || isConversionToNetCDF());
+		Nemo.getInstance().getViewMain().getEditDataForm().enableP091(!isConversionToNetCDF());
 		Nemo.getInstance().getViewMain().getEditDataForm().enableAboveSeaLevel(!isConversionToMedatlas());
-		Nemo.getInstance().getViewMain().getEditDataForm()
-		.selectDataList(dataListType);
+		Nemo.getInstance().getViewMain().getEditDataForm().selectDataList(dataListType);
 		ViewLog.styledTextLogErreurs.setText(messageLog);
 
 	}
@@ -658,19 +686,19 @@ public class RulesManager {
 				myInputVariant==E_Variant.PHYSICOCHEMICAL
 				&& (isProfile() || isTrajectory())
 				&& myMesureType == E_MesureType.BSBED;
-		
-		
+
+
 		boolean p_depthBSSurf = false;
 		if (myInputVariant==E_Variant.PHYSICOCHEMICAL) {
 			p_depthBSSurf =
 					(isProfile() && myMesureType == E_MesureType.BSSURF)
 					|| ((isTimeSeries() || isTrajectory())
-					&& (isConversionToODV() || isConversionToNetCDF()) && myMesureType == E_MesureType.BSSURF);
+							&& (isConversionToODV() || isConversionToNetCDF()) && myMesureType == E_MesureType.BSSURF);
 		}else {
-			 p_depthBSSurf = false;
+			p_depthBSSurf = false;
 		}
 
-		
+
 		boolean p_pressure = 	myInputVariant==E_Variant.PHYSICOCHEMICAL && isProfile() && myMesureType == E_MesureType.BSSURF;
 		boolean p_heightASLvl = false;
 		if (	myInputVariant==E_Variant.PHYSICOCHEMICAL) {
@@ -686,11 +714,25 @@ public class RulesManager {
 		setM_aboveSeaLevel_enabled(!isConversionToMedatlas());
 
 	}
-
+	private boolean isVariantODV() {
+		return myInputVariant==E_Variant.BIOLOGICAL||myInputVariant==E_Variant.FLOWCYTO||myInputVariant==E_Variant.MICROLITTER;
+	}
 	/******************************************
 	 * REGLES
 	 ******************************************/
-
+	private void rule_variant(boolean addToLog) {
+		// if input is bio/cyto/micro ODV variant, Nemo can generate only ODV or CF (need P01 parameters)
+		if (isVariantODV()) {
+			medatlasEnabled = false;
+			if (addToLog) {
+				messageLog +=
+//						Messages.edit_file_info_medatlasForbiddenBecauseCollection
+						"TODO: only ODV or CFPoint is allowed for bio/cyto/micro variants"
+						+ Global.RN;
+			}
+		}
+	}
+	
 	private void rule_process(boolean addToLog) {
 		// FAE 0001134: dans le cas d'une collection, on ne peut generer que le
 		// format ODV
@@ -822,7 +864,7 @@ public class RulesManager {
 	public boolean isTimeSeries() {
 		return myFileType == E_InputType.TIMESERIES;
 	}
-	
+
 	// Input data type (physicoChm, bio, flowcyto, microlitter)
 	public E_Variant getMyInputVariant() {
 		return myInputVariant;
@@ -984,6 +1026,6 @@ public class RulesManager {
 		this.separator = separator;
 
 	}
-	
+
 
 }

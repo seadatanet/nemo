@@ -334,7 +334,7 @@ public class GrpAutoInput implements UIobject
         if (posVariable)
             buttonVari.setSelection(valueVariable);
 
-        if (hasDefaultValue)
+        if (defaultValueEnable && hasDefaultValue)
         {
             textDefaultValue.setEnabled(isDefaultValueSeceted);
 

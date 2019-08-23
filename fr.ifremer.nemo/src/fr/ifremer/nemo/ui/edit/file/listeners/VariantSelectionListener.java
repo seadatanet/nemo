@@ -4,11 +4,12 @@ import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 
 import fr.ifremer.nemo.ui.RulesManager;
+import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.file.EditFileForm;
 import fr.ifremer.nemo.util.Global.E_Variant;
 
 /**
- * Description: listener sur la selection du type de variante ODV
+ * Description: listener sur la selection du type de variante (pour fichiers d'entree en ODV)
  * @author sbregent
  *
  */
@@ -22,12 +23,14 @@ public class VariantSelectionListener  implements SelectionListener
         myEditFileForm = editFileForm;
     }
     
-    public void widgetDefaultSelected( SelectionEvent g)
+    @Override
+	public void widgetDefaultSelected( SelectionEvent g)
     {
         widgetSelected(g);
     }
     
-    public void widgetSelected( SelectionEvent e)
+    @Override
+	public void widgetSelected( SelectionEvent e)
     {
 
     	E_Variant currentVariant = E_Variant.PHYSICOCHEMICAL;
@@ -46,9 +49,9 @@ public class VariantSelectionListener  implements SelectionListener
         {
             currentVariant = E_Variant.MICROLITTER;
         }
-
         RulesManager.getInstance().updateFromIHM(currentVariant);
-        RulesManager.getInstance().defineSectionMandatory();
+        // invalidation de l'etape quand modif
+        Utils.invalidEtapes();
     }
     
 }

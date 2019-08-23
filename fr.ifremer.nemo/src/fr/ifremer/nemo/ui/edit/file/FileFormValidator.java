@@ -20,9 +20,9 @@ import fr.ifremer.nemo.ui.edit.NemoSection;
 import fr.ifremer.nemo.ui.edit.cruise.EditCruiseForm;
 import fr.ifremer.nemo.ui.view.ViewLog;
 import fr.ifremer.nemo.util.Global;
-import fr.ifremer.nemo.util.Global.E_Variant;
 import fr.ifremer.nemo.util.Global.E_InputType;
 import fr.ifremer.nemo.util.Global.E_TypeConversion;
+import fr.ifremer.nemo.util.Global.E_Variant;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.util.Preformat;
 
@@ -43,6 +43,7 @@ public class FileFormValidator extends FormValidator
 	{
 		try
 		{
+			Nemo.getInstance().getViewMain().setEtape(0);
 			EditFileForm editFileForm =	Nemo.getInstance().getViewMain().getEditFileForm();
 
 			// retour à l'onglet message d'erreur
@@ -56,10 +57,15 @@ public class FileFormValidator extends FormValidator
 
 			// first check if an output format has been set
 			if (RulesManager.getInstance().getMyConversionType() == E_TypeConversion.UNKNOWN)
-			{
+			{				
 				Utils.messageErreur(Messages.error_file_convertFormatUnknown);
 				return;
 			}
+			if (RulesManager.getInstance().getMyInputVariant()==E_Variant.UNKNOWN) {
+				Utils.messageErreur(Messages.error_file_inputVariantUnknown);
+				return;
+			}
+					
 			if (RulesManager.getInstance().getMyFileType() == E_InputType.UNKNOWN)
 			{
 				if (RulesManager.getInstance().getMyInputVariant()==E_Variant.BIOLOGICAL
@@ -139,15 +145,13 @@ public class FileFormValidator extends FormValidator
 			}
 			else
 			{
-				Nemo.getInstance().getViewMain().tabFile
-				.setText(Messages.onglet_file_error);
+				Nemo.getInstance().getViewMain().tabFile.setText(Messages.onglet_file_error);
 				Nemo.getInstance().getViewMain().setEtape(0);
 
 				editFileForm.initFromNewModel();
-				Nemo.getInstance().getDomain().getMedia()
-				.buildInputFilesNames();
+				Nemo.getInstance().getDomain().getMedia().buildInputFilesNames();
 			}
-			RulesManager.getInstance().defineSectionMandatory();
+//			RulesManager.getInstance().defineSectionMandatory();
 
 		}
 		catch (Exception e)

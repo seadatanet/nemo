@@ -92,16 +92,14 @@ public class OutputFormatRadioSelectionListener implements SelectionListener
             }
         }
         
-        RulesManager.getInstance().defineSectionMandatory();
-     
-//        boolean confirm = MessageDialog.openConfirm(null, 
-//            Messages.edit_data_dataListDialogBox_title,
-//            Messages.edit_data_dataListDialogBox_text);
-     
+        
         Nemo.getInstance().getDomain().getConversion().setCurrentConversion(currentConv);
         Nemo.getInstance().getViewMain().getEditFileForm().afficheGrpODV();
         
-        
+        if ( currentConv == E_TypeConversion.UNKNOWN) {
+            Utils.invalidEtapes();
+        	return; // no need to update all if still unknown (user has to choose between mono and multi)
+        }
         Nemo.getInstance().getDomain().getConversion().getModel().setOutputFormat(currentConv);
         Nemo.getInstance().getViewMain().getEditConversionForm().fillSummary();
         RulesManager.getInstance().updateFromIHM(currentConv);

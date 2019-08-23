@@ -303,12 +303,10 @@ public class EditCruiseForm extends EditForm {
 			/** 
 			 * DATA TYPE
 			 **/
-			sectionType.setEnabled(RulesManager.getInstance()
-					.isConversionToMedatlas()
+			sectionType.setEnabled(RulesManager.getInstance().isConversionToMedatlas()
 //					|| RulesManager.getInstance().isConversionToNetCDF() // 25528 disable for netcdf
 					);
-			sectionType.setMandatory(RulesManager.getInstance()
-					.isConversionToMedatlas());
+			sectionType.setMandatory(RulesManager.getInstance()	.isConversionToMedatlas());
 		}
 	}
 	public void init_webService() {
