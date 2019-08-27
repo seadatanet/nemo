@@ -678,7 +678,7 @@ public class StationDomain {
 			medStationHeader.append(Global.RN);
 			errorMessage = "station header";
 			E_InputType inputType = Nemo.getInstance().getDomain().getMedia().getModel().getInputType();
-			if (inputType==E_InputType.TRAJECTORY || inputType==E_InputType.TIMESERIES) { // TODO 42483: what if unknown type (bio or micro)?
+			if (inputType==E_InputType.TRAJECTORY || inputType==E_InputType.TIMESERIES) { 
 				medStationHeader.append(getMedTimeSeriesHeader(currentStation,inputStationHeader));
 			}
 
