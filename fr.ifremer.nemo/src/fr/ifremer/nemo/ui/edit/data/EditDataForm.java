@@ -179,12 +179,11 @@ public class EditDataForm extends EditForm {
 		
 		//**********************************
 		if (isMustBeReinit()) {
-//		Nemo.getInstance().getViewMain().getEditDataForm().reinitTableData();
-		getMyGroupeVerticalParameters().removeAllToAllCombos();
-		resetFallRate();
-		Nemo.getInstance().getViewMain().getEditDataForm().selectDataList(RulesManager.getInstance().getMyDataListType());
-		// !!! le fillTypes doit être appelé APRES le removeToAllcombos
-		getMyTableData().fillTypes();
+			getMyGroupeVerticalParameters().removeAllToAllCombos();
+			resetFallRate();
+			Nemo.getInstance().getViewMain().getEditDataForm().selectDataList(RulesManager.getInstance().getMyDataListType());
+			// !!! le fillTypes doit être appelé APRES le removeToAllcombos
+			getMyTableData().fillTypes();
 		}
 //		Nemo.getInstance().getViewMain().getEditDataForm().invalidEtape();
 		//*********************************
@@ -198,12 +197,12 @@ public class EditDataForm extends EditForm {
 		}else{
 
 			// text area
-			setTextAreaData(new StyledText(this.inputComposite, SWT.MULTI | SWT.READ_ONLY | SWT.H_SCROLL
-					| SWT.V_SCROLL));
+			setTextAreaData(new StyledText(this.inputComposite, SWT.MULTI | SWT.READ_ONLY | SWT.H_SCROLL | SWT.V_SCROLL));
 			getTextAreaData().setFont(Utils.fontCourier);
 
 			textAreaData.setText(Utils.texteBrut);
 		}
+		
 
 		setLoaded(true);
 		Nemo.getInstance().getViewMain().setAffiche(3);
@@ -214,6 +213,7 @@ public class EditDataForm extends EditForm {
 
 		if (myTableData.getTypes() != null && !myTableData.getTypes().isEmpty()) {
 			myTableData.razAndRecreateTable();
+			myTableData.fillTypes();
 		} else if (!Global.EMPTY_STRING.equals(modelName)) {
 			fillFromModel();
 		} else {
