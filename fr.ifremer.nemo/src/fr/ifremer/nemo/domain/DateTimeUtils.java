@@ -17,7 +17,9 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.text.DecimalFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
@@ -29,6 +31,7 @@ import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Global.E_InputType;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.format.DateTimeFormat;
+import fr.ifremer.sismer_tools.SismerToolsException;
 
 /**
  * Class DateTimeUtils.java
@@ -130,7 +133,7 @@ public class DateTimeUtils {
 			String frgmntDate = "";
 			
 			if (dateModel.isInData()) {
-				// récupération dans la donnée
+				// rï¿½cupï¿½ration dans la donnï¿½e
 				frgmntDate = dateModel.getFragment().fullRetreiveInLine(inputLine);
 			} else {
 				// manuel
@@ -141,7 +144,7 @@ public class DateTimeUtils {
 			String frgmntTime = "";
 			
 			if (timeModel.isInData()) {
-				// récupération dans la donnée
+				// rï¿½cupï¿½ration dans la donnï¿½e
 				frgmntTime = timeModel.getFragment().fullRetreiveInLine(inputLine);
 			} else {
 				// manuel
@@ -150,8 +153,8 @@ public class DateTimeUtils {
 
 			// FAE 0001229 : Conversion date et heure : s'il manque des Zeros il
 			// faut que NEMO les mette
-			frgmntDate = frgmntDate.replace(' ', '0');
-			frgmntTime = frgmntTime.replace(' ', '0');
+//			frgmntDate = frgmntDate.replace(' ', '0');
+//			frgmntTime = frgmntTime.replace(' ', '0');
 			
 			frgmntFullDate = frgmntDate + Global.SPACE + frgmntTime;
 
@@ -300,6 +303,55 @@ public class DateTimeUtils {
 		String time = Formatter.getSingleton().formatDateTime("hh24:mm:ss.sss", currentDate); //$NON-NLS-1$
 		value.append(time);
 		return value.toString();
+	}
+	
+	/**
+	 * Gets the date from a datetime passed as a long.
+	 * 
+	 * @param dateTime the datetime as a long.
+	 * @return a long representing the date.
+	 * @throws SismerToolsException
+	 */
+	public static long dateTimeToDate(long dateTime) throws SismerToolsException {
+
+		SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy"); //$NON-NLS-1$
+		formatter.setTimeZone(TimeZone.getTimeZone("GMT0")); //$NON-NLS-1$
+
+		Date date = new Date(dateTime);
+
+		try {
+			Date dateOnly = formatter.parse(formatter.format(date));
+
+			return dateOnly.getTime();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new SismerToolsException(e.getMessage());
+		}
+	}
+	
+	/**
+	 * Gets the time from a datetime passed as a long.
+	 * 
+	 * @param dateTime the datetime as a long.
+	 * @return a long representing the time.
+	 * @throws SismerToolsException
+	 */
+	public static long dateTimeToTime(long dateTime) throws SismerToolsException {
+
+		SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss"); //$NON-NLS-1$
+		formatter.setTimeZone(TimeZone.getTimeZone("GMT0")); //$NON-NLS-1$
+		
+		Date date = new Date(dateTime);
+
+		try {
+			Date timeOnly = formatter.parse(formatter.format(date));
+			return timeOnly.getTime();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new SismerToolsException(e.getMessage());
+		}
 	}
 
 }

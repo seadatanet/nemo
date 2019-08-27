@@ -96,6 +96,8 @@ public class Station implements Comparable {
 			_longitude = ((Double) stationDomain.getModel().getProperty(Intern.S_LON).applyOn(inputStationHeader)).doubleValue();
 			errorMessage = Intern.S_DATE;
 			_date = ((Long) stationDomain.getModel().getProperty(Intern.S_DATE).applyOn(inputStationHeader)).longValue();
+			// The date may be in a datetime column, we extract only the date.
+			_date = DateTimeUtils.dateTimeToDate(_date);			
 			errorMessage = Intern.S_TIME;
 			Object time = stationDomain.getModel().getProperty(Intern.S_TIME).applyOn(inputStationHeader);
 			// default time = -1 voir aussi
@@ -103,7 +105,8 @@ public class Station implements Comparable {
 			if (time.toString().equals("Default"))
 				_time = -1;
 			else
-				_time = (Long) time;
+				// The time may be in a datetime column, we extract only the time.
+				_time = DateTimeUtils.dateTimeToTime((Long) time);
 			if (stationDomain.getModel().getProperty(Intern.S_OFFSETTU)!=null){
 				errorMessage = Intern.S_OFFSETTU;
 				_offsetTU = ((Float) stationDomain.getModel().getProperty(Intern.S_OFFSETTU).applyOn(inputStationHeader)).floatValue();

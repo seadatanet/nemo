@@ -352,10 +352,6 @@ public class PropertyModel extends AbstractModel {
 						}
 					}
 					
-					if (_format instanceof DateTimeFormat) {
-						sResult = sResult.replace(' ', '0');
-					}
-
 					if (_format instanceof LatitudeFormat) {
 						// 40216
 						LatitudeFormat formatLat = (LatitudeFormat) _format;
