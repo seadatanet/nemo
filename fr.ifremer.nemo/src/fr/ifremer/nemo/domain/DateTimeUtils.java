@@ -134,7 +134,8 @@ public class DateTimeUtils {
 			
 			if (dateModel.isInData()) {
 				// r�cup�ration dans la donn�e
-				frgmntDate = dateModel.getFragment().fullRetreiveInLine(inputLine);
+//				frgmntDate = dateModel.getFragment().fullRetreiveInLine(inputLine);
+				frgmntDate = dateModel.getFragment().retreiveInLine(inputLine);
 			} else {
 				// manuel
 				frgmntDate = dateModel.getUserValue();
@@ -145,7 +146,8 @@ public class DateTimeUtils {
 			
 			if (timeModel.isInData()) {
 				// r�cup�ration dans la donn�e
-				frgmntTime = timeModel.getFragment().fullRetreiveInLine(inputLine);
+//				frgmntTime = timeModel.getFragment().fullRetreiveInLine(inputLine);
+				frgmntTime = timeModel.getFragment().retreiveInLine(inputLine);
 			} else {
 				// manuel
 				frgmntTime = timeModel.getUserValue();
