@@ -221,7 +221,7 @@ public class ParameterManager {
 			resetParameterModels();
 			break;
 		case  FLOWCYTO: 
-			resetParameterModels();
+			setAddedParameterModelForPhysicochemical();
 			break;
 		case  UNKNOWN: 
 			resetParameterModels();
