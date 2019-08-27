@@ -146,7 +146,7 @@ public class RulesManager {
 		cruiseEnabled = DEFAULT_CRUISE_ENABLED;//!isConversionToODV();
 		myDataListType = DEFAULT_DATALIST;
 		dataList_P011viaP021_Enabled = isConversionToODV() || isConversionToNetCDF();
-		dataList_P091_Enabled = !isConversionToNetCDF();
+		dataList_P091_Enabled = !isConversionToNetCDF() && myInputVariant == E_Variant.PHYSICOCHEMICAL;
 		m_aboveSeaLevel_Enabled = !isConversionToMedatlas();
 		myVerticalParametersList = new VerticalParametersList();
 		myMesureType = DEFAULT_MESURETYPE;
@@ -682,14 +682,15 @@ public class RulesManager {
 
 		setM_aboveSeaLevel_enabled(false);
 
+		boolean isVariantWithZ=(myInputVariant==E_Variant.PHYSICOCHEMICAL || 	myInputVariant==E_Variant.FLOWCYTO);
 		boolean p_depthBSBed =
-				myInputVariant==E_Variant.PHYSICOCHEMICAL
+				isVariantWithZ
 				&& (isProfile() || isTrajectory())
 				&& myMesureType == E_MesureType.BSBED;
 
 
 		boolean p_depthBSSurf = false;
-		if (myInputVariant==E_Variant.PHYSICOCHEMICAL) {
+		if (isVariantWithZ) {
 			p_depthBSSurf =
 					(isProfile() && myMesureType == E_MesureType.BSSURF)
 					|| ((isTimeSeries() || isTrajectory())
@@ -699,9 +700,9 @@ public class RulesManager {
 		}
 
 
-		boolean p_pressure = 	myInputVariant==E_Variant.PHYSICOCHEMICAL && isProfile() && myMesureType == E_MesureType.BSSURF;
+		boolean p_pressure = 	isVariantWithZ && isProfile() && myMesureType == E_MesureType.BSSURF;
 		boolean p_heightASLvl = false;
-		if (	myInputVariant==E_Variant.PHYSICOCHEMICAL) {
+		if (	isVariantWithZ) {
 			p_heightASLvl = !isConversionToMedatlas() && (isProfile() || isTrajectory()) && myMesureType == E_MesureType.ASLVL;
 		}else {
 			p_heightASLvl = false;
