@@ -628,7 +628,7 @@ public class ParameterManager {
 	}
 
 	public boolean isPossible_PressureParameter(Parameter param) {
-		return param.getCode().equals(getP_pressureCode());
+		return param.getCode()!=null && param.getCode().equals(getP_pressureCode());
 	}
 
 	public boolean isPossible_DepthBSSurfParameter(TypeData typeData) {
@@ -636,7 +636,7 @@ public class ParameterManager {
 	}
 
 	public boolean isPossible_DepthBSSurfParameter(Parameter param) {
-		return param.getCode().equals(getP_depthBSSurfCode());
+		return param.getCode()!=null && param.getCode().equals(getP_depthBSSurfCode());
 	}
 
 	public boolean isPossible_DepthBSBedParameter(TypeData typeData) {
@@ -644,7 +644,7 @@ public class ParameterManager {
 	}
 
 	public boolean isPossible_HeightASlvlParameter(Parameter param) {
-		return param.getCode().equals(getP_depthBSBedCode());
+		return param.getCode()!=null && param.getCode().equals(getP_depthBSBedCode());
 	}
 
 	public boolean isPossible_HeightASlvlParameter(TypeData typeData) {
@@ -652,7 +652,7 @@ public class ParameterManager {
 	}
 
 	public boolean isPossible_DepthBSBedParameter(Parameter param) {
-		return param.getCode().equals(getP_heightASLvlCode());
+		return param.getCode()!=null && param.getCode().equals(getP_heightASLvlCode());
 	}
 
 	public String getP_depthBSSurfCode() {
