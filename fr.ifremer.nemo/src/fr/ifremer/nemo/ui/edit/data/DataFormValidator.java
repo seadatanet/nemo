@@ -79,7 +79,11 @@ public class DataFormValidator extends FormValidator {
 			return;
 		}
 		// -------------------------------------------------------------------------
-
+		String errors =VariantsSpecificsParameters.getInstance().checkSpecificParameters(editDataForm.getMyTableData().getTypes());
+		if (!errors.isEmpty()){
+			Utils.messageErreurAppend(errors);
+			return;
+		}
 
 		
 
@@ -281,6 +285,7 @@ public class DataFormValidator extends FormValidator {
 			
 
 	}
+
 	private boolean isUnitP09() {
 		return RulesManager.getInstance().isDataListTypeP091()||RulesManager.getInstance().isDataListTypeP011viaP091();
 	}

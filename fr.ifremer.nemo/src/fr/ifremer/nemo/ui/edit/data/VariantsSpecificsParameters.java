@@ -1,6 +1,7 @@
 package fr.ifremer.nemo.ui.edit.data;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
@@ -25,7 +26,6 @@ import fr.ifremer.sismer_tools.seadatanet.SdnVocabularyManager;
 public class VariantsSpecificsParameters {
 
 	private static VariantsSpecificsParameters instance ;
-//	private final HashMap<E_Variant, List<TypeData>> lists;
 
 
 	public static VariantsSpecificsParameters getInstance() {
@@ -35,57 +35,40 @@ public class VariantsSpecificsParameters {
 		return instance;
 	}
 	public VariantsSpecificsParameters() {
-//		lists=new HashMap<>();
-//		lists.put(E_Variant.PHYSICOCHEMICAL,null);
-//		lists.put(E_Variant.BIOLOGICAL,null);
-//		lists.put(E_Variant.FLOWCYTO,null);
-//		lists.put(E_Variant.MICROLITTER,null);
 	}
 
 	public List<TypeData> getParameters(){
 		return getParameters(Nemo.getInstance().getDomain().getMedia().getModel().getVariant());
 	}
+
+
 	public List<TypeData> getParameters(E_Variant variant){
 		List<TypeData> specificList=new ArrayList<>();
-//		specificList = lists.get(variant);
-//		if (specificList!=null) {
-//			return specificList;
-//		}
-//		lists.put(E_Variant.UNKNOWN,new ArrayList<>());
-//		lists.put(E_Variant.PHYSICOCHEMICAL,null);
-//		lists.put(E_Variant.BIOLOGICAL,null);
-//		lists.put(E_Variant.FLOWCYTO,null);
-//		lists.put(E_Variant.MICROLITTER,null);
-
-		switch (variant) {
-		case PHYSICOCHEMICAL:
-			specificList=getSpecificParams(new OdvSpecificValidatorClassic(null, null, null));
-//			lists.put(E_Variant.PHYSICOCHEMICAL,specificList);
-			break;
-		case BIOLOGICAL:
-			specificList=getSpecificParams(new OdvSpecificValidatorBio(null, null, null));
-//			lists.put(E_Variant.BIOLOGICAL,specificList);
-			break;
-		case MICROLITTER:
-			specificList=getSpecificParams(new OdvSpecificValidatorMicro(null, null, null));
-//			lists.put(E_Variant.MICROLITTER,specificList);
-			break;
-		case FLOWCYTO:
-			specificList=getSpecificParams(new OdvSpecificValidatorCyto(null, null, null));
-//			lists.put(E_Variant.FLOWCYTO,specificList);
-			break;
-		default:
-			specificList=new ArrayList<>();
-			break;
-		}
-
+		specificList = getSpecificParams(getValidator(variant));
 		return specificList;
 	}
 
+	private OdvSpecificValidator getValidator(E_Variant variant) {
+		switch (variant) {
+		case PHYSICOCHEMICAL:
+			return new OdvSpecificValidatorClassic(null, null, null);
+		case BIOLOGICAL:
+			return new OdvSpecificValidatorBio(null, null, null);
+		case MICROLITTER:
+			return new OdvSpecificValidatorMicro(null, null, null);
+		case FLOWCYTO:
+			return new OdvSpecificValidatorCyto(null, null, null);
+		default:
+			return null;
+		}
 
+	}
 	private List<TypeData> getSpecificParams(OdvSpecificValidator validator)	{ 
 		List<SpecificParameter>specificParamsList=new ArrayList<>();
 		List<TypeData>specificList=new ArrayList<>();
+		if (validator==null) {
+			return specificList;
+		}
 		HashMap<String[], PARAMETER_REQUIREMENT> expectedParams = validator.getExpectedParams();
 		for (Entry<String[], PARAMETER_REQUIREMENT> p : expectedParams.entrySet()) {
 			if (p.getValue()==PARAMETER_REQUIREMENT.MAND) {
@@ -93,7 +76,6 @@ public class VariantsSpecificsParameters {
 					// do not add in data tab (date is managed in station tab)
 				}else {
 					String p01Code = p.getKey()[0];
-//					specificList.add(specificParam2TypeData(validator.getSpecificParams().get(p01Code)));
 					specificParamsList.add(validator.getSpecificParams().get(p01Code));
 				}
 			}else  if (p.getKey()[0].equals(SdnVocabularyManager.P01_ADEPZZ01)){
@@ -103,7 +85,7 @@ public class VariantsSpecificsParameters {
 				}
 			}
 		}
-		
+
 		int position = 0;
 		while(specificList.size()<specificParamsList.size()) {
 			for (SpecificParameter sp : specificParamsList) {
@@ -114,8 +96,8 @@ public class VariantsSpecificsParameters {
 			}
 			position++;
 		}
-		
-		
+
+
 		return specificList;
 	}
 
@@ -128,7 +110,33 @@ public class VariantsSpecificsParameters {
 	 * @return
 	 */
 	public String checkSpecificParameters(List<TypeData> allParameters) {
-		return "";
+		String res="";
+		OdvSpecificValidator validator = getValidator(Nemo.getInstance().getDomain().getMedia().getModel().getVariant());
+		HashMap<String[], PARAMETER_REQUIREMENT> expected = validator.getExpectedParams();
+		boolean p01Found;
+		String p01Title="";
+		
+		for (Entry<String[], PARAMETER_REQUIREMENT> entry : expected.entrySet()) {
+			p01Found=false;
+			
+			for (String p01 : entry.getKey()) { // multiple choice possible
+				p01Title =  validator.getSpecificParams().get(p01).getCodeLocal();
+				for (TypeData td : allParameters) {
+					if (td.getEntryKeyP011().equals(p01)) {
+						p01Found=true;
+					}
+				}
+			}
+			
+			if (!p01Found) {
+				
+				res+= p01Title +" ("+Arrays.toString(entry.getKey())+") ";
+			}
+		}
+		if (!res.isEmpty()) {
+			res="Missing parameters for variant " +  Nemo.getInstance().getDomain().getMedia().getModel().getVariant()+": "+res;
+		}
+		return res;
 	}
 
 	private TypeData specificParam2TypeData(SpecificParameter p) {
@@ -139,7 +147,7 @@ public class VariantsSpecificsParameters {
 				p.getCodeP01(),
 				Intern.NemoLists_unknown);
 		td.setEntryKey(p02Code);
-//		td.setEntryTerm(p.getCodeLocal());
+		//		td.setEntryTerm(p.getCodeLocal());
 		td.setEntryKeyP011(p.getCodeP01());
 		td.setUniteCode(p.getCodeP06());
 		td.setUnite(p.getUnitLocalLabel());
