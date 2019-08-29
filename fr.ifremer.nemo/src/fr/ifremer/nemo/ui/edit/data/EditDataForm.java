@@ -35,6 +35,7 @@ import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Global.DataListTypeEnum;
 import fr.ifremer.nemo.util.Global.E_MesureType;
 import fr.ifremer.nemo.util.Global.E_TypeConversion;
+import fr.ifremer.nemo.util.Global.E_Variant;
 import fr.ifremer.nemo.util.Messages;
 
 public class EditDataForm extends EditForm {
@@ -65,8 +66,22 @@ public class EditDataForm extends EditForm {
 	private Text fallrateLabel;
 	private Composite inputComposite;
 	private boolean mustBeReinit;
+	private boolean mustFillFromModel;
+	private boolean mustReinitInputData;
 
 
+	public boolean isMustReinitInputData() {
+		return mustReinitInputData;
+	}
+	public void setMustReinitInputData(boolean mustReinitInputData) {
+		this.mustReinitInputData = mustReinitInputData;
+	}
+	public boolean isMustFillFromModel() {
+		return mustFillFromModel;
+	}
+	public void setMustFillFromModel(boolean mustFillFromModel) {
+		this.mustFillFromModel = mustFillFromModel;
+	}
 	public boolean isMustBeReinit() {
 		return mustBeReinit;
 	}
@@ -164,61 +179,62 @@ public class EditDataForm extends EditForm {
 	@Override
 	public void afficheEdition() {
 		super.afficheEdition();
-		reinitTableData();
-		//FAE 18259
-		reinitParameters();
 
 		ViewLog.aideData();
-		
-		if (textAreaData != null)
-			textAreaData.dispose();
-		if (inputTableData != null)
-			inputTableData.dispose();
+		RulesManager rm =RulesManager.getInstance();
+		if (isMustReinitInputData()) {
+			if (textAreaData != null)
+				textAreaData.dispose();
+			if (inputTableData != null)
+				inputTableData.dispose();
+		}
 
-		
-		
-		//**********************************
 		if (isMustBeReinit()) {
+
+			// reinit parameters table
+			reinitTableData();
 			getMyGroupeVerticalParameters().removeAllToAllCombos();
 			resetFallRate();
-			Nemo.getInstance().getViewMain().getEditDataForm().selectDataList(RulesManager.getInstance().getMyDataListType());
-			// !!! le fillTypes doit être appelé APRES le removeToAllcombos
-			getMyTableData().fillTypes();
+
+			enableP091(rm.getMyInputVariant() == E_Variant.PHYSICOCHEMICAL	&& !rm.isConversionToNetCDF());
+			enableP011viaP091(rm.getMyInputVariant() == E_Variant.PHYSICOCHEMICAL);
+			enableP011viaP021(rm.isConversionToODV() || rm.isConversionToNetCDF());
+			enableAboveSeaLevel(!rm.isConversionToMedatlas());
+			mustBeReinit=false;
 		}
-//		Nemo.getInstance().getViewMain().getEditDataForm().invalidEtape();
+		//		Nemo.getInstance().getViewMain().getEditDataForm().invalidEtape();
+
+		if (isMustFillFromModel()) {
+			fillFromModel();
+		}else {
+			selectMesureType(rm.getMyMesureType());
+			selectDataList(rm.getMyDataListType());
+			// !!! le fillTypes doit être appelé APRES le removeToAllcombos
+			if (isMustBeReinit()) {
+				getMyTableData().fillTypes();
+			}else {
+				initFromNewModel();
+			}
+		}
 		//*********************************
 		// 33278: now we have the model -> we can display depending on separator check
 		// affichage du texte dans la zone de gauche
-		//		if (Nemo.getInstance().getDomain().getMedia().getModel().getSeparator().isEmpty()){
-		if (RulesManager.getInstance().isUsingTableForCsvData()){
-			inputTableData = new InputTableData(this.inputComposite);
-			List<String> list =  Arrays.asList(Utils.texteBrut.split("\n"));
-			inputTableData.init(list);
-		}else{
-
-			// text area
-			setTextAreaData(new StyledText(this.inputComposite, SWT.MULTI | SWT.READ_ONLY | SWT.H_SCROLL | SWT.V_SCROLL));
-			getTextAreaData().setFont(Utils.fontCourier);
-
-			textAreaData.setText(Utils.texteBrut);
-		}
-		
-
+		if (isMustReinitInputData()) {
+			if (rm.isUsingTableForCsvData()){
+				inputTableData = new InputTableData(this.inputComposite);
+				List<String> list =  Arrays.asList(Utils.texteBrut.split("\n"));
+				inputTableData.init(list);
+			}else{
+				// text area
+				setTextAreaData(new StyledText(this.inputComposite, SWT.MULTI | SWT.READ_ONLY | SWT.H_SCROLL | SWT.V_SCROLL));
+				getTextAreaData().setFont(Utils.fontCourier);
+				textAreaData.setText(Utils.texteBrut);
+			}
+			setMustReinitInputData(false);
+			}
 		setLoaded(true);
 		Nemo.getInstance().getViewMain().setAffiche(3);
 
-		// remplissage de l'IHM par le modele charge
-		// nom du model
-		String modelName = Nemo.getInstance().getNomModele();
-
-		if (myTableData.getTypes() != null && !myTableData.getTypes().isEmpty()) {
-			myTableData.razAndRecreateTable();
-			myTableData.fillTypes();
-		} else if (!Global.EMPTY_STRING.equals(modelName)) {
-			fillFromModel();
-		} else {
-			myTableData.fillTypes();
-		}
 	}
 
 	@Override
@@ -278,15 +294,9 @@ public class EditDataForm extends EditForm {
 	public void fillFromModel() {
 
 		myTableData.reinitTypes();
-		ParameterModel[] parameterModels =
-				Nemo.getInstance().getDomain().getData().getModel().getParameterModels();
+		ParameterModel[] parameterModels =Nemo.getInstance().getDomain().getData().getModel().getParameterModels();
 
-		
-		
-			
-			
 		// update dataList to use
-
 		DataListTypeEnum dataList = Nemo.getInstance().getDomain().getData().getModel().getDataListType();
 		E_TypeConversion conv = RulesManager.getInstance().getMyConversionType();
 		if (conv == E_TypeConversion.MEDATLAS && dataList == dataList.P011_VIA_P021) {
@@ -319,21 +329,19 @@ public class EditDataForm extends EditForm {
 		}
 		// BGT: correction bug: update vertical params APRES l'ajout des
 		// parameters a la table
-		VerticalParametersList verticParams =
-				Nemo.getInstance().getDomain().getData().getModel().getVerticalParametersList();
+		VerticalParametersList verticParams = Nemo.getInstance().getDomain().getData().getModel().getVerticalParametersList();
 		RulesManager.getInstance().updateFromModel(verticParams);
 
 		TypeFallRate typeFallrate = new TypeFallRate(
 				Nemo.getInstance().getDomain().getData().getModel().getFallrateLabel(),
 				"", "", Nemo.getInstance().getDomain().getData().getModel().getFallrateCode());
-		RulesManager.getInstance().updateFromModel(
-				typeFallrate);
+		RulesManager.getInstance().updateFromModel(typeFallrate);
 
 		// refresh de la table de l'onglet Data
-		myTableData.razAndRecreateTable();
+		//		myTableData.razAndRecreateTable();
 	}
-	
-	
+
+
 
 	public void enableP011viaP021(boolean enabled) {
 		button_P011viaP021.setEnabled(enabled);
@@ -407,10 +415,10 @@ public class EditDataForm extends EditForm {
 		dataModel.setMesureType(rulesManager.getMyMesureType());
 		dataModel.setFallrateCode(this.getFallrateCode());
 		dataModel.setFallrateLabel(this.getFallrateLabel());
-		
+
 		// mise e jour des types avant validation
 		myTableData.majTypeData();
-		
+
 
 		for (TypeData typeCourant : myTableData.getTypes()) {
 			ParameterModel parameterModel = new ParameterModel(typeCourant);

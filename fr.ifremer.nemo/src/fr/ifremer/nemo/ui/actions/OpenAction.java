@@ -96,19 +96,13 @@ public class OpenAction extends Action implements ISelectionListener,
                     // effacement preventif
                     // si besoin
                     // fillDesc(true);
-                    Nemo.getInstance().getViewMain().getEditFileForm()
-                        .afficheEdition();
+                    Nemo.getInstance().getViewMain().getEditFileForm().afficheEdition();
 
-                    ViewLog.styledTextLogInfos
-                        .append(Messages.success_openModel + nomModele);
+                    ViewLog.styledTextLogInfos.append(Messages.success_openModel + nomModele);
 
                     // reinitialisation du tableau de paramètres
-                    Nemo.getInstance().getViewMain().getEditDataForm()
-                        .reinitTableData();
-// if (Nemo.getInstance().getViewMain().getEditDataForm().getMyTable() != null)
-// {
-// Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().go();
-// }
+                    Nemo.getInstance().getViewMain().getEditDataForm().setMustBeReinit(true);
+                    Nemo.getInstance().getViewMain().getEditDataForm().setMustFillFromModel(true);
                     // 4063 affectation du nom de modele courant
                     Nemo.getInstance().setCurrentOpenModelPath(nomModele);
                 }

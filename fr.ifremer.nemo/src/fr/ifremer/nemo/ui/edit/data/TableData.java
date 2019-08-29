@@ -406,8 +406,7 @@ public class TableData {
 		initTable();
 
 		// agrandissement de la table
-		Nemo.getInstance().getViewMain().getEditDataForm().getCompositeData()
-		.getShell().layout();
+		Nemo.getInstance().getViewMain().getEditDataForm().getCompositeData().getShell().layout();
 
 	}
 

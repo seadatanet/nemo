@@ -120,6 +120,10 @@ public class VariantsSpecificsParameters {
 			p01Found=false;
 			
 			for (String p01 : entry.getKey()) { // multiple choice possible
+				if (p01.equals(SdnVocabularyManager.P01_DTUT8601_ISODATE) || p01.equals(SdnVocabularyManager.P01_ADEPZZ01)){
+					p01Found=true;
+					break;
+				}
 				p01Title =  validator.getSpecificParams().get(p01).getCodeLocal();
 				for (TypeData td : allParameters) {
 					if (td.getEntryKeyP011().equals(p01)) {

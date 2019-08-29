@@ -293,23 +293,18 @@ public class DataFormValidator extends FormValidator {
 	protected void onSuccess() {
 		super.onSuccess();
 
-		EditDataForm editDataForm =
-				Nemo.getInstance().getViewMain().getEditDataForm();
+		EditDataForm editDataForm =	Nemo.getInstance().getViewMain().getEditDataForm();
 
 		editDataForm.initFromNewModel();
 
-		Nemo.getInstance().getViewMain().tabData
-		.setText(Messages.onglet_data_valid);
+		Nemo.getInstance().getViewMain().tabData.setText(Messages.onglet_data_valid);
 		Nemo.getInstance().getViewMain().setEtape(4);
 
-		Nemo.getInstance().getDomain().getData().getModel()
-		.setMesureType(rm.getMyMesureType());
+		Nemo.getInstance().getDomain().getData().getModel().setMesureType(rm.getMyMesureType());
 
 
-		Nemo.getInstance().getDomain().getData().getModel()
-		.setFallrateCode(editDataForm.getFallrateCode());
-		Nemo.getInstance().getDomain().getData().getModel()
-		.setFallrateLabel(editDataForm.getFallrateLabel());
+		Nemo.getInstance().getDomain().getData().getModel().setFallrateCode(editDataForm.getFallrateCode());
+		Nemo.getInstance().getDomain().getData().getModel().setFallrateLabel(editDataForm.getFallrateLabel());
 
 		Nemo.getInstance().getViewMain().getEditConversionForm().fillSummary();
 

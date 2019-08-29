@@ -38,17 +38,20 @@ public class OutputFormatRadioSelectionListener implements SelectionListener
     
     public void widgetSelected(SelectionEvent g)
     {
-
+    	// indicates if conversion was changed (med/odv/cf, or only mono/multi)
+    	boolean isConversionChanged=false;
         E_TypeConversion currentConv =E_TypeConversion.UNKNOWN;
 
         if (g.getSource().equals(myEditFileForm.getRadMedatlas()))
         {
             currentConv = E_TypeConversion.MEDATLAS;
+            isConversionChanged=true;
         }
         else if(g.getSource().equals(myEditFileForm.getRadNetCDF())){
             if (myEditFileForm.getRadODVMonoFichier().getSelection())
             {
                 currentConv = E_TypeConversion.NETCDF_MULTISTATIONS;
+                isConversionChanged=true;
             }else if(myEditFileForm.getRadODVMonoStation().getSelection())
             {
                 currentConv = E_TypeConversion.NETCDF_MONOSTATION;
@@ -81,7 +84,6 @@ public class OutputFormatRadioSelectionListener implements SelectionListener
         }
         else if(g.getSource().equals(myEditFileForm.getRadODVMonoStation()))
         {
-            
             if (myEditFileForm.getRadODV().getSelection())
             {
                 currentConv = E_TypeConversion.ODV_MONOSTATION;
@@ -102,7 +104,7 @@ public class OutputFormatRadioSelectionListener implements SelectionListener
         }
         Nemo.getInstance().getDomain().getConversion().getModel().setOutputFormat(currentConv);
         Nemo.getInstance().getViewMain().getEditConversionForm().fillSummary();
-        RulesManager.getInstance().updateFromIHM(currentConv);
+        RulesManager.getInstance().updateFromIHM(currentConv, isConversionChanged);
         // invalidation de l'etape quand modif
         Utils.invalidEtapes();
     }
