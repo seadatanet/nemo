@@ -597,7 +597,8 @@ public class DataFormValidator extends FormValidator {
 
 		int index;
 		// depth below sea surface
-		if (rm.isP_depthBSSurf_enabled()) {
+		if (comboDBBSurf.isEnabled()) { // use directly the compos because RM seems not so trusty
+//		if (rm.isP_depthBSSurf_enabled()) {
 			index = comboDBBSurf.getSelectionIndex();
 			if (index != -1) {
 				rm.getMyVerticalParametersList().setP_depthBSSurf(
@@ -605,7 +606,8 @@ public class DataFormValidator extends FormValidator {
 			}
 		}
 		// Depth below sea bed
-		if (rm.isP_depthBSBed_enabled()) {
+		if (comboDBSBed.isEnabled()) {
+//		if (rm.isP_depthBSBed_enabled()) {
 			index = comboDBSBed.getSelectionIndex();
 			if (index != -1) {
 				rm.getMyVerticalParametersList().setP_depthBSBed(
@@ -613,7 +615,8 @@ public class DataFormValidator extends FormValidator {
 			}
 		}
 		// pressure
-		if (rm.isP_pressure_enabled()) {
+//		if (rm.isP_pressure_enabled()) {
+		if (comboP.isEnabled()) {
 			index = comboP.getSelectionIndex();
 			if (index != -1) {
 				rm.getMyVerticalParametersList().setP_pressure(
@@ -622,7 +625,8 @@ public class DataFormValidator extends FormValidator {
 		}
 
 		// Hauteur au dessus de la colonne d'eau
-		if (rm.isP_heightASLvl_enabled()) {
+//		if (rm.isP_heightASLvl_enabled()) {
+			if (comboHASLvl.isEnabled()) {
 			index = comboHASLvl.getSelectionIndex();
 			if (index != -1) {
 				rm.getMyVerticalParametersList().setP_heightASLvl(
