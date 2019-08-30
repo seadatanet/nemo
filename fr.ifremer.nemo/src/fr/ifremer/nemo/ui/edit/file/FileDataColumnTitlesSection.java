@@ -63,6 +63,7 @@ public class FileDataColumnTitlesSection extends FileSection
 				if (!checkUseTableForCsv.getSelection()){
 		    		checkColTitlesInInputFile.setSelection(false);
 		    	}
+				Nemo.getInstance().getViewMain().getEditDataForm().setMustReinitInputData(true);
 				Utils.invalidEtapes();
 			}
 		});
@@ -77,6 +78,8 @@ public class FileDataColumnTitlesSection extends FileSection
 			{
 				Utils.invalidEtapes();
 				setter.setEnabled(checkColTitlesInInputFile.getSelection());
+				// will redraw the input data without/without title columns
+				Nemo.getInstance().getViewMain().getEditDataForm().setMustReinitInputData(true);
 			}
 		});
 
