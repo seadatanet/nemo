@@ -36,7 +36,6 @@ public class DataFormValidator extends FormValidator {
 		super();
 
 	}
-
 	@Override
 	public void validate() {
 		rm = RulesManager.getInstance();
@@ -51,11 +50,11 @@ public class DataFormValidator extends FormValidator {
 		comboP = verticalParamGroup.getComboP();
 
 		myParameterManager = Nemo.getInstance().getDomain().getData().getMyParameterManager();
-		int unitCodeColNb=Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().getColNb(TableData.COL_UNIT_CODE);
-		int unitColNb=Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().getColNb(TableData.COL_UNIT);
-		int paramCodeColNb=Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().getColNb(TableData.COL_CODE);
-		int instrumentCodeColNb=Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().getColNb(TableData.COL_INSTRUMENT_CODE);
-		int instrumentColNb=Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().getColNb(TableData.COL_INSTRUMENT);
+		int unitCodeColNb=editDataForm.getMyTableData().getColNb(TableData.COL_UNIT_CODE);
+		int unitColNb=editDataForm.getMyTableData().getColNb(TableData.COL_UNIT);
+		int paramCodeColNb=editDataForm.getMyTableData().getColNb(TableData.COL_CODE);
+		int instrumentCodeColNb=editDataForm.getMyTableData().getColNb(TableData.COL_INSTRUMENT_CODE);
+		int instrumentColNb=editDataForm.getMyTableData().getColNb(TableData.COL_INSTRUMENT);
 
 		Boolean ok = true;
 
@@ -67,7 +66,6 @@ public class DataFormValidator extends FormValidator {
 
 		// mise e jour avant toute chose
 		editDataForm.getMyTableData().majTypeData();
-
 		int nbreParam = editDataForm.getMyTableData().getTypes().size();
 
 		/**
@@ -85,7 +83,7 @@ public class DataFormValidator extends FormValidator {
 			return;
 		}
 
-		
+
 
 		boolean bodcReplaced = false;
 		if (ok) {
@@ -97,8 +95,7 @@ public class DataFormValidator extends FormValidator {
 			fins = new int[nbreParam];
 
 			for (int i = 0; i < nbreParam; i++) {
-				TypeData typeCourant =
-						editDataForm.getMyTableData().getTypes().get(i);
+				TypeData typeCourant =	editDataForm.getMyTableData().getTypes().get(i);
 				debuts[i] = typeCourant.getDebut();
 				fins[i] = typeCourant.getFin();
 
@@ -165,11 +162,11 @@ public class DataFormValidator extends FormValidator {
 						Utils.messageErreurAppend(bodcRes.getErrorMsg());
 						ok=false;
 					}else if (bodcRes.getResStatus() == BODC_RES_STATUS.WARNING){
-							typeCourant = bodcRes.getTypeData();
-							Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().getMyTable().getItems()[i].setText(unitCodeColNb, String.valueOf(typeCourant.getUniteCode()));
-							Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().getMyTable().getItems()[i].setText(unitColNb, String.valueOf(typeCourant.getUnite()));
-							Utils.messageWarningAppend(bodcRes.getWarningMsg());
-							bodcReplaced=true;
+						typeCourant = bodcRes.getTypeData();
+						Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().getMyTable().getItems()[i].setText(unitCodeColNb, String.valueOf(typeCourant.getUniteCode()));
+						Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().getMyTable().getItems()[i].setText(unitColNb, String.valueOf(typeCourant.getUnite()));
+						Utils.messageWarningAppend(bodcRes.getWarningMsg());
+						bodcReplaced=true;
 					}
 				}
 				// 35230 check instrument
@@ -185,10 +182,10 @@ public class DataFormValidator extends FormValidator {
 					bodcReplaced=true;
 				}
 			}
-			
-			
+
+
 			// 35230 check fall rate
-		
+
 			BODCResult bodcRes = BodcChecker.getInstance().checkFallRate(	editDataForm.getFallrateCode(), editDataForm.getFallrateLabel());
 			if (bodcRes.getResStatus() == BODC_RES_STATUS.KO){
 				ok=false;
@@ -209,7 +206,7 @@ public class DataFormValidator extends FormValidator {
 			// ----------------------------------------------------------
 			// PARAMETRES
 			// ----------------------------------------------------------
-			
+
 			ok = ok && detectVerticalParameters();
 			if (ok) {
 
@@ -260,29 +257,28 @@ public class DataFormValidator extends FormValidator {
 				 */
 			}
 		}
-			/**
-			 * 
-			 */
+		/**
+		 * 
+		 */
 		if (bodcReplaced){
 			ok=false;
 			Utils.messageWarningAppend("Some bodc terms have been replaced. Please verify and validate. Save your model to avoid this warning next time."); // TODO 35230 message
 		}
-		
-			if (ok) {
-				// FAE 9656
-				// les donnees du model doivent etre presente.
-				// 10594: on a besoin que le formulaire soit valide pour lancer la
-				// conversion
-				editDataForm.setOkApresReset(true);
-				onSuccess();
-			} else {
-				Nemo.getInstance().getViewMain().tabData
-				.setText(Messages.onglet_data_error);
-				editDataForm.initFromNewModel();
-				Nemo.getInstance().getViewMain().setEtape(3);
-			}
 
-			
+		if (ok) {
+			// FAE 9656
+			// les donnees du model doivent etre presente.
+			// 10594: on a besoin que le formulaire soit valide pour lancer la
+			// conversion
+			editDataForm.setOkApresReset(true);
+			onSuccess();
+		} else {
+			Nemo.getInstance().getViewMain().tabData.setText(Messages.onglet_data_error);
+			editDataForm.initFromNewModel();
+			Nemo.getInstance().getViewMain().setEtape(3);
+		}
+
+
 
 	}
 
@@ -301,8 +297,6 @@ public class DataFormValidator extends FormValidator {
 		Nemo.getInstance().getViewMain().setEtape(4);
 
 		Nemo.getInstance().getDomain().getData().getModel().setMesureType(rm.getMyMesureType());
-
-
 		Nemo.getInstance().getDomain().getData().getModel().setFallrateCode(editDataForm.getFallrateCode());
 		Nemo.getInstance().getDomain().getData().getModel().setFallrateLabel(editDataForm.getFallrateLabel());
 
@@ -408,7 +402,7 @@ public class DataFormValidator extends FormValidator {
 		// peut être modifie par le user entre 2 validations)
 		TypeData premierType =
 				Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData()
-						.getTypes().get(0);
+				.getTypes().get(0);
 		return premierType.getCodeToUse();
 	}
 
@@ -434,8 +428,8 @@ public class DataFormValidator extends FormValidator {
 							rm.getMyVerticalParametersList().getP_depthBSBed());
 			if (!checkOk) {
 				Utils
-						.messageErreurAppend(Messages.error_data_firstParam_depthBSBed
-								+ " (data65)"); //$NON-NLS-1$
+				.messageErreurAppend(Messages.error_data_firstParam_depthBSBed
+						+ " (data65)"); //$NON-NLS-1$
 			}
 		}
 		// cas below sea surface (data60)
@@ -443,12 +437,12 @@ public class DataFormValidator extends FormValidator {
 			checkOk =
 					getFirstParameterCode().equals(
 							rm.getMyVerticalParametersList().getP_depthBSSurf())
-							|| getFirstParameterCode().equals(
-									rm.getMyVerticalParametersList().getP_pressure());
+					|| getFirstParameterCode().equals(
+							rm.getMyVerticalParametersList().getP_pressure());
 			if (!checkOk) {
 				Utils
-						.messageErreurAppend(Messages.error_data_firstParam_depthBSSurfOrPres
-								+ " (data60)"); //$NON-NLS-1$
+				.messageErreurAppend(Messages.error_data_firstParam_depthBSSurfOrPres
+						+ " (data60)"); //$NON-NLS-1$
 			}
 		}
 
@@ -461,36 +455,36 @@ public class DataFormValidator extends FormValidator {
 		// recup du premier parametre
 		TypeData premierType =
 				Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData()
-						.getTypes().get(0);
+				.getTypes().get(0);
 		String firstParameterCode = premierType.getCodeToUse();
 		E_MesureType mesureType = rm.getMyMesureType();
 
 		// cas below sea bed (data85)
 		if (mesureType == E_MesureType.BSBED
 				&& !rm.getMyVerticalParametersList().getP_depthBSBed()
-						.equals(Global.EMPTY_STRING)) {
+				.equals(Global.EMPTY_STRING)) {
 			checkOk =
 					firstParameterCode.equals(rm.getMyVerticalParametersList()
 							.getP_depthBSBed());
 			if (!checkOk) {
 				Utils
-						.messageErreurAppend(Messages.error_data_firstParam_depthBSBed
-								+ "( data85)"); //$NON-NLS-1$
+				.messageErreurAppend(Messages.error_data_firstParam_depthBSBed
+						+ "( data85)"); //$NON-NLS-1$
 			}
 		}
 		// cas below sea surface (data80)
 		else if (mesureType == E_MesureType.BSSURF
 				&& !rm.getMyVerticalParametersList().getP_depthBSSurf()
-						.equals(Global.EMPTY_STRING)) {
+				.equals(Global.EMPTY_STRING)) {
 			checkOk =
 					firstParameterCode.equals(rm.getMyVerticalParametersList()
 							.getP_depthBSSurf())
-							|| firstParameterCode.equals(rm
-									.getMyVerticalParametersList().getP_pressure());
+					|| firstParameterCode.equals(rm
+							.getMyVerticalParametersList().getP_pressure());
 			if (!checkOk) {
 				Utils
-						.messageErreurAppend(Messages.error_data_firstParam_depthBSSurf
-								+ "( data80)"); //$NON-NLS-1$
+				.messageErreurAppend(Messages.error_data_firstParam_depthBSSurf
+						+ "( data80)"); //$NON-NLS-1$
 			}
 		}
 
@@ -499,10 +493,8 @@ public class DataFormValidator extends FormValidator {
 
 	private boolean updateTestValues() {
 		boolean res;
-		EditDataForm editDataForm =
-				Nemo.getInstance().getViewMain().getEditDataForm();
+		EditDataForm editDataForm =	Nemo.getInstance().getViewMain().getEditDataForm();
 		// test de toutes les valeurs debut / fin des Data
-
 		res = editDataForm.getMyTableData().majChampTest();
 
 		if (!res) {
@@ -529,23 +521,23 @@ public class DataFormValidator extends FormValidator {
 			} else {
 				index = indexSign + 1;
 			}
-//			int totLength =
-//					Integer.parseInt(formatString.substring(index, index + 1));
+			//			int totLength =
+			//					Integer.parseInt(formatString.substring(index, index + 1));
 			int totLength;
 			if (formatString.indexOf(".")==-1){
-			 totLength =
-					Integer.parseInt(formatString.substring(index, formatString.length() - 1));
+				totLength =
+						Integer.parseInt(formatString.substring(index, formatString.length() - 1));
 			}else{
-				 totLength =
+				totLength =
 						Integer.parseInt(formatString.substring(index, formatString.lastIndexOf(".")));
 			}
 
 			// Float ou Decimal ?
 			String type = formatString.substring(formatString.length() - 1);
 			if (type.equals("f") || type.equals("F")) { //$NON-NLS-1$ //$NON-NLS-2$
-//				fmOut =
-//						String.format(java.util.Locale.US, formatString,
-//								Float.parseFloat(typeCourant.getSortie()));
+				//				fmOut =
+				//						String.format(java.util.Locale.US, formatString,
+				//								Float.parseFloat(typeCourant.getSortie()));
 				// 33045 use bigInt to avoid round value
 				fmOut =
 						String.format(java.util.Locale.US, formatString,
@@ -553,16 +545,16 @@ public class DataFormValidator extends FormValidator {
 			} else if (type.equals("d") || type.equals("D")) { //$NON-NLS-1$ //$NON-NLS-2$
 				try{
 					int resInt = Integer.parseInt(typeCourant.getSortie());
-					 fmOut =
-								String.format(java.util.Locale.US, formatString,
-										resInt);
+					fmOut =
+							String.format(java.util.Locale.US, formatString,
+									resInt);
 				}catch (Exception e) {
 					long resLong= Long.parseLong(typeCourant.getSortie());
 					fmOut =
 							String.format(java.util.Locale.US, formatString,
 									resLong);
 				}
-				
+
 			}
 
 			if ((fmOut.equals(typeCourant.getSortie())) && (typeCourant.getSortie().length() == totLength)) {
@@ -573,14 +565,14 @@ public class DataFormValidator extends FormValidator {
 				// erreur
 				okRes = false;
 				Utils.messageErreurAppend(Messages.Etape_106
-								+ " " + typeCourant.getCodeToUse() + " : " + Messages.Etape_106b); //$NON-NLS-1$ //$NON-NLS-2$
+						+ " " + typeCourant.getCodeToUse() + " : " + Messages.Etape_106b); //$NON-NLS-1$ //$NON-NLS-2$
 			}
 
 		} catch (Exception e) {
 			// erreur
 			okRes = false;
 			Utils.messageErreurAppend(Messages.Etape_106
-							+ " " + typeCourant.getCodeToUse() + " : " + Messages.Etape_106b); //$NON-NLS-1$ //$NON-NLS-2$
+					+ " " + typeCourant.getCodeToUse() + " : " + Messages.Etape_106b); //$NON-NLS-1$ //$NON-NLS-2$
 			System.out.print(e.getMessage());
 		}
 
@@ -645,8 +637,8 @@ public class DataFormValidator extends FormValidator {
 		boolean ok = true;
 		if (rm.isP_depthBSBed_enabled()
 				&& rm.getMyVerticalParametersList().getP_depthBSBed()
-						.equals(Global.EMPTY_STRING)) {
-			
+				.equals(Global.EMPTY_STRING)) {
+
 			Utils.messageErreurAppend(MessageFormat.format(Messages.edit_data_verticalParameters_info_chooseDepthBSBed, myParameterManager.getP_depthBSBedCode()));
 
 			ok = false;
@@ -657,7 +649,7 @@ public class DataFormValidator extends FormValidator {
 						.equals(Global.EMPTY_STRING) && rm
 						.getMyVerticalParametersList().getP_pressure()
 						.equals(Global.EMPTY_STRING))) {
-			
+
 			Utils.messageErreurAppend(MessageFormat.format(Messages.edit_data_verticalParameters_info_chooseDepthBSurfOrPressure, myParameterManager.getP_depthBSSurfCode(), myParameterManager.getP_pressureCode()));
 
 			ok = false;
@@ -732,7 +724,7 @@ public class DataFormValidator extends FormValidator {
 		// valeur vide = 0, index de la valeur attendue est 1)
 		TypeData premierType =
 				Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData()
-						.getTypes().get(0);
+				.getTypes().get(0);
 		String firstParameterCode = premierType.getCodeToUse();
 
 		// cas ideal: on n'a qu'une possibilite -> on la selectionne

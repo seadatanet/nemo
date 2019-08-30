@@ -1991,8 +1991,7 @@ public class TableData {
 		if (RulesManager.getInstance().isUsingTableForCsvData()){
 			selectDataFromParameterSelection();
 		}else{
-			Nemo.getInstance().getViewMain().getEditDataForm().getTextAreaData()
-			.setSelection(debut - 1, fin);
+			Nemo.getInstance().getViewMain().getEditDataForm().getTextAreaData().setSelection(debut - 1, fin);
 		}
 	}
 

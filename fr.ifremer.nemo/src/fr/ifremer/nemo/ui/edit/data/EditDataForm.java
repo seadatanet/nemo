@@ -19,6 +19,7 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Text;
 
 import fr.ifremer.nemo.Nemo;
+import fr.ifremer.nemo.input.DataModel;
 import fr.ifremer.nemo.input.parameters.ParameterModel;
 import fr.ifremer.nemo.input.parameters.VerticalParametersList;
 import fr.ifremer.nemo.ui.RulesManager;
@@ -190,36 +191,43 @@ public class EditDataForm extends EditForm {
 		}
 
 		if (isMustBeReinit()) {
-
+			invalidEtape();
 			// reinit parameters table
 			reinitTableData();
 			getMyGroupeVerticalParameters().removeAllToAllCombos();
 			resetFallRate();
-
-			enableP091(rm.getMyInputVariant() == E_Variant.PHYSICOCHEMICAL	&& !rm.isConversionToNetCDF());
-			enableP011viaP091(rm.getMyInputVariant() == E_Variant.PHYSICOCHEMICAL);
-			enableP011viaP021(rm.isConversionToODV() || rm.isConversionToNetCDF());
-			enableAboveSeaLevel(!rm.isConversionToMedatlas());
-			mustBeReinit=false;
 		}
-		//		Nemo.getInstance().getViewMain().getEditDataForm().invalidEtape();
 
 		if (isMustFillFromModel()) {
 			fillFromModel();
-		}else {
-			selectMesureType(rm.getMyMesureType());
-			selectDataList(rm.getMyDataListType());
-			// !!! le fillTypes doit être appelé APRES le removeToAllcombos
-			if (isMustBeReinit()) {
-				getMyTableData().fillTypes();
-			}else {
-				initFromNewModel();
-			}
 		}
+		//		else {
+		getMyGroupeVerticalParameters().select(rm.getMyVerticalParametersList());
+		setFallrateGroupEnabled(rm.isFallrateEnabled());
+		selectMesureType(rm.getMyMesureType());
+		selectDataList(rm.getMyDataListType());
+		enableP091(rm.isDataList_P091_Enabled());
+		enableP011viaP091(rm.getMyInputVariant() == E_Variant.PHYSICOCHEMICAL);
+		enableP011viaP021(rm.isDataList_P011viaP021_Enabled());
+		enableAboveSeaLevel(!rm.isConversionToMedatlas());
+
+
+		// !!! le fillTypes doit être appelé APRES le removeToAllcombos
+		if (isMustBeReinit()) {
+			getMyTableData().fillTypes();
+		}else {
+			initFromNewModel();
+		}
+		if (isMustFillFromModel()) {
+			fillFromModel();
+		}
+		//		}
+
 		//*********************************
 		// 33278: now we have the model -> we can display depending on separator check
-		// affichage du texte dans la zone de gauche
+		// affichage du texte dans la zone du haut
 		if (isMustReinitInputData()) {
+			invalidEtape();
 			if (rm.isUsingTableForCsvData()){
 				inputTableData = new InputTableData(this.inputComposite);
 				List<String> list =  Arrays.asList(Utils.texteBrut.split("\n"));
@@ -230,11 +238,14 @@ public class EditDataForm extends EditForm {
 				getTextAreaData().setFont(Utils.fontCourier);
 				textAreaData.setText(Utils.texteBrut);
 			}
-			setMustReinitInputData(false);
-			}
+		}
+
+		getMyTableData().razAndRecreateTable();
 		setLoaded(true);
 		Nemo.getInstance().getViewMain().setAffiche(3);
 
+		setMustReinitInputData(false);
+		setMustBeReinit(false);
 	}
 
 	@Override
@@ -294,20 +305,20 @@ public class EditDataForm extends EditForm {
 	public void fillFromModel() {
 
 		myTableData.reinitTypes();
-		ParameterModel[] parameterModels =Nemo.getInstance().getDomain().getData().getModel().getParameterModels();
+		DataModel dataModel = Nemo.getInstance().getDomain().getData().getModel();
+		ParameterModel[] parameterModels =dataModel.getParameterModels();
 
 		// update dataList to use
-		DataListTypeEnum dataList = Nemo.getInstance().getDomain().getData().getModel().getDataListType();
+		DataListTypeEnum dataList = dataModel.getDataListType();
 		E_TypeConversion conv = RulesManager.getInstance().getMyConversionType();
 		if (conv == E_TypeConversion.MEDATLAS && dataList == dataList.P011_VIA_P021) {
 			dataList = DataListTypeEnum.UNKNOWN;
-			Nemo.getInstance().getDomain().getData().getModel().setDataListType(dataList);
+			dataModel.setDataListType(dataList);
 
 		}
 		if ((conv == E_TypeConversion.NETCDF_MONOSTATION || conv == E_TypeConversion.NETCDF_MULTISTATIONS) && dataList == dataList.P091) {
 			dataList = DataListTypeEnum.UNKNOWN;
-			Nemo.getInstance().getDomain().getData().getModel().setDataListType(dataList);
-
+			dataModel.setDataListType(dataList);
 		}
 
 		RulesManager.getInstance().updateFromModel(dataList);
@@ -315,7 +326,7 @@ public class EditDataForm extends EditForm {
 		E_MesureType mesureType = Nemo.getInstance().getDomain().getData().getModel().getMesureType();
 		if ((conv == E_TypeConversion.MEDATLAS) && mesureType == E_MesureType.ASLVL) {
 			mesureType = E_MesureType.UNKNOWN;
-			Nemo.getInstance().getDomain().getData().getModel().setMesureType(mesureType);
+			dataModel.setMesureType(mesureType);
 
 		}
 		RulesManager.getInstance().updateFromModel(mesureType);
@@ -329,7 +340,7 @@ public class EditDataForm extends EditForm {
 		}
 		// BGT: correction bug: update vertical params APRES l'ajout des
 		// parameters a la table
-		VerticalParametersList verticParams = Nemo.getInstance().getDomain().getData().getModel().getVerticalParametersList();
+		VerticalParametersList verticParams = dataModel.getVerticalParametersList();
 		RulesManager.getInstance().updateFromModel(verticParams);
 
 		TypeFallRate typeFallrate = new TypeFallRate(

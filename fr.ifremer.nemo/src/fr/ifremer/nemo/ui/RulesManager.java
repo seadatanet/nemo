@@ -177,7 +177,7 @@ public class RulesManager {
 		myDataListType = DEFAULT_DATALIST;
 		myEditDataForm.selectDataList(myDataListType);
 		dataList_P011viaP021_Enabled = isConversionToODV() || isConversionToNetCDF();
-		dataList_P091_Enabled = !isConversionToNetCDF();
+		dataList_P091_Enabled = !isConversionToNetCDF() && myInputVariant == E_Variant.PHYSICOCHEMICAL;
 		m_aboveSeaLevel_Enabled = !isMedatlasEnabled();
 		myMesureType = DEFAULT_MESURETYPE;
 		myEditDataForm.selectMesureType(myMesureType);
@@ -218,8 +218,7 @@ public class RulesManager {
 				|| (!netCDFMonostationEnabled && conv == E_TypeConversion.NETCDF_MONOSTATION)
 				|| (!netCDFMonostationEnabled && conv == E_TypeConversion.NETCDF_MONOSTATION)) {
 			applicableConv = E_TypeConversion.UNKNOWN;
-			messageLog +=
-					Messages.edit_file_info_conversionNotApplicable + Global.RN;
+			messageLog +=Messages.edit_file_info_conversionNotApplicable + Global.RN;
 		}
 
 		return applicableConv;
@@ -256,11 +255,11 @@ public class RulesManager {
 		myEditFileForm.selectConversion(myConversionType);
 
 		Nemo.getInstance().getViewMain().enableCruiseTab(isCruiseEnabled());
-		Nemo.getInstance().getViewMain().getEditDataForm().enableP011viaP021(isConversionToODV() || isConversionToNetCDF());
-		Nemo.getInstance().getViewMain().getEditDataForm().enableP091(!isConversionToNetCDF());
-		Nemo.getInstance().getViewMain().getEditDataForm().enableAboveSeaLevel(!isConversionToMedatlas());
+//		Nemo.getInstance().getViewMain().getEditDataForm().enableP011viaP021(isConversionToODV() || isConversionToNetCDF());
+//		Nemo.getInstance().getViewMain().getEditDataForm().enableP091(!isConversionToNetCDF());
+//		Nemo.getInstance().getViewMain().getEditDataForm().enableAboveSeaLevel(!isConversionToMedatlas());
 		ViewLog.styledTextLogErreurs.setText(messageLog);
-		resetDataForm();
+//		resetDataForm();
 	}
 
 	public void updateFromIHMSeparatorChecked(){
@@ -320,17 +319,17 @@ public class RulesManager {
 		myEditFileForm.selectConversion(myConversionType);
 
 		Nemo.getInstance().getViewMain().enableCruiseTab(isCruiseEnabled());
-		Nemo.getInstance().getViewMain().getEditDataForm().enableP011viaP021(isConversionToODV() || isConversionToNetCDF());
-		Nemo.getInstance().getViewMain().getEditDataForm().enableP091(!isConversionToNetCDF());
-		Nemo.getInstance().getViewMain().getEditDataForm().enableAboveSeaLevel(!isConversionToMedatlas());
+//		Nemo.getInstance().getViewMain().getEditDataForm().enableP011viaP021(isDataList_P011viaP021_Enabled());
+//		Nemo.getInstance().getViewMain().getEditDataForm().enableP091(isDataList_P091_Enabled());
+//		Nemo.getInstance().getViewMain().getEditDataForm().enableAboveSeaLevel(!isConversionToMedatlas());
 		ViewLog.styledTextLogErreurs.setText(messageLog);
 
 		rule_mesureType();
-		GroupVerticalParameters verticGroup =	Nemo.getInstance().getViewMain().getEditDataForm().getMyGroupeVerticalParameters();
-		verticGroup.enable_pDepthBSBed(isP_depthBSBed_enabled());
-		verticGroup.enable_pDepthBSSurf(isP_depthBSSurf_enabled());
-		verticGroup.enable_pPressure(isP_pressure_enabled());
-		verticGroup.enable_pHeightASLvl(isP_heightASLvl_enabled());
+//		GroupVerticalParameters verticGroup =	Nemo.getInstance().getViewMain().getEditDataForm().getMyGroupeVerticalParameters();
+//		verticGroup.enable_pDepthBSBed(isP_depthBSBed_enabled());
+//		verticGroup.enable_pDepthBSSurf(isP_depthBSSurf_enabled());
+//		verticGroup.enable_pPressure(isP_pressure_enabled());
+//		verticGroup.enable_pHeightASLvl(isP_heightASLvl_enabled());
 
 	}
 
@@ -353,12 +352,9 @@ public class RulesManager {
 		myEditFileForm.selectConversion(myConversionType);
 
 		Nemo.getInstance().getViewMain().enableCruiseTab(isCruiseEnabled());
-		Nemo.getInstance().getViewMain().getEditDataForm()
-		.enableP011viaP021(isConversionToODV() || isConversionToNetCDF());
-		Nemo.getInstance().getViewMain().getEditDataForm()
-		.enableP091(!isConversionToNetCDF());
-		Nemo.getInstance().getViewMain().getEditDataForm()
-		.enableAboveSeaLevel(!isConversionToMedatlas());
+//		Nemo.getInstance().getViewMain().getEditDataForm().enableP011viaP021(isConversionToODV() || isConversionToNetCDF());
+//		Nemo.getInstance().getViewMain().getEditDataForm().enableP091(!isConversionToNetCDF());
+//		Nemo.getInstance().getViewMain().getEditDataForm().enableAboveSeaLevel(!isConversionToMedatlas());
 		ViewLog.styledTextLogErreurs.setText(messageLog);
 	}
 
@@ -474,7 +470,7 @@ public class RulesManager {
 
 				dataList_P011viaP021_Enabled = isConversionToODV() || isConversionToNetCDF();
 				Nemo.getInstance().getViewMain().getEditDataForm().enableP011viaP021(dataList_P011viaP021_Enabled);
-				dataList_P091_Enabled = !isConversionToNetCDF();
+				dataList_P091_Enabled = !isConversionToNetCDF() && myInputVariant == E_Variant.PHYSICOCHEMICAL;
 				Nemo.getInstance().getViewMain().getEditDataForm().enableP091(dataList_P091_Enabled);
 
 				// ensuite on selectionne si necessaire
@@ -505,20 +501,17 @@ public class RulesManager {
 		myEditFileForm.selectConversion(myConversionType);
 
 		Nemo.getInstance().getViewMain().enableCruiseTab(isCruiseEnabled());
-		Nemo.getInstance().getViewMain().getEditDataForm().enableP011viaP021(isConversionToODV() || isConversionToNetCDF());
-		Nemo.getInstance().getViewMain().getEditDataForm().enableAboveSeaLevel(!isConversionToMedatlas());
-		Nemo.getInstance().getViewMain().getEditDataForm().enableP091(!isConversionToNetCDF());
+//		Nemo.getInstance().getViewMain().getEditDataForm().enableP011viaP021(isConversionToODV() || isConversionToNetCDF());
+//		Nemo.getInstance().getViewMain().getEditDataForm().enableAboveSeaLevel(!isConversionToMedatlas());
+//		Nemo.getInstance().getViewMain().getEditDataForm().enableP091(!isConversionToNetCDF());
 		ViewLog.styledTextLogErreurs.setText(messageLog);
 
 	}
 
 	public void updateFromModel(VerticalParametersList verticalParametersList) {
 		myVerticalParametersList = verticalParametersList;
-		Nemo.getInstance().getViewMain().getEditDataForm()
-		.getMyGroupeVerticalParameters().select(myVerticalParametersList);
-
-
-		myEditDataForm.setFallrateGroupEnabled(isFallrateEnabled());
+//		Nemo.getInstance().getViewMain().getEditDataForm().getMyGroupeVerticalParameters().select(myVerticalParametersList);
+//		myEditDataForm.setFallrateGroupEnabled(isFallrateEnabled());
 	}
 
 	/**
@@ -569,8 +562,7 @@ public class RulesManager {
 	public void updateFromIHM(DataListTypeEnum dataListType) {
 		boolean confirm = true;
 		if (dataListType != myDataListType) {
-			if (Nemo.getInstance().getViewMain().getEditDataForm()
-					.getMyTableData().getTypes().size() > 0) {
+			if (Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().getTypes().size() > 0) {
 				confirm =
 						MessageDialog.openConfirm(null,
 								Messages.edit_data_dataListDialogBox_title,
@@ -597,10 +589,10 @@ public class RulesManager {
 	public void updateFromModel(DataListTypeEnum dataListType) {
 
 		myDataListType = dataListType;
-		Nemo.getInstance().getViewMain().getEditDataForm().enableP011viaP021(isConversionToODV() || isConversionToNetCDF());
-		Nemo.getInstance().getViewMain().getEditDataForm().enableP091(!isConversionToNetCDF());
-		Nemo.getInstance().getViewMain().getEditDataForm().enableAboveSeaLevel(!isConversionToMedatlas());
-		Nemo.getInstance().getViewMain().getEditDataForm().selectDataList(dataListType);
+//		Nemo.getInstance().getViewMain().getEditDataForm().enableP011viaP021(isConversionToODV() || isConversionToNetCDF());
+//		Nemo.getInstance().getViewMain().getEditDataForm().enableP091(!isConversionToNetCDF());
+//		Nemo.getInstance().getViewMain().getEditDataForm().enableAboveSeaLevel(!isConversionToMedatlas());
+//		Nemo.getInstance().getViewMain().getEditDataForm().selectDataList(dataListType);
 		ViewLog.styledTextLogErreurs.setText(messageLog);
 
 	}
@@ -621,6 +613,8 @@ public class RulesManager {
 		myEditDataForm.setFallrateGroupEnabled(isFallrateEnabled());
 	}
 
+	
+	
 	public void updateFromModel(E_MesureType mesureType) {
 		if (mesureType == E_MesureType.UNKNOWN) {
 			myMesureType = DEFAULT_MESURETYPE;
@@ -628,15 +622,12 @@ public class RulesManager {
 			myMesureType = mesureType;
 		}
 		rule_mesureType();
-		GroupVerticalParameters verticGroup =
-				Nemo.getInstance().getViewMain().getEditDataForm()
-				.getMyGroupeVerticalParameters();
+		GroupVerticalParameters verticGroup =Nemo.getInstance().getViewMain().getEditDataForm().getMyGroupeVerticalParameters();
 		verticGroup.enable_pDepthBSBed(isP_depthBSBed_enabled());
 		verticGroup.enable_pDepthBSSurf(isP_depthBSSurf_enabled());
 		verticGroup.enable_pPressure(isP_pressure_enabled());
 		verticGroup.enable_pHeightASLvl(isP_heightASLvl_enabled());
-		Nemo.getInstance().getViewMain().getEditDataForm()
-		.selectMesureType(mesureType);
+		Nemo.getInstance().getViewMain().getEditDataForm().selectMesureType(mesureType);
 
 	}
 
