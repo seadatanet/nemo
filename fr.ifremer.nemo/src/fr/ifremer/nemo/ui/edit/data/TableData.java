@@ -136,9 +136,9 @@ public class TableData {
 
 	private final String[] colOrder =
 		{ COL_IS_STRING, COL_CODE, COL_STANDARD_NAME, COL_LONG_NAME, COL_USERLABEL, COL_UNIT,
-			COL_CONVERSION, COL_TEST, COL_START, COL_END, COL_FORMAT,
-			COL_VALUE_IN, COL_VALUE_OUT, COL_TEST_IN, COL_TEST_OUT,
-			COL_START_FLAG, COL_END_FLAG, COL_UNIT_CODE,COL_INSTRUMENT,COL_INSTRUMENT_CODE
+				COL_CONVERSION, COL_TEST, COL_START, COL_END, COL_FORMAT,
+				COL_VALUE_IN, COL_VALUE_OUT, COL_TEST_IN, COL_TEST_OUT,
+				COL_START_FLAG, COL_END_FLAG, COL_UNIT_CODE,COL_INSTRUMENT,COL_INSTRUMENT_CODE
 		};
 
 	/**
@@ -516,13 +516,15 @@ public class TableData {
 		// initialisation de la ArrayList des types des donnees e partir du
 		types = null;
 		types = new ArrayList<TypeData>();
+		try {
 			List<TypeData> specificParams = VariantsSpecificsParameters.getInstance().getParameters();
 			for (TypeData td : specificParams) {
 				addType(td);
 			}
-
-
-		razAndRecreateTable();
+			razAndRecreateTable();
+		}catch (Exception e) {
+			Utils.messageErreur(e.getMessage());
+		}
 	}
 
 	/**
@@ -632,14 +634,14 @@ public class TableData {
 							it.setEnabled(true);
 						}
 					}
-					
+
 					if (RulesManager.getInstance()
 							.getMyDataListType() == DataListTypeEnum.P011_VIA_P021)
 					{
 						Point pt = new Point(event.x, event.y);
 						TableItem itemTmp = table.getItem(pt);
 						if (itemTmp != null) {
-						
+
 							table.getMenu()
 							.getItem(menuMap.get(MENU_ITEM_SELECTFORMAT))
 							.setEnabled(!itemTmp.getChecked());
@@ -666,9 +668,9 @@ public class TableData {
 									Integer.valueOf(myTable.getItem(indice)
 											.getText(
 													colNbById.get(COL_START))),
-													Integer.valueOf(myTable.getItem(indice)
-															.getText(
-																	colNbById.get(COL_END))));
+									Integer.valueOf(myTable.getItem(indice)
+											.getText(
+													colNbById.get(COL_END))));
 						}
 					}
 				}
@@ -777,8 +779,8 @@ public class TableData {
 					selectInViewFile(
 							Integer.valueOf(myTable.getItem(indice).getText(
 									colNbById.get(COL_START))),
-									Integer.valueOf(myTable.getItem(indice).getText(
-											colNbById.get(COL_END))));
+							Integer.valueOf(myTable.getItem(indice).getText(
+									colNbById.get(COL_END))));
 				}
 			}
 		});
@@ -1093,7 +1095,7 @@ public class TableData {
 		});
 
 		table.setMenu(menu);
-//		Utils.forceMenu(table, menu);
+		//		Utils.forceMenu(table, menu);
 		// Do not show menu, when no item is selected
 
 
@@ -1193,13 +1195,13 @@ public class TableData {
 			}
 			item.setText(new String[]
 					{
-					null,
-					code,
-					standardName,
-					longName,
-					label, 
-					unitLabel,
-					(types.get(i).isText() ? null : types.get(i).getConversion()),
+							null,
+							code,
+							standardName,
+							longName,
+							label, 
+							unitLabel,
+							(types.get(i).isText() ? null : types.get(i).getConversion()),
 							types.get(i).getTest(),
 							String.valueOf(types.get(i).getDebut()),
 							String.valueOf(types.get(i).getFin()),
@@ -1223,7 +1225,7 @@ public class TableData {
 
 	}
 
-	
+
 	private boolean isUnitP09() {
 		return RulesManager.getInstance().isDataListTypeP091()||RulesManager.getInstance().isDataListTypeP011viaP091();
 	}
@@ -1541,14 +1543,14 @@ public class TableData {
 								ligne.substring(
 										Integer.valueOf(myTable.getItem(i).getText(
 												colNbById.get(COL_START))) - 1,
-												Integer.valueOf(myTable.getItem(i).getText(
-														colNbById.get(COL_END)))).trim();
+										Integer.valueOf(myTable.getItem(i).getText(
+												colNbById.get(COL_END)))).trim();
 					}else{
 						// 33278: split as columns
 						selection = ligne.split(
 								Nemo.getInstance().getDomain().getMedia().getModel().getSeparator(), -1)
 								[Integer.valueOf(myTable.getItem(i).getText(colNbById.get(COL_START)))-1].trim();
-						
+
 					}
 
 				} catch (Exception e) {
@@ -1662,17 +1664,17 @@ public class TableData {
 									String.format(
 											myTable.getItem(i).getText(
 													colNbById.get(COL_FORMAT)),
-													new Double(
-															resultJEP));
+											new Double(
+													resultJEP));
 						} else if (type.equals("d") || type.equals("D")) { //$NON-NLS-1$ //$NON-NLS-2$
 							resultat =
 									String.format(
 											myTable.getItem(i).getText(
 													colNbById.get(COL_FORMAT)),
-													//													(Double.valueOf(resultJEP))
-													//													.intValue()
-													(Double.valueOf(resultJEP))
-													.longValue()
+											//													(Double.valueOf(resultJEP))
+											//													.intValue()
+											(Double.valueOf(resultJEP))
+											.longValue()
 											);
 						} else {
 							// error
@@ -1709,18 +1711,18 @@ public class TableData {
 					&& (!myTable.getItem(i)
 							.getText(colNbById.get(COL_END_FLAG))
 							.equals(Global.EMPTY_STRING))) {
-			
+
 				if (Nemo.getInstance().getDomain().getMedia().getModel().getSeparator().isEmpty() || !RulesManager.getInstance().isUsingTableForCsvData()){
 					selection =
 							ligne.substring(
 									Integer.valueOf(myTable.getItem(i).getText(	colNbById.get(COL_START_FLAG))) - 1,
-											Integer.valueOf(myTable.getItem(i).getText(colNbById.get(COL_END_FLAG)))).trim();
+									Integer.valueOf(myTable.getItem(i).getText(colNbById.get(COL_END_FLAG)))).trim();
 				}else{
 					// 33278: split as columns
 					selection = ligne.split(
 							Nemo.getInstance().getDomain().getMedia().getModel().getSeparator(), -1)
 							[Integer.valueOf(myTable.getItem(i).getText(colNbById.get(COL_START_FLAG)))-1].trim();
-					
+
 				}
 
 				types.get(i).setTestIn(selection);
@@ -1795,13 +1797,13 @@ public class TableData {
 
 			types.get(i).setUnite(
 					myTable.getItem(i).getText(colNbById.get(COL_UNIT)));
-			
+
 			if (!isUnitP09()){ // 25794
-			
+
 				types.get(i).setP06Label(
 						myTable.getItem(i).getText(colNbById.get(COL_UNIT)));
 			}
-			
+
 			types.get(i).setConversion(
 					myTable.getItem(i).getText(colNbById.get(COL_CONVERSION)));
 			types.get(i).setTest(

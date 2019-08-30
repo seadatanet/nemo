@@ -37,12 +37,12 @@ public class VariantsSpecificsParameters {
 	public VariantsSpecificsParameters() {
 	}
 
-	public List<TypeData> getParameters(){
+	public List<TypeData> getParameters() throws Exception{
 		return getParameters(Nemo.getInstance().getDomain().getMedia().getModel().getVariant());
 	}
 
 
-	public List<TypeData> getParameters(E_Variant variant){
+	public List<TypeData> getParameters(E_Variant variant) throws Exception{
 		List<TypeData> specificList=new ArrayList<>();
 		specificList = getSpecificParams(getValidator(variant));
 		return specificList;
@@ -63,7 +63,7 @@ public class VariantsSpecificsParameters {
 		}
 
 	}
-	private List<TypeData> getSpecificParams(OdvSpecificValidator validator)	{ 
+	private List<TypeData> getSpecificParams(OdvSpecificValidator validator) throws Exception	{ 
 		List<SpecificParameter>specificParamsList=new ArrayList<>();
 		List<TypeData>specificList=new ArrayList<>();
 		if (validator==null) {
@@ -143,13 +143,17 @@ public class VariantsSpecificsParameters {
 		return res;
 	}
 
-	private TypeData specificParam2TypeData(SpecificParameter p) {
+	private TypeData specificParam2TypeData(SpecificParameter p) throws Exception {
 		TypeData td = new TypeData();
 
 		String p02Code = VocabLists.getVocabMatch(
 				Intern.list_P011, Intern.list_P021,
 				p.getCodeP01(),
 				Intern.NemoLists_unknown);
+		if (p02Code==null) {
+			// TODO message
+			throw new Exception("P02 code not found for specific parameter " + p.getCodeP01());
+		}
 		td.setEntryKey(p02Code);
 		//		td.setEntryTerm(p.getCodeLocal());
 		td.setEntryKeyP011(p.getCodeP01());
@@ -169,8 +173,8 @@ public class VariantsSpecificsParameters {
 			td.setEntryTermP011(labelP01);
 			td.setP06Label(p.getUnitLocalLabel());
 		} catch (SismerToolsException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			// TODO message
+			throw new Exception("P01 label not found for specific parameter " + p.getCodeP01());
 		}
 
 
