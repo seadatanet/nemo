@@ -66,8 +66,8 @@ public class RulesManager {
 	private boolean odvMultistationEnabled;
 	private boolean netCDFMonostationEnabled;
 	private boolean netCDFMultistationEnabled;
-	private boolean dataList_P011viaP021_Enabled = false;
-	private boolean dataList_P091_Enabled = false;
+//	private boolean dataList_P011viaP021_Enabled = false;
+//	private boolean dataList_P091_Enabled = false;
 
 	private boolean m_aboveSeaLevel_Enabled = false;
 
@@ -145,8 +145,8 @@ public class RulesManager {
 		// FAE 6739
 		cruiseEnabled = DEFAULT_CRUISE_ENABLED;//!isConversionToODV();
 		myDataListType = DEFAULT_DATALIST;
-		dataList_P011viaP021_Enabled = isConversionToODV() || isConversionToNetCDF();
-		dataList_P091_Enabled = !isConversionToNetCDF() && myInputVariant == E_Variant.PHYSICOCHEMICAL;
+//		dataList_P011viaP021_Enabled = isConversionToODV() || isConversionToNetCDF();
+//		dataList_P091_Enabled = !isConversionToNetCDF() && myInputVariant == E_Variant.PHYSICOCHEMICAL;
 		m_aboveSeaLevel_Enabled = !isConversionToMedatlas();
 		myVerticalParametersList = new VerticalParametersList();
 		myMesureType = DEFAULT_MESURETYPE;
@@ -176,8 +176,8 @@ public class RulesManager {
 
 		myDataListType = DEFAULT_DATALIST;
 		myEditDataForm.selectDataList(myDataListType);
-		dataList_P011viaP021_Enabled = isConversionToODV() || isConversionToNetCDF();
-		dataList_P091_Enabled = !isConversionToNetCDF() && myInputVariant == E_Variant.PHYSICOCHEMICAL;
+//		dataList_P011viaP021_Enabled = isConversionToODV() || isConversionToNetCDF();
+//		dataList_P091_Enabled = !isConversionToNetCDF() && myInputVariant == E_Variant.PHYSICOCHEMICAL;
 		m_aboveSeaLevel_Enabled = !isMedatlasEnabled();
 		myMesureType = DEFAULT_MESURETYPE;
 		myEditDataForm.selectMesureType(myMesureType);
@@ -255,11 +255,11 @@ public class RulesManager {
 		myEditFileForm.selectConversion(myConversionType);
 
 		Nemo.getInstance().getViewMain().enableCruiseTab(isCruiseEnabled());
-//		Nemo.getInstance().getViewMain().getEditDataForm().enableP011viaP021(isConversionToODV() || isConversionToNetCDF());
-//		Nemo.getInstance().getViewMain().getEditDataForm().enableP091(!isConversionToNetCDF());
-//		Nemo.getInstance().getViewMain().getEditDataForm().enableAboveSeaLevel(!isConversionToMedatlas());
+		//		Nemo.getInstance().getViewMain().getEditDataForm().enableP011viaP021(isConversionToODV() || isConversionToNetCDF());
+		//		Nemo.getInstance().getViewMain().getEditDataForm().enableP091(!isConversionToNetCDF());
+		//		Nemo.getInstance().getViewMain().getEditDataForm().enableAboveSeaLevel(!isConversionToMedatlas());
 		ViewLog.styledTextLogErreurs.setText(messageLog);
-//		resetDataForm();
+		//		resetDataForm();
 	}
 
 	public void updateFromIHMSeparatorChecked(){
@@ -319,17 +319,17 @@ public class RulesManager {
 		myEditFileForm.selectConversion(myConversionType);
 
 		Nemo.getInstance().getViewMain().enableCruiseTab(isCruiseEnabled());
-//		Nemo.getInstance().getViewMain().getEditDataForm().enableP011viaP021(isDataList_P011viaP021_Enabled());
-//		Nemo.getInstance().getViewMain().getEditDataForm().enableP091(isDataList_P091_Enabled());
-//		Nemo.getInstance().getViewMain().getEditDataForm().enableAboveSeaLevel(!isConversionToMedatlas());
+		//		Nemo.getInstance().getViewMain().getEditDataForm().enableP011viaP021(isDataList_P011viaP021_Enabled());
+		//		Nemo.getInstance().getViewMain().getEditDataForm().enableP091(isDataList_P091_Enabled());
+		//		Nemo.getInstance().getViewMain().getEditDataForm().enableAboveSeaLevel(!isConversionToMedatlas());
 		ViewLog.styledTextLogErreurs.setText(messageLog);
 
 		rule_mesureType();
-//		GroupVerticalParameters verticGroup =	Nemo.getInstance().getViewMain().getEditDataForm().getMyGroupeVerticalParameters();
-//		verticGroup.enable_pDepthBSBed(isP_depthBSBed_enabled());
-//		verticGroup.enable_pDepthBSSurf(isP_depthBSSurf_enabled());
-//		verticGroup.enable_pPressure(isP_pressure_enabled());
-//		verticGroup.enable_pHeightASLvl(isP_heightASLvl_enabled());
+		//		GroupVerticalParameters verticGroup =	Nemo.getInstance().getViewMain().getEditDataForm().getMyGroupeVerticalParameters();
+		//		verticGroup.enable_pDepthBSBed(isP_depthBSBed_enabled());
+		//		verticGroup.enable_pDepthBSSurf(isP_depthBSSurf_enabled());
+		//		verticGroup.enable_pPressure(isP_pressure_enabled());
+		//		verticGroup.enable_pHeightASLvl(isP_heightASLvl_enabled());
 
 	}
 
@@ -345,16 +345,17 @@ public class RulesManager {
 		rule_fileType(true);
 
 		myEditFileForm.selectTypeFile(myFileType);
-
+		
+		
 		myConversionType = getCurrentConversionTypeWithRules(myConversionType);
 		rule_conversionType(true);
 		myEditFileForm.updateEnableConversionTypes();
 		myEditFileForm.selectConversion(myConversionType);
 
 		Nemo.getInstance().getViewMain().enableCruiseTab(isCruiseEnabled());
-//		Nemo.getInstance().getViewMain().getEditDataForm().enableP011viaP021(isConversionToODV() || isConversionToNetCDF());
-//		Nemo.getInstance().getViewMain().getEditDataForm().enableP091(!isConversionToNetCDF());
-//		Nemo.getInstance().getViewMain().getEditDataForm().enableAboveSeaLevel(!isConversionToMedatlas());
+		//		Nemo.getInstance().getViewMain().getEditDataForm().enableP011viaP021(isConversionToODV() || isConversionToNetCDF());
+		//		Nemo.getInstance().getViewMain().getEditDataForm().enableP091(!isConversionToNetCDF());
+		//		Nemo.getInstance().getViewMain().getEditDataForm().enableAboveSeaLevel(!isConversionToMedatlas());
 		ViewLog.styledTextLogErreurs.setText(messageLog);
 	}
 
@@ -371,10 +372,10 @@ public class RulesManager {
 
 
 		if (myInputVariant != variant) {
-				confirm =
-						MessageDialog.openConfirm(null,
-								Messages.edit_data_dataListDialogBox_title,
-								Messages.edit_data_dataListDialogBox_text);
+			confirm =
+					MessageDialog.openConfirm(null,
+							Messages.edit_data_dataListDialogBox_title,
+							Messages.edit_data_dataListDialogBox_text);
 		}else {
 			return;// nochange
 		}
@@ -390,10 +391,7 @@ public class RulesManager {
 				myFileType=DEFAULT_FILETYPE;
 			}
 
-			if (variant == E_Variant.BIOLOGICAL
-					|| variant == E_Variant.FLOWCYTO
-					|| variant == E_Variant.MICROLITTER
-					) {
+			if (isBioCytoMicroVariant()) {
 				myDataListType=DataListTypeEnum.P011_VIA_P021;
 			}
 
@@ -428,6 +426,12 @@ public class RulesManager {
 	 * RECEPTION MAJ CONVERSION
 	 */
 
+	
+	/**
+	 * 
+	 * @param convType: output format, including mono/multi
+	 * @param isConversionChanged: indicates if the output format has changed (false if same format, only multi/mono changed)
+	 */
 	public void updateFromIHM(E_TypeConversion convType, boolean isConversionChanged) {
 		boolean confirm = true;
 		boolean mustReinitDataForm = false;
@@ -435,54 +439,57 @@ public class RulesManager {
 		E_TypeConversion tmp = myConversionType;
 		//		DataListTypeEnum newDataList = myDataListType;
 
-		if (isConversionChanged && myConversionType != convType) {
-			if (myDataListType == DataListTypeEnum.UNKNOWN) {
-				mustChangeDatalist = true;
-			}
-			if (myDataListType == DataListTypeEnum.P011_VIA_P021 && convType == E_TypeConversion.MEDATLAS) {
-				confirm =
-						MessageDialog.openConfirm(null,
-								Messages.edit_data_dataListDialogBox_title,
-								Messages.edit_data_dataListDialogBox_text);
-				myDataListType = DEFAULT_DATALIST;
-				//				newDataList = myDataListType;
-				mustReinitDataForm = true;
-			}
-			if (myDataListType == DataListTypeEnum.P091
-					&& (convType == E_TypeConversion.NETCDF_MONOSTATION || convType == E_TypeConversion.NETCDF_MULTISTATIONS)) {
-				confirm =
-						MessageDialog.openConfirm(null,
-								Messages.edit_data_dataListDialogBox_title,
-								Messages.edit_data_dataListDialogBox_text);
-				myDataListType = DEFAULT_DATALIST;
-				//				newDataList = myDataListType;
-				mustReinitDataForm = true;
-			}
-			if (confirm) {
-				reinitRules();
-				rule_process(true);
-				rule_fileType(true);
-				myConversionType = convType;
-				rule_conversionType(true);
-				Nemo.getInstance().getViewMain().enableCruiseTab(isCruiseEnabled());
-				m_aboveSeaLevel_Enabled = !isConversionToMedatlas();
-				Nemo.getInstance().getViewMain().getEditDataForm().enableAboveSeaLevel(m_aboveSeaLevel_Enabled);
-
-				dataList_P011viaP021_Enabled = isConversionToODV() || isConversionToNetCDF();
-				Nemo.getInstance().getViewMain().getEditDataForm().enableP011viaP021(dataList_P011viaP021_Enabled);
-				dataList_P091_Enabled = !isConversionToNetCDF() && myInputVariant == E_Variant.PHYSICOCHEMICAL;
-				Nemo.getInstance().getViewMain().getEditDataForm().enableP091(dataList_P091_Enabled);
-
-				// ensuite on selectionne si necessaire
-				if (mustReinitDataForm || mustChangeDatalist) {
-					Nemo.getInstance().getViewMain().getEditDataForm().setMustBeReinit(true);
-					Nemo.getInstance().getViewMain().getEditDataForm().setMustFillFromModel(false);
-
+		if( myConversionType != convType) {
+			if (isConversionChanged ) {
+				if (myDataListType == DataListTypeEnum.UNKNOWN) {
+					mustChangeDatalist = true;
 				}
+				if (myDataListType == DataListTypeEnum.P011_VIA_P021 && convType == E_TypeConversion.MEDATLAS) {
+					confirm =
+							MessageDialog.openConfirm(null,
+									Messages.edit_data_dataListDialogBox_title,
+									Messages.edit_data_dataListDialogBox_text);
+					myDataListType = DEFAULT_DATALIST;
+					//				newDataList = myDataListType;
+					mustReinitDataForm = true;
+				}
+				if (myDataListType == DataListTypeEnum.P091
+						&& (convType == E_TypeConversion.NETCDF_MONOSTATION || convType == E_TypeConversion.NETCDF_MULTISTATIONS)) {
+					confirm =
+							MessageDialog.openConfirm(null,
+									Messages.edit_data_dataListDialogBox_title,
+									Messages.edit_data_dataListDialogBox_text);
+					myDataListType = DEFAULT_DATALIST;
+					//				newDataList = myDataListType;
+					mustReinitDataForm = true;
+				}
+				if (confirm) {
+					reinitRules();
+					rule_process(true);
+					rule_fileType(true);
+					myConversionType = convType;
+					rule_conversionType(true);
+					Nemo.getInstance().getViewMain().enableCruiseTab(isCruiseEnabled());
+					m_aboveSeaLevel_Enabled = !isConversionToMedatlas();
+					Nemo.getInstance().getViewMain().getEditDataForm().enableAboveSeaLevel(m_aboveSeaLevel_Enabled);
 
-				ViewLog.styledTextLogErreurs.setText(messageLog);
-			} else {
-				myEditFileForm.selectConversion(tmp);
+//					dataList_P011viaP021_Enabled = isConversionToODV() || isConversionToNetCDF();
+//					Nemo.getInstance().getViewMain().getEditDataForm().enableP011viaP021(dataList_P011viaP021_Enabled);
+//					dataList_P091_Enabled = !isConversionToNetCDF() && myInputVariant == E_Variant.PHYSICOCHEMICAL;
+//					Nemo.getInstance().getViewMain().getEditDataForm().enableP091(dataList_P091_Enabled);
+
+					// ensuite on selectionne si necessaire
+					if (mustReinitDataForm || mustChangeDatalist) {
+						Nemo.getInstance().getViewMain().getEditDataForm().setMustBeReinit(true);
+						Nemo.getInstance().getViewMain().getEditDataForm().setMustFillFromModel(false);
+					}
+
+					ViewLog.styledTextLogErreurs.setText(messageLog);
+				} else {
+					myEditFileForm.selectConversion(tmp);
+				}
+			}else {
+				myConversionType = convType;
 			}
 		}
 
@@ -492,6 +499,7 @@ public class RulesManager {
 
 		reinitRules();
 		rule_process(false);
+		rule_variant(false);
 		rule_fileType(false);
 
 
@@ -501,17 +509,17 @@ public class RulesManager {
 		myEditFileForm.selectConversion(myConversionType);
 
 		Nemo.getInstance().getViewMain().enableCruiseTab(isCruiseEnabled());
-//		Nemo.getInstance().getViewMain().getEditDataForm().enableP011viaP021(isConversionToODV() || isConversionToNetCDF());
-//		Nemo.getInstance().getViewMain().getEditDataForm().enableAboveSeaLevel(!isConversionToMedatlas());
-//		Nemo.getInstance().getViewMain().getEditDataForm().enableP091(!isConversionToNetCDF());
+		//		Nemo.getInstance().getViewMain().getEditDataForm().enableP011viaP021(isConversionToODV() || isConversionToNetCDF());
+		//		Nemo.getInstance().getViewMain().getEditDataForm().enableAboveSeaLevel(!isConversionToMedatlas());
+		//		Nemo.getInstance().getViewMain().getEditDataForm().enableP091(!isConversionToNetCDF());
 		ViewLog.styledTextLogErreurs.setText(messageLog);
 
 	}
 
 	public void updateFromModel(VerticalParametersList verticalParametersList) {
 		myVerticalParametersList = verticalParametersList;
-//		Nemo.getInstance().getViewMain().getEditDataForm().getMyGroupeVerticalParameters().select(myVerticalParametersList);
-//		myEditDataForm.setFallrateGroupEnabled(isFallrateEnabled());
+		//		Nemo.getInstance().getViewMain().getEditDataForm().getMyGroupeVerticalParameters().select(myVerticalParametersList);
+		//		myEditDataForm.setFallrateGroupEnabled(isFallrateEnabled());
 	}
 
 	/**
@@ -589,10 +597,10 @@ public class RulesManager {
 	public void updateFromModel(DataListTypeEnum dataListType) {
 
 		myDataListType = dataListType;
-//		Nemo.getInstance().getViewMain().getEditDataForm().enableP011viaP021(isConversionToODV() || isConversionToNetCDF());
-//		Nemo.getInstance().getViewMain().getEditDataForm().enableP091(!isConversionToNetCDF());
-//		Nemo.getInstance().getViewMain().getEditDataForm().enableAboveSeaLevel(!isConversionToMedatlas());
-//		Nemo.getInstance().getViewMain().getEditDataForm().selectDataList(dataListType);
+		//		Nemo.getInstance().getViewMain().getEditDataForm().enableP011viaP021(isConversionToODV() || isConversionToNetCDF());
+		//		Nemo.getInstance().getViewMain().getEditDataForm().enableP091(!isConversionToNetCDF());
+		//		Nemo.getInstance().getViewMain().getEditDataForm().enableAboveSeaLevel(!isConversionToMedatlas());
+		//		Nemo.getInstance().getViewMain().getEditDataForm().selectDataList(dataListType);
 		ViewLog.styledTextLogErreurs.setText(messageLog);
 
 	}
@@ -613,8 +621,8 @@ public class RulesManager {
 		myEditDataForm.setFallrateGroupEnabled(isFallrateEnabled());
 	}
 
-	
-	
+
+
 	public void updateFromModel(E_MesureType mesureType) {
 		if (mesureType == E_MesureType.UNKNOWN) {
 			myMesureType = DEFAULT_MESURETYPE;
@@ -676,7 +684,7 @@ public class RulesManager {
 		setM_aboveSeaLevel_enabled(!isConversionToMedatlas());
 
 	}
-	private boolean isVariantODV() {
+	private boolean isBioCytoMicroVariant() {
 		return myInputVariant==E_Variant.BIOLOGICAL||myInputVariant==E_Variant.FLOWCYTO||myInputVariant==E_Variant.MICROLITTER;
 	}
 	/******************************************
@@ -684,15 +692,16 @@ public class RulesManager {
 	 ******************************************/
 	private void rule_variant(boolean addToLog) {
 		// if input is bio/cyto/micro ODV variant, Nemo can generate only ODV or CF (need P01 parameters)
-		if (isVariantODV()) {
+		if (isBioCytoMicroVariant()) {
 			medatlasEnabled = false;
 			if (addToLog) {
 				messageLog +=
 						//						Messages.edit_file_info_medatlasForbiddenBecauseCollection
-						"TODO: only ODV or CFPoint is allowed for bio/cyto/micro variants"
+						"TODO: only ODV or CFPoint is allowed for bio/cyto/micro variants" // TODO message
 						+ Global.RN;
 			}
 		}
+		myEditFileForm.enableFileTypeChoice(myInputVariant==E_Variant.FLOWCYTO ||myInputVariant==E_Variant.PHYSICOCHEMICAL);
 	}
 
 	private void rule_process(boolean addToLog) {
@@ -720,7 +729,7 @@ public class RulesManager {
 
 		if (myConversionType == E_TypeConversion.ODV_MONOSTATION
 				|| myConversionType == E_TypeConversion.ODV_MULTISTATIONS) {
-			dataList_P011viaP021_Enabled = true;
+//			dataList_P011viaP021_Enabled = true;
 		} else if (myConversionType == E_TypeConversion.MEDATLAS) {
 			m_aboveSeaLevel_Enabled = false;
 			if (addToLog) {
@@ -732,14 +741,24 @@ public class RulesManager {
 			}
 		} else if (myConversionType == E_TypeConversion.NETCDF_MONOSTATION
 				|| myConversionType == E_TypeConversion.NETCDF_MULTISTATIONS) {
-			dataList_P011viaP021_Enabled = true;
-			dataList_P091_Enabled = false;
+//			dataList_P011viaP021_Enabled = true;
+//			dataList_P091_Enabled = false;
 			if (addToLog) {
 				messageLog += Messages.edit_file_info_P091disabled + Global.RN;
 			}
 		}
 	}
 
+	public boolean isP09Enabled() {
+		return 	!isConversionToNetCDF()
+				&& myInputVariant==E_Variant.PHYSICOCHEMICAL;
+	}
+	public boolean isP01viaP09Enabled() {
+		return myInputVariant==E_Variant.PHYSICOCHEMICAL;
+	}
+	public boolean isP01viaP02Enabled() {
+		return !isConversionToMedatlas();
+	}
 	/***********************************************************************************************************
 	 * recup proprietes (raccourcis)
 	 *********************************************************************************************************/
@@ -895,13 +914,13 @@ public class RulesManager {
 		return cruiseEnabled;
 	}
 
-	public boolean isDataList_P011viaP021_Enabled() {
-		return dataList_P011viaP021_Enabled;
-	}
-
-	public boolean isDataList_P091_Enabled() {
-		return dataList_P091_Enabled;
-	}
+//	public boolean isDataList_P011viaP021_Enabled() {
+//		return dataList_P011viaP021_Enabled;
+//	}
+//
+//	public boolean isDataList_P091_Enabled() {
+//		return dataList_P091_Enabled;
+//	}
 
 	public DataListTypeEnum getMyDataListType() {
 		return myDataListType;

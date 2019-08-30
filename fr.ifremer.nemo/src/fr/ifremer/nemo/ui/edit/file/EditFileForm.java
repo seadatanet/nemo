@@ -539,7 +539,7 @@ public class EditFileForm extends EditForm
 		setSortForced(Nemo.getInstance().getDomain().getConversion().getModel().isSortStations());
 		// activation option serie tempo
 		enableSeparatorChoice(true);
-		enableFileTypeChoice(true);
+//		enableFileTypeChoice(true);
 	}
 
 	public void invalidEtape()

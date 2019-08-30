@@ -36,7 +36,6 @@ import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Global.DataListTypeEnum;
 import fr.ifremer.nemo.util.Global.E_MesureType;
 import fr.ifremer.nemo.util.Global.E_TypeConversion;
-import fr.ifremer.nemo.util.Global.E_Variant;
 import fr.ifremer.nemo.util.Messages;
 
 public class EditDataForm extends EditForm {
@@ -206,9 +205,11 @@ public class EditDataForm extends EditForm {
 		setFallrateGroupEnabled(rm.isFallrateEnabled());
 		selectMesureType(rm.getMyMesureType());
 		selectDataList(rm.getMyDataListType());
-		enableP091(rm.isDataList_P091_Enabled());
-		enableP011viaP091(rm.getMyInputVariant() == E_Variant.PHYSICOCHEMICAL);
-		enableP011viaP021(rm.isDataList_P011viaP021_Enabled());
+		
+		enableP091(rm.isP09Enabled());
+		enableP011viaP091(rm.isP01viaP09Enabled());
+		enableP011viaP021( rm.isP01viaP02Enabled());
+		
 		enableAboveSeaLevel(!rm.isConversionToMedatlas());
 
 

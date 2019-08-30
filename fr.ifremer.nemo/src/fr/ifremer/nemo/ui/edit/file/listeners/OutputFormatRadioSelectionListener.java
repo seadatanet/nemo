@@ -48,10 +48,10 @@ public class OutputFormatRadioSelectionListener implements SelectionListener
             isConversionChanged=true;
         }
         else if(g.getSource().equals(myEditFileForm.getRadNetCDF())){
+        	 isConversionChanged=true;
             if (myEditFileForm.getRadODVMonoFichier().getSelection())
             {
                 currentConv = E_TypeConversion.NETCDF_MULTISTATIONS;
-                isConversionChanged=true;
             }else if(myEditFileForm.getRadODVMonoStation().getSelection())
             {
                 currentConv = E_TypeConversion.NETCDF_MONOSTATION;
@@ -61,6 +61,7 @@ public class OutputFormatRadioSelectionListener implements SelectionListener
         }
         else if(g.getSource().equals(myEditFileForm.getRadODV()))
         {
+        	 isConversionChanged=true;
             if (myEditFileForm.getRadODVMonoFichier().getSelection())
             {
                 currentConv = E_TypeConversion.ODV_MULTISTATIONS;
