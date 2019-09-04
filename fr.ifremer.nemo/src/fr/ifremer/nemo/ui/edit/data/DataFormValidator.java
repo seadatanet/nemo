@@ -2,6 +2,7 @@ package fr.ifremer.nemo.ui.edit.data;
 
 import java.math.BigDecimal;
 import java.text.MessageFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.swt.widgets.Combo;
@@ -239,15 +240,16 @@ public class DataFormValidator extends FormValidator {
 								getFirstParameterCode().equals(
 										rm.getMyVerticalParametersList().getP_pressure());
 					}
+					ok = ok && checkVerticalReferenceP01CodeIsUnique();
 				} else if (rm.isTrajectory() && (rm.isConversionToODV() || rm.isConversionToNetCDF())) {
 					/**
 					 * data80/data85 traj parametre de reference verticale en
 					 * premiere position
 					 **/
 					boolean verticTrajParamOk;
-					verticTrajParamOk =
-							checkTrajectoryVerticalParameterIsInFirstPosition();
+					verticTrajParamOk =	checkTrajectoryVerticalParameterIsInFirstPosition();
 					ok = ok && verticTrajParamOk;
+					ok = ok && checkVerticalReferenceP01CodeIsUnique();
 				}
 
 				/**
@@ -303,7 +305,25 @@ public class DataFormValidator extends FormValidator {
 		Nemo.getInstance().getViewMain().getEditConversionForm().fillSummary();
 
 	}
-
+	/**
+	 * 47818
+	 * Nemo allows multiple parameters with the same P01 EXCEPT for the vertical reference (when exist)
+	 * This method assumes that the first parameter in the data table is a vertical reference and is a P01, so should be called only in this context, after having checked the table
+	 * @return true if vertical reference P01 code is unique in parameters
+	 */
+	private  boolean checkVerticalReferenceP01CodeIsUnique() {
+		boolean ok=true;
+		ArrayList<TypeData> dataTypes = Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().getTypes();
+		String verticalReferenceP01Code=dataTypes.get(0).getEntryKeyP011();
+		for (int i=1; i<dataTypes.size(); i++) {
+			if (dataTypes.get(i).getEntryKeyP011().equals(verticalReferenceP01Code)){
+				Utils.messageErreurAppend(MessageFormat.format(Messages.error_data_firstParam_nonUnique	, verticalReferenceP01Code)); 
+				ok=false;
+				break;
+			}
+		}
+		return ok;
+	}
 	private boolean checkStartAndEndAreFilled(int nbreParam, int[] debuts,
 			int[] fins) {
 		boolean ok = true;
