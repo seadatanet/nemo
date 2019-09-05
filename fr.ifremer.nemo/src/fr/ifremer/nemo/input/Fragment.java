@@ -303,9 +303,9 @@ public class Fragment extends AbstractModel
     	}
 
     	if (end == -1) {
-    		writer.println(a_Line.substring(start));
+    		writer.print(a_Line.substring(start));
     	} else {
-    		writer.println(a_Line.substring(start, end + 1));
+    		writer.print(a_Line.substring(start, end + 1));
     	}
 	
 		return stringWriter.toString();
