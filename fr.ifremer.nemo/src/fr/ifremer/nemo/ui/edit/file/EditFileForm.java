@@ -740,22 +740,22 @@ public class EditFileForm extends EditForm
 		GridLayoutFactory.fillDefaults().applyTo(grpDatatype);
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(grpDatatype);
 
-		VariantSelectionListener dataTypeSelectionListener = new VariantSelectionListener(this);
+		VariantSelectionListener variantSelectionListener = new VariantSelectionListener(this);
 		radPhysicochemical = new Button(grpDatatype, SWT.RADIO);
 		radPhysicochemical.setText(Messages.variant_physicochemical);
-		radPhysicochemical.addSelectionListener(dataTypeSelectionListener);
+		radPhysicochemical.addSelectionListener(variantSelectionListener);
 
 		radBiological = new Button(grpDatatype, SWT.RADIO);
 		radBiological.setText(Messages.variant_biological);
-		radBiological.addSelectionListener(dataTypeSelectionListener);
+		radBiological.addSelectionListener(variantSelectionListener);
 
 		radFlowcytometry = new Button(grpDatatype, SWT.RADIO);
 		radFlowcytometry.setText(Messages.variant_flowcytometry);
-		radFlowcytometry.addSelectionListener(dataTypeSelectionListener);
+		radFlowcytometry.addSelectionListener(variantSelectionListener);
 		
 		radMicrolitter = new Button(grpDatatype, SWT.RADIO);
 		radMicrolitter.setText(Messages.variant_microlitter);
-		radMicrolitter.addSelectionListener(dataTypeSelectionListener);
+		radMicrolitter.addSelectionListener(variantSelectionListener);
 
 		// Selection du type par defaut
 
