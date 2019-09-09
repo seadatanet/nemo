@@ -304,6 +304,7 @@ public class Messages {
 	public static String edit_file_info_P011viaP021_disabled;
 	public static String edit_file_info_AboveSeaLevel_disabled;
 	public static String edit_file_info_P091disabled;
+	public static String edit_file_info_allowedOutputFormatsForBioCytoMicro;
 	// RESULTATS
 	public static String error_preformat_impossible;
 	public static String success_file_preformat;

@@ -709,8 +709,7 @@ public class RulesManager {
 			netCDFMultistationEnabled = false;
 			if (addToLog) {
 				messageLog +=
-						//						Messages.edit_file_info_medatlasForbiddenBecauseCollection
-						"TODO: only ODV or CFPoint is allowed for bio/cyto/micro variants" // TODO message
+						Messages.edit_file_info_allowedOutputFormatsForBioCytoMicro
 						+ Global.RN;
 			}
 		}
