@@ -198,6 +198,7 @@ public class EditDataForm extends EditForm {
 		}
 
 		if (isMustFillFromModel()) {
+			getMyGroupeVerticalParameters().removeAllToAllCombos();
 			fillFromModel();
 		}
 		//		else {
@@ -220,6 +221,7 @@ public class EditDataForm extends EditForm {
 			initFromNewModel();
 		}
 		if (isMustFillFromModel()) {
+			getMyGroupeVerticalParameters().removeAllToAllCombos();
 			fillFromModel();
 		}
 		//		}
