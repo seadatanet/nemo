@@ -202,7 +202,7 @@ public class EditDataForm extends EditForm {
 			fillFromModel();
 		}
 		//		else {
-		getMyGroupeVerticalParameters().select(rm.getMyVerticalParametersList());
+
 		setFallrateGroupEnabled(rm.isFallrateEnabled());
 		selectMesureType(rm.getMyMesureType());
 		selectDataList(rm.getMyDataListType());
@@ -224,6 +224,7 @@ public class EditDataForm extends EditForm {
 			getMyGroupeVerticalParameters().removeAllToAllCombos();
 			fillFromModel();
 		}
+		getMyGroupeVerticalParameters().select(rm.getMyVerticalParametersList());
 		//		}
 
 		//*********************************
