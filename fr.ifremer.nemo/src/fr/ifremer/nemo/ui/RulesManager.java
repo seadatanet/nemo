@@ -380,8 +380,6 @@ public class RulesManager {
 		}
 
 		if (confirm) {
-			reinitRules();
-
 			myInputVariant = variant;
 			if (variant == E_Variant.PHYSICOCHEMICAL || variant == E_Variant.FLOWCYTO) {
 				Nemo.getInstance().getViewMain().getEditFileForm().enableFileTypeChoice(true);
@@ -431,7 +429,7 @@ public class RulesManager {
 	 * @param convType: output format, including mono/multi
 	 * @param isConversionChanged: indicates if the output format has changed (false if same format, only multi/mono changed)
 	 */
-	public void updateFromIHM(E_TypeConversion convType, boolean isConversionChanged) {
+	public void updateFromIHM(E_TypeConversion convType) {
 		boolean confirm = true;
 		boolean mustReinitDataForm = false;
 		boolean mustChangeDatalist = false;
@@ -439,7 +437,7 @@ public class RulesManager {
 		//		DataListTypeEnum newDataList = myDataListType;
 
 		if( myConversionType != convType) {
-			if (isConversionChanged ) {
+			if (isConversionFormatChanged(myConversionType, convType) ) {
 				if (myDataListType == DataListTypeEnum.UNKNOWN) {
 					mustChangeDatalist = true;
 				}
@@ -494,6 +492,20 @@ public class RulesManager {
 
 	}
 
+	private boolean isConversionFormatChanged(E_TypeConversion oldConv, E_TypeConversion newConv) {
+		switch (oldConv) {
+		case MEDATLAS:
+			return newConv!= E_TypeConversion.MEDATLAS;
+		case ODV_MONOSTATION:
+		case ODV_MULTISTATIONS:
+			return newConv!= E_TypeConversion.ODV_MONOSTATION && newConv!= E_TypeConversion.ODV_MULTISTATIONS;
+		case NETCDF_MONOSTATION:
+		case NETCDF_MULTISTATIONS:
+			return newConv!= E_TypeConversion.NETCDF_MONOSTATION && newConv!= E_TypeConversion.NETCDF_MULTISTATIONS;
+		default:
+			return true;
+		}
+	}
 	public void updateFromModel(E_TypeConversion convType) {
 
 		reinitRules();
