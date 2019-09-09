@@ -173,8 +173,7 @@ public class RulesManager {
 	}
 
 	public void resetDataForm() {
-
-		myDataListType = DEFAULT_DATALIST;
+//		myDataListType = DEFAULT_DATALIST;
 		myEditDataForm.selectDataList(myDataListType);
 //		dataList_P011viaP021_Enabled = isConversionToODV() || isConversionToNetCDF();
 //		dataList_P091_Enabled = !isConversionToNetCDF() && myInputVariant == E_Variant.PHYSICOCHEMICAL;
@@ -694,6 +693,8 @@ public class RulesManager {
 		// if input is bio/cyto/micro ODV variant, Nemo can generate only ODV or CF (need P01 parameters)
 		if (isBioCytoMicroVariant()) {
 			medatlasEnabled = false;
+			netCDFMonostationEnabled = false;
+			netCDFMultistationEnabled = false;
 			if (addToLog) {
 				messageLog +=
 						//						Messages.edit_file_info_medatlasForbiddenBecauseCollection
