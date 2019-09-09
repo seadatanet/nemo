@@ -313,6 +313,9 @@ public class DataFormValidator extends FormValidator {
 	 */
 	private  boolean checkVerticalReferenceP01CodeIsUnique() {
 		boolean ok=true;
+		if (rm.isDataListTypeP091()) {
+			return ok;// no P01 duplication test in P09
+		}
 		ArrayList<TypeData> dataTypes = Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().getTypes();
 		String verticalReferenceP01Code=dataTypes.get(0).getEntryKeyP011();
 		for (int i=1; i<dataTypes.size(); i++) {
