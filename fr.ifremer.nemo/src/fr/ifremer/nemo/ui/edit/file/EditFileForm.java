@@ -226,6 +226,7 @@ public class EditFileForm extends EditForm
 		radioEspace.setEnabled(true);
 		radioSeparateurAutre.setEnabled(true);
 		textSeparateur.setEnabled(true);
+	
 		// reinitialisation des selections
 		chkSeparateur.setSelection(false);
 		radioTabulation.setSelection(true);
@@ -503,6 +504,7 @@ public class EditFileForm extends EditForm
 		}
 
 		// Entête Station
+		sectionStationHeader.getUseSeparatorInStationHeader().setSelection(mediaModel.isUseSeparatorInStationHeader());
 		if (mediaModel.getStationHeaderPattern().equals(Global.EMPTY_STRING))
 		{
 			sectionStationHeader.selectNumber(true);

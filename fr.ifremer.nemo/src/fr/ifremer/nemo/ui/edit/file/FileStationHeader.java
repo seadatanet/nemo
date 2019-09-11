@@ -33,6 +33,8 @@ public class FileStationHeader extends FileSection
     
 
    
+	
+
 	/**
      * @param shell
      * @param name
@@ -97,6 +99,7 @@ public class FileStationHeader extends FileSection
     
         useSeparatorInStationHeader = new Button(compo, SWT.CHECK);
     	useSeparatorInStationHeader.setText(Messages.view_file_separator);
+    	useSeparatorInStationHeader.setEnabled(false);
     	
         radNumber = new Button(compo, SWT.RADIO);
         radNumber.setBackground(Nemo.getInstance().getViewMain().getBackgroundEdit());
@@ -141,6 +144,7 @@ public class FileStationHeader extends FileSection
         setterIndicator.razValues();
         setterLinesBeforeData.razValues();
         selectNumber(true);
+        useSeparatorInStationHeader.setSelection(false);
     }
 
     /**
@@ -216,5 +220,7 @@ public class FileStationHeader extends FileSection
     public Button getUseSeparatorInStationHeader() {
 		return useSeparatorInStationHeader;
 	}
-
+    public void setUseSeparatorInStationHeader(Button useSeparatorInStationHeader) {
+		this.useSeparatorInStationHeader = useSeparatorInStationHeader;
+	}
 }

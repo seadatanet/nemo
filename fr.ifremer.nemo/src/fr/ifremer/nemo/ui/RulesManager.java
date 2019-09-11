@@ -265,7 +265,11 @@ public class RulesManager {
 		if (myEditFileForm.isSeparatorChecked()){
 			myEditFileForm.sectionDataColumnTitles.setEnabled(true);
 			separator = myEditFileForm.getSeparateur();//40216
+			
+			myEditFileForm.sectionStationHeader.getUseSeparatorInStationHeader().setEnabled(true);
 		}else{
+			myEditFileForm.sectionStationHeader.getUseSeparatorInStationHeader().setSelection(false);
+			myEditFileForm.sectionStationHeader.getUseSeparatorInStationHeader().setEnabled(false);
 			myEditFileForm.sectionDataColumnTitles.setEnabled(false);
 		}
 		updateFromIHMColumnTitlesInInputFile();
