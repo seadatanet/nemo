@@ -28,10 +28,12 @@ public class FileStationHeader extends FileSection
     protected Composite subCompo, col01, col02;
     protected Button radNumber, radIndicator;
     protected SetText setterIndicator, setterLinesBeforeData;
+	private Button useSeparatorInStationHeader;
    
     
 
-    /**
+   
+	/**
      * @param shell
      * @param name
      * @param title
@@ -92,7 +94,10 @@ public class FileStationHeader extends FileSection
         compo = new Composite(parent, SWT.NONE);
         GridLayoutFactory.fillDefaults().numColumns(1).applyTo(compo);
         GridDataFactory.fillDefaults().grab(false, false).applyTo(compo);
-
+    
+        useSeparatorInStationHeader = new Button(compo, SWT.CHECK);
+    	useSeparatorInStationHeader.setText(Messages.view_file_separator);
+    	
         radNumber = new Button(compo, SWT.RADIO);
         radNumber.setBackground(Nemo.getInstance().getViewMain().getBackgroundEdit());
         radNumber.setText(Messages.edit_file_enteteStation_radNumber);
@@ -208,4 +213,8 @@ public class FileStationHeader extends FileSection
     {
         setterLinesBeforeData.setValue(value);
     }
+    public Button getUseSeparatorInStationHeader() {
+		return useSeparatorInStationHeader;
+	}
+
 }

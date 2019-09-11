@@ -927,6 +927,7 @@ public class EditFileForm extends EditForm
 		mediaModel.setFileHeader(fileHeader);
 
 		// Entête Station
+		mediaModel.setUseSeparatorInStationHeader(sectionStationHeader.getUseSeparatorInStationHeader().getSelection());
 		if (!sectionStationHeader.isSelectNumber())
 		{
 			mediaModel.setStationHeaderPattern(sectionStationHeader.getIndicatorText());
