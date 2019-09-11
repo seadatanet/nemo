@@ -39,7 +39,6 @@ import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Global.DataListTypeEnum;
 import fr.ifremer.nemo.util.Global.E_TypeConversion;
-import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.util.Preformat;
 import fr.ifremer.nemo.ws.WSDataType;
@@ -409,9 +408,9 @@ public class NemoShell {
 			}
 			// 35230 check unit
 			if (typeCourant.isText()) { //46457
-				typeCourant.setUniteCode(Intern.NemoLists_unknown);
+				typeCourant.setUniteCode(SdnVocabularyManager.P06_XXXX);
 				try {
-					typeCourant.setUnite( BodcChecker.getInstance().getSdnMgr().getLabel(Intern.NemoLists_unknown, SdnVocabularyManager.LIST_P06));
+					typeCourant.setUnite( BodcChecker.getInstance().getSdnMgr().getLabel(SdnVocabularyManager.P06_XXXX, SdnVocabularyManager.LIST_P06));
 				} catch (SismerToolsException e) {
 					logger.warn(e.getMessage());
 				}

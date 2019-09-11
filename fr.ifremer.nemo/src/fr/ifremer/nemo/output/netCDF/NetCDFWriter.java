@@ -1279,7 +1279,7 @@ public class NetCDFWriter extends NemoWriter {
 			urnSyntaxe.append(Global.DBL_PT);
 			String pdvCodeobject;
 			if (list1 != null)
-				pdvCodeobject = VocabLists.getVocabMatch(list1, list2, code, Intern.NemoLists_unknown);
+				pdvCodeobject = VocabLists.getVocabMatch(list1, list2, code);
 			else
 				pdvCodeobject = code;
 
@@ -1297,7 +1297,7 @@ public class NetCDFWriter extends NemoWriter {
 			urnSyntaxe.append(Global.DBL_PT);
 			String pdvCodeunits;
 			if (list1 != null || isText)
-				pdvCodeunits = VocabLists.getVocabMatch(list1, list2, code, Intern.NemoLists_unknown);
+				pdvCodeunits = VocabLists.getVocabMatch(list1, list2, code);
 			else
 				pdvCodeunits = code;
 			if (pdvCodeunits==null) {
@@ -1305,7 +1305,7 @@ public class NetCDFWriter extends NemoWriter {
 			}
 			// FAE 10755
 			if (isText)
-				urnSyntaxe.append(Intern.NemoLists_unknown);
+				urnSyntaxe.append(SdnVocabularyManager.P06_XXXX);
 			else
 				urnSyntaxe.append(pdvCodeunits);
 			break;
@@ -1317,7 +1317,7 @@ public class NetCDFWriter extends NemoWriter {
 			urnSyntaxe.append(Global.DBL_PT);
 			String pdvCodefallrate;
 			if (list1 != null)
-				pdvCodefallrate = VocabLists.getVocabMatch(list1, list2, code, Intern.NemoLists_unknown);
+				pdvCodefallrate = VocabLists.getVocabMatch(list1, list2, code);
 			else
 				pdvCodefallrate = code;
 			if (pdvCodefallrate==null) {
@@ -1333,7 +1333,7 @@ public class NetCDFWriter extends NemoWriter {
 			urnSyntaxe.append(Global.DBL_PT);
 			String pdvCodeinstrument;
 			if (list1 != null)
-				pdvCodeinstrument = VocabLists.getVocabMatch(list1, list2, code, Intern.NemoLists_unknown);
+				pdvCodeinstrument = VocabLists.getVocabMatch(list1, list2, code);
 			else
 				pdvCodeinstrument = code;
 			if (pdvCodeinstrument==null) {

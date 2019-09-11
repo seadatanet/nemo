@@ -88,7 +88,7 @@ public class Intern extends NLS {
 	public static String file_mapping;
 	public static String file_mapping_sdn;
 	public static String file_mapping_subject;
-	public static String NemoLists_unknown;
+//	public static String NemoLists_unknown;
 	public static String CJDY;
 	public static String DTUT;
 

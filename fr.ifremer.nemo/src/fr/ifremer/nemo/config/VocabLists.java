@@ -146,7 +146,7 @@ public class VocabLists {
 		_vocabMap.put(fr.ifremer.nemo.util.Utils.concat(list1, list2, Global.UNDERSCORE), map);
 	}
 
-	public static String getVocabMatch(String list1, String list2, String value, String errorMessage) {
+	public static String getVocabMatch(String list1, String list2, String value) {
 		String strReturn = null;
 
 		ICollectionMapping tableMap = getVocabMap(list1, list2);

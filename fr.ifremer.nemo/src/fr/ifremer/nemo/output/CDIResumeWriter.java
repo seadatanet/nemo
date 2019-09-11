@@ -249,8 +249,8 @@ public class CDIResumeWriter {
 			// 6542
 			p02Code = VocabLists.getVocabMatch(
 					Intern.mapping_subject, Intern.list_P021,
-					param.getParameter().getCode(),
-					Intern.NemoLists_unknown);
+					param.getParameter().getCode()
+					);
 		}
 		writer.write(sep + p02Code + Global.EMPTY_STRING);
 
