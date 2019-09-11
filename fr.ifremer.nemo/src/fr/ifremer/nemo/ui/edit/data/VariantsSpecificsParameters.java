@@ -158,7 +158,7 @@ public class VariantsSpecificsParameters {
 		//		td.setEntryTerm(p.getCodeLocal());
 		td.setEntryKeyP011(p.getCodeP01());
 		td.setUniteCode(p.getCodeP06());
-		td.setUnite(p.getUnitLocalLabel());
+//		td.setUnite(p.getUnitLocalLabel());
 
 		//		td.setInstrumentCode();
 		//		td.setInstrument();
@@ -171,7 +171,10 @@ public class VariantsSpecificsParameters {
 		try {
 			String labelP01= BodcChecker.getInstance().getSdnMgr().getP01Label(p.getCodeP01());
 			td.setEntryTermP011(labelP01);
-			td.setP06Label(p.getUnitLocalLabel());
+			// we do not use unit labels as specified in the documentations, because Nemo fixes them if they are not official P06 labels
+			// we use directly the P06 labels
+			String labelP06= BodcChecker.getInstance().getSdnMgr().getP06UnitLabel(p.getCodeP06());
+			td.setP06Label(labelP06);
 		} catch (SismerToolsException e) {
 			// TODO message
 			throw new Exception("P01 label not found for specific parameter " + p.getCodeP01());
