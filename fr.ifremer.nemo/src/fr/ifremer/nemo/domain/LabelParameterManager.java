@@ -78,7 +78,9 @@ public class LabelParameterManager
 		}
 		return instance;
 	}
-
+	public void cleanUSersLabels() {
+		labelsMap = new HashMap<String, String>();
+	}
 	public String getUserLabel(String P011Code)
 	{
 		return labelsMap.get(P011Code);
