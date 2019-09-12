@@ -380,8 +380,14 @@ public class DateTimeFormat extends ExternalizableFormat implements Cloneable {
 			for (int i = 0; i < _elements.length && index < source.length(); i++) {
 				switch (_elements[i]._type) {
 				case YEAR: {
-					String tmp = source.substring(index, index + _elements[i]._element.length());
-					int year = Integer.parseInt(tmp);
+					String tmp = source.substring(index, index + _elements[i]._element.length()).trim();
+					
+					int year = 0;
+					
+					if (!tmp.equals("")) {
+						year = Integer.parseInt(tmp);
+					}
+					
 					if (_elements[i]._element.length() <= 2) {
 						if (year < 50) {
 							year = 2000 + year;
@@ -394,7 +400,7 @@ public class DateTimeFormat extends ExternalizableFormat implements Cloneable {
 					break;
 				}
 				case YEAR19: {
-					String tmp = source.substring(index, index + _elements[i]._element.length());
+					String tmp = source.substring(index, index + _elements[i]._element.length()).trim();
 					int year = Integer.parseInt(tmp);
 					if (_elements[i]._element.length() <= 2) {
 						year = 1900 + year;
@@ -404,7 +410,7 @@ public class DateTimeFormat extends ExternalizableFormat implements Cloneable {
 					break;
 				}
 				case MONTH: {
-					String tmp = source.substring(index, index + _elements[i]._element.length());
+					String tmp = source.substring(index, index + _elements[i]._element.length()).trim();
 					if (tmp.length() > 2) {
 						java.text.SimpleDateFormat fmt = new java.text.SimpleDateFormat(_elements[i]._element, new java.text.DateFormatSymbols(java.util.Locale.US));
 						java.util.Date date = fmt.parse(tmp);
@@ -420,7 +426,7 @@ public class DateTimeFormat extends ExternalizableFormat implements Cloneable {
 					break;
 				}
 				case DAY: {
-					String tmp = source.substring(index, index + _elements[i]._element.length());
+					String tmp = source.substring(index, index + _elements[i]._element.length()).trim();
 					int day = Integer.parseInt(tmp);
 					cal.set(Calendar.DAY_OF_MONTH, day);
 
@@ -428,7 +434,7 @@ public class DateTimeFormat extends ExternalizableFormat implements Cloneable {
 					break;
 				}
 				case DAY_DECIMAL: {
-					String tmp = source.substring(index, index + _elements[i]._element.length() - 1);
+					String tmp = source.substring(index, index + _elements[i]._element.length() - 1).trim();
 					cal.setTimeInMillis(getRefDate());
 					double days = Double.parseDouble(tmp.replace(',', '.'));
 					JulianDate jd = new JulianDate(days, true);
@@ -448,7 +454,7 @@ public class DateTimeFormat extends ExternalizableFormat implements Cloneable {
 					break;
 				}
 				case HOURS12: {
-					String tmp = source.substring(index, index + _elements[i]._element.length());
+					String tmp = source.substring(index, index + _elements[i]._element.length()).trim();
 					int hours = 0;
 					if (tmp.trim().length() > 0) {
 						hours = Integer.parseInt(tmp.trim());
@@ -458,7 +464,7 @@ public class DateTimeFormat extends ExternalizableFormat implements Cloneable {
 					break;
 				}
 				case HOURS24: {
-					String tmp = source.substring(index, index + _elements[i]._element.length());
+					String tmp = source.substring(index, index + _elements[i]._element.length()).trim();
 					int hours = 0;
 					if (tmp.trim().length() > 0) {
 						hours = Integer.parseInt(tmp.trim());
@@ -468,7 +474,7 @@ public class DateTimeFormat extends ExternalizableFormat implements Cloneable {
 					break;
 				}
 				case AMPM: {
-					String tmp = source.substring(index, index + _elements[i]._element.length());
+					String tmp = source.substring(index, index + _elements[i]._element.length()).trim();
 					if (tmp.toUpperCase().equals(AM)) {
 						cal.set(Calendar.AM_PM, Calendar.AM);
 					} else {
@@ -478,7 +484,7 @@ public class DateTimeFormat extends ExternalizableFormat implements Cloneable {
 					break;
 				}
 				case MINUTES: {
-					String tmp = source.substring(index, index + _elements[i]._element.length());
+					String tmp = source.substring(index, index + _elements[i]._element.length()).trim();
 					int minutes = 0;
 					if (tmp.trim().length() > 0) {
 						minutes = Integer.parseInt(tmp.trim());
@@ -488,14 +494,14 @@ public class DateTimeFormat extends ExternalizableFormat implements Cloneable {
 					break;
 				}
 				case SECONDS: {
-					String tmp = source.substring(index, index + _elements[i]._element.length());
+					String tmp = source.substring(index, index + _elements[i]._element.length()).trim();
 					int seconds = Integer.parseInt(tmp.trim());
 					cal.set(Calendar.SECOND, seconds);
 					index += _elements[i]._element.length();
 					break;
 				}
 				case MILLISECONDS: {
-					String tmp = source.substring(index, index + _elements[i]._element.length());
+					String tmp = source.substring(index, index + _elements[i]._element.length()).trim();
 					Pattern p = Pattern.compile("[.]"); //$NON-NLS-1$
 					String parties[] = p.split(tmp);
 
@@ -506,7 +512,7 @@ public class DateTimeFormat extends ExternalizableFormat implements Cloneable {
 					break;
 				}
 				case HOURSDEC: {
-					String tmp = source.substring(index, index + _elements[i]._element.length());
+					String tmp = source.substring(index, index + _elements[i]._element.length()).trim();
 
 					// maximum 7 éléments
 					tmp = Formatter.getSingleton().genericPadString(tmp, 7, '0', false);
@@ -536,7 +542,7 @@ public class DateTimeFormat extends ExternalizableFormat implements Cloneable {
 					Calendar calTemp = Calendar.getInstance();
 					calTemp.clear();
 
-					String tmp = source.substring(index, index + _elements[i]._element.length());
+					String tmp = source.substring(index, index + _elements[i]._element.length()).trim();
 
 					calTemp.add(Calendar.SECOND, Integer.parseInt(tmp.trim()));
 
