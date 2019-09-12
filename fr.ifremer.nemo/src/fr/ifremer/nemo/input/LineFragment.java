@@ -130,7 +130,7 @@ public class LineFragment extends AbstractModel
      */
     public String retreive(String a_Line) {
     	String res;
-    	if (getSeparatorForSplit().isEmpty() ||
+    	if (Nemo.getInstance().getDomain().getMedia().getModel().getSeparatorForSplit().isEmpty() ||
     			!Nemo.getInstance().getDomain().getMedia().getModel().getUseTableForCsvData()
     			){
     		if (_lastCharOffset == -1) {
@@ -139,18 +139,12 @@ public class LineFragment extends AbstractModel
     		res= a_Line.substring(_firstCharOffset - 1, _lastCharOffset).trim();
     	}else{
     		//33278: split as columns
-    		String[] splittedLine = a_Line.split(getSeparatorForSplit(), -1);
+    		String[] splittedLine = a_Line.split(Nemo.getInstance().getDomain().getMedia().getModel().getSeparatorForSplit(), -1);
     		res= splittedLine[_lastCharOffset-1].trim();
     	}
     	return res;
     }
-    private String getSeparatorForSplit(){
-    	String sep=Nemo.getInstance().getDomain().getMedia().getModel().getSeparator();
-		if (sep.equals("|")){ //$NON-NLS-1$
-			return "\\|"; //$NON-NLS-1$
-		}
-		return sep;
-	}
+
     /**
      * 
      * @param a_Line

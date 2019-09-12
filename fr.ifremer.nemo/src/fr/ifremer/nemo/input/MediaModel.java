@@ -717,6 +717,19 @@ public class MediaModel extends AbstractModel
 	{
 		return _stationHeaderPattern;
 	}
+	
+	/**
+	 * Gets the separator in order to perform a split(). Prevents bugs with some characters (ex: pipe).
+	 * 
+	 * @return String
+	 */
+	public String getSeparatorForSplit() {
+		String sep = this.getSeparator();
+		if (sep.equals("|")) { //$NON-NLS-1$
+			return "\\|"; //$NON-NLS-1$
+		}
+		return sep;
+	}
 
 	/**
 	 * Setter pour _stationHeaderPattern.
