@@ -303,6 +303,9 @@ public class DataFormValidator extends FormValidator {
 		Nemo.getInstance().getDomain().getData().getModel().setFallrateLabel(editDataForm.getFallrateLabel());
 
 		Nemo.getInstance().getViewMain().getEditConversionForm().fillSummary();
+		
+		// Update multiple P01 indexes in the parameters
+		Nemo.getInstance().getDomain().getData().getModel().majMultipleP011Indexes();
 
 	}
 	/**

@@ -912,7 +912,7 @@ public class NetCDFWriter extends NemoWriter {
 			z.setFall_rate(Nemo.getInstance().getDomain().getData().getModel().getFallrateLabel(), fallrateCode);
 		}
 
-		map_P011_VarName.put(longitude.getSdnParameterName(), longitude.getVarName());
+		// map_P011_VarName.put(longitude.getSdnParameterName(), longitude.getVarName());
 		// add DefaultFillValue
 		longitude.addVariableAttribute(ParameterNames.FILLVALUE, convertValue(DataType.DOUBLE, ParameterValues.DEFAULT_FILLVALUE));
 		latitude.addVariableAttribute(ParameterNames.FILLVALUE, convertValue(DataType.DOUBLE, ParameterValues.DEFAULT_FILLVALUE));
@@ -1003,7 +1003,7 @@ public class NetCDFWriter extends NemoWriter {
 
 			if (!sdnParameterUrn.equals(z.getSdnParameterUrn())) {
 				String coordinates = myCFPointWriterManager.getCoordinatesAttributeString(longitude, latitude, z, time);
-				GeophysicalVariable current = new GeophysicalVariable(varName, getUnits(param.getParameter().getFormat()), geoDim, longName, coordinates, unit, sdnParameterUrn, sdnParameterName, sdnUomUrn, sdnUomName);
+				GeophysicalVariable current = new GeophysicalVariable(param.getParameter().getIndexedP011(), getUnits(param.getParameter().getFormat()), geoDim, longName, coordinates, unit, sdnParameterUrn, sdnParameterName, sdnUomUrn, sdnUomName);
 
 				// add default value if existe 44130
 //				if (!param.getParameter().getDefault().isEmpty())

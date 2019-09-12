@@ -261,7 +261,7 @@ public class Fragment extends AbstractModel
 		int start = _firstCharOffset - 1;
 
 		// 40216: guess the column number from the caracter start number (for files with separator)
-		String separator = Nemo.getInstance().getDomain().getMedia().getModel().getSeparator();
+		String separator = Nemo.getInstance().getDomain().getMedia().getModel().getSeparatorForSplit();
 		boolean isUseTableForCsvData = Nemo.getInstance().getDomain().getMedia().getModel().getUseTableForCsvData();
 
 		if (isUseTableForCsvData && separator != null) {

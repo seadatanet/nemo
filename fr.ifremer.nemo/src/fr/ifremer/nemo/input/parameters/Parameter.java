@@ -36,6 +36,12 @@ public class Parameter extends AbstractModel {
 	 * Code du paramètre P011
 	 */
 	protected String _codeP011;
+	
+	/**
+	 * Index du paramètre P011 s'il n'est pas le seul dans une liste de paramètres.
+	 * Cet index est à concaténer au code P011 le cas échéant (écriture NetCDF, ...)
+	 */
+	protected Integer _indexP011;
 
 	/**
 	 * Nom du paramètre P011
@@ -309,7 +315,27 @@ public class Parameter extends AbstractModel {
 		return _codeP011;
 	}
 
+	/**
+	 * Getter for _indexP011.
+	 * @return Integer
+	 * @see Parameter.java#_indexP011
+	 */
+	public Integer getIndexP011() {
+		return _indexP011;
+	}
 
+	/**
+	 * Gets the P011 with the index at the end.
+	 * @return String
+	 */
+	public String getIndexedP011() {
+
+		if (_indexP011 == null || _indexP011 == 1) {
+			return _codeP011;
+		}
+		
+		return _codeP011 + "_" + _indexP011;
+	}
 
 	public String getLocalCode() {
 		String localCode = null;
@@ -373,6 +399,15 @@ public class Parameter extends AbstractModel {
 	 */
 	public void setCodeP011(String x) {
 		_codeP011 = x;
+	}
+	
+	/**
+	 * Setter for _indexP011.
+	 * @param index an Integer representing the index.
+	 * @see Parameter.java#_indexP011
+	 */
+	public void setIndexP011(Integer index) {
+		_indexP011 = index;
 	}
 
 	/**

@@ -1756,9 +1756,10 @@ public class TableData {
 		return ok;
 	}
 
+	/**
+	 * Update every data type in the global ArrayList from the TableData values.
+	 */
 	public void majTypeData() {
-		// on met a jour tous les types de donnees dans l'ArrayList global
-		// a partir des valeurs de la table
 
 		int nbre;
 		nbre = myTable.getItemCount();

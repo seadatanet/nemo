@@ -1,6 +1,7 @@
 package fr.ifremer.nemo.input;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.xml.sax.Attributes;
@@ -311,5 +312,33 @@ public class DataModel extends AbstractModel {
 
 	public VerticalParametersList getVerticalParametersList() {
 		return _verticalParametersList;
+	}
+	
+	/**
+	 * Sets the indexes for parameters that share the same P011 value with other parameters.
+	 */
+	public void majMultipleP011Indexes() {
+		// This map has key = P011 ; value = quantity of this P011 found in the parameters.
+		HashMap<String, Integer> mapDuplicates = new HashMap<String, Integer>();
+		
+		for (ParameterModel parameterModel : _parameterModels) {
+			
+			String currentP011 = parameterModel.getParameter().getCodeP011();
+			if (mapDuplicates.containsKey(currentP011)) {
+				
+				Integer currentCount = mapDuplicates.get(currentP011);
+				// this P011 already exists in the parameters. Increment the count + set as index for the parameter
+				currentCount++;
+				
+				parameterModel.getParameter().setIndexP011(currentCount);
+			}
+			else {
+				// first time this P011 is seen, create the map entry for it.
+				mapDuplicates.put(currentP011, 1);
+				
+				// FIXME doit-on setter à 1 même si on n'utilise jamais 1 comme suffixe ?
+				parameterModel.getParameter().setIndexP011(1);
+			}
+		}
 	}
 }

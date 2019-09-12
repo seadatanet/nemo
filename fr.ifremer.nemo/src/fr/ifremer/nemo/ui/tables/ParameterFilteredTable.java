@@ -203,37 +203,7 @@ public class ParameterFilteredTable extends AbstractFilteredTable
 		int taille = myTableDataRef.getTypes().size();
 		Boolean found = false;
 
-		if (taille != 0)
-		{
-			for (int i = 0; i < taille; i++)
-			{
-				String codeModele, codeActuel;
-
-				codeActuel = typeData.getCodeToUse();
-				codeModele = myTableDataRef.getTypes().get(i).getCodeToUse();
-
-				if (codeModele.equals(codeActuel))
-				{
-					found = true;
-				}
-			}
-
-			if (found == false)
-			{
-				myTableDataRef.addType(new TypeData(typeData));
-
-				// Suppression message erreur FAE 3752
-				Utils.messageErreur(""); //$NON-NLS-1$
-            }
-            else
-			{
-				Utils.messageErreur(Messages.error_table_parameters);
-			}
-        }
-        else
-		{
-			myTableDataRef.addType(new TypeData(typeData));
-		}
+		myTableDataRef.addType(new TypeData(typeData));
 
 		myTableDataRef.majTypeData();
 
