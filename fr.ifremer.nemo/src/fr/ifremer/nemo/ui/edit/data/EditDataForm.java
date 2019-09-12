@@ -224,6 +224,7 @@ public class EditDataForm extends EditForm {
 			getMyGroupeVerticalParameters().removeAllToAllCombos();
 			fillFromModel();
 		}
+		RulesManager.getInstance().updateFromModel(rm.getMyMesureType());
 		getMyGroupeVerticalParameters().select(rm.getMyVerticalParametersList());
 		//		}
 
