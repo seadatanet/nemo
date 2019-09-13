@@ -112,6 +112,7 @@ public class Parameter extends AbstractModel {
 		setCodeP011(typeData.getEntryKeyP011());
 		setNameP011(typeData.getEntryTermP011());
 		setP011(typeData.isP011());
+		setIndexP011(typeData.getIndexP011());
 
 		setDefault(typeData.getSortie());
 		setFormat(typeData.getFormat());
@@ -205,6 +206,11 @@ public class Parameter extends AbstractModel {
 					ModelDescription.setter_codeP011);
 			return setter;
 		}
+		if (a_LocalName.equals(ModelDescription.node_indexP011)) {
+			Element2Field setter = new Element2Field(this,
+					ModelDescription.setter_indexP011);
+			return setter;
+		}
 		if (a_LocalName.equals(ModelDescription.node_nameP011)) {
 			Element2Field setter = new Element2Field(this,
 					ModelDescription.setter_nameP011);
@@ -251,6 +257,7 @@ public class Parameter extends AbstractModel {
 		a_Writer.putTag(ModelDescription.node_outdefault, getDefault());
 		a_Writer.putTag(ModelDescription.node_format, getFormat());
 		a_Writer.putTag(ModelDescription.node_codeP011, getCodeP011());
+		a_Writer.putTag(ModelDescription.node_indexP011, getIndexP011());
 		a_Writer.putTag(ModelDescription.node_nameP011, getNameP011());
 		a_Writer.putTag(ModelDescription.node_P011, isP011());
 		a_Writer.putTag(ModelDescription.node_instrument, getInstrument());
@@ -337,6 +344,18 @@ public class Parameter extends AbstractModel {
 		return _codeP011 + "_" + _indexP011;
 	}
 
+	/**
+	 * Gets the localCode with the index at the end.
+	 * @return String
+	 */
+	public String getIndexedLocalCode() {
+		String  localCode=getLocalCode();
+		if (_indexP011 == null || _indexP011 == 1) {
+			return localCode;
+		}
+		
+		return localCode + "_" + _indexP011;
+	}
 	public String getLocalCode() {
 		String localCode = null;
 		DataListTypeEnum dataListType = Nemo.getInstance().getDomain().getData().getModel().getDataListType();
@@ -409,7 +428,9 @@ public class Parameter extends AbstractModel {
 	public void setIndexP011(Integer index) {
 		_indexP011 = index;
 	}
-
+	public void setIndexP011(String index) {
+		_indexP011 = Integer.valueOf(index);
+	}
 	/**
 	 * Getter pour _P011.
 	 * 

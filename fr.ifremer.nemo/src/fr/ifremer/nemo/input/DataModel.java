@@ -55,7 +55,7 @@ public class DataModel extends AbstractModel {
 		fallrateLabel= Global.EMPTY_STRING;
 	}
 
-	public DataListTypeEnum getDataListType() {
+	public DataListTypeEnum getDataListType() { 
 		return _dataListType;
 	}
 
@@ -335,8 +335,6 @@ public class DataModel extends AbstractModel {
 			else {
 				// first time this P011 is seen, create the map entry for it.
 				mapDuplicates.put(currentP011, 1);
-				
-				// FIXME doit-on setter à 1 même si on n'utilise jamais 1 comme suffixe ?
 				parameterModel.getParameter().setIndexP011(1);
 			}
 		}

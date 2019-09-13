@@ -85,6 +85,7 @@ public class ModelDescription extends NLS {
 	public static String node_parameter;
 	public static String node_fullname;
 	public static String node_codeP011;
+	public static String node_indexP011;
 	public static String node_nameP011;
 	public static String node_P011;
 	public static String node_unit;
@@ -179,6 +180,7 @@ public class ModelDescription extends NLS {
 	public static String setter_indefault;
 	public static String setter_fullname;
 	public static String setter_codeP011;
+	public static String setter_indexP011;
 	public static String setter_nameP011;
 	public static String setter_P011;
 	public static String setter_unit;

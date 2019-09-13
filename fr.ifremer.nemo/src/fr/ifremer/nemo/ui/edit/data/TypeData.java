@@ -47,6 +47,7 @@ public class TypeData extends Object implements Comparable<TypeData> {
 	private String entryKeyP011;
 	private String entryTermP011;
 	private boolean isP011;
+	private Integer indexP011;
 
 	
 	public TypeData(String theEntryKey, String theEntryTerm, 
@@ -65,6 +66,12 @@ public class TypeData extends Object implements Comparable<TypeData> {
 		this.setInstrument(theInstrumentLabel);
 		this.setIsP011(itheIsP011);
 		this.setIsText(isText);
+	}
+	public Integer getIndexP011() {
+		return indexP011;
+	}
+	public void setIndexP011(Integer indexP011) {
+		this.indexP011 = indexP011;
 	}
 	public TypeData(String theEntryKey, String theEntryTerm, 
 			String theCodeP01,String theNameP01 ,
@@ -101,6 +108,7 @@ public class TypeData extends Object implements Comparable<TypeData> {
 		this.setEntryTermP011(typeData.entryTermP011);
 		this.setEntryKeyP011(typeData.entryKeyP011);
 		this.setIsP011(typeData.isP011);
+		this.setIndexP011(typeData.indexP011);
 		this.setIsText(typeData.isText());
 	}
 
@@ -160,6 +168,7 @@ public class TypeData extends Object implements Comparable<TypeData> {
 		setEntryKeyP011(parameter.getCodeP011());
 		setEntryTermP011(parameter.getNameP011());
 		setIsP011(parameter.isP011());
+		setIndexP011(parameter.getIndexP011());
 
 	}
 

@@ -365,7 +365,10 @@ public class DataDomain {
 			 * ----------------------------------------------------- subject
 			 */
 			// FAE 4045 getLocalCode
-			sdnMapping.append(getURNSyntaxe(URNtype.subject, param.getLocalCode(), null, null, null));
+//			sdnMapping.append(getURNSyntaxe(URNtype.subject, param.getLocalCode(), null, null, null));
+			//47818: add index if multiple P01
+			sdnMapping.append(getURNSyntaxe(URNtype.subject, param.getIndexedLocalCode(), null, null, null));
+			
 			/**
 			 * ----------------------------------------------------- object si
 			 * param P011, on met le code P011 si param P091, on met le premier
