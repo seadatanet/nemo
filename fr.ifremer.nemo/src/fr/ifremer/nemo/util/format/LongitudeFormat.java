@@ -837,7 +837,7 @@ public class LongitudeFormat extends ExternalizableFormat implements Cloneable
 	 */
 	public Double parseFreeDecimalDegrees(Fragment fragment, String source) throws ParseException {
 		
-		String separator=Nemo.getInstance().getDomain().getMedia().getModel().getSeparator();
+		String separator=Nemo.getInstance().getDomain().getMedia().getModel().getSeparatorForSplit();
 		
 		if (separator!=null){
 			try{

@@ -1022,6 +1022,7 @@ public class RulesManager {
 	public void updateFromModel_separator(String separator) {
 		this.separator = separator;
 
+		Nemo.getInstance().getViewMain().getEditFileForm().getSectionStationHeader().getUseSeparatorInStationHeader().setEnabled((separator != null && !separator.equals("")));
 	}
 
 
