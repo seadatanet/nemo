@@ -836,7 +836,9 @@ public class NetCDFWriter extends NemoWriter {
 		default:
 			break;
 		}
-		String title = SDNTools.getGeneratedByString(Format.CFPOINT, cfFeatureType.toString(), "Nemo", Nemo.getInstance().getVersion());
+		String title = SDNTools.getGeneratedByString(Format.CFPOINT, cfFeatureType.toString(), 
+				mediaModel.getVariant().toString(),
+				"Nemo", Nemo.getInstance().getVersion());
 		
 		SdnGlobalAttribute globattr = new SdnGlobalAttribute(cfFeatureType.getLabel(), title, new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ").format(new Date())); //$NON-NLS-1$
 		myCFPointWriterManager.addGlobalAttributes(globattr);

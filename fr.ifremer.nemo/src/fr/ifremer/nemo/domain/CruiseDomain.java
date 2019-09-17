@@ -253,6 +253,7 @@ public class CruiseDomain {
 		
 		String title = SDNTools.getGeneratedByString(Format.MEDATLAS_SDN,
 				Nemo.getInstance().getDomain().getMedia().getModel().getInputType().toString().toLowerCase(), 
+				Nemo.getInstance().getDomain().getMedia().getModel().getVariant().toString(),
 				"Nemo", 
 				Nemo.getInstance().getVersion());
 		medCruiseHeader.append(title);

@@ -6,7 +6,7 @@ import org.eclipse.swt.events.SelectionListener;
 import fr.ifremer.nemo.ui.RulesManager;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.file.EditFileForm;
-import fr.ifremer.nemo.util.Global.E_Variant;
+import fr.ifremer.sismer_tools.resources.ODVConstants.E_Variant;
 
 /**
  * Description: listener sur la selection du type de variante (pour fichiers d'entree en ODV)

@@ -10,7 +10,7 @@ import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Global.E_EndData;
 import fr.ifremer.nemo.util.Global.E_InputType;
 import fr.ifremer.nemo.util.Global.E_ProcessType;
-import fr.ifremer.nemo.util.Global.E_Variant;
+import fr.ifremer.sismer_tools.resources.ODVConstants.E_Variant;
 
 /**
  * Class MediaModel Description: Informations descrivant l'onglet File

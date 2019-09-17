@@ -52,6 +52,6 @@ Bundle-ClassPath: .,
  lib/log4j-api-2.3.jar,
  lib/log4j-core-2.3.jar,
  lib/SoftwareVersionApi-1.0.jar,
- lib/odvSDN2CFPointLib-1.1.4-jar-with-dependencies.jar
+ lib/odvSDN2CFPointLib-1.1.5-jar-with-dependencies.jar
 Bundle-Vendor: IFREMER
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8

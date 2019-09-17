@@ -10,7 +10,6 @@ import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.config.VocabLists;
 import fr.ifremer.nemo.ui.RulesManager;
 import fr.ifremer.nemo.util.BodcChecker;
-import fr.ifremer.nemo.util.Global.E_Variant;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.seadatanet.odv.input.model.Parameter.ParameterType;
 import fr.ifremer.seadatanet.odv.input.validator.OdvSpecificValidator;
@@ -21,6 +20,7 @@ import fr.ifremer.seadatanet.odv.input.validator.OdvSpecificValidatorCyto;
 import fr.ifremer.seadatanet.odv.input.validator.OdvSpecificValidatorMicro;
 import fr.ifremer.seadatanet.odv.input.validator.SpecificParameter;
 import fr.ifremer.sismer_tools.SismerToolsException;
+import fr.ifremer.sismer_tools.resources.ODVConstants.E_Variant;
 import fr.ifremer.sismer_tools.seadatanet.SdnVocabularyManager;
 
 public class VariantsSpecificsParameters {

@@ -26,9 +26,9 @@ import fr.ifremer.nemo.util.Global.E_InputType;
 import fr.ifremer.nemo.util.Global.E_MesureType;
 import fr.ifremer.nemo.util.Global.E_ProcessType;
 import fr.ifremer.nemo.util.Global.E_TypeConversion;
-import fr.ifremer.nemo.util.Global.E_Variant;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
+import fr.ifremer.sismer_tools.resources.ODVConstants.E_Variant;
 
 /**
  * Description: cette classe centralise les règles NEMO et leur gestion pour

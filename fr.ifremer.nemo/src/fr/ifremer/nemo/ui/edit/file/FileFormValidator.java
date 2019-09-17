@@ -22,9 +22,9 @@ import fr.ifremer.nemo.ui.view.ViewLog;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Global.E_InputType;
 import fr.ifremer.nemo.util.Global.E_TypeConversion;
-import fr.ifremer.nemo.util.Global.E_Variant;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.util.Preformat;
+import fr.ifremer.sismer_tools.resources.ODVConstants.E_Variant;
 
 /**
  * Description: validation de l'onglet File

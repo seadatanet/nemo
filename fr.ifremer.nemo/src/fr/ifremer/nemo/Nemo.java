@@ -48,11 +48,11 @@ import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Global.DataListTypeEnum;
 import fr.ifremer.nemo.util.Global.E_InputType;
 import fr.ifremer.nemo.util.Global.E_TypeConversion;
-import fr.ifremer.nemo.util.Global.E_Variant;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.util.Utils;
 import fr.ifremer.nemo.ws.NemoWS;
+import fr.ifremer.sismer_tools.resources.ODVConstants.E_Variant;
 
 /**
  * Class Nemo.java Description: Classe principale de l'application - utilisée en

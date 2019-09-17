@@ -112,10 +112,10 @@ public interface Global {
 	public enum E_InputType {
 		PROFILE, TIMESERIES, TRAJECTORY, UNKNOWN;
 	}
-	// Types de fichierdonnee
-	public enum E_Variant {
-			PHYSICOCHEMICAL, BIOLOGICAL, FLOWCYTO, MICROLITTER, UNKNOWN;
-		}
+//	// Types de fichierdonnee
+//	public enum E_Variant {
+//			PHYSICOCHEMICAL, BIOLOGICAL, FLOWCYTO, MICROLITTER, UNKNOWN;
+//		}
 	// COLLECTION_DIR = group by cruise
 	public enum E_ProcessType {
 		CRUISE_FILE, CRUISE_DIR, COLLECTION_DIR, COLLECTION_FILES;
