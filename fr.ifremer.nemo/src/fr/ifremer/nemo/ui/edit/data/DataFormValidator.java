@@ -669,7 +669,7 @@ public class DataFormValidator extends FormValidator {
 				&& rm.getMyVerticalParametersList().getP_depthBSBed()
 				.equals(Global.EMPTY_STRING)) {
 
-			Utils.messageErreurAppend(MessageFormat.format(Messages.edit_data_verticalParameters_info_chooseDepthBSBed, myParameterManager.getP_depthBSBedCode()));
+			Utils.messageErreurAppend(Messages.edit_data_verticalParameters_info_chooseDepthBSBed);
 
 			ok = false;
 		}
@@ -680,14 +680,14 @@ public class DataFormValidator extends FormValidator {
 						.getMyVerticalParametersList().getP_pressure()
 						.equals(Global.EMPTY_STRING))) {
 
-			Utils.messageErreurAppend(MessageFormat.format(Messages.edit_data_verticalParameters_info_chooseDepthBSurfOrPressure, myParameterManager.getP_depthBSSurfCode(), myParameterManager.getP_pressureCode()));
+			Utils.messageErreurAppend(Messages.edit_data_verticalParameters_info_chooseDepthBSurfOrPressure);
 
 			ok = false;
 		}
 
 		if (rm.isP_heightASLvl_enabled() && rm.getMyVerticalParametersList().getP_heightASLvl().equals(Global.EMPTY_STRING) && !rm.isTrajectory()) {
 
-			Utils.messageErreurAppend(MessageFormat.format(Messages.edit_data_verticalParameters_info_chooseHeightASLvl, myParameterManager.getP_heightASLvlCode()));
+			Utils.messageErreurAppend(Messages.edit_data_verticalParameters_info_chooseHeightASLvl);
 
 			ok = false;
 		}
