@@ -121,7 +121,7 @@ public class ModelDescription extends NLS {
 	public static String a_multistations;
 	public static String a_pattern;
 	public static String a_patternIsRegexp;
-//	public static String a_useSeparatorInStationHeader;
+	public static String a_useSeparatorInStationHeader;
 	public static String a_code;
 	public static String a_property;
 	public static String a_userprovided;

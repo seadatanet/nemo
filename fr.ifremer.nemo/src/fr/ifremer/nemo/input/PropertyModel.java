@@ -306,8 +306,10 @@ public class PropertyModel extends AbstractModel {
 			// Value in the file
 			
 			// Get the file separator if exists.
-			String separator = Nemo.getInstance().getDomain().getMedia().getModel().getSeparator();
-	    	boolean isUseTableForCsvData = Nemo.getInstance().getDomain().getMedia().getModel().getUseTableForCsvData();
+			MediaModel model = Nemo.getInstance().getDomain().getMedia().getModel();
+			String separator = model.getSeparator();
+			boolean isUseSeparatorInStationHeader = model.isUseSeparatorInStationHeader();
+	    	boolean isUseTableForCsvData = model.getUseTableForCsvData();
 
 			// retrieve data from the right place (header or data line)
 			// FAE 7239
@@ -323,7 +325,16 @@ public class PropertyModel extends AbstractModel {
 //				}
 
 			} else {
-				sResult = _fragment.retreive(a_Header);
+				// Data is in station header lines
+				
+				if (isUseSeparatorInStationHeader)
+				{
+					sResult = _fragment.retreiveInLine(a_Header[_fragment.getFirstLine() - 1]);
+				}
+				else {
+					
+					sResult = _fragment.retreive(a_Header);
+				}
 			}
 
 			// default value

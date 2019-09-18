@@ -28,7 +28,7 @@ public class FileStationHeader extends FileSection
     protected Composite subCompo, col01, col02;
     protected Button radNumber, radIndicator;
     protected SetText setterIndicator, setterLinesBeforeData;
-//	private Button useSeparatorInStationHeader;
+	private Button useSeparatorInStationHeader;
    
     
 
@@ -97,9 +97,9 @@ public class FileStationHeader extends FileSection
         GridLayoutFactory.fillDefaults().numColumns(1).applyTo(compo);
         GridDataFactory.fillDefaults().grab(false, false).applyTo(compo);
     
-//        useSeparatorInStationHeader = new Button(compo, SWT.CHECK);
-//    	useSeparatorInStationHeader.setText(Messages.view_file_separator);
-//    	useSeparatorInStationHeader.setEnabled(false);
+        useSeparatorInStationHeader = new Button(compo, SWT.CHECK);
+    	useSeparatorInStationHeader.setText(Messages.view_file_separator);
+    	useSeparatorInStationHeader.setEnabled(false);
     	
         radNumber = new Button(compo, SWT.RADIO);
         radNumber.setBackground(Nemo.getInstance().getViewMain().getBackgroundEdit());
@@ -144,7 +144,7 @@ public class FileStationHeader extends FileSection
         setterIndicator.razValues();
         setterLinesBeforeData.razValues();
         selectNumber(true);
-//        useSeparatorInStationHeader.setSelection(false);
+        useSeparatorInStationHeader.setSelection(false);
     }
 
     /**
@@ -217,10 +217,12 @@ public class FileStationHeader extends FileSection
     {
         setterLinesBeforeData.setValue(value);
     }
-//    public Button getUseSeparatorInStationHeader() {
-//		return useSeparatorInStationHeader;
-//	}
-//    public void setUseSeparatorInStationHeader(Button useSeparatorInStationHeader) {
-//		this.useSeparatorInStationHeader = useSeparatorInStationHeader;
-//	}
+    
+    public Button getUseSeparatorInStationHeader() {
+		return useSeparatorInStationHeader;
+	}
+    
+    public void setUseSeparatorInStationHeader(Button useSeparatorInStationHeader) {
+		this.useSeparatorInStationHeader = useSeparatorInStationHeader;
+	}
 }

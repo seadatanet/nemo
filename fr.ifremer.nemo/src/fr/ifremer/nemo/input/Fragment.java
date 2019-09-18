@@ -311,7 +311,7 @@ public class Fragment extends AbstractModel
 		return stringWriter.toString();
     	
 	}
-
+    
     public String retreiveVariable(String[] a_Header) {
         if (_firstLine == 0) {
             if (_lastCharOffset == -1 || isVariable()) {

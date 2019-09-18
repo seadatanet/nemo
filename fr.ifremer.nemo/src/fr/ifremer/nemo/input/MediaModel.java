@@ -63,11 +63,11 @@ public class MediaModel extends AbstractModel
 	 */
 	protected String _stationHeaderPattern;
 	
-//	/**
-//	 * indique si l'utilisateur souhaite utiliser le séparateur  _separator dans l'en-tete station
-//	 */
-//	protected boolean _useSeparatorInStationHeader;
-//	
+	/**
+	 * indique si l'utilisateur souhaite utiliser le séparateur  _separator dans l'en-tete station
+	 */
+	protected boolean _useSeparatorInStationHeader;
+	
 
 
 	/**
@@ -117,7 +117,7 @@ public class MediaModel extends AbstractModel
 		_fileHeader = 0;
 		_stationHeader = 0;
 		_stationHeaderPattern = Global.EMPTY_STRING;
-//		_useSeparatorInStationHeader = false;
+		_useSeparatorInStationHeader = false;
 		_endStation = 0;
 		_endData = E_EndData.EOF;
 		_endDataPattern = Global.EMPTY_STRING;
@@ -213,8 +213,8 @@ public class MediaModel extends AbstractModel
 			String attribute = a_Attributes.getValue(ModelDescription.a_pattern);
 			setStationHeaderPattern(attribute);
 			
-//			attribute = a_Attributes.getValue(ModelDescription.a_useSeparatorInStationHeader);
-//			setUseSeparatorInStationHeader(Boolean.parseBoolean(attribute));
+			attribute = a_Attributes.getValue(ModelDescription.a_useSeparatorInStationHeader);
+			setUseSeparatorInStationHeader(Boolean.parseBoolean(attribute));
 			
 			Element2Field setter = new Element2Field(this, ModelDescription.setter_stationHeader);
 			return setter;
@@ -278,7 +278,7 @@ public class MediaModel extends AbstractModel
 		// STATION HEADER
 		a_Writer.openTag(ModelDescription.node_stationHeader);
 		a_Writer.putAttribute(ModelDescription.a_pattern, getStationHeaderPattern());
-//		a_Writer.putAttribute(ModelDescription.a_useSeparatorInStationHeader, isUseSeparatorInStationHeader());
+		a_Writer.putAttribute(ModelDescription.a_useSeparatorInStationHeader, isUseSeparatorInStationHeader());
 		a_Writer.closeTag(getStationHeader());
 
 		// COLUMN TITLES
@@ -766,11 +766,11 @@ public class MediaModel extends AbstractModel
 		_useTableForCsvData = useTableForCsvData;
 	}
 	
-//	public boolean isUseSeparatorInStationHeader() {
-//		return _useSeparatorInStationHeader;
-//	}
-//
-//	public void setUseSeparatorInStationHeader(boolean useSeparatorInStationHeader) {
-//		_useSeparatorInStationHeader = useSeparatorInStationHeader;
-//	}
+	public boolean isUseSeparatorInStationHeader() {
+		return _useSeparatorInStationHeader;
+	}
+
+	public void setUseSeparatorInStationHeader(boolean useSeparatorInStationHeader) {
+		_useSeparatorInStationHeader = useSeparatorInStationHeader;
+	}
 }

@@ -504,7 +504,7 @@ public class EditFileForm extends EditForm
 		}
 
 		// Entête Station
-//		sectionStationHeader.getUseSeparatorInStationHeader().setSelection(mediaModel.isUseSeparatorInStationHeader());
+		sectionStationHeader.getUseSeparatorInStationHeader().setSelection(mediaModel.isUseSeparatorInStationHeader());
 		if (mediaModel.getStationHeaderPattern().equals(Global.EMPTY_STRING))
 		{
 			sectionStationHeader.selectNumber(true);
@@ -929,7 +929,7 @@ public class EditFileForm extends EditForm
 		mediaModel.setFileHeader(fileHeader);
 
 		// Entête Station
-//		mediaModel.setUseSeparatorInStationHeader(sectionStationHeader.getUseSeparatorInStationHeader().getSelection());
+		mediaModel.setUseSeparatorInStationHeader(sectionStationHeader.getUseSeparatorInStationHeader().getSelection());
 		if (!sectionStationHeader.isSelectNumber())
 		{
 			mediaModel.setStationHeaderPattern(sectionStationHeader.getIndicatorText());

@@ -266,10 +266,10 @@ public class RulesManager {
 			myEditFileForm.sectionDataColumnTitles.setEnabled(true);
 			separator = myEditFileForm.getSeparateur();//40216
 			
-//			myEditFileForm.sectionStationHeader.getUseSeparatorInStationHeader().setEnabled(true);
+			myEditFileForm.sectionStationHeader.getUseSeparatorInStationHeader().setEnabled(true);
 		}else{
-//			myEditFileForm.sectionStationHeader.getUseSeparatorInStationHeader().setSelection(false);
-//			myEditFileForm.sectionStationHeader.getUseSeparatorInStationHeader().setEnabled(false);
+			myEditFileForm.sectionStationHeader.getUseSeparatorInStationHeader().setSelection(false);
+			myEditFileForm.sectionStationHeader.getUseSeparatorInStationHeader().setEnabled(false);
 			myEditFileForm.sectionDataColumnTitles.setEnabled(false);
 		}
 		updateFromIHMColumnTitlesInInputFile();
@@ -1022,7 +1022,7 @@ public class RulesManager {
 	public void updateFromModel_separator(String separator) {
 		this.separator = separator;
 
-//		Nemo.getInstance().getViewMain().getEditFileForm().getSectionStationHeader().getUseSeparatorInStationHeader().setEnabled((separator != null && !separator.equals("")));
+		Nemo.getInstance().getViewMain().getEditFileForm().getSectionStationHeader().getUseSeparatorInStationHeader().setEnabled((separator != null && !separator.equals("")));
 	}
 
 

@@ -257,7 +257,9 @@ public class Parameter extends AbstractModel {
 		a_Writer.putTag(ModelDescription.node_outdefault, getDefault());
 		a_Writer.putTag(ModelDescription.node_format, getFormat());
 		a_Writer.putTag(ModelDescription.node_codeP011, getCodeP011());
-		a_Writer.putTag(ModelDescription.node_indexP011, getIndexP011());
+		if (getIndexP011() != null) {
+			a_Writer.putTag(ModelDescription.node_indexP011, getIndexP011());
+		}
 		a_Writer.putTag(ModelDescription.node_nameP011, getNameP011());
 		a_Writer.putTag(ModelDescription.node_P011, isP011());
 		a_Writer.putTag(ModelDescription.node_instrument, getInstrument());
