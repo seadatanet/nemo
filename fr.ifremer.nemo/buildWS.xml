@@ -67,8 +67,8 @@ Usage: ant [-f buildWS.xml] option
   <property name="catalina.home" value="${myenv.CATALINA_HOME}"/>
 
 	<!--- version java -->
-	<property name="ant.build.javac.source" value="1.6"/>
-	<property name="ant.build.javac.target" value="1.6"/>
+	<property name="ant.build.javac.source" value="1.8"/>
+	<property name="ant.build.javac.target" value="1.8"/>
 	
   <!-- Chemins de l applicatif -->
   <property name="src.dir" value="${basedir}/src"/>
