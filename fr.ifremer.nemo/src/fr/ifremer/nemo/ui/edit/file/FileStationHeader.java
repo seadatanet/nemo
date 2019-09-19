@@ -100,6 +100,15 @@ public class FileStationHeader extends FileSection
         useSeparatorInStationHeader = new Button(compo, SWT.CHECK);
     	useSeparatorInStationHeader.setText(Messages.view_file_separator);
     	useSeparatorInStationHeader.setEnabled(false);
+    	useSeparatorInStationHeader.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter()
+		{
+			@Override
+			public void widgetSelected(org.eclipse.swt.events.SelectionEvent g)
+			{
+				Utils.invalidEtapes();
+				Utils.messageErreur(Global.EMPTY_STRING);
+			}
+		});
     	
         radNumber = new Button(compo, SWT.RADIO);
         radNumber.setBackground(Nemo.getInstance().getViewMain().getBackgroundEdit());
