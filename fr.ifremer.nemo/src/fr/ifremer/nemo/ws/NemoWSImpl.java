@@ -452,8 +452,10 @@ public class NemoWSImpl implements Cloneable, NemoWS {
 
 			
 			
-			String statement = "select CAM_CRNO, CAM_CRNOM " + "from CAM "
-					+ "where CAM_CAMTYP != 'PV' " + "order by CAM_DATDEB desc ";
+//			String statement = "select CAM_CRNO, CAM_CRNOM " + "from CAM "
+//					+ "where CAM_CAMTYP != 'PV' " + "order by CAM_DATDEB desc ";
+			
+			String statement = "select CAM_CRNO, CAM_CRNOM from VUE_CAM_NEMO";
 			
 			_logger.debug("getSurveyList - after request");
 			

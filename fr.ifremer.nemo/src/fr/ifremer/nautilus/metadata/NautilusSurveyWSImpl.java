@@ -171,17 +171,17 @@ public class NautilusSurveyWSImpl implements Cloneable, NautilusSurveyWS {
 
 	/**
 	 * 
-	 * @param a_SurveyRef
+	 * @param camCrno
 	 * @return WSSurvey
 	 */
-	public WSSurvey getSurvey(String a_SurveyRef) {
+	public WSSurvey getSurvey(String camCrno) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet result = null;
 		WSSurvey survey = new WSSurvey();
 		if (_logger.isDebugEnabled()) {
 			_logger
-					.debug("NautilusSurveyWSImpl.getSurvey(" + a_SurveyRef
+					.debug("NautilusSurveyWSImpl.getSurvey(" + camCrno
 							+ ")");
 		}
 		try {
@@ -190,14 +190,23 @@ public class NautilusSurveyWSImpl implements Cloneable, NautilusSurveyWS {
 			DataSource ds = (DataSource) envCtx.lookup("SISMER");
 			conn = ds.getConnection();
 
-			String statement = "select distinct cp.CAM_CRNOM, n.NAV_CODNOD,n.NAV_NOMNAV,cp.CAM_DATDEB,cp.CAM_DATFIN,"
-					+ "c.COD_LIBEL,cp.CAM_CPAYS,cp.CAM_ORGPAR,SUBSTR(cp.CAM_CAMREF,1,2),r.RSP_NOM, cp.CAM_CPRJ,cp.CAM_CRNO,cp.CAM_CAMREF "
-					+ "from CAM cp,NAV n, COD c, RSP r, MIS m "
-					+ "where ((cp.CAM_CRNO = ?) and (cp.CAM_NAVIRE = n.NAV_NAVIRE) and (c.COD_CODE=cp.CAM_CZONE) "
-					+ "and (c.COD_NOLIST=23) and (c.COD_LANGUE='E') and (r.RSP_CRSP=m.MIS_CRSP) and "
-					+ "(m.MIS_CRNO=cp.CAM_CRNO) and (m.MIS_NORANG=1))";
+//			String statement = "select distinct cp.CAM_CRNOM, n.NAV_CODNOD,n.NAV_NOMNAV,cp.CAM_DATDEB,cp.CAM_DATFIN,"
+//					+ "c.COD_LIBEL,cp.CAM_CPAYS,cp.CAM_ORGPAR,SUBSTR(cp.CAM_CAMREF,1,2),r.RSP_NOM, cp.CAM_CPRJ,cp.CAM_CRNO,cp.CAM_CAMREF "
+//					+ "from CAM cp,NAV n, COD c, RSP r, MIS m "
+//					+ "where ((cp.CAM_CRNO = ?) and (cp.CAM_NAVIRE = n.NAV_NAVIRE) and (c.COD_CODE=cp.CAM_CZONE) "
+//					+ "and (c.COD_NOLIST=23) and (c.COD_LANGUE='E') and (r.RSP_CRSP=m.MIS_CRSP) and "
+//					+ "(m.MIS_CRNO=cp.CAM_CRNO) and (m.MIS_NORANG=1))";
+			
+			String statement = "select CAM_CRNOM, NAV_CODNOD, NAV_NOMNAV,CAM_DATDEB,CAM_DATFIN, " + 
+					"REGION ,PAYS ,LABO, DATA_CENTRE , CHIEF_SCIENTIST, " + 
+					"LISTE_PROJET, CSR, CAMREF " + 
+					"from VUE_CAM_NEMO_DETAIL " + 
+					"where ((cp.CAM_CRNO = ?)" ;
+					
+					
+					
 			pstmt = conn.prepareStatement(statement);
-			pstmt.setString(1, a_SurveyRef);
+			pstmt.setString(1, camCrno);
 			result = pstmt.executeQuery();
 			if (result.next()) {
 //				survey.setReference(a_SurveyRef);
@@ -213,17 +222,18 @@ public class NautilusSurveyWSImpl implements Cloneable, NautilusSurveyWS {
 				survey.setChiefScientist(result.getString(10));
 				
 				String cprj = result.getString(11);
-				String crno = result.getString(12);
-				String ref = result.getString(13);
+//				String crno = result.getString(12);
+				String camref = result.getString(13);
 				
-				survey.setReference(ref);
-				survey.setCrno(crno);
+				survey.setReference(camref);
+				survey.setCrno(camCrno);
 				survey.setComment("");
-				survey.setProjectName(getProjectName(cprj, conn));
-				survey.setDataTypes(getDataTypeFor(crno, conn));
+				//survey.setProjectName(getProjectName(cprj, conn));
+				survey.setProjectName(cprj);
+				survey.setDataTypes(getDataTypeFor(camCrno, conn));
 				
-				_logger.debug("reference >>>>>"+ref);
-				_logger.error("reference >>>>" + ref);
+				_logger.debug("reference >>>>>"+camref);
+				_logger.error("reference >>>>" + camref);
 			}
 			return survey;
 		} catch (Exception e) {
