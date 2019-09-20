@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<java version="1.8.0_151" class="java.beans.XMLDecoder">
+<java version="1.8.0_202" class="java.beans.XMLDecoder">
  <object class="java.util.ArrayList">
   <void method="add">
    <object class="fr.ifremer.nemo.ws.WSParameter">
@@ -922,6 +922,28 @@
     </void>
     <void property="unitP06">
      <string>Milligrams per cubic metre</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="fr.ifremer.nemo.ws.WSParameter">
+    <void property="code">
+     <string>BEAR</string>
+    </void>
+    <void property="defaultValue">
+     <string>999.9</string>
+    </void>
+    <void property="format">
+     <string>%5.1f</string>
+    </void>
+    <void property="name">
+     <string>BEARING AWAY FROM INSTRUMENT</string>
+    </void>
+    <void property="unit">
+     <string>degree</string>
+    </void>
+    <void property="unitP06">
+     <string>Degrees True</string>
     </void>
    </object>
   </void>
@@ -3282,13 +3304,35 @@
   <void method="add">
    <object class="fr.ifremer.nemo.ws.WSParameter">
     <void property="code">
-     <string>DRYT</string>
+     <string>DRVA</string>
     </void>
     <void property="defaultValue">
      <string>999.9</string>
     </void>
     <void property="format">
      <string>%5.1f</string>
+    </void>
+    <void property="name">
+     <string>DIRECTION OF RADIAL VECTOR</string>
+    </void>
+    <void property="unit">
+     <string>degree</string>
+    </void>
+    <void property="unitP06">
+     <string>Degrees True</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="fr.ifremer.nemo.ws.WSParameter">
+    <void property="code">
+     <string>DRYT</string>
+    </void>
+    <void property="defaultValue">
+     <string>99.99</string>
+    </void>
+    <void property="format">
+     <string>%5.2f</string>
     </void>
     <void property="name">
      <string>DRY BULB TEMPERATURE</string>
@@ -4017,10 +4061,10 @@
      <string>%5.1f</string>
     </void>
     <void property="name">
-     <string>GUST WIND DIRECTION</string>
+     <string>GUST WIND DIRECTION REL TRUE N</string>
     </void>
     <void property="unit">
-     <string>degree</string>
+     <string>degree true</string>
     </void>
     <void property="unitP06">
      <string>Degrees</string>
@@ -4196,7 +4240,7 @@
      <string>DIRECTION REL. TRUE NORTH</string>
     </void>
     <void property="unit">
-     <string>degree</string>
+     <string>degree true</string>
     </void>
     <void property="unitP06">
      <string>Degrees</string>
@@ -4262,7 +4306,7 @@
      <string>PLAT. HEADING REL. TRUE NORTH</string>
     </void>
     <void property="unit">
-     <string>degree</string>
+     <string>degree true</string>
     </void>
     <void property="unitP06">
      <string>Degrees</string>
@@ -7528,6 +7572,28 @@
   <void method="add">
    <object class="fr.ifremer.nemo.ws.WSParameter">
     <void property="code">
+     <string>NRAD</string>
+    </void>
+    <void property="defaultValue">
+     <string>-999.9</string>
+    </void>
+    <void property="format">
+     <string>%+6.1f</string>
+    </void>
+    <void property="name">
+     <string>NET TOTAL INCOMING RADIATION</string>
+    </void>
+    <void property="unit">
+     <string>watt/m2</string>
+    </void>
+    <void property="unitP06">
+     <string>Watts per square metre</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="fr.ifremer.nemo.ws.WSParameter">
+    <void property="code">
      <string>NSCS</string>
     </void>
     <void property="defaultValue">
@@ -8914,6 +8980,28 @@
   <void method="add">
    <object class="fr.ifremer.nemo.ws.WSParameter">
     <void property="code">
+     <string>PICP</string>
+    </void>
+    <void property="defaultValue">
+     <string>999.99</string>
+    </void>
+    <void property="format">
+     <string>%6.2f</string>
+    </void>
+    <void property="name">
+     <string>PARTICULATE INORGANIC CARBON</string>
+    </void>
+    <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
+     <string>Milligrams per cubic metre</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="fr.ifremer.nemo.ws.WSParameter">
+    <void property="code">
      <string>PN1P</string>
     </void>
     <void property="defaultValue">
@@ -9561,13 +9649,35 @@
      <string>%+5.1f</string>
     </void>
     <void property="name">
-     <string>INCIDENT RADIATION</string>
+     <string>TOTAL INCIDENT RADIATION</string>
     </void>
     <void property="unit">
      <string>watt/m2</string>
     </void>
     <void property="unitP06">
      <string>Watts per square metre</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="fr.ifremer.nemo.ws.WSParameter">
+    <void property="code">
+     <string>RDVA</string>
+    </void>
+    <void property="defaultValue">
+     <string>9.999</string>
+    </void>
+    <void property="format">
+     <string>%5.3f</string>
+    </void>
+    <void property="name">
+     <string>RADIAL SEA WATER VELOCITY</string>
+    </void>
+    <void property="unit">
+     <string>meter/second</string>
+    </void>
+    <void property="unitP06">
+     <string>Metres per second</string>
     </void>
    </object>
   </void>
@@ -9612,6 +9722,28 @@
     </void>
     <void property="unitP06">
      <string>Percent</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="fr.ifremer.nemo.ws.WSParameter">
+    <void property="code">
+     <string>RNGE</string>
+    </void>
+    <void property="defaultValue">
+     <string>999.9</string>
+    </void>
+    <void property="format">
+     <string>%5.1f</string>
+    </void>
+    <void property="name">
+     <string>RANGE AWAY FROM INSTRUMENT</string>
+    </void>
+    <void property="unit">
+     <string>kilometer</string>
+    </void>
+    <void property="unitP06">
+     <string>Kilometres</string>
     </void>
    </object>
   </void>
@@ -9832,6 +9964,28 @@
     </void>
     <void property="unitP06">
      <string>Percent</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="fr.ifremer.nemo.ws.WSParameter">
+    <void property="code">
+     <string>SINC</string>
+    </void>
+    <void property="defaultValue">
+     <string>-999.9</string>
+    </void>
+    <void property="format">
+     <string>%+6.1f</string>
+    </void>
+    <void property="name">
+     <string>SHORT-WAVE INCOMING RADIATION</string>
+    </void>
+    <void property="unit">
+     <string>watt/m2</string>
+    </void>
+    <void property="unitP06">
+     <string>Watts per square metre</string>
     </void>
    </object>
   </void>
@@ -10290,7 +10444,7 @@
      <string>SWELL DIRECTION  REL TRUE N.</string>
     </void>
     <void property="unit">
-     <string>degree</string>
+     <string>degree true</string>
     </void>
     <void property="unitP06">
      <string>Degrees</string>
@@ -11874,10 +12028,32 @@
      <string>WAVE DIRECTION REL. TRUE NORTH</string>
     </void>
     <void property="unit">
-     <string>degree</string>
+     <string>degree true</string>
     </void>
     <void property="unitP06">
      <string>Degrees</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="fr.ifremer.nemo.ws.WSParameter">
+    <void property="code">
+     <string>VEMH</string>
+    </void>
+    <void property="defaultValue">
+     <string>99.99</string>
+    </void>
+    <void property="format">
+     <string>%5.2f</string>
+    </void>
+    <void property="name">
+     <string>ESTIMATED MAXIMUM WAVE HEIGHT</string>
+    </void>
+    <void property="unit">
+     <string>meter</string>
+    </void>
+    <void property="unitP06">
+     <string>Metres</string>
     </void>
    </object>
   </void>
@@ -11950,6 +12126,50 @@
   <void method="add">
    <object class="fr.ifremer.nemo.ws.WSParameter">
     <void property="code">
+     <string>VGHS</string>
+    </void>
+    <void property="defaultValue">
+     <string>99.9</string>
+    </void>
+    <void property="format">
+     <string>%4.1f</string>
+    </void>
+    <void property="name">
+     <string>GENERIC SIGNIF. WAVE HEIGHT</string>
+    </void>
+    <void property="unit">
+     <string>meter</string>
+    </void>
+    <void property="unitP06">
+     <string>Metres</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="fr.ifremer.nemo.ws.WSParameter">
+    <void property="code">
+     <string>VGTA</string>
+    </void>
+    <void property="defaultValue">
+     <string>999</string>
+    </void>
+    <void property="format">
+     <string>%3.0f</string>
+    </void>
+    <void property="name">
+     <string>GENERIC AVERAGE WAVE PERIOD</string>
+    </void>
+    <void property="unit">
+     <string>second</string>
+    </void>
+    <void property="unitP06">
+     <string>Seconds</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="fr.ifremer.nemo.ws.WSParameter">
+    <void property="code">
      <string>VHM0</string>
     </void>
     <void property="defaultValue">
@@ -11960,6 +12180,28 @@
     </void>
     <void property="name">
      <string>SPECTRAL SIGNIF. WAVE HEIGHT</string>
+    </void>
+    <void property="unit">
+     <string>meter</string>
+    </void>
+    <void property="unitP06">
+     <string>Metres</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="fr.ifremer.nemo.ws.WSParameter">
+    <void property="code">
+     <string>VHZA</string>
+    </void>
+    <void property="defaultValue">
+     <string>99.99</string>
+    </void>
+    <void property="format">
+     <string>%5.2f</string>
+    </void>
+    <void property="name">
+     <string>AVER ZERO CROSSING WAVE HEIGHT</string>
     </void>
     <void property="unit">
      <string>meter</string>
@@ -12060,6 +12302,28 @@
   <void method="add">
    <object class="fr.ifremer.nemo.ws.WSParameter">
     <void property="code">
+     <string>VMNL</string>
+    </void>
+    <void property="defaultValue">
+     <string>99.99</string>
+    </void>
+    <void property="format">
+     <string>%5.2f</string>
+    </void>
+    <void property="name">
+     <string>DEPTH OF THE DEEPEST TROUGH</string>
+    </void>
+    <void property="unit">
+     <string>meter</string>
+    </void>
+    <void property="unitP06">
+     <string>Metres</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="fr.ifremer.nemo.ws.WSParameter">
+    <void property="code">
      <string>VMXL</string>
     </void>
     <void property="defaultValue">
@@ -12138,7 +12402,7 @@
      <string>WAVE SPECTRUM PEAK ENERGY DIR.</string>
     </void>
     <void property="unit">
-     <string>degree</string>
+     <string>degree true</string>
     </void>
     <void property="unitP06">
      <string>Degrees True</string>
@@ -12214,6 +12478,28 @@
   <void method="add">
    <object class="fr.ifremer.nemo.ws.WSParameter">
     <void property="code">
+     <string>VST1</string>
+    </void>
+    <void property="defaultValue">
+     <string>9.999</string>
+    </void>
+    <void property="format">
+     <string>%5.3f</string>
+    </void>
+    <void property="name">
+     <string>MAXIMUM WAVE STEEPNESS</string>
+    </void>
+    <void property="unit">
+     <string>dimensionless</string>
+    </void>
+    <void property="unitP06">
+     <string>Dimensionless</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="fr.ifremer.nemo.ws.WSParameter">
+    <void property="code">
      <string>VTDH</string>
     </void>
     <void property="defaultValue">
@@ -12230,6 +12516,28 @@
     </void>
     <void property="unitP06">
      <string>Metres</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="fr.ifremer.nemo.ws.WSParameter">
+    <void property="code">
+     <string>VTMX</string>
+    </void>
+    <void property="defaultValue">
+     <string>999</string>
+    </void>
+    <void property="format">
+     <string>%3.0f</string>
+    </void>
+    <void property="name">
+     <string>MAXIMUM WAVE PERIOD</string>
+    </void>
+    <void property="unit">
+     <string>second</string>
+    </void>
+    <void property="unitP06">
+     <string>Seconds</string>
     </void>
    </object>
   </void>
@@ -12280,6 +12588,28 @@
   <void method="add">
    <object class="fr.ifremer.nemo.ws.WSParameter">
     <void property="code">
+     <string>VTZM</string>
+    </void>
+    <void property="defaultValue">
+     <string>999</string>
+    </void>
+    <void property="format">
+     <string>%3.0f</string>
+    </void>
+    <void property="name">
+     <string>PERIOD OF THE HIGHEST WAVE</string>
+    </void>
+    <void property="unit">
+     <string>second</string>
+    </void>
+    <void property="unitP06">
+     <string>Seconds</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="fr.ifremer.nemo.ws.WSParameter">
+    <void property="code">
      <string>VZMX</string>
     </void>
     <void property="defaultValue">
@@ -12302,6 +12632,28 @@
   <void method="add">
    <object class="fr.ifremer.nemo.ws.WSParameter">
     <void property="code">
+     <string>WBFO</string>
+    </void>
+    <void property="defaultValue">
+     <string>99</string>
+    </void>
+    <void property="format">
+     <string>%2.0f</string>
+    </void>
+    <void property="name">
+     <string>BEAUFORT WIND FORCE</string>
+    </void>
+    <void property="unit">
+     <string>dimensionless</string>
+    </void>
+    <void property="unitP06">
+     <string>Dimensionless</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="fr.ifremer.nemo.ws.WSParameter">
+    <void property="code">
      <string>WDIR</string>
     </void>
     <void property="defaultValue">
@@ -12314,10 +12666,32 @@
      <string>WIND DIRECTION REL. TRUE NORTH</string>
     </void>
     <void property="unit">
-     <string>degree</string>
+     <string>degree true</string>
     </void>
     <void property="unitP06">
      <string>Degrees</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="fr.ifremer.nemo.ws.WSParameter">
+    <void property="code">
+     <string>WETT</string>
+    </void>
+    <void property="defaultValue">
+     <string>99.99</string>
+    </void>
+    <void property="format">
+     <string>%5.2f</string>
+    </void>
+    <void property="name">
+     <string>WET BULB TEMPERATURE</string>
+    </void>
+    <void property="unit">
+     <string>Celsius degree</string>
+    </void>
+    <void property="unitP06">
+     <string>Degrees Celsius</string>
     </void>
    </object>
   </void>
