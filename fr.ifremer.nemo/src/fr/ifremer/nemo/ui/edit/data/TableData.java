@@ -1766,15 +1766,12 @@ public class TableData {
 
 		for (int i = 0; i < nbre; i++) {
 			if (!types.get(i).isP011()) {
-				types.get(i).setEntryKeyAndEntryTerm(
-						myTable.getItem(i).getText(colNbById.get(COL_CODE)));
+				types.get(i).setEntryKeyAndEntryTerm(myTable.getItem(i).getText(colNbById.get(COL_CODE)));
 			}
-			String userLabel =
-					myTable.getItem(i).getText(colNbById.get(COL_USERLABEL));
+			String userLabel =	myTable.getItem(i).getText(colNbById.get(COL_USERLABEL));
 
 			if (!userLabel.equals(Global.EMPTY_STRING)) {
-				LabelParameterManager.getInstance().updateLabel(
-						types.get(i).getEntryKeyP011(), userLabel);
+				LabelParameterManager.getInstance().updateLabel(types.get(i).getEntryKeyP011(), userLabel);
 			}
 			// types.get(i).setUserLabel(myTable.getItem(i).getText(colNbById.get(COL_USERLABEL)));
 
@@ -1786,8 +1783,7 @@ public class TableData {
 						types.get(i).getEntryKeyP011(), userStandardName);
 			}
 
-			String userLongName =
-					myTable.getItem(i).getText(colNbById.get(COL_LONG_NAME));
+			String userLongName =	myTable.getItem(i).getText(colNbById.get(COL_LONG_NAME));
 
 			if (!userLongName.equals(Global.EMPTY_STRING)) {
 				NetCDFLongNameParameterManager.getInstance().updateLongName(
@@ -1795,7 +1791,7 @@ public class TableData {
 			}
 
 			//types.get(i).setStandardName(myTable.getItem(i).getText(colNbById.get(COL_STANDARD_NAME)));
-
+			
 			types.get(i).setUnite(
 					myTable.getItem(i).getText(colNbById.get(COL_UNIT)));
 

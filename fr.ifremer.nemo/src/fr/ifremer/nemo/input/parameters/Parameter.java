@@ -382,13 +382,18 @@ public class Parameter extends AbstractModel {
 				String userLabel = LabelParameterManager.getInstance().getUserLabel(getCodeP011());
 				if (userLabel != null) {
 					localCode = userLabel;
-				} else {
-					localCode = getCodeP011();
+				}else {
+					String specificLabel =	LabelParameterManager.getInstance().getSpecificParameterLabel(getCodeP011());
+					if (specificLabel != null) {
+						localCode = specificLabel;
+					} else {
+						localCode = getCodeP011();
+					}
 				}
-			}
+				}
 		}
-		return localCode;
-	}
+				return localCode;
+			}
 
 	/**
 	 * Setter pour _nameP011

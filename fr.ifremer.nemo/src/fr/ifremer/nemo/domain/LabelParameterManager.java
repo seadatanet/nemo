@@ -147,7 +147,7 @@ public class LabelParameterManager
 		}
 	}
 
-	private void loadSpecificLabels()
+	public void loadSpecificLabels()
 	{
 				HashMap<String, SpecificParameter> list = new OdvSpecificValidatorClassic(null, null, null).getSpecificParams();
 				addSpecificLabelsList(list);

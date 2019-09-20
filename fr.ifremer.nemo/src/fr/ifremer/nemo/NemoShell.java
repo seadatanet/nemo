@@ -21,6 +21,7 @@ import fr.ifremer.nemo.config.ManageLists;
 import fr.ifremer.nemo.domain.ConversionDomain;
 import fr.ifremer.nemo.domain.CruiseDomain;
 import fr.ifremer.nemo.domain.InputDomain;
+import fr.ifremer.nemo.domain.LabelParameterManager;
 import fr.ifremer.nemo.domain.StationDomain;
 import fr.ifremer.nemo.input.DataType;
 import fr.ifremer.nemo.input.PropertyModel;
@@ -62,6 +63,7 @@ public class NemoShell {
 			Logger logger) {
 
 		try {
+			LabelParameterManager.getInstance().loadSpecificLabels();
 			ManageLists.initLists();
 			Nemo nemo = Nemo.getInstance();
 			if (!new File(inputFile).exists()) {
