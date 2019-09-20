@@ -39,6 +39,7 @@ import fr.ifremer.seadatanet.odv.input.validator.OdvSpecificValidatorClassic;
 import fr.ifremer.seadatanet.odv.input.validator.OdvSpecificValidatorCyto;
 import fr.ifremer.seadatanet.odv.input.validator.OdvSpecificValidatorMicro;
 import fr.ifremer.seadatanet.odv.input.validator.SpecificParameter;
+import fr.ifremer.sismer_tools.resources.ODVConstants.E_Variant;
 
 /**
  * Description: TODO
@@ -50,8 +51,8 @@ public class LabelParameterManager
 {
 	private static LabelParameterManager instance;
 	private HashMap<String, String> labelsMap;
-	private final HashMap<String, String> specificLabelsMap;
-	
+	private HashMap<String, String> specificLabelsMap;
+
 	String fileName =
 			Intern.dir_resources + File.separator + "userParametersLabels"
 					+ Global.EXT_XML;
@@ -79,7 +80,8 @@ public class LabelParameterManager
 		return instance;
 	}
 	public void cleanUSersLabels() {
-		labelsMap = new HashMap<String, String>();
+//		labelsMap = new HashMap<String, String>();
+		specificLabelsMap = new HashMap<String, String>();
 	}
 	public String getUserLabel(String P011Code)
 	{
@@ -149,21 +151,35 @@ public class LabelParameterManager
 
 	public void loadSpecificLabels()
 	{
-				HashMap<String, SpecificParameter> list = new OdvSpecificValidatorClassic(null, null, null).getSpecificParams();
-				addSpecificLabelsList(list);
-				list = new OdvSpecificValidatorBio(null, null, null).getSpecificParams();
-				addSpecificLabelsList(list);
-				list = new OdvSpecificValidatorCyto(null, null, null).getSpecificParams();
-				addSpecificLabelsList(list);
-				list = new OdvSpecificValidatorMicro(null, null, null).getSpecificParams();
-				addSpecificLabelsList(list);
+		HashMap<String, SpecificParameter> list = new HashMap<>();
+		
+		E_Variant variant = Nemo.getInstance().getDomain().getMedia().getModel().getVariant();
+
+		switch (variant) {
+		case PHYSICOCHEMICAL:
+			list = new OdvSpecificValidatorClassic(null, null, null).getSpecificParams();
+			break;
+		case BIOLOGICAL:
+			list = new OdvSpecificValidatorBio(null, null, null).getSpecificParams();
+			break;
+		case FLOWCYTO:
+			list = new OdvSpecificValidatorCyto(null, null, null).getSpecificParams();
+			break;
+		case MICROLITTER:
+			list = new OdvSpecificValidatorMicro(null, null, null).getSpecificParams();
+			break;
+		default:
+			break;
+		}
+
+		addSpecificLabelsList(list);
 
 	}
-		private void addSpecificLabelsList(HashMap<String, SpecificParameter> list ) {
-			for (Entry<String, SpecificParameter> entry : list.entrySet()) {
-				specificLabelsMap.put(entry.getKey(), entry.getValue().getCodeLocal());
-			}
+	private void addSpecificLabelsList(HashMap<String, SpecificParameter> list ) {
+		for (Entry<String, SpecificParameter> entry : list.entrySet()) {
+			specificLabelsMap.put(entry.getKey(), entry.getValue().getCodeLocal());
 		}
+	}
 	private void loadUserLabels()
 	{
 		labelsMap = new HashMap<String, String>();
