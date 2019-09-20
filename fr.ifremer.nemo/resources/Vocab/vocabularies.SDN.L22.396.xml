@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vocabularies>
+   <vocabulary list="SDN:L05:70:"  version="70"  date="2019-09-05T01:00:09.000"  title="SeaDataNet device categories"   />
+   <vocabulary list="SDN:L22:396:"  version="396"  date="2019-09-18T01:00:09.000"  title="SeaVoX Device Catalogue"   />
+   <vocabulary list="SDN:B75:53:"  version="53"  date="2019-09-17T01:00:08.000"  title="BODC Organisations"   />
+   <vocabulary list="SDN:L35:24:"  version="24"  date="2019-09-18T01:00:09.000"  title="SenseOcean device developers and manufacturers"   />
+   <vocabulary list="SDN:P01:937:"  version="937"  date="2019-09-18T01:00:09.000"  title="BODC Parameter Usage Vocabulary"   />
+</vocabularies>

@@ -1,0 +1,3473 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapping>
+   <vocabulary list="SDN:P07:58:"  version="58"  date="2019-09-18T01:00:09.000"  title="Climate and Forecast Standard Names"   />
+   <mapped>
+      <vocabulary list="SDN:P07:68:"  version="68"  date="2019-09-18T01:00:09.000"  title="Climate and Forecast Standard Names"   />
+   </mapped>
+   <match>
+      <element  key="SDN:P07:68:CFSN0012"  label="aerosol_angstrom_exponent"    />
+      <exact>
+         <element  key="SDN:P07:68:CF12S1"  label="angstrom_exponent_of_ambient_aerosol_in_air"    />
+         <element  key="SDN:P07:68:CF12S1"  label="angstrom_exponent_of_ambient_aerosol_in_air"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0022"  label="air_pressure_at_sea_level"    />
+      <exact>
+         <element  key="SDN:P07:68:Q9ZYSAOC"  label="air_pressure_at_mean_sea_level"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV13N44"  label="atmosphere_absorption_optical_thickness_due_to_ambient_aerosol"    />
+      <exact>
+         <element  key="SDN:P07:68:K733V1TX"  label="atmosphere_absorption_optical_thickness_due_to_ambient_aerosol_particles"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV13N38"  label="atmosphere_absorption_optical_thickness_due_to_dust_ambient_aerosol"    />
+      <exact>
+         <element  key="SDN:P07:68:4PKYZCZO"  label="atmosphere_absorption_optical_thickness_due_to_dust_ambient_aerosol_particles"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV13N39"  label="atmosphere_absorption_optical_thickness_due_to_particulate_organic_matter_ambient_aerosol"    />
+      <exact>
+         <element  key="SDN:P07:68:7L9GZZ3C"  label="atmosphere_absorption_optical_thickness_due_to_particulate_organic_matter_ambient_aerosol_particles"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV13N40"  label="atmosphere_absorption_optical_thickness_due_to_seasalt_ambient_aerosol"    />
+      <exact>
+         <element  key="SDN:P07:68:NBNM4BKR"  label="atmosphere_absorption_optical_thickness_due_to_sea_salt_ambient_aerosol_particles"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:EPD9XTVI"  label="atmosphere_absorption_optical_thickness_due_to_seasalt_ambient_aerosol_particles"    />
+      <exact>
+         <element  key="SDN:P07:68:NBNM4BKR"  label="atmosphere_absorption_optical_thickness_due_to_sea_salt_ambient_aerosol_particles"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV13N41"  label="atmosphere_absorption_optical_thickness_due_to_sulfate_ambient_aerosol"    />
+      <exact>
+         <element  key="SDN:P07:68:35C2WEJP"  label="atmosphere_absorption_optical_thickness_due_to_sulfate_ambient_aerosol_particles"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0005"  label="atmosphere_cloud_condensed_water_content"    />
+      <exact>
+         <element  key="SDN:P07:68:BBAD2149"  label="atmosphere_mass_content_of_cloud_condensed_water"    />
+         <element  key="SDN:P07:68:BBAD2149"  label="atmosphere_mass_content_of_cloud_condensed_water"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0006"  label="atmosphere_cloud_ice_content"    />
+      <exact>
+         <element  key="SDN:P07:68:BBAD2158"  label="atmosphere_mass_content_of_cloud_ice"    />
+         <element  key="SDN:P07:68:BBAD2158"  label="atmosphere_mass_content_of_cloud_ice"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0007"  label="atmosphere_cloud_liquid_water_content"    />
+      <exact>
+         <element  key="SDN:P07:68:BBAD2159"  label="atmosphere_mass_content_of_cloud_liquid_water"    />
+         <element  key="SDN:P07:68:BBAD2159"  label="atmosphere_mass_content_of_cloud_liquid_water"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0008"  label="atmosphere_content_of_sulfate_aerosol"    />
+      <exact>
+         <element  key="SDN:P07:68:7MO18ODI"  label="atmosphere_mass_content_of_sulfate_ambient_aerosol_particles"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV8N2"  label="atmosphere_convective_cloud_condensed_water_content"    />
+      <exact>
+         <element  key="SDN:P07:68:BBAD2100"  label="atmosphere_mass_content_of_convective_cloud_condensed_water"    />
+         <element  key="SDN:P07:68:BBAD2100"  label="atmosphere_mass_content_of_convective_cloud_condensed_water"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV8N3"  label="atmosphere_convective_cloud_liquid_water_content"    />
+      <exact>
+         <element  key="SDN:P07:68:BBAD2101"  label="atmosphere_mass_content_of_convective_cloud_liquid_water"    />
+         <element  key="SDN:P07:68:BBAD2101"  label="atmosphere_mass_content_of_convective_cloud_liquid_water"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0009"  label="atmosphere_convective_mass_flux"    />
+      <exact>
+         <element  key="SDN:P07:68:CFV13A1"  label="atmosphere_net_upward_convective_mass_flux"    />
+         <element  key="SDN:P07:68:CFV13A1"  label="atmosphere_net_upward_convective_mass_flux"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CF12N8"  label="atmosphere_mass_content_of_ammonium_dry_aerosol"    />
+      <exact>
+         <element  key="SDN:P07:68:FVM903KE"  label="atmosphere_mass_content_of_ammonium_dry_aerosol_particles"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CF12N17"  label="atmosphere_mass_content_of_black_carbon_dry_aerosol"    />
+      <exact>
+         <element  key="SDN:P07:68:V4O6KUO9"  label="atmosphere_mass_content_of_elemental_carbon_dry_aerosol_particles"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CF12N39"  label="atmosphere_mass_content_of_dust_dry_aerosol"    />
+      <exact>
+         <element  key="SDN:P07:68:DPJB8SFZ"  label="atmosphere_mass_content_of_dust_dry_aerosol_particles"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CF12N70"  label="atmosphere_mass_content_of_mercury_dry_aerosol"    />
+      <exact>
+         <element  key="SDN:P07:68:C0R0T8J4"  label="atmosphere_mass_content_of_mercury_dry_aerosol_particles"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CF12N78"  label="atmosphere_mass_content_of_nitrate_dry_aerosol"    />
+      <exact>
+         <element  key="SDN:P07:68:8O7ZSO1W"  label="atmosphere_mass_content_of_nitrate_dry_aerosol_particles"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CF12N81"  label="atmosphere_mass_content_of_nitric_acid_trihydrate_ambient_aerosol"    />
+      <exact>
+         <element  key="SDN:P07:68:O6MY37CL"  label="atmosphere_mass_content_of_nitric_acid_trihydrate_ambient_aerosol_particles"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CF12N91"  label="atmosphere_mass_content_of_particulate_organic_matter_dry_aerosol"    />
+      <exact>
+         <element  key="SDN:P07:68:LHHVPPON"  label="atmosphere_mass_content_of_particulate_organic_matter_dry_aerosol_particles"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CF12N95"  label="atmosphere_mass_content_of_primary_particulate_organic_matter_dry_aerosol"    />
+      <exact>
+         <element  key="SDN:P07:68:LITQW4MX"  label="atmosphere_mass_content_of_primary_particulate_organic_matter_dry_aerosol_particles"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CF12N99"  label="atmosphere_mass_content_of_seasalt_dry_aerosol"    />
+      <exact>
+         <element  key="SDN:P07:68:J0EYP8G7"  label="atmosphere_mass_content_of_sea_salt_dry_aerosol_particles"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:4RWM7VWJ"  label="atmosphere_mass_content_of_seasalt_dry_aerosol_particles"    />
+      <exact>
+         <element  key="SDN:P07:68:J0EYP8G7"  label="atmosphere_mass_content_of_sea_salt_dry_aerosol_particles"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CF12N100"  label="atmosphere_mass_content_of_secondary_particulate_organic_matter_dry_aerosol"    />
+      <exact>
+         <element  key="SDN:P07:68:44ANZNZD"  label="atmosphere_mass_content_of_secondary_particulate_organic_matter_dry_aerosol_particles"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CF12S2"  label="atmosphere_mass_content_of_sulfate_ambient_aerosol"    />
+      <exact>
+         <element  key="SDN:P07:68:7MO18ODI"  label="atmosphere_mass_content_of_sulfate_ambient_aerosol_particles"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CF12N101"  label="atmosphere_mass_content_of_sulfate_dry_aerosol"    />
+      <exact>
+         <element  key="SDN:P07:68:FZAT6UAR"  label="atmosphere_mass_content_of_sulfate_dry_aerosol_particles"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV15A1"  label="atmosphere_mass_content_of_sulfate_dry_aerosol_expressed_as_sulfur"    />
+      <exact>
+         <element  key="SDN:P07:68:UKGJEWEU"  label="atmosphere_mass_content_of_sulfate_dry_aerosol_particles_expressed_as_sulfur"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CF12N102"  label="atmosphere_mass_content_of_sulfate_expressed_as_sulfur_dry_aerosol"    />
+      <exact>
+         <element  key="SDN:P07:68:UKGJEWEU"  label="atmosphere_mass_content_of_sulfate_dry_aerosol_particles_expressed_as_sulfur"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CF12N106"  label="atmosphere_mass_content_of_water_in_ambient_aerosol"    />
+      <exact>
+         <element  key="SDN:P07:68:22ZMPG4C"  label="atmosphere_mass_content_of_water_in_ambient_aerosol_particles"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CF12N164"  label="atmosphere_moles_of_nitric_acid_trihydrate_ambient_aerosol"    />
+      <exact>
+         <element  key="SDN:P07:68:0QR2MCSC"  label="atmosphere_moles_of_nitric_acid_trihydrate_ambient_aerosol_particles"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0763"  label="atmosphere_optical_thickness_due_to_aerosol"    />
+      <exact>
+         <element  key="SDN:P07:68:BZT50PNT"  label="atmosphere_optical_thickness_due_to_ambient_aerosol_particles"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV13A2"  label="atmosphere_optical_thickness_due_to_ambient_aerosol"    />
+      <exact>
+         <element  key="SDN:P07:68:BZT50PNT"  label="atmosphere_optical_thickness_due_to_ambient_aerosol_particles"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV7N73"  label="atmosphere_optical_thickness_due_to_dust_ambient_aerosol"    />
+      <exact>
+         <element  key="SDN:P07:68:8EM4NR55"  label="atmosphere_optical_thickness_due_to_dust_ambient_aerosol_particles"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:BBAH2112"  label="atmosphere_optical_thickness_due_to_dust_dry_aerosol"    />
+      <exact>
+         <element  key="SDN:P07:68:8653W3HC"  label="atmosphere_optical_thickness_due_to_dust_dry_aerosol_particles"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV7N74"  label="atmosphere_optical_thickness_due_to_particulate_organic_matter_ambient_aerosol"    />
+      <exact>
+         <element  key="SDN:P07:68:RFMOUWGK"  label="atmosphere_optical_thickness_due_to_particulate_organic_matter_ambient_aerosol_particles"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV7N68"  label="atmosphere_optical_thickness_due_to_pm10_ambient_aerosol"    />
+      <exact>
+         <element  key="SDN:P07:68:OJ9FZRPI"  label="atmosphere_optical_thickness_due_to_pm10_ambient_aerosol_particles"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV7N69"  label="atmosphere_optical_thickness_due_to_pm1_ambient_aerosol"    />
+      <exact>
+         <element  key="SDN:P07:68:7FIU8PCM"  label="atmosphere_optical_thickness_due_to_pm1_ambient_aerosol_particles"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV7N70"  label="atmosphere_optical_thickness_due_to_pm2p5_ambient_aerosol"    />
+      <exact>
+         <element  key="SDN:P07:68:O1IPIHLF"  label="atmosphere_optical_thickness_due_to_pm2p5_ambient_aerosol_particles"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV7N71"  label="atmosphere_optical_thickness_due_to_seasalt_ambient_aerosol"    />
+      <exact>
+         <element  key="SDN:P07:68:5D3PO7YU"  label="atmosphere_optical_thickness_due_to_sea_salt_ambient_aerosol_particles"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:O7C6DLT1"  label="atmosphere_optical_thickness_due_to_seasalt_ambient_aerosol_particles"    />
+      <exact>
+         <element  key="SDN:P07:68:5D3PO7YU"  label="atmosphere_optical_thickness_due_to_sea_salt_ambient_aerosol_particles"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV7N44"  label="atmosphere_optical_thickness_due_to_water_in_ambient_aerosol"    />
+      <exact>
+         <element  key="SDN:P07:68:XSKHRFMM"  label="atmosphere_optical_thickness_due_to_water_in_ambient_aerosol_particles"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSNA002"  label="atmosphere_so4_content"    />
+      <exact>
+         <element  key="SDN:P07:68:BBAH2155"  label="atmosphere_mass_content_of_sulfate"    />
+         <element  key="SDN:P07:68:BBAH2155"  label="atmosphere_mass_content_of_sulfate"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0768"  label="atmosphere_specific_convective_available_potential_energy"    />
+      <exact>
+         <element  key="SDN:P07:68:7K2ILV7Y"  label="atmosphere_convective_available_potential_energy"    />
+         <element  key="SDN:P07:68:7K2ILV7Y"  label="atmosphere_convective_available_potential_energy"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0769"  label="atmosphere_sulfate_content"    />
+      <exact>
+         <element  key="SDN:P07:68:BBAH2155"  label="atmosphere_mass_content_of_sulfate"    />
+         <element  key="SDN:P07:68:BBAH2155"  label="atmosphere_mass_content_of_sulfate"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSNA019"  label="atmosphere_surface_drag_coefficient"    />
+      <exact>
+         <element  key="SDN:P07:68:CFSN0265"  label="surface_drag_coefficient_in_air"    />
+         <element  key="SDN:P07:68:CFSN0265"  label="surface_drag_coefficient_in_air"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSNA017"  label="atmosphere_surface_drag_coefficient_of_heat"    />
+      <exact>
+         <element  key="SDN:P07:68:CFSN0263"  label="surface_drag_coefficient_for_heat_in_air"    />
+         <element  key="SDN:P07:68:CFSN0263"  label="surface_drag_coefficient_for_heat_in_air"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSNA018"  label="atmosphere_surface_drag_coefficient_of_momentum"    />
+      <exact>
+         <element  key="SDN:P07:68:CFSN0264"  label="surface_drag_coefficient_for_momentum_in_air"    />
+         <element  key="SDN:P07:68:CFSN0264"  label="surface_drag_coefficient_for_momentum_in_air"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0770"  label="atmosphere_water_content"    />
+      <exact>
+         <element  key="SDN:P07:68:BBAH2153"  label="atmosphere_mass_content_of_water"    />
+         <element  key="SDN:P07:68:BBAH2153"  label="atmosphere_mass_content_of_water"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0771"  label="atmosphere_water_vapor_content"    />
+      <exact>
+         <element  key="SDN:P07:68:CF12N107"  label="atmosphere_mass_content_of_water_vapor"    />
+         <element  key="SDN:P07:68:CF12N107"  label="atmosphere_mass_content_of_water_vapor"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:QT0VTCHE"  label="backscattering_ratio_in_air"    />
+      <exact>
+         <element  key="SDN:P07:68:CF12N187"  label="backscattering_ratio"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV8N4"  label="bolus_eastward_sea_water_velocity"    />
+      <exact>
+         <element  key="SDN:P07:68:1JDV3KLZ"  label="eastward_sea_water_velocity_due_to_parameterized_mesoscale_eddies"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV8N5"  label="bolus_northward_sea_water_velocity"    />
+      <exact>
+         <element  key="SDN:P07:68:556S8S17"  label="northward_sea_water_velocity_due_to_parameterized_mesoscale_eddies"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV10N7"  label="bolus_sea_water_x_velocity"    />
+      <exact>
+         <element  key="SDN:P07:68:EISQFY55"  label="sea_water_x_velocity_due_to_parameterized_mesoscale_eddies"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV10N8"  label="bolus_sea_water_y_velocity"    />
+      <exact>
+         <element  key="SDN:P07:68:J0OEZBJ5"  label="sea_water_y_velocity_due_to_parameterized_mesoscale_eddies"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV8N6"  label="bolus_upward_sea_water_velocity"    />
+      <exact>
+         <element  key="SDN:P07:68:J1F4A574"  label="upward_sea_water_velocity_due_to_parameterized_mesoscale_eddies"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:EVKFM0BL"  label="carbon_content_of_forestry_and_agricultural_products"    />
+      <exact>
+         <element  key="SDN:P07:68:8PSGY4EL"  label="carbon_mass_content_of_forestry_and_agricultural_products"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV16A4"  label="carbon_content_of_products_of_anthropogenic_land_use_change"    />
+      <exact>
+         <element  key="SDN:P07:68:8PSGY4EL"  label="carbon_mass_content_of_forestry_and_agricultural_products"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:SZPJGD34"  label="carbon_mass_flux_into_litter_and_soil_due_to_anthropogenic_land_use_or_land_cover_change"    />
+      <exact>
+         <element  key="SDN:P07:68:8YZ1OII6"  label="carbon_mass_flux_into_soil_and_litter_due_to_anthropogenic_land_use_or_land_cover_change"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV13A3"  label="change_over_time_in_atmosphere_water_content_due_to_advection"    />
+      <exact>
+         <element  key="SDN:P07:68:BBAH2152"  label="change_over_time_in_atmosphere_mass_content_of_water_due_to_advection"    />
+         <element  key="SDN:P07:68:BBAH2152"  label="change_over_time_in_atmosphere_mass_content_of_water_due_to_advection"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0743"  label="change_over_time_in_atmospheric_water_content_due_to_advection"    />
+      <exact>
+         <element  key="SDN:P07:68:BBAH2152"  label="change_over_time_in_atmosphere_mass_content_of_water_due_to_advection"    />
+         <element  key="SDN:P07:68:BBAH2152"  label="change_over_time_in_atmosphere_mass_content_of_water_due_to_advection"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSNA003"  label="chlorophyll_concentration_in_sea_water"    />
+      <exact>
+         <element  key="SDN:P07:68:CF12S21"  label="mass_concentration_of_chlorophyll_in_sea_water"    />
+         <element  key="SDN:P07:68:CF12S21"  label="mass_concentration_of_chlorophyll_in_sea_water"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0701"  label="cloud_condensed_water_content_of_atmosphere_layer"    />
+      <exact>
+         <element  key="SDN:P07:68:BBAH2150"  label="mass_content_of_cloud_condensed_water_in_atmosphere_layer"    />
+         <element  key="SDN:P07:68:BBAH2150"  label="mass_content_of_cloud_condensed_water_in_atmosphere_layer"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0702"  label="cloud_ice_content_of_atmosphere_layer"    />
+      <exact>
+         <element  key="SDN:P07:68:BBAH2149"  label="mass_content_of_cloud_ice_in_atmosphere_layer"    />
+         <element  key="SDN:P07:68:BBAH2149"  label="mass_content_of_cloud_ice_in_atmosphere_layer"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0703"  label="cloud_liquid_water_content_of_atmosphere_layer"    />
+      <exact>
+         <element  key="SDN:P07:68:BBAH2147"  label="mass_content_of_cloud_liquid_water_in_atmosphere_layer"    />
+         <element  key="SDN:P07:68:BBAH2147"  label="mass_content_of_cloud_liquid_water_in_atmosphere_layer"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0705"  label="concentration_of_chlorophyll_in_sea_water"    />
+      <exact>
+         <element  key="SDN:P07:68:CF12S21"  label="mass_concentration_of_chlorophyll_in_sea_water"    />
+         <element  key="SDN:P07:68:CF12S21"  label="mass_concentration_of_chlorophyll_in_sea_water"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0706"  label="concentration_of_suspended_matter_in_sea_water"    />
+      <exact>
+         <element  key="SDN:P07:68:CF12S23"  label="mass_concentration_of_suspended_matter_in_sea_water"    />
+         <element  key="SDN:P07:68:CF12S23"  label="mass_concentration_of_suspended_matter_in_sea_water"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:SC42QN4N"  label="diameter_of_ambient_aerosol_particles"    />
+      <exact>
+         <element  key="SDN:P07:68:ZI76OI29"  label="ambient_aerosol_particle_diameter"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0727"  label="direction_of_sea_water_velocity"    />
+      <exact>
+         <element  key="SDN:P07:68:9IWLLFXP"  label="sea_water_to_direction"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSNA028"  label="direction_of_swell_wave_velocity"    />
+      <exact>
+         <element  key="SDN:P07:68:CFSN0379"  label="sea_surface_swell_wave_to_direction"    />
+         <element  key="SDN:P07:68:CFSN0379"  label="sea_surface_swell_wave_to_direction"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSNA031"  label="direction_of_wind_wave_velocity"    />
+      <exact>
+         <element  key="SDN:P07:68:CFSN0391"  label="sea_surface_wind_wave_to_direction"    />
+         <element  key="SDN:P07:68:CFSN0391"  label="sea_surface_wind_wave_to_direction"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0728"  label="dissipation_in_atmosphere_boundary_layer"    />
+      <exact>
+         <element  key="SDN:P07:68:CFV15A3"  label="kinetic_energy_dissipation_in_atmosphere_boundary_layer"    />
+         <element  key="SDN:P07:68:CFV15A3"  label="kinetic_energy_dissipation_in_atmosphere_boundary_layer"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:B7IXS3WH"  label="downwelling_shortwave_flux_in_air_assuming_clean_clear_sky"    />
+      <exact>
+         <element  key="SDN:P07:68:P2VDRPKJ"  label="downwelling_shortwave_flux_in_air_assuming_clear_sky_and_no_aerosol"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0662"  label="downwelling_spectral_photon_flux_in_sea_water"    />
+      <exact>
+         <element  key="SDN:P07:68:E51WRQIW"  label="downwelling_photon_flux_per_unit_wavelength_in_sea_water"    />
+         <element  key="SDN:P07:68:E51WRQIW"  label="downwelling_photon_flux_per_unit_wavelength_in_sea_water"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0663"  label="downwelling_spectral_photon_radiance_in_sea_water"    />
+      <exact>
+         <element  key="SDN:P07:68:Z2CRG5G5"  label="downwelling_photon_radiance_per_unit_wavelength_in_sea_water"    />
+         <element  key="SDN:P07:68:Z2CRG5G5"  label="downwelling_photon_radiance_per_unit_wavelength_in_sea_water"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0664"  label="downwelling_spectral_photon_spherical_irradiance_in_sea_water"    />
+      <exact>
+         <element  key="SDN:P07:68:879S7613"  label="downwelling_photon_spherical_irradiance_per_unit_wavelength_in_sea_water"    />
+         <element  key="SDN:P07:68:879S7613"  label="downwelling_photon_spherical_irradiance_per_unit_wavelength_in_sea_water"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0665"  label="downwelling_spectral_radiance_in_air"    />
+      <exact>
+         <element  key="SDN:P07:68:HLKZ2VSL"  label="downwelling_radiance_per_unit_wavelength_in_air"    />
+         <element  key="SDN:P07:68:HLKZ2VSL"  label="downwelling_radiance_per_unit_wavelength_in_air"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0666"  label="downwelling_spectral_radiance_in_sea_water"    />
+      <exact>
+         <element  key="SDN:P07:68:6151973H"  label="downwelling_radiance_per_unit_wavelength_in_sea_water"    />
+         <element  key="SDN:P07:68:6151973H"  label="downwelling_radiance_per_unit_wavelength_in_sea_water"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0667"  label="downwelling_spectral_radiative_flux_in_air"    />
+      <exact>
+         <element  key="SDN:P07:68:YI375G77"  label="downwelling_radiative_flux_per_unit_wavelength_in_air"    />
+         <element  key="SDN:P07:68:YI375G77"  label="downwelling_radiative_flux_per_unit_wavelength_in_air"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0668"  label="downwelling_spectral_radiative_flux_in_sea_water"    />
+      <exact>
+         <element  key="SDN:P07:68:NAIK3LNA"  label="downwelling_radiative_flux_per_unit_wavelength_in_sea_water"    />
+         <element  key="SDN:P07:68:NAIK3LNA"  label="downwelling_radiative_flux_per_unit_wavelength_in_sea_water"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0669"  label="downwelling_spectral_spherical_irradiance_in_sea_water"    />
+      <exact>
+         <element  key="SDN:P07:68:17G027ST"  label="downwelling_spherical_irradiance_per_unit_wavelength_in_sea_water"    />
+         <element  key="SDN:P07:68:17G027ST"  label="downwelling_spherical_irradiance_per_unit_wavelength_in_sea_water"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV8N9"  label="eastward_transformed_eulerian_mean_velocity"    />
+      <exact>
+         <element  key="SDN:P07:68:CFV9S1"  label="eastward_transformed_eulerian_mean_air_velocity"    />
+         <element  key="SDN:P07:68:CFV9S1"  label="eastward_transformed_eulerian_mean_air_velocity"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0651"  label="eastward_water_vapor_flux"    />
+      <exact>
+         <element  key="SDN:P07:68:CFV15A2"  label="eastward_water_vapor_flux_in_air"    />
+         <element  key="SDN:P07:68:CFV15A2"  label="eastward_water_vapor_flux_in_air"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:TK2CWWPU"  label="effective_radius_of_cloud_liquid_water_particles"    />
+      <exact>
+         <element  key="SDN:P07:68:MRXUEVAS"  label="effective_radius_of_cloud_liquid_water_particle"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:X4CY5Z6H"  label="effective_radius_of_cloud_liquid_water_particles_at_liquid_water_cloud_top"    />
+      <exact>
+         <element  key="SDN:P07:68:CFV16A12"  label="effective_radius_of_cloud_liquid_water_particle_at_liquid_water_cloud_top"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:NOX8IGKW"  label="effective_radius_of_convective_cloud_ice_particles"    />
+      <exact>
+         <element  key="SDN:P07:68:CF12N195"  label="effective_radius_of_convective_cloud_ice_particle"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:N3D94CVE"  label="effective_radius_of_convective_cloud_liquid_water_particles"    />
+      <exact>
+         <element  key="SDN:P07:68:CF12N196"  label="effective_radius_of_convective_cloud_liquid_water_particle"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:6YPSI8M3"  label="effective_radius_of_convective_cloud_liquid_water_particles_at_convective_liquid_water_cloud_top"    />
+      <exact>
+         <element  key="SDN:P07:68:S1CHM4XM"  label="effective_radius_of_convective_cloud_liquid_water_particle_at_convective_liquid_water_cloud_top"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:79GTEIUB"  label="effective_radius_of_convective_cloud_rain_particles"    />
+      <exact>
+         <element  key="SDN:P07:68:CF12N197"  label="effective_radius_of_convective_cloud_rain_particle"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:9M3C9WFF"  label="effective_radius_of_convective_cloud_snow_particles"    />
+      <exact>
+         <element  key="SDN:P07:68:CF12N198"  label="effective_radius_of_convective_cloud_snow_particle"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:WSOOVDAH"  label="effective_radius_of_stratiform_cloud_graupel_particles"    />
+      <exact>
+         <element  key="SDN:P07:68:CF12N199"  label="effective_radius_of_stratiform_cloud_graupel_particle"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:9XXE61KE"  label="effective_radius_of_stratiform_cloud_ice_particles"    />
+      <exact>
+         <element  key="SDN:P07:68:CF12N200"  label="effective_radius_of_stratiform_cloud_ice_particle"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:VVZRYOE6"  label="effective_radius_of_stratiform_cloud_liquid_water_particles"    />
+      <exact>
+         <element  key="SDN:P07:68:CF12N201"  label="effective_radius_of_stratiform_cloud_liquid_water_particle"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:D21M7174"  label="effective_radius_of_stratiform_cloud_liquid_water_particles_at_stratiform_liquid_water_cloud_top"    />
+      <exact>
+         <element  key="SDN:P07:68:9SAN6SZV"  label="effective_radius_of_stratiform_cloud_liquid_water_particle_at_stratiform_liquid_water_cloud_top"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:UZ0ESYPD"  label="effective_radius_of_stratiform_cloud_rain_particles"    />
+      <exact>
+         <element  key="SDN:P07:68:CF12N202"  label="effective_radius_of_stratiform_cloud_rain_particle"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:US3N6FMX"  label="effective_radius_of_stratiform_cloud_snow_particles"    />
+      <exact>
+         <element  key="SDN:P07:68:CF12N203"  label="effective_radius_of_stratiform_cloud_snow_particle"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:IJAQNXAV"  label="electrical_mobility_diameter_of_ambient_aerosol_particles"    />
+      <exact>
+         <element  key="SDN:P07:68:PB1AX23L"  label="electrical_mobility_particle_diameter"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSNA023"  label="electromagnetic_wavelength"    />
+      <exact>
+         <element  key="SDN:P07:68:CFSN0407"  label="radiation_wavelength"    />
+         <element  key="SDN:P07:68:CFSN0407"  label="radiation_wavelength"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSNA004"  label="equivalent_thickness_at_stp_of_atmosphere_o3_content"    />
+      <exact>
+         <element  key="SDN:P07:68:CFSN0619"  label="equivalent_thickness_at_stp_of_atmosphere_ozone_content"    />
+         <element  key="SDN:P07:68:CFSN0619"  label="equivalent_thickness_at_stp_of_atmosphere_ozone_content"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV16A13"  label="fast_soil_pool_carbon_content"    />
+      <exact>
+         <element  key="SDN:P07:68:AT7HOKCE"  label="fast_soil_pool_mass_content_of_carbon"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:U2HD33ZJ"  label="floating_ice_sheet_area_fraction"    />
+      <exact>
+         <element  key="SDN:P07:68:B58LZ0OO"  label="floating_ice_shelf_area_fraction"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSNA021"  label="grid_eastward_wind"    />
+      <exact>
+         <element  key="SDN:P07:68:CFSN0042"  label="x_wind"    />
+         <element  key="SDN:P07:68:CFSN0042"  label="x_wind"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSNA040"  label="grid_northward_wind"    />
+      <exact>
+         <element  key="SDN:P07:68:CFSN0043"  label="y_wind"    />
+         <element  key="SDN:P07:68:CFSN0043"  label="y_wind"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0636"  label="gross_primary_productivity_of_carbon"    />
+      <exact>
+         <element  key="SDN:P07:68:48CPRT6U"  label="gross_primary_productivity_of_biomass_expressed_as_carbon"    />
+         <element  key="SDN:P07:68:48CPRT6U"  label="gross_primary_productivity_of_biomass_expressed_as_carbon"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0641"  label="heterotrophic_respiration_carbon_flux"    />
+      <exact>
+         <element  key="SDN:P07:68:PPMSXAF8"  label="surface_upward_mass_flux_of_carbon_dioxide_expressed_as_carbon_due_to_heterotrophic_respiration"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:RSLGQH3R"  label="histogram_of_backscattering_ratio_in_air_over_height_above_reference_ellipsoid"    />
+      <exact>
+         <element  key="SDN:P07:68:CF12N209"  label="histogram_of_backscattering_ratio_over_height_above_reference_ellipsoid"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0608"  label="integral_of_air_temperature_deficit_wrt_time"    />
+      <exact>
+         <element  key="SDN:P07:68:4GRPX3GS"  label="integral_wrt_time_of_air_temperature_deficit"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0609"  label="integral_of_air_temperature_excess_wrt_time"    />
+      <exact>
+         <element  key="SDN:P07:68:D9NHJ9OK"  label="integral_wrt_time_of_air_temperature_excess"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:Y3YCVZ68"  label="integral_of_product_of_eastward_wind_and_specific_humidity_wrt_height"    />
+      <exact>
+         <element  key="SDN:P07:68:FJH6BK34"  label="integral_wrt_height_of_product_of_eastward_wind_and_specific_humidity"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:FHL4XLAR"  label="integral_of_product_of_northward_wind_and_specific_humidity_wrt_height"    />
+      <exact>
+         <element  key="SDN:P07:68:NVYYJLNX"  label="integral_wrt_height_of_product_of_northward_wind_and_specific_humidity"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:7701XKQN"  label="integral_of_sea_water_practical_salinity_wrt_depth"    />
+      <exact>
+         <element  key="SDN:P07:68:3UYK3O8G"  label="integral_wrt_depth_of_sea_water_practical_salinity"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0610"  label="integral_of_sea_water_temperature_wrt_depth_in_ocean_layer"    />
+      <exact>
+         <element  key="SDN:P07:68:DHTXFX9K"  label="integral_wrt_depth_of_sea_water_temperature"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV11N6"  label="integral_of_surface_downward_eastward_stress_wrt_time"    />
+      <exact>
+         <element  key="SDN:P07:68:ZLU79UXI"  label="integral_wrt_time_of_surface_downward_eastward_stress"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0837"  label="integral_of_surface_downward_latent_heat_flux_wrt_time"    />
+      <exact>
+         <element  key="SDN:P07:68:KSKBQFN2"  label="integral_wrt_time_of_surface_downward_latent_heat_flux"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV11N7"  label="integral_of_surface_downward_northward_stress_wrt_time"    />
+      <exact>
+         <element  key="SDN:P07:68:XBYNXLH6"  label="integral_wrt_time_of_surface_downward_northward_stress"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0831"  label="integral_of_surface_downward_sensible_heat_flux_wrt_time"    />
+      <exact>
+         <element  key="SDN:P07:68:WKV82GB7"  label="integral_wrt_time_of_surface_downward_sensible_heat_flux"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV11N8"  label="integral_of_surface_downwelling_longwave_flux_in_air_wrt_time"    />
+      <exact>
+         <element  key="SDN:P07:68:VL5QBNPI"  label="integral_wrt_time_of_surface_downwelling_longwave_flux_in_air"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV11N9"  label="integral_of_surface_downwelling_shortwave_flux_in_air_wrt_time"    />
+      <exact>
+         <element  key="SDN:P07:68:S8XHMYE1"  label="integral_wrt_time_of_surface_downwelling_shortwave_flux_in_air"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0832"  label="integral_of_surface_net_downward_longwave_flux_wrt_time"    />
+      <exact>
+         <element  key="SDN:P07:68:YLNOX07E"  label="integral_wrt_time_of_surface_net_downward_longwave_flux"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0833"  label="integral_of_surface_net_downward_shortwave_flux_wrt_time"    />
+      <exact>
+         <element  key="SDN:P07:68:U7Q3ZEKD"  label="integral_wrt_time_of_surface_net_downward_shortwave_flux"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0834"  label="integral_of_toa_net_downward_shortwave_flux_wrt_time"    />
+      <exact>
+         <element  key="SDN:P07:68:M8XGB09H"  label="integral_wrt_time_of_toa_net_downward_shortwave_flux"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0835"  label="integral_of_toa_outgoing_longwave_flux_wrt_time"    />
+      <exact>
+         <element  key="SDN:P07:68:8LI08BVT"  label="integral_wrt_time_of_toa_outgoing_longwave_flux"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:9CM634JC"  label="integral_wrt_depth_of_sea_ice_temperature_expressed_as_heat_content"    />
+      <exact>
+         <element  key="SDN:P07:68:RBBSI64N"  label="sea_ice_temperature_expressed_as_heat_content"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:VU17QYTV"  label="integral_wrt_depth_of_sea_water_potential_temperature_expressed_as_heat_content"    />
+      <exact>
+         <element  key="SDN:P07:68:169IEA5N"  label="sea_water_potential_temperature_expressed_as_heat_content"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:0C3XUKXM"  label="integral_wrt_depth_of_sea_water_temperature_in_ocean_layer"    />
+      <exact>
+         <element  key="SDN:P07:68:DHTXFX9K"  label="integral_wrt_depth_of_sea_water_temperature"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0614"  label="isotropic_spectral_radiance_in_air"    />
+      <exact>
+         <element  key="SDN:P07:68:WPA7Z3EX"  label="isotropic_radiance_per_unit_wavelength_in_air"    />
+         <element  key="SDN:P07:68:WPA7Z3EX"  label="isotropic_radiance_per_unit_wavelength_in_air"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0575"  label="land_cover"    />
+      <exact>
+         <element  key="SDN:P07:68:CFV11S1"  label="area_type"    />
+      </exact>
+      <related>
+         <element  key="SDN:P07:68:CFV11S1"  label="area_type"    />
+      </related>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0592"  label="large_scale_cloud_area_fraction"    />
+      <exact>
+         <element  key="SDN:P07:68:CFV15A12"  label="stratiform_cloud_area_fraction"    />
+         <element  key="SDN:P07:68:CFV15A12"  label="stratiform_cloud_area_fraction"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CF12N211"  label="large_scale_graupel_flux"    />
+      <exact>
+         <element  key="SDN:P07:68:CFV15A13"  label="stratiform_graupel_flux"    />
+         <element  key="SDN:P07:68:CFV15A13"  label="stratiform_graupel_flux"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0593"  label="large_scale_precipitation_amount"    />
+      <exact>
+         <element  key="SDN:P07:68:CFV15A14"  label="stratiform_precipitation_amount"    />
+         <element  key="SDN:P07:68:CFV15A14"  label="stratiform_precipitation_amount"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0594"  label="large_scale_precipitation_flux"    />
+      <exact>
+         <element  key="SDN:P07:68:CFV15A15"  label="stratiform_precipitation_flux"    />
+         <element  key="SDN:P07:68:CFV15A15"  label="stratiform_precipitation_flux"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0595"  label="large_scale_rainfall_amount"    />
+      <exact>
+         <element  key="SDN:P07:68:CFV15A16"  label="stratiform_rainfall_amount"    />
+         <element  key="SDN:P07:68:CFV15A16"  label="stratiform_rainfall_amount"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0596"  label="large_scale_rainfall_flux"    />
+      <exact>
+         <element  key="SDN:P07:68:CFV15A17"  label="stratiform_rainfall_flux"    />
+         <element  key="SDN:P07:68:CFV15A17"  label="stratiform_rainfall_flux"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0597"  label="large_scale_rainfall_rate"    />
+      <exact>
+         <element  key="SDN:P07:68:CFV15A18"  label="stratiform_rainfall_rate"    />
+         <element  key="SDN:P07:68:CFV15A18"  label="stratiform_rainfall_rate"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0598"  label="large_scale_snowfall_amount"    />
+      <exact>
+         <element  key="SDN:P07:68:CFV15A19"  label="stratiform_snowfall_amount"    />
+         <element  key="SDN:P07:68:CFV15A19"  label="stratiform_snowfall_amount"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0599"  label="large_scale_snowfall_flux"    />
+      <exact>
+         <element  key="SDN:P07:68:CFV15A20"  label="stratiform_snowfall_flux"    />
+         <element  key="SDN:P07:68:CFV15A20"  label="stratiform_snowfall_flux"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV16A16"  label="leaf_carbon_content"    />
+      <exact>
+         <element  key="SDN:P07:68:IBL3SXY3"  label="leaf_mass_content_of_carbon"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0602"  label="liquid_water_content_of_snow_layer"    />
+      <exact>
+         <element  key="SDN:P07:68:CFV15A4"  label="liquid_water_content_of_surface_snow"    />
+         <element  key="SDN:P07:68:CFV15A4"  label="liquid_water_content_of_surface_snow"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0604"  label="litter_carbon_content"    />
+      <exact>
+         <element  key="SDN:P07:68:Z8MNYOFO"  label="litter_mass_content_of_carbon"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0553"  label="litter_carbon_flux"    />
+      <exact>
+         <element  key="SDN:P07:68:MGOP5BFS"  label="mass_flux_of_carbon_into_litter_from_vegetation"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSNA005"  label="longwave_radiance"    />
+      <exact>
+         <element  key="SDN:P07:68:CFSN0612"  label="isotropic_longwave_radiance_in_air"    />
+         <element  key="SDN:P07:68:CFSN0612"  label="isotropic_longwave_radiance_in_air"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0557"  label="lwe_large_scale_precipitation_rate"    />
+      <exact>
+         <element  key="SDN:P07:68:CFV15A5"  label="lwe_stratiform_precipitation_rate"    />
+         <element  key="SDN:P07:68:CFV15A5"  label="lwe_stratiform_precipitation_rate"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0558"  label="lwe_large_scale_snowfall_rate"    />
+      <exact>
+         <element  key="SDN:P07:68:CFV15A6"  label="lwe_stratiform_snowfall_rate"    />
+         <element  key="SDN:P07:68:CFV15A6"  label="lwe_stratiform_snowfall_rate"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0561"  label="lwe_thickness_of_atmosphere_water_vapor_content"    />
+      <exact>
+         <element  key="SDN:P07:68:BBAH2146"  label="lwe_thickness_of_atmosphere_mass_content_of_water_vapor"    />
+         <element  key="SDN:P07:68:BBAH2146"  label="lwe_thickness_of_atmosphere_mass_content_of_water_vapor"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0566"  label="lwe_thickness_of_large_scale_precipitation_amount"    />
+      <exact>
+         <element  key="SDN:P07:68:CFV15A7"  label="lwe_thickness_of_stratiform_precipitation_amount"    />
+         <element  key="SDN:P07:68:CFV15A7"  label="lwe_thickness_of_stratiform_precipitation_amount"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0567"  label="lwe_thickness_of_large_scale_snowfall_amount"    />
+      <exact>
+         <element  key="SDN:P07:68:CFV15A8"  label="lwe_thickness_of_stratiform_snowfall_amount"    />
+         <element  key="SDN:P07:68:CFV15A8"  label="lwe_thickness_of_stratiform_snowfall_amount"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CF12N219"  label="mass_concentration_of_ammonium_dry_aerosol_in_air"    />
+      <exact>
+         <element  key="SDN:P07:68:4EWCHNYX"  label="mass_concentration_of_ammonium_dry_aerosol_particles_in_air"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:RVY4U6VV"  label="mass_concentration_of_biomass_burning_dry_aerosol_particles_in_air"    />
+      <exact>
+         <element  key="SDN:P07:68:CFV16A18"  label="mass_concentration_of_biomass_burning_dry_aerosol_in_air"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CF12N228"  label="mass_concentration_of_black_carbon_dry_aerosol_in_air"    />
+      <exact>
+         <element  key="SDN:P07:68:CDDBJ4AL"  label="mass_concentration_of_elemental_carbon_dry_aerosol_particles_in_air"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:IEIAABIH"  label="mass_concentration_of_coarse_mode_ambient_aerosol_in_air"    />
+      <exact>
+         <element  key="SDN:P07:68:3CJPRLTE"  label="mass_concentration_of_coarse_mode_ambient_aerosol_particles_in_air"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CF12N252"  label="mass_concentration_of_dust_dry_aerosol_in_air"    />
+      <exact>
+         <element  key="SDN:P07:68:YKFYOO3T"  label="mass_concentration_of_dust_dry_aerosol_particles_in_air"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CF12N283"  label="mass_concentration_of_mercury_dry_aerosol_in_air"    />
+      <exact>
+         <element  key="SDN:P07:68:PCDEL2PW"  label="mass_concentration_of_mercury_dry_aerosol_particles_in_air"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CF12N291"  label="mass_concentration_of_nitrate_dry_aerosol_in_air"    />
+      <exact>
+         <element  key="SDN:P07:68:80SFD1ZQ"  label="mass_concentration_of_nitrate_dry_aerosol_particles_in_air"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CF12N294"  label="mass_concentration_of_nitric_acid_trihydrate_ambient_aerosol_in_air"    />
+      <exact>
+         <element  key="SDN:P07:68:52SO2NQQ"  label="mass_concentration_of_nitric_acid_trihydrate_ambient_aerosol_particles_in_air"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CF12N306"  label="mass_concentration_of_particulate_organic_matter_dry_aerosol_in_air"    />
+      <exact>
+         <element  key="SDN:P07:68:6KDFFL7S"  label="mass_concentration_of_particulate_organic_matter_dry_aerosol_particles_in_air"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:DIEJIDDA"  label="mass_concentration_of_pm10_ambient_aerosol_in_air"    />
+      <exact>
+         <element  key="SDN:P07:68:6O34XRFW"  label="mass_concentration_of_pm10_ambient_aerosol_particles_in_air"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:DIAIAHGI"  label="mass_concentration_of_pm1_ambient_aerosol_in_air"    />
+      <exact>
+         <element  key="SDN:P07:68:T33M2FO7"  label="mass_concentration_of_pm1_ambient_aerosol_particles_in_air"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:IGGCJECC"  label="mass_concentration_of_pm2p5_ambient_aerosol_in_air"    />
+      <exact>
+         <element  key="SDN:P07:68:YUDG9DXK"  label="mass_concentration_of_pm2p5_ambient_aerosol_particles_in_air"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CF12N312"  label="mass_concentration_of_primary_particulate_organic_matter_dry_aerosol_in_air"    />
+      <exact>
+         <element  key="SDN:P07:68:FQM4CFXQ"  label="mass_concentration_of_primary_particulate_organic_matter_dry_aerosol_particles_in_air"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CF12N316"  label="mass_concentration_of_seasalt_dry_aerosol_in_air"    />
+      <exact>
+         <element  key="SDN:P07:68:555CIR5B"  label="mass_concentration_of_sea_salt_dry_aerosol_particles_in_air"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:VXU53AOW"  label="mass_concentration_of_seasalt_dry_aerosol_particles_in_air"    />
+      <exact>
+         <element  key="SDN:P07:68:555CIR5B"  label="mass_concentration_of_sea_salt_dry_aerosol_particles_in_air"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CF12N317"  label="mass_concentration_of_secondary_particulate_organic_matter_dry_aerosol_in_air"    />
+      <exact>
+         <element  key="SDN:P07:68:WM3WIV44"  label="mass_concentration_of_secondary_particulate_organic_matter_dry_aerosol_particles_in_air"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0530"  label="mass_concentration_of_sulfate_aerosol_in_air"    />
+      <exact>
+         <element  key="SDN:P07:68:WWO2ZBS0"  label="mass_concentration_of_sulfate_ambient_aerosol_particles_in_air"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CF12S22"  label="mass_concentration_of_sulfate_ambient_aerosol_in_air"    />
+      <exact>
+         <element  key="SDN:P07:68:WWO2ZBS0"  label="mass_concentration_of_sulfate_ambient_aerosol_particles_in_air"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CF12N319"  label="mass_concentration_of_sulfate_dry_aerosol_in_air"    />
+      <exact>
+         <element  key="SDN:P07:68:TA5FFG7W"  label="mass_concentration_of_sulfate_dry_aerosol_particles_in_air"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CF12N323"  label="mass_concentration_of_water_in_ambient_aerosol_in_air"    />
+      <exact>
+         <element  key="SDN:P07:68:DEFTZ0HG"  label="mass_concentration_of_water_in_ambient_aerosol_particles_in_air"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0788"  label="mass_fraction_of_ammonium_dry_aerosol_in_air"    />
+      <exact>
+         <element  key="SDN:P07:68:7QGQFIQV"  label="mass_fraction_of_ammonium_dry_aerosol_particles_in_air"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0789"  label="mass_fraction_of_black_carbon_dry_aerosol_in_air"    />
+      <exact>
+         <element  key="SDN:P07:68:EDUTEJ6O"  label="mass_fraction_of_elemental_carbon_dry_aerosol_particles_in_air"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0536"  label="mass_fraction_of_convective_condensed_water_in_air"    />
+      <exact>
+         <element  key="SDN:P07:68:CFV8NS1"  label="mass_fraction_of_convective_cloud_condensed_water_in_air"    />
+         <element  key="SDN:P07:68:CFV8NS1"  label="mass_fraction_of_convective_cloud_condensed_water_in_air"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0790"  label="mass_fraction_of_dust_dry_aerosol_in_air"    />
+      <exact>
+         <element  key="SDN:P07:68:KBOQ4L1S"  label="mass_fraction_of_dust_dry_aerosol_particles_in_air"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:IKWO62WV"  label="mass_fraction_of_mercury_dry_aerosol_particles_in_air"    />
+      <exact>
+         <element  key="SDN:P07:68:CFSN0791"  label="mass_fraction_of_mercury_dry_aerosol_in_air"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0792"  label="mass_fraction_of_nitrate_dry_aerosol_in_air"    />
+      <exact>
+         <element  key="SDN:P07:68:6RWOHGO9"  label="mass_fraction_of_nitrate_dry_aerosol_particles_in_air"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CF12N400"  label="mass_fraction_of_nitric_acid_trihydrate_ambient_aerosol_in_air"    />
+      <exact>
+         <element  key="SDN:P07:68:MX090E9Y"  label="mass_fraction_of_nitric_acid_trihydrate_ambient_aerosol_particles_in_air"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSNA022"  label="mass_fraction_of_o3_in_air"    />
+      <exact>
+         <element  key="SDN:P07:68:CFSN0540"  label="mass_fraction_of_ozone_in_air"    />
+         <element  key="SDN:P07:68:CFSN0540"  label="mass_fraction_of_ozone_in_air"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0793"  label="mass_fraction_of_particulate_organic_matter_dry_aerosol_in_air"    />
+      <exact>
+         <element  key="SDN:P07:68:5UJSYYVL"  label="mass_fraction_of_particulate_organic_matter_dry_aerosol_particles_in_air"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0795"  label="mass_fraction_of_pm10_aerosol_in_air"    />
+      <exact>
+         <element  key="SDN:P07:68:ARL7QV7Y"  label="mass_fraction_of_pm10_ambient_aerosol_particles_in_air"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CF12S25"  label="mass_fraction_of_pm10_ambient_aerosol_in_air"    />
+      <exact>
+         <element  key="SDN:P07:68:ARL7QV7Y"  label="mass_fraction_of_pm10_ambient_aerosol_particles_in_air"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0794"  label="mass_fraction_of_pm1_aerosol_in_air"    />
+      <exact>
+         <element  key="SDN:P07:68:A8WMKTJ0"  label="mass_fraction_of_pm1_ambient_aerosol_particles_in_air"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CF12S24"  label="mass_fraction_of_pm1_ambient_aerosol_in_air"    />
+      <exact>
+         <element  key="SDN:P07:68:A8WMKTJ0"  label="mass_fraction_of_pm1_ambient_aerosol_particles_in_air"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0796"  label="mass_fraction_of_pm2p5_aerosol_in_air"    />
+      <exact>
+         <element  key="SDN:P07:68:GFVM4F3K"  label="mass_fraction_of_pm2p5_ambient_aerosol_particles_in_air"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CF12S26"  label="mass_fraction_of_pm2p5_ambient_aerosol_in_air"    />
+      <exact>
+         <element  key="SDN:P07:68:GFVM4F3K"  label="mass_fraction_of_pm2p5_ambient_aerosol_particles_in_air"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0797"  label="mass_fraction_of_primary_particulate_organic_matter_dry_aerosol_in_air"    />
+      <exact>
+         <element  key="SDN:P07:68:PDWSOGYJ"  label="mass_fraction_of_primary_particulate_organic_matter_dry_aerosol_particles_in_air"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0798"  label="mass_fraction_of_seasalt_dry_aerosol_in_air"    />
+      <exact>
+         <element  key="SDN:P07:68:1IRVLFFX"  label="mass_fraction_of_sea_salt_dry_aerosol_particles_in_air"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:GMFCAI5Q"  label="mass_fraction_of_seasalt_dry_aerosol_particles_in_air"    />
+      <exact>
+         <element  key="SDN:P07:68:1IRVLFFX"  label="mass_fraction_of_sea_salt_dry_aerosol_particles_in_air"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0799"  label="mass_fraction_of_secondary_particulate_organic_matter_dry_aerosol_in_air"    />
+      <exact>
+         <element  key="SDN:P07:68:RNVB2L9N"  label="mass_fraction_of_secondary_particulate_organic_matter_dry_aerosol_particles_in_air"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0800"  label="mass_fraction_of_sulfate_dry_aerosol_in_air"    />
+      <exact>
+         <element  key="SDN:P07:68:3UGROHS3"  label="mass_fraction_of_sulfate_dry_aerosol_particles_in_air"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0801"  label="mass_fraction_of_water_in_ambient_aerosol_in_air"    />
+      <exact>
+         <element  key="SDN:P07:68:UJWSGQ2N"  label="mass_fraction_of_water_in_ambient_aerosol_particles_in_air"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV16A19"  label="medium_soil_pool_carbon_content"    />
+      <exact>
+         <element  key="SDN:P07:68:LZJ8947A"  label="medium_soil_pool_mass_content_of_carbon"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV16A20"  label="miscellaneous_living_matter_carbon_content"    />
+      <exact>
+         <element  key="SDN:P07:68:WFN37VJ8"  label="miscellaneous_living_matter_mass_content_of_carbon"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0511"  label="moisture_content_of_soil_layer"    />
+      <exact>
+         <element  key="SDN:P07:68:WLG5JE8B"  label="mass_content_of_water_in_soil_layer"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CF14N19"  label="mole_concentration_of_bacteria_expressed_as_carbon_in_sea_water"    />
+      <exact>
+         <element  key="SDN:P07:68:CF37JAPZ"  label="mole_concentration_of_bacteria_expressed_as_carbon_in_sea_water"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0803"  label="mole_concentration_of_diatoms_in_sea_water_expressed_as_nitrogen"    />
+      <exact>
+         <element  key="SDN:P07:68:CF12S27"  label="mole_concentration_of_diatoms_expressed_as_nitrogen_in_sea_water"    />
+         <element  key="SDN:P07:68:CF12S27"  label="mole_concentration_of_diatoms_expressed_as_nitrogen_in_sea_water"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:3B2JG9UV"  label="mole_concentration_of_dissolved_inorganic_carbon13_in_sea_water"    />
+      <exact>
+         <element  key="SDN:P07:68:DORXA6DP"  label="mole_concentration_of_dissolved_inorganic_13C_in_sea_water"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:UMZS988Y"  label="mole_concentration_of_dissolved_inorganic_carbon14_in_sea_water"    />
+      <exact>
+         <element  key="SDN:P07:68:9HADKG3D"  label="mole_concentration_of_dissolved_inorganic_14C_in_sea_water"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0804"  label="mole_concentration_of_mesozooplankton_in_sea_water_expressed_as_nitrogen"    />
+      <exact>
+         <element  key="SDN:P07:68:CF12S28"  label="mole_concentration_of_mesozooplankton_expressed_as_nitrogen_in_sea_water"    />
+         <element  key="SDN:P07:68:CF12S28"  label="mole_concentration_of_mesozooplankton_expressed_as_nitrogen_in_sea_water"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0805"  label="mole_concentration_of_microzooplankton_in_sea_water_expressed_as_nitrogen"    />
+      <exact>
+         <element  key="SDN:P07:68:CF12S29"  label="mole_concentration_of_microzooplankton_expressed_as_nitrogen_in_sea_water"    />
+         <element  key="SDN:P07:68:CF12S29"  label="mole_concentration_of_microzooplankton_expressed_as_nitrogen_in_sea_water"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CF12N491"  label="mole_concentration_of_nitric_acid_trihydrate_ambient_aerosol_in_air"    />
+      <exact>
+         <element  key="SDN:P07:68:URHC8AYC"  label="mole_concentration_of_nitric_acid_trihydrate_ambient_aerosol_particles_in_air"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0807"  label="mole_concentration_of_organic_detritus_in_sea_water_expressed_as_nitrogen"    />
+      <exact>
+         <element  key="SDN:P07:68:CF12S30"  label="mole_concentration_of_organic_detritus_expressed_as_nitrogen_in_sea_water"    />
+         <element  key="SDN:P07:68:CF12S30"  label="mole_concentration_of_organic_detritus_expressed_as_nitrogen_in_sea_water"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0808"  label="mole_concentration_of_organic_detritus_in_sea_water_expressed_as_silicon"    />
+      <exact>
+         <element  key="SDN:P07:68:CF12S31"  label="mole_concentration_of_organic_detritus_expressed_as_silicon_in_sea_water"    />
+         <element  key="SDN:P07:68:CF12S31"  label="mole_concentration_of_organic_detritus_expressed_as_silicon_in_sea_water"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0809"  label="mole_concentration_of_phytoplankton_in_sea_water_expressed_as_nitrogen"    />
+      <exact>
+         <element  key="SDN:P07:68:CF12S32"  label="mole_concentration_of_phytoplankton_expressed_as_nitrogen_in_sea_water"    />
+         <element  key="SDN:P07:68:CF12S32"  label="mole_concentration_of_phytoplankton_expressed_as_nitrogen_in_sea_water"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV8N23"  label="mole_fraction_of_chlorine dioxide_in_air"    />
+      <exact>
+         <element  key="SDN:P07:68:CFV11S2"  label="mole_fraction_of_chlorine_dioxide_in_air"    />
+         <element  key="SDN:P07:68:CFV11S2"  label="mole_fraction_of_chlorine_dioxide_in_air"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV8N24"  label="mole_fraction_of_chlorine monoxide_in_air"    />
+      <exact>
+         <element  key="SDN:P07:68:CFV11S3"  label="mole_fraction_of_chlorine_monoxide_in_air"    />
+         <element  key="SDN:P07:68:CFV11S3"  label="mole_fraction_of_chlorine_monoxide_in_air"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV8N26"  label="mole_fraction_of_dichlorine peroxide_in_air"    />
+      <exact>
+         <element  key="SDN:P07:68:CFV11S4"  label="mole_fraction_of_dichlorine_peroxide_in_air"    />
+         <element  key="SDN:P07:68:CFV11S4"  label="mole_fraction_of_dichlorine_peroxide_in_air"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV8N38"  label="mole_fraction_of_hypochlorous acid_in_air"    />
+      <exact>
+         <element  key="SDN:P07:68:CFV11S5"  label="mole_fraction_of_hypochlorous_acid_in_air"    />
+         <element  key="SDN:P07:68:CFV11S5"  label="mole_fraction_of_hypochlorous_acid_in_air"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:ML5LCAE4"  label="mole_fraction_of_methylglyoxal_in_air"    />
+      <exact>
+         <element  key="SDN:P07:68:HDFFIHBC"  label="mole_fraction_of_methlyglyoxal_in_air"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CF12N531"  label="mole_fraction_of_nitric_acid_trihydrate_ambient_aerosol_in_air"    />
+      <exact>
+         <element  key="SDN:P07:68:URGNWFUF"  label="mole_fraction_of_nitric_acid_trihydrate_ambient_aerosol_particles_in_air"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSNA012"  label="mole_fraction_of_o3_in_air"    />
+      <exact>
+         <element  key="SDN:P07:68:CFSN0513"  label="mole_fraction_of_ozone_in_air"    />
+         <element  key="SDN:P07:68:CFSN0513"  label="mole_fraction_of_ozone_in_air"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV8N46"  label="mole_fraction_of_total_inorganic_bromine_in_air"    />
+      <exact>
+         <element  key="SDN:P07:68:CF12S33"  label="mole_fraction_of_inorganic_bromine_in_air"    />
+         <element  key="SDN:P07:68:CF12S33"  label="mole_fraction_of_inorganic_bromine_in_air"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV8N47"  label="mole_fraction_of_total_reactive_nitrogen_in_air"    />
+      <exact>
+         <element  key="SDN:P07:68:CF12N535"  label="mole_fraction_of_noy_expressed_as_nitrogen_in_air"    />
+         <element  key="SDN:P07:68:CF12N535"  label="mole_fraction_of_noy_expressed_as_nitrogen_in_air"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV8N49"  label="moles_of_carbon_monoxide_in_atmosphere"    />
+      <exact>
+         <element  key="SDN:P07:68:CF12S3"  label="atmosphere_moles_of_carbon_monoxide"    />
+         <element  key="SDN:P07:68:CF12S3"  label="atmosphere_moles_of_carbon_monoxide"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV8N50"  label="moles_of_carbon_tetrachloride_in_atmosphere"    />
+      <exact>
+         <element  key="SDN:P07:68:CF12S4"  label="atmosphere_moles_of_carbon_tetrachloride"    />
+         <element  key="SDN:P07:68:CF12S4"  label="atmosphere_moles_of_carbon_tetrachloride"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV8N52"  label="moles_of_cfc113_in_atmosphere"    />
+      <exact>
+         <element  key="SDN:P07:68:CF12S6"  label="atmosphere_moles_of_cfc113"    />
+         <element  key="SDN:P07:68:CF12S6"  label="atmosphere_moles_of_cfc113"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV8N53"  label="moles_of_cfc114_in_atmosphere"    />
+      <exact>
+         <element  key="SDN:P07:68:CF12S7"  label="atmosphere_moles_of_cfc114"    />
+         <element  key="SDN:P07:68:CF12S7"  label="atmosphere_moles_of_cfc114"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV8N54"  label="moles_of_cfc115_in_atmosphere"    />
+      <exact>
+         <element  key="SDN:P07:68:CF12S8"  label="atmosphere_moles_of_cfc115"    />
+         <element  key="SDN:P07:68:CF12S8"  label="atmosphere_moles_of_cfc115"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV8N51"  label="moles_of_cfc11_in_atmosphere"    />
+      <exact>
+         <element  key="SDN:P07:68:CF12S5"  label="atmosphere_moles_of_cfc11"    />
+         <element  key="SDN:P07:68:CF12S5"  label="atmosphere_moles_of_cfc11"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV8N55"  label="moles_of_cfc12_in_atmosphere"    />
+      <exact>
+         <element  key="SDN:P07:68:CF12S9"  label="atmosphere_moles_of_cfc12"    />
+         <element  key="SDN:P07:68:CF12S9"  label="atmosphere_moles_of_cfc12"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV8N56"  label="moles_of_halon1202_in_atmosphere"    />
+      <exact>
+         <element  key="SDN:P07:68:CF12S10"  label="atmosphere_moles_of_halon1202"    />
+         <element  key="SDN:P07:68:CF12S10"  label="atmosphere_moles_of_halon1202"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV8N57"  label="moles_of_halon1211_in_atmosphere"    />
+      <exact>
+         <element  key="SDN:P07:68:CF12S11"  label="atmosphere_moles_of_halon1211"    />
+         <element  key="SDN:P07:68:CF12S11"  label="atmosphere_moles_of_halon1211"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV8N58"  label="moles_of_halon1301_in_atmosphere"    />
+      <exact>
+         <element  key="SDN:P07:68:CF12S12"  label="atmosphere_moles_of_halon1301"    />
+         <element  key="SDN:P07:68:CF12S12"  label="atmosphere_moles_of_halon1301"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV8N59"  label="moles_of_halon2402_in_atmosphere"    />
+      <exact>
+         <element  key="SDN:P07:68:CF12S13"  label="atmosphere_moles_of_halon2402"    />
+         <element  key="SDN:P07:68:CF12S13"  label="atmosphere_moles_of_halon2402"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV8N60"  label="moles_of_hcc140a_in_atmosphere"    />
+      <exact>
+         <element  key="SDN:P07:68:CF12S14"  label="atmosphere_moles_of_hcc140a"    />
+         <element  key="SDN:P07:68:CF12S14"  label="atmosphere_moles_of_hcc140a"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV8N61"  label="moles_of_hcfc22_in_atmosphere"    />
+      <exact>
+         <element  key="SDN:P07:68:CF12S15"  label="atmosphere_moles_of_hcfc22"    />
+         <element  key="SDN:P07:68:CF12S15"  label="atmosphere_moles_of_hcfc22"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV8N62"  label="moles_of_methane_in_atmosphere"    />
+      <exact>
+         <element  key="SDN:P07:68:CF12S16"  label="atmosphere_moles_of_methane"    />
+         <element  key="SDN:P07:68:CF12S16"  label="atmosphere_moles_of_methane"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV8N63"  label="moles_of_methyl_bromide_in_atmosphere"    />
+      <exact>
+         <element  key="SDN:P07:68:CF12S17"  label="atmosphere_moles_of_methyl_bromide"    />
+         <element  key="SDN:P07:68:CF12S17"  label="atmosphere_moles_of_methyl_bromide"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV8N64"  label="moles_of_methyl_chloride_in_atmosphere"    />
+      <exact>
+         <element  key="SDN:P07:68:CF12S18"  label="atmosphere_moles_of_methyl_chloride"    />
+         <element  key="SDN:P07:68:CF12S18"  label="atmosphere_moles_of_methyl_chloride"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV8N65"  label="moles_of_molecular_hydrogen_in_atmosphere"    />
+      <exact>
+         <element  key="SDN:P07:68:CF12S19"  label="atmosphere_moles_of_molecular_hydrogen"    />
+         <element  key="SDN:P07:68:CF12S19"  label="atmosphere_moles_of_molecular_hydrogen"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV8N66"  label="moles_of_nitrous_oxide_in_atmosphere"    />
+      <exact>
+         <element  key="SDN:P07:68:CF12S20"  label="atmosphere_moles_of_nitrous_oxide"    />
+         <element  key="SDN:P07:68:CF12S20"  label="atmosphere_moles_of_nitrous_oxide"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CF12N538"  label="moles_per_unit_mass_of_cfc11_in_sea_water"    />
+      <exact>
+         <element  key="SDN:P07:68:CFV13A4"  label="moles_of_cfc11_per_unit_mass_in_sea_water"    />
+         <element  key="SDN:P07:68:CFV13A4"  label="moles_of_cfc11_per_unit_mass_in_sea_water"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CF14N47"  label="net_primary_mole_productivity_of_carbon_by_calcareous_phytoplankton"    />
+      <exact>
+         <element  key="SDN:P07:68:Z2DYHW05"  label="net_primary_mole_productivity_of_biomass_expressed_as_carbon_by_calcareous_phytoplankton"    />
+         <element  key="SDN:P07:68:Z2DYHW05"  label="net_primary_mole_productivity_of_biomass_expressed_as_carbon_by_calcareous_phytoplankton"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CF14N48"  label="net_primary_mole_productivity_of_carbon_by_diatoms"    />
+      <exact>
+         <element  key="SDN:P07:68:RMOQBF66"  label="net_primary_mole_productivity_of_biomass_expressed_as_carbon_by_diatoms"    />
+         <element  key="SDN:P07:68:RMOQBF66"  label="net_primary_mole_productivity_of_biomass_expressed_as_carbon_by_diatoms"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CF14N49"  label="net_primary_mole_productivity_of_carbon_by_diazotrophs"    />
+      <exact>
+         <element  key="SDN:P07:68:6ZGAK5Q0"  label="net_primary_mole_productivity_of_biomass_expressed_as_carbon_by_diazotrophs"    />
+         <element  key="SDN:P07:68:6ZGAK5Q0"  label="net_primary_mole_productivity_of_biomass_expressed_as_carbon_by_diazotrophs"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CF14N50"  label="net_primary_mole_productivity_of_carbon_by_miscellaneous_phytoplankton"    />
+      <exact>
+         <element  key="SDN:P07:68:R5C60WOO"  label="net_primary_mole_productivity_of_biomass_expressed_as_carbon_by_miscellaneous_phytoplankton"    />
+         <element  key="SDN:P07:68:R5C60WOO"  label="net_primary_mole_productivity_of_biomass_expressed_as_carbon_by_miscellaneous_phytoplankton"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CF14N51"  label="net_primary_mole_productivity_of_carbon_by_phytoplankton"    />
+      <exact>
+         <element  key="SDN:P07:68:W7YFSHUY"  label="net_primary_mole_productivity_of_biomass_expressed_as_carbon_by_phytoplankton"    />
+         <element  key="SDN:P07:68:W7YFSHUY"  label="net_primary_mole_productivity_of_biomass_expressed_as_carbon_by_phytoplankton"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CF14N52"  label="net_primary_mole_productivity_of_carbon_by_picophytoplankton"    />
+      <exact>
+         <element  key="SDN:P07:68:2313HZTW"  label="net_primary_mole_productivity_of_biomass_expressed_as_carbon_by_picophytoplankton"    />
+         <element  key="SDN:P07:68:2313HZTW"  label="net_primary_mole_productivity_of_biomass_expressed_as_carbon_by_picophytoplankton"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CF14N53"  label="net_primary_mole_productivity_of_carbon_due_to_nitrate_utilization"    />
+      <exact>
+         <element  key="SDN:P07:68:ZWN04FAY"  label="net_primary_mole_productivity_of_biomass_expressed_as_carbon_due_to_nitrate_utilization"    />
+         <element  key="SDN:P07:68:ZWN04FAY"  label="net_primary_mole_productivity_of_biomass_expressed_as_carbon_due_to_nitrate_utilization"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0525"  label="net_primary_productivity_of_carbon"    />
+      <exact>
+         <element  key="SDN:P07:68:5M3131AO"  label="net_primary_productivity_of_biomass_expressed_as_carbon"    />
+         <element  key="SDN:P07:68:5M3131AO"  label="net_primary_productivity_of_biomass_expressed_as_carbon"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV16A22"  label="net_primary_productivity_of_carbon_accumulated_in_leaves"    />
+      <exact>
+         <element  key="SDN:P07:68:11WSJRTK"  label="net_primary_productivity_of_biomass_expressed_as_carbon_accumulated_in_leaves"    />
+         <element  key="SDN:P07:68:11WSJRTK"  label="net_primary_productivity_of_biomass_expressed_as_carbon_accumulated_in_leaves"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV16A23"  label="net_primary_productivity_of_carbon_accumulated_in_roots"    />
+      <exact>
+         <element  key="SDN:P07:68:EH4D6MT4"  label="net_primary_productivity_of_biomass_expressed_as_carbon_accumulated_in_roots"    />
+         <element  key="SDN:P07:68:EH4D6MT4"  label="net_primary_productivity_of_biomass_expressed_as_carbon_accumulated_in_roots"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV16A24"  label="net_primary_productivity_of_carbon_accumulated_in_wood"    />
+      <exact>
+         <element  key="SDN:P07:68:NCI7OEMC"  label="net_primary_productivity_of_biomass_expressed_as_carbon_accumulated_in_wood"    />
+         <element  key="SDN:P07:68:NCI7OEMC"  label="net_primary_productivity_of_biomass_expressed_as_carbon_accumulated_in_wood"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV8N67"  label="northward_eliassen_palm_flux"    />
+      <exact>
+         <element  key="SDN:P07:68:CFV9S2"  label="northward_eliassen_palm_flux_in_air"    />
+         <element  key="SDN:P07:68:CFV9S2"  label="northward_eliassen_palm_flux_in_air"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV8N68"  label="northward_heat_flux_due_to_eddy_advection"    />
+      <exact>
+         <element  key="SDN:P07:68:CFV9S3"  label="northward_heat_flux_in_air_due_to_eddy_advection"    />
+         <element  key="SDN:P07:68:CFV9S3"  label="northward_heat_flux_in_air_due_to_eddy_advection"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0508"  label="northward_ocean_freshwater_transport_due_to_bolus_advection"    />
+      <exact>
+         <element  key="SDN:P07:68:5QO6NMIS"  label="northward_ocean_freshwater_transport_due_to_parameterized_eddy_advection"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0484"  label="northward_ocean_heat_transport_due_to_bolus_advection"    />
+      <exact>
+         <element  key="SDN:P07:68:FD60XCCW"  label="northward_ocean_heat_transport_due_to_parameterized_eddy_advection"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0489"  label="northward_ocean_salt_transport_due_to_bolus_advection"    />
+      <exact>
+         <element  key="SDN:P07:68:GER0U8ED"  label="northward_ocean_salt_transport_due_to_parameterized_eddy_advection"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV8N69"  label="northward_transformed_eulerian_mean_velocity"    />
+      <exact>
+         <element  key="SDN:P07:68:CFV9S4"  label="northward_transformed_eulerian_mean_air_velocity"    />
+         <element  key="SDN:P07:68:CFV9S4"  label="northward_transformed_eulerian_mean_air_velocity"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0495"  label="northward_water_vapor_flux"    />
+      <exact>
+         <element  key="SDN:P07:68:CFV15A10"  label="northward_water_vapor_flux_in_air"    />
+         <element  key="SDN:P07:68:CFV15A10"  label="northward_water_vapor_flux_in_air"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV16A26"  label="number_concentration_of_ambient_aerosol_in_air"    />
+      <exact>
+         <element  key="SDN:P07:68:9GPDHML0"  label="number_concentration_of_ambient_aerosol_particles_in_air"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV16A29"  label="number_concentration_of_coarse_mode_ambient_aerosol_in_air"    />
+      <exact>
+         <element  key="SDN:P07:68:M9TNZCKV"  label="number_concentration_of_coarse_mode_ambient_aerosol_particles_in_air"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:PC2GTK0J"  label="number_concentration_of_convective_cloud_liquid_water_particles_at_convective_liquid_water_cloud_top"    />
+      <exact>
+         <element  key="SDN:P07:68:0BQS2R11"  label="number_concentration_of_convective_cloud_liquid_water_particle_at_convective_liquid_water_cloud_top"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV16A32"  label="number_concentration_of_nucleation_mode_ambient_aerosol_in_air"    />
+      <exact>
+         <element  key="SDN:P07:68:2XJXW5QA"  label="number_concentration_of_nucleation_mode_ambient_aerosol_particles_in_air"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:HFT351PS"  label="number_concentration_of_stratiform_cloud_liquid_water_particles_at_stratiform_liquid_water_cloud_top"    />
+      <exact>
+         <element  key="SDN:P07:68:IDWENXCE"  label="number_concentration_of_stratiform_cloud_liquid_water_particle_at_stratiform_liquid_water_cloud_top"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CF12N541"  label="ocean_heat_x_transport_due_to_bolus_advection"    />
+      <exact>
+         <element  key="SDN:P07:68:RHK1DYZX"  label="ocean_heat_x_transport_due_to_parameterized_eddy_advection"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CF12N544"  label="ocean_heat_y_transport_due_to_bolus_advection"    />
+      <exact>
+         <element  key="SDN:P07:68:GVNOXTF9"  label="ocean_heat_y_transport_due_to_parameterized_eddy_advection"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0464"  label="ocean_integral_of_sea_water_temperature_wrt_depth"    />
+      <exact>
+         <element  key="SDN:P07:68:DHTXFX9K"  label="integral_wrt_depth_of_sea_water_temperature"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:9W3159BW"  label="ocean_integral_wrt_depth_of_sea_water_temperature"    />
+      <exact>
+         <element  key="SDN:P07:68:DHTXFX9K"  label="integral_wrt_depth_of_sea_water_temperature"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CF12N550"  label="ocean_mass_x_transport_due_to_advection_and_bolus_advection"    />
+      <exact>
+         <element  key="SDN:P07:68:MMNPQSD5"  label="ocean_mass_x_transport_due_to_advection_and_parameterized_eddy_advection"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CF12N553"  label="ocean_mass_y_transport_due_to_advection_and_bolus_advection"    />
+      <exact>
+         <element  key="SDN:P07:68:4YW5AAAT"  label="ocean_mass_y_transport_due_to_advection_and_parameterized_eddy_advection"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CF12N555"  label="ocean_meridional_overturning_mass_streamfunction_due_to_bolus_advection"    />
+      <exact>
+         <element  key="SDN:P07:68:TQ3WPUFD"  label="ocean_meridional_overturning_mass_streamfunction_due_to_parameterized_eddy_advection"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV10N22"  label="ocean_mixed_layer_thickness_defined_by_vertical_tracer_diffusivity"    />
+      <exact>
+         <element  key="SDN:P07:68:KOUJEBSP"  label="ocean_mixed_layer_thickness_defined_by_vertical_tracer_diffusivity_deficit"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CF12N561"  label="ocean_tracer_bolus_biharmonic_diffusivity"    />
+      <exact>
+         <element  key="SDN:P07:68:KHM9VKP7"  label="ocean_tracer_biharmonic_diffusivity_due_to_parameterized_mesoscale_eddy_advection"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CF12N562"  label="ocean_tracer_bolus_laplacian_diffusivity"    />
+      <exact>
+         <element  key="SDN:P07:68:XP5PYKHS"  label="ocean_tracer_laplacian_diffusivity_due_to_parameterized_mesoscale_eddy_advection"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CF12N573"  label="ocean_y_overturning_mass_streamfunction_due_to_bolus_advection"    />
+      <exact>
+         <element  key="SDN:P07:68:96IUCKHD"  label="ocean_y_overturning_mass_streamfunction_due_to_parameterized_eddy_advection"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSNA008"  label="omega"    />
+      <exact>
+         <element  key="SDN:P07:68:CFSN0616"  label="lagrangian_tendency_of_air_pressure"    />
+         <element  key="SDN:P07:68:CFSN0616"  label="lagrangian_tendency_of_air_pressure"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0477"  label="omnidirectional_spectral_spherical_irradiance_in_sea_water"    />
+      <exact>
+         <element  key="SDN:P07:68:1JSOE4OU"  label="omnidirectional_spherical_irradiance_per_unit_wavelength_in_sea_water"    />
+         <element  key="SDN:P07:68:1JSOE4OU"  label="omnidirectional_spherical_irradiance_per_unit_wavelength_in_sea_water"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0478"  label="optical_thickness_of_atmosphere_layer_due_to_aerosol"    />
+      <exact>
+         <element  key="SDN:P07:68:BLJKADJX"  label="optical_thickness_of_atmosphere_layer_due_to_ambient_aerosol_particles"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV13A5"  label="optical_thickness_of_atmosphere_layer_due_to_ambient_aerosol"    />
+      <exact>
+         <element  key="SDN:P07:68:BLJKADJX"  label="optical_thickness_of_atmosphere_layer_due_to_ambient_aerosol_particles"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0480"  label="plant_respiration_carbon_flux"    />
+      <exact>
+         <element  key="SDN:P07:68:067HJZRA"  label="surface_upward_mass_flux_of_carbon_dioxide_expressed_as_carbon_due_to_plant_respiration"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:UOMSLR0H"  label="platform_pitch"    />
+      <exact>
+         <element  key="SDN:P07:68:CFSN0440"  label="platform_pitch_angle"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:STKKO0AT"  label="platform_roll"    />
+      <exact>
+         <element  key="SDN:P07:68:CFSN0442"  label="platform_roll_angle"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:62TJQD97"  label="platform_yaw"    />
+      <exact>
+         <element  key="SDN:P07:68:CFSN0447"  label="platform_yaw_angle"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0454"  label="precipitation_flux_onto_canopy_where_land"    />
+      <exact>
+         <element  key="SDN:P07:68:CFV11S6"  label="precipitation_flux_onto_canopy"    />
+      </exact>
+      <broad>
+         <element  key="SDN:P07:68:CFV11S6"  label="precipitation_flux_onto_canopy"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:2RG7DKDP"  label="product_of_eastward_wind_and_lagrangian_tendency_of_air_pressure"    />
+      <exact>
+         <element  key="SDN:P07:68:CFSN0428"  label="product_of_eastward_wind_and_omega"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:I80MNTEI"  label="product_of_lagrangian_tendency_of_air_pressure_and_air_temperature"    />
+      <exact>
+         <element  key="SDN:P07:68:CFSN0455"  label="product_of_air_temperature_and_omega"    />
+         <element  key="SDN:P07:68:CFSN0397"  label="product_of_omega_and_air_temperature"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:XYJRRYI8"  label="product_of_lagrangian_tendency_of_air_pressure_and_geopotential_height"    />
+      <exact>
+         <element  key="SDN:P07:68:CFSN0431"  label="product_of_geopotential_height_and_omega"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:2XPO4WGL"  label="product_of_lagrangian_tendency_of_air_pressure_and_specific_humidity"    />
+      <exact>
+         <element  key="SDN:P07:68:CFSN0399"  label="product_of_specific_humidity_and_omega"    />
+         <element  key="SDN:P07:68:CFSN0398"  label="product_of_omega_and_specific_humidity"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:55KUDP8X"  label="product_of_northward_wind_and_lagrangian_tendency_of_air_pressure"    />
+      <exact>
+         <element  key="SDN:P07:68:CFSN0436"  label="product_of_northward_wind_and_omega"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0437"  label="product_of_northward_wind_and_specific_humdity"    />
+      <exact>
+         <element  key="SDN:P07:68:CFSN0438"  label="product_of_northward_wind_and_specific_humidity"    />
+         <element  key="SDN:P07:68:CFSN0438"  label="product_of_northward_wind_and_specific_humidity"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:P2BHUZTK"  label="rate_of_ hydroxyl_radical_destruction_due_to_reaction_with_nmvoc"    />
+      <exact>
+         <element  key="SDN:P07:68:HZYUQOJU"  label="rate_of_hydroxyl_radical_destruction_due_to_reaction_with_nmvoc"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:162XLWW7"  label="river_water_volume_transport_into_cell"    />
+      <exact>
+         <element  key="SDN:P07:68:M9GLYAEB"  label="incoming_water_volume_transport_along_river_channel"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:PJDNDMLV"  label="river_water_volume_transport_out_of_cell"    />
+      <exact>
+         <element  key="SDN:P07:68:P9EI1SYR"  label="outgoing_water_volume_transport_along_river_channel"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV16A34"  label="root_carbon_content"    />
+      <exact>
+         <element  key="SDN:P07:68:UKJ8WY6A"  label="root_mass_content_of_carbon"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSNA024"  label="sea_floor_depth"    />
+      <exact>
+         <element  key="SDN:P07:68:CFSN0420"  label="sea_floor_depth_below_geoid"    />
+         <element  key="SDN:P07:68:CFSN0420"  label="sea_floor_depth_below_geoid"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0421"  label="sea_floor_depth_below_sea_level"    />
+      <exact>
+         <element  key="SDN:P07:68:G00MLQLO"  label="sea_floor_depth_below_mean_sea_level"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV13N18"  label="sea_ice_displacement"    />
+      <exact>
+         <element  key="SDN:P07:68:CFV15A9"  label="magnitude_of_sea_ice_displacement"    />
+         <element  key="SDN:P07:68:CFV15A9"  label="magnitude_of_sea_ice_displacement"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSNA025"  label="sea_surface_elevation"    />
+      <exact>
+         <element  key="SDN:P07:68:CFSN0374"  label="sea_surface_height_above_geoid"    />
+         <element  key="SDN:P07:68:CFSN0374"  label="sea_surface_height_above_geoid"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSNA026"  label="sea_surface_elevation_anomaly"    />
+      <exact>
+         <element  key="SDN:P07:68:CFSN0374"  label="sea_surface_height_above_geoid"    />
+         <element  key="SDN:P07:68:CFSN0374"  label="sea_surface_height_above_geoid"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSNA013"  label="sea_surface_height"    />
+      <exact>
+         <element  key="SDN:P07:68:GYTUBB9R"  label="sea_surface_height_above_mean_sea_level"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0375"  label="sea_surface_height_above_sea_level"    />
+      <exact>
+         <element  key="SDN:P07:68:GYTUBB9R"  label="sea_surface_height_above_mean_sea_level"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0380"  label="sea_surface_swell_wave_zero_upcrossing_period"    />
+      <exact>
+         <element  key="SDN:P07:68:8WMKETJA"  label="sea_surface_swell_wave_mean_period"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0383"  label="sea_surface_wave_frequency"    />
+      <exact>
+         <element  key="SDN:P07:68:CFV8NS6"  label="wave_frequency"    />
+         <element  key="SDN:P07:68:CFV8NS6"  label="wave_frequency"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0388"  label="sea_surface_wave_zero_upcrossing_period"    />
+      <exact>
+         <element  key="SDN:P07:68:SUM7H3HM"  label="sea_surface_wave_mean_period"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0392"  label="sea_surface_wind_wave_zero_upcrossing_period"    />
+      <exact>
+         <element  key="SDN:P07:68:EXD6ILFA"  label="sea_surface_wind_wave_mean_period"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSNA006"  label="shortwave_radiance"    />
+      <exact>
+         <element  key="SDN:P07:68:CFSN0613"  label="isotropic_shortwave_radiance_in_air"    />
+         <element  key="SDN:P07:68:CFSN0613"  label="isotropic_shortwave_radiance_in_air"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSNA014"  label="significant_height_of_swell_waves"    />
+      <exact>
+         <element  key="SDN:P07:68:CFSN0378"  label="sea_surface_swell_wave_significant_height"    />
+         <element  key="SDN:P07:68:CFSN0378"  label="sea_surface_swell_wave_significant_height"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSNA015"  label="significant_height_of_wind_and_swell_waves"    />
+      <exact>
+         <element  key="SDN:P07:68:CFSN0385"  label="sea_surface_wave_significant_height"    />
+         <element  key="SDN:P07:68:CFSN0385"  label="sea_surface_wave_significant_height"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSNA030"  label="significant_height_of_wind_waves"    />
+      <exact>
+         <element  key="SDN:P07:68:CFSN0390"  label="sea_surface_wind_wave_significant_height"    />
+         <element  key="SDN:P07:68:CFSN0390"  label="sea_surface_wind_wave_significant_height"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV16A42"  label="slow_soil_pool_carbon_content"    />
+      <exact>
+         <element  key="SDN:P07:68:I5DGQM0D"  label="slow_soil_pool_mass_content_of_carbon"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0340"  label="snow_soot_content"    />
+      <exact>
+         <element  key="SDN:P07:68:CFV15A11"  label="soot_content_of_surface_snow"    />
+         <element  key="SDN:P07:68:CFV15A11"  label="soot_content_of_surface_snow"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0341"  label="snow_temperature"    />
+      <exact>
+         <element  key="SDN:P07:68:CFV15A23"  label="temperature_in_surface_snow"    />
+         <element  key="SDN:P07:68:CFV15A23"  label="temperature_in_surface_snow"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0342"  label="snow_thermal_energy_content"    />
+      <exact>
+         <element  key="SDN:P07:68:CFV15A30"  label="thermal_energy_content_of_surface_snow"    />
+         <element  key="SDN:P07:68:CFV15A30"  label="thermal_energy_content_of_surface_snow"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0346"  label="soil_carbon_content"    />
+      <exact>
+         <element  key="SDN:P07:68:QKPDOSQJ"  label="soil_mass_content_of_carbon"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0349"  label="soil_moisture_content"    />
+      <exact>
+         <element  key="SDN:P07:68:TSZDW8IB"  label="mass_content_of_water_in_soil"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0352"  label="soil_respiration_carbon_flux"    />
+      <exact>
+         <element  key="SDN:P07:68:RTIXFQZ3"  label="surface_upward_mass_flux_of_carbon_dioxide_expressed_as_carbon_due_to_respiration_in_soil"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSNA033"  label="specific_potential_energy"    />
+      <exact>
+         <element  key="SDN:P07:68:CFSN0312"  label="specific_gravitational_potential_energy"    />
+         <element  key="SDN:P07:68:CFSN0312"  label="specific_gravitational_potential_energy"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSNA007"  label="spectral_radiance"    />
+      <exact>
+         <element  key="SDN:P07:68:WPA7Z3EX"  label="isotropic_radiance_per_unit_wavelength_in_air"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:G5URGJYJ"  label="station_description"    />
+      <exact>
+         <element  key="SDN:P07:68:CH3BBTYJ"  label="platform_name"    />
+         <element  key="SDN:P07:68:CH3BBTYJ"  label="platform_name"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:RF2NF77P"  label="station_wmo_id"    />
+      <exact>
+         <element  key="SDN:P07:68:I2NHBPFG"  label="platform_id"    />
+         <element  key="SDN:P07:68:I2NHBPFG"  label="platform_id"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV16A43"  label="subsurface_litter_carbon_content"    />
+      <exact>
+         <element  key="SDN:P07:68:WBEUZ46B"  label="subsurface_litter_mass_content_of_carbon"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0292"  label="surface_carbon_dioxide_mole_flux"    />
+      <exact>
+         <element  key="SDN:P07:68:CFV15A21"  label="surface_downward_mole_flux_of_carbon_dioxide"    />
+      </exact>
+      <narrow>
+         <element  key="SDN:P07:68:CFV15A21"  label="surface_downward_mole_flux_of_carbon_dioxide"    />
+         <element  key="SDN:P07:68:CFV15A22"  label="surface_upward_mole_flux_of_carbon_dioxide"    />
+      </narrow>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0294"  label="surface_cover"    />
+      <exact>
+         <element  key="SDN:P07:68:CFV11S1"  label="area_type"    />
+      </exact>
+      <related>
+         <element  key="SDN:P07:68:CFV11S1"  label="area_type"    />
+      </related>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:FHMB0C0Z"  label="surface_downward_mass_flux_of_carbon13_dioxide_abiotic_analogue_expressed_as_carbon13"    />
+      <exact>
+         <element  key="SDN:P07:68:19EPEI15"  label="surface_downward_mass_flux_of_13C_dioxide_abiotic_analogue_expressed_as_13C"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:EV1FU5HF"  label="surface_downward_mass_flux_of_carbon14_dioxide_abiotic_analogue_expressed_as_carbon"    />
+      <exact>
+         <element  key="SDN:P07:68:KXO1F55H"  label="surface_downward_mass_flux_of_14C_dioxide_abiotic_analogue_expressed_as_carbon"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSNA041"  label="surface_downwelling_longwave_flux"    />
+      <exact>
+         <element  key="SDN:P07:68:CFSN0279"  label="surface_downwelling_longwave_flux_in_air"    />
+         <element  key="SDN:P07:68:CFSN0279"  label="surface_downwelling_longwave_flux_in_air"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSNA034"  label="surface_downwelling_shortwave_flux"    />
+      <exact>
+         <element  key="SDN:P07:68:CFSN0275"  label="surface_downwelling_shortwave_flux_in_air"    />
+         <element  key="SDN:P07:68:CFSN0275"  label="surface_downwelling_shortwave_flux_in_air"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSNA035"  label="surface_downwelling_shortwave_flux_assuming_clear_sky"    />
+      <exact>
+         <element  key="SDN:P07:68:CFSN0276"  label="surface_downwelling_shortwave_flux_in_air_assuming_clear_sky"    />
+         <element  key="SDN:P07:68:CFSN0276"  label="surface_downwelling_shortwave_flux_in_air_assuming_clear_sky"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:BWGKPWGN"  label="surface_downwelling_shortwave_flux_in_air_assuming_clean_clear_sky"    />
+      <exact>
+         <element  key="SDN:P07:68:QFAN0RQ1"  label="surface_downwelling_shortwave_flux_in_air_assuming_clear_sky_and_no_aerosol"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0277"  label="surface_downwelling_spectral_photon_flux_in_sea_water"    />
+      <exact>
+         <element  key="SDN:P07:68:QASZPOPC"  label="surface_downwelling_photon_flux_per_unit_wavelength_in_sea_water"    />
+         <element  key="SDN:P07:68:QASZPOPC"  label="surface_downwelling_photon_flux_per_unit_wavelength_in_sea_water"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0278"  label="surface_downwelling_spectral_photon_radiance_in_sea_water"    />
+      <exact>
+         <element  key="SDN:P07:68:92V2UOF6"  label="surface_downwelling_photon_radiance_per_unit_wavelength_in_sea_water"    />
+         <element  key="SDN:P07:68:92V2UOF6"  label="surface_downwelling_photon_radiance_per_unit_wavelength_in_sea_water"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0257"  label="surface_downwelling_spectral_photon_spherical_irradiance_in_sea_water"    />
+      <exact>
+         <element  key="SDN:P07:68:JFTGSY33"  label="surface_downwelling_photon_spherical_irradiance_per_unit_wavelength_in_sea_water"    />
+         <element  key="SDN:P07:68:JFTGSY33"  label="surface_downwelling_photon_spherical_irradiance_per_unit_wavelength_in_sea_water"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0258"  label="surface_downwelling_spectral_radiance_in_sea_water"    />
+      <exact>
+         <element  key="SDN:P07:68:VXOB20W3"  label="surface_downwelling_radiance_per_unit_wavelength_in_sea_water"    />
+         <element  key="SDN:P07:68:VXOB20W3"  label="surface_downwelling_radiance_per_unit_wavelength_in_sea_water"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0259"  label="surface_downwelling_spectral_radiative_flux_in_air"    />
+      <exact>
+         <element  key="SDN:P07:68:PE6BY1SE"  label="surface_downwelling_radiative_flux_per_unit_wavelength_in_air"    />
+         <element  key="SDN:P07:68:PE6BY1SE"  label="surface_downwelling_radiative_flux_per_unit_wavelength_in_air"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0260"  label="surface_downwelling_spectral_radiative_flux_in_sea_water"    />
+      <exact>
+         <element  key="SDN:P07:68:JATNYVYW"  label="surface_downwelling_radiative_flux_per_unit_wavelength_in_sea_water"    />
+         <element  key="SDN:P07:68:JATNYVYW"  label="surface_downwelling_radiative_flux_per_unit_wavelength_in_sea_water"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0261"  label="surface_downwelling_spectral_spherical_irradiance_in_sea_water"    />
+      <exact>
+         <element  key="SDN:P07:68:BAJFI492"  label="surface_downwelling_spherical_irradiance_per_unit_wavelength_in_sea_water"    />
+         <element  key="SDN:P07:68:BAJFI492"  label="surface_downwelling_spherical_irradiance_per_unit_wavelength_in_sea_water"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0778"  label="surface_eastward_geostrophic_sea_water_velocity"    />
+      <exact>
+         <element  key="SDN:P07:68:CFV8NS2"  label="surface_geostrophic_eastward_sea_water_velocity"    />
+         <element  key="SDN:P07:68:CFV8NS2"  label="surface_geostrophic_eastward_sea_water_velocity"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0779"  label="surface_eastward_geostrophic_sea_water_velocity_assuming_sea_level_for_geoid"    />
+      <exact>
+         <element  key="SDN:P07:68:TGQWOPTH"  label="surface_geostrophic_eastward_sea_water_velocity_assuming_mean_sea_level_for_geoid"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV8NS3"  label="surface_geostrophic_eastward_sea_water_velocity_assuming_sea_level_for_geoid"    />
+      <exact>
+         <element  key="SDN:P07:68:TGQWOPTH"  label="surface_geostrophic_eastward_sea_water_velocity_assuming_mean_sea_level_for_geoid"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV8NS5"  label="surface_geostrophic_northward_sea_water_velocity_assuming_sea_level_for_geoid"    />
+      <exact>
+         <element  key="SDN:P07:68:UNPRYO3X"  label="surface_geostrophic_northward_sea_water_velocity_assuming_mean_sea_level_for_geoid"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0827"  label="surface_geostrophic_sea_water_x_velocity_assuming_sea_level_for_geoid"    />
+      <exact>
+         <element  key="SDN:P07:68:R33VVM5P"  label="surface_geostrophic_sea_water_x_velocity_assuming_mean_sea_level_for_geoid"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0829"  label="surface_geostrophic_sea_water_y_velocity_assuming_sea_level_for_geoid"    />
+      <exact>
+         <element  key="SDN:P07:68:7QLFZGQ2"  label="surface_geostrophic_sea_water_y_velocity_assuming_mean_sea_level_for_geoid"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV16A46"  label="surface_litter_carbon_content"    />
+      <exact>
+         <element  key="SDN:P07:68:2MY21HA6"  label="surface_litter_mass_content_of_carbon"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0780"  label="surface_net_downward_radiative_flux_where_land"    />
+      <exact>
+         <element  key="SDN:P07:68:CFSN0830"  label="surface_net_downward_radiative_flux"    />
+      </exact>
+      <broad>
+         <element  key="SDN:P07:68:CFSN0830"  label="surface_net_downward_radiative_flux"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0781"  label="surface_northward_geostrophic_sea_water_velocity"    />
+      <exact>
+         <element  key="SDN:P07:68:CFV8NS4"  label="surface_geostrophic_northward_sea_water_velocity"    />
+         <element  key="SDN:P07:68:CFV8NS4"  label="surface_geostrophic_northward_sea_water_velocity"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0782"  label="surface_northward_geostrophic_sea_water_velocity_assuming_sea_level_for_geoid"    />
+      <exact>
+         <element  key="SDN:P07:68:UNPRYO3X"  label="surface_geostrophic_northward_sea_water_velocity_assuming_mean_sea_level_for_geoid"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV8N81"  label="surface_snow_and_ice_sublimation_flux"    />
+      <exact>
+         <element  key="SDN:P07:68:P22BTMMS"  label="tendency_of_atmosphere_mass_content_of_water_vapor_due_to_sublimation_of_surface_snow_and_ice"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0223"  label="surface_snow_thickness_where_sea_ice"    />
+      <exact>
+         <element  key="SDN:P07:68:CFSN0222"  label="surface_snow_thickness"    />
+      </exact>
+      <broad>
+         <element  key="SDN:P07:68:CFSN0222"  label="surface_snow_thickness"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0227"  label="surface_temperature_where_land"    />
+      <exact>
+         <element  key="SDN:P07:68:CFSN0225"  label="surface_temperature"    />
+      </exact>
+      <broad>
+         <element  key="SDN:P07:68:CFSN0225"  label="surface_temperature"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0228"  label="surface_temperature_where_open_sea"    />
+      <exact>
+         <element  key="SDN:P07:68:CFSN0225"  label="surface_temperature"    />
+      </exact>
+      <broad>
+         <element  key="SDN:P07:68:CFSN0225"  label="surface_temperature"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0229"  label="surface_temperature_where_snow"    />
+      <exact>
+         <element  key="SDN:P07:68:CFSN0225"  label="surface_temperature"    />
+      </exact>
+      <broad>
+         <element  key="SDN:P07:68:CFSN0225"  label="surface_temperature"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV16A50"  label="surface_upward_carbon_mass_flux_due_to_plant_respiration_for_biomass_growth"    />
+      <exact>
+         <element  key="SDN:P07:68:65PHTU2D"  label="surface_upward_mass_flux_of_carbon_dioxide_expressed_as_carbon_due_to_plant_respiration_for_biomass_growth"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV16A51"  label="surface_upward_carbon_mass_flux_due_to_plant_respiration_for_biomass_maintenance"    />
+      <exact>
+         <element  key="SDN:P07:68:FBG5PV67"  label="surface_upward_mass_flux_of_carbon_dioxide_expressed_as_carbon_due_to_plant_respiration_for_biomass_maintenance"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0233"  label="surface_upward_sensible_heat_flux_where_sea"    />
+      <exact>
+         <element  key="SDN:P07:68:CFSN0232"  label="surface_upward_sensible_heat_flux"    />
+      </exact>
+      <broad>
+         <element  key="SDN:P07:68:CFSN0232"  label="surface_upward_sensible_heat_flux"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSNA036"  label="surface_upwelling_longwave_flux"    />
+      <exact>
+         <element  key="SDN:P07:68:CFSN0235"  label="surface_upwelling_longwave_flux_in_air"    />
+         <element  key="SDN:P07:68:CFSN0235"  label="surface_upwelling_longwave_flux_in_air"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSNA037"  label="surface_upwelling_longwave_flux_assuming_clear_sky"    />
+      <exact>
+         <element  key="SDN:P07:68:CFSN0236"  label="surface_upwelling_longwave_flux_in_air_assuming_clear_sky"    />
+         <element  key="SDN:P07:68:CFSN0236"  label="surface_upwelling_longwave_flux_in_air_assuming_clear_sky"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSNA038"  label="surface_upwelling_shortwave_flux"    />
+      <exact>
+         <element  key="SDN:P07:68:CFSN0216"  label="surface_upwelling_shortwave_flux_in_air"    />
+         <element  key="SDN:P07:68:CFSN0216"  label="surface_upwelling_shortwave_flux_in_air"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSNA039"  label="surface_upwelling_shortwave_flux_assuming_clear_sky"    />
+      <exact>
+         <element  key="SDN:P07:68:CFSN0217"  label="surface_upwelling_shortwave_flux_in_air_assuming_clear_sky"    />
+         <element  key="SDN:P07:68:CFSN0217"  label="surface_upwelling_shortwave_flux_in_air_assuming_clear_sky"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:3691THAI"  label="surface_upwelling_shortwave_flux_in_air_assuming_clean_clear_sky"    />
+      <exact>
+         <element  key="SDN:P07:68:ZEQML5PB"  label="surface_upwelling_shortwave_flux_in_air_assuming_clear_sky_and_no_aerosol"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0218"  label="surface_upwelling_spectral_radiance_in_air"    />
+      <exact>
+         <element  key="SDN:P07:68:CS10ZOYX"  label="surface_upwelling_radiance_per_unit_wavelength_in_air"    />
+         <element  key="SDN:P07:68:CS10ZOYX"  label="surface_upwelling_radiance_per_unit_wavelength_in_air"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0219"  label="surface_upwelling_spectral_radiance_in_air_emerging_from_sea_water"    />
+      <exact>
+         <element  key="SDN:P07:68:WEHO2P23"  label="surface_upwelling_radiance_per_unit_wavelength_in_air_emerging_from_sea_water"    />
+         <element  key="SDN:P07:68:WEHO2P23"  label="surface_upwelling_radiance_per_unit_wavelength_in_air_emerging_from_sea_water"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0220"  label="surface_upwelling_spectral_radiance_in_air_reflected_by_sea_water"    />
+      <exact>
+         <element  key="SDN:P07:68:105YAXZ4"  label="surface_upwelling_radiance_per_unit_wavelength_in_air_reflected_by_sea_water"    />
+         <element  key="SDN:P07:68:105YAXZ4"  label="surface_upwelling_radiance_per_unit_wavelength_in_air_reflected_by_sea_water"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0195"  label="surface_upwelling_spectral_radiance_in_sea_water"    />
+      <exact>
+         <element  key="SDN:P07:68:RWP7TWKV"  label="surface_upwelling_radiance_per_unit_wavelength_in_sea_water"    />
+         <element  key="SDN:P07:68:RWP7TWKV"  label="surface_upwelling_radiance_per_unit_wavelength_in_sea_water"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0196"  label="surface_upwelling_spectral_radiative_flux_in_air"    />
+      <exact>
+         <element  key="SDN:P07:68:J0VGRYWY"  label="surface_upwelling_radiative_flux_per_unit_wavelength_in_air"    />
+         <element  key="SDN:P07:68:J0VGRYWY"  label="surface_upwelling_radiative_flux_per_unit_wavelength_in_air"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0197"  label="surface_upwelling_spectral_radiative_flux_in_sea_water"    />
+      <exact>
+         <element  key="SDN:P07:68:VY6WUPOO"  label="surface_upwelling_radiative_flux_per_unit_wavelength_in_sea_water"    />
+         <element  key="SDN:P07:68:VY6WUPOO"  label="surface_upwelling_radiative_flux_per_unit_wavelength_in_sea_water"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSNA027"  label="swell_wave_period"    />
+      <exact>
+         <element  key="SDN:P07:68:CFSN0377"  label="sea_surface_swell_wave_period"    />
+         <element  key="SDN:P07:68:CFSN0377"  label="sea_surface_swell_wave_period"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0207"  label="tendency_of_air_temperature_due_to_large_scale_precipitation"    />
+      <exact>
+         <element  key="SDN:P07:68:CFV13A6"  label="tendency_of_air_temperature_due_to_stratiform_precipitation"    />
+         <element  key="SDN:P07:68:CFV13A6"  label="tendency_of_air_temperature_due_to_stratiform_precipitation"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CF12N603"  label="tendency_of_atmosphere_mass_content_of_ammonium_dry_aerosol_due_to_dry_deposition"    />
+      <exact>
+         <element  key="SDN:P07:68:L2OD8IOR"  label="tendency_of_atmosphere_mass_content_of_ammonium_dry_aerosol_particles_due_to_dry_deposition"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CF12N604"  label="tendency_of_atmosphere_mass_content_of_ammonium_dry_aerosol_due_to_wet_deposition"    />
+      <exact>
+         <element  key="SDN:P07:68:H81P2AIH"  label="tendency_of_atmosphere_mass_content_of_ammonium_dry_aerosol_particles_due_to_wet_deposition"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV7N67"  label="tendency_of_atmosphere_mass_content_of_black_carbon_dry_aerosol_due_to_dry_deposition"    />
+      <exact>
+         <element  key="SDN:P07:68:YEP61YZ8"  label="tendency_of_atmosphere_mass_content_of_elemental_carbon_dry_aerosol_particles_due_to_dry_deposition"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV7N29"  label="tendency_of_atmosphere_mass_content_of_black_carbon_dry_aerosol_due_to_emission"    />
+      <exact>
+         <element  key="SDN:P07:68:0K0F0Y2P"  label="tendency_of_atmosphere_mass_content_of_elemental_carbon_dry_aerosol_particles_due_to_emission"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:ACJAAJGD"  label="tendency_of_atmosphere_mass_content_of_black_carbon_dry_aerosol_due_to_emission_from_agricultural_waste_burning"    />
+      <exact>
+         <element  key="SDN:P07:68:37U1ZUXR"  label="tendency_of_atmosphere_mass_content_of_elemental_carbon_dry_aerosol_particles_due_to_emission_from_agricultural_waste_burning"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:IBJEIJJG"  label="tendency_of_atmosphere_mass_content_of_black_carbon_dry_aerosol_due_to_emission_from_energy_production_and_distribution"    />
+      <exact>
+         <element  key="SDN:P07:68:OHV8PBIF"  label="tendency_of_atmosphere_mass_content_of_elemental_carbon_dry_aerosol_particles_due_to_emission_from_energy_production_and_distribution"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:GCGJHGCD"  label="tendency_of_atmosphere_mass_content_of_black_carbon_dry_aerosol_due_to_emission_from_forest_fires"    />
+      <exact>
+         <element  key="SDN:P07:68:3SGXMKJ9"  label="tendency_of_atmosphere_mass_content_of_elemental_carbon_dry_aerosol_particles_due_to_emission_from_forest_fires"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:JJHHAHAA"  label="tendency_of_atmosphere_mass_content_of_black_carbon_dry_aerosol_due_to_emission_from_industrial_processes_and_combustion"    />
+      <exact>
+         <element  key="SDN:P07:68:TKHC48UB"  label="tendency_of_atmosphere_mass_content_of_elemental_carbon_dry_aerosol_particles_due_to_emission_from_industrial_processes_and_combustion"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:DBAHIIHF"  label="tendency_of_atmosphere_mass_content_of_black_carbon_dry_aerosol_due_to_emission_from_land_transport"    />
+      <exact>
+         <element  key="SDN:P07:68:4UZJL4HX"  label="tendency_of_atmosphere_mass_content_of_elemental_carbon_dry_aerosol_particles_due_to_emission_from_land_transport"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:GABGECDG"  label="tendency_of_atmosphere_mass_content_of_black_carbon_dry_aerosol_due_to_emission_from_maritime_transport"    />
+      <exact>
+         <element  key="SDN:P07:68:HTG3FF2P"  label="tendency_of_atmosphere_mass_content_of_elemental_carbon_dry_aerosol_particles_due_to_emission_from_maritime_transport"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:DCGHDBGG"  label="tendency_of_atmosphere_mass_content_of_black_carbon_dry_aerosol_due_to_emission_from_residential_and_commercial_combustion"    />
+      <exact>
+         <element  key="SDN:P07:68:KE3VGDT1"  label="tendency_of_atmosphere_mass_content_of_elemental_carbon_dry_aerosol_particles_due_to_emission_from_residential_and_commercial_combustion"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:JBBBGFJB"  label="tendency_of_atmosphere_mass_content_of_black_carbon_dry_aerosol_due_to_emission_from_savanna_and_grassland_fires"    />
+      <exact>
+         <element  key="SDN:P07:68:YX6OSE3Y"  label="tendency_of_atmosphere_mass_content_of_elemental_carbon_dry_aerosol_particles_due_to_emission_from_savanna_and_grassland_fires"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:HHFIBGAE"  label="tendency_of_atmosphere_mass_content_of_black_carbon_dry_aerosol_due_to_emission_from_waste_treatment_and_disposal"    />
+      <exact>
+         <element  key="SDN:P07:68:BOMY8L2Z"  label="tendency_of_atmosphere_mass_content_of_elemental_carbon_dry_aerosol_particles_due_to_emission_from_waste_treatment_and_disposal"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CF12N607"  label="tendency_of_atmosphere_mass_content_of_black_carbon_dry_aerosol_due_to_gravitational_settling"    />
+      <exact>
+         <element  key="SDN:P07:68:TJBER2QW"  label="tendency_of_atmosphere_mass_content_of_elemental_carbon_dry_aerosol_particles_due_to_gravitational_settling"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CF12N608"  label="tendency_of_atmosphere_mass_content_of_black_carbon_dry_aerosol_due_to_turbulent_deposition"    />
+      <exact>
+         <element  key="SDN:P07:68:IJWJWK1A"  label="tendency_of_atmosphere_mass_content_of_elemental_carbon_dry_aerosol_particles_due_to_turbulent_deposition"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV7N30"  label="tendency_of_atmosphere_mass_content_of_black_carbon_dry_aerosol_due_to_wet_deposition"    />
+      <exact>
+         <element  key="SDN:P07:68:RAWK0OMW"  label="tendency_of_atmosphere_mass_content_of_elemental_carbon_dry_aerosol_particles_due_to_wet_deposition"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV7N35"  label="tendency_of_atmosphere_mass_content_of_dust_dry_aerosol_due_to_dry_deposition"    />
+      <exact>
+         <element  key="SDN:P07:68:QTYB0PGB"  label="tendency_of_atmosphere_mass_content_of_dust_dry_aerosol_particles_due_to_dry_deposition"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV7N36"  label="tendency_of_atmosphere_mass_content_of_dust_dry_aerosol_due_to_emission"    />
+      <exact>
+         <element  key="SDN:P07:68:8FKHOJ0X"  label="tendency_of_atmosphere_mass_content_of_dust_dry_aerosol_particles_due_to_emission"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CF12N619"  label="tendency_of_atmosphere_mass_content_of_dust_dry_aerosol_due_to_gravitational_settling"    />
+      <exact>
+         <element  key="SDN:P07:68:GOP20L7L"  label="tendency_of_atmosphere_mass_content_of_dust_dry_aerosol_particles_due_to_gravitational_settling"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CF12N620"  label="tendency_of_atmosphere_mass_content_of_dust_dry_aerosol_due_to_turbulent_deposition"    />
+      <exact>
+         <element  key="SDN:P07:68:NWMYKIW4"  label="tendency_of_atmosphere_mass_content_of_dust_dry_aerosol_particles_due_to_turbulent_deposition"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV7N37"  label="tendency_of_atmosphere_mass_content_of_dust_dry_aerosol_due_to_wet_deposition"    />
+      <exact>
+         <element  key="SDN:P07:68:02TE7PDC"  label="tendency_of_atmosphere_mass_content_of_dust_dry_aerosol_particles_due_to_wet_deposition"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV7N18"  label="tendency_of_atmosphere_mass_content_of_mercury_dry_aerosol_due_to_dry_deposition"    />
+      <exact>
+         <element  key="SDN:P07:68:TGMSIFL6"  label="tendency_of_atmosphere_mass_content_of_mercury_dry_aerosol_particles_due_to_dry_deposition"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV7N20"  label="tendency_of_atmosphere_mass_content_of_mercury_dry_aerosol_due_to_wet_deposition"    />
+      <exact>
+         <element  key="SDN:P07:68:85XN19KM"  label="tendency_of_atmosphere_mass_content_of_mercury_dry_aerosol_particles_due_to_wet_deposition"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:LE4PB3MS"  label="tendency_of_atmosphere_mass_content_of_mercury_dry_aerosol_particles_due_to_emission"    />
+      <exact>
+         <element  key="SDN:P07:68:CFV7N19"  label="tendency_of_atmosphere_mass_content_of_mercury_dry_aerosol_due_to_emission"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CF12N648"  label="tendency_of_atmosphere_mass_content_of_nitrate_dry_aerosol_due_to_dry_deposition"    />
+      <exact>
+         <element  key="SDN:P07:68:RV4GJ49C"  label="tendency_of_atmosphere_mass_content_of_nitrate_dry_aerosol_particles_due_to_dry_deposition"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:I5V0KRHS"  label="tendency_of_atmosphere_mass_content_of_nitrogen_due_to_deposition"    />
+      <exact>
+         <element  key="SDN:P07:68:DTZ449B7"  label="tendency_of_atmosphere_mass_content_of_nitrogen_compounds_expressed_as_nitrogen_due_to_deposition"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:SKE9VU03"  label="tendency_of_atmosphere_mass_content_of_nitrogen_due_to_dry_deposition"    />
+      <exact>
+         <element  key="SDN:P07:68:IR9CXAYI"  label="tendency_of_atmosphere_mass_content_of_nitrogen_compounds_expressed_as_nitrogen_due_to_dry_deposition"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:GZ7VQ2YN"  label="tendency_of_atmosphere_mass_content_of_nitrogen_due_to_wet_deposition"    />
+      <exact>
+         <element  key="SDN:P07:68:FILQ1KD8"  label="tendency_of_atmosphere_mass_content_of_nitrogen_compounds_expressed_as_nitrogen_due_to_wet_deposition"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV7N27"  label="tendency_of_atmosphere_mass_content_of_particulate_organic_matter_dry_aerosol_due_to_dry_deposition"    />
+      <exact>
+         <element  key="SDN:P07:68:1SO3598I"  label="tendency_of_atmosphere_mass_content_of_particulate_organic_matter_dry_aerosol_particles_due_to_dry_deposition"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CF12N655"  label="tendency_of_atmosphere_mass_content_of_particulate_organic_matter_dry_aerosol_due_to_gravitational_settling"    />
+      <exact>
+         <element  key="SDN:P07:68:O1NFQ760"  label="tendency_of_atmosphere_mass_content_of_particulate_organic_matter_dry_aerosol_particles_due_to_gravitational_settling"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CF12S35"  label="tendency_of_atmosphere_mass_content_of_particulate_organic_matter_dry_aerosol_due_to_net_chemical_production_and_emission"    />
+      <exact>
+         <element  key="SDN:P07:68:EC58CHWI"  label="tendency_of_atmosphere_mass_content_of_particulate_organic_matter_dry_aerosol_particles_due_to_net_chemical_production_and_emission"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV7N28"  label="tendency_of_atmosphere_mass_content_of_particulate_organic_matter_dry_aerosol_due_to_net_production_and_emission"    />
+      <exact>
+         <element  key="SDN:P07:68:EC58CHWI"  label="tendency_of_atmosphere_mass_content_of_particulate_organic_matter_dry_aerosol_particles_due_to_net_chemical_production_and_emission"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CF12N656"  label="tendency_of_atmosphere_mass_content_of_particulate_organic_matter_dry_aerosol_due_to_turbulent_deposition"    />
+      <exact>
+         <element  key="SDN:P07:68:N0WSPN8I"  label="tendency_of_atmosphere_mass_content_of_particulate_organic_matter_dry_aerosol_particles_due_to_turbulent_deposition"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV7N5"  label="tendency_of_atmosphere_mass_content_of_particulate_organic_matter_dry_aerosol_due_to_wet_deposition"    />
+      <exact>
+         <element  key="SDN:P07:68:R5WXPV1R"  label="tendency_of_atmosphere_mass_content_of_particulate_organic_matter_dry_aerosol_particles_due_to_wet_deposition"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:GFJIGBFA"  label="tendency_of_atmosphere_mass_content_of_particulate_organic_matter_dry_aerosol_expressed_as_carbon_due_to_emission_from_agricultural_waste_burning"    />
+      <exact>
+         <element  key="SDN:P07:68:1Z0QLL6T"  label="tendency_of_atmosphere_mass_content_of_particulate_organic_matter_dry_aerosol_particles_expressed_as_carbon_due_to_emission_from_agricultural_waste_burning"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:BBBGAIAG"  label="tendency_of_atmosphere_mass_content_of_particulate_organic_matter_dry_aerosol_expressed_as_carbon_due_to_emission_from_energy_production_and_distribution"    />
+      <exact>
+         <element  key="SDN:P07:68:MY3194P0"  label="tendency_of_atmosphere_mass_content_of_particulate_organic_matter_dry_aerosol_particles_expressed_as_carbon_due_to_emission_from_energy_production_and_distribution"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:GJHGGGAH"  label="tendency_of_atmosphere_mass_content_of_particulate_organic_matter_dry_aerosol_expressed_as_carbon_due_to_emission_from_forest_fires"    />
+      <exact>
+         <element  key="SDN:P07:68:GRFAUB95"  label="tendency_of_atmosphere_mass_content_of_particulate_organic_matter_dry_aerosol_particles_expressed_as_carbon_due_to_emission_from_forest_fires"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:IFEICGEA"  label="tendency_of_atmosphere_mass_content_of_particulate_organic_matter_dry_aerosol_expressed_as_carbon_due_to_emission_from_industrial_processes_and_combustion"    />
+      <exact>
+         <element  key="SDN:P07:68:1EZNH3ET"  label="tendency_of_atmosphere_mass_content_of_particulate_organic_matter_dry_aerosol_particles_expressed_as_carbon_due_to_emission_from_industrial_processes_and_combustion"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:JIJGJHII"  label="tendency_of_atmosphere_mass_content_of_particulate_organic_matter_dry_aerosol_expressed_as_carbon_due_to_emission_from_land_transport"    />
+      <exact>
+         <element  key="SDN:P07:68:SZRKUV5H"  label="tendency_of_atmosphere_mass_content_of_particulate_organic_matter_dry_aerosol_particles_expressed_as_carbon_due_to_emission_from_land_transport"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:DDDHBHHD"  label="tendency_of_atmosphere_mass_content_of_particulate_organic_matter_dry_aerosol_expressed_as_carbon_due_to_emission_from_maritime_transport"    />
+      <exact>
+         <element  key="SDN:P07:68:0O5CSWT7"  label="tendency_of_atmosphere_mass_content_of_particulate_organic_matter_dry_aerosol_particles_expressed_as_carbon_due_to_emission_from_maritime_transport"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:BGJBBJFB"  label="tendency_of_atmosphere_mass_content_of_particulate_organic_matter_dry_aerosol_expressed_as_carbon_due_to_emission_from_residential_and_commercial_combustion"    />
+      <exact>
+         <element  key="SDN:P07:68:53FJNEEM"  label="tendency_of_atmosphere_mass_content_of_particulate_organic_matter_dry_aerosol_particles_expressed_as_carbon_due_to_emission_from_residential_and_commercial_combustion"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:IFIJJFAJ"  label="tendency_of_atmosphere_mass_content_of_particulate_organic_matter_dry_aerosol_expressed_as_carbon_due_to_emission_from_savanna_and_grassland_fires"    />
+      <exact>
+         <element  key="SDN:P07:68:MECUC61J"  label="tendency_of_atmosphere_mass_content_of_particulate_organic_matter_dry_aerosol_particles_expressed_as_carbon_due_to_emission_from_savanna_and_grassland_fires"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:EDDDFHDD"  label="tendency_of_atmosphere_mass_content_of_particulate_organic_matter_dry_aerosol_expressed_as_carbon_due_to_emission_from_waste_treatment_and_disposal"    />
+      <exact>
+         <element  key="SDN:P07:68:0RBP5DGR"  label="tendency_of_atmosphere_mass_content_of_particulate_organic_matter_dry_aerosol_particles_expressed_as_carbon_due_to_emission_from_waste_treatment_and_disposal"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:P4IUKD6T"  label="tendency_of_atmosphere_mass_content_of_pm10_seasalt_dry_aerosol_particles_due_to_dry_deposition"    />
+      <exact>
+         <element  key="SDN:P07:68:2K7FF6H0"  label="tendency_of_atmosphere_mass_content_of_pm10_sea_salt_dry_aerosol_particles_due_to_dry_deposition"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:JLMLN8CI"  label="tendency_of_atmosphere_mass_content_of_pm10_seasalt_dry_aerosol_particles_due_to_emission"    />
+      <exact>
+         <element  key="SDN:P07:68:1X10YOBN"  label="tendency_of_atmosphere_mass_content_of_pm10_sea_salt_dry_aerosol_particles_due_to_emission"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:PO5EFBL5"  label="tendency_of_atmosphere_mass_content_of_pm10_seasalt_dry_aerosol_particles_due_to_wet_deposition"    />
+      <exact>
+         <element  key="SDN:P07:68:R1HFS76P"  label="tendency_of_atmosphere_mass_content_of_pm10_sea_salt_dry_aerosol_particles_due_to_wet_deposition"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:9BT1EM7W"  label="tendency_of_atmosphere_mass_content_of_pm2p5_seasalt_dry_aerosol_particles_due_to_dry_deposition"    />
+      <exact>
+         <element  key="SDN:P07:68:8EM9UQ1C"  label="tendency_of_atmosphere_mass_content_of_pm2p5_sea_salt_dry_aerosol_particles_due_to_dry_deposition"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:MU75QKKV"  label="tendency_of_atmosphere_mass_content_of_pm2p5_seasalt_dry_aerosol_particles_due_to_emission"    />
+      <exact>
+         <element  key="SDN:P07:68:IONOVEZM"  label="tendency_of_atmosphere_mass_content_of_pm2p5_sea_salt_dry_aerosol_particles_due_to_emission"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:A7LKPMP3"  label="tendency_of_atmosphere_mass_content_of_pm2p5_seasalt_dry_aerosol_particles_due_to_wet_deposition"    />
+      <exact>
+         <element  key="SDN:P07:68:4ED55N1Q"  label="tendency_of_atmosphere_mass_content_of_pm2p5_sea_salt_dry_aerosol_particles_due_to_wet_deposition"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV7N6"  label="tendency_of_atmosphere_mass_content_of_primary_particulate_organic_matter_dry_aerosol_due_to_dry_deposition"    />
+      <exact>
+         <element  key="SDN:P07:68:PCQV9HBC"  label="tendency_of_atmosphere_mass_content_of_primary_particulate_organic_matter_dry_aerosol_particles_due_to_dry_deposition"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV7N7"  label="tendency_of_atmosphere_mass_content_of_primary_particulate_organic_matter_dry_aerosol_due_to_emission"    />
+      <exact>
+         <element  key="SDN:P07:68:SZQ4294N"  label="tendency_of_atmosphere_mass_content_of_primary_particulate_organic_matter_dry_aerosol_particles_due_to_emission"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV7N8"  label="tendency_of_atmosphere_mass_content_of_primary_particulate_organic_matter_dry_aerosol_due_to_wet_deposition"    />
+      <exact>
+         <element  key="SDN:P07:68:Q8JPIQBO"  label="tendency_of_atmosphere_mass_content_of_primary_particulate_organic_matter_dry_aerosol_particles_due_to_wet_deposition"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:FIRGH6OT"  label="tendency_of_atmosphere_mass_content_of_sea_salt_dry_aerosol_particles_due_to_wet_deposition"    />
+      <exact>
+         <element  key="SDN:P07:68:MK0VKZR5"  label="tendency_of_atmosphere_mass_content_of_sea_salt_dry_aerosol_particles_due_to_wet_deposition"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV7N9"  label="tendency_of_atmosphere_mass_content_of_seasalt_dry_aerosol_due_to_dry_deposition"    />
+      <exact>
+         <element  key="SDN:P07:68:0L1IA5Z9"  label="tendency_of_atmosphere_mass_content_of_sea_salt_dry_aerosol_particles_due_to_dry_deposition"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV7N10"  label="tendency_of_atmosphere_mass_content_of_seasalt_dry_aerosol_due_to_emission"    />
+      <exact>
+         <element  key="SDN:P07:68:3ZP5PFW6"  label="tendency_of_atmosphere_mass_content_of_sea_salt_dry_aerosol_particles_due_to_emission"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CF12N662"  label="tendency_of_atmosphere_mass_content_of_seasalt_dry_aerosol_due_to_gravitational_settling"    />
+      <exact>
+         <element  key="SDN:P07:68:5NCCEKPE"  label="tendency_of_atmosphere_mass_content_of_sea_salt_dry_aerosol_particles_due_to_gravitational_settling"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CF12N663"  label="tendency_of_atmosphere_mass_content_of_seasalt_dry_aerosol_due_to_turbulent_deposition"    />
+      <exact>
+         <element  key="SDN:P07:68:SEYBUFZ5"  label="tendency_of_atmosphere_mass_content_of_sea_salt_dry_aerosol_particles_due_to_turbulent_deposition"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV7N11"  label="tendency_of_atmosphere_mass_content_of_seasalt_dry_aerosol_due_to_wet_deposition"    />
+      <exact>
+         <element  key="SDN:P07:68:MK0VKZR5"  label="tendency_of_atmosphere_mass_content_of_sea_salt_dry_aerosol_particles_due_to_wet_deposition"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:C4AGSXHQ"  label="tendency_of_atmosphere_mass_content_of_seasalt_dry_aerosol_particles_due_to_dry_deposition"    />
+      <exact>
+         <element  key="SDN:P07:68:0L1IA5Z9"  label="tendency_of_atmosphere_mass_content_of_sea_salt_dry_aerosol_particles_due_to_dry_deposition"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:6L3Z7RH7"  label="tendency_of_atmosphere_mass_content_of_seasalt_dry_aerosol_particles_due_to_emission"    />
+      <exact>
+         <element  key="SDN:P07:68:3ZP5PFW6"  label="tendency_of_atmosphere_mass_content_of_sea_salt_dry_aerosol_particles_due_to_emission"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:3XHVIYNY"  label="tendency_of_atmosphere_mass_content_of_seasalt_dry_aerosol_particles_due_to_gravitational_settling"    />
+      <exact>
+         <element  key="SDN:P07:68:5NCCEKPE"  label="tendency_of_atmosphere_mass_content_of_sea_salt_dry_aerosol_particles_due_to_gravitational_settling"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:TANBDOQS"  label="tendency_of_atmosphere_mass_content_of_seasalt_dry_aerosol_particles_due_to_turbulent_deposition"    />
+      <exact>
+         <element  key="SDN:P07:68:SEYBUFZ5"  label="tendency_of_atmosphere_mass_content_of_sea_salt_dry_aerosol_particles_due_to_turbulent_deposition"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:G7JCBPY7"  label="tendency_of_atmosphere_mass_content_of_seasalt_dry_aerosol_particles_due_to_wet_deposition"    />
+      <exact>
+         <element  key="SDN:P07:68:MK0VKZR5"  label="tendency_of_atmosphere_mass_content_of_sea_salt_dry_aerosol_particles_due_to_wet_deposition"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV7N12"  label="tendency_of_atmosphere_mass_content_of_secondary_particulate_organic_matter_dry_aerosol_due_to_dry_deposition"    />
+      <exact>
+         <element  key="SDN:P07:68:WH0SX7G4"  label="tendency_of_atmosphere_mass_content_of_secondary_particulate_organic_matter_dry_aerosol_particles_due_to_dry_deposition"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CF12S36"  label="tendency_of_atmosphere_mass_content_of_secondary_particulate_organic_matter_dry_aerosol_due_to_net_chemical_production"    />
+      <exact>
+         <element  key="SDN:P07:68:KSU11DIP"  label="tendency_of_atmosphere_mass_content_of_secondary_particulate_organic_matter_dry_aerosol_particles_due_to_net_chemical_production"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV7N13"  label="tendency_of_atmosphere_mass_content_of_secondary_particulate_organic_matter_dry_aerosol_due_to_net_production"    />
+      <exact>
+         <element  key="SDN:P07:68:KSU11DIP"  label="tendency_of_atmosphere_mass_content_of_secondary_particulate_organic_matter_dry_aerosol_particles_due_to_net_chemical_production"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV7N1"  label="tendency_of_atmosphere_mass_content_of_secondary_particulate_organic_matter_dry_aerosol_due_to_wet_deposition"    />
+      <exact>
+         <element  key="SDN:P07:68:9M73ZUY9"  label="tendency_of_atmosphere_mass_content_of_secondary_particulate_organic_matter_dry_aerosol_particles_due_to_wet_deposition"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CF12N664"  label="tendency_of_atmosphere_mass_content_of_sulfate_dry_aerosol_due_to_dry_deposition"    />
+      <exact>
+         <element  key="SDN:P07:68:GM6Q50OD"  label="tendency_of_atmosphere_mass_content_of_sulfate_dry_aerosol_particles_due_to_dry_deposition"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CF12N665"  label="tendency_of_atmosphere_mass_content_of_sulfate_dry_aerosol_due_to_emission"    />
+      <exact>
+         <element  key="SDN:P07:68:VV0S90FL"  label="tendency_of_atmosphere_mass_content_of_sulfate_dry_aerosol_particles_due_to_emission"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV15A24"  label="tendency_of_atmosphere_mass_content_of_sulfate_dry_aerosol_expressed_as_sulfur_due_to_dry_deposition"    />
+      <exact>
+         <element  key="SDN:P07:68:7Y2S1MBH"  label="tendency_of_atmosphere_mass_content_of_sulfate_dry_aerosol_particles_expressed_as_sulfur_due_to_dry_deposition"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV15A25"  label="tendency_of_atmosphere_mass_content_of_sulfate_dry_aerosol_expressed_as_sulfur_due_to_gravitational_settling"    />
+      <exact>
+         <element  key="SDN:P07:68:IK675SDG"  label="tendency_of_atmosphere_mass_content_of_sulfate_dry_aerosol_particles_expressed_as_sulfur_due_to_gravitational_settling"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV15A26"  label="tendency_of_atmosphere_mass_content_of_sulfate_dry_aerosol_expressed_as_sulfur_due_to_turbulent_deposition"    />
+      <exact>
+         <element  key="SDN:P07:68:QWLW1M4H"  label="tendency_of_atmosphere_mass_content_of_sulfate_dry_aerosol_particles_expressed_as_sulfur_due_to_turbulent_deposition"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:KCKKUJTQ"  label="tendency_of_atmosphere_mass_content_of_sulfate_dry_aerosol_particles_expressed_as_sulfur_due_to_wet_deposition"    />
+      <exact>
+         <element  key="SDN:P07:68:CFV15A27"  label="tendency_of_atmosphere_mass_content_of_sulfate_dry_aerosol_expressed_as_sulfur_due_to_wet_deposition"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CF12N666"  label="tendency_of_atmosphere_mass_content_of_sulfate_expressed_as_sulfur_dry_aerosol_due_to_dry_deposition"    />
+      <exact>
+         <element  key="SDN:P07:68:7Y2S1MBH"  label="tendency_of_atmosphere_mass_content_of_sulfate_dry_aerosol_particles_expressed_as_sulfur_due_to_dry_deposition"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CF12N667"  label="tendency_of_atmosphere_mass_content_of_sulfate_expressed_as_sulfur_dry_aerosol_due_to_gravitational_settling"    />
+      <exact>
+         <element  key="SDN:P07:68:IK675SDG"  label="tendency_of_atmosphere_mass_content_of_sulfate_dry_aerosol_particles_expressed_as_sulfur_due_to_gravitational_settling"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CF12N668"  label="tendency_of_atmosphere_mass_content_of_sulfate_expressed_as_sulfur_dry_aerosol_due_to_turbulent_deposition"    />
+      <exact>
+         <element  key="SDN:P07:68:QWLW1M4H"  label="tendency_of_atmosphere_mass_content_of_sulfate_dry_aerosol_particles_expressed_as_sulfur_due_to_turbulent_deposition"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CF12N669"  label="tendency_of_atmosphere_mass_content_of_sulfate_expressed_as_sulfur_dry_aerosol_due_to_wet_deposition"    />
+      <exact>
+         <element  key="SDN:P07:68:CFV15A27"  label="tendency_of_atmosphere_mass_content_of_sulfate_dry_aerosol_expressed_as_sulfur_due_to_wet_deposition"    />
+         <element  key="SDN:P07:68:CFV15A27"  label="tendency_of_atmosphere_mass_content_of_sulfate_dry_aerosol_expressed_as_sulfur_due_to_wet_deposition"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CF12N728"  label="tendency_of_atmosphere_moles_of_nitric_acid_trihydrate_ambient_aerosol"    />
+      <exact>
+         <element  key="SDN:P07:68:B5DD6TTP"  label="tendency_of_atmosphere_moles_of_nitric_acid_trihydrate_ambient_aerosol_particles"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CF12N741"  label="tendency_of_atmosphere_moles_of_sulfate_dry_aerosol"    />
+      <exact>
+         <element  key="SDN:P07:68:OZ7FJ55U"  label="tendency_of_atmosphere_moles_of_sulfate_dry_aerosol_particles"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:STAEGS8Z"  label="tendency_of_atmosphere_number_content_of_aerosol_particles_due_to_turbulent_deposition"    />
+      <exact>
+         <element  key="SDN:P07:68:CF12N748"  label="tendency_of_atmosphere_number_content_of_aerosol_particles_due_to_turbulent_depostion"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:1VBQ7NDV"  label="tendency_of_atmosphere_of_mole_concentration_of_carbon_monoxide_due_to_chemical_destruction"    />
+      <exact>
+         <element  key="SDN:P07:68:Y0PZNAFN"  label="tendency_of_atmosphere_mole_concentration_of_carbon_monoxide_due_to_chemical_destruction"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0193"  label="tendency_of_atmosphere_water_content_due_to_advection"    />
+      <exact>
+         <element  key="SDN:P07:68:BBAH2142"  label="tendency_of_atmosphere_mass_content_of_water_due_to_advection"    />
+         <element  key="SDN:P07:68:BBAH2142"  label="tendency_of_atmosphere_mass_content_of_water_due_to_advection"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0194"  label="tendency_of_atmosphere_water_vapor_content"    />
+      <exact>
+         <element  key="SDN:P07:68:BBAH2141"  label="tendency_of_atmosphere_mass_content_of_water_vapor"    />
+         <element  key="SDN:P07:68:BBAH2141"  label="tendency_of_atmosphere_mass_content_of_water_vapor"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0173"  label="tendency_of_atmosphere_water_vapor_content_due_to_advection"    />
+      <exact>
+         <element  key="SDN:P07:68:H2MP3LLX"  label="tendency_of_atmosphere_mass_content_of_water_vapor_due_to_advection"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0174"  label="tendency_of_atmosphere_water_vapor_content_due_to_convection"    />
+      <exact>
+         <element  key="SDN:P07:68:BBAH2139"  label="tendency_of_atmosphere_mass_content_of_water_vapor_due_to_convection"    />
+         <element  key="SDN:P07:68:BBAH2139"  label="tendency_of_atmosphere_mass_content_of_water_vapor_due_to_convection"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0175"  label="tendency_of_atmosphere_water_vapor_content_due_to_deep_convection"    />
+      <exact>
+         <element  key="SDN:P07:68:BBAH2137"  label="tendency_of_atmosphere_mass_content_of_water_vapor_due_to_deep_convection"    />
+         <element  key="SDN:P07:68:BBAH2137"  label="tendency_of_atmosphere_mass_content_of_water_vapor_due_to_deep_convection"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0176"  label="tendency_of_atmosphere_water_vapor_content_due_to_shallow_convection"    />
+      <exact>
+         <element  key="SDN:P07:68:BBAH2135"  label="tendency_of_atmosphere_mass_content_of_water_vapor_due_to_shallow_convection"    />
+         <element  key="SDN:P07:68:BBAH2135"  label="tendency_of_atmosphere_mass_content_of_water_vapor_due_to_shallow_convection"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0177"  label="tendency_of_atmosphere_water_vapor_content_due_to_turbulence"    />
+      <exact>
+         <element  key="SDN:P07:68:BBAH2134"  label="tendency_of_atmosphere_mass_content_of_water_vapor_due_to_turbulence"    />
+         <element  key="SDN:P07:68:BBAH2134"  label="tendency_of_atmosphere_mass_content_of_water_vapor_due_to_turbulence"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:JBDFFFBB"  label="tendency_of_mass_concentration_of_black_carbon_dry_aerosol_in_air_due_to_emission_from_aviation"    />
+      <exact>
+         <element  key="SDN:P07:68:CLQ62JNA"  label="tendency_of_mass_concentration_of_elemental_carbon_dry_aerosol_particles_in_air_due_to_emission_from_aviation"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CF12N760"  label="tendency_of_mass_fraction_of_stratiform_cloud_ice_in_air_due_to_heterogeneous_nucleation_from_cloud_liquid"    />
+      <exact>
+         <element  key="SDN:P07:68:CFV13A7"  label="tendency_of_mass_fraction_of_stratiform_cloud_ice_in_air_due_to_heterogeneous_nucleation_from_cloud_liquid_water"    />
+         <element  key="SDN:P07:68:CFV13A7"  label="tendency_of_mass_fraction_of_stratiform_cloud_ice_in_air_due_to_heterogeneous_nucleation_from_cloud_liquid_water"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CF12N762"  label="tendency_of_mass_fraction_of_stratiform_cloud_ice_in_air_due_to_homegeneous_nucleation"    />
+      <exact>
+         <element  key="SDN:P07:68:CF23EOCS"  label="tendency_of_mass_fraction_of_stratiform_cloud_ice_in_air_due_to_homogeneous_nucleation"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CF12N764"  label="tendency_of_mass_fraction_of_stratiform_cloud_ice_in_air_due_to_melting_to_cloud_liquid"    />
+      <exact>
+         <element  key="SDN:P07:68:CFV13A8"  label="tendency_of_mass_fraction_of_stratiform_cloud_ice_in_air_due_to_melting_to_cloud_liquid_water"    />
+         <element  key="SDN:P07:68:CFV13A8"  label="tendency_of_mass_fraction_of_stratiform_cloud_ice_in_air_due_to_melting_to_cloud_liquid_water"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CF12N766"  label="tendency_of_mass_fraction_of_stratiform_cloud_ice_in_air_due_to_riming_from_cloud_liquid"    />
+      <exact>
+         <element  key="SDN:P07:68:CFV13A9"  label="tendency_of_mass_fraction_of_stratiform_cloud_ice_in_air_due_to_riming_from_cloud_liquid_water"    />
+         <element  key="SDN:P07:68:CFV13A9"  label="tendency_of_mass_fraction_of_stratiform_cloud_ice_in_air_due_to_riming_from_cloud_liquid_water"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CF14N87"  label="tendency_of_mole_concentration_of_dissolved_inorganic_phosphate_in_sea_water_due_to_biological_processes"    />
+      <exact>
+         <element  key="SDN:P07:68:CFV15A28"  label="tendency_of_mole_concentration_of_dissolved_inorganic_phosphorus_in_sea_water_due_to_biological_processes"    />
+         <element  key="SDN:P07:68:CFV15A28"  label="tendency_of_mole_concentration_of_dissolved_inorganic_phosphorus_in_sea_water_due_to_biological_processes"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CF14N88"  label="tendency_of_mole_concentration_of_dissolved_inorganic_silicate_in_sea_water_due_to_biological_processes"    />
+      <exact>
+         <element  key="SDN:P07:68:CFV15A29"  label="tendency_of_mole_concentration_of_dissolved_inorganic_silicon_in_sea_water_due_to_biological_processes"    />
+         <element  key="SDN:P07:68:CFV15A29"  label="tendency_of_mole_concentration_of_dissolved_inorganic_silicon_in_sea_water_due_to_biological_processes"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV8N87"  label="tendency_of_moles_of_carbon_monoxide_in_atmosphere"    />
+      <exact>
+         <element  key="SDN:P07:68:CF12S37"  label="tendency_of_atmosphere_moles_of_carbon_monoxide"    />
+         <element  key="SDN:P07:68:CF12S37"  label="tendency_of_atmosphere_moles_of_carbon_monoxide"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV8N88"  label="tendency_of_moles_of_carbon_monoxide_in_middle_atmosphere"    />
+      <exact>
+         <element  key="SDN:P07:68:CF12S55"  label="tendency_of_middle_atmosphere_moles_of_carbon_monoxide"    />
+         <element  key="SDN:P07:68:CF12S55"  label="tendency_of_middle_atmosphere_moles_of_carbon_monoxide"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV8N89"  label="tendency_of_moles_of_carbon_monoxide_in_troposphere"    />
+      <exact>
+         <element  key="SDN:P07:68:CF12S61"  label="tendency_of_troposphere_moles_of_carbon_monoxide"    />
+         <element  key="SDN:P07:68:CF12S61"  label="tendency_of_troposphere_moles_of_carbon_monoxide"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV8N90"  label="tendency_of_moles_of_carbon_tetrachloride_in_atmosphere"    />
+      <exact>
+         <element  key="SDN:P07:68:CF12S38"  label="tendency_of_atmosphere_moles_of_carbon_tetrachloride"    />
+         <element  key="SDN:P07:68:CF12S38"  label="tendency_of_atmosphere_moles_of_carbon_tetrachloride"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV8N92"  label="tendency_of_moles_of_cfc113_in_atmosphere"    />
+      <exact>
+         <element  key="SDN:P07:68:CF12S40"  label="tendency_of_atmosphere_moles_of_cfc113"    />
+         <element  key="SDN:P07:68:CF12S40"  label="tendency_of_atmosphere_moles_of_cfc113"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV8N93"  label="tendency_of_moles_of_cfc114_in_atmosphere"    />
+      <exact>
+         <element  key="SDN:P07:68:CF12S41"  label="tendency_of_atmosphere_moles_of_cfc114"    />
+         <element  key="SDN:P07:68:CF12S41"  label="tendency_of_atmosphere_moles_of_cfc114"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV8N94"  label="tendency_of_moles_of_cfc115_in_atmosphere"    />
+      <exact>
+         <element  key="SDN:P07:68:CF12S42"  label="tendency_of_atmosphere_moles_of_cfc115"    />
+         <element  key="SDN:P07:68:CF12S42"  label="tendency_of_atmosphere_moles_of_cfc115"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV8N91"  label="tendency_of_moles_of_cfc11_in_atmosphere"    />
+      <exact>
+         <element  key="SDN:P07:68:CF12S39"  label="tendency_of_atmosphere_moles_of_cfc11"    />
+         <element  key="SDN:P07:68:CF12S39"  label="tendency_of_atmosphere_moles_of_cfc11"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV8N95"  label="tendency_of_moles_of_cfc12_in_atmosphere"    />
+      <exact>
+         <element  key="SDN:P07:68:CF12S43"  label="tendency_of_atmosphere_moles_of_cfc12"    />
+         <element  key="SDN:P07:68:CF12S43"  label="tendency_of_atmosphere_moles_of_cfc12"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV8N96"  label="tendency_of_moles_of_halon1202_in_atmosphere"    />
+      <exact>
+         <element  key="SDN:P07:68:CF12S44"  label="tendency_of_atmosphere_moles_of_halon1202"    />
+         <element  key="SDN:P07:68:CF12S44"  label="tendency_of_atmosphere_moles_of_halon1202"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV8N97"  label="tendency_of_moles_of_halon1211_in_atmosphere"    />
+      <exact>
+         <element  key="SDN:P07:68:CF12S45"  label="tendency_of_atmosphere_moles_of_halon1211"    />
+         <element  key="SDN:P07:68:CF12S45"  label="tendency_of_atmosphere_moles_of_halon1211"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV8N98"  label="tendency_of_moles_of_halon1301_in_atmosphere"    />
+      <exact>
+         <element  key="SDN:P07:68:CF12S46"  label="tendency_of_atmosphere_moles_of_halon1301"    />
+         <element  key="SDN:P07:68:CF12S46"  label="tendency_of_atmosphere_moles_of_halon1301"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV8N99"  label="tendency_of_moles_of_halon2402_in_atmosphere"    />
+      <exact>
+         <element  key="SDN:P07:68:CF12S47"  label="tendency_of_atmosphere_moles_of_halon2402"    />
+         <element  key="SDN:P07:68:CF12S47"  label="tendency_of_atmosphere_moles_of_halon2402"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV8N100"  label="tendency_of_moles_of_hcc140a_in_atmosphere"    />
+      <exact>
+         <element  key="SDN:P07:68:CF12S48"  label="tendency_of_atmosphere_moles_of_hcc140a"    />
+         <element  key="SDN:P07:68:CF12S48"  label="tendency_of_atmosphere_moles_of_hcc140a"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV8N101"  label="tendency_of_moles_of_hcc140a_in_middle_atmosphere"    />
+      <exact>
+         <element  key="SDN:P07:68:CF12S56"  label="tendency_of_middle_atmosphere_moles_of_hcc140a"    />
+         <element  key="SDN:P07:68:CF12S56"  label="tendency_of_middle_atmosphere_moles_of_hcc140a"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV8N102"  label="tendency_of_moles_of_hcc140a_in_troposphere"    />
+      <exact>
+         <element  key="SDN:P07:68:CF12S62"  label="tendency_of_troposphere_moles_of_hcc140a"    />
+         <element  key="SDN:P07:68:CF12S62"  label="tendency_of_troposphere_moles_of_hcc140a"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV8N103"  label="tendency_of_moles_of_hcfc22_in_atmosphere"    />
+      <exact>
+         <element  key="SDN:P07:68:CF12S49"  label="tendency_of_atmosphere_moles_of_hcfc22"    />
+         <element  key="SDN:P07:68:CF12S49"  label="tendency_of_atmosphere_moles_of_hcfc22"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV8N104"  label="tendency_of_moles_of_hcfc22_in_troposphere"    />
+      <exact>
+         <element  key="SDN:P07:68:CF12S63"  label="tendency_of_troposphere_moles_of_hcfc22"    />
+         <element  key="SDN:P07:68:CF12S63"  label="tendency_of_troposphere_moles_of_hcfc22"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV8N105"  label="tendency_of_moles_of_methane_in_atmosphere"    />
+      <exact>
+         <element  key="SDN:P07:68:CF12S50"  label="tendency_of_atmosphere_moles_of_methane"    />
+         <element  key="SDN:P07:68:CF12S50"  label="tendency_of_atmosphere_moles_of_methane"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV8N106"  label="tendency_of_moles_of_methane_in_middle_atmosphere"    />
+      <exact>
+         <element  key="SDN:P07:68:CF12S57"  label="tendency_of_middle_atmosphere_moles_of_methane"    />
+         <element  key="SDN:P07:68:CF12S57"  label="tendency_of_middle_atmosphere_moles_of_methane"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV8N107"  label="tendency_of_moles_of_methane_in_troposphere"    />
+      <exact>
+         <element  key="SDN:P07:68:CF12S64"  label="tendency_of_troposphere_moles_of_methane"    />
+         <element  key="SDN:P07:68:CF12S64"  label="tendency_of_troposphere_moles_of_methane"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV8N108"  label="tendency_of_moles_of_methyl_bromide_in_atmosphere"    />
+      <exact>
+         <element  key="SDN:P07:68:CF12S51"  label="tendency_of_atmosphere_moles_of_methyl_bromide"    />
+         <element  key="SDN:P07:68:CF12S51"  label="tendency_of_atmosphere_moles_of_methyl_bromide"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV8N109"  label="tendency_of_moles_of_methyl_bromide_in_middle_atmosphere"    />
+      <exact>
+         <element  key="SDN:P07:68:CF12S58"  label="tendency_of_middle_atmosphere_moles_of_methyl_bromide"    />
+         <element  key="SDN:P07:68:CF12S58"  label="tendency_of_middle_atmosphere_moles_of_methyl_bromide"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV8N110"  label="tendency_of_moles_of_methyl_bromide_in_troposphere"    />
+      <exact>
+         <element  key="SDN:P07:68:CF12S65"  label="tendency_of_troposphere_moles_of_methyl_bromide"    />
+         <element  key="SDN:P07:68:CF12S65"  label="tendency_of_troposphere_moles_of_methyl_bromide"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV8N111"  label="tendency_of_moles_of_methyl_chloride_in_atmosphere"    />
+      <exact>
+         <element  key="SDN:P07:68:CF12S52"  label="tendency_of_atmosphere_moles_of_methyl_chloride"    />
+         <element  key="SDN:P07:68:CF12S52"  label="tendency_of_atmosphere_moles_of_methyl_chloride"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV8N112"  label="tendency_of_moles_of_methyl_chloride_in_middle_atmosphere"    />
+      <exact>
+         <element  key="SDN:P07:68:CF12S59"  label="tendency_of_middle_atmosphere_moles_of_methyl_chloride"    />
+         <element  key="SDN:P07:68:CF12S59"  label="tendency_of_middle_atmosphere_moles_of_methyl_chloride"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV8N113"  label="tendency_of_moles_of_methyl_chloride_in_troposphere"    />
+      <exact>
+         <element  key="SDN:P07:68:CF12S66"  label="tendency_of_troposphere_moles_of_methyl_chloride"    />
+         <element  key="SDN:P07:68:CF12S66"  label="tendency_of_troposphere_moles_of_methyl_chloride"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV8N114"  label="tendency_of_moles_of_molecular_hydrogen_in_atmosphere"    />
+      <exact>
+         <element  key="SDN:P07:68:CF12S53"  label="tendency_of_atmosphere_moles_of_molecular_hydrogen"    />
+         <element  key="SDN:P07:68:CF12S53"  label="tendency_of_atmosphere_moles_of_molecular_hydrogen"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV8N115"  label="tendency_of_moles_of_molecular_hydrogen_in_middle_atmosphere"    />
+      <exact>
+         <element  key="SDN:P07:68:CF12S60"  label="tendency_of_middle_atmosphere_moles_of_molecular_hydrogen"    />
+         <element  key="SDN:P07:68:CF12S60"  label="tendency_of_middle_atmosphere_moles_of_molecular_hydrogen"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV8N116"  label="tendency_of_moles_of_molecular_hydrogen_in_troposphere"    />
+      <exact>
+         <element  key="SDN:P07:68:CF12S67"  label="tendency_of_troposphere_moles_of_molecular_hydrogen"    />
+         <element  key="SDN:P07:68:CF12S67"  label="tendency_of_troposphere_moles_of_molecular_hydrogen"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV8N117"  label="tendency_of_moles_of_nitrous_oxide_in_atmosphere"    />
+      <exact>
+         <element  key="SDN:P07:68:CF12S54"  label="tendency_of_atmosphere_moles_of_nitrous_oxide"    />
+         <element  key="SDN:P07:68:CF12S54"  label="tendency_of_atmosphere_moles_of_nitrous_oxide"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CF12N783"  label="tendency_of_ocean_eddy_kinetic_energy_content_due_to_bolus_transport"    />
+      <exact>
+         <element  key="SDN:P07:68:3MUBQ4IM"  label="tendency_of_ocean_eddy_kinetic_energy_content_due_to_parameterized_eddy_advection"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:I8R1394U"  label="tendency_of_ocean_eddy_kinetic_energy_content_due_to_parameterized_eddy_advection"    />
+      <exact>
+         <element  key="SDN:P07:68:3MUBQ4IM"  label="tendency_of_ocean_eddy_kinetic_energy_content_due_to_parameterized_eddy_advection"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV16A62"  label="tendency_of_sea_ice_amount_due_to_snow_conversion"    />
+      <exact>
+         <element  key="SDN:P07:68:9GNSLLJN"  label="tendency_of_sea_ice_amount_due_to_conversion_of_snow_to_sea_ice"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:RQ2Q233Z"  label="tendency_of_sea_surface_height_above_sea_level"    />
+      <exact>
+         <element  key="SDN:P07:68:ZJ5I0YQC"  label="tendency_of_sea_surface_height_above_mean_sea_level"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:XKQKCLKL"  label="tendency_of_sea_water_conservative_temperature_expressed_as_heat_content_due_to_parameterized_dianeutral_mixing"    />
+      <exact>
+         <element  key="SDN:P07:68:V3NLUKPK"  label="tendency_of_sea_water_conservative_temperature_expressed_as_heat_content_due_to_parameterized_eddy_dianeutral_mixing"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:A13CL568"  label="tendency_of_sea_water_potential_temperature_expressed_as_heat_content_due_to_parameterized_dianeutral_mixing"    />
+      <exact>
+         <element  key="SDN:P07:68:LM0A4IV4"  label="tendency_of_sea_water_potential_temperature_expressed_as_heat_content_due_to_parameterized_eddy_dianeutral_mixing"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV8N122"  label="tendency_of_sea_water_salinity_due_to_bolus_advection"    />
+      <exact>
+         <element  key="SDN:P07:68:PS23TRUE"  label="tendency_of_sea_water_salinity_due_to_parameterized_eddy_advection"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:TOGASZOW"  label="tendency_of_sea_water_salinity_expressed_as_salt_content_due_to_parameterized_dianeutral_mixing"    />
+      <exact>
+         <element  key="SDN:P07:68:X62TUKSM"  label="tendency_of_sea_water_salinity_expressed_as_salt_content_due_to_parameterized_eddy_dianeutral_mixing"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV8N127"  label="tendency_of_sea_water_temperature_due_to_bolus_advection"    />
+      <exact>
+         <element  key="SDN:P07:68:G9SFNEYA"  label="tendency_of_sea_water_temperature_due_to_parameterized_eddy_advection"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0825"  label="tendency_of_specific_humidity_due_to_large_scale_precipitation"    />
+      <exact>
+         <element  key="SDN:P07:68:CFV13A10"  label="tendency_of_specific_humidity_due_to_stratiform_precipitation"    />
+         <element  key="SDN:P07:68:CFV13A10"  label="tendency_of_specific_humidity_due_to_stratiform_precipitation"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0132"  label="tendency_of_water_vapor_content_of_atmosphere_layer"    />
+      <exact>
+         <element  key="SDN:P07:68:BBAH2132"  label="tendency_of_mass_content_of_water_vapor_in_atmosphere_layer"    />
+         <element  key="SDN:P07:68:BBAH2132"  label="tendency_of_mass_content_of_water_vapor_in_atmosphere_layer"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0133"  label="tendency_of_water_vapor_content_of_atmosphere_layer_due_to_convection"    />
+      <exact>
+         <element  key="SDN:P07:68:BBAH2131"  label="tendency_of_mass_content_of_water_vapor_in_atmosphere_layer_due_to_convection"    />
+         <element  key="SDN:P07:68:BBAH2131"  label="tendency_of_mass_content_of_water_vapor_in_atmosphere_layer_due_to_convection"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0134"  label="tendency_of_water_vapor_content_of_atmosphere_layer_due_to_deep_convection"    />
+      <exact>
+         <element  key="SDN:P07:68:BBAH2129"  label="tendency_of_mass_content_of_water_vapor_in_atmosphere_layer_due_to_deep_convection"    />
+         <element  key="SDN:P07:68:BBAH2129"  label="tendency_of_mass_content_of_water_vapor_in_atmosphere_layer_due_to_deep_convection"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0135"  label="tendency_of_water_vapor_content_of_atmosphere_layer_due_to_shallow_convection"    />
+      <exact>
+         <element  key="SDN:P07:68:BBAH2128"  label="tendency_of_mass_content_of_water_vapor_in_atmosphere_layer_due_to_shallow_convection"    />
+         <element  key="SDN:P07:68:BBAH2128"  label="tendency_of_mass_content_of_water_vapor_in_atmosphere_layer_due_to_shallow_convection"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0136"  label="tendency_of_water_vapor_content_of_atmosphere_layer_due_to_turbulence"    />
+      <exact>
+         <element  key="SDN:P07:68:BBAH2123"  label="tendency_of_mass_content_of_water_vapor_in_atmosphere_layer_due_to_turbulence"    />
+         <element  key="SDN:P07:68:BBAH2123"  label="tendency_of_mass_content_of_water_vapor_in_atmosphere_layer_due_to_turbulence"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0141"  label="thickness_of_large_scale_rainfall_amount"    />
+      <exact>
+         <element  key="SDN:P07:68:CFV15A31"  label="thickness_of_stratiform_rainfall_amount"    />
+         <element  key="SDN:P07:68:CFV15A31"  label="thickness_of_stratiform_rainfall_amount"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0142"  label="thickness_of_large_scale_snowfall_amount"    />
+      <exact>
+         <element  key="SDN:P07:68:CFV15A32"  label="thickness_of_stratiform_snowfall_amount"    />
+         <element  key="SDN:P07:68:CFV15A32"  label="thickness_of_stratiform_snowfall_amount"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:QV8NTU29"  label="toa_outgoing_shortwave_flux_assuming_clean_clear_sky"    />
+      <exact>
+         <element  key="SDN:P07:68:JNVL2P7J"  label="toa_outgoing_shortwave_flux_assuming_clear_sky_and_no_aerosol"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSNA010"  label="upward_air_velocity_expressed_as_tendency_of_sigma"    />
+      <exact>
+         <element  key="SDN:P07:68:CFSN0617"  label="lagrangian_tendency_of_atmosphere_sigma_coordinate"    />
+         <element  key="SDN:P07:68:CFSN0617"  label="lagrangian_tendency_of_atmosphere_sigma_coordinate"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV8N133"  label="upward_eliassen_palm_flux"    />
+      <exact>
+         <element  key="SDN:P07:68:CFV9S8"  label="upward_eliassen_palm_flux_in_air"    />
+         <element  key="SDN:P07:68:CFV9S8"  label="upward_eliassen_palm_flux_in_air"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV8N134"  label="upward_flux_of_eastward_momentum_due_to_nonorographic_eastward_gravity_waves"    />
+      <exact>
+         <element  key="SDN:P07:68:CFV9S5"  label="upward_eastward_momentum_flux_in_air_due_to_nonorographic_eastward_gravity_waves"    />
+         <element  key="SDN:P07:68:CFV9S5"  label="upward_eastward_momentum_flux_in_air_due_to_nonorographic_eastward_gravity_waves"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV8N135"  label="upward_flux_of_eastward_momentum_due_to_nonorographic_westward_gravity_waves"    />
+      <exact>
+         <element  key="SDN:P07:68:CFV9S6"  label="upward_eastward_momentum_flux_in_air_due_to_nonorographic_westward_gravity_waves"    />
+         <element  key="SDN:P07:68:CFV9S6"  label="upward_eastward_momentum_flux_in_air_due_to_nonorographic_westward_gravity_waves"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV8N136"  label="upward_flux_of_eastward_momentum_due_to_orographic_gravity_waves"    />
+      <exact>
+         <element  key="SDN:P07:68:CFV9S7"  label="upward_eastward_momentum_flux_in_air_due_to_orographic_gravity_waves"    />
+         <element  key="SDN:P07:68:CFV9S7"  label="upward_eastward_momentum_flux_in_air_due_to_orographic_gravity_waves"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:10QV8U2K"  label="upwelling_shortwave_flux_in_air_assuming_clean_clear_sky"    />
+      <exact>
+         <element  key="SDN:P07:68:RIJSEZI9"  label="upwelling_shortwave_flux_in_air_assuming_clear_sky_and_no_aerosol"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0087"  label="upwelling_spectral_radiance_in_air"    />
+      <exact>
+         <element  key="SDN:P07:68:0F95XPEG"  label="upwelling_radiance_per_unit_wavelength_in_air"    />
+         <element  key="SDN:P07:68:0F95XPEG"  label="upwelling_radiance_per_unit_wavelength_in_air"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0088"  label="upwelling_spectral_radiative_flux_in_air"    />
+      <exact>
+         <element  key="SDN:P07:68:3LRQADLT"  label="upwelling_radiative_flux_per_unit_wavelength_in_air"    />
+         <element  key="SDN:P07:68:3LRQADLT"  label="upwelling_radiative_flux_per_unit_wavelength_in_air"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0089"  label="upwelling_spectral_radiative_flux_in_sea_water"    />
+      <exact>
+         <element  key="SDN:P07:68:WGFWBWG7"  label="upwelling_radiative_flux_per_unit_wavelength_in_sea_water"    />
+         <element  key="SDN:P07:68:WGFWBWG7"  label="upwelling_radiative_flux_per_unit_wavelength_in_sea_water"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSNA009"  label="vertical_air_velocity_expressed_as_tendency_of_pressure"    />
+      <exact>
+         <element  key="SDN:P07:68:CFSN0616"  label="lagrangian_tendency_of_air_pressure"    />
+         <element  key="SDN:P07:68:CFSN0616"  label="lagrangian_tendency_of_air_pressure"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSNA011"  label="vertical_air_velocity_expressed_as_tendency_of_sigma"    />
+      <exact>
+         <element  key="SDN:P07:68:CFSN0617"  label="lagrangian_tendency_of_atmosphere_sigma_coordinate"    />
+         <element  key="SDN:P07:68:CFSN0617"  label="lagrangian_tendency_of_atmosphere_sigma_coordinate"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:BBAD2119"  label="volume_extinction_coefficient_in_air_due_to_ambient_aerosol"    />
+      <exact>
+         <element  key="SDN:P07:68:I4M0PBUO"  label="volume_extinction_coefficient_in_air_due_to_ambient_aerosol_particles"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0071"  label="volume_fraction_of_water_in_soil"    />
+      <exact>
+         <element  key="SDN:P07:68:CFSNA042"  label="volume_fraction_of_condensed_water_in_soil"    />
+         <element  key="SDN:P07:68:CFSNA042"  label="volume_fraction_of_condensed_water_in_soil"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0783"  label="volume_fraction_of_water_in_soil_at_critical_point"    />
+      <exact>
+         <element  key="SDN:P07:68:CFSNA043"  label="volume_fraction_of_condensed_water_in_soil_at_critical_point"    />
+         <element  key="SDN:P07:68:CFSNA043"  label="volume_fraction_of_condensed_water_in_soil_at_critical_point"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0072"  label="volume_fraction_of_water_in_soil_at_field_capacity"    />
+      <exact>
+         <element  key="SDN:P07:68:CFSNA044"  label="volume_fraction_of_condensed_water_in_soil_at_field_capacity"    />
+         <element  key="SDN:P07:68:CFSNA044"  label="volume_fraction_of_condensed_water_in_soil_at_field_capacity"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0073"  label="volume_fraction_of_water_in_soil_at_wilting_point"    />
+      <exact>
+         <element  key="SDN:P07:68:CFSNA045"  label="volume_fraction_of_condensed_water_in_soil_at_wilting_point"    />
+         <element  key="SDN:P07:68:CFSNA045"  label="volume_fraction_of_condensed_water_in_soil_at_wilting_point"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:V2HU8K9D"  label="volume_scattering_coefficient_in_air_due_to_ambient_aerosol_particles"    />
+      <exact>
+         <element  key="SDN:P07:68:JR2O2D6Z"  label="volume_scattering_coefficient_of_radiative_flux_in_air_due_to_ambient_aerosol_particles"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:DPHLAB11"  label="volume_scattering_coefficient_in_air_due_to_dried_aerosol_particles"    />
+      <exact>
+         <element  key="SDN:P07:68:69BZ39UQ"  label="volume_scattering_coefficient_of_radiative_flux_in_air_due_to_dried_aerosol_particles"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0047"  label="water_content_of_atmosphere_layer"    />
+      <exact>
+         <element  key="SDN:P07:68:BBAH2121"  label="mass_content_of_water_in_atmosphere_layer"    />
+         <element  key="SDN:P07:68:BBAH2121"  label="mass_content_of_water_in_atmosphere_layer"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSNA020"  label="water_evaporation_amount_from_canopy_where_land"    />
+      <exact>
+         <element  key="SDN:P07:68:CFSN0049"  label="water_evaporation_amount_from_canopy"    />
+         <element  key="SDN:P07:68:CFSN0049"  label="water_evaporation_amount_from_canopy"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0050"  label="water_evaporation_flux"    />
+      <exact>
+         <element  key="SDN:P07:68:OLT1W3WD"  label="water_evapotranspiration_flux"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0052"  label="water_evaporation_flux_from_canopy_where_land"    />
+      <exact>
+         <element  key="SDN:P07:68:CFSN0051"  label="water_evaporation_flux_from_canopy"    />
+      </exact>
+      <broad>
+         <element  key="SDN:P07:68:CFSN0051"  label="water_evaporation_flux_from_canopy"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0054"  label="water_evaporation_flux_where_sea_ice"    />
+      <exact>
+         <element  key="SDN:P07:68:97T4F10I"  label="surface_water_evaporation_flux"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0056"  label="water_flux_into_ocean"    />
+      <exact>
+         <element  key="SDN:P07:68:CFV10S1"  label="water_flux_into_sea_water"    />
+         <element  key="SDN:P07:68:CFV10S1"  label="water_flux_into_sea_water"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0057"  label="water_flux_into_ocean_from_rivers"    />
+      <exact>
+         <element  key="SDN:P07:68:CFV10S2"  label="water_flux_into_sea_water_from_rivers"    />
+         <element  key="SDN:P07:68:CFV10S2"  label="water_flux_into_sea_water_from_rivers"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0031"  label="water_vapor_content_of_atmosphere_layer"    />
+      <exact>
+         <element  key="SDN:P07:68:BBAH2120"  label="mass_content_of_water_vapor_in_atmosphere_layer"    />
+         <element  key="SDN:P07:68:BBAH2120"  label="mass_content_of_water_vapor_in_atmosphere_layer"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0032"  label="water_vapor_pressure"    />
+      <exact>
+         <element  key="SDN:P07:68:CFV15A33"  label="water_vapor_partial_pressure_in_air"    />
+         <element  key="SDN:P07:68:CFV15A33"  label="water_vapor_partial_pressure_in_air"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0033"  label="water_vapor_saturation_deficit"    />
+      <exact>
+         <element  key="SDN:P07:68:CFV15A34"  label="water_vapor_saturation_deficit_in_air"    />
+         <element  key="SDN:P07:68:CFV15A34"  label="water_vapor_saturation_deficit_in_air"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0034"  label="water_volume_transport_into_ocean_from_rivers"    />
+      <exact>
+         <element  key="SDN:P07:68:CFV10S3"  label="water_volume_transport_into_sea_water_from_rivers"    />
+         <element  key="SDN:P07:68:CFV10S3"  label="water_volume_transport_into_sea_water_from_rivers"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSN0037"  label="wind_mixing_energy_flux_into_ocean"    />
+      <exact>
+         <element  key="SDN:P07:68:CFV10S4"  label="wind_mixing_energy_flux_into_sea_water"    />
+         <element  key="SDN:P07:68:CFV10S4"  label="wind_mixing_energy_flux_into_sea_water"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSNA029"  label="wind_wave_period"    />
+      <exact>
+         <element  key="SDN:P07:68:CFSN0389"  label="sea_surface_wind_wave_period"    />
+         <element  key="SDN:P07:68:CFSN0389"  label="sea_surface_wind_wave_period"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV16A67"  label="wood_carbon_content"    />
+      <exact>
+         <element  key="SDN:P07:68:QHQLM3BE"  label="stem_mass_content_of_carbon"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFV16A68"  label="wood_debris_carbon_content"    />
+      <exact>
+         <element  key="SDN:P07:68:QDSSNHQK"  label="wood_debris_mass_content_of_carbon"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSNA016"  label="x_sea_water_velocity"    />
+      <exact>
+         <element  key="SDN:P07:68:CFSN0336"  label="sea_water_x_velocity"    />
+         <element  key="SDN:P07:68:CFSN0336"  label="sea_water_x_velocity"    />
+      </exact>
+   </match>
+   <match>
+      <element  key="SDN:P07:68:CFSNA032"  label="y_sea_water_velocity"    />
+      <exact>
+         <element  key="SDN:P07:68:CFSN0337"  label="sea_water_y_velocity"    />
+         <element  key="SDN:P07:68:CFSN0337"  label="sea_water_y_velocity"    />
+      </exact>
+   </match>
+</mapping>
