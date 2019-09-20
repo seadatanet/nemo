@@ -98,7 +98,7 @@ public class FileStationHeader extends FileSection
         GridDataFactory.fillDefaults().grab(false, false).applyTo(compo);
     
         useSeparatorInStationHeader = new Button(compo, SWT.CHECK);
-    	useSeparatorInStationHeader.setText(Messages.view_file_separator);
+    	useSeparatorInStationHeader.setText(Messages.edit_file_enteteStation_separator);
     	useSeparatorInStationHeader.setEnabled(false);
     	useSeparatorInStationHeader.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter()
 		{
