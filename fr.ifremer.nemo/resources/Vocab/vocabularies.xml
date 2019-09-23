@@ -34,7 +34,7 @@
    <vocabulary list="SDN:C35:1:"  version="1"  date="2010-02-19T02:01:37.000"  title="European Nature Information System Level 3 Habitats"   />
    <vocabulary list="SDN:C36:9:"  version="9"  date="2018-10-24T01:00:04.000"  title="Monitoring activity legislative drivers"   />
    <vocabulary list="SDN:C37:3:"  version="3"  date="2009-01-09T02:00:05.000"  title="Ten-degree Marsden Squares"   />
-   <vocabulary list="SDN:C38:70:"  version="70"  date="2019-09-17T01:00:08.000"  title="SeaDataNet Ports Gazetteer"   />
+   <vocabulary list="SDN:C38:71:"  version="71"  date="2019-09-21T01:00:06.000"  title="SeaDataNet Ports Gazetteer"   />
    <vocabulary list="SDN:C39:1:"  version="1"  date="2009-09-30T01:01:08.000"  title="World Meteorological Organisation sea states"   />
    <vocabulary list="SDN:C40:1:"  version="1"  date="2009-09-30T01:01:08.000"  title="Bonn Agreement pollution report accuracy"   />
    <vocabulary list="SDN:C41:2:"  version="2"  date="2011-08-27T01:00:05.000"  title="BODC marine pollution sources"   />
@@ -58,7 +58,7 @@
    <vocabulary list="SDN:C88:46:"  version="46"  date="2019-07-12T01:00:07.000"  title="BODC asset access right roles"   />
    <vocabulary list="SDN:C89:0:"  version="0"  date="2011-12-13T00:00:00.000"  title="BODC dataset roles"   />
    <vocabulary list="SDN:C96:1:"  version="1"  date="2012-10-04T01:00:03.000"  title="BODC data model spatial objects"   />
-   <vocabulary list="SDN:C97:1511:"  version="1511"  date="2019-09-19T01:00:08.000"  title="NERC Vocabulary Server Version 1 mappings index"   />
+   <vocabulary list="SDN:C97:1512:"  version="1512"  date="2019-09-21T01:00:06.000"  title="NERC Vocabulary Server Version 1 mappings index"   />
    <vocabulary list="SDN:C98:10:"  version="10"  date="2013-08-23T01:00:03.000"  title="Vocabulary Server list subject categories"   />
    <vocabulary list="SDN:D01:1:"  version="1"  date="2017-11-11T02:00:03.000"  title="DCAT Themes for Linked Data Representation of the SeaDataNet EDMED Catalogue"   />
    <vocabulary list="SDN:E01:7:"  version="7"  date="2014-06-25T01:00:03.000"  title="ESEAS active tide gauge sites"   />
@@ -137,7 +137,7 @@
    <vocabulary list="SDN:L19:3:"  version="3"  date="2015-03-13T02:00:02.000"  title="SeaDataNet keyword types"   />
    <vocabulary list="SDN:L20:5:"  version="5"  date="2019-05-10T01:00:06.000"  title="SeaDataNet measurand qualifier flags"   />
    <vocabulary list="SDN:L21:5:"  version="5"  date="2012-07-17T01:00:03.000"  title="SeaDataNet device category types"   />
-   <vocabulary list="SDN:L22:396:"  version="396"  date="2019-09-18T01:00:09.000"  title="SeaVoX Device Catalogue"   />
+   <vocabulary list="SDN:L22:397:"  version="397"  date="2019-09-21T01:00:06.000"  title="SeaVoX Device Catalogue"   />
    <vocabulary list="SDN:L23:9:"  version="9"  date="2017-09-07T01:00:04.000"  title="SeaDataNet metadata entities"   />
    <vocabulary list="SDN:L24:8:"  version="8"  date="2018-09-06T01:00:03.000"  title="SeaDataNet data transport formats"   />
    <vocabulary list="SDN:L26:1:"  version="1"  date="2014-05-07T07:19:59.000"  title="EDIOS permitted sampling interval units"   />
