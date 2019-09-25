@@ -10,7 +10,7 @@ Pour plus de détails, se référer au manuel utilisateur de NEMO.
 
 ==TABLE DE COUPLAGE=================
 
-Ce menu permet la gestion de la table de couplage de NEMO qui permet la génération du fichier de mapping utilisé par le Download Manager de SeaDataNet 
+Ce menu permet la gestion de la table de couplage de NEMO qui permet la génération du fichier de mapping utilisé par le Replication Manager de SeaDataNet 
 pour faire la correspondance entre un LICAL_CDI_ID (un profil vertical, une série temporelle ou une trajectoire) et le fichier contenant ce LOCAL_CDI_ID.
 1/ Table de couplage/Importer: importe un fichier de mapping dans la table de couplage de NEMO.
 2/ Table de couplage/Exporter: exporte la table de couplage dans un fichier.
@@ -375,7 +375,7 @@ Cette étape de conversion génère :
 - If "Création d'un résumé pour le CDI de SeaDataNet" est coché dans la configuration de NEMO, un fichier de résumé pour le CDI est créé, pendant le processus de conversion.
   C'est un fichier au format (CSV) qui doit être converti en fichier Excel pour être directement utilisable par le logiciel MIKADO pour générer les descriptions XML des
   stations converties au format ODV et/ou au format MEDATLAS. 
-- If "Création du mapping pour le download manager de SeaDataNet" est coché dans la configuration de NEMO, l'information est insérée dans la table de couplage de NEMO pour toute les stations converties au format ODV et/ou au format MEDATLAS. 
+- If "Création du mapping pour le Replication Manager de SeaDataNet" est coché dans la configuration de NEMO, l'information est insérée dans la table de couplage de NEMO pour toute les stations converties au format ODV et/ou au format MEDATLAS. 
   
 La conversion est divisée en 2 étapes:
 1-conversion du fichier en mémoire : la conversion en mémoire peut être interrompue à tout moment.

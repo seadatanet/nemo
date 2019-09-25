@@ -10,8 +10,8 @@ For detailed explanation, please see NEMO user manual.
 
 ==COUPLING TABLE==
 
-This menu allows the management of the coupling table to be able to generate coupling file used by SeaDataNet download manager.
-Coupling file is used by SeaDataNet download manager to make the mapping between a LOCAL_CDI_ID (one profile, one time-series or one trajectory) 
+This menu allows the management of the coupling table to be able to generate coupling file used by SeaDataNet Replication Manager.
+Coupling file is used by SeaDataNet Replication Manager to make the mapping between a LOCAL_CDI_ID (one profile, one time-series or one trajectory) 
 and the file containing this LOCAL_CDI_ID.
 1/ Coupling Table/Import: to import a coupling file into the coupling table of NEMO.
 2/ Coupling Table/Export: to export the coupling table of NEMO into a coupling file.
@@ -376,7 +376,7 @@ This conversion step generates:
   while NEMO is converting the input file(s). It is a Coma Separated Values (CSV) file that can be converted
   to an Excel file directly usable by Mikado to generate a CDI XML export, corresponding to the stations that
   are converted to ODV or MEDATLAS format. 
-- If "Generate mapping for SeaDataNet download manager" is clicked in NEMO settings, mapping information
+- If "Generate mapping for SeaDataNet Replication Manager" is clicked in NEMO settings, mapping information
   (for all the stations that are converted to ODV or MEDATLAS format) are inserted in the local database of NEMO.
 
 Conversion is divided in two steps:
