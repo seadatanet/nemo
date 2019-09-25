@@ -610,7 +610,8 @@ public class Parameter extends AbstractModel {
 		String code;
 		// on ne fabrique le code qu'à un seul endroit comme ca on sera sur que
 		// c'est le meme!!!!
-		code = getLocalCode();
+//		code = getLocalCode();
+		code= getIndexedLocalCode();
 
 		if (!isText) {
 			paramHeader.append(code);
@@ -644,8 +645,8 @@ public class Parameter extends AbstractModel {
 		String code;
 		// on ne fabrique le code qu'à un seul endroit comme ca on sera sur que
 		// c'est le meme!!!!
-		code = getLocalCode();
-
+//		code = getLocalCode();
+		code= getIndexedLocalCode();
 		if (!isText) {
 			paramHeader.append(code);
 			paramHeader.append(Global.SPACE);
