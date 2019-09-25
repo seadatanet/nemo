@@ -721,11 +721,11 @@ public class NetCDFWriter extends NemoWriter {
 		// paramètres mesurés
 		for (ParameterModel pModel : dataDomain.getModel().getParameterModels()) {
 
-			varName = pModel.getParameter().getCodeP011();
+			varName = pModel.getParameter().getIndexedP011();
 			if(map_P011_VarName.get(varName)!=null){
 				varName=map_P011_VarName.get(varName);
 			}else{
-				varName = pModel.getParameter().getCodeP011();
+				varName = pModel.getParameter().getIndexedP011();
 			}
 
 			pModel.computeParameterValue(inputLine);
