@@ -118,6 +118,7 @@ public class EditCruiseForm extends EditForm {
 		super.afficheEdition();
 
 		ViewLog.aideCruise();
+		defineMandatorySections();
 
 		// affichage du texte dans la zone de gauche
 		textAreaCruise.setText(Utils.texteBrut);

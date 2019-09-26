@@ -94,7 +94,7 @@ public class EditStationForm extends EditForm {
 		super.afficheEdition();
 
 		ViewLog.aideStation();
-
+		defineMandatorySections();
 		// affichage du texte dans la zone de gauche
 		textAreaStation.setText(Utils.texteBrut);
 
