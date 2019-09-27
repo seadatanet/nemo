@@ -35,9 +35,8 @@ public class StationFormValidator extends FormValidator {
 
 		try {
 			//37866: mise a jour des tous les champs car affichage peut etre a modifier en fonction des selections effectuees 
-			  Nemo.getInstance().getViewMain().getEditStationForm().actualiseEdition();
-			  
-			  
+			Nemo.getInstance().getViewMain().getEditStationForm().actualiseEdition();
+
 			EditStationForm editStationForm = Nemo.getInstance().getViewMain().getEditStationForm();
 			EditFileForm editFileForm = Nemo.getInstance().getViewMain().getEditFileForm();
 			EditConversionForm editConversionForm = Nemo.getInstance().getViewMain().getEditConversionForm();
@@ -46,8 +45,9 @@ public class StationFormValidator extends FormValidator {
 			// test des valeurs de Station
 
 			// Remplissage du tableau de correspondance de flags
-			if (!rulesManager.isConversionToNetCDF())
+			if (!rulesManager.isConversionToNetCDF()) {
 				editStationForm.qcFlags.getFlagTable().fillFlagTable(editStationForm.qcFlags.getTabCorrespondance());
+			}
 
 			// retour à l'onglet message d'erreur
 			ViewLog.tabFolderLog.setSelection(0);
@@ -59,26 +59,24 @@ public class StationFormValidator extends FormValidator {
 			ligneOK = true;
 			ok = true;
 			int size = 0;
-			if (!rulesManager.isConversionToNetCDF())
+			if (!rulesManager.isConversionToNetCDF()) {
 				size = editStationForm.qcFlags.getTabFlagQC().getItemCount();
+			}
 
 			// raz du message d'erreurs
 			Utils.messageErreur(Global.EMPTY_STRING);
 
-			// NUMERO STATION
+			/**
+			 * ==============================================================================================
+			 * NUMERO STATION
+			 * ==============================================================================================
+			 */
 			if (!editStationForm.stationNumber.isManual()) {
 				// position dans le fichier, verif des valeurs
-				resultat1 =
-						editStationForm.stationNumber
-								.checkAutoInputValues(Messages
-										.getString(Intern.S_STATIONNUMBER));
+				resultat1 = editStationForm.stationNumber.checkAutoInputValues(Messages.getString(Intern.S_STATIONNUMBER));
 				if (resultat1) {
-					String lign =
-							editStationForm.stationNumber.getLineText(0);
-					ligneOK =
-							editStationForm.stationNumber
-									.checkInDataOrHeader(lign, Messages
-											.getString(Intern.S_STATIONNUMBER));
+					String lign = editStationForm.stationNumber.getLineText(0);
+					ligneOK = editStationForm.stationNumber.checkInDataOrHeader(lign, Messages.getString(Intern.S_STATIONNUMBER));
 					ok = ok && ligneOK;
 				}else{
 					Utils.messageErreurAppend(Messages.Etape_129);
@@ -114,42 +112,37 @@ public class StationFormValidator extends FormValidator {
 				value = value.trim();
 			}
 			if (!RulesManager.getInstance().isProcessCollection() && RulesManager.getInstance().isConversionToMedatlas() && value.length() > 5) {
-				editConversionForm
-						.setWarningStation(Messages.ViewLog_6);
+				editConversionForm.setWarningStation(Messages.ViewLog_6);
 			} else {
-				editConversionForm
-						.setWarningStation(Global.EMPTY_STRING);
+				editConversionForm.setWarningStation(Global.EMPTY_STRING);
 			}
 
 			// FAE022 : TYPE DE DONNEES
 			// FAE 6536 : on exige un dataType même si pas onglet Cruise
-			if (editStationForm.dataType.getDatatype()
-						.getValueCombo().getSelectionIndex() == -1) {
+			if (editStationForm.dataType.getDatatype().getValueCombo().getSelectionIndex() == -1) {
 				Utils.messageErreurAppend(Messages.Etape_32);
 				ok = ok && false;
 			}
-			
-		
-			// HISTORIQUE ACQUISITION
+
+			/**
+			 * ==============================================================================================
+			 * HISTORIQUE ACQUISITION
+			 * ==============================================================================================
+			 */
 			if (!rulesManager.isConversionToNetCDF() && !editStationForm.historique.isManual()) {
 				// position dans fichier, verif des valeurs
-				resultat1 =
-						editStationForm.historique.checkAutoInputValues(0,
-								Messages.Etape_33);
+				resultat1 =editStationForm.historique.checkAutoInputValues(0,Messages.Etape_33);
 				ok = ok && resultat1;
 
 				if (resultat1) {
-					int nbreLignes =
-							editStationForm.historique.calculNbreLignes(0);
+					int nbreLignes = editStationForm.historique.calculNbreLignes(0);
 
 					if (nbreLignes > 1) {
 						ok = ok && false;
 						Utils.messageErreurAppend(Messages.Etape_113);
 					} else {
 						// nbre de ligne bon mais est-ce au bon endroit ?
-						resultat3 =
-								editStationForm.historique.checkPosition(
-										0, nbreLignes);
+						resultat3 = editStationForm.historique.checkPosition(0, nbreLignes);
 						ok = ok && resultat3;
 
 						if (!resultat3)
@@ -157,25 +150,18 @@ public class StationFormValidator extends FormValidator {
 					}
 				}
 				// on permet de n'utiliser qu'une ligne sur les deux!
-				if (!editStationForm.historique.getLineText(1).trim()
-						.equals(Global.EMPTY_STRING)) {
-					resultat2 =
-							editStationForm.historique
-									.checkAutoInputValues(1, Messages.Etape_34);
+				if (!editStationForm.historique.getLineText(1).trim().equals(Global.EMPTY_STRING)) {
+					resultat2 = editStationForm.historique.checkAutoInputValues(1, Messages.Etape_34);
 
 					if (resultat2) {
-						int nbreLignes =
-								editStationForm.historique
-										.calculNbreLignes(1);
+						int nbreLignes = editStationForm.historique.calculNbreLignes(1);
 
 						if (nbreLignes > 1) {
 							ok = ok && false;
 							Utils.messageErreurAppend(Messages.Etape_115);
 						} else {
 							// nbre de ligne bon mais est-ce au bon endroit
-							resultat3 =
-									editStationForm.historique
-											.checkPosition(1, nbreLignes);
+							resultat3 = editStationForm.historique.checkPosition(1, nbreLignes);
 							ok = ok && resultat3;
 
 							if (!resultat3)
@@ -187,50 +173,46 @@ public class StationFormValidator extends FormValidator {
 				}
 				ok = ok && resultat2;
 			}
+			/**
+			 * ==============================================================================================
+			 * COMMENTAIRE
+			 * ==============================================================================================
+			 */
 
-			// COMMENTAIRE
 			if (!rulesManager.isConversionToNetCDF() && !editStationForm.comments.isManual()) {
-				resultat1 =
-						editStationForm.comments
-								.checkAutoInputValues(Messages
-										.getString(Intern.S_COMMENT));
+				resultat1 = editStationForm.comments.checkAutoInputValues(Messages.getString(Intern.S_COMMENT));
 				ok = ok && resultat1;
 
 				if (resultat1) {
 					// VERIF si le commentaire ne depasse pas le nombre de
 					// lignes
 					// d'entete station!
-					int nbreLignes =
-							editStationForm.comments.calculNbreLignes();
-					resultat3 =
-							editStationForm.comments
-									.checkPosition(nbreLignes);
+					int nbreLignes =editStationForm.comments.calculNbreLignes();
+					resultat3 =editStationForm.comments.checkPosition(nbreLignes);
 					ok = ok && resultat3;
 
 					if (!resultat3)
 						Utils.messageErreurAppend(Messages.Etape_108);
 				}
 			}
+			/**
+			 * ==============================================================================================
+			 * ECHANTILLON SURFACE
+			 * ==============================================================================================
+			 */
 
-			// ECHANTILLON SURFACE
 			if (!rulesManager.isConversionToNetCDF() && !editStationForm.surfaceSample.isManual()) {
-				resultat1 =
-						editStationForm.surfaceSample
-								.checkAutoInputValues(0, Messages.Etape_36);
+				resultat1 = editStationForm.surfaceSample.checkAutoInputValues(0, Messages.Etape_36);
 				ok = ok && resultat1;
 				if (resultat1) {
-					int nbreLignes =
-							editStationForm.surfaceSample
-									.calculNbreLignes(0);
+					int nbreLignes = editStationForm.surfaceSample.calculNbreLignes(0);
 
 					if (nbreLignes > 1) {
 						ok = ok && false;
 						Utils.messageErreurAppend(Messages.Etape_109);
 					} else {
 						// nbre de ligne bon mais est-ce au bon endroit ?
-						resultat3 =
-								editStationForm.surfaceSample
-										.checkPosition(0, nbreLignes);
+						resultat3 =editStationForm.surfaceSample.checkPosition(0, nbreLignes);
 						ok = ok && resultat3;
 
 						if (!resultat3)
@@ -239,24 +221,17 @@ public class StationFormValidator extends FormValidator {
 				}
 
 				// permettre une seule ligne sur les deux!
-				if (!editStationForm.surfaceSample.getLineText(1)
-						.trim().equals(Global.EMPTY_STRING)) {
-					resultat2 =
-							editStationForm.surfaceSample
-									.checkAutoInputValues(1, Messages.Etape_37);
+				if (!editStationForm.surfaceSample.getLineText(1).trim().equals(Global.EMPTY_STRING)) {
+					resultat2 = editStationForm.surfaceSample.checkAutoInputValues(1, Messages.Etape_37);
 					if (resultat2) {
 
-						int nbreLignes =
-								editStationForm.surfaceSample
-										.calculNbreLignes(1);
+						int nbreLignes = editStationForm.surfaceSample.calculNbreLignes(1);
 
 						if (nbreLignes > 1) {
 							ok = ok && false;
 							Utils.messageErreurAppend(Messages.Etape_112);
 						} else {
-							resultat3 =
-									editStationForm.surfaceSample
-											.checkPosition(1, nbreLignes);
+							resultat3 = editStationForm.surfaceSample.checkPosition(1, nbreLignes);
 							ok = ok && resultat3;
 
 							if (!resultat3)
@@ -270,23 +245,21 @@ public class StationFormValidator extends FormValidator {
 
 			}
 
-			// HEURE
-			String formatSaisi =
-					editStationForm.time.getConverter().getText();
+			/**
+			 * ==============================================================================================
+			 * HEURE
+			 * ==============================================================================================
+			 */
+
+			String formatSaisi = editStationForm.time.getConverter().getText();
 			checkValue = true;
 			if (!formatSaisi.equals("Unknown")) {
 				if (!editStationForm.time.isManual()) {
 					// position dans fichier
-					resultat1 =
-							editStationForm.time
-									.checkAutoInputValues(Messages
-											.getString(Intern.S_TIME));
+					resultat1 = editStationForm.time.checkAutoInputValues(Messages.getString(Intern.S_TIME));
 					if (resultat1) {
-						String lign =
-								editStationForm.time.getLineText(0);
-						ligneOK =
-								editStationForm.time.checkInDataOrHeader(
-										lign, Messages.getString(Intern.S_TIME));
+						String lign = editStationForm.time.getLineText(0);
+						ligneOK = editStationForm.time.checkInDataOrHeader(lign, Messages.getString(Intern.S_TIME));
 						ok = ok && ligneOK;
 					} else {
 						checkValue = false;
@@ -296,38 +269,33 @@ public class StationFormValidator extends FormValidator {
 
 				// check value (creer une nouvelle heure)
 				if (checkValue) {
-
 					try {
-						value =
-								editStationForm.time.getValue().replace(' ',
-										'0');
+						value =editStationForm.time.getValue().replace(' ','0');
 						DateTimeFormat format = new DateTimeFormat(formatSaisi);
-
-						if (!value.equals(StationSection.defaultValue))
+						if (!value.equals(StationSection.defaultValue)) {
 							format.parseObject(value);
+						}
 					} catch (ParseException e) {
-						Utils.messageErreurAppend(Messages.Etape_38
-								+ formatSaisi + Messages.Etape_39 + value);
+						Utils.messageErreurAppend(Messages.Etape_38+ formatSaisi + Messages.Etape_39 + value);
 						ok = ok && false;
 						e.printStackTrace();
 					}
 				}
 			}
-			// DATE
-			formatSaisi =
-					editStationForm.date.getConverter().getText();
+			/**
+			 * ==============================================================================================
+			 * DATE
+			 * ==============================================================================================
+			 */
+			formatSaisi =editStationForm.date.getConverter().getText();
 			checkValue = true;
 			if (!editStationForm.date.isManual()) {
 				// position dans fichier
 				// check valeurs ligne/debut/fin
-				resultat1 =
-						editStationForm.date.checkAutoInputValues(Messages
-								.getString(Intern.S_DATE));
+				resultat1 = editStationForm.date.checkAutoInputValues(Messages.getString(Intern.S_DATE));
 				if (resultat1) {
 					String lign = editStationForm.date.getLineText(0);
-					ligneOK =
-							editStationForm.date.checkInDataOrHeader(lign,
-									Messages.getString(Intern.S_DATE));
+					ligneOK = editStationForm.date.checkInDataOrHeader(lign,Messages.getString(Intern.S_DATE));
 					ok = ok && ligneOK;
 				} else {
 					checkValue = false;
@@ -336,8 +304,7 @@ public class StationFormValidator extends FormValidator {
 			}
 			// check value (creer une nouvelle date)
 			if (checkValue) {
-				value =
-						editStationForm.date.getValue().replace(' ', '0');
+				value = editStationForm.date.getValue().replace(' ', '0');
 				try {
 					DateTimeFormat format = new DateTimeFormat(formatSaisi);
 					format.parseObject(value);
@@ -350,22 +317,16 @@ public class StationFormValidator extends FormValidator {
 			}
 			/**
 			 * ==============================================================================================
-			 * bottom depth
+			 * bottom depth / PROFONDEUR     non-obligatoire
 			 * ==============================================================================================
 			 */
-			// PROFONDEUR non-obligatoire
 			checkValue = true;
 			if (!editStationForm.depth.isManual()
 					&& !rulesManager.isTrajectory()) {
-				resultat1 =
-						editStationForm.depth
-								.checkAutoInputValues(Messages
-										.getString(Intern.S_DEPTH));
+				resultat1 = editStationForm.depth.checkAutoInputValues(Messages.getString(Intern.S_DEPTH));
 				if (resultat1) {
 					String lign = editStationForm.depth.getLineText(0);
-					ligneOK =
-							editStationForm.depth.checkInDataOrHeader(
-									lign, Messages.getString(Intern.S_DEPTH));
+					ligneOK = editStationForm.depth.checkInDataOrHeader(lign, Messages.getString(Intern.S_DEPTH));
 					ok = ok && ligneOK;
 				} else {
 					checkValue = false;
@@ -392,23 +353,15 @@ public class StationFormValidator extends FormValidator {
 			}
 			/**
 			 * ==============================================================================================
-			 * UT conversion
+			 * UT conversion / DECALAGE/TU
 			 * ==============================================================================================
 			 */
-			// DECALAGE/TU
 			checkValue = true;
 			if (!rulesManager.isConversionToNetCDF() && !editStationForm.utConvertion.isManual()) {
-				resultat1 =
-						editStationForm.utConvertion
-								.checkAutoInputValues(Messages
-										.getString(Intern.S_OFFSETTU));
+				resultat1 = editStationForm.utConvertion.checkAutoInputValues(Messages.getString(Intern.S_OFFSETTU));
 				if (resultat1) {
-					String lign =
-							editStationForm.utConvertion.getLineText(0);
-					ligneOK =
-							editStationForm.utConvertion
-									.checkInDataOrHeader(lign, Messages
-											.getString(Intern.S_OFFSETTU));
+					String lign = editStationForm.utConvertion.getLineText(0);
+					ligneOK = editStationForm.utConvertion.checkInDataOrHeader(lign, Messages.getString(Intern.S_OFFSETTU));
 					ok = ok && ligneOK;
 				} else {
 					checkValue = false;
@@ -429,20 +382,14 @@ public class StationFormValidator extends FormValidator {
 			 * latitude
 			 * ==============================================================================================
 			 */
-			formatSaisi =
-					editStationForm.latitude.getConverter().getText();
+			formatSaisi = editStationForm.latitude.getConverter().getText();
 			checkValue = true;
 			if (!editStationForm.latitude.isManual()) {
 				// position dans fichier
-				resultat1 =
-						editStationForm.latitude
-								.checkAutoInputValues(Messages.getString(Intern.S_LAT));
+				resultat1 = editStationForm.latitude.checkAutoInputValues(Messages.getString(Intern.S_LAT));
 				if (resultat1) {
-					String lign =
-							editStationForm.latitude.getLineText(0);
-					ligneOK =
-							editStationForm.latitude.checkInDataOrHeader(
-									lign, Messages.getString(Intern.S_LAT));
+					String lign = editStationForm.latitude.getLineText(0);
+					ligneOK = editStationForm.latitude.checkInDataOrHeader(lign, Messages.getString(Intern.S_LAT));
 					ok = ok && ligneOK;
 				} else {
 					checkValue = false;
@@ -453,11 +400,8 @@ public class StationFormValidator extends FormValidator {
 			if (checkValue) {
 				value = editStationForm.latitude.getValue();
 				try {//40216
-					LatitudeFormat latitudeFormat =
-							new LatitudeFormat(formatSaisi);
-					latitudeFormat
-							.setVariableLength(editStationForm.latitude
-									.isVariablePos());
+					LatitudeFormat latitudeFormat = new LatitudeFormat(formatSaisi);
+					latitudeFormat.setVariableLength(editStationForm.latitude.isVariablePos());
 					latitudeFormat.parseObject(value);
 
 				} catch (ParseException e) {
@@ -477,20 +421,14 @@ public class StationFormValidator extends FormValidator {
 			 * longitude
 			 * ==============================================================================================
 			 */
-			formatSaisi =
-					editStationForm.longitude.getConverter().getText();
+			formatSaisi = editStationForm.longitude.getConverter().getText();
 			checkValue = true;
 			if (!editStationForm.longitude.isManual()) {
 				// position dans fichier
-				resultat1 =
-						editStationForm.longitude
-								.checkAutoInputValues(Messages.getString(Intern.S_LON));
+				resultat1 = editStationForm.longitude.checkAutoInputValues(Messages.getString(Intern.S_LON));
 				if (resultat1) {
-					String lign =
-							editStationForm.longitude.getLineText(0);
-					ligneOK =
-							editStationForm.longitude.checkInDataOrHeader(
-									lign, Messages.getString(Intern.S_LON));
+					String lign = editStationForm.longitude.getLineText(0);
+					ligneOK = editStationForm.longitude.checkInDataOrHeader(lign, Messages.getString(Intern.S_LON));
 					ok = ok && ligneOK;
 				} else {
 					checkValue = false;
@@ -501,11 +439,8 @@ public class StationFormValidator extends FormValidator {
 			if (checkValue) {
 				value = editStationForm.longitude.getValue();
 				try {//40216
-					LongitudeFormat longitudeFormat =
-							new LongitudeFormat(formatSaisi);
-					longitudeFormat
-							.setVariableLength(editStationForm.longitude
-									.isVariablePos());
+					LongitudeFormat longitudeFormat = new LongitudeFormat(formatSaisi);
+					longitudeFormat.setVariableLength(editStationForm.longitude.isVariablePos());
 					longitudeFormat.parseObject(value);
 
 				} catch (ParseException e) {
@@ -526,28 +461,19 @@ public class StationFormValidator extends FormValidator {
 			 * **********************************************************************************************
 			 * ==============================================================================================
 			 */
-			// specifique SERIE TEMPO ou TRAJECTOIRE
 			if (rulesManager.isTimeSeries() || rulesManager.isTrajectory()) {
 
 				/**
 				 * ==============================================================================================
-				 * sensor depth
+				 * sensor depth / PROFONDEUR DU CAPTEUR
 				 * ==============================================================================================
 				 */
-				// PROFONDEUR DU CAPTEUR
 				checkValue = true;
 				if (!editStationForm.sensorDepth.isManual()) {
-					resultat1 =
-							editStationForm.sensorDepth
-									.checkAutoInputValues(Messages
-											.getString(Intern.S_SENSORDEPTH));
+					resultat1 = editStationForm.sensorDepth.checkAutoInputValues(Messages.getString(Intern.S_SENSORDEPTH));
 					if (resultat1) {
-						String lign =
-								editStationForm.sensorDepth.getLineText(0);
-						ligneOK =
-								editStationForm.sensorDepth
-										.checkInDataOrHeader(lign, Messages
-												.getString(Intern.S_SENSORDEPTH));
+						String lign =editStationForm.sensorDepth.getLineText(0);
+						ligneOK =editStationForm.sensorDepth.checkInDataOrHeader(lign, Messages.getString(Intern.S_SENSORDEPTH));
 						ok = ok && ligneOK;
 					} else {
 						checkValue = false;
@@ -584,26 +510,17 @@ public class StationFormValidator extends FormValidator {
 				}
 				/**
 				 * ==============================================================================================
-				 * sampling rate
+				 * sampling rate / FREQUENCE ECHANTILLONNAGE
 				 * ==============================================================================================
 				 */
-				// FREQUENCE ECHANTILLONNAGE
 				// ne tester que si section frequence pas grisee !
 				checkValue = true;
 				if (!rulesManager.isConversionToNetCDF() && editStationForm.samplingRate.isEnabled()) {
 					if (!editStationForm.samplingRate.isManual()) {
-						resultat1 =
-								editStationForm.samplingRate
-										.checkAutoInputValues(Messages
-												.getString(Intern.S_SAMPLINGRATE));
+						resultat1 = editStationForm.samplingRate.checkAutoInputValues(Messages.getString(Intern.S_SAMPLINGRATE));
 						if (resultat1) {
-							String lign =
-									editStationForm.samplingRate
-											.getLineText(0);
-							ligneOK =
-									editStationForm.samplingRate
-											.checkInDataOrHeader(lign, Messages
-													.getString(Intern.S_SAMPLINGRATE));
+							String lign =editStationForm.samplingRate.getLineText(0);
+							ligneOK =editStationForm.samplingRate.checkInDataOrHeader(lign, Messages.getString(Intern.S_SAMPLINGRATE));
 							ok = ok && ligneOK;
 						} else {
 							checkValue = false;
@@ -611,8 +528,7 @@ public class StationFormValidator extends FormValidator {
 						ok = ok && resultat1;
 					}
 					if (!rulesManager.isConversionToNetCDF() && checkValue) {
-						value =
-								editStationForm.samplingRate.getValue();
+						value =editStationForm.samplingRate.getValue();
 
 						if (value.trim().equals(Global.EMPTY_STRING)) {
 							ok = ok && false;
@@ -625,26 +541,18 @@ public class StationFormValidator extends FormValidator {
 								Double dblValue = Double.parseDouble(value);
 								if (dblValue.compareTo(new Double("0.0")) == 0) { //$NON-NLS-1$
 									ok = ok && false;
-									Utils
-											.messageErreurAppend(Messages.Etape_103b);
+									Utils.messageErreurAppend(Messages.Etape_103b);
 								} else {
-									org.nfunk.jep.JEP parser =
-											new org.nfunk.jep.JEP();
+									org.nfunk.jep.JEP parser =new org.nfunk.jep.JEP();
 									parser.addStandardFunctions();
 									parser.addStandardConstants();
-									parser.addVariable(Global.STR_CONVERT,
-											dblValue);
-									parser
-											.parseExpression(Global.STR_CONVERT
-													+ editStationForm.samplingRate
-															.getConverter().getText()
-															.trim());
+									parser.addVariable(Global.STR_CONVERT, dblValue);
+									parser.parseExpression(Global.STR_CONVERT + editStationForm.samplingRate.getConverter().getText().trim());
 
 									Double resultJEP = parser.getValue();
 									if (resultJEP.isNaN()) {
 										ok = ok && false;
-										Utils
-												.messageErreurAppend(Messages.Etape_103);
+										Utils.messageErreurAppend(Messages.Etape_103);
 									}
 								}
 							}
@@ -659,46 +567,29 @@ public class StationFormValidator extends FormValidator {
 			 * **********************************************************************************************
 			 * ==============================================================================================
 			 */
-			// specifique SERIE TEMPO
 			if (!rulesManager.isConversionToNetCDF() && rulesManager.isTimeSeries()) {
 				/**
 				 * ==============================================================================================
-				 * latitude end
+				 * latitude end / LATITUDE DE FIN
 				 * ==============================================================================================
 				 */
-				// LATITUDE DE FIN
-				formatSaisi =
-						editStationForm.endLatitude.getConverter()
-								.getText();
+				formatSaisi =editStationForm.endLatitude.getConverter().getText();
 				value = editStationForm.endLatitude.getValue();
 				checkValue = true;
 				if (value != null
 						&& !value.trim().equals(Global.EMPTY_STRING)
-						&& !value.equals(editStationForm.latitude
-								.getValue())) {
+						&& !value.equals(editStationForm.latitude.getValue())) {
 					// vérification du format
-					if (formatSaisi == null
-							|| formatSaisi.equals(Global.EMPTY_STRING)) {
-						formatSaisi =
-								editStationForm.latitude.getConverter()
-										.getText();
-						editStationForm.endLatitude.getConverter()
-								.setText(formatSaisi);
+					if (formatSaisi == null || formatSaisi.equals(Global.EMPTY_STRING)) {
+						formatSaisi =editStationForm.latitude.getConverter().getText();
+						editStationForm.endLatitude.getConverter().setText(formatSaisi);
 					}
 					if (!editStationForm.endLatitude.isManual()) {
 						// position dans fichier
-						resultat1 =
-								editStationForm.endLatitude
-										.checkAutoInputValues(Messages
-												.getString(Intern.S_ELAT));
+						resultat1 =editStationForm.endLatitude.checkAutoInputValues(Messages.getString(Intern.S_ELAT));
 						if (resultat1) {
-							String lign =
-									editStationForm.endLatitude
-											.getLineText(0);
-							ligneOK =
-									editStationForm.endLatitude
-											.checkInDataOrHeader(lign, Messages
-													.getString(Intern.S_ELAT));
+							String lign =editStationForm.endLatitude.getLineText(0);
+							ligneOK = editStationForm.endLatitude.checkInDataOrHeader(lign, Messages.getString(Intern.S_ELAT));
 							ok = ok && ligneOK;
 						} else {
 							checkValue = false;
@@ -708,11 +599,8 @@ public class StationFormValidator extends FormValidator {
 					// check value (creer une nouvelle latitude)
 					if (checkValue) {
 						try {
-							LatitudeFormat latitudeFormat =
-									new LatitudeFormat(formatSaisi);
-							latitudeFormat
-									.setVariableLength(editStationForm.endLatitude
-											.isVariablePos());
+							LatitudeFormat latitudeFormat = new LatitudeFormat(formatSaisi);
+							latitudeFormat.setVariableLength(editStationForm.endLatitude.isVariablePos());
 							latitudeFormat.parseObject(value);
 
 						} catch (ParseException e) {
@@ -724,42 +612,26 @@ public class StationFormValidator extends FormValidator {
 				}
 				/**
 				 * ==============================================================================================
-				 * longitude end
+				 * longitude end / LONGITUDE DE FIN
 				 * ==============================================================================================
 				 */
-				// LONGITUDE DE FIN
-				formatSaisi =
-						editStationForm.endLongitude.getConverter()
-								.getText();
+				formatSaisi = editStationForm.endLongitude.getConverter().getText();
 				value = editStationForm.endLongitude.getValue();
 				checkValue = true;
 				if (value != null
 						&& !value.trim().equals(Global.EMPTY_STRING)
-						&& !value.equals(editStationForm.longitude
-								.getValue())) {
+						&& !value.equals(editStationForm.longitude.getValue())) {
 					// vérification du format
-					if (formatSaisi == null
-							|| formatSaisi.equals(Global.EMPTY_STRING)) {
-						formatSaisi =
-								editStationForm.longitude.getConverter()
-										.getText();
-						editStationForm.endLongitude.getConverter()
-								.setText(formatSaisi);
+					if (formatSaisi == null || formatSaisi.equals(Global.EMPTY_STRING)) {
+						formatSaisi =editStationForm.longitude.getConverter().getText();
+						editStationForm.endLongitude.getConverter().setText(formatSaisi);
 					}
 					if (!editStationForm.endLongitude.isManual()) {
 						// position dans fichier
-						resultat1 =
-								editStationForm.endLongitude
-										.checkAutoInputValues(Messages
-												.getString(Intern.S_ELON));
+						resultat1 =editStationForm.endLongitude.checkAutoInputValues(Messages.getString(Intern.S_ELON));
 						if (resultat1) {
-							String lign =
-									editStationForm.endLongitude
-											.getLineText(0);
-							ligneOK =
-									editStationForm.endLongitude
-											.checkInDataOrHeader(lign, Messages
-													.getString(Intern.S_ELON));
+							String lign =editStationForm.endLongitude.getLineText(0);
+							ligneOK =editStationForm.endLongitude.checkInDataOrHeader(lign, Messages.getString(Intern.S_ELON));
 							ok = ok && ligneOK;
 						} else {
 							checkValue = false;
@@ -769,11 +641,8 @@ public class StationFormValidator extends FormValidator {
 					// check value (creer une nouvelle longitude)
 					if (checkValue) {
 						try {
-							LongitudeFormat longitudeFormat =
-									new LongitudeFormat(formatSaisi);
-							longitudeFormat
-									.setVariableLength(editStationForm.endLongitude
-											.isVariablePos());
+							LongitudeFormat longitudeFormat =new LongitudeFormat(formatSaisi);
+							longitudeFormat.setVariableLength(editStationForm.endLongitude.isVariablePos());
 							longitudeFormat.parseObject(value);
 
 						} catch (ParseException e) {
@@ -785,23 +654,15 @@ public class StationFormValidator extends FormValidator {
 				}
 				/**
 				 * ==============================================================================================
-				 * depth end
+				 * depth end / ROFONDEUR DE FIN
 				 * ==============================================================================================
 				 */
-				// PROFONDEUR DE FIN
 				checkValue = true;
 				if (!editStationForm.endDepth.isManual()) {
-					resultat1 =
-							editStationForm.endDepth
-									.checkAutoInputValues(Messages
-											.getString(Intern.S_EDEPTH));
+					resultat1 =editStationForm.endDepth.checkAutoInputValues(Messages.getString(Intern.S_EDEPTH));
 					if (resultat1) {
-						String lign =
-								editStationForm.endDepth.getLineText(0);
-						ligneOK =
-								editStationForm.endDepth
-										.checkInDataOrHeader(lign, Messages
-												.getString(Intern.S_EDEPTH));
+						String lign =editStationForm.endDepth.getLineText(0);
+						ligneOK =editStationForm.endDepth.checkInDataOrHeader(lign, Messages.getString(Intern.S_EDEPTH));
 						ok = ok && ligneOK;
 					} else {
 						checkValue = false;
@@ -819,25 +680,16 @@ public class StationFormValidator extends FormValidator {
 				}
 				/**
 				 * ==============================================================================================
-				 * magnetic declin
+				 * magnetic declin / DECLINAISON MAGNETIQUE
 				 * ==============================================================================================
 				 */
-				// DECLINAISON MAGNETIQUE
 				value = editStationForm.magneticDeclin.getValue();
 				checkValue = true;
 				if (!editStationForm.magneticDeclin.isManual()) {
-					resultat1 =
-							editStationForm.magneticDeclin
-									.checkAutoInputValues(Messages
-											.getString(Intern.S_MAGNETIC));
+					resultat1 =editStationForm.magneticDeclin.checkAutoInputValues(Messages.getString(Intern.S_MAGNETIC));
 					if (resultat1) {
-						String lign =
-								editStationForm.magneticDeclin
-										.getLineText(0);
-						ligneOK =
-								editStationForm.magneticDeclin
-										.checkInDataOrHeader(lign, Messages
-												.getString(Intern.S_MAGNETIC));
+						String lign =editStationForm.magneticDeclin.getLineText(0);
+						ligneOK = editStationForm.magneticDeclin.checkInDataOrHeader(lign, Messages.getString(Intern.S_MAGNETIC));
 						ok = ok && ligneOK;
 					} else {
 						checkValue = false;
@@ -857,39 +709,28 @@ public class StationFormValidator extends FormValidator {
 			} // fin specifique serie tempo
 			/**
 			 * ==============================================================================================
-			 * flag QC
+			 * flag QC /  Flag QC
 			 * ==============================================================================================
 			 */
-			// Section Flag QC
 			boolean flagOK = false;
 			for (i = 0; i < size; i++) {
-				String nomSection =
-						Messages.getString(Intern.S_QCFLAG)
-								+ Global.SEP
-								+ editStationForm.qcFlags.getTabFlagQC()
-										.getItems()[i].getText(1);
+				String nomSection =Messages.getString(Intern.S_QCFLAG)
+						+ Global.SEP
+						+ editStationForm.qcFlags.getTabFlagQC().getItems()[i].getText(1);
 
-				AutoLine line =
-						new AutoLine(1, true, MetaInData.FACULTATIF, false);
+				AutoLine line = new AutoLine(1, true, MetaInData.FACULTATIF, false);
 				line.draw(new Shell(), false);
-				line
-						.setValue(editStationForm.qcFlags.getTabFlagQC()
-								.getItems()[i].getText(2),
-								editStationForm.qcFlags.getTabFlagQC()
-										.getItems()[i].getText(3),
-								editStationForm.qcFlags.getTabFlagQC()
-										.getItems()[i].getText(4));
+				line.setValue(
+						editStationForm.qcFlags.getTabFlagQC().getItems()[i].getText(2),
+						editStationForm.qcFlags.getTabFlagQC().getItems()[i].getText(3),
+						editStationForm.qcFlags.getTabFlagQC().getItems()[i].getText(4));
 
 				flagOK = line.checkValues(nomSection);
 				if (flagOK) {
-					String zone =
-							Messages.getString(Intern.S_QCFLAG).trim()
-									+ " : " //$NON-NLS-1$
-									+ editStationForm.qcFlags
-											.getTabFlagQC().getItems()[i].getText(1);
-					ligneOK =
-							line.checkInDataOrHeader(
-									line.getNumberLine().getText(), zone);
+					String zone = Messages.getString(Intern.S_QCFLAG).trim()
+							+ " : " //$NON-NLS-1$
+							+ editStationForm.qcFlags.getTabFlagQC().getItems()[i].getText(1);
+					ligneOK = line.checkInDataOrHeader(line.getNumberLine().getText(), zone);
 					ok = ok && ligneOK;
 				} else {
 					ok = ok && false;
@@ -920,11 +761,9 @@ public class StationFormValidator extends FormValidator {
 
 		// envoi des valeurs dans le modele
 		Utils.messageOK(Messages.success_etape);
-		if (!editConversionForm.getWarningStation().equals(
-				Global.EMPTY_STRING)) {
+		if (!editConversionForm.getWarningStation().equals(Global.EMPTY_STRING)) {
 			Utils.messageOKAppend(Messages.ViewLog_8);
-			Utils.messageOKAppend(editConversionForm
-					.getWarningStation());
+			Utils.messageOKAppend(editConversionForm.getWarningStation());
 		}
 		//      DataModel.initStation();
 		editStationForm.initFromNewModel();
