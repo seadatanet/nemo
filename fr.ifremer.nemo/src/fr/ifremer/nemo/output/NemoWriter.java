@@ -265,6 +265,7 @@ public abstract class NemoWriter {
 
 					}
 					bufferedReader.close();
+					Nemo.getInstance().setLog_currentInputFile("");
 
 					Collections.sort(stationDomain.getStations(inputFilePath));
 
@@ -363,6 +364,7 @@ public abstract class NemoWriter {
 			Station currentStation) throws FileNotFoundException {
 		File inputFile = new File(inputFilePath + File.separator
 				+ currentStation.getFileName());
+		Nemo.getInstance().setLog_currentInputFile(inputFilePath + File.separator+ currentStation.getFileName());
 		return new BufferedReader(new FileReader(inputFile));
 
 	}
