@@ -11,8 +11,7 @@ package fr.ifremer.nemo.ui.edit.station;
 import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
-import java.util.Calendar;
-import java.util.TimeZone;
+import java.text.ParsePosition;
 import java.util.regex.Pattern;
 
 import org.eclipse.jface.layout.GridDataFactory;
@@ -23,6 +22,8 @@ import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Text;
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.config.ManageLists;
@@ -50,6 +51,7 @@ import fr.ifremer.nemo.util.format.ExternalizableFormat;
 import fr.ifremer.nemo.util.format.LatitudeFormat;
 import fr.ifremer.nemo.util.format.LongitudeFormat;
 import fr.ifremer.nemo.ws.WSDataType;
+import fr.ifremer.sismer_tools.DateTools;
 
 /**
  * Description: objet graphique représentant une section dans l'onglet station
@@ -146,8 +148,8 @@ public class StationSection extends NemoSection {
 				new GrpNoValueInput(nbLignes, manualLabel, type, defaultValue);
 	}
 
-	
-	
+
+
 	/**
 	 * add a AutoInput group
 	 * @param autoLabel
@@ -291,8 +293,8 @@ public class StationSection extends NemoSection {
 		manualInput.setEnabled(false);
 		manualInput.razDefaultValues();
 		if (autoInput!=null){
-		autoInput.setValue(line, start, end, posVariable, valueVariable, i,
-				hasDefaultValue, isDefaultValueSeceted, defaultValue);
+			autoInput.setValue(line, start, end, posVariable, valueVariable, i,
+					hasDefaultValue, isDefaultValueSeceted, defaultValue);
 		}
 	}
 
@@ -325,10 +327,10 @@ public class StationSection extends NemoSection {
 			real_ligne =
 					new Integer(ligne
 							+ Integer
-									.valueOf(Nemo.getInstance().getViewMain()
-											.getEditFileForm()
-											.getSectionFileHeader()
-											.getValue()));
+							.valueOf(Nemo.getInstance().getViewMain()
+									.getEditFileForm()
+									.getSectionFileHeader()
+									.getValue()));
 		}
 
 		boolean hasDefaultValue = frag.isDefaultValue();
@@ -563,16 +565,16 @@ public class StationSection extends NemoSection {
 						@Override
 						public void widgetSelected(
 								org.eclipse.swt.events.SelectionEvent e)
-				{
+						{
 
-					manualInput.setEnabled(true);
+							manualInput.setEnabled(true);
 
-					if (autoInput != null)
-					{
-						autoInput.razValues();
-						autoInput.setEnabled(false);
-					}
-				}
+							if (autoInput != null)
+							{
+								autoInput.razValues();
+								autoInput.setEnabled(false);
+							}
+						}
 					});
 			// DefaultValue
 			if (!Nemo.getInstance().getViewMain().getEditStationForm().filled)
@@ -587,16 +589,16 @@ public class StationSection extends NemoSection {
 						@Override
 						public void widgetSelected(
 								org.eclipse.swt.events.SelectionEvent f)
-				{
+						{
 
-					// raz de la valeur manuelles et injectées
-						if (manualInput != null)
-					{
-						manualInput.razDefaultValues();
-						manualInput.setEnabled(false);
-					}
-					autoInput.setEnabled(true);
-				}
+							// raz de la valeur manuelles et injectées
+							if (manualInput != null)
+							{
+								manualInput.razDefaultValues();
+								manualInput.setEnabled(false);
+							}
+							autoInput.setEnabled(true);
+						}
 					});
 			// DefaultValue
 			// autoInput.getButtonPos().setSelection(!blnDefaultManual);
@@ -622,10 +624,10 @@ public class StationSection extends NemoSection {
 		buttonTest.setText(Messages.label_test);
 		// LISTENER
 		buttonTest
-				.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
-					@Override
-					public void widgetSelected(
-							org.eclipse.swt.events.SelectionEvent g)
+		.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+			@Override
+			public void widgetSelected(
+					org.eclipse.swt.events.SelectionEvent g)
 			{
 				String errorMessage = Global.EMPTY_STRING;
 				Utils.messageErreur(errorMessage);
@@ -635,11 +637,11 @@ public class StationSection extends NemoSection {
 					{
 					case DATE:
 						errorMessage = Messages.Etape_122;
-						dateTest();
+						dateTimeTest(true);
 						break;
 					case TIME:
 						errorMessage = Messages.Etape_121;
-						timeTest();
+						dateTimeTest(false);
 						break;
 					case LAT:
 						errorMessage = Messages.Etape_53;
@@ -679,7 +681,7 @@ public class StationSection extends NemoSection {
 					resultTest.pack();
 				}
 			}
-				});
+		});
 
 		resultTest = new Text(compoTest, SWT.BORDER);
 		resultTest.setEnabled(false);
@@ -694,7 +696,7 @@ public class StationSection extends NemoSection {
 		if (!isManual()) {
 			String line =
 					autoInput.getLines().get(0).getNumberLine().getText()
-							.trim();
+					.trim();
 			String start =
 					autoInput.getLines().get(0).getStart().getText().trim();
 			String end = autoInput.getLines().get(0).getEnd().getText().trim();
@@ -705,8 +707,8 @@ public class StationSection extends NemoSection {
 						.isCruiseIsAFile()) {
 					strFichier =
 							fr.ifremer.nemo.util.Utils
-									.extraitFichierChemin(Nemo.getInstance()
-											.getViewMain().getEditFileForm().nomFichier);
+							.extraitFichierChemin(Nemo.getInstance()
+									.getViewMain().getEditFileForm().nomFichier);
 				} else {
 					File directory =
 							new File(Nemo.getInstance().getViewMain()
@@ -720,7 +722,7 @@ public class StationSection extends NemoSection {
 				result =
 						(strFichier.substring(Integer.parseInt(start) - 1,
 								Integer
-										.parseInt(end))).trim();
+								.parseInt(end))).trim();
 			} else {
 				result = autoInput.getValue(0).trim();
 				autoInput.getLines().get(0).selectInViewFile();
@@ -731,67 +733,35 @@ public class StationSection extends NemoSection {
 
 		// 6406
 		resultTest
-				.setText(Formatter.getSingleton().formatStationNumber(result));
+		.setText(Formatter.getSingleton().formatStationNumber(result));
 		resultTest.pack();
 	}
 
-	protected void dateTest() throws ParseException,
-			UnsupportedEncodingException {
 
-		//long timeWithTUDecal = getTimeWithTUDecal();
 
-		TimeZone tz = TimeZone.getTimeZone(DateTimeFormat.GMT);
-		Calendar cal = Calendar.getInstance(tz);
-		cal.clear();
-		cal.setLenient(false);
+	//	private long getTimeWithTUDecal() throws UnsupportedEncodingException,
+	//	ParseException {
+	//		long hourLong = myForm.time.timeTest();
+	//
+	//		Formatter formatter = Formatter.getSingleton();
+	//		String timeString =
+	//				formatter.formatDateTime("hh24:mm:ss.sss", hourLong, "9999");
+	//
+	//		// System.out.println(timeString);
+	//		return hourLong;
+	//	}
 
-		// TEST DATE
-		resultTest.setText(getValue());
-		if (!isManual())
-			autoInput.selectInViewFile();
+	//	private void setDefaultUTConversion() {
+	//		if (myForm.utConvertion.getValue().equals("")) {
+	//			myForm.utConvertion.getManualInput().setValue("0.0", 0);
+	//			myForm.utConvertion.getAutoInput().setEnabled(false);
+	//		}
+	//	}
 
-		setDefaultUTConversion();
-		DateTimeFormat format = new DateTimeFormat(converter.getText());
-		Long DateLong =
-				(Long) format.parseObject(resultTest.getText()
-						.replace(' ', '0'));
+	protected long dateTimeTest(boolean isDate) throws ParseException, UnsupportedEncodingException {
 
-		cal.setTimeInMillis(DateLong /*+ timeWithTUDecal + HourLong */);
-
-		if (!isManual())
-			autoInput.getLines().get(0).selectInViewFile();
-
-		DateLong = cal.getTimeInMillis();
-
-		Formatter formatter = Formatter.getSingleton();
-
-		resultTest.setText(formatter.formatDateTime("yyyy-MM-dd", DateLong)); //$NON-NLS-1$
-		resultTest.pack();
-	}
-
-	private long getTimeWithTUDecal() throws UnsupportedEncodingException,
-			ParseException {
-		long hourLong = myForm.time.timeTest();
-
-		Formatter formatter = Formatter.getSingleton();
-		String timeString =
-				formatter.formatDateTime("hh24:mm:ss.sss", hourLong, "9999");
-
-		// System.out.println(timeString);
-		return hourLong;
-	}
-
-	private void setDefaultUTConversion() {
-		if (myForm.utConvertion.getValue().equals("")) {
-			myForm.utConvertion.getManualInput().setValue("0.0", 0);
-			myForm.utConvertion.getAutoInput().setEnabled(false);
-		}
-	}
-
-	protected long timeTest() throws ParseException,
-			UnsupportedEncodingException {
-
-		resultTest.setText(getValue());
+		String settedValue=getValue();
+		resultTest.setText(settedValue);
 
 		if (resultTest.getText().equals(defaultValue))
 			return 0;
@@ -800,25 +770,60 @@ public class StationSection extends NemoSection {
 			autoInput.selectInViewFile();
 
 		DateTimeFormat format = new DateTimeFormat(converter.getText());
-		setDefaultUTConversion();
-		Float flDecalTU =
-				Float.parseFloat(myForm.utConvertion.getValue()) * 3600 * 1000;
-		Long lgDecalTU = flDecalTU.longValue();
-		Long HourLong =
-				(Long) format.parseObject(resultTest.getText()
-						.replace(' ', '0'))
-						+ lgDecalTU;
+		long res = format.parseObject(settedValue,   new ParsePosition(0));
 
-		Formatter formatter = Formatter.getSingleton();
-		String timeString =
-				formatter.formatDateTime("hh24:mm:ss.sss", HourLong, "9999");
-		resultTest.setText(timeString);
+		String test="";
 
+		if (isDate) {
+			try {
+				test=DateTools.formatDateWithISOPattern(new DateTime(res, DateTimeZone.UTC) , "YYYY-MM-DD");
+			}catch (Exception e) {
+				// TODO: handle exception
+			}
+		}else {
+			try {
+				Float flDecalTU =Float.parseFloat(myForm.utConvertion.getValue()) * 3600 * 1000;
+				Long lgDecalTU = flDecalTU.longValue();
+				test=DateTools.formatDateWithISOPattern(new DateTime(res+lgDecalTU, DateTimeZone.UTC) , "hh:mm:ss.sss");
+			}catch (Exception e) {
+				// TODO: handle exception
+			}
+		}
+		resultTest.setText(test);
 		resultTest.pack();
 
-		return HourLong;
+		return res;
 	}
-
+	//	protected void dateTimeTest(boolean isDate) throws ParseException, UnsupportedEncodingException {
+	//
+	//		TimeZone tz = TimeZone.getTimeZone(DateTimeFormat.GMT);
+	//		Calendar cal = Calendar.getInstance(tz);
+	//		cal.clear();
+	//		cal.setLenient(false);
+	//
+	//		// TEST DATE
+	//		resultTest.setText(getValue());
+	//		if (!isManual())
+	//			autoInput.selectInViewFile();
+	//
+	//		setDefaultUTConversion();
+	//		DateTimeFormat format = new DateTimeFormat(converter.getText());
+	//		Long DateLong =
+	//				(Long) format.parseObject(resultTest.getText()
+	//						.replace(' ', '0'));
+	//
+	//		cal.setTimeInMillis(DateLong /*+ timeWithTUDecal + HourLong */);
+	//
+	//		if (!isManual())
+	//			autoInput.getLines().get(0).selectInViewFile();
+	//
+	//		DateLong = cal.getTimeInMillis();
+	//
+	//		Formatter formatter = Formatter.getSingleton();
+	//
+	//		resultTest.setText(formatter.formatDateTime("yyyy-MM-dd", DateLong)); //$NON-NLS-1$
+	//		resultTest.pack();
+	//	}
 	protected void latitudeTest() throws ParseException {
 
 		resultTest.setText(getValue());
@@ -868,7 +873,7 @@ public class StationSection extends NemoSection {
 	}
 
 	protected void longitudeTest() throws ParseException,
-			UnsupportedEncodingException {
+	UnsupportedEncodingException {
 
 		resultTest.setText(getValue());
 		if (!isManual())
@@ -884,7 +889,7 @@ public class StationSection extends NemoSection {
 
 	protected String calcLongitudeTest(String formatString, String value,
 			boolean isVariableLength, boolean displayDebugMessages)
-			throws UnsupportedEncodingException {
+					throws UnsupportedEncodingException {
 		LongitudeFormat format;
 		String res;
 
@@ -929,7 +934,7 @@ public class StationSection extends NemoSection {
 				// position dans fichier
 				String line =
 						autoInput.getLines().get(0).getNumberLine().getText()
-								.trim();
+						.trim();
 				String start =
 						autoInput.getLines().get(0).getStart().getText().trim();
 				String end =
@@ -943,7 +948,7 @@ public class StationSection extends NemoSection {
 					stringValue =
 							ligne.substring(Integer.parseInt(start) - 1,
 									Integer
-											.parseInt(end));
+									.parseInt(end));
 				}
 			}
 
@@ -1042,17 +1047,17 @@ public class StationSection extends NemoSection {
 						case DATE:
 							format = new DateTimeFormat();
 							((DateTimeFormat) format)
-									.setFormatString(formatSaisi);
+							.setFormatString(formatSaisi);
 							break;
 						case LAT:
 							format = new LatitudeFormat();
 							((LatitudeFormat) format)
-									.setFormatString(formatSaisi);
+							.setFormatString(formatSaisi);
 							break;
 						case LON:
 							format = new LongitudeFormat();
 							((LongitudeFormat) format)
-									.setFormatString(formatSaisi);
+							.setFormatString(formatSaisi);
 							break;
 						default:
 							break;
@@ -1087,7 +1092,7 @@ public class StationSection extends NemoSection {
 										fillVariPos);
 						int entete =
 								Nemo.getInstance().getDomain().getMedia()
-										.getModel().getFileHeader();
+								.getModel().getFileHeader();
 						Utils.calculNbreLignesPuisRemplissageFrag(frag, entete);
 					} else {
 						// Généralisation
@@ -1105,9 +1110,9 @@ public class StationSection extends NemoSection {
 							try {
 								propertyModel.fillFragment(this, ligne, i,
 										true, fillVariPos, getAutoInput()
-												.isDefaultValueEnable(),
+										.isDefaultValueEnable(),
 										getAutoInput()
-												.isDefaultValueSelected(),
+										.isDefaultValueSelected(),
 										getAutoInput().getDefaultValue());
 							} catch (Exception e) {
 								e.printStackTrace();
@@ -1115,10 +1120,10 @@ public class StationSection extends NemoSection {
 							if (fillVariPos) {
 								if (format instanceof LatitudeFormat) {
 									((LatitudeFormat) format)
-											.setVariableLength(isVariablePos());
+									.setVariableLength(isVariablePos());
 								} else if (format instanceof LongitudeFormat) {
 									((LongitudeFormat) format)
-											.setVariableLength(isVariablePos());
+									.setVariableLength(isVariablePos());
 								}
 							}
 							position = true;
@@ -1158,13 +1163,13 @@ public class StationSection extends NemoSection {
 			} else {
 				ligne =
 						String
-								.valueOf(ligneSaisie
-										- Integer
-												.valueOf(Nemo.getInstance()
-														.getViewMain()
-														.getEditFileForm()
-														.getSectionFileHeader()
-														.getValue()));
+						.valueOf(ligneSaisie
+								- Integer
+								.valueOf(Nemo.getInstance()
+										.getViewMain()
+										.getEditFileForm()
+										.getSectionFileHeader()
+										.getValue()));
 			}
 			propertyModel.fillFragment(myForm.stationNumber,
 					ligne);
@@ -1213,24 +1218,24 @@ public class StationSection extends NemoSection {
 		stationModel.setDataType(newDataType);
 		// }
 	}
-private DataType getDataTypeFromCruiseTableDataSurvey(String code) throws Exception{
-	for (int i = 0; i < TableDataSurvey.types.size(); i++) {
-		if (code.contentEquals(TableDataSurvey.types.get(i)
-				.getCode())) {
-			DataType newDataType = new DataType();
-			newDataType.setCode(code);
-			// c'est le bon dataType
-			// on recupere le nombre de mesures et le QC
-			newDataType.setNumberOfProfiles(TableDataSurvey.types
-					.get(i).getNombre());
-			newDataType.setQc(TableDataSurvey.types.get(i).getQc());
-			newDataType.setSensor(TableDataSurvey.types.get(i)
-					.getSensor());
-			return newDataType;
+	private DataType getDataTypeFromCruiseTableDataSurvey(String code) throws Exception{
+		for (int i = 0; i < TableDataSurvey.types.size(); i++) {
+			if (code.contentEquals(TableDataSurvey.types.get(i)
+					.getCode())) {
+				DataType newDataType = new DataType();
+				newDataType.setCode(code);
+				// c'est le bon dataType
+				// on recupere le nombre de mesures et le QC
+				newDataType.setNumberOfProfiles(TableDataSurvey.types
+						.get(i).getNombre());
+				newDataType.setQc(TableDataSurvey.types.get(i).getQc());
+				newDataType.setSensor(TableDataSurvey.types.get(i)
+						.getSensor());
+				return newDataType;
+			}
 		}
+		throw new Exception("datatype not found in cruise data types table"); // TODO 35230 msg
 	}
-	throw new Exception("datatype not found in cruise data types table"); // TODO 35230 msg
-}
 	@Override
 	public void fillFromModel(StationModel stationModel) {
 		// Station station = stationModel.getModel();
@@ -1262,7 +1267,7 @@ private DataType getDataTypeFromCruiseTableDataSurvey(String code) throws Except
 						propertyCode = Intern.DATETIME;
 					myForm.qcFlags.setFlagFragment(propertyModel
 							.getFlag(), propertyCode, Messages.getString(
-							propertyCode)
+									propertyCode)
 							.trim());
 
 					// gestion des converters
@@ -1282,16 +1287,16 @@ private DataType getDataTypeFromCruiseTableDataSurvey(String code) throws Except
 							// ((DateTimeFormat)propertyModel.getFormat()).getFormatString();
 							// else
 							formule =
-									((DateTimeFormat) format).getFormatString();
+							((DateTimeFormat) format).getFormatString();
 							break;
 						case LAT:
 							formule =
-									((LatitudeFormat) format).getFormatString();
+							((LatitudeFormat) format).getFormatString();
 							break;
 						case LON:
 							formule =
-									((LongitudeFormat) format)
-											.getFormatString();
+							((LongitudeFormat) format)
+							.getFormatString();
 							break;
 						default:
 							break;
@@ -1351,7 +1356,7 @@ private DataType getDataTypeFromCruiseTableDataSurvey(String code) throws Except
 		if (refProperty != null) {
 			if (refProperty.isUserProvided()) {
 				Nemo.getInstance().getViewMain().getEditStationForm().stationNumber
-						.setManualValueInput(refProperty.getUserValue());
+				.setManualValueInput(refProperty.getUserValue());
 			} else {
 				Fragment frag = refProperty.getFragment();
 				Integer realLigne = null;
@@ -1359,8 +1364,8 @@ private DataType getDataTypeFromCruiseTableDataSurvey(String code) throws Except
 				if (ligne == 0)
 					realLigne = new Integer(0);
 				Nemo.getInstance().getViewMain().getEditStationForm().stationNumber
-						.setAutoValueInput(
-								refProperty, realLigne);
+				.setAutoValueInput(
+						refProperty, realLigne);
 			}
 		}
 
@@ -1441,7 +1446,7 @@ private DataType getDataTypeFromCruiseTableDataSurvey(String code) throws Except
 		Boolean isCruiseEnabled = RulesManager.getInstance().isCruiseEnabled();
 		Boolean addOk = true;
 		DataType dataType = station.getDataType();
-		
+
 		boolean isCruiseDataTypeEnabled = Nemo.getInstance().getViewMain().getEditCruiseForm().getSectionDataType().isEnabled();
 
 		// FAE 6536 - si pas d'onglet Cruise, ni de dataType dans le modele, on
@@ -1456,19 +1461,19 @@ private DataType getDataTypeFromCruiseTableDataSurvey(String code) throws Except
 
 		if (dataType != null) {
 			String code = dataType.getCode();
-			
-				BODCResult bodcRes = BodcChecker.getInstance().checkDataType(code);
-				if (bodcRes.getResStatus() == BODC_RES_STATUS.KO){
-					Utils.messageErreurAppend(bodcRes.getErrorMsg());
-				}else if (bodcRes.getResStatus() == BODC_RES_STATUS.WARNING){
-					try {
-						station.setDataType(getDataTypeFromCruiseTableDataSurvey(bodcRes.getDataTypeCode()));
-					} catch (Exception e) {
-						Utils.messageErreurAppend(e.getMessage());
-						station.setDataType(null);
-					}
-					Utils.messageWarningAppend(bodcRes.getWarningMsg());
+
+			BODCResult bodcRes = BodcChecker.getInstance().checkDataType(code);
+			if (bodcRes.getResStatus() == BODC_RES_STATUS.KO){
+				Utils.messageErreurAppend(bodcRes.getErrorMsg());
+			}else if (bodcRes.getResStatus() == BODC_RES_STATUS.WARNING){
+				try {
+					station.setDataType(getDataTypeFromCruiseTableDataSurvey(bodcRes.getDataTypeCode()));
+				} catch (Exception e) {
+					Utils.messageErreurAppend(e.getMessage());
+					station.setDataType(null);
 				}
+				Utils.messageWarningAppend(bodcRes.getWarningMsg());
+			}
 
 			// si l'onglet cruise existe, on verifie que le dataType est bien
 			// dans la liste des datatypes de cet onglet

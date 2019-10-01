@@ -157,16 +157,21 @@ public class DateTimeUtils {
 			// faut que NEMO les mette
 //			frgmntDate = frgmntDate.replace(' ', '0');
 //			frgmntTime = frgmntTime.replace(' ', '0');
-			
-			frgmntFullDate = frgmntDate + Global.SPACE + frgmntTime;
-
-			formatFullDate = dFormat + Global.SPACE + tFormat;
+			if (frgmntDate.trim().isEmpty() && frgmntTime.trim().isEmpty()){
+				throw new ParseException("empty values", 0);
+			}else if (frgmntDate.trim().equals(frgmntTime.trim())){
+				frgmntFullDate=frgmntDate; // case using ISO or JULIAN DAY format (set date and time with the same value)
+				formatFullDate = dFormat;
+			}else {
+				frgmntFullDate = frgmntDate + Global.SPACE + frgmntTime;
+				formatFullDate = dFormat + Global.SPACE + tFormat;
+			}
 		}
 		
 		format.setFormatString(formatFullDate);
 		format.setRefDate(0);
 
-		return (Long) format.parseObject(frgmntFullDate);
+		return (long) format.parseObject(frgmntFullDate);
 	}
 
 	public static long computeEndTime(Station currentStation) {

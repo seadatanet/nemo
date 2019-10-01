@@ -381,7 +381,11 @@ public class PropertyModel extends AbstractModel {
 						} else {
 							result = _format.parseObject(sResult);
 						}
-					} else {
+					}else if (_format instanceof DateTimeFormat) {
+						DateTimeFormat formatDateTime = (DateTimeFormat) _format;
+							result = formatDateTime.parseObject(sResult);
+					}
+					else {
 						result = _format.parseObject(sResult);
 					}
 				} catch (ParseException e) {

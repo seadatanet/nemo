@@ -399,7 +399,7 @@ public class LatitudeFormat extends ExternalizableFormat implements Cloneable
 		try
 		{
 			if (isFreeDecimalDegrees()){//40216
-				pos.setIndex( source.length());
+				pos.setIndex( source.length()); 
 				return Double.valueOf(source);
 			}
 			else if (_variableLength)

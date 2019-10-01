@@ -1,6 +1,7 @@
 package fr.ifremer.nemo.ui.edit.station;
 
 import java.text.ParseException;
+import java.text.ParsePosition;
 import java.util.regex.Pattern;
 
 import org.eclipse.swt.widgets.Shell;
@@ -270,10 +271,10 @@ public class StationFormValidator extends FormValidator {
 				// check value (creer une nouvelle heure)
 				if (checkValue) {
 					try {
-						value =editStationForm.time.getValue().replace(' ','0');
+						value =editStationForm.time.getValue();//.replace(' ','0');
 						DateTimeFormat format = new DateTimeFormat(formatSaisi);
 						if (!value.equals(StationSection.defaultValue)) {
-							format.parseObject(value);
+							format.parseObject(value, new ParsePosition(0));
 						}
 					} catch (ParseException e) {
 						Utils.messageErreurAppend(Messages.Etape_38+ formatSaisi + Messages.Etape_39 + value);
@@ -304,10 +305,10 @@ public class StationFormValidator extends FormValidator {
 			}
 			// check value (creer une nouvelle date)
 			if (checkValue) {
-				value = editStationForm.date.getValue().replace(' ', '0');
+				value = editStationForm.date.getValue();//.replace(' ', '0');
 				try {
 					DateTimeFormat format = new DateTimeFormat(formatSaisi);
-					format.parseObject(value);
+					format.parseObject(value,new ParsePosition(0));
 				} catch (ParseException e) {
 					Utils.messageErreurAppend(Messages.Etape_43 + formatSaisi
 							+ Messages.Etape_44 + value);

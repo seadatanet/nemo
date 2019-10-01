@@ -157,45 +157,51 @@ public class StationDomain {
 
 	public StringBuffer getOdvTrajectoryHeader(Station currentStation,
 			String inputLine, int indexRecord) throws ParseException,
-			UnsupportedEncodingException, GenerationException {
+	UnsupportedEncodingException, GenerationException {
 		_currentStation = currentStation;
 
 		StringBuffer odvStationHeader = new StringBuffer();
 		String stationRef = currentStation.getReference();
 		// Cruise
 		String cruiseName = Nemo.getInstance().getDomain().getCruise().getModel().getName();
-		
+
 		if (cruiseName.isEmpty()){
 			cruiseName = Nemo.getInstance().getDomain().getCruise().getModel().getReference().trim();
 		}
 		if (cruiseName.isEmpty()){
 			throw new GenerationException(Messages.error_missing_cruise_reference);
 		}
-		
 
-//		odvStationHeader.append(form.limitString(cruiseName, 20));//40442: do not limit cruise name length
+
+		//		odvStationHeader.append(form.limitString(cruiseName, 20));//40442: do not limit cruise name length
 		odvStationHeader.append(cruiseName);
 		odvStationHeader.append(Global.TAB);
 
 		// Station
-//		odvStationHeader.append(form.limitString(getRef(true), 20));//40442: do not limit station name length
+		//		odvStationHeader.append(form.limitString(getRef(true), 20));//40442: do not limit station name length
 		odvStationHeader.append(getRef(true));
 		odvStationHeader.append(Global.TAB);
 
 		// Type
 		odvStationHeader.append(getTypeBC(stationRef));
 		odvStationHeader.append(Global.TAB);
-
-		// yyyy-mm-ddThh:mm:ss.sss
-		long currentDate = DateTimeUtils.getCurrentDate(currentStation,	indexRecord);
-		//30378
-		if ( Nemo.getInstance().getDomain().getStation().getModel().getProperty(Intern.S_DATE).isInData()){
-			currentDate = Long.valueOf(DateTimeUtils.convertTimestamp(inputLine));
+		try {
+			// yyyy-mm-ddThh:mm:ss.sss
+			long currentDate = DateTimeUtils.getCurrentDate(currentStation,	indexRecord);
+			//30378
+			if ( Nemo.getInstance().getDomain().getStation().getModel().getProperty(Intern.S_DATE).isInData()){
+				currentDate = Long.valueOf(DateTimeUtils.convertTimestamp(inputLine));
+			}
+			odvStationHeader.append(DateTimeUtils.getVariantDateTime(currentDate));
+			odvStationHeader.append(Global.TAB);
+			
+		}catch (Exception e) {
+			Nemo.getInstance().getLogger().error(e.getMessage() + " line: " + inputLine );
+			throw e;
 		}
+
 		
 		
-		odvStationHeader.append(DateTimeUtils.getVariantDateTime(currentDate));
-		odvStationHeader.append(Global.TAB);
 
 		// Longitude [degrees_east]
 		odvStationHeader.append(form.formatLongitude("+DDD.dddddd",
@@ -292,7 +298,7 @@ public class StationDomain {
 
 	public StringBuffer getHeader(Conversion c, Station currentStation,
 			String[] inputStationHeader) throws ParseException,
-			GenerationException {
+	GenerationException {
 
 		_currentStation = currentStation;
 
@@ -312,7 +318,7 @@ public class StationDomain {
 	@SuppressWarnings("nls")
 	private StringBuffer getOdvHeader(Station currentStation,
 			String[] inputStationHeader) throws ParseException,
-			GenerationException {
+	GenerationException {
 		String errorMessage = "";
 		try {
 			StringBuffer odvStationHeader = new StringBuffer();
@@ -331,7 +337,7 @@ public class StationDomain {
 			if (cruiseName.isEmpty()){
 				throw new GenerationException(Messages.error_missing_cruise_reference);
 			}
-//			odvStationHeader.append(form.limitString(cruiseName, 20));//40442: do not limit cruise name length
+			//			odvStationHeader.append(form.limitString(cruiseName, 20));//40442: do not limit cruise name length
 			odvStationHeader.append(cruiseName);
 			odvStationHeader.append(Global.TAB);
 
@@ -367,8 +373,8 @@ public class StationDomain {
 					// TODO: handle exception
 				}
 			}
-				odvStationHeader.append(dateTime);
-			
+			odvStationHeader.append(dateTime);
+
 			odvStationHeader.append(Global.TAB);
 
 			// Longitude [degrees_east]
@@ -407,7 +413,7 @@ public class StationDomain {
 				odvStationHeader.append(botDepth);
 			} else {
 				// odvStationHeader.append(Global.ZERO);
-//				odvStationHeader.append(Global.SPACE); // do not write a space, write nothing!
+				//				odvStationHeader.append(Global.SPACE); // do not write a space, write nothing!
 			}
 			odvStationHeader.append(Global.TAB);
 
@@ -513,7 +519,7 @@ public class StationDomain {
 	// FAE 6143
 	public Station getAndCheckLocalCDI(CruiseDomain cDomain, Conversion c,
 			Station st) throws ParseException, GenerationException,
-			UnsupportedEncodingException {
+	UnsupportedEncodingException {
 		String localCdi = getLocalCdiId(cDomain, c, st.getReference());
 		if (stationsLocalCDIList.contains(localCdi)) {
 			throw new GenerationException(
@@ -534,7 +540,7 @@ public class StationDomain {
 	@SuppressWarnings("nls")
 	private StringBuffer getMedatlasHeader(Station currentStation,
 			String[] inputStationHeader) throws ParseException,
-			GenerationException {
+	GenerationException {
 
 		String errorMessage = "";
 		try {
@@ -645,7 +651,7 @@ public class StationDomain {
 				// this is authorized: only DCHistory1 is used, DC History2 is
 				// empty
 				// so this is not an error
-//				System.out.println("no value for " + Intern.S_DCHIST + "2");
+				//				System.out.println("no value for " + Intern.S_DCHIST + "2");
 			}
 
 			// FAE 5803 Sortie du try catch du passage à la ligne
@@ -703,17 +709,17 @@ public class StationDomain {
 
 			// SDN references
 			// CSR
-			
+
 			errorMessage = "SDN CSR REFERENCE";
 			String localCsrId = Nemo.getInstance().getDomain().getCruise().getModel().getLocalCsrIdentifier();
 			String bshCsrReference = Nemo.getInstance().getDomain().getCruise().getModel().getBshCsrReference();
-			
+
 			if (localCsrId!=null && !localCsrId.trim().isEmpty()){
 				String idEdmoRespCsr=Nemo.getInstance().getConfig().getIdEdmoRespCsr();
 				if (idEdmoRespCsr==null||idEdmoRespCsr.equals("0")) {
 					throw new Exception(Messages.edit_convert_cruiseLocalCsrId_unableToCreateMissingCSREdmoId);
 				}
-				
+
 				SdnXLinkReference csr = new SdnXLinkReference();
 				csr.setAsCsr(Integer.valueOf(idEdmoRespCsr), localCsrId);
 				medStationHeader.append(start);
@@ -734,7 +740,7 @@ public class StationDomain {
 			{
 				SdnXLinkReference shipRef = new SdnXLinkReference();
 				shipRef.setAsShipReference(shipCodeAndName[0] );
-				
+
 				medStationHeader.append(start);
 				medStationHeader.append(shipRef.toString(false));
 				medStationHeader.append(Global.RN);
@@ -767,7 +773,7 @@ public class StationDomain {
 				// this is authorized: only DCHistory1 is used, DC History2 is
 				// empty
 				// so this is not an error
-//				System.out.println("no value for " + Intern.S_SURFACE + "2");
+				//				System.out.println("no value for " + Intern.S_SURFACE + "2");
 			}
 
 			return medStationHeader;
@@ -824,14 +830,14 @@ public class StationDomain {
 
 	private StringBuffer getMedTimeSeriesHeader(Station currentStation,
 			String[] inputFile) throws ParseException,
-			UnsupportedEncodingException {
+	UnsupportedEncodingException {
 		StringBuffer timeseriesHeader = new StringBuffer();
 		String start = Conversion.MEDATLAS.getDebut();
-		
+
 
 		float sensorDepth = currentStation.getSensorDepth();
-		
-		
+
+
 		long endTime = DateTimeUtils.computeEndTime(currentStation);
 		//33044 manage offset in end date time
 		long endTimeWithOffset = 

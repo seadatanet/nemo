@@ -11,6 +11,8 @@ import java.util.Date;
 import java.util.TimeZone;
 import java.util.regex.Pattern;
 
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
@@ -18,9 +20,12 @@ import com.ago.xml.SAXConsumer;
 import com.ago.xml.XMLOutputWriter;
 
 import fr.ifremer.nemo.input.ModelDescription;
+import fr.ifremer.nemo.ui.edit.station.EditStationForm;
 import fr.ifremer.nemo.util.Formatter;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Intern;
+import fr.ifremer.sismer_tools.DateTools;
+import fr.ifremer.sismer_tools.SismerToolsException;
 
 /**
  * Class DateTimeFormat
@@ -361,6 +366,16 @@ public class DateTimeFormat extends ExternalizableFormat implements Cloneable {
 		return buf.toString();
 	}
 
+	private long readIsoDate(String date) throws SismerToolsException {
+		DateTime dt = new DateTime(date,DateTimeZone.UTC);
+		return dt.getMillis();
+	}
+	
+	
+	@Override
+	public Object parseObject(String source) throws ParseException{
+			return parseObject(source, new ParsePosition(0));
+	}
 	/**
 	 * 
 	 * @param source
@@ -377,6 +392,16 @@ public class DateTimeFormat extends ExternalizableFormat implements Cloneable {
 		cal.setLenient(false);
 
 		try {
+			
+			if (isIso()){//49092
+				return readIsoDate(source);
+			}
+			
+			if (isJulianDay()) {
+				return DateTools.julianChronologicalToLongUTC(Double.valueOf(source));
+			}
+			
+			
 			for (int i = 0; i < _elements.length && index < source.length(); i++) {
 				switch (_elements[i]._type) {
 				case YEAR: {
@@ -597,4 +622,15 @@ public class DateTimeFormat extends ExternalizableFormat implements Cloneable {
 		return size;
 	}
 
+	
+	
+	public boolean isIso() {
+		return _formatString.startsWith(EditStationForm.DATETIME_CHOICE_ISO); 
+	}
+	public boolean isJulianDay() {
+		return _formatString.startsWith(EditStationForm.DATETIME_CHOICE_JULIAN); 
+	}
+
+	
+	
 }
