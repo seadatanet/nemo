@@ -11,11 +11,13 @@ import com.ago.xml.PathElementConsumer;
 import com.ago.xml.SAXConsumer;
 import com.ago.xml.XMLOutputWriter;
 
+import fr.ifremer.nemo.config.VocabLists;
 import fr.ifremer.nemo.input.parameters.ParameterModel;
 import fr.ifremer.nemo.input.parameters.VerticalParametersList;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Global.DataListTypeEnum;
 import fr.ifremer.nemo.util.Global.E_MesureType;
+import fr.ifremer.nemo.util.Intern;
 
 /**
  * Class DataModel.java
@@ -322,8 +324,11 @@ public class DataModel extends AbstractModel {
 		HashMap<String, Integer> mapDuplicates = new HashMap<String, Integer>();
 		
 		for (ParameterModel parameterModel : _parameterModels) {
-			
 			String currentP011 = parameterModel.getParameter().getCodeP011();
+			if ( currentP011== null || currentP011.isEmpty()) {
+				currentP011 = VocabLists.getVocabMatch(Intern.list_P091, Intern.list_P011,  parameterModel.getParameter().getCode());
+				parameterModel.getParameter().setCodeP011(currentP011);
+			}
 			if (mapDuplicates.containsKey(currentP011)) {
 				
 				Integer currentCount = mapDuplicates.get(currentP011);

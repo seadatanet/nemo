@@ -374,11 +374,12 @@ public class DataDomain {
 			 * param P011, on met le code P011 si param P091, on met le premier
 			 * P011 de la liste de P011 correspondants au P091
 			 */
-			if (param.isP011()) {
-				sdnMapping.append(getURNSyntaxe(URNtype.object, param.getCodeP011(), null, Intern.mapping_objet, isText));
-			} else {
-				sdnMapping.append(getURNSyntaxe(URNtype.object, param.getCode(), Intern.mapping_subject, Intern.mapping_objet, isText));
+
+			if ( param.getCodeP011()== null || param.getCodeP011().isEmpty()) {
+				param.setCodeP011(VocabLists.getVocabMatch(Intern.list_P091, Intern.list_P011,  param.getCode()));
 			}
+				sdnMapping.append(getURNSyntaxe(URNtype.object, param.getCodeP011(), null, Intern.mapping_objet, isText));
+
 
 			/**
 			 * ----------------------------------------------------- units
