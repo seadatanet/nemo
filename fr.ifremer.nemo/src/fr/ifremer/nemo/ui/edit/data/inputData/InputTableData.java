@@ -197,26 +197,33 @@ public class InputTableData {
 			}
 			cpt++;
 		}
-		 cpt = 0;
-		for (String line : lignesBrutes){
+		cpt = 0;
+		for (String line : lignesBrutes) {
 			
-			if (cpt<header){
+			if (cpt<header) {
 				// 	skip file and station header
 			}
-			else{
-				if (!columnsTitlesCreated){
+			else if (cpt >= 100 + header) {
+				
+				// Display only the N first data lines
+				break;
+			}
+			else {
+				if (!columnsTitlesCreated) {
 					split = line.split(getSeparatorForSplit());
 					String[] colTitles = new String[split.length];
 
-					for (int colNb=0; colNb<split.length; colNb++)
+					for (int colNb = 0; colNb < split.length; colNb++)
 					{
-						colTitles[colNb] = String.valueOf(colNb+1);
+						colTitles[colNb] = String.valueOf(colNb + 1);
 					}
 					createColumns(colTitles);
-					columnsTitlesCreated=true;
+					columnsTitlesCreated = true;
 				}
+				
 				linesWithoutFileHeader.add(line);
 			}
+			
 			cpt++;
 		}
 		try{
