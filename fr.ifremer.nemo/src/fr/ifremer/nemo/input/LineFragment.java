@@ -6,6 +6,7 @@ import com.ago.xml.SAXConsumer;
 import com.ago.xml.XMLOutputWriter;
 
 import fr.ifremer.nemo.Nemo;
+import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.util.Global;
 
 
@@ -139,8 +140,7 @@ public class LineFragment extends AbstractModel
     		res= a_Line.substring(_firstCharOffset - 1, _lastCharOffset).trim();
     	}else{
     		//33278: split as columns
-    		String[] splittedLine = a_Line.split(Nemo.getInstance().getDomain().getMedia().getModel().getSeparatorForSplit(), -1);
-    		res= splittedLine[_lastCharOffset-1].trim();
+    		res = Utils.getColumnFromCsvLine(a_Line, Nemo.getInstance().getDomain().getMedia().getModel().getSeparatorForSplit(), _firstCharOffset);
     	}
     	return res;
     }

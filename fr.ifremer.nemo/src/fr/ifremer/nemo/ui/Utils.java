@@ -1319,4 +1319,48 @@ public class Utils {
 	public static Shell getMainShell() {
 		return ApplicationWorkbenchWindowAdvisor.configurer.getWindow().getShell();
 	}
+	
+	/**
+	 * Extract a column value from a CSV-style line, indicated by a char position.
+	 * 
+	 * @param line a CSV-style line.
+	 * @param separator the separator used in the CSV-style line.
+	 * @param charPos The char position indicating the column to find.
+	 * 
+	 * @return the column value, or an empty string if not found.
+	 */
+	public static String getColumnFromCsvLine(String line, String separator, int charPos) {
+
+		// rolling index
+		int indexSearch = 0;
+		
+		boolean isColumnFound = false;
+		
+		String[] split = line.split(separator);
+		String returnValue = Global.EMPTY_STRING;
+		String foundData = Global.EMPTY_STRING;
+		
+		for (String colData : split) {
+
+			foundData = colData;
+
+			// indexSearch takes the index of the current column's last character
+			indexSearch = indexSearch + colData.length();
+			if (charPos < indexSearch) {
+				
+				// the column is found
+				isColumnFound = true;
+				break;
+			}
+			
+			indexSearch++; // add separator (1 char)
+		}
+		
+		if (isColumnFound) {
+			returnValue = foundData;
+		}
+
+		// The value has been found AND the line is clearly with a separator.
+		return returnValue;
+	}
 }

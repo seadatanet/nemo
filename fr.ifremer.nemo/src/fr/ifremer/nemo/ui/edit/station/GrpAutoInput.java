@@ -321,6 +321,18 @@ public class GrpAutoInput implements UIobject
         }
         return result;
     }
+    
+    /**
+     * Return the entire raw line at index i.
+     * @param i the line index (cf. autoLine)
+     * 
+     * @return the raw line found
+     */
+    public String getRawLine(int i) {
+    	
+        AutoLine line = lines.get(i);
+        return line.getRawLine();
+    }
 
     public void setValue(String line, String start, String end,
             boolean posVariable, boolean valueVariable, int i,

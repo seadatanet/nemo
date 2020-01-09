@@ -449,36 +449,8 @@ public class AutoLine implements UIobject
                 && end.getText() != null
                 && !end.getText().equals(Global.EMPTY_STRING))
         {
-            String ligne = Global.EMPTY_STRING;
-            if (numberLine.getText().equals(Global.EMPTY_STRING))
-            {
-                ligne = Utils.lignesBrutes.get(getStationHeaderPos());
-            }
-            else if (numberLine.getText().equals(Global.ZERO))
-            {
-                // la ligne correspond au nom du fichier
-                if (Nemo.getInstance().getViewMain().getEditFileForm().isCruiseIsAFile())
-                {
-                    ligne = fr.ifremer.nemo.util.Utils.extraitFichierChemin(Nemo.getInstance().getViewMain().getEditFileForm().nomFichier);
-                }
-                else
-                {
-                    File directory = new File(Nemo.getInstance().getViewMain().getEditFileForm().nomRepertoire);
-                    File[] subfiles = directory.listFiles();
-                    
-                    //Correction FAE 4076
-                    if (subfiles[0].isFile())
-                        ligne = subfiles[0].getName();
-                    else
-                        ligne = subfiles[0].listFiles()[0].getName();
-                }
-            }
-            else
-            {
-                ligne =
-                    Utils.lignesBrutes.get(Integer.parseInt(numberLine
-                        .getText()) - 1);
-            }
+        	
+        	String ligne = getRawLine();
 
             int iEnd = Integer.parseInt(end.getText());
             if (posVariable)
@@ -510,6 +482,43 @@ public class AutoLine implements UIobject
         return result;
     }
 
+    /**
+     * Get the raw line from its current line number (this.numberLine) in the file.
+     * 
+     * Caution: 
+     *  - if this.numberLine is empty, gets the line corresponding to the station header
+     *  - if this.numberLine is "0", gets the file name
+     *  - otherwise, gets the line corresponding to this.numberLine
+     * 
+     * @return a raw line as a String.
+     */
+	public String getRawLine() {
+
+		String ligne = Global.EMPTY_STRING;
+		if (numberLine.getText().equals(Global.EMPTY_STRING)) {
+			ligne = Utils.lignesBrutes.get(getStationHeaderPos());
+		} else if (numberLine.getText().equals(Global.ZERO)) {
+			// la ligne correspond au nom du fichier
+			if (Nemo.getInstance().getViewMain().getEditFileForm().isCruiseIsAFile()) {
+				ligne = fr.ifremer.nemo.util.Utils.extraitFichierChemin(Nemo.getInstance().getViewMain().getEditFileForm().nomFichier);
+			} else {
+				File directory = new File(Nemo.getInstance().getViewMain().getEditFileForm().nomRepertoire);
+				File[] subfiles = directory.listFiles();
+
+				// Correction FAE 4076
+				if (subfiles[0].isFile())
+					ligne = subfiles[0].getName();
+				else
+					ligne = subfiles[0].listFiles()[0].getName();
+			}
+		} else {
+			ligne = Utils.lignesBrutes.get(Integer.parseInt(numberLine
+					.getText()) - 1);
+		}
+
+		return ligne;
+	}
+    
     public void setValue(String line, String start, String end)
     {
         numberLine.setText(line);

@@ -29,6 +29,7 @@ import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.config.ManageLists;
 import fr.ifremer.nemo.input.DataType;
 import fr.ifremer.nemo.input.Fragment;
+import fr.ifremer.nemo.input.LineFragment;
 import fr.ifremer.nemo.input.PropertyModel;
 import fr.ifremer.nemo.input.StationModel;
 import fr.ifremer.nemo.ui.RulesManager;
@@ -724,8 +725,22 @@ public class StationSection extends NemoSection {
 								Integer
 								.parseInt(end))).trim();
 			} else {
-				result = autoInput.getValue(0).trim();
-				autoInput.getLines().get(0).selectInViewFile();
+				
+    			if (Nemo.getInstance().getDomain().getMedia().getModel().getUseTableForCsvData()) {
+    				LineFragment lineFragment = new LineFragment();
+    				lineFragment.setFirstCharOffset(start);
+    				lineFragment.setLastCharOffset(end);
+    				
+    				 System.out.println(lineFragment.retreive(autoInput.getRawLine(0)));
+    				 result = lineFragment.retreive(autoInput.getRawLine(0));
+    			}
+    			else {
+    				
+    				result = autoInput.getValue(0).trim();
+    				autoInput.getLines().get(0).selectInViewFile();
+    			}
+
+				
 			}
 		} else {
 			result = manualInput.getValue().trim();
