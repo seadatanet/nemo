@@ -304,8 +304,10 @@ public class DataFormValidator extends FormValidator {
 
 		Nemo.getInstance().getViewMain().getEditConversionForm().fillSummary();
 		
-		// Update multiple P01 indexes in the parameters
-		Nemo.getInstance().getDomain().getData().getModel().majMultipleP011Indexes();
+		// Update multiple P01 indexes in the parameters except for Medatlas
+		if (!RulesManager.getInstance().isConversionToMedatlas()) {
+			Nemo.getInstance().getDomain().getData().getModel().majMultipleP011Indexes();
+		}
 
 	}
 	/**
