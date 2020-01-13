@@ -14,6 +14,7 @@ import java.text.ParseException;
 import java.text.ParsePosition;
 import java.util.regex.Pattern;
 
+import org.apache.logging.log4j.Logger;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.swt.SWT;
@@ -29,7 +30,6 @@ import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.config.ManageLists;
 import fr.ifremer.nemo.input.DataType;
 import fr.ifremer.nemo.input.Fragment;
-import fr.ifremer.nemo.input.LineFragment;
 import fr.ifremer.nemo.input.PropertyModel;
 import fr.ifremer.nemo.input.StationModel;
 import fr.ifremer.nemo.ui.RulesManager;
@@ -81,6 +81,8 @@ public class StationSection extends NemoSection {
 	public static final String defaultValue = "Default";
 
 	protected EditStationForm myForm;
+	
+	private Logger logger;
 
 	/*
 	 * construct StationSection methodes
@@ -104,6 +106,9 @@ public class StationSection extends NemoSection {
 		this.test = test;
 		this.nbLignes = nbLignes;
 		myForm = form;
+		
+		Nemo.getInstance().getLogger();
+		
 	}
 
 	/**
@@ -725,22 +730,24 @@ public class StationSection extends NemoSection {
 								Integer
 								.parseInt(end))).trim();
 			} else {
-				
-    			if (Nemo.getInstance().getDomain().getMedia().getModel().getUseTableForCsvData()) {
-    				LineFragment lineFragment = new LineFragment();
-    				lineFragment.setFirstCharOffset(start);
-    				lineFragment.setLastCharOffset(end);
-    				
-    				 System.out.println(lineFragment.retreive(autoInput.getRawLine(0)));
-    				 result = lineFragment.retreive(autoInput.getRawLine(0));
-    			}
-    			else {
-    				
-    				result = autoInput.getValue(0).trim();
-    				autoInput.getLines().get(0).selectInViewFile();
-    			}
 
-				
+				if (Nemo.getInstance().getDomain().getMedia().getModel().getUseTableForCsvData()) {
+
+					try {
+						int firstCharOffset;
+						firstCharOffset = Integer.parseInt(start);
+
+						result = fr.ifremer.nemo.util.Utils.getColumnFromCsvLine(autoInput.getRawLine(0), Nemo.getInstance().getDomain().getMedia().getModel().getSeparatorForSplit(), firstCharOffset);
+					} catch (Exception e) {
+						logger.error(e.getMessage());
+					}
+
+				} else {
+
+					result = autoInput.getValue(0).trim();
+					autoInput.getLines().get(0).selectInViewFile();
+				}
+
 			}
 		} else {
 			result = manualInput.getValue().trim();

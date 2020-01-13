@@ -7,7 +7,6 @@ import com.ago.xml.XMLOutputWriter;
 
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.util.Global;
-import fr.ifremer.nemo.util.Utils;
 
 
 /**
@@ -125,7 +124,8 @@ public class LineFragment extends AbstractModel
 	}
 
     /**
-     * 
+     * Get a value in a line.
+     * If it's a raw string line, 
      * @param a_Line
      * @return String
      */
@@ -140,7 +140,8 @@ public class LineFragment extends AbstractModel
     		res= a_Line.substring(_firstCharOffset - 1, _lastCharOffset).trim();
     	}else{
     		//33278: split as columns
-    		res = Utils.getColumnFromCsvLine(a_Line, Nemo.getInstance().getDomain().getMedia().getModel().getSeparatorForSplit(), _firstCharOffset);
+    		String[] splittedLine = a_Line.split(Nemo.getInstance().getDomain().getMedia().getModel().getSeparatorForSplit(), -1);
+    		res = splittedLine[_lastCharOffset-1].trim();
     	}
     	return res;
     }
