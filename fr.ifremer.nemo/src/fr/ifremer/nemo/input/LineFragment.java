@@ -6,8 +6,8 @@ import com.ago.xml.SAXConsumer;
 import com.ago.xml.XMLOutputWriter;
 
 import fr.ifremer.nemo.Nemo;
-import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.util.Global;
+import fr.ifremer.nemo.util.Utils;
 
 
 /**
