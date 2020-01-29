@@ -13,11 +13,14 @@ package fr.ifremer.nemo.domain;
 import java.io.LineNumberReader;
 import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.input.DataType;
@@ -202,17 +205,24 @@ public class StationDomain {
 
 		
 		
-
+		/** 50695 do not use strict format, but limit the number of decimals to 7 in case of input is not a double, example
+		 * Station 1 10/12/2001 17:29     S21 57.10 E166 44.82
+		 * 	 result without any formatting would be -20.859000	167.08566666666667
+		**/
+		NumberFormat nf = DecimalFormat.getInstance(Locale.US);
+		nf.setMaximumFractionDigits(7);
+		
+		odvStationHeader.append(Global.TAB);
 		// Longitude [degrees_east]
-		odvStationHeader.append(form.formatLongitude("+DDD.dddddd",
-				(Double) _model.getProperty(Intern.S_LON)
-				.applyOnLine(inputLine)));
+		odvStationHeader.append(
+				nf.format(	_model.getProperty(Intern.S_LON).applyOnLine(inputLine))
+				);
 		odvStationHeader.append(Global.TAB);
 
 		// Latitude [degrees_north]
-		odvStationHeader.append(form.formatLatitude("+DD.dddddd",//40439
-				(Double) _model.getProperty(Intern.S_LAT)
-				.applyOnLine(inputLine)));
+		odvStationHeader.append(
+				nf.format(_model.getProperty(Intern.S_LAT).applyOnLine(inputLine))
+				);
 		odvStationHeader.append(Global.TAB);
 
 		// LOCAL_CDI_ID
@@ -377,16 +387,29 @@ public class StationDomain {
 
 			odvStationHeader.append(Global.TAB);
 
+			/** 50695 do not use strict format, but limit the number of decimals to 7 in case of input is not a double, example
+			 * Station 1 10/12/2001 17:29     S21 57.10 E166 44.82
+			 * 	 result without any formatting would be -20.859000	167.08566666666667
+			**/
+			NumberFormat nf = DecimalFormat.getInstance(Locale.US);
+			nf.setMaximumFractionDigits(7);
+			
 			// Longitude [degrees_east]
 			errorMessage = "longitude";
-			odvStationHeader.append(form.formatLongitude("+DDD.dddddd",
-					currentStation.getLongitude()));
+			odvStationHeader.append(
+							nf.format(
+									currentStation.getLongitude()
+									)
+					);
 			odvStationHeader.append(Global.TAB);
 
 			// Latitude [degrees_north]
 			errorMessage = "latitude";
-			odvStationHeader.append(form.formatLatitude("+DD.dddddd",//40439
-					currentStation.getLatitude()));
+			odvStationHeader.append(
+					nf.format(
+							currentStation.getLatitude()
+							)
+			);
 			odvStationHeader.append(Global.TAB);
 
 			// LOCAL_CDI_ID
