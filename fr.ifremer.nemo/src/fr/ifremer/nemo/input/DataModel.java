@@ -317,6 +317,43 @@ public class DataModel extends AbstractModel {
 	}
 	
 	/**
+	 * rename the param localcode in case of duplicates
+	 */
+	public void majMultipleParamCodes() {
+		// This map has key = param code ; value = quantity of this code found in the parameters.
+		HashMap<String, Integer> mapDuplicates = new HashMap<String, Integer>();
+		
+		for (ParameterModel parameterModel : _parameterModels) {
+			
+			String currentCode = parameterModel.getParameter().getLocalCode();
+			
+			// Sometimes the P011 is not defined yet
+			String currentP011 = parameterModel.getParameter().getCodeP011();
+			if ( currentP011== null || currentP011.isEmpty()) {
+				currentP011 = VocabLists.getVocabMatch(Intern.list_P091, Intern.list_P011,  parameterModel.getParameter().getCode());
+				parameterModel.getParameter().setCodeP011(currentP011);
+			}
+			
+			// LocalCode check
+			if (mapDuplicates.containsKey(currentCode)) {
+				
+				Integer currentCount = mapDuplicates.get(currentCode);
+				// this localcode already exists in the parameters. Increment the count + set as index for the parameter
+				currentCount++;
+				
+				parameterModel.getParameter().setIndexP011(currentCount);
+				mapDuplicates.put(currentCode, currentCount);
+			}
+			else {
+				// first time this P011 is seen, create the map entry for it.
+				mapDuplicates.put(currentCode, 1);
+				parameterModel.getParameter().setIndexP011(1);
+			}
+		}
+	}
+
+	
+	/**
 	 * Sets the indexes for parameters that share the same P011 value with other parameters.
 	 */
 	public void majMultipleP011Indexes() {
