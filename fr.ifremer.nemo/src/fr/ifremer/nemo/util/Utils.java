@@ -207,7 +207,7 @@ public class Utils
 		public static String getColumnFromCsvLine(String line, String separator, int charPos) {
 
 			// rolling index
-			int indexSearch = 0;
+			int indexSearch = 1;
 			
 			boolean isColumnFound = false;
 			
