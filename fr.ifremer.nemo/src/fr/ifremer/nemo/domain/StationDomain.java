@@ -212,7 +212,6 @@ public class StationDomain {
 		NumberFormat nf = DecimalFormat.getInstance(Locale.US);
 		nf.setMaximumFractionDigits(7);
 		
-		odvStationHeader.append(Global.TAB);
 		// Longitude [degrees_east]
 		odvStationHeader.append(
 				nf.format(	_model.getProperty(Intern.S_LON).applyOnLine(inputLine))
