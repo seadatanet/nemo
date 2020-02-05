@@ -27,10 +27,22 @@ import fr.ifremer.nemo.util.Messages;
 public class FileEndData extends FileSection
 {
 	protected Composite subCompo, col01, col02;
-	protected Button radEOF, radEmptyLine, radBeginLineChanges, radNextStationBeginsWith, radManuel;
+	
+	
+	protected Button radEOF;//EOF (End of File)
+	protected Button radEmptyLine; //One empty line
+	protected Button radManuel;//One constant character string
+
+	protected Button radNextStationBeginsWith;//A constant character string or regular expression
 	protected Button radNextStationIsRegexpCheckbox;
+	protected Button radBeginLineChanges; //A character string different from the one of the previous station 
+	protected Button radColCellChanges; // A cell value different from the one of the previous station (csv only)
+	
+	
+
 	protected SetText setterStartStation;
 	protected SetTextLength setterBeginLineChange;
+	protected SetColumn setterColumn;
 
 	/**
 	 * @param shell
@@ -41,8 +53,9 @@ public class FileEndData extends FileSection
 	public FileEndData(String name, String title, String description, EditFileForm form)
 	{
 		super(name, title, description, form);
-		setterStartStation = new SetText(Messages.edit_file_termination_start, Global.EMPTY_STRING, true); //$NON-NLS-1$
-		setterBeginLineChange = new SetTextLength(Messages.edit_file_beginLineChange, Global.EMPTY_STRING); //$NON-NLS-1$
+		setterStartStation = new SetText(Messages.edit_file_termination_start, Global.EMPTY_STRING, true); 
+		setterBeginLineChange = new SetTextLength(Messages.edit_file_beginLineChange, Global.EMPTY_STRING); 
+		setterColumn = new SetColumn(Messages.edit_file_columnCellChange, Global.EMPTY_STRING);
 	}
 
 	@Override
@@ -128,12 +141,20 @@ public class FileEndData extends FileSection
 		radBeginLineChanges.setText(Messages.edit_file_idcBeginLineChange);
 		setterBeginLineChange.draw(compoNext, filled);
 
+		
+		radColCellChanges = new Button(compoNext, SWT.RADIO);
+		radColCellChanges.setBackground(Nemo.getInstance().getViewMain().getBackgroundEdit());
+		radColCellChanges.setText(Messages.edit_file_idcColumnCellChange);
+		setterColumn.draw(compoNext, filled);
+		
+		
 		selectEndData(radEOF);
 		addRadListener(radEOF);
 		addRadListener(radEmptyLine);
 		addRadListener(radBeginLineChanges);
 		addRadListener(radNextStationBeginsWith);
 		addRadListener(radManuel);
+		addRadListener(radColCellChanges);
 	}
 
 	@Override
@@ -154,7 +175,12 @@ public class FileEndData extends FileSection
 		{
 			ok = setterBeginLineChange.checkMandatoryValue();
 			log = log + Messages.error_file_idcBeginLineChangeEmpty;
+		}else if (radColCellChanges.getSelection())
+		{
+			ok = setterColumn.checkMandatoryValue();
+			log = log + Messages.error_file_idcColumnCellChangeEmpty;
 		}
+
 
 		if (!ok)
 			Utils.messageErreurAppend(log);
@@ -171,6 +197,7 @@ public class FileEndData extends FileSection
 		super.razValues();
 		setterStartStation.razValues();
 		setterBeginLineChange.razValues();
+		setterColumn.razValues();
 		selectEndData(radEOF);
 	}
 
@@ -200,11 +227,13 @@ public class FileEndData extends FileSection
 		radBeginLineChanges.setSelection(false);
 		radNextStationBeginsWith.setSelection(false);
 		radManuel.setSelection(false);
-
+		radColCellChanges.setSelection(false);
+		
 		radNextStationIsRegexpCheckbox.setEnabled(false);
 		setterStartStation.setEnabled(false);
 		setterBeginLineChange.setEnabled(false);
 		setter.setEnabled(false);
+		setterColumn.setEnabled(false);
 
 		if (radio != null)
 		{
@@ -231,6 +260,11 @@ public class FileEndData extends FileSection
 			{
 				radManuel.setSelection(true);
 				setter.setEnabled(true);
+
+			} else if (radio == radColCellChanges)
+			{
+				radColCellChanges.setSelection(true);
+				setterColumn.setEnabled(true);
 
 			} else
 			{
@@ -279,7 +313,13 @@ public class FileEndData extends FileSection
 	{
 		return radNextStationBeginsWith;
 	}
+	public Button getRadColCellChanges() {
+		return radColCellChanges;
+	}
 
+	public void setRadColCellChanges(Button radColCellChanges) {
+		this.radColCellChanges = radColCellChanges;
+	}
 	/**
 	 * Getter sur radManuel.
 	 * 
@@ -329,6 +369,10 @@ public class FileEndData extends FileSection
 	{
 		setterBeginLineChange.setValue(value);
 	}
+	public String getColumnChangeIndicator()
+	{
+		return setterColumn.getValue();
+	}
 
 	public void setStartStationIndicatorRegexpCheckbox(boolean isRegexp)
 	{
@@ -358,6 +402,9 @@ public class FileEndData extends FileSection
 		} else if (radEOF.getSelection())
 		{
 			return E_EndData.EOF;
+		} else if (radColCellChanges.getSelection())
+		{
+			return E_EndData.COLUMNCHANGE;
 		} else
 		{
 			// should not happend
@@ -384,6 +431,10 @@ public class FileEndData extends FileSection
 		case BEGIN_LINE_CHANGES:
 			selectEndData(getRadBeginLineChanges());
 			setBeginLineChangeIndicator(String.valueOf(pattern.length()));
+			break;
+		case COLUMNCHANGE:
+			selectEndData(getRadColCellChanges());
+			setterColumn.setValue(pattern);
 			break;
 		default:
 			selectEndData(getRadEOF());

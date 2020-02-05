@@ -105,7 +105,7 @@ public interface Global {
 	}
 
 	public enum E_EndData {
-		EOF, EMPTY_LINE, BEGIN_LINE_CHANGES, NEXT_START_WITH, END_WITH;
+		EOF, EMPTY_LINE, BEGIN_LINE_CHANGES, NEXT_START_WITH, END_WITH, COLUMNCHANGE;
 	}
 
 	// Types de fichier

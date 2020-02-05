@@ -91,6 +91,7 @@ public abstract class NemoWriter {
 	protected boolean isRefIncremented = false;
 
 	protected String beginningOfPreviousLine = Global.NO_VALUE;
+	protected String cellColOfPreviousLine = Global.NO_VALUE;
 	protected String previousReadedLine = Global.NO_VALUE;
 	protected boolean isBeginningOfStation = false;
 
@@ -131,11 +132,20 @@ public abstract class NemoWriter {
 	}
 
 	protected void setBeginningOfPreviousLine() {
-		isBeginningOfStation = !beginningOfPreviousLine.equals(readedLine.substring(0, mediaModel.getEndDataPattern().length()));
-		beginningOfPreviousLine = readedLine.substring(0, mediaModel.getEndDataPattern().length());
+		String value=readedLine.substring(0, mediaModel.getEndDataPattern().length());
+		isBeginningOfStation = !beginningOfPreviousLine.equals(value);
+		beginningOfPreviousLine = value;
 		previousReadedLine = readedLine;
 	}
-
+	
+	
+	protected void setColumnCellValueOfPreviousLine() {
+		String value;
+		value=readedLine.split(Nemo.getInstance().getDomain().getMedia().getModel().getSeparatorForSplit())[Integer.valueOf(mediaModel.getEndDataPattern())];
+		isBeginningOfStation = !cellColOfPreviousLine.equals(value);
+		cellColOfPreviousLine = value;
+		previousReadedLine = readedLine;
+	}
 	/**
 	 * @throws GenerationException
 	 */
@@ -150,7 +160,7 @@ public abstract class NemoWriter {
 			int readerSize = 0;
 			// pour chaque repertoire d'entree
 			for (String inputFilePath : mediaDomain.getInputFilesNames().keySet()) {
-				
+
 				Nemo.getInstance().getLogger().debug("inputFilePath " + inputFilePath);
 				if (!inputFilePath.endsWith(Global.SVN_DIR)) {
 
@@ -188,11 +198,11 @@ public abstract class NemoWriter {
 							boolean isRateCalculated = false;
 							while ((readedLine = bufferedReader.readLine()) != null) {
 								incrementLine();
-								
+
 								if (inFileHeader()) {
 									continue;
 								}
-								
+
 								if (isEndData() && (st != null)) {
 									st.setNbRecords(nbrecords);
 									stationDomain.addStation(inputFilePath,st);
@@ -213,11 +223,11 @@ public abstract class NemoWriter {
 										st.setStartLine(numLine);//36265
 										// FAE 18333 calcul start et end date of cruise
 										updateStartEndDate(st);
-//										if (stationDomain.getModel().getProperty(Intern.S_DATE).isInData()) {
+										//										if (stationDomain.getModel().getProperty(Intern.S_DATE).isInData()) {
 										if (mediaDomain.getModel().getInputType()!=E_InputType.UNKNOWN) {
 											st.updateStationStartEnd(readedLine, nbrecords);
 										}
-//										}
+										//										}
 										if (!isEndData()) // FAE 4673 Pb si une seule ligne données et pas d'entête station
 											st.updateGlobalParamQc(readedLine);
 
@@ -226,11 +236,11 @@ public abstract class NemoWriter {
 										break;
 									}
 								} else if (st != null) {
-//									if (stationDomain.getModel().getProperty(Intern.S_DATE).isInData()) {
+									//									if (stationDomain.getModel().getProperty(Intern.S_DATE).isInData()) {
 									if (mediaDomain.getModel().getInputType()!=E_InputType.UNKNOWN) {
 										st.updateStationStartEnd(readedLine, nbrecords);
 									}
-//									}
+									//									}
 									if (mediaDomain.getModel().getInputType() == E_InputType.TRAJECTORY) {
 										st.completeMedatlasTrajectory(readedLine);
 									}
@@ -299,7 +309,7 @@ public abstract class NemoWriter {
 				throw new GenerationException(ioe);
 			}
 		}
-		
+
 	}
 
 	/**
@@ -381,13 +391,18 @@ public abstract class NemoWriter {
 		int nbLignesFileHeader = mediaModel.getFileHeader();
 		if (numLine == (nbLignesFileHeader + 1)) {
 			start = true;
-		} else if (mediaModel.getEndData() == E_EndData.BEGIN_LINE_CHANGES) {
+		} else if (mediaModel.getEndData() == E_EndData.BEGIN_LINE_CHANGES ||mediaModel.getEndData() == E_EndData.COLUMNCHANGE ) {
 			start = isEndData();
 		} else if (isProcessType_CruiseFile || mediaModel.isMultiStations()) {
 			start = isEndData();
 		}
 		if (start) {
-			setBeginningOfPreviousLine();
+			if (mediaModel.getEndData() == E_EndData.BEGIN_LINE_CHANGES) {
+				setBeginningOfPreviousLine();
+			}
+			if (mediaModel.getEndData() == E_EndData.COLUMNCHANGE) {
+				setColumnCellValueOfPreviousLine();
+			}
 		}
 		return start;
 	}
@@ -416,6 +431,13 @@ public abstract class NemoWriter {
 			}
 
 			break;
+		case COLUMNCHANGE:
+			if (numLine == (mediaModel.getFileHeader() + 1)) {
+				end = false;
+			} else {
+				end = hasColumnCellChanged(readedLine);
+			}
+			break;
 		default:
 			end = false;
 			break;
@@ -425,6 +447,18 @@ public abstract class NemoWriter {
 			// System.out.println("is end = " + end);
 		}
 		return end;
+	}
+
+	private boolean hasColumnCellChanged(String readedLine) {
+		boolean hasChanged = false;
+		if (readedLine==null) {
+			return true;
+		}
+		String value;
+			
+		value=readedLine.split(Nemo.getInstance().getDomain().getMedia().getModel().getSeparatorForSplit())[Integer.valueOf(mediaModel.getEndDataPattern())];
+		hasChanged = !value.equals(cellColOfPreviousLine);
+		return hasChanged;
 	}
 
 	private boolean hasBeginLineChanged(String readedLine) {
@@ -437,6 +471,8 @@ public abstract class NemoWriter {
 		hasChanged = !beginningOfCurrentLine.equals(beginningOfPreviousLine);
 		return hasChanged;
 	}
+
+
 
 	/**
 	 * @return

@@ -238,4 +238,46 @@ public class Utils
 			// The value has been found AND the line is clearly with a separator.
 			return returnValue;
 		}
+		
+		/**
+		 * Extract a column index from a CSV-style line, indicated by a char position.
+		 * 
+		 * @param line a CSV-style line.
+		 * @param separator the separator used in the CSV-style line.
+		 * @param charPos The char position indicating the column to find.
+		 * 
+		 * @return the column index, or an empty string if not found.
+		 */
+		public static int getColumnIndexFromCsvLine(String line, String separator, int charPos) {
+
+			// rolling index
+			int indexSearch = 1;
+			int res=-1;
+			
+			boolean isColumnFound = false;
+			
+			String[] split = line.split(separator);
+			int colIndex=0;
+			for (String colData : split) {
+
+				// indexSearch takes the index of the current column's last character
+				indexSearch = indexSearch + colData.length();
+				if (charPos < indexSearch) {
+					
+					// the column is found
+					isColumnFound = true;
+					break;
+				}
+				
+				indexSearch++; // add separator (1 char)
+				colIndex++;
+			}
+			
+			if (isColumnFound) {
+				res = colIndex;
+			}
+
+			// The value has been found AND the line is clearly with a separator.
+			return res;
+		}
 }

@@ -969,6 +969,8 @@ public class EditFileForm extends EditForm
 
 			mediaModel.setEndDataPattern(tmpString);
 			mediaModel.setEndDataPatternIsRegexp(false);
+		}else if(end == E_EndData.COLUMNCHANGE) {
+			mediaModel.setEndDataPattern(sectionDataTerminator.getColumnChangeIndicator());
 		}
 		Nemo.getInstance().getDomain().getConversion().setSortData(isSortForced());
 		Nemo.getInstance().getDomain().getConversion().getModel().setSortStations(isSortForced());
@@ -1201,7 +1203,11 @@ public class EditFileForm extends EditForm
 	{
 		compositeSeparateur.setVisible(chkSeparateur.getSelection());
 	}
-
+	public String getCurrentSelectedLineText()
+	{
+		int lineNB= textAreaFile.getContent().getLineAtOffset(textAreaFile.getSelection().x);
+		return textAreaFile.getContent().getLine(lineNB);
+	}
 	public String getSelectedText()
 	{
 		return textAreaFile.getText().substring(textAreaFile.getSelection().x, textAreaFile.getSelection().y);
@@ -1211,7 +1217,11 @@ public class EditFileForm extends EditForm
 	{
 		return textAreaFile.getSelection().x;
 	}
-
+	public int getSelectedTextStartPositionInCurrentLine()
+	{
+		int lineNB= textAreaFile.getContent().getLineAtOffset(textAreaFile.getSelection().x);
+		return textAreaFile.getSelection().x - textAreaFile.getContent().getOffsetAtLine(lineNB);
+	}
 	public int getSelectedTextEndPosition()
 	{
 		return textAreaFile.getSelection().y;
