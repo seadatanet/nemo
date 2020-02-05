@@ -375,11 +375,10 @@ public class DataDomain {
 			 * P011 de la liste de P011 correspondants au P091
 			 */
 
-			if ( param.getCodeP011()== null || param.getCodeP011().isEmpty()) {
-				param.setCodeP011(VocabLists.getVocabMatch(Intern.list_P091, Intern.list_P011,  param.getCode()));
+			if (param.getCodeP011() == null || param.getCodeP011().isEmpty()) {
+				param.setCodeP011(VocabLists.getVocabMatch(Intern.list_P091, Intern.list_P011, param.getCode()));
 			}
-				sdnMapping.append(getURNSyntaxe(URNtype.object, param.getCodeP011(), null, Intern.mapping_objet, isText));
-
+			sdnMapping.append(getURNSyntaxe(URNtype.object, param.getCodeP011(), null, Intern.mapping_objet, isText));
 
 			/**
 			 * ----------------------------------------------------- units

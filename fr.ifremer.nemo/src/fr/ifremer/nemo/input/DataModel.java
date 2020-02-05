@@ -14,6 +14,7 @@ import com.ago.xml.XMLOutputWriter;
 import fr.ifremer.nemo.config.VocabLists;
 import fr.ifremer.nemo.input.parameters.ParameterModel;
 import fr.ifremer.nemo.input.parameters.VerticalParametersList;
+import fr.ifremer.nemo.ui.RulesManager;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Global.DataListTypeEnum;
 import fr.ifremer.nemo.util.Global.E_MesureType;
@@ -322,29 +323,21 @@ public class DataModel extends AbstractModel {
 	public void majMultipleParamCodes() {
 		// This map has key = param code ; value = quantity of this code found in the parameters.
 		HashMap<String, Integer> mapDuplicates = new HashMap<String, Integer>();
-		
+
 		for (ParameterModel parameterModel : _parameterModels) {
-			
+
 			String currentCode = parameterModel.getParameter().getLocalCode();
-			
-			// Sometimes the P011 is not defined yet
-			String currentP011 = parameterModel.getParameter().getCodeP011();
-			if ( currentP011== null || currentP011.isEmpty()) {
-				currentP011 = VocabLists.getVocabMatch(Intern.list_P091, Intern.list_P011,  parameterModel.getParameter().getCode());
-				parameterModel.getParameter().setCodeP011(currentP011);
-			}
-			
+
 			// LocalCode check
 			if (mapDuplicates.containsKey(currentCode)) {
-				
+
 				Integer currentCount = mapDuplicates.get(currentCode);
 				// this localcode already exists in the parameters. Increment the count + set as index for the parameter
 				currentCount++;
-				
+
 				parameterModel.getParameter().setIndexP011(currentCount);
 				mapDuplicates.put(currentCode, currentCount);
-			}
-			else {
+			} else {
 				// first time this P011 is seen, create the map entry for it.
 				mapDuplicates.put(currentCode, 1);
 				parameterModel.getParameter().setIndexP011(1);
@@ -352,33 +345,36 @@ public class DataModel extends AbstractModel {
 		}
 	}
 
-	
 	/**
-	 * Sets the indexes for parameters that share the same P011 value with other parameters.
+	 * Update the P011 for each parameter.
+	 * This method checks if the primary parameter is a vertical coordinate in case of a profile or a trajectory.
+	 * 
+	 * @throws Exception
 	 */
-	public void majMultipleP011Indexes() {
-		// This map has key = P011 ; value = quantity of this P011 found in the parameters.
-		HashMap<String, Integer> mapDuplicates = new HashMap<String, Integer>();
-		
+	public void udpateP011s() throws Exception {
+		RulesManager rm = RulesManager.getInstance();
+
+		boolean isPrimaryParameter = true; // the first parameter of the list.
+
 		for (ParameterModel parameterModel : _parameterModels) {
+
 			String currentP011 = parameterModel.getParameter().getCodeP011();
-			if ( currentP011== null || currentP011.isEmpty()) {
-				currentP011 = VocabLists.getVocabMatch(Intern.list_P091, Intern.list_P011,  parameterModel.getParameter().getCode());
-				parameterModel.getParameter().setCodeP011(currentP011);
+			
+			if (currentP011 == null || currentP011.isEmpty() || true) {
+				// Sometimes the P011 is not defined yet
+
+				if (isPrimaryParameter && (rm.isTrajectory() || rm.isProfile())) {
+
+					parameterModel.getParameter().setP011ForPrimaryParameter();
+				} else {
+
+					currentP011 = VocabLists.getVocabMatch(Intern.list_P091, Intern.list_P011, parameterModel.getParameter().getCode());
+					parameterModel.getParameter().setCodeP011(currentP011);
+				}
 			}
-			if (mapDuplicates.containsKey(currentP011)) {
-				
-				Integer currentCount = mapDuplicates.get(currentP011);
-				// this P011 already exists in the parameters. Increment the count + set as index for the parameter
-				currentCount++;
-				
-				parameterModel.getParameter().setIndexP011(currentCount);
-			}
-			else {
-				// first time this P011 is seen, create the map entry for it.
-				mapDuplicates.put(currentP011, 1);
-				parameterModel.getParameter().setIndexP011(1);
-			}
+
+			isPrimaryParameter = false;
 		}
 	}
+	
 }

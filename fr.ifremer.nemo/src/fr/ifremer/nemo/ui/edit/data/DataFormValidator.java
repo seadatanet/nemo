@@ -68,7 +68,20 @@ public class DataFormValidator extends FormValidator {
 		// mise e jour avant toute chose
 		editDataForm.getMyTableData().majTypeData();
 		int nbreParam = editDataForm.getMyTableData().getTypes().size();
+		
+		
+		
+		// update indexes for duplicates parameter local codes, and set the P011 id needed
+		try {
+			Nemo.getInstance().getDomain().getData().getModel().udpateP011s();
+		} catch (Exception e1) {
 
+			// no vertical reference has been found for the first
+			ok = false;
+			Utils.messageWarningAppend(e1.getMessage());
+		}
+		Nemo.getInstance().getDomain().getData().getModel().majMultipleParamCodes();
+		
 		/**
 		 * --------------------------------------------------------------------
 		 * --- data05 presence d'au moins 1 paramètre dans le tableau
@@ -303,9 +316,6 @@ public class DataFormValidator extends FormValidator {
 		Nemo.getInstance().getDomain().getData().getModel().setFallrateLabel(editDataForm.getFallrateLabel());
 
 		Nemo.getInstance().getViewMain().getEditConversionForm().fillSummary();
-		
-		// update indexes for duplicates parameter local codes
-		Nemo.getInstance().getDomain().getData().getModel().majMultipleParamCodes();
 	}
 	/**
 	 * 47818

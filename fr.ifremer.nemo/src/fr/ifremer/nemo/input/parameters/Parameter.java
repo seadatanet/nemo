@@ -7,6 +7,7 @@ import com.ago.xml.SAXConsumer;
 import com.ago.xml.XMLOutputWriter;
 
 import fr.ifremer.nemo.Nemo;
+import fr.ifremer.nemo.config.VocabLists;
 import fr.ifremer.nemo.domain.LabelParameterManager;
 import fr.ifremer.nemo.domain.StandardNameParameterManager;
 import fr.ifremer.nemo.input.AbstractModel;
@@ -19,6 +20,7 @@ import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Global.DataListTypeEnum;
 import fr.ifremer.nemo.util.Global.E_TypeConversion;
 import fr.ifremer.nemo.util.Intern;
+import sdn.vocabulary.interfaces.IElement;
 
 /**
  * Class Parameter Description : Classe permettant la description d'un parametre
@@ -468,6 +470,29 @@ public class Parameter extends AbstractModel {
 	 */
 	public void setP011(boolean x) {
 		_P011 = x;
+	}
+	
+	/**
+	 * Setter for a primary parameter: must be a vertical coordinate.
+	 */
+	public void setP011ForPrimaryParameter() throws Exception {
+
+		String elementP01 = null;
+
+		for (IElement element : VocabLists.getVocabMatchs(Intern.list_P091, Intern.list_P011, this.getCode())) {
+
+			elementP01 = element.getKey();
+
+			// check vertical (P02 = AHGT)
+			if (VocabLists.getVocabMatch(Intern.list_P011, Intern.list_P021, elementP01).equals("AHGT")) {
+
+				this.setCodeP011(elementP01);
+				return;
+			}
+		}
+		
+		// Here we didn't find any correct P011, it's an exception.
+		throw new Exception("No vertical coordinate found among the P011.");
 	}
 
 	/**
