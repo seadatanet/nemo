@@ -11,6 +11,8 @@
 package fr.ifremer.nemo;
 
 import java.io.File;
+import java.io.IOException;
+import java.text.MessageFormat;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
@@ -18,6 +20,7 @@ import java.util.List;
 import org.apache.logging.log4j.Logger;
 
 import fr.ifremer.nemo.config.ManageLists;
+import fr.ifremer.nemo.config.VocabLists;
 import fr.ifremer.nemo.domain.ConversionDomain;
 import fr.ifremer.nemo.domain.CruiseDomain;
 import fr.ifremer.nemo.domain.InputDomain;
@@ -31,6 +34,7 @@ import fr.ifremer.nemo.output.CDIResumeWriter;
 import fr.ifremer.nemo.output.GenerationException;
 import fr.ifremer.nemo.output.NemoWriter;
 import fr.ifremer.nemo.output.NemoWriterFactory;
+import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.data.TypeData;
 import fr.ifremer.nemo.util.BODCResult;
 import fr.ifremer.nemo.util.BODCResult.BODC_RES_STATUS;
@@ -58,8 +62,8 @@ public class NemoShell {
 	 */
 	public static boolean main(String inputFile, String outputFile,
 			String modelFile, Conversion conv, boolean sortDatas,
-			E_TypeConversion odvConv, String datasetRef, String cdiSummaryFile,
-			boolean couplingTableUpdate, String couplingTablePrefix,
+			E_TypeConversion odvConv, String datasetRef, String localCsrIdentifier, String bshCsrReference, String cruiseName, String cdiSummaryFile,
+			boolean couplingTableUpdate, String couplingTablePrefix, String shipCode,
 			Logger logger) {
 
 		try {
@@ -171,7 +175,28 @@ public class NemoShell {
 				}
 				inputDomain.getCruise().getModel().setReference(strDefault);
 			}
+			
+			// Cruise name.
+			if (!cruiseName.equals(Global.EMPTY_STRING)) {
+				inputDomain.getCruise().getModel().setName(cruiseName);
+			}
+			
+			// Local CSR identifier.
+			if (!localCsrIdentifier.equals(Global.EMPTY_STRING)) {
+				inputDomain.getCruise().getModel().setLocalCSRIdentifier(localCsrIdentifier);
+			}
+			
+			// BSH CSR reference.
+			if (!bshCsrReference.equals(Global.EMPTY_STRING)) {
+				inputDomain.getCruise().getModel().setBshCsrReference(bshCsrReference);
+			}
 
+			// Ship code and name. Those will be checked later.
+			if (!shipCode.equals(Global.EMPTY_STRING)) {
+				inputDomain.getCruise().getModel().setShipCode(shipCode);
+				inputDomain.getCruise().getModel().setShipName(null); // will be filled during the check.
+			}
+			
 			// Is a station property in file
 			int nbLignes =
 					inputDomain.getMedia().getModel().getFileHeader()
@@ -275,19 +300,53 @@ public class NemoShell {
 	private static boolean checkBodc(Logger logger, InputDomain inputDomain) {
 		// 35230********************
 		boolean ok = true;
-		// SHIP
+		
+		// CRUISE REFERENCES
+		String localCsrRef = inputDomain.getCruise().getModel().getLocalCsrIdentifier();
+		String bshCsrRef = inputDomain.getCruise().getModel().getBshCsrReference();
+		if (!localCsrRef.trim().isEmpty()) {
 
-		String shipCode = fr.ifremer.nemo.util.Utils.extraitCode(inputDomain.getCruise().getModel().getShipCode());
-		String shipName = fr.ifremer.nemo.util.Utils.extraitCode(inputDomain.getCruise().getModel().getShipName());
-		BODCResult bodcRes = BodcChecker.getInstance().checkShip(	shipCode, shipName);
+			if (Nemo.getInstance().getConfig().getIdEdmoRespCsr() == null ||
+					Nemo.getInstance().getConfig().getIdEdmoRespCsr().trim().isEmpty() || Nemo.getInstance().getConfig().getIdEdmoRespCsr().equals("0")) {
+				Utils.messageErreurAppend(Messages.edit_cruise_cruiseLocalCsrId_unableToCheckMissingCSREdmoId);
+				ok = false;
+			} else {
+				try {
+					boolean exist = VocabLists.getCSRListManager().doesCodeExist(Nemo.getInstance().getConfig().getIdEdmoRespCsr(), localCsrRef);
+					if (!exist) {
+						logger.warn(MessageFormat.format(Messages.edit_cruise_cruiseLocalCsrId_doesNotExist, localCsrRef, Nemo.getInstance().getConfig().getIdEdmoRespCsr()) + Global.RN);
+					}
+				} catch (IOException e) {
+					logger.warn(Messages.edit_cruise_cruiseLocalCsrId_unableToCheck);
+				}
+			}
+		} else if (!bshCsrRef.trim().isEmpty()) {
+			try {
+				boolean exist = VocabLists.getCSRListManager().doesBshCodeExist(bshCsrRef);
+				if (!exist) {
+					logger.error(MessageFormat.format(Messages.edit_cruise_cruiseBshCsrId_doesNotExist, bshCsrRef));
+					ok = false;
+				}
+			} catch (IOException e) {
+				logger.error(Messages.edit_cruise_cruiseLocalCsrId_unableToCheck);
+				ok = false;
+			}
+		}
+		
+		// SHIP
+		BODCResult bodcRes = BodcChecker.getInstance().checkShip(inputDomain.getCruise().getModel().getShipCode(), inputDomain.getCruise().getModel().getShipName());
 
 		if (bodcRes.getResStatus() == BODC_RES_STATUS.KO){
 			ok=false;
 			logger.error(bodcRes.getErrorMsg());
-		}else if (bodcRes.getResStatus() == BODC_RES_STATUS.WARNING){
+		}else if (bodcRes.getResStatus() == BODC_RES_STATUS.WARNING) { 
 			inputDomain.getCruise().getModel().setShipCode(bodcRes.getShipCode());
 			inputDomain.getCruise().getModel().setShipName(bodcRes.getShipLabel());
 			logger.warn(bodcRes.getWarningMsg());
+		}
+		else if (inputDomain.getCruise().getModel().getShipName() == null || inputDomain.getCruise().getModel().getShipName().isEmpty()) {
+			//case of a forced ship code (the name has been retrieved in checkShip())
+			inputDomain.getCruise().getModel().setShipName(bodcRes.getShipLabel());
 		}
 
 		// 35230 region

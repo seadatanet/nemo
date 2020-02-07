@@ -71,6 +71,10 @@ public interface Global {
 	public static final String optOdvMulti = "multi";
 	public static final String optSortDatas = "sort";
 	public static final String optDatasetRef = "datasetRef";
+	public static final String optCruiseName = "cruiseName";
+	public static final String optLocalCsrIdentifier = "localCsrIdentifier";
+	public static final String optBshCsrReference = "bshCsrReference";
+	public static final String optShipCode = "shipCode";
 	public static final String optCdiSummary = "cdiSummary";
 	public static final String optCouplingTableUpdate = "couplingTableUpdate";
 	public static final String optCouplingTablePrefix = "couplingTablePrefix";

@@ -57,12 +57,17 @@ public class Application implements IPlatformRunnable {
 
 	private static final String optSortDatas = Global.optSortDatas;
 	private static final String optDatasetRef = Global.optDatasetRef;
+	private static final String optCruiseName = Global.optCruiseName;
+	private static final String optLocalCsrIdentifier = Global.optLocalCsrIdentifier;
+	private static final String optBshCsrReference = Global.optBshCsrReference;
+	private static final String optShipCode = Global.optShipCode;
 
 	private static final String optCdiSummary = Global.optCdiSummary;
 	private static final String optCouplingTableUpdate = Global.optCouplingTableUpdate;
 	private static final String optCouplingTablePrefix = Global.optCouplingTablePrefix;
 
 	private static final String optUpdateVocabs = Global.optUpdateVocabs;
+	
 
 	/*
 	 * (non-Javadoc)
@@ -120,6 +125,10 @@ public class Application implements IPlatformRunnable {
 				Conversion convType = null;
 				E_TypeConversion convOdv = null;
 				String datasetReference = "";
+				String cruiseName = "";
+				String localCsrIdentifier = "";
+				String bshCsrReference = "";
+				String shipCode = "";
 				boolean sortDatas = false;
 				String cdiSummaryFile = Global.EMPTY_STRING;
 				boolean couplingTableUpdate = false;
@@ -169,6 +178,18 @@ public class Application implements IPlatformRunnable {
 						if (cl.hasOption(optDatasetRef)) {
 							datasetReference = cl.getOptionValue(optDatasetRef);
 						}
+						// CRUISE NAME
+						if (cl.hasOption(optCruiseName)) {
+							cruiseName = cl.getOptionValue(optCruiseName);
+						}
+						// LOCAL CSR IDENTIFIER
+						if (cl.hasOption(optLocalCsrIdentifier)) {
+							localCsrIdentifier = cl.getOptionValue(optLocalCsrIdentifier);
+						}
+						// BSH CSR REFERENCE
+						if (cl.hasOption(optBshCsrReference)) {
+							bshCsrReference = cl.getOptionValue(optBshCsrReference);
+						}
 						// SORT DATA
 						if (cl.hasOption(optSortDatas)) {
 							sortDatas = true;
@@ -182,6 +203,12 @@ public class Application implements IPlatformRunnable {
 							couplingTableUpdate = true;
 							couplingTablePrefix = cl.getOptionValue(optCouplingTablePrefix);
 						}
+						
+						// SHIP CODE
+						if (cl.hasOption(optShipCode)) {
+							shipCode = cl.getOptionValue(optShipCode);
+						}
+
 						// print arguments in the log file
 						Nemo.getInstance().getLogger().info("Batch mode starting. Arguments :");
 						StringBuilder sb = new StringBuilder();
@@ -189,9 +216,9 @@ public class Application implements IPlatformRunnable {
 							sb.append(s + " ");
 						Nemo.getInstance().getLogger().info(sb.toString());
 						boolean success = NemoShell.main(inputFile, outputFile, modelFile,
-								convType, sortDatas, convOdv, datasetReference,
+								convType, sortDatas, convOdv, datasetReference, localCsrIdentifier, bshCsrReference, cruiseName,
 								cdiSummaryFile, couplingTableUpdate,
-								couplingTablePrefix, Nemo.getInstance().getLogger());
+								couplingTablePrefix, shipCode, Nemo.getInstance().getLogger());
 						if (success) {
 							Nemo.getInstance().getLogger().info("Batch mode successfully ended.");
 							System.exit(0);
@@ -278,6 +305,25 @@ public class Application implements IPlatformRunnable {
 				optDatasetRef,
 				true,
 				"Optional dataset reference, default value is the cruise reference or the cruise name if reference is empty");
+		opt.addOption(
+				optCruiseName,
+				true,
+				"Optional cruise name, default value is the cruise name.");
+		
+		opt.addOption(
+				optLocalCsrIdentifier,
+				true,
+				"Optional Local CSR identifier. Can't be present if -" + Global.optBshCsrReference + " is used.");
+		
+		opt.addOption(
+				optBshCsrReference,
+				true,
+				"Optional BSH CSR reference. Can't be present if -" + Global.optLocalCsrIdentifier + " is used.");
+		
+		opt.addOption(
+				optShipCode,
+				true,
+				"Optional ship code, sets the ship or overrides the ship provided by the model.");
 
 		opt.addOption(optCdiSummary, true, "CDI Summary file path (mandatory)");
 		opt.addOption(optCouplingTableUpdate, false,
@@ -330,6 +376,12 @@ public class Application implements IPlatformRunnable {
 							.info("Error, Conversion type must be \"medatlas\" , \"odv\" or \"NETCDF\" ");
 					checkOptionsOk = false;
 				}
+			}
+			
+			if (cl.hasOption(optLocalCsrIdentifier) && cl.hasOption(optBshCsrReference)) {
+				Nemo.getInstance().getLogger()
+						.info("Error, Options '" + optLocalCsrIdentifier + "' and '" + optBshCsrReference + "' can't be used at the same time.");
+				checkOptionsOk = false;
 			}
 
 			// if update coupling table is used, we must know the prefix to use

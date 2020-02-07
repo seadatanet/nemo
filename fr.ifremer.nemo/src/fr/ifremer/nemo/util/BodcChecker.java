@@ -404,49 +404,65 @@ public class BodcChecker {
 
 		return res;
 	}
+	
+	/**
+	 * Check the validity of the couple shipCode / shipLabel.
+	 *  - if deprecated, replace by the new values
+	 *  - if shipLabel is not set, get the ship label from the ship code.
+	 *  
+	 * @param shipCode the ship code.
+	 * @param shipLabel the ship label. If null or empty, the method gets the ship label from the ship code.
+	 * 
+	 * @return a BODCResult containing the updated values.
+	 */
 	public BODCResult checkShip(String shipCode, String shipLabel) {
 		logger.debug(Messages.BODC_check_ship_c17);
-		//  TODO 35230: check label if code is OK
-		BODCResult res= new BODCResult(BODC_RES_STATUS.OK);
+		// TODO 35230: check label if code is OK
+		BODCResult res = new BODCResult(BODC_RES_STATUS.OK);
 		res.setShipCode(shipCode);
 		res.setShipLabel(shipLabel);
-		if (shipCode==null ||shipCode.isEmpty()){
+		if (shipCode == null || shipCode.isEmpty()) {
 			return res;
 		}
-		String replaceMsg="";
-		String errorMsg="";
-		boolean ok=true;
+
+		String replaceMsg = "";
+		String errorMsg = "";
+		boolean ok = true;
+
 		try {
+
+			// case of a deprecated replacement
 			String replacement = sdnMgr.getReplacedByCode(shipCode, SdnVocabularyManager.LIST_C17);
-			if (replacement != null){
-				String replacementLabel= sdnMgr.getLabel(replacement, SdnVocabularyManager.LIST_C17);
-				replaceMsg+=MessageFormat.format(Messages.BODC_check_ship_c17_deprecated, shipCode,shipLabel, replacement, replacementLabel, SdnVocabularyManager.LIST_C17 )+Global.RN;
+			if (replacement != null) {
+				String replacementLabel = sdnMgr.getLabel(replacement, SdnVocabularyManager.LIST_C17);
+				replaceMsg += MessageFormat.format(Messages.BODC_check_ship_c17_deprecated, shipCode, shipLabel, replacement, replacementLabel, SdnVocabularyManager.LIST_C17) + Global.RN;
 				res.setShipCode(replacement);
 				res.setShipLabel(replacementLabel);
-				
+			} else if (shipLabel == null || shipLabel.isEmpty()) {
+				// case of a ship label to set
+				res.setShipLabel(sdnMgr.getLabel(shipCode, SdnVocabularyManager.LIST_C17));
 			}
 		} catch (Exception e) {
-			errorMsg+=MessageFormat.format(Messages.BODC_check_ship_c17_notExist, shipCode, shipLabel, SdnVocabularyManager.LIST_C17);
-//			errorMsg=e.getMessage();
+			errorMsg += MessageFormat.format(Messages.BODC_check_ship_c17_notExist, shipCode, shipLabel, SdnVocabularyManager.LIST_C17);
 			logger.error(errorMsg);
-			ok=false;
-		} 
+			ok = false;
+		}
 
-		
-		if (ok){
-			if(replaceMsg.isEmpty()){
+		if (ok) {
+			if (replaceMsg.isEmpty()) {
 				res.setResStatus(BODC_RES_STATUS.OK);
-			}else{
+			} else {
 				res.setWarningMsg(replaceMsg);
 				res.setResStatus(BODC_RES_STATUS.WARNING);
 			}
-		}else{
+		} else {
 			res.setErrorMsg(errorMsg);
-			res.setResStatus(BODC_RES_STATUS.KO);	
+			res.setResStatus(BODC_RES_STATUS.KO);
 		}
 
 		return res;
 	}
+
 	public BODCResult checkRegion(String regionCode, String regionLabel) {
 		logger.debug(Messages.BODC_check_region_c19);
 		//  TODO 35230: check label if code is OK
