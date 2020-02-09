@@ -21,6 +21,7 @@ import fr.ifremer.nemo.util.BODCResult.BODC_RES_STATUS;
 import fr.ifremer.nemo.util.BodcChecker;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Global.E_MesureType;
+import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
 
 /**
@@ -265,6 +266,13 @@ public class DataFormValidator extends FormValidator {
 					ok = ok && checkVerticalReferenceP01CodeIsUnique();
 				}
 
+				if (RulesManager.getInstance().isTrajectory()) {
+					String sensorDepth = Nemo.getInstance().getDomain().getStation().getModel().getProperty(Intern.S_SENSORDEPTH).getUserValue();
+					if (sensorDepth.isEmpty() && rm.getMyVerticalParametersList().getP_depthBSSurf().isEmpty()) {
+						Utils.messageErreurAppend(Messages.error_data_missingDepthForTrajectory); 
+					}
+				}
+				
 				/**
 				 * ***************************************************** 
 				 * fintests sur params
@@ -675,19 +683,20 @@ public class DataFormValidator extends FormValidator {
 
 		boolean ok = true;
 		if (rm.isP_depthBSBed_enabled()
-				&& rm.getMyVerticalParametersList().getP_depthBSBed()
-				.equals(Global.EMPTY_STRING)) {
+				&& rm.getMyVerticalParametersList().getP_depthBSBed().equals(Global.EMPTY_STRING)) {
 
 			Utils.messageErreurAppend(Messages.edit_data_verticalParameters_info_chooseDepthBSBed);
 
 			ok = false;
 		}
 
-		if ((rm.isP_depthBSSurf_enabled() && rm.isP_pressure_enabled())
-				&& (rm.getMyVerticalParametersList().getP_depthBSSurf()
-						.equals(Global.EMPTY_STRING) && rm
-						.getMyVerticalParametersList().getP_pressure()
-						.equals(Global.EMPTY_STRING))) {
+		if (
+				(rm.isP_depthBSSurf_enabled() && rm.isP_pressure_enabled())
+				&& (
+						rm.getMyVerticalParametersList().getP_depthBSSurf().equals(Global.EMPTY_STRING) && 
+						rm.getMyVerticalParametersList().getP_pressure().equals(Global.EMPTY_STRING))
+				
+				) {
 
 			Utils.messageErreurAppend(Messages.edit_data_verticalParameters_info_chooseDepthBSurfOrPressure);
 

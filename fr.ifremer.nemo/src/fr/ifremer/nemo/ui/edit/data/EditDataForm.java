@@ -442,15 +442,15 @@ public class EditDataForm extends EditForm {
 		}
 		dataModel.setDataListType(rulesManager.getMyDataListType());
 		
+		Nemo.getInstance().getDomain().getData().updateData(dataModel);
 		try {
 			dataModel.udpateP011s();
 		} catch (Exception e) {
 			Utils.messageWarningAppend(e.getMessage());
 		}
 		
-		dataModel.majMultipleParamCodes();
 
-		Nemo.getInstance().getDomain().getData().updateData(dataModel);
+		dataModel.majMultipleParamCodes();
 		Nemo.getInstance().getViewMain().getEditDataForm().setValidated(true);
 
 	}

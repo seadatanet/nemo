@@ -11,6 +11,7 @@ import com.ago.xml.PathElementConsumer;
 import com.ago.xml.SAXConsumer;
 import com.ago.xml.XMLOutputWriter;
 
+import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.config.VocabLists;
 import fr.ifremer.nemo.input.parameters.ParameterModel;
 import fr.ifremer.nemo.input.parameters.VerticalParametersList;
@@ -316,15 +317,27 @@ public class DataModel extends AbstractModel {
 	public VerticalParametersList getVerticalParametersList() {
 		return _verticalParametersList;
 	}
-	
+
 	/**
 	 * rename the param localcode in case of duplicates
 	 */
 	public void majMultipleParamCodes() {
 		// This map has key = param code ; value = quantity of this code found in the parameters.
+		RulesManager rm = RulesManager.getInstance();
 		HashMap<String, Integer> mapDuplicates = new HashMap<String, Integer>();
+		List<ParameterModel> allParameters= new ArrayList<>();
+		ParameterModel[] addedParam = Nemo.getInstance().getDomain().getData().getMyParameterManager().getAddedParameterModels(rm.getConversion()	);
+		if (addedParam!=null) {
+			for (ParameterModel p : addedParam)
+			{
+				allParameters.add(p);
+			}
+		}
+		for (ParameterModel p : _parameterModels) {
+			allParameters.add(p);
+		}
 
-		for (ParameterModel parameterModel : _parameterModels) {
+		for (ParameterModel parameterModel : allParameters) {
 
 			String currentCode = parameterModel.getParameter().getLocalCode();
 
@@ -359,7 +372,7 @@ public class DataModel extends AbstractModel {
 		for (ParameterModel parameterModel : _parameterModels) {
 
 			String currentP011 = parameterModel.getParameter().getCodeP011();
-			
+
 			if (currentP011 == null || currentP011.isEmpty() || true) {
 				// Sometimes the P011 is not defined yet
 
@@ -376,5 +389,5 @@ public class DataModel extends AbstractModel {
 			isPrimaryParameter = false;
 		}
 	}
-	
+
 }

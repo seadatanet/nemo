@@ -332,6 +332,9 @@ public class Messages {
 	public static String error_data_firstParam_depthBSSurfOrPres;
 	public static String error_data_firstParam_depthBSSurf;
 	public static String error_data_firstParam_nonUnique;
+	
+	public static String error_data_missingDepthForTrajectory;
+	
 	public static String error_convert_invalideSteps;
 	public static String error_convert_sdnmapping_paramcode;
 	public static String error_convert_sdnmapping_paramunit;
