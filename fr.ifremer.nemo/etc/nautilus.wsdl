@@ -41,15 +41,15 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
   </schema>
  </wsdl:types>
 
-   <wsdl:message name="getSurveyResponse">
-
-      <wsdl:part name="getSurveyReturn" type="impl:WSSurvey"/>
-
-   </wsdl:message>
-
    <wsdl:message name="getSurveyRequest">
 
       <wsdl:part name="in0" type="xsd:string"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getSurveyResponse">
+
+      <wsdl:part name="getSurveyReturn" type="impl:WSSurvey"/>
 
    </wsdl:message>
 

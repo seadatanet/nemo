@@ -285,7 +285,7 @@ Usage: ant [-f buildWS.xml] option
            <include name="log4j.properties"/>
         </classes>
         <lib dir="${axis.lib}">
-           <include name="axis.jar"/>
+           <include name="axis-java8-1.4.jar"/>
            <include name="axis-ant.jar"/>
            <include name="commons-discovery-0.2.jar"/>
            <include name="jaxrpc.jar"/>
@@ -295,10 +295,10 @@ Usage: ant [-f buildWS.xml] option
         <lib dir="${basedir}/lib">
            <include name="activation.jar"/>
            <include name="mail.jar"/>
-           <include name="log4j-1.2.14.jar"/>
+           <include name="log4j*.jar"/>
            <include name="commons-logging-1.0.4.jar"/>
 <!--           <include name="classes12.jar"/> -->
-<!--                   	<include name="ojdbc14-10.2.0.4.0.jar"/> -->
+                  	<include name="ojdbc14-10.2.0.4.0.jar"/>
         </lib>
      </war>
      <copy file="${jars.dir}/nemo.war" todir="${outputwars.dir}"/>
@@ -331,7 +331,7 @@ Usage: ant [-f buildWS.xml] option
            <include name="log4j.properties"/>
         </classes>
         <lib dir="${axis.lib}">
-           <include name="axis.jar"/>
+           <include name="axis-java8-1.4.jar"/>
            <include name="axis-ant.jar"/>
            <include name="commons-discovery-0.2.jar"/>
            <include name="jaxrpc.jar"/>
@@ -341,9 +341,9 @@ Usage: ant [-f buildWS.xml] option
         <lib dir="${basedir}/lib">
            <include name="activation.jar"/>
            <include name="mail.jar"/>
-           <include name="log4j-1.2.14.jar"/>
+           <include name="log4j*.jar"/>
            <include name="commons-logging-1.0.4.jar"/>
-<!--                   	<include name="ojdbc14-10.2.0.4.0.jar"/> -->
+                   	<include name="ojdbc14-10.2.0.4.0.jar"/> 
         </lib>
      </war>
   	 <copy file="${jars.dir}/nautilus.war" todir="${outputwars.dir}"/>

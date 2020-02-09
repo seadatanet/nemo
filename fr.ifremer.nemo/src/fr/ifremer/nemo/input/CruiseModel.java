@@ -349,7 +349,7 @@ public class CruiseModel extends AbstractModel {
 	 * @exception java.rmi.RemoteException
 	 */
 	public void fillFromSISMER(String a_Reference) throws ServiceException, MalformedURLException, RemoteException {
-
+		Nemo.getInstance().getLogger().info("connection to the Nautilus web service :"+ Nemo.getInstance().getConfig().getNautilusWebServiceURL());
 		NautilusSurveyWS service = new NautilusSurveyWSServiceLocator().getNAUTILUS(new java.net.URL(Nemo.getInstance().getConfig().getNautilusWebServiceURL()));
 		WSSurvey wssurvey = service.getSurvey(a_Reference);
 

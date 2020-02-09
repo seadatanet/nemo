@@ -22,7 +22,6 @@ Bundle-ClassPath: .,
  lib/slf4j-jdk14-1.5.6.jar,
  lib/slf4j-log4j12-1.5.6.jar,
  lib/netcdf-4.2.jar,
- lib_axis_14/axis.jar,
  lib_axis_14/axis-ant.jar,
  lib_axis_14/commons-discovery-0.2.jar,
  lib_axis_14/commons-logging-1.0.4.jar,
@@ -52,6 +51,7 @@ Bundle-ClassPath: .,
  lib/log4j-api-2.3.jar,
  lib/log4j-core-2.3.jar,
  lib/SoftwareVersionApi-1.0.jar,
- lib/odvSDN2CFPointLib-1.1.8-SNAPSHOT-jar-with-dependencies.jar
+ lib/odvSDN2CFPointLib-1.1.8-SNAPSHOT-jar-with-dependencies.jar,
+ lib_axis_14/axis-java8-1.4.jar
 Bundle-Vendor: IFREMER
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8

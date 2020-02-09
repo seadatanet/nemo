@@ -5,6 +5,23 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
  <wsdl:types>
   <schema targetNamespace="nemo" xmlns="http://www.w3.org/2001/XMLSchema">
    <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+   <complexType name="WSParameter">
+    <sequence>
+     <element name="code" nillable="true" type="xsd:string"/>
+     <element name="defaultValue" nillable="true" type="xsd:string"/>
+     <element name="format" nillable="true" type="xsd:string"/>
+     <element name="name" nillable="true" type="xsd:string"/>
+     <element name="unit" nillable="true" type="xsd:string"/>
+     <element name="unitP06" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOfWSParameter">
+    <complexContent>
+     <restriction base="soapenc:Array">
+      <attribute ref="soapenc:arrayType" wsdl:arrayType="impl:WSParameter[]"/>
+     </restriction>
+    </complexContent>
+   </complexType>
    <complexType name="WSCountry">
     <sequence>
      <element name="code" nillable="true" type="xsd:string"/>
@@ -15,6 +32,19 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
     <complexContent>
      <restriction base="soapenc:Array">
       <attribute ref="soapenc:arrayType" wsdl:arrayType="impl:WSCountry[]"/>
+     </restriction>
+    </complexContent>
+   </complexType>
+   <complexType name="WSShip">
+    <sequence>
+     <element name="code" nillable="true" type="xsd:string"/>
+     <element name="name" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOfWSShip">
+    <complexContent>
+     <restriction base="soapenc:Array">
+      <attribute ref="soapenc:arrayType" wsdl:arrayType="impl:WSShip[]"/>
      </restriction>
     </complexContent>
    </complexType>
@@ -59,19 +89,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
      </restriction>
     </complexContent>
    </complexType>
-   <complexType name="WSShip">
-    <sequence>
-     <element name="code" nillable="true" type="xsd:string"/>
-     <element name="name" nillable="true" type="xsd:string"/>
-    </sequence>
-   </complexType>
-   <complexType name="ArrayOfWSShip">
-    <complexContent>
-     <restriction base="soapenc:Array">
-      <attribute ref="soapenc:arrayType" wsdl:arrayType="impl:WSShip[]"/>
-     </restriction>
-    </complexContent>
-   </complexType>
    <complexType name="WSSurveyDescription">
     <sequence>
      <element name="name" nillable="true" type="xsd:string"/>
@@ -85,86 +102,10 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
      </restriction>
     </complexContent>
    </complexType>
-   <complexType name="WSParameter">
-    <sequence>
-     <element name="code" nillable="true" type="xsd:string"/>
-     <element name="defaultValue" nillable="true" type="xsd:string"/>
-     <element name="format" nillable="true" type="xsd:string"/>
-     <element name="name" nillable="true" type="xsd:string"/>
-     <element name="unit" nillable="true" type="xsd:string"/>
-    </sequence>
-   </complexType>
-   <complexType name="ArrayOfWSParameter">
-    <complexContent>
-     <restriction base="soapenc:Array">
-      <attribute ref="soapenc:arrayType" wsdl:arrayType="impl:WSParameter[]"/>
-     </restriction>
-    </complexContent>
-   </complexType>
   </schema>
  </wsdl:types>
 
-   <wsdl:message name="getDataCentresRequest">
-
-   </wsdl:message>
-
-   <wsdl:message name="getCountriesRequest">
-
-   </wsdl:message>
-
    <wsdl:message name="getShipsRequest">
-
-   </wsdl:message>
-
-   <wsdl:message name="getSurveyListResponse">
-
-      <wsdl:part name="getSurveyListReturn" type="impl:ArrayOfWSSurveyDescription"/>
-
-   </wsdl:message>
-
-   <wsdl:message name="getDataCentresResponse">
-
-      <wsdl:part name="getDataCentresReturn" type="impl:ArrayOfWSDataCentre"/>
-
-   </wsdl:message>
-
-   <wsdl:message name="getRegionsRequest">
-
-   </wsdl:message>
-
-   <wsdl:message name="getDataTypesRequest">
-
-   </wsdl:message>
-
-   <wsdl:message name="getSurveyListRequest">
-
-   </wsdl:message>
-
-   <wsdl:message name="getParametersRequest">
-
-   </wsdl:message>
-
-   <wsdl:message name="getCountriesResponse">
-
-      <wsdl:part name="getCountriesReturn" type="impl:ArrayOfWSCountry"/>
-
-   </wsdl:message>
-
-   <wsdl:message name="getShipsResponse">
-
-      <wsdl:part name="getShipsReturn" type="impl:ArrayOfWSShip"/>
-
-   </wsdl:message>
-
-   <wsdl:message name="getParametersResponse">
-
-      <wsdl:part name="getParametersReturn" type="impl:ArrayOfWSParameter"/>
-
-   </wsdl:message>
-
-   <wsdl:message name="getRegionsResponse">
-
-      <wsdl:part name="getRegionsReturn" type="impl:ArrayOfWSRegion"/>
 
    </wsdl:message>
 
@@ -174,13 +115,89 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:message>
 
+   <wsdl:message name="getParametersRequest">
+
+   </wsdl:message>
+
+   <wsdl:message name="getParametersResponse">
+
+      <wsdl:part name="getParametersReturn" type="impl:ArrayOfWSParameter"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getCountriesRequest">
+
+   </wsdl:message>
+
+   <wsdl:message name="getShipsResponse">
+
+      <wsdl:part name="getShipsReturn" type="impl:ArrayOfWSShip"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getSurveyListResponse">
+
+      <wsdl:part name="getSurveyListReturn" type="impl:ArrayOfWSSurveyDescription"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getRegionsRequest">
+
+   </wsdl:message>
+
+   <wsdl:message name="getDataCentresResponse">
+
+      <wsdl:part name="getDataCentresReturn" type="impl:ArrayOfWSDataCentre"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getDataTypesRequest">
+
+   </wsdl:message>
+
+   <wsdl:message name="getRegionsResponse">
+
+      <wsdl:part name="getRegionsReturn" type="impl:ArrayOfWSRegion"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getSurveyListRequest">
+
+   </wsdl:message>
+
+   <wsdl:message name="getDataCentresRequest">
+
+   </wsdl:message>
+
+   <wsdl:message name="getCountriesResponse">
+
+      <wsdl:part name="getCountriesReturn" type="impl:ArrayOfWSCountry"/>
+
+   </wsdl:message>
+
    <wsdl:portType name="NemoWS">
+
+      <wsdl:operation name="getParameters">
+
+         <wsdl:input message="impl:getParametersRequest" name="getParametersRequest"/>
+
+         <wsdl:output message="impl:getParametersResponse" name="getParametersResponse"/>
+
+      </wsdl:operation>
 
       <wsdl:operation name="getCountries">
 
          <wsdl:input message="impl:getCountriesRequest" name="getCountriesRequest"/>
 
          <wsdl:output message="impl:getCountriesResponse" name="getCountriesResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getShips">
+
+         <wsdl:input message="impl:getShipsRequest" name="getShipsRequest"/>
+
+         <wsdl:output message="impl:getShipsResponse" name="getShipsResponse"/>
 
       </wsdl:operation>
 
@@ -208,14 +225,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
-      <wsdl:operation name="getShips">
-
-         <wsdl:input message="impl:getShipsRequest" name="getShipsRequest"/>
-
-         <wsdl:output message="impl:getShipsResponse" name="getShipsResponse"/>
-
-      </wsdl:operation>
-
       <wsdl:operation name="getSurveyList">
 
          <wsdl:input message="impl:getSurveyListRequest" name="getSurveyListRequest"/>
@@ -224,19 +233,29 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
-      <wsdl:operation name="getParameters">
-
-         <wsdl:input message="impl:getParametersRequest" name="getParametersRequest"/>
-
-         <wsdl:output message="impl:getParametersResponse" name="getParametersResponse"/>
-
-      </wsdl:operation>
-
    </wsdl:portType>
 
    <wsdl:binding name="NEMOSoapBinding" type="impl:NemoWS">
 
       <wsdlsoap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="getParameters">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getParametersRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="nemo" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getParametersResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="nemo" use="encoded"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
 
       <wsdl:operation name="getCountries">
 
@@ -249,6 +268,24 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
          </wsdl:input>
 
          <wsdl:output name="getCountriesResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="nemo" use="encoded"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getShips">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getShipsRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="nemo" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getShipsResponse">
 
             <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="nemo" use="encoded"/>
 
@@ -310,24 +347,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       </wsdl:operation>
 
-      <wsdl:operation name="getShips">
-
-         <wsdlsoap:operation soapAction=""/>
-
-         <wsdl:input name="getShipsRequest">
-
-            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="nemo" use="encoded"/>
-
-         </wsdl:input>
-
-         <wsdl:output name="getShipsResponse">
-
-            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="nemo" use="encoded"/>
-
-         </wsdl:output>
-
-      </wsdl:operation>
-
       <wsdl:operation name="getSurveyList">
 
          <wsdlsoap:operation soapAction=""/>
@@ -339,24 +358,6 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
          </wsdl:input>
 
          <wsdl:output name="getSurveyListResponse">
-
-            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="nemo" use="encoded"/>
-
-         </wsdl:output>
-
-      </wsdl:operation>
-
-      <wsdl:operation name="getParameters">
-
-         <wsdlsoap:operation soapAction=""/>
-
-         <wsdl:input name="getParametersRequest">
-
-            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="nemo" use="encoded"/>
-
-         </wsdl:input>
-
-         <wsdl:output name="getParametersResponse">
 
             <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="nemo" use="encoded"/>
 
