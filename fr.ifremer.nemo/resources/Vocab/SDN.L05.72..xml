@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<vocabulary list="SDN:L05:70:"  version="70"  date="2019-09-05T01:00:09.000"  title="SeaDataNet device categories"  >
+<vocabulary list="SDN:L05:72:"  version="72"  date="2019-12-20T02:00:06.000"  title="SeaDataNet device categories"  >
    <element  key="SDN:L05::LAB11"  label="high performance liquid chromatographs"   date="2008-01-10T16:10:12.000"  />
    <element  key="SDN:L05::MOD01"  label="Global models"   date="2012-07-16T13:13:04.000"  />
    <element  key="SDN:L05::LAB10"  label="atomic absorption spectrometers"   date="2008-01-10T16:10:12.000"  />
@@ -69,7 +69,7 @@
    <element  key="SDN:L05::DLOG"  label="data loggers"   date="2017-12-05T11:14:23.000"  />
    <element  key="SDN:L05::22"  label="plankton nets"   date="2018-02-20T17:43:56.000"  />
    <element  key="SDN:L05::23"  label="pelagic trawl nets"   date="2007-11-20T08:50:03.000"  />
-   <element  key="SDN:L05::24"  label="benthos samplers"   date="2017-11-07T15:16:11.000"  />
+   <element  key="SDN:L05::24"  label="benthos samplers"   date="2019-12-19T11:32:58.000"  />
    <element  key="SDN:L05::LBTG"  label="labelling tags"   date="2013-02-26T17:11:07.000"  />
    <element  key="SDN:L05::370"  label="geothermometers"   date="2010-11-18T11:35:46.000"  />
    <element  key="SDN:L05::371"  label="60 Hz top-bandwidth single-channel seismic reflection systems"   date="2010-02-19T11:52:56.000"  />
@@ -116,6 +116,7 @@
    <element  key="SDN:L05::LAB06"  label="fluorescence microscopes"   date="2008-01-10T16:10:12.000"  />
    <element  key="SDN:L05::LAB05"  label="optical microscopes"   date="2008-01-10T16:10:12.000"  />
    <element  key="SDN:L05::390"  label="Mechanical bathythermographs"   date="2018-10-24T08:48:30.000"  />
+   <element  key="SDN:L05::391"  label="sediment suction samplers"   date="2019-12-19T15:01:25.000"  />
    <element  key="SDN:L05::150"  label="in-situ particle sizers"   date="2017-08-08T13:48:18.000"  />
    <element  key="SDN:L05::151"  label="benthic incubation chambers"   date="2008-01-10T15:47:47.000"  />
    <element  key="SDN:L05::152"  label="sidescan sonars"   date="2007-11-20T09:34:40.000"  />
@@ -160,8 +161,6 @@
    <element  key="SDN:L05::LAB30"  label="salinometers"   date="2015-02-11T09:18:46.000"  />
    <element  key="SDN:L05::EXHL"  label="high resolution low penetration explosives"   date="2013-02-26T17:11:07.000"  />
    <element  key="SDN:L05::70"  label="fish aggregating devices"  shortLabel="FAD"  date="2019-09-04T09:01:22.000"  />
-   <element  key="SDN:L05::71"  label="scallop dredges"   date="2019-09-03T23:54:50.000"  />
-   <element  key="SDN:L05::72"  label="queen scallop dredges"   date="2019-09-03T23:54:27.000"  />
    <element  key="SDN:L05::LAB37"  label="flow cytometers"   date="2012-08-02T13:45:33.000"  />
    <element  key="SDN:L05::LAB36"  label="flow injection analysers"   date="2012-08-02T13:44:24.000"  />
    <element  key="SDN:L05::LAB39"  label="Geiger counters"   date="2012-08-30T13:13:49.000"  />
@@ -196,7 +195,7 @@
    <element  key="SDN:L05::91"  label="observers"   date="2014-11-18T00:21:30.000"  />
    <element  key="SDN:L05::92"  label="meteorological LiDARs"   date="2016-06-06T14:34:38.000"  />
    <element  key="SDN:L05::999"  label="unknown"   date="2007-11-20T08:50:03.000"  />
-   <element  key="SDN:L05::EMSR"  label="elecromagnetic sensors"   date="2011-09-16T10:48:04.000"  />
+   <element  key="SDN:L05::EMSR"  label="electromagnetic sensors"   date="2019-12-11T18:23:45.000"  />
    <element  key="SDN:L05::FFES"  label="Fish-finder echosounders"   date="2011-11-26T15:02:06.000"  />
    <element  key="SDN:L05::EXLH"  label="high penetration low resolution explosives"   date="2013-02-26T17:11:07.000"  />
    <element  key="SDN:L05::NATS"  label="natural source"   date="2013-02-26T17:11:07.000"  />

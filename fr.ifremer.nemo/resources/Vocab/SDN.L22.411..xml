@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<vocabulary list="SDN:L22:397:"  version="397"  date="2019-09-21T01:00:06.000"  title="SeaVoX Device Catalogue"  >
+<vocabulary list="SDN:L22:411:"  version="411"  date="2020-01-31T02:00:04.000"  title="SeaVoX Device Catalogue"  >
    <element  key="SDN:L22::TOOL0715"  label="Lockheed Martin Sippican Deep Blue XBT probe"  shortLabel="Deep Blue XBT"  date="2015-06-11T07:41:00.000"  />
    <element  key="SDN:L22::TOOL0957"  label="RPS MetOcean CM 04 current meter"  shortLabel="RPS MetOcean CM 04"  date="2015-12-14T10:01:01.000"  />
    <element  key="SDN:L22::TOOL0956"  label="Barringer M123 Marine Proton Magnetometer"  shortLabel="Barringer M123"  date="2015-12-01T14:39:08.000"  />
@@ -624,6 +624,9 @@
    <element  key="SDN:L22::NETT0179"  label="British Antarctic Survey Rectangular Midwater Trawl 1+8"  shortLabel="BAS RMT1+8"  date="2018-01-30T16:59:47.000"  />
    <element  key="SDN:L22::NETT0177"  label="Manta net"  shortLabel="Manta trawl"  date="2018-01-09T13:29:51.000"  />
    <element  key="SDN:L22::NETT0178"  label="British Antarctic Survey Rectangular Midwater Trawl 1"  shortLabel="BAS RMT1"  date="2018-01-30T16:59:47.000"  />
+   <element  key="SDN:L22::NETT0191"  label="Unknown 41 x 91 cm hydraulic blade dredge"  shortLabel="41 x 91cm blade dredge"  date="2019-12-10T09:27:08.000"  />
+   <element  key="SDN:L22::NETT0192"  label="University Marine Biological Station Millport hydraulic blade dredge"  shortLabel="UMBSM blade dredge"  date="2019-12-10T09:27:08.000"  />
+   <element  key="SDN:L22::NETT0190"  label="Unspecified naturalists {rectangular} dredge"  shortLabel="Natlst dredge"  date="2019-12-02T09:02:24.000"  />
    <element  key="SDN:L22::NETT0142"  label="Planktonbenthos sampler - Hensen (1895)"  shortLabel="Hensen planktonbenthos sampler"  date="2011-10-21T13:18:49.000"  />
    <element  key="SDN:L22::NETT0143"  label="Plummet net - Hovekamp ; Daly [personal communication to Wiebe and Benfield]"  shortLabel="Hovekamp-Daly plummet net"  date="2011-10-21T13:18:49.000"  />
    <element  key="SDN:L22::NETT0140"  label="Plankton-Bar - Tonolli (1951)"  shortLabel="Plankton-Bar"  date="2011-10-21T13:18:49.000"  />
@@ -1079,7 +1082,7 @@
    <element  key="SDN:L22::TOOL1351"  label="Nanometrics Titan Ethernet Accelerograph"  shortLabel="Nanometrics Titan EA"  date="2019-08-09T14:57:21.000"  />
    <element  key="SDN:L22::TOOL0020"  label="Sea-Bird SBE 37-SIP MicroCAT C-T Sensor"  shortLabel="SBE 37-SIP MicroCAT"  date="2017-04-03T10:45:41.000"  />
    <element  key="SDN:L22::TOOL1350"  label="Nanometrics Centaur Digital Recorder CTR4"  shortLabel="Nanometrics Centaur CTR4"  date="2019-08-09T14:58:31.000"  />
-   <element  key="SDN:L22::TOOL0260"  label="Young MA05103 Wind Monitor anemometer"  shortLabel="Young MA05103 anemometer"  date="2014-11-12T11:29:50.000"  />
+   <element  key="SDN:L22::TOOL0260"  label="Young 05103 Wind Monitor anemometer"  shortLabel="Young 05103 anemometer"  date="2019-11-27T16:07:36.000"  />
    <element  key="SDN:L22::TOOL1114"  label="BD Biosciences Accuri C6 Plus flow cytometer"  shortLabel="BD Accuri C6 Plus"  date="2017-02-13T16:45:25.000"  />
    <element  key="SDN:L22::TOOL0025"  label="Sea-Bird SBE 53 BPR Bottom Pressure Recorder"  shortLabel="SBE 53 BPR"  date="2009-11-30T11:27:51.000"  />
    <element  key="SDN:L22::TOOL0267"  label="Star-Oddi Starmon mini temperature recorder"  shortLabel="Star-Oddi Starmon mini TR"  date="2017-04-03T09:40:29.000"  />
@@ -1111,80 +1114,108 @@
    <element  key="SDN:L22::TOOL1115"  label="Metrohm 888 Titrando pentiometric titrator"  shortLabel="Metrohm 888 Titrando"  date="2017-08-09T23:25:40.000"  />
    <element  key="SDN:L22::TOOL1119"  label="Pro Oceanus CO2-Pro Submersible pCO2 Sensor"  shortLabel="Pro Oceanus pCO2"  date="2017-03-24T13:02:45.000"  />
    <element  key="SDN:L22::TOOL0032"  label="Guildline Model 8705 Digital CTD"  shortLabel="Guildline 8705 CTD"  date="2009-11-30T11:56:35.000"  />
+   <element  key="SDN:L22::TOOL1363"  label="Imagenex 881A Digital Multi-Frequency (profiling) single-beam echosounder"  shortLabel="Imagenex 881A Profiling"  date="2019-10-04T14:28:52.000"  />
    <element  key="SDN:L22::TOOL1121"  label="Star-Oddi DST Tilt platform orientation sensor"  shortLabel="Star-Oddi Tilt"  date="2017-08-09T23:30:17.000"  />
    <element  key="SDN:L22::TOOL1120"  label="AERONET SeaWIFS SeaPRISM radiometer"  shortLabel="AERONET SeaPRISM"  date="2017-04-04T09:06:11.000"  />
    <element  key="SDN:L22::TOOL0031"  label="Aanderaa WLR 7 Water Level Recorder"  shortLabel="WLR 7"  date="2013-07-25T15:07:40.000"  />
    <element  key="SDN:L22::TOOL0273"  label="RD200A echosounder"  shortLabel="RD200A echosounder"  date="2010-05-18T15:10:58.000"  />
+   <element  key="SDN:L22::TOOL1362"  label="Shimadzu UV-1800 UV-VIS spectrophotometer"  shortLabel="Shimadzu UV-1800"  date="2019-10-04T14:28:52.000"  />
    <element  key="SDN:L22::TOOL0030"  label="Aanderaa WLR 8 Water Level Recorder"  shortLabel="WLR 8"  date="2009-11-30T11:56:35.000"  />
    <element  key="SDN:L22::TOOL1361"  label="WETLabs ECO FLBB scattering fluorescence sensor"  shortLabel="WETLabs ECO FLBB"  date="2019-09-20T10:25:28.000"  />
    <element  key="SDN:L22::TOOL1360"  label="JFE Advantech AAQ-RINKO 176 1.06 {AAQ176} water quality profiler"  shortLabel="JFE AAQ176"  date="2019-09-17T14:43:46.000"  />
    <element  key="SDN:L22::TOOL0036"  label="Sea-Bird SBE 43 Dissolved Oxygen Sensor"  shortLabel="SBE 43 DO"  date="2009-11-30T11:56:35.000"  />
    <element  key="SDN:L22::TOOL0278"  label="University of Liverpool cathodic stripping voltammetry metal analyser"  shortLabel="Liverpool CSV metals"  date="2010-05-18T15:10:58.000"  />
+   <element  key="SDN:L22::TOOL1367"  label="University of Minnesota (automated) pH sensor"  shortLabel="UMN pH sensor"  date="2019-10-17T14:48:07.000"  />
    <element  key="SDN:L22::TOOL1125"  label="WETLabs ECO BB9 backscattering sensor"  shortLabel="WETLabs ECO BB9"  date="2017-04-04T09:06:11.000"  />
+   <element  key="SDN:L22::TOOL1366"  label="CODAR SeaSonde continuous surface current mapping and wave monitoring HF radar system"  shortLabel="CODAR SeaSonde"  date="2019-10-17T14:48:07.000"  />
    <element  key="SDN:L22::TOOL1124"  label="Campbell Scientific CS456 pressure transducer"  shortLabel="Campbell Scientific CS456"  date="2017-04-04T09:06:11.000"  />
    <element  key="SDN:L22::TOOL0277"  label="Endeco model 1125 dissolved oxygen system"  shortLabel="Endeco 1125 DO"  date="2010-05-18T15:10:58.000"  />
    <element  key="SDN:L22::TOOL0035"  label="Sea-Bird SBE 911 CTD"  shortLabel="SBE 911 CTD"  date="2010-11-18T00:42:13.000"  />
    <element  key="SDN:L22::TOOL0034"  label="Guildline Model 8770 Digital CTD"  shortLabel="Guildline 8770 CTD"  date="2009-11-30T11:56:35.000"  />
    <element  key="SDN:L22::TOOL1123"  label="LI-COR LI-6262 CO2/H2O infrared gas analyser"  shortLabel="LI-COR LI-6262 gas analyser"  date="2017-04-04T09:06:11.000"  />
+   <element  key="SDN:L22::TOOL1365"  label="Lufft WS501-UMB weather station"  shortLabel="Lufft WS501-UMB"  date="2019-10-16T12:56:41.000"  />
    <element  key="SDN:L22::TOOL0276"  label="OceanData TSG103 thermosalinograph"  shortLabel="TSG103 thermosalinograph"  date="2010-05-18T15:10:58.000"  />
+   <element  key="SDN:L22::TOOL1364"  label="Imagenex 881A Digital Multi-Frequency (imaging) single-beam echosounder"  shortLabel="Imagenex 881A Imaging"  date="2019-10-04T14:28:52.000"  />
    <element  key="SDN:L22::TOOL0033"  label="Neil Brown Smart CTD"  shortLabel="Neil Brown Smart CTD"  date="2009-11-30T16:34:50.000"  />
    <element  key="SDN:L22::TOOL1122"  label="Sea-Bird SBE 39plus temperature sensor"  shortLabel="SBE 39plus"  date="2017-04-04T09:06:11.000"  />
    <element  key="SDN:L22::TOOL1129"  label="National Oceanography Centre Colorimetric Microfluidic pH sensor"  shortLabel="UoS NOC pH sensor"  date="2017-08-09T23:37:04.000"  />
    <element  key="SDN:L22::TOOL1128"  label="Exeter Analytical Model CE-440 elemental analyser"  shortLabel="Exeter Analytical CE-440"  date="2017-05-05T13:33:21.000"  />
    <element  key="SDN:L22::TOOL0039"  label="Sea-Bird SBE 13 Dissolved Oxygen Sensor"  shortLabel="SBE 13 DO"  date="2010-11-18T00:39:41.000"  />
+   <element  key="SDN:L22::TOOL1369"  label="Sequoia LISST-200X particle size analyser"  shortLabel="LISST-200X"  date="2019-12-09T10:33:19.000"  />
    <element  key="SDN:L22::TOOL1127"  label="University of Rhode Island-Graduate School of Oceanography Inverted Echo Sounder (IES)"  shortLabel="URI-GSO IES"  date="2017-04-12T09:29:35.000"  />
+   <element  key="SDN:L22::TOOL1368"  label="Biospherical Instruments QSP-2155 underwater PAR sensor"  shortLabel="Biospherical QSP-2155"  date="2019-11-20T13:45:50.000"  />
    <element  key="SDN:L22::TOOL1126"  label="JFE Advantech DEFI2-L PAR sensor"  shortLabel="JFE Advantech DEF12-L"  date="2017-04-04T09:06:11.000"  />
    <element  key="SDN:L22::TOOL0037"  label="Sea-Bird SBE 43F Dissolved Oxygen Sensor"  shortLabel="SBE 43F DO"  date="2009-11-30T11:56:35.000"  />
    <element  key="SDN:L22::TOOL0281"  label="Barometer"  shortLabel="Barometer"  date="2010-05-18T15:10:58.000"  />
+   <element  key="SDN:L22::TOOL1370"  label="Sequoia LISST-Glider Slocum G2-G3 particle size analyser"  shortLabel="LISST-G2-G3"  date="2019-12-09T10:33:19.000"  />
    <element  key="SDN:L22::TOOL0280"  label="Cup and vane anemometer"  shortLabel="Cup and vane anemometer"  date="2010-05-18T15:10:58.000"  />
    <element  key="SDN:L22::TOOL1132"  label="BD Biosciences Influx Cell Sorter"  shortLabel="BD Influx Cell Sorter"  date="2017-05-19T15:18:59.000"  />
    <element  key="SDN:L22::TOOL0043"  label="Chelsea Technologies Group Aqualog CTD"  shortLabel="CTG Aqualog CTD"  date="2010-11-18T00:39:41.000"  />
+   <element  key="SDN:L22::TOOL1374"  label="Unspecified sediment corer"  shortLabel="sediment corer"  date="2019-12-10T10:47:35.000"  />
    <element  key="SDN:L22::TOOL1131"  label="Metrohm 702 SM Titrino potentiometric titrator"  shortLabel="Metrohm 702 SM Titrino"  date="2017-05-12T15:24:53.000"  />
    <element  key="SDN:L22::TOOL0042"  label="Sea-Bird SBE 19 SEACAT CTD"  shortLabel="SBE 19 SEACAT"  date="2010-11-18T00:39:41.000"  />
+   <element  key="SDN:L22::TOOL1373"  label="Unknown 1 x 0.25m sediment pipe dredge"  shortLabel="steel 1m pipe dredge"  date="2019-12-10T10:47:35.000"  />
    <element  key="SDN:L22::TOOL0041"  label="Applied Microsystems CTD-12"  shortLabel="AML CTD-12"  date="2009-11-30T11:56:35.000"  />
    <element  key="SDN:L22::TOOL0283"  label="Atmospheric thermometer"  shortLabel="Air thermometer"  date="2010-05-18T15:10:58.000"  />
    <element  key="SDN:L22::TOOL1130"  label="Sea Data Inverted Echo Sounder (IES)"  shortLabel="Sea Data IES"  date="2017-05-10T09:47:50.000"  />
+   <element  key="SDN:L22::TOOL1372"  label="Unknown diver-operated sediment suction sampler - Rostron 1983"  shortLabel="diver suction pump - Rostron 1983"  date="2019-12-10T10:47:35.000"  />
    <element  key="SDN:L22::TOOL0282"  label="Hygrometer"  shortLabel="Hygrometer"  date="2010-05-18T15:10:58.000"  />
    <element  key="SDN:L22::TOOL0040"  label="Sea-Bird SBE 25 Sealogger CTD"  shortLabel="SBE 25 Sealogger"  date="2010-11-18T00:39:41.000"  />
+   <element  key="SDN:L22::TOOL1371"  label="Unspecified diver-operated sediment suction sampler"  shortLabel="diver suction pump"  date="2019-12-10T09:27:08.000"  />
    <element  key="SDN:L22::TOOL0047"  label="Sea-Bird SBE 19plus SEACAT CTD"  shortLabel="SBE 19+ SEACAT"  date="2010-11-18T00:39:41.000"  />
+   <element  key="SDN:L22::TOOL1378"  label="Unspecified scallop dredge"  shortLabel="scallop dredge"  date="2019-12-19T09:54:55.000"  />
    <element  key="SDN:L22::TOOL1136"  label="YSI Model 30/30M Salinity, Conductivity and Temperature System"  shortLabel="YSI Model 30/30M"  date="2017-06-14T15:49:46.000"  />
    <element  key="SDN:L22::TOOL0288"  label="Biospherical QCP-2300 underwater PAR sensor"  shortLabel="QCP-2300 underwater PAR"  date="2010-05-18T15:10:58.000"  />
    <element  key="SDN:L22::TOOL1135"  label="Kompressoren-Pumpen-Zentrale GMBH pump"  shortLabel="KPZ GMBH pump"  date="2017-06-14T15:49:46.000"  />
    <element  key="SDN:L22::TOOL0046"  label="Marine Electronics Sand Ripple Profiling Sonar"  shortLabel="Mar Elec SRPS"  date="2009-11-30T11:56:35.000"  />
+   <element  key="SDN:L22::TOOL1377"  label="SubCtech OceanPack RACE 5th generation {FerryBox} combined pCO2 analyser and microplastics sampler"  shortLabel="OceanPack RACE 5 pC02+plastics"  date="2019-12-16T11:41:29.000"  />
    <element  key="SDN:L22::TOOL1134"  label="Agilent/HP 5972A Mass Selective Detector"  shortLabel="Agilent/HP 5972A MSD"  date="2017-09-05T23:53:00.000"  />
    <element  key="SDN:L22::TOOL0045"  label="Marine Electronics 3D Sand Ripple Profiling Logging Sonar"  shortLabel="Mar Elec 3D SRPLS"  date="2009-11-30T11:56:35.000"  />
+   <element  key="SDN:L22::TOOL1376"  label="Unspecified manual sediment corer"  shortLabel="manual corer"  date="2019-12-10T10:47:35.000"  />
    <element  key="SDN:L22::TOOL0286"  label="Biospherical QCD-905L underwater PAR sensor"  shortLabel="QCD-905L underwater PAR"  date="2010-05-18T15:10:58.000"  />
    <element  key="SDN:L22::TOOL0044"  label="Sequoia Laser In-Situ Sediment Size Transmissometer"  shortLabel="LISST"  date="2009-11-30T11:56:35.000"  />
    <element  key="SDN:L22::TOOL1133"  label="Shimadzu GC-2014 gas chromatograph"  shortLabel="Shimadzu GC-2014"  date="2017-06-05T08:31:07.000"  />
+   <element  key="SDN:L22::TOOL1375"  label="Unspecified HAPS corer"  shortLabel="HAPS corer"  date="2019-12-10T10:47:35.000"  />
    <element  key="SDN:L22::TOOL1139"  label="Malvern Mastersizer 3000/3000E laser diffraction particle size analyser"  shortLabel="Mastersizer 3000/3000E"  date="2017-06-20T08:40:21.000"  />
    <element  key="SDN:L22::TOOL0049"  label="Chelsea Technologies Group Aquatracka fluorometer"  shortLabel="CTG Aquatracka fluorometer"  date="2010-11-18T00:39:41.000"  />
    <element  key="SDN:L22::TOOL1138"  label="Marel M1100 industrial scales"  shortLabel="Marel M1100 scales"  date="2017-06-20T08:40:03.000"  />
    <element  key="SDN:L22::TOOL0048"  label="Chelsea Technologies Group Aquapack CTD"  shortLabel="CTG Aquapack CTD"  date="2009-11-30T11:56:35.000"  />
    <element  key="SDN:L22::TOOL1137"  label="Mettler Toledo SevenGo Portable Instruments"  shortLabel="Mettler Toledo SevenGo"  date="2017-06-14T15:49:46.000"  />
+   <element  key="SDN:L22::TOOL1379"  label="Unspecified queen scallop dredge"  shortLabel="queen scallop dredge"  date="2019-12-19T09:54:55.000"  />
    <element  key="SDN:L22::TOOL0292"  label="ASL Environmental Sciences IPS4 Ice Profiler Sonar"  shortLabel="ASL IPS4 ice profiler"  date="2010-11-18T00:39:41.000"  />
    <element  key="SDN:L22::TOOL0050"  label="Chelsea Technologies Group 2-pi PAR irradiance sensor"  shortLabel="CTG 2-pi PAR"  date="2010-11-18T00:39:41.000"  />
+   <element  key="SDN:L22::TOOL1381"  label="Sparton of Canada T-1 XBT probe"  shortLabel="Sparton T-1 XBT"  date="2020-01-15T11:51:29.000"  />
+   <element  key="SDN:L22::TOOL1380"  label="Shimadzu Total Organic Carbon Analyser (TOC-LCPH)"  shortLabel="Shimadzu TOC-LCPH"  date="2020-01-08T15:44:17.000"  />
    <element  key="SDN:L22::TOOL0291"  label="Technicon AutoAnalyzer II colorimetric autoanalyser"  shortLabel="Technicon AAII AA"  date="2010-11-18T00:39:41.000"  />
    <element  key="SDN:L22::TOOL0054"  label="RBR TDR-2050 underwater temperature logger"  shortLabel="RBR TDR-2050"  date="2009-11-30T11:56:35.000"  />
+   <element  key="SDN:L22::TOOL1385"  label="Sparton of Canada T-6 XBT probe"  shortLabel="Sparton T-6 XBT"  date="2020-01-15T10:59:20.000"  />
    <element  key="SDN:L22::TOOL0296"  label="Thermo Scientific 5012 Multi Angle Absorption Photometer"  shortLabel="Thermo 5012 MAAP"  date="2010-05-18T15:10:58.000"  />
    <element  key="SDN:L22::TOOL1143"  label="Thermo Scientific Fluoroskan Ascent microplate fluorometer"  shortLabel="Thermo Scientific Fluoroskan Ascent"  date="2017-07-26T10:43:10.000"  />
    <element  key="SDN:L22::TOOL0053"  label="RBR XR-420 CTD Marine"  shortLabel="RBR XR-420 CTD"  date="2010-11-18T00:39:41.000"  />
+   <element  key="SDN:L22::TOOL1384"  label="Sparton of Canada T-5 XBT probe"  shortLabel="Sparton T-5 XBT"  date="2020-01-15T10:59:20.000"  />
    <element  key="SDN:L22::TOOL0295"  label="Teledyne RDI Workhorse Sentinel-300 ADCP"  shortLabel="RDI Workhorse Sentinel-300 ADCP"  date="2013-08-21T23:43:47.000"  />
    <element  key="SDN:L22::TOOL1142"  label="Thermo Scientific Accela Series High Performance Liquid Chromatograph"  shortLabel="Thermo Scientific Accela HPLC"  date="2017-07-24T10:51:25.000"  />
+   <element  key="SDN:L22::TOOL1383"  label="Sparton of Canada T-4 XBT probe"  shortLabel="Sparton T-4 XBT"  date="2020-01-15T10:59:20.000"  />
    <element  key="SDN:L22::TOOL0294"  label="Teledyne RDI Workhorse Sentinel-600 ADCP"  shortLabel="RDI Workhorse Sentinel-600 ADCP"  date="2013-08-21T23:43:39.000"  />
    <element  key="SDN:L22::TOOL1141"  label="WETLabs ECO FLBBCD backscattering sensor"  shortLabel="WETLabs ECO FLBBCD"  date="2017-07-19T15:13:58.000"  />
+   <element  key="SDN:L22::TOOL1382"  label="Sparton of Canada T-3 XBT probe"  shortLabel="Sparton T-3 XBT"  date="2020-01-15T11:52:02.000"  />
    <element  key="SDN:L22::TOOL0293"  label="Teledyne RDI Workhorse Sentinel-1200 ADCP"  shortLabel="RDI Workhorse Sentinel-1200 ADCP"  date="2013-08-21T23:43:30.000"  />
    <element  key="SDN:L22::TOOL1140"  label="Unisense pH microelectrode"  shortLabel="Unisense micro pH"  date="2017-07-05T08:32:47.000"  />
    <element  key="SDN:L22::TOOL1147"  label="Hach DR 5000 UV-Vis Laboratory Spectrophotometer"  shortLabel="Hach DR 5000 Spectrophotometer"  date="2017-08-07T12:33:48.000"  />
+   <element  key="SDN:L22::TOOL1389"  label="Lockheed Martin Sippican AXBT XBT probe"  shortLabel="Sippican AXBT"  date="2020-01-15T10:59:20.000"  />
    <element  key="SDN:L22::TOOL0058"  label="Sea-Bird SBE 911plus CTD"  shortLabel="SBE 911+ CTD"  date="2013-03-13T15:55:10.000"  />
    <element  key="SDN:L22::TOOL0299"  label="GRIMM 1.108 aerosol spectrometer"  shortLabel="GRIMM 1.108 aerosol spec"  date="2011-07-01T09:20:53.000"  />
    <element  key="SDN:L22::TOOL0057"  label="Marsh McBirney 585 OEM electromagnetic flowmeter"  shortLabel="Marsh McBirney 585 EMCM"  date="2012-11-20T14:50:06.000"  />
    <element  key="SDN:L22::TOOL1146"  label="Sequoia LISST-100X particle sizer"  shortLabel="LISST-100X"  date="2017-08-07T12:07:11.000"  />
+   <element  key="SDN:L22::TOOL1388"  label="Sparton of Canada T-20 XBT probe"  shortLabel="Sparton T-20 XBT"  date="2020-01-15T10:59:20.000"  />
    <element  key="SDN:L22::TOOL0298"  label="GRIMM 1.109 aerosol spectrometer"  shortLabel="GRIMM 1.109 aerosol spec"  date="2011-07-01T09:20:55.000"  />
    <element  key="SDN:L22::TOOL1145"  label="Plymouth Marine Laboratory automated Winkler titration system"  shortLabel="PML Winkler titrator"  date="2017-08-07T09:21:23.000"  />
+   <element  key="SDN:L22::TOOL1387"  label="Sparton of Canada T-10 XBT probe"  shortLabel="Sparton T-10 XBT"  date="2020-01-15T10:59:20.000"  />
    <element  key="SDN:L22::TOOL0056"  label="Teledyne RDI Workhorse Long-Ranger ADCP"  shortLabel="RDI Workhorse Long-Ranger ADCP"  date="2010-11-18T00:39:41.000"  />
    <element  key="SDN:L22::TOOL0297"  label="Aerodyne High Resolution Time-of-Flight Aerosol Mass Spectrometer"  shortLabel="Aerodyne HR Tof AMS"  date="2010-05-18T15:10:58.000"  />
    <element  key="SDN:L22::TOOL1144"  label="PreSens OXY-10 Mini oxygen meter"  shortLabel="PreSens OXY-10 Mini"  date="2017-07-26T10:43:10.000"  />
    <element  key="SDN:L22::TOOL0055"  label="RBR TR-1050 underwater temperature logger"  shortLabel="RBR TR-1050"  date="2017-08-09T23:39:12.000"  />
+   <element  key="SDN:L22::TOOL1386"  label="Sparton of Canada T-7 XBT probe"  shortLabel="Sparton T-7 XBT"  date="2020-01-15T10:59:20.000"  />
    <element  key="SDN:L22::TOOL1149"  label="Agilent 5975C Series Gas Chromatograph/Mass Selective Detector System"  shortLabel="Agilent 5975C Series GC/MSD System"  date="2017-09-07T08:23:08.000"  />
    <element  key="SDN:L22::TOOL1148"  label="TitraLab TIM90, ABU91/ABU93 automated titration system"  shortLabel="TitraLab TIM90, ABU91/ABU93"  date="2017-09-01T15:28:19.000"  />
    <element  key="SDN:L22::TOOL0059"  label="Tritech PA-200 Altimeter"  shortLabel="TPA200 Altimeter"  date="2009-11-30T11:56:35.000"  />
@@ -1198,7 +1229,10 @@
    <element  key="SDN:L22::NETT0002"  label="High-speed sampler - Apstein (1906)"  shortLabel="Apstein HSS"  date="2011-10-21T13:18:49.000"  />
    <element  key="SDN:L22::TOOL1150"  label="Rockland Scientific Vertical Microstructure Profiler (VMP) 6000"  shortLabel="Rockland VMP 6000"  date="2018-04-23T15:44:15.000"  />
    <element  key="SDN:L22::TOOL0061"  label="Teledyne RDI 300kHz Workhorse Monitor direct-reading ADCP"  shortLabel="RDI Workhorse-300 DR-ADCP"  date="2009-11-30T11:56:35.000"  />
+   <element  key="SDN:L22::TOOL1392"  label="WETLabs ECO FL(RT) fluorometer"  shortLabel="WETLabs ECO FL(RT)"  date="2020-01-30T16:21:04.000"  />
    <element  key="SDN:L22::TOOL0060"  label="WETLabs ECO BB(RT)D Scattering Meter"  shortLabel="WL BB(RT)D OBS"  date="2009-11-30T11:56:35.000"  />
+   <element  key="SDN:L22::TOOL1391"  label="WETLabs ECO-NTU(SB) turbidity sensor"  shortLabel="WETLabs ECO-NTU(SB)"  date="2020-01-17T14:25:59.000"  />
+   <element  key="SDN:L22::TOOL1390"  label="WETLabs ECO-NTU(S) turbidity sensor"  shortLabel="WETLabs ECO-NTU(S)"  date="2020-01-17T14:25:59.000"  />
    <element  key="SDN:L22::TOOL0065"  label="Chelsea Technologies Group Alphatracka transmissometer"  shortLabel="CTG Alphatracka transmissometer"  date="2009-11-30T11:56:35.000"  />
    <element  key="SDN:L22::TOOL1154"  label="Vemco V16 Coded Transmitter Tag"  shortLabel="Vemco V16"  date="2017-11-01T00:30:29.000"  />
    <element  key="SDN:L22::TOOL1153"  label="Vemco V13AP Coded Accelerometer Pressure Transmitter Tag"  shortLabel="Vemco V13AP"  date="2017-10-15T23:08:03.000"  />

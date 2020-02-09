@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <mapping>
-   <vocabulary list="SDN:P07:68:"  version="68"  date="2019-09-18T01:00:09.000"  title="Climate and Forecast Standard Names"   />
+   <vocabulary list="SDN:P07:71:"  version="71"  date="2020-02-04T02:00:04.000"  title="Climate and Forecast Standard Names"   />
    <mapped>
       <vocabulary list="SDN:P02:113:"  version="113"  date="2019-07-26T10:34:49.000"  title="SeaDataNet Parameter Discovery Vocabulary"   />
    </mapped>
@@ -1106,8 +1106,8 @@
    <match>
       <element  key="SDN:P02:113:SIXX"  label="Concentration of silicon species in the water column"    />
       <narrow>
-         <element  key="SDN:P07:113:CFSN0519"  label="moles_of_silicate_per_unit_mass_in_sea_water"    />
          <element  key="SDN:P07:113:CF14N37"  label="mole_concentration_of_particulate_matter_expressed_as_silicon_in_sea_water"    />
+         <element  key="SDN:P07:113:CFSN0519"  label="moles_of_silicate_per_unit_mass_in_sea_water"    />
       </narrow>
    </match>
    <match>
@@ -1239,20 +1239,24 @@
    <match>
       <element  key="SDN:P02:113:HBCH"  label="Habitat characterisation"    />
       <narrow>
-         <element  key="SDN:P07:113:CFSN0357"  label="soil_type"    />
-         <element  key="SDN:P07:113:CFSN0354"  label="soil_temperature"    />
-         <element  key="SDN:P07:113:CFSN0351"  label="soil_porosity"    />
-         <element  key="SDN:P07:113:CFSN0368"  label="sea_ice_temperature"    />
-         <element  key="SDN:P07:113:GACJJFFJ"  label="burned_area_fraction"    />
          <element  key="SDN:P07:113:CEDABECC"  label="burned_area"    />
+         <element  key="SDN:P07:113:GACJJFFJ"  label="burned_area_fraction"    />
+         <element  key="SDN:P07:113:CFSN0368"  label="sea_ice_temperature"    />
+         <element  key="SDN:P07:113:CFSN0351"  label="soil_porosity"    />
+         <element  key="SDN:P07:113:CFSN0354"  label="soil_temperature"    />
+         <element  key="SDN:P07:113:CFSN0357"  label="soil_type"    />
       </narrow>
    </match>
    <match>
       <element  key="SDN:P02:113:HBEX"  label="Habitat extent"    />
       <narrow>
          <element  key="SDN:P07:113:CFSN0425"  label="sea_ice_draft"    />
+         <element  key="SDN:P07:113:CFSN0365"  label="sea_ice_freeboard"    />
+         <element  key="SDN:P07:113:CFSN0364"  label="sea_ice_extent"    />
+         <element  key="SDN:P07:113:CFSN0090"  label="vegetation_area_fraction"    />
+         <element  key="SDN:P07:113:CFSN0618"  label="land_area_fraction"    />
+         <element  key="SDN:P07:113:CFSN0574"  label="land_binary_mask"    />
          <element  key="SDN:P07:113:CFSN0576"  label="land_ice_area_fraction"    />
-         <element  key="SDN:P07:113:CFSN0424"  label="sea_ice_area_fraction"    />
          <element  key="SDN:P07:113:CFSN0467"  label="ocean_mixed_layer_thickness"    />
          <element  key="SDN:P07:113:CFSN0468"  label="ocean_mixed_layer_thickness_defined_by_mixing_scheme"    />
          <element  key="SDN:P07:113:CFSN0470"  label="ocean_mixed_layer_thickness_defined_by_sigma_theta"    />
@@ -1260,13 +1264,9 @@
          <element  key="SDN:P07:113:CFSN0471"  label="ocean_mixed_layer_thickness_defined_by_temperature"    />
          <element  key="SDN:P07:113:CFSN0474"  label="ocean_volume"    />
          <element  key="SDN:P07:113:CFSN0418"  label="sea_area"    />
-         <element  key="SDN:P07:113:CFSN0574"  label="land_binary_mask"    />
-         <element  key="SDN:P07:113:CFSN0618"  label="land_area_fraction"    />
-         <element  key="SDN:P07:113:CFSN0423"  label="sea_ice_area"    />
-         <element  key="SDN:P07:113:CFSN0364"  label="sea_ice_extent"    />
-         <element  key="SDN:P07:113:CFSN0365"  label="sea_ice_freeboard"    />
          <element  key="SDN:P07:113:CFSN0419"  label="sea_area_fraction"    />
-         <element  key="SDN:P07:113:CFSN0090"  label="vegetation_area_fraction"    />
+         <element  key="SDN:P07:113:CFSN0423"  label="sea_ice_area"    />
+         <element  key="SDN:P07:113:CFSN0424"  label="sea_ice_area_fraction"    />
       </narrow>
    </match>
    <match>
@@ -1321,6 +1321,9 @@
    <match>
       <element  key="SDN:P02:113:RFVL"  label="Horizontal velocity of the water column (currents)"    />
       <narrow>
+         <element  key="SDN:P07:113:CFSN0266"  label="surface_eastward_sea_water_velocity"    />
+         <element  key="SDN:P07:113:CFV8NS4"  label="surface_geostrophic_northward_sea_water_velocity"    />
+         <element  key="SDN:P07:113:CF12N188"  label="barotropic_sea_water_x_velocity"    />
          <element  key="SDN:P07:113:CFSN0772"  label="baroclinic_eastward_sea_water_velocity"    />
          <element  key="SDN:P07:113:CFSN0242"  label="surface_northward_sea_water_velocity"    />
          <element  key="SDN:P07:113:CFSN0836"  label="surface_geostrophic_sea_water_x_velocity"    />
@@ -1333,14 +1336,11 @@
          <element  key="SDN:P07:113:CFSN0334"  label="sea_water_speed"    />
          <element  key="SDN:P07:113:CFSN0336"  label="sea_water_x_velocity"    />
          <element  key="SDN:P07:113:CFSN0337"  label="sea_water_y_velocity"    />
-         <element  key="SDN:P07:113:CFSN0266"  label="surface_eastward_sea_water_velocity"    />
          <element  key="SDN:P07:113:CFV13N16"  label="northward_sea_water_velocity_assuming_no_tide"    />
          <element  key="SDN:P07:113:CFV13N15"  label="radial_sea_water_velocity_away_from_instrument"    />
          <element  key="SDN:P07:113:CF12N189"  label="barotropic_sea_water_y_velocity"    />
          <element  key="SDN:P07:113:CFV13N10"  label="eastward_sea_water_velocity_assuming_no_tide"    />
          <element  key="SDN:P07:113:CFV8NS2"  label="surface_geostrophic_eastward_sea_water_velocity"    />
-         <element  key="SDN:P07:113:CFV8NS4"  label="surface_geostrophic_northward_sea_water_velocity"    />
-         <element  key="SDN:P07:113:CF12N188"  label="barotropic_sea_water_x_velocity"    />
       </narrow>
       <related>
          <element  key="SDN:P07:113:CFV13N5"  label="direction_of_radial_vector_away_from_instrument"    />
@@ -1469,6 +1469,7 @@
    <match>
       <element  key="SDN:P02:113:TMES"  label="Metadata parameters"    />
       <narrow>
+         <element  key="SDN:P07:113:CFV11S1"  label="area_type"    />
          <element  key="SDN:P07:113:CFSN0411"  label="realization"    />
          <element  key="SDN:P07:113:CFSN0199"  label="temperature_of_sensor_for_oxygen_in_sea_water"    />
          <element  key="SDN:P07:113:CF12N190"  label="cell_thickness"    />
@@ -1477,7 +1478,6 @@
          <element  key="SDN:P07:113:CFV10N12"  label="geoid_height_above_reference_ellipsoid"    />
          <element  key="SDN:P07:113:CFV10N20"  label="model_level_number_at_base_of_ocean_mixed_layer_defined_by_sigma_theta"    />
          <element  key="SDN:P07:113:CFV10N21"  label="model_level_number_at_sea_floor"    />
-         <element  key="SDN:P07:113:CFV11S1"  label="area_type"    />
       </narrow>
       <related>
          <element  key="SDN:P07:113:CFV13N42"  label="angle_of_emergence"    />
@@ -1667,11 +1667,11 @@
    <match>
       <element  key="SDN:P02:113:PHOS"  label="Phosphate concentration parameters in the water column"    />
       <narrow>
+         <element  key="SDN:P07:113:CFSN0518"  label="moles_of_phosphate_per_unit_mass_in_sea_water"    />
+         <element  key="SDN:P07:113:CF14N111"  label="tendency_of_ocean_mole_content_of_dissolved_inorganic_phosphorus"    />
          <element  key="SDN:P07:113:CF14N112"  label="tendency_of_ocean_mole_content_of_dissolved_inorganic_phosphorus_due_to_biological_processes"    />
          <element  key="SDN:P07:113:CF12N310"  label="mass_concentration_of_phosphate_in_sea_water"    />
          <element  key="SDN:P07:113:CF12N502"  label="mole_concentration_of_phosphate_in_sea_water"    />
-         <element  key="SDN:P07:113:CFSN0518"  label="moles_of_phosphate_per_unit_mass_in_sea_water"    />
-         <element  key="SDN:P07:113:CF14N111"  label="tendency_of_ocean_mole_content_of_dissolved_inorganic_phosphorus"    />
       </narrow>
       <related>
          <element  key="SDN:P07:113:CF12N537"  label="mole_ratio_of_nitrate_to_phosphate_in_sea_water"    />
@@ -1763,7 +1763,6 @@
          <element  key="SDN:P07:113:CFSN0058"  label="water_potential_evaporation_amount"    />
          <element  key="SDN:P07:113:CFSN0059"  label="water_potential_evaporation_flux"    />
          <element  key="SDN:P07:113:CFSN0569"  label="lwe_thickness_of_precipitation_amount"    />
-         <element  key="SDN:P07:113:CFSN0542"  label="mass_fraction_of_rain_in_air"    />
          <element  key="SDN:P07:113:CFSN0713"  label="convective_precipitation_amount"    />
          <element  key="SDN:P07:113:CFSN0715"  label="convective_rainfall_amount"    />
          <element  key="SDN:P07:113:CFSN0716"  label="convective_rainfall_flux"    />
@@ -1797,8 +1796,8 @@
    <match>
       <element  key="SDN:P02:113:RBSC"  label="Radar backscatter"    />
       <narrow>
-         <element  key="SDN:P07:113:CFV10N43"  label="surface_backwards_scattering_coefficient_of_radar_wave"    />
          <element  key="SDN:P07:113:CF12N204"  label="equivalent_reflectivity_factor"    />
+         <element  key="SDN:P07:113:CFV10N43"  label="surface_backwards_scattering_coefficient_of_radar_wave"    />
       </narrow>
       <related>
          <element  key="SDN:P07:113:CF12N800"  label="volume_attenuated_backwards_scattering_function_in_air_assuming_no_aerosol_or_cloud"    />
@@ -1820,6 +1819,8 @@
    <match>
       <element  key="SDN:P02:113:PSAL"  label="Salinity of the water column"    />
       <narrow>
+         <element  key="SDN:P07:113:CFSN0376"  label="sea_surface_salinity"    />
+         <element  key="SDN:P07:113:CFSN0331"  label="sea_water_salinity"    />
          <element  key="SDN:P07:113:BBAH2111"  label="change_over_time_in_sea_water_salinity"    />
          <element  key="SDN:P07:113:JIBGDIEJ"  label="sea_water_absolute_salinity"    />
          <element  key="SDN:P07:113:EAEEJEIH"  label="change_over_time_in_sea_water_absolute_salinity"    />
@@ -1835,8 +1836,6 @@
          <element  key="SDN:P07:113:CFV8N124"  label="tendency_of_sea_water_salinity_due_to_sea_ice_thermodynamics"    />
          <element  key="SDN:P07:113:CFV8N125"  label="tendency_of_sea_water_salinity_due_to_vertical_mixing"    />
          <element  key="SDN:P07:113:CFV8N121"  label="tendency_of_sea_water_salinity_due_to_advection"    />
-         <element  key="SDN:P07:113:CFSN0376"  label="sea_surface_salinity"    />
-         <element  key="SDN:P07:113:CFSN0331"  label="sea_water_salinity"    />
       </narrow>
    </match>
    <match>
@@ -1876,10 +1875,10 @@
    <match>
       <element  key="SDN:P02:113:PREX"  label="Sea level expressed as pressure"    />
       <narrow>
-         <element  key="SDN:P07:113:CFV13N17"  label="sea_floor_depth_below_sea_surface"    />
-         <element  key="SDN:P07:113:CIEIIDJF"  label="sea_water_pressure_due_to_sea_water"    />
          <element  key="SDN:P07:113:CFSN0330"  label="sea_water_pressure"    />
+         <element  key="SDN:P07:113:CIEIIDJF"  label="sea_water_pressure_due_to_sea_water"    />
          <element  key="SDN:P07:113:CF12N583"  label="sea_water_pressure_at_sea_floor"    />
+         <element  key="SDN:P07:113:CFV13N17"  label="sea_floor_depth_below_sea_surface"    />
       </narrow>
       <related>
          <element  key="SDN:P07:113:CF12N584"  label="sea_water_pressure_at_sea_water_surface"    />
@@ -2097,6 +2096,7 @@
          <element  key="SDN:P07:113:JBCIIFEB"  label="tendency_of_atmosphere_mass_content_of_sulfur_dioxide_due_to_emission_from_forest_fires"    />
          <element  key="SDN:P07:113:JCIAJBEE"  label="tendency_of_atmosphere_mass_content_of_dimethyl_sulfide_due_to_emission_from_forest_fires"    />
          <element  key="SDN:P07:113:JEDFIAHA"  label="tendency_of_atmosphere_mass_content_of_sulfur_dioxide_due_to_emission_from_waste_treatment_and_disposal"    />
+         <element  key="SDN:P07:113:CFSN0537"  label="mass_fraction_of_dimethyl_sulfide_in_air"    />
          <element  key="SDN:P07:113:CFSN0546"  label="mass_fraction_of_sulfur_dioxide_in_air"    />
          <element  key="SDN:P07:113:CFSN0813"  label="mole_fraction_of_dimethyl_sulfide_in_air"    />
          <element  key="SDN:P07:113:CFSN0821"  label="mole_fraction_of_sulfur_dioxide_in_air"    />
@@ -2111,7 +2111,6 @@
          <element  key="SDN:P07:113:CF12N133"  label="atmosphere_moles_of_dimethyl_sulfide"    />
          <element  key="SDN:P07:113:CF12N177"  label="atmosphere_moles_of_sulfur_dioxide"    />
          <element  key="SDN:P07:113:CF12N250"  label="mass_concentration_of_dimethyl_sulfide_in_air"    />
-         <element  key="SDN:P07:113:CFSN0537"  label="mass_fraction_of_dimethyl_sulfide_in_air"    />
          <element  key="SDN:P07:113:BBAH2155"  label="atmosphere_mass_content_of_sulfate"    />
       </narrow>
       <related>
@@ -2204,10 +2203,10 @@
    <match>
       <element  key="SDN:P02:113:MTWT"  label="Total metal concentrations in water bodies"    />
       <narrow>
-         <element  key="SDN:P07:113:CF14N119"  label="tendency_of_ocean_mole_content_of_iron_due_to_deposition_and_runoff_and_sediment_dissolution"    />
-         <element  key="SDN:P07:113:CF14N120"  label="tendency_of_ocean_mole_content_of_iron_due_to_sedimentation"    />
          <element  key="SDN:P07:113:CF14N118"  label="tendency_of_ocean_mole_content_of_iron_due_to_biological_production"    />
+         <element  key="SDN:P07:113:CF14N119"  label="tendency_of_ocean_mole_content_of_iron_due_to_deposition_and_runoff_and_sediment_dissolution"    />
          <element  key="SDN:P07:113:CF14N121"  label="tendency_of_ocean_mole_content_of_silicon_due_to_biological_production"    />
+         <element  key="SDN:P07:113:CF14N120"  label="tendency_of_ocean_mole_content_of_iron_due_to_sedimentation"    />
       </narrow>
    </match>
    <match>
@@ -2314,13 +2313,13 @@
       <element  key="SDN:P02:113:VSRA"  label="Visible waveband radiance and irradiance measurements in the atmosphere"    />
       <narrow>
          <element  key="SDN:P07:113:CFV13N26"  label="surface_ratio_of_upwelling_radiance_emerging_from_sea_water_to_downwelling_radiative_flux_in_air"    />
-         <element  key="SDN:P07:113:WPA7Z3EX"  label="isotropic_radiance_per_unit_wavelength_in_air"    />
-         <element  key="SDN:P07:113:YI375G77"  label="downwelling_radiative_flux_per_unit_wavelength_in_air"    />
          <element  key="SDN:P07:113:0F95XPEG"  label="upwelling_radiance_per_unit_wavelength_in_air"    />
          <element  key="SDN:P07:113:0PVCZPS1"  label="toa_outgoing_radiance_per_unit_wavelength"    />
          <element  key="SDN:P07:113:3LRQADLT"  label="upwelling_radiative_flux_per_unit_wavelength_in_air"    />
          <element  key="SDN:P07:113:HLKZ2VSL"  label="downwelling_radiance_per_unit_wavelength_in_air"    />
          <element  key="SDN:P07:113:J0VGRYWY"  label="surface_upwelling_radiative_flux_per_unit_wavelength_in_air"    />
+         <element  key="SDN:P07:113:WPA7Z3EX"  label="isotropic_radiance_per_unit_wavelength_in_air"    />
+         <element  key="SDN:P07:113:YI375G77"  label="downwelling_radiative_flux_per_unit_wavelength_in_air"    />
          <element  key="SDN:P07:113:CFV13N8"  label="downwelling_shortwave_flux_in_air_assuming_clear_sky"    />
          <element  key="SDN:P07:113:CFSN0295"  label="surface_diffuse_downwelling_photosynthetic_radiative_flux_in_air"    />
          <element  key="SDN:P07:113:CFSN0284"  label="surface_downwelling_photosynthetic_photon_flux_in_air"    />
@@ -2352,11 +2351,6 @@
          <element  key="SDN:P07:113:CFSN0271"  label="surface_downwelling_photosynthetic_radiative_flux_in_sea_water"    />
          <element  key="SDN:P07:113:CFSN0272"  label="surface_downwelling_photosynthetic_spherical_irradiance_in_sea_water"    />
          <element  key="SDN:P07:113:CFSN0673"  label="downwelling_photon_flux_in_sea_water"    />
-         <element  key="SDN:P07:113:RWP7TWKV"  label="surface_upwelling_radiance_per_unit_wavelength_in_sea_water"    />
-         <element  key="SDN:P07:113:WGFWBWG7"  label="upwelling_radiative_flux_per_unit_wavelength_in_sea_water"    />
-         <element  key="SDN:P07:113:VXOB20W3"  label="surface_downwelling_radiance_per_unit_wavelength_in_sea_water"    />
-         <element  key="SDN:P07:113:VY6WUPOO"  label="surface_upwelling_radiative_flux_per_unit_wavelength_in_sea_water"    />
-         <element  key="SDN:P07:113:Z2CRG5G5"  label="downwelling_photon_radiance_per_unit_wavelength_in_sea_water"    />
          <element  key="SDN:P07:113:17G027ST"  label="downwelling_spherical_irradiance_per_unit_wavelength_in_sea_water"    />
          <element  key="SDN:P07:113:1JSOE4OU"  label="omnidirectional_spherical_irradiance_per_unit_wavelength_in_sea_water"    />
          <element  key="SDN:P07:113:6151973H"  label="downwelling_radiance_per_unit_wavelength_in_sea_water"    />
@@ -2369,6 +2363,11 @@
          <element  key="SDN:P07:113:JFTGSY33"  label="surface_downwelling_photon_spherical_irradiance_per_unit_wavelength_in_sea_water"    />
          <element  key="SDN:P07:113:NAIK3LNA"  label="downwelling_radiative_flux_per_unit_wavelength_in_sea_water"    />
          <element  key="SDN:P07:113:QASZPOPC"  label="surface_downwelling_photon_flux_per_unit_wavelength_in_sea_water"    />
+         <element  key="SDN:P07:113:RWP7TWKV"  label="surface_upwelling_radiance_per_unit_wavelength_in_sea_water"    />
+         <element  key="SDN:P07:113:WGFWBWG7"  label="upwelling_radiative_flux_per_unit_wavelength_in_sea_water"    />
+         <element  key="SDN:P07:113:VXOB20W3"  label="surface_downwelling_radiance_per_unit_wavelength_in_sea_water"    />
+         <element  key="SDN:P07:113:VY6WUPOO"  label="surface_upwelling_radiative_flux_per_unit_wavelength_in_sea_water"    />
+         <element  key="SDN:P07:113:Z2CRG5G5"  label="downwelling_photon_radiance_per_unit_wavelength_in_sea_water"    />
       </narrow>
       <related>
          <element  key="SDN:P07:113:CFSN0262"  label="surface_downwelling_spherical_irradiance_in_sea_water"    />
