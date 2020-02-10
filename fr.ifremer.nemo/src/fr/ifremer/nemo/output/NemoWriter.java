@@ -482,7 +482,7 @@ public abstract class NemoWriter {
 		String[] res = null;
 		StringBuffer stationHeader = new StringBuffer();
 
-		if (mediaModel.getEndData() == E_EndData.BEGIN_LINE_CHANGES) {
+		if (mediaModel.getEndData() == E_EndData.BEGIN_LINE_CHANGES||mediaModel.getEndData() == E_EndData.COLUMNCHANGE) {
 			// 8909
 			if (consume) {
 				res = consumeLine().toString().split(Global.RN);
