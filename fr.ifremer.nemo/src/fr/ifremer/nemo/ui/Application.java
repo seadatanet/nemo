@@ -315,26 +315,26 @@ public class Application implements IPlatformRunnable {
 		opt.addOption(
 				optCruiseName,
 				true,
-				"Optional cruise name, default value is the cruise name in the model.");
+				"Optional cruise name. Overrides the model value.");
 		opt.addOption(
 				optCruiseComment,
 				true,
-				"Optional cruise comment, default value is the cruise comment in the model.");
+				"Optional cruise comment. Overrides the model value.");
 		
 		opt.addOption(
 				optLocalCsrIdentifier,
 				true,
-				"Optional Local CSR identifier. Can't be present if -" + Global.optBshCsrReference + " is used.");
+				"Optional Local CSR identifier. . Overrides the model value. Can't be present if -" + Global.optBshCsrReference + " is used.");
 		
 		opt.addOption(
 				optBshCsrReference,
 				true,
-				"Optional BSH CSR reference. Can't be present if -" + Global.optLocalCsrIdentifier + " is used.");
+				"Optional BSH CSR reference. . Overrides the model value. Can't be present if -" + Global.optLocalCsrIdentifier + " is used.");
 		
 		opt.addOption(
 				optShipCode,
 				true,
-				"Optional ship code, default value is the ship in the model.");
+				"Optional ship code. Overrides the model value.");
 
 		opt.addOption(optCdiSummary, true, "CDI Summary file path (mandatory)");
 		opt.addOption(optCouplingTableUpdate, false,
