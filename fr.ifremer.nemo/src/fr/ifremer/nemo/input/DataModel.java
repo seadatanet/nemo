@@ -373,7 +373,7 @@ public class DataModel extends AbstractModel {
 
 			String currentP011 = parameterModel.getParameter().getCodeP011();
 
-			if (currentP011 == null || currentP011.isEmpty() || true) {
+			if (currentP011 == null || currentP011.isEmpty()) {
 				// Sometimes the P011 is not defined yet
 
 				if (isPrimaryParameter && (rm.isTrajectory() || rm.isProfile())) {
