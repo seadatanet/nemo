@@ -58,6 +58,7 @@ public class Application implements IPlatformRunnable {
 	private static final String optSortDatas = Global.optSortDatas;
 	private static final String optDatasetRef = Global.optDatasetRef;
 	private static final String optCruiseName = Global.optCruiseName;
+	private static final String optCruiseComment = Global.optCruiseComment;
 	private static final String optLocalCsrIdentifier = Global.optLocalCsrIdentifier;
 	private static final String optBshCsrReference = Global.optBshCsrReference;
 	private static final String optShipCode = Global.optShipCode;
@@ -126,9 +127,11 @@ public class Application implements IPlatformRunnable {
 				E_TypeConversion convOdv = null;
 				String datasetReference = "";
 				String cruiseName = "";
+				String cruiseComment="";
 				String localCsrIdentifier = "";
 				String bshCsrReference = "";
 				String shipCode = "";
+				
 				boolean sortDatas = false;
 				String cdiSummaryFile = Global.EMPTY_STRING;
 				boolean couplingTableUpdate = false;
@@ -182,6 +185,10 @@ public class Application implements IPlatformRunnable {
 						if (cl.hasOption(optCruiseName)) {
 							cruiseName = cl.getOptionValue(optCruiseName);
 						}
+						// CRUISE COMMENT
+						if (cl.hasOption(optCruiseComment)) {
+							cruiseComment= cl.getOptionValue(optCruiseComment);
+						}
 						// LOCAL CSR IDENTIFIER
 						if (cl.hasOption(optLocalCsrIdentifier)) {
 							localCsrIdentifier = cl.getOptionValue(optLocalCsrIdentifier);
@@ -216,9 +223,9 @@ public class Application implements IPlatformRunnable {
 							sb.append(s + " ");
 						Nemo.getInstance().getLogger().info(sb.toString());
 						boolean success = NemoShell.main(inputFile, outputFile, modelFile,
-								convType, sortDatas, convOdv, datasetReference, localCsrIdentifier, bshCsrReference, cruiseName,
+								convType, sortDatas, convOdv, datasetReference, localCsrIdentifier, bshCsrReference, cruiseName,cruiseComment,
 								cdiSummaryFile, couplingTableUpdate,
-								couplingTablePrefix, shipCode, Nemo.getInstance().getLogger());
+								couplingTablePrefix, shipCode,  Nemo.getInstance().getLogger());
 						if (success) {
 							Nemo.getInstance().getLogger().info("Batch mode successfully ended.");
 							System.exit(0);
@@ -308,7 +315,11 @@ public class Application implements IPlatformRunnable {
 		opt.addOption(
 				optCruiseName,
 				true,
-				"Optional cruise name, default value is the cruise name.");
+				"Optional cruise name, default value is the cruise name in the model.");
+		opt.addOption(
+				optCruiseComment,
+				true,
+				"Optional cruise comment, default value is the cruise comment in the model.");
 		
 		opt.addOption(
 				optLocalCsrIdentifier,
@@ -323,7 +334,7 @@ public class Application implements IPlatformRunnable {
 		opt.addOption(
 				optShipCode,
 				true,
-				"Optional ship code, sets the ship or overrides the ship provided by the model.");
+				"Optional ship code, default value is the ship in the model.");
 
 		opt.addOption(optCdiSummary, true, "CDI Summary file path (mandatory)");
 		opt.addOption(optCouplingTableUpdate, false,

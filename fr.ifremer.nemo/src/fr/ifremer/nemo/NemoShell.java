@@ -62,7 +62,7 @@ public class NemoShell {
 	 */
 	public static boolean main(String inputFile, String outputFile,
 			String modelFile, Conversion conv, boolean sortDatas,
-			E_TypeConversion odvConv, String datasetRef, String localCsrIdentifier, String bshCsrReference, String cruiseName, String cdiSummaryFile,
+			E_TypeConversion odvConv, String datasetRef, String localCsrIdentifier, String bshCsrReference, String cruiseName, String cruiseComment, String cdiSummaryFile,
 			boolean couplingTableUpdate, String couplingTablePrefix, String shipCode,
 			Logger logger) {
 
@@ -180,7 +180,11 @@ public class NemoShell {
 			if (!cruiseName.equals(Global.EMPTY_STRING)) {
 				inputDomain.getCruise().getModel().setName(cruiseName);
 			}
-			
+			// Cruise comment.
+			if (!cruiseComment.equals(Global.EMPTY_STRING)) {
+				inputDomain.getCruise().getModel().setComment(cruiseComment);
+			}
+						
 			// Local CSR identifier.
 			if (!localCsrIdentifier.equals(Global.EMPTY_STRING)) {
 				inputDomain.getCruise().getModel().setLocalCSRIdentifier(localCsrIdentifier);

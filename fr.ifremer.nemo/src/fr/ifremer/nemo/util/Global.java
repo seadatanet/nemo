@@ -72,6 +72,7 @@ public interface Global {
 	public static final String optSortDatas = "sort";
 	public static final String optDatasetRef = "datasetRef";
 	public static final String optCruiseName = "cruiseName";
+	public static final String optCruiseComment="cruiseComment";
 	public static final String optLocalCsrIdentifier = "localCsrIdentifier";
 	public static final String optBshCsrReference = "bshCsrReference";
 	public static final String optShipCode = "shipCode";
