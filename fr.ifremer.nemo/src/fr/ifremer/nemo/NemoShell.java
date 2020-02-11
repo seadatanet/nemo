@@ -188,11 +188,17 @@ public class NemoShell {
 			// Local CSR identifier.
 			if (!localCsrIdentifier.equals(Global.EMPTY_STRING)) {
 				inputDomain.getCruise().getModel().setLocalCSRIdentifier(localCsrIdentifier);
+				
+				// overrides eventual setting from the model
+				inputDomain.getCruise().getModel().setBshCsrReference("");
 			}
 			
 			// BSH CSR reference.
 			if (!bshCsrReference.equals(Global.EMPTY_STRING)) {
 				inputDomain.getCruise().getModel().setBshCsrReference(bshCsrReference);
+				
+				// overrides eventual setting from the model
+				inputDomain.getCruise().getModel().setLocalCSRIdentifier("");
 			}
 
 			// Ship code and name. Those will be checked later.
