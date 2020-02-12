@@ -120,9 +120,24 @@ public class StationFormValidator extends FormValidator {
 
 			// FAE022 : TYPE DE DONNEES
 			// FAE 6536 : on exige un dataType même si pas onglet Cruise
-			if (editStationForm.dataType.getDatatype().getValueCombo().getSelectionIndex() == -1) {
-				Utils.messageErreurAppend(Messages.Etape_32);
-				ok = ok && false;
+			
+			if (RulesManager.getInstance().isConversionToMedatlas()) {
+				
+				// MEDATLAS: custom datatype not allowed.
+				if (editStationForm.dataType.getDatatype().getValueCombo().getSelectionIndex() == -1) {
+					Utils.messageErreurAppend(Messages.Etape_32);
+					ok = ok && false;
+				}
+			}
+			else {
+				// ODV / NetCDF: custom datatype allowed, not empty, no spaces.
+				String currentComboText = editStationForm.dataType.getDatatype().getValueCombo().getText().trim();
+				if (editStationForm.dataType.getDatatype().getValueCombo().getSelectionIndex() <= 0
+						&& (currentComboText.equals(Global.EMPTY_STRING)|| currentComboText.contains(" "))) {
+
+					Utils.messageErreurAppend(Messages.Etape_32);
+					ok = ok && false;
+				}
 			}
 
 			/**
