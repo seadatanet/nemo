@@ -39,8 +39,7 @@ public class EditStationForm extends EditForm {
 	private StyledText textAreaStation;
 
 	public static String LATLON_CHOICE_DEC_DEGREES_FOR_FILES_WITH_SEP = "decimal degrees for file with separators"; //$NON-NLS-1$
-	public static String DATETIME_CHOICE_ISO= "ISO8601"; //$NON-NLS-1$
-	public static String DATETIME_CHOICE_JULIAN="JULIAN DAY";//$NON-NLS-1$
+
 
 	public EditStationForm() {
 		super();

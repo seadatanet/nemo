@@ -1578,15 +1578,21 @@ public class TableData {
 
 				// on formate puis on reaffiche la liste
 				try {
-					String formatString =
-							myTable.getItem(i).getText(colNbById.get(COL_FORMAT));
+					String formatString = myTable.getItem(i).getText(colNbById.get(COL_FORMAT));
 					String type ="";
 					try{
+						if (formatString.equals(Global.DATETIME_CHOICE_ISO)) {
+							type=Global.DATETIME_CHOICE_ISO;
+						}else {
 						type = formatString.substring(formatString.length() - 1);
 						if ( !(type.equals("f") || type.equals("F") || type.equals("d") || type.equals("D") )){
+							
+							
 							Utils.messageErreurAppend("Unrecognized format: "+ formatString);// TODO
 							ok = false;
 							resultat = Messages.error;
+							
+						}
 						}
 					}catch (Exception e) {
 						Utils.messageErreurAppend("Format is empty, please choose one");// TODO
@@ -1594,8 +1600,15 @@ public class TableData {
 						resultat = Messages.error;
 						throw e;
 					}
-
-					if (isSelectedValueEqualsToDefaultIn(i, selection)) {
+					if (type.equals(Global.DATETIME_CHOICE_ISO)) {
+						// FAE 10755 - gestion de la chaine de charactere
+						if (isSelectedValueEqualsToDefaultIn(i, selection)) {
+							resultat = defaultValue;
+						} else {
+							resultat = selection;
+						}
+					}
+					else if (isSelectedValueEqualsToDefaultIn(i, selection)) {
 
 						// entree par defaut, le test est la valeur de sortie
 						// par defaut formatee

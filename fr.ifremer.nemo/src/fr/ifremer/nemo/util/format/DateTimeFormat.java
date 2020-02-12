@@ -20,7 +20,6 @@ import com.ago.xml.SAXConsumer;
 import com.ago.xml.XMLOutputWriter;
 
 import fr.ifremer.nemo.input.ModelDescription;
-import fr.ifremer.nemo.ui.edit.station.EditStationForm;
 import fr.ifremer.nemo.util.Formatter;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Intern;
@@ -625,10 +624,10 @@ public class DateTimeFormat extends ExternalizableFormat implements Cloneable {
 	
 	
 	public boolean isIso() {
-		return _formatString.startsWith(EditStationForm.DATETIME_CHOICE_ISO); 
+		return _formatString.startsWith(Global.DATETIME_CHOICE_ISO); 
 	}
 	public boolean isJulianDay() {
-		return _formatString.startsWith(EditStationForm.DATETIME_CHOICE_JULIAN); 
+		return _formatString.startsWith(Global.DATETIME_CHOICE_JULIAN); 
 	}
 
 	

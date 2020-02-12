@@ -275,7 +275,7 @@ public class ParameterModel extends AbstractModel
 			else 
 			{
 				//teste sur le parametre est un chaine ou non.
-				if(!isText())
+				if(!(isText() || getParameter().getFormat().equals(Global.DATETIME_CHOICE_ISO)))
 				{
 					Double val;
 					try 

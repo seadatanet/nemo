@@ -76,8 +76,8 @@ public enum ComboType {
 			valueCombo.add("YYYY-MM-DD"); //$NON-NLS-1$
 			valueCombo.add("YYYYMMDD"); //$NON-NLS-1$
 //			valueCombo.add("DDDDDDD.d"); //$NON-NLS-1$
-			valueCombo.add(EditStationForm.DATETIME_CHOICE_ISO); 
-			valueCombo.add(EditStationForm.DATETIME_CHOICE_JULIAN); 
+			valueCombo.add(Global.DATETIME_CHOICE_ISO); 
+			valueCombo.add(Global.DATETIME_CHOICE_JULIAN); 
 			break;
 		case TIME:
 			valueCombo.add("hh:mm PM"); //$NON-NLS-1$
@@ -92,8 +92,8 @@ public enum ComboType {
 			valueCombo.add("hh24.ccc"); //$NON-NLS-1$
 //			valueCombo.add("D.dddddd"); //$NON-NLS-1$
 			valueCombo.add("ttttt"); //$NON-NLS-1$
-			valueCombo.add(EditStationForm.DATETIME_CHOICE_ISO);
-			valueCombo.add(EditStationForm.DATETIME_CHOICE_JULIAN); 
+			valueCombo.add(Global.DATETIME_CHOICE_ISO);
+			valueCombo.add(Global.DATETIME_CHOICE_JULIAN); 
 			break;
 		case LAT:
 			valueCombo.add("+DD MM.mm"); //$NON-NLS-1$

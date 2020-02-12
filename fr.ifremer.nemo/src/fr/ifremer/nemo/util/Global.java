@@ -81,6 +81,9 @@ public interface Global {
 	public static final String optCouplingTablePrefix = "couplingTablePrefix";
 	public static final String optUpdateVocabs = "updateVocabs";
 
+	public static final String DATETIME_CHOICE_ISO= "ISO8601"; //$NON-NLS-1$
+	public static final String DATETIME_CHOICE_JULIAN="JULIAN DAY";//$NON-NLS-1$
+	
 	/*
 	 * // Types de metadonnee
 	 * public static final String DATETIME = "dateTime"; //$NON-NLS-1$

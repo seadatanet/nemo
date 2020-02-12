@@ -178,7 +178,7 @@ public class Formatter implements Cloneable
 	    
 	    Double value = Double.NaN;
 	  
-	        if(format.length()!=0)
+	        if(format.length()!=0 && !format.equals(Global.DATETIME_CHOICE_ISO))
             {
     	        value = Double.parseDouble(a_Double);
     	        if (Double.isNaN(value))
