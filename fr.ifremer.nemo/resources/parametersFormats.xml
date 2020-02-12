@@ -58,4 +58,5 @@
 	<format example="-99999.999" format="%10.3f"/>
 	<format example="-99999.9999" format="%11.4f"/>
 	<format example="-99999.99999" format="%12.5f"/>
+	<format example="2011-09-11T09:58:00" format="ISO8601"/>
 </root>
