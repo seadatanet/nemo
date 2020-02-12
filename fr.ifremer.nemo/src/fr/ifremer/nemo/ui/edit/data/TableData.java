@@ -1453,7 +1453,22 @@ public class TableData {
 		}
 
 		types.remove(indice);
-
+		if (RulesManager.getInstance().getMyVerticalParametersList().getP_depthBSSurf().equals(typeData.getEntryKeyP011()))
+		{
+			RulesManager.getInstance().getMyVerticalParametersList().setP_depthBSSurf("");	
+		}
+		if (RulesManager.getInstance().getMyVerticalParametersList().getP_depthBSBed().equals(typeData.getEntryKeyP011()))
+		{
+			RulesManager.getInstance().getMyVerticalParametersList().setP_depthBSBed("");	
+		}
+		if (RulesManager.getInstance().getMyVerticalParametersList().getP_heightASLvl().equals(typeData.getEntryKeyP011()))
+		{
+			RulesManager.getInstance().getMyVerticalParametersList().setP_heightASLvl("");	
+		}
+		if (RulesManager.getInstance().getMyVerticalParametersList().getP_pressure().equals(typeData.getEntryKeyP011()))
+		{
+			RulesManager.getInstance().getMyVerticalParametersList().setP_pressure("");	
+		}
 		myGroupVerticalParameters.removeToAllCombo(typeData);
 
 		// refresh de la table
