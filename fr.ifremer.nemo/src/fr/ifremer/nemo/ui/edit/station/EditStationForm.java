@@ -150,8 +150,16 @@ public class EditStationForm extends EditForm {
 		/**
 		 * ============================================================================================== data type ==============================================================================================
 		 */
+		// For Medatlas it's not allowed to set a custom data type, only to choose an item in the list.
+		String dataTypeComboLabel;
+		if (RulesManager.getInstance().isConversionToMedatlas()) {
+			dataTypeComboLabel = Messages.edit_station_sectionDataType_lib;
+		}
+		else {
+			dataTypeComboLabel = Messages.edit_station_sectionDataType_withManualInput_lib;
+		}
 
-		dataType = new StationSection(Intern.S_DATATYPE, Messages.getString(Intern.S_DATATYPE), Messages.edit_station_sectionDataType_lib, true, false, 1, this);
+		dataType = new StationSection(Intern.S_DATATYPE, Messages.getString(Intern.S_DATATYPE), dataTypeComboLabel, true, false, 1, this);
 		dataType.addCouple(ComboType.DATATYPE, Global.EMPTY_STRING);
 		listeSections.add(dataType);
 		/**

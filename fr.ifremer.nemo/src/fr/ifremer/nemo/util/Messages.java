@@ -239,6 +239,7 @@ public class Messages {
 	public static String edit_station_sectionReference_lib;
 	public static String edit_station_refIncrement;
 	public static String edit_station_sectionDataType_lib;
+	public static String edit_station_sectionDataType_withManualInput_lib;
 	public static String edit_station_sectionHistory_lib;
 	public static String edit_station_sectionComment_lib;
 	public static String edit_station_sectionSurface_lib;
@@ -536,6 +537,8 @@ public class Messages {
 	public static String Etape_27;
 	public static String Etape_28;
 	public static String Etape_32;
+	public static String Etape_32blank;
+	public static String Etape_32nodatatype;
 	public static String Etape_33;
 	public static String Etape_34;
 	public static String Etape_36;

@@ -134,9 +134,19 @@ public class StationFormValidator extends FormValidator {
 				String currentComboText = editStationForm.dataType.getDatatype().getValueCombo().getText().trim();
 				if (editStationForm.dataType.getDatatype().getValueCombo().getSelectionIndex() <= 0
 						&& (currentComboText.equals(Global.EMPTY_STRING)|| currentComboText.contains(" "))) {
+					
+					if (currentComboText.equals(Global.EMPTY_STRING)) {
+						
+						Utils.messageErreurAppend(Messages.Etape_32nodatatype);
+						ok = ok && false;
+					}
+					
+					if (currentComboText.contains(" ")) {
+						
+						Utils.messageErreurAppend(Messages.Etape_32blank);
+						ok = ok && false;
+					}
 
-					Utils.messageErreurAppend(Messages.Etape_32);
-					ok = ok && false;
 				}
 			}
 
