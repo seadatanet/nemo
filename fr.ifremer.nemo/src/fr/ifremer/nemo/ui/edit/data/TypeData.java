@@ -28,6 +28,12 @@ public class TypeData extends Object implements Comparable<TypeData> {
 	private String instrument;
 	private String instrumentCode;
 
+	/**
+	 * This parameter stores the ISO date format if the parameter is a ISO1601 date.
+	 * 
+	 * It is used to pass it to the Parameter object (FAE50999).
+	 */
+	private String effectiveIsoDateFormat;
 
 	private int position, debut, fin;
 
@@ -169,6 +175,9 @@ public class TypeData extends Object implements Comparable<TypeData> {
 		setEntryTermP011(parameter.getNameP011());
 		setIsP011(parameter.isP011());
 		setIndexP011(parameter.getIndexP011());
+		
+		// TODO check if it's pertinent
+//		setEffectiveIsoDateFormat(parameter.getEffectiveIsoDateFormat());
 
 	}
 
@@ -465,5 +474,13 @@ public class TypeData extends Object implements Comparable<TypeData> {
 
 	public void setP06Label(String p06Label) {
 		P06Label = p06Label;
+	}
+	
+	public String getEffectiveIsoDateFormat() {
+		return effectiveIsoDateFormat;
+	}
+	
+	public void setEffectiveIsoDateFormat(String effectiveIsoDateFormat) {
+		this.effectiveIsoDateFormat = effectiveIsoDateFormat;
 	}
 }

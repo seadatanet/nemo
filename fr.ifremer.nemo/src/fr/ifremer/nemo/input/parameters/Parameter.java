@@ -20,6 +20,7 @@ import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Global.DataListTypeEnum;
 import fr.ifremer.nemo.util.Global.E_TypeConversion;
 import fr.ifremer.nemo.util.Intern;
+import fr.ifremer.sismer_tools.seadatanet.SdnVocabularyManager;
 import sdn.vocabulary.interfaces.IElement;
 
 /**
@@ -82,7 +83,12 @@ public class Parameter extends AbstractModel {
 	protected String _instrument;
 	protected String _instrumentCode;
 
-
+	/**
+	 * This parameter stores the ISO date format if the parameter is a ISO1601 date.
+	 * 
+	 * It is used to write it instead of the unit in ODV column headers (FAE50999).
+	 */
+	protected String effectiveIsoDateFormat;
 	
 
 	public String getInstrumentCode() {
@@ -121,6 +127,8 @@ public class Parameter extends AbstractModel {
 		
 		setInstrument(typeData.getInstrument());
 		setInstrumentCode(typeData.getInstrumentCode());
+		
+		setEffectiveIsoDateFormat(typeData.getEffectiveIsoDateFormat());
 
 	}
 
@@ -673,10 +681,20 @@ public class Parameter extends AbstractModel {
 //		code = getLocalCode();
 		code= getIndexedLocalCode();
 		if (!isText) {
+			
+			// FAE50999
+			String unit;
+			if (_unitCode.contentEquals(SdnVocabularyManager.P06_TISO)) {
+				unit = effectiveIsoDateFormat;
+			}
+			else {
+				unit = _unit;
+			}
+			
 			paramHeader.append(code);
 			paramHeader.append(Global.SPACE);
 			paramHeader.append('[');
-			paramHeader.append(_unit);
+			paramHeader.append(unit);
 			paramHeader.append(']');
 
 		} else {
@@ -714,6 +732,14 @@ public class Parameter extends AbstractModel {
 
 	public void setP06Label(String p06Label) {
 		_p06Label = p06Label;
+	}
+
+	public String getEffectiveIsoDateFormat() {
+		return effectiveIsoDateFormat;
+	}
+
+	public void setEffectiveIsoDateFormat(String effectiveIsoDateFormat) {
+		this.effectiveIsoDateFormat = effectiveIsoDateFormat;
 	}
 
 

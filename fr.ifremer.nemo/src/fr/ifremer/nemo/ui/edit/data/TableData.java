@@ -41,6 +41,9 @@ import fr.ifremer.nemo.util.Global.DataListTypeEnum;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.ws.WSParameter;
+import fr.ifremer.sismer_tools.DateTools;
+import fr.ifremer.sismer_tools.SismerToolsException;
+import fr.ifremer.sismer_tools.seadatanet.SdnVocabularyManager;
 import sdn.vocabulary.interfaces.IElement;
 
 public class TableData {
@@ -1822,6 +1825,15 @@ public class TableData {
 			
 			types.get(i).setUnite(
 					myTable.getItem(i).getText(colNbById.get(COL_UNIT)));
+			
+			// FAE50999: set the effective ISO format
+			if (types.get(i).getUniteCode().contentEquals(SdnVocabularyManager.P06_TISO)) {
+				try {
+					types.get(i).setEffectiveIsoDateFormat(DateTools.detectIso(types.get(i).getTest()).getPattern());
+				} catch (SismerToolsException e) {
+					Utils.messageErreur(e.getMessage());
+				}
+			}
 
 			if (!isUnitP09()){ // 25794
 
