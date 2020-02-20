@@ -1826,8 +1826,14 @@ public class TableData {
 			types.get(i).setUnite(
 					myTable.getItem(i).getText(colNbById.get(COL_UNIT)));
 			
+			// FAE 6542
+			types.get(i).setUniteCode(
+					myTable.getItem(i).getText(colNbById.get(COL_UNIT_CODE)));
+			
 			// FAE50999: set the effective ISO format
-			if (types.get(i).getUniteCode().contentEquals(SdnVocabularyManager.P06_TISO)) {
+			if (types.get(i).getUniteCode().contentEquals(SdnVocabularyManager.P06_TISO)
+					&& types.get(i).getTest() != null
+					&& !types.get(i).getTest().isEmpty()) {
 				try {
 					types.get(i).setEffectiveIsoDateFormat(DateTools.detectIso(types.get(i).getTest()).getPattern());
 				} catch (SismerToolsException e) {
@@ -1870,10 +1876,6 @@ public class TableData {
 				.setFinFlag(
 						myTable.getItem(i).getText(colNbById.get(COL_END_FLAG)));
 			}
-			// FAE 6542
-			types.get(i).setUniteCode(
-					myTable.getItem(i).getText(colNbById.get(COL_UNIT_CODE)));
-
 
 			types.get(i).setInstrument(
 					myTable.getItem(i).getText(colNbById.get(COL_INSTRUMENT)));
