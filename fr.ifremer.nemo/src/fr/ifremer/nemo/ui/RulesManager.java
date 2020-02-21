@@ -373,6 +373,9 @@ public class RulesManager {
 	public void updateFromIHM( E_Variant newVariant) {
 		boolean confirm = true;
 
+		if (myInputVariant==E_Variant.UNKNOWN) {
+			confirm=true;
+		}else
 		if (myInputVariant != newVariant) {
 			confirm =
 					MessageDialog.openConfirm(null,
