@@ -65,7 +65,7 @@ public class VariantsSpecificsParameters {
 
 	}
 	private List<TypeData> getSpecificParams(OdvSpecificValidator validator) throws Exception	{ 
-		List<SpecificParameter>specificParamsList=new ArrayList<>();
+		HashMap<Integer, SpecificParameter> map = new HashMap<>();
 		List<TypeData>specificList=new ArrayList<>();
 		if (validator==null) {
 			return specificList;
@@ -74,25 +74,24 @@ public class VariantsSpecificsParameters {
 		for (Entry<String[], PARAMETER_REQUIREMENT> p : expectedParams.entrySet()) {
 			if (p.getValue()==PARAMETER_REQUIREMENT.MAND) {
 				String p01Code = p.getKey()[0];
-				specificParamsList.add(validator.getSpecificParams().get(p01Code));
-			}else  if (p.getKey()[0].equals(SdnVocabularyManager.P01_ADEPZZ01)){
-				validator.getSpecificParams().get(p.getKey()[0]).setPosition(-1);
-				// ADEPZZ01 mandatory for profiles and trajectories
+				SpecificParameter param = validator.getSpecificParams().get(p01Code);
+				map.put(param.getPosition(), param);
+			}
+			else  if (p.getKey()[0].equals(SdnVocabularyManager.P01_ADEPZZ01)){
+//				validator.getSpecificParams().get(p.getKey()[0]).setPosition(-1);
+//				// ADEPZZ01 mandatory for profiles and trajectories
 				if (RulesManager.getInstance().isProfile()||RulesManager.getInstance().isTrajectory()) {
-					specificParamsList.add(validator.getSpecificParams().get(p.getKey()[0]));
-				}
-				
-			}
-		}
-
-
-		for (int cpt=-1; cpt<specificParamsList.size(); cpt++) {
-			for (SpecificParameter sp : specificParamsList) {
-				if (sp.getPosition()==cpt) {
-					specificList.add(specificParam2TypeData(sp));
+					map.put(-1, validator.getSpecificParams().get(p.getKey()[0]));
 				}
 			}
 		}
+		
+		for (int i=-1; i<map.size()+1; i++) {
+			if (map.get(i)!=null){
+				specificList.add(specificParam2TypeData(map.get(i)));
+					}
+		}
+		
 
 
 
