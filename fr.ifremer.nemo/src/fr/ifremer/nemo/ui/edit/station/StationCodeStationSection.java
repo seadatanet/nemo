@@ -1,13 +1,10 @@
 package fr.ifremer.nemo.ui.edit.station;
 
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 
 import fr.ifremer.nemo.ui.RulesManager;
-import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.ComboType;
 import fr.ifremer.nemo.ui.edit.station.AutoLine.MetaInData;
 import fr.ifremer.nemo.util.Intern;
@@ -50,30 +47,7 @@ public class StationCodeStationSection extends StationSection {
 		super.drawSection(sectionClient, filled);
 		useStationCodeInLocalCDIIdCheckBox = new Button(sectionClient, SWT.CHECK);
 		useStationCodeInLocalCDIIdCheckBox.setText(Messages.edit_station_useInLocalCdiId);
-		useStationCodeInLocalCDIIdCheckBox.addSelectionListener(new SelectionListener() {
-
-             public void widgetDefaultSelected(SelectionEvent e)
-             {
-                 widgetSelected(e);
-             }
-
-             public void widgetSelected(SelectionEvent e)
-             {
-             
-                 if (useStationCodeInLocalCDIIdCheckBox.getSelection())
-                 {
-//                     textDefaultValue.setEnabled(true);
-                 }
-                 else
-                 {
-//                     textDefaultValue.setEnabled(false);
-                 }
-
-                 Utils.invalidEtapes();
-             }
-
-         });
-
+		useStationCodeInLocalCDIIdCheckBox.setSelection(true);
 		
 	}
 	@Override
