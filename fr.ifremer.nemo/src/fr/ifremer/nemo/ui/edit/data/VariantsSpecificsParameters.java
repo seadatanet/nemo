@@ -10,6 +10,7 @@ import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.config.VocabLists;
 import fr.ifremer.nemo.ui.RulesManager;
 import fr.ifremer.nemo.util.BodcChecker;
+import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.seadatanet.odv.input.model.Parameter.ParameterType;
 import fr.ifremer.seadatanet.odv.input.validator.OdvSpecificValidator;
@@ -72,30 +73,27 @@ public class VariantsSpecificsParameters {
 		HashMap<String[], PARAMETER_REQUIREMENT> expectedParams = validator.getExpectedParams();
 		for (Entry<String[], PARAMETER_REQUIREMENT> p : expectedParams.entrySet()) {
 			if (p.getValue()==PARAMETER_REQUIREMENT.MAND) {
-				if (p.getKey()[0].equals(SdnVocabularyManager.P01_DTUT8601_ISODATE)){
-					// do not add in data tab (date is managed in station tab)
-				}else {
-					String p01Code = p.getKey()[0];
-					specificParamsList.add(validator.getSpecificParams().get(p01Code));
-				}
+				String p01Code = p.getKey()[0];
+				specificParamsList.add(validator.getSpecificParams().get(p01Code));
 			}else  if (p.getKey()[0].equals(SdnVocabularyManager.P01_ADEPZZ01)){
+				validator.getSpecificParams().get(p.getKey()[0]).setPosition(-1);
 				// ADEPZZ01 mandatory for profiles and trajectories
 				if (RulesManager.getInstance().isProfile()||RulesManager.getInstance().isTrajectory()) {
 					specificParamsList.add(validator.getSpecificParams().get(p.getKey()[0]));
 				}
+				
 			}
 		}
 
-		int position = 0;
-		while(specificList.size()<specificParamsList.size()) {
+
+		for (int cpt=-1; cpt<specificParamsList.size(); cpt++) {
 			for (SpecificParameter sp : specificParamsList) {
-				if (sp.getPosition()==position) {
+				if (sp.getPosition()==cpt) {
 					specificList.add(specificParam2TypeData(sp));
-					break;
 				}
 			}
-			position++;
 		}
+
 
 
 		return specificList;
@@ -168,6 +166,10 @@ public class VariantsSpecificsParameters {
 		td.setSortie("");
 		td.setPosition(p.getPosition());
 		td.setFormat("");
+		
+		if (p.getCodeP01().equals(SdnVocabularyManager.P01_DTUT8601)) {
+			td.setFormat(Global.DATETIME_CHOICE_ISO);
+		}
 		try {
 			String labelP01= BodcChecker.getInstance().getSdnMgr().getP01Label(p.getCodeP01());
 			td.setEntryTermP011(labelP01);
