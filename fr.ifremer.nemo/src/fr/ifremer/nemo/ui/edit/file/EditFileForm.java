@@ -25,7 +25,10 @@ import fr.ifremer.nemo.ui.edit.file.listeners.InputFileBrowseListener;
 import fr.ifremer.nemo.ui.edit.file.listeners.InputFileCheckMultistationsListener;
 import fr.ifremer.nemo.ui.edit.file.listeners.InputFileRadioSelectionListener;
 import fr.ifremer.nemo.ui.edit.file.listeners.OutputFormatRadioSelectionListener;
-import fr.ifremer.nemo.ui.edit.file.listeners.VariantSelectionListener;
+import fr.ifremer.nemo.ui.edit.file.listeners.variants.VariantBiologicalListener;
+import fr.ifremer.nemo.ui.edit.file.listeners.variants.VariantFlowcytometrylListener;
+import fr.ifremer.nemo.ui.edit.file.listeners.variants.VariantMicrolitterListener;
+import fr.ifremer.nemo.ui.edit.file.listeners.variants.VariantPhysicochemicalListener;
 import fr.ifremer.nemo.ui.view.ViewLog;
 import fr.ifremer.nemo.ui.view.ViewMain;
 import fr.ifremer.nemo.util.Conversion;
@@ -742,22 +745,21 @@ public class EditFileForm extends EditForm
 		GridLayoutFactory.fillDefaults().applyTo(grpDatatype);
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(grpDatatype);
 
-		VariantSelectionListener variantSelectionListener = new VariantSelectionListener(this);
 		radPhysicochemical = new Button(grpDatatype, SWT.RADIO);
 		radPhysicochemical.setText(Messages.variant_physicochemical);
-		radPhysicochemical.addSelectionListener(variantSelectionListener);
+		radPhysicochemical.addSelectionListener(new VariantPhysicochemicalListener(this));
 
 		radBiological = new Button(grpDatatype, SWT.RADIO);
 		radBiological.setText(Messages.variant_biological);
-		radBiological.addSelectionListener(variantSelectionListener);
+		radBiological.addSelectionListener(new VariantBiologicalListener(this));
 
 		radFlowcytometry = new Button(grpDatatype, SWT.RADIO);
 		radFlowcytometry.setText(Messages.variant_flowcytometry);
-		radFlowcytometry.addSelectionListener(variantSelectionListener);
+		radFlowcytometry.addSelectionListener(new VariantFlowcytometrylListener(this));
 		
 		radMicrolitter = new Button(grpDatatype, SWT.RADIO);
 		radMicrolitter.setText(Messages.variant_microlitter);
-		radMicrolitter.addSelectionListener(variantSelectionListener);
+		radMicrolitter.addSelectionListener(new VariantMicrolitterListener(this));
 
 		// Selection du type par defaut
 
@@ -1047,6 +1049,9 @@ public class EditFileForm extends EditForm
 	 */
 	public void selectVariant(E_Variant variant)
 	{
+		if (variant==null) {
+			return;
+		}
 		switch (variant)
 		{
 		case PHYSICOCHEMICAL:
