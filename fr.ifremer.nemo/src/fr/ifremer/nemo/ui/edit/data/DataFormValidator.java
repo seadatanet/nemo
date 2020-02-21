@@ -89,13 +89,13 @@ public class DataFormValidator extends FormValidator {
 		 */
 		ok = checkNbParams(nbreParam);
 		if (!ok){
-			return;
+//			return; 51180: continue, we want to save the model even if it contains errors
 		}
 		// -------------------------------------------------------------------------
 		String errors =VariantsSpecificsParameters.getInstance().checkSpecificParameters(editDataForm.getMyTableData().getTypes());
 		if (!errors.isEmpty()){
 			Utils.messageErreurAppend(errors);
-			return;
+//			return;51180: continue, we want to save the model even if it contains errors
 		}
 
 
@@ -122,7 +122,7 @@ public class DataFormValidator extends FormValidator {
 				if (!typeCourant.isText())
 					ok = ok && checkUniteIsPresent(typeCourant);
 				if (!ok){
-					return;
+//					return;51180: continue, we want to save the model even if it contains errors
 				}
 				/**
 				 * data30 verif compatibilité valeur par defaut et valeur output
@@ -297,7 +297,7 @@ public class DataFormValidator extends FormValidator {
 			onSuccess();
 		} else {
 			Nemo.getInstance().getViewMain().tabData.setText(Messages.onglet_data_error);
-			editDataForm.initFromNewModel();
+			save();
 			Nemo.getInstance().getViewMain().setEtape(3);
 		}
 
@@ -312,18 +312,22 @@ public class DataFormValidator extends FormValidator {
 	protected void onSuccess() {
 		super.onSuccess();
 
+		save();
+		
+		Nemo.getInstance().getViewMain().tabData.setText(Messages.onglet_data_valid);
+		Nemo.getInstance().getViewMain().setEtape(4);
+		
+		Nemo.getInstance().getViewMain().getEditConversionForm().fillSummary();
+	}
+	
+	private void save() {
 		EditDataForm editDataForm =	Nemo.getInstance().getViewMain().getEditDataForm();
 
 		editDataForm.initFromNewModel();
 
-		Nemo.getInstance().getViewMain().tabData.setText(Messages.onglet_data_valid);
-		Nemo.getInstance().getViewMain().setEtape(4);
-
 		Nemo.getInstance().getDomain().getData().getModel().setMesureType(rm.getMyMesureType());
 		Nemo.getInstance().getDomain().getData().getModel().setFallrateCode(editDataForm.getFallrateCode());
 		Nemo.getInstance().getDomain().getData().getModel().setFallrateLabel(editDataForm.getFallrateLabel());
-
-		Nemo.getInstance().getViewMain().getEditConversionForm().fillSummary();
 	}
 	/**
 	 * 47818
