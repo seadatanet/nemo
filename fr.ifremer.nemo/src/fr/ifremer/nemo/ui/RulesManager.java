@@ -370,22 +370,23 @@ public class RulesManager {
 	}
 
 
-	public void updateFromIHM(E_Variant variant) {
+	public void updateFromIHM( E_Variant newVariant) {
 		boolean confirm = true;
 
-
-		if (myInputVariant != variant) {
+		if (myInputVariant != newVariant) {
 			confirm =
 					MessageDialog.openConfirm(null,
 							Messages.edit_data_dataListDialogBox_title,
 							Messages.edit_data_dataListDialogBox_text);
+		   
 		}else {
 			return;// nochange
 		}
 
 		if (confirm) {
-			myInputVariant = variant;
-			if (variant == E_Variant.PHYSICOCHEMICAL || variant == E_Variant.FLOWCYTO) {
+			 // invalidation de l'etape quand modif
+			myInputVariant = newVariant;
+			if (newVariant == E_Variant.PHYSICOCHEMICAL || newVariant == E_Variant.FLOWCYTO) {
 				Nemo.getInstance().getViewMain().getEditFileForm().enableFileTypeChoice(true);
 			}else {
 				Nemo.getInstance().getViewMain().getEditFileForm().deselectAndDisableSelectionFileType();
@@ -406,6 +407,8 @@ public class RulesManager {
 			Nemo.getInstance().getViewMain().getEditDataForm().setMustFillFromModel(false);
 			Nemo.getInstance().getViewMain().getEditFileForm().invalidEtape();
 			//*****************
+		}else {
+			myEditFileForm.selectVariant(myInputVariant);// reselect the previous one 
 		}
 		ViewLog.styledTextLogErreurs.setText(messageLog);
 	}
