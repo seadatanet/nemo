@@ -41,6 +41,7 @@ import fr.ifremer.nemo.config.VocabLists;
 import fr.ifremer.nemo.domain.InputDomain;
 import fr.ifremer.nemo.input.CruiseModel;
 import fr.ifremer.nemo.input.InputModel;
+import fr.ifremer.nemo.input.PropertyModel;
 import fr.ifremer.nemo.ui.ApplicationWorkbenchWindowAdvisor;
 import fr.ifremer.nemo.ui.RulesManager;
 import fr.ifremer.nemo.ui.view.ViewMain;
@@ -188,6 +189,13 @@ public class Nemo {
 		//42483: old models without variants=physicochemical
 		if (model.getMediaModel().getVariant()==E_Variant.UNKNOWN) {
 			model.getMediaModel().setVariant(E_Variant.PHYSICOCHEMICAL);
+		}
+		//51120
+		if (model.getStationModel().getProperty(Intern.USE_STATION_CODE_IN_LOCAL_CDI_ID_CHECKBOX)==null) {
+			PropertyModel propertyModelUseStationCodeInLocalCdiId = new PropertyModel();
+			propertyModelUseStationCodeInLocalCdiId.setProperty(Intern.USE_STATION_CODE_IN_LOCAL_CDI_ID_CHECKBOX);
+			propertyModelUseStationCodeInLocalCdiId.fillUserValue(Boolean.TRUE.toString());
+			model.getStationModel().addProperty(propertyModelUseStationCodeInLocalCdiId);
 		}
 		completeDataList(model, isBeforeP011);
 		domain.update(model);
