@@ -237,7 +237,11 @@ public class Messages {
 	// STATION
 	public static String edit_station_title;
 	public static String edit_station_sectionReference_lib;
+	//public static String edit_station_sectionReference_lib_variants;
+	public static String edit_station_sectionReference_lib_traj;
 	public static String edit_station_refIncrement;
+	//public static String edit_station_refIncrement_variants;
+	public static String edit_station_useInLocalCdiId;
 	public static String edit_station_sectionDataType_lib;
 	public static String edit_station_sectionDataType_withManualInput_lib;
 	public static String edit_station_sectionHistory_lib;

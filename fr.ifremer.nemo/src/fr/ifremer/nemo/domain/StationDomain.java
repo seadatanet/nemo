@@ -39,6 +39,7 @@ import fr.ifremer.nemo.util.Global.E_TypeConversion;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.sismer_tools.DateTools;
+import fr.ifremer.sismer_tools.resources.ODVConstants.E_Variant;
 import fr.ifremer.sismer_tools.seadatanet.SdnXLinkReference;
 
 /**
@@ -59,9 +60,10 @@ public class StationDomain {
 	protected HashMap<String, List<Station>> _listStations;
 
 	protected boolean _someInData;
-
+	// since #51120, ref can be an alphanumeric string
+//	protected String _ref = "-1";
+//private final int refToIncrement=1;
 	protected int _ref = -1;
-
 	protected boolean _computed;
 
 	protected HashSet<String> stationsLocalCDIList;
@@ -197,21 +199,21 @@ public class StationDomain {
 			}
 			odvStationHeader.append(DateTimeUtils.getVariantDateTime(currentDate));
 			odvStationHeader.append(Global.TAB);
-			
+
 		}catch (Exception e) {
 			Nemo.getInstance().getLogger().error(e.getMessage() + " line: " + inputLine );
 			throw e;
 		}
 
-		
-		
+
+
 		/** 50695 do not use strict format, but limit the number of decimals to 7 in case of input is not a double, example
 		 * Station 1 10/12/2001 17:29     S21 57.10 E166 44.82
 		 * 	 result without any formatting would be -20.859000	167.08566666666667
-		**/
+		 **/
 		NumberFormat nf = DecimalFormat.getInstance(Locale.US);
 		nf.setMaximumFractionDigits(7);
-		
+
 		// Longitude [degrees_east]
 		odvStationHeader.append(
 				nf.format(	_model.getProperty(Intern.S_LON).applyOnLine(inputLine))
@@ -225,8 +227,7 @@ public class StationDomain {
 		odvStationHeader.append(Global.TAB);
 
 		// LOCAL_CDI_ID
-		odvStationHeader.append(getLocalCdiId(Nemo.getInstance().getDomain()
-				.getCruise(), Conversion.ODV, stationRef));
+		odvStationHeader.append(getLocalCdiId(Nemo.getInstance().getDomain().getCruise(), Conversion.ODV, stationRef));
 		odvStationHeader.append(Global.TAB);
 
 		// EDMO_CODE
@@ -270,8 +271,7 @@ public class StationDomain {
 		// STATION NUMBER
 		String ref = Global.EMPTY_STRING;
 		if (_model.getReferenceProperty().isUserProvided()) {
-			if (Nemo.getInstance().getDomain().getMedia().getModel()
-					.getInputType() == E_InputType.TRAJECTORY 
+			if (Nemo.getInstance().getDomain().getMedia().getModel().getInputType() == E_InputType.TRAJECTORY 
 					&& Nemo.getInstance().getDomain().getConversion().getCurrent()!= E_TypeConversion.NETCDF_MULTISTATIONS
 					&& Nemo.getInstance().getDomain().getConversion().getCurrent()!= E_TypeConversion.NETCDF_MONOSTATION
 					) {
@@ -292,10 +292,9 @@ public class StationDomain {
 	}
 
 	private String getRef(boolean mustIncrement) {
-		// incrementation du numÃ©ro
 		String ref = Integer.toString(_ref);
 		if (mustIncrement) {
-			_ref++;
+			incrementRef();
 		}
 		return ref;
 	}
@@ -352,14 +351,16 @@ public class StationDomain {
 
 			// Station
 			errorMessage = "station reference";
+			String stationReferenceToWrite="";
 			if (Nemo.getInstance().getDomain().getMedia().getModel().getInputType() == E_InputType.TRAJECTORY) {
-				if (Nemo.getInstance().getDomain().getConversion().getCurrent() != E_TypeConversion.ODV_MULTISTATIONS
-						|| Nemo.getInstance().getDomain().getConversion().getCurrent() != E_TypeConversion.NETCDF_MULTISTATIONS)
-					_ref = 1;
-				odvStationHeader.append(getRef(true)); //40442
-			} else {
-				odvStationHeader.append(stationRef);//40442
+//				if (Nemo.getInstance().getDomain().getConversion().getCurrent() != E_TypeConversion.ODV_MULTISTATIONS
+//						|| Nemo.getInstance().getDomain().getConversion().getCurrent() != E_TypeConversion.NETCDF_MULTISTATIONS)
+//					_ref = "1";
+				stationReferenceToWrite=getRef(true); //40442
+			}else {
+				stationReferenceToWrite = stationRef;//40442
 			}
+			odvStationHeader.append(stationReferenceToWrite);//40442
 			odvStationHeader.append(Global.TAB);
 
 			// Type
@@ -389,16 +390,16 @@ public class StationDomain {
 			/** 50695 do not use strict format, but limit the number of decimals to 7 in case of input is not a double, example
 			 * Station 1 10/12/2001 17:29     S21 57.10 E166 44.82
 			 * 	 result without any formatting would be -20.859000	167.08566666666667
-			**/
+			 **/
 			NumberFormat nf = DecimalFormat.getInstance(Locale.US);
 			nf.setMaximumFractionDigits(7);
-			
+
 			// Longitude [degrees_east]
 			errorMessage = "longitude";
 			odvStationHeader.append(
-							nf.format(
-									currentStation.getLongitude()
-									)
+					nf.format(
+							currentStation.getLongitude()
+							)
 					);
 			odvStationHeader.append(Global.TAB);
 
@@ -408,13 +409,12 @@ public class StationDomain {
 					nf.format(
 							currentStation.getLatitude()
 							)
-			);
+					);
 			odvStationHeader.append(Global.TAB);
 
 			// LOCAL_CDI_ID
 			errorMessage = "LOCAL_CDI_ID";
-			odvStationHeader.append(getLocalCdiId(Nemo.getInstance()
-					.getDomain().getCruise(), Conversion.ODV, stationRef));
+			odvStationHeader.append(getLocalCdiId(Nemo.getInstance().getDomain().getCruise(), Conversion.ODV, stationRef));
 			odvStationHeader.append(Global.TAB);
 
 			// EDMO_CODE
@@ -475,51 +475,26 @@ public class StationDomain {
 		return typeBC;
 	}
 
-	public String getLocalCdiId(CruiseDomain cDomain, Conversion c, String ref)
-			throws ParseException, UnsupportedEncodingException {
+	public String getLocalCdiId(CruiseDomain cDomain, Conversion c, String ref)	throws ParseException, UnsupportedEncodingException {
 		// FAE 1143 : nommage du LOCAL_CDI_ID
 		String localCDIId = "";
 		String cruiseRef = Global.EMPTY_STRING;
 		String stationReference = ref.trim();
-
-		switch (c) {
-		case NETCDF:
-		case ODV:
-			// ODV -> [Reference du jeu de donnees]
-			// if
-			// (Nemo.getInstance().getDomain().getMedia().getModel().getProcessType()
-			// == E_ProcessType.COLLECTION_FILES)
-			// cruiseRef = cDomain.getModel().getName();
-			// else
-			cruiseRef = Nemo.getInstance().getDomain().getCruise().getModel().getReference();
-			// [Numero station]si < 5 : code sur 5 caracteres il est
-			// complete a 
-			// gauche par des '0'.
-			if (stationReference.length() < 5) {
-				stationReference = form.padZero(stationReference, 5);
-			}
-			break;
-
-		case MEDATLAS:
-			// MEDATLAS ->
-			// [RÃ©fÃ©rence campagne]
-			cruiseRef = Elts.getElt(Elts.cruise_ref, cDomain.getModel()
-					.getReference());
-			// [NumÃ©ro station] codÃ© sur 5 caractÃ¨res il est complÃ©tÃ© Ã 
-			// gauche
-			// par des '0'.
-			stationReference = form.padZero(stationReference, 5);
-			break;
-		}
+		cruiseRef = Nemo.getInstance().getDomain().getCruise().getModel().getReference();
+		stationReference = form.padZero(stationReference, 5);
 
 		// [Reference]
 		String temp = Global.EMPTY_STRING;
 		temp += cruiseRef;
 
 		// [NumÃ©ro station]
-		if (!temp.equals(Global.EMPTY_STRING))
-			temp += Global.UNDERSCORE;
-		temp += stationReference;
+		if (Boolean.valueOf(_model.getProperty(Intern.USE_STATION_CODE_IN_LOCAL_CDI_ID_CHECKBOX).getUserValue())){
+
+			if (!temp.equals(Global.EMPTY_STRING)) {
+				temp += Global.UNDERSCORE;
+			}
+			temp += stationReference;
+		}
 
 		// [Type de donnees] s'il existe
 		DataType dataType = _model.getDataType();
@@ -529,8 +504,7 @@ public class StationDomain {
 					temp += Global.UNDERSCORE;
 				}
 				// FAE 6536
-				temp += fr.ifremer.nemo.util.Utils.extraitCode(dataType
-						.getCode());
+				temp += fr.ifremer.nemo.util.Utils.extraitCode(dataType.getCode());
 			}
 		}
 		localCDIId = fr.ifremer.nemo.util.Utils.validFileName(temp);
@@ -540,10 +514,11 @@ public class StationDomain {
 
 	// FAE 6143
 	public Station getAndCheckLocalCDI(CruiseDomain cDomain, Conversion c,
-			Station st) throws ParseException, GenerationException,
-	UnsupportedEncodingException {
+			Station st) throws ParseException, GenerationException,	UnsupportedEncodingException {
 		String localCdi = getLocalCdiId(cDomain, c, st.getReference());
-		if (stationsLocalCDIList.contains(localCdi)) {
+		if (stationsLocalCDIList.contains(localCdi) 
+				&& Nemo.getInstance().getDomain().getMedia().getModel().getVariant()==E_Variant.PHYSICOCHEMICAL
+				) {
 			throw new GenerationException(
 					Messages.error_convert_stationsDoubles + " " + localCdi);
 		}
@@ -579,8 +554,7 @@ public class StationDomain {
 			errorMessage = "cruise reference";
 			medStationHeader.append(Elts.getElt(Elts.cruise_ref, cruiseRef));
 			errorMessage = "station reference";
-			medStationHeader.append(Elts.getElt(Elts.station_ref,
-					stationRef.trim()));
+			medStationHeader.append(Elts.getElt(Elts.station_ref,stationRef.trim()));
 			medStationHeader.append(Global.SPACE);
 			errorMessage = "dataType";
 			medStationHeader.append(Elts.getElt(Elts.datatype_code, _model

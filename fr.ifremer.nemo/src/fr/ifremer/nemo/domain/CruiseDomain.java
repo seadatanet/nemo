@@ -15,6 +15,7 @@ import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -144,12 +145,20 @@ public class CruiseDomain {
 				throw new GenerationException(e.getMessage());
 			}
 		}
+		List<String> cdis = new ArrayList<String>();
+		SdnXLinkReference cdi ;
 		for (Station st : stationsList){
-			SdnXLinkReference cdi = new SdnXLinkReference();
 			String localCdiId;
 			try {
 				localCdiId = stationDomain.getLocalCdiId(this, Conversion.ODV, st.getReference());
-				cdi.setAsCdi(Integer.valueOf(Nemo.getInstance().getConfig().getIdEdmoRespCdi()), localCdiId, true);
+				cdi = new SdnXLinkReference();
+				if (!cdis.contains(localCdiId)) { //51120: a bio, cyto or micro ODV file can contain multiple stations with the same local_cdi_id
+					cdi.setAsCdi(Integer.valueOf(Nemo.getInstance().getConfig().getIdEdmoRespCdi()), localCdiId, true);
+					cdis.add(localCdiId);
+					odvCruiseHeader.append(start);
+					odvCruiseHeader.append(cdi.toString(true));
+					odvCruiseHeader.append(Global.RN);
+				}
 			} catch (UnsupportedEncodingException e) {
 				throw new GenerationException(e.getMessage());
 			} catch (ParseException e) {
@@ -163,11 +172,10 @@ public class CruiseDomain {
 			}
 
 
-			odvCruiseHeader.append(start);
-			odvCruiseHeader.append(cdi.toString(true));
-			odvCruiseHeader.append(Global.RN);
+			
 		}
-
+		cdis=null;
+		
 		// SDN PARAMETERS
 		DataDomain dataDomain = Nemo.getInstance().getDomain().getData();
 		odvCruiseHeader.append(dataDomain.getSDNparameters(Conversion.ODV));

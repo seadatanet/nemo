@@ -29,7 +29,7 @@ import fr.ifremer.nemo.util.Messages;
 
 public class EditStationForm extends EditForm {
 
-	public StationSection stationNumber;
+	public StationCodeStationSection stationNumber;
 	public StationSection dataType, historique, comments, surfaceSample, utConvertion, time, date, latitude, endLatitude, longitude, endLongitude, depth, sensorDepth, magneticDeclin, samplingRate;
 
 	public StationSection endDepth;
@@ -135,16 +135,7 @@ public class EditStationForm extends EditForm {
 		/**
 		 * ============================================================================================== station number ==============================================================================================
 		 */
-		stationNumber = new StationSection(Intern.S_STATIONNUMBER, Messages.getString(Intern.S_STATIONNUMBER), Messages.edit_station_sectionReference_lib, true, true, 1, this);
-
-		stationNumber.addManualInput(null, ComboType.NONE, "1"); //$NON-NLS-1$
-		stationNumber.getManualInput().setNbColumns(2);
-		stationNumber.getManualInput().setLabelButton(Messages.edit_station_refIncrement);
-
-		if (!rulesManager.isTrajectory()) {
-			stationNumber.addAutoInput(Messages.label_auto_02, false, MetaInData.FACULTATIF, false, false);
-		}
-
+		stationNumber = new StationCodeStationSection( this);
 		listeSections.add(stationNumber);
 
 		/**
@@ -340,6 +331,9 @@ public class EditStationForm extends EditForm {
 
 		}
 
+		// update station ref
+		stationNumber.initDescriptions();
+		
 		for (NemoSection section : listeSections) {
 			if (section instanceof StationSection) {
 				((StationSection) section).diseableLineInData();
