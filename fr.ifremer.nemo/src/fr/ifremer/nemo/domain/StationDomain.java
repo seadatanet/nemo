@@ -35,6 +35,7 @@ import fr.ifremer.nemo.util.Formatter;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Global.E_InputType;
 import fr.ifremer.nemo.util.Global.E_MesureType;
+import fr.ifremer.nemo.util.Global.E_ProcessType;
 import fr.ifremer.nemo.util.Global.E_TypeConversion;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
@@ -353,9 +354,10 @@ public class StationDomain {
 			errorMessage = "station reference";
 			String stationReferenceToWrite="";
 			if (Nemo.getInstance().getDomain().getMedia().getModel().getInputType() == E_InputType.TRAJECTORY) {
-//				if (Nemo.getInstance().getDomain().getConversion().getCurrent() != E_TypeConversion.ODV_MULTISTATIONS
-//						|| Nemo.getInstance().getDomain().getConversion().getCurrent() != E_TypeConversion.NETCDF_MULTISTATIONS)
-//					_ref = "1";
+				if ((Nemo.getInstance().getDomain().getConversion().getCurrent() != E_TypeConversion.ODV_MULTISTATIONS
+						|| Nemo.getInstance().getDomain().getConversion().getCurrent() != E_TypeConversion.NETCDF_MULTISTATIONS)
+						&& Nemo.getInstance().getDomain().getMedia().getModel().getProcessType()!=E_ProcessType.CRUISE_FILE)
+					_ref = 1;
 				stationReferenceToWrite=getRef(true); //40442
 			}else {
 				stationReferenceToWrite = stationRef;//40442
@@ -481,7 +483,18 @@ public class StationDomain {
 		String cruiseRef = Global.EMPTY_STRING;
 		String stationReference = ref.trim();
 		cruiseRef = Nemo.getInstance().getDomain().getCruise().getModel().getReference();
-		stationReference = form.padZero(stationReference, 5);
+		switch (c) {
+		case NETCDF:
+		case ODV:
+			if (stationReference.length() < 5) {
+				stationReference = form.padZero(stationReference, 5);
+			}
+			break;
+		case MEDATLAS:
+			stationReference = form.padZero(stationReference, 5);
+			break;
+		}
+		
 
 		// [Reference]
 		String temp = Global.EMPTY_STRING;
