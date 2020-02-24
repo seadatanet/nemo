@@ -315,7 +315,7 @@ public class RulesManager {
 		reinitRules();
 		rule_process(true);
 		rule_fileType(true);
-
+		rule_variant(true);
 		myConversionType = getCurrentConversionTypeWithRules(myConversionType);
 		rule_conversionType(true);
 		myEditFileForm.updateEnableConversionTypes();
@@ -767,6 +767,10 @@ public class RulesManager {
 //			dataList_P091_Enabled = false;
 			if (addToLog) {
 				messageLog += Messages.edit_file_info_P091disabled + Global.RN;
+			}
+		}else if(myConversionType == E_TypeConversion.UNKNOWN) {
+			if (myInputVariant !=null && (myInputVariant==E_Variant.BIOLOGICAL||myInputVariant==E_Variant.FLOWCYTO||myInputVariant==E_Variant.MICROLITTER)) {
+				myConversionType =  E_TypeConversion.ODV_MULTISTATIONS;
 			}
 		}
 	}
