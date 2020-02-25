@@ -428,37 +428,37 @@ public class NemoShell {
 
 			}
 		}
-		// 35230 data types in station
-		boolean newCodeFoundInCruiseDataTypes=false;
-		DataType dataType = inputDomain.getStation().getModel().getDataType();
-		bodcRes = BodcChecker.getInstance().checkDataType(dataType.getCode());
-		if (bodcRes.getResStatus() == BODC_RES_STATUS.KO){
-			ok=false;
-			logger.error(bodcRes.getErrorMsg());
-		}else if (bodcRes.getResStatus() == BODC_RES_STATUS.WARNING){
-			String newCode=bodcRes.getDataTypeCode();
-			
-			if (inputDomain.getConversion().getModel().getOutputFormat()==E_TypeConversion.MEDATLAS ){
-				for (int i=0; i<dataTypes.length; i++){
-					if (dataTypes[i].getCode().equals(newCode)){
-						inputDomain.getStation().getModel().setDataType(dataTypes[i]);
-						if (!dataTypes[i].isSensor()){
-							logger.error("dataType "+ dataType.getCode() + " is deprecated and shall be replaced by " + newCode + " but this dataType has not sensor. Please check your model with Nemo GUI");
-							ok = false;
-						}
-						newCodeFoundInCruiseDataTypes=true;
-					}
-				}
-			}else{
-				newCodeFoundInCruiseDataTypes=true; // IF conv is not medatlas, no datatypes in cruise tab, so no need to find them
-			}
-			if (newCodeFoundInCruiseDataTypes){
-				logger.warn(bodcRes.getWarningMsg());
-			}else{
-				ok=false;
-				logger.error("dataType "+ dataType.getCode() + " is deprecated and shall be replaced by " + newCode + " but this dataType has not been found in Cruise datatypes. Please check your model with Nemo GUI");
-			}
-		}
+		// 35230 data types in station - DO NOT TEST because user can set a free string as data type since 1.7.0 
+//		boolean newCodeFoundInCruiseDataTypes=false;
+//		DataType dataType = inputDomain.getStation().getModel().getDataType();
+//		bodcRes = BodcChecker.getInstance().checkDataType(dataType.getCode());
+//		if (bodcRes.getResStatus() == BODC_RES_STATUS.KO){
+//			ok=false;
+//			logger.error(bodcRes.getErrorMsg());
+//		}else if (bodcRes.getResStatus() == BODC_RES_STATUS.WARNING){
+//			String newCode=bodcRes.getDataTypeCode();
+//			
+//			if (inputDomain.getConversion().getModel().getOutputFormat()==E_TypeConversion.MEDATLAS ){
+//				for (int i=0; i<dataTypes.length; i++){
+//					if (dataTypes[i].getCode().equals(newCode)){
+//						inputDomain.getStation().getModel().setDataType(dataTypes[i]);
+//						if (!dataTypes[i].isSensor()){
+//							logger.error("dataType "+ dataType.getCode() + " is deprecated and shall be replaced by " + newCode + " but this dataType has not sensor. Please check your model with Nemo GUI");
+//							ok = false;
+//						}
+//						newCodeFoundInCruiseDataTypes=true;
+//					}
+//				}
+//			}else{
+//				newCodeFoundInCruiseDataTypes=true; // IF conv is not medatlas, no datatypes in cruise tab, so no need to find them
+//			}
+//			if (newCodeFoundInCruiseDataTypes){
+//				logger.warn(bodcRes.getWarningMsg());
+//			}else{
+//				ok=false;
+//				logger.error("dataType "+ dataType.getCode() + " is deprecated and shall be replaced by " + newCode + " but this dataType has not been found in Cruise datatypes. Please check your model with Nemo GUI");
+//			}
+//		}
 
 		for (ParameterModel pModel : inputDomain.getData().getModel().getParameterModels()) {
 			TypeData typeCourant = new TypeData(pModel);
