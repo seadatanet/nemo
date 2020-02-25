@@ -1,4 +1,4 @@
-<NemoConfiguration lang="fr_FR">
+<NemoConfiguration lang="en_GB">
   <dataCenter>IL</dataCenter>
   <nemoWsURL>http://www.ifremer.fr/WSnemo/services/NEMO</nemoWsURL>
   <nautilusWsURL>http://www.ifremer.fr/WSnautilus/services/NAUTILUS</nautilusWsURL>
@@ -25,7 +25,7 @@
   <dateISO>true</dateISO>
   <defaultConversionType>UNKNOWN</defaultConversionType>
   <proxy use="false" address="" port="" login="" password=""/>
-  <edmoURL>http://seadatanet.maris2.nl/ws/ws_edmo.asmx</edmoURL>
+  <edmoURL>https://edmo.seadatanet.org/ws/ws_edmo.asmx</edmoURL>
   <defaultFlagTable>C1</defaultFlagTable>
   <FlagTable code="C1" label="SeaDataNet">
     <Flag local="0" SDN="0 - no quality control"/>
