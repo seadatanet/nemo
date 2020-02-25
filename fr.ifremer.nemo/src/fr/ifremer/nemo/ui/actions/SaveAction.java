@@ -73,6 +73,7 @@ public class SaveAction extends Action implements ISelectionListener,
                 || !editStationForm.isOkApresReset()
                 || !editDataForm.isOkApresReset())
         {
+        	editDataForm.myValidator.validate(); // force validation to save current parameters, even if not valid
             editDataForm.setValidated(false);
         }
 
