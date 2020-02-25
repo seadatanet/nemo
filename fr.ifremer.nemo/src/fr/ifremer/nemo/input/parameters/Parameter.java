@@ -241,6 +241,11 @@ public class Parameter extends AbstractModel {
 					ModelDescription.setter_instrument_code);
 			return setter;
 		}
+		if (a_LocalName.equals(ModelDescription.node_effectiveIsoDateFormat)) {
+			Element2Field setter = new Element2Field(this,
+					ModelDescription.setter_effectiveIsoDateFormat);
+			return setter;
+		}
 	
 		return null;
 	}
@@ -275,6 +280,9 @@ public class Parameter extends AbstractModel {
 		a_Writer.putTag(ModelDescription.node_instrument, getInstrument());
 		a_Writer.putTag(ModelDescription.node_instrument_code, getInstrumentCode());
 		
+		if (getUnitCode().equals(SdnVocabularyManager.P06_TISO) && getEffectiveIsoDateFormat() != null) {
+			a_Writer.putTag(ModelDescription.node_effectiveIsoDateFormat, getEffectiveIsoDateFormat());
+		}
 	}
 
 	/**
