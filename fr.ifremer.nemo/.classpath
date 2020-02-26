@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
+	<classpathentry exported="true" kind="lib" path="lib/octopus-1.5.2.0.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib_axis_14/axis-java8-1.4.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/odvSDN2CFPointLib-1.1.8-SNAPSHOT-jar-with-dependencies.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
 	<classpathentry excluding="fr/ifremer/nemo/input/CopyOfFragment.java" kind="src" path="src"/>

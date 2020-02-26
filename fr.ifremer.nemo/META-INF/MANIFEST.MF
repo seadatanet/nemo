@@ -51,7 +51,7 @@ Bundle-ClassPath: .,
  lib/log4j-api-2.3.jar,
  lib/log4j-core-2.3.jar,
  lib/SoftwareVersionApi-1.0.jar,
- lib/odvSDN2CFPointLib-1.1.8-SNAPSHOT-jar-with-dependencies.jar,
- lib_axis_14/axis-java8-1.4.jar
+ lib_axis_14/axis-java8-1.4.jar,
+ lib/octopus-1.5.2.0.jar
 Bundle-Vendor: IFREMER
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
