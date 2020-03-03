@@ -1072,6 +1072,9 @@ public class NetCDFWriter extends NemoWriter {
 			}
 		} else {
 			longNameCruise = cruiseDomain.getModel().getName().trim();
+			if (longNameCruise.isEmpty()) {
+				longNameCruise = Nemo.getInstance().getDomain().getCruise().getModel().getReference();//51250:use mandatory ref if name is empty
+			}
 		}
 		return longNameCruise;
 	}
