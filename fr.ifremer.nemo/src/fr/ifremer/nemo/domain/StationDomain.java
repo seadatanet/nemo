@@ -198,6 +198,7 @@ public class StationDomain {
 			if ( Nemo.getInstance().getDomain().getStation().getModel().getProperty(Intern.S_DATE).isInData()){
 				currentDate = Long.valueOf(DateTimeUtils.convertTimestamp(inputLine));
 			}
+			currentDate=DateTimeUtils.getGMTDate(currentDate,  currentStation.getOffsetTU());
 			odvStationHeader.append(DateTimeUtils.getVariantDateTime(currentDate));
 			odvStationHeader.append(Global.TAB);
 
@@ -205,7 +206,6 @@ public class StationDomain {
 			Nemo.getInstance().getLogger().error(e.getMessage() + " line: " + inputLine );
 			throw e;
 		}
-
 
 
 		/** 50695 do not use strict format, but limit the number of decimals to 7 in case of input is not a double, example
