@@ -196,7 +196,9 @@ public abstract class NemoWriter {
 
 							int nbrecords = 0;
 							boolean isRateCalculated = false;
-							while ((readedLine = bufferedReader.readLine()) != null) {
+							while ((readedLine = bufferedReader.readLine()) != null ) {
+								
+								
 								incrementLine();
 
 								if (inFileHeader()) {
@@ -236,6 +238,9 @@ public abstract class NemoWriter {
 										break;
 									}
 								} else if (st != null) {
+									if (readedLine.isEmpty()) {// fix bug detected when using data in columns (empty lines were ignored by Preformat, no used in this case)
+										continue;
+									}
 									//									if (stationDomain.getModel().getProperty(Intern.S_DATE).isInData()) {
 									if (mediaDomain.getModel().getInputType()!=E_InputType.UNKNOWN) {
 										st.updateStationStartEnd(readedLine, nbrecords);
