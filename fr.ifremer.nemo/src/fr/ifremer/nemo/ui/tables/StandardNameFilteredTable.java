@@ -10,9 +10,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 
-import sdn.vocabulary.interfaces.IElement;
 import fr.ifremer.nemo.Nemo;
-import fr.ifremer.nemo.config.VocabLists;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.data.TableData;
 import fr.ifremer.nemo.ui.edit.data.TypeData;
@@ -20,6 +18,10 @@ import fr.ifremer.nemo.ui.edit.data.TypeStandardName;
 import fr.ifremer.nemo.util.Global.DataListTypeEnum;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
+import fr.ifremer.sismer_tools.externalresources.ExternalResourcesManager;
+import fr.ifremer.sismer_tools.seadatanet.SdnVocabularyManager;
+import sdn.vocabulary.interfaces.IElement;
+import sdn.vocabulary.interfaces.VocabularyException;
 
 
 /**
@@ -111,31 +113,34 @@ public class StandardNameFilteredTable extends AbstractFilteredTable
      */
     public void initTypesP07()
     {
-        listeOrigine= new ArrayList<TypeStandardName>();
-        Collection<IElement> listP07 = new ArrayList<IElement>();
-        if(_typeToUse == DataListTypeEnum.P011_VIA_P021)
-        {
-            listP07 = VocabLists.getVocabMatchs(Intern.list_P021, 
-                Intern.list_P07, _typeParameter.getEntryKey());
-        }
-        else
-        {
-            List<IElement> listeP091_P021 = VocabLists.getVocabMatchs(Intern.list_P091, Intern.list_P021, _typeParameter.getEntryKey());
+    	SdnVocabularyManager sdnVocabsMgr = ExternalResourcesManager.getInstance().getSdnVocabularyManager();
+    	listeOrigine= new ArrayList<TypeStandardName>();
+    	Collection<IElement> listP07 = new ArrayList<IElement>();
+    	try {
+    		if(_typeToUse == DataListTypeEnum.P011_VIA_P021)
+    		{
+    			listP07 = sdnVocabsMgr.getVocabMatchs(Intern.list_P07,Intern.list_P021,  _typeParameter.getEntryKey());//order ok
+    		}
+    		else
+    		{
+    			List<IElement> listeP091_P021 = sdnVocabsMgr.getVocabMatchs( Intern.list_P021,Intern.list_P091, _typeParameter.getEntryKey());//order ok
 
-            for (IElement liste : listeP091_P021)
-            {
-                listP07 = VocabLists.getVocabMatchs(Intern.list_P021, 
-                    Intern.list_P07, liste.getKey());
-            }
-        }
+    			for (IElement liste : listeP091_P021)
+    			{
+    				listP07 = sdnVocabsMgr.getVocabMatchs(Intern.list_P07, Intern.list_P021, liste.getKey());//order ok
+    			}
+    		}
+    	} catch (VocabularyException e) {
+    		Nemo.getInstance().getLogger().error(e.getMessage());    	
+    	}
 
-        TypeStandardName typeStandardName;
-        for (IElement record : listP07)
-        {
-            typeStandardName = new TypeStandardName(record);
-            listeOrigine.add(typeStandardName);
-        }
-        
+    	TypeStandardName typeStandardName;
+    	for (IElement record : listP07)
+    	{
+    		typeStandardName = new TypeStandardName(record);
+    		listeOrigine.add(typeStandardName);
+    	}
+
 
     }
 

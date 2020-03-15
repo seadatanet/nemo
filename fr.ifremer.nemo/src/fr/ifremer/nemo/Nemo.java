@@ -35,9 +35,9 @@ import com.ago.xml.XMLBootstrapParser;
 
 import fr.ifremer.nemo.config.Configuration;
 import fr.ifremer.nemo.config.ManageLists;
+import fr.ifremer.nemo.config.NemoExternalResourcesManager;
 import fr.ifremer.nemo.config.NemoLists;
 import fr.ifremer.nemo.config.UpdateStatusList;
-import fr.ifremer.nemo.config.VocabLists;
 import fr.ifremer.nemo.domain.InputDomain;
 import fr.ifremer.nemo.input.CruiseModel;
 import fr.ifremer.nemo.input.InputModel;
@@ -53,7 +53,9 @@ import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.util.Utils;
 import fr.ifremer.nemo.ws.NemoWS;
+import fr.ifremer.sismer_tools.externalresources.ExternalResourcesManager;
 import fr.ifremer.sismer_tools.resources.ODVConstants.E_Variant;
+import sdn.vocabulary.interfaces.VocabularyException;
 
 /**
  * Class Nemo.java Description: Classe principale de l'application - utilisée en
@@ -130,7 +132,7 @@ public class Nemo {
 	 * @throws TransformerException
 	 */
 	public List<String> openModel(String pathModel) throws FileNotFoundException,
-			TransformerException {
+	TransformerException {
 		List<String> messages = new ArrayList<>();
 
 		// nom du model
@@ -151,8 +153,7 @@ public class Nemo {
 			parser = new XMLBootstrapParser(model);
 
 			StreamSource xmlSource = new StreamSource(new File(pathModel));
-			StreamSource xslSource = new StreamSource(new File(Intern.dir_resources + File.separator
-					+ Intern.ModelXSL));
+			StreamSource xslSource = new StreamSource(new File(Intern.dir_resources + File.separator+ Intern.ModelXSL));
 			Result result = new SAXResult(parser);
 
 			TransformerFactory factory = TransformerFactory.newInstance();
@@ -163,7 +164,11 @@ public class Nemo {
 		// FAE 16868
 		if (Utils.compareVersion(model.getVersion(), "1.5.1") == -1) { // older than 1.5.1
 			String regionName = model.getCruiseModel().getRegionName();
-			String C19RegionName = CruiseModel.getTranscodeRegionName(regionName);
+			String C19RegionName="";
+			try {
+				C19RegionName = CruiseModel.getTranscodeRegionName(regionName);
+			} catch (VocabularyException e) {
+			}
 			model.getCruiseModel().setRegionName(C19RegionName);
 		}
 		if (Utils.compareVersion(model.getVersion(), "1.6.0") == -1) { // older than 1.6.0
@@ -185,7 +190,7 @@ public class Nemo {
 				model.getStationModel().getReferenceProperty().setUserValue("1");
 			}
 		}
-		
+
 		//42483: old models without variants=physicochemical
 		if (model.getMediaModel().getVariant()==E_Variant.UNKNOWN) {
 			model.getMediaModel().setVariant(E_Variant.PHYSICOCHEMICAL);
@@ -242,9 +247,9 @@ public class Nemo {
 		InputModel inputModel = new InputModel(domain.getMedia().getModel(), domain.getCruise()
 				.getModel(), domain.getStation().getModel(),
 				domain.getData()
-						.getModel(),
+				.getModel(),
 				domain.getConversion().getModel(), Nemo
-						.getInstance().getViewMain().getEditDataForm().isValidated());
+				.getInstance().getViewMain().getEditDataForm().isValidated());
 		inputModel.writeXMLOn(a_Stream);
 	}
 
@@ -320,15 +325,15 @@ public class Nemo {
 			File fich = new File(myViewMain.getEditFileForm().nomRepertoire);
 			if (!Global.EMPTY_STRING.equals(modelName)) {
 				ApplicationWorkbenchWindowAdvisor.configurer_titre
-						.setTitle(Messages.application_directoryTitle
-								+ fich.getAbsolutePath()
-								+ Messages.application_modelTitle + modelName
-								+ " ]"); //$NON-NLS-1$
+				.setTitle(Messages.application_directoryTitle
+						+ fich.getAbsolutePath()
+						+ Messages.application_modelTitle + modelName
+						+ " ]"); //$NON-NLS-1$
 
 			} else {
 				ApplicationWorkbenchWindowAdvisor.configurer_titre
-						.setTitle(Messages.application_directoryTitle
-								+ fich.getAbsolutePath() + " ]"); //$NON-NLS-1$
+				.setTitle(Messages.application_directoryTitle
+						+ fich.getAbsolutePath() + " ]"); //$NON-NLS-1$
 			}
 
 		} else {
@@ -338,14 +343,14 @@ public class Nemo {
 
 			if (!Global.EMPTY_STRING.equals(modelName)) {
 				ApplicationWorkbenchWindowAdvisor.configurer_titre
-						.setTitle(Messages.application_fileTitle
-								+ fich.getAbsolutePath()
-								+ Messages.application_modelTitle + modelName
-								+ " ]"); //$NON-NLS-1$
+				.setTitle(Messages.application_fileTitle
+						+ fich.getAbsolutePath()
+						+ Messages.application_modelTitle + modelName
+						+ " ]"); //$NON-NLS-1$
 			} else {
 				ApplicationWorkbenchWindowAdvisor.configurer_titre
-						.setTitle(Messages.application_fileTitle
-								+ fich.getAbsolutePath() + " ]"); //$NON-NLS-1$
+				.setTitle(Messages.application_fileTitle
+						+ fich.getAbsolutePath() + " ]"); //$NON-NLS-1$
 			}
 		}
 	}
@@ -456,37 +461,35 @@ public class Nemo {
 			ManageLists.resetUpdatedLists();
 
 			// Call NEMO WebService
-//				monitor.subTask(Messages.connect_nemo);
+			Nemo.getInstance().getLogger().info(Messages.connect_nemo);
 			NemoWS service = NemoLists.callNemoWS();
 			UpdateStatusList updateNemo = (UpdateStatusList) ManageLists.getUpdate(Intern.id_nemo);
 
-//					monitor.subTask(Messages.update_param);
-			NemoLists.updateParameters(null, service, updateNemo);
-
-//		monitor.subTask(Messages.update_survey);
-			NemoLists.updateSurveys(null, service, updateNemo);
-
 			// update CSR
-			if (!VocabLists.getCSRListManager().isFileUpToDate()) {
-				VocabLists.getCSRListManager().update();
+			
+			if (!ExternalResourcesManager.getInstance().getCsrListManager().isFileUpToDate()) {
+				ExternalResourcesManager.getInstance().getCsrListManager().reload();
 			}
+			Nemo.getInstance().getLogger().info(Messages.connect_vocab);
+			Nemo.getInstance().getLogger().info(Messages.getString(Intern.id_lists));
+			NemoExternalResourcesManager.updateVocabLists(null);
 
-//		monitor.subTask(Messages.connect_vocab);
-			/////// VocabSoapBindingStub vocabService = NemoLists.connectVocab();
-
-//		monitor.subTask(Messages.getString(Intern.id_lists));
-			VocabLists.updateVocabLists(null);
-
-//		monitor.subTask(Messages.getString(Intern.id_maps));
-			VocabLists.updateMapLists(null);
+//			Nemo.getInstance().getLogger().info(Messages.getString(Intern.id_maps));
+//			VocabLists.updateMapLists(null);
 
 			ManageLists.updateDataTypes();
 
-//			monitor.subTask(Messages.connect_edmo);
+			Nemo.getInstance().getLogger().info(Messages.connect_edmo);
 			NemoLists.updateEdmo(null);
 
-			Nemo.getInstance().getConfig().save();
+			Nemo.getInstance().getLogger().info(Messages.update_param);
+			NemoLists.updateParameters(null, service, updateNemo);
 
+			Nemo.getInstance().getLogger().info(Messages.update_survey);
+			NemoLists.updateSurveys(null, service, updateNemo);
+
+			Nemo.getInstance().getConfig().save();
+			Nemo.getInstance().getLogger().info("updates ended");
 			return "";
 
 		} catch (Exception e) {

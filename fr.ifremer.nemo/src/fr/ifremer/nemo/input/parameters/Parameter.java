@@ -7,7 +7,6 @@ import com.ago.xml.SAXConsumer;
 import com.ago.xml.XMLOutputWriter;
 
 import fr.ifremer.nemo.Nemo;
-import fr.ifremer.nemo.config.VocabLists;
 import fr.ifremer.nemo.domain.LabelParameterManager;
 import fr.ifremer.nemo.domain.StandardNameParameterManager;
 import fr.ifremer.nemo.input.AbstractModel;
@@ -20,6 +19,7 @@ import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Global.DataListTypeEnum;
 import fr.ifremer.nemo.util.Global.E_TypeConversion;
 import fr.ifremer.nemo.util.Intern;
+import fr.ifremer.sismer_tools.externalresources.ExternalResourcesManager;
 import fr.ifremer.sismer_tools.seadatanet.SdnVocabularyManager;
 import sdn.vocabulary.interfaces.IElement;
 
@@ -495,12 +495,12 @@ public class Parameter extends AbstractModel {
 
 		String elementP01 = null;
 
-		for (IElement element : VocabLists.getVocabMatchs(Intern.list_P091, Intern.list_P011, this.getCode())) {
+		for (IElement element : ExternalResourcesManager.getInstance().getSdnVocabularyManager().getVocabMatchs( Intern.list_P011, Intern.list_P091,this.getCode())) {//order ok
 
 			elementP01 = element.getKey();
 
 			// check vertical (P02 = AHGT)
-			if (VocabLists.getVocabMatch(Intern.list_P011, Intern.list_P021, elementP01).equals("AHGT")) {
+			if (ExternalResourcesManager.getInstance().getSdnVocabularyManager().getVocabMatch(Intern.list_P011, Intern.list_P021, elementP01).equals("AHGT")) {
 
 				this.setCodeP011(elementP01);
 				return;

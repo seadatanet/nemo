@@ -4,9 +4,12 @@ import java.util.Collection;
 import java.util.Map.Entry;
 import java.util.TreeMap;
 
-import sdn.vocabulary.interfaces.IElement;
+import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Intern;
+import fr.ifremer.sismer_tools.externalresources.ExternalResourcesManager;
+import sdn.vocabulary.interfaces.IElement;
+import sdn.vocabulary.interfaces.VocabularyException;
 
 /**
  * Class Flag
@@ -73,7 +76,12 @@ public class Flag
 	 */
 	public static String[] flagSDN()
 	{
-		Collection<IElement> flags = VocabLists.getVocabList(Intern.list_flagsSDN).getElements();
+		Collection<IElement> flags = null;
+		try {
+			flags = ExternalResourcesManager.getInstance().getSdnVocabularyManager().getVocabList(Intern.list_flagsSDN).getElements();
+		} catch (VocabularyException e) {
+			Nemo.getInstance().getLogger().error(e.getMessage());
+		}
 		String[] listFlags = new String[flags.size()];
 
 		TreeMap<String, String> treeFlags = new TreeMap<String, String>();

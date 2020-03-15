@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry exported="true" kind="lib" path="lib/octopus-1.5.2.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/octopus-1.5.3.0.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib_axis_14/axis-java8-1.4.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
@@ -15,12 +15,10 @@
 	<classpathentry exported="true" kind="lib" path="lib/slf4j-api-1.5.6.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/slf4j-jdk14-1.5.6.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/slf4j-log4j12-1.5.6.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/netcdf-4.2.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib_axis_14/axis-ant.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib_axis_14/commons-discovery-0.2.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib_axis_14/commons-logging-1.0.4.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib_axis_14/jaxrpc.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib_axis_14/log4j-1.2.8.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib_axis_14/saaj.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib_axis_14/wsdl4j-1.5.1.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/appframework-1.0.3.jar"/>
@@ -42,8 +40,6 @@
 	<classpathentry exported="true" kind="lib" path="lib/hsqldb-2.2.6.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/eclipselink.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/javax.persistence_2.1.0.v201304241213.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/log4j-api-2.3.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/log4j-core-2.3.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/SoftwareVersionApi-1.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

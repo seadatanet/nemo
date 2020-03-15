@@ -3,7 +3,6 @@ package fr.ifremer.nemo.output;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -20,7 +19,6 @@ import org.joda.time.DateTime;
 
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.config.Configuration;
-import fr.ifremer.nemo.config.VocabLists;
 import fr.ifremer.nemo.domain.CruiseDomain;
 import fr.ifremer.nemo.domain.DataDomain;
 import fr.ifremer.nemo.domain.DateTimeUtils;
@@ -39,6 +37,7 @@ import fr.ifremer.nemo.util.Global.E_TypeConversion;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.sismer_tools.DateTools;
+import fr.ifremer.sismer_tools.externalresources.ExternalResourcesManager;
 
 public class CDIResumeWriter {
 	private static CDIResumeWriter instance;
@@ -169,7 +168,7 @@ public class CDIResumeWriter {
 		}
 		return selected;
 	}
-	private void writeCDILine(Station st, ParameterModel param, Conversion formatConversion, String localCDIId, String outputPath) throws IOException, ParseException {
+	private void writeCDILine(Station st, ParameterModel param, Conversion formatConversion, String localCDIId, String outputPath) throws Exception {
 
 		InputDomain iDomain = Nemo.getInstance().getDomain();
 		CruiseDomain cDomain = iDomain.getCruise();
@@ -247,7 +246,7 @@ public class CDIResumeWriter {
 			// si on est en P091 ou P011viaP091, on map code
 			// P091 -> P021
 			// 6542
-			p02Code = VocabLists.getVocabMatch(
+			p02Code = ExternalResourcesManager.getInstance().getSdnVocabularyManager().getVocabMatch(
 					Intern.mapping_subject, Intern.list_P021,
 					param.getParameter().getCode()
 					);
@@ -366,14 +365,13 @@ public class CDIResumeWriter {
 			// for timeseries and trajectories
 		{
 			try{
-//				System.out.println(DateTools.TIMEZONE_GMT);
-			String cruiseDateTime = DateTools.getUTCLongAsString(st.getYoungerDate(), "yyyy-MM-dd'T'HH:mm:ss");
-			writer.write(sep +cruiseDateTime);
+				//				System.out.println(DateTools.TIMEZONE_GMT);
+				String cruiseDateTime = DateTools.getUTCLongAsString(st.getYoungerDate(), "yyyy-MM-dd'T'HH:mm:ss");
+				writer.write(sep +cruiseDateTime);
 			}
-				catch (Exception e) {
-					// TODO: handle exception
-					e.printStackTrace();
-				}	
+			catch (Exception e) {
+				Nemo.getInstance().getLogger().error(e.getMessage());
+			}	
 		}
 
 	}

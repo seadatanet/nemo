@@ -16,15 +16,17 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CCombo;
 import org.eclipse.swt.widgets.Composite;
 
+import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.config.NemoLists;
-import fr.ifremer.nemo.config.VocabLists;
 import fr.ifremer.nemo.ui.RulesManager;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.cruise.TableDataSurvey;
 import fr.ifremer.nemo.ui.edit.station.EditStationForm;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Intern;
+import fr.ifremer.sismer_tools.externalresources.ExternalResourcesManager;
 import sdn.vocabulary.interfaces.IElement;
+import sdn.vocabulary.interfaces.VocabularyException;
 
 /**
  * Description: enumération des types de Combo possibles
@@ -63,6 +65,8 @@ public enum ComboType {
 
 	public CCombo fillCombo(CCombo valueCombo) {
 		String temp;
+		
+		try {
 		switch (this) {
 		case DATE:
 			valueCombo.add("DD/MM/YY"); //$NON-NLS-1$
@@ -130,7 +134,10 @@ public enum ComboType {
 			}
 			break;
 		case SHIP:
-			Collection<IElement> navires = VocabLists.getVocabList(Intern.list_ship).getElements();
+			Collection<IElement> navires;
+			
+				navires = ExternalResourcesManager.getInstance().getSdnVocabularyManager().getVocabList(Intern.list_ship).getElements();
+			
 
 			TreeMap<String, String> treeNavire = new TreeMap<String, String>();
 
@@ -151,8 +158,7 @@ public enum ComboType {
 			break;
 		case REGION:
 			NemoLists.listeRegion = new ArrayList<String>();
-			Collection<IElement> regions = VocabLists.getVocabList(Intern.list_regionsPolygones).getElements();
-
+			Collection<IElement> regions = ExternalResourcesManager.getInstance().getSdnVocabularyManager().getVocabList(Intern.list_regionsPolygones).getElements();
 			TreeMap<String, String> treeRegion = new TreeMap<String, String>();
 
 			for (IElement record : regions) {
@@ -168,7 +174,7 @@ public enum ComboType {
 			Utils.createSearchMenu(valueCombo, Global.REGION);
 			break;
 		case COUNTRY:
-			Collection<IElement> records = VocabLists.getVocabList(Intern.list_countries).getElements();
+			Collection<IElement> records = ExternalResourcesManager.getInstance().getSdnVocabularyManager().getVocabList(Intern.list_countries).getElements();
 
 			TreeMap<String, String> treePays = new TreeMap<String, String>();
 
@@ -181,7 +187,7 @@ public enum ComboType {
 			}
 			break;
 		case DATACENTER:
-			Collection<IElement> centres = VocabLists.getVocabList(Intern.list_dataCenter).getElements();
+			Collection<IElement> centres = ExternalResourcesManager.getInstance().getSdnVocabularyManager().getVocabList(Intern.list_dataCenter).getElements();
 
 			TreeMap<String, String> treeCentre = new TreeMap<String, String>();
 
@@ -205,6 +211,9 @@ public enum ComboType {
 			break;
 		default:
 			break;
+		}
+		} catch (VocabularyException e) {
+			Nemo.getInstance().getLogger().error(e.getMessage());
 		}
 		return valueCombo;
 	}

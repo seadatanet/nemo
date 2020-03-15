@@ -19,6 +19,7 @@ import org.osgi.framework.FrameworkUtil;
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.NemoShell;
 import fr.ifremer.nemo.config.ManageLists;
+import fr.ifremer.nemo.config.NemoExternalResourcesManager;
 import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Global.E_TypeConversion;
@@ -86,8 +87,7 @@ public class Application implements IPlatformRunnable {
 			CommandLine cl = p.parse(opt, strArgs);
 
 			// retrieve application path (FAE 9910)
-			appDir = Application.class.getProtectionDomain().getCodeSource()
-					.getLocation().getPath();
+			appDir = Application.class.getProtectionDomain().getCodeSource().getLocation().getPath();
 			if (appDir.endsWith("jar")) {
 				appDir = (new File(Application.class.getProtectionDomain()
 						.getCodeSource().getLocation().getFile())
@@ -112,7 +112,9 @@ public class Application implements IPlatformRunnable {
 						MessageFormat.format(Messages.JavaVersionHigherThanNine, javaVersion));
 
 			}
-
+			
+			// load external resources
+			NemoExternalResourcesManager.init();
 			/**************************************************************************
 			 * BATCH MODE
 			 **************************************************************************/

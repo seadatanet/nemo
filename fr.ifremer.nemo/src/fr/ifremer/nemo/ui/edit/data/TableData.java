@@ -23,7 +23,6 @@ import org.eclipse.swt.widgets.Text;
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.config.Flag;
 import fr.ifremer.nemo.config.NemoLists;
-import fr.ifremer.nemo.config.VocabLists;
 import fr.ifremer.nemo.domain.LabelParameterManager;
 import fr.ifremer.nemo.domain.MediaDomain;
 import fr.ifremer.nemo.domain.NetCDFLongNameParameterManager;
@@ -43,8 +42,10 @@ import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.ws.WSParameter;
 import fr.ifremer.sismer_tools.DateTools;
 import fr.ifremer.sismer_tools.SismerToolsException;
+import fr.ifremer.sismer_tools.externalresources.ExternalResourcesManager;
 import fr.ifremer.sismer_tools.seadatanet.SdnVocabularyManager;
 import sdn.vocabulary.interfaces.IElement;
+import sdn.vocabulary.interfaces.VocabularyException;
 
 public class TableData {
 	final Color red = new Color(null, 239,180,110);
@@ -454,14 +455,21 @@ public class TableData {
 
 	private void iniTypesWSP021() {
 		// init des données a partir du fichier P021 p021.xml
-		Collection<IElement> listP021 = VocabLists.getVocabList(Intern.list_P021).getElements();
-		TypeData type;
+		Collection<IElement> listP021;
+		SdnVocabularyManager sdnVocabsMgr = ExternalResourcesManager.getInstance().getSdnVocabularyManager();
+		try {
+			listP021 = sdnVocabsMgr.getVocabList(Intern.list_P021).getElements();
 
-		for (IElement record : listP021) {
-			type = new TypeData(record);
-			type.setIsP011(false);
-			// ajout dans liste
-			typesWS.add(type);
+			TypeData type;
+
+			for (IElement record : listP021) {
+				type = new TypeData(record);
+				type.setIsP011(false);
+				// ajout dans liste
+				typesWS.add(type);
+			}
+		} catch (VocabularyException e) {
+			Nemo.getInstance().getLogger().error(e.getMessage());    	
 		}
 	}
 
@@ -469,48 +477,62 @@ public class TableData {
 	 * initialize the P061 types to use as units choice in P011viaP021 case
 	 */
 	public void initTypesP061() {
-		if (typesP061 == null) {
-			typesP061 = new ArrayList<TypeUnit>();
-			// init des données a partir du fichier P021 p021.xml
-			Collection<IElement> listP061 = VocabLists.getVocabList(Intern.list_P061).getElements();
-			TypeUnit typeUnit;
-			for (IElement record : listP061) {
-				typeUnit = new TypeUnit(record);
-				typesP061.add(typeUnit);
+		SdnVocabularyManager sdnVocabsMgr = ExternalResourcesManager.getInstance().getSdnVocabularyManager();
+		try {
+			if (typesP061 == null) {
+				typesP061 = new ArrayList<TypeUnit>();
+				// init des données a partir du fichier P021 p021.xml
+				Collection<IElement> listP061 = sdnVocabsMgr.getVocabList(Intern.list_P061).getElements();
+				TypeUnit typeUnit;
+				for (IElement record : listP061) {
+					typeUnit = new TypeUnit(record);
+					typesP061.add(typeUnit);
+				}
 			}
+			Collections.sort(typesP061);
+		} catch (VocabularyException e) {
+			Nemo.getInstance().getLogger().error(e.getMessage());    	
 		}
-		Collections.sort(typesP061);
 	}
 	/**
 	 * initialize the L22
 	 */
 	public void initTypesL22() {
-		if (typesL22 == null) {
-			typesL22 = new ArrayList<TypeInstrument>();
-			Collection<IElement> listL22 = VocabLists.getVocabList(Intern.list_L22).getElements();
-			TypeInstrument typeInstrument;
-			for (IElement record : listL22) {
-				typeInstrument = new TypeInstrument(record);
-				typesL22.add(typeInstrument);
+		SdnVocabularyManager sdnVocabsMgr = ExternalResourcesManager.getInstance().getSdnVocabularyManager();
+		try {
+			if (typesL22 == null) {
+				typesL22 = new ArrayList<TypeInstrument>();
+				Collection<IElement> listL22 = sdnVocabsMgr.getVocabList(Intern.list_L22).getElements();
+				TypeInstrument typeInstrument;
+				for (IElement record : listL22) {
+					typeInstrument = new TypeInstrument(record);
+					typesL22.add(typeInstrument);
+				}
 			}
+			Collections.sort(typesL22);
+		} catch (VocabularyException e) {
+			Nemo.getInstance().getLogger().error(e.getMessage());    	
 		}
-		Collections.sort(typesL22);
-
 	}
 	/**
 	 * initialize the L22
 	 */
 	public void initTypesL33() {
-		if (typesL33 == null) {
-			typesL33 = new ArrayList<TypeFallRate>();
-			Collection<IElement> listL33 = VocabLists.getVocabList(Intern.list_L33).getElements();
-			TypeFallRate typeFallrate;
-			for (IElement record : listL33) {
-				typeFallrate = new TypeFallRate(record);
-				typesL33.add(typeFallrate);
+		SdnVocabularyManager sdnVocabsMgr = ExternalResourcesManager.getInstance().getSdnVocabularyManager();
+		try {
+			if (typesL33 == null) {
+				typesL33 = new ArrayList<TypeFallRate>();
+				Collection<IElement> listL33 = sdnVocabsMgr.getVocabList(Intern.list_L33).getElements();
+				TypeFallRate typeFallrate;
+				for (IElement record : listL33) {
+					typeFallrate = new TypeFallRate(record);
+					typesL33.add(typeFallrate);
+				}
 			}
+			Collections.sort(typesL33);
+		} catch (VocabularyException e) {
+			Nemo.getInstance().getLogger().error(e.getMessage());    	
 		}
-		Collections.sort(typesL33);
 	}
 	/**
 	 * fill types 

@@ -27,8 +27,8 @@ public class Intern extends NLS {
 	public static String id_maps;
 	public static String id_edmo;
 	public static String nbnemolists;
-	public static String vocabLists;
-	public static String vocabMaps;
+//	public static String vocabLists;
+//	public static String vocabMaps;
 
 	public static String list_ship;
 	public static String list_dataCenter;

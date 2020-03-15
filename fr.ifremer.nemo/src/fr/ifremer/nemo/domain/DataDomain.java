@@ -16,7 +16,6 @@ import java.text.ParseException;
 import java.util.MissingResourceException;
 
 import fr.ifremer.nemo.Nemo;
-import fr.ifremer.nemo.config.VocabLists;
 import fr.ifremer.nemo.input.DataModel;
 import fr.ifremer.nemo.input.InputModel;
 import fr.ifremer.nemo.input.parameters.Parameter;
@@ -29,6 +28,7 @@ import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Global.E_InputType;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
+import fr.ifremer.sismer_tools.externalresources.ExternalResourcesManager;
 import fr.ifremer.sismer_tools.seadatanet.SdnVocabularyManager;
 
 /**
@@ -376,7 +376,7 @@ public class DataDomain {
 			 */
 
 			if (param.getCodeP011() == null || param.getCodeP011().isEmpty()) {
-				param.setCodeP011(VocabLists.getVocabMatch(Intern.list_P091, Intern.list_P011, param.getCode()));
+				param.setCodeP011(ExternalResourcesManager.getInstance().getSdnVocabularyManager().getVocabMatch(Intern.list_P091, Intern.list_P011, param.getCode()));
 			}
 			sdnMapping.append(getURNSyntaxe(URNtype.object, param.getCodeP011(), null, Intern.mapping_objet, isText));
 
@@ -414,6 +414,7 @@ public class DataDomain {
 	private static StringBuffer getURNSyntaxe(URNtype type, String code, String list1, String list2, Boolean isText) throws GenerationException {
 		StringBuffer urnSyntaxe = new StringBuffer();
 
+		SdnVocabularyManager sdnVocabMgr = ExternalResourcesManager.getInstance().getSdnVocabularyManager();
 		urnSyntaxe.append(Intern.xml_tag_start);
 		urnSyntaxe.append(type.toString());
 		urnSyntaxe.append(Intern.xml_tag_end);
@@ -433,7 +434,7 @@ public class DataDomain {
 			urnSyntaxe.append(Global.DBL_PT);
 			String pdvCodeobject;
 			if (list1 != null)
-				pdvCodeobject = VocabLists.getVocabMatch(list1, list2, code);
+				pdvCodeobject = sdnVocabMgr.getVocabMatch(list1, list2, code);
 			else
 				pdvCodeobject = code;
 			if (pdvCodeobject==null) {
@@ -450,7 +451,7 @@ public class DataDomain {
 				pdvCodeunits = SdnVocabularyManager.P06_XXXX;
 			}
 			else if (list1 != null ){
-				pdvCodeunits = VocabLists.getVocabMatch(list1, list2, code);
+				pdvCodeunits = sdnVocabMgr.getVocabMatch(list1, list2, code);
 			}
 			else{
 				pdvCodeunits = code;
@@ -466,7 +467,7 @@ public class DataDomain {
 			urnSyntaxe.append(Global.DBL_PT);
 			String pdvCodefallrate;
 			if (list1 != null)
-				pdvCodefallrate = VocabLists.getVocabMatch(list1, list2, code);
+				pdvCodefallrate = sdnVocabMgr.getVocabMatch(list1, list2, code);
 			else
 				pdvCodefallrate = code;
 			if (pdvCodefallrate==null) {
@@ -480,7 +481,7 @@ public class DataDomain {
 			urnSyntaxe.append(Global.DBL_PT);
 			String pdvCodeinstrument;
 			if (list1 != null)
-				pdvCodeinstrument = VocabLists.getVocabMatch(list1, list2, code);
+				pdvCodeinstrument = sdnVocabMgr.getVocabMatch(list1, list2, code);
 			else
 				pdvCodeinstrument = code;
 			if (pdvCodeinstrument==null) {

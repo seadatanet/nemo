@@ -7,21 +7,19 @@ import java.util.List;
 import org.apache.logging.log4j.Logger;
 
 import fr.ifremer.nemo.Nemo;
-import fr.ifremer.nemo.config.VocabLists;
 import fr.ifremer.nemo.output.GenerationException;
 import fr.ifremer.nemo.ui.edit.data.TypeData;
 import fr.ifremer.nemo.util.BODCResult.BODC_RES_STATUS;
 import fr.ifremer.nemo.util.Global.DataListTypeEnum;
+import fr.ifremer.sismer_tools.externalresources.ExternalResourcesManager;
 import fr.ifremer.sismer_tools.seadatanet.SdnVocabularyManager;
 
 public class BodcChecker {
 	private static Logger logger;
 	private static BodcChecker bodcChecker;
-	private final SdnVocabularyManager sdnMgr;
 
 	private BodcChecker(){
 		logger = Nemo.getInstance().getLogger();
-		sdnMgr = new SdnVocabularyManager(VocabLists.getCf());
 	}
 	public static BodcChecker getInstance(){
 		if (bodcChecker == null ){
@@ -57,6 +55,7 @@ public class BodcChecker {
 		String errorMsg="";
 		boolean ok=true;
 		try {
+			SdnVocabularyManager sdnMgr = ExternalResourcesManager.getInstance().getSdnVocabularyManager();
 			String replacement = sdnMgr.getReplacedByCode(typeData.getEntryKey(), SdnVocabularyManager.LIST_P09);
 			if (replacement != null){
 				String replacementLabel= sdnMgr.getLabel(replacement, SdnVocabularyManager.LIST_P09);
@@ -113,6 +112,7 @@ public class BodcChecker {
 		String errorMsg="";
 		boolean ok=true;
 		try {
+			SdnVocabularyManager sdnMgr = ExternalResourcesManager.getInstance().getSdnVocabularyManager();
 			String replacement = sdnMgr.getReplacedByCode(typeData.getEntryKey(), SdnVocabularyManager.LIST_P02);
 			if (replacement != null){
 				String replacementLabel= sdnMgr.getLabel(replacement, SdnVocabularyManager.LIST_P02);
@@ -160,6 +160,7 @@ public class BodcChecker {
 //		TypeData typeDataNew = new TypeData(typeData);
 
 		try {
+			SdnVocabularyManager sdnMgr = ExternalResourcesManager.getInstance().getSdnVocabularyManager();
 			String replacement = sdnMgr.getReplacedByCode(typeData.getEntryKeyP011(), SdnVocabularyManager.LIST_P01);
 			if (replacement != null){
 				String replacementLabel= sdnMgr.getLabel( replacement, SdnVocabularyManager.LIST_P01);
@@ -215,6 +216,7 @@ public class BodcChecker {
 			p06Code=typeData.getUniteCode();
 			String replacement;
 			try {
+				SdnVocabularyManager sdnMgr = ExternalResourcesManager.getInstance().getSdnVocabularyManager();
 				replacement = sdnMgr.getReplacedByCode(p06Code, SdnVocabularyManager.LIST_P06);
 				if (replacement != null){
 					String replacementLabel= sdnMgr.getP06UnitLabel(replacement);
@@ -257,6 +259,7 @@ public class BodcChecker {
 		}
 		else if (dataListTypeEnum==DataListTypeEnum.P011_VIA_P091){
 			try {
+				SdnVocabularyManager sdnMgr = ExternalResourcesManager.getInstance().getSdnVocabularyManager();
 				p06Code= sdnMgr.getBestVocabMatchCode(
 						SdnVocabularyManager.LIST_P06, 
 						SdnVocabularyManager.LIST_P09, 
@@ -324,6 +327,7 @@ public class BodcChecker {
 		boolean ok=true;
 		res= new BODCResult(typeData, BODC_RES_STATUS.OK);
 		try {
+			SdnVocabularyManager sdnMgr = ExternalResourcesManager.getInstance().getSdnVocabularyManager();
 			String replacement = sdnMgr.getReplacedByCode(typeData.getInstrumentCode(), SdnVocabularyManager.LIST_L22);
 			if (replacement != null){
 				String replacementLabel= sdnMgr.getLabel(replacement, SdnVocabularyManager.LIST_L22);
@@ -374,6 +378,7 @@ public class BodcChecker {
 		String errorMsg="";
 		boolean ok=true;
 		try {
+			SdnVocabularyManager sdnMgr = ExternalResourcesManager.getInstance().getSdnVocabularyManager();
 			String replacement = sdnMgr.getReplacedByCode(fallrateCode, SdnVocabularyManager.LIST_L33);
 			if (replacement != null){
 				String replacementLabel= sdnMgr.getLabel(replacement, SdnVocabularyManager.LIST_L33);
@@ -430,7 +435,7 @@ public class BodcChecker {
 		boolean ok = true;
 
 		try {
-
+			SdnVocabularyManager sdnMgr = ExternalResourcesManager.getInstance().getSdnVocabularyManager();
 			// case of a deprecated replacement
 			String replacement = sdnMgr.getReplacedByCode(shipCode, SdnVocabularyManager.LIST_C17);
 			if (replacement != null) {
@@ -477,6 +482,7 @@ public class BodcChecker {
 		String errorMsg="";
 		boolean ok=true;
 		try {
+			SdnVocabularyManager sdnMgr = ExternalResourcesManager.getInstance().getSdnVocabularyManager();
 			String replacement = sdnMgr.getReplacedByCode(regionCode, SdnVocabularyManager.LIST_C19);
 			if (replacement != null){
 				String replacementLabel= sdnMgr.getLabel(replacement, SdnVocabularyManager.LIST_C19);
@@ -524,6 +530,7 @@ public class BodcChecker {
 		String errorMsg="";
 		boolean ok=true;
 		try {
+			SdnVocabularyManager sdnMgr = ExternalResourcesManager.getInstance().getSdnVocabularyManager();
 			String replacement = sdnMgr.getReplacedByCode(countryCode, SdnVocabularyManager.LIST_C18);
 			if (replacement != null){
 				String replacementLabel= sdnMgr.getLabel(replacement, SdnVocabularyManager.LIST_C18);
@@ -580,6 +587,7 @@ public class BodcChecker {
 		String errorMsg="";
 		boolean ok=true;
 		try {
+			SdnVocabularyManager sdnMgr = ExternalResourcesManager.getInstance().getSdnVocabularyManager();
 			String replacement = sdnMgr.getReplacedByCode(centerCode, SdnVocabularyManager.LIST_L30);
 			if (replacement != null){
 				String replacementLabel= sdnMgr.getLabel(replacement, SdnVocabularyManager.LIST_L30);
@@ -634,6 +642,7 @@ public class BodcChecker {
 //				replacement="H09";
 //				
 //			}else{
+			SdnVocabularyManager sdnMgr = ExternalResourcesManager.getInstance().getSdnVocabularyManager();
 				replacement = sdnMgr.getReplacedByCode(code, SdnVocabularyManager.LIST_C77);
 //			}
 			if (replacement != null){
@@ -661,8 +670,5 @@ public class BodcChecker {
 		}
 
 		return res;
-	}
-	public SdnVocabularyManager getSdnMgr() {
-		return sdnMgr;
 	}
 }

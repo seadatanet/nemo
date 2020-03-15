@@ -36,17 +36,19 @@ import fr.ifremer.nautilus.metadata.NautilusSurveyWSServiceLocator;
 import fr.ifremer.nautilus.metadata.WSCollectedData;
 import fr.ifremer.nautilus.metadata.WSSurvey;
 import fr.ifremer.nemo.Nemo;
-import fr.ifremer.nemo.config.VocabLists;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.util.Formatter;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Global.E_Availability;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
+import fr.ifremer.sismer_tools.externalresources.ExternalResourcesManager;
+import fr.ifremer.sismer_tools.seadatanet.SdnVocabularyManager;
 import fr.ifremer.util.iso.version.IsoAnalyser;
 import fr.ifremer.util.iso.version.IsoAnalyser.ISO_TYPE;
 import sdn.vocabulary.interfaces.ICollection;
 import sdn.vocabulary.interfaces.IElement;
+import sdn.vocabulary.interfaces.VocabularyException;
 
 /**
  * Class CruiseModel.java Description: Informations descrivant l'onglet Cuise
@@ -418,11 +420,13 @@ public class CruiseModel extends AbstractModel {
 	 * 
 	 * @param region Name C16
 	 * @return region Name C19
+	 * @throws VocabularyException 
 	 */
 
 	// FAE 16868
-	public static String getTranscodeRegionName(String regionNameC16) {
-		ICollection regionsRectangles = VocabLists.getVocabList(Intern.list_regionsRectangles);
+	public static String getTranscodeRegionName(String regionNameC16) throws VocabularyException {
+		SdnVocabularyManager vocabMgr = ExternalResourcesManager.getInstance().getSdnVocabularyManager();
+		ICollection regionsRectangles = vocabMgr.getVocabList(Intern.list_regionsRectangles);
 		String regionsKey = null;
 		String RegionName = Global.EMPTY_STRING;
 		for (IElement elem : regionsRectangles.getElements()) {
@@ -432,7 +436,7 @@ public class CruiseModel extends AbstractModel {
 			}
 		}
 		if (regionsKey != null) {
-			List<IElement> c19List = VocabLists.getVocabMatchs(Intern.list_regionsRectangles, Intern.list_regionsPolygones, regionsKey);
+			List<IElement> c19List =vocabMgr.getVocabMatchs(Intern.list_regionsPolygones, Intern.list_regionsRectangles, regionsKey);//order ok
 			if (!c19List.isEmpty()) {
 				RegionName = c19List.get(0).getLabel();
 			}

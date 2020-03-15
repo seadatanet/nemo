@@ -480,9 +480,9 @@ public class Messages {
 	public static String INTERRUPTED;
 	public static String ERROR;
 	public static String WARNING;
-	public static String downloadBODCTry;
-	public static String downloadBODCSuccess;
-	public static String downloadBODCError;
+//	public static String downloadBODCTry;
+//	public static String downloadBODCSuccess;
+//	public static String downloadBODCError;
 
 	// MAPPING
 	public static String ImportMappingAction_1;

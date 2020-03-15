@@ -10,7 +10,6 @@ import java.util.Date;
 
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.config.ManageLists;
-import fr.ifremer.nemo.config.VocabLists;
 import fr.ifremer.nemo.ui.RulesManager;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.ui.edit.FormValidator;
@@ -25,6 +24,7 @@ import fr.ifremer.nemo.util.Global.E_TypeConversion;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.util.format.DateTimeFormat;
 import fr.ifremer.nemo.ws.WSDataType;
+import fr.ifremer.sismer_tools.externalresources.ExternalResourcesManager;
 
 /**
  * Description: validation de l'onget cruise
@@ -134,7 +134,7 @@ public class CruiseFormValidator extends FormValidator {
 					ok=false;
 				}else {
 					try {
-						boolean exist = VocabLists.getCSRListManager().doesCodeExist(Nemo.getInstance().getConfig().getIdEdmoRespCsr(), localCsrRef);
+						boolean exist = ExternalResourcesManager.getInstance().getCsrListManager().doesCodeExist(Nemo.getInstance().getConfig().getIdEdmoRespCsr(), localCsrRef);
 						if (!exist){
 							warningCruise+=MessageFormat.format(Messages.edit_cruise_cruiseLocalCsrId_doesNotExist , localCsrRef, Nemo.getInstance().getConfig().getIdEdmoRespCsr())+Global.RN;
 						}
@@ -146,7 +146,7 @@ public class CruiseFormValidator extends FormValidator {
 			
 			else if (!bshCsrRef.trim().isEmpty()){
 				try {
-					boolean exist = VocabLists.getCSRListManager().doesBshCodeExist( bshCsrRef);
+					boolean exist = ExternalResourcesManager.getInstance().getCsrListManager().doesBshCodeExist( bshCsrRef);
 					if (!exist){
 						Utils.messageErreurAppend(MessageFormat.format(Messages.edit_cruise_cruiseBshCsrId_doesNotExist , bshCsrRef));
 						ok=false;

@@ -1,7 +1,7 @@
 package fr.ifremer.nemo.ui;
 
-import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.net.ConnectException;
 import java.net.MalformedURLException;
 import java.rmi.RemoteException;
 
@@ -12,14 +12,15 @@ import org.eclipse.jface.operation.IRunnableWithProgress;
 
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.config.ManageLists;
+import fr.ifremer.nemo.config.NemoExternalResourcesManager;
 import fr.ifremer.nemo.config.NemoLists;
 import fr.ifremer.nemo.config.UpdateStatus.EtatUpdate;
 import fr.ifremer.nemo.config.UpdateStatusList;
-import fr.ifremer.nemo.config.VocabLists;
 import fr.ifremer.nemo.input.CruiseModel;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.ws.NemoWS;
+import fr.ifremer.sismer_tools.externalresources.ExternalResourcesManager;
 
 public class SWTProcessWS implements IRunnableWithProgress {
 
@@ -38,6 +39,42 @@ public class SWTProcessWS implements IRunnableWithProgress {
 			// mise e jour fichiers constantes
 			ManageLists.resetUpdatedLists();
 
+			
+			
+			// update CSR
+			if (!monitor.isCanceled()) {
+				try {
+					if (!ExternalResourcesManager.getInstance().getCsrListManager().isFileUpToDate()) {
+						ExternalResourcesManager.getInstance().getCsrListManager().reload();
+					}
+				} catch (ConnectException e) {
+//					Utils.messageErreur("ERROR: CSR check failed. Please check your internet connection."); 
+				} catch (Exception e) {
+//					throw new InterruptedException(e.getMessage());
+//					Utils.messageErreur("ERROR: CSR check failed. " +e.getMessage()); 
+				}
+			}
+
+			if (!monitor.isCanceled()) {
+				monitor.subTask(Messages.connect_vocab);
+
+				if (!monitor.isCanceled()) {
+					monitor.subTask(Messages.getString(Intern.id_lists));
+					NemoExternalResourcesManager.updateVocabLists(monitor);
+				}
+
+//				if (!monitor.isCanceled()) {
+//					monitor.subTask(Messages.getString(Intern.id_maps));
+//					VocabLists.updateMapLists(monitor);
+//				}
+
+				ManageLists.updateDataTypes();
+			}
+
+			if (!monitor.isCanceled()) {
+				monitor.subTask(Messages.connect_edmo);
+				NemoLists.updateEdmo(monitor);
+			}
 			if (!monitor.isCanceled()) {
 				// appel au WebService NEMO
 				monitor.subTask(Messages.connect_nemo);
@@ -59,46 +96,8 @@ public class SWTProcessWS implements IRunnableWithProgress {
 					throw new InterruptedException();
 				}
 			}
-			
-			// update CSR
-			if (!monitor.isCanceled()) {
-				try {
-					if (!VocabLists.getCSRListManager().isFileUpToDate()) {
-						VocabLists.getCSRListManager().update();
-					}
-				} catch (MalformedURLException e) {
-
-					throw new InterruptedException(e.getMessage());
-				} catch (IOException e) {
-
-					throw new InterruptedException(e.getMessage());
-				}
-			}
-
-			if (!monitor.isCanceled()) {
-				monitor.subTask(Messages.connect_vocab);
-				// VocabSoapBindingStub vocabService = NemoLists.connectVocab();
-
-				if (!monitor.isCanceled()) {
-					monitor.subTask(Messages.getString(Intern.id_lists));
-					VocabLists.updateVocabLists(monitor);
-				}
-
-				if (!monitor.isCanceled()) {
-					monitor.subTask(Messages.getString(Intern.id_maps));
-					VocabLists.updateMapLists(monitor);
-				}
-
-				ManageLists.updateDataTypes();
-			}
-
-			if (!monitor.isCanceled()) {
-				monitor.subTask(Messages.connect_edmo);
-				NemoLists.updateEdmo(monitor);
-			}
-
 			Nemo.getInstance().getConfig().save();
-
+			Nemo.getInstance().getLogger().info("updates ended");
 			if (monitor.isCanceled()) {
 				throw new InterruptedException();
 			}

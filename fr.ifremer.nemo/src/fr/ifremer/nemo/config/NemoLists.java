@@ -27,6 +27,7 @@ import fr.ifremer.nemo.ws.NemoWS;
 import fr.ifremer.nemo.ws.NemoWSServiceLocator;
 import fr.ifremer.nemo.ws.WSParameter;
 import fr.ifremer.nemo.ws.WSSurveyDescription;
+import fr.ifremer.sismer_tools.externalresources.ExternalResourcesManager;
 import fr.ifremer.sismer_tools.seadatanet.SdnVocabularyManager;
 
 /**
@@ -580,7 +581,7 @@ public class NemoLists implements Cloneable {
 					for (int i = 0; i < parameters.length; i++) {
 						WSParameter param = parameters[i];
 						// 25794
-						SdnVocabularyManager sdnMgr = new SdnVocabularyManager(VocabLists.getCf());
+						SdnVocabularyManager sdnMgr = ExternalResourcesManager.getInstance().getSdnVocabularyManager();
 						String p06 = sdnMgr.getBestVocabMatchCode(
 								SdnVocabularyManager.LIST_P06,
 								SdnVocabularyManager.LIST_P09,

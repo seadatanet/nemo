@@ -7,9 +7,7 @@ import java.util.List;
 import java.util.Map.Entry;
 
 import fr.ifremer.nemo.Nemo;
-import fr.ifremer.nemo.config.VocabLists;
 import fr.ifremer.nemo.ui.RulesManager;
-import fr.ifremer.nemo.util.BodcChecker;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.seadatanet.odv.input.model.Parameter.ParameterType;
@@ -21,6 +19,7 @@ import fr.ifremer.seadatanet.odv.input.validator.OdvSpecificValidatorCyto;
 import fr.ifremer.seadatanet.odv.input.validator.OdvSpecificValidatorMicro;
 import fr.ifremer.seadatanet.odv.input.validator.SpecificParameter;
 import fr.ifremer.sismer_tools.SismerToolsException;
+import fr.ifremer.sismer_tools.externalresources.ExternalResourcesManager;
 import fr.ifremer.sismer_tools.resources.ODVConstants.E_Variant;
 import fr.ifremer.sismer_tools.seadatanet.SdnVocabularyManager;
 
@@ -143,7 +142,7 @@ public class VariantsSpecificsParameters {
 	private TypeData specificParam2TypeData(SpecificParameter p) throws Exception {
 		TypeData td = new TypeData();
 
-		String p02Code = VocabLists.getVocabMatch(
+		String p02Code = ExternalResourcesManager.getInstance().getSdnVocabularyManager().getVocabMatch(
 				Intern.list_P011, Intern.list_P021,
 				p.getCodeP01()
 				);
@@ -170,13 +169,13 @@ public class VariantsSpecificsParameters {
 			td.setFormat(Global.DATETIME_CHOICE_ISO);
 		}
 		try {
-			String labelP01= BodcChecker.getInstance().getSdnMgr().getP01Label(p.getCodeP01());
+			String labelP01=  ExternalResourcesManager.getInstance().getSdnVocabularyManager().getP01Label(p.getCodeP01());
 			td.setEntryTermP011(labelP01);
 			// we do not use unit labels as specified in the documentations, because Nemo fixes them if they are not official P06 labels
 			// we use directly the P06 labels
 			String labelP06="";
 			if (!td.isText()) {
-				labelP06= BodcChecker.getInstance().getSdnMgr().getP06UnitLabel(p.getCodeP06());
+				labelP06= ExternalResourcesManager.getInstance().getSdnVocabularyManager().getP06UnitLabel(p.getCodeP06());
 			}
 			td.setP06Label(labelP06);
 		} catch (SismerToolsException e) {

@@ -18,13 +18,16 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.swt.widgets.TableItem;
 
-import sdn.vocabulary.interfaces.IElement;
-import fr.ifremer.nemo.config.VocabLists;
+import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.ui.edit.data.TypeData;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Global.DataListTypeEnum;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
+import fr.ifremer.sismer_tools.externalresources.ExternalResourcesManager;
+import fr.ifremer.sismer_tools.seadatanet.SdnVocabularyManager;
+import sdn.vocabulary.interfaces.IElement;
+import sdn.vocabulary.interfaces.VocabularyException;
 
 /**
  * Description: TODO
@@ -96,23 +99,29 @@ public class SubParameterFilteredTable extends AbstractFilteredTable
      */
     private void createDataList_P011_via_P021()
     {
-        List<IElement> listeP021_P011 =
-            VocabLists.getVocabMatchs(Intern.list_P021, Intern.list_P011, _typeParameter.getEntryKey());
-
-        for (IElement record : listeP021_P011)
-        {
-            TypeData newElement = new TypeData(_typeParameter);
-
-            newElement.setIsP011(true);
-
-            newElement.setEntryKeyP011(record.getKey());
+    	SdnVocabularyManager sdnVocabsMgr = ExternalResourcesManager.getInstance().getSdnVocabularyManager();
+    	List<IElement> listeP021_P011;
+    	try {
+    		listeP021_P011 = sdnVocabsMgr.getVocabMatchs( Intern.list_P011, Intern.list_P021, _typeParameter.getEntryKey()); //order ok
 
 
-            newElement.setEntryTermP011(record.getLabel());
+    		for (IElement record : listeP021_P011)
+    		{
+    			TypeData newElement = new TypeData(_typeParameter);
 
-            _datas.add(newElement);
+    			newElement.setIsP011(true);
 
-        }
+    			newElement.setEntryKeyP011(record.getKey());
+
+
+    			newElement.setEntryTermP011(record.getLabel());
+
+    			_datas.add(newElement);
+
+    		}
+    	} catch (VocabularyException e) {
+    		Nemo.getInstance().getLogger().error(e.getMessage());    	
+    	}
     }
     /**
      * creation de la liste de parametres P011 correspondant au paramètre P091 choisi dans le panneau précedent
@@ -120,32 +129,38 @@ public class SubParameterFilteredTable extends AbstractFilteredTable
      */
     private void createDataList_P011_via_P091()
     {
-        List<IElement> listeCompleteP091_P021_P011 = new ArrayList<IElement>();
-        List<IElement> listeP091_P021 = VocabLists.getVocabMatchs(Intern.list_P091, Intern.list_P021, _typeParameter.getEntryKey());
+    	SdnVocabularyManager sdnVocabsMgr = ExternalResourcesManager.getInstance().getSdnVocabularyManager();
+    	List<IElement> listeCompleteP091_P021_P011 = new ArrayList<IElement>();
+    	List<IElement> listeP091_P021;
+    	try {
+    		listeP091_P021 = sdnVocabsMgr.getVocabMatchs( Intern.list_P021, Intern.list_P091,_typeParameter.getEntryKey());//order ok
 
-        for (IElement liste : listeP091_P021)
-        {
-            listeCompleteP091_P021_P011.addAll(VocabLists.getVocabMatchs(Intern.list_P021, 
-                Intern.list_P011, liste.getKey())); 
-        }
 
-        for (IElement code : listeCompleteP091_P021_P011)
-        {
-            TypeData newElement = new TypeData(_typeParameter);
+    		for (IElement liste : listeP091_P021)
+    		{
+    			listeCompleteP091_P021_P011.addAll(sdnVocabsMgr.getVocabMatchs(
+    					Intern.list_P011, Intern.list_P021, liste.getKey())); //order ok
+    		}
 
-            
+    		for (IElement code : listeCompleteP091_P021_P011)
+    		{
+    			TypeData newElement = new TypeData(_typeParameter);
 
-            newElement.setIsP011(true);
 
-            newElement.setEntryKeyP011(code.getKey());
 
-            newElement.setEntryTermP011(code.getLabel());
+    			newElement.setIsP011(true);
 
-            _datas.add(newElement);
+    			newElement.setEntryKeyP011(code.getKey());
 
-        }
+    			newElement.setEntryTermP011(code.getLabel());
 
-       
+    			_datas.add(newElement);
+
+    		}
+    	} catch (VocabularyException e) {
+    		Nemo.getInstance().getLogger().error(e.getMessage());    	
+    	}
+
     }
     
     /**

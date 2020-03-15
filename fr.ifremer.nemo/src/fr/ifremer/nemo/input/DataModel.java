@@ -12,7 +12,6 @@ import com.ago.xml.SAXConsumer;
 import com.ago.xml.XMLOutputWriter;
 
 import fr.ifremer.nemo.Nemo;
-import fr.ifremer.nemo.config.VocabLists;
 import fr.ifremer.nemo.input.parameters.ParameterModel;
 import fr.ifremer.nemo.input.parameters.VerticalParametersList;
 import fr.ifremer.nemo.ui.RulesManager;
@@ -20,6 +19,8 @@ import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Global.DataListTypeEnum;
 import fr.ifremer.nemo.util.Global.E_MesureType;
 import fr.ifremer.nemo.util.Intern;
+import fr.ifremer.sismer_tools.externalresources.ExternalResourcesManager;
+import fr.ifremer.sismer_tools.seadatanet.SdnVocabularyManager;
 
 /**
  * Class DataModel.java
@@ -368,7 +369,7 @@ public class DataModel extends AbstractModel {
 		RulesManager rm = RulesManager.getInstance();
 
 		boolean isPrimaryParameter = true; // the first parameter of the list.
-
+		SdnVocabularyManager vocabMgr = ExternalResourcesManager.getInstance().getSdnVocabularyManager();
 		for (ParameterModel parameterModel : _parameterModels) {
 
 			String currentP011 = parameterModel.getParameter().getCodeP011();
@@ -381,7 +382,7 @@ public class DataModel extends AbstractModel {
 					parameterModel.getParameter().setP011ForPrimaryParameter();
 				} else {
 
-					currentP011 = VocabLists.getVocabMatch(Intern.list_P091, Intern.list_P011, parameterModel.getParameter().getCode());
+					currentP011 = vocabMgr.getVocabMatch(Intern.list_P091, Intern.list_P011, parameterModel.getParameter().getCode());
 					parameterModel.getParameter().setCodeP011(currentP011);
 				}
 			}

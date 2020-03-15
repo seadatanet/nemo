@@ -20,7 +20,6 @@ import java.util.List;
 import org.apache.logging.log4j.Logger;
 
 import fr.ifremer.nemo.config.ManageLists;
-import fr.ifremer.nemo.config.VocabLists;
 import fr.ifremer.nemo.domain.ConversionDomain;
 import fr.ifremer.nemo.domain.CruiseDomain;
 import fr.ifremer.nemo.domain.InputDomain;
@@ -46,6 +45,7 @@ import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.util.Preformat;
 import fr.ifremer.nemo.ws.WSDataType;
 import fr.ifremer.sismer_tools.SismerToolsException;
+import fr.ifremer.sismer_tools.externalresources.ExternalResourcesManager;
 import fr.ifremer.sismer_tools.resources.ODVConstants.E_Variant;
 import fr.ifremer.sismer_tools.seadatanet.SdnVocabularyManager;
 
@@ -321,7 +321,8 @@ public class NemoShell {
 				ok = false;
 			} else {
 				try {
-					boolean exist = VocabLists.getCSRListManager().doesCodeExist(Nemo.getInstance().getConfig().getIdEdmoRespCsr(), localCsrRef);
+					
+					boolean exist = ExternalResourcesManager.getInstance().getCsrListManager().doesCodeExist(Nemo.getInstance().getConfig().getIdEdmoRespCsr(), localCsrRef);
 					if (!exist) {
 						logger.warn(MessageFormat.format(Messages.edit_cruise_cruiseLocalCsrId_doesNotExist, localCsrRef, Nemo.getInstance().getConfig().getIdEdmoRespCsr()) + Global.RN);
 					}
@@ -331,7 +332,7 @@ public class NemoShell {
 			}
 		} else if (!bshCsrRef.trim().isEmpty()) {
 			try {
-				boolean exist = VocabLists.getCSRListManager().doesBshCodeExist(bshCsrRef);
+				boolean exist = ExternalResourcesManager.getInstance().getCsrListManager().doesBshCodeExist(bshCsrRef);
 				if (!exist) {
 					logger.error(MessageFormat.format(Messages.edit_cruise_cruiseBshCsrId_doesNotExist, bshCsrRef));
 					ok = false;
@@ -487,7 +488,7 @@ public class NemoShell {
 			if (typeCourant.isText()) { //46457
 				typeCourant.setUniteCode(SdnVocabularyManager.P06_XXXX);
 				try {
-					typeCourant.setUnite( BodcChecker.getInstance().getSdnMgr().getLabel(SdnVocabularyManager.P06_XXXX, SdnVocabularyManager.LIST_P06));
+					typeCourant.setUnite( ExternalResourcesManager.getInstance().getSdnVocabularyManager().getLabel(SdnVocabularyManager.P06_XXXX, SdnVocabularyManager.LIST_P06));
 				} catch (SismerToolsException e) {
 					logger.warn(e.getMessage());
 				}

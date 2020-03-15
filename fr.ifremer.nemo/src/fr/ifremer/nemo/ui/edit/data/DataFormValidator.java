@@ -268,8 +268,12 @@ public class DataFormValidator extends FormValidator {
 
 				if (RulesManager.getInstance().isTrajectory()) {
 					String sensorDepth = Nemo.getInstance().getDomain().getStation().getModel().getProperty(Intern.S_SENSORDEPTH).getUserValue();
-					if (sensorDepth.isEmpty() && rm.getMyVerticalParametersList().getP_depthBSSurf().isEmpty()) {
+					if ( rm.getMyVerticalParametersList().getP_depthBSSurf().isEmpty()
+							&& sensorDepth.isEmpty() 
+							&& !Nemo.getInstance().getDomain().getStation().getModel().getProperty(Intern.S_SENSORDEPTH).isInData()
+							) {
 						Utils.messageErreurAppend(Messages.error_data_missingDepthForTrajectory); 
+						ok=false;
 					}
 				}
 				
@@ -299,6 +303,7 @@ public class DataFormValidator extends FormValidator {
 			Nemo.getInstance().getViewMain().tabData.setText(Messages.onglet_data_error);
 			save();
 			Nemo.getInstance().getViewMain().setEtape(3);
+			editConversionForm.setWarningData("data tab not validated");// TODO message
 		}
 
 

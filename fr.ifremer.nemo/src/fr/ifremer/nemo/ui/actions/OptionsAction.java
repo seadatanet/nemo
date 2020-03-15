@@ -41,7 +41,6 @@ import fr.ifremer.nemo.config.Configuration;
 import fr.ifremer.nemo.config.FlagTable;
 import fr.ifremer.nemo.config.NemoLists;
 import fr.ifremer.nemo.config.Proxy;
-import fr.ifremer.nemo.config.VocabLists;
 import fr.ifremer.nemo.domain.CruiseDomain;
 import fr.ifremer.nemo.domain.InputDomain;
 import fr.ifremer.nemo.domain.StationDomain;
@@ -57,7 +56,9 @@ import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Global.E_TypeConversion;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
+import fr.ifremer.sismer_tools.externalresources.ExternalResourcesManager;
 import sdn.vocabulary.interfaces.IElement;
+import sdn.vocabulary.interfaces.VocabularyException;
 
 public class OptionsAction extends Action implements ISelectionListener, ActionFactory.IWorkbenchAction {
 
@@ -143,7 +144,7 @@ public class OptionsAction extends Action implements ISelectionListener, ActionF
 
 	@Override
 	public void run() {
-		long start = System.currentTimeMillis();
+//		long start = System.currentTimeMillis();
 
 		// configuration
 		Configuration config = Nemo.getInstance().getConfig();
@@ -173,13 +174,17 @@ public class OptionsAction extends Action implements ISelectionListener, ActionF
 		shelloptions.open();
 
 		// chargement des options
-		alimenteCombos();
+		try {
+			alimenteCombos();
+		} catch (VocabularyException e) {
+			Nemo.getInstance().getLogger().error(e.getMessage());
+		}
 
 		remplissageOptions();
 
-		long end = System.currentTimeMillis();
+//		long end = System.currentTimeMillis();
 
-		System.out.println("Temps : run() = " + (end - start) + "ms");
+//		System.out.println("Temps : run() = " + (end - start) + "ms");
 	}
 	
 	private void initFlagsTmpChoices(){
@@ -218,12 +223,12 @@ public class OptionsAction extends Action implements ISelectionListener, ActionF
 		}
 	}
 
-	private void alimenteCombos() {
+	private void alimenteCombos() throws VocabularyException {
 
 		// long start = System.currentTimeMillis();
 
 		// CENTRES DE DONNEES
-		Collection<IElement> centres = VocabLists.getVocabList(Intern.list_dataCenter).getElements();
+		Collection<IElement> centres = ExternalResourcesManager.getInstance().getSdnVocabularyManager().getVocabList(Intern.list_dataCenter).getElements();
 		TreeMap<String, String> treeCentre = new TreeMap<String, String>();
 		for (IElement record : centres) {
 			treeCentre.put(record.getKey(), record.getLabel());
@@ -238,7 +243,7 @@ public class OptionsAction extends Action implements ISelectionListener, ActionF
 
 		// CDI
 		// FAE 58 CDL 09/04/08
-		Collection<IElement> records = VocabLists.getVocabList(Intern.list_methodCDI).getElements();
+		Collection<IElement> records = ExternalResourcesManager.getInstance().getSdnVocabularyManager().getVocabList(Intern.list_methodCDI).getElements();
 		TreeSet<String> champsMethodesCdi = new TreeSet<String>();
 		for (IElement record : records) {
 			String champCombo = record.getKey() + Global.SEP + record.getLabel();
@@ -248,7 +253,7 @@ public class OptionsAction extends Action implements ISelectionListener, ActionF
 			comboMethodeCdi.add(champ);
 		}
 
-		records = VocabLists.getVocabList(Intern.list_typePlatform).getElements();
+		records = ExternalResourcesManager.getInstance().getSdnVocabularyManager().getVocabList(Intern.list_typePlatform).getElements();
 		champsMethodesCdi = new TreeSet<String>();
 		for (IElement record : records) {
 			String champCombo = record.getKey() + Global.SEP + record.getLabel();
@@ -257,7 +262,7 @@ public class OptionsAction extends Action implements ISelectionListener, ActionF
 		for (String champ : champsMethodesCdi)
 			comboTypePlateForme.add(champ);
 
-		records = VocabLists.getVocabList(Intern.list_accesDonnees).getElements();
+		records = ExternalResourcesManager.getInstance().getSdnVocabularyManager().getVocabList(Intern.list_accesDonnees).getElements();
 		champsMethodesCdi = new TreeSet<String>();
 		for (IElement record : records) {
 			String champCombo = record.getKey() + Global.SEP + record.getLabel();
