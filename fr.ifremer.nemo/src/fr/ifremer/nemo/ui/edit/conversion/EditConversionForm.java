@@ -118,17 +118,18 @@ public class EditConversionForm extends EditForm {
 		// FAE 1143 : déactivation MEDATLAS
 		// adaptation du code suite deplacement conversion dans 1er onglet (FAE
 		// 5683)
-		if (RulesManager.getInstance()
-				.isConversionToMedatlas()) {
-			boolean medOK = true;
-			if (!warningFile.equals(Global.EMPTY_STRING)
-					|| !warningCampagne.equals(Global.EMPTY_STRING)
-					|| !warningStation.equals(Global.EMPTY_STRING)
-					|| !warningData.equals(Global.EMPTY_STRING)) {
-				medOK = false;
-			}
-			buttonConversion.setEnabled(medOK);
-		}
+//		if (RulesManager.getInstance()
+//				.isConversionToMedatlas()) {
+//			boolean medOK = true;
+//			if (!warningFile.equals(Global.EMPTY_STRING)
+//					|| !warningCampagne.equals(Global.EMPTY_STRING)
+//					|| !warningStation.equals(Global.EMPTY_STRING)
+//					|| !warningData.equals(Global.EMPTY_STRING)) {
+//				medOK = false;
+//			}
+//			buttonConversion.setEnabled(medOK);
+//		}
+		buttonConversion.setEnabled(Nemo.getInstance().getViewMain().getEtape()==4);
 		setLoaded(true);
 		Nemo.getInstance().getViewMain().setAffiche(4);
 
