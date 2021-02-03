@@ -30,6 +30,7 @@ import fr.ifremer.nemo.input.parameters.ParameterModel;
 import fr.ifremer.nemo.mapping.Mapping;
 import fr.ifremer.nemo.mapping.MappingTable;
 import fr.ifremer.nemo.output.CDIResumeWriter;
+import fr.ifremer.nemo.output.GenerationException;
 import fr.ifremer.nemo.output.NemoWriter;
 import fr.ifremer.nemo.output.NemoWriterFactory;
 import fr.ifremer.nemo.ui.Utils;
@@ -40,6 +41,7 @@ import fr.ifremer.nemo.util.BodcChecker;
 import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Global.DataListTypeEnum;
+import fr.ifremer.nemo.util.Global.E_ProcessType;
 import fr.ifremer.nemo.util.Global.E_TypeConversion;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.util.Preformat;
@@ -167,13 +169,14 @@ public class NemoShell {
 
 			if (strDefault.equals(Global.EMPTY_STRING))
 				strDefault = inputDomain.getCruise().getModel().getName();
+			
 			// cruise ref is in the model, or in the directory name in case of files group by cruise
-//			if (odvConv != E_TypeConversion.MEDATLAS){
-//				if (strDefault.isEmpty()){
-//					throw new GenerationException(Messages.error_missing_cruise_reference);
-//				}
-//				inputDomain.getCruise().getModel().setReference(strDefault);
-//			}
+			if (odvConv != E_TypeConversion.MEDATLAS){
+				if (strDefault.isEmpty() && inputDomain.getMedia().getModel().getProcessType() != E_ProcessType.COLLECTION_DIR){
+					throw new GenerationException(Messages.error_missing_cruise_reference);
+				}
+				inputDomain.getCruise().getModel().setReference(strDefault);
+			}
 			
 			// Cruise name.
 			if (!cruiseName.equals(Global.EMPTY_STRING)) {
