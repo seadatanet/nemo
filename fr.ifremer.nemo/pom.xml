@@ -6,14 +6,14 @@
 	<parent>
 		<groupId>fr.ifremer.nemo</groupId>
 		<artifactId>fr.ifremer.nemo.parent</artifactId>
-		<version>1.7.1-SNAPSHOT</version>
+		<version>1.7.1</version>
 		<relativePath>../fr.ifremer.nemo.parent/pom.xml</relativePath>
 
 	</parent>
 
 
 	<artifactId>fr.ifremer.nemo</artifactId>
-	<version>1.7.1-SNAPSHOT</version> <!-- meme version que dans l'overview de plugin.xml -->
+	<version>1.7.1</version> <!-- meme version que dans l'overview de plugin.xml -->
 	<packaging>eclipse-plugin</packaging>
 
 
