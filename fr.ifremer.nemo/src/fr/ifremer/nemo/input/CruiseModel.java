@@ -86,6 +86,11 @@ public class CruiseModel extends AbstractModel {
 	 * Commentaires sur la campagne (multi-lines)
 	 */
 	protected String _comment;
+	
+	/**
+	 * Commentaires provenant de l'option -cruiseComment, destiné au CDI summary.
+	 */
+//	protected String _datesetAbstractString;
 
 	/**
 	 * Code pays du laboratoire source (MEDATLAS: 2 char max)
