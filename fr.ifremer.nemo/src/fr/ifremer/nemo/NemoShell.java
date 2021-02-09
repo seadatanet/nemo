@@ -43,6 +43,7 @@ import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Global.DataListTypeEnum;
 import fr.ifremer.nemo.util.Global.E_ProcessType;
 import fr.ifremer.nemo.util.Global.E_TypeConversion;
+import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.util.Preformat;
 import fr.ifremer.nemo.ws.WSDataType;
@@ -182,10 +183,19 @@ public class NemoShell {
 			if (!cruiseName.equals(Global.EMPTY_STRING)) {
 				inputDomain.getCruise().getModel().setName(cruiseName);
 			}
-			// Cruise comment.
+			
+			// Cruise comments.
 			if (!cruiseComment.equals(Global.EMPTY_STRING)) {
 				inputDomain.getCruise().getModel().setComment(cruiseComment);
+
+				// Cruise comment, only for CDI summary
+				inputDomain.getCruise().getModel().setDatasetAbstractString(cruiseComment);
 			}
+			else {
+				// default string for CDI summary.
+				inputDomain.getCruise().getModel().setDatasetAbstractString(Intern.CDIResumeWriter_notSpecified);
+			}
+			
 						
 			// Local CSR identifier.
 			if (!localCsrIdentifier.equals(Global.EMPTY_STRING)) {

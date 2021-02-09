@@ -90,7 +90,7 @@ public class CruiseModel extends AbstractModel {
 	/**
 	 * Commentaires provenant de l'option -cruiseComment, destiné au CDI summary.
 	 */
-//	protected String _datesetAbstractString;
+	protected String _datasetAbstractString;
 
 	/**
 	 * Code pays du laboratoire source (MEDATLAS: 2 char max)
@@ -1071,5 +1071,13 @@ public class CruiseModel extends AbstractModel {
 
 	public void setBshCsrReference(String bshCsrReference) {
 		_bshCsrReference = bshCsrReference;
+	}
+
+	public String getDatasetAbstractString() {
+		return _datasetAbstractString;
+	}
+
+	public void setDatasetAbstractString(String datasetAbstractString) {
+		_datasetAbstractString = datasetAbstractString;
 	}
 }

@@ -231,8 +231,7 @@ public class CDIResumeWriter {
 		writer.write(sep + config.getCodeEdmoDonnees());
 
 		// Dataset ABS
-//		 String datasetAbs = (!(cDomain.getModel().getComment().equals(Global.EMPTY_STRING)))?cDomain.getModel().getComment():Intern.CDIResumeWriter_notSpecified;
-		 String datasetAbs = Intern.CDIResumeWriter_notSpecified;
+		 String datasetAbs = cDomain.getModel().getDatasetAbstractString();
 		writer.write(sep + datasetAbs);
 
 		// EDMO Custodian
