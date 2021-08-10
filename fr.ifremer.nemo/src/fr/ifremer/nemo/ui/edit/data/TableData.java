@@ -39,7 +39,7 @@ import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Global.DataListTypeEnum;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
-import fr.ifremer.nemo.ws.WSParameter;
+import fr.ifremer.nemo.ws.model.Parameter;
 import fr.ifremer.sismer_tools.DateTools;
 import fr.ifremer.sismer_tools.SismerToolsException;
 import fr.ifremer.sismer_tools.externalresources.ExternalResourcesManager;
@@ -48,8 +48,8 @@ import sdn.vocabulary.interfaces.IElement;
 import sdn.vocabulary.interfaces.VocabularyException;
 
 public class TableData {
-	final Color red = new Color(null, 239,180,110);
-	final Color white = new Color(null, 255,255,255);
+	final Color red = new Color(null, 239, 180, 110);
+	final Color white = new Color(null, 255, 255, 255);
 
 	/**
 	 * Parametres provenant des web services (fichiers xml mis à jour par les
@@ -70,6 +70,7 @@ public class TableData {
 	 */
 	private ArrayList<TypeFormat> typesFormat;
 	HashMap<Integer, Integer> mapColLineIndexes;
+
 	/**
 	 * Getter sur typesFormat.
 	 * 
@@ -82,8 +83,7 @@ public class TableData {
 	/**
 	 * Setter sur typesFormat.
 	 * 
-	 * @param typesFormat
-	 *            the typesFormat to set
+	 * @param typesFormat the typesFormat to set
 	 */
 	public void setTypesFormat(ArrayList<TypeFormat> typesFormat) {
 		this.typesFormat = typesFormat;
@@ -110,8 +110,7 @@ public class TableData {
 	 * liste des titres de colonnes (ordonnée)
 	 */
 	private HashMap<Integer, TableDataColumn> columnsMap;
-	private final HashMap<String, Integer> colNbById =
-			new HashMap<String, Integer>();
+	private final HashMap<String, Integer> colNbById = new HashMap<String, Integer>();
 
 	/**
 	 * columns IDs
@@ -137,13 +136,10 @@ public class TableData {
 	public static String COL_INSTRUMENT = "COL_INSTRUMENT"; //$NON-NLS-1$
 	public static String COL_INSTRUMENT_CODE = "COL_INSTRUMENT_CODE"; //$NON-NLS-1$
 
-
-	private final String[] colOrder =
-		{ COL_IS_STRING, COL_CODE, COL_STANDARD_NAME, COL_LONG_NAME, COL_USERLABEL, COL_UNIT,
-				COL_CONVERSION, COL_TEST, COL_START, COL_END, COL_FORMAT,
-				COL_VALUE_IN, COL_VALUE_OUT, COL_TEST_IN, COL_TEST_OUT,
-				COL_START_FLAG, COL_END_FLAG, COL_UNIT_CODE,COL_INSTRUMENT,COL_INSTRUMENT_CODE
-		};
+	private final String[] colOrder = { COL_IS_STRING, COL_CODE, COL_STANDARD_NAME, COL_LONG_NAME, COL_USERLABEL,
+			COL_UNIT, COL_CONVERSION, COL_TEST, COL_START, COL_END, COL_FORMAT, COL_VALUE_IN, COL_VALUE_OUT,
+			COL_TEST_IN, COL_TEST_OUT, COL_START_FLAG, COL_END_FLAG, COL_UNIT_CODE, COL_INSTRUMENT,
+			COL_INSTRUMENT_CODE };
 
 	/**
 	 * Indexes for contextual menu items
@@ -164,7 +160,8 @@ public class TableData {
 	int MENU_ITEM_DELATEFLAG = 13;
 	int MENU_ITEM_DELETEALLPARAMS = 14;
 	/*
-	 * map key=menuItem / value=index in menu (can change depending to configuration)
+	 * map key=menuItem / value=index in menu (can change depending to
+	 * configuration)
 	 */
 	HashMap<Integer, Integer> menuMap = new HashMap<Integer, Integer>();
 	/**
@@ -176,9 +173,7 @@ public class TableData {
 		initTypesWS();
 		initColumnsMap();
 
-		myGroupVerticalParameters =
-				Nemo.getInstance().getViewMain().getEditDataForm()
-				.getMyGroupeVerticalParameters();
+		myGroupVerticalParameters = Nemo.getInstance().getViewMain().getEditDataForm().getMyGroupeVerticalParameters();
 	}
 
 	private boolean isValueOutWritable() {
@@ -190,8 +185,7 @@ public class TableData {
 	}
 
 	private boolean isLabelWritable() {
-		return RulesManager.getInstance().isConversionToODV()
-				&& !RulesManager.getInstance().isDataListTypeP091();
+		return RulesManager.getInstance().isConversionToODV() && !RulesManager.getInstance().isDataListTypeP091();
 	}
 
 	private boolean isStandardNameWritable() {
@@ -203,7 +197,8 @@ public class TableData {
 	}
 
 	private boolean isCheckBoxWritable() {
-		return !(RulesManager.getInstance().isConversionToMedatlas() || RulesManager.getInstance().isConversionToNetCDF());
+		return !(RulesManager.getInstance().isConversionToMedatlas()
+				|| RulesManager.getInstance().isConversionToNetCDF());
 	}
 
 	/**
@@ -219,103 +214,67 @@ public class TableData {
 		TableDataColumn col;
 		columnsMap = new HashMap<Integer, TableDataColumn>();
 
-		col =
-				new TableDataColumn(COL_IS_STRING, colNbById.get(COL_IS_STRING),
-						Messages.table_label_is_string, 25, true,
-						false);
+		col = new TableDataColumn(COL_IS_STRING, colNbById.get(COL_IS_STRING), Messages.table_label_is_string, 25, true,
+				false);
 
 		columnsMap.put(col.pos, col);
-		col =
-				new TableDataColumn(COL_CODE, colNbById.get(COL_CODE),
-						Messages.table_label_code, 100, false, true);
+		col = new TableDataColumn(COL_CODE, colNbById.get(COL_CODE), Messages.table_label_code, 100, false, true);
 		columnsMap.put(col.pos, col);
-		col =
-				new TableDataColumn(COL_STANDARD_NAME, colNbById.get(COL_STANDARD_NAME),
-						Messages.table_label_standard_name, 100, false,
-						false);
+		col = new TableDataColumn(COL_STANDARD_NAME, colNbById.get(COL_STANDARD_NAME),
+				Messages.table_label_standard_name, 100, false, false);
 		columnsMap.put(col.pos, col);
 
-		col =
-				new TableDataColumn(COL_LONG_NAME, colNbById.get(COL_LONG_NAME),
-						Messages.table_label_long_name, 100, isLongNameWritable(),
-						false);
+		col = new TableDataColumn(COL_LONG_NAME, colNbById.get(COL_LONG_NAME), Messages.table_label_long_name, 100,
+				isLongNameWritable(), false);
 		columnsMap.put(col.pos, col);
-		col =
-				new TableDataColumn(COL_USERLABEL,
-						colNbById.get(COL_USERLABEL),
-						Messages.table_label_userlabel, 100, isLabelWritable(),
-						false);
+		col = new TableDataColumn(COL_USERLABEL, colNbById.get(COL_USERLABEL), Messages.table_label_userlabel, 100,
+				isLabelWritable(), false);
 		columnsMap.put(col.pos, col);
-		col =
-				new TableDataColumn(COL_UNIT, colNbById.get(COL_UNIT),
-						Messages.table_label_unit, 90, false, true);
+		col = new TableDataColumn(COL_UNIT, colNbById.get(COL_UNIT), Messages.table_label_unit, 90, false, true);
 		columnsMap.put(col.pos, col);
-		col =
-				new TableDataColumn(COL_CONVERSION, colNbById
-						.get(COL_CONVERSION),
-						Messages.label_conversion, 70, true, false);
+		col = new TableDataColumn(COL_CONVERSION, colNbById.get(COL_CONVERSION), Messages.label_conversion, 70, true,
+				false);
 		columnsMap.put(col.pos, col);
-		col =
-				new TableDataColumn(COL_TEST, colNbById.get(COL_TEST),
-						Messages.label_test, 50, false, false);
+		col = new TableDataColumn(COL_TEST, colNbById.get(COL_TEST), Messages.label_test, 50, false, false);
 		columnsMap.put(col.pos, col);
-		col =
-				new TableDataColumn(COL_START, colNbById.get(COL_START),
-						Messages.label_start, 50, false, true);
+		col = new TableDataColumn(COL_START, colNbById.get(COL_START), Messages.label_start, 50, false, true);
 		columnsMap.put(col.pos, col);
-		col =
-				new TableDataColumn(COL_END, colNbById.get(COL_END),
-						Messages.label_end, 50, false, true);
+		col = new TableDataColumn(COL_END, colNbById.get(COL_END), Messages.label_end, 50, false, true);
 		columnsMap.put(col.pos, col);
-		col =
-				new TableDataColumn(COL_FORMAT, colNbById.get(COL_FORMAT),
-						Messages.label_format, 70, true, true);
+		col = new TableDataColumn(COL_FORMAT, colNbById.get(COL_FORMAT), Messages.label_format, 70, true, true);
 		columnsMap.put(col.pos, col);
-		col =
-				new TableDataColumn(COL_VALUE_IN, colNbById.get(COL_VALUE_IN),
-						Messages.table_label_valueIn, 50, true, false);
+		col = new TableDataColumn(COL_VALUE_IN, colNbById.get(COL_VALUE_IN), Messages.table_label_valueIn, 50, true,
+				false);
 		columnsMap.put(col.pos, col);
-		col =
-				new TableDataColumn(COL_VALUE_OUT,
-						colNbById.get(COL_VALUE_OUT),
-						Messages.table_label_valueOut, 50,
-						isValueOutWritable(), false);
+		col = new TableDataColumn(COL_VALUE_OUT, colNbById.get(COL_VALUE_OUT), Messages.table_label_valueOut, 50,
+				isValueOutWritable(), false);
 		columnsMap.put(col.pos, col);
-		col =
-				new TableDataColumn(COL_TEST_IN, colNbById.get(COL_TEST_IN),
-						Messages.table_label_testIn, 50, false, false);
+		col = new TableDataColumn(COL_TEST_IN, colNbById.get(COL_TEST_IN), Messages.table_label_testIn, 50, false,
+				false);
 		columnsMap.put(col.pos, col);
-		col =
-				new TableDataColumn(COL_TEST_OUT, colNbById.get(COL_TEST_OUT),
-						Messages.table_label_testOut, 50, false, false);
+		col = new TableDataColumn(COL_TEST_OUT, colNbById.get(COL_TEST_OUT), Messages.table_label_testOut, 50, false,
+				false);
 		columnsMap.put(col.pos, col);
-		col =
-				new TableDataColumn(COL_START_FLAG, colNbById
-						.get(COL_START_FLAG),
-						Messages.table_label_startFlag, 50, false, false);
+		col = new TableDataColumn(COL_START_FLAG, colNbById.get(COL_START_FLAG), Messages.table_label_startFlag, 50,
+				false, false);
 		columnsMap.put(col.pos, col);
-		col =
-				new TableDataColumn(COL_END_FLAG, colNbById.get(COL_END_FLAG),
-						Messages.table_label_endFlag, 50, false, false);
+		col = new TableDataColumn(COL_END_FLAG, colNbById.get(COL_END_FLAG), Messages.table_label_endFlag, 50, false,
+				false);
 		columnsMap.put(col.pos, col);
-		col =
-				new TableDataColumn(COL_UNIT_CODE,
-						colNbById.get(COL_UNIT_CODE),
-						Global.EMPTY_STRING, 0, false, false);
+		col = new TableDataColumn(COL_UNIT_CODE, colNbById.get(COL_UNIT_CODE), Global.EMPTY_STRING, 0, false, false);
 		columnsMap.put(col.pos, col);
 
-		col =
-				new TableDataColumn(COL_INSTRUMENT, colNbById.get(COL_INSTRUMENT),
-						Messages.table_label_intrument, 50, false, false);
+		col = new TableDataColumn(COL_INSTRUMENT, colNbById.get(COL_INSTRUMENT), Messages.table_label_intrument, 50,
+				false, false);
 		columnsMap.put(col.pos, col);
 
-		col =
-				new TableDataColumn(COL_INSTRUMENT_CODE, colNbById.get(COL_INSTRUMENT_CODE),
-						Global.EMPTY_STRING, 0, false, false);
+		col = new TableDataColumn(COL_INSTRUMENT_CODE, colNbById.get(COL_INSTRUMENT_CODE), Global.EMPTY_STRING, 0,
+				false, false);
 		columnsMap.put(col.pos, col);
 
 	}
-	public int getColNb(String columnID){
+
+	public int getColNb(String columnID) {
 		return colNbById.get(columnID);
 	}
 
@@ -368,11 +327,8 @@ public class TableData {
 	 */
 	public void creationTable() {
 
-		myTable =
-				new Table(Nemo.getInstance().getViewMain().getEditDataForm()
-						.getCompositeData(), SWT.CHECK | SWT.FULL_SELECTION
-						| SWT.H_SCROLL
-						| SWT.H_SCROLL);
+		myTable = new Table(Nemo.getInstance().getViewMain().getEditDataForm().getCompositeData(),
+				SWT.CHECK | SWT.FULL_SELECTION | SWT.H_SCROLL | SWT.H_SCROLL);
 
 		myTable.setHeaderVisible(true);
 		myTable.setLinesVisible(true);
@@ -425,8 +381,7 @@ public class TableData {
 	public void initTypesWS() {
 		typesWS = null;
 		typesWS = new ArrayList<TypeData>();
-		if (RulesManager.getInstance()
-				.getMyDataListType() != DataListTypeEnum.P011_VIA_P021)
+		if (RulesManager.getInstance().getMyDataListType() != DataListTypeEnum.P011_VIA_P021)
 
 		{
 			iniTypesWSP091();
@@ -438,18 +393,9 @@ public class TableData {
 	}
 
 	private void iniTypesWSP091() {
-		int taille = NemoLists.getParameters().length;
-
-		for (int i = 0; i < taille; i++) {
-			// initialisation de la ArrayList des types des donnees a partir du
-			// fichier P091 parameters.xml
-			WSParameter wsParameter = new WSParameter();
-			wsParameter = NemoLists.getParameters()[i];
-
-			TypeData type = new TypeData(wsParameter);
-
-			// ajout dans liste
-			typesWS.add(type);
+		Parameter[] parameters = NemoLists.getParameters();
+		for (int i = 0; i < parameters.length; i++) {
+			typesWS.add(new TypeData(parameters[i]));
 		}
 	}
 
@@ -469,7 +415,7 @@ public class TableData {
 				typesWS.add(type);
 			}
 		} catch (VocabularyException e) {
-			Nemo.getInstance().getLogger().error(e.getMessage());    	
+			Nemo.getInstance().getLogger().error(e.getMessage());
 		}
 	}
 
@@ -491,9 +437,10 @@ public class TableData {
 			}
 			Collections.sort(typesP061);
 		} catch (VocabularyException e) {
-			Nemo.getInstance().getLogger().error(e.getMessage());    	
+			Nemo.getInstance().getLogger().error(e.getMessage());
 		}
 	}
+
 	/**
 	 * initialize the L22
 	 */
@@ -511,9 +458,10 @@ public class TableData {
 			}
 			Collections.sort(typesL22);
 		} catch (VocabularyException e) {
-			Nemo.getInstance().getLogger().error(e.getMessage());    	
+			Nemo.getInstance().getLogger().error(e.getMessage());
 		}
 	}
+
 	/**
 	 * initialize the L22
 	 */
@@ -531,11 +479,12 @@ public class TableData {
 			}
 			Collections.sort(typesL33);
 		} catch (VocabularyException e) {
-			Nemo.getInstance().getLogger().error(e.getMessage());    	
+			Nemo.getInstance().getLogger().error(e.getMessage());
 		}
 	}
+
 	/**
-	 * fill types 
+	 * fill types
 	 */
 	public void fillTypes() {
 		// initialisation de la ArrayList des types des donnees e partir du
@@ -547,7 +496,7 @@ public class TableData {
 				addType(td);
 			}
 			razAndRecreateTable();
-		}catch (Exception e) {
+		} catch (Exception e) {
 			Utils.messageErreur(e.getMessage());
 		}
 	}
@@ -582,51 +531,32 @@ public class TableData {
 		 * listener pour la case a cocher 10755
 		 */
 		table.addListener(SWT.Selection, new Listener() {
-			public void handleEvent(Event event)
-			{
+			@Override
+			public void handleEvent(Event event) {
 
-				if (event.detail == SWT.CHECK)
-				{
-					if (((TableItem) event.item).getChecked())
-					{
+				if (event.detail == SWT.CHECK) {
+					if (((TableItem) event.item).getChecked()) {
 						Utils.messageOK(Messages.edit_data_parameterIsText);
 
 						((TableItem) event.item).setData(COL_CONVERSION,
-								((TableItem) event.item).getText(colNbById
-										.get(COL_CONVERSION)));
+								((TableItem) event.item).getText(colNbById.get(COL_CONVERSION)));
 						((TableItem) event.item).setData(COL_UNIT,
-								((TableItem) event.item).getText(colNbById
-										.get(COL_UNIT)));
+								((TableItem) event.item).getText(colNbById.get(COL_UNIT)));
 						((TableItem) event.item).setData(COL_FORMAT,
-								((TableItem) event.item).getText(colNbById
-										.get(COL_FORMAT)));
-						((TableItem) event.item).setText(colNbById
-								.get(COL_CONVERSION), "");
-						((TableItem) event.item).setText(colNbById
-								.get(COL_UNIT),
-								"");
-						((TableItem) event.item).setText(colNbById
-								.get(COL_FORMAT),
-								"");
-					}
-					else
-					{
+								((TableItem) event.item).getText(colNbById.get(COL_FORMAT)));
+						((TableItem) event.item).setText(colNbById.get(COL_CONVERSION), "");
+						((TableItem) event.item).setText(colNbById.get(COL_UNIT), "");
+						((TableItem) event.item).setText(colNbById.get(COL_FORMAT), "");
+					} else {
 						Utils.messageOK(Messages.edit_data_parameterIsNumeric);
 
-						((TableItem) event.item).setText(colNbById
-								.get(COL_CONVERSION),
-								(String) ((TableItem) event.item)
-								.getData(COL_CONVERSION));
-						((TableItem) event.item)
-						.setText(colNbById.get(COL_UNIT),
-								(String) ((TableItem) event.item)
-								.getData(COL_UNIT));
-						((TableItem) event.item).setText(colNbById
-								.get(COL_FORMAT),
-								(String) ((TableItem) event.item)
-								.getData(COL_FORMAT));
-						((TableItem) event.item).setText(colNbById
-								.get(COL_CONVERSION), TypeData.DEFAULT_CONVERT);
+						((TableItem) event.item).setText(colNbById.get(COL_CONVERSION),
+								(String) ((TableItem) event.item).getData(COL_CONVERSION));
+						((TableItem) event.item).setText(colNbById.get(COL_UNIT),
+								(String) ((TableItem) event.item).getData(COL_UNIT));
+						((TableItem) event.item).setText(colNbById.get(COL_FORMAT),
+								(String) ((TableItem) event.item).getData(COL_FORMAT));
+						((TableItem) event.item).setText(colNbById.get(COL_CONVERSION), TypeData.DEFAULT_CONVERT);
 					}
 				}
 			}
@@ -636,43 +566,36 @@ public class TableData {
 		 * format entree sortie conversion
 		 */
 		// 42716 MouseDown
-		table.addListener(SWT.MouseDown, new Listener()
-		{
+		table.addListener(SWT.MouseDown, new Listener() {
 			@Override
-			public void handleEvent(Event event)
-			{
+			public void handleEvent(Event event) {
 
 				// clic 3e bouton (=clic droit): comportement par defaut
-				if (event.button == 3)
-				{
+				if (event.button == 3) {
 					Point ptt = new Point(event.x, event.y);
 					TableItem itemTmpt = table.getItem(ptt);
 					if (itemTmpt == null) {
-						//empty item -> only new param menu
-						for (MenuItem  it: table.getMenu().getItems()){
+						// empty item -> only new param menu
+						for (MenuItem it : table.getMenu().getItems()) {
 							it.setEnabled(false);
 						}
 						table.getMenu().getItem(menuMap.get(MENU_ITEM_PARAMLIST)).setEnabled(true);
-					}else{
+					} else {
 						// item existing -> full menu
-						for (MenuItem  it: table.getMenu().getItems()){
+						for (MenuItem it : table.getMenu().getItems()) {
 							it.setEnabled(true);
 						}
 					}
 
-					if (RulesManager.getInstance()
-							.getMyDataListType() == DataListTypeEnum.P011_VIA_P021)
-					{
+					if (RulesManager.getInstance().getMyDataListType() == DataListTypeEnum.P011_VIA_P021) {
 						Point pt = new Point(event.x, event.y);
 						TableItem itemTmp = table.getItem(pt);
 						if (itemTmp != null) {
 
-							table.getMenu()
-							.getItem(menuMap.get(MENU_ITEM_SELECTFORMAT))
-							.setEnabled(!itemTmp.getChecked());
-							table.getMenu().getItem(
-									menuMap.get(MENU_ITEM_SELECTUNIT)).setEnabled(
-											!itemTmp.getChecked());
+							table.getMenu().getItem(menuMap.get(MENU_ITEM_SELECTFORMAT))
+									.setEnabled(!itemTmp.getChecked());
+							table.getMenu().getItem(menuMap.get(MENU_ITEM_SELECTUNIT))
+									.setEnabled(!itemTmp.getChecked());
 						}
 					}
 					return;
@@ -680,22 +603,15 @@ public class TableData {
 
 				// FAE 9670 surlignage de la position des paramètres dans le
 				// fichier
-				if (event.button == 1)
-				{
+				if (event.button == 1) {
 					int indice = myTable.getSelectionIndex();
-					if (indice >= 0)
-					{
+					if (indice >= 0) {
 						// select data from parameters selection
-						if (RulesManager.getInstance().isUsingTableForCsvData()){
+						if (RulesManager.getInstance().isUsingTableForCsvData()) {
 							selectDataFromParameterSelection();
-						}else{
-							selectInViewFile(
-									Integer.valueOf(myTable.getItem(indice)
-											.getText(
-													colNbById.get(COL_START))),
-									Integer.valueOf(myTable.getItem(indice)
-											.getText(
-													colNbById.get(COL_END))));
+						} else {
+							selectInViewFile(Integer.valueOf(myTable.getItem(indice).getText(colNbById.get(COL_START))),
+									Integer.valueOf(myTable.getItem(indice).getText(colNbById.get(COL_END))));
 						}
 					}
 				}
@@ -704,8 +620,7 @@ public class TableData {
 				Point pt = new Point(event.x, event.y);
 				TableItem item = table.getItem(pt);
 
-				if (item == null)
-				{
+				if (item == null) {
 					return;
 				}
 
@@ -713,21 +628,17 @@ public class TableData {
 				Rectangle clientArea = table.getClientArea();
 				int index = table.getTopIndex();
 
-				while (index < table.getItemCount())
-				{
+				while (index < table.getItemCount()) {
 
 					boolean visible = false;
 					final TableItem itemTmp = table.getItem(index);
-					for (int colNumber = 0; colNumber < table.getColumnCount(); colNumber++)
-					{
+					for (int colNumber = 0; colNumber < table.getColumnCount(); colNumber++) {
 						// edition des colonnes autorisées en écriture
 						// uniquement
 
-						if (isCellWritable(colNumber, itemTmp))
-						{
+						if (isCellWritable(colNumber, itemTmp)) {
 							Rectangle rect = itemTmp.getBounds(colNumber);
-							if (rect.contains(pt))
-							{
+							if (rect.contains(pt)) {
 								final int column = colNumber;
 								final Text text = new Text(table, SWT.NONE);
 								text.setText(itemTmp.getText(colNumber));
@@ -735,27 +646,21 @@ public class TableData {
 								/**
 								 * Listener sur le texte d'une cellule
 								 */
-								Listener textListener = new Listener()
-								{
+								Listener textListener = new Listener() {
 
 									String s = text.getText();
 
-									public void handleEvent(final Event e)
-									{
+									public void handleEvent(final Event e) {
 
-										switch (e.type)
-										{
+										switch (e.type) {
 										case SWT.FocusOut:
-											itemTmp.setText(column,
-													text.getText());
+											itemTmp.setText(column, text.getText());
 											text.dispose();
 											break;
 										case SWT.Traverse:
-											switch (e.detail)
-											{
+											switch (e.detail) {
 											case SWT.TRAVERSE_RETURN:
-												itemTmp.setText(column,
-														text.getText());
+												itemTmp.setText(column, text.getText());
 
 											case SWT.TRAVERSE_ESCAPE:
 												text.dispose();
@@ -764,8 +669,7 @@ public class TableData {
 											break;
 
 										case SWT.Modify:
-											if (!((Text) e.widget)
-													.getText().equals(s))
+											if (!((Text) e.widget).getText().equals(s))
 												Utils.invalidEtapes();
 											break;
 										}
@@ -780,8 +684,7 @@ public class TableData {
 								text.setFocus();
 								return;
 							}
-							if (!visible && rect.intersects(clientArea))
-							{
+							if (!visible && rect.intersects(clientArea)) {
 								visible = true;
 							}
 						}
@@ -793,19 +696,12 @@ public class TableData {
 			}
 		});
 
-		table.addListener(SWT.KeyUp, new Listener()
-		{
-			public void handleEvent(Event event)
-			{
-				if (event.keyCode == SWT.ARROW_DOWN
-						|| event.keyCode == SWT.ARROW_UP)
-				{
+		table.addListener(SWT.KeyUp, new Listener() {
+			public void handleEvent(Event event) {
+				if (event.keyCode == SWT.ARROW_DOWN || event.keyCode == SWT.ARROW_UP) {
 					int indice = myTable.getSelectionIndex();
-					selectInViewFile(
-							Integer.valueOf(myTable.getItem(indice).getText(
-									colNbById.get(COL_START))),
-							Integer.valueOf(myTable.getItem(indice).getText(
-									colNbById.get(COL_END))));
+					selectInViewFile(Integer.valueOf(myTable.getItem(indice).getText(colNbById.get(COL_START))),
+							Integer.valueOf(myTable.getItem(indice).getText(colNbById.get(COL_END))));
 				}
 			}
 		});
@@ -818,24 +714,26 @@ public class TableData {
 		Menu menu = new Menu(table.getShell(), SWT.POP_UP);
 		int index = 0;
 
-
 		// ========= Injecter debut/fin
 		MenuItem itemInject = new MenuItem(menu, SWT.NONE, index);
 		menuMap.put(MENU_ITEM_SETVALUE, index);
 		index++;
 		itemInject.setText(Messages.menu_label_setValue);
-		itemInject.addListener(SWT.Selection, new Listener()
-		{
-			public void handleEvent(Event e)
-			{
-				if (RulesManager.getInstance().isUsingTableForCsvData()){
+		itemInject.addListener(SWT.Selection, new Listener() {
+			public void handleEvent(Event e) {
+				if (RulesManager.getInstance().isUsingTableForCsvData()) {
 					// 33278 CSV files
 					int selectionIndex = myTable.getSelectionIndex();
-					int selectedColumnIndex = Nemo.getInstance().getViewMain().getEditDataForm().getInputTableData().getIndexSelected();
-					int selectedColumnNumber = selectedColumnIndex+1;
+					int selectedColumnIndex = Nemo.getInstance().getViewMain().getEditDataForm().getInputTableData()
+							.getIndexSelected();
+					int selectedColumnNumber = selectedColumnIndex + 1;
 					// remplissage debut et fin dans interface
-					Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().getMyTable().getItems()[selectionIndex].setText(colNbById.get(COL_START), String.valueOf(selectedColumnNumber));
-					Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().getMyTable().getItems()[selectionIndex].setText(colNbById.get(COL_END), String.valueOf(selectedColumnNumber));
+					Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().getMyTable()
+							.getItems()[selectionIndex].setText(colNbById.get(COL_START),
+									String.valueOf(selectedColumnNumber));
+					Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().getMyTable()
+							.getItems()[selectionIndex].setText(colNbById.get(COL_END),
+									String.valueOf(selectedColumnNumber));
 
 					mapColLineIndexes.put(selectedColumnIndex, selectionIndex);
 					majTypeData();
@@ -843,11 +741,10 @@ public class TableData {
 					razAndRecreateTable();
 					Utils.invalidEtapes();
 
-				}else{
+				} else {
 					// text files
 					// table.forceFocus();
-					Utils.injectData(Nemo.getInstance().getViewMain()
-							.getEditDataForm().getTextAreaData(),
+					Utils.injectData(Nemo.getInstance().getViewMain().getEditDataForm().getTextAreaData(),
 							colNbById.get(COL_START), colNbById.get(COL_END));
 					majTypeData();
 
@@ -862,10 +759,8 @@ public class TableData {
 		menuMap.put(MENU_ITEM_UPDATETEST, index);
 		index++;
 		itemMaj.setText(Messages.menu_label_updateTest);
-		itemMaj.addListener(SWT.Selection, new Listener()
-		{
-			public void handleEvent(Event e)
-			{
+		itemMaj.addListener(SWT.Selection, new Listener() {
+			public void handleEvent(Event e) {
 				majChampTest();
 			}
 		});
@@ -874,19 +769,13 @@ public class TableData {
 		menuMap.put(MENU_ITEM_PARAMLIST, index);
 		index++;
 		itemList.setText(Messages.menu_label_paramList);
-		itemList.addListener(SWT.Selection, new Listener()
-		{
-			public void handleEvent(Event e)
-			{
-				if (RulesManager.getInstance().getMyDataListType() != DataListTypeEnum.UNKNOWN)
-				{
+		itemList.addListener(SWT.Selection, new Listener() {
+			public void handleEvent(Event e) {
+				if (RulesManager.getInstance().getMyDataListType() != DataListTypeEnum.UNKNOWN) {
 					checkTypesWS();
 					openMyParameterFilteredTable();
-				}
-				else
-				{
-					Utils
-					.messageErreur(Messages.edit_data_error_dataListUnknown);
+				} else {
+					Utils.messageErreur(Messages.edit_data_error_dataListUnknown);
 				}
 			}
 		});
@@ -896,10 +785,8 @@ public class TableData {
 		menuMap.put(MENU_ITEM_INSTRUMENTLIST, index);
 		index++;
 		instrumentList.setText(Messages.menu_label_instrumentList);
-		instrumentList.addListener(SWT.Selection, new Listener()
-		{
-			public void handleEvent(Event e)
-			{
+		instrumentList.addListener(SWT.Selection, new Listener() {
+			public void handleEvent(Event e) {
 				initTypesL22();
 				openMyInstrumentTable();
 			}
@@ -907,14 +794,12 @@ public class TableData {
 
 		// ========= Liste des unités P061 (P011 via P021 seulement)
 		if (RulesManager.getInstance().getMyDataListType() == DataListTypeEnum.P011_VIA_P021) {
-			MenuItem itemAddP061Unit =	new MenuItem(menu, SWT.NONE, index);
+			MenuItem itemAddP061Unit = new MenuItem(menu, SWT.NONE, index);
 			menuMap.put(MENU_ITEM_SELECTUNIT, index);
 			index++;
 			itemAddP061Unit.setText(Messages.menu_label_selectP061Unit);
-			itemAddP061Unit.addListener(SWT.Selection, new Listener()
-			{
-				public void handleEvent(Event e)
-				{
+			itemAddP061Unit.addListener(SWT.Selection, new Listener() {
+				public void handleEvent(Event e) {
 					initTypesP061();
 					int indice = myTable.getSelectionIndex();
 					openMyUnitFilteredTable(indice);
@@ -924,15 +809,13 @@ public class TableData {
 
 		// ========= Selection d'un format (P011 via P021 seulement)
 		if (RulesManager.getInstance().getMyDataListType() == DataListTypeEnum.P011_VIA_P021) {
-			MenuItem selectFormat =	new MenuItem(menu, SWT.NONE, index);
+			MenuItem selectFormat = new MenuItem(menu, SWT.NONE, index);
 			menuMap.put(MENU_ITEM_SELECTFORMAT, index);
 			index++;
 			selectFormat.setText(Messages.menu_label_selectFormat);
-			selectFormat.addListener(SWT.Selection, new Listener()
-			{
-				public void handleEvent(Event e)
-				{
-					//					initTypesP061();
+			selectFormat.addListener(SWT.Selection, new Listener() {
+				public void handleEvent(Event e) {
+					// initTypesP061();
 					int indice = myTable.getSelectionIndex();
 					openMyFormatFilteredTable(indice);
 				}
@@ -944,26 +827,21 @@ public class TableData {
 			menuMap.put(MENU_ITEM_SELECTSTANDARDNAME, index);
 			index++;
 			selectStandardName.setText(Messages.menu_label_selectStandardName);
-			selectStandardName.addListener(SWT.Selection, new Listener()
-			{
-				public void handleEvent(Event e)
-				{
-					//initTypesP07();
+			selectStandardName.addListener(SWT.Selection, new Listener() {
+				public void handleEvent(Event e) {
+					// initTypesP07();
 					int indice = myTable.getSelectionIndex();
 					openMyStandardNameFilteredTable(indice);
 				}
 			});
 		}
 		// ========= Monter paramètre sélectionné tout en haut de la liste
-		MenuItem itemUpToTop =
-				new MenuItem(menu, SWT.NONE, index);
+		MenuItem itemUpToTop = new MenuItem(menu, SWT.NONE, index);
 		menuMap.put(MENU_ITEM_UPTOTOPPARAM, index);
 		index++;
 		itemUpToTop.setText(Messages.menu_label_upToTopParam);
-		itemUpToTop.addListener(SWT.Selection, new Listener()
-		{
-			public void handleEvent(Event e)
-			{
+		itemUpToTop.addListener(SWT.Selection, new Listener() {
+			public void handleEvent(Event e) {
 				// System.out.println("up");
 				monterEltToTopTableData();
 
@@ -976,10 +854,8 @@ public class TableData {
 		menuMap.put(MENU_ITEM_UPPARAM, index);
 		index++;
 		itemUp.setText(Messages.menu_label_upParam);
-		itemUp.addListener(SWT.Selection, new Listener()
-		{
-			public void handleEvent(Event e)
-			{
+		itemUp.addListener(SWT.Selection, new Listener() {
+			public void handleEvent(Event e) {
 				// System.out.println("up");
 				monterEltTableData();
 
@@ -991,25 +867,20 @@ public class TableData {
 		menuMap.put(MENU_ITEM_DOWNPARAM, index);
 		index++;
 		itemDown.setText(Messages.menu_label_downParam);
-		itemDown.addListener(SWT.Selection, new Listener()
-		{
-			public void handleEvent(Event e)
-			{
+		itemDown.addListener(SWT.Selection, new Listener() {
+			public void handleEvent(Event e) {
 				descendreEltTableData();
 
 				Utils.invalidEtapes();
 			}
 		});
 		// ========= descendre paramètre sélectionné en bas de liste
-		MenuItem itemDownToBottom =
-				new MenuItem(menu, SWT.NONE, index);
+		MenuItem itemDownToBottom = new MenuItem(menu, SWT.NONE, index);
 		menuMap.put(MENU_ITEM_DOWNTOBOTTOMPARAM, index);
 		index++;
 		itemDownToBottom.setText(Messages.menu_label_downToBottomParam);
-		itemDownToBottom.addListener(SWT.Selection, new Listener()
-		{
-			public void handleEvent(Event e)
-			{
+		itemDownToBottom.addListener(SWT.Selection, new Listener() {
+			public void handleEvent(Event e) {
 				descendreEltToBottomTableData();
 
 				Utils.invalidEtapes();
@@ -1020,10 +891,8 @@ public class TableData {
 		menuMap.put(MENU_ITEM_REMOVEPARAM, index);
 		index++;
 		itemDel.setText(Messages.menu_label_removeParam);
-		itemDel.addListener(SWT.Selection, new Listener()
-		{
-			public void handleEvent(Event e)
-			{
+		itemDel.addListener(SWT.Selection, new Listener() {
+			public void handleEvent(Event e) {
 				supprEltTableData();
 				Utils.invalidEtapes();
 			}
@@ -1034,63 +903,55 @@ public class TableData {
 		index++;
 
 		// ========= Injecter flag
-		MenuItem itemInjectFlag =
-				new MenuItem(menu, SWT.NONE, index);
+		MenuItem itemInjectFlag = new MenuItem(menu, SWT.NONE, index);
 		menuMap.put(MENU_ITEM_SETFLAG, index);
 		index++;
 		itemInjectFlag.setText(Messages.menu_label_setFlag);
-		itemInjectFlag.addListener(SWT.Selection, new Listener()
-		{
+		itemInjectFlag.addListener(SWT.Selection, new Listener() {
 			@Override
-			public void handleEvent(Event e)
-			{
+			public void handleEvent(Event e) {
 
-
-				if (RulesManager.getInstance().isUsingTableForCsvData()){
+				if (RulesManager.getInstance().isUsingTableForCsvData()) {
 					// 33278 CSV files
 					int selectionIndex = myTable.getSelectionIndex();
-					int selectedColumnIndex = Nemo.getInstance().getViewMain().getEditDataForm().getInputTableData().getIndexSelected();
-					int selectedColumnNumber = selectedColumnIndex+1;
+					int selectedColumnIndex = Nemo.getInstance().getViewMain().getEditDataForm().getInputTableData()
+							.getIndexSelected();
+					int selectedColumnNumber = selectedColumnIndex + 1;
 					// remplissage debut et fin dans interface
-					Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().getMyTable().getItems()[selectionIndex].setText(colNbById.get(COL_START_FLAG), String.valueOf(selectedColumnNumber));
-					Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().getMyTable().getItems()[selectionIndex].setText(colNbById.get(COL_END_FLAG), String.valueOf(selectedColumnNumber));
+					Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().getMyTable()
+							.getItems()[selectionIndex].setText(colNbById.get(COL_START_FLAG),
+									String.valueOf(selectedColumnNumber));
+					Nemo.getInstance().getViewMain().getEditDataForm().getMyTableData().getMyTable()
+							.getItems()[selectionIndex].setText(colNbById.get(COL_END_FLAG),
+									String.valueOf(selectedColumnNumber));
 					mapColLineIndexes.put(selectedColumnIndex, selectionIndex);
 					majTypeData();
 					// refresh de la table
 					razAndRecreateTable();
 					Utils.invalidEtapes();
 
-				}else{
+				} else {
 
 					table.forceFocus();
-					Utils.injectData(Nemo.getInstance().getViewMain()
-							.getEditDataForm().getTextAreaData(),
-							colNbById.get(COL_START_FLAG), colNbById
-							.get(COL_END_FLAG));
+					Utils.injectData(Nemo.getInstance().getViewMain().getEditDataForm().getTextAreaData(),
+							colNbById.get(COL_START_FLAG), colNbById.get(COL_END_FLAG));
 
 					Utils.invalidEtapes();
 				}
 			}
 		});
 		// ========= supprimer flag
-		MenuItem itemRemoveFlag =
-				new MenuItem(menu, SWT.NONE, index);
+		MenuItem itemRemoveFlag = new MenuItem(menu, SWT.NONE, index);
 		menuMap.put(MENU_ITEM_DELATEFLAG, index);
 		index++;
 		itemRemoveFlag.setText(Messages.menu_label_deleteFlag);
-		itemRemoveFlag.addListener(SWT.Selection, new Listener()
-		{
-			public void handleEvent(Event e)
-			{
+		itemRemoveFlag.addListener(SWT.Selection, new Listener() {
+			public void handleEvent(Event e) {
 				table.forceFocus();
-				table.getItems()[table.getSelectionIndex()].setText(
-						colNbById.get(COL_TEST_IN), Global.EMPTY_STRING);
-				table.getItems()[table.getSelectionIndex()].setText(
-						colNbById.get(COL_TEST_OUT), Global.EMPTY_STRING);
-				table.getItems()[table.getSelectionIndex()].setText(
-						colNbById.get(COL_START_FLAG), Global.EMPTY_STRING);
-				table.getItems()[table.getSelectionIndex()].setText(
-						colNbById.get(COL_END_FLAG), Global.EMPTY_STRING);
+				table.getItems()[table.getSelectionIndex()].setText(colNbById.get(COL_TEST_IN), Global.EMPTY_STRING);
+				table.getItems()[table.getSelectionIndex()].setText(colNbById.get(COL_TEST_OUT), Global.EMPTY_STRING);
+				table.getItems()[table.getSelectionIndex()].setText(colNbById.get(COL_START_FLAG), Global.EMPTY_STRING);
+				table.getItems()[table.getSelectionIndex()].setText(colNbById.get(COL_END_FLAG), Global.EMPTY_STRING);
 				types.get(table.getSelectionIndex()).setDebutFlag(null);
 				types.get(table.getSelectionIndex()).setFinFlag(null);
 
@@ -1103,16 +964,13 @@ public class TableData {
 		index++;
 
 		// ========= Suppression de tous les parametres à la fois
-		MenuItem deleteAll =
-				new MenuItem(menu, SWT.NONE, index);
+		MenuItem deleteAll = new MenuItem(menu, SWT.NONE, index);
 		deleteAll.setEnabled(false);
 		menuMap.put(MENU_ITEM_DELETEALLPARAMS, index);
 		index++;
 		deleteAll.setText(Messages.menu_label_deleteAllParameters);
-		deleteAll.addListener(SWT.Selection, new Listener()
-		{
-			public void handleEvent(Event e)
-			{
+		deleteAll.addListener(SWT.Selection, new Listener() {
+			public void handleEvent(Event e) {
 				table.clearAll();
 				supprAllEltTableData();
 
@@ -1120,14 +978,12 @@ public class TableData {
 		});
 
 		table.setMenu(menu);
-		//		Utils.forceMenu(table, menu);
+		// Utils.forceMenu(table, menu);
 		// Do not show menu, when no item is selected
 
-
 		// agrandissement de la table
-		Nemo.getInstance().getViewMain().getEditDataForm().getCompositeData()
-		.getParent().layout(true, true);
-		/*table.setLayout(new FillLayout());*/
+		Nemo.getInstance().getViewMain().getEditDataForm().getCompositeData().getParent().layout(true, true);
+		/* table.setLayout(new FillLayout()); */
 		table.redraw();
 	}
 
@@ -1135,32 +991,27 @@ public class TableData {
 	 * ouvre la fenetre de choix de parametres
 	 */
 	public void openMyParameterFilteredTable() {
-		getMyParameterFilteredTable().open(
-				Nemo.getInstance().getViewMain().getEditDataForm()
-				.getCompositeData().getParent());
+		getMyParameterFilteredTable()
+				.open(Nemo.getInstance().getViewMain().getEditDataForm().getCompositeData().getParent());
 	}
+
 	public void openMyInstrumentTable() {
-		getMyInstrumentTable().open(
-				Nemo.getInstance().getViewMain().getEditDataForm()
-				.getCompositeData().getParent());
+		getMyInstrumentTable().open(Nemo.getInstance().getViewMain().getEditDataForm().getCompositeData().getParent());
 	}
 
 	public void openMyUnitFilteredTable(int rowIndex) {
-		getMyUnitFilteredTable().open(
-				Nemo.getInstance().getViewMain().getEditDataForm()
-				.getCompositeData().getParent());
+		getMyUnitFilteredTable()
+				.open(Nemo.getInstance().getViewMain().getEditDataForm().getCompositeData().getParent());
 	}
 
 	public void openMyFormatFilteredTable(int rowIndex) {
-		getMyFormatFilteredTable().open(
-				Nemo.getInstance().getViewMain().getEditDataForm()
-				.getCompositeData().getParent());
+		getMyFormatFilteredTable()
+				.open(Nemo.getInstance().getViewMain().getEditDataForm().getCompositeData().getParent());
 	}
 
 	public void openMyStandardNameFilteredTable(int rowIndex) {
-		getMyStandardNameFilteredTable().open(
-				Nemo.getInstance().getViewMain().getEditDataForm()
-				.getCompositeData().getParent());
+		getMyStandardNameFilteredTable()
+				.open(Nemo.getInstance().getViewMain().getEditDataForm().getCompositeData().getParent());
 	}
 
 	public void initTableData() {
@@ -1174,9 +1025,7 @@ public class TableData {
 			String label = "";
 
 			if (types.get(i).isP011()) {
-				code =
-						types.get(i).getEntryKeyP011() + Global.SEP
-						+ types.get(i).getEntryTermP011();
+				code = types.get(i).getEntryKeyP011() + Global.SEP + types.get(i).getEntryTermP011();
 
 			} else {
 				code = types.get(i).getFormattedCodeAndName();
@@ -1184,12 +1033,13 @@ public class TableData {
 
 			if (types.get(i).isP011()) {
 				if (RulesManager.getInstance().isConversionToODV()) {
-					String userLabel =	LabelParameterManager.getInstance().getUserLabel(types.get(i).getEntryKeyP011());
+					String userLabel = LabelParameterManager.getInstance().getUserLabel(types.get(i).getEntryKeyP011());
 					if (userLabel != null) {
 						label = userLabel;
 					}
 					if (label.isEmpty()) {
-						String specificLabel =	LabelParameterManager.getInstance().getSpecificParameterLabel(types.get(i).getEntryKeyP011());
+						String specificLabel = LabelParameterManager.getInstance()
+								.getSpecificParameterLabel(types.get(i).getEntryKeyP011());
 						if (specificLabel != null) {
 							label = specificLabel;
 						}
@@ -1199,7 +1049,8 @@ public class TableData {
 
 			String standardName = "";
 			if (RulesManager.getInstance().isConversionToNetCDF()) {
-				String userStandardName = StandardNameParameterManager.getInstance().getUserStandardName(types.get(i).getEntryKeyP011());
+				String userStandardName = StandardNameParameterManager.getInstance()
+						.getUserStandardName(types.get(i).getEntryKeyP011());
 				if (userStandardName != null) {
 					standardName = userStandardName;
 				}
@@ -1207,53 +1058,43 @@ public class TableData {
 
 			String longName = "";
 			if (RulesManager.getInstance().isConversionToNetCDF()) {
-				String userLongName = NetCDFLongNameParameterManager.getInstance().getUserLongName(types.get(i).getEntryKeyP011());
+				String userLongName = NetCDFLongNameParameterManager.getInstance()
+						.getUserLongName(types.get(i).getEntryKeyP011());
 				if (userLongName != null) {
 					longName = userLongName;
 				}
 			}
 			String unitLabel;
-			if ( isUnitP09()){ // 25794
-				unitLabel=types.get(i).getUnite();
-			}else{
-				unitLabel=types.get(i).getP06Label();
+			if (isUnitP09()) { // 25794
+				unitLabel = types.get(i).getUnite();
+			} else {
+				unitLabel = types.get(i).getP06Label();
 			}
-			item.setText(new String[]
-					{
-							null,
-							code,
-							standardName,
-							longName,
-							label, 
-							unitLabel,
-							(types.get(i).isText() ? null : types.get(i).getConversion()),
-							types.get(i).getTest(),
-							String.valueOf(types.get(i).getDebut()),
-							String.valueOf(types.get(i).getFin()),
-							types.get(i).getFormat(), types.get(i).getEntree(),
-							types.get(i).getSortie(), types.get(i).getTestIn(),
-							types.get(i).getTestOut(), types.get(i).getDebutFlag(),
-							types.get(i).getFinFlag(),
-							// FAE 6542
-							types.get(i).getUniteCode() ,
-							types.get(i).getInstrument(),
-							types.get(i).getInstrumentCode()
-					});
+			item.setText(new String[] { null, code, standardName, longName, label, unitLabel,
+					(types.get(i).isText() ? null : types.get(i).getConversion()), types.get(i).getTest(),
+					String.valueOf(types.get(i).getDebut()), String.valueOf(types.get(i).getFin()),
+					types.get(i).getFormat(), types.get(i).getEntree(), types.get(i).getSortie(),
+					types.get(i).getTestIn(), types.get(i).getTestOut(), types.get(i).getDebutFlag(),
+					types.get(i).getFinFlag(),
+					// FAE 6542
+					types.get(i).getUniteCode(), types.get(i).getInstrument(), types.get(i).getInstrumentCode() });
 			if (isCheckBoxWritable())
 				item.setChecked(types.get(i).isText());
 			else
 				item.setChecked(false);
 
-			// fill the map between col index in InputTableData and row index in TableDta
-			mapColLineIndexes.put(types.get(i).getDebut()-1, i);
+			// fill the map between col index in InputTableData and row index in
+			// TableDta
+			mapColLineIndexes.put(types.get(i).getDebut() - 1, i);
 		}
 
 	}
 
-
 	private boolean isUnitP09() {
-		return RulesManager.getInstance().isDataListTypeP091()||RulesManager.getInstance().isDataListTypeP011viaP091();
+		return RulesManager.getInstance().isDataListTypeP091()
+				|| RulesManager.getInstance().isDataListTypeP011viaP091();
 	}
+
 	public void razTableData() {
 		// effacement de tous les items de la table
 		myTable.dispose();
@@ -1472,27 +1313,27 @@ public class TableData {
 		//
 		System.out.println("suppr " + typeData.getEntryKey());
 
-		if(myGroupVerticalParameters.getSelection().contains(typeData.getEntryKey())){
+		if (myGroupVerticalParameters.getSelection().contains(typeData.getEntryKey())) {
 			Nemo.getInstance().getViewMain().getEditDataForm().resetFallRate();
 			Nemo.getInstance().getViewMain().getEditDataForm().setFallrateGroupEnabled(false);
 		}
 
 		types.remove(indice);
-		if (RulesManager.getInstance().getMyVerticalParametersList().getP_depthBSSurf().equals(typeData.getEntryKeyP011()))
-		{
-			RulesManager.getInstance().getMyVerticalParametersList().setP_depthBSSurf("");	
+		if (RulesManager.getInstance().getMyVerticalParametersList().getP_depthBSSurf()
+				.equals(typeData.getEntryKeyP011())) {
+			RulesManager.getInstance().getMyVerticalParametersList().setP_depthBSSurf("");
 		}
-		if (RulesManager.getInstance().getMyVerticalParametersList().getP_depthBSBed().equals(typeData.getEntryKeyP011()))
-		{
-			RulesManager.getInstance().getMyVerticalParametersList().setP_depthBSBed("");	
+		if (RulesManager.getInstance().getMyVerticalParametersList().getP_depthBSBed()
+				.equals(typeData.getEntryKeyP011())) {
+			RulesManager.getInstance().getMyVerticalParametersList().setP_depthBSBed("");
 		}
-		if (RulesManager.getInstance().getMyVerticalParametersList().getP_heightASLvl().equals(typeData.getEntryKeyP011()))
-		{
-			RulesManager.getInstance().getMyVerticalParametersList().setP_heightASLvl("");	
+		if (RulesManager.getInstance().getMyVerticalParametersList().getP_heightASLvl()
+				.equals(typeData.getEntryKeyP011())) {
+			RulesManager.getInstance().getMyVerticalParametersList().setP_heightASLvl("");
 		}
-		if (RulesManager.getInstance().getMyVerticalParametersList().getP_pressure().equals(typeData.getEntryKeyP011()))
-		{
-			RulesManager.getInstance().getMyVerticalParametersList().setP_pressure("");	
+		if (RulesManager.getInstance().getMyVerticalParametersList().getP_pressure()
+				.equals(typeData.getEntryKeyP011())) {
+			RulesManager.getInstance().getMyVerticalParametersList().setP_pressure("");
 		}
 		myGroupVerticalParameters.removeToAllCombo(typeData);
 
@@ -1519,8 +1360,7 @@ public class TableData {
 	 * @return
 	 */
 	private boolean isNonNumericFieldParamsComplete(int index) {
-		return (!myTable.getItem(index).getText(colNbById.get(COL_START))
-				.equals(Global.EMPTY_STRING));
+		return (!myTable.getItem(index).getText(colNbById.get(COL_START)).equals(Global.EMPTY_STRING));
 	}
 
 	/**
@@ -1530,10 +1370,8 @@ public class TableData {
 	 * @return
 	 */
 	private boolean isNumericFieldParamsComplete(int index) {
-		return (!myTable.getItem(index).getText(colNbById.get(COL_START))
-				.equals(Global.EMPTY_STRING))
-				&& (!myTable.getItem(index).getText(
-						colNbById.get(COL_CONVERSION)).equals(Global.EMPTY_STRING));
+		return (!myTable.getItem(index).getText(colNbById.get(COL_START)).equals(Global.EMPTY_STRING))
+				&& (!myTable.getItem(index).getText(colNbById.get(COL_CONVERSION)).equals(Global.EMPTY_STRING));
 	}
 
 	private boolean isParameterReady(int index) {
@@ -1543,8 +1381,7 @@ public class TableData {
 	}
 
 	private boolean isSelectedValueEqualsToDefaultIn(int index, String selection) {
-		return selection.equals(myTable.getItem(index).getText(
-				colNbById.get(COL_VALUE_IN)).trim());
+		return selection.equals(myTable.getItem(index).getText(colNbById.get(COL_VALUE_IN)).trim());
 
 	}
 
@@ -1563,50 +1400,45 @@ public class TableData {
 
 		nbre = myTable.getItemCount();
 		MediaDomain mediaDomain = Nemo.getInstance().getDomain().getMedia();
-		if (RulesManager.getInstance().isUsingTableForCsvData()){
+		if (RulesManager.getInstance().isUsingTableForCsvData()) {
 			// 33278: split as columns
-			ArrayList<String> input = (ArrayList<String>)Nemo.getInstance().getViewMain().getEditDataForm().getInputTableData().getViewer().getInput();
-			ligne=input.get(0);
+			ArrayList<String> input = (ArrayList<String>) Nemo.getInstance().getViewMain().getEditDataForm()
+					.getInputTableData().getViewer().getInput();
+			ligne = input.get(0);
 
-		}else{
+		} else {
 
-			ligne = Utils.lignesBrutes.get(mediaDomain.getModel().getFileHeader()
-					+ mediaDomain.getStationHeaderNumberLines());
+			ligne = Utils.lignesBrutes
+					.get(mediaDomain.getModel().getFileHeader() + mediaDomain.getStationHeaderNumberLines());
 		}
 
 		for (int i = 0; i < nbre; i++) {
-			selection="";defaultValue="";
+			selection = "";
+			defaultValue = "";
 			if (isParameterReady(i)) {
 				try {
-					if (Nemo.getInstance().getDomain().getMedia().getModel().getSeparator().isEmpty() || !RulesManager.getInstance().isUsingTableForCsvData()){
-						selection =
-								ligne.substring(
-										Integer.valueOf(myTable.getItem(i).getText(
-												colNbById.get(COL_START))) - 1,
-										Integer.valueOf(myTable.getItem(i).getText(
-												colNbById.get(COL_END)))).trim();
-					}else{
+					if (Nemo.getInstance().getDomain().getMedia().getModel().getSeparator().isEmpty()
+							|| !RulesManager.getInstance().isUsingTableForCsvData()) {
+						selection = ligne
+								.substring(Integer.valueOf(myTable.getItem(i).getText(colNbById.get(COL_START))) - 1,
+										Integer.valueOf(myTable.getItem(i).getText(colNbById.get(COL_END))))
+								.trim();
+					} else {
 						// 33278: split as columns
 						selection = ligne.split(
-								Nemo.getInstance().getDomain().getMedia().getModel().getSeparatorForSplit(), -1)
-								[Integer.valueOf(myTable.getItem(i).getText(colNbById.get(COL_START)))-1].trim();
+								Nemo.getInstance().getDomain().getMedia().getModel().getSeparatorForSplit(),
+								-1)[Integer.valueOf(myTable.getItem(i).getText(colNbById.get(COL_START))) - 1].trim();
 
 					}
 
 				} catch (Exception e) {
-					System.out.println("erreur substring "
-							+ myTable.getItem(i).getText(
-									colNbById.get(COL_CODE)));
+					System.out.println("erreur substring " + myTable.getItem(i).getText(colNbById.get(COL_CODE)));
 					ok = false;
-					Utils.messageErreurAppend(Messages.Etape_98
-							+ " "
-							+ myTable.getItem(i).getText(
-									colNbById.get(COL_CODE)));
+					Utils.messageErreurAppend(
+							Messages.Etape_98 + " " + myTable.getItem(i).getText(colNbById.get(COL_CODE)));
 					break;
 				}
-				defaultValue =
-						myTable.getItem(i).getText(
-								colNbById.get(COL_VALUE_OUT));
+				defaultValue = myTable.getItem(i).getText(colNbById.get(COL_VALUE_OUT));
 			}
 
 			/**
@@ -1619,22 +1451,21 @@ public class TableData {
 				// on formate puis on reaffiche la liste
 				try {
 					String formatString = myTable.getItem(i).getText(colNbById.get(COL_FORMAT));
-					String type ="";
-					try{
+					String type = "";
+					try {
 						if (formatString.equals(Global.DATETIME_CHOICE_ISO)) {
-							type=Global.DATETIME_CHOICE_ISO;
-						}else {
-						type = formatString.substring(formatString.length() - 1);
-						if ( !(type.equals("f") || type.equals("F") || type.equals("d") || type.equals("D") )){
-							
-							
-							Utils.messageErreurAppend("Unrecognized format: "+ formatString);// TODO
-							ok = false;
-							resultat = Messages.error;
-							
+							type = Global.DATETIME_CHOICE_ISO;
+						} else {
+							type = formatString.substring(formatString.length() - 1);
+							if (!(type.equals("f") || type.equals("F") || type.equals("d") || type.equals("D"))) {
+
+								Utils.messageErreurAppend("Unrecognized format: " + formatString);// TODO
+								ok = false;
+								resultat = Messages.error;
+
+							}
 						}
-						}
-					}catch (Exception e) {
+					} catch (Exception e) {
 						Utils.messageErreurAppend("Format is empty, please choose one");// TODO
 						ok = false;
 						resultat = Messages.error;
@@ -1647,29 +1478,20 @@ public class TableData {
 						} else {
 							resultat = selection;
 						}
-					}
-					else if (isSelectedValueEqualsToDefaultIn(i, selection)) {
+					} else if (isSelectedValueEqualsToDefaultIn(i, selection)) {
 
 						// entree par defaut, le test est la valeur de sortie
 						// par defaut formatee
 						String fmOut = Global.EMPTY_STRING;
-						String outputDefaultValue =
-								myTable.getItem(i).getText(
-										colNbById.get(COL_VALUE_OUT));
+						String outputDefaultValue = myTable.getItem(i).getText(colNbById.get(COL_VALUE_OUT));
 
 						// Float ou Decimal ?
 						if ((type.equals("f") || type.equals("F")) && !outputDefaultValue.trim().isEmpty()) { //$NON-NLS-1$//$NON-NLS-2$
-							fmOut =
-									String
-									.format(java.util.Locale.US,
-											formatString,
-											Double.parseDouble(outputDefaultValue));
+							fmOut = String.format(java.util.Locale.US, formatString,
+									Double.parseDouble(outputDefaultValue));
 						} else if ((type.equals("d") || type.equals("D")) && !outputDefaultValue.trim().isEmpty()) { //$NON-NLS-1$ //$NON-NLS-2$
-							fmOut =
-									String.format(java.util.Locale.US,
-											formatString,
-											Integer
-											.parseInt(outputDefaultValue));
+							fmOut = String.format(java.util.Locale.US, formatString,
+									Integer.parseInt(outputDefaultValue));
 						}
 
 						if (fmOut.equals(outputDefaultValue)) {
@@ -1692,43 +1514,30 @@ public class TableData {
 						// 11976
 						Double selectionValue = null;
 						try {
-							//selectionValue = Float.valueOf(selection);
+							// selectionValue = Float.valueOf(selection);
 							selectionValue = Double.valueOf(selection);
 						} catch (NumberFormatException e) {
 							System.out.println("erreur conversion on parameter"
-									+ myTable.getItem(i).getText(
-											colNbById.get(COL_CODE)));
+									+ myTable.getItem(i).getText(colNbById.get(COL_CODE)));
 							ok = false;
-							Utils.messageErreurAppend(Messages.ParameterModel_1
-									+ " "
-									+ myTable.getItem(i).getText(
-											colNbById.get(COL_CODE)));
-							Utils.messageErreurAppend("expected a numeric value, found \'"+selection + "'");// TODO
+							Utils.messageErreurAppend(Messages.ParameterModel_1 + " "
+									+ myTable.getItem(i).getText(colNbById.get(COL_CODE)));
+							Utils.messageErreurAppend("expected a numeric value, found \'" + selection + "'");// TODO
 							break;
 
 						}
 						parser.addVariable("x", selectionValue); //$NON-NLS-1$
-						parser.parseExpression(myTable.getItem(i).getText(
-								colNbById.get(COL_CONVERSION)));
+						parser.parseExpression(myTable.getItem(i).getText(colNbById.get(COL_CONVERSION)));
 						resultJEP = parser.getValue();
 
 						if (type.equals("f") || type.equals("F")) { //$NON-NLS-1$//$NON-NLS-2$
-							resultat =
-									String.format(
-											myTable.getItem(i).getText(
-													colNbById.get(COL_FORMAT)),
-											new Double(
-													resultJEP));
+							resultat = String.format(myTable.getItem(i).getText(colNbById.get(COL_FORMAT)),
+									new Double(resultJEP));
 						} else if (type.equals("d") || type.equals("D")) { //$NON-NLS-1$ //$NON-NLS-2$
-							resultat =
-									String.format(
-											myTable.getItem(i).getText(
-													colNbById.get(COL_FORMAT)),
-											//													(Double.valueOf(resultJEP))
-											//													.intValue()
-											(Double.valueOf(resultJEP))
-											.longValue()
-											);
+							resultat = String.format(myTable.getItem(i).getText(colNbById.get(COL_FORMAT)),
+									// (Double.valueOf(resultJEP))
+									// .intValue()
+									(Double.valueOf(resultJEP)).longValue());
 						} else {
 							// error
 							ok = false;
@@ -1759,39 +1568,31 @@ public class TableData {
 			/**
 			 * FLAGS
 			 */
-			if ((!myTable.getItem(i).getText(colNbById.get(COL_START_FLAG))
-					.equals(Global.EMPTY_STRING))
-					&& (!myTable.getItem(i)
-							.getText(colNbById.get(COL_END_FLAG))
-							.equals(Global.EMPTY_STRING))) {
+			if ((!myTable.getItem(i).getText(colNbById.get(COL_START_FLAG)).equals(Global.EMPTY_STRING))
+					&& (!myTable.getItem(i).getText(colNbById.get(COL_END_FLAG)).equals(Global.EMPTY_STRING))) {
 
-				if (Nemo.getInstance().getDomain().getMedia().getModel().getSeparator().isEmpty() || !RulesManager.getInstance().isUsingTableForCsvData()){
-					selection =
-							ligne.substring(
-									Integer.valueOf(myTable.getItem(i).getText(	colNbById.get(COL_START_FLAG))) - 1,
-									Integer.valueOf(myTable.getItem(i).getText(colNbById.get(COL_END_FLAG)))).trim();
-				}else{
+				if (Nemo.getInstance().getDomain().getMedia().getModel().getSeparator().isEmpty()
+						|| !RulesManager.getInstance().isUsingTableForCsvData()) {
+					selection = ligne
+							.substring(Integer.valueOf(myTable.getItem(i).getText(colNbById.get(COL_START_FLAG))) - 1,
+									Integer.valueOf(myTable.getItem(i).getText(colNbById.get(COL_END_FLAG))))
+							.trim();
+				} else {
 					// 33278: split as columns
-					selection = ligne.split(
-							Nemo.getInstance().getDomain().getMedia().getModel().getSeparatorForSplit(), -1)
-							[Integer.valueOf(myTable.getItem(i).getText(colNbById.get(COL_START_FLAG)))-1].trim();
+					selection = ligne.split(Nemo.getInstance().getDomain().getMedia().getModel().getSeparatorForSplit(),
+							-1)[Integer.valueOf(myTable.getItem(i).getText(colNbById.get(COL_START_FLAG))) - 1].trim();
 
 				}
 
 				types.get(i).setTestIn(selection);
 
 				String flagSDN = Global.ZERO;
-				ArrayList<Flag> flags =
-						Nemo.getInstance().getDomain().getStation().getModel()
-						.getFlagTable().getFlags();
+				ArrayList<Flag> flags = Nemo.getInstance().getDomain().getStation().getModel().getFlagTable()
+						.getFlags();
 				int size = flags.size();
 				for (int j = 0; j < size; j++) {
-					if (flags.get(j).getLocal()
-							.equals(types.get(i).getTestIn())) {
-						flagSDN =
-								fr.ifremer.nemo.util.Utils.extraitCode(flags
-										.get(j)
-										.getSdn());
+					if (flags.get(j).getLocal().equals(types.get(i).getTestIn())) {
+						flagSDN = fr.ifremer.nemo.util.Utils.extraitCode(flags.get(j).getSdn());
 						break;
 					}
 				}
@@ -1821,41 +1622,37 @@ public class TableData {
 			if (!types.get(i).isP011()) {
 				types.get(i).setEntryKeyAndEntryTerm(myTable.getItem(i).getText(colNbById.get(COL_CODE)));
 			}
-			String userLabel =	myTable.getItem(i).getText(colNbById.get(COL_USERLABEL));
+			String userLabel = myTable.getItem(i).getText(colNbById.get(COL_USERLABEL));
 
 			if (!userLabel.equals(Global.EMPTY_STRING)) {
 				LabelParameterManager.getInstance().updateLabel(types.get(i).getEntryKeyP011(), userLabel);
 			}
 			// types.get(i).setUserLabel(myTable.getItem(i).getText(colNbById.get(COL_USERLABEL)));
 
-			String userStandardName =
-					myTable.getItem(i).getText(colNbById.get(COL_STANDARD_NAME));
+			String userStandardName = myTable.getItem(i).getText(colNbById.get(COL_STANDARD_NAME));
 
 			if (!userStandardName.equals(Global.EMPTY_STRING)) {
-				StandardNameParameterManager.getInstance().updateStandardName(
-						types.get(i).getEntryKeyP011(), userStandardName);
+				StandardNameParameterManager.getInstance().updateStandardName(types.get(i).getEntryKeyP011(),
+						userStandardName);
 			}
 
-			String userLongName =	myTable.getItem(i).getText(colNbById.get(COL_LONG_NAME));
+			String userLongName = myTable.getItem(i).getText(colNbById.get(COL_LONG_NAME));
 
 			if (!userLongName.equals(Global.EMPTY_STRING)) {
-				NetCDFLongNameParameterManager.getInstance().updateLongName(
-						types.get(i).getEntryKeyP011(), userLongName);
+				NetCDFLongNameParameterManager.getInstance().updateLongName(types.get(i).getEntryKeyP011(),
+						userLongName);
 			}
 
-			//types.get(i).setStandardName(myTable.getItem(i).getText(colNbById.get(COL_STANDARD_NAME)));
-			
-			types.get(i).setUnite(
-					myTable.getItem(i).getText(colNbById.get(COL_UNIT)));
-			
+			// types.get(i).setStandardName(myTable.getItem(i).getText(colNbById.get(COL_STANDARD_NAME)));
+
+			types.get(i).setUnite(myTable.getItem(i).getText(colNbById.get(COL_UNIT)));
+
 			// FAE 6542
-			types.get(i).setUniteCode(
-					myTable.getItem(i).getText(colNbById.get(COL_UNIT_CODE)));
-			
+			types.get(i).setUniteCode(myTable.getItem(i).getText(colNbById.get(COL_UNIT_CODE)));
+
 			// FAE50999: set the effective ISO format
 			if (types.get(i).getUniteCode().contentEquals(SdnVocabularyManager.P06_TISO)
-					&& types.get(i).getTest() != null
-					&& !types.get(i).getTest().isEmpty()) {
+					&& types.get(i).getTest() != null && !types.get(i).getTest().isEmpty()) {
 				try {
 					types.get(i).setEffectiveIsoDateFormat(DateTools.detectIso(types.get(i).getTest()).getPattern());
 				} catch (SismerToolsException e) {
@@ -1863,49 +1660,28 @@ public class TableData {
 				}
 			}
 
-			if (!isUnitP09()){ // 25794
+			if (!isUnitP09()) { // 25794
 
-				types.get(i).setP06Label(
-						myTable.getItem(i).getText(colNbById.get(COL_UNIT)));
+				types.get(i).setP06Label(myTable.getItem(i).getText(colNbById.get(COL_UNIT)));
 			}
 
-			types.get(i).setConversion(
-					myTable.getItem(i).getText(colNbById.get(COL_CONVERSION)));
-			types.get(i).setTest(
-					myTable.getItem(i).getText(colNbById.get(COL_TEST)));
-			types.get(i).setDebut(
-					Integer.valueOf(myTable.getItem(i).getText(
-							colNbById.get(COL_START))));
-			types.get(i).setFin(
-					Integer.valueOf(myTable.getItem(i).getText(
-							colNbById.get(COL_END))));
-			types.get(i).setFormat(
-					myTable.getItem(i).getText(colNbById.get(COL_FORMAT)));
-			types.get(i).setEntree(
-					myTable.getItem(i).getText(colNbById.get(COL_VALUE_IN)));
-			types.get(i).setSortie(
-					myTable.getItem(i).getText(colNbById.get(COL_VALUE_OUT)));
+			types.get(i).setConversion(myTable.getItem(i).getText(colNbById.get(COL_CONVERSION)));
+			types.get(i).setTest(myTable.getItem(i).getText(colNbById.get(COL_TEST)));
+			types.get(i).setDebut(Integer.valueOf(myTable.getItem(i).getText(colNbById.get(COL_START))));
+			types.get(i).setFin(Integer.valueOf(myTable.getItem(i).getText(colNbById.get(COL_END))));
+			types.get(i).setFormat(myTable.getItem(i).getText(colNbById.get(COL_FORMAT)));
+			types.get(i).setEntree(myTable.getItem(i).getText(colNbById.get(COL_VALUE_IN)));
+			types.get(i).setSortie(myTable.getItem(i).getText(colNbById.get(COL_VALUE_OUT)));
 
-			if (!myTable.getItem(i).getText(colNbById.get(COL_START_FLAG))
-					.equals(Global.EMPTY_STRING)
-					&& !myTable.getItem(i).getText(colNbById.get(COL_END_FLAG))
-					.equals(Global.EMPTY_STRING)) {
-				types.get(i).setDebutFlag(
-						myTable.getItem(i).getText(
-								colNbById.get(COL_START_FLAG)));
-				types
-				.get(i)
-				.setFinFlag(
-						myTable.getItem(i).getText(colNbById.get(COL_END_FLAG)));
+			if (!myTable.getItem(i).getText(colNbById.get(COL_START_FLAG)).equals(Global.EMPTY_STRING)
+					&& !myTable.getItem(i).getText(colNbById.get(COL_END_FLAG)).equals(Global.EMPTY_STRING)) {
+				types.get(i).setDebutFlag(myTable.getItem(i).getText(colNbById.get(COL_START_FLAG)));
+				types.get(i).setFinFlag(myTable.getItem(i).getText(colNbById.get(COL_END_FLAG)));
 			}
 
-			types.get(i).setInstrument(
-					myTable.getItem(i).getText(colNbById.get(COL_INSTRUMENT)));
+			types.get(i).setInstrument(myTable.getItem(i).getText(colNbById.get(COL_INSTRUMENT)));
 
-			types.get(i).setInstrumentCode(
-					myTable.getItem(i).getText(colNbById.get(COL_INSTRUMENT_CODE)));
-
-
+			types.get(i).setInstrumentCode(myTable.getItem(i).getText(colNbById.get(COL_INSTRUMENT_CODE)));
 
 			types.get(i).setIsText(isSelected(i));
 
@@ -1930,17 +1706,14 @@ public class TableData {
 
 	public ParameterFilteredTable getMyParameterFilteredTable() {
 		if (myParameterFilteredTable == null) {
-			FilteredTableFactory filteredFactory =
-					Nemo.getInstance().getViewMain()
-					.getMyFilteredTableFactory();
-			myParameterFilteredTable =
-					(ParameterFilteredTable) filteredFactory.go(Nemo
-							.getInstance()
-							.getViewMain().getEditDataForm().getCompositeData()
-							.getParent(), Global.PARAMETER, null);
+			FilteredTableFactory filteredFactory = Nemo.getInstance().getViewMain().getMyFilteredTableFactory();
+			myParameterFilteredTable = (ParameterFilteredTable) filteredFactory.go(
+					Nemo.getInstance().getViewMain().getEditDataForm().getCompositeData().getParent(), Global.PARAMETER,
+					null);
 		}
 		return myParameterFilteredTable;
 	}
+
 	public InstrumentFilteredTable getMyInstrumentTable() {
 		if (myInstrumentTable == null) {
 			myInstrumentTable = new InstrumentFilteredTable();
@@ -1967,7 +1740,8 @@ public class TableData {
 		int index = myTable.getSelectionIndex();
 		typeParameter = types.get(index);
 
-		StandardNameFilteredTable theTable = new StandardNameFilteredTable(typeParameter, RulesManager.getInstance().getMyDataListType());
+		StandardNameFilteredTable theTable = new StandardNameFilteredTable(typeParameter,
+				RulesManager.getInstance().getMyDataListType());
 		return theTable;
 	}
 
@@ -1980,6 +1754,7 @@ public class TableData {
 			item.setText(colNbById.get(COL_UNIT_CODE), typeUnit.getUnitKey());
 		}
 	}
+
 	public void setInstrument(TypeInstrument type) {
 		int selectedRow = myTable.getSelectionIndex();
 		if (selectedRow > -1) {
@@ -2009,51 +1784,47 @@ public class TableData {
 	public ArrayList<TypeUnit> getTypesP061() {
 		return typesP061;
 	}
+
 	/**
 	 * L22 list for instruments
+	 * 
 	 * @return
 	 */
 	public ArrayList<TypeInstrument> getTypesL22() {
 		return typesL22;
 	}
+
 	/**
 	 * L33 list for fall rates
+	 * 
 	 * @return
 	 */
 	public ArrayList<TypeFallRate> getTypesL33() {
 
-		if (typesL33 == null){
+		if (typesL33 == null) {
 			initTypesL33();
 		}
 		return typesL33;
 	}
 
-
-
 	// FAE 9670 surlignage de la position des paramètres dans le fichier
 	public void selectInViewFile(int debut, int fin) {
 
-
-		// TODO 33278: on garde la colonne start pour stocker le no de colonne pour les csv. La colonne end ne sert a rien et sera masquée
+		// TODO 33278: on garde la colonne start pour stocker le no de colonne
+		// pour les csv. La colonne end ne sert a rien et sera masquée
 		int lign = 0;
-		if (!RulesManager.getInstance()
-				.isCruiseInADirectory()
-				|| Nemo.getInstance().getViewMain().getEditFileForm()
-				.isMultiStationFileChecked()) {
+		if (!RulesManager.getInstance().isCruiseInADirectory()
+				|| Nemo.getInstance().getViewMain().getEditFileForm().isMultiStationFileChecked()) {
 			// fichier campagne
-			lign =
-					Nemo.getInstance().getDomain().getMedia().getModel()
-					.getFileHeader();
+			lign = Nemo.getInstance().getDomain().getMedia().getModel().getFileHeader();
 		}
-		lign +=
-				Nemo.getInstance().getDomain().getMedia()
-				.getStationHeaderNumberLines() + 1;
+		lign += Nemo.getInstance().getDomain().getMedia().getStationHeaderNumberLines() + 1;
 
 		debut += Utils.taillesCumLignes[lign - 1];
 		fin += Utils.taillesCumLignes[lign - 1];
-		if (RulesManager.getInstance().isUsingTableForCsvData()){
+		if (RulesManager.getInstance().isUsingTableForCsvData()) {
 			selectDataFromParameterSelection();
-		}else{
+		} else {
 			Nemo.getInstance().getViewMain().getEditDataForm().getTextAreaData().setSelection(debut - 1, fin);
 		}
 	}
@@ -2063,12 +1834,9 @@ public class TableData {
 		if (columnsMap.get(colNumber).writable) {
 			// case where parameter is type string
 			if (itemTmp.getChecked()) {
-				isWritable =
-						!
-						(columnsMap.get(colNumber).id.equals(COL_FORMAT)
-								|| columnsMap.get(colNumber).id
-								.equals(COL_CONVERSION)
-								|| columnsMap.get(colNumber).id.equals(COL_UNIT));
+				isWritable = !(columnsMap.get(colNumber).id.equals(COL_FORMAT)
+						|| columnsMap.get(colNumber).id.equals(COL_CONVERSION)
+						|| columnsMap.get(colNumber).id.equals(COL_UNIT));
 			} else {
 				isWritable = true;
 			}
@@ -2081,17 +1849,20 @@ public class TableData {
 		return mapColLineIndexes;
 	}
 
-	private void selectDataFromParameterSelection(){
+	private void selectDataFromParameterSelection() {
 		int indice = myTable.getSelectionIndex();
-		int colCount = Nemo.getInstance().getViewMain().getEditDataForm().getInputTableData().getViewer().getTable().getColumnCount();
-		//33278: split as columns
+		int colCount = Nemo.getInstance().getViewMain().getEditDataForm().getInputTableData().getViewer().getTable()
+				.getColumnCount();
+		// 33278: split as columns
 		int colNb = Integer.valueOf(myTable.getItem(indice).getText(colNbById.get(COL_START)));
-		Nemo.getInstance().getViewMain().getEditDataForm().getInputTableData().setIndexSelected(colNb-1);
-		Nemo.getInstance().getViewMain().getEditDataForm().getInputTableData().getViewer().getTable().getItem(0).setBackground(colNb-1, red);
-		TableItem item = Nemo.getInstance().getViewMain().getEditDataForm().getInputTableData().getViewer().getTable().getItem(0);
-		for (int colCpt=0; colCpt<colCount; colCpt++){
+		Nemo.getInstance().getViewMain().getEditDataForm().getInputTableData().setIndexSelected(colNb - 1);
+		Nemo.getInstance().getViewMain().getEditDataForm().getInputTableData().getViewer().getTable().getItem(0)
+				.setBackground(colNb - 1, red);
+		TableItem item = Nemo.getInstance().getViewMain().getEditDataForm().getInputTableData().getViewer().getTable()
+				.getItem(0);
+		for (int colCpt = 0; colCpt < colCount; colCpt++) {
 			item.setBackground(colCpt, white);
 		}
-		item.setBackground(colNb-1, red);
+		item.setBackground(colNb - 1, red);
 	}
 }

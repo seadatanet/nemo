@@ -46,7 +46,6 @@ import fr.ifremer.nemo.util.Global.E_TypeConversion;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.util.Preformat;
-import fr.ifremer.nemo.ws.WSDataType;
 import fr.ifremer.sismer_tools.SismerToolsException;
 import fr.ifremer.sismer_tools.externalresources.ExternalResourcesManager;
 import fr.ifremer.sismer_tools.resources.ODVConstants.E_Variant;
@@ -62,14 +61,13 @@ public class NemoShell {
 	/**
 	 * @param args
 	 */
-	public static boolean main(String inputFile, String outputFile,
-			String modelFile, Conversion conv, boolean sortDatas,
-			E_TypeConversion odvConv, String datasetRef, String localCsrIdentifier, String bshCsrReference, String cruiseName, String cruiseComment, String cdiSummaryFile,
-			boolean couplingTableUpdate, String couplingTablePrefix, String shipCode,
-			Logger logger) {
+	public static boolean main(String inputFile, String outputFile, String modelFile, Conversion conv,
+			boolean sortDatas, E_TypeConversion odvConv, String datasetRef, String localCsrIdentifier,
+			String bshCsrReference, String cruiseName, String cruiseComment, String cdiSummaryFile,
+			boolean couplingTableUpdate, String couplingTablePrefix, String shipCode, Logger logger) {
 
 		try {
-			
+
 			ManageLists.initLists();
 			Nemo nemo = Nemo.getInstance();
 			if (!new File(inputFile).exists()) {
@@ -85,38 +83,37 @@ public class NemoShell {
 			// export CDI summary (FAE 4525)
 			if (!cdiSummaryFile.equals(Global.EMPTY_STRING)) {
 				CDIResumeWriter.getInstance().reset();
-				CDIResumeWriter.getInstance().setNomFichierSortie(
-						cdiSummaryFile);
+				CDIResumeWriter.getInstance().setNomFichierSortie(cdiSummaryFile);
 			}
 
 			List<String> resmsg = nemo.openModel(modelFile);
 			if (!resmsg.isEmpty()) {
-				for (String msg : resmsg){
+				for (String msg : resmsg) {
 					logger.warn(msg);
 				}
 			}
 			InputDomain inputDomain = Nemo.getInstance().getDomain();
-			if (!inputDomain.isValid()){
+			if (!inputDomain.isValid()) {
 				logger.error("Error, model file not valid");
 				return false;
 			}
-			//			if (inputDomain.getMedia().getModel().getSeparator() != Global.EMPTY_STRING)
-			//				inputFile =
+			// if (inputDomain.getMedia().getModel().getSeparator() !=
+			// Global.EMPTY_STRING)
+			// inputFile =
 			// 33278: format only for models < 1.6.4
-			if (inputDomain.getMedia().getModel().getSeparator() != Global.EMPTY_STRING && !inputDomain.getMedia().getModel().getUseTableForCsvData())
+			if (inputDomain.getMedia().getModel().getSeparator() != Global.EMPTY_STRING
+					&& !inputDomain.getMedia().getModel().getUseTableForCsvData())
 				inputFile = Preformat.run(new File(inputFile)).getAbsolutePath();
 
 			nemo.getDomain().getMedia().getModel().setSourcePath(inputFile);
 
-			E_TypeConversion convertModel =
-					inputDomain.getConversion().getModel().getOutputFormat();
+			E_TypeConversion convertModel = inputDomain.getConversion().getModel().getOutputFormat();
 			E_TypeConversion convertArgument = odvConv;
 
 			// les deux sont égaux et différents de UNKNOWN
 			if (convertModel == convertArgument) {
 				if (convertModel != E_TypeConversion.UNKNOWN) {
-					nemo.getDomain().getConversion()
-					.setCurrentConversion(convertArgument);
+					nemo.getDomain().getConversion().setCurrentConversion(convertArgument);
 				} else {
 					// ERREUR les deux sont UNKNOWN
 					logger.error("Error, Conversion format must be set");
@@ -145,12 +142,10 @@ public class NemoShell {
 			}
 			// Modele UNKNOWN Argument NON UNKNOWN
 			else if (convertModel == E_TypeConversion.UNKNOWN) {
-				inputDomain.getConversion().setCurrentConversion(
-						convertArgument);
+				inputDomain.getConversion().setCurrentConversion(convertArgument);
 			} else {
 				// ERREUR argument et modele sont différents !!
-				logger
-				.error("Error, Conversion format incompatible with the model");
+				logger.error("Error, Conversion format incompatible with the model");
 				return false;
 			}
 
@@ -170,45 +165,45 @@ public class NemoShell {
 
 			if (strDefault.equals(Global.EMPTY_STRING))
 				strDefault = inputDomain.getCruise().getModel().getName();
-			
-			// cruise ref is in the model, or in the directory name in case of files group by cruise
-			if (odvConv != E_TypeConversion.MEDATLAS){
-				if (strDefault.isEmpty() && inputDomain.getMedia().getModel().getProcessType() != E_ProcessType.COLLECTION_DIR){
+
+			// cruise ref is in the model, or in the directory name in case of
+			// files group by cruise
+			if (odvConv != E_TypeConversion.MEDATLAS) {
+				if (strDefault.isEmpty()
+						&& inputDomain.getMedia().getModel().getProcessType() != E_ProcessType.COLLECTION_DIR) {
 					throw new GenerationException(Messages.error_missing_cruise_reference);
 				}
 				inputDomain.getCruise().getModel().setReference(strDefault);
 			}
-			
+
 			// Cruise name.
 			if (!cruiseName.equals(Global.EMPTY_STRING)) {
 				inputDomain.getCruise().getModel().setName(cruiseName);
 			}
-			
+
 			// Cruise comments.
 			if (!cruiseComment.equals(Global.EMPTY_STRING)) {
 				inputDomain.getCruise().getModel().setComment(cruiseComment);
 
 				// Cruise comment, only for CDI summary
 				inputDomain.getCruise().getModel().setDatasetAbstractString(cruiseComment);
-			}
-			else {
+			} else {
 				// default string for CDI summary.
 				inputDomain.getCruise().getModel().setDatasetAbstractString(Intern.CDIResumeWriter_notSpecified);
 			}
-			
-						
+
 			// Local CSR identifier.
 			if (!localCsrIdentifier.equals(Global.EMPTY_STRING)) {
 				inputDomain.getCruise().getModel().setLocalCSRIdentifier(localCsrIdentifier);
-				
+
 				// overrides eventual setting from the model
 				inputDomain.getCruise().getModel().setBshCsrReference("");
 			}
-			
+
 			// BSH CSR reference.
 			if (!bshCsrReference.equals(Global.EMPTY_STRING)) {
 				inputDomain.getCruise().getModel().setBshCsrReference(bshCsrReference);
-				
+
 				// overrides eventual setting from the model
 				inputDomain.getCruise().getModel().setLocalCSRIdentifier("");
 			}
@@ -216,18 +211,19 @@ public class NemoShell {
 			// Ship code and name. Those will be checked later.
 			if (!shipCode.equals(Global.EMPTY_STRING)) {
 				inputDomain.getCruise().getModel().setShipCode(shipCode);
-				inputDomain.getCruise().getModel().setShipName(null); // will be filled during the check.
+				inputDomain.getCruise().getModel().setShipName(null); // will be
+																		// filled
+																		// during
+																		// the
+																		// check.
 			}
-			
+
 			// Is a station property in file
-			int nbLignes =
-					inputDomain.getMedia().getModel().getFileHeader()
-					+ Nemo.getInstance().getDomain().getMedia()
-					.getShellStationHeaderNumberLines();
+			int nbLignes = inputDomain.getMedia().getModel().getFileHeader()
+					+ Nemo.getInstance().getDomain().getMedia().getShellStationHeaderNumberLines();
 
 			// FAE 7239
-			PropertyModel prefModel =
-					inputDomain.getStation().getModel().getReferenceProperty();
+			PropertyModel prefModel = inputDomain.getStation().getModel().getReferenceProperty();
 			if (prefModel.getFragment() != null) {
 
 				// FAE 7138
@@ -238,8 +234,7 @@ public class NemoShell {
 				}
 			}
 
-			for (PropertyModel pModel : inputDomain.getStation().getModel()
-					.getProperties()) {
+			for (PropertyModel pModel : inputDomain.getStation().getModel().getProperties()) {
 				if (pModel.getFragment() != null) {
 
 					// FAE 7138
@@ -265,11 +260,11 @@ public class NemoShell {
 			// la premiere fois (1er appel via openModel ci-dessus)
 			// a ce stade, il manque notamment la taille du stationHeader si
 			// celui-ci est variable
-			nemo.getDomain().getData().getMyParameterManager()
-			.setAddedParameterModel();
+			nemo.getDomain().getData().getMyParameterManager().setAddedParameterModel();
 			File repertory = null;
 
-			if (odvConv.equals(E_TypeConversion.ODV_MONOSTATION) || odvConv.equals(E_TypeConversion.NETCDF_MONOSTATION)) {
+			if (odvConv.equals(E_TypeConversion.ODV_MONOSTATION)
+					|| odvConv.equals(E_TypeConversion.NETCDF_MONOSTATION)) {
 				repertory = new File(outputFile);
 			} else {
 				repertory = new File(outputFile).getParentFile();
@@ -278,20 +273,22 @@ public class NemoShell {
 			if (!(repertory == null) && !repertory.exists())
 				repertory.mkdirs();
 
-			boolean ok =  checkBodc(logger, inputDomain);
+			boolean ok = checkBodc(logger, inputDomain);
 
-			if (!ok){
-				logger.error("errors in BODC parameters. Please check your model.");// TODO 35230 msg
+			if (!ok) {
+				logger.error("errors in BODC parameters. Please check your model.");// TODO
+																					// 35230
+																					// msg
 				return false;
 			}
-			
+
 			E_Variant variant = nemo.getDomain().getMedia().getModel().getVariant();
 //			if (variant != E_Variant.PHYSICOCHEMICAL)
 //			{
 //				LabelParameterManager.getInstance().loadSpecificLabels();
 //			}
-			
-			//*************************************************
+
+			// *************************************************
 			NemoWriter writer = NemoWriterFactory.createWriter(conv);
 
 			writer.write(null);
@@ -322,22 +319,25 @@ public class NemoShell {
 	private static boolean checkBodc(Logger logger, InputDomain inputDomain) {
 		// 35230********************
 		boolean ok = true;
-		
+
 		// CRUISE REFERENCES
 		String localCsrRef = inputDomain.getCruise().getModel().getLocalCsrIdentifier();
 		String bshCsrRef = inputDomain.getCruise().getModel().getBshCsrReference();
 		if (!localCsrRef.trim().isEmpty()) {
 
-			if (Nemo.getInstance().getConfig().getIdEdmoRespCsr() == null ||
-					Nemo.getInstance().getConfig().getIdEdmoRespCsr().trim().isEmpty() || Nemo.getInstance().getConfig().getIdEdmoRespCsr().equals("0")) {
+			if (Nemo.getInstance().getConfig().getIdEdmoRespCsr() == null
+					|| Nemo.getInstance().getConfig().getIdEdmoRespCsr().trim().isEmpty()
+					|| Nemo.getInstance().getConfig().getIdEdmoRespCsr().equals("0")) {
 				Utils.messageErreurAppend(Messages.edit_cruise_cruiseLocalCsrId_unableToCheckMissingCSREdmoId);
 				ok = false;
 			} else {
 				try {
-					
-					boolean exist = ExternalResourcesManager.getInstance().getCsrListManager().doesCodeExist(Nemo.getInstance().getConfig().getIdEdmoRespCsr(), localCsrRef);
+
+					boolean exist = ExternalResourcesManager.getInstance().getCsrListManager()
+							.doesCodeExist(Nemo.getInstance().getConfig().getIdEdmoRespCsr(), localCsrRef);
 					if (!exist) {
-						logger.warn(MessageFormat.format(Messages.edit_cruise_cruiseLocalCsrId_doesNotExist, localCsrRef, Nemo.getInstance().getConfig().getIdEdmoRespCsr()) + Global.RN);
+						logger.warn(MessageFormat.format(Messages.edit_cruise_cruiseLocalCsrId_doesNotExist,
+								localCsrRef, Nemo.getInstance().getConfig().getIdEdmoRespCsr()) + Global.RN);
 					}
 				} catch (IOException e) {
 					logger.warn(Messages.edit_cruise_cruiseLocalCsrId_unableToCheck);
@@ -355,63 +355,67 @@ public class NemoShell {
 				ok = false;
 			}
 		}
-		
-		// SHIP
-		BODCResult bodcRes = BodcChecker.getInstance().checkShip(inputDomain.getCruise().getModel().getShipCode(), inputDomain.getCruise().getModel().getShipName());
 
-		if (bodcRes.getResStatus() == BODC_RES_STATUS.KO){
-			ok=false;
+		// SHIP
+		BODCResult bodcRes = BodcChecker.getInstance().checkShip(inputDomain.getCruise().getModel().getShipCode(),
+				inputDomain.getCruise().getModel().getShipName());
+
+		if (bodcRes.getResStatus() == BODC_RES_STATUS.KO) {
+			ok = false;
 			logger.error(bodcRes.getErrorMsg());
-		}else if (bodcRes.getResStatus() == BODC_RES_STATUS.WARNING) { 
+		} else if (bodcRes.getResStatus() == BODC_RES_STATUS.WARNING) {
 			inputDomain.getCruise().getModel().setShipCode(bodcRes.getShipCode());
 			inputDomain.getCruise().getModel().setShipName(bodcRes.getShipLabel());
 			logger.warn(bodcRes.getWarningMsg());
-		}
-		else if (inputDomain.getCruise().getModel().getShipName() == null || inputDomain.getCruise().getModel().getShipName().isEmpty()) {
-			//case of a forced ship code (the name has been retrieved in checkShip())
+		} else if (inputDomain.getCruise().getModel().getShipName() == null
+				|| inputDomain.getCruise().getModel().getShipName().isEmpty()) {
+			// case of a forced ship code (the name has been retrieved in
+			// checkShip())
 			inputDomain.getCruise().getModel().setShipName(bodcRes.getShipLabel());
 		}
 
 		// 35230 region
-		if (isConversionToMedatlasOrCFPoint(inputDomain) ){
-			String regionCode = fr.ifremer.nemo.util.Utils.extraitCode(inputDomain.getCruise().getModel().getRegionCode());
-			String regionName = fr.ifremer.nemo.util.Utils.extraitValeur(inputDomain.getCruise().getModel().getRegionName());
-
+		if (isConversionToMedatlasOrCFPoint(inputDomain)) {
+			String regionCode = fr.ifremer.nemo.util.Utils
+					.extraitCode(inputDomain.getCruise().getModel().getRegionCode());
+			String regionName = fr.ifremer.nemo.util.Utils
+					.extraitValeur(inputDomain.getCruise().getModel().getRegionName());
 
 			bodcRes = BodcChecker.getInstance().checkRegion(regionCode, regionName);
-			if (bodcRes.getResStatus() == BODC_RES_STATUS.KO){
-				ok=false;
+			if (bodcRes.getResStatus() == BODC_RES_STATUS.KO) {
+				ok = false;
 				logger.error(bodcRes.getErrorMsg());
-			}else if (bodcRes.getResStatus() == BODC_RES_STATUS.WARNING){
+			} else if (bodcRes.getResStatus() == BODC_RES_STATUS.WARNING) {
 				inputDomain.getCruise().getModel().setRegionCode(bodcRes.getRegionCode());
 				inputDomain.getCruise().getModel().setRegionName(bodcRes.getRegionLabel());
 				logger.warn(bodcRes.getWarningMsg());
 			}
 		}
 		// 35230 country
-		if (isConversionToMedatlasOrCFPoint(inputDomain) ){
-			String countryCode = fr.ifremer.nemo.util.Utils.extraitCode(inputDomain.getCruise().getModel().getCountryCode());
-
+		if (isConversionToMedatlasOrCFPoint(inputDomain)) {
+			String countryCode = fr.ifremer.nemo.util.Utils
+					.extraitCode(inputDomain.getCruise().getModel().getCountryCode());
 
 			bodcRes = BodcChecker.getInstance().checkCountry(countryCode);
-			if (bodcRes.getResStatus() == BODC_RES_STATUS.KO){
-				ok=false;
+			if (bodcRes.getResStatus() == BODC_RES_STATUS.KO) {
+				ok = false;
 				logger.error(bodcRes.getErrorMsg());
-			}else if (bodcRes.getResStatus() == BODC_RES_STATUS.WARNING){
+			} else if (bodcRes.getResStatus() == BODC_RES_STATUS.WARNING) {
 				inputDomain.getCruise().getModel().setCountryCode(bodcRes.getCountryCode());
 				inputDomain.getCruise().getModel().setCountryName(bodcRes.getCountryLabel());
 				logger.warn(bodcRes.getWarningMsg());
 			}
 		}
 		// 35230 data center
-		if (isConversionToMedatlasOrCFPoint(inputDomain) ){
-			String centerCode = fr.ifremer.nemo.util.Utils.extraitCode(inputDomain.getCruise().getModel().getDataCentre());
+		if (isConversionToMedatlasOrCFPoint(inputDomain)) {
+			String centerCode = fr.ifremer.nemo.util.Utils
+					.extraitCode(inputDomain.getCruise().getModel().getDataCentre());
 
 			bodcRes = BodcChecker.getInstance().checkDataCenter(centerCode);
-			if (bodcRes.getResStatus() == BODC_RES_STATUS.KO){
-				ok=false;
+			if (bodcRes.getResStatus() == BODC_RES_STATUS.KO) {
+				ok = false;
 				logger.error(bodcRes.getErrorMsg());
-			}else if (bodcRes.getResStatus() == BODC_RES_STATUS.WARNING){
+			} else if (bodcRes.getResStatus() == BODC_RES_STATUS.WARNING) {
 				inputDomain.getCruise().getModel().setCountryCode(bodcRes.getCenterCode());
 				inputDomain.getCruise().getModel().setCountryName(bodcRes.getCenterLabel());
 				logger.warn(bodcRes.getWarningMsg());
@@ -419,22 +423,23 @@ public class NemoShell {
 		}
 		// 35230 data types in cruise
 		DataType[] dataTypes = null;
-		if (inputDomain.getConversion().getModel().getOutputFormat()==E_TypeConversion.MEDATLAS ){
+		if (inputDomain.getConversion().getModel().getOutputFormat() == E_TypeConversion.MEDATLAS) {
 			dataTypes = inputDomain.getCruise().getModel().getDataTypes();
-			for (int i=0; i<dataTypes.length; i++){
+			for (int i = 0; i < dataTypes.length; i++) {
 
-				bodcRes = BodcChecker.getInstance().checkDataType(fr.ifremer.nemo.util.Utils.extraitCode(dataTypes[i].getCode()));
-				if (bodcRes.getResStatus() == BODC_RES_STATUS.KO){
-					ok=false;
+				bodcRes = BodcChecker.getInstance()
+						.checkDataType(fr.ifremer.nemo.util.Utils.extraitCode(dataTypes[i].getCode()));
+				if (bodcRes.getResStatus() == BODC_RES_STATUS.KO) {
+					ok = false;
 					logger.error(bodcRes.getErrorMsg());
-				}else if (bodcRes.getResStatus() == BODC_RES_STATUS.WARNING){
+				} else if (bodcRes.getResStatus() == BODC_RES_STATUS.WARNING) {
 					try {
-						WSDataType newdt = ManageLists.getDataType(bodcRes.getDataTypeCode());
+						fr.ifremer.nemo.ws.model.DataType newdt = ManageLists.getDataType(bodcRes.getDataTypeCode());
 						dataTypes[i].setCode(bodcRes.getDataTypeCode());
 						dataTypes[i].setSensor(newdt.isSensor());
 					} catch (Exception e) {
 						logger.error(e.getMessage());
-						ok=false;
+						ok = false;
 					}
 
 					logger.warn(bodcRes.getWarningMsg());
@@ -442,7 +447,8 @@ public class NemoShell {
 
 			}
 		}
-		// 35230 data types in station - DO NOT TEST because user can set a free string as data type since 1.7.0 
+		// 35230 data types in station - DO NOT TEST because user can set a free
+		// string as data type since 1.7.0
 //		boolean newCodeFoundInCruiseDataTypes=false;
 //		DataType dataType = inputDomain.getStation().getModel().getDataType();
 //		bodcRes = BodcChecker.getInstance().checkDataType(dataType.getCode());
@@ -478,49 +484,52 @@ public class NemoShell {
 			TypeData typeCourant = new TypeData(pModel);
 
 			// check parameters codes
-			try{
+			try {
 				TypeData typeCourantOrig = new TypeData(typeCourant);
-				List<BODCResult> bodcResList = BodcChecker.getInstance().checkParameterCode(typeCourant, 	inputDomain.getData().getModel().getDataListType());
-				for (BODCResult res :bodcResList){
-					if (res.getResStatus() == BODC_RES_STATUS.KO){
+				List<BODCResult> bodcResList = BodcChecker.getInstance().checkParameterCode(typeCourant,
+						inputDomain.getData().getModel().getDataListType());
+				for (BODCResult res : bodcResList) {
+					if (res.getResStatus() == BODC_RES_STATUS.KO) {
 						logger.error(res.getErrorMsg());
-						ok=false;
-					}else if (res.getResStatus() == BODC_RES_STATUS.WARNING){
+						ok = false;
+					} else if (res.getResStatus() == BODC_RES_STATUS.WARNING) {
 						typeCourant = res.getTypeData();
 						pModel.setParameter(typeCourant);
 						logger.warn(res.getWarningMsg());
 
-						replaceVerticalParameters(typeCourantOrig, typeCourant,inputDomain);
+						replaceVerticalParameters(typeCourantOrig, typeCourant, inputDomain);
 
 					}
 				}
-			}catch (Exception e) {
+			} catch (Exception e) {
 				logger.error(e.getMessage());
 			}
 			// 35230 check unit
-			if (typeCourant.isText()) { //46457
+			if (typeCourant.isText()) { // 46457
 				typeCourant.setUniteCode(SdnVocabularyManager.P06_XXXX);
 				try {
-					typeCourant.setUnite( ExternalResourcesManager.getInstance().getSdnVocabularyManager().getLabel(SdnVocabularyManager.P06_XXXX, SdnVocabularyManager.LIST_P06));
+					typeCourant.setUnite(ExternalResourcesManager.getInstance().getSdnVocabularyManager()
+							.getLabel(SdnVocabularyManager.P06_XXXX, SdnVocabularyManager.LIST_P06));
 				} catch (SismerToolsException e) {
 					logger.warn(e.getMessage());
 				}
-			}else {
-				bodcRes = BodcChecker.getInstance().checkP06(typeCourant, inputDomain.getData().getModel().getDataListType());
-				if (bodcRes.getResStatus() == BODC_RES_STATUS.KO){
+			} else {
+				bodcRes = BodcChecker.getInstance().checkP06(typeCourant,
+						inputDomain.getData().getModel().getDataListType());
+				if (bodcRes.getResStatus() == BODC_RES_STATUS.KO) {
 					logger.error(bodcRes.getErrorMsg());
-					ok=false;
-				}else if (bodcRes.getResStatus() == BODC_RES_STATUS.WARNING){
+					ok = false;
+				} else if (bodcRes.getResStatus() == BODC_RES_STATUS.WARNING) {
 					typeCourant = bodcRes.getTypeData();
 					pModel.setParameter(typeCourant);
 					logger.warn(bodcRes.getWarningMsg());
 				}
 				// 35230 check instrument
 				bodcRes = BodcChecker.getInstance().checkInstrument(typeCourant);
-				if (bodcRes.getResStatus() == BODC_RES_STATUS.KO){
-					ok=false;
+				if (bodcRes.getResStatus() == BODC_RES_STATUS.KO) {
+					ok = false;
 					logger.error(bodcRes.getErrorMsg());
-				}else if (bodcRes.getResStatus() == BODC_RES_STATUS.WARNING){
+				} else if (bodcRes.getResStatus() == BODC_RES_STATUS.WARNING) {
 					typeCourant = bodcRes.getTypeData();
 					pModel.setParameter(typeCourant);
 					logger.warn(bodcRes.getWarningMsg());
@@ -529,11 +538,12 @@ public class NemoShell {
 		}
 		// 35230 check fall rate
 
-		bodcRes = BodcChecker.getInstance().checkFallRate(inputDomain.getData().getModel().getFallrateCode(), inputDomain.getData().getModel().getFallrateLabel());
-		if (bodcRes.getResStatus() == BODC_RES_STATUS.KO){
-			ok=false;
+		bodcRes = BodcChecker.getInstance().checkFallRate(inputDomain.getData().getModel().getFallrateCode(),
+				inputDomain.getData().getModel().getFallrateLabel());
+		if (bodcRes.getResStatus() == BODC_RES_STATUS.KO) {
+			ok = false;
 			logger.error(bodcRes.getErrorMsg());
-		}else if (bodcRes.getResStatus() == BODC_RES_STATUS.WARNING){
+		} else if (bodcRes.getResStatus() == BODC_RES_STATUS.WARNING) {
 			inputDomain.getData().getModel().setFallrateCode(bodcRes.getFallrateCode());
 			inputDomain.getData().getModel().setFallrateLabel(bodcRes.getFallrateLabel());
 			logger.warn(bodcRes.getWarningMsg());
@@ -541,55 +551,54 @@ public class NemoShell {
 		return ok;
 	}
 
-	private static void replaceVerticalParameters(TypeData typeCourantOrig,
-			TypeData typeCourant, InputDomain inputDomain) {
+	private static void replaceVerticalParameters(TypeData typeCourantOrig, TypeData typeCourant,
+			InputDomain inputDomain) {
 		String oldParamCode;
 		String newParamCode;
-		if (inputDomain.getData().getModel().getDataListType()==DataListTypeEnum.P091){
+		if (inputDomain.getData().getModel().getDataListType() == DataListTypeEnum.P091) {
 			oldParamCode = typeCourantOrig.getEntryKey();
-			newParamCode =  typeCourant.getEntryKey();
-		}else{
+			newParamCode = typeCourant.getEntryKey();
+		} else {
 			oldParamCode = typeCourantOrig.getEntryKeyP011();
-			newParamCode =  typeCourant.getEntryKeyP011();
+			newParamCode = typeCourant.getEntryKeyP011();
 		}
-		if (inputDomain.getData().getModel().getVerticalParametersList().getP_depthBSBed().equals(oldParamCode)){
+		if (inputDomain.getData().getModel().getVerticalParametersList().getP_depthBSBed().equals(oldParamCode)) {
 			inputDomain.getData().getModel().getVerticalParametersList().setP_depthBSBed(newParamCode);
 		}
-		if (inputDomain.getData().getModel().getVerticalParametersList().getP_depthBSSurf().equals(oldParamCode)){
+		if (inputDomain.getData().getModel().getVerticalParametersList().getP_depthBSSurf().equals(oldParamCode)) {
 			inputDomain.getData().getModel().getVerticalParametersList().setP_depthBSSurf(newParamCode);
 		}
-		if (inputDomain.getData().getModel().getVerticalParametersList().getP_heightASLvl().equals(oldParamCode)){
+		if (inputDomain.getData().getModel().getVerticalParametersList().getP_heightASLvl().equals(oldParamCode)) {
 			inputDomain.getData().getModel().getVerticalParametersList().setP_heightASLvl(newParamCode);
 		}
-		if (inputDomain.getData().getModel().getVerticalParametersList().getP_pressure().equals(oldParamCode)){
+		if (inputDomain.getData().getModel().getVerticalParametersList().getP_pressure().equals(oldParamCode)) {
 			inputDomain.getData().getModel().getVerticalParametersList().setP_pressure(newParamCode);
 		}
 
 	}
 
-	private static void mapping(Logger logger, Conversion conv,
-			MappingTable mappingTable, String couplingTablePrefix)
-					throws Exception {
+	private static void mapping(Logger logger, Conversion conv, MappingTable mappingTable, String couplingTablePrefix)
+			throws Exception {
 		Mapping mapping;
 
 		InputDomain inputDomain = Nemo.getInstance().getDomain();
 		CruiseDomain cDomain = inputDomain.getCruise();
 		StationDomain sDomain = inputDomain.getStation();
-		ConversionDomain convDomain =Nemo.getInstance().getDomain().getConversion();
+		ConversionDomain convDomain = Nemo.getInstance().getDomain().getConversion();
 		String localCdiId;
 		try {
 
 			String cheminComplet = convDomain.getOutputPath();
 			String couplingTablValidPrefix = convDomain.getValidPrefix(couplingTablePrefix, cheminComplet);
-			if (couplingTablValidPrefix!=null) {
+			if (couplingTablValidPrefix != null) {
 				convDomain.setCouplingTablePrefix(couplingTablValidPrefix);
-			}else{
+			} else {
 				throw new Exception("Error: couplingTablePrefix is not consistent with output path");
 			}
 
 			for (String outputPath : inputDomain.getMedia().getOutputFiles().keySet()) {
 
-				for (String local_cdi_id: inputDomain.getMedia().getOutputFiles().get(outputPath)) {
+				for (String local_cdi_id : inputDomain.getMedia().getOutputFiles().get(outputPath)) {
 					mapping = new Mapping(local_cdi_id, conv.getFormatName());
 
 					String modus = Mapping.MODUS_MULTISTATIONS;
@@ -597,7 +606,6 @@ public class NemoShell {
 							|| inputDomain.getConversion().getCurrent() == E_TypeConversion.NETCDF_MONOSTATION) {
 						modus = Mapping.MODUS_MONOSTATION;
 					}
-
 
 					mapping.setFilename(convDomain.getFileNameInCoupling(outputPath));
 					mapping.setDate(new Date());
@@ -611,9 +619,10 @@ public class NemoShell {
 			e.printStackTrace();
 		}
 	}
-	private static boolean isConversionToMedatlasOrCFPoint(InputDomain inputDomain){
-		return inputDomain.getConversion().getModel().getOutputFormat()==E_TypeConversion.MEDATLAS
-				|| inputDomain.getConversion().getModel().getOutputFormat()==E_TypeConversion.NETCDF_MONOSTATION
-				||inputDomain.getConversion().getModel().getOutputFormat()==E_TypeConversion.NETCDF_MULTISTATIONS ;
+
+	private static boolean isConversionToMedatlasOrCFPoint(InputDomain inputDomain) {
+		return inputDomain.getConversion().getModel().getOutputFormat() == E_TypeConversion.MEDATLAS
+				|| inputDomain.getConversion().getModel().getOutputFormat() == E_TypeConversion.NETCDF_MONOSTATION
+				|| inputDomain.getConversion().getModel().getOutputFormat() == E_TypeConversion.NETCDF_MULTISTATIONS;
 	}
 }

@@ -52,7 +52,7 @@ import fr.ifremer.nemo.util.Global.E_TypeConversion;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.util.Utils;
-import fr.ifremer.nemo.ws.NemoWS;
+import fr.ifremer.nemo.ws.NemoService;
 import fr.ifremer.sismer_tools.externalresources.ExternalResourcesManager;
 import fr.ifremer.sismer_tools.resources.ODVConstants.E_Variant;
 import sdn.vocabulary.interfaces.VocabularyException;
@@ -462,7 +462,7 @@ public class Nemo {
 
 			// Call NEMO WebService
 			Nemo.getInstance().getLogger().info(Messages.connect_nemo);
-			NemoWS service = NemoLists.callNemoWS();
+			NemoService service = NemoLists.callNemoWS();
 			UpdateStatusList updateNemo = (UpdateStatusList) ManageLists.getUpdate(Intern.id_nemo);
 
 			// update CSR

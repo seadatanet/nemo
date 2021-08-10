@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import org.eclipse.swt.widgets.Table;
 
-import fr.ifremer.nemo.ws.WSSurveyDescription;
+import fr.ifremer.nemo.ws.model.SurveyDescription;
 
 public class TableWS_Survey {
 
@@ -18,7 +18,7 @@ public class TableWS_Survey {
 
 	public static ArrayList<String> refs, listeFiltree, refsWS;
 
-	public static WSSurveyDescription[] surveysWS;
+	public static SurveyDescription[] surveysWS;
 
 	public static void main(String[] args) {
 

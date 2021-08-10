@@ -1,6 +1,5 @@
 package fr.ifremer.nemo.ui.edit.cruise;
 
-
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.text.MessageFormat;
@@ -23,7 +22,7 @@ import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Global.E_TypeConversion;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.util.format.DateTimeFormat;
-import fr.ifremer.nemo.ws.WSDataType;
+import fr.ifremer.nemo.ws.model.DataType;
 import fr.ifremer.sismer_tools.externalresources.ExternalResourcesManager;
 
 /**
@@ -32,7 +31,6 @@ import fr.ifremer.sismer_tools.externalresources.ExternalResourcesManager;
  * @author sbregent
  */
 public class CruiseFormValidator extends FormValidator {
-	
 
 	private String warningCruise = "";
 
@@ -41,7 +39,7 @@ public class CruiseFormValidator extends FormValidator {
 	}
 
 	private void displayErrorIfNeeded(boolean checkResult, String fieldName) {
-		
+
 		if (!checkResult) {
 			Utils.messageErreurAppend(Messages.Regexp_3 + fieldName + Messages.Regexp_5);
 		}
@@ -49,7 +47,7 @@ public class CruiseFormValidator extends FormValidator {
 
 	@Override
 	public void validate() {
-		boolean bodcReplaced=false;
+		boolean bodcReplaced = false;
 		BODCResult bodcRes;
 		guiLogger.info("validate cruise tab");
 		warningCruise = "";
@@ -72,9 +70,8 @@ public class CruiseFormValidator extends FormValidator {
 
 		// check valeurs obligatoires
 		CruiseSection section = editCruiseForm.getSectionReference();
-		if (section != null){
-			
-			
+		if (section != null) {
+
 			resultat = section.checkMandatory(itemID.REFERENCE);
 			displayErrorIfNeeded(resultat, Messages.edit_cruise_cruiseRef);
 			ok = ok && resultat;
@@ -84,7 +81,7 @@ public class CruiseFormValidator extends FormValidator {
 			resultat = section.checkMandatory(itemID.BSH_CSR);
 			displayErrorIfNeeded(resultat, Messages.edit_cruise_cruiseBshCsrReference);
 			ok = ok && resultat;
-			
+
 			resultat = section.checkMandatory(itemID.NAME);
 			displayErrorIfNeeded(resultat, Messages.edit_cruise_cruiseName);
 			ok = ok && resultat;
@@ -92,75 +89,79 @@ public class CruiseFormValidator extends FormValidator {
 			resultat = section.checkMandatory(itemID.SHIP);
 			displayErrorIfNeeded(resultat, Messages.edit_cruise_ship);
 			ok = ok && resultat;
-			
-			
-			
-			
+
 			// 35230 SHIP
 			String shipCode = fr.ifremer.nemo.util.Utils.extraitCode(section.getItem(itemID.SHIP).getText());
 			String shipName = fr.ifremer.nemo.util.Utils.extraitValeur(section.getItem(itemID.SHIP).getText());
-			
-			if(section.isEnabled()){
+
+			if (section.isEnabled()) {
 				bodcRes = BodcChecker.getInstance().checkShip(shipCode, shipName);
-				if (bodcRes.getResStatus() == BODC_RES_STATUS.KO){
-					ok=false;
+				if (bodcRes.getResStatus() == BODC_RES_STATUS.KO) {
+					ok = false;
 					Utils.messageErreurAppend(bodcRes.getErrorMsg());
-				}else if (bodcRes.getResStatus() == BODC_RES_STATUS.WARNING){
-					Utils.selectComboCodePlus(section.getItem(itemID.SHIP).getValueCombo(),bodcRes.getShipCode(), bodcRes.getShipLabel());
-					warningCruise+=bodcRes.getWarningMsg()+Global.RN;
+				} else if (bodcRes.getResStatus() == BODC_RES_STATUS.WARNING) {
+					Utils.selectComboCodePlus(section.getItem(itemID.SHIP).getValueCombo(), bodcRes.getShipCode(),
+							bodcRes.getShipLabel());
+					warningCruise += bodcRes.getWarningMsg() + Global.RN;
 				}
 			}
 			// FAE 1143 : la référence campagne doit être == 13 caractères pour
 			// MEDATLAS
 			editConversionForm.setWarningCampagne(Global.EMPTY_STRING);
 			String value = section.getItem(itemID.REFERENCE).getText().trim();
-			if (value.length() != 13 && (RulesManager.getInstance().getMyConversionType() == E_TypeConversion.MEDATLAS)) {
+			if (value.length() != 13
+					&& (RulesManager.getInstance().getMyConversionType() == E_TypeConversion.MEDATLAS)) {
 				editConversionForm.setWarningCampagne(Messages.ViewLog_5);
 			} else {
 				editConversionForm.setWarningStation(Global.EMPTY_STRING);
 			}
-			
+
 			String localCsrRef = fr.ifremer.nemo.util.Utils.extraitCode(section.getItem(itemID.LOCAL_CSR_ID).getText());
 			String bshCsrRef = fr.ifremer.nemo.util.Utils.extraitCode(section.getItem(itemID.BSH_CSR).getText());
-			
-			if (!localCsrRef.trim().isEmpty() && !bshCsrRef.trim().isEmpty()){
-				ok=false;
-				Utils.messageErreurAppend(Messages.edit_cruise_uniqueCSR);
-			}else if (!localCsrRef.trim().isEmpty()){
 
-				if (Nemo.getInstance().getConfig().getIdEdmoRespCsr()==null||
-						Nemo.getInstance().getConfig().getIdEdmoRespCsr().trim().isEmpty() || Nemo.getInstance().getConfig().getIdEdmoRespCsr().equals("0")) {
+			if (!localCsrRef.trim().isEmpty() && !bshCsrRef.trim().isEmpty()) {
+				ok = false;
+				Utils.messageErreurAppend(Messages.edit_cruise_uniqueCSR);
+			} else if (!localCsrRef.trim().isEmpty()) {
+
+				if (Nemo.getInstance().getConfig().getIdEdmoRespCsr() == null
+						|| Nemo.getInstance().getConfig().getIdEdmoRespCsr().trim().isEmpty()
+						|| Nemo.getInstance().getConfig().getIdEdmoRespCsr().equals("0")) {
 					Utils.messageErreurAppend(Messages.edit_cruise_cruiseLocalCsrId_unableToCheckMissingCSREdmoId);
-					ok=false;
-				}else {
+					ok = false;
+				} else {
 					try {
-						boolean exist = ExternalResourcesManager.getInstance().getCsrListManager().doesCodeExist(Nemo.getInstance().getConfig().getIdEdmoRespCsr(), localCsrRef);
-						if (!exist){
-							warningCruise+=MessageFormat.format(Messages.edit_cruise_cruiseLocalCsrId_doesNotExist , localCsrRef, Nemo.getInstance().getConfig().getIdEdmoRespCsr())+Global.RN;
+						boolean exist = ExternalResourcesManager.getInstance().getCsrListManager()
+								.doesCodeExist(Nemo.getInstance().getConfig().getIdEdmoRespCsr(), localCsrRef);
+						if (!exist) {
+							warningCruise += MessageFormat.format(Messages.edit_cruise_cruiseLocalCsrId_doesNotExist,
+									localCsrRef, Nemo.getInstance().getConfig().getIdEdmoRespCsr()) + Global.RN;
 						}
-					} catch ( IOException e) {
-						warningCruise+=Messages.edit_cruise_cruiseLocalCsrId_unableToCheck;
+					} catch (IOException e) {
+						warningCruise += Messages.edit_cruise_cruiseLocalCsrId_unableToCheck;
 					}
 				}
 			}
-			
-			else if (!bshCsrRef.trim().isEmpty()){
+
+			else if (!bshCsrRef.trim().isEmpty()) {
 				try {
-					boolean exist = ExternalResourcesManager.getInstance().getCsrListManager().doesBshCodeExist( bshCsrRef);
-					if (!exist){
-						Utils.messageErreurAppend(MessageFormat.format(Messages.edit_cruise_cruiseBshCsrId_doesNotExist , bshCsrRef));
-						ok=false;
+					boolean exist = ExternalResourcesManager.getInstance().getCsrListManager()
+							.doesBshCodeExist(bshCsrRef);
+					if (!exist) {
+						Utils.messageErreurAppend(
+								MessageFormat.format(Messages.edit_cruise_cruiseBshCsrId_doesNotExist, bshCsrRef));
+						ok = false;
 					}
-				} catch ( IOException e) {
+				} catch (IOException e) {
 					Utils.messageErreurAppend(Messages.edit_cruise_cruiseLocalCsrId_unableToCheck);
-					ok=false;
+					ok = false;
 				}
 			}
-			
+
 		}
 
 		section = editCruiseForm.getSectionLocalisation();
-		if (section != null && section.isEnabled()){
+		if (section != null && section.isEnabled()) {
 			resultat = section.checkMandatory(itemID.START_DATE);
 			displayErrorIfNeeded(resultat, Messages.edit_cruise_startDate);
 			ok = ok && resultat;
@@ -174,25 +175,25 @@ public class CruiseFormValidator extends FormValidator {
 			ok = ok && resultat;
 
 			ok = checkDates(section, ok);
-			if (section.isEnabled()){
+			if (section.isEnabled()) {
 				// 35230 region
 				String regionCode = fr.ifremer.nemo.util.Utils.extraitCode(section.getItem(itemID.REGION).getText());
 				String regionName = fr.ifremer.nemo.util.Utils.extraitValeur(section.getItem(itemID.REGION).getText());
 
-
 				bodcRes = BodcChecker.getInstance().checkRegion(regionCode, regionName);
-				if (bodcRes.getResStatus() == BODC_RES_STATUS.KO){
-					ok=false;
+				if (bodcRes.getResStatus() == BODC_RES_STATUS.KO) {
+					ok = false;
 					Utils.messageErreurAppend(bodcRes.getErrorMsg());
-				}else if (bodcRes.getResStatus() == BODC_RES_STATUS.WARNING){
-					Utils.selectComboCodePlus(section.getItem(itemID.REGION).getValueCombo(),bodcRes.getRegionCode(), bodcRes.getRegionLabel());
+				} else if (bodcRes.getResStatus() == BODC_RES_STATUS.WARNING) {
+					Utils.selectComboCodePlus(section.getItem(itemID.REGION).getValueCombo(), bodcRes.getRegionCode(),
+							bodcRes.getRegionLabel());
 					Utils.messageWarningAppend(bodcRes.getWarningMsg());
 				}
 			}
 		}
 
 		section = editCruiseForm.getSectionSource();
-		if (section != null){
+		if (section != null) {
 			resultat = section.checkMandatory(itemID.COUNTRY);
 			displayErrorIfNeeded(resultat, Messages.edit_cruise_country);
 			ok = ok && resultat;
@@ -200,82 +201,86 @@ public class CruiseFormValidator extends FormValidator {
 			resultat = section.checkMandatory(itemID.CHIEF);
 			displayErrorIfNeeded(resultat, Messages.edit_cruise_chief);
 			ok = ok && resultat;
-			
+
 			// 35230 country
-			if (section.isEnabled()){
+			if (section.isEnabled()) {
 				String countryCode = fr.ifremer.nemo.util.Utils.extraitCode(section.getItem(itemID.COUNTRY).getText());
-				String countryName = fr.ifremer.nemo.util.Utils.extraitValeur(section.getItem(itemID.COUNTRY).getText());
+				String countryName = fr.ifremer.nemo.util.Utils
+						.extraitValeur(section.getItem(itemID.COUNTRY).getText());
 
 				bodcRes = BodcChecker.getInstance().checkCountry(countryCode, countryName);
-				if (bodcRes.getResStatus() == BODC_RES_STATUS.KO){
-					ok=false;
+				if (bodcRes.getResStatus() == BODC_RES_STATUS.KO) {
+					ok = false;
 					Utils.messageErreurAppend(bodcRes.getErrorMsg());
-				}else if (bodcRes.getResStatus() == BODC_RES_STATUS.WARNING){
-					Utils.selectComboCodePlus(section.getItem(itemID.COUNTRY).getValueCombo(),bodcRes.getCountryCode(), bodcRes.getCountryLabel());
+				} else if (bodcRes.getResStatus() == BODC_RES_STATUS.WARNING) {
+					Utils.selectComboCodePlus(section.getItem(itemID.COUNTRY).getValueCombo(), bodcRes.getCountryCode(),
+							bodcRes.getCountryLabel());
 					Utils.messageWarningAppend(bodcRes.getWarningMsg());
 				}
 			}
-						
+
 		}
-		
 
 		CruiseSection sectionCentre = editCruiseForm.getSectionCentre();
 		// 35230 DATA CENTER
 		String centreCode = fr.ifremer.nemo.util.Utils.extraitCode(sectionCentre.getItem(itemID.DATA_CENTER).getText());
-		String centreName = fr.ifremer.nemo.util.Utils.extraitValeur(sectionCentre.getItem(itemID.DATA_CENTER).getText());
+		String centreName = fr.ifremer.nemo.util.Utils
+				.extraitValeur(sectionCentre.getItem(itemID.DATA_CENTER).getText());
 
-		if (sectionCentre.isEnabled()){
+		if (sectionCentre.isEnabled()) {
 			bodcRes = BodcChecker.getInstance().checkDataCenter(centreCode, centreName);
-			if (bodcRes.getResStatus() == BODC_RES_STATUS.KO){
-				ok=false;
+			if (bodcRes.getResStatus() == BODC_RES_STATUS.KO) {
+				ok = false;
 				Utils.messageErreurAppend(bodcRes.getErrorMsg());
-			}else if (bodcRes.getResStatus() == BODC_RES_STATUS.WARNING){
-				Utils.selectComboCodePlus(sectionCentre.getItem(itemID.DATA_CENTER).getValueCombo(),bodcRes.getCenterCode(), bodcRes.getCenterLabel());
+			} else if (bodcRes.getResStatus() == BODC_RES_STATUS.WARNING) {
+				Utils.selectComboCodePlus(sectionCentre.getItem(itemID.DATA_CENTER).getValueCombo(),
+						bodcRes.getCenterCode(), bodcRes.getCenterLabel());
 				Utils.messageWarningAppend(bodcRes.getWarningMsg());
 			}
 		}
 
-
 		// DATA TYPE
 		CruiseDatatypeSection sectionDataType = editCruiseForm.getSectionDataType();
-		if(sectionDataType !=null){
-			if (sectionDataType.isMandatory()){
+		if (sectionDataType != null) {
+			if (sectionDataType.isMandatory()) {
 				ok = ok & sectionDataType.chekMandatory();
 			}
-			if(sectionDataType.isEnabled()){
+			if (sectionDataType.isEnabled()) {
 				String code;
-				for (int i=0; i<TableDataSurvey.types.size(); i++){
+				for (int i = 0; i < TableDataSurvey.types.size(); i++) {
 					TypeSurvey tds = TableDataSurvey.types.get(i);
 					code = fr.ifremer.nemo.util.Utils.extraitCode(tds.getCode());
 					bodcRes = BodcChecker.getInstance().checkDataType(code);
-					if (bodcRes.getResStatus() == BODC_RES_STATUS.KO){
-						ok=false;
+					if (bodcRes.getResStatus() == BODC_RES_STATUS.KO) {
+						ok = false;
 						Utils.messageErreurAppend(bodcRes.getErrorMsg());
-					}else if (bodcRes.getResStatus() == BODC_RES_STATUS.WARNING){
-						WSDataType newdt;
+					} else if (bodcRes.getResStatus() == BODC_RES_STATUS.WARNING) {
+						DataType newdt;
 						try {
 							newdt = ManageLists.getDataType(bodcRes.getDataTypeCode());
 							tds.setCode(newdt.getCode());
 							tds.setSensor(newdt.isSensor());
 							Utils.messageWarningAppend(bodcRes.getWarningMsg());
-							bodcReplaced=true;
+							bodcReplaced = true;
 						} catch (Exception e) {
-							ok=false;
+							ok = false;
 							Utils.messageErreurAppend(e.getMessage());
 						}
 
 					}
 				}
-				if (bodcReplaced){
+				if (bodcReplaced) {
 					TableDataSurvey.majIHM();
 				}
 			}
 		}
-		
 
-		if (bodcReplaced){
-			ok=false;
-			Utils.messageWarningAppend("Some bodc terms has been replaced. Please verify and validate. Save your model to avoid this warning next time."); // TODO 35230 message
+		if (bodcReplaced) {
+			ok = false;
+			Utils.messageWarningAppend(
+					"Some bodc terms has been replaced. Please verify and validate. Save your model to avoid this warning next time."); // TODO
+																																		// 35230
+																																		// message
 		}
 		if (ok) {
 			guiLogger.info("Cruise validation result: OK");
@@ -291,6 +296,7 @@ public class CruiseFormValidator extends FormValidator {
 			Nemo.getInstance().getViewMain().setEtape(1);
 		}
 	}
+
 	/**
 	 * @param editCruiseForm
 	 * @param ok
@@ -311,10 +317,8 @@ public class CruiseFormValidator extends FormValidator {
 				dateFormat.parseObject(startDate);
 
 				if (formatter.format(curDate).equals(startDate)) {
-					warningCruise += Messages.Regexp_3 +
-							Messages.edit_cruise_startDate +
-							" (" + startDate + ") " +
-							Messages.Regexp_6 + Global.RN;
+					warningCruise += Messages.Regexp_3 + Messages.edit_cruise_startDate + " (" + startDate + ") "
+							+ Messages.Regexp_6 + Global.RN;
 				}
 
 			} catch (ParseException e) {
@@ -333,10 +337,8 @@ public class CruiseFormValidator extends FormValidator {
 
 				dateFormat.parseObject(endDate);
 				if (formatter.format(curDate).equals(endDate)) {
-					warningCruise += Messages.Regexp_3 +
-							Messages.edit_cruise_endDate +
-							" (" + endDate + ") " +
-							Messages.Regexp_6 + Global.RN;
+					warningCruise += Messages.Regexp_3 + Messages.edit_cruise_endDate + " (" + endDate + ") "
+							+ Messages.Regexp_6 + Global.RN;
 				}
 			} catch (ParseException e) {
 				Utils.messageErreurAppend(Messages.Etape_27);
@@ -350,6 +352,7 @@ public class CruiseFormValidator extends FormValidator {
 		}
 		return ok;
 	}
+
 	@Override
 	protected void onSuccess() {
 		EditConversionForm editConversionForm = Nemo.getInstance().getViewMain().getEditConversionForm();

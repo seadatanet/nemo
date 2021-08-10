@@ -26,11 +26,12 @@ import fr.ifremer.nemo.config.ManageLists;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
-import fr.ifremer.nemo.ws.WSDataType;
+import fr.ifremer.nemo.ws.model.DataType;
 
 /**
  * 
  * Description: Table affichée dans l'onglet Cruise, section "Type of data"
+ * 
  * @author sbregent
  *
  */
@@ -62,9 +63,7 @@ public class TableDataSurvey {
 	public static void creationTable() {
 		final Table table;
 
-		TableDataSurvey.tableTypeSurvey =
-				new Table(sectionClientType, SWT.MULTI | SWT.FULL_SELECTION
-						| SWT.BORDER);
+		TableDataSurvey.tableTypeSurvey = new Table(sectionClientType, SWT.MULTI | SWT.FULL_SELECTION | SWT.BORDER);
 
 		table = TableDataSurvey.tableTypeSurvey;
 
@@ -90,12 +89,10 @@ public class TableDataSurvey {
 
 		table.addControlListener(new ControlListener() {
 
-			public void controlMoved(ControlEvent e)
-			{
+			public void controlMoved(ControlEvent e) {
 			}
 
-			public void controlResized(ControlEvent e)
-			{
+			public void controlResized(ControlEvent e) {
 
 				int w = ((Table) e.getSource()).getSize().x;
 				int w1 = 60;
@@ -118,19 +115,15 @@ public class TableDataSurvey {
 		// datamodel
 		types = new ArrayList<TypeSurvey>();
 		typesWS = new ArrayList<TypeSurvey>();
-
-		int taille = ManageLists.getDataTypes().length;
-
-		for (int i = 0; i < taille; i++) {
-			WSDataType wsDatatype = new WSDataType();
-			wsDatatype = ManageLists.getDataTypes()[i];
+		DataType[] dataTypes = ManageLists.getDataTypes();
+		for (int i = 0; i < dataTypes.length; i++) {
+			DataType wsDatatype = ManageLists.getDataTypes()[i];
 
 			// new type
 			TypeSurvey type = new TypeSurvey();
 
 			// parametres
-			type.setCode(wsDatatype.getCode() + Global.SEP
-					+ wsDatatype.getLibelle());
+			type.setCode(wsDatatype.getCode() + Global.SEP + wsDatatype.getLibelle());
 			type.setQc(Global.NO);
 
 			type.setSensor(wsDatatype.isSensor());
@@ -166,8 +159,7 @@ public class TableDataSurvey {
 		 * Point size = table.computeSize(SWT.DEFAULT, SWT.DEFAULT);
 		 * table.setSize(size);
 		 */table.addListener(SWT.MouseDown, new Listener() {
-			public void handleEvent(Event event)
-			{
+			public void handleEvent(Event event) {
 
 				// calcul du numero de ligne selectionne
 
@@ -182,58 +174,47 @@ public class TableDataSurvey {
 				Rectangle clientArea = table.getClientArea();
 				int index = table.getTopIndex();
 
-				for (int i = 0; i < table.getColumnCount(); i++)
-				{
+				for (int i = 0; i < table.getColumnCount(); i++) {
 					Rectangle rect = item.getBounds(i);
-					if (rect.contains(pt))
-					{
+					if (rect.contains(pt)) {
 						int indexTmp = table.indexOf(item);
 						ligneSelec = indexTmp;
 						colonneSelec = i;
 					}
 				}
 
-				while (index < table.getItemCount())
-				{
+				while (index < table.getItemCount()) {
 					boolean visible = false;
 					final TableItem itemTmp = table.getItem(index);
 
-					for (int i = 0; i < table.getColumnCount(); i++)
-					{
-						//le champs sensors etant en position 3
-						//le champs code etant en position 0
-						//on ne crée pas l'edition.
-						if (i != 0 && i != 3)
-						{
+					for (int i = 0; i < table.getColumnCount(); i++) {
+						// le champs sensors etant en position 3
+						// le champs code etant en position 0
+						// on ne crée pas l'edition.
+						if (i != 0 && i != 3) {
 							Rectangle rect = itemTmp.getBounds(i);
-							if (rect.contains(pt))
-							{
+							if (rect.contains(pt)) {
 								final int column = i;
 								final Text text = new Text(table, SWT.NONE);
 								Listener textListener = new Listener() {
-									public void handleEvent(final Event e)
-									{
-										switch (e.type)
-										{
+									public void handleEvent(final Event e) {
+										switch (e.type) {
 										case SWT.FocusOut:
-												itemTmp.setText(column, text
-														.getText());
-												text.dispose();
-												break;
-											case SWT.Traverse:
-												switch (e.detail)
-												{
-												case SWT.TRAVERSE_RETURN:
-														itemTmp.setText(column,
-																text.getText());
+											itemTmp.setText(column, text.getText());
+											text.dispose();
+											break;
+										case SWT.Traverse:
+											switch (e.detail) {
+											case SWT.TRAVERSE_RETURN:
+												itemTmp.setText(column, text.getText());
 
-													case SWT.TRAVERSE_ESCAPE:
-														text.dispose();
-														e.doit = false;
-													}
-													break;
-												}
+											case SWT.TRAVERSE_ESCAPE:
+												text.dispose();
+												e.doit = false;
 											}
+											break;
+										}
+									}
 								};
 								text.addListener(SWT.FocusOut, textListener);
 								text.addListener(SWT.Traverse, textListener);
@@ -247,8 +228,7 @@ public class TableDataSurvey {
 								text.setFocus();
 								return;
 							}
-							if (!visible && rect.intersects(clientArea))
-							{
+							if (!visible && rect.intersects(clientArea)) {
 								visible = true;
 							}
 						}
@@ -280,30 +260,27 @@ public class TableDataSurvey {
 		// ajouter des listeners sur les menu items ^^
 
 		itemList.addListener(SWT.Selection, new Listener() {
-			public void handleEvent(Event e)
-			{
+			public void handleEvent(Event e) {
 				// System.out.println("selection liste");
-				Nemo.getInstance().getViewMain().getMyFilteredTableFactory().go(sectionClientType, Global.DATATYPE, null);
+				Nemo.getInstance().getViewMain().getMyFilteredTableFactory().go(sectionClientType, Global.DATATYPE,
+						null);
 
 			}
 		});
 		itemUp.addListener(SWT.Selection, new Listener() {
-			public void handleEvent(Event e)
-			{
+			public void handleEvent(Event e) {
 				// System.out.println("up");
 				monterEltTableData(ligneSelec);
 			}
 		});
 		itemDown.addListener(SWT.Selection, new Listener() {
-			public void handleEvent(Event e)
-			{
+			public void handleEvent(Event e) {
 				// System.out.println("down");
 				descendreEltTableData(ligneSelec);
 			}
 		});
 		itemDel.addListener(SWT.Selection, new Listener() {
-			public void handleEvent(Event e)
-			{
+			public void handleEvent(Event e) {
 				// System.out.println("suppression");
 				// supprEltTableData(ligneSelec);
 				supprEltTableData(table.getSelectionIndices());
@@ -330,10 +307,8 @@ public class TableDataSurvey {
 		// nouvelle creation des items
 		for (int i = 0; i < nbre; i++) {
 			TableItem item = new TableItem(table, SWT.NONE);
-			item.setText(new String[] { types.get(i).getCode(),
-					String.valueOf(types.get(i).getNombre()),
-					types.get(i).getQc(),
-					String.valueOf(types.get(i).getSensor()) });
+			item.setText(new String[] { types.get(i).getCode(), String.valueOf(types.get(i).getNombre()),
+					types.get(i).getQc(), String.valueOf(types.get(i).getSensor()) });
 
 		}
 
@@ -365,7 +340,7 @@ public class TableDataSurvey {
 	public static void monterEltTableData(int indice) {
 		// on monte d'un cran l'element e la position indice
 		// swap (indice-1) <-> indice
-		// 
+		//
 
 		// On teste si ce n'est pas le premier element
 		if (indice > 0) {
@@ -479,27 +454,19 @@ public class TableDataSurvey {
 		// types = null;
 		// types = new ArrayList<TypeSurvey>();
 		try {
-			if (TableDataSurvey.tableTypeSurvey != null
-					&& !TableDataSurvey.tableTypeSurvey.isDisposed()) {
+			if (TableDataSurvey.tableTypeSurvey != null && !TableDataSurvey.tableTypeSurvey.isDisposed()) {
 				nbre = TableDataSurvey.tableTypeSurvey.getItemCount();
 				for (int i = 0; i < nbre; i++) {
 					TypeSurvey ts = new TypeSurvey();
 
-					ts.setCode(
-							TableDataSurvey.tableTypeSurvey.getItem(i).getText(0));
-					if (TableDataSurvey.tableTypeSurvey.getItem(i).getText(1)
-							.equals(Global.EMPTY_STRING)) {
+					ts.setCode(TableDataSurvey.tableTypeSurvey.getItem(i).getText(0));
+					if (TableDataSurvey.tableTypeSurvey.getItem(i).getText(1).equals(Global.EMPTY_STRING)) {
 						ts.setNombre(0);
 					} else {
-						ts.setNombre(
-								Integer.valueOf(TableDataSurvey.tableTypeSurvey
-										.getItem(i).getText(1)));
+						ts.setNombre(Integer.valueOf(TableDataSurvey.tableTypeSurvey.getItem(i).getText(1)));
 					}
-					ts.setQc(
-							TableDataSurvey.tableTypeSurvey.getItem(i).getText(2));
-					ts.setSensor(
-							Boolean.parseBoolean(TableDataSurvey.tableTypeSurvey
-									.getItem(i).getText(3)));
+					ts.setQc(TableDataSurvey.tableTypeSurvey.getItem(i).getText(2));
+					ts.setSensor(Boolean.parseBoolean(TableDataSurvey.tableTypeSurvey.getItem(i).getText(3)));
 					types.set(i, ts);
 				}
 			}

@@ -31,10 +31,9 @@ import com.ago.xml.SAXConsumer;
 import com.ago.xml.XMLBootstrapParser;
 import com.ago.xml.XMLOutputWriter;
 
-import fr.ifremer.nautilus.metadata.NautilusSurveyWS;
-import fr.ifremer.nautilus.metadata.NautilusSurveyWSServiceLocator;
-import fr.ifremer.nautilus.metadata.WSCollectedData;
-import fr.ifremer.nautilus.metadata.WSSurvey;
+import fr.ifremer.nautilus.ws.NautilusSurveyServiceClient;
+import fr.ifremer.nautilus.ws.model.CollectedData;
+import fr.ifremer.nautilus.ws.model.Survey;
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.ui.Utils;
 import fr.ifremer.nemo.util.Formatter;
@@ -86,9 +85,10 @@ public class CruiseModel extends AbstractModel {
 	 * Commentaires sur la campagne (multi-lines)
 	 */
 	protected String _comment;
-	
+
 	/**
-	 * Commentaires provenant de l'option -cruiseComment, destin� au CDI summary.
+	 * Commentaires provenant de l'option -cruiseComment, destin� au CDI
+	 * summary.
 	 */
 	protected String _datasetAbstractString;
 
@@ -308,7 +308,8 @@ public class CruiseModel extends AbstractModel {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public SAXConsumer handlePathElement(String path, String a_URI, String a_LocalName, String a_QName, Attributes a_Attributes) {
+	public SAXConsumer handlePathElement(String path, String a_URI, String a_LocalName, String a_QName,
+			Attributes a_Attributes) {
 		SAXConsumer el = null;
 		if (path.equals(ModelDescription.node_listDatatypes)) {
 			el = DataType.fromElement(a_URI, a_LocalName, a_QName, a_Attributes);
@@ -356,9 +357,13 @@ public class CruiseModel extends AbstractModel {
 	 * @exception java.rmi.RemoteException
 	 */
 	public void fillFromSISMER(String a_Reference) throws ServiceException, MalformedURLException, RemoteException {
-		Nemo.getInstance().getLogger().info("connection to the Nautilus web service :"+ Nemo.getInstance().getConfig().getNautilusWebServiceURL());
-		NautilusSurveyWS service = new NautilusSurveyWSServiceLocator().getNAUTILUS(new java.net.URL(Nemo.getInstance().getConfig().getNautilusWebServiceURL()));
-		WSSurvey wssurvey = service.getSurvey(a_Reference);
+		Nemo.getInstance().getLogger().info(
+				"connection to the Nautilus web service :" + Nemo.getInstance().getConfig().getNautilusWebServiceURL());
+
+		final String apiUrl = Nemo.getInstance().getConfig().getNautilusWebServiceURL();
+		NautilusSurveyServiceClient service = new NautilusSurveyServiceClient(apiUrl);
+
+		Survey wssurvey = service.getSurvey(a_Reference);
 
 		// initialisation avec les valeurs par défaut
 		initValues();
@@ -371,7 +376,8 @@ public class CruiseModel extends AbstractModel {
 			setLocalCSRIdentifier(wssurvey.getCrno());
 		} else {
 //			System.out.println("ERROR :nautilus web service returned a null CRNO");// TODO BGT
-			Nemo.getInstance().getLogger().error("ERROR :nautilus web service returned a null CRNO");// TODO BGT
+			Nemo.getInstance().getLogger().error("ERROR :nautilus web service returned a null CRNO");// TODO
+																										// BGT
 		}
 		if (wssurvey.getName() != null) {
 			setName(wssurvey.getName());
@@ -406,17 +412,15 @@ public class CruiseModel extends AbstractModel {
 			setDataCentre(wssurvey.getDataCentre());
 		}
 
-		WSCollectedData[] datas = wssurvey.getDataTypes();
-		// releaseDataTypes();
+		List<CollectedData> datas = wssurvey.getDataTypes();
 		if (datas != null) {
-			for (int i = 0; i < datas.length; i++) {
-				WSCollectedData data = datas[i];
+			datas.forEach(collectedData -> {
 				DataType dataType = new DataType();
-				dataType.setCode(data.getCode());
-				dataType.setNumberOfProfiles(data.getObservationNumber());
-				dataType.setSensor(data.isSensor());
+				dataType.setCode(collectedData.getCode());
+				dataType.setNumberOfProfiles(collectedData.getObservationNumber());
+				dataType.setSensor(collectedData.isSensor());
 				addDataType(dataType);
-			}
+			});
 		}
 	}
 
@@ -425,7 +429,7 @@ public class CruiseModel extends AbstractModel {
 	 * 
 	 * @param region Name C16
 	 * @return region Name C19
-	 * @throws VocabularyException 
+	 * @throws VocabularyException
 	 */
 
 	// FAE 16868
@@ -441,7 +445,8 @@ public class CruiseModel extends AbstractModel {
 			}
 		}
 		if (regionsKey != null) {
-			List<IElement> c19List =vocabMgr.getVocabMatchs(Intern.list_regionsPolygones, Intern.list_regionsRectangles, regionsKey);//order ok
+			List<IElement> c19List = vocabMgr.getVocabMatchs(Intern.list_regionsPolygones,
+					Intern.list_regionsRectangles, regionsKey);// order ok
 			if (!c19List.isEmpty()) {
 				RegionName = c19List.get(0).getLabel();
 			}
@@ -450,7 +455,8 @@ public class CruiseModel extends AbstractModel {
 	}
 
 	/**
-	 * Methode de creation d'instance a partir d'un fichier XML il peut charger des fichier ISO 19139 et 19115
+	 * Methode de creation d'instance a partir d'un fichier XML il peut charger
+	 * des fichier ISO 19139 et 19115
 	 * 
 	 * @param xmlFile : Schéma XML
 	 * @exception SAXException
@@ -461,7 +467,7 @@ public class CruiseModel extends AbstractModel {
 
 		// Check XML type
 		ISO_TYPE type = IsoAnalyser.getType(xmlFile);
-		
+
 		// verifie si input xml est SDN2_CSR_ISO19139_3.0.0.xsd compliant
 		if (type == ISO_TYPE.ISO19139) {
 			importFromXML(xmlFile, new File(Intern.dir_resources + File.separator + Intern.CruiseXSLISO19139));
@@ -742,7 +748,8 @@ public class CruiseModel extends AbstractModel {
 	/**
 	 * Setter pour _endDate
 	 * 
-	 * @param a_EndDate : nouvelle valeur pour _endDate sous forme de String formattée
+	 * @param a_EndDate : nouvelle valeur pour _endDate sous forme de String
+	 * formattée
 	 * @exception ParseException
 	 * @see CruiseModel.java#_endDate
 	 */
@@ -972,7 +979,8 @@ public class CruiseModel extends AbstractModel {
 	/**
 	 * Setter pour _startDate
 	 * 
-	 * @param a_StartDate : nouvelle valeur pour _startDate sous forme de String formattée
+	 * @param a_StartDate : nouvelle valeur pour _startDate sous forme de String
+	 * formattée
 	 * @exception ParseException
 	 * @see CruiseModel.java#_startDate
 	 */
@@ -1053,7 +1061,8 @@ public class CruiseModel extends AbstractModel {
 	}
 
 	/**
-	 * set local CSR identifier from XML. Remove urn:SDN:CSR:LOCAL: prefix for 19139 CSRs or SDN:CSR:LOCAL: prefix for 19115 CSRs
+	 * set local CSR identifier from XML. Remove urn:SDN:CSR:LOCAL: prefix for
+	 * 19139 CSRs or SDN:CSR:LOCAL: prefix for 19115 CSRs
 	 * 
 	 * @param localCsrIdentifier
 	 */

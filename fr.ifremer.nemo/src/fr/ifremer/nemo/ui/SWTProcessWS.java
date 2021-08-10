@@ -1,6 +1,5 @@
 package fr.ifremer.nemo.ui;
 
-import java.lang.reflect.InvocationTargetException;
 import java.net.ConnectException;
 import java.net.MalformedURLException;
 import java.rmi.RemoteException;
@@ -19,7 +18,7 @@ import fr.ifremer.nemo.config.UpdateStatusList;
 import fr.ifremer.nemo.input.CruiseModel;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
-import fr.ifremer.nemo.ws.NemoWS;
+import fr.ifremer.nemo.ws.NemoService;
 import fr.ifremer.sismer_tools.externalresources.ExternalResourcesManager;
 
 public class SWTProcessWS implements IRunnableWithProgress {
@@ -31,7 +30,7 @@ public class SWTProcessWS implements IRunnableWithProgress {
 	public static String referenceWS;
 
 	@Override
-	public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
+	public void run(IProgressMonitor monitor) throws InterruptedException {
 		monitor.beginTask(Messages.update_title, IProgressMonitor.UNKNOWN);
 		monitor2 = monitor;
 
@@ -39,8 +38,6 @@ public class SWTProcessWS implements IRunnableWithProgress {
 			// mise e jour fichiers constantes
 			ManageLists.resetUpdatedLists();
 
-			
-			
 			// update CSR
 			if (!monitor.isCanceled()) {
 				try {
@@ -78,7 +75,7 @@ public class SWTProcessWS implements IRunnableWithProgress {
 			if (!monitor.isCanceled()) {
 				// appel au WebService NEMO
 				monitor.subTask(Messages.connect_nemo);
-				NemoWS service = NemoLists.callNemoWS();
+				NemoService service = NemoLists.callNemoWS();
 				UpdateStatusList updateNemo = (UpdateStatusList) ManageLists.getUpdate(Intern.id_nemo);
 
 				if (!monitor.isCanceled()) {
@@ -97,7 +94,7 @@ public class SWTProcessWS implements IRunnableWithProgress {
 				}
 			}
 			Nemo.getInstance().getConfig().save();
-			Nemo.getInstance().getLogger().info("updates ended");
+			Nemo.getInstance().getLogger().info("updates ended"); //$NON-NLS-1$
 			if (monitor.isCanceled()) {
 				throw new InterruptedException();
 			}
@@ -129,45 +126,25 @@ public class SWTProcessWS implements IRunnableWithProgress {
 			}
 
 			/*
-			 * if (dossier) {
-			 * // mise e jour dossier campagne
-			 * try {
-			 * Application.nemo.getDomain().getCruise().getModel().fillFromSISMER
-			 * (referenceWS);
-			 * } catch (MalformedURLException e) {
-			 * //
-			 * e.printStackTrace();
-			 * Utils.messageErreur(Messages.error_updateSurvey_url);
-			 * } catch (RemoteException e) {
-			 * //
-			 * e.printStackTrace();
-			 * Utils.messageErreur(Messages.error_updateSurvey_distant);
-			 * } catch (ServiceException e) {
-			 * //
-			 * e.printStackTrace();
-			 * Utils.messageErreur(Messages.error_updateSurvey_service);
-			 * }
+			 * if (dossier) { // mise e jour dossier campagne try {
+			 * Application.nemo.getDomain().getCruise().getModel().
+			 * fillFromSISMER (referenceWS); } catch (MalformedURLException e) {
+			 * // e.printStackTrace();
+			 * Utils.messageErreur(Messages.error_updateSurvey_url); } catch
+			 * (RemoteException e) { // e.printStackTrace();
+			 * Utils.messageErreur(Messages.error_updateSurvey_distant); } catch
+			 * (ServiceException e) { // e.printStackTrace();
+			 * Utils.messageErreur(Messages.error_updateSurvey_service); }
 			 * 
-			 * }
-			 * else {
-			 * // mise e jour fichier campagne
-			 * try {
-			 * Application.nemo.getDomain().getCruise().getModel().fillFromSISMER
-			 * (
-			 * referenceWS);
-			 * } catch (MalformedURLException e) {
-			 * //
-			 * Utils.messageErreur(Messages.error_updateSurvey_url);
+			 * } else { // mise e jour fichier campagne try {
+			 * Application.nemo.getDomain().getCruise().getModel().
+			 * fillFromSISMER ( referenceWS); } catch (MalformedURLException e)
+			 * { // Utils.messageErreur(Messages.error_updateSurvey_url);
+			 * e.printStackTrace(); } catch (RemoteException e) { //
 			 * e.printStackTrace();
-			 * } catch (RemoteException e) {
-			 * //
-			 * e.printStackTrace();
-			 * Utils.messageErreur(Messages.error_updateSurvey_distant);
-			 * } catch (ServiceException e) {
-			 * //
-			 * e.printStackTrace();
-			 * Utils.messageErreur(Messages.error_updateSurvey_service);
-			 * }
+			 * Utils.messageErreur(Messages.error_updateSurvey_distant); } catch
+			 * (ServiceException e) { // e.printStackTrace();
+			 * Utils.messageErreur(Messages.error_updateSurvey_service); }
 			 * 
 			 * }
 			 */

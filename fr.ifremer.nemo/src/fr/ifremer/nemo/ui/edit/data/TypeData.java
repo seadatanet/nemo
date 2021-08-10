@@ -8,7 +8,6 @@ import fr.ifremer.nemo.input.parameters.Parameter;
 import fr.ifremer.nemo.input.parameters.ParameterModel;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Global.E_TypeConversion;
-import fr.ifremer.nemo.ws.WSParameter;
 import sdn.vocabulary.interfaces.IElement;
 
 public class TypeData extends Object implements Comparable<TypeData> {
@@ -29,7 +28,8 @@ public class TypeData extends Object implements Comparable<TypeData> {
 	private String instrumentCode;
 
 	/**
-	 * This parameter stores the ISO date format if the parameter is a ISO1601 date.
+	 * This parameter stores the ISO date format if the parameter is a ISO1601
+	 * date.
 	 * 
 	 * It is used to pass it to the Parameter object (FAE50999).
 	 */
@@ -55,11 +55,8 @@ public class TypeData extends Object implements Comparable<TypeData> {
 	private boolean isP011;
 	private Integer indexP011;
 
-	
-	public TypeData(String theEntryKey, String theEntryTerm, 
-			String theCodeP01,String theNameP01 ,
-			String theUniteCode,String theUniteLabel,String theP06Label,
-			String theInstrumentCode,String theInstrumentLabel ,
+	public TypeData(String theEntryKey, String theEntryTerm, String theCodeP01, String theNameP01, String theUniteCode,
+			String theUniteLabel, String theP06Label, String theInstrumentCode, String theInstrumentLabel,
 			boolean itheIsP011, boolean isText) {
 		this.setEntryKey(theEntryKey);
 		this.setEntryTerm(theEntryTerm);
@@ -73,17 +70,17 @@ public class TypeData extends Object implements Comparable<TypeData> {
 		this.setIsP011(itheIsP011);
 		this.setIsText(isText);
 	}
+
 	public Integer getIndexP011() {
 		return indexP011;
 	}
+
 	public void setIndexP011(Integer indexP011) {
 		this.indexP011 = indexP011;
 	}
-	public TypeData(String theEntryKey, String theEntryTerm, 
-			String theCodeP01,String theNameP01 ,
-			String theUniteCode,String theUniteLabel,
-			String theInstrumentCode,String theInstrumentLabel ,
-			boolean itheIsP011) {
+
+	public TypeData(String theEntryKey, String theEntryTerm, String theCodeP01, String theNameP01, String theUniteCode,
+			String theUniteLabel, String theInstrumentCode, String theInstrumentLabel, boolean itheIsP011) {
 		this.setEntryKey(theEntryKey);
 		this.setEntryTerm(theEntryTerm);
 		this.setEntryKeyP011(theCodeP01);
@@ -94,14 +91,14 @@ public class TypeData extends Object implements Comparable<TypeData> {
 		this.setInstrument(theInstrumentLabel);
 		this.setIsP011(itheIsP011);
 	}
-	
+
 	public TypeData(TypeData typeData) {
 		this.setConversion(typeData.conversion);
 		this.setEntree(typeData.entree);
 		this.setFormat(typeData.format);
 		// 11976
 		if (isODV() || isNetCDF()) {
-			this.setSortie("");
+			this.setSortie(""); //$NON-NLS-1$
 		} else {
 			this.setSortie(typeData.sortie);
 		}
@@ -118,7 +115,7 @@ public class TypeData extends Object implements Comparable<TypeData> {
 		this.setIsText(typeData.isText());
 	}
 
-	public TypeData(WSParameter wsParameter) {
+	public TypeData(fr.ifremer.nemo.ws.model.Parameter wsParameter) {
 		setEntryKey(wsParameter.getCode());
 		setEntryTerm(wsParameter.getName());
 		setUnite(wsParameter.getUnit());
@@ -152,22 +149,22 @@ public class TypeData extends Object implements Comparable<TypeData> {
 		}
 
 		String inputDefault = parameterModel.getInputDefault();
-		if (inputDefault == null || inputDefault.equals("null"))inputDefault = Global.EMPTY_STRING; //$NON-NLS-1$
+		if (inputDefault == null || inputDefault.equals("null")) //$NON-NLS-1$
+			inputDefault = Global.EMPTY_STRING;
 		setEntree(inputDefault);
-		if (parameter.isP011()){ 
+		if (parameter.isP011()) {
 			setP06Label(parameter.getUnit());
 		}
 		setUnite(parameter.getUnit());
 		setUniteCode(parameter.getUnitCode());
-		
-		
+
 		setInstrument(parameter.getInstrument());
 		setInstrumentCode(parameter.getInstrumentCode());
-		
+
 		setFormat(parameter.getFormat());
 		// 11976
 		if (isODV() || isNetCDF()) {
-			setSortie("");
+			setSortie(""); //$NON-NLS-1$
 		} else {
 			setSortie(parameter.getDefault());
 		}
@@ -175,7 +172,7 @@ public class TypeData extends Object implements Comparable<TypeData> {
 		setEntryTermP011(parameter.getNameP011());
 		setIsP011(parameter.isP011());
 		setIndexP011(parameter.getIndexP011());
-		
+
 		// TODO check if it's pertinent
 //		setEffectiveIsoDateFormat(parameter.getEffectiveIsoDateFormat());
 
@@ -183,14 +180,14 @@ public class TypeData extends Object implements Comparable<TypeData> {
 
 	public TypeData() {
 
-		//		this.setCode("Code"); //$NON-NLS-1$
+		// this.setCode("Code"); //$NON-NLS-1$
 		this.setConversion(DEFAULT_CONVERT);
 		this.setEntree("Entree"); //$NON-NLS-1$
 		this.setFormat("Format"); //$NON-NLS-1$
 		this.setSortie("Sortie"); //$NON-NLS-1$
 		this.setUnite("Unite"); //$NON-NLS-1$
-		this.setInstrument(Global.EMPTY_STRING); 
-		this.setInstrumentCode(Global.EMPTY_STRING); 
+		this.setInstrument(Global.EMPTY_STRING);
+		this.setInstrumentCode(Global.EMPTY_STRING);
 		this.setTest(Global.EMPTY_STRING);
 		// this.setFullname(Global.EMPTY_STRING);
 		this.setEntryKey(Global.EMPTY_STRING);
@@ -216,18 +213,14 @@ public class TypeData extends Object implements Comparable<TypeData> {
 
 	private boolean isODV() {
 
-		E_TypeConversion conv =
-				Nemo.getInstance().getDomain().getConversion().getModel()
-						.getOutputFormat();
+		E_TypeConversion conv = Nemo.getInstance().getDomain().getConversion().getModel().getOutputFormat();
 		return (conv == E_TypeConversion.ODV_MONOSTATION || conv == E_TypeConversion.ODV_MULTISTATIONS);
 
 	}
 
 	private boolean isNetCDF() {
 
-		E_TypeConversion conv =
-				Nemo.getInstance().getDomain().getConversion().getModel()
-						.getOutputFormat();
+		E_TypeConversion conv = Nemo.getInstance().getDomain().getConversion().getModel().getOutputFormat();
 		return (conv == E_TypeConversion.NETCDF_MONOSTATION || conv == E_TypeConversion.NETCDF_MULTISTATIONS);
 
 	}
@@ -239,22 +232,25 @@ public class TypeData extends Object implements Comparable<TypeData> {
 	public String getFormattedCodeAndNameToUse() {
 		if (isP011()) {
 			return entryKeyP011 + Global.SEP + entryTermP011;
-		} 
-			// code = getFormattedCodeAndName();//P021 ou P091 selon le contexte
-			// d'utilisation
-			return entryKey + Global.SEP + entryTerm;
-		
+		}
+		// code = getFormattedCodeAndName();//P021 ou P091 selon le contexte
+		// d'utilisation
+		return entryKey + Global.SEP + entryTerm;
+
 	}
+
 	public void setEntryKeyAndEntryTerm(String formattedCodeAndName) {
 		Pattern p = Pattern.compile(Global.SEP);
 		String mots[] = p.split(formattedCodeAndName);
 		setEntryKey(mots[0]);
 		setEntryTerm(mots[1]);
 	}
-	 @Override
-		public int compareTo(TypeData other) {
-	    	return entryKey.compareTo(other.getEntryKey());
-	    }
+
+	@Override
+	public int compareTo(TypeData other) {
+		return entryKey.compareTo(other.getEntryKey());
+	}
+
 	// FAE 6537
 	public String getCodeToUse() {
 		String code;
@@ -447,6 +443,7 @@ public class TypeData extends Object implements Comparable<TypeData> {
 	public void setEntryTerm(String entryTerm) {
 		this.entryTerm = entryTerm;
 	}
+
 	public String getInstrument() {
 		return instrument;
 	}
@@ -454,12 +451,15 @@ public class TypeData extends Object implements Comparable<TypeData> {
 	public void setInstrument(String instrument) {
 		this.instrument = instrument;
 	}
+
 	public String getInstrumentCode() {
 		return instrumentCode;
 	}
+
 	public void setInstrumentCode(String instrumentCode) {
 		this.instrumentCode = instrumentCode;
 	}
+
 	public Boolean getSensor() {
 		return sensor;
 	}
@@ -475,11 +475,11 @@ public class TypeData extends Object implements Comparable<TypeData> {
 	public void setP06Label(String p06Label) {
 		P06Label = p06Label;
 	}
-	
+
 	public String getEffectiveIsoDateFormat() {
 		return effectiveIsoDateFormat;
 	}
-	
+
 	public void setEffectiveIsoDateFormat(String effectiveIsoDateFormat) {
 		this.effectiveIsoDateFormat = effectiveIsoDateFormat;
 	}

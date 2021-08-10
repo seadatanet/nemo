@@ -35,7 +35,7 @@ import fr.ifremer.nemo.ui.view.ViewLog;
 import fr.ifremer.nemo.util.Global;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.nemo.util.format.DateTimeFormat;
-import fr.ifremer.nemo.ws.WSDataType;
+import fr.ifremer.nemo.ws.model.DataType;
 
 public class EditCruiseForm extends EditForm {
 	private Button buttonInitServeur, buttonXML;
@@ -405,7 +405,7 @@ public class EditCruiseForm extends EditForm {
 		// Liste des capteurs
 		ArrayList<String> listSensor = new ArrayList<String>();
 
-		WSDataType[] listWSDT = ManageLists.getDataTypes();
+		DataType[] listWSDT = ManageLists.getDataTypes();
 		for (int i = 0; i < listWSDT.length; i++) {
 			if (listWSDT[i].isSensor()) {
 				listSensor.add(listWSDT[i].getCode());
