@@ -23,6 +23,7 @@ import fr.ifremer.nemo.output.ProgressNotification;
 import fr.ifremer.nemo.util.Conversion;
 import fr.ifremer.nemo.util.Global.E_TypeConversion;
 import fr.ifremer.nemo.util.Messages;
+import fr.ifremer.sismer_tools.resources.ODVConstants.E_Variant;
 
 public class SWTProcess implements IRunnableWithProgress {
 
@@ -76,6 +77,8 @@ public class SWTProcess implements IRunnableWithProgress {
 				writer = NemoWriterFactory.createWriter(formatConversion);
 				writer.write(notifier);
 
+				E_Variant variant = iDomain.getMedia().getModel().getVariant();
+
 				// mapping
 				if (config.isWriteMapping()) {
 					monitor.setTaskName("enregistrement du mapping"); //TODO msg
@@ -85,7 +88,9 @@ public class SWTProcess implements IRunnableWithProgress {
 						for (String local_cdi_id : iDomain.getMedia().getOutputFiles().get(outputPath)) {
 							
 							Station st = CDIResumeWriter.getInstance().getStationByLocalCdiId(local_cdi_id);
-							mapping = new Mapping(local_cdi_id, formatConversion.getFormatName());
+							// check for ODV variants
+							String convAsString = Conversion.getFormatFromVariant(formatConversion, variant);
+							mapping = new Mapping(local_cdi_id, convAsString);
 							mapping.setFilename(convDomain.getFileNameInCoupling(outputFile.getAbsolutePath()));
 							mapping.setDate(new Date());
 							mapping.setModus(modus);
@@ -98,7 +103,7 @@ public class SWTProcess implements IRunnableWithProgress {
 				// Ecriture du resume CDI
 				if (config.isWriteCdi()) {
 					monitor.setTaskName(Messages.SWTProcess_CDIresume);
-					CDIResumeWriter.getInstance().writeResume(formatConversion);
+					CDIResumeWriter.getInstance().writeResume(Conversion.getConversionFromVariant(formatConversion, variant));
 				}
 			}
 

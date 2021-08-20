@@ -1,12 +1,14 @@
 package fr.ifremer.nemo.util;
 
+import fr.ifremer.sismer_tools.resources.ODVConstants.E_Variant;
+
 /**
  * Description: Types de conversion
  * @author dboulang
  *
  */
 public enum Conversion {
-	MEDATLAS, ODV, NETCDF;
+	MEDATLAS, ODV, BODV, MODV, NETCDF;
 
 	public String getName() {
 		String name = Global.EMPTY_STRING;
@@ -16,6 +18,12 @@ public enum Conversion {
 			break;
 		case NETCDF:
 			name = "NetCDF";//$NON-NLS-1$
+			break;
+		case BODV:
+			name = "ODV Biological";//$NON-NLS-1$
+			break;
+		case MODV:
+			name = "ODV microlitter";//$NON-NLS-1$
 			break;
 		default:
 			name = this.toString();
@@ -44,6 +52,8 @@ public enum Conversion {
 			debut = "*"; //$NON-NLS-1$
 			break;
 		case ODV:
+		case BODV:
+		case MODV:
 			debut = "//"; //$NON-NLS-1$
 			break;
 		}
@@ -54,6 +64,8 @@ public enum Conversion {
 		String ext = Global.EMPTY_STRING;
 		switch (this) {
 		case ODV:
+		case BODV:
+		case MODV:
 			ext = Global.EXT_TXT;
 			break;
 		case NETCDF:
@@ -80,4 +92,41 @@ public enum Conversion {
 	       return name;
 	   }
 	   */
+	
+	/**
+	 * Get the format name from the ODV variant.
+	 * @param variant
+	 * @return
+	 */
+	public static String getFormatFromVariant(Conversion conv, E_Variant variant) {
+		
+		return getConversionFromVariant(conv, variant).getFormatName();
+	}
+	
+	/**
+	 * Get the new Conversion value from the ODV variant.
+	 * @param variant
+	 * @return
+	 */
+	public static Conversion getConversionFromVariant(Conversion conv, E_Variant variant) {
+		
+		Conversion returnedConv = conv;
+		if (returnedConv == Conversion.ODV && variant != null) {
+			switch (variant) {
+			case BIOLOGICAL:
+				returnedConv = Conversion.BODV;
+				break;
+
+			case MICROLITTER:
+				returnedConv = Conversion.MODV;
+				break;
+
+			default:
+				break;
+			}
+		}
+		return returnedConv;
+
+	}
+
 }

@@ -295,13 +295,13 @@ public class NemoShell {
 
 			// export CDI summary (FAE 4525)
 			if (!cdiSummaryFile.equals(Global.EMPTY_STRING)) {
-				CDIResumeWriter.getInstance().writeResume(conv);
+				CDIResumeWriter.getInstance().writeResume(Conversion.getConversionFromVariant(conv, variant));
 			}
 
 			if (couplingTableUpdate) {
 				// update coupling table (FAE 4525)
 				MappingTable mappingTable = new MappingTable();
-				mapping(logger, conv, mappingTable, couplingTablePrefix);
+				mapping(logger, conv, variant, mappingTable, couplingTablePrefix);
 
 			}
 			Nemo.getInstance().getLogger().info("Conversion ended with success at " + new Date() + "\n---------------");
@@ -577,7 +577,7 @@ public class NemoShell {
 
 	}
 
-	private static void mapping(Logger logger, Conversion conv, MappingTable mappingTable, String couplingTablePrefix)
+	private static void mapping(Logger logger, Conversion conv, E_Variant variant, MappingTable mappingTable, String couplingTablePrefix)
 			throws Exception {
 		Mapping mapping;
 
@@ -599,7 +599,11 @@ public class NemoShell {
 			for (String outputPath : inputDomain.getMedia().getOutputFiles().keySet()) {
 
 				for (String local_cdi_id : inputDomain.getMedia().getOutputFiles().get(outputPath)) {
-					mapping = new Mapping(local_cdi_id, conv.getFormatName());
+					
+					// check for ODV variants
+					String convAsString = Conversion.getFormatFromVariant(conv, variant);
+					
+					mapping = new Mapping(local_cdi_id, convAsString);
 
 					String modus = Mapping.MODUS_MULTISTATIONS;
 					if (inputDomain.getConversion().getCurrent() == E_TypeConversion.ODV_MONOSTATION
@@ -625,4 +629,5 @@ public class NemoShell {
 				|| inputDomain.getConversion().getModel().getOutputFormat() == E_TypeConversion.NETCDF_MONOSTATION
 				|| inputDomain.getConversion().getModel().getOutputFormat() == E_TypeConversion.NETCDF_MULTISTATIONS;
 	}
+	
 }
