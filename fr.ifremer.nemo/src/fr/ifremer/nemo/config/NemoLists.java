@@ -621,6 +621,7 @@ public class NemoLists implements Cloneable {
 
 				if (monitor == null || !monitor.isCanceled()) {
 					File file = new java.io.File(Intern.dir_resources + File.separator + listName);
+					Nemo.getInstance().getLogger().warn("Parameters file location: " + Intern.dir_resources + File.separator + listName); //$NON-NLS-1$
 					stream = new FileOutputStream(file.toString());
 					encoder = new XMLEncoder(stream);
 					encoder.writeObject(_parameters);
