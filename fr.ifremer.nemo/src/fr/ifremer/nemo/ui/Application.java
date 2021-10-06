@@ -87,15 +87,14 @@ public class Application implements IPlatformRunnable {
 			CommandLine cl = p.parse(opt, strArgs);
 
 			// retrieve application path (FAE 9910)
-			appDir = Application.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+			appDir = new File(Application.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getPath();
 			if (appDir.endsWith("jar")) {
 				appDir = (new File(Application.class.getProtectionDomain()
 						.getCodeSource().getLocation().getFile())
 								.getParentFile().getParent());
 			}
 
-			String path = appDir + File.separator + Intern.dir_resources;
-			Intern.dir_resources = path.replaceFirst("^/","").replaceAll("//*", "/"); //$NON-NLS-4$
+			Intern.dir_resources = appDir + File.separator + Intern.dir_resources;
 			
 			// LOGGER
 			LoggerContext context = (org.apache.logging.log4j.core.LoggerContext) LogManager.getContext(false);
