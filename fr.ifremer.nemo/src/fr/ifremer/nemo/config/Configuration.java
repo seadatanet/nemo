@@ -534,10 +534,14 @@ public class Configuration extends AbstractModel {
 		FileOutputStream stream = null;
 		try {
 			// creation nouveau dossier puis creation fichier config
-			File fich2 = new java.io.File(Intern.dir_resources +
+			String fich2Path = Intern.dir_resources +
 					File.separator +
 					ConfigDescription.node_root +
-					Global.EXT_XML);
+					Global.EXT_XML;
+			
+			
+			File fich2 = new java.io.File(fich2Path);
+			Nemo.getInstance().getLogger().info("Config file: " + fich2);
 			stream = new FileOutputStream(fich2.toString());
 			writeXMLOn(stream);
 		} catch (Exception e) {
