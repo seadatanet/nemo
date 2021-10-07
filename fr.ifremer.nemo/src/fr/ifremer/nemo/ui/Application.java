@@ -2,7 +2,6 @@ package fr.ifremer.nemo.ui;
 
 import java.io.File;
 import java.io.PrintWriter;
-import java.nio.file.Paths;
 import java.text.MessageFormat;
 
 import org.apache.commons.cli.BasicParser;
@@ -104,10 +103,6 @@ public class Application implements IPlatformRunnable {
 			// LOGGER
 			LoggerContext context = (org.apache.logging.log4j.core.LoggerContext) LogManager.getContext(false);
 			File file = new File(appDir + File.separator + "resources/log4j2.xml");
-			
-			String path = Paths.get(appDir, Intern.dir_resources).toAbsolutePath().toString();
-			Intern.dir_resources = path.replaceFirst("^/","").replaceAll("//*", "/"); //$NON-NLS-4$
-			
 
 			context.setConfigLocation(file.toURI());
 			if (cl.hasOption(optBatchMode)) {
