@@ -74,7 +74,11 @@ public class Application implements IPlatformRunnable {
 	/** Gets the directory */
 	private static String getBaseDirectory() {
 		try {
-			return Platform.getLocation().toFile().toString();
+			File d = new File(Platform.getLocation().toFile().toString());
+			if(d.getName().equals("workspace")) {
+				d = d.getParentFile();
+			}
+			return d.getAbsolutePath();
 		} catch(Exception e) {
 			e.printStackTrace(System.err);
 			return ".";
