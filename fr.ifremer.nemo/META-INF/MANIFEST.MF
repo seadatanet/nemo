@@ -67,6 +67,7 @@ Bundle-ClassPath: .,
  ./lib/toplink-essentials.jar,
  ./lib/velocity-dep-1.4.jar,
  ./lib/ws_client-1.jar,
+ ./lib/httpclient-4.5.3.jar,
  ./lib/ws_interfaces-1.jar,
  ./lib/xalan-j2-2.6.0.jar,
  ./lib/xbean.jar,
@@ -76,6 +77,5 @@ Bundle-ClassPath: .,
  ./lib/xmlParserAPIs.jar,
  ./lib/xmlpublic.jar
 Bundle-Vendor: IFREMER,
- lib/httpclient-4.5.3.jar
 Bundle-Vendor: IFREMER
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
