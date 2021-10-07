@@ -547,6 +547,9 @@ public class NemoLists implements Cloneable {
 
 	public static void initSurveys() {
 		try {
+
+			Nemo.getInstance().getLogger().info("Intern.dir_resources = " + Intern.dir_resources);
+
 			_surveys = readXmlList(Intern.dir_resources + File.separator + Intern.list_nemo_survey,
 					SurveyDescription.class);
 		} catch (Exception e) {
@@ -559,6 +562,8 @@ public class NemoLists implements Cloneable {
 		try {
 
 			EdmoHandler edmoH = new EdmoHandler();
+			
+			Nemo.getInstance().getLogger().info("Intern.dir_resources = " + Intern.dir_resources);
 
 			SAXParserFactory.newInstance().newSAXParser()
 					.parse(new FileInputStream(Intern.dir_resources + File.separator + Intern.list_edmo), edmoH);

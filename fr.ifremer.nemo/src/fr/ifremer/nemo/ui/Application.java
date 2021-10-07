@@ -103,14 +103,15 @@ public class Application implements IPlatformRunnable {
 			// LOGGER
 			LoggerContext context = (org.apache.logging.log4j.core.LoggerContext) LogManager.getContext(false);
 			File file = new File(appDir + File.separator + "resources/log4j2.xml");
-
 			context.setConfigLocation(file.toURI());
+			
 			if (cl.hasOption(optBatchMode)) {
 				Nemo.getInstance().setLogger(LogManager.getLogger(Global.LOGGER_NAME_BATCH));
 			} else {
 				Nemo.getInstance().setLogger(LogManager.getLogger(Global.LOGGER_NAME_GUI));
 			}
 			
+			Nemo.getInstance().getLogger().info("appDir : " + appDir);
 			// check java version
 			int javaVersion = JavaVersionDectect.getJavaVersion();
 			if (javaVersion >= 9) {
