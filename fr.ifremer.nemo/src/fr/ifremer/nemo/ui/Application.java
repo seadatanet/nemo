@@ -2,6 +2,7 @@ package fr.ifremer.nemo.ui;
 
 import java.io.File;
 import java.io.PrintWriter;
+import java.nio.file.Paths;
 import java.text.MessageFormat;
 
 import org.apache.commons.cli.BasicParser;
@@ -12,6 +13,7 @@ import org.apache.commons.cli.ParseException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.core.LoggerContext;
 import org.eclipse.core.runtime.IPlatformRunnable;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.PlatformUI;
 import org.osgi.framework.FrameworkUtil;
@@ -70,7 +72,15 @@ public class Application implements IPlatformRunnable {
 
 	private static final String optUpdateVocabs = Global.optUpdateVocabs;
 	
-
+	/** Gets the directory */
+	private static String getBaseDirectory() {
+		try {
+			return Platform.getLocation().toFile().toString();
+		} catch(Exception e) {
+			e.printStackTrace(System.err);
+			return ".";
+		}
+	}
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -87,18 +97,17 @@ public class Application implements IPlatformRunnable {
 			CommandLine cl = p.parse(opt, strArgs);
 
 			// retrieve application path (FAE 9910)
-			appDir = new File(Application.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getPath();
-			if (appDir.endsWith("jar")) {
-				appDir = (new File(Application.class.getProtectionDomain()
-						.getCodeSource().getLocation().getFile())
-								.getParentFile().getParent());
-			}
+			appDir = getBaseDirectory();
 
 			Intern.dir_resources = appDir + File.separator + Intern.dir_resources;
 			
 			// LOGGER
 			LoggerContext context = (org.apache.logging.log4j.core.LoggerContext) LogManager.getContext(false);
 			File file = new File(appDir + File.separator + "resources/log4j2.xml");
+			
+			String path = Paths.get(appDir, Intern.dir_resources).toAbsolutePath().toString();
+			Intern.dir_resources = path.replaceFirst("^/","").replaceAll("//*", "/"); //$NON-NLS-4$
+			
 
 			context.setConfigLocation(file.toURI());
 			if (cl.hasOption(optBatchMode)) {
@@ -106,6 +115,7 @@ public class Application implements IPlatformRunnable {
 			} else {
 				Nemo.getInstance().setLogger(LogManager.getLogger(Global.LOGGER_NAME_GUI));
 			}
+			
 			// check java version
 			int javaVersion = JavaVersionDectect.getJavaVersion();
 			if (javaVersion >= 9) {
@@ -116,6 +126,7 @@ public class Application implements IPlatformRunnable {
 			
 			// load external resources
 			NemoExternalResourcesManager.init();
+
 			/**************************************************************************
 			 * BATCH MODE
 			 **************************************************************************/
