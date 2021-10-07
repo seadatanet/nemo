@@ -645,9 +645,10 @@ public class NemoLists implements Cloneable {
 						nbParameters = 0;
 					}
 				}
-			} catch (Exception e) {
+			} catch (Throwable t) {
+				Nemo.getInstance().getLogger().error("updateParameters", t);
 				updateParameters.setEtat(EtatUpdate.FAILED);
-				e.printStackTrace();
+				t.printStackTrace();
 			} finally {
 				if (encoder != null) {
 					try {
