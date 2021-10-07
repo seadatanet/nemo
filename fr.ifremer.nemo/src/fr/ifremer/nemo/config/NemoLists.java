@@ -548,8 +548,6 @@ public class NemoLists implements Cloneable {
 	public static void initSurveys() {
 		try {
 
-			Nemo.getInstance().getLogger().info("Intern.dir_resources = " + Intern.dir_resources);
-
 			_surveys = readXmlList(Intern.dir_resources + File.separator + Intern.list_nemo_survey,
 					SurveyDescription.class);
 		} catch (Exception e) {
@@ -563,8 +561,6 @@ public class NemoLists implements Cloneable {
 
 			EdmoHandler edmoH = new EdmoHandler();
 			
-			Nemo.getInstance().getLogger().info("Intern.dir_resources = " + Intern.dir_resources);
-
 			SAXParserFactory.newInstance().newSAXParser()
 					.parse(new FileInputStream(Intern.dir_resources + File.separator + Intern.list_edmo), edmoH);
 
@@ -626,7 +622,6 @@ public class NemoLists implements Cloneable {
 
 				if (monitor == null || !monitor.isCanceled()) {
 					File file = new java.io.File(Intern.dir_resources + File.separator + listName);
-					Nemo.getInstance().getLogger().warn("Parameters file location: " + Intern.dir_resources + File.separator + listName); //$NON-NLS-1$
 					stream = new FileOutputStream(file.toString());
 					encoder = new XMLEncoder(stream);
 					encoder.writeObject(_parameters);

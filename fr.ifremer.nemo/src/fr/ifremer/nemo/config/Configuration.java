@@ -541,7 +541,6 @@ public class Configuration extends AbstractModel {
 			
 			
 			File fich2 = new java.io.File(fich2Path);
-			Nemo.getInstance().getLogger().info("Config file: " + fich2);
 			stream = new FileOutputStream(fich2.toString());
 			writeXMLOn(stream);
 		} catch (Exception e) {

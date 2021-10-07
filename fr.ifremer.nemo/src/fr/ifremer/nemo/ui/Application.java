@@ -115,7 +115,6 @@ public class Application implements IPlatformRunnable {
 				Nemo.getInstance().setLogger(LogManager.getLogger(Global.LOGGER_NAME_GUI));
 			}
 			
-			Nemo.getInstance().getLogger().info("appDir : " + appDir);
 			// check java version
 			int javaVersion = JavaVersionDectect.getJavaVersion();
 			if (javaVersion >= 9) {
