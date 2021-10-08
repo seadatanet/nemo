@@ -372,8 +372,8 @@ public class CruiseModel extends AbstractModel {
 			// force à 13 caractères
 			setReference(Formatter.getSingleton().padString(wssurvey.getReference(), 13));
 		}
-		if (wssurvey.getCrno() != null) {
-			setLocalCSRIdentifier(wssurvey.getCrno());
+		if (wssurvey.getCsr() != null) {
+			setLocalCSRIdentifier(wssurvey.getCsr());
 		} else {
 //			System.out.println("ERROR :nautilus web service returned a null CRNO");// TODO BGT
 			Nemo.getInstance().getLogger().error("ERROR :nautilus web service returned a null CRNO");// TODO
