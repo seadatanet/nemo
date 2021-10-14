@@ -40,7 +40,6 @@ import fr.ifremer.nemo.util.Global.E_TypeConversion;
 import fr.ifremer.nemo.util.Intern;
 import fr.ifremer.nemo.util.Messages;
 import fr.ifremer.sismer_tools.DateTools;
-import fr.ifremer.sismer_tools.resources.ODVConstants.E_Variant;
 import fr.ifremer.sismer_tools.seadatanet.SdnXLinkReference;
 
 /**
@@ -529,12 +528,6 @@ public class StationDomain {
 	public Station getAndCheckLocalCDI(CruiseDomain cDomain, Conversion c,
 			Station st) throws ParseException, GenerationException,	UnsupportedEncodingException {
 		String localCdi = getLocalCdiId(cDomain, c, st.getReference());
-		if (stationsLocalCDIList.contains(localCdi) 
-				&& Nemo.getInstance().getDomain().getMedia().getModel().getVariant()==E_Variant.PHYSICOCHEMICAL
-				) {
-			throw new GenerationException(
-					Messages.error_convert_stationsDoubles + " " + localCdi);
-		}
 		st.setLocal_cdi_id(localCdi);
 		st.setCruiseName(cDomain.getModel().getName());
 		st.setCruiseRef(cDomain.getModel().getReference());
