@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<java version="1.8.0_221" class="java.beans.XMLDecoder">
+<java version="1.8.0_202" class="java.beans.XMLDecoder">
  <object class="java.util.ArrayList">
   <void method="add">
    <object class="fr.ifremer.nemo.ws.model.Parameter">
@@ -906,6 +906,28 @@
   <void method="add">
    <object class="fr.ifremer.nemo.ws.model.Parameter">
     <void property="code">
+     <string>BCHA</string>
+    </void>
+    <void property="defaultValue">
+     <string>9.9999</string>
+    </void>
+    <void property="format">
+     <string>%6.4f</string>
+    </void>
+    <void property="name">
+     <string>BACTERIOCHLOROPHYLL-A</string>
+    </void>
+    <void property="unit">
+     <string>mg/m3</string>
+    </void>
+    <void property="unitP06">
+     <string>Milligrams per cubic metre</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="fr.ifremer.nemo.ws.model.Parameter">
+    <void property="code">
      <string>BCMW</string>
     </void>
     <void property="defaultValue">
@@ -1324,6 +1346,47 @@
   <void method="add">
    <object class="fr.ifremer.nemo.ws.model.Parameter">
     <void property="code">
+     <string>CBCI</string>
+    </void>
+    <void property="defaultValue">
+     <string>9999</string>
+    </void>
+    <void property="format">
+     <string>%4d</string>
+    </void>
+    <void property="name">
+     <string>CARBON BIOMASS OF CILIATEA</string>
+    </void>
+    <void property="unit">
+     <string>microgram/m3</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="fr.ifremer.nemo.ws.model.Parameter">
+    <void property="code">
+     <string>CBDF</string>
+    </void>
+    <void property="defaultValue">
+     <string>99999</string>
+    </void>
+    <void property="format">
+     <string>%5d</string>
+    </void>
+    <void property="name">
+     <string>C BIOMASS OF DINOFLAGELLATES</string>
+    </void>
+    <void property="unit">
+     <string>microgram/m3</string>
+    </void>
+    <void property="unitP06">
+     <string>Micrograms per cubic metre</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="fr.ifremer.nemo.ws.model.Parameter">
+    <void property="code">
      <string>CBIO</string>
     </void>
     <void property="defaultValue">
@@ -1340,6 +1403,50 @@
     </void>
     <void property="unitP06">
      <string>Milligrams per cubic metre</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="fr.ifremer.nemo.ws.model.Parameter">
+    <void property="code">
+     <string>CBNC</string>
+    </void>
+    <void property="defaultValue">
+     <string>99999</string>
+    </void>
+    <void property="format">
+     <string>%5d</string>
+    </void>
+    <void property="name">
+     <string>C BIOMASS OF NAKED CILIATES</string>
+    </void>
+    <void property="unit">
+     <string>microgram/m3</string>
+    </void>
+    <void property="unitP06">
+     <string>Micrograms per cubic metre</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="fr.ifremer.nemo.ws.model.Parameter">
+    <void property="code">
+     <string>CBTN</string>
+    </void>
+    <void property="defaultValue">
+     <string>9999</string>
+    </void>
+    <void property="format">
+     <string>%4d</string>
+    </void>
+    <void property="name">
+     <string>CARBON BIOMASS OF TINTINNINA</string>
+    </void>
+    <void property="unit">
+     <string>microgram/m3</string>
+    </void>
+    <void property="unitP06">
+     <string>Micrograms per cubic metre</string>
     </void>
    </object>
   </void>
@@ -1428,6 +1535,28 @@
     </void>
     <void property="unitP06">
      <string>Milligrams per cubic metre per day</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="fr.ifremer.nemo.ws.model.Parameter">
+    <void property="code">
+     <string>CDO2</string>
+    </void>
+    <void property="defaultValue">
+     <string>99.9999</string>
+    </void>
+    <void property="format">
+     <string>%7.4f</string>
+    </void>
+    <void property="name">
+     <string>COLORED DISS. ORGANIC MATTER</string>
+    </void>
+    <void property="unit">
+     <string>Dimensionless</string>
+    </void>
+    <void property="unitP06">
+     <string>Dimensionless</string>
     </void>
    </object>
   </void>
@@ -2050,6 +2179,28 @@
   <void method="add">
    <object class="fr.ifremer.nemo.ws.model.Parameter">
     <void property="code">
+     <string>CIDA</string>
+    </void>
+    <void property="defaultValue">
+     <string>99.999</string>
+    </void>
+    <void property="format">
+     <string>%6.3f</string>
+    </void>
+    <void property="name">
+     <string>CHLOROPHYLLIDE A</string>
+    </void>
+    <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
+     <string>Milligrams per cubic metre</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="fr.ifremer.nemo.ws.model.Parameter">
+    <void property="code">
      <string>CJDY</string>
     </void>
     <void property="defaultValue">
@@ -2110,6 +2261,28 @@
     </void>
     <void property="unitP06">
      <string>Percent</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="fr.ifremer.nemo.ws.model.Parameter">
+    <void property="code">
+     <string>CN02</string>
+    </void>
+    <void property="defaultValue">
+     <string>99.999</string>
+    </void>
+    <void property="format">
+     <string>%5.3f</string>
+    </void>
+    <void property="name">
+     <string>ELECTRICAL CONDUCTIVITY 2</string>
+    </void>
+    <void property="unit">
+     <string>mho/meter</string>
+    </void>
+    <void property="unitP06">
+     <string>Siemens per metre</string>
     </void>
    </object>
   </void>
@@ -2622,6 +2795,28 @@
   <void method="add">
    <object class="fr.ifremer.nemo.ws.model.Parameter">
     <void property="code">
+     <string>CRSW</string>
+    </void>
+    <void property="defaultValue">
+     <string>99999</string>
+    </void>
+    <void property="format">
+     <string>%5d</string>
+    </void>
+    <void property="name">
+     <string>NUMBER OF SW CRYPTOPHYCEAE</string>
+    </void>
+    <void property="unit">
+     <string>nb cell/l</string>
+    </void>
+    <void property="unitP06">
+     <string>Number per litre</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="fr.ifremer.nemo.ws.model.Parameter">
+    <void property="code">
      <string>CRYW</string>
     </void>
     <void property="defaultValue">
@@ -2902,6 +3097,28 @@
     </void>
     <void property="unitP06">
      <string>Milligrams per cubic metre</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="fr.ifremer.nemo.ws.model.Parameter">
+    <void property="code">
+     <string>DEEX</string>
+    </void>
+    <void property="defaultValue">
+     <string>-99.99</string>
+    </void>
+    <void property="format">
+     <string>%+5.2f</string>
+    </void>
+    <void property="name">
+     <string>DEUTERIUM EXCESS</string>
+    </void>
+    <void property="unit">
+     <string>per thousand</string>
+    </void>
+    <void property="unitP06">
+     <string>Parts per thousand</string>
     </void>
    </object>
   </void>
@@ -4514,6 +4731,28 @@
   <void method="add">
    <object class="fr.ifremer.nemo.ws.model.Parameter">
     <void property="code">
+     <string>HNAC</string>
+    </void>
+    <void property="defaultValue">
+     <string>999.99</string>
+    </void>
+    <void property="format">
+     <string>%6.2f</string>
+    </void>
+    <void property="name">
+     <string>HIGH NUCLEIC ACID CONTENT</string>
+    </void>
+    <void property="unit">
+     <string>%</string>
+    </void>
+    <void property="unitP06">
+     <string>Percent</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="fr.ifremer.nemo.ws.model.Parameter">
+    <void property="code">
      <string>HO63</string>
     </void>
     <void property="defaultValue">
@@ -4766,6 +5005,28 @@
     </void>
     <void property="name">
      <string>IODINE</string>
+    </void>
+    <void property="unit">
+     <string>millimole/m3</string>
+    </void>
+    <void property="unitP06">
+     <string>Micromoles per litre</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="fr.ifremer.nemo.ws.model.Parameter">
+    <void property="code">
+     <string>IRON</string>
+    </void>
+    <void property="defaultValue">
+     <string>9999.99</string>
+    </void>
+    <void property="format">
+     <string>%6.2f</string>
+    </void>
+    <void property="name">
+     <string>TOTAL IRON IN WATER BODY</string>
     </void>
     <void property="unit">
      <string>millimole/m3</string>
@@ -5834,6 +6095,28 @@
   <void method="add">
    <object class="fr.ifremer.nemo.ws.model.Parameter">
     <void property="code">
+     <string>MEHG</string>
+    </void>
+    <void property="defaultValue">
+     <string>9.9999</string>
+    </void>
+    <void property="format">
+     <string>%6.4f</string>
+    </void>
+    <void property="name">
+     <string>METHYLMERCURY CONTENT</string>
+    </void>
+    <void property="unit">
+     <string>microgram/m3</string>
+    </void>
+    <void property="unitP06">
+     <string>Micrograms per cubic metre</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="fr.ifremer.nemo.ws.model.Parameter">
+    <void property="code">
      <string>MERB</string>
     </void>
     <void property="defaultValue">
@@ -6444,6 +6727,28 @@
     </void>
     <void property="unitP06">
      <string>Milligrams per kilogram</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="fr.ifremer.nemo.ws.model.Parameter">
+    <void property="code">
+     <string>MOLW</string>
+    </void>
+    <void property="defaultValue">
+     <string>99.9</string>
+    </void>
+    <void property="format">
+     <string>%%4.1f</string>
+    </void>
+    <void property="name">
+     <string>MOLYBDENUM IN WATER BODY</string>
+    </void>
+    <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
+     <string>Milligrams per cubic metre</string>
     </void>
    </object>
   </void>
@@ -7104,6 +7409,28 @@
     </void>
     <void property="unitP06">
      <string>Dimensionless</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="fr.ifremer.nemo.ws.model.Parameter">
+    <void property="code">
+     <string>NCSW</string>
+    </void>
+    <void property="defaultValue">
+     <string>9999</string>
+    </void>
+    <void property="format">
+     <string>%4d</string>
+    </void>
+    <void property="name">
+     <string>NUMBER OF SW  NAKED CILIATES</string>
+    </void>
+    <void property="unit">
+     <string>nb cell/l</string>
+    </void>
+    <void property="unitP06">
+     <string>Number per litre</string>
     </void>
    </object>
   </void>
@@ -7962,6 +8289,28 @@
     </void>
     <void property="unitP06">
      <string>Number per cubic metre</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="fr.ifremer.nemo.ws.model.Parameter">
+    <void property="code">
+     <string>O18E</string>
+    </void>
+    <void property="defaultValue">
+     <string>99.99</string>
+    </void>
+    <void property="format">
+     <string>%5.2f</string>
+    </void>
+    <void property="name">
+     <string>O18 ENRICHMENT</string>
+    </void>
+    <void property="unit">
+     <string>per thousand</string>
+    </void>
+    <void property="unitP06">
+     <string>Parts per thousand</string>
     </void>
    </object>
   </void>
@@ -9370,6 +9719,28 @@
     </void>
     <void property="unitP06">
      <string>Milligrams per kilogram</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="fr.ifremer.nemo.ws.model.Parameter">
+    <void property="code">
+     <string>PS02</string>
+    </void>
+    <void property="defaultValue">
+     <string>99.99</string>
+    </void>
+    <void property="format">
+     <string>%6.3f</string>
+    </void>
+    <void property="name">
+     <string>PRACTICAL SALINITY 2</string>
+    </void>
+    <void property="unit">
+     <string>P.S.U</string>
+    </void>
+    <void property="unitP06">
+     <string>Dimensionless</string>
     </void>
    </object>
   </void>
@@ -11136,6 +11507,28 @@
   <void method="add">
    <object class="fr.ifremer.nemo.ws.model.Parameter">
     <void property="code">
+     <string>TISW</string>
+    </void>
+    <void property="defaultValue">
+     <string>9999</string>
+    </void>
+    <void property="format">
+     <string>%4d</string>
+    </void>
+    <void property="name">
+     <string>NUMBER OF SW TINTINNINA</string>
+    </void>
+    <void property="unit">
+     <string>nb cell/l</string>
+    </void>
+    <void property="unitP06">
+     <string>Number per litre</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="fr.ifremer.nemo.ws.model.Parameter">
+    <void property="code">
      <string>TL63</string>
     </void>
     <void property="defaultValue">
@@ -11745,7 +12138,7 @@
      <string>milliF.T.U Formaz Turb Unit</string>
     </void>
     <void property="unitP06">
-     <string>Nephelometric Turbidity Units</string>
+     <string>Formazin Nephelometric Units</string>
     </void>
    </object>
   </void>
@@ -11834,6 +12227,28 @@
     </void>
     <void property="unitP06">
      <string>Picomoles per litre per hour</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="fr.ifremer.nemo.ws.model.Parameter">
+    <void property="code">
+     <string>URAW</string>
+    </void>
+    <void property="defaultValue">
+     <string>99.9</string>
+    </void>
+    <void property="format">
+     <string>%4.1f</string>
+    </void>
+    <void property="name">
+     <string>URANIUM IN WATER BODY</string>
+    </void>
+    <void property="unit">
+     <string>milligram/m3</string>
+    </void>
+    <void property="unitP06">
+     <string>Milligrams per cubic metre</string>
     </void>
    </object>
   </void>
