@@ -14,7 +14,6 @@ import java.util.List;
 import fr.ifremer.nemo.Nemo;
 import fr.ifremer.nemo.input.DataModel;
 import fr.ifremer.nemo.input.Fragment;
-import fr.ifremer.nemo.input.LineFragment;
 import fr.ifremer.nemo.input.PropertyModel;
 import fr.ifremer.nemo.input.parameters.Parameter;
 import fr.ifremer.nemo.input.parameters.ParameterModel;
@@ -184,7 +183,7 @@ public class ParameterManager {
 			// fragment du parametre
 			Fragment headFrag = propertyModel.getFragment();
 			if (headFrag != null) {
-				LineFragment frag = new LineFragment();
+				Fragment frag = new Fragment();
 				frag.setFirstCharOffset(headFrag.getFirstCharOffset());
 				frag.setLastCharOffset(headFrag.getLastCharOffset());
 				parameterModel.setFragment(frag);

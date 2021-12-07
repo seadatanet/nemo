@@ -3,7 +3,7 @@ package fr.ifremer.nemo.ui.edit.data;
 import java.util.regex.Pattern;
 
 import fr.ifremer.nemo.Nemo;
-import fr.ifremer.nemo.input.LineFragment;
+import fr.ifremer.nemo.input.Fragment;
 import fr.ifremer.nemo.input.parameters.Parameter;
 import fr.ifremer.nemo.input.parameters.ParameterModel;
 import fr.ifremer.nemo.util.Global;
@@ -129,8 +129,8 @@ public class TypeData extends Object implements Comparable<TypeData> {
 
 	public TypeData(ParameterModel parameterModel) {
 		Parameter parameter = parameterModel.getParameter();
-		LineFragment frag = parameterModel.getFragment();
-		LineFragment flag = parameterModel.getFlag();
+		Fragment frag = parameterModel.getFragment();
+		Fragment flag = parameterModel.getFlag();
 		setIsText(parameterModel.isText());
 
 		setEntryKey(parameter.getCode());
