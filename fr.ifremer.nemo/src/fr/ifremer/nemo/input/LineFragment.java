@@ -31,6 +31,9 @@ public class LineFragment extends AbstractModel
 	 * si -1 on lit jusqu'a la fin de ligne
 	 */
 	protected int _lastCharOffset;
+	
+	//40216
+	private int _colNb=-1;
 
 	public LineFragment() {
         _tagName = ModelDescription.nodetitle_default;
@@ -140,6 +143,7 @@ public class LineFragment extends AbstractModel
     		res= a_Line.substring(_firstCharOffset - 1, _lastCharOffset).trim();
     	}else{
     		//33278: split as columns
+    		// _lastCharOffset is used as columnNum in retreive(String a_Line) function
     		String[] splittedLine = a_Line.split(Nemo.getInstance().getDomain().getMedia().getModel().getSeparatorForSplit(), -1);
     		res = splittedLine[_lastCharOffset-1].trim();
     	}
@@ -153,6 +157,43 @@ public class LineFragment extends AbstractModel
      */
     public String fullRetreive(String a_Line) {
         String fullFrag = Global.EMPTY_STRING;
+        
+        
+		// 40216: guess the column number from the caracter start number (for files with separator)
+        // _colNb is used as columnNum in fullRetreive(String a_Line) function
+        String separator = Nemo.getInstance().getDomain().getMedia().getModel().getSeparatorForSplit();
+		boolean isUseTableForCsvData = Nemo.getInstance().getDomain().getMedia().getModel().getUseTableForCsvData();
+		int start = _firstCharOffset - 1;
+		if (isUseTableForCsvData && separator != null) {
+			if (this._colNb == -1 ) {
+				int colNb = -1;
+				int currentCol = 0;
+				int indexSearch = 0;
+				String[] split = a_Line.split(separator);
+				String foundData = "";
+
+				for (String colData : split) {
+
+					foundData = colData;
+
+					indexSearch = indexSearch + colData.length();
+					if (start < indexSearch) {
+						colNb = currentCol;
+						break;
+					}
+					currentCol++;
+					indexSearch++; // add separator
+				}
+				this._colNb = colNb;
+
+				// The value has been found AND the line is clearly with a separator.
+				return foundData;
+			}else {
+				return a_Line.split(separator)[_colNb];
+			}
+		}
+        
+        
         if (_lastCharOffset == -1) {
             fullFrag = a_Line.substring(_firstCharOffset - 1);
         } else {
@@ -231,5 +272,13 @@ public class LineFragment extends AbstractModel
 		} catch (Exception e) {
             e.printStackTrace();
 		}
+	}
+	
+	
+	/**
+	 * 40216
+	 */
+    public int getColNb() {
+		return _colNb;
 	}
 }
