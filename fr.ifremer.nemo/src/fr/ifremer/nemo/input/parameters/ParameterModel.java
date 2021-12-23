@@ -12,7 +12,7 @@ import fr.ifremer.nemo.config.FlagTable;
 import fr.ifremer.nemo.domain.ParameterValue;
 import fr.ifremer.nemo.domain.Station;
 import fr.ifremer.nemo.input.AbstractModel;
-import fr.ifremer.nemo.input.Fragment;
+import fr.ifremer.nemo.input.LineFragment;
 import fr.ifremer.nemo.input.ModelDescription;
 import fr.ifremer.nemo.input.parameters.addedParameters.AddedParam;
 import fr.ifremer.nemo.ui.edit.data.TypeData;
@@ -21,7 +21,7 @@ import fr.ifremer.nemo.util.Messages;
 
 /**
  * Class ParameterModel
- * Description : Modélisation d'un paramètre mesuré. 
+ * Description : ModÃ©lisation d'un paramÃ¨tre mesurÃ©. 
  * @author Gerard BUNEL
  */
 public class ParameterModel extends AbstractModel
@@ -41,21 +41,21 @@ public class ParameterModel extends AbstractModel
 
 
 	/**
-	 * Valeur par défaut dans le fichier
+	 * Valeur par dÃ©faut dans le fichier
 	 */
-	public String _inputDefault;	
-	
-	/**
-	 * Represente le fragment de ligne du fichier d'entree où la valeur du
-	 * parametre peut etre lue
-	 */
-	protected Fragment _fragment;
+	public String _inputDefault;
 
 	/**
-	 * Represente le fragment de ligne du fichier d'entree où la valeur du flag
+	 * Represente le fragment de ligne du fichier d'entree oÃ¹ la valeur du
+	 * parametre peut etre lue
+	 */
+	protected LineFragment _fragment;
+
+	/**
+	 * Represente le fragment de ligne du fichier d'entree oÃ¹ la valeur du flag
 	 * peut etre lue
 	 */
-	protected Fragment _flag;
+	protected LineFragment _flag;
 
 	/**
 	 * Represente le parametre modelise par ce ParameterModel
@@ -83,7 +83,7 @@ public class ParameterModel extends AbstractModel
 		this.setInputDefault(typeData.getEntree());
 
 		// fragment du parametre
-		Fragment frag = new Fragment();
+		LineFragment frag = new LineFragment();
 		frag.setFirstCharOffset(typeData.getDebut());
 		frag.setLastCharOffset(typeData.getFin());
 		this.setFragment(frag);
@@ -91,7 +91,7 @@ public class ParameterModel extends AbstractModel
 		if (!typeData.getDebutFlag().equals(Global.EMPTY_STRING)
 				&& !typeData.getFinFlag().equals(Global.EMPTY_STRING))
 		{
-			Fragment flag = new Fragment();
+			LineFragment flag = new LineFragment();
 			flag.setFirstCharOffset(typeData.getDebutFlag());
 			flag.setLastCharOffset(typeData.getFinFlag());
 			this.setFlag(flag);
@@ -106,7 +106,7 @@ public class ParameterModel extends AbstractModel
 	public void initValues(){
 		_conversionFormula = Global.EMPTY_STRING;
 		_inputDefault = Global.EMPTY_STRING;
-		_fragment = new Fragment();
+		_fragment = new LineFragment();
 		_flag = null;
 		_parameter = new Parameter();
 		_lineValue = null;
@@ -134,7 +134,7 @@ public class ParameterModel extends AbstractModel
 			String a_LocalName,
 			String a_QName, 
 			Attributes a_Attributes){
-		// l'élément n'a pas d'attribut
+		// l'Ã©lÃ©ment n'a pas d'attribut
 	}
 
 	/**
@@ -160,8 +160,8 @@ public class ParameterModel extends AbstractModel
 			return setter;
 		}        
 		if (a_LocalName.equals(ModelDescription.node_dataFragment)) {
-			el = Fragment.fromElement(a_URI, a_LocalName, a_QName, a_Attributes);
-			setFragment((Fragment) el);
+			el = LineFragment.fromElement(a_URI, a_LocalName, a_QName, a_Attributes);
+			setFragment((LineFragment) el);
 			return el;
 			//return new PathElementConsumer(ModelDescription.node_dataFragment, this);
 		}
@@ -172,8 +172,8 @@ public class ParameterModel extends AbstractModel
 			//return new PathElementConsumer(ModelDescription.node_parameter, this);
 		}
 		if (a_LocalName.equals(ModelDescription.node_flag)) {
-			el = Fragment.fromElement(a_URI, a_LocalName, a_QName, a_Attributes);
-			setFlag((Fragment) el);
+			el = LineFragment.fromElement(a_URI, a_LocalName, a_QName, a_Attributes);
+			setFlag((LineFragment) el);
 			return el;
 			//return new PathElementConsumer(ModelDescription.node_flag, this);
 		}
@@ -189,7 +189,7 @@ public class ParameterModel extends AbstractModel
 			String a_LocalName, 
 			String a_QName, 
 			Attributes a_Attributes){
-		// non utilisé
+		// non utilisÃ©
 		return null;
 	}
 
@@ -225,7 +225,7 @@ public class ParameterModel extends AbstractModel
 		copy = (ParameterModel) super.clone();
 		copy._fragment = null;
 		if (getFragment() != null) {
-			copy.setFragment((Fragment) getFragment().clone());
+			copy.setFragment((LineFragment) getFragment().clone());
 		}
 		copy._parameter = null;
 		if (getParameter() != null) {
@@ -233,7 +233,7 @@ public class ParameterModel extends AbstractModel
 		}
 		copy._flag = null;
 		if (getFlag() != null) {
-			copy.setFlag((Fragment) getFlag().clone());
+			copy.setFlag((LineFragment) getFlag().clone());
 		}
 		return copy;
 	}
@@ -241,7 +241,7 @@ public class ParameterModel extends AbstractModel
 	public boolean hasDefaultValue(String inputLine)
 	{
 		boolean hasDefaultValue=false;
-		String value = _fragment.retreiveInLine(inputLine);
+		String value = _fragment.retreive(inputLine);
 		if (_inputDefault.trim().equals(value)) {
 			hasDefaultValue=true;
 		}
@@ -250,7 +250,7 @@ public class ParameterModel extends AbstractModel
 	public boolean hasNaNValue(String inputLine)
 	{
 		boolean hasNaNValue=false;
-		String value = _fragment.retreiveInLine(inputLine);
+		String value = _fragment.retreive(inputLine);
 		if (value.equals(Global.EMPTY_STRING) && !_inputDefault.trim().equals(Global.EMPTY_STRING)) {
 			hasNaNValue=true;
 		}
@@ -261,9 +261,9 @@ public class ParameterModel extends AbstractModel
 	{
 		ParameterValue pValue = new ParameterValue();
 		JEP parser = null;
-		String value = _fragment.retreiveInLine(inputLine);
+		String value = _fragment.retreive(inputLine);
 
-		// calcul de la valeur du paramètre
+		// calcul de la valeur du paramÃ¨tre
 		if (hasNaNValue(inputLine)) {
 			pValue.setValue("");
 		} 
@@ -324,7 +324,7 @@ public class ParameterModel extends AbstractModel
 			}
 		}
 
-		// détermination du flag du paramètre
+		// dÃ©termination du flag du paramÃ¨tre
 		pValue.setQc(retreiveParameterFlag(inputLine));
 
 		_lineValue = pValue;
@@ -332,25 +332,25 @@ public class ParameterModel extends AbstractModel
 
 	public String retreiveParameterFlag(String inputLine)
 	{
-		String value = _fragment.retreiveInLine(inputLine);
+		String value = _fragment.retreive(inputLine);
 
-		//FAE 4431 Flag qualité par défault configurable
+		//FAE 4431 Flag qualitÃ© par dÃ©fault configurable
 		String flagConfig = Nemo.getInstance().getConfig().getDefaultFlag();
 		String flagQc = flagConfig==null?Global.ZERO:flagConfig;
 
 		if (_inputDefault.trim().equals(value)  || value.equals(Global.EMPTY_STRING)){
-			// la valeur est celle par défaut ou la valeur est manquante
+			// la valeur est celle par dÃ©faut ou la valeur est manquante
 			flagQc = Global.DEFAULT_FLAG;
 		}
 		else{
 			if (_flag != null) {
-				// le flag est a récupérer dans fichier
+				// le flag est a rÃ©cupÃ©rer dans fichier
 				// table de correspondance SDN
 				FlagTable flagTable = Nemo.getInstance().getDomain().getStation().getModel().getFlagTable();
-				flagQc = flagTable.getFlagSDN(_flag.retreiveInLine(inputLine));
+				flagQc = flagTable.getFlagSDN(_flag.retreive(inputLine));
 			}
 
-			// sinon, on laisse le flag à 0
+			// sinon, on laisse le flag Ã  0
 		}
 		return flagQc;
 	}
@@ -362,9 +362,16 @@ public class ParameterModel extends AbstractModel
 		AddedParam p = (AddedParam) _parameter;
 
 		String stringValue = null;
+		
+		
+		if (inputLine.equalsIgnoreCase("ABRACOS;5; C;09/29/2015;16:37;-35.1889;-5.74746;0;0;27.943;35.968;5.754;27.408") && _fragment.getFirstCharOffset() == 41) {
+			System.out.println("test");
+		}
 
 		if (p.isMesured()){
-			stringValue = p.compute(_fragment.retreiveInLine(inputLine));
+			// FIXME PROBLEM ICI
+			stringValue = p.compute(_fragment.fullRetreive(inputLine));
+//			stringValue = p.compute(_fragment.retreive(inputLine));
 		}
 		else{
 			stringValue = p.getValue(currentStation, inputLine, currentDate);
@@ -504,7 +511,7 @@ public class ParameterModel extends AbstractModel
 	 * @return LineFragment
 	 * @see ParameterModel.java#_fragment
 	 */
-	public Fragment getFragment() {
+	public LineFragment getFragment() {
 		return _fragment;
 	}
 
@@ -513,7 +520,7 @@ public class ParameterModel extends AbstractModel
 	 * @param x : nouvelle valeur pour _fragment
 	 * @see ParameterModel.java#_fragment
 	 */
-	public void setFragment(Fragment x) {
+	public void setFragment(LineFragment x) {
 		if (_fragment == x)
 			return;
 		_fragment = x;
@@ -524,7 +531,7 @@ public class ParameterModel extends AbstractModel
 	 * @return LineFragment
 	 * @see ParameterModel.java#_flag
 	 */
-	public Fragment getFlag() {
+	public LineFragment getFlag() {
 		return _flag;
 	}
 
@@ -533,7 +540,7 @@ public class ParameterModel extends AbstractModel
 	 * @param x : nouvelle valeur pour _flag
 	 * @see ParameterModel.java#_flag
 	 */
-	public void setFlag(Fragment x) {
+	public void setFlag(LineFragment x) {
 		if (_flag == x)
 			return;
 		_flag = x;
