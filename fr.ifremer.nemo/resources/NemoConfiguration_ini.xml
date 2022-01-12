@@ -39,6 +39,7 @@
     <Flag local="8" SDN="8 - interpolated value"/>
     <Flag local="9" SDN="9 - missing value"/>
     <Flag local="A" SDN="A - value phenomenon uncertain"/>
+    <Flag local="B" SDN="B - nominal value"/>
     <Flag local="Q" SDN="Q - value below limit of quantification"/>
   </FlagTable>
   <FlagTable code="C2" label="MEDATLAS">
