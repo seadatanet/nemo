@@ -247,7 +247,8 @@ public class MedatlasWriter extends NemoWriter
 			{
 				key = Double.valueOf(DateTimeUtils.getCurrentDate(currentStation, indexRecord));
 				//FAE 11356
-                if(Nemo.getInstance().getDomain().getMedia().getModel().getInputType() == E_InputType.TIMESERIES 
+                if((Nemo.getInstance().getDomain().getMedia().getModel().getInputType() == E_InputType.TIMESERIES
+                		|| Nemo.getInstance().getDomain().getMedia().getModel().getInputType() == E_InputType.TRAJECTORY) 
                         && Nemo.getInstance().getDomain().getStation().getModel().getProperty(Intern.S_DATE).isInData())
                     key = Double.valueOf(DateTimeUtils.convertTimestamp(inputLine));
 			}

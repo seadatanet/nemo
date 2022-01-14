@@ -267,9 +267,6 @@ public class OdvWriter extends NemoWriter
 				stationHeader = iDomain.getStation().getHeader(myConversion,currentStation, inputStationHeader);
 			}
 			
-//			stationHeader = iDomain.getStation().getHeader(myConversion,currentStation, inputStationHeader);
-
-			
 			dataLine.append(stationHeader);	
 
 			dataLine.append(iDomain.getData().getDataLine(myConversion, currentStation, readedLine,indexRecord));
@@ -289,14 +286,7 @@ public class OdvWriter extends NemoWriter
 	 * @throws Exception
 	 */
 	private void stackHeaderDataLine(String[] inputStationHeader, Station currentStation) throws Exception {
-//		if (isInputType_Trajectory) {
-//			stationHeader = iDomain.getStation().getOdvTrajectoryHeader(currentStation, readedLine, indexRecord);
-//		} else {
-//			stationHeader = iDomain.getStation().getHeader(myConversion,currentStation, inputStationHeader);
-//		}
-		
 		stationHeader = iDomain.getStation().getHeader(myConversion,currentStation, inputStationHeader);
-
 
 		// FAE 4673 Pb si une seule ligne données et pas d'entête station
 		// FAE 11978 - cas des fichiers ODV en entree	
