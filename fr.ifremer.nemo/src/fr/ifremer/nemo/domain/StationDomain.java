@@ -166,7 +166,7 @@ public class StationDomain {
 		_currentStation = currentStation;
 
 		StringBuffer odvStationHeader = new StringBuffer();
-		String stationRef = currentStation.getReference();
+		String stationRef = currentStation.getReference().trim();
 		// Cruise
 		String cruiseName = Nemo.getInstance().getDomain().getCruise().getModel().getName();
 
