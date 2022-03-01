@@ -1165,16 +1165,18 @@ public class OptionsAction extends Action implements ISelectionListener, ActionF
 
 	public void createPartControl(Composite parent) {
 		parent.setLayout(new GridLayout());
-
+		
 		FormToolkit toolkitOption = new FormToolkit(parent.getDisplay());
 		toolkitOption.setBackground(parent.getBackground());
 		final ScrolledForm formOption = toolkitOption.createScrolledForm(parent);
 		formOption.setBackground(parent.getBackground());
 		formOption.getBody().setLayout(new GridLayout());
 		GridData data = new GridData();
-		data.widthHint = 600;
+		data.widthHint = 800;
+		data.heightHint = 700;
 		data.grabExcessVerticalSpace = true;
 		formOption.getBody().setLayoutData(data);
+		formOption.setLayoutData(data);
 		edmoChoiceListener = new EdmoChoiceListener();
 		editFlagsListener = new EditFlagsListener();
 		
@@ -1190,7 +1192,7 @@ public class OptionsAction extends Action implements ISelectionListener, ActionF
 		createCompoBouton(parent);
 
 		updateEdmo(tmpEdmoChoices);
-
+		
 		// listener cancel
 		buttonCancel.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
 			@Override
