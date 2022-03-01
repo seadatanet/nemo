@@ -320,6 +320,12 @@ public class CDIResumeWriter {
 			writer.write(sep + config.getMedatlasVersion());
 		else if (formatConversion == Conversion.NETCDF)
 			writer.write(sep + config.getNetCDFVersion());
+		else if (formatConversion == Conversion.BODV)
+			writer.write(sep + config.getBodvVersion());
+		else if (formatConversion == Conversion.MODV)
+			writer.write(sep + config.getModvVersion());
+		else if (formatConversion == Conversion.SODV)
+			writer.write(sep + config.getSodvVersion());
 		else
 			writer.write(sep);
 

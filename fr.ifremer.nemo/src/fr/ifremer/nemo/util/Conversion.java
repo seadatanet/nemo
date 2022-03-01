@@ -8,7 +8,7 @@ import fr.ifremer.sismer_tools.resources.ODVConstants.E_Variant;
  *
  */
 public enum Conversion {
-	MEDATLAS, ODV, BODV, MODV, NETCDF;
+	MEDATLAS, ODV, BODV, MODV, NETCDF, SODV;
 
 	public String getName() {
 		String name = Global.EMPTY_STRING;
@@ -24,6 +24,9 @@ public enum Conversion {
 			break;
 		case MODV:
 			name = "ODV microlitter";//$NON-NLS-1$
+			break;			
+		case SODV:
+			name = "ODV microlitter in sediments";//$NON-NLS-1$
 			break;
 		default:
 			name = this.toString();

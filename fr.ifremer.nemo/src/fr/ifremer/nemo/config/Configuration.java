@@ -73,6 +73,12 @@ public class Configuration extends AbstractModel {
 	protected String _netCDFVersion;
 
 	protected String _medatlasVersion;
+	
+	protected String _bodvVersion;
+	
+	protected String _modvVersion;
+	
+	protected String _sodvVersion;
 
 	protected String _cdiMethod;
 
@@ -167,6 +173,9 @@ public class Configuration extends AbstractModel {
 		_odvVersion = Intern.defaultODVFormatVersion;
 		_medatlasVersion = Intern.defaultMedatlasFormatVersion;
 		_netCDFVersion = Intern.defaultNetCDFFormatVersion;
+		_bodvVersion = Intern.defaultBodvFormatVersion;
+		_modvVersion = Intern.defaultModvFormatVersion;
+		_sodvVersion = Intern.defaultSodvFormatVersion;
 		_cdiMethod = Global.EMPTY_STRING;
 		_typePlateForme = Global.EMPTY_STRING;
 		_accesDonnees = Global.EMPTY_STRING;
@@ -311,6 +320,24 @@ public class Configuration extends AbstractModel {
 		if (a_LocalName.equals(ConfigDescription.node_netCDFVersion)) {
 			Element2Field setter =
 					new Element2Field(this, ConfigDescription.setter_NetCDFVersion);
+			return setter;
+		}
+		
+		if (a_LocalName.equals(ConfigDescription.node_bodvVersion)) {
+			Element2Field setter =
+					new Element2Field(this, ConfigDescription.setter_BodvVersion);
+			return setter;
+		}
+		
+		if (a_LocalName.equals(ConfigDescription.node_modvVersion)) {
+			Element2Field setter =
+					new Element2Field(this, ConfigDescription.setter_ModvVersion);
+			return setter;
+		}
+		
+		if (a_LocalName.equals(ConfigDescription.node_sodvVersion)) {
+			Element2Field setter =
+					new Element2Field(this, ConfigDescription.setter_SodvVersion);
 			return setter;
 		}
 
@@ -461,6 +488,9 @@ public class Configuration extends AbstractModel {
 		a_Writer.putTag(ConfigDescription.node_odvVersion, getODVFormatVersion());
 		a_Writer.putTag(ConfigDescription.node_medatlasVersion, getMedatlasVersion());
 		a_Writer.putTag(ConfigDescription.node_netCDFVersion, getNetCDFVersion());
+		a_Writer.putTag(ConfigDescription.node_bodvVersion, getBodvVersion());
+		a_Writer.putTag(ConfigDescription.node_modvVersion, getModvVersion());
+		a_Writer.putTag(ConfigDescription.node_sodvVersion, getSodvVersion());
 
 		a_Writer.putTag(ConfigDescription.node_cdiMethod, getCdiMethod());
 		a_Writer.putTag(ConfigDescription.node_accesDonnees, getAccesDonnees());
@@ -881,6 +911,39 @@ public class Configuration extends AbstractModel {
 	public void setOdvVersion(String x) {
 		_odvVersion = x;
 	}
+	
+	/**
+	 * Write accessor (setter) for attribute _bodvVersion
+	 * 
+	 * @param x
+	 *            new value for _bodvVersion
+	 * @see Configuration#_bodvVersion
+	 */
+	public void setBodvVersion(String x) {
+		_bodvVersion = x;
+	}
+	
+	/**
+	 * Write accessor (setter) for attribute _modvVersion
+	 * 
+	 * @param x
+	 *            new value for _modvVersion
+	 * @see Configuration#_modvVersion
+	 */
+	public void setModvVersion(String x) {
+		_modvVersion = x;
+	}
+	
+	/**
+	 * Write accessor (setter) for attribute _sodvVersion
+	 * 
+	 * @param x
+	 *            new value for _sodvVersion
+	 * @see Configuration#_sodvVersion
+	 */
+	public void setSodvVersion(String x) {
+		_sodvVersion = x;
+	}
 
 	/**
 	 * Read accessor (getter) for attribute _cdiMethod
@@ -1170,6 +1233,17 @@ public class Configuration extends AbstractModel {
 		return _medatlasVersion;
 	}
 
+	public String getBodvVersion() {
+		return _bodvVersion;
+	}
+	
+	public String getModvVersion() {
+		return _modvVersion;
+	}
+	
+	public String getSodvVersion() {
+		return _sodvVersion;
+	}
 	public String checkConfig() {
 		boolean blnOK = true;
 		String message="";

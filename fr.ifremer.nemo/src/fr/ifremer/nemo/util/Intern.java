@@ -161,6 +161,10 @@ public class Intern extends NLS {
 	public static String defaultODVFormatVersion;
 	public static String defaultNetCDFFormatVersion;
 	public static String defaultMedatlasFormatVersion;
+	public static String defaultBodvFormatVersion;
+	public static String defaultModvFormatVersion;
+	public static String defaultSodvFormatVersion;
+	
 	public static String USE_STATION_CODE_IN_LOCAL_CDI_ID_CHECKBOX;
 	static {
 		// initialize resource bundle

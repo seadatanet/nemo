@@ -361,6 +361,9 @@ public class Messages {
 	public static String settings_odvVersion;
 	public static String settings_netcdfVersion;
 	public static String settings_medatlasVersion;
+	public static String settings_bodvVersion;
+	public static String settings_modvVersion;
+	public static String settings_sodvVersion;
 	public static String error_updateSurvey_url;
 	public static String error_updateSurvey_distant;
 	public static String error_updateSurvey_service;

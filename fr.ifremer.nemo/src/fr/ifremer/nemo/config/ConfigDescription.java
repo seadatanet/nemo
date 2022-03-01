@@ -53,6 +53,12 @@ public class ConfigDescription extends NLS {
 	public static String node_netCDFVersion;
 
 	public static String node_medatlasVersion;
+	
+	public static String node_bodvVersion;
+	
+	public static String node_modvVersion;
+	
+	public static String node_sodvVersion;
 
 	public static String node_codeEdmoDonnees;
 
@@ -115,6 +121,12 @@ public class ConfigDescription extends NLS {
 	public static String setter_NetCDFVersion;
 
 	public static String setter_MedatlasVersion;
+	
+	public static String setter_BodvVersion;
+	
+	public static String setter_ModvVersion;
+	
+	public static String setter_SodvVersion;
 
 	public static String setter_CodeEdmoDonnees;
 
