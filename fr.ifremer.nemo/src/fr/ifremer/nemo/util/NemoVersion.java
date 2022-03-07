@@ -6,10 +6,10 @@ import java.text.MessageFormat;
 
 import org.osgi.framework.Version;
 
+import fr.ifremer.nemo.Nemo;
 import software.version.SoftwareState;
 import software.version.SoftwareState.STATE;
 import software.version.SoftwareVersionClient;
-import fr.ifremer.nemo.Nemo;
 
 public class NemoVersion {
 
@@ -20,7 +20,7 @@ public class NemoVersion {
 		SoftwareState state = null;
 		try
 		{                      
-			client = new SoftwareVersionClient(new URL("http://www.ifremer.fr/SoftwareVersionSoap/SoftwareVersionWebService?wsdl"));                                
+			client = new SoftwareVersionClient(new URL("https://www.ifremer.fr/SoftwareVersionSoap/SoftwareVersionWebService?wsdl"));                                
 
 
 			state = client.getSoftwareState("NEMO", version.toString());
