@@ -48,6 +48,7 @@ writeBodcReference: https://www.seadatanet.org/urnurl/SDN:{0}::{1}
 cdiUrlPatterns:
     - (?i)^https://cdi\.seadatanet\.org/report/edmo/([0-9]+)/([^/\?\s]+)/xml/?$
     - (?i)^http://seadatanet\.maris2\.nl/v_cdi_v3/print_xml\.asp\?edmo=([0-9]+)&identifier=([^/\?\s]+)$
+    - (?i)^https://cdi\.seadatanet\.org/report/edmo/([0-9]+)/([^/\?\s]+)/?$
 
 # URL pattern to write a CDI URL.
 # {0} is EDMO_CODE, {1} is LOCAL_CDI_ID.
