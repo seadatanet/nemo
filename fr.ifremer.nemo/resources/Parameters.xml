@@ -1360,6 +1360,9 @@
     <void property="unit">
      <string>microgram/m3</string>
     </void>
+    <void property="unitP06">
+     <string>Micrograms per cubic metre</string>
+    </void>
    </object>
   </void>
   <void method="add">
@@ -4284,7 +4287,7 @@
      <string>degree true</string>
     </void>
     <void property="unitP06">
-     <string>Degrees</string>
+     <string>Degrees True</string>
     </void>
    </object>
   </void>
@@ -4460,7 +4463,7 @@
      <string>degree true</string>
     </void>
     <void property="unitP06">
-     <string>Degrees</string>
+     <string>Degrees True</string>
     </void>
    </object>
   </void>
@@ -4526,7 +4529,7 @@
      <string>degree true</string>
     </void>
     <void property="unitP06">
-     <string>Degrees</string>
+     <string>Degrees True</string>
     </void>
    </object>
   </void>
@@ -10818,7 +10821,7 @@
      <string>degree true</string>
     </void>
     <void property="unitP06">
-     <string>Degrees</string>
+     <string>Degrees True</string>
     </void>
    </object>
   </void>
@@ -12446,7 +12449,7 @@
      <string>degree true</string>
     </void>
     <void property="unitP06">
-     <string>Degrees</string>
+     <string>Degrees True</string>
     </void>
    </object>
   </void>
@@ -13084,7 +13087,7 @@
      <string>degree true</string>
     </void>
     <void property="unitP06">
-     <string>Degrees</string>
+     <string>Degrees True</string>
     </void>
    </object>
   </void>
