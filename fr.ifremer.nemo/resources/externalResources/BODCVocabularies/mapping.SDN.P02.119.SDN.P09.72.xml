@@ -1,0 +1,3808 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapping>
+   <vocabulary list="SDN:P02:119:"  version="119"  date="2022-04-28T02:00:03.000"  title="SeaDataNet Parameter Discovery Vocabulary"   />
+   <mapped>
+      <vocabulary list="SDN:P09:72:"  version="72"  date="2022-04-28T02:00:03.000"  title="MEDATLAS Parameter Usage Vocabulary"   />
+   </mapped>
+   <match>
+      <element  key="SDN:P09:72:DMTW"  label="1,3-1,4dimethylbenzene water"    />
+      <broad>
+         <element  key="SDN:P02:72:OHWC"  label="Concentration of other hydrocarbons in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:CUPH"  label="14C PRODUCTION FILTER UNSPECIF"    />
+      <broad>
+         <element  key="SDN:P02:72:PPRD"  label="Primary production in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:CUPW"  label="14C PRODUCTION FILTER UNSPECIF"    />
+      <broad>
+         <element  key="SDN:P02:72:PPRD"  label="Primary production in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:C4UW"  label="14C PRODUCTION/10 MICRON FILT."    />
+      <broad>
+         <element  key="SDN:P02:72:PPRD"  label="Primary production in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:C2UW"  label="14C PRODUCTION/2 MICRON FILT."    />
+      <broad>
+         <element  key="SDN:P02:72:PPRD"  label="Primary production in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:C1UW"  label="14C UPTAKE 0.2-1 MICRON"    />
+      <broad>
+         <element  key="SDN:P02:72:PPRD"  label="Primary production in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:BFUP"  label="19&apos;BUTANOYLOXYFUCOXANTHINE"    />
+      <broad>
+         <element  key="SDN:P02:72:CARO"  label="Carotenoid and flavenoid pigment concentrations in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:HFUP"  label="19&apos;HEXANOYLOXYFUCOXANTHINE"    />
+      <broad>
+         <element  key="SDN:P02:72:CARO"  label="Carotenoid and flavenoid pigment concentrations in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:NOPW"  label="4-nonylphenol in water body"    />
+      <broad>
+         <element  key="SDN:P02:72:WCOC"  label="Concentration of other organic contaminants in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:ASDW"  label="ABSORPTION STANDARD DEVIATION"    />
+      <broad>
+         <element  key="SDN:P02:72:PPRD"  label="Primary production in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:ABB3"  label="ABUNDANCE BIO PER VOL IN SED"    />
+      <broad>
+         <element  key="SDN:P02:72:BPRP"  label="SeaDataNet biological format biotic parameters"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:ABB2"  label="ABUNDANCE OF BIO PER AREA"    />
+      <broad>
+         <element  key="SDN:P02:72:BPRP"  label="SeaDataNet biological format biotic parameters"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:ABB1"  label="ABUNDANCE OF BIO PER VOLUME"    />
+      <broad>
+         <element  key="SDN:P02:72:BPRP"  label="SeaDataNet biological format biotic parameters"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:MALF"  label="AL FLUX IN SETTLING PARTICLES"    />
+      <broad>
+         <element  key="SDN:P02:72:MLFX"  label="Sedimentation flux of metallic and metalloid elements and isotopes in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:ALKW"  label="ALKALINITY"    />
+      <broad>
+         <element  key="SDN:P02:72:ALKY"  label="Alkalinity, acidity and pH of the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:ALKY"  label="ALKALINITY"    />
+      <broad>
+         <element  key="SDN:P02:72:ALKY"  label="Alkalinity, acidity and pH of the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:AXAP"  label="ALLOXANTHINE"    />
+      <broad>
+         <element  key="SDN:P02:72:CARO"  label="Carotenoid and flavenoid pigment concentrations in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:ABCP"  label="ALPHA BETA CAROTENES"    />
+      <broad>
+         <element  key="SDN:P02:72:CARO"  label="Carotenoid and flavenoid pigment concentrations in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:AACP"  label="ALPHA-CAROTENE"    />
+      <broad>
+         <element  key="SDN:P02:72:CARO"  label="Carotenoid and flavenoid pigment concentrations in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:AMON"  label="AMMONIUM (NH4-N) CONTENT"    />
+      <broad>
+         <element  key="SDN:P02:72:AMON"  label="Ammonium and ammonia concentration parameters in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:AMOW"  label="AMMONIUM (NH4-N) CONTENT"    />
+      <broad>
+         <element  key="SDN:P02:72:AMON"  label="Ammonium and ammonia concentration parameters in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:NHRW"  label="AMMONIUM REGENERATION"    />
+      <broad>
+         <element  key="SDN:P02:72:EXCR"  label="Excretion rate parameters in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:NHUW"  label="AMMONIUM UPTAKE"    />
+      <broad>
+         <element  key="SDN:P02:72:AMUP"  label="Regenerated production in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:AMOP"  label="AMONIUM IN SEDIMENT PORE WATER"    />
+      <broad>
+         <element  key="SDN:P02:72:NTPW"  label="Nutrient concentrations in sediment pore waters"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:ANXW"  label="ANTHERAXANTHIN"    />
+      <broad>
+         <element  key="SDN:P02:72:CARO"  label="Carotenoid and flavenoid pigment concentrations in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:ATMP"  label="ATMOSPHERIC PRESSURE"    />
+      <broad>
+         <element  key="SDN:P02:72:CAPH"  label="Air pressure"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:ATMS"  label="ATMOSPHERIC PRESSURE - SEA LEV"    />
+      <broad>
+         <element  key="SDN:P02:72:CAPH"  label="Air pressure"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:ATPT"  label="ATMOSPHERIC PRESSURE TENDENCY"    />
+      <broad>
+         <element  key="SDN:P02:72:CAPH"  label="Air pressure"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:NFAW"  label="AUTOTROPHIC NANOFLAGELLATES"    />
+      <broad>
+         <element  key="SDN:P02:72:PNTX"  label="Phytoplankton generic abundance in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:VHZA"  label="AVER ZERO CROSSING WAVE HEIGHT"    />
+      <broad>
+         <element  key="SDN:P02:72:WVST"  label="Wave height and period statistics"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:VTZA"  label="AVER ZERO CROSSING WAVE PERIOD"    />
+      <broad>
+         <element  key="SDN:P02:72:WVST"  label="Wave height and period statistics"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:VAVH"  label="AVER. HEIGHT HIGHEST 1/3 WAVE"    />
+      <broad>
+         <element  key="SDN:P02:72:WVST"  label="Wave height and period statistics"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:VAVT"  label="AVER. PERIOD HIGHEST 1/3 WAVE"    />
+      <broad>
+         <element  key="SDN:P02:72:WVST"  label="Wave height and period statistics"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:NAVG"  label="AVERAGED DATA CYCLE NUMBER"    />
+      <broad>
+         <element  key="SDN:P02:72:ACYC"  label="Reference numbers"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:ACES"  label="Acenaphthylene in sediment"    />
+      <broad>
+         <element  key="SDN:P02:72:SCAH"  label="Concentration of polycyclic aromatic hydrocarbons (PAHs) in sediment samples"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:ACEW"  label="Acenaphthylene in water body"    />
+      <broad>
+         <element  key="SDN:P02:72:PCHW"  label="Concentration of polycyclic aromatic hydrocarbons (PAHs) in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:AGSX"  label="Ag IN DRY WEIGHT SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:AG63"  label="Ag&lt;63um IN DRY WEIGHT SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:MALP"  label="Al IN SUSPENDED MATTER"    />
+      <broad>
+         <element  key="SDN:P02:72:MTWP"  label="Particulate metal concentrations in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:MALS"  label="Al IN THE SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:AL63"  label="Al&lt;63um IN DRY WEIGHT SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:ALUW"  label="Aluminium in water body"    />
+      <broad>
+         <element  key="SDN:P02:72:MTWT"  label="Total metal concentrations in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:AMSE"  label="Ammonium in sediment"    />
+      <broad>
+         <element  key="SDN:P02:72:NTPW"  label="Nutrient concentrations in sediment pore waters"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:ANTB"  label="Anthracene in biota"    />
+      <broad>
+         <element  key="SDN:P02:72:BCAH"  label="Concentration of polycyclic aromatic hydrocarbons (PAHs) in biota"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:ANTS"  label="Anthracene in sediment"    />
+      <broad>
+         <element  key="SDN:P02:72:SCAH"  label="Concentration of polycyclic aromatic hydrocarbons (PAHs) in sediment samples"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:ANTW"  label="Anthracene in water body"    />
+      <broad>
+         <element  key="SDN:P02:72:PCHW"  label="Concentration of polycyclic aromatic hydrocarbons (PAHs) in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:ARSW"  label="Arsenic in water body"    />
+      <broad>
+         <element  key="SDN:P02:72:MDWD"  label="Dissolved trace metalloid and inorganic selenium concentrations in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:ASSX"  label="As IN DRY WEIGHT SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:UPTS"  label="BACT. PROD. STANDARD DEVIATION"    />
+      <broad>
+         <element  key="SDN:P02:72:UPTH"  label="Bacterial production in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:BCMW"  label="BACTERIAL BIOMASS IN SEA WATER"    />
+      <broad>
+         <element  key="SDN:P02:72:BNTC"  label="Bacteria non taxonomy-related biomass expressed as carbon per unit volume of the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:UPTH"  label="BACTERIAL PRODUCTION(THYM. UP)"    />
+      <broad>
+         <element  key="SDN:P02:72:UPTH"  label="Bacterial production in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:BCHA"  label="BACTERIOCHLOROPHYLL-A"    />
+      <broad>
+         <element  key="SDN:P02:72:CPWC"  label="Chlorophyll pigment concentrations in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:BATH"  label="BATHYMETRIC DEPTH"    />
+      <broad>
+         <element  key="SDN:P02:72:MBAN"  label="Bathymetry and Elevation"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:BEAR"  label="BEARING AWAY FROM INSTRUMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:ALAT"  label="Horizontal spatial co-ordinates"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:WBFO"  label="BEAUFORT WIND FORCE"    />
+      <broad>
+         <element  key="SDN:P02:72:EWSB"  label="Wind strength and direction"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:BBCP"  label="BETA-CAROTENE"    />
+      <broad>
+         <element  key="SDN:P02:72:CARO"  label="Carotenoid and flavenoid pigment concentrations in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:TB25"  label="BLUE LIGHT TRANSMISSION 25CM"    />
+      <broad>
+         <element  key="SDN:P02:72:ATTN"  label="Transmittance and attenuance of the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:MBAP"  label="Ba IN SUSPENDED MATTER"    />
+      <broad>
+         <element  key="SDN:P02:72:MTWP"  label="Particulate metal concentrations in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:MBAS"  label="Ba IN THE SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:BAAS"  label="Benz(a)anthracene in sediment"    />
+      <broad>
+         <element  key="SDN:P02:72:SCAH"  label="Concentration of polycyclic aromatic hydrocarbons (PAHs) in sediment samples"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:BAAW"  label="Benz(a)anthracene in water"    />
+      <broad>
+         <element  key="SDN:P02:72:PCHW"  label="Concentration of polycyclic aromatic hydrocarbons (PAHs) in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:BENW"  label="Benzene in water body"    />
+      <broad>
+         <element  key="SDN:P02:72:OHWC"  label="Concentration of other hydrocarbons in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:BAPS"  label="Benzo(a)pyrene in sediment"    />
+      <broad>
+         <element  key="SDN:P02:72:SCAH"  label="Concentration of polycyclic aromatic hydrocarbons (PAHs) in sediment samples"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:BAPW"  label="Benzo(a)pyrene in water body"    />
+      <broad>
+         <element  key="SDN:P02:72:PCHW"  label="Concentration of polycyclic aromatic hydrocarbons (PAHs) in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:BBFW"  label="Benzo(b)fluoranthene in water"    />
+      <broad>
+         <element  key="SDN:P02:72:PCHW"  label="Concentration of polycyclic aromatic hydrocarbons (PAHs) in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:BBFS"  label="Benzo(b)fluoranthene sediment"    />
+      <broad>
+         <element  key="SDN:P02:72:SCAH"  label="Concentration of polycyclic aromatic hydrocarbons (PAHs) in sediment samples"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:BGHW"  label="Benzo(g,h,i)perylene in water"    />
+      <broad>
+         <element  key="SDN:P02:72:PCHW"  label="Concentration of polycyclic aromatic hydrocarbons (PAHs) in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:BGHS"  label="Benzo(g,h,i)perylene sediment"    />
+      <broad>
+         <element  key="SDN:P02:72:SCAH"  label="Concentration of polycyclic aromatic hydrocarbons (PAHs) in sediment samples"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:BKFW"  label="Benzo(k)fluoranthene in water"    />
+      <broad>
+         <element  key="SDN:P02:72:PCHW"  label="Concentration of polycyclic aromatic hydrocarbons (PAHs) in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:BKFS"  label="Benzo(k)fluoranthene sediment"    />
+      <broad>
+         <element  key="SDN:P02:72:SCAH"  label="Concentration of polycyclic aromatic hydrocarbons (PAHs) in sediment samples"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:BISX"  label="Bi IN DRY WEIGHT SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:BI63"  label="Bi&lt;63um IN DRY WEIGHT SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:ETYW"  label="Bis(ethylhexyl)phthalate water"    />
+      <broad>
+         <element  key="SDN:P02:72:WCOC"  label="Concentration of other organic contaminants in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:MBRS"  label="Br IN THE SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:CBDF"  label="C BIOMASS OF DINOFLAGELLATES"    />
+      <broad>
+         <element  key="SDN:P02:72:CATX"  label="Phytoplankton taxonomic biomass in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:CBNC"  label="C BIOMASS OF NAKED CILIATES"    />
+      <broad>
+         <element  key="SDN:P02:72:MZBC"  label="Microzooplankton non taxonomy-related biomass expressed as carbon per unit volume of the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:GLUC"  label="CARBOHYDRATE"    />
+      <broad>
+         <element  key="SDN:P02:72:TOCH"  label="Concentration of carbohydrates, phenols, alkanols (alcohols), aldehydes and ketones in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:CBIO"  label="CARBON BIOMASS OF BIO ENTITY"    />
+      <broad>
+         <element  key="SDN:P02:72:BPRP"  label="SeaDataNet biological format biotic parameters"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:CBCI"  label="CARBON BIOMASS OF CILIATEA"    />
+      <broad>
+         <element  key="SDN:P02:72:MATC"  label="Microzooplankton taxonomy-related biomass expressed as carbon per unit volume of the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:CBTN"  label="CARBON BIOMASS OF TINTINNINA"    />
+      <broad>
+         <element  key="SDN:P02:72:MATC"  label="Microzooplankton taxonomy-related biomass expressed as carbon per unit volume of the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:CO3P"  label="CARBONATES CONTENT"    />
+      <broad>
+         <element  key="SDN:P02:72:CBSP"  label="Carbon concentrations in suspended particulate material"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:CODW"  label="CHEMICAL OXYGEN DEMAND"    />
+      <broad>
+         <element  key="SDN:P02:72:DOXY"  label="Dissolved oxygen parameters in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:CH1P"  label="CHL-A(LESS DIVINYLCHL-A)"    />
+      <broad>
+         <element  key="SDN:P02:72:CPWC"  label="Chlorophyll pigment concentrations in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:CH2P"  label="CHL-B(LESS DIVINYLCHL-B)"    />
+      <broad>
+         <element  key="SDN:P02:72:CPWC"  label="Chlorophyll pigment concentrations in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:CH1T"  label="CHLOROPHYLL TOTAL"    />
+      <broad>
+         <element  key="SDN:P02:72:CPWC"  label="Chlorophyll pigment concentrations in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:CPH6"  label="CHLOROPHYLL-A &lt;3 MICRON"    />
+      <broad>
+         <element  key="SDN:P02:72:CPWC"  label="Chlorophyll pigment concentrations in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:CPH7"  label="CHLOROPHYLL-A &gt;3 &lt;10 MICRON"    />
+      <broad>
+         <element  key="SDN:P02:72:CPWC"  label="Chlorophyll pigment concentrations in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:CPH5"  label="CHLOROPHYLL-A &gt;3 &lt;20 MICRON"    />
+      <broad>
+         <element  key="SDN:P02:72:CPWC"  label="Chlorophyll pigment concentrations in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:CPH1"  label="CHLOROPHYLL-A TOTAL"    />
+      <broad>
+         <element  key="SDN:P02:72:CPWC"  label="Chlorophyll pigment concentrations in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:CPHL"  label="CHLOROPHYLL-A TOTAL"    />
+      <broad>
+         <element  key="SDN:P02:72:CPWC"  label="Chlorophyll pigment concentrations in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:CHAF"  label="CHLOROPHYLL-A VERTICAL FLUX"    />
+      <broad>
+         <element  key="SDN:P02:72:AXFX"  label="Sedimentation flux of pigments in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:CPH4"  label="CHLOROPHYLL-A/10 MICRON FILTER"    />
+      <broad>
+         <element  key="SDN:P02:72:CPWC"  label="Chlorophyll pigment concentrations in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:CPH2"  label="CHLOROPHYLL-A/2 MICRON FILTER"    />
+      <broad>
+         <element  key="SDN:P02:72:CPWC"  label="Chlorophyll pigment concentrations in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:CPH3"  label="CHLOROPHYLL-A/20 MICRON FILTER"    />
+      <broad>
+         <element  key="SDN:P02:72:CPWC"  label="Chlorophyll pigment concentrations in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:CHLB"  label="CHLOROPHYLL-B TOTAL"    />
+      <broad>
+         <element  key="SDN:P02:72:CPWC"  label="Chlorophyll pigment concentrations in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:CHLC"  label="CHLOROPHYLL-C TOTAL"    />
+      <broad>
+         <element  key="SDN:P02:72:CPWC"  label="Chlorophyll pigment concentrations in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:CHCZ"  label="CHLOROPHYLL-C1+C2"    />
+      <broad>
+         <element  key="SDN:P02:72:CPWC"  label="Chlorophyll pigment concentrations in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:CHC3"  label="CHLOROPHYLL-C3"    />
+      <broad>
+         <element  key="SDN:P02:72:CPWC"  label="Chlorophyll pigment concentrations in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:CHLT"  label="CHLOROPHYLL-TOTAL"    />
+      <broad>
+         <element  key="SDN:P02:72:CPWC"  label="Chlorophyll pigment concentrations in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:CIDA"  label="CHLOROPHYLLIDE A"    />
+      <broad>
+         <element  key="SDN:P02:72:CPWC"  label="Chlorophyll pigment concentrations in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:CLAY"  label="CLAY IN THE SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:MNGS"  label="Sediment grain size parameters"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:FCO2"  label="CO2 FUGACITY"    />
+      <broad>
+         <element  key="SDN:P02:72:PCO2"  label="Partial pressure (pCO2) and fugacity (fCO2) of carbon dioxide in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:XCO2"  label="CO2 MOLE FRACTION IN DRY GAS"    />
+      <broad>
+         <element  key="SDN:P02:72:PCO2"  label="Partial pressure (pCO2) and fugacity (fCO2) of carbon dioxide in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:PCO2"  label="CO2 PART. PRES IN DRY/WET GAS"    />
+      <broad>
+         <element  key="SDN:P02:72:PCO2"  label="Partial pressure (pCO2) and fugacity (fCO2) of carbon dioxide in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:C363"  label="CO3&lt;63um IN DRY WGHT SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:COPF"  label="COCCOLITHOPHORIDAE PPC FLUX"    />
+      <broad>
+         <element  key="SDN:P02:72:PCFX"  label="Sedimentation flux of identified biota expressed as carbon in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:CDO2"  label="COLORED DISS. ORGANIC MATTER"    />
+      <broad>
+         <element  key="SDN:P02:72:FVLT"  label="Raw fluorometer output"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:CDOM"  label="COLORED DISS. ORGANIC MATTER"    />
+      <broad>
+         <element  key="SDN:P02:72:HMSB"  label="Concentration of organic matter in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:OCNT"  label="COUNT OF BIOLOGICAL ENTITY"    />
+      <broad>
+         <element  key="SDN:P02:72:BPRP"  label="SeaDataNet biological format biotic parameters"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:CXAP"  label="CROCOXANTHIN"    />
+      <broad>
+         <element  key="SDN:P02:72:CARO"  label="Carotenoid and flavenoid pigment concentrations in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:MCUF"  label="CU FLUX IN SETTLING PARTICLES"    />
+      <broad>
+         <element  key="SDN:P02:72:MLFX"  label="Sedimentation flux of metallic and metalloid elements and isotopes in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:EWCS"  label="CURRENT EAST  STD. DEVIATION"    />
+      <broad>
+         <element  key="SDN:P02:72:RFVL"  label="Horizontal velocity of the water column (currents)"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:EWCT"  label="CURRENT EAST COMPONENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RFVL"  label="Horizontal velocity of the water column (currents)"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:NSCT"  label="CURRENT NORTH COMPONENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RFVL"  label="Horizontal velocity of the water column (currents)"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:NSCS"  label="CURRENT NORTH STD. DEVIATION"    />
+      <broad>
+         <element  key="SDN:P02:72:RFVL"  label="Horizontal velocity of the water column (currents)"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:HCSS"  label="CURRENT SPEED STD DEV"    />
+      <broad>
+         <element  key="SDN:P02:72:RFVL"  label="Horizontal velocity of the water column (currents)"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:MCAP"  label="Ca IN SUSPENDED MATTER"    />
+      <broad>
+         <element  key="SDN:P02:72:MTWP"  label="Particulate metal concentrations in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:MCAS"  label="Ca IN THE SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:CA63"  label="Ca&lt;63um IN DRY WEIGHT SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:CADB"  label="Cadmium in biota"    />
+      <broad>
+         <element  key="SDN:P02:72:BCMT"  label="Metal concentrations in biota"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:CADS"  label="Cadmium in sediment"    />
+      <broad>
+         <element  key="SDN:P02:72:MTPW"  label="Metal concentrations in sediment pore waters"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:CADW"  label="Cadmium in water body"    />
+      <broad>
+         <element  key="SDN:P02:72:MTWT"  label="Total metal concentrations in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:PCOW"  label="Carbon dioxide in water"    />
+      <broad>
+         <element  key="SDN:P02:72:PCO2"  label="Partial pressure (pCO2) and fugacity (fCO2) of carbon dioxide in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:CDSX"  label="Cd IN DRY WEIGHT SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:CD45"  label="Cd&lt;0.4/0.45um IN WATER BODY"    />
+      <broad>
+         <element  key="SDN:P02:72:MTWD"  label="Dissolved metal concentrations in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:CD63"  label="Cd&lt;63um IN DRY WEIGHT SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:CD40"  label="Cd&gt;0.4/0.45um IN WATER BODY"    />
+      <broad>
+         <element  key="SDN:P02:72:MTWP"  label="Particulate metal concentrations in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:MCES"  label="Ce IN THE SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:CE63"  label="Ce&lt;63um IN DRY WEIGHT SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:CHLS"  label="Chlorine IN DRY WGHT SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:CHAS"  label="Chlorophyll-a in sediment"    />
+      <broad>
+         <element  key="SDN:P02:72:CPSD"  label="Chlorophyll pigment concentrations in sediment"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:CROW"  label="Chromium in water body"    />
+      <broad>
+         <element  key="SDN:P02:72:MTWT"  label="Total metal concentrations in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:CHRS"  label="Chrysene in sediment"    />
+      <broad>
+         <element  key="SDN:P02:72:SCAH"  label="Concentration of polycyclic aromatic hydrocarbons (PAHs) in sediment samples"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:CRYW"  label="Chrysene in water body"    />
+      <broad>
+         <element  key="SDN:P02:72:PCHW"  label="Concentration of polycyclic aromatic hydrocarbons (PAHs) in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:MCLP"  label="Cl IN SUSPENDED MATTER"    />
+      <broad>
+         <element  key="SDN:P02:72:HLWC"  label="Concentration of inorganic halogens in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:COSX"  label="Co IN DRY WEIGHT SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:CO63"  label="Co&lt;63um IN DRY WEIGHT SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:COPS"  label="Copper in sediment"    />
+      <broad>
+         <element  key="SDN:P02:72:MTPW"  label="Metal concentrations in sediment pore waters"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:MCRS"  label="Cr IN THE SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:CR63"  label="Cr&lt;63um IN DRY WEIGHT SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:CSSX"  label="Cs  IN DRY WEIGHT SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:CS63"  label="Cs&lt;63um IN DRY WEIGHT SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:MCUS"  label="Cu IN THE SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:CU63"  label="Cu&lt;63um IN DRY WEIGHT SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:DCAW"  label="DARK CARBON ABSORPTION"    />
+      <broad>
+         <element  key="SDN:P02:72:PPRD"  label="Primary production in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:CDFW"  label="DARK FIXATION"    />
+      <broad>
+         <element  key="SDN:P02:72:PPRD"  label="Primary production in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:DATE"  label="DATE"    />
+      <broad>
+         <element  key="SDN:P02:72:AYMD"  label="Date and time"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:DAYX"  label="DAY WITHIN MONTH"    />
+      <broad>
+         <element  key="SDN:P02:72:AYMD"  label="Date and time"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:DAYS"  label="DAY WITHIN YEAR"    />
+      <broad>
+         <element  key="SDN:P02:72:AYMD"  label="Date and time"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:D13C"  label="DELTA 13 C SIGNATURE"    />
+      <broad>
+         <element  key="SDN:P02:72:WSTB"  label="Stable isotopes in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:C13D"  label="DELTA 13C (13C/12C)"    />
+      <broad>
+         <element  key="SDN:P02:72:WSTB"  label="Stable isotopes in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:N15D"  label="DELTA 15N (15N/14N)"    />
+      <broad>
+         <element  key="SDN:P02:72:WSTB"  label="Stable isotopes in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:HELD"  label="DELTA HELIUM 3"    />
+      <broad>
+         <element  key="SDN:P02:72:WSTB"  label="Stable isotopes in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:DENS"  label="DENSITY (Sigma-theta)"    />
+      <broad>
+         <element  key="SDN:P02:72:SIGT"  label="Density of the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:DPS1"  label="DEPTH BELOW BOTTOM-LOWER LIMIT"    />
+      <broad>
+         <element  key="SDN:P02:72:AHGT"  label="Vertical spatial coordinates"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:DPSF"  label="DEPTH BELOW SEA FLOOR"    />
+      <broad>
+         <element  key="SDN:P02:72:AHGT"  label="Vertical spatial coordinates"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:DEPH"  label="DEPTH BELOW SEA SURFACE"    />
+      <broad>
+         <element  key="SDN:P02:72:AHGT"  label="Vertical spatial coordinates"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:VMNL"  label="DEPTH OF THE DEEPEST TROUGH"    />
+      <broad>
+         <element  key="SDN:P02:72:WVST"  label="Wave height and period statistics"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:DEEX"  label="DEUTERIUM EXCESS"    />
+      <broad>
+         <element  key="SDN:P02:72:WSTB"  label="Stable isotopes in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:DEWT"  label="DEW POINT TEMPERATURE"    />
+      <broad>
+         <element  key="SDN:P02:72:CHUM"  label="Atmospheric humidity"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:DXAP"  label="DIADINOXANTHINE"    />
+      <broad>
+         <element  key="SDN:P02:72:CARO"  label="Carotenoid and flavenoid pigment concentrations in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:DIPF"  label="DIATOMS PPC FLUX"    />
+      <broad>
+         <element  key="SDN:P02:72:PCFX"  label="Sedimentation flux of identified biota expressed as carbon in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:TXAP"  label="DIATOXANTHINE"    />
+      <broad>
+         <element  key="SDN:P02:72:CARO"  label="Carotenoid and flavenoid pigment concentrations in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:IC13"  label="DIC DELTA-13C"    />
+      <broad>
+         <element  key="SDN:P02:72:WSTB"  label="Stable isotopes in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:DICP"  label="DIC IN SEDIMENT PORE WATER"    />
+      <broad>
+         <element  key="SDN:P02:72:CCPW"  label="Carbonate chemistry in sediment pore waters"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:DFPF"  label="DINOFLAGELLATES PPC FLUX"    />
+      <broad>
+         <element  key="SDN:P02:72:PCFX"  label="Sedimentation flux of identified biota expressed as carbon in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:VPSP"  label="DIR. SPREADING AT WAVE PEAK"    />
+      <broad>
+         <element  key="SDN:P02:72:GWDR"  label="Wave direction"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:DRVA"  label="DIRECTION OF RADIAL VECTOR"    />
+      <broad>
+         <element  key="SDN:P02:72:RFVL"  label="Horizontal velocity of the water column (currents)"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:HCDT"  label="DIRECTION REL. TRUE NORTH"    />
+      <broad>
+         <element  key="SDN:P02:72:RFVL"  label="Horizontal velocity of the water column (currents)"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:TPAW"  label="DISS. TRIPHOSPHATE ADENOSINE"    />
+      <broad>
+         <element  key="SDN:P02:72:ATPX"  label="Concentration of adenylates in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:ETHW"  label="DISSOLVED 234 TH ACT. ERROR"    />
+      <broad>
+         <element  key="SDN:P02:72:WRAD"  label="Radioactivity in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:TH4W"  label="DISSOLVED 234TH"    />
+      <broad>
+         <element  key="SDN:P02:72:WRAD"  label="Radioactivity in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:CL4W"  label="DISSOLVED C-TETRACHLORIDE"    />
+      <broad>
+         <element  key="SDN:P02:72:DCMX"  label="Other halocarbon concentrations in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:MCDW"  label="DISSOLVED CADMIUM (Cd)"    />
+      <broad>
+         <element  key="SDN:P02:72:MTWD"  label="Dissolved metal concentrations in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:CO2W"  label="DISSOLVED CARBON DIOXYD (CO2)"    />
+      <broad>
+         <element  key="SDN:P02:72:TCO2"  label="Total dissolved inorganic carbon (TCO2) concentration in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:CF1W"  label="DISSOLVED CFC11"    />
+      <broad>
+         <element  key="SDN:P02:72:FR11"  label="Chlorofluorocarbon concentrations in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:CE1W"  label="DISSOLVED CFC11 ERROR"    />
+      <broad>
+         <element  key="SDN:P02:72:FR11"  label="Chlorofluorocarbon concentrations in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:EF1W"  label="DISSOLVED CFC11 ERROR"    />
+      <broad>
+         <element  key="SDN:P02:72:FR11"  label="Chlorofluorocarbon concentrations in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:CF3W"  label="DISSOLVED CFC113"    />
+      <broad>
+         <element  key="SDN:P02:72:FR11"  label="Chlorofluorocarbon concentrations in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:CE3W"  label="DISSOLVED CFC113 ERROR"    />
+      <broad>
+         <element  key="SDN:P02:72:FR11"  label="Chlorofluorocarbon concentrations in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:EF3W"  label="DISSOLVED CFC113 ERROR"    />
+      <broad>
+         <element  key="SDN:P02:72:FR11"  label="Chlorofluorocarbon concentrations in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:CF2W"  label="DISSOLVED CFC12"    />
+      <broad>
+         <element  key="SDN:P02:72:FR11"  label="Chlorofluorocarbon concentrations in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:CE2W"  label="DISSOLVED CFC12 ERROR"    />
+      <broad>
+         <element  key="SDN:P02:72:FR11"  label="Chlorofluorocarbon concentrations in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:EF2W"  label="DISSOLVED CFC12 ERROR"    />
+      <broad>
+         <element  key="SDN:P02:72:FR11"  label="Chlorofluorocarbon concentrations in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:MCOW"  label="DISSOLVED COBALT (Co)"    />
+      <broad>
+         <element  key="SDN:P02:72:MTWD"  label="Dissolved metal concentrations in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:MCU2"  label="DISSOLVED COPPER (Cu)"    />
+      <broad>
+         <element  key="SDN:P02:72:MTWD"  label="Dissolved metal concentrations in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:MCUW"  label="DISSOLVED COPPER (Cu)"    />
+      <broad>
+         <element  key="SDN:P02:72:MTWD"  label="Dissolved metal concentrations in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:HELW"  label="DISSOLVED HELIUM"    />
+      <broad>
+         <element  key="SDN:P02:72:HEXC"  label="Dissolved noble gas concentration parameters in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:HEEW"  label="DISSOLVED HELIUM ERROR"    />
+      <broad>
+         <element  key="SDN:P02:72:HEXC"  label="Dissolved noble gas concentration parameters in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:TINW"  label="DISSOLVED INORGANIC NITROGEN"    />
+      <broad>
+         <element  key="SDN:P02:72:TDIN"  label="Dissolved inorganic nitrogen concentration in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:MPBW"  label="DISSOLVED LEAD (Pb)"    />
+      <broad>
+         <element  key="SDN:P02:72:MTWD"  label="Dissolved metal concentrations in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:NEOW"  label="DISSOLVED NEON"    />
+      <broad>
+         <element  key="SDN:P02:72:HEXC"  label="Dissolved noble gas concentration parameters in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:NEEW"  label="DISSOLVED NEON ERROR"    />
+      <broad>
+         <element  key="SDN:P02:72:HEXC"  label="Dissolved noble gas concentration parameters in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:MNI2"  label="DISSOLVED NICKEL (Ni)"    />
+      <broad>
+         <element  key="SDN:P02:72:MTWD"  label="Dissolved metal concentrations in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:MNIW"  label="DISSOLVED NICKEL (Ni)"    />
+      <broad>
+         <element  key="SDN:P02:72:MTWD"  label="Dissolved metal concentrations in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:CORG"  label="DISSOLVED ORGANIC CARBON"    />
+      <broad>
+         <element  key="SDN:P02:72:DOCC"  label="Dissolved organic carbon concentration in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:NODW"  label="DISSOLVED ORGANIC NITROGEN"    />
+      <broad>
+         <element  key="SDN:P02:72:TDNT"  label="Dissolved total and organic nitrogen concentrations in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:NORG"  label="DISSOLVED ORGANIC NITROGEN"    />
+      <broad>
+         <element  key="SDN:P02:72:TDNT"  label="Dissolved total and organic nitrogen concentrations in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:DOPW"  label="DISSOLVED ORGANIC PHOSPHORUS"    />
+      <broad>
+         <element  key="SDN:P02:72:TDPX"  label="Dissolved total or organic phosphorus concentration in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:PODW"  label="DISSOLVED ORGANIC PHOSPHORUS"    />
+      <broad>
+         <element  key="SDN:P02:72:TDPX"  label="Dissolved total or organic phosphorus concentration in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:DOX1"  label="DISSOLVED OXYGEN"    />
+      <broad>
+         <element  key="SDN:P02:72:DOXY"  label="Dissolved oxygen parameters in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:DOX2"  label="DISSOLVED OXYGEN"    />
+      <broad>
+         <element  key="SDN:P02:72:DOXY"  label="Dissolved oxygen parameters in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:DOXY"  label="DISSOLVED OXYGEN"    />
+      <broad>
+         <element  key="SDN:P02:72:DOXY"  label="Dissolved oxygen parameters in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:MAGW"  label="DISSOLVED SILVER (Ag)"    />
+      <broad>
+         <element  key="SDN:P02:72:MTWD"  label="Dissolved metal concentrations in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:TRIW"  label="DISSOLVED TRITIUM"    />
+      <broad>
+         <element  key="SDN:P02:72:WRAD"  label="Radioactivity in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:TREW"  label="DISSOLVED TRITIUM ERROR"    />
+      <broad>
+         <element  key="SDN:P02:72:WRAD"  label="Radioactivity in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:MZNW"  label="DISSOLVED ZINC (Zn)"    />
+      <broad>
+         <element  key="SDN:P02:72:MTWD"  label="Dissolved metal concentrations in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:CHAD"  label="DIVINYL CHLOROPHYLL-A"    />
+      <broad>
+         <element  key="SDN:P02:72:CPWC"  label="Chlorophyll pigment concentrations in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:CHBD"  label="DIVINYL-CHLOROPHYLL-B"    />
+      <broad>
+         <element  key="SDN:P02:72:CPWC"  label="Chlorophyll pigment concentrations in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:DOCP"  label="DOC IN SEDIMENT PORE WATER"    />
+      <broad>
+         <element  key="SDN:P02:72:OCPW"  label="Dissolved organic carbon concentrations in sediment pore waters"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:DRYT"  label="DRY BULB TEMPERATURE"    />
+      <broad>
+         <element  key="SDN:P02:72:CDTA"  label="Air temperature"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:DBIO"  label="DRY WEIGHT BIOMASS OF ENTITY"    />
+      <broad>
+         <element  key="SDN:P02:72:BPRP"  label="SeaDataNet biological format biotic parameters"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:DRDD"  label="DURATION (DAYS)"    />
+      <broad>
+         <element  key="SDN:P02:72:AYMD"  label="Date and time"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:DBAW"  label="Dibenzo(ah)anthracene in water"    />
+      <broad>
+         <element  key="SDN:P02:72:PCHW"  label="Concentration of polycyclic aromatic hydrocarbons (PAHs) in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:DBAS"  label="Dibenzo(ah)anthracene sediment"    />
+      <broad>
+         <element  key="SDN:P02:72:SCAH"  label="Concentration of polycyclic aromatic hydrocarbons (PAHs) in sediment samples"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:DYSX"  label="Dy IN DRY WEIGHT SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:DY63"  label="Dy&lt;63um IN DRY WEIGHT SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:CNDC"  label="ELECTRICAL CONDUCTIVITY"    />
+      <broad>
+         <element  key="SDN:P02:72:CNDC"  label="Electrical conductivity of the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:CN02"  label="ELECTRICAL CONDUCTIVITY 2"    />
+      <broad>
+         <element  key="SDN:P02:72:CNDC"  label="Electrical conductivity of the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:ETDD"  label="ELLAPSED TIME"    />
+      <broad>
+         <element  key="SDN:P02:72:AYMD"  label="Date and time"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:CHAE"  label="EPIMERE CHLOROPHYLL-A"    />
+      <broad>
+         <element  key="SDN:P02:72:CPWC"  label="Chlorophyll pigment concentrations in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:VEMH"  label="ESTIMATED MAXIMUM WAVE HEIGHT"    />
+      <broad>
+         <element  key="SDN:P02:72:HEAV"  label="Wave height estimates"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:ERSX"  label="Er IN DRY WEIGHT SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:ER63"  label="Er&lt;63um IN DRY WEIGHT SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:ETBW"  label="Ethylbenzene in water body"    />
+      <broad>
+         <element  key="SDN:P02:72:PEWB"  label="Pesticide concentrations in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:EUSX"  label="Eu IN DRY WEIGHT SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:EU63"  label="Eu&lt;63um IN DRY WEIGHT SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:MFEF"  label="FE FLUX IN SETTLING PARTICLES"    />
+      <broad>
+         <element  key="SDN:P02:72:MLFX"  label="Sedimentation flux of metallic and metalloid elements and isotopes in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:FLPF"  label="FLAGELLATES PPC FLUX"    />
+      <broad>
+         <element  key="SDN:P02:72:PNFX"  label="Sedimentation flux of identified biota in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:FLU1"  label="FLUORESCENCE"    />
+      <broad>
+         <element  key="SDN:P02:72:FVLT"  label="Raw fluorometer output"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:FLU2"  label="FLUORESCENCE"    />
+      <broad>
+         <element  key="SDN:P02:72:CPWC"  label="Chlorophyll pigment concentrations in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:FLU3"  label="FLUORESCENCE"    />
+      <broad>
+         <element  key="SDN:P02:72:FVLT"  label="Raw fluorometer output"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:FLUO"  label="FLUORESCENCE"    />
+      <broad>
+         <element  key="SDN:P02:72:FVLT"  label="Raw fluorometer output"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:FUCP"  label="FUCOXANTHINE"    />
+      <broad>
+         <element  key="SDN:P02:72:CARO"  label="Carotenoid and flavenoid pigment concentrations in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:FESP"  label="Fe IN SUSPENDED MATTER"    />
+      <broad>
+         <element  key="SDN:P02:72:MTWP"  label="Particulate metal concentrations in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:MFEP"  label="Fe IN SUSPENDED MATTER"    />
+      <broad>
+         <element  key="SDN:P02:72:MTWP"  label="Particulate metal concentrations in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:MFES"  label="Fe IN THE SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:FE63"  label="Fe&lt;63um IN DRY WEIGHT SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:FLRS"  label="Fluoranthene in sediment"    />
+      <broad>
+         <element  key="SDN:P02:72:SCAH"  label="Concentration of polycyclic aromatic hydrocarbons (PAHs) in sediment samples"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:FLRW"  label="Fluoranthene in water body"    />
+      <broad>
+         <element  key="SDN:P02:72:PCHW"  label="Concentration of polycyclic aromatic hydrocarbons (PAHs) in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:FLUS"  label="Fluorene in sediment"    />
+      <broad>
+         <element  key="SDN:P02:72:SCAH"  label="Concentration of polycyclic aromatic hydrocarbons (PAHs) in sediment samples"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:FLUW"  label="Fluorene in water body"    />
+      <broad>
+         <element  key="SDN:P02:72:PCHW"  label="Concentration of polycyclic aromatic hydrocarbons (PAHs) in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:VGTA"  label="GENERIC AVERAGE WAVE PERIOD"    />
+      <broad>
+         <element  key="SDN:P02:72:WVST"  label="Wave height and period statistics"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:VGHS"  label="GENERIC SIGNIF. WAVE HEIGHT"    />
+      <broad>
+         <element  key="SDN:P02:72:WVST"  label="Wave height and period statistics"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:GDIR"  label="GUST WIND DIRECTION"    />
+      <broad>
+         <element  key="SDN:P02:72:EWSB"  label="Wind strength and direction"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:GSPD"  label="GUST WIND SPEED"    />
+      <broad>
+         <element  key="SDN:P02:72:EWSB"  label="Wind strength and direction"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:GASX"  label="Ga IN DRY WEIGHT SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:GA63"  label="Ga&lt;63um IN DRY WEIGHT SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:GDSX"  label="Gd IN DRY WEIGHT SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:GD63"  label="Gd&lt;63um IN DRY WEIGHT SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:ALTS"  label="HEIGHT ABOVE MEAN SEA LEVEL"    />
+      <broad>
+         <element  key="SDN:P02:72:AHGT"  label="Vertical spatial coordinates"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:HEDW"  label="HELIUM DEV. OF ISOTOPIC RATIO"    />
+      <broad>
+         <element  key="SDN:P02:72:WSTB"  label="Stable isotopes in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:HEDE"  label="HELIUM ISOTOPIC RATIO ERROR"    />
+      <broad>
+         <element  key="SDN:P02:72:WSTB"  label="Stable isotopes in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:NFHW"  label="HETEROTROPHIC NANOFLAGELLATES"    />
+      <broad>
+         <element  key="SDN:P02:72:PNTX"  label="Phytoplankton generic abundance in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:HNAC"  label="HIGH NUCLEIC ACID CONTENT"    />
+      <broad>
+         <element  key="SDN:P02:72:BNTX"  label="Bacteria generic abundance in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:HCSP"  label="HORIZONTAL CURRENT SPEED"    />
+      <broad>
+         <element  key="SDN:P02:72:RFVL"  label="Horizontal velocity of the water column (currents)"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:WSPD"  label="HORIZONTAL WIND SPEED"    />
+      <broad>
+         <element  key="SDN:P02:72:EWSB"  label="Wind strength and direction"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:HSUL"  label="HYDROGEN SULPHIDE (H2S)"    />
+      <broad>
+         <element  key="SDN:P02:72:SCOX"  label="Dissolved concentration parameters for other gases in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:HXC1"  label="Hexachlorobiphenyl128 sediment"    />
+      <broad>
+         <element  key="SDN:P02:72:SPCB"  label="Concentration of polychlorobiphenyls (PCBs) in sediment samples"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:HXC2"  label="Hexachlorobiphenyl138 sediment"    />
+      <broad>
+         <element  key="SDN:P02:72:SPCB"  label="Concentration of polychlorobiphenyls (PCBs) in sediment samples"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:HXC3"  label="Hexachlorobiphenyl153 sediment"    />
+      <broad>
+         <element  key="SDN:P02:72:SPCB"  label="Concentration of polychlorobiphenyls (PCBs) in sediment samples"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:HXC4"  label="Hexachlorobiphenyl156 sediment"    />
+      <broad>
+         <element  key="SDN:P02:72:SPCB"  label="Concentration of polychlorobiphenyls (PCBs) in sediment samples"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:HFSX"  label="Hf IN DRY WEIGHT SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:HF63"  label="Hf&lt;63um IN DRY WEIGHT SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:HGSX"  label="Hg IN DRY WEIGHT SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:HOSX"  label="Ho IN DRY WEIGHT SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:HO63"  label="Ho&lt;63um IN DRY WEIGHT SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:MIIS"  label="I IN THE SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:LGH5"  label="IMMERGED/SURF IRRADIANCE RATIO"    />
+      <broad>
+         <element  key="SDN:P02:72:VSRW"  label="Visible waveband radiance and irradiance measurements in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:SPDI"  label="INDICATED PLATFORM SPEED-SHIP"    />
+      <broad>
+         <element  key="SDN:P02:72:APDA"  label="Horizontal platform movement"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:ISMP"  label="INORGANIC SUSPENDED MATTER"    />
+      <broad>
+         <element  key="SDN:P02:72:TSED"  label="Concentration of suspended particulate material in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:IODI"  label="IODINE"    />
+      <broad>
+         <element  key="SDN:P02:72:HLWC"  label="Concentration of inorganic halogens in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:OXIR"  label="ISOTOPIC RATIO O18/O16"    />
+      <broad>
+         <element  key="SDN:P02:72:WSTB"  label="Stable isotopes in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:IDPW"  label="Indeno(1,2,3cd)pyrene in water"    />
+      <broad>
+         <element  key="SDN:P02:72:PCHW"  label="Concentration of polycyclic aromatic hydrocarbons (PAHs) in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:INDE"  label="Indeno(1,2,3cd)pyrene sediment"    />
+      <broad>
+         <element  key="SDN:P02:72:SCAH"  label="Concentration of polycyclic aromatic hydrocarbons (PAHs) in sediment samples"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:INCS"  label="Inorganic carbon in sediment"    />
+      <broad>
+         <element  key="SDN:P02:72:CBSD"  label="Carbon concentrations in sediment"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:CJDY"  label="JULIAN DATE (CHRONOLOGICAL)"    />
+      <broad>
+         <element  key="SDN:P02:72:AYMD"  label="Date and time"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:MKKP"  label="K IN SUSPENDED MATTER"    />
+      <broad>
+         <element  key="SDN:P02:72:MTWP"  label="Particulate metal concentrations in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:MKKS"  label="K IN THE SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:LATX"  label="LATITUDE"    />
+      <broad>
+         <element  key="SDN:P02:72:ALAT"  label="Horizontal spatial co-ordinates"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:LATD"  label="LATITUDE DEGREES"    />
+      <broad>
+         <element  key="SDN:P02:72:ALAT"  label="Horizontal spatial co-ordinates"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:LATM"  label="LATITUDE MINUTES"    />
+      <broad>
+         <element  key="SDN:P02:72:ALAT"  label="Horizontal spatial co-ordinates"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:LTUW"  label="LEUCINE UPTAKE RATE"    />
+      <broad>
+         <element  key="SDN:P02:72:UPTH"  label="Bacterial production in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:TUR2"  label="LIGHT ATTENUATION COEFFICIENT"    />
+      <broad>
+         <element  key="SDN:P02:72:ATTN"  label="Transmittance and attenuance of the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:LCAW"  label="LIGHT CARBON ABSORPTION"    />
+      <broad>
+         <element  key="SDN:P02:72:PPRD"  label="Primary production in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:TUR1"  label="LIGHT DIFFUSION COEFFICIENT"    />
+      <broad>
+         <element  key="SDN:P02:72:EXCO"  label="Light extinction and diffusion coefficients"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:LGH3"  label="LIGHT IRRADIANCE CORRECTED PAR"    />
+      <broad>
+         <element  key="SDN:P02:72:VSRW"  label="Visible waveband radiance and irradiance measurements in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:LGHT"  label="LIGHT IRRADIANCE IMMERGED PAR"    />
+      <broad>
+         <element  key="SDN:P02:72:VSRW"  label="Visible waveband radiance and irradiance measurements in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:LGH4"  label="LIGHT IRRADIANCE SURFACE PAR"    />
+      <broad>
+         <element  key="SDN:P02:72:VSRA"  label="Visible waveband radiance and irradiance measurements in the atmosphere"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:LSCT"  label="LIGHT SCATTERING"    />
+      <broad>
+         <element  key="SDN:P02:72:OPBS"  label="Optical backscatter"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:TUR3"  label="LIGHT TRANSMISSION"    />
+      <broad>
+         <element  key="SDN:P02:72:ATTN"  label="Transmittance and attenuance of the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:TUR0"  label="LIGHT TRANSMISSION -  NOT USED"    />
+      <broad>
+         <element  key="SDN:P02:72:ATTN"  label="Transmittance and attenuance of the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:LIPI"  label="LIPIDS IN THE WATER COLUMN"    />
+      <broad>
+         <element  key="SDN:P02:72:F001"  label="Water body lipid concentrations"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:LSIC"  label="LITHOGENIC CONTENT"    />
+      <broad>
+         <element  key="SDN:P02:72:TD00"  label="Terrestrial detritus in the water column suspended particulate material"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:LTHF"  label="LITHOGENIC FRACTION FLUX"    />
+      <broad>
+         <element  key="SDN:P02:72:LIFX"  label="Sedimentation flux of terrestrially derived material in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:LINC"  label="LONG-WAVE INCOMING RADIATION"    />
+      <broad>
+         <element  key="SDN:P02:72:LWRD"  label="Long-wave radiation"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:LONX"  label="LONGITUDE"    />
+      <broad>
+         <element  key="SDN:P02:72:ALAT"  label="Horizontal spatial co-ordinates"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:LOND"  label="LONGITUDE DEGREES"    />
+      <broad>
+         <element  key="SDN:P02:72:ALAT"  label="Horizontal spatial co-ordinates"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:LONM"  label="LONGITUDE MINUTES"    />
+      <broad>
+         <element  key="SDN:P02:72:ALAT"  label="Horizontal spatial co-ordinates"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:LUTW"  label="LUTEIN"    />
+      <broad>
+         <element  key="SDN:P02:72:CARO"  label="Carotenoid and flavenoid pigment concentrations in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:MLAS"  label="La IN THE SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:LA63"  label="La&lt;63um IN DRY WEIGHT SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:LEAB"  label="Lead in biota"    />
+      <broad>
+         <element  key="SDN:P02:72:BCMT"  label="Metal concentrations in biota"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:LEAS"  label="Lead in sediment"    />
+      <broad>
+         <element  key="SDN:P02:72:MTPW"  label="Metal concentrations in sediment pore waters"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:LEAW"  label="Lead in water body"    />
+      <broad>
+         <element  key="SDN:P02:72:MTWT"  label="Total metal concentrations in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:LISX"  label="Li IN DRY WEIGHT SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:LI63"  label="Li&lt;63um IN DRY WEIGHT SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:LUSX"  label="Lu IN DRY WEIGHT SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:LU63"  label="Lu&lt;63um IN DRY WEIGHT SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:MAXD"  label="MAX. DEPTH BELOW SEA SURFACE"    />
+      <broad>
+         <element  key="SDN:P02:72:AHGT"  label="Vertical spatial coordinates"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:VZMX"  label="MAXI ZERO CROSSING WAVE HEIGHT"    />
+      <broad>
+         <element  key="SDN:P02:72:WVST"  label="Wave height and period statistics"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:VCMX"  label="MAXIMUM CREST TO TROUGH WAVE HEIGHT"    />
+      <broad>
+         <element  key="SDN:P02:72:WVST"  label="Wave height and period statistics"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:VMXL"  label="MAXIMUM WAVE LEVEL"    />
+      <broad>
+         <element  key="SDN:P02:72:WVST"  label="Wave height and period statistics"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:VTMX"  label="MAXIMUM WAVE PERIOD"    />
+      <broad>
+         <element  key="SDN:P02:72:WVST"  label="Wave height and period statistics"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:VST1"  label="MAXIMUM WAVE STEEPNESS"    />
+      <broad>
+         <element  key="SDN:P02:72:WVST"  label="Wave height and period statistics"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:MSMP"  label="MEAN SPHERIC DIAM. MEDIAN"    />
+      <broad>
+         <element  key="SDN:P02:72:SPGS"  label="Suspended particulate material grain size parameters"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:MSDP"  label="MEAN SPHERIC DIAM. OF PARTICLE"    />
+      <broad>
+         <element  key="SDN:P02:72:SPGS"  label="Suspended particulate material grain size parameters"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:MSZW"  label="MESOZOOPLANCTON DRY WEIGHT"    />
+      <broad>
+         <element  key="SDN:P02:72:MSBD"  label="Zooplankton dry weight biomass per unit volume of the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:MSBO"  label="MESOZOOPLANKTON ASH-FREE DRY W"    />
+      <broad>
+         <element  key="SDN:P02:72:MSBO"  label="Zooplankton ash-free dry weight biomass per unit volume of the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:MEHG"  label="METHYLMERCURY CONTENT"    />
+      <broad>
+         <element  key="SDN:P02:72:OMWC"  label="Organometallic and organometalloid species concentration parameters in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:MIND"  label="MIN. DEPTH BELOW SEA SURFACE"    />
+      <broad>
+         <element  key="SDN:P02:72:AHGT"  label="Vertical spatial coordinates"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:MMNF"  label="MN FLUX IN SETTLING PARTICLES"    />
+      <broad>
+         <element  key="SDN:P02:72:MLFX"  label="Sedimentation flux of metallic and metalloid elements and isotopes in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:MOLW"  label="MOLYBDENUM IN WATER BODY"    />
+      <broad>
+         <element  key="SDN:P02:72:MTWT"  label="Total metal concentrations in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:MNTH"  label="MONTH"    />
+      <broad>
+         <element  key="SDN:P02:72:AYMD"  label="Date and time"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:VMDR"  label="Mean direction in spectrum of waves from which waves are coming relative to True North"    />
+      <broad>
+         <element  key="SDN:P02:72:GWDR"  label="Wave direction"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:METW"  label="Methylbenzene in water body"    />
+      <broad>
+         <element  key="SDN:P02:72:OHWC"  label="Concentration of other hydrocarbons in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:MMGP"  label="Mg IN SUSPENDED MATTER"    />
+      <broad>
+         <element  key="SDN:P02:72:MTWP"  label="Particulate metal concentrations in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:MMGS"  label="Mg IN THE SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:MG63"  label="Mg&lt;63um IN DRY WEIGHT SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:MMNP"  label="Mn IN SUSPENDED MATTER"    />
+      <broad>
+         <element  key="SDN:P02:72:MTWP"  label="Particulate metal concentrations in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:MNSP"  label="Mn IN SUSPENDED MATTER"    />
+      <broad>
+         <element  key="SDN:P02:72:MTWP"  label="Particulate metal concentrations in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:MMNS"  label="Mn IN THE SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:MN63"  label="Mn&lt;63um IN DRY WEIGHT SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:MMOS"  label="Mo IN THE SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:MO63"  label="Mo&lt;63um IN DRY WEIGHT SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:N63X"  label="N&lt;63um IN DRY WEIGHT SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:HBAW"  label="NB OF HETEROTROPHIC BACTERIA"    />
+      <broad>
+         <element  key="SDN:P02:72:BNTX"  label="Bacteria generic abundance in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:NEXW"  label="NEOXANTHIN"    />
+      <broad>
+         <element  key="SDN:P02:72:CARO"  label="Carotenoid and flavenoid pigment concentrations in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:NETR"  label="NET RADIATION"    />
+      <broad>
+         <element  key="SDN:P02:72:VSRA"  label="Visible waveband radiance and irradiance measurements in the atmosphere"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:NRAD"  label="NET TOTAL INCOMING RADIATION"    />
+      <broad>
+         <element  key="SDN:P02:72:LWRD"  label="Long-wave radiation"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:NTAW"  label="NITRATE (NO3-N) CONTENT"    />
+      <broad>
+         <element  key="SDN:P02:72:NTRA"  label="Nitrate concentration parameters in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:NTRA"  label="NITRATE (NO3-N) CONTENT"    />
+      <broad>
+         <element  key="SDN:P02:72:NTRA"  label="Nitrate concentration parameters in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:NTRZ"  label="NITRATE + NITRITE CONTENT"    />
+      <broad>
+         <element  key="SDN:P02:72:NTRA"  label="Nitrate concentration parameters in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:NTZW"  label="NITRATE + NITRITE CONTENT"    />
+      <broad>
+         <element  key="SDN:P02:72:NTRA"  label="Nitrate concentration parameters in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:NTAP"  label="NITRATE IN SEDIMENT PORE WATER"    />
+      <broad>
+         <element  key="SDN:P02:72:NTPW"  label="Nutrient concentrations in sediment pore waters"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:NOUW"  label="NITRATE UPTAKE"    />
+      <broad>
+         <element  key="SDN:P02:72:NTUP"  label="New production in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:NORW"  label="NITRIFICATION"    />
+      <broad>
+         <element  key="SDN:P02:72:AMOX"  label="Nitrification and denitrification rates in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:NTIW"  label="NITRITE (NO2-N) CONTENT"    />
+      <broad>
+         <element  key="SDN:P02:72:NTRI"  label="Nitrite concentration parameters in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:NTRI"  label="NITRITE (NO2-N) CONTENT"    />
+      <broad>
+         <element  key="SDN:P02:72:NTRI"  label="Nitrite concentration parameters in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:NTIP"  label="NITRITE IN SEDIMENT PORE WATER"    />
+      <broad>
+         <element  key="SDN:P02:72:NTPW"  label="Nutrient concentrations in sediment pore waters"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:NIUW"  label="NITROGEN UPTAKE (FIXATION)"    />
+      <broad>
+         <element  key="SDN:P02:72:NTUP"  label="New production in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:BCCS"  label="NUMBER OF BACTERIA IN SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:BNUC"  label="Bacteria generic abundance in sediment"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:COPP"  label="NUMBER OF COPEPODS"    />
+      <broad>
+         <element  key="SDN:P02:72:ZNTX"  label="Zooplankton non taxonomy-related abundance per unit volume of the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:CYAF"  label="NUMBER OF CYANOBACTERIA"    />
+      <broad>
+         <element  key="SDN:P02:72:BATX"  label="Bacteria taxonomic abundance in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:NNEF"  label="NUMBER OF NANOEUKARYOTES"    />
+      <broad>
+         <element  key="SDN:P02:72:PYTT"  label="Plankton abundance per unit volume of the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:NPKF"  label="NUMBER OF NANOPROKARYOTES"    />
+      <broad>
+         <element  key="SDN:P02:72:PYTT"  label="Plankton abundance per unit volume of the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:NUMP"  label="NUMBER OF PARTICLES 3-80UM"    />
+      <broad>
+         <element  key="SDN:P02:72:SPGS"  label="Suspended particulate material grain size parameters"    />
+         <element  key="SDN:P02:72:TSED"  label="Concentration of suspended particulate material in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:NUMN"  label="NUMBER OF PARTICLES &gt;0.7UM"    />
+      <broad>
+         <element  key="SDN:P02:72:SPGS"  label="Suspended particulate material grain size parameters"    />
+         <element  key="SDN:P02:72:TSED"  label="Concentration of suspended particulate material in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:NUNM"  label="NUMBER OF PARTICLES &gt;=480UM"    />
+      <broad>
+         <element  key="SDN:P02:72:SPGS"  label="Suspended particulate material grain size parameters"    />
+         <element  key="SDN:P02:72:TSED"  label="Concentration of suspended particulate material in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:PCEF"  label="NUMBER OF PICOEUKARYOTES"    />
+      <broad>
+         <element  key="SDN:P02:72:PYTT"  label="Plankton abundance per unit volume of the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:PPKF"  label="NUMBER OF PICOPROKARYOTES"    />
+      <broad>
+         <element  key="SDN:P02:72:BNTX"  label="Bacteria generic abundance in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:PRCF"  label="NUMBER OF PROCHLOROCOCCUS"    />
+      <broad>
+         <element  key="SDN:P02:72:PATX"  label="Phytoplankton taxonomic abundance in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:BCCW"  label="NUMBER OF SW BACTERIA"    />
+      <broad>
+         <element  key="SDN:P02:72:BNTX"  label="Bacteria generic abundance in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:CICW"  label="NUMBER OF SW CILIATES"    />
+      <broad>
+         <element  key="SDN:P02:72:MATX"  label="Microzooplankton taxonomic abundance in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:COCW"  label="NUMBER OF SW COCCOLITHOPHORIDS"    />
+      <broad>
+         <element  key="SDN:P02:72:PNTX"  label="Phytoplankton generic abundance in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:CRSW"  label="NUMBER OF SW CRYPTOPHYCEAE"    />
+      <broad>
+         <element  key="SDN:P02:72:PATX"  label="Phytoplankton taxonomic abundance in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:DTCW"  label="NUMBER OF SW DIATOMS"    />
+      <broad>
+         <element  key="SDN:P02:72:PNTX"  label="Phytoplankton generic abundance in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:DFCW"  label="NUMBER OF SW DINOFLAGELLATES"    />
+      <broad>
+         <element  key="SDN:P02:72:PNTX"  label="Phytoplankton generic abundance in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:DINW"  label="NUMBER OF SW DYNOPHYSIS"    />
+      <broad>
+         <element  key="SDN:P02:72:PATX"  label="Phytoplankton taxonomic abundance in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:GYRW"  label="NUMBER OF SW GYRODINIUM"    />
+      <broad>
+         <element  key="SDN:P02:72:PATX"  label="Phytoplankton taxonomic abundance in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:NCSW"  label="NUMBER OF SW NAKED CILIATES"    />
+      <broad>
+         <element  key="SDN:P02:72:MZBN"  label="Microzooplankton generic abundance in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:NFCW"  label="NUMBER OF SW NANOFLAGELLATES"    />
+      <broad>
+         <element  key="SDN:P02:72:PNTX"  label="Phytoplankton generic abundance in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:PCEW"  label="NUMBER OF SW PICOEUCARYOTES"    />
+      <broad>
+         <element  key="SDN:P02:72:PYTT"  label="Plankton abundance per unit volume of the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:PRCW"  label="NUMBER OF SW PROCHLOROCOCCUS"    />
+      <broad>
+         <element  key="SDN:P02:72:PATX"  label="Phytoplankton taxonomic abundance in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:SNCW"  label="NUMBER OF SW SYNECHOCOCCUS"    />
+      <broad>
+         <element  key="SDN:P02:72:PATX"  label="Phytoplankton taxonomic abundance in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:TISW"  label="NUMBER OF SW TINTINNINA"    />
+      <broad>
+         <element  key="SDN:P02:72:MATX"  label="Microzooplankton taxonomic abundance in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:SNCF"  label="NUMBER OF SYNECHOCOCCUS"    />
+      <broad>
+         <element  key="SDN:P02:72:PATX"  label="Phytoplankton taxonomic abundance in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:MNAS"  label="Na IN THE SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:NAPS"  label="Naphthalene in sediment"    />
+      <broad>
+         <element  key="SDN:P02:72:SCAH"  label="Concentration of polycyclic aromatic hydrocarbons (PAHs) in sediment samples"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:NAPW"  label="Naphthalene in water body"    />
+      <broad>
+         <element  key="SDN:P02:72:PCHW"  label="Concentration of polycyclic aromatic hydrocarbons (PAHs) in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:MNBS"  label="Nb IN THE SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:MNDS"  label="Nd IN THE SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:ND63"  label="Nd&lt;63um IN DRY WEIGHT SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:NISX"  label="Ni IN DRY WEIGHT SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:MNIS"  label="Ni IN THE SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:NIKS"  label="Nickel in sediment"    />
+      <broad>
+         <element  key="SDN:P02:72:MTPW"  label="Metal concentrations in sediment pore waters"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:NIKW"  label="Nickel in water body"    />
+      <broad>
+         <element  key="SDN:P02:72:MTWT"  label="Total metal concentrations in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:NTR1"  label="Nitrate in sediment"    />
+      <broad>
+         <element  key="SDN:P02:72:NTPW"  label="Nutrient concentrations in sediment pore waters"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:NTRS"  label="Nitrite in sediment"    />
+      <broad>
+         <element  key="SDN:P02:72:NTPW"  label="Nutrient concentrations in sediment pore waters"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:NITS"  label="Nitrogen in sediment"    />
+      <broad>
+         <element  key="SDN:P02:72:NTSD"  label="Nitrogen concentrations in sediment"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:O18E"  label="O18 ENRICHMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:WSTB"  label="Stable isotopes in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:SLEV"  label="OBSERVED SEA LEVEL"    />
+      <broad>
+         <element  key="SDN:P02:72:ASLV"  label="Sea level"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:OPAP"  label="OPAL CONTENT"    />
+      <broad>
+         <element  key="SDN:P02:72:CLAY"  label="Mineralogical composition"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:TOMP"  label="ORGANIC MATTER CONTENT"    />
+      <broad>
+         <element  key="SDN:P02:72:DENS"  label="Other physical and chemical properties of suspended particulate material"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:OSMP"  label="ORGANIC SUSPENDED MATTER"    />
+      <broad>
+         <element  key="SDN:P02:72:TSED"  label="Concentration of suspended particulate material in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:OSAT"  label="OXYGEN SATURATION"    />
+      <broad>
+         <element  key="SDN:P02:72:DOXY"  label="Dissolved oxygen parameters in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:DOCS"  label="Organic carbon DOC in sediment"    />
+      <broad>
+         <element  key="SDN:P02:72:OCPW"  label="Dissolved organic carbon concentrations in sediment pore waters"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:OCCN"  label="Organic carbon in sediment"    />
+      <broad>
+         <element  key="SDN:P02:72:CBSD"  label="Carbon concentrations in sediment"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:ONIS"  label="Organic nitrogen in sediment"    />
+      <broad>
+         <element  key="SDN:P02:72:NTSD"  label="Nitrogen concentrations in sediment"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:MPPP"  label="P IN SUSPENDED MATTER"    />
+      <broad>
+         <element  key="SDN:P02:72:PXSP"  label="Phosphorus concentrations in suspended particulate material"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:MPPS"  label="P IN THE SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:LGH2"  label="PAR ATTENUATION COEFFICIENT"    />
+      <broad>
+         <element  key="SDN:P02:72:EXCO"  label="Light extinction and diffusion coefficients"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:SIOF"  label="PART. BIOGENIC Si FLUX"    />
+      <broad>
+         <element  key="SDN:P02:72:OPFX"  label="Sedimentation flux of non-metallic inorganic species in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:CO3F"  label="PART. CaCO3 FLUX"    />
+      <broad>
+         <element  key="SDN:P02:72:TCFX"  label="Sedimentation flux of carbon, nitrogen or organic matter in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:POCF"  label="PART. ORGANIC CARBON FLUX"    />
+      <broad>
+         <element  key="SDN:P02:72:TCFX"  label="Sedimentation flux of carbon, nitrogen or organic matter in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:OMMF"  label="PART. ORGANIC MATTER FLUX"    />
+      <broad>
+         <element  key="SDN:P02:72:TCFX"  label="Sedimentation flux of carbon, nitrogen or organic matter in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:PP1P"  label="PART. ORGANIC PHOSPHORUS (P)"    />
+      <broad>
+         <element  key="SDN:P02:72:TPHS"  label="Particulate total and organic phosphorus concentrations in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:CHTF"  label="PART. TOTAL CARBOHYDRATES FLUX"    />
+      <broad>
+         <element  key="SDN:P02:72:CBFX"  label="Sedimentation flux of carbohydates in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:TCCF"  label="PART. TOTAL CARBON FLUX"    />
+      <broad>
+         <element  key="SDN:P02:72:TCFX"  label="Sedimentation flux of carbon, nitrogen or organic matter in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:TNNF"  label="PART. TOTAL NITROGEN FLUX"    />
+      <broad>
+         <element  key="SDN:P02:72:TCFX"  label="Sedimentation flux of carbon, nitrogen or organic matter in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:ETHP"  label="PARTICULATE 234 TH ACT. ERROR"    />
+      <broad>
+         <element  key="SDN:P02:72:WRAD"  label="Radioactivity in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:TH4P"  label="PARTICULATE 234TH ACTIVTY"    />
+      <broad>
+         <element  key="SDN:P02:72:WRAD"  label="Radioactivity in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:PICP"  label="PARTICULATE INORGANIC CARBON"    />
+      <broad>
+         <element  key="SDN:P02:72:CING"  label="Particulate inorganic carbon concentrations in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:PC1P"  label="PARTICULATE ORGANIC CARBON/POC"    />
+      <broad>
+         <element  key="SDN:P02:72:CORG"  label="Particulate total and organic carbon concentrations in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:POCP"  label="PARTICULATE ORGANIC CARBON/POC"    />
+      <broad>
+         <element  key="SDN:P02:72:CORG"  label="Particulate total and organic carbon concentrations in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:PN1P"  label="PARTICULATE ORGANIC NITROGEN"    />
+      <broad>
+         <element  key="SDN:P02:72:NTOT"  label="Particulate total and organic nitrogen concentrations in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:PONP"  label="PARTICULATE ORGANIC NITROGEN"    />
+      <broad>
+         <element  key="SDN:P02:72:NTOT"  label="Particulate total and organic nitrogen concentrations in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:SLCP"  label="PARTICULATE ORGANIC SILICA(SI)"    />
+      <broad>
+         <element  key="SDN:P02:72:SIXX"  label="Concentration of silicon species in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:MPBF"  label="PB FLUX IN SETTLING PARTICLES"    />
+      <broad>
+         <element  key="SDN:P02:72:MLFX"  label="Sedimentation flux of metallic and metalloid elements and isotopes in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:PERP"  label="PERIDININE"    />
+      <broad>
+         <element  key="SDN:P02:72:CARO"  label="Carotenoid and flavenoid pigment concentrations in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:VTZM"  label="PERIOD OF THE HIGHEST WAVE"    />
+      <broad>
+         <element  key="SDN:P02:72:WVST"  label="Wave height and period statistics"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:PHPH"  label="PH"    />
+      <broad>
+         <element  key="SDN:P02:72:ALKY"  label="Alkalinity, acidity and pH of the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:PHE6"  label="PHAEOPHYTIN &lt;3 MICRON"    />
+      <broad>
+         <element  key="SDN:P02:72:PHWC"  label="Phaeopigment concentrations in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:PHE3"  label="PHAEOPHYTIN &gt;20 MICRON"    />
+      <broad>
+         <element  key="SDN:P02:72:PHWC"  label="Phaeopigment concentrations in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:PHE5"  label="PHAEOPHYTIN &gt;3 &lt;20 MICRON"    />
+      <broad>
+         <element  key="SDN:P02:72:PHWC"  label="Phaeopigment concentrations in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:PHTF"  label="PHAEOPIGMENTS VERTICAL FLUX"    />
+      <broad>
+         <element  key="SDN:P02:72:AXFX"  label="Sedimentation flux of pigments in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:PHEP"  label="PHEOPHORBIDE A"    />
+      <broad>
+         <element  key="SDN:P02:72:PHWC"  label="Phaeopigment concentrations in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:PHEA"  label="PHEOPHYTIN-A"    />
+      <broad>
+         <element  key="SDN:P02:72:PHWC"  label="Phaeopigment concentrations in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:PHEB"  label="PHEOPHYTIN-B"    />
+      <broad>
+         <element  key="SDN:P02:72:PHWC"  label="Phaeopigment concentrations in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:PHEC"  label="PHEOPHYTIN-C"    />
+      <broad>
+         <element  key="SDN:P02:72:PHWC"  label="Phaeopigment concentrations in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:PHE4"  label="PHEOPHYTINE / 10 MICRON FILTER"    />
+      <broad>
+         <element  key="SDN:P02:72:PHWC"  label="Phaeopigment concentrations in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:PHE2"  label="PHEOPHYTINE / 2 MICRON FILTER"    />
+      <broad>
+         <element  key="SDN:P02:72:PHWC"  label="Phaeopigment concentrations in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:PHOS"  label="PHOSPHATE (PO4-P) CONTENT"    />
+      <broad>
+         <element  key="SDN:P02:72:PHOS"  label="Phosphate concentration parameters in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:PHOW"  label="PHOSPHATE (PO4-P) CONTENT"    />
+      <broad>
+         <element  key="SDN:P02:72:PHOS"  label="Phosphate concentration parameters in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:PHOP"  label="PHOSPHATE IN SEDIMT PORE WATER"    />
+      <broad>
+         <element  key="SDN:P02:72:NTPW"  label="Nutrient concentrations in sediment pore waters"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:PHSP"  label="PHOSPHORUS IN SUSP. MATT."    />
+      <broad>
+         <element  key="SDN:P02:72:PXSP"  label="Phosphorus concentrations in suspended particulate material"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:PHCW"  label="PHYTOPLANKTON ABUNDANCE"    />
+      <broad>
+         <element  key="SDN:P02:72:PNTX"  label="Phytoplankton generic abundance in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:HEAD"  label="PLAT. HEADING REL. TRUE NORTH"    />
+      <broad>
+         <element  key="SDN:P02:72:HEAD"  label="Platform or instrument orientation"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:SO4O"  label="PORE WATER SULFATE"    />
+      <broad>
+         <element  key="SDN:P02:72:SPHT"  label="Concentration of inorganic sulphur species in sediment pore water"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:PO63"  label="PORG&lt;63um in DRY W. SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:PETD"  label="POTENTIAL EVAPOTRANSPIRATION"    />
+      <broad>
+         <element  key="SDN:P02:72:CPRP"  label="Precipitation and evaporation"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:PSAL"  label="PRACTICAL SALINITY"    />
+      <broad>
+         <element  key="SDN:P02:72:PSAL"  label="Salinity of the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:PS02"  label="PRACTICAL SALINITY 2"    />
+      <broad>
+         <element  key="SDN:P02:72:PSAL"  label="Salinity of the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:PXAP"  label="PRASINOXANTHINE"    />
+      <broad>
+         <element  key="SDN:P02:72:CARO"  label="Carotenoid and flavenoid pigment concentrations in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:PRRD"  label="PRECIPITATION RATE"    />
+      <broad>
+         <element  key="SDN:P02:72:CPRP"  label="Precipitation and evaporation"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:PRRT"  label="PRECIPITATION RATE"    />
+      <broad>
+         <element  key="SDN:P02:72:CPRP"  label="Precipitation and evaporation"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:PRAB"  label="PRESENCE OR ABSENCE OF ENTITY"    />
+      <broad>
+         <element  key="SDN:P02:72:BPRP"  label="SeaDataNet biological format biotic parameters"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:PROT"  label="PROTEIN"    />
+      <broad>
+         <element  key="SDN:P02:72:WPRO"  label="Concentration of proteins in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:PTZF"  label="PROTOZOA PPC FLUX"    />
+      <broad>
+         <element  key="SDN:P02:72:PCFX"  label="Sedimentation flux of identified biota expressed as carbon in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:PT63"  label="PTOT&lt;63um in DRY W. SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:MPBS"  label="Pb IN THE SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:PB45"  label="Pb&lt;0.4/0.45um IN WATER BODY"    />
+      <broad>
+         <element  key="SDN:P02:72:MTWD"  label="Dissolved metal concentrations in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:PB63"  label="Pb&lt;63um IN DRY WEIGHT SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:PB40"  label="Pb&gt;0.4/0.45um IN WATER BODY"    />
+      <broad>
+         <element  key="SDN:P02:72:MTWP"  label="Particulate metal concentrations in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:PENW"  label="Pentachlorobiphenyl in water"    />
+      <broad>
+         <element  key="SDN:P02:72:PPWC"  label="Concentration of polychlorobiphenyls (PCBs) in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:PTC1"  label="Pentachlorobiphenyl101 in sed."    />
+      <broad>
+         <element  key="SDN:P02:72:SPCB"  label="Concentration of polychlorobiphenyls (PCBs) in sediment samples"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:PTC2"  label="Pentachlorobiphenyl118 in sed."    />
+      <broad>
+         <element  key="SDN:P02:72:SPCB"  label="Concentration of polychlorobiphenyls (PCBs) in sediment samples"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:PCPW"  label="Pentachlorophenol in water"    />
+      <broad>
+         <element  key="SDN:P02:72:PEWB"  label="Pesticide concentrations in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:VM01"  label="Period (at first spectral moment) of waves on the water body"    />
+      <broad>
+         <element  key="SDN:P02:72:WVST"  label="Wave height and period statistics"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:PHAS"  label="Phaeopigments in sediment"    />
+      <broad>
+         <element  key="SDN:P02:72:PHSD"  label="Phaeopigment concentrations in sediment"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:PHES"  label="Phenanthrene in sediment"    />
+      <broad>
+         <element  key="SDN:P02:72:SCAH"  label="Concentration of polycyclic aromatic hydrocarbons (PAHs) in sediment samples"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:PHEW"  label="Phenanthrene in water body"    />
+      <broad>
+         <element  key="SDN:P02:72:PCHW"  label="Concentration of polycyclic aromatic hydrocarbons (PAHs) in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:PHSS"  label="Phosphate in sediment"    />
+      <broad>
+         <element  key="SDN:P02:72:NTPW"  label="Nutrient concentrations in sediment pore waters"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:PRSX"  label="Pr IN DRY WEIGHT SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:PR63"  label="Pr&lt;63um IN DRY WEIGHT SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:PYRS"  label="Pyrene in sediment"    />
+      <broad>
+         <element  key="SDN:P02:72:SCAH"  label="Concentration of polycyclic aromatic hydrocarbons (PAHs) in sediment samples"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:PYRW"  label="Pyrene in water body"    />
+      <broad>
+         <element  key="SDN:P02:72:PCHW"  label="Concentration of polycyclic aromatic hydrocarbons (PAHs) in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:RDVA"  label="RADIAL SEAWATER VELOCITY"    />
+      <broad>
+         <element  key="SDN:P02:72:RFVL"  label="Horizontal velocity of the water column (currents)"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:RNGE"  label="RANGE AWAY FROM INSTRUMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:ALAT"  label="Horizontal spatial co-ordinates"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:TR10"  label="RED LIGHT TRANSMISSION 10CM"    />
+      <broad>
+         <element  key="SDN:P02:72:ATTN"  label="Transmittance and attenuance of the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:TR25"  label="RED LIGHT TRANSMISSION 25CM"    />
+      <broad>
+         <element  key="SDN:P02:72:ATTN"  label="Transmittance and attenuance of the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:REDS"  label="REDOX POTENTIAL"    />
+      <broad>
+         <element  key="SDN:P02:72:RPOT"  label="Redox potential in sediment"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:RELH"  label="RELATIVE HUMIDITY"    />
+      <broad>
+         <element  key="SDN:P02:72:CHUM"  label="Atmospheric humidity"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:SLVR"  label="RESIDUAL (OBS-PRED SEA LEVEL)"    />
+      <broad>
+         <element  key="SDN:P02:72:ASLV"  label="Sea level"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:RVFL"  label="RIVER FLOW RATE"    />
+      <broad>
+         <element  key="SDN:P02:72:RVDS"  label="River flow and discharge"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:MRBS"  label="Rb IN THE SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:RB63"  label="Rb&lt;63um IN DRY WEIGHT SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:SSXX"  label="S IN DRY WEIGHT SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:MSSP"  label="S IN SUSPENDED MATTER"    />
+      <broad>
+         <element  key="SDN:P02:72:SXCN"  label="Concentration of inorganic sulphur species in suspended particulate material"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:SSAL"  label="SALINITY (PRE-1978 DEFN)"    />
+      <broad>
+         <element  key="SDN:P02:72:PSAL"  label="Salinity of the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:SACC"  label="SALINITY ACCURACY"    />
+      <broad>
+         <element  key="SDN:P02:72:TMES"  label="Metadata parameters"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:VOLF"  label="SAMPLE VOLUME BY FLOW METER"    />
+      <broad>
+         <element  key="SDN:P02:72:TMES"  label="Metadata parameters"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:SAND"  label="SAND IN THE SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:MNGS"  label="Sediment grain size parameters"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:PRES"  label="SEA PRESSURE sea surface=0"    />
+      <broad>
+         <element  key="SDN:P02:72:AHGT"  label="Vertical spatial coordinates"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:SCDT"  label="SEA SURF CURRENT DIR. REL T. N"    />
+      <broad>
+         <element  key="SDN:P02:72:RFVL"  label="Horizontal velocity of the water column (currents)"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:SCSP"  label="SEA SURFACE CURRENT SPEED"    />
+      <broad>
+         <element  key="SDN:P02:72:RFVL"  label="Horizontal velocity of the water column (currents)"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:SSPS"  label="SEA SURFACE PRACTICAL SALINITY"    />
+      <broad>
+         <element  key="SDN:P02:72:PSAL"  label="Salinity of the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:SSTP"  label="SEA SURFACE TEMPERATURE"    />
+      <broad>
+         <element  key="SDN:P02:72:TEMP"  label="Temperature of the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:TE01"  label="SEA TEMPERATURE"    />
+      <broad>
+         <element  key="SDN:P02:72:TEMP"  label="Temperature of the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:TE02"  label="SEA TEMPERATURE"    />
+      <broad>
+         <element  key="SDN:P02:72:TEMP"  label="Temperature of the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:TE03"  label="SEA TEMPERATURE"    />
+      <broad>
+         <element  key="SDN:P02:72:TEMP"  label="Temperature of the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:TE04"  label="SEA TEMPERATURE"    />
+      <broad>
+         <element  key="SDN:P02:72:TEMP"  label="Temperature of the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:TE05"  label="SEA TEMPERATURE"    />
+      <broad>
+         <element  key="SDN:P02:72:TEMP"  label="Temperature of the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:TE06"  label="SEA TEMPERATURE"    />
+      <broad>
+         <element  key="SDN:P02:72:TEMP"  label="Temperature of the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:TE07"  label="SEA TEMPERATURE"    />
+      <broad>
+         <element  key="SDN:P02:72:TEMP"  label="Temperature of the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:TE08"  label="SEA TEMPERATURE"    />
+      <broad>
+         <element  key="SDN:P02:72:TEMP"  label="Temperature of the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:TE09"  label="SEA TEMPERATURE"    />
+      <broad>
+         <element  key="SDN:P02:72:TEMP"  label="Temperature of the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:TE10"  label="SEA TEMPERATURE"    />
+      <broad>
+         <element  key="SDN:P02:72:TEMP"  label="Temperature of the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:TE11"  label="SEA TEMPERATURE"    />
+      <broad>
+         <element  key="SDN:P02:72:TEMP"  label="Temperature of the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:TE12"  label="SEA TEMPERATURE"    />
+      <broad>
+         <element  key="SDN:P02:72:TEMP"  label="Temperature of the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:TEMP"  label="SEA TEMPERATURE"    />
+      <broad>
+         <element  key="SDN:P02:72:TEMP"  label="Temperature of the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:SECC"  label="SECCHI DISK DEPTH"    />
+      <broad>
+         <element  key="SDN:P02:72:SECC"  label="Secchi disk depth"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:SECS"  label="SECONDS WITHIN MINUTE"    />
+      <broad>
+         <element  key="SDN:P02:72:AYMD"  label="Date and time"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:AMIS"  label="SEDIMENT AMINO-ACIDS"    />
+      <broad>
+         <element  key="SDN:P02:72:HAAC"  label="Amino acids in sediment"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:SIOS"  label="SEDIMENT BIOGENIC SiO2"    />
+      <broad>
+         <element  key="SDN:P02:72:CLAY"  label="Mineralogical composition"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:CHTS"  label="SEDIMENT CARBOHYDRATES"    />
+      <broad>
+         <element  key="SDN:P02:72:CASD"  label="Concentration of carbohydrates, phenols, alkanols (alcohols), ethers, aldehydes and ketones in sediment"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:CO3S"  label="SEDIMENT CARBONATES"    />
+      <broad>
+         <element  key="SDN:P02:72:CLAY"  label="Mineralogical composition"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:LIPS"  label="SEDIMENT LIPIDS"    />
+      <broad>
+         <element  key="SDN:P02:72:CD10"  label="Sediment lipid concentrations"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:PHNS"  label="SEDIMENT PHENOLS"    />
+      <broad>
+         <element  key="SDN:P02:72:CASD"  label="Concentration of carbohydrates, phenols, alkanols (alcohols), ethers, aldehydes and ketones in sediment"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:TCCS"  label="SEDIMENT TOTAL CARBON"    />
+      <broad>
+         <element  key="SDN:P02:72:CBSD"  label="Carbon concentrations in sediment"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:TNNS"  label="SEDIMENT TOTAL NITROGEN"    />
+      <broad>
+         <element  key="SDN:P02:72:NTSD"  label="Nitrogen concentrations in sediment"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:TOCS"  label="SEDIMENT TOTAL ORGANIC CARBON"    />
+      <broad>
+         <element  key="SDN:P02:72:CBSD"  label="Carbon concentrations in sediment"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:SINC"  label="SHORT-WAVE INCOMING RADIATION"    />
+      <broad>
+         <element  key="SDN:P02:72:CSLR"  label="Solar Radiation"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:SAMA"  label="SIGNAL RETURN AMPLITUDE"    />
+      <broad>
+         <element  key="SDN:P02:72:ASAM"  label="Acoustic backscatter in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:VTDH"  label="SIGNIFICANT WAVE HEIGHT"    />
+      <broad>
+         <element  key="SDN:P02:72:WVST"  label="Wave height and period statistics"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:SLCA"  label="SILICATE (SIO4-SI) CONTENT"    />
+      <broad>
+         <element  key="SDN:P02:72:SLCA"  label="Silicate concentration parameters in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:SLCW"  label="SILICATE (SIO4-SI) CONTENT"    />
+      <broad>
+         <element  key="SDN:P02:72:SLCA"  label="Silicate concentration parameters in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:SILT"  label="SILT IN THE SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:MNGS"  label="Sediment grain size parameters"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:SVEL"  label="SOUND VELOCITY"    />
+      <broad>
+         <element  key="SDN:P02:72:SVEL"  label="Sound velocity and travel time in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:VSMC"  label="SPECT. MOMENT(0,2) WAVE PERIOD"    />
+      <broad>
+         <element  key="SDN:P02:72:WVST"  label="Wave height and period statistics"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:VHM0"  label="SPECTRAL SIGNIFICANT WAVE HEIGHT HM0"    />
+      <broad>
+         <element  key="SDN:P02:72:WVST"  label="Wave height and period statistics"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:CHSD"  label="STD deviation chlorophyll-a"    />
+      <broad>
+         <element  key="SDN:P02:72:CPSD"  label="Chlorophyll pigment concentrations in sediment"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:OCSD"  label="STD deviation organic carbon"    />
+      <broad>
+         <element  key="SDN:P02:72:CBSD"  label="Carbon concentrations in sediment"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:ONSD"  label="STD deviation organic nitrogen"    />
+      <broad>
+         <element  key="SDN:P02:72:NTSD"  label="Nitrogen concentrations in sediment"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:TCSD"  label="STD deviation total carbon"    />
+      <broad>
+         <element  key="SDN:P02:72:CBSD"  label="Carbon concentrations in sediment"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:ABED"  label="SURFACE SAMPLED OR OBSERVED"    />
+      <broad>
+         <element  key="SDN:P02:72:TMES"  label="Metadata parameters"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:SWDR"  label="SWELL DIRECTION  REL TRUE N."    />
+      <broad>
+         <element  key="SDN:P02:72:GWDR"  label="Wave direction"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:SWHT"  label="SWELL HEIGHT"    />
+      <broad>
+         <element  key="SDN:P02:72:WVST"  label="Wave height and period statistics"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:SWPR"  label="SWELL PERIOD"    />
+      <broad>
+         <element  key="SDN:P02:72:WVST"  label="Wave height and period statistics"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:SBSX"  label="Sb IN DRY WEIGHT SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:SB63"  label="Sb&lt;63um IN DRY WEIGHT SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:MSCS"  label="Sc IN THE SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:SC63"  label="Sc&lt;63um IN DRY WEIGHT SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:MSIP"  label="Si IN SUSPENDED MATTER"    />
+      <broad>
+         <element  key="SDN:P02:72:SIXX"  label="Concentration of silicon species in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:MSIS"  label="Si IN THE SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:SI63"  label="Si&lt;63um IN DRY WEIGHT SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:SLC1"  label="Silicate in sediment"    />
+      <broad>
+         <element  key="SDN:P02:72:NTPW"  label="Nutrient concentrations in sediment pore waters"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:SMSX"  label="Sm IN DRY WEIGHT SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:SM63"  label="Sm&lt;63um IN DRY WEIGHT SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:SNSX"  label="Sn IN DRY WEIGHT SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:SN63"  label="Sn&lt;63um IN DRY WEIGHT SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:MSRS"  label="Sr IN THE SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:SR63"  label="Sr&lt;63um IN DRY WEIGHT SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:STYW"  label="Styrene in water body"    />
+      <broad>
+         <element  key="SDN:P02:72:WCOC"  label="Concentration of other organic contaminants in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:ZNTH"  label="TILT OF MEASUREMENT PLATFORM"    />
+      <broad>
+         <element  key="SDN:P02:72:HEAD"  label="Platform or instrument orientation"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:TIME"  label="TIME WITHIN DAY"    />
+      <broad>
+         <element  key="SDN:P02:72:AYMD"  label="Date and time"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:TCO2"  label="TOTAL CARBON DIOXYD (CO2)"    />
+      <broad>
+         <element  key="SDN:P02:72:TCO2"  label="Total dissolved inorganic carbon (TCO2) concentration in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:TDPW"  label="TOTAL DISSOLVED PHOSPHORUS"    />
+      <broad>
+         <element  key="SDN:P02:72:TDPX"  label="Dissolved total or organic phosphorus concentration in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:TDSW"  label="TOTAL DISSOLVED SOLID"    />
+      <broad>
+         <element  key="SDN:P02:72:TSED"  label="Concentration of suspended particulate material in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:RDIN"  label="TOTAL INCIDENT RADIATION"    />
+      <broad>
+         <element  key="SDN:P02:72:VSRA"  label="Visible waveband radiance and irradiance measurements in the atmosphere"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:TICW"  label="TOTAL INORGANIC CARBON"    />
+      <broad>
+         <element  key="SDN:P02:72:TCO2"  label="Total dissolved inorganic carbon (TCO2) concentration in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:TSMF"  label="TOTAL MASS FLUX"    />
+      <broad>
+         <element  key="SDN:P02:72:MSFX"  label="Sedimentation flux quantification in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:NTOT"  label="TOTAL NITROGEN (N) CONTENT"    />
+      <broad>
+         <element  key="SDN:P02:72:TDNT"  label="Dissolved total and organic nitrogen concentrations in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:TOCW"  label="TOTAL ORGANIC CARBON"    />
+      <broad>
+         <element  key="SDN:P02:72:DOCC"  label="Dissolved organic carbon concentration in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:TPCW"  label="TOTAL PARTICULATE CARBON"    />
+      <broad>
+         <element  key="SDN:P02:72:CORG"  label="Particulate total and organic carbon concentrations in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:NT1P"  label="TOTAL PARTICULATE NITROGEN"    />
+      <broad>
+         <element  key="SDN:P02:72:NTOT"  label="Particulate total and organic nitrogen concentrations in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:PTNP"  label="TOTAL PARTICULATE NITROGEN"    />
+      <broad>
+         <element  key="SDN:P02:72:NTOT"  label="Particulate total and organic nitrogen concentrations in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:PT1P"  label="TOTAL PARTICULATE PHOSPHORUS"    />
+      <broad>
+         <element  key="SDN:P02:72:TPHS"  label="Particulate total and organic phosphorus concentrations in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:PTPP"  label="TOTAL PARTICULATE PHOSPHORUS"    />
+      <broad>
+         <element  key="SDN:P02:72:TPHS"  label="Particulate total and organic phosphorus concentrations in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:MAGP"  label="TOTAL PARTICULATE SILVER"    />
+      <broad>
+         <element  key="SDN:P02:72:MTWP"  label="Particulate metal concentrations in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:TPHP"  label="TOTAL PHAEOPIGMENTS"    />
+      <broad>
+         <element  key="SDN:P02:72:PHWC"  label="Phaeopigment concentrations in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:PHTP"  label="TOTAL PHEOPHYTINE"    />
+      <broad>
+         <element  key="SDN:P02:72:PHWC"  label="Phaeopigment concentrations in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:TPHS"  label="TOTAL PHOSPHORUS (P) CONTENT"    />
+      <broad>
+         <element  key="SDN:P02:72:TPHS"  label="Particulate total and organic phosphorus concentrations in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:EPMP"  label="TOTAL SUSP. PART. MATTER/ESTER"    />
+      <broad>
+         <element  key="SDN:P02:72:TSED"  label="Concentration of suspended particulate material in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:GPMP"  label="TOTAL SUSP. PART. MATTER/GLASS"    />
+      <broad>
+         <element  key="SDN:P02:72:TSED"  label="Concentration of suspended particulate material in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:TSMP"  label="TOTAL SUSPENDED MATTER"    />
+      <broad>
+         <element  key="SDN:P02:72:TSED"  label="Concentration of suspended particulate material in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:TUR4"  label="TURBIDITY"    />
+      <broad>
+         <element  key="SDN:P02:72:TSED"  label="Concentration of suspended particulate material in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:TUR5"  label="TURBIDITY"    />
+      <broad>
+         <element  key="SDN:P02:72:TSED"  label="Concentration of suspended particulate material in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:TUR6"  label="TURBIDITY"    />
+      <broad>
+         <element  key="SDN:P02:72:TSED"  label="Concentration of suspended particulate material in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:TBSX"  label="Tb IN DRY WEIGHT SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:TB63"  label="Tb&lt;63um IN DRY WEIGHT SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:TETW"  label="Tetrachlorobiphenyl in water"    />
+      <broad>
+         <element  key="SDN:P02:72:PPWC"  label="Concentration of polychlorobiphenyls (PCBs) in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:TETS"  label="Tetrachlorobiphenyl sediment"    />
+      <broad>
+         <element  key="SDN:P02:72:SPCB"  label="Concentration of polychlorobiphenyls (PCBs) in sediment samples"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:MTHS"  label="Th IN THE SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:OXDE"  label="The isotopic enrichment of 2H in the hydrogen of water molecules"    />
+      <broad>
+         <element  key="SDN:P02:72:WSTB"  label="Stable isotopes in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:MTIP"  label="Ti IN SUSPENDED MATTER"    />
+      <broad>
+         <element  key="SDN:P02:72:MTWP"  label="Particulate metal concentrations in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:MTIS"  label="Ti IN THE SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:TLSX"  label="Tl IN DRY WEIGHT SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:TL63"  label="Tl&lt;63um IN DRY WEIGHT SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:TMSX"  label="Tm IN DRY WEIGHT SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:TM63"  label="Tm&lt;63um IN DRY WEIGHT SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:TOTS"  label="Total carbon in sediment"    />
+      <broad>
+         <element  key="SDN:P02:72:CBSD"  label="Carbon concentrations in sediment"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:TICS"  label="Total inorganic carbon sedimen"    />
+      <broad>
+         <element  key="SDN:P02:72:CCPW"  label="Carbonate chemistry in sediment pore waters"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:IROS"  label="Total iron in sediment"    />
+      <broad>
+         <element  key="SDN:P02:72:MTPW"  label="Metal concentrations in sediment pore waters"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:IROW"  label="Total iron in water body"    />
+      <broad>
+         <element  key="SDN:P02:72:MTWT"  label="Total metal concentrations in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:MANW"  label="Total manganese in water body"    />
+      <broad>
+         <element  key="SDN:P02:72:MTWD"  label="Dissolved metal concentrations in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:MERB"  label="Total mercury in biota"    />
+      <broad>
+         <element  key="SDN:P02:72:BCMT"  label="Metal concentrations in biota"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:MERW"  label="Total mercury in water body"    />
+      <broad>
+         <element  key="SDN:P02:72:MTWT"  label="Total metal concentrations in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:TNIS"  label="Total nitrogen in sediment"    />
+      <broad>
+         <element  key="SDN:P02:72:NTPW"  label="Nutrient concentrations in sediment pore waters"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:PETW"  label="Total petroleum in water body"    />
+      <broad>
+         <element  key="SDN:P02:72:WCOC"  label="Concentration of other organic contaminants in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:TRBB"  label="Tributyltin cation in biota"    />
+      <broad>
+         <element  key="SDN:P02:72:OMBI"  label="Organometallic species concentration parameters in biota"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:TRCS"  label="Trichlorobiphenyl in sediment"    />
+      <broad>
+         <element  key="SDN:P02:72:SPCB"  label="Concentration of polychlorobiphenyls (PCBs) in sediment samples"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:MUUS"  label="U IN THE SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:U63X"  label="U&lt;63um IN DRY WEIGHT SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:UVCT"  label="UPWARD CURRENT VELOCITY"    />
+      <broad>
+         <element  key="SDN:P02:72:LRZA"  label="Vertical velocity of the water column (currents)"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:URAW"  label="URANIUM IN WATER BODY"    />
+      <broad>
+         <element  key="SDN:P02:72:MTWT"  label="Total metal concentrations in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:UREA"  label="UREA"    />
+      <broad>
+         <element  key="SDN:P02:72:UREA"  label="Urea concentration parameters in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:MVVS"  label="V IN THE SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:V63X"  label="V&lt;63um IN DRY WEIGHT SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:VERR"  label="VELOCITY ERROR"    />
+      <broad>
+         <element  key="SDN:P02:72:TMES"  label="Metadata parameters"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:VCSP"  label="VERTICAL CURRENT SPEED"    />
+      <broad>
+         <element  key="SDN:P02:72:LRZA"  label="Vertical velocity of the water column (currents)"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:VERT"  label="VERTICAL DISPLACEMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:AHGT"  label="Vertical spatial coordinates"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:VIOW"  label="VIOLAXANTHIN"    />
+      <broad>
+         <element  key="SDN:P02:72:CARO"  label="Carotenoid and flavenoid pigment concentrations in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:VIAW"  label="VIRUS ABUNDANCE IN SEA WATER"    />
+      <broad>
+         <element  key="SDN:P02:72:VIRU"  label="Virus abundance in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:VOCP"  label="VOLUME CONC. OF PARTICLES"    />
+      <broad>
+         <element  key="SDN:P02:72:TSED"  label="Concentration of suspended particulate material in the water column"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:VSAM"  label="VOLUME SAMPLED OF WATER BODY"    />
+      <broad>
+         <element  key="SDN:P02:72:TMES"  label="Metadata parameters"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:VANW"  label="Vanadium in water body"    />
+      <broad>
+         <element  key="SDN:P02:72:MTWT"  label="Total metal concentrations in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:WO63"  label="W&lt;63um IN DRY WEIGHT SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:H2OS"  label="WATER CONTENT"    />
+      <broad>
+         <element  key="SDN:P02:72:WCWT"  label="Sediment water content, porosity and surface area"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:VDIR"  label="WAVE DIRECTION REL. TRUE NORTH"    />
+      <broad>
+         <element  key="SDN:P02:72:GWDR"  label="Wave direction"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:VTPK"  label="WAVE PEAK PERIOD"    />
+      <broad>
+         <element  key="SDN:P02:72:WVST"  label="Wave height and period statistics"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:VEPK"  label="WAVE SPECTRUM PEAK ENERGY"    />
+      <broad>
+         <element  key="SDN:P02:72:WVSP"  label="Spectral wave data parameters"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:VPED"  label="WAVE SPECTRUM PEAK ENERGY DIR."    />
+      <broad>
+         <element  key="SDN:P02:72:GWDR"  label="Wave direction"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:WETT"  label="WET BULB TEMPERATURE"    />
+      <broad>
+         <element  key="SDN:P02:72:CHUM"  label="Atmospheric humidity"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:WDIR"  label="WIND DIRECTION REL. TRUE NORTH"    />
+      <broad>
+         <element  key="SDN:P02:72:EWSB"  label="Wind strength and direction"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:WMSP"  label="WIND SPEED - MAX AVER PER 2 MN"    />
+      <broad>
+         <element  key="SDN:P02:72:EWSB"  label="Wind strength and direction"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:WSPE"  label="WIND SPEED EASTWARD COMPONENT"    />
+      <broad>
+         <element  key="SDN:P02:72:EWSB"  label="Wind strength and direction"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:WSPN"  label="WIND SPEED NORTHWARD COMPONENT"    />
+      <broad>
+         <element  key="SDN:P02:72:EWSB"  label="Wind strength and direction"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:WSTE"  label="WIND STRESS EAST COMPONENT"    />
+      <broad>
+         <element  key="SDN:P02:72:WSTR"  label="Wind stress and shear"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:WSTN"  label="WIND STRESS NORTH COMPONENT"    />
+      <broad>
+         <element  key="SDN:P02:72:WSTR"  label="Wind stress and shear"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:MYYS"  label="Y IN THE SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:Y63X"  label="Y&lt;63um IN DRY WEIGHT SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:YEAR"  label="YEAR"    />
+      <broad>
+         <element  key="SDN:P02:72:AYMD"  label="Date and time"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:YBSX"  label="Yb IN DRY WEIGHT SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:YB63"  label="Yb&lt;63um IN DRY WEIGHT SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:ZXAP"  label="ZEAXANTHINE"    />
+      <broad>
+         <element  key="SDN:P02:72:CARO"  label="Carotenoid and flavenoid pigment concentrations in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:MZNF"  label="ZN FLUX IN SETTLING PARTICLES"    />
+      <broad>
+         <element  key="SDN:P02:72:MLFX"  label="Sedimentation flux of metallic and metalloid elements and isotopes in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:ZINS"  label="Zinc in sediment"    />
+      <broad>
+         <element  key="SDN:P02:72:MTPW"  label="Metal concentrations in sediment pore waters"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:ZINW"  label="Zinc in water body"    />
+      <broad>
+         <element  key="SDN:P02:72:MTWT"  label="Total metal concentrations in water bodies"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:MZNS"  label="Zn IN THE SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:ZN63"  label="Zn&lt;63um IN DRY WEIGHT SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:MZRS"  label="Zr IN THE SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:P09:72:ZR63"  label="Zr&lt;63um IN DRY WEIGHT SEDIMENT"    />
+      <broad>
+         <element  key="SDN:P02:72:RMIN"  label="Inorganic chemical composition of sediment or rocks"    />
+      </broad>
+   </match>
+</mapping>
