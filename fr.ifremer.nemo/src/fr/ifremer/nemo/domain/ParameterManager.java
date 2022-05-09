@@ -220,6 +220,9 @@ public class ParameterManager {
 		case  MICROLITTER: 
 			resetParameterModels();
 			break;
+		case  MICROLITTERINSEDIMENTS: 
+			resetParameterModels();
+			break;
 		case  FLOWCYTO: 
 			setAddedParameterModelForPhysicochemical();
 			break;

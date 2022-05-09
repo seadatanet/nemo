@@ -17,6 +17,7 @@ import fr.ifremer.seadatanet.odv.input.validator.OdvSpecificValidatorBio;
 import fr.ifremer.seadatanet.odv.input.validator.OdvSpecificValidatorClassic;
 import fr.ifremer.seadatanet.odv.input.validator.OdvSpecificValidatorCyto;
 import fr.ifremer.seadatanet.odv.input.validator.OdvSpecificValidatorMicro;
+import fr.ifremer.seadatanet.odv.input.validator.OdvSpecificValidatorMicroInSed;
 import fr.ifremer.seadatanet.odv.input.validator.SpecificParameter;
 import fr.ifremer.sismer_tools.SismerToolsException;
 import fr.ifremer.sismer_tools.externalresources.ExternalResourcesManager;
@@ -56,6 +57,8 @@ public class VariantsSpecificsParameters {
 			return new OdvSpecificValidatorBio(null, null, null);
 		case MICROLITTER:
 			return new OdvSpecificValidatorMicro(null, null, null);
+		case MICROLITTERINSEDIMENTS:
+			return new OdvSpecificValidatorMicroInSed(null, null, null);
 		case FLOWCYTO:
 			return new OdvSpecificValidatorCyto(null, null, null);
 		default:

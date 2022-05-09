@@ -69,7 +69,8 @@ public class FileFormValidator extends FormValidator
 			if (RulesManager.getInstance().getMyFileType() == E_InputType.UNKNOWN)
 			{
 				if (RulesManager.getInstance().getMyInputVariant()==E_Variant.BIOLOGICAL
-					||	RulesManager.getInstance().getMyInputVariant()==E_Variant.MICROLITTER) {
+					||	RulesManager.getInstance().getMyInputVariant()==E_Variant.MICROLITTER
+					||	RulesManager.getInstance().getMyInputVariant()==E_Variant.MICROLITTERINSEDIMENTS) {
 							// no input type for bio or micro
 				}else {
 					Utils.messageErreur(Messages.error_file_inputTypeUnknown);

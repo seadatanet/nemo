@@ -124,6 +124,10 @@ public enum Conversion {
 				returnedConv = Conversion.MODV;
 				break;
 
+			case MICROLITTERINSEDIMENTS:
+				returnedConv = Conversion.SODV;
+				break;
+
 			default:
 				break;
 			}

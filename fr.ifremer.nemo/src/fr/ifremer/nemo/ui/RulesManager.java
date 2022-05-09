@@ -706,7 +706,7 @@ public class RulesManager {
 
 	}
 	private boolean isBioCytoMicroVariant() {
-		return myInputVariant==E_Variant.BIOLOGICAL||myInputVariant==E_Variant.FLOWCYTO||myInputVariant==E_Variant.MICROLITTER;
+		return myInputVariant==E_Variant.BIOLOGICAL||myInputVariant==E_Variant.FLOWCYTO||myInputVariant==E_Variant.MICROLITTER||myInputVariant==E_Variant.MICROLITTERINSEDIMENTS;
 	}
 	/******************************************
 	 * REGLES
@@ -769,7 +769,7 @@ public class RulesManager {
 				messageLog += Messages.edit_file_info_P091disabled + Global.RN;
 			}
 		}else if(myConversionType == E_TypeConversion.UNKNOWN) {
-			if (myInputVariant !=null && (myInputVariant==E_Variant.BIOLOGICAL||myInputVariant==E_Variant.FLOWCYTO||myInputVariant==E_Variant.MICROLITTER)) {
+			if (myInputVariant !=null && (myInputVariant==E_Variant.BIOLOGICAL||myInputVariant==E_Variant.FLOWCYTO||myInputVariant==E_Variant.MICROLITTER||myInputVariant==E_Variant.MICROLITTERINSEDIMENTS)) {
 				myConversionType =  E_TypeConversion.ODV_MULTISTATIONS;
 			}
 		}
@@ -872,7 +872,7 @@ public class RulesManager {
 		return myFileType == E_InputType.TIMESERIES;
 	}
 
-	// Input data type (physicoChm, bio, flowcyto, microlitter)
+	// Input data type (physicoChm, bio, flowcyto, microlitter, microlitter in sediment)
 	public E_Variant getMyInputVariant() {
 		return myInputVariant;
 	}

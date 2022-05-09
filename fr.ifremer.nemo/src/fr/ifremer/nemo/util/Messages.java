@@ -55,6 +55,7 @@ public class Messages {
 	public static String variant_biological;
 	public static String variant_flowcytometry;
 	public static String variant_microlitter;
+	public static String variant_microlitter_in_sediment;
 
 	// ECRAN PRINCIPAL
 	public static String view_file_inputTitle;

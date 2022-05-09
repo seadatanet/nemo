@@ -38,6 +38,7 @@ import fr.ifremer.seadatanet.odv.input.validator.OdvSpecificValidatorBio;
 import fr.ifremer.seadatanet.odv.input.validator.OdvSpecificValidatorClassic;
 import fr.ifremer.seadatanet.odv.input.validator.OdvSpecificValidatorCyto;
 import fr.ifremer.seadatanet.odv.input.validator.OdvSpecificValidatorMicro;
+import fr.ifremer.seadatanet.odv.input.validator.OdvSpecificValidatorMicroInSed;
 import fr.ifremer.seadatanet.odv.input.validator.SpecificParameter;
 import fr.ifremer.sismer_tools.resources.ODVConstants.E_Variant;
 
@@ -167,6 +168,9 @@ public class LabelParameterManager
 			break;
 		case MICROLITTER:
 			list = new OdvSpecificValidatorMicro(null, null, null).getSpecificParams();
+			break;
+		case MICROLITTERINSEDIMENTS:
+			list = new OdvSpecificValidatorMicroInSed(null, null, null).getSpecificParams();
 			break;
 		default:
 			break;

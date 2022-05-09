@@ -27,6 +27,7 @@ import fr.ifremer.nemo.ui.edit.file.listeners.InputFileRadioSelectionListener;
 import fr.ifremer.nemo.ui.edit.file.listeners.OutputFormatRadioSelectionListener;
 import fr.ifremer.nemo.ui.edit.file.listeners.variants.VariantBiologicalListener;
 import fr.ifremer.nemo.ui.edit.file.listeners.variants.VariantFlowcytometrylListener;
+import fr.ifremer.nemo.ui.edit.file.listeners.variants.VariantMicrolitterInSedimentListener;
 import fr.ifremer.nemo.ui.edit.file.listeners.variants.VariantMicrolitterListener;
 import fr.ifremer.nemo.ui.edit.file.listeners.variants.VariantPhysicochemicalListener;
 import fr.ifremer.nemo.ui.view.ViewLog;
@@ -78,8 +79,8 @@ public class EditFileForm extends EditForm
 	// choix pour File type: profile, time series ou trajectory
 	private Button radProfilVertical, radSerieTempo, radTrajectoire;
 
-	// choix pour variante: physicochemical (historiquement gere par Nemo), biological, flowcytometry, microlitter
-	private Button radPhysicochemical, radBiological, radFlowcytometry, radMicrolitter;
+	// choix pour variante: physicochemical (historiquement gere par Nemo), biological, flowcytometry, microlitter, microlitter in sediment
+	private Button radPhysicochemical, radBiological, radFlowcytometry, radMicrolitter, radMicrolitterInSediment;
 		
 	
 	// choix du format d'export
@@ -761,6 +762,10 @@ public class EditFileForm extends EditForm
 		radMicrolitter.setText(Messages.variant_microlitter);
 		radMicrolitter.addSelectionListener(new VariantMicrolitterListener(this));
 
+		radMicrolitterInSediment = new Button(grpDatatype, SWT.RADIO);
+		radMicrolitterInSediment.setText(Messages.variant_microlitter_in_sediment);
+		radMicrolitterInSediment.addSelectionListener(new VariantMicrolitterInSedimentListener(this));
+
 		// Selection du type par defaut
 
 		resetDefaultSelectionVariant();
@@ -772,6 +777,7 @@ public class EditFileForm extends EditForm
 		radBiological.setSelection(RulesManager.DEFAULT_VARIANT == E_Variant.BIOLOGICAL);
 		radFlowcytometry.setSelection(RulesManager.DEFAULT_VARIANT == E_Variant.FLOWCYTO);
 		radMicrolitter.setSelection(RulesManager.DEFAULT_VARIANT == E_Variant.MICROLITTER);
+		radMicrolitterInSediment.setSelection(RulesManager.DEFAULT_VARIANT == E_Variant.MICROLITTERINSEDIMENTS);
 		
 	}
 
@@ -1059,30 +1065,42 @@ public class EditFileForm extends EditForm
 			radBiological.setSelection(false);
 			radFlowcytometry.setSelection(false);
 			radMicrolitter.setSelection(false);
+			radMicrolitterInSediment.setSelection(false);
 			break;
 		case BIOLOGICAL:
 			radPhysicochemical.setSelection(false);
 			radBiological.setSelection(true);
 			radFlowcytometry.setSelection(false);
 			radMicrolitter.setSelection(false);
+			radMicrolitterInSediment.setSelection(false);
 			break;
 		case FLOWCYTO:
 			radPhysicochemical.setSelection(false);
 			radBiological.setSelection(false);
 			radFlowcytometry.setSelection(true);
 			radMicrolitter.setSelection(false);
+			radMicrolitterInSediment.setSelection(false);
 			break;
 		case MICROLITTER:
 			radPhysicochemical.setSelection(false);
 			radBiological.setSelection(false);
 			radFlowcytometry.setSelection(false);
 			radMicrolitter.setSelection(true);
+			radMicrolitterInSediment.setSelection(false);
+			break;
+		case MICROLITTERINSEDIMENTS:
+			radPhysicochemical.setSelection(false);
+			radBiological.setSelection(false);
+			radFlowcytometry.setSelection(false);
+			radMicrolitter.setSelection(false);
+			radMicrolitterInSediment.setSelection(true);
 			break;
 		default:
 			radPhysicochemical.setSelection(false);
 			radBiological.setSelection(false);
 			radFlowcytometry.setSelection(false);
 			radMicrolitter.setSelection(false);
+			radMicrolitterInSediment.setSelection(false);
 			break;
 		}
 	}
@@ -1434,6 +1452,10 @@ public class EditFileForm extends EditForm
 
 	public Button getRadMicrolitter() {
 		return radMicrolitter;
+	}
+
+	public Button getRadMicrolitterInSediment() {
+		return radMicrolitterInSediment;
 	}
 
 }
