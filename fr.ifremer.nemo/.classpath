@@ -23,7 +23,7 @@
 	<classpathentry exported="true" kind="lib" path="lib/javax.persistence_2.1.0.v201304241213.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/SoftwareVersionApi-1.0.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
-	<classpathentry kind="lib" path="lib/octopus-1.7.1.jar"/>
+	<classpathentry kind="lib" path="lib/octopus-1.8.0.jar"/>
 	<classpathentry kind="lib" path="lib/ws_client-1.jar"/>
 	<classpathentry kind="lib" path="lib/ws_interfaces-1.jar"/>
 	<classpathentry kind="lib" path="lib/commons-codec-1.10.jar"/>
