@@ -1,0 +1,47 @@
+<project>
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>fr.ifremer.nemo</groupId>
+		<artifactId>ws</artifactId>
+		<version>1</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+
+	<artifactId>ws_nautilus</artifactId>
+	<packaging>war</packaging>
+
+	<description>NAUTILUS webservice</description>
+
+	<build>
+		<finalName>nautilus</finalName>
+
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>3.3.1</version>
+			</plugin>
+		</plugins>
+
+
+	</build>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>fr.ifremer.nemo</groupId>
+			<artifactId>ws_common</artifactId>
+			<version>${project.parent.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.1.0</version>
+			<scope>provided</scope>
+		</dependency>
+
+	</dependencies>
+
+</project>

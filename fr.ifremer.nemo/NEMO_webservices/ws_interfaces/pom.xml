@@ -1,0 +1,15 @@
+<project>
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>fr.ifremer.nemo</groupId>
+        <artifactId>ws</artifactId>
+        <version>1</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <artifactId>ws_interfaces</artifactId>
+    <packaging>jar</packaging>
+
+    <description>Definition of services and data implemented by ws_nautilus and ws_nemo</description>
+</project>
