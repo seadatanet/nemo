@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<processing>
+  <logfiledir>$INSTALL_PATH</logfiledir>
+  <job name="Pre install">   
+    <executeclass name="fr.ifremer.nemo.delete.DeleteOlderInstallation">
+    	<arg>-l</arg>
+    	<arg>$ISO3_LANG</arg>
+    	<arg>-i</arg>
+        <arg>$INSTALL_PATH</arg> 
+    </executeclass>
+  </job>
+  <onFail previous="true" next="false" />
+  <onSuccess previous="false" next="true" />
+</processing>

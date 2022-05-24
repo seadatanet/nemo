@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="iso-8859-1" standalone="yes" ?>
+
+
+
+
+
+
+<installation version="1.0">
+
+    <info>
+        <appname>NEMO</appname>
+        <appversion>@release.version@</appversion>
+        <authors>
+            <author name="IFREMER" email="sismer@ifremer.fr"/>
+        </authors>
+        <url>https://www.seadatanet.org/Software/NEMO</url>
+        <url>http://www.ifremer.fr/</url>
+        <javaversion>1.8</javaversion>
+    </info>
+
+    <guiprefs width="640" height="480" resizable="no"/>
+
+    <locale>
+        <langpack iso3="eng"/>
+        <langpack iso3="fra"/>
+    </locale>
+    
+           
+    <resources>
+        <res src="ressources/Licence.txt" id="LicencePanel.licence" />
+        <res src="ressources/Licence_uk.txt" id="LicencePanel.licence_eng" />
+        <res src="ressources/Readme_fr_ISO8859.txt" id="InfoPanel.info" />
+        <res src="ressources/Readme_uk.txt" id="InfoPanel.info_eng" />
+        <res src="ressources/splash.bmp" id="Installer.image" />
+        <res src="ressources/shortcutSpec.xml" id="shortcutSpec.xml" />
+        <res src="ressources/processPanelSpec.xml" id="ProcessPanel.Spec.xml" />
+    </resources>
+
+	<!-- add jar to installeur -->
+    <jar src="ressources/deleteDirectory.jar" stage="install"/>
+	<jar src="ressources/org.apache.common.cli_1.2.0.jar" stage="install"/>
+
+	<variables>
+		<variable name="UserPathPanelVariable" value="toto"/>
+		<variable name="UserPathPanelDependsName" value="test userpath"/>
+	</variables>
+	
+    <panels>
+        <panel classname="HelloPanel" id="hellopanel" />
+        <panel classname="InfoPanel" id="infopanel" />
+        <panel classname="LicencePanel" id="licencepanel" />
+     	<panel classname="TargetPanel" id="targetpanel" />
+        <panel classname="SummaryPanel" id="summarypanel"/>
+        <panel classname="ProcessPanel" id="processpanel"/>
+        <panel classname="InstallPanel" id="installpanel" />
+        <panel classname="ShortcutPanel" id="shortcutpanel" />
+        <panel classname="FinishPanel" id="finishpanel" />
+    </panels>
+    
+   
+	
+    <packs>
+        <pack name="Base" required="yes">
+            <description>Les fichiers de base</description>
+            
+            <file src="ressources/Readme_fr_ISO8859.txt" targetdir="$INSTALL_PATH" override="true"/>
+            <file src="ressources/Licence.txt" targetdir="$INSTALL_PATH" override="true"/>
+            <file src="ressources/Readme_uk.txt" targetdir="$INSTALL_PATH" override="true"/>
+            <file src="ressources/Licence_uk.txt" targetdir="$INSTALL_PATH" override="true"/>
+            <file src="ressources/nemo_batch.ini" targetdir="$INSTALL_PATH" override="true"/>
+            
+            <!--  RESSOURCES: -->
+            <!-- 1/ on ecrase tous les fichiers SAUF NemoConfiguration et userParametersLabels qui contiennent les donnees utilisateur (preferences)
+            defaultexcludes permet d'exclure les repertoires svn-->
+            <fileset dir="ressources/resources" targetdir="$INSTALL_PATH/resources" defaultexcludes="yes" override="true">
+            	<exclude name="NemoConfiguration.xml" />
+              	<exclude name="userParametersLabels.xml" />
+              	<exclude name="userParametersStandardNames.xml" />
+              	<exclude name="userParametersNetCDFLongNames.xml" />
+            </fileset>
+            
+            
+            <!-- 2/ on ecrase les fichiers de preferences SEULEMENT si l'utilisateur le confirme ("asktrue") -->
+            <singlefile src="ressources/resources/NemoConfiguration.xml" target="$INSTALL_PATH/resources/NemoConfiguration.xml" override="asktrue"/>
+            <singlefile src="ressources/resources/userParametersLabels.xml" target="$INSTALL_PATH/resources/userParametersLabels.xml" override="asktrue" />
+            <singlefile src="ressources/resources/userParametersStandardNames.xml" target="$INSTALL_PATH/resources/userParametersStandardNames.xml" override="asktrue" />
+            <singlefile src="ressources/resources/userParametersNetCDFLongNames.xml" target="$INSTALL_PATH/resources/userParametersNetCDFLongNames.xml" override="asktrue" />
+            <singlefile src="ressources/nemo.ini" target="$INSTALL_PATH/nemo.ini" override="asktrue" />
+            
+
+            <!-- specificites Windows -->
+            <file src="ressources/launcher_uninstaller.bat" targetdir="$INSTALL_PATH\Uninstaller" override="true">
+                  <os family="windows"/>
+            </file>
+            <file src="ressources/nemo.ico" targetdir="$INSTALL_PATH" override="true">
+                  <os family="windows"/>
+            </file>
+            <file override="true" src="ressources/nemo_suppr.ico" targetdir="$INSTALL_PATH">
+                  <os family="windows"/>
+            </file>
+            <file src="@{product_win32_win32_dir}/nemo.exe" targetdir="$INSTALL_PATH" override="true">
+                  <os family="windows"/>
+            </file>
+            <file src="@{product_win32_win32_dir}/nemo_batch.exe" targetdir="$INSTALL_PATH" override="true">
+                  <os family="windows"/>
+            </file>
+             <!--remove plugins and configuration directory-->
+            <delete dir="$INSTALL_PATH/plugins" quiet="true" includeemptydirs="true"/>
+            <delete dir="$INSTALL_PATH/configuration" quiet="true" includeemptydirs="true"/>
+            
+            <file src="@{product_win32_win32_dir}/configuration" targetdir="$INSTALL_PATH" override="true">
+                  <os family="windows"/>
+            </file>
+            <file src="@{product_win32_win32_dir}/plugins" targetdir="$INSTALL_PATH" override="true">
+                  <os family="windows"/>
+            </file>
+
+        </pack>
+    </packs>
+
+    <!-- pour les shortcut sous Windows -->
+    <native type="izpack" name="ShellLink.dll">
+              <os family="windows"/>
+    </native>
+
+</installation>
