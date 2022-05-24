@@ -1,0 +1,349 @@
+locationID,decimalLatitude,decimalLongitude,eventDate,minimumDepthInMeters,maximumDepthInMeters,measurementType,occurrenceStatus,scientificName,scientificNameID,lifeStage,measurementValue,measurementUnit
+A,45.6111917,13.7447028,2015-03-20,17,17,Abundance per unit volume of the water body,absent,Podon intermedius,urn:lsid:marinespecies.org:taxname:106276,,8,Cells per litre
+A,45.6111917,13.7447028,2015-03-20,17,17,Abundance per unit volume of the water body,absent,Acartia,urn:lsid:marinespecies.org:taxname:104108,copepodites,305,Cells per litre
+A,45.6111917,13.7447028,2015-03-20,17,17,Abundance per unit volume of the water body,absent,Acartia (Acartiura) clausi,urn:lsid:marinespecies.org:taxname:149755,,328,Cells per litre
+A,45.6111917,13.7447028,2015-03-20,17,17,Abundance per unit volume of the water body,absent,Anomalocera patersoni,urn:lsid:marinespecies.org:taxname:104722,,0,Cells per litre
+A,45.6111917,13.7447028,2015-03-20,17,17,Abundance per unit volume of the water body,absent,Calanus helgolandicus,urn:lsid:marinespecies.org:taxname:104466,,136,Cells per litre
+A,45.6111917,13.7447028,2015-03-20,17,17,Abundance per unit volume of the water body,absent,Calocalanus spp,urn:lsid:marinespecies.org:taxname:104193,,11,Cells per litre
+A,45.6111917,13.7447028,2015-03-20,17,17,Abundance per unit volume of the water body,absent,Calocalanus styliremis,urn:lsid:marinespecies.org:taxname:104673,,0,Cells per litre
+A,45.6111917,13.7447028,2015-03-20,17,17,Abundance per unit volume of the water body,absent,Centropages,urn:lsid:marinespecies.org:taxname:104159,copepodites,151,Cells per litre
+A,45.6111917,13.7447028,2015-03-20,17,17,Abundance per unit volume of the water body,absent,Centropages typicus,urn:lsid:marinespecies.org:taxname:104499,,196,Cells per litre
+A,45.6111917,13.7447028,2015-03-20,17,17,Abundance per unit volume of the water body,absent,Clausocalanus arcuicornis,urn:lsid:marinespecies.org:taxname:104502,,0,Cells per litre
+A,45.6111917,13.7447028,2015-03-20,17,17,Abundance per unit volume of the water body,absent,Clausocalanus jobei,urn:lsid:marinespecies.org:taxname:104504,,60,Cells per litre
+A,45.6111917,13.7447028,2015-03-20,17,17,Abundance per unit volume of the water body,absent,Clausocalanus,urn:lsid:marinespecies.org:taxname:104161,copepodites,305,Cells per litre
+A,45.6111917,13.7447028,2015-03-20,17,17,Abundance per unit volume of the water body,absent,Clausocalanus spp,urn:lsid:marinespecies.org:taxname:104161,,0,Cells per litre
+A,45.6111917,13.7447028,2015-03-20,17,17,Abundance per unit volume of the water body,absent,Ctenocalanus vanus,urn:lsid:marinespecies.org:taxname:104510,,553,Cells per litre
+A,45.6111917,13.7447028,2015-03-20,17,17,Abundance per unit volume of the water body,absent,Diaixis pygmaea,urn:lsid:marinespecies.org:taxname:104522,,8,Cells per litre
+A,45.6111917,13.7447028,2015-03-20,17,17,Abundance per unit volume of the water body,absent,Isias clavipes,urn:lsid:marinespecies.org:taxname:104501,,4,Cells per litre
+A,45.6111917,13.7447028,2015-03-20,17,17,Abundance per unit volume of the water body,absent,Nannocalanus minor,urn:lsid:marinespecies.org:taxname:104469,,0,Cells per litre
+A,45.6111917,13.7447028,2015-03-20,17,17,Abundance per unit volume of the water body,absent,Paracalanus,urn:lsid:marinespecies.org:taxname:104196,copepodites,2135,Cells per litre
+A,45.6111917,13.7447028,2015-03-20,17,17,Abundance per unit volume of the water body,absent,Paracalanus denudatus,urn:lsid:marinespecies.org:taxname:104682,,365,Cells per litre
+A,45.6111917,13.7447028,2015-03-20,17,17,Abundance per unit volume of the water body,absent,Paracalanus nanus,urn:lsid:marinespecies.org:taxname:104684,,0,Cells per litre
+A,45.6111917,13.7447028,2015-03-20,17,17,Abundance per unit volume of the water body,absent,Paracalanus parvus,urn:lsid:marinespecies.org:taxname:104685,,832,Cells per litre
+A,45.6111917,13.7447028,2015-03-20,17,17,Abundance per unit volume of the water body,absent,Pontella spp,urn:lsid:marinespecies.org:taxname:104209,,0,Cells per litre
+A,45.6111917,13.7447028,2015-03-20,17,17,Abundance per unit volume of the water body,absent,Temora longicornis,urn:lsid:marinespecies.org:taxname:104878,,132,Cells per litre
+A,45.6111917,13.7447028,2015-03-20,17,17,Abundance per unit volume of the water body,absent,Temora stylifera,urn:lsid:marinespecies.org:taxname:104879,,0,Cells per litre
+A,45.6111917,13.7447028,2015-03-20,17,17,Abundance per unit volume of the water body,absent,Monothula subtilis,urn:lsid:marinespecies.org:taxname:237984,,0,Cells per litre
+A,45.6111917,13.7447028,2015-03-20,17,17,Abundance per unit volume of the water body,absent,Oithona,urn:lsid:marinespecies.org:taxname:106485,copepodites,1318,Cells per litre
+A,45.6111917,13.7447028,2015-03-20,17,17,Abundance per unit volume of the water body,absent,Oithona nana,urn:lsid:marinespecies.org:taxname:106651,,19,Cells per litre
+A,45.6111917,13.7447028,2015-03-20,17,17,Abundance per unit volume of the water body,absent,Oithona plumifera,urn:lsid:marinespecies.org:taxname:106652,,26,Cells per litre
+A,45.6111917,13.7447028,2015-03-20,17,17,Abundance per unit volume of the water body,absent,Oithona setigera,urn:lsid:marinespecies.org:taxname:106655,,19,Cells per litre
+A,45.6111917,13.7447028,2015-03-20,17,17,Abundance per unit volume of the water body,absent,Oithona similis,urn:lsid:marinespecies.org:taxname:106656,,636,Cells per litre
+A,45.6111917,13.7447028,2015-03-20,17,17,Abundance per unit volume of the water body,absent,Corycaeidae,urn:lsid:marinespecies.org:taxname:128569,,49,Cells per litre
+A,45.6111917,13.7447028,2015-03-20,17,17,Abundance per unit volume of the water body,absent,Oncaea curta,urn:lsid:marinespecies.org:taxname:128929,,0,Cells per litre
+A,45.6111917,13.7447028,2015-03-20,17,17,Abundance per unit volume of the water body,absent,Oncaea media,urn:lsid:marinespecies.org:taxname:128938,,0,Cells per litre
+A,45.6111917,13.7447028,2015-03-20,17,17,Abundance per unit volume of the water body,absent,Oncaea,urn:lsid:marinespecies.org:taxname:128690,,105,Cells per litre
+A,45.6111917,13.7447028,2015-03-20,17,17,Abundance per unit volume of the water body,absent,Clytemnestra,urn:lsid:marinespecies.org:taxname:115273,,0,Cells per litre
+A,45.6111917,13.7447028,2015-03-20,17,17,Abundance per unit volume of the water body,absent,Euterpina acutifrons,urn:lsid:marinespecies.org:taxname:116162,,151,Cells per litre
+A,45.6111917,13.7447028,2015-03-20,17,17,Abundance per unit volume of the water body,absent,Harpacticoida,urn:lsid:marinespecies.org:taxname:1102,,0,Cells per litre
+A,45.6111917,13.7447028,2015-03-20,17,17,Abundance per unit volume of the water body,absent,Copepoda,urn:lsid:marinespecies.org:taxname:1080,nauplii,0,Cells per litre
+A,45.6111917,13.7447028,2015-03-20,17,17,Abundance per unit volume of the water body,absent,Anthoathecata,urn:lsid:marinespecies.org:taxname:13551,,8,Cells per litre
+A,45.6111917,13.7447028,2015-03-20,17,17,Abundance per unit volume of the water body,absent,Leptothecata,urn:lsid:marinespecies.org:taxname:13552,,0,Cells per litre
+A,45.6111917,13.7447028,2015-03-20,17,17,Abundance per unit volume of the water body,absent,Obelia spp,urn:lsid:marinespecies.org:taxname:117034,,4,Cells per litre
+A,45.6111917,13.7447028,2015-03-20,17,17,Abundance per unit volume of the water body,absent,Solmaris spp,urn:lsid:marinespecies.org:taxname:117239,,4,Cells per litre
+A,45.6111917,13.7447028,2015-03-20,17,17,Abundance per unit volume of the water body,absent,Siphonophora,urn:lsid:marinespecies.org:taxname:892593,,8,Cells per litre
+A,45.6111917,13.7447028,2015-03-20,17,17,Abundance per unit volume of the water body,absent,Ctenophora,urn:lsid:marinespecies.org:taxname:1248,,4,Cells per litre
+A,45.6111917,13.7447028,2015-03-20,17,17,Abundance per unit volume of the water body,absent,Nemertea,urn:lsid:marinespecies.org:taxname:152391,larvae,11,Cells per litre
+A,45.6111917,13.7447028,2015-03-20,17,17,Abundance per unit volume of the water body,absent,Gastropoda,urn:lsid:marinespecies.org:taxname:101,larvae,41,Cells per litre
+A,45.6111917,13.7447028,2015-03-20,17,17,Abundance per unit volume of the water body,absent,Bivalvia,urn:lsid:marinespecies.org:taxname:105,larvae,4,Cells per litre
+A,45.6111917,13.7447028,2015-03-20,17,17,Abundance per unit volume of the water body,absent,Polychaeta,urn:lsid:marinespecies.org:taxname:883,larvae,8,Cells per litre
+A,45.6111917,13.7447028,2015-03-20,17,17,Abundance per unit volume of the water body,absent,Polygordius,urn:lsid:marinespecies.org:taxname:129472,larvae,30,Cells per litre
+A,45.6111917,13.7447028,2015-03-20,17,17,Abundance per unit volume of the water body,absent,Ostracoda,urn:lsid:marinespecies.org:taxname:1078,,0,Cells per litre
+A,45.6111917,13.7447028,2015-03-20,17,17,Abundance per unit volume of the water body,absent,Brachyura,urn:lsid:marinespecies.org:taxname:106673,zoeae,8,Cells per litre
+A,45.6111917,13.7447028,2015-03-20,17,17,Abundance per unit volume of the water body,absent,Decapoda,urn:lsid:marinespecies.org:taxname:1130,larvae,4,Cells per litre
+A,45.6111917,13.7447028,2015-03-20,17,17,Abundance per unit volume of the water body,absent,Sagitta spp,urn:lsid:marinespecies.org:taxname:105410,,117,Cells per litre
+A,45.6111917,13.7447028,2015-03-20,17,17,Abundance per unit volume of the water body,absent,Echinodermata,urn:lsid:marinespecies.org:taxname:1806,larvae,49,Cells per litre
+A,45.6111917,13.7447028,2015-03-20,17,17,Abundance per unit volume of the water body,absent,Echinodermata,urn:lsid:marinespecies.org:taxname:1806,pluteus larvae,15,Cells per litre
+A,45.6111917,13.7447028,2015-03-20,17,17,Abundance per unit volume of the water body,absent,Oikopleura spp,urn:lsid:marinespecies.org:taxname:103367,,410,Cells per litre
+A,45.6111917,13.7447028,2015-03-20,17,17,Abundance per unit volume of the water body,absent,Teleostei,urn:lsid:marinespecies.org:taxname:293496,egg,0,Cells per litre
+A,45.6111917,13.7447028,2015-03-20,17,17,Abundance per unit volume of the water body,absent,Teleostei,urn:lsid:marinespecies.org:taxname:293496,larvae,0,Cells per litre
+B,45.6140222,13.7510389,2015-03-20,15,15,Abundance per unit volume of the water body,present,Podon intermedius,urn:lsid:marinespecies.org:taxname:106276,,4,Cells per litre
+B,45.6140222,13.7510389,2015-03-20,15,15,Abundance per unit volume of the water body,present,Acartia,urn:lsid:marinespecies.org:taxname:104108,copepodites,60,Cells per litre
+B,45.6140222,13.7510389,2015-03-20,15,15,Abundance per unit volume of the water body,present,Acartia (Acartiura) clausi,urn:lsid:marinespecies.org:taxname:149755,,92,Cells per litre
+B,45.6140222,13.7510389,2015-03-20,15,15,Abundance per unit volume of the water body,absent,Anomalocera patersoni,urn:lsid:marinespecies.org:taxname:104722,,0,Cells per litre
+B,45.6140222,13.7510389,2015-03-20,15,15,Abundance per unit volume of the water body,present,Calanus helgolandicus,urn:lsid:marinespecies.org:taxname:104466,,32,Cells per litre
+B,45.6140222,13.7510389,2015-03-20,15,15,Abundance per unit volume of the water body,present,Calocalanus spp,urn:lsid:marinespecies.org:taxname:104193,,2,Cells per litre
+B,45.6140222,13.7510389,2015-03-20,15,15,Abundance per unit volume of the water body,absent,Calocalanus styliremis,urn:lsid:marinespecies.org:taxname:104673,,0,Cells per litre
+B,45.6140222,13.7510389,2015-03-20,15,15,Abundance per unit volume of the water body,present,Centropages,urn:lsid:marinespecies.org:taxname:104159,copepodites,23,Cells per litre
+B,45.6140222,13.7510389,2015-03-20,15,15,Abundance per unit volume of the water body,present,Centropages typicus,urn:lsid:marinespecies.org:taxname:104499,,34,Cells per litre
+B,45.6140222,13.7510389,2015-03-20,15,15,Abundance per unit volume of the water body,present,Clausocalanus arcuicornis,urn:lsid:marinespecies.org:taxname:104502,,11,Cells per litre
+B,45.6140222,13.7510389,2015-03-20,15,15,Abundance per unit volume of the water body,present,Clausocalanus jobei,urn:lsid:marinespecies.org:taxname:104504,,17,Cells per litre
+B,45.6140222,13.7510389,2015-03-20,15,15,Abundance per unit volume of the water body,present,Clausocalanus,urn:lsid:marinespecies.org:taxname:104161,copepodites,51,Cells per litre
+B,45.6140222,13.7510389,2015-03-20,15,15,Abundance per unit volume of the water body,absent,Clausocalanus spp,urn:lsid:marinespecies.org:taxname:104161,,0,Cells per litre
+B,45.6140222,13.7510389,2015-03-20,15,15,Abundance per unit volume of the water body,present,Ctenocalanus vanus,urn:lsid:marinespecies.org:taxname:104510,,205,Cells per litre
+B,45.6140222,13.7510389,2015-03-20,15,15,Abundance per unit volume of the water body,present,Diaixis pygmaea,urn:lsid:marinespecies.org:taxname:104522,,4,Cells per litre
+B,45.6140222,13.7510389,2015-03-20,15,15,Abundance per unit volume of the water body,absent,Isias clavipes,urn:lsid:marinespecies.org:taxname:104501,,0,Cells per litre
+B,45.6140222,13.7510389,2015-03-20,15,15,Abundance per unit volume of the water body,absent,Nannocalanus minor,urn:lsid:marinespecies.org:taxname:104469,,0,Cells per litre
+B,45.6140222,13.7510389,2015-03-20,15,15,Abundance per unit volume of the water body,present,Paracalanus,urn:lsid:marinespecies.org:taxname:104196,copepodites,862,Cells per litre
+B,45.6140222,13.7510389,2015-03-20,15,15,Abundance per unit volume of the water body,present,Paracalanus denudatus,urn:lsid:marinespecies.org:taxname:104682,,203,Cells per litre
+B,45.6140222,13.7510389,2015-03-20,15,15,Abundance per unit volume of the water body,absent,Paracalanus nanus,urn:lsid:marinespecies.org:taxname:104684,,0,Cells per litre
+B,45.6140222,13.7510389,2015-03-20,15,15,Abundance per unit volume of the water body,present,Paracalanus parvus,urn:lsid:marinespecies.org:taxname:104685,,407,Cells per litre
+B,45.6140222,13.7510389,2015-03-20,15,15,Abundance per unit volume of the water body,absent,Pontella spp,urn:lsid:marinespecies.org:taxname:104209,,0,Cells per litre
+B,45.6140222,13.7510389,2015-03-20,15,15,Abundance per unit volume of the water body,present,Temora longicornis,urn:lsid:marinespecies.org:taxname:104878,,47,Cells per litre
+B,45.6140222,13.7510389,2015-03-20,15,15,Abundance per unit volume of the water body,present,Temora stylifera,urn:lsid:marinespecies.org:taxname:104879,,2,Cells per litre
+B,45.6140222,13.7510389,2015-03-20,15,15,Abundance per unit volume of the water body,absent,Monothula subtilis,urn:lsid:marinespecies.org:taxname:237984,,0,Cells per litre
+B,45.6140222,13.7510389,2015-03-20,15,15,Abundance per unit volume of the water body,present,Oithona,urn:lsid:marinespecies.org:taxname:106485,copepodites,678,Cells per litre
+B,45.6140222,13.7510389,2015-03-20,15,15,Abundance per unit volume of the water body,present,Oithona nana,urn:lsid:marinespecies.org:taxname:106651,,13,Cells per litre
+B,45.6140222,13.7510389,2015-03-20,15,15,Abundance per unit volume of the water body,present,Oithona plumifera,urn:lsid:marinespecies.org:taxname:106652,,11,Cells per litre
+B,45.6140222,13.7510389,2015-03-20,15,15,Abundance per unit volume of the water body,present,Oithona setigera,urn:lsid:marinespecies.org:taxname:106655,,6,Cells per litre
+B,45.6140222,13.7510389,2015-03-20,15,15,Abundance per unit volume of the water body,present,Oithona similis,urn:lsid:marinespecies.org:taxname:106656,,324,Cells per litre
+B,45.6140222,13.7510389,2015-03-20,15,15,Abundance per unit volume of the water body,present,Corycaeidae,urn:lsid:marinespecies.org:taxname:128569,,21,Cells per litre
+B,45.6140222,13.7510389,2015-03-20,15,15,Abundance per unit volume of the water body,absent,Oncaea curta,urn:lsid:marinespecies.org:taxname:128929,,0,Cells per litre
+B,45.6140222,13.7510389,2015-03-20,15,15,Abundance per unit volume of the water body,absent,Oncaea media,urn:lsid:marinespecies.org:taxname:128938,,0,Cells per litre
+B,45.6140222,13.7510389,2015-03-20,15,15,Abundance per unit volume of the water body,present,Oncaea,urn:lsid:marinespecies.org:taxname:128690,,41,Cells per litre
+B,45.6140222,13.7510389,2015-03-20,15,15,Abundance per unit volume of the water body,absent,Clytemnestra,urn:lsid:marinespecies.org:taxname:115273,,0,Cells per litre
+B,45.6140222,13.7510389,2015-03-20,15,15,Abundance per unit volume of the water body,present,Euterpina acutifrons,urn:lsid:marinespecies.org:taxname:116162,,60,Cells per litre
+B,45.6140222,13.7510389,2015-03-20,15,15,Abundance per unit volume of the water body,present,Harpacticoida,urn:lsid:marinespecies.org:taxname:1102,,6,Cells per litre
+B,45.6140222,13.7510389,2015-03-20,15,15,Abundance per unit volume of the water body,present,Copepoda,urn:lsid:marinespecies.org:taxname:1080,nauplii,21,Cells per litre
+B,45.6140222,13.7510389,2015-03-20,15,15,Abundance per unit volume of the water body,present,Anthoathecata,urn:lsid:marinespecies.org:taxname:13551,,2,Cells per litre
+B,45.6140222,13.7510389,2015-03-20,15,15,Abundance per unit volume of the water body,present,Leptothecata,urn:lsid:marinespecies.org:taxname:13552,,2,Cells per litre
+B,45.6140222,13.7510389,2015-03-20,15,15,Abundance per unit volume of the water body,absent,Obelia spp,urn:lsid:marinespecies.org:taxname:117034,,0,Cells per litre
+B,45.6140222,13.7510389,2015-03-20,15,15,Abundance per unit volume of the water body,absent,Solmaris spp,urn:lsid:marinespecies.org:taxname:117239,,0,Cells per litre
+B,45.6140222,13.7510389,2015-03-20,15,15,Abundance per unit volume of the water body,present,Siphonophora,urn:lsid:marinespecies.org:taxname:892593,,6,Cells per litre
+B,45.6140222,13.7510389,2015-03-20,15,15,Abundance per unit volume of the water body,present,Ctenophora,urn:lsid:marinespecies.org:taxname:1248,,4,Cells per litre
+B,45.6140222,13.7510389,2015-03-20,15,15,Abundance per unit volume of the water body,absent,Nemertea,urn:lsid:marinespecies.org:taxname:152391,larvae,0,Cells per litre
+B,45.6140222,13.7510389,2015-03-20,15,15,Abundance per unit volume of the water body,present,Gastropoda,urn:lsid:marinespecies.org:taxname:101,larvae,47,Cells per litre
+B,45.6140222,13.7510389,2015-03-20,15,15,Abundance per unit volume of the water body,present,Bivalvia,urn:lsid:marinespecies.org:taxname:105,larvae,23,Cells per litre
+B,45.6140222,13.7510389,2015-03-20,15,15,Abundance per unit volume of the water body,present,Polychaeta,urn:lsid:marinespecies.org:taxname:883,larvae,4,Cells per litre
+B,45.6140222,13.7510389,2015-03-20,15,15,Abundance per unit volume of the water body,present,Polygordius,urn:lsid:marinespecies.org:taxname:129472,larvae,6,Cells per litre
+B,45.6140222,13.7510389,2015-03-20,15,15,Abundance per unit volume of the water body,absent,Ostracoda,urn:lsid:marinespecies.org:taxname:1078,,0,Cells per litre
+B,45.6140222,13.7510389,2015-03-20,15,15,Abundance per unit volume of the water body,absent,Brachyura,urn:lsid:marinespecies.org:taxname:106673,zoeae,0,Cells per litre
+B,45.6140222,13.7510389,2015-03-20,15,15,Abundance per unit volume of the water body,absent,Decapoda,urn:lsid:marinespecies.org:taxname:1130,larvae,0,Cells per litre
+B,45.6140222,13.7510389,2015-03-20,15,15,Abundance per unit volume of the water body,present,Sagitta spp,urn:lsid:marinespecies.org:taxname:105410,,75,Cells per litre
+B,45.6140222,13.7510389,2015-03-20,15,15,Abundance per unit volume of the water body,present,Echinodermata,urn:lsid:marinespecies.org:taxname:1806,larvae,38,Cells per litre
+B,45.6140222,13.7510389,2015-03-20,15,15,Abundance per unit volume of the water body,present,Echinodermata,urn:lsid:marinespecies.org:taxname:1806,pluteus larvae,17,Cells per litre
+B,45.6140222,13.7510389,2015-03-20,15,15,Abundance per unit volume of the water body,present,Oikopleura spp,urn:lsid:marinespecies.org:taxname:103367,,183,Cells per litre
+B,45.6140222,13.7510389,2015-03-20,15,15,Abundance per unit volume of the water body,present,Teleostei,urn:lsid:marinespecies.org:taxname:293496,egg,2,Cells per litre
+B,45.6140222,13.7510389,2015-03-20,15,15,Abundance per unit volume of the water body,absent,Teleostei,urn:lsid:marinespecies.org:taxname:293496,larvae,0,Cells per litre
+C,45.6084611,13.7621222,2015-03-20,8,8,Abundance per unit volume of the water body,present,Podon intermedius,urn:lsid:marinespecies.org:taxname:106276,,1,Cells per litre
+C,45.6084611,13.7621222,2015-03-20,8,8,Abundance per unit volume of the water body,present,Acartia,urn:lsid:marinespecies.org:taxname:104108,copepodites,14,Cells per litre
+C,45.6084611,13.7621222,2015-03-20,8,8,Abundance per unit volume of the water body,present,Acartia (Acartiura) clausi,urn:lsid:marinespecies.org:taxname:149755,,25,Cells per litre
+C,45.6084611,13.7621222,2015-03-20,8,8,Abundance per unit volume of the water body,absent,Anomalocera patersoni,urn:lsid:marinespecies.org:taxname:104722,,0,Cells per litre
+C,45.6084611,13.7621222,2015-03-20,8,8,Abundance per unit volume of the water body,present,Calanus helgolandicus,urn:lsid:marinespecies.org:taxname:104466,,4,Cells per litre
+C,45.6084611,13.7621222,2015-03-20,8,8,Abundance per unit volume of the water body,absent,Calocalanus spp,urn:lsid:marinespecies.org:taxname:104193,,0,Cells per litre
+C,45.6084611,13.7621222,2015-03-20,8,8,Abundance per unit volume of the water body,absent,Calocalanus styliremis,urn:lsid:marinespecies.org:taxname:104673,,0,Cells per litre
+C,45.6084611,13.7621222,2015-03-20,8,8,Abundance per unit volume of the water body,present,Centropages,urn:lsid:marinespecies.org:taxname:104159,copepodites,2,Cells per litre
+C,45.6084611,13.7621222,2015-03-20,8,8,Abundance per unit volume of the water body,present,Centropages typicus,urn:lsid:marinespecies.org:taxname:104499,,6,Cells per litre
+C,45.6084611,13.7621222,2015-03-20,8,8,Abundance per unit volume of the water body,absent,Clausocalanus arcuicornis,urn:lsid:marinespecies.org:taxname:104502,,0,Cells per litre
+C,45.6084611,13.7621222,2015-03-20,8,8,Abundance per unit volume of the water body,present,Clausocalanus jobei,urn:lsid:marinespecies.org:taxname:104504,,4,Cells per litre
+C,45.6084611,13.7621222,2015-03-20,8,8,Abundance per unit volume of the water body,present,Clausocalanus,urn:lsid:marinespecies.org:taxname:104161,copepodites,12,Cells per litre
+C,45.6084611,13.7621222,2015-03-20,8,8,Abundance per unit volume of the water body,absent,Clausocalanus spp,urn:lsid:marinespecies.org:taxname:104161,,0,Cells per litre
+C,45.6084611,13.7621222,2015-03-20,8,8,Abundance per unit volume of the water body,present,Ctenocalanus vanus,urn:lsid:marinespecies.org:taxname:104510,,23,Cells per litre
+C,45.6084611,13.7621222,2015-03-20,8,8,Abundance per unit volume of the water body,present,Diaixis pygmaea,urn:lsid:marinespecies.org:taxname:104522,,1,Cells per litre
+C,45.6084611,13.7621222,2015-03-20,8,8,Abundance per unit volume of the water body,absent,Isias clavipes,urn:lsid:marinespecies.org:taxname:104501,,0,Cells per litre
+C,45.6084611,13.7621222,2015-03-20,8,8,Abundance per unit volume of the water body,absent,Nannocalanus minor,urn:lsid:marinespecies.org:taxname:104469,,0,Cells per litre
+C,45.6084611,13.7621222,2015-03-20,8,8,Abundance per unit volume of the water body,present,Paracalanus,urn:lsid:marinespecies.org:taxname:104196,copepodites,285,Cells per litre
+C,45.6084611,13.7621222,2015-03-20,8,8,Abundance per unit volume of the water body,present,Paracalanus denudatus,urn:lsid:marinespecies.org:taxname:104682,,25,Cells per litre
+C,45.6084611,13.7621222,2015-03-20,8,8,Abundance per unit volume of the water body,absent,Paracalanus nanus,urn:lsid:marinespecies.org:taxname:104684,,0,Cells per litre
+C,45.6084611,13.7621222,2015-03-20,8,8,Abundance per unit volume of the water body,present,Paracalanus parvus,urn:lsid:marinespecies.org:taxname:104685,,130,Cells per litre
+C,45.6084611,13.7621222,2015-03-20,8,8,Abundance per unit volume of the water body,present,Pontella spp,urn:lsid:marinespecies.org:taxname:104209,,1,Cells per litre
+C,45.6084611,13.7621222,2015-03-20,8,8,Abundance per unit volume of the water body,present,Temora longicornis,urn:lsid:marinespecies.org:taxname:104878,,6,Cells per litre
+C,45.6084611,13.7621222,2015-03-20,8,8,Abundance per unit volume of the water body,absent,Temora stylifera,urn:lsid:marinespecies.org:taxname:104879,,0,Cells per litre
+C,45.6084611,13.7621222,2015-03-20,8,8,Abundance per unit volume of the water body,absent,Monothula subtilis,urn:lsid:marinespecies.org:taxname:237984,,0,Cells per litre
+C,45.6084611,13.7621222,2015-03-20,8,8,Abundance per unit volume of the water body,present,Oithona,urn:lsid:marinespecies.org:taxname:106485,copepodites,245,Cells per litre
+C,45.6084611,13.7621222,2015-03-20,8,8,Abundance per unit volume of the water body,present,Oithona nana,urn:lsid:marinespecies.org:taxname:106651,,10,Cells per litre
+C,45.6084611,13.7621222,2015-03-20,8,8,Abundance per unit volume of the water body,present,Oithona plumifera,urn:lsid:marinespecies.org:taxname:106652,,4,Cells per litre
+C,45.6084611,13.7621222,2015-03-20,8,8,Abundance per unit volume of the water body,present,Oithona setigera,urn:lsid:marinespecies.org:taxname:106655,,1,Cells per litre
+C,45.6084611,13.7621222,2015-03-20,8,8,Abundance per unit volume of the water body,present,Oithona similis,urn:lsid:marinespecies.org:taxname:106656,,138,Cells per litre
+C,45.6084611,13.7621222,2015-03-20,8,8,Abundance per unit volume of the water body,present,Corycaeidae,urn:lsid:marinespecies.org:taxname:128569,,6,Cells per litre
+C,45.6084611,13.7621222,2015-03-20,8,8,Abundance per unit volume of the water body,absent,Oncaea curta,urn:lsid:marinespecies.org:taxname:128929,,0,Cells per litre
+C,45.6084611,13.7621222,2015-03-20,8,8,Abundance per unit volume of the water body,absent,Oncaea media,urn:lsid:marinespecies.org:taxname:128938,,0,Cells per litre
+C,45.6084611,13.7621222,2015-03-20,8,8,Abundance per unit volume of the water body,present,Oncaea,urn:lsid:marinespecies.org:taxname:128690,,6,Cells per litre
+C,45.6084611,13.7621222,2015-03-20,8,8,Abundance per unit volume of the water body,absent,Clytemnestra,urn:lsid:marinespecies.org:taxname:115273,,0,Cells per litre
+C,45.6084611,13.7621222,2015-03-20,8,8,Abundance per unit volume of the water body,present,Euterpina acutifrons,urn:lsid:marinespecies.org:taxname:116162,,28,Cells per litre
+C,45.6084611,13.7621222,2015-03-20,8,8,Abundance per unit volume of the water body,present,Harpacticoida,urn:lsid:marinespecies.org:taxname:1102,,1,Cells per litre
+C,45.6084611,13.7621222,2015-03-20,8,8,Abundance per unit volume of the water body,present,Copepoda,urn:lsid:marinespecies.org:taxname:1080,nauplii,7,Cells per litre
+C,45.6084611,13.7621222,2015-03-20,8,8,Abundance per unit volume of the water body,present,Anthoathecata,urn:lsid:marinespecies.org:taxname:13551,,2,Cells per litre
+C,45.6084611,13.7621222,2015-03-20,8,8,Abundance per unit volume of the water body,absent,Leptothecata,urn:lsid:marinespecies.org:taxname:13552,,0,Cells per litre
+C,45.6084611,13.7621222,2015-03-20,8,8,Abundance per unit volume of the water body,absent,Obelia spp,urn:lsid:marinespecies.org:taxname:117034,,0,Cells per litre
+C,45.6084611,13.7621222,2015-03-20,8,8,Abundance per unit volume of the water body,absent,Solmaris spp,urn:lsid:marinespecies.org:taxname:117239,,0,Cells per litre
+C,45.6084611,13.7621222,2015-03-20,8,8,Abundance per unit volume of the water body,present,Siphonophora,urn:lsid:marinespecies.org:taxname:892593,,1,Cells per litre
+C,45.6084611,13.7621222,2015-03-20,8,8,Abundance per unit volume of the water body,present,Ctenophora,urn:lsid:marinespecies.org:taxname:1248,,2,Cells per litre
+C,45.6084611,13.7621222,2015-03-20,8,8,Abundance per unit volume of the water body,absent,Nemertea,urn:lsid:marinespecies.org:taxname:152391,larvae,0,Cells per litre
+C,45.6084611,13.7621222,2015-03-20,8,8,Abundance per unit volume of the water body,present,Gastropoda,urn:lsid:marinespecies.org:taxname:101,larvae,13,Cells per litre
+C,45.6084611,13.7621222,2015-03-20,8,8,Abundance per unit volume of the water body,present,Bivalvia,urn:lsid:marinespecies.org:taxname:105,larvae,79,Cells per litre
+C,45.6084611,13.7621222,2015-03-20,8,8,Abundance per unit volume of the water body,present,Polychaeta,urn:lsid:marinespecies.org:taxname:883,larvae,4,Cells per litre
+C,45.6084611,13.7621222,2015-03-20,8,8,Abundance per unit volume of the water body,present,Polygordius,urn:lsid:marinespecies.org:taxname:129472,larvae,1,Cells per litre
+C,45.6084611,13.7621222,2015-03-20,8,8,Abundance per unit volume of the water body,absent,Ostracoda,urn:lsid:marinespecies.org:taxname:1078,,0,Cells per litre
+C,45.6084611,13.7621222,2015-03-20,8,8,Abundance per unit volume of the water body,absent,Brachyura,urn:lsid:marinespecies.org:taxname:106673,zoeae,0,Cells per litre
+C,45.6084611,13.7621222,2015-03-20,8,8,Abundance per unit volume of the water body,absent,Decapoda,urn:lsid:marinespecies.org:taxname:1130,larvae,0,Cells per litre
+C,45.6084611,13.7621222,2015-03-20,8,8,Abundance per unit volume of the water body,present,Sagitta spp,urn:lsid:marinespecies.org:taxname:105410,,14,Cells per litre
+C,45.6084611,13.7621222,2015-03-20,8,8,Abundance per unit volume of the water body,present,Echinodermata,urn:lsid:marinespecies.org:taxname:1806,larvae,13,Cells per litre
+C,45.6084611,13.7621222,2015-03-20,8,8,Abundance per unit volume of the water body,present,Echinodermata,urn:lsid:marinespecies.org:taxname:1806,pluteus larvae,7,Cells per litre
+C,45.6084611,13.7621222,2015-03-20,8,8,Abundance per unit volume of the water body,present,Oikopleura spp,urn:lsid:marinespecies.org:taxname:103367,,78,Cells per litre
+C,45.6084611,13.7621222,2015-03-20,8,8,Abundance per unit volume of the water body,absent,Teleostei,urn:lsid:marinespecies.org:taxname:293496,egg,0,Cells per litre
+C,45.6084611,13.7621222,2015-03-20,8,8,Abundance per unit volume of the water body,absent,Teleostei,urn:lsid:marinespecies.org:taxname:293496,larvae,0,Cells per litre
+F,45.7055556,13.71,2015-03-23,13.5,13.5,Abundance per unit volume of the water body,present,Podon intermedius,urn:lsid:marinespecies.org:taxname:106276,,9,Cells per litre
+F,45.7055556,13.71,2015-03-23,13.5,13.5,Abundance per unit volume of the water body,present,Acartia,urn:lsid:marinespecies.org:taxname:104108,copepodites,71,Cells per litre
+F,45.7055556,13.71,2015-03-23,13.5,13.5,Abundance per unit volume of the water body,present,Acartia (Acartiura) clausi,urn:lsid:marinespecies.org:taxname:149755,,171,Cells per litre
+F,45.7055556,13.71,2015-03-23,13.5,13.5,Abundance per unit volume of the water body,absent,Anomalocera patersoni,urn:lsid:marinespecies.org:taxname:104722,,0,Cells per litre
+F,45.7055556,13.71,2015-03-23,13.5,13.5,Abundance per unit volume of the water body,present,Calanus helgolandicus,urn:lsid:marinespecies.org:taxname:104466,,43,Cells per litre
+F,45.7055556,13.71,2015-03-23,13.5,13.5,Abundance per unit volume of the water body,absent,Calocalanus spp,urn:lsid:marinespecies.org:taxname:104193,,0,Cells per litre
+F,45.7055556,13.71,2015-03-23,13.5,13.5,Abundance per unit volume of the water body,present,Calocalanus styliremis,urn:lsid:marinespecies.org:taxname:104673,,7,Cells per litre
+F,45.7055556,13.71,2015-03-23,13.5,13.5,Abundance per unit volume of the water body,present,Centropages,urn:lsid:marinespecies.org:taxname:104159,copepodites,55,Cells per litre
+F,45.7055556,13.71,2015-03-23,13.5,13.5,Abundance per unit volume of the water body,present,Centropages typicus,urn:lsid:marinespecies.org:taxname:104499,,50,Cells per litre
+F,45.7055556,13.71,2015-03-23,13.5,13.5,Abundance per unit volume of the water body,absent,Clausocalanus arcuicornis,urn:lsid:marinespecies.org:taxname:104502,,0,Cells per litre
+F,45.7055556,13.71,2015-03-23,13.5,13.5,Abundance per unit volume of the water body,absent,Clausocalanus jobei,urn:lsid:marinespecies.org:taxname:104504,,0,Cells per litre
+F,45.7055556,13.71,2015-03-23,13.5,13.5,Abundance per unit volume of the water body,present,Clausocalanus,urn:lsid:marinespecies.org:taxname:104161,copepodites,12,Cells per litre
+F,45.7055556,13.71,2015-03-23,13.5,13.5,Abundance per unit volume of the water body,present,Clausocalanus spp,urn:lsid:marinespecies.org:taxname:104161,,2,Cells per litre
+F,45.7055556,13.71,2015-03-23,13.5,13.5,Abundance per unit volume of the water body,present,Ctenocalanus vanus,urn:lsid:marinespecies.org:taxname:104510,,261,Cells per litre
+F,45.7055556,13.71,2015-03-23,13.5,13.5,Abundance per unit volume of the water body,present,Diaixis pygmaea,urn:lsid:marinespecies.org:taxname:104522,,14,Cells per litre
+F,45.7055556,13.71,2015-03-23,13.5,13.5,Abundance per unit volume of the water body,absent,Isias clavipes,urn:lsid:marinespecies.org:taxname:104501,,0,Cells per litre
+F,45.7055556,13.71,2015-03-23,13.5,13.5,Abundance per unit volume of the water body,present,Nannocalanus minor,urn:lsid:marinespecies.org:taxname:104469,,2,Cells per litre
+F,45.7055556,13.71,2015-03-23,13.5,13.5,Abundance per unit volume of the water body,present,Paracalanus,urn:lsid:marinespecies.org:taxname:104196,copepodites,735,Cells per litre
+F,45.7055556,13.71,2015-03-23,13.5,13.5,Abundance per unit volume of the water body,present,Paracalanus denudatus,urn:lsid:marinespecies.org:taxname:104682,,69,Cells per litre
+F,45.7055556,13.71,2015-03-23,13.5,13.5,Abundance per unit volume of the water body,absent,Paracalanus nanus,urn:lsid:marinespecies.org:taxname:104684,,0,Cells per litre
+F,45.7055556,13.71,2015-03-23,13.5,13.5,Abundance per unit volume of the water body,present,Paracalanus parvus,urn:lsid:marinespecies.org:taxname:104685,,192,Cells per litre
+F,45.7055556,13.71,2015-03-23,13.5,13.5,Abundance per unit volume of the water body,absent,Pontella spp,urn:lsid:marinespecies.org:taxname:104209,,0,Cells per litre
+F,45.7055556,13.71,2015-03-23,13.5,13.5,Abundance per unit volume of the water body,present,Temora longicornis,urn:lsid:marinespecies.org:taxname:104878,,45,Cells per litre
+F,45.7055556,13.71,2015-03-23,13.5,13.5,Abundance per unit volume of the water body,absent,Temora stylifera,urn:lsid:marinespecies.org:taxname:104879,,0,Cells per litre
+F,45.7055556,13.71,2015-03-23,13.5,13.5,Abundance per unit volume of the water body,present,Monothula subtilis,urn:lsid:marinespecies.org:taxname:237984,,7,Cells per litre
+F,45.7055556,13.71,2015-03-23,13.5,13.5,Abundance per unit volume of the water body,present,Oithona,urn:lsid:marinespecies.org:taxname:106485,copepodites,768,Cells per litre
+F,45.7055556,13.71,2015-03-23,13.5,13.5,Abundance per unit volume of the water body,present,Oithona nana,urn:lsid:marinespecies.org:taxname:106651,,14,Cells per litre
+F,45.7055556,13.71,2015-03-23,13.5,13.5,Abundance per unit volume of the water body,present,Oithona plumifera,urn:lsid:marinespecies.org:taxname:106652,,14,Cells per litre
+F,45.7055556,13.71,2015-03-23,13.5,13.5,Abundance per unit volume of the water body,absent,Oithona setigera,urn:lsid:marinespecies.org:taxname:106655,,0,Cells per litre
+F,45.7055556,13.71,2015-03-23,13.5,13.5,Abundance per unit volume of the water body,present,Oithona similis,urn:lsid:marinespecies.org:taxname:106656,,467,Cells per litre
+F,45.7055556,13.71,2015-03-23,13.5,13.5,Abundance per unit volume of the water body,present,Corycaeidae,urn:lsid:marinespecies.org:taxname:128569,,24,Cells per litre
+F,45.7055556,13.71,2015-03-23,13.5,13.5,Abundance per unit volume of the water body,present,Oncaea curta,urn:lsid:marinespecies.org:taxname:128929,,386,Cells per litre
+F,45.7055556,13.71,2015-03-23,13.5,13.5,Abundance per unit volume of the water body,present,Oncaea media,urn:lsid:marinespecies.org:taxname:128938,,2,Cells per litre
+F,45.7055556,13.71,2015-03-23,13.5,13.5,Abundance per unit volume of the water body,present,Oncaea,urn:lsid:marinespecies.org:taxname:128690,,204,Cells per litre
+F,45.7055556,13.71,2015-03-23,13.5,13.5,Abundance per unit volume of the water body,absent,Clytemnestra,urn:lsid:marinespecies.org:taxname:115273,,0,Cells per litre
+F,45.7055556,13.71,2015-03-23,13.5,13.5,Abundance per unit volume of the water body,present,Euterpina acutifrons,urn:lsid:marinespecies.org:taxname:116162,,133,Cells per litre
+F,45.7055556,13.71,2015-03-23,13.5,13.5,Abundance per unit volume of the water body,absent,Harpacticoida,urn:lsid:marinespecies.org:taxname:1102,,0,Cells per litre
+F,45.7055556,13.71,2015-03-23,13.5,13.5,Abundance per unit volume of the water body,present,Copepoda,urn:lsid:marinespecies.org:taxname:1080,nauplii,9,Cells per litre
+F,45.7055556,13.71,2015-03-23,13.5,13.5,Abundance per unit volume of the water body,present,Anthoathecata,urn:lsid:marinespecies.org:taxname:13551,,5,Cells per litre
+F,45.7055556,13.71,2015-03-23,13.5,13.5,Abundance per unit volume of the water body,absent,Leptothecata,urn:lsid:marinespecies.org:taxname:13552,,0,Cells per litre
+F,45.7055556,13.71,2015-03-23,13.5,13.5,Abundance per unit volume of the water body,absent,Obelia spp,urn:lsid:marinespecies.org:taxname:117034,,0,Cells per litre
+F,45.7055556,13.71,2015-03-23,13.5,13.5,Abundance per unit volume of the water body,absent,Solmaris spp,urn:lsid:marinespecies.org:taxname:117239,,0,Cells per litre
+F,45.7055556,13.71,2015-03-23,13.5,13.5,Abundance per unit volume of the water body,present,Siphonophora,urn:lsid:marinespecies.org:taxname:892593,,2,Cells per litre
+F,45.7055556,13.71,2015-03-23,13.5,13.5,Abundance per unit volume of the water body,present,Ctenophora,urn:lsid:marinespecies.org:taxname:1248,,5,Cells per litre
+F,45.7055556,13.71,2015-03-23,13.5,13.5,Abundance per unit volume of the water body,present,Nemertea,urn:lsid:marinespecies.org:taxname:152391,larvae,7,Cells per litre
+F,45.7055556,13.71,2015-03-23,13.5,13.5,Abundance per unit volume of the water body,present,Gastropoda,urn:lsid:marinespecies.org:taxname:101,larvae,76,Cells per litre
+F,45.7055556,13.71,2015-03-23,13.5,13.5,Abundance per unit volume of the water body,present,Bivalvia,urn:lsid:marinespecies.org:taxname:105,larvae,24,Cells per litre
+F,45.7055556,13.71,2015-03-23,13.5,13.5,Abundance per unit volume of the water body,absent,Polychaeta,urn:lsid:marinespecies.org:taxname:883,larvae,0,Cells per litre
+F,45.7055556,13.71,2015-03-23,13.5,13.5,Abundance per unit volume of the water body,present,Polygordius,urn:lsid:marinespecies.org:taxname:129472,larvae,12,Cells per litre
+F,45.7055556,13.71,2015-03-23,13.5,13.5,Abundance per unit volume of the water body,present,Ostracoda,urn:lsid:marinespecies.org:taxname:1078,,5,Cells per litre
+F,45.7055556,13.71,2015-03-23,13.5,13.5,Abundance per unit volume of the water body,present,Brachyura,urn:lsid:marinespecies.org:taxname:106673,zoeae,2,Cells per litre
+F,45.7055556,13.71,2015-03-23,13.5,13.5,Abundance per unit volume of the water body,present,Decapoda,urn:lsid:marinespecies.org:taxname:1130,larvae,12,Cells per litre
+F,45.7055556,13.71,2015-03-23,13.5,13.5,Abundance per unit volume of the water body,present,Sagitta spp,urn:lsid:marinespecies.org:taxname:105410,,38,Cells per litre
+F,45.7055556,13.71,2015-03-23,13.5,13.5,Abundance per unit volume of the water body,present,Echinodermata,urn:lsid:marinespecies.org:taxname:1806,larvae,33,Cells per litre
+F,45.7055556,13.71,2015-03-23,13.5,13.5,Abundance per unit volume of the water body,present,Echinodermata,urn:lsid:marinespecies.org:taxname:1806,pluteus larvae,19,Cells per litre
+F,45.7055556,13.71,2015-03-23,13.5,13.5,Abundance per unit volume of the water body,absent,Oikopleura spp,urn:lsid:marinespecies.org:taxname:103367,,0,Cells per litre
+F,45.7055556,13.71,2015-03-23,13.5,13.5,Abundance per unit volume of the water body,absent,Teleostei,urn:lsid:marinespecies.org:taxname:293496,egg,0,Cells per litre
+F,45.7055556,13.71,2015-03-23,13.5,13.5,Abundance per unit volume of the water body,absent,Teleostei,urn:lsid:marinespecies.org:taxname:293496,larvae,0,Cells per litre
+D,45.6210722,13.7417806,2015-03-20,15.5,15.5,Abundance per unit volume of the water body,present,Podon intermedius,urn:lsid:marinespecies.org:taxname:106276,,17,Cells per litre
+D,45.6210722,13.7417806,2015-03-20,15.5,15.5,Abundance per unit volume of the water body,present,Acartia,urn:lsid:marinespecies.org:taxname:104108,copepodites,256,Cells per litre
+D,45.6210722,13.7417806,2015-03-20,15.5,15.5,Abundance per unit volume of the water body,present,Acartia (Acartiura) clausi,urn:lsid:marinespecies.org:taxname:149755,,124,Cells per litre
+D,45.6210722,13.7417806,2015-03-20,15.5,15.5,Abundance per unit volume of the water body,present,Anomalocera patersoni,urn:lsid:marinespecies.org:taxname:104722,,4,Cells per litre
+D,45.6210722,13.7417806,2015-03-20,15.5,15.5,Abundance per unit volume of the water body,present,Calanus helgolandicus,urn:lsid:marinespecies.org:taxname:104466,,66,Cells per litre
+D,45.6210722,13.7417806,2015-03-20,15.5,15.5,Abundance per unit volume of the water body,absent,Calocalanus spp,urn:lsid:marinespecies.org:taxname:104193,,0,Cells per litre
+D,45.6210722,13.7417806,2015-03-20,15.5,15.5,Abundance per unit volume of the water body,absent,Calocalanus styliremis,urn:lsid:marinespecies.org:taxname:104673,,0,Cells per litre
+D,45.6210722,13.7417806,2015-03-20,15.5,15.5,Abundance per unit volume of the water body,present,Centropages,urn:lsid:marinespecies.org:taxname:104159,copepodites,74,Cells per litre
+D,45.6210722,13.7417806,2015-03-20,15.5,15.5,Abundance per unit volume of the water body,present,Centropages typicus,urn:lsid:marinespecies.org:taxname:104499,,29,Cells per litre
+D,45.6210722,13.7417806,2015-03-20,15.5,15.5,Abundance per unit volume of the water body,absent,Clausocalanus arcuicornis,urn:lsid:marinespecies.org:taxname:104502,,0,Cells per litre
+D,45.6210722,13.7417806,2015-03-20,15.5,15.5,Abundance per unit volume of the water body,present,Clausocalanus jobei,urn:lsid:marinespecies.org:taxname:104504,,8,Cells per litre
+D,45.6210722,13.7417806,2015-03-20,15.5,15.5,Abundance per unit volume of the water body,present,Clausocalanus,urn:lsid:marinespecies.org:taxname:104161,copepodites,41,Cells per litre
+D,45.6210722,13.7417806,2015-03-20,15.5,15.5,Abundance per unit volume of the water body,absent,Clausocalanus spp,urn:lsid:marinespecies.org:taxname:104161,,0,Cells per litre
+D,45.6210722,13.7417806,2015-03-20,15.5,15.5,Abundance per unit volume of the water body,present,Ctenocalanus vanus,urn:lsid:marinespecies.org:taxname:104510,,99,Cells per litre
+D,45.6210722,13.7417806,2015-03-20,15.5,15.5,Abundance per unit volume of the water body,present,Diaixis pygmaea,urn:lsid:marinespecies.org:taxname:104522,,8,Cells per litre
+D,45.6210722,13.7417806,2015-03-20,15.5,15.5,Abundance per unit volume of the water body,absent,Isias clavipes,urn:lsid:marinespecies.org:taxname:104501,,0,Cells per litre
+D,45.6210722,13.7417806,2015-03-20,15.5,15.5,Abundance per unit volume of the water body,absent,Nannocalanus minor,urn:lsid:marinespecies.org:taxname:104469,,0,Cells per litre
+D,45.6210722,13.7417806,2015-03-20,15.5,15.5,Abundance per unit volume of the water body,present,Paracalanus,urn:lsid:marinespecies.org:taxname:104196,copepodites,1086,Cells per litre
+D,45.6210722,13.7417806,2015-03-20,15.5,15.5,Abundance per unit volume of the water body,present,Paracalanus denudatus,urn:lsid:marinespecies.org:taxname:104682,,153,Cells per litre
+D,45.6210722,13.7417806,2015-03-20,15.5,15.5,Abundance per unit volume of the water body,present,Paracalanus nanus,urn:lsid:marinespecies.org:taxname:104684,,37,Cells per litre
+D,45.6210722,13.7417806,2015-03-20,15.5,15.5,Abundance per unit volume of the water body,present,Paracalanus parvus,urn:lsid:marinespecies.org:taxname:104685,,334,Cells per litre
+D,45.6210722,13.7417806,2015-03-20,15.5,15.5,Abundance per unit volume of the water body,absent,Pontella spp,urn:lsid:marinespecies.org:taxname:104209,,0,Cells per litre
+D,45.6210722,13.7417806,2015-03-20,15.5,15.5,Abundance per unit volume of the water body,present,Temora longicornis,urn:lsid:marinespecies.org:taxname:104878,,45,Cells per litre
+D,45.6210722,13.7417806,2015-03-20,15.5,15.5,Abundance per unit volume of the water body,present,Temora stylifera,urn:lsid:marinespecies.org:taxname:104879,,4,Cells per litre
+D,45.6210722,13.7417806,2015-03-20,15.5,15.5,Abundance per unit volume of the water body,present,Monothula subtilis,urn:lsid:marinespecies.org:taxname:237984,,4,Cells per litre
+D,45.6210722,13.7417806,2015-03-20,15.5,15.5,Abundance per unit volume of the water body,present,Oithona,urn:lsid:marinespecies.org:taxname:106485,copepodites,1330,Cells per litre
+D,45.6210722,13.7417806,2015-03-20,15.5,15.5,Abundance per unit volume of the water body,present,Oithona nana,urn:lsid:marinespecies.org:taxname:106651,,29,Cells per litre
+D,45.6210722,13.7417806,2015-03-20,15.5,15.5,Abundance per unit volume of the water body,present,Oithona plumifera,urn:lsid:marinespecies.org:taxname:106652,,33,Cells per litre
+D,45.6210722,13.7417806,2015-03-20,15.5,15.5,Abundance per unit volume of the water body,present,Oithona setigera,urn:lsid:marinespecies.org:taxname:106655,,4,Cells per litre
+D,45.6210722,13.7417806,2015-03-20,15.5,15.5,Abundance per unit volume of the water body,present,Oithona similis,urn:lsid:marinespecies.org:taxname:106656,,273,Cells per litre
+D,45.6210722,13.7417806,2015-03-20,15.5,15.5,Abundance per unit volume of the water body,present,Corycaeidae,urn:lsid:marinespecies.org:taxname:128569,,21,Cells per litre
+D,45.6210722,13.7417806,2015-03-20,15.5,15.5,Abundance per unit volume of the water body,absent,Oncaea curta,urn:lsid:marinespecies.org:taxname:128929,,0,Cells per litre
+D,45.6210722,13.7417806,2015-03-20,15.5,15.5,Abundance per unit volume of the water body,absent,Oncaea media,urn:lsid:marinespecies.org:taxname:128938,,0,Cells per litre
+D,45.6210722,13.7417806,2015-03-20,15.5,15.5,Abundance per unit volume of the water body,present,Oncaea,urn:lsid:marinespecies.org:taxname:128690,,107,Cells per litre
+D,45.6210722,13.7417806,2015-03-20,15.5,15.5,Abundance per unit volume of the water body,present,Clytemnestra,urn:lsid:marinespecies.org:taxname:115273,,4,Cells per litre
+D,45.6210722,13.7417806,2015-03-20,15.5,15.5,Abundance per unit volume of the water body,present,Euterpina acutifrons,urn:lsid:marinespecies.org:taxname:116162,,91,Cells per litre
+D,45.6210722,13.7417806,2015-03-20,15.5,15.5,Abundance per unit volume of the water body,present,Harpacticoida,urn:lsid:marinespecies.org:taxname:1102,,4,Cells per litre
+D,45.6210722,13.7417806,2015-03-20,15.5,15.5,Abundance per unit volume of the water body,present,Copepoda,urn:lsid:marinespecies.org:taxname:1080,nauplii,37,Cells per litre
+D,45.6210722,13.7417806,2015-03-20,15.5,15.5,Abundance per unit volume of the water body,absent,Anthoathecata,urn:lsid:marinespecies.org:taxname:13551,,0,Cells per litre
+D,45.6210722,13.7417806,2015-03-20,15.5,15.5,Abundance per unit volume of the water body,absent,Leptothecata,urn:lsid:marinespecies.org:taxname:13552,,0,Cells per litre
+D,45.6210722,13.7417806,2015-03-20,15.5,15.5,Abundance per unit volume of the water body,present,Obelia spp,urn:lsid:marinespecies.org:taxname:117034,,4,Cells per litre
+D,45.6210722,13.7417806,2015-03-20,15.5,15.5,Abundance per unit volume of the water body,absent,Solmaris spp,urn:lsid:marinespecies.org:taxname:117239,,0,Cells per litre
+D,45.6210722,13.7417806,2015-03-20,15.5,15.5,Abundance per unit volume of the water body,present,Siphonophora,urn:lsid:marinespecies.org:taxname:892593,,8,Cells per litre
+D,45.6210722,13.7417806,2015-03-20,15.5,15.5,Abundance per unit volume of the water body,absent,Ctenophora,urn:lsid:marinespecies.org:taxname:1248,,0,Cells per litre
+D,45.6210722,13.7417806,2015-03-20,15.5,15.5,Abundance per unit volume of the water body,present,Nemertea,urn:lsid:marinespecies.org:taxname:152391,larvae,4,Cells per litre
+D,45.6210722,13.7417806,2015-03-20,15.5,15.5,Abundance per unit volume of the water body,present,Gastropoda,urn:lsid:marinespecies.org:taxname:101,larvae,99,Cells per litre
+D,45.6210722,13.7417806,2015-03-20,15.5,15.5,Abundance per unit volume of the water body,present,Bivalvia,urn:lsid:marinespecies.org:taxname:105,larvae,66,Cells per litre
+D,45.6210722,13.7417806,2015-03-20,15.5,15.5,Abundance per unit volume of the water body,present,Polychaeta,urn:lsid:marinespecies.org:taxname:883,larvae,8,Cells per litre
+D,45.6210722,13.7417806,2015-03-20,15.5,15.5,Abundance per unit volume of the water body,present,Polygordius,urn:lsid:marinespecies.org:taxname:129472,larvae,8,Cells per litre
+D,45.6210722,13.7417806,2015-03-20,15.5,15.5,Abundance per unit volume of the water body,present,Ostracoda,urn:lsid:marinespecies.org:taxname:1078,,4,Cells per litre
+D,45.6210722,13.7417806,2015-03-20,15.5,15.5,Abundance per unit volume of the water body,absent,Brachyura,urn:lsid:marinespecies.org:taxname:106673,zoeae,0,Cells per litre
+D,45.6210722,13.7417806,2015-03-20,15.5,15.5,Abundance per unit volume of the water body,present,Decapoda,urn:lsid:marinespecies.org:taxname:1130,larvae,4,Cells per litre
+D,45.6210722,13.7417806,2015-03-20,15.5,15.5,Abundance per unit volume of the water body,present,Sagitta spp,urn:lsid:marinespecies.org:taxname:105410,,17,Cells per litre
+D,45.6210722,13.7417806,2015-03-20,15.5,15.5,Abundance per unit volume of the water body,present,Echinodermata,urn:lsid:marinespecies.org:taxname:1806,larvae,25,Cells per litre
+D,45.6210722,13.7417806,2015-03-20,15.5,15.5,Abundance per unit volume of the water body,present,Echinodermata,urn:lsid:marinespecies.org:taxname:1806,pluteus larvae,17,Cells per litre
+D,45.6210722,13.7417806,2015-03-20,15.5,15.5,Abundance per unit volume of the water body,present,Oikopleura spp,urn:lsid:marinespecies.org:taxname:103367,,256,Cells per litre
+D,45.6210722,13.7417806,2015-03-20,15.5,15.5,Abundance per unit volume of the water body,absent,Teleostei,urn:lsid:marinespecies.org:taxname:293496,egg,0,Cells per litre
+D,45.6210722,13.7417806,2015-03-20,15.5,15.5,Abundance per unit volume of the water body,absent,Teleostei,urn:lsid:marinespecies.org:taxname:293496,larvae,0,Cells per litre
+E,45.6179167,13.7584917,2015-03-20,14,14,Abundance per unit volume of the water body,absent,Podon intermedius,urn:lsid:marinespecies.org:taxname:106276,,0,Cells per litre
+E,45.6179167,13.7584917,2015-03-20,14,14,Abundance per unit volume of the water body,present,Acartia,urn:lsid:marinespecies.org:taxname:104108,copepodites,219,Cells per litre
+E,45.6179167,13.7584917,2015-03-20,14,14,Abundance per unit volume of the water body,present,Acartia (Acartiura) clausi,urn:lsid:marinespecies.org:taxname:149755,,219,Cells per litre
+E,45.6179167,13.7584917,2015-03-20,14,14,Abundance per unit volume of the water body,present,Anomalocera patersoni,urn:lsid:marinespecies.org:taxname:104722,,18,Cells per litre
+E,45.6179167,13.7584917,2015-03-20,14,14,Abundance per unit volume of the water body,present,Calanus helgolandicus,urn:lsid:marinespecies.org:taxname:104466,,50,Cells per litre
+E,45.6179167,13.7584917,2015-03-20,14,14,Abundance per unit volume of the water body,absent,Calocalanus spp,urn:lsid:marinespecies.org:taxname:104193,,0,Cells per litre
+E,45.6179167,13.7584917,2015-03-20,14,14,Abundance per unit volume of the water body,absent,Calocalanus styliremis,urn:lsid:marinespecies.org:taxname:104673,,0,Cells per litre
+E,45.6179167,13.7584917,2015-03-20,14,14,Abundance per unit volume of the water body,present,Centropages,urn:lsid:marinespecies.org:taxname:104159,copepodites,64,Cells per litre
+E,45.6179167,13.7584917,2015-03-20,14,14,Abundance per unit volume of the water body,present,Centropages typicus,urn:lsid:marinespecies.org:taxname:104499,,91,Cells per litre
+E,45.6179167,13.7584917,2015-03-20,14,14,Abundance per unit volume of the water body,absent,Clausocalanus arcuicornis,urn:lsid:marinespecies.org:taxname:104502,,0,Cells per litre
+E,45.6179167,13.7584917,2015-03-20,14,14,Abundance per unit volume of the water body,present,Clausocalanus jobei,urn:lsid:marinespecies.org:taxname:104504,,55,Cells per litre
+E,45.6179167,13.7584917,2015-03-20,14,14,Abundance per unit volume of the water body,present,Clausocalanus,urn:lsid:marinespecies.org:taxname:104161,copepodites,27,Cells per litre
+E,45.6179167,13.7584917,2015-03-20,14,14,Abundance per unit volume of the water body,present,Clausocalanus spp,urn:lsid:marinespecies.org:taxname:104161,,9,Cells per litre
+E,45.6179167,13.7584917,2015-03-20,14,14,Abundance per unit volume of the water body,present,Ctenocalanus vanus,urn:lsid:marinespecies.org:taxname:104510,,558,Cells per litre
+E,45.6179167,13.7584917,2015-03-20,14,14,Abundance per unit volume of the water body,present,Diaixis pygmaea,urn:lsid:marinespecies.org:taxname:104522,,5,Cells per litre
+E,45.6179167,13.7584917,2015-03-20,14,14,Abundance per unit volume of the water body,absent,Isias clavipes,urn:lsid:marinespecies.org:taxname:104501,,0,Cells per litre
+E,45.6179167,13.7584917,2015-03-20,14,14,Abundance per unit volume of the water body,absent,Nannocalanus minor,urn:lsid:marinespecies.org:taxname:104469,,0,Cells per litre
+E,45.6179167,13.7584917,2015-03-20,14,14,Abundance per unit volume of the water body,present,Paracalanus,urn:lsid:marinespecies.org:taxname:104196,copepodites,1125,Cells per litre
+E,45.6179167,13.7584917,2015-03-20,14,14,Abundance per unit volume of the water body,present,Paracalanus denudatus,urn:lsid:marinespecies.org:taxname:104682,,178,Cells per litre
+E,45.6179167,13.7584917,2015-03-20,14,14,Abundance per unit volume of the water body,absent,Paracalanus nanus,urn:lsid:marinespecies.org:taxname:104684,,0,Cells per litre
+E,45.6179167,13.7584917,2015-03-20,14,14,Abundance per unit volume of the water body,present,Paracalanus parvus,urn:lsid:marinespecies.org:taxname:104685,,398,Cells per litre
+E,45.6179167,13.7584917,2015-03-20,14,14,Abundance per unit volume of the water body,absent,Pontella spp,urn:lsid:marinespecies.org:taxname:104209,,0,Cells per litre
+E,45.6179167,13.7584917,2015-03-20,14,14,Abundance per unit volume of the water body,present,Temora longicornis,urn:lsid:marinespecies.org:taxname:104878,,46,Cells per litre
+E,45.6179167,13.7584917,2015-03-20,14,14,Abundance per unit volume of the water body,absent,Temora stylifera,urn:lsid:marinespecies.org:taxname:104879,,0,Cells per litre
+E,45.6179167,13.7584917,2015-03-20,14,14,Abundance per unit volume of the water body,absent,Monothula subtilis,urn:lsid:marinespecies.org:taxname:237984,,0,Cells per litre
+E,45.6179167,13.7584917,2015-03-20,14,14,Abundance per unit volume of the water body,present,Oithona,urn:lsid:marinespecies.org:taxname:106485,copepodites,1198,Cells per litre
+E,45.6179167,13.7584917,2015-03-20,14,14,Abundance per unit volume of the water body,present,Oithona nana,urn:lsid:marinespecies.org:taxname:106651,,18,Cells per litre
+E,45.6179167,13.7584917,2015-03-20,14,14,Abundance per unit volume of the water body,present,Oithona plumifera,urn:lsid:marinespecies.org:taxname:106652,,18,Cells per litre
+E,45.6179167,13.7584917,2015-03-20,14,14,Abundance per unit volume of the water body,absent,Oithona setigera,urn:lsid:marinespecies.org:taxname:106655,,0,Cells per litre
+E,45.6179167,13.7584917,2015-03-20,14,14,Abundance per unit volume of the water body,present,Oithona similis,urn:lsid:marinespecies.org:taxname:106656,,786,Cells per litre
+E,45.6179167,13.7584917,2015-03-20,14,14,Abundance per unit volume of the water body,present,Corycaeidae,urn:lsid:marinespecies.org:taxname:128569,,87,Cells per litre
+E,45.6179167,13.7584917,2015-03-20,14,14,Abundance per unit volume of the water body,absent,Oncaea curta,urn:lsid:marinespecies.org:taxname:128929,,0,Cells per litre
+E,45.6179167,13.7584917,2015-03-20,14,14,Abundance per unit volume of the water body,absent,Oncaea media,urn:lsid:marinespecies.org:taxname:128938,,0,Cells per litre
+E,45.6179167,13.7584917,2015-03-20,14,14,Abundance per unit volume of the water body,present,Oncaea,urn:lsid:marinespecies.org:taxname:128690,,123,Cells per litre
+E,45.6179167,13.7584917,2015-03-20,14,14,Abundance per unit volume of the water body,present,Clytemnestra,urn:lsid:marinespecies.org:taxname:115273,,5,Cells per litre
+E,45.6179167,13.7584917,2015-03-20,14,14,Abundance per unit volume of the water body,present,Euterpina acutifrons,urn:lsid:marinespecies.org:taxname:116162,,155,Cells per litre
+E,45.6179167,13.7584917,2015-03-20,14,14,Abundance per unit volume of the water body,absent,Harpacticoida,urn:lsid:marinespecies.org:taxname:1102,,0,Cells per litre
+E,45.6179167,13.7584917,2015-03-20,14,14,Abundance per unit volume of the water body,present,Copepoda,urn:lsid:marinespecies.org:taxname:1080,nauplii,27,Cells per litre
+E,45.6179167,13.7584917,2015-03-20,14,14,Abundance per unit volume of the water body,present,Anthoathecata,urn:lsid:marinespecies.org:taxname:13551,,23,Cells per litre
+E,45.6179167,13.7584917,2015-03-20,14,14,Abundance per unit volume of the water body,absent,Leptothecata,urn:lsid:marinespecies.org:taxname:13552,,0,Cells per litre
+E,45.6179167,13.7584917,2015-03-20,14,14,Abundance per unit volume of the water body,absent,Obelia spp,urn:lsid:marinespecies.org:taxname:117034,,0,Cells per litre
+E,45.6179167,13.7584917,2015-03-20,14,14,Abundance per unit volume of the water body,absent,Solmaris spp,urn:lsid:marinespecies.org:taxname:117239,,0,Cells per litre
+E,45.6179167,13.7584917,2015-03-20,14,14,Abundance per unit volume of the water body,present,Siphonophora,urn:lsid:marinespecies.org:taxname:892593,,5,Cells per litre
+E,45.6179167,13.7584917,2015-03-20,14,14,Abundance per unit volume of the water body,present,Ctenophora,urn:lsid:marinespecies.org:taxname:1248,,5,Cells per litre
+E,45.6179167,13.7584917,2015-03-20,14,14,Abundance per unit volume of the water body,absent,Nemertea,urn:lsid:marinespecies.org:taxname:152391,larvae,0,Cells per litre
+E,45.6179167,13.7584917,2015-03-20,14,14,Abundance per unit volume of the water body,present,Gastropoda,urn:lsid:marinespecies.org:taxname:101,larvae,50,Cells per litre
+E,45.6179167,13.7584917,2015-03-20,14,14,Abundance per unit volume of the water body,present,Bivalvia,urn:lsid:marinespecies.org:taxname:105,larvae,14,Cells per litre
+E,45.6179167,13.7584917,2015-03-20,14,14,Abundance per unit volume of the water body,absent,Polychaeta,urn:lsid:marinespecies.org:taxname:883,larvae,0,Cells per litre
+E,45.6179167,13.7584917,2015-03-20,14,14,Abundance per unit volume of the water body,present,Polygordius,urn:lsid:marinespecies.org:taxname:129472,larvae,46,Cells per litre
+E,45.6179167,13.7584917,2015-03-20,14,14,Abundance per unit volume of the water body,absent,Ostracoda,urn:lsid:marinespecies.org:taxname:1078,,0,Cells per litre
+E,45.6179167,13.7584917,2015-03-20,14,14,Abundance per unit volume of the water body,present,Brachyura,urn:lsid:marinespecies.org:taxname:106673,zoeae,5,Cells per litre
+E,45.6179167,13.7584917,2015-03-20,14,14,Abundance per unit volume of the water body,present,Decapoda,urn:lsid:marinespecies.org:taxname:1130,larvae,5,Cells per litre
+E,45.6179167,13.7584917,2015-03-20,14,14,Abundance per unit volume of the water body,present,Sagitta spp,urn:lsid:marinespecies.org:taxname:105410,,119,Cells per litre
+E,45.6179167,13.7584917,2015-03-20,14,14,Abundance per unit volume of the water body,present,Echinodermata,urn:lsid:marinespecies.org:taxname:1806,larvae,5,Cells per litre
+E,45.6179167,13.7584917,2015-03-20,14,14,Abundance per unit volume of the water body,present,Echinodermata,urn:lsid:marinespecies.org:taxname:1806,pluteus larvae,18,Cells per litre
+E,45.6179167,13.7584917,2015-03-20,14,14,Abundance per unit volume of the water body,present,Oikopleura spp,urn:lsid:marinespecies.org:taxname:103367,,416,Cells per litre
+E,45.6179167,13.7584917,2015-03-20,14,14,Abundance per unit volume of the water body,absent,Teleostei,urn:lsid:marinespecies.org:taxname:293496,egg,0,Cells per litre
+E,45.6179167,13.7584917,2015-03-20,14,14,Abundance per unit volume of the water body,present,Teleostei,urn:lsid:marinespecies.org:taxname:293496,larvae,5,Cells per litre

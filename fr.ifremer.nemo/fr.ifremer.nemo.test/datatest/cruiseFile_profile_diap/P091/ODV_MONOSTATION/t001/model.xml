@@ -1,0 +1,488 @@
+<InputModel version="1.2.31">
+  <MediaModel path="C:\test_1_2_32\000010_diap\diapalis2_bot.prn">
+    <processType multiStations="false">CRUISE_FILE</processType>
+    <separator></separator>
+    <inputType>PROFILE</inputType>
+    <fileHeader>0</fileHeader>
+    <stationHeader pattern="">2</stationHeader>
+    <endStation>0</endStation>
+    <endData pattern="END">END_WITH</endData>
+  </MediaModel>
+  <CruiseModel>
+    <reference>FI35200110014</reference>
+    <name>DIAPALIS 2</name>
+    <shipCode>35AY</shipCode>
+    <shipName>Alis</shipName>
+    <startDate>1007942400000</startDate>
+    <endDate>1008892800000</endDate>
+    <regionName>Coral Sea</regionName>
+    <country>35</country>
+    <laboratories>IRD, CNRS, IUEM et Universite</laboratories>
+    <chiefScientist>LE BOUTEILLER Aubert</chiefScientist>
+    <projectName>JGOFS - FRANCE/PROOF</projectName>
+    <dataCentre>FI</dataCentre>
+    <availability>publicly</availability>
+    <comment><![CDATA[Ces donnees hydrologiques sont issues de la base de donnees DIAPAZON :
+http://www.com.univ-mrs.fr/IRD/urcyano/bdd/diapazon/bddiapaz.htm
+
+L'utilisation de ces donnees est soumise aux conditions suivantes :
+- demander l'autorisation aux responsables dont les noms et contacts figurent
+sur la page correspondant a la campagne.
+- faire reference a leur origine.
+
+PRESSION :
+---------
+En l'absence de valeurs de temperature et salinite et compte-tenu des faibles
+profondeurs de mesure, on considere que la pression est egale a la profondeur
+donnee.
+
+Mesures de sels nutritifs :
+--------------------------
+Les prelevements ont ete realises sur 12 bouteilles de prelevement Niskin de 8
+litres, greees a la rosette. Les  phosphates et l'ammonium ont ete analyses a
+bord, immediatement apres le prelevement (en general < 1h). Dans le cas des
+nitrates et nitrites, les echantillons ont ete conserves au froid apres ajout de
+HgCl2 (Kattner, 1999) et analyses a posteriori au laboratoire a Noumea. Les
+resultats sont exprimes en micromoles par litre.
+
+- Nitrates et Nitrites :
+Les nitrates et les nitrites ont ete determines par dosage colorimetrique
+automatise a flux continu sur un autoanalyseur II Technicon. Pour les
+concentrations de nitrate > 0.1 micromoles/l, les protocoles analytiques sont
+adaptes de ceux decrits dans Strickland and Parsons (1972). Pour les
+concentrations de nitrates < 0.1 micromoles/l, l'analyse a ete realisee selon la
+methode "haute sensibilite" decrite par Raimbault et al. (1990).
+La limite de detection pour le nitrate basse et haute sensibilite est de 0.02
+micromoles/l et 0.003 micromoles/l, respectivement. La limite pour le nitrite
+est de 0.003 micromoles/l.
+
+- Phosphates (phosphates solubles reactifs PSR) :
+Les phosphates PSR (phosphate soluble reactif) ont ete mesures manuellement par
+dosage colorimetrique au spectrophotometre (CECIL) a 885nm selon la methode de
+Murphy and Riley (1962). La mesure a ete realisee sur une cuve de 10cm afin
+d'augmenter la sensibilite.
+Pour le phosphate, la limite de detection est de 0.020 micromoles/l.
+
+- Ammonium :
+L'ammonium a ete mesure manuellement par fluorimetrie, selon la methode decrite
+par Holmes et al. (1999). L'analyse est realisee sur un fluorimetre Turner
+Design TD-700 (photo ci-contre) equipe d'un filtre d'excitation a 350 nm et d'un
+filtre d'emission de 410-600nm. La lecture au fluorimetre est realisee 3h apres
+ajout des reactifs, delai necessaire au developpement complet de la
+fluorescence.
+
+
+Mesure des pigments chlorophylliens :
+------------------------------------
+- Recolte du phytoplancton :
+Le phytoplancton etait recolte, par filtration de 265 ml d'eau de mer, sur des
+filtres en fibre de verre Whatman GF/F de 25 mm de diametre. Les filtres etaient
+congeles a bord dans l'azote liquide, puis conserves a -80 DegC au laboratoire
+avant l'analyse.
+
+- Extraction des pigments :
+L'extraction des pigments etait realisee dans 4.8 ml d'acetone a 93% (pigments
+dans l'acetone a 90% tenant compte de l'eau retenue sur le filtre), en broyant
+le filtre avec une baguette de verre a l'extremite fraichement cassee et en
+laissant le broyat pendant environ 12 h au refrigerateur a 4 DegC. Apres
+centrifugation 5 minutes a 3500 t.p.m, la fluorescence du surnageant etait
+mesuree a l'aide d'un spectrofluorimetre HITACHI F4500.
+
+- Estimation de la concentration des pigments chlorophylliens :
+La concentration des pigments chlorophylliens [chlorophylle a, b et c (c1+c2;
+c3); divinyle-chlorophylle a et b] et de leurs derives de type pheopigments a
+ete estimee par la methode modifiee de Neveux et Lantoine (1993).
+
+Methode modifiee de mesure des pigments chlorophylliens (Neveux et Lantoine,
+1993)
+- Mode d'acquisition des donnees de fluorescence : realisation d'une serie de 31
+spectres d'emission fixant d'abord la longueur d'onde d'excitation a 390 nm puis
+l'incrementant de 3 en 3 nm jusqu'a 480 nm. Utilisation de 806 points de mesure
+dans le calcul des concentrations en pigments (Neveux et al., 2003).
+- Introduction d'un nouveau standard dans l'analyse, la chlorophylle c3 et une
+analyse qui elimine les solutions negatives.
+
+- Calibration du spectrofluorimetre :
+La calibration du spectrofluorimetre a ete realisee a partir de solutions
+standards preparees au laboratoire Arago (Neveux et Lantoine, 1993), excepte la
+chlorophylle c3 qui a ete achetee chez DHI (Danemark).]]></comment>
+    <dataTypes>
+      <DataType code="B02">
+        <profiles>13</profiles>
+        <qc>false</qc>
+        <sensor>false</sensor>
+      </DataType>
+      <DataType code="B06">
+        <profiles>8</profiles>
+        <qc>false</qc>
+        <sensor>false</sensor>
+      </DataType>
+      <DataType code="B71">
+        <profiles>8</profiles>
+        <qc>false</qc>
+        <sensor>false</sensor>
+      </DataType>
+      <DataType code="H09">
+        <profiles>13</profiles>
+        <qc>false</qc>
+        <sensor>true</sensor>
+      </DataType>
+      <DataType code="H22">
+        <profiles>12</profiles>
+        <qc>false</qc>
+        <sensor>false</sensor>
+      </DataType>
+      <DataType code="H24">
+        <profiles>11</profiles>
+        <qc>false</qc>
+        <sensor>false</sensor>
+      </DataType>
+      <DataType code="H25">
+        <profiles>11</profiles>
+        <qc>false</qc>
+        <sensor>false</sensor>
+      </DataType>
+      <DataType code="H76">
+        <profiles>11</profiles>
+        <qc>false</qc>
+        <sensor>false</sensor>
+      </DataType>
+    </dataTypes>
+  </CruiseModel>
+  <StationModel>
+    <referenceProperty>
+      <PropertyModel property="" userProvided="false">
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>1</firstLine>
+          <lastLine>1</lastLine>
+          <firstCharOffset>8</firstCharOffset>
+          <lastCharOffset>9</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+    </referenceProperty>
+    <properties>
+      <PropertyModel property="dcHistory1" userProvided="true">
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="dcHistory2" userProvided="true">
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="comment" userProvided="true">
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="surfaceSamples1" userProvided="true">
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="surfaceSamples2" userProvided="true">
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="offsetTU" userProvided="true">
+        <format>
+          <FloatFormat formatString="%4.1f"/>
+        </format>
+        <userValue>0.0</userValue>
+      </PropertyModel>
+      <PropertyModel property="time" userProvided="false">
+        <format>
+          <DateTimeFormat formatString="hh24:mm"/>
+        </format>
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>1</firstLine>
+          <lastLine>1</lastLine>
+          <firstCharOffset>22</firstCharOffset>
+          <lastCharOffset>26</lastCharOffset>
+          <isDefaultValueSelected>false</isDefaultValueSelected>
+          <defaultValue></defaultValue>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="date" userProvided="false">
+        <format>
+          <DateTimeFormat formatString="DD/MM/YYYY"/>
+        </format>
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>1</firstLine>
+          <lastLine>1</lastLine>
+          <firstCharOffset>11</firstCharOffset>
+          <lastCharOffset>20</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="latitude" userProvided="false">
+        <format>
+          <LatitudeFormat formatString="NDD MM.mm"/>
+        </format>
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>1</firstLine>
+          <lastLine>1</lastLine>
+          <firstCharOffset>32</firstCharOffset>
+          <lastCharOffset>40</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="longitude" userProvided="false">
+        <format>
+          <LongitudeFormat formatString="NDDD MM.mm"/>
+        </format>
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>1</firstLine>
+          <lastLine>1</lastLine>
+          <firstCharOffset>42</firstCharOffset>
+          <lastCharOffset>51</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="bottomDepth" userProvided="true">
+        <format>
+          <FloatFormat formatString="%4.0f"/>
+        </format>
+        <userValue></userValue>
+      </PropertyModel>
+    </properties>
+    <DataType code="H09">
+      <profiles>0</profiles>
+      <qc>false</qc>
+      <sensor>false</sensor>
+    </DataType>
+    <FlagTable code="" label="">
+      <Flag local="0" SDN="0 - no quality control"/>
+      <Flag local="1" SDN="1 - good value"/>
+      <Flag local="2" SDN="2 - probably good value"/>
+      <Flag local="3" SDN="3 - probably bad value"/>
+      <Flag local="4" SDN="4 - bad value"/>
+      <Flag local="5" SDN="5 - changed value"/>
+      <Flag local="6" SDN="6 - value below detection"/>
+      <Flag local="7" SDN="7 - value in excess"/>
+      <Flag local="8" SDN="8 - interpolated value"/>
+      <Flag local="9" SDN="9 - missing value"/>
+      <Flag local="A" SDN="A - value phenomenon uncertain"/>
+    </FlagTable>
+  </StationModel>
+  <DataModel>
+    <dataListType>P091</dataListType>
+    <mesureType>BSSURF</mesureType>
+    <verticalParametersList>
+      <p_depthBSBed></p_depthBSBed>
+      <p_depthBSSurf></p_depthBSSurf>
+      <p_pressure>PRES</p_pressure>
+    </verticalParametersList>
+    <parameters>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault>-999.9</inputDefault>
+        <LineFragment firstCharOffset="1" lastCharOffset="10"/>
+        <Parameter code="PRES">
+          <fullName>SEA PRESSURE sea surface=0</fullName>
+          <unit>decibar=10000 pascals</unit>
+          <unitCode></unitCode>
+          <default>-999.9</default>
+          <format>%6.1f</format>
+          <CodeP011></CodeP011>
+          <NameP011></NameP011>
+          <IsP011>false</IsP011>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault>99.99</inputDefault>
+        <LineFragment firstCharOffset="33" lastCharOffset="41"/>
+        <Parameter code="PHOS">
+          <fullName>PHOSPHATE (PO4-P) CONTENT</fullName>
+          <unit>millimole/m3</unit>
+          <unitCode></unitCode>
+          <default>99.99</default>
+          <format>%5.2f</format>
+          <CodeP011></CodeP011>
+          <NameP011></NameP011>
+          <IsP011>false</IsP011>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault>99.999</inputDefault>
+        <LineFragment firstCharOffset="23" lastCharOffset="31"/>
+        <Parameter code="NTRA">
+          <fullName>NITRATE (NO3-N) CONTENT</fullName>
+          <unit>millimole/m3</unit>
+          <unitCode></unitCode>
+          <default>99.999</default>
+          <format>%6.3f</format>
+          <CodeP011></CodeP011>
+          <NameP011></NameP011>
+          <IsP011>false</IsP011>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault>99.999</inputDefault>
+        <LineFragment firstCharOffset="13" lastCharOffset="21"/>
+        <Parameter code="NTRI">
+          <fullName>NITRITE (NO2-N) CONTENT</fullName>
+          <unit>millimole/m3</unit>
+          <unitCode></unitCode>
+          <default>99.999</default>
+          <format>%6.3f</format>
+          <CodeP011></CodeP011>
+          <NameP011></NameP011>
+          <IsP011>false</IsP011>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault>99.999</inputDefault>
+        <LineFragment firstCharOffset="103" lastCharOffset="111"/>
+        <Parameter code="CPHL">
+          <fullName>CHLOROPHYLL-A TOTAL</fullName>
+          <unit>milligram/m3</unit>
+          <unitCode></unitCode>
+          <default>99.999</default>
+          <format>%6.3f</format>
+          <CodeP011></CodeP011>
+          <NameP011></NameP011>
+          <IsP011>false</IsP011>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault>99.999</inputDefault>
+        <LineFragment firstCharOffset="53" lastCharOffset="61"/>
+        <Parameter code="CPH1">
+          <fullName>CHLOROPHYLL-A TOTAL</fullName>
+          <unit>milligram/m3</unit>
+          <unitCode></unitCode>
+          <default>99.999</default>
+          <format>%6.3f</format>
+          <CodeP011></CodeP011>
+          <NameP011></NameP011>
+          <IsP011>false</IsP011>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault>99.999</inputDefault>
+        <LineFragment firstCharOffset="63" lastCharOffset="71"/>
+        <Parameter code="CHLB">
+          <fullName>CHLOROPHYLL-B TOTAL</fullName>
+          <unit>milligram/m3</unit>
+          <unitCode></unitCode>
+          <default>99.999</default>
+          <format>%6.3f</format>
+          <CodeP011></CodeP011>
+          <NameP011></NameP011>
+          <IsP011>false</IsP011>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault>99.999</inputDefault>
+        <LineFragment firstCharOffset="73" lastCharOffset="81"/>
+        <Parameter code="CHLC">
+          <fullName>CHLOROPHYLL-C TOTAL</fullName>
+          <unit>milligram/m3</unit>
+          <unitCode></unitCode>
+          <default>99.999</default>
+          <format>%6.3f</format>
+          <CodeP011></CodeP011>
+          <NameP011></NameP011>
+          <IsP011>false</IsP011>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault>99.999</inputDefault>
+        <LineFragment firstCharOffset="93" lastCharOffset="101"/>
+        <Parameter code="CHC3">
+          <fullName>CHLOROPHYLL-C3</fullName>
+          <unit>milligram/m3</unit>
+          <unitCode></unitCode>
+          <default>99.999</default>
+          <format>%6.3f</format>
+          <CodeP011></CodeP011>
+          <NameP011></NameP011>
+          <IsP011>false</IsP011>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault>99.999</inputDefault>
+        <LineFragment firstCharOffset="83" lastCharOffset="91"/>
+        <Parameter code="TPHP">
+          <fullName>TOTAL PHAEOPIGMENTS</fullName>
+          <unit>milligram/m3</unit>
+          <unitCode></unitCode>
+          <default>99.999</default>
+          <format>%6.3f</format>
+          <CodeP011></CodeP011>
+          <NameP011></NameP011>
+          <IsP011>false</IsP011>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault>99.99</inputDefault>
+        <LineFragment firstCharOffset="43" lastCharOffset="51"/>
+        <Parameter code="AMON">
+          <fullName>AMMONIUM (NH4-N) CONTENT</fullName>
+          <unit>millimole/m3</unit>
+          <unitCode></unitCode>
+          <default>999.99</default>
+          <format>%6.2f</format>
+          <CodeP011></CodeP011>
+          <NameP011></NameP011>
+          <IsP011>false</IsP011>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x/1000.0</conversionFormula>
+        <inputDefault>999.9</inputDefault>
+        <LineFragment firstCharOffset="123" lastCharOffset="131"/>
+        <Parameter code="DOPW">
+          <fullName>DISSOLVED ORGANIC PHOSPHORUS</fullName>
+          <unit>millimole/m3</unit>
+          <unitCode></unitCode>
+          <default>99.9999</default>
+          <format>%7.4f</format>
+          <CodeP011></CodeP011>
+          <NameP011></NameP011>
+          <IsP011>false</IsP011>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x/1000.0</conversionFormula>
+        <inputDefault>999.9</inputDefault>
+        <LineFragment firstCharOffset="113" lastCharOffset="121"/>
+        <Parameter code="PP1P">
+          <fullName>PART. ORGANIC PHOSPHORUS (P)</fullName>
+          <unit>millimole/m3</unit>
+          <unitCode></unitCode>
+          <default>99.9999</default>
+          <format>%7.4f</format>
+          <CodeP011></CodeP011>
+          <NameP011></NameP011>
+          <IsP011>false</IsP011>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x/1000.0</conversionFormula>
+        <inputDefault>999.9</inputDefault>
+        <LineFragment firstCharOffset="133" lastCharOffset="141"/>
+        <Parameter code="TPHS">
+          <fullName>TOTAL PHOSPHORUS (P) CONTENT</fullName>
+          <unit>millimole/m3</unit>
+          <unitCode></unitCode>
+          <default>99.9999</default>
+          <format>%7.4f</format>
+          <CodeP011></CodeP011>
+          <NameP011></NameP011>
+          <IsP011>false</IsP011>
+        </Parameter>
+      </ParameterModel>
+    </parameters>
+  </DataModel>
+  <ConversionModel>
+    <permissions>
+      <MEDATLAS enable="true"/>
+      <ODV_MULTISTATIONS enable="true"/>
+      <ODV_MONOSTATION enable="true"/>
+      <UNKNOWN enable="true"/>
+    </permissions>
+    <sortStations>false</sortStations>
+    <outputFormat>ODV_MONOSTATION</outputFormat>
+  </ConversionModel>
+</InputModel>

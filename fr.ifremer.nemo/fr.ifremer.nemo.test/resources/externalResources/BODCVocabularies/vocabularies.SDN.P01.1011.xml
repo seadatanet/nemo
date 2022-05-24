@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vocabularies>
+   <vocabulary list="SDN:B39:3:"  version="3"  date="2016-03-17T02:00:04.000"  title="NMF-SS Research Vessel underway variable NetCDF vocabulary"   />
+   <vocabulary list="SDN:OG1:11:"  version="11"  date="2020-07-21T02:00:03.000"  title="Ocean Glider Network Parameter Usage Vocabulary"   />
+   <vocabulary list="SDN:P01:1011:"  version="1011"  date="2021-01-21T14:00:01.000"  title="BODC Parameter Usage Vocabulary"   />
+   <vocabulary list="SDN:P09:63:"  version="63"  date="2021-01-14T14:00:02.000"  title="MEDATLAS Parameter Usage Vocabulary"   />
+   <vocabulary list="SDN:R03:4:"  version="4"  date="2021-02-02T02:00:02.000"  title="Argo parameter codes"   />
+   <vocabulary list="SDN:A04:1:"  version="1"  date="2012-06-28T01:00:03.000"  title="MIDA Coastal Erosion Thesaurus"   />
+   <vocabulary list="SDN:A05:4:"  version="4"  date="2019-03-29T02:01:22.000"  title="AtlantOS Essential Variables"   />
+   <vocabulary list="SDN:C67:6:"  version="6"  date="2020-03-19T14:00:00.000"  title="BODC series parameter collection names"   />
+   <vocabulary list="SDN:P02:115:"  version="115"  date="2020-10-21T02:00:10.000"  title="SeaDataNet Parameter Discovery Vocabulary"   />
+   <vocabulary list="SDN:P07:77:"  version="77"  date="2021-01-19T02:00:03.000"  title="Climate and Forecast Standard Names"   />
+   <vocabulary list="SDN:P25:5:"  version="5"  date="2012-07-26T01:00:03.000"  title="NETMAR aggregation parameters"   />
+   <vocabulary list="SDN:P35:17:"  version="17"  date="2020-04-15T14:00:01.000"  title="EMODnet Chemistry aggregated parameter names"   />
+   <vocabulary list="SDN:S06:99:"  version="99"  date="2020-12-22T02:00:02.000"  title="BODC parameter semantic model parameter entity names"   />
+   <vocabulary list="SDN:S21:12:"  version="12"  date="2015-02-06T02:00:02.000"  title="BODC parameter semantic model sphere names"   />
+   <vocabulary list="SDN:S25:134:"  version="134"  date="2020-12-11T14:00:01.000"  title="BODC parameter semantic model biological entity names"   />
+   <vocabulary list="SDN:S26:31:"  version="31"  date="2019-12-07T02:00:06.000"  title="BODC parameter semantic model matrices"   />
+   <vocabulary list="SDN:S27:131:"  version="131"  date="2021-01-18T14:00:01.000"  title="BODC parameter semantic model chemical substances"   />
+   <vocabulary list="SDN:S29:50:"  version="50"  date="2020-10-21T02:00:10.000"  title="BODC parameter semantic model physical entity compound names"   />
+   <vocabulary list="SDN:GGS:7:"  version="7"  date="2017-08-11T01:00:03.000"  title="GEBCO 30-second grid data sources"   />
+   <vocabulary list="SDN:GGT:1:"  version="1"  date="2019-11-15T02:00:04.000"  title="GEBCO Grid Source Data Type Identifier"   />
+   <vocabulary list="SDN:H01:3:"  version="3"  date="2018-05-24T01:00:04.000"  title="EMODnet micro-litter types"   />
+   <vocabulary list="SDN:H02:2:"  version="2"  date="2018-02-14T02:00:03.000"  title="EMODnet micro-litter shapes"   />
+   <vocabulary list="SDN:H03:4:"  version="4"  date="2019-01-15T02:00:05.000"  title="EMODnet micro-litter size classes"   />
+   <vocabulary list="SDN:H04:3:"  version="3"  date="2018-05-24T01:00:04.000"  title="EMODnet micro-litter colour classes"   />
+   <vocabulary list="SDN:H05:2:"  version="2"  date="2018-02-14T02:00:03.000"  title="EMODnet micro-litter polymer type"   />
+   <vocabulary list="SDN:L22:488:"  version="488"  date="2021-02-03T14:00:01.000"  title="SeaVoX Device Catalogue"   />
+   <vocabulary list="SDN:P06:125:"  version="125"  date="2020-12-15T14:00:00.000"  title="BODC-approved data storage units"   />
+   <vocabulary list="SDN:P19:1:"  version="1"  date="2008-02-05T11:24:56.000"  title="Global Change Master Directory platforms"   />
+   <vocabulary list="SDN:S02:17:"  version="17"  date="2019-03-14T02:00:04.000"  title="BODC parameter semantic model relationships between what theme and where theme"   />
+   <vocabulary list="SDN:S03:69:"  version="69"  date="2019-08-06T01:00:08.000"  title="BODC parameter semantic model sample preparation entity descriptions"   />
+   <vocabulary list="SDN:S04:130:"  version="130"  date="2020-06-18T02:00:01.000"  title="BODC parameter semantic model analytical method entity descriptions"   />
+   <vocabulary list="SDN:S05:46:"  version="46"  date="2021-01-20T02:00:01.000"  title="BODC parameter semantic model data processing entity descriptions"   />
+   <vocabulary list="SDN:S07:13:"  version="13"  date="2020-01-12T02:00:05.000"  title="BODC parameter semantic model parameter statistic"   />
+   <vocabulary list="SDN:S30:3:"  version="3"  date="2020-05-13T02:00:03.000"  title="BODC parameter semantic model relationships between biological entities"   />
+</vocabularies>

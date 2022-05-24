@@ -1,0 +1,218 @@
+<InputModel version="1.5" isValid="true">
+  <MediaModel path="D:\dev\dev\workspace\ifremer_datatest\cruiseFile_profile_diap_6903\input">
+    <processType multiStations="false">CRUISE_FILE</processType>
+    <separator></separator>
+    <inputType>PROFILE</inputType>
+    <fileHeader>0</fileHeader>
+    <stationHeader pattern="">2</stationHeader>
+    <endStation>0</endStation>
+    <endData pattern="END" patternIsRegexp="false">END_WITH</endData>
+  </MediaModel>
+  <CruiseModel>
+    <reference>FI35200110014</reference>
+    <name>DIAPALIS 2</name>
+    <shipCode>35AY</shipCode>
+    <shipName>Alis</shipName>
+    <startDate>1007942400000</startDate>
+    <endDate>1008892800000</endDate>
+    <regionName>Coral Sea</regionName>
+    <country>35</country>
+    <laboratories>IRD pour la partie travail de terrain ;  IRD, CNRS, IUEM et Universit&#233; pour</laboratories>
+    <chiefScientist>LE BOUTEILLER Aubert</chiefScientist>
+    <projectName>JGOFS - FRANCE/PROOF</projectName>
+    <dataCentre>FI</dataCentre>
+    <availability>publicly</availability>
+    <comment><![CDATA[]]></comment>
+    <correspondingURL><![CDATA[http://seadata.bsh.de/csr/retrieve/sdn2_index.html]]></correspondingURL>
+    <dataTypes>
+      <DataType code="B02 - Phytoplankton pigments (eg chloroph">
+        <profiles>13</profiles>
+        <qc>false</qc>
+        <sensor>false</sensor>
+      </DataType>
+      <DataType code="B06 - Dissolved organic matter (inc DOC)">
+        <profiles>8</profiles>
+        <qc>false</qc>
+        <sensor>false</sensor>
+      </DataType>
+      <DataType code="B71 - Particulate organic matter (inc POC">
+        <profiles>8</profiles>
+        <qc>false</qc>
+        <sensor>false</sensor>
+      </DataType>
+      <DataType code="H09 - Water bottle stations">
+        <profiles>13</profiles>
+        <qc>false</qc>
+        <sensor>true</sensor>
+      </DataType>
+      <DataType code="H22 - Phosphate">
+        <profiles>12</profiles>
+        <qc>false</qc>
+        <sensor>false</sensor>
+      </DataType>
+      <DataType code="H23 - Total - P">
+        <profiles>3</profiles>
+        <qc>false</qc>
+        <sensor>false</sensor>
+      </DataType>
+      <DataType code="H24 - Nitrate">
+        <profiles>11</profiles>
+        <qc>false</qc>
+        <sensor>false</sensor>
+      </DataType>
+      <DataType code="H25 - Nitrite">
+        <profiles>11</profiles>
+        <qc>false</qc>
+        <sensor>false</sensor>
+      </DataType>
+      <DataType code="H76 - Ammonia">
+        <profiles>11</profiles>
+        <qc>false</qc>
+        <sensor>false</sensor>
+      </DataType>
+    </dataTypes>
+  </CruiseModel>
+  <StationModel>
+    <referenceProperty>
+      <PropertyModel property="" userProvided="false">
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>1</firstLine>
+          <lastLine>1</lastLine>
+          <firstCharOffset>8</firstCharOffset>
+          <lastCharOffset>9</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+    </referenceProperty>
+    <properties>
+      <PropertyModel property="offsetTU" userProvided="true">
+        <format>
+          <FloatFormat formatString="%4.1f"/>
+        </format>
+        <userValue>0.0</userValue>
+      </PropertyModel>
+      <PropertyModel property="time" userProvided="false">
+        <format>
+          <DateTimeFormat formatString="hh24:mm"/>
+        </format>
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>1</firstLine>
+          <lastLine>1</lastLine>
+          <firstCharOffset>22</firstCharOffset>
+          <lastCharOffset>26</lastCharOffset>
+          <isDefaultValueSelected>false</isDefaultValueSelected>
+          <defaultValue></defaultValue>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="date" userProvided="false">
+        <format>
+          <DateTimeFormat formatString="DD/MM/YYYY"/>
+        </format>
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>1</firstLine>
+          <lastLine>1</lastLine>
+          <firstCharOffset>11</firstCharOffset>
+          <lastCharOffset>20</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="latitude" userProvided="false">
+        <format>
+          <LatitudeFormat formatString="NDD MM.mm"/>
+        </format>
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>1</firstLine>
+          <lastLine>1</lastLine>
+          <firstCharOffset>32</firstCharOffset>
+          <lastCharOffset>40</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="longitude" userProvided="false">
+        <format>
+          <LongitudeFormat formatString="NDDD MM.mm"/>
+        </format>
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>1</firstLine>
+          <lastLine>1</lastLine>
+          <firstCharOffset>42</firstCharOffset>
+          <lastCharOffset>51</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="bottomDepth" userProvided="true">
+        <format>
+          <FloatFormat formatString="%4.0f"/>
+        </format>
+        <userValue></userValue>
+      </PropertyModel>
+    </properties>
+    <DataType code="H09">
+      <profiles>0</profiles>
+      <qc>false</qc>
+      <sensor>false</sensor>
+    </DataType>
+    <FlagTable code="C1" label="SeaDataNet">
+      <Flag local="0" SDN="0 - no quality control"/>
+      <Flag local="1" SDN="1 - good value"/>
+      <Flag local="2" SDN="2 - probably good value"/>
+      <Flag local="3" SDN="3 - probably bad value"/>
+      <Flag local="4" SDN="4 - bad value"/>
+      <Flag local="5" SDN="5 - changed value"/>
+      <Flag local="6" SDN="6 - value below detection"/>
+      <Flag local="7" SDN="7 - value in excess"/>
+      <Flag local="8" SDN="8 - interpolated value"/>
+      <Flag local="9" SDN="9 - missing value"/>
+      <Flag local="A" SDN="A - value phenomenon uncertain"/>
+    </FlagTable>
+  </StationModel>
+  <DataModel>
+    <dataListType>P011_VIA_P021</dataListType>
+    <mesureType>BSSURF</mesureType>
+    <verticalParametersList>
+      <p_depthBSBed></p_depthBSBed>
+      <p_depthBSSurf></p_depthBSSurf>
+      <p_pressure>PRESPR01</p_pressure>
+    </verticalParametersList>
+    <parameters>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault>-999.9</inputDefault>
+        <LineFragment firstCharOffset="7" lastCharOffset="10"/>
+        <Parameter code="AHGT">
+          <fullName>Vertical spatial coordinates</fullName>
+          <unit>Pascals</unit>
+          <unitCode>PASX</unitCode>
+          <default></default>
+          <format>%6.1f</format>
+          <CodeP011>PRESPR01</CodeP011>
+          <NameP011>Pressure (spatial co-ordinate) exerted by the water body by profiling pressure sensor and corrected to read zero at sea level</NameP011>
+          <IsP011>true</IsP011>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault>99.999</inputDefault>
+        <LineFragment firstCharOffset="27" lastCharOffset="31"/>
+        <Parameter code="NTRA">
+          <fullName>Nitrate concentration parameters in the water column</fullName>
+          <unit>Micromoles per litre</unit>
+          <unitCode>UPOX</unitCode>
+          <default></default>
+          <format>%6.3f</format>
+          <CodeP011>NTRAZZXX</CodeP011>
+          <NameP011>Concentration of nitrate {NO3} per unit volume of the water body [unknown phase]</NameP011>
+          <IsP011>true</IsP011>
+        </Parameter>
+      </ParameterModel>
+    </parameters>
+  </DataModel>
+  <ConversionModel>
+    <permissions>
+      <MEDATLAS enable="true"/>
+      <ODV_MULTISTATIONS enable="true"/>
+      <ODV_MONOSTATION enable="true"/>
+      <UNKNOWN enable="true"/>
+      <NETCDF_MONOSTATION enable="true"/>
+      <NETCDF_MULTISTATIONS enable="true"/>
+    </permissions>
+    <sortStations>false</sortStations>
+    <outputFormat>NETCDF_MONOSTATION</outputFormat>
+  </ConversionModel>
+</InputModel>

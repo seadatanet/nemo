@@ -1,0 +1,227 @@
+<InputModel version="1.7.0" isValid="true">
+  <MediaModel path="/home/sophie/Bureau/tmp/nemo/45196/Ismar_Bo_S1_buoy_12_14_elaborati.txt">
+    <processType multiStations="false">CRUISE_FILE</processType>
+    <separator>&#9;</separator>
+    <inputType>TIMESERIES</inputType>
+    <variant>PHYSICOCHEMICAL</variant>
+    <fileHeader>1</fileHeader>
+    <stationHeader pattern="" useSeparatorInStationHeader="true">1</stationHeader>
+    <colTitleInInputFile colTitleInInputFileCheck="true" colTitlesInInputFileLineNb="1" useTableForCsvData="true"/>
+    <endStation>0</endStation>
+    <endData pattern="" patternIsRegexp="false">EOF</endData>
+  </MediaModel>
+  <CruiseModel>
+    <reference>ismar</reference>
+    <bshCsrReference></bshCsrReference>
+    <localCSRIdentifier></localCSRIdentifier>
+    <name>ismar</name>
+    <shipCode></shipCode>
+    <shipName></shipName>
+    <startDate>1569934169092</startDate>
+    <endDate>1569934169092</endDate>
+    <regionName></regionName>
+    <regionCode></regionCode>
+    <country></country>
+    <laboratories></laboratories>
+    <chiefScientist>UNKNOWN</chiefScientist>
+    <projectName></projectName>
+    <dataCentre></dataCentre>
+    <availability>publicly</availability>
+    <comment><![CDATA[]]></comment>
+    <dataTypes/>
+  </CruiseModel>
+  <StationModel>
+    <referenceProperty>
+      <PropertyModel property="" userProvided="true">
+        <userValue>1</userValue>
+      </PropertyModel>
+    </referenceProperty>
+    <properties>
+      <PropertyModel property="dcHistory1" userProvided="false">
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>1</firstLine>
+          <lastLine>1</lastLine>
+          <firstCharOffset>56</firstCharOffset>
+          <lastCharOffset>73</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="dcHistory2" userProvided="false"/>
+      <PropertyModel property="comment" userProvided="false">
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>1</firstLine>
+          <lastLine>1</lastLine>
+          <firstCharOffset>56</firstCharOffset>
+          <lastCharOffset>73</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="surfaceSamples1" userProvided="true">
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="surfaceSamples2" userProvided="true">
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="offsetTU" userProvided="true">
+        <format>
+          <FloatFormat formatString="%4.1f"/>
+        </format>
+        <userValue>0.0</userValue>
+      </PropertyModel>
+      <PropertyModel property="time" userProvided="false">
+        <format>
+          <DateTimeFormat formatString="hh24:mm"/>
+        </format>
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>2</firstLine>
+          <lastLine>2</lastLine>
+          <firstCharOffset>38</firstCharOffset>
+          <lastCharOffset>42</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="date" userProvided="false">
+        <format>
+          <DateTimeFormat formatString="MM/DD/YYYY"/>
+        </format>
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>2</firstLine>
+          <lastLine>2</lastLine>
+          <firstCharOffset>27</firstCharOffset>
+          <lastCharOffset>36</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="latitude" userProvided="false">
+        <format>
+          <LatitudeFormat formatString="DD.ddd"/>
+        </format>
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>1</firstLine>
+          <lastLine>1</lastLine>
+          <firstCharOffset>64</firstCharOffset>
+          <lastCharOffset>70</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="endLatitude" userProvided="true">
+        <format>
+          <LatitudeFormat formatString=""/>
+        </format>
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="longitude" userProvided="false">
+        <format>
+          <LongitudeFormat formatString="DDD.ddd"/>
+        </format>
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>1</firstLine>
+          <lastLine>1</lastLine>
+          <firstCharOffset>54</firstCharOffset>
+          <lastCharOffset>61</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="endLongitude" userProvided="true">
+        <format>
+          <LongitudeFormat formatString=""/>
+        </format>
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="bottomDepth" userProvided="true">
+        <format>
+          <FloatFormat formatString="%4.0f"/>
+        </format>
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="endDepth" userProvided="true">
+        <format>
+          <FloatFormat formatString="%4.0f"/>
+        </format>
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="sensorDepth" userProvided="true">
+        <format>
+          <FloatFormat formatString="%4.0f"/>
+        </format>
+        <userValue>5</userValue>
+      </PropertyModel>
+      <PropertyModel property="magneticDeclination" userProvided="true">
+        <format>
+          <FloatFormat formatString="%4.1f"/>
+        </format>
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="samplingRate" userProvided="true">
+        <format>
+          <FloatFormat formatString="%4.0f"/>
+        </format>
+        <conversionFormula>*1</conversionFormula>
+        <userValue>0</userValue>
+      </PropertyModel>
+      <PropertyModel property="endDate" userProvided="true">
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="endTime" userProvided="true">
+        <userValue></userValue>
+      </PropertyModel>
+    </properties>
+    <DataType code="B02">
+      <profiles>0</profiles>
+      <qc>false</qc>
+      <sensor>false</sensor>
+    </DataType>
+    <FlagTable code="C1" label="SeaDataNet">
+      <Flag local="0" SDN="0 - no quality control"/>
+      <Flag local="1" SDN="1 - good value"/>
+      <Flag local="2" SDN="2 - probably good value"/>
+      <Flag local="3" SDN="3 - probably bad value"/>
+      <Flag local="4" SDN="4 - bad value"/>
+      <Flag local="5" SDN="5 - changed value"/>
+      <Flag local="6" SDN="6 - value below detection"/>
+      <Flag local="7" SDN="7 - value in excess"/>
+      <Flag local="8" SDN="8 - interpolated value"/>
+      <Flag local="9" SDN="9 - missing value"/>
+      <Flag local="A" SDN="A - value phenomenon uncertain"/>
+      <Flag local="Q" SDN="Q - value below limit of quantification"/>
+    </FlagTable>
+  </StationModel>
+  <DataModel>
+    <dataListType>P011_VIA_P021</dataListType>
+    <mesureType>BSSURF</mesureType>
+    <fallrateCode></fallrateCode>
+    <fallrateLabel></fallrateLabel>
+    <verticalParametersList>
+      <p_depthBSBed></p_depthBSBed>
+      <p_depthBSSurf></p_depthBSSurf>
+      <p_pressure>PRESCX01</p_pressure>
+      <p_heightASLvl></p_heightASLvl>
+    </verticalParametersList>
+    <parameters>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="11" lastCharOffset="11"/>
+        <Parameter code="FR11">
+          <fullName>Chlorofluorocarbon concentrations in the water column</fullName>
+          <unit>Micrograms per litre</unit>
+          <unitCode>UGPL</unitCode>
+          <default>999.99</default>
+          <format>%6.2f</format>
+          <CodeP011>CFC13GCD</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011>Concentration of trifluorochloromethane {CFC-13 CAS 75-72-9} per unit volume of the water body [dissolved plus reactive particulate phase] by gas chromatography-electron capture detection</NameP011>
+          <IsP011>true</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+    </parameters>
+  </DataModel>
+  <ConversionModel>
+    <permissions>
+      <MEDATLAS enable="true"/>
+      <ODV_MULTISTATIONS enable="true"/>
+      <ODV_MONOSTATION enable="true"/>
+      <UNKNOWN enable="true"/>
+      <NETCDF_MONOSTATION enable="true"/>
+      <NETCDF_MULTISTATIONS enable="true"/>
+    </permissions>
+    <sortStations>false</sortStations>
+    <outputFormat>ODV_MULTISTATIONS</outputFormat>
+  </ConversionModel>
+</InputModel>

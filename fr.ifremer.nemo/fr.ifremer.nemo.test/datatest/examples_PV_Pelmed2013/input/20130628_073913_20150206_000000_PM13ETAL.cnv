@@ -1,0 +1,81 @@
+* Sea-Bird SBE 19 Data File:
+* FileName = PM120900.HEX
+* Software Version 4.201
+* Temperature SN = 1178
+* Conductivity SN = 1178
+* System UpLoad Time = Jun 28 2013 08:32:28
+* Bateau: L'EUROPE  
+* Campagne:PELMED13  
+* Chalutage ETAL 28 Juin 2013
+* Latitude:          4321.133
+* Longitude:         0344.167
+* ds
+* SEACAT PROFILER V3.0c  1178   06/28/13  07:58:59.023
+* strain gauge pressure sensor: S/N = 156844,  range = 1000 psia,  tc = -122
+* clk = 32768.031   iop = 181   vmain = 8.5   vlith = 5.1
+* mode = PROFILE  ncasts = 1
+* sample rate = 1 scan every 0.5 seconds
+* samples = 618   free = 20591   lwait = 0 msec
+* SW1 = 00   battery cutoff = 5.8 volts
+* number of voltages sampled = 0
+* logdata = NO
+* S>
+* cast 0  06/28  07:39:13   samples 0 to 617 sample rate = 1 scan every 0.5 seconds  stop = switch off
+# nquan = 6
+# nvalues = 28                          
+# units = metric
+# name 0 = pr: pressure [decibars]
+# name 1 = t068: temperature, IPTS-68 [deg C]
+# name 2 = c0S/m: Conductivity [S/m]
+# name 3 = sal00: salinity, PSS-78 [PSU]
+# name 4 = nbin: number of scans per bin
+# name 5 = flag: flag
+# span 0 =      1.000,     28.000       
+# span 1 =    13.5593,    15.3645       
+# span 2 =   4.452615,   4.624870       
+# span 3 =    37.5735,    37.8810       
+# span 4 =          2,        269       
+# span 5 = 0.0000e+00, 0.0000e+00       
+# interval = decibars: 1                
+# start_time = Jun 28 2013 07:39:13
+# bad_flag = -9.990e-29
+# datcnv_date = Jun 28 2013 08:38:31, 4.201
+# datcnv_in = PM13ETAL.HEX  1178 1178 1178
+# datcnv_skipover = 0
+# binavg_date = Feb 06 2015 10:20:00, 7.21k
+# binavg_in = M:\newdata\pelmed2013\ctd\travail\a_moyenner_entree\PM13ETAL.cnv
+# binavg_bintype = decibars
+# binavg_binsize = 1
+# binavg_excl_bad_scans = yes
+# binavg_skipover = 0
+# binavg_surface_bin = no, min = 0.000, max = 0.000, value = 0.000
+# file_type = ascii
+*END*
+      1.000    15.3645   4.624870    37.7091        269 0.0000e+00
+      2.000    15.3468   4.618669    37.6689          5 0.0000e+00
+      3.000    15.3382   4.617265    37.6639          5 0.0000e+00
+      4.000    15.3249   4.615987    37.6646          4 0.0000e+00
+      5.000    15.3150   4.614768    37.6625          4 0.0000e+00
+      6.000    15.3018   4.613380    37.6620          4 0.0000e+00
+      7.000    15.2902   4.611249    37.6532          2 0.0000e+00
+      8.000    15.2487   4.606450    37.6487          3 0.0000e+00
+      9.000    15.1967   4.599233    37.6322          2 0.0000e+00
+     10.000    15.1037   4.588295    37.6207          3 0.0000e+00
+     11.000    14.9715   4.572786    37.6048          2 0.0000e+00
+     12.000    14.7519   4.546485    37.5735          2 0.0000e+00
+     13.000    14.4892   4.524054    37.6193          2 0.0000e+00
+     14.000    14.2992   4.510736    37.6795          2 0.0000e+00
+     15.000    14.2015   4.502684    37.6992          2 0.0000e+00
+     16.000    14.1338   4.495732    37.6997          2 0.0000e+00
+     17.000    14.0243   4.484267    37.6988          3 0.0000e+00
+     18.000    13.8455   4.470090    37.7403          2 0.0000e+00
+     19.000    13.7644   4.465298    37.7744          2 0.0000e+00
+     20.000    13.7417   4.463609    37.7804          2 0.0000e+00
+     21.000    13.7183   4.460799    37.7765          2 0.0000e+00
+     22.000    13.6904   4.458477    37.7816          2 0.0000e+00
+     23.000    13.6767   4.457435    37.7847          2 0.0000e+00
+     24.000    13.6509   4.454691    37.7837          3 0.0000e+00
+     25.000    13.6209   4.453447    37.8011          2 0.0000e+00
+     26.000    13.5987   4.457903    37.8652          8 0.0000e+00
+     27.000    13.5781   4.452615    37.8347          6 0.0000e+00
+     28.000    13.5593   4.455553    37.8810          4 0.0000e+00

@@ -1,0 +1,342 @@
+<InputModel version="1.7.0" isValid="true">
+  <MediaModel path="/home/sophie/git/nemo/fr.ifremer.nemo.test/datatest/42483_OGSDataset_ordered/input">
+    <processType multiStations="false">CRUISE_FILE</processType>
+    <separator>,</separator>
+    <inputType>UNKNOWN</inputType>
+    <variant>MICROLITTER</variant>
+    <fileHeader>1</fileHeader>
+    <stationHeader pattern="" useSeparatorInStationHeader="true">0</stationHeader>
+    <colTitleInInputFile colTitleInInputFileCheck="true" colTitlesInInputFileLineNb="1" useTableForCsvData="true"/>
+    <endStation>0</endStation>
+    <endData pattern="x" patternIsRegexp="false">BEGIN_LINE_CHANGES</endData>
+  </MediaModel>
+  <CruiseModel>
+    <reference>ref test microlitter</reference>
+    <bshCsrReference></bshCsrReference>
+    <localCSRIdentifier></localCSRIdentifier>
+    <name>campagne test microlitter</name>
+    <shipCode></shipCode>
+    <shipName></shipName>
+    <startDate>1420070400000</startDate>
+    <endDate>1451520000000</endDate>
+    <regionName>Irish Sea</regionName>
+    <regionCode>1_4</regionCode>
+    <country></country>
+    <laboratories></laboratories>
+    <chiefScientist>UNKNOWN</chiefScientist>
+    <projectName></projectName>
+    <dataCentre></dataCentre>
+    <availability>publicly</availability>
+    <comment><![CDATA[]]></comment>
+    <dataTypes>
+      <DataType code="B09 - Zooplankton">
+        <profiles>0</profiles>
+        <qc>false</qc>
+        <sensor>false</sensor>
+      </DataType>
+      <DataType code="B18 - Zoobenthos">
+        <profiles>0</profiles>
+        <qc>false</qc>
+        <sensor>true</sensor>
+      </DataType>
+    </dataTypes>
+  </CruiseModel>
+  <StationModel>
+    <referenceProperty>
+      <PropertyModel property="" userProvided="true">
+        <userValue>1</userValue>
+      </PropertyModel>
+    </referenceProperty>
+    <properties>
+      <PropertyModel property="dcHistory1" userProvided="true">
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="dcHistory2" userProvided="true">
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="comment" userProvided="true">
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="surfaceSamples1" userProvided="true">
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="surfaceSamples2" userProvided="true">
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="offsetTU" userProvided="true">
+        <format>
+          <FloatFormat formatString="%4.1f"/>
+        </format>
+        <userValue>10</userValue>
+      </PropertyModel>
+      <PropertyModel property="time" userProvided="true">
+        <format>
+          <DateTimeFormat formatString="hh24:mm"/>
+        </format>
+        <userValue>15:30</userValue>
+      </PropertyModel>
+      <PropertyModel property="date" userProvided="false">
+        <format>
+          <DateTimeFormat formatString="YYYY-MM-DD"/>
+        </format>
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>1</firstLine>
+          <lastLine>1</lastLine>
+          <firstCharOffset>25</firstCharOffset>
+          <lastCharOffset>34</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="latitude" userProvided="false">
+        <format>
+          <LatitudeFormat formatString="decimal degrees for file with separators"/>
+        </format>
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>1</firstLine>
+          <lastLine>1</lastLine>
+          <firstCharOffset>3</firstCharOffset>
+          <lastCharOffset>12</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="longitude" userProvided="false">
+        <format>
+          <LongitudeFormat formatString="decimal degrees for file with separators"/>
+        </format>
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>1</firstLine>
+          <lastLine>1</lastLine>
+          <firstCharOffset>14</firstCharOffset>
+          <lastCharOffset>23</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="bottomDepth" userProvided="true">
+        <format>
+          <FloatFormat formatString="%4.0f"/>
+        </format>
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="sensorDepth" userProvided="true">
+        <format>
+          <FloatFormat formatString="%4.0f"/>
+        </format>
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="samplingRate" userProvided="true">
+        <format>
+          <FloatFormat formatString="%4.0f"/>
+        </format>
+        <conversionFormula>*1</conversionFormula>
+        <userValue>0</userValue>
+      </PropertyModel>
+    </properties>
+    <DataType code="B18">
+      <profiles>0</profiles>
+      <qc>false</qc>
+      <sensor>true</sensor>
+    </DataType>
+    <FlagTable code="C1" label="SeaDataNet">
+      <Flag local="0" SDN="0 - no quality control"/>
+      <Flag local="1" SDN="1 - good value"/>
+      <Flag local="2" SDN="2 - probably good value"/>
+      <Flag local="3" SDN="3 - probably bad value"/>
+      <Flag local="4" SDN="4 - bad value"/>
+      <Flag local="5" SDN="5 - changed value"/>
+      <Flag local="6" SDN="6 - value below detection"/>
+      <Flag local="7" SDN="7 - value in excess"/>
+      <Flag local="8" SDN="8 - interpolated value"/>
+      <Flag local="9" SDN="9 - missing value"/>
+      <Flag local="A" SDN="A - value phenomenon uncertain"/>
+      <Flag local="Q" SDN="Q - value below limit of quantification"/>
+    </FlagTable>
+  </StationModel>
+  <DataModel>
+    <dataListType>P011_VIA_P021</dataListType>
+    <mesureType>BSSURF</mesureType>
+    <fallrateCode></fallrateCode>
+    <fallrateLabel></fallrateLabel>
+    <verticalParametersList>
+      <p_depthBSBed></p_depthBSBed>
+      <p_depthBSSurf></p_depthBSSurf>
+      <p_pressure></p_pressure>
+      <p_heightASLvl></p_heightASLvl>
+    </verticalParametersList>
+    <parameters>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="5" lastCharOffset="5"/>
+        <Parameter code="AHGT">
+          <fullName></fullName>
+          <unit>Metres</unit>
+          <unitCode>ULAA</unitCode>
+          <default></default>
+          <format>%3d</format>
+          <CodeP011>MINWDIST</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011>Depth (spatial coordinate) minimum relative to water surface in the water body</NameP011>
+          <IsP011>true</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="6" lastCharOffset="6"/>
+        <Parameter code="AHGT">
+          <fullName></fullName>
+          <unit>Metres</unit>
+          <unitCode>ULAA</unitCode>
+          <default></default>
+          <format>%3d</format>
+          <CodeP011>MAXWDIST</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011>Depth (spatial coordinate) maximum relative to water surface in the water body</NameP011>
+          <IsP011>true</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula></conversionFormula>
+        <isText>true</isText>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="10" lastCharOffset="10"/>
+        <Parameter code="ACYC">
+          <fullName></fullName>
+          <unit></unit>
+          <unitCode>XXXX</unitCode>
+          <default></default>
+          <format></format>
+          <CodeP011>SAMPID01</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011>Sample identifier</NameP011>
+          <IsP011>true</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="12" lastCharOffset="12"/>
+        <Parameter code="SAMP">
+          <fullName></fullName>
+          <unit>Kilometres</unit>
+          <unitCode>ULKM</unitCode>
+          <default></default>
+          <format>%3d</format>
+          <CodeP011>LENTRACK</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011>Length of sampling track</NameP011>
+          <IsP011>true</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="12" lastCharOffset="12"/>
+        <Parameter code="SAMP">
+          <fullName></fullName>
+          <unit>Centimetres</unit>
+          <unitCode>ULCM</unitCode>
+          <default></default>
+          <format>%3d</format>
+          <CodeP011>MTHWDTH1</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011>Width of sample collector (aperture) {mouth width}</NameP011>
+          <IsP011>true</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="12" lastCharOffset="12"/>
+        <Parameter code="TMES">
+          <fullName></fullName>
+          <unit>Micrometres (microns)</unit>
+          <unitCode>UMIC</unitCode>
+          <default></default>
+          <format>%3d</format>
+          <CodeP011>MSHSIZE1</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011>Size of sample collector (mesh) {mesh size}</NameP011>
+          <IsP011>true</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula></conversionFormula>
+        <isText>true</isText>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="11" lastCharOffset="11"/>
+        <Parameter code="UMLW">
+          <fullName></fullName>
+          <unit></unit>
+          <unitCode>XXXX</unitCode>
+          <default></default>
+          <format></format>
+          <CodeP011>MLITTYPW</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011>Type class of micro-litter particles in the water body by categorisation using EMODnet chemistry reporting protocol</NameP011>
+          <IsP011>true</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula></conversionFormula>
+        <isText>true</isText>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="13" lastCharOffset="13"/>
+        <Parameter code="UMLW">
+          <fullName></fullName>
+          <unit></unit>
+          <unitCode>XXXX</unitCode>
+          <default></default>
+          <format></format>
+          <CodeP011>MLITSIZW</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011>Size class of micro-litter particles in the water body by categorisation using EMODnet chemistry reporting protocol</NameP011>
+          <IsP011>true</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="12" lastCharOffset="12"/>
+        <Parameter code="UMLW">
+          <fullName></fullName>
+          <unit>Not applicable</unit>
+          <unitCode>XXXX</unitCode>
+          <default></default>
+          <format>%3d</format>
+          <CodeP011>MLITCNTW</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011>Count of micro-litter particles in the water body by categorisation using EMODnet chemistry reporting protocol</NameP011>
+          <IsP011>true</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+    </parameters>
+  </DataModel>
+  <ConversionModel>
+    <permissions>
+      <MEDATLAS enable="true"/>
+      <ODV_MULTISTATIONS enable="true"/>
+      <ODV_MONOSTATION enable="true"/>
+      <UNKNOWN enable="true"/>
+      <NETCDF_MONOSTATION enable="true"/>
+      <NETCDF_MULTISTATIONS enable="true"/>
+    </permissions>
+    <sortStations>false</sortStations>
+    <outputFormat>ODV_MULTISTATIONS</outputFormat>
+  </ConversionModel>
+</InputModel>

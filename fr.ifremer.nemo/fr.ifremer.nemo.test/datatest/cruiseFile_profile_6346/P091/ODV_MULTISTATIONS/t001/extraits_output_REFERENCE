@@ -1,0 +1,15 @@
+//
+//SDN_parameter_mapping
+//<subject>SDN:LOCAL:DEPH</subject><object>SDN:P011::ADEPZZ01</object><units>SDN:P061::ULAA</units>
+//<subject>SDN:LOCAL:TEMP</subject><object>SDN:P011::TEMPPR01</object><units>SDN:P061::UPAA</units>
+//<subject>SDN:LOCAL:PSAL</subject><object>SDN:P011::PSLTZZ01</object><units>SDN:P061::UUUU</units>
+//
+Cruise	Station	Type	yyyy-mm-ddThh:mm:ss.sss	Longitude [degrees_east]	Latitude [degrees_north]	LOCAL_CDI_ID	EDMO_code	Bot. Depth [m]	DEPH [meter]	QV:SEADATANET	TEMP [Celsius degree]	QV:SEADATANET	PSAL [P.S.U.]	QV:SEADATANET
+testaaaaaaaaa	1	B	1969-05-23T14:15:00.000	+031.933333	+46.433333 	testaaaaaaaaa_00001_H09	486	 	   0.0	0	18.500	0		9
+									   0.0	0	18.500	0		9
+									   2.0	0	18.500	0	18.500	0
+testaaaaaaaaa	2	B	1969-05-23T15:50:00.000	+031.966667	+46.433333 	testaaaaaaaaa_00002_H09	486	 	   1.0	0	18.200	0	18.480	0
+									   1.0	0	18.200	0	18.480	0
+testaaaaaaaaa	3	B	1969-05-24T08:50:00.000	+031.866667	+46.366667 	testaaaaaaaaa_00003_H09	486	 	   0.0	0	17.300	0		9
+									   0.0	0	17.300	0		9
+									   2.0	0	17.200	0	16.780	0

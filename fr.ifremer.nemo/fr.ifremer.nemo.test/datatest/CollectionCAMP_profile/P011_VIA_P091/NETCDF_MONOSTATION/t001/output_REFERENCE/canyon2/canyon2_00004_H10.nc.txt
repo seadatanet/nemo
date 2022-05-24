@@ -1,0 +1,345 @@
+netcdf canyon2_00004_H10 {
+dimensions:
+	INSTANCE = 1 ;
+	MAXZ = 214 ;
+	REFMAX = 1 ;
+	STRING171 = 171 ;
+	STRING17 = 17 ;
+variables:
+	int SDN_EDMO_CODE(INSTANCE) ;
+		SDN_EDMO_CODE:long_name = "European Directory of Marine Organisations code for the CDI supplier" ;
+	char SDN_CRUISE(INSTANCE, STRING17) ;
+		SDN_CRUISE:long_name = "canyon2" ;
+		SDN_CRUISE:startDate = "2004-02-10T13:15:00.000" ;
+		SDN_CRUISE:endDate = "2004-02-10T15:50:00.000" ;
+	char SDN_STATION(INSTANCE, STRING17) ;
+		SDN_STATION:long_name = "List of station numbers" ;
+	char SDN_LOCAL_CDI_ID(INSTANCE, STRING17) ;
+		SDN_LOCAL_CDI_ID:long_name = "SeaDataNet CDI identifier" ;
+		SDN_LOCAL_CDI_ID:cf_role = "profile_id" ;
+	char SDN_XLINK(INSTANCE, REFMAX, STRING171) ;
+		SDN_XLINK:long_name = "External resource linkages" ;
+	float SDN_BOT_DEPTH(INSTANCE) ;
+		SDN_BOT_DEPTH:long_name = "Bathymetric depth at  measurement site" ;
+		SDN_BOT_DEPTH:sdn_parameter_urn = "SDN:P01::MBANZZZZ" ;
+		SDN_BOT_DEPTH:sdn_parameter_name = "Sea-floor depth (below instantaneous sea level) {bathymetric depth} in the water body" ;
+		SDN_BOT_DEPTH:sdn_uom_urn = "SDN:P06::ULAA" ;
+		SDN_BOT_DEPTH:sdn_uom_name = "Metres" ;
+		SDN_BOT_DEPTH:units = "meters" ;
+		SDN_BOT_DEPTH:standard_name = "sea_floor_depth_below_sea_surface" ;
+		SDN_BOT_DEPTH:_FillValue = -999.f ;
+	double LONGITUDE(INSTANCE) ;
+		LONGITUDE:long_name = "Longitude" ;
+		LONGITUDE:sdn_parameter_urn = "SDN:P01::ALONZZ01" ;
+		LONGITUDE:sdn_parameter_name = "Longitude east" ;
+		LONGITUDE:sdn_uom_urn = "SDN:P06::DEGE" ;
+		LONGITUDE:sdn_uom_name = "Degrees east" ;
+		LONGITUDE:units = "degrees_east" ;
+		LONGITUDE:standard_name = "longitude" ;
+		LONGITUDE:axis = "X" ;
+		LONGITUDE:ancillary_variables = "POSITION_SEADATANET_QC" ;
+		LONGITUDE:grid_mapping = "crs" ;
+		LONGITUDE:_FillValue = -99999. ;
+	double LATITUDE(INSTANCE) ;
+		LATITUDE:long_name = "Latitude" ;
+		LATITUDE:sdn_parameter_urn = "SDN:P01::ALATZZ01" ;
+		LATITUDE:sdn_parameter_name = "Latitude north" ;
+		LATITUDE:sdn_uom_urn = "SDN:P06::DEGN" ;
+		LATITUDE:sdn_uom_name = "Degrees north" ;
+		LATITUDE:units = "degrees_north" ;
+		LATITUDE:standard_name = "latitude" ;
+		LATITUDE:axis = "Y" ;
+		LATITUDE:ancillary_variables = "POSITION_SEADATANET_QC" ;
+		LATITUDE:grid_mapping = "crs" ;
+		LATITUDE:_FillValue = -99999. ;
+	byte POSITION_SEADATANET_QC(INSTANCE) ;
+		POSITION_SEADATANET_QC:long_name = "SeaDataNet quality flag" ;
+		POSITION_SEADATANET_QC:Conventions = "SeaDataNet measurand qualifier flags" ;
+		POSITION_SEADATANET_QC:_FillValue = 57b ;
+		POSITION_SEADATANET_QC:sdn_conventions_urn = "SDN:L20::" ;
+		POSITION_SEADATANET_QC:flag_values = 48b, 49b, 50b, 51b, 52b, 53b, 54b, 55b, 56b, 57b, 65b ;
+		POSITION_SEADATANET_QC:flag_meanings = "no_quality_control good_value probably_good_value probably_bad_value bad_value changed_value value_below_detection value_in_excess interpolated_value missing_value value_phenomenon_uncertain" ;
+	int crs ;
+		crs:grid_mapping_name = "latitude_longitude" ;
+		crs:epsg_code = "EPSG:4326" ;
+		crs:semi_major_axis = 6378137. ;
+		crs:inverse_flattening = 298.257223563 ;
+	double TIME(INSTANCE) ;
+		TIME:long_name = "Chronological Julian Date" ;
+		TIME:sdn_parameter_urn = "SDN:P01::CJDY1101" ;
+		TIME:sdn_parameter_name = "Julian Date (chronological)" ;
+		TIME:sdn_uom_urn = "SDN:P06::UTAA" ;
+		TIME:sdn_uom_name = "Days" ;
+		TIME:units = "days since -4713-01-01T00:00:00Z" ;
+		TIME:standard_name = "time" ;
+		TIME:axis = "T" ;
+		TIME:ancillary_variables = "TIME_SEADATANET_QC" ;
+		TIME:calendar = "julian" ;
+		TIME:_FillValue = -99999. ;
+	byte TIME_SEADATANET_QC(INSTANCE) ;
+		TIME_SEADATANET_QC:long_name = "SeaDataNet quality flag" ;
+		TIME_SEADATANET_QC:Conventions = "SeaDataNet measurand qualifier flags" ;
+		TIME_SEADATANET_QC:_FillValue = 57b ;
+		TIME_SEADATANET_QC:sdn_conventions_urn = "SDN:L20::" ;
+		TIME_SEADATANET_QC:flag_values = 48b, 49b, 50b, 51b, 52b, 53b, 54b, 55b, 56b, 57b, 65b ;
+		TIME_SEADATANET_QC:flag_meanings = "no_quality_control good_value probably_good_value probably_bad_value bad_value changed_value value_below_detection value_in_excess interpolated_value missing_value value_phenomenon_uncertain" ;
+	double DEPTH(INSTANCE, MAXZ) ;
+		DEPTH:long_name = "Depth" ;
+		DEPTH:sdn_parameter_urn = "SDN:P01::ADEPZZ01" ;
+		DEPTH:sdn_parameter_name = "Depth below surface of the water body" ;
+		DEPTH:sdn_uom_urn = "SDN:P06::ULAA" ;
+		DEPTH:sdn_uom_name = "Metres" ;
+		DEPTH:units = "meters" ;
+		DEPTH:standard_name = "sea_water_pressure" ;
+		DEPTH:axis = "Z" ;
+		DEPTH:ancillary_variables = "DEPTH_SEADATANET_QC" ;
+		DEPTH:positive = "down" ;
+		DEPTH:_FillValue = -99999. ;
+	byte DEPTH_SEADATANET_QC(INSTANCE, MAXZ) ;
+		DEPTH_SEADATANET_QC:long_name = "SeaDataNet quality flag" ;
+		DEPTH_SEADATANET_QC:Conventions = "SeaDataNet measurand qualifier flags" ;
+		DEPTH_SEADATANET_QC:_FillValue = 57b ;
+		DEPTH_SEADATANET_QC:sdn_conventions_urn = "SDN:L20::" ;
+		DEPTH_SEADATANET_QC:flag_values = 48b, 49b, 50b, 51b, 52b, 53b, 54b, 55b, 56b, 57b, 65b ;
+		DEPTH_SEADATANET_QC:flag_meanings = "no_quality_control good_value probably_good_value probably_bad_value bad_value changed_value value_below_detection value_in_excess interpolated_value missing_value value_phenomenon_uncertain" ;
+	double PRESPR01(INSTANCE, MAXZ) ;
+		PRESPR01:long_name = "Pressure" ;
+		PRESPR01:sdn_parameter_urn = "SDN:P01::PRESPR01" ;
+		PRESPR01:sdn_parameter_name = "Pressure (spatial co-ordinate) exerted by the water body by profiling pressure sensor and corrected to read zero at sea level" ;
+		PRESPR01:sdn_uom_urn = "SDN:P06::UPDB" ;
+		PRESPR01:sdn_uom_name = "Decibars" ;
+		PRESPR01:units = "decibars" ;
+		PRESPR01:coordinates = "TIME DEPTH LATITUDE LONGITUDE" ;
+		PRESPR01:ancillary_variables = "PRESPR01_SEADATANET_QC" ;
+		PRESPR01:_FillValue = -99999. ;
+		PRESPR01:standard_name = "sea_water_pressure" ;
+	byte PRESPR01_SEADATANET_QC(INSTANCE, MAXZ) ;
+		PRESPR01_SEADATANET_QC:long_name = "SeaDataNet quality flag" ;
+		PRESPR01_SEADATANET_QC:Conventions = "SeaDataNet measurand qualifier flags" ;
+		PRESPR01_SEADATANET_QC:_FillValue = 57b ;
+		PRESPR01_SEADATANET_QC:sdn_conventions_urn = "SDN:L20::" ;
+		PRESPR01_SEADATANET_QC:flag_values = 48b, 49b, 50b, 51b, 52b, 53b, 54b, 55b, 56b, 57b, 65b ;
+		PRESPR01_SEADATANET_QC:flag_meanings = "no_quality_control good_value probably_good_value probably_bad_value bad_value changed_value value_below_detection value_in_excess interpolated_value missing_value value_phenomenon_uncertain" ;
+	double TEMPPR01(INSTANCE, MAXZ) ;
+		TEMPPR01:long_name = "Temperature" ;
+		TEMPPR01:sdn_parameter_urn = "SDN:P01::TEMPPR01" ;
+		TEMPPR01:sdn_parameter_name = "Temperature of the water body" ;
+		TEMPPR01:sdn_uom_urn = "SDN:P06::UPAA" ;
+		TEMPPR01:sdn_uom_name = "Degrees Celsius" ;
+		TEMPPR01:units = "degrees celsius" ;
+		TEMPPR01:coordinates = "TIME DEPTH LATITUDE LONGITUDE" ;
+		TEMPPR01:ancillary_variables = "TEMPPR01_SEADATANET_QC" ;
+		TEMPPR01:_FillValue = -99999. ;
+		TEMPPR01:standard_name = "sea_water_temperature" ;
+	byte TEMPPR01_SEADATANET_QC(INSTANCE, MAXZ) ;
+		TEMPPR01_SEADATANET_QC:long_name = "SeaDataNet quality flag" ;
+		TEMPPR01_SEADATANET_QC:Conventions = "SeaDataNet measurand qualifier flags" ;
+		TEMPPR01_SEADATANET_QC:_FillValue = 57b ;
+		TEMPPR01_SEADATANET_QC:sdn_conventions_urn = "SDN:L20::" ;
+		TEMPPR01_SEADATANET_QC:flag_values = 48b, 49b, 50b, 51b, 52b, 53b, 54b, 55b, 56b, 57b, 65b ;
+		TEMPPR01_SEADATANET_QC:flag_meanings = "no_quality_control good_value probably_good_value probably_bad_value bad_value changed_value value_below_detection value_in_excess interpolated_value missing_value value_phenomenon_uncertain" ;
+	double PSLTZZ01(INSTANCE, MAXZ) ;
+		PSLTZZ01:long_name = "Salinity" ;
+		PSLTZZ01:sdn_parameter_urn = "SDN:P01::PSLTZZ01" ;
+		PSLTZZ01:sdn_parameter_name = "Practical salinity of the water body" ;
+		PSLTZZ01:sdn_uom_urn = "SDN:P06::UUUU" ;
+		PSLTZZ01:sdn_uom_name = "Dimensionless" ;
+		PSLTZZ01:units = "dimensionless" ;
+		PSLTZZ01:coordinates = "TIME DEPTH LATITUDE LONGITUDE" ;
+		PSLTZZ01:ancillary_variables = "PSLTZZ01_SEADATANET_QC" ;
+		PSLTZZ01:_FillValue = -99999. ;
+		PSLTZZ01:standard_name = "sea_water_salinity" ;
+	byte PSLTZZ01_SEADATANET_QC(INSTANCE, MAXZ) ;
+		PSLTZZ01_SEADATANET_QC:long_name = "SeaDataNet quality flag" ;
+		PSLTZZ01_SEADATANET_QC:Conventions = "SeaDataNet measurand qualifier flags" ;
+		PSLTZZ01_SEADATANET_QC:_FillValue = 57b ;
+		PSLTZZ01_SEADATANET_QC:sdn_conventions_urn = "SDN:L20::" ;
+		PSLTZZ01_SEADATANET_QC:flag_values = 48b, 49b, 50b, 51b, 52b, 53b, 54b, 55b, 56b, 57b, 65b ;
+		PSLTZZ01_SEADATANET_QC:flag_meanings = "no_quality_control good_value probably_good_value probably_bad_value bad_value changed_value value_below_detection value_in_excess interpolated_value missing_value value_phenomenon_uncertain" ;
+
+// global attributes:
+		:title = "NetCDF PROFILE - Generated by NEMO, version 1.6.4" ;
+		:Conventions = "SeaDataNet_1.0 CF 1.6" ;
+		:featureType = "profile" ;
+		:date_update = "2017-05-05T16:44+0200" ;
+data:
+
+ SDN_EDMO_CODE = 486 ;
+
+ SDN_CRUISE =
+  "canyon2" ;
+
+ SDN_STATION =
+  "4" ;
+
+ SDN_LOCAL_CDI_ID =
+  "canyon2_00004_H10" ;
+
+ SDN_XLINK =
+  "<sdn_reference xlink:href=\"http://seadatanet.maris2.nl/v_cdi_v3/print_xml.asp?edmo=486&identifier=canyon2_00004_H10\" xlink:role=\"isDescribedBy\" xlink:type=\"SDN:L23::CDI\"/>" ;
+
+ SDN_BOT_DEPTH = 211 ;
+
+ LONGITUDE = 5.1299 ;
+
+ LATITUDE = 43.0748 ;
+
+ POSITION_SEADATANET_QC = 48 ;
+
+ crs = 0 ;
+
+ TIME = 2453046.659722 ;
+
+ TIME_SEADATANET_QC = 48 ;
+
+ DEPTH =
+  0, 1, 2, 3, 4, 5, 6, 6.9, 7.9, 8.9, 9.9, 10.9, 11.9, 12.9, 13.9, 14.9, 
+    15.9, 16.9, 17.9, 18.8, 19.8, 20.8, 21.8, 22.8, 23.8, 24.8, 25.8, 26.8, 
+    27.8, 28.8, 29.8, 30.8, 31.7, 32.7, 33.7, 34.7, 35.7, 36.7, 37.7, 38.7, 
+    39.7, 40.7, 41.7, 42.7, 43.6, 44.6, 45.6, 46.6, 47.6, 48.6, 49.6, 50.6, 
+    51.6, 52.6, 53.6, 54.6, 55.5, 56.5, 57.5, 58.5, 59.5, 60.5, 61.5, 62.5, 
+    63.5, 64.5, 65.5, 66.5, 67.4, 68.4, 69.4, 70.4, 71.4, 72.4, 73.4, 74.4, 
+    75.4, 76.4, 77.4, 78.4, 79.3, 80.3, 81.3, 82.3, 83.3, 84.3, 85.3, 86.3, 
+    87.3, 88.3, 89.3, 90.3, 91.2, 92.2, 93.2, 94.2, 95.2, 96.2, 97.2, 98.2, 
+    99.2, 100.2, 101.2, 102.2, 103.1, 104.1, 105.1, 106.1, 107.1, 108.1, 
+    109.1, 110.1, 111.1, 112.1, 113.1, 114.1, 115, 116, 117, 118, 119, 120, 
+    121, 122, 123, 124, 125, 126, 126.9, 127.9, 128.9, 129.9, 130.9, 131.9, 
+    132.9, 133.9, 134.9, 135.9, 136.9, 137.8, 138.8, 139.8, 140.8, 141.8, 
+    142.8, 143.8, 144.8, 145.8, 146.8, 147.8, 148.8, 149.7, 150.7, 151.7, 
+    152.7, 153.7, 154.7, 155.7, 156.7, 157.7, 158.7, 159.7, 160.7, 161.6, 
+    162.6, 163.6, 164.6, 165.6, 166.6, 167.6, 168.6, 169.6, 170.6, 171.6, 
+    172.5, 173.5, 174.5, 175.5, 176.5, 177.5, 178.5, 179.5, 180.5, 181.5, 
+    182.5, 183.4, 184.4, 185.4, 186.4, 187.4, 188.4, 189.4, 190.4, 191.4, 
+    192.4, 193.4, 194.4, 195.3, 196.3, 197.3, 198.3, 199.3, 200.3, 201.3, 
+    202.3, 203.3, 204.3, 205.3, 206.2, 207.2, 208.2, 209.2, 210.2, 211.2 ;
+
+ DEPTH_SEADATANET_QC =
+  48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 
+    48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 
+    48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 
+    48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 
+    48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 
+    48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 
+    48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 
+    48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 
+    48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 
+    48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 
+    48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 
+    48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48 ;
+
+ PRESPR01 =
+  0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 
+    21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 
+    39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 
+    57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 
+    75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 
+    93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 
+    109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 
+    123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 
+    137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 
+    151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 
+    165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178, 
+    179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 
+    193, 194, 195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205, 206, 
+    207, 208, 209, 210, 211, 212, 213 ;
+
+ PRESPR01_SEADATANET_QC =
+  48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 
+    48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 
+    48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 
+    48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 
+    48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 
+    48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 
+    48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 
+    48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 
+    48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 
+    48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 
+    48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 
+    48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48 ;
+
+ TEMPPR01 =
+  13.1911, 13.1894, 13.1841, 13.1749, 13.1622, 13.1473, 13.132, 13.1181, 
+    13.1062, 13.0966, 13.089, 13.0831, 13.0785, 13.0749, 13.0719, 13.0692, 
+    13.0669, 13.0647, 13.0627, 13.0611, 13.0597, 13.0586, 13.0576, 13.0567, 
+    13.0556, 13.0543, 13.0527, 13.0508, 13.0484, 13.0456, 13.0424, 13.0391, 
+    13.0358, 13.0328, 13.0303, 13.0284, 13.0269, 13.0256, 13.0243, 13.0228, 
+    13.021, 13.019, 13.0172, 13.0161, 13.0157, 13.0162, 13.0172, 13.0187, 
+    13.0203, 13.022, 13.0238, 13.0258, 13.0282, 13.0312, 13.0352, 13.0401, 
+    13.0459, 13.0526, 13.06, 13.0685, 13.0791, 13.0932, 13.112, 13.1359, 
+    13.1635, 13.1914, 13.2159, 13.2342, 13.2457, 13.252, 13.2553, 13.2581, 
+    13.2623, 13.2692, 13.2792, 13.2923, 13.3075, 13.3237, 13.3393, 13.3529, 
+    13.3635, 13.3707, 13.3745, 13.3756, 13.3748, 13.3729, 13.3709, 13.3698, 
+    13.3706, 13.3739, 13.3803, 13.3897, 13.401, 13.4126, 13.4229, 13.4304, 
+    13.4349, 13.4368, 13.4375, 13.4381, 13.4399, 13.4442, 13.4527, 13.4674, 
+    13.4901, 13.5205, 13.5563, 13.5931, 13.6265, 13.6534, 13.6726, 13.6845, 
+    13.6905, 13.6917, 13.6892, 13.6843, 13.6781, 13.6715, 13.6651, 13.6585, 
+    13.6513, 13.6433, 13.6347, 13.6252, 13.6134, 13.5968, 13.5735, 13.5438, 
+    13.5106, 13.4782, 13.45, 13.4275, 13.4104, 13.3976, 13.3879, 13.3806, 
+    13.3748, 13.37, 13.3657, 13.3617, 13.3579, 13.3545, 13.3516, 13.3495, 
+    13.3481, 13.3473, 13.347, 13.3471, 13.3475, 13.348, 13.3487, 13.3496, 
+    13.3506, 13.3517, 13.3527, 13.3535, 13.354, 13.3542, 13.354, 13.3537, 
+    13.3534, 13.3534, 13.354, 13.355, 13.3567, 13.3588, 13.3613, 13.3637, 
+    13.3658, 13.3673, 13.3681, 13.3684, 13.3679, 13.3664, 13.3635, 13.3594, 
+    13.3545, 13.3496, 13.3454, 13.3426, 13.3411, 13.3406, 13.3405, 13.34, 
+    13.3388, 13.3366, 13.3338, 13.3308, 13.3279, 13.3254, 13.323, 13.3209, 
+    13.3191, 13.3177, 13.3168, 13.3164, 13.3162, 13.3162, 13.3161, 13.316, 
+    13.3159, 13.3158, 13.3159, 13.3162, 13.3169, 13.3181, 13.3198, 13.322, 
+    13.3245, 13.3269, 13.3289, 13.3302, 13.3309, 13.3311 ;
+
+ TEMPPR01_SEADATANET_QC =
+  48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 
+    48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 
+    48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 
+    48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 
+    48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 
+    48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 
+    48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 
+    48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 
+    48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 
+    48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 
+    48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 
+    48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48 ;
+
+ PSLTZZ01 =
+  38.0551, 38.0549, 38.0552, 38.0558, 38.0565, 38.0571, 38.0574, 38.0571, 
+    38.0565, 38.0556, 38.0546, 38.0538, 38.0532, 38.0527, 38.0524, 38.052, 
+    38.0518, 38.0515, 38.0512, 38.051, 38.0509, 38.0507, 38.0506, 38.0504, 
+    38.0503, 38.05, 38.0498, 38.0495, 38.0491, 38.0485, 38.0479, 38.0471, 
+    38.0463, 38.0455, 38.0449, 38.0444, 38.044, 38.0438, 38.0435, 38.0433, 
+    38.043, 38.0426, 38.0423, 38.0421, 38.0421, 38.0422, 38.0425, 38.0429, 
+    38.0434, 38.0439, 38.0445, 38.0452, 38.046, 38.047, 38.0483, 38.0499, 
+    38.0518, 38.0539, 38.0563, 38.0589, 38.0621, 38.0666, 38.0728, 38.081, 
+    38.0906, 38.1005, 38.1094, 38.1164, 38.1213, 38.1245, 38.1266, 38.1286, 
+    38.131, 38.1343, 38.1389, 38.1445, 38.151, 38.1578, 38.1641, 38.1694, 
+    38.1737, 38.1768, 38.1792, 38.181, 38.1825, 38.1839, 38.1852, 38.1868, 
+    38.1888, 38.1915, 38.1952, 38.1995, 38.2042, 38.2087, 38.2127, 38.2157, 
+    38.2177, 38.2191, 38.22, 38.2208, 38.2218, 38.2234, 38.2263, 38.2313, 
+    38.2388, 38.2489, 38.2607, 38.2729, 38.2843, 38.2937, 38.3009, 38.3058, 
+    38.3088, 38.3102, 38.3105, 38.31, 38.3091, 38.3079, 38.3066, 38.3049, 
+    38.303, 38.3009, 38.2987, 38.2966, 38.2943, 38.2914, 38.2873, 38.2818, 
+    38.2752, 38.2682, 38.2617, 38.2562, 38.252, 38.2489, 38.2464, 38.2444, 
+    38.2426, 38.241, 38.2396, 38.2383, 38.2372, 38.2363, 38.2357, 38.2354, 
+    38.2354, 38.2354, 38.2355, 38.2354, 38.2353, 38.2352, 38.2352, 38.2351, 
+    38.2352, 38.2353, 38.2355, 38.2358, 38.236, 38.2361, 38.2361, 38.2361, 
+    38.236, 38.2361, 38.2363, 38.2367, 38.2373, 38.238, 38.2389, 38.2397, 
+    38.2406, 38.2413, 38.2417, 38.242, 38.242, 38.2416, 38.241, 38.2402, 
+    38.2393, 38.2384, 38.2378, 38.2374, 38.2373, 38.2374, 38.2376, 38.2378, 
+    38.2379, 38.2378, 38.2377, 38.2374, 38.2371, 38.2368, 38.2366, 38.2364, 
+    38.2362, 38.2362, 38.2362, 38.2363, 38.2365, 38.2366, 38.2367, 38.2367, 
+    38.2365, 38.2363, 38.2362, 38.2363, 38.2366, 38.2373, 38.2383, 38.2397, 
+    38.2412, 38.2428, 38.2439, 38.2447, 38.2449, 38.2446 ;
+
+ PSLTZZ01_SEADATANET_QC =
+  48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 
+    48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 
+    48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 
+    48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 
+    48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 
+    48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 
+    48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 
+    48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 
+    48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 
+    48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 
+    48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 
+    48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48 ;
+}

@@ -1,0 +1,366 @@
+<InputModel version="1.7.0" isValid="true">
+  <MediaModel path="/home/sophie/Documents/workspaces/SISMER/Nemos/nemo/fr.ifremer.nemo.test/datatest/22733_nolwenn/input">
+    <processType multiStations="false">CRUISE_FILE</processType>
+    <separator></separator>
+    <inputType>PROFILE</inputType>
+    <variant>PHYSICOCHEMICAL</variant>
+    <fileHeader>2</fileHeader>
+    <stationHeader pattern="" useSeparatorInStationHeader="false">0</stationHeader>
+    <colTitleInInputFile colTitleInInputFileCheck="false" colTitlesInInputFileLineNb="0" useTableForCsvData="false"/>
+    <endStation>0</endStation>
+    <endData pattern="xxxxxxxxxxxxxxxxxxxxxxxxxx" patternIsRegexp="false">BEGIN_LINE_CHANGES</endData>
+  </MediaModel>
+  <CruiseModel>
+    <reference>FI35200404005</reference>
+    <bshCsrReference></bshCsrReference>
+    <localCSRIdentifier>4040050</localCSRIdentifier>
+    <name>OVIDE 2</name>
+    <shipCode>35HT</shipCode>
+    <shipName>Thalassa</shipName>
+    <startDate>1086307200000</startDate>
+    <endDate>1089158400000</endDate>
+    <regionName>Northeast Atlantic Ocean (40W)</regionName>
+    <regionCode>SVX00015</regionCode>
+    <country>35</country>
+    <laboratories>IFREMER , CNRS/INSU, IIM Vigo, IUEM/Universit&#233; de Bretagne Occidentale</laboratories>
+    <chiefScientist>HUCK Thierry</chiefScientist>
+    <projectName>OVIDE</projectName>
+    <dataCentre>FI</dataCentre>
+    <availability>publicly</availability>
+    <comment><![CDATA[The cross-over analysis carried out at the carbon dioxide information analysis
+center (CDIAC) suggested that, for consistency with reference cruises, the
+nitrate, silicate and phosphate data measured during the OVIDE 2002, 2004,
+2006, 2008 and 2010 cruises should be multiplied by 0.96, 0.98 and 1.1
+respectively. See http://cdiac.ornl.gov/oceans/GLODAPv2/cruise_table.html for
+more information. This correction was not applied to this data set. ]]></comment>
+    <dataTypes>
+      <DataType code="H09 - Water bottle stations">
+        <profiles>114</profiles>
+        <qc>false</qc>
+        <sensor>true</sensor>
+      </DataType>
+      <DataType code="H21 - Oxygen">
+        <profiles>114</profiles>
+        <qc>false</qc>
+        <sensor>false</sensor>
+      </DataType>
+      <DataType code="H22 - Phosphate">
+        <profiles>114</profiles>
+        <qc>false</qc>
+        <sensor>false</sensor>
+      </DataType>
+      <DataType code="H24 - Nitrate">
+        <profiles>114</profiles>
+        <qc>false</qc>
+        <sensor>false</sensor>
+      </DataType>
+      <DataType code="H26 - Silicate">
+        <profiles>114</profiles>
+        <qc>false</qc>
+        <sensor>false</sensor>
+      </DataType>
+      <DataType code="H27 - Alkalinity">
+        <profiles>114</profiles>
+        <qc>false</qc>
+        <sensor>false</sensor>
+      </DataType>
+      <DataType code="H28 - pH">
+        <profiles>114</profiles>
+        <qc>false</qc>
+        <sensor>false</sensor>
+      </DataType>
+    </dataTypes>
+  </CruiseModel>
+  <StationModel>
+    <referenceProperty>
+      <PropertyModel property="" userProvided="false">
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>1</firstLine>
+          <lastLine>1</lastLine>
+          <firstCharOffset>23</firstCharOffset>
+          <lastCharOffset>26</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+    </referenceProperty>
+    <properties>
+      <PropertyModel property="USE_STATION_CODE_IN_LOCAL_CDI_ID_CHECKBOX" userProvided="true">
+        <userValue>true</userValue>
+      </PropertyModel>
+      <PropertyModel property="dcHistory1" userProvided="true">
+        <userValue>Niskin</userValue>
+      </PropertyModel>
+      <PropertyModel property="dcHistory2" userProvided="true">
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="comment" userProvided="true">
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="surfaceSamples1" userProvided="true">
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="surfaceSamples2" userProvided="true">
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="offsetTU" userProvided="true">
+        <format>
+          <FloatFormat formatString="%4.1f"/>
+        </format>
+        <userValue>0.0</userValue>
+      </PropertyModel>
+      <PropertyModel property="time" userProvided="false">
+        <format>
+          <DateTimeFormat formatString="hh24mm"/>
+        </format>
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>1</firstLine>
+          <lastLine>1</lastLine>
+          <firstCharOffset>45</firstCharOffset>
+          <lastCharOffset>48</lastCharOffset>
+          <isDefaultValueSelected>false</isDefaultValueSelected>
+          <defaultValue></defaultValue>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="date" userProvided="false">
+        <format>
+          <DateTimeFormat formatString="YYYYMMDD"/>
+        </format>
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>1</firstLine>
+          <lastLine>1</lastLine>
+          <firstCharOffset>31</firstCharOffset>
+          <lastCharOffset>38</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="latitude" userProvided="false">
+        <format>
+          <LatitudeFormat formatString="+DD.ddd"/>
+        </format>
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>1</firstLine>
+          <lastLine>1</lastLine>
+          <firstCharOffset>52</firstCharOffset>
+          <lastCharOffset>58</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="longitude" userProvided="false">
+        <format>
+          <LongitudeFormat formatString="+DD.ddd"/>
+        </format>
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>1</firstLine>
+          <lastLine>1</lastLine>
+          <firstCharOffset>62</firstCharOffset>
+          <lastCharOffset>68</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="bottomDepth" userProvided="false">
+        <format>
+          <FloatFormat formatString="%4.0f"/>
+        </format>
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>1</firstLine>
+          <lastLine>1</lastLine>
+          <firstCharOffset>74</firstCharOffset>
+          <lastCharOffset>78</lastCharOffset>
+          <isDefaultValueSelected>false</isDefaultValueSelected>
+          <defaultValue></defaultValue>
+        </HeaderFragment>
+      </PropertyModel>
+    </properties>
+    <DataType code="H09">
+      <profiles>114</profiles>
+      <qc>false</qc>
+      <sensor>true</sensor>
+    </DataType>
+    <FlagTable code="C1" label="SeaDataNet">
+      <Flag local="0" SDN="0 - no quality control"/>
+      <Flag local="1" SDN="1 - good value"/>
+      <Flag local="2" SDN="2 - probably good value"/>
+      <Flag local="3" SDN="3 - probably bad value"/>
+      <Flag local="4" SDN="4 - bad value"/>
+      <Flag local="5" SDN="5 - changed value"/>
+      <Flag local="6" SDN="6 - value below detection"/>
+      <Flag local="7" SDN="7 - value in excess"/>
+      <Flag local="8" SDN="8 - interpolated value"/>
+      <Flag local="9" SDN="9 - missing value"/>
+      <Flag local="A" SDN="A - value phenomenon uncertain"/>
+    </FlagTable>
+  </StationModel>
+  <DataModel>
+    <dataListType>P091</dataListType>
+    <mesureType>BSSURF</mesureType>
+    <fallrateCode></fallrateCode>
+    <fallrateLabel></fallrateLabel>
+    <verticalParametersList>
+      <p_depthBSBed></p_depthBSBed>
+      <p_depthBSSurf></p_depthBSSurf>
+      <p_pressure>PRES</p_pressure>
+      <p_heightASLvl></p_heightASLvl>
+    </verticalParametersList>
+    <parameters>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="83" lastCharOffset="88"/>
+        <Parameter code="PRES">
+          <fullName>SEA PRESSURE sea surface=0</fullName>
+          <unit>Decibars</unit>
+          <unitCode>UPDB</unitCode>
+          <default>-999.9</default>
+          <format>%6.1f</format>
+          <CodeP011>PRESPR01</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011></NameP011>
+          <IsP011>false</IsP011>
+          <instrument>Niskin bottle</instrument>
+          <instrumentCode>TOOL0412</instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault>-999.000</inputDefault>
+        <LineFragment firstCharOffset="91" lastCharOffset="98"/>
+        <Flag firstCharOffset="108" lastCharOffset="108"/>
+        <Parameter code="PSAL">
+          <fullName>PRACTICAL SALINITY</fullName>
+          <unit>Dimensionless</unit>
+          <unitCode>UUUU</unitCode>
+          <default>99.999</default>
+          <format>%6.3f</format>
+          <CodeP011>PSLTZZ01</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011></NameP011>
+          <IsP011>false</IsP011>
+          <instrument>Niskin bottle</instrument>
+          <instrumentCode>TOOL0412</instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault>-999.0</inputDefault>
+        <LineFragment firstCharOffset="113" lastCharOffset="118"/>
+        <Flag firstCharOffset="128" lastCharOffset="128"/>
+        <Parameter code="DOX2">
+          <fullName>DISSOLVED OXYGEN</fullName>
+          <unit>Micromoles per kilogram</unit>
+          <unitCode>KGUM</unitCode>
+          <default>999.9</default>
+          <format>%5.1f</format>
+          <CodeP011>DOXMZZXX</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011></NameP011>
+          <IsP011>false</IsP011>
+          <instrument>Niskin bottle</instrument>
+          <instrumentCode>TOOL0412</instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault>-999.00</inputDefault>
+        <LineFragment firstCharOffset="172" lastCharOffset="178"/>
+        <Flag firstCharOffset="188" lastCharOffset="188"/>
+        <Parameter code="PHOW">
+          <fullName>PHOSPHATE (PO4-P) CONTENT</fullName>
+          <unit>Micromoles per kilogram</unit>
+          <unitCode>KGUM</unitCode>
+          <default>9.99</default>
+          <format>%4.2f</format>
+          <CodeP011>MDMAP906</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011></NameP011>
+          <IsP011>false</IsP011>
+          <instrument>Niskin bottle</instrument>
+          <instrumentCode>TOOL0412</instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault>-999.00</inputDefault>
+        <LineFragment firstCharOffset="152" lastCharOffset="158"/>
+        <Flag firstCharOffset="168" lastCharOffset="168"/>
+        <Parameter code="NTAW">
+          <fullName>NITRATE (NO3-N) CONTENT</fullName>
+          <unit>Micromoles per kilogram</unit>
+          <unitCode>KGUM</unitCode>
+          <default>99.99</default>
+          <format>%5.2f</format>
+          <CodeP011>MDMAP005</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011></NameP011>
+          <IsP011>false</IsP011>
+          <instrument>Niskin bottle</instrument>
+          <instrumentCode>TOOL0412</instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault>-999.00</inputDefault>
+        <LineFragment firstCharOffset="132" lastCharOffset="138"/>
+        <Flag firstCharOffset="148" lastCharOffset="148"/>
+        <Parameter code="SLCW">
+          <fullName>SILICATE (SIO4-SI) CONTENT</fullName>
+          <unit>Micromoles per kilogram</unit>
+          <unitCode>KGUM</unitCode>
+          <default>999.99</default>
+          <format>%6.2f</format>
+          <CodeP011>MDMAP012</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011></NameP011>
+          <IsP011>false</IsP011>
+          <instrument>Niskin bottle</instrument>
+          <instrumentCode>TOOL0412</instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault>-999.000</inputDefault>
+        <LineFragment firstCharOffset="211" lastCharOffset="218"/>
+        <Flag firstCharOffset="228" lastCharOffset="228"/>
+        <Parameter code="PHPH">
+          <fullName>PH</fullName>
+          <unit>pH units</unit>
+          <unitCode>UUPH</unitCode>
+          <default>9.999</default>
+          <format>%5.3f</format>
+          <CodeP011>PHXXZZXX</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011></NameP011>
+          <IsP011>false</IsP011>
+          <instrument>Niskin bottle</instrument>
+          <instrumentCode>TOOL0412</instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault>-999.0</inputDefault>
+        <LineFragment firstCharOffset="193" lastCharOffset="198"/>
+        <Flag firstCharOffset="208" lastCharOffset="208"/>
+        <Parameter code="ALKW">
+          <fullName>ALKALINITY</fullName>
+          <unit>Micromoles per kilogram</unit>
+          <unitCode>KGUM</unitCode>
+          <default>9999.9</default>
+          <format>%6.1f</format>
+          <CodeP011>MDMAP014</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011></NameP011>
+          <IsP011>false</IsP011>
+          <instrument>Niskin bottle</instrument>
+          <instrumentCode>TOOL0412</instrumentCode>
+        </Parameter>
+      </ParameterModel>
+    </parameters>
+  </DataModel>
+  <ConversionModel>
+    <permissions>
+      <MEDATLAS enable="true"/>
+      <ODV_MULTISTATIONS enable="true"/>
+      <ODV_MONOSTATION enable="true"/>
+      <UNKNOWN enable="true"/>
+      <NETCDF_MONOSTATION enable="true"/>
+      <NETCDF_MULTISTATIONS enable="true"/>
+    </permissions>
+    <sortStations>true</sortStations>
+    <outputFormat>MEDATLAS</outputFormat>
+  </ConversionModel>
+</InputModel>

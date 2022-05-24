@@ -1,0 +1,319 @@
+<InputModel>
+  <Media>
+    <SingleFileSurvey file="Z:\&#214;rjan\rseal_data_1995_traj.txt" lineNumber="1">
+      <Survey>
+        <reference>rsealtest1</reference>
+        <name>rsealtest1</name>
+        <shipCode>ZZ99</shipCode>
+        <shipName>Unknown</shipName>
+        <startDate>796694400000</startDate>
+        <endDate>796694400000</endDate>
+        <regionName>Gulf of Bothnia (Baltic Sea)</regionName>
+        <country>77</country>
+        <laboratories></laboratories>
+        <chiefScientist>XXX</chiefScientist>
+        <projectName></projectName>
+        <dataCentre>SM</dataCentre>
+        <availability>publicly</availability>
+        <comment><![CDATA[]]></comment>
+        <dataTypes>
+          <DataType code="B26 - Mammals and reptiles">
+            <profiles>1</profiles>
+            <qc>false</qc>
+            <sensor>true</sensor>
+          </DataType>
+        </dataTypes>
+        <stations/>
+      </Survey>
+      <StationModel endOnEOF="false" endOnEmptyLine="false" endOnNextStation="false" endOnPattern="true" lineNumber="0">
+        <inputType>trajectory</inputType>
+        <separator></separator>
+        <incrementRef>true</incrementRef>
+        <incrementNumber>1</incrementNumber>
+        <endDataPattern>END</endDataPattern>
+        <rowNumber>0</rowNumber>
+        <endData>0</endData>
+        <Station reference="">
+          <date>0</date>
+          <time>NaN</time>
+          <offsetTU>0.0</offsetTU>
+          <latitude>0.0</latitude>
+          <longitude>0.0</longitude>
+          <bottomDepth>NaN</bottomDepth>
+          <dateQC>0</dateQC>
+          <latitudeQC>0</latitudeQC>
+          <longitudeQC>0</longitudeQC>
+          <depthQC>0</depthQC>
+          <dcHistory1></dcHistory1>
+          <dcHistory2></dcHistory2>
+          <dmHistory1></dmHistory1>
+          <dmHistory2></dmHistory2>
+          <surfaceSample1></surfaceSample1>
+          <surfaceSample2></surfaceSample2>
+          <comment><![CDATA[]]></comment>
+          <DataType code="B26">
+            <profiles>1</profiles>
+            <qc>false</qc>
+            <sensor>true</sensor>
+          </DataType>
+          <TimeSeriesInformation>
+            <endDate>NaN</endDate>
+            <endTime>NaN</endTime>
+            <endLatitude>0.0</endLatitude>
+            <endLongitude>0.0</endLongitude>
+            <endDepth>NaN</endDepth>
+            <qc1>00000</qc1>
+            <sensorDepth>0.0</sensorDepth>
+            <qc2>00</qc2>
+            <qc3>0</qc3>
+            <samplingRate>0.0</samplingRate>
+            <magneticDeclination>-999.0</magneticDeclination>
+          </TimeSeriesInformation>
+        </Station>
+        <parameters>
+          <ParameterModel>
+            <conversionFormula>x*1</conversionFormula>
+            <inputDefault></inputDefault>
+            <LineFragment firstCharOffset="79" lastCharOffset="79"/>
+            <Parameter code="NAVG">
+              <fullName>AVERAGED DATA CYCLE NUMBER</fullName>
+              <unit>number</unit>
+              <default>9</default>
+              <format>%1.0f</format>
+            </Parameter>
+          </ParameterModel>
+        </parameters>
+        <properties>
+          <PropertyModel property="date" userProvided="false">
+            <format>
+              <DateTimeFormat formatString="YYYYMMDD" refDate="0"/>
+            </format>
+            <HeaderFragment isSingleLine="true" isVariable="false">
+              <firstLine>1</firstLine>
+              <lastLine>1</lastLine>
+              <firstCharOffset>6</firstCharOffset>
+              <lastCharOffset>13</lastCharOffset>
+            </HeaderFragment>
+          </PropertyModel>
+          <PropertyModel property="time" userProvided="false">
+            <format>
+              <DateTimeFormat formatString="hh24ms" refDate="0"/>
+            </format>
+            <HeaderFragment isSingleLine="true" isVariable="false">
+              <firstLine>1</firstLine>
+              <lastLine>1</lastLine>
+              <firstCharOffset>1</firstCharOffset>
+              <lastCharOffset>4</lastCharOffset>
+            </HeaderFragment>
+          </PropertyModel>
+          <PropertyModel property="offsetTU" userProvided="true">
+            <format>
+              <FloatFormat formatString="%4.1f"/>
+            </format>
+            <HeaderFragment isSingleLine="false" isVariable="false">
+              <firstLine>1</firstLine>
+              <lastLine>1</lastLine>
+              <firstCharOffset>1</firstCharOffset>
+              <lastCharOffset>1</lastCharOffset>
+            </HeaderFragment>
+          </PropertyModel>
+          <PropertyModel property="latitude" userProvided="false">
+            <format>
+              <LatitudeFormat formatString="DDMM.mm"/>
+            </format>
+            <HeaderFragment isSingleLine="true" isVariable="false">
+              <firstLine>1</firstLine>
+              <lastLine>1</lastLine>
+              <firstCharOffset>47</firstCharOffset>
+              <lastCharOffset>53</lastCharOffset>
+            </HeaderFragment>
+          </PropertyModel>
+          <PropertyModel property="longitude" userProvided="false">
+            <format>
+              <LongitudeFormat formatString="DDMM.mm"/>
+            </format>
+            <HeaderFragment isSingleLine="true" isVariable="false">
+              <firstLine>1</firstLine>
+              <lastLine>1</lastLine>
+              <firstCharOffset>55</firstCharOffset>
+              <lastCharOffset>61</lastCharOffset>
+            </HeaderFragment>
+          </PropertyModel>
+          <PropertyModel property="bottomDepth" userProvided="false">
+            <format>
+              <FloatFormat formatString="%4.0f"/>
+            </format>
+            <HeaderFragment isSingleLine="true" isVariable="false">
+              <firstLine>1</firstLine>
+              <lastLine>1</lastLine>
+              <firstCharOffset>45</firstCharOffset>
+              <lastCharOffset>45</lastCharOffset>
+            </HeaderFragment>
+          </PropertyModel>
+          <PropertyModel property="dcHistory1" userProvided="true">
+            <HeaderFragment isSingleLine="false" isVariable="false">
+              <firstLine>1</firstLine>
+              <lastLine>1</lastLine>
+              <firstCharOffset>1</firstCharOffset>
+              <lastCharOffset>1</lastCharOffset>
+            </HeaderFragment>
+          </PropertyModel>
+          <PropertyModel property="dcHistory2" userProvided="true">
+            <HeaderFragment isSingleLine="false" isVariable="false">
+              <firstLine>1</firstLine>
+              <lastLine>1</lastLine>
+              <firstCharOffset>1</firstCharOffset>
+              <lastCharOffset>1</lastCharOffset>
+            </HeaderFragment>
+          </PropertyModel>
+          <PropertyModel property="surfaceSamples1" userProvided="true">
+            <HeaderFragment isSingleLine="false" isVariable="false">
+              <firstLine>1</firstLine>
+              <lastLine>1</lastLine>
+              <firstCharOffset>1</firstCharOffset>
+              <lastCharOffset>1</lastCharOffset>
+            </HeaderFragment>
+          </PropertyModel>
+          <PropertyModel property="surfaceSamples2" userProvided="true">
+            <HeaderFragment isSingleLine="false" isVariable="false">
+              <firstLine>1</firstLine>
+              <lastLine>1</lastLine>
+              <firstCharOffset>1</firstCharOffset>
+              <lastCharOffset>1</lastCharOffset>
+            </HeaderFragment>
+          </PropertyModel>
+          <PropertyModel property="comment" userProvided="true">
+            <HeaderFragment isSingleLine="false" isVariable="false">
+              <firstLine>1</firstLine>
+              <lastLine>1</lastLine>
+              <firstCharOffset>1</firstCharOffset>
+              <lastCharOffset>1</lastCharOffset>
+            </HeaderFragment>
+          </PropertyModel>
+        </properties>
+        <referenceProperty>
+          <PropertyModel property="reference" userProvided="true">
+            <HeaderFragment isSingleLine="false" isVariable="false">
+              <firstLine>1</firstLine>
+              <lastLine>1</lastLine>
+              <firstCharOffset>1</firstCharOffset>
+              <lastCharOffset>1</lastCharOffset>
+            </HeaderFragment>
+          </PropertyModel>
+        </referenceProperty>
+        <Trajectory>
+          <stationNumber>s1</stationNumber>
+        </Trajectory>
+        <TimeSeriesModel>
+          <sampeRateConversion>*1</sampeRateConversion>
+          <properties>
+            <PropertyModel property="endDate" userProvided="true">
+              <format>
+                <DateTimeFormat formatString="dd/MM/yyyy" refDate="0"/>
+              </format>
+              <HeaderFragment isSingleLine="false" isVariable="false">
+                <firstLine>1</firstLine>
+                <lastLine>1</lastLine>
+                <firstCharOffset>1</firstCharOffset>
+                <lastCharOffset>1</lastCharOffset>
+              </HeaderFragment>
+            </PropertyModel>
+            <PropertyModel property="endTime" userProvided="true">
+              <format>
+                <DateTimeFormat formatString="hh24:mm" refDate="0"/>
+              </format>
+              <HeaderFragment isSingleLine="false" isVariable="false">
+                <firstLine>1</firstLine>
+                <lastLine>1</lastLine>
+                <firstCharOffset>1</firstCharOffset>
+                <lastCharOffset>1</lastCharOffset>
+              </HeaderFragment>
+            </PropertyModel>
+            <PropertyModel property="endLatitude" userProvided="false">
+              <format>
+                <LatitudeFormat formatString="NDD MM SS"/>
+              </format>
+              <HeaderFragment isSingleLine="false" isVariable="false">
+                <firstLine>1</firstLine>
+                <lastLine>1</lastLine>
+                <firstCharOffset>1</firstCharOffset>
+                <lastCharOffset>1</lastCharOffset>
+              </HeaderFragment>
+            </PropertyModel>
+            <PropertyModel property="endLongitude" userProvided="false">
+              <format>
+                <LongitudeFormat formatString="NDDD MM SS"/>
+              </format>
+              <HeaderFragment isSingleLine="false" isVariable="false">
+                <firstLine>1</firstLine>
+                <lastLine>1</lastLine>
+                <firstCharOffset>1</firstCharOffset>
+                <lastCharOffset>1</lastCharOffset>
+              </HeaderFragment>
+            </PropertyModel>
+            <PropertyModel property="endDepth" userProvided="false">
+              <format>
+                <FloatFormat formatString="%4.0f"/>
+              </format>
+              <HeaderFragment isSingleLine="false" isVariable="false">
+                <firstLine>1</firstLine>
+                <lastLine>1</lastLine>
+                <firstCharOffset>1</firstCharOffset>
+                <lastCharOffset>1</lastCharOffset>
+              </HeaderFragment>
+            </PropertyModel>
+            <PropertyModel property="sensorDepth" userProvided="true">
+              <format>
+                <FloatFormat formatString="%4.0f"/>
+              </format>
+              <HeaderFragment isSingleLine="false" isVariable="false">
+                <firstLine>1</firstLine>
+                <lastLine>1</lastLine>
+                <firstCharOffset>1</firstCharOffset>
+                <lastCharOffset>1</lastCharOffset>
+              </HeaderFragment>
+            </PropertyModel>
+            <PropertyModel property="samplingRate" userProvided="true">
+              <format>
+                <FloatFormat formatString="%4.0f"/>
+              </format>
+              <HeaderFragment isSingleLine="false" isVariable="false">
+                <firstLine>1</firstLine>
+                <lastLine>1</lastLine>
+                <firstCharOffset>1</firstCharOffset>
+                <lastCharOffset>1</lastCharOffset>
+              </HeaderFragment>
+            </PropertyModel>
+            <PropertyModel property="magneticDeclination" userProvided="true">
+              <format>
+                <FloatFormat formatString="%4.1f"/>
+              </format>
+              <HeaderFragment isSingleLine="false" isVariable="false">
+                <firstLine>1</firstLine>
+                <lastLine>1</lastLine>
+                <firstCharOffset>1</firstCharOffset>
+                <lastCharOffset>1</lastCharOffset>
+              </HeaderFragment>
+            </PropertyModel>
+          </properties>
+        </TimeSeriesModel>
+        <HorodatedParameterModel computed="false">
+          <dateFragment>
+            <LineFragment firstCharOffset="6" lastCharOffset="13"/>
+          </dateFragment>
+          <timeFragment>
+            <LineFragment firstCharOffset="1" lastCharOffset="4"/>
+          </timeFragment>
+          <dateFormat formatString="YYYYMMDD" refDate="0"/>
+          <timeFormat formatString="hh24ms" refDate="0"/>
+        </HorodatedParameterModel>
+        <FlagTable code="C3" label="ODV">
+          <Flag local="0" SDN="1 - good value"/>
+          <Flag local="1" SDN="9 - missing value"/>
+          <Flag local="4" SDN="3 - probably bad value"/>
+          <Flag local="8" SDN="4 - bad value"/>
+        </FlagTable>
+      </StationModel>
+    </SingleFileSurvey>
+  </Media>
+</InputModel>

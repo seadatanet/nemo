@@ -1,0 +1,546 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapping>
+   <vocabulary list="SDN:L06:14:"  version="14"  date="2018-03-14T02:00:03.000"  title="SeaVoX Platform Categories"   />
+   <mapped>
+      <vocabulary list="SDN:L06:14:"  version="14"  date="2018-03-14T02:00:03.000"  title="SeaVoX Platform Categories"   />
+   </mapped>
+   <match>
+      <element  key="SDN:L06:14:9A"  label="DUKW"    />
+      <broad>
+         <element  key="SDN:L06:14:95"  label="amphibious vehicle"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:L06:14:62"  label="aeroplane"    />
+      <broad>
+         <element  key="SDN:L06:14:60"  label="non-buoyant aircraft"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:L06:14:54"  label="airship"    />
+      <broad>
+         <element  key="SDN:L06:14:50"  label="buoyant aircraft"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:L06:14:96"  label="amphibious crawler"    />
+      <broad>
+         <element  key="SDN:L06:14:10"  label="land or seafloor"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:L06:14:95"  label="amphibious vehicle"    />
+      <narrow>
+         <element  key="SDN:L06:14:9B"  label="hovercraft"    />
+         <element  key="SDN:L06:14:9A"  label="DUKW"    />
+      </narrow>
+   </match>
+   <match>
+      <element  key="SDN:L06:14:69"  label="autogyro"    />
+      <broad>
+         <element  key="SDN:L06:14:60"  label="non-buoyant aircraft"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:L06:14:3B"  label="autonomous surface water vehicle"    />
+      <broad>
+         <element  key="SDN:L06:14:3Z"  label="surface vessel"    />
+      </broad>
+      <narrow>
+         <element  key="SDN:L06:14:3C"  label="surface gliders"    />
+      </narrow>
+   </match>
+   <match>
+      <element  key="SDN:L06:14:25"  label="autonomous underwater vehicle"    />
+      <broad>
+         <element  key="SDN:L06:14:20"  label="submersible"    />
+      </broad>
+      <narrow>
+         <element  key="SDN:L06:14:27"  label="sub-surface gliders"    />
+      </narrow>
+   </match>
+   <match>
+      <element  key="SDN:L06:14:13"  label="beach/intertidal zone structure"    />
+      <broad>
+         <element  key="SDN:L06:14:10"  label="land or seafloor"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:L06:14:50"  label="buoyant aircraft"    />
+      <narrow>
+         <element  key="SDN:L06:14:51"  label="free-rising balloon"    />
+         <element  key="SDN:L06:14:54"  label="airship"    />
+         <element  key="SDN:L06:14:53"  label="tethered balloon"    />
+         <element  key="SDN:L06:14:52"  label="free-floating balloon"    />
+      </narrow>
+   </match>
+   <match>
+      <element  key="SDN:L06:14:75"  label="cetacean"    />
+      <broad>
+         <element  key="SDN:L06:14:70"  label="organism"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:L06:14:17"  label="coastal structure"    />
+      <broad>
+         <element  key="SDN:L06:14:10"  label="land or seafloor"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:L06:14:90"  label="cryosphere"    />
+      <narrow>
+         <element  key="SDN:L06:14:94"  label="drift ice"    />
+         <element  key="SDN:L06:14:93"  label="pack ice"    />
+         <element  key="SDN:L06:14:91"  label="ice island"    />
+         <element  key="SDN:L06:14:92"  label="ice shelf"    />
+      </narrow>
+   </match>
+   <match>
+      <element  key="SDN:L06:14:72"  label="diver"    />
+      <broad>
+         <element  key="SDN:L06:14:70"  label="organism"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:L06:14:94"  label="drift ice"    />
+      <broad>
+         <element  key="SDN:L06:14:90"  label="cryosphere"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:L06:14:24"  label="drifting manned submersible"    />
+      <broad>
+         <element  key="SDN:L06:14:20"  label="submersible"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:L06:14:44"  label="drifting subsurface float"    />
+      <broad>
+         <element  key="SDN:L06:14:47"  label="float"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:L06:14:46"  label="drifting subsurface profiling float"    />
+      <broad>
+         <element  key="SDN:L06:14:47"  label="float"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:L06:14:42"  label="drifting surface float"    />
+      <broad>
+         <element  key="SDN:L06:14:47"  label="float"    />
+      </broad>
+      <narrow>
+         <element  key="SDN:L06:14:49"  label="surface ice buoy"    />
+      </narrow>
+   </match>
+   <match>
+      <element  key="SDN:L06:14:3D"  label="drillship"    />
+      <broad>
+         <element  key="SDN:L06:14:3Z"  label="surface vessel"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:L06:14:76"  label="fish"    />
+      <broad>
+         <element  key="SDN:L06:14:70"  label="organism"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:L06:14:36"  label="fishing vessel"    />
+      <broad>
+         <element  key="SDN:L06:14:3Z"  label="surface vessel"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:L06:14:11"  label="fixed benthic node"    />
+      <broad>
+         <element  key="SDN:L06:14:48"  label="mooring"    />
+         <element  key="SDN:L06:14:10"  label="land or seafloor"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:L06:14:45"  label="fixed subsurface vertical profiler"    />
+      <broad>
+         <element  key="SDN:L06:14:48"  label="mooring"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:L06:14:73"  label="flightless bird"    />
+      <broad>
+         <element  key="SDN:L06:14:70"  label="organism"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:L06:14:47"  label="float"    />
+      <narrow>
+         <element  key="SDN:L06:14:44"  label="drifting subsurface float"    />
+         <element  key="SDN:L06:14:46"  label="drifting subsurface profiling float"    />
+         <element  key="SDN:L06:14:42"  label="drifting surface float"    />
+      </narrow>
+   </match>
+   <match>
+      <element  key="SDN:L06:14:52"  label="free-floating balloon"    />
+      <broad>
+         <element  key="SDN:L06:14:50"  label="buoyant aircraft"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:L06:14:51"  label="free-rising balloon"    />
+      <broad>
+         <element  key="SDN:L06:14:50"  label="buoyant aircraft"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:L06:14:64"  label="geostationary orbiting satellite"    />
+      <broad>
+         <element  key="SDN:L06:14:6Z"  label="spacecraft"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:L06:14:6A"  label="glider"    />
+      <broad>
+         <element  key="SDN:L06:14:60"  label="non-buoyant aircraft"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:L06:14:67"  label="helicopter"    />
+      <broad>
+         <element  key="SDN:L06:14:60"  label="non-buoyant aircraft"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:L06:14:9B"  label="hovercraft"    />
+      <broad>
+         <element  key="SDN:L06:14:95"  label="amphibious vehicle"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:L06:14:71"  label="human"    />
+      <broad>
+         <element  key="SDN:L06:14:70"  label="organism"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:L06:14:91"  label="ice island"    />
+      <broad>
+         <element  key="SDN:L06:14:90"  label="cryosphere"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:L06:14:92"  label="ice shelf"    />
+      <broad>
+         <element  key="SDN:L06:14:90"  label="cryosphere"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:L06:14:6B"  label="kite"    />
+      <broad>
+         <element  key="SDN:L06:14:60"  label="non-buoyant aircraft"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:L06:14:10"  label="land or seafloor"    />
+      <narrow>
+         <element  key="SDN:L06:14:96"  label="amphibious crawler"    />
+         <element  key="SDN:L06:14:11"  label="fixed benthic node"    />
+         <element  key="SDN:L06:14:12"  label="sea bed vehicle"    />
+         <element  key="SDN:L06:14:13"  label="beach/intertidal zone structure"    />
+         <element  key="SDN:L06:14:19"  label="mesocosm bag"    />
+         <element  key="SDN:L06:14:15"  label="land/onshore vehicle"    />
+         <element  key="SDN:L06:14:16"  label="offshore structure"    />
+         <element  key="SDN:L06:14:17"  label="coastal structure"    />
+         <element  key="SDN:L06:14:18"  label="river station"    />
+         <element  key="SDN:L06:14:14"  label="land/onshore structure"    />
+      </narrow>
+   </match>
+   <match>
+      <element  key="SDN:L06:14:77"  label="land-sea mammals"    />
+      <broad>
+         <element  key="SDN:L06:14:70"  label="organism"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:L06:14:14"  label="land/onshore structure"    />
+      <broad>
+         <element  key="SDN:L06:14:10"  label="land or seafloor"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:L06:14:15"  label="land/onshore vehicle"    />
+      <broad>
+         <element  key="SDN:L06:14:10"  label="land or seafloor"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:L06:14:26"  label="lowered unmanned submersible"    />
+      <broad>
+         <element  key="SDN:L06:14:20"  label="submersible"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:L06:14:38"  label="man-powered boat"    />
+      <broad>
+         <element  key="SDN:L06:14:3Z"  label="surface vessel"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:L06:14:3A"  label="man-powered small boat"    />
+      <broad>
+         <element  key="SDN:L06:14:3Z"  label="surface vessel"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:L06:14:66"  label="manned spacecraft"    />
+      <broad>
+         <element  key="SDN:L06:14:6Z"  label="spacecraft"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:L06:14:19"  label="mesocosm bag"    />
+      <broad>
+         <element  key="SDN:L06:14:10"  label="land or seafloor"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:L06:14:41"  label="moored surface buoy"    />
+      <broad>
+         <element  key="SDN:L06:14:48"  label="mooring"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:L06:14:48"  label="mooring"    />
+      <narrow>
+         <element  key="SDN:L06:14:43"  label="subsurface mooring"    />
+         <element  key="SDN:L06:14:11"  label="fixed benthic node"    />
+         <element  key="SDN:L06:14:45"  label="fixed subsurface vertical profiler"    />
+         <element  key="SDN:L06:14:41"  label="moored surface buoy"    />
+      </narrow>
+   </match>
+   <match>
+      <element  key="SDN:L06:14:39"  label="naval vessel"    />
+      <broad>
+         <element  key="SDN:L06:14:3Z"  label="surface vessel"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:L06:14:60"  label="non-buoyant aircraft"    />
+      <narrow>
+         <element  key="SDN:L06:14:63"  label="rocket"    />
+         <element  key="SDN:L06:14:62"  label="aeroplane"    />
+         <element  key="SDN:L06:14:61"  label="research aeroplane"    />
+         <element  key="SDN:L06:14:67"  label="helicopter"    />
+         <element  key="SDN:L06:14:6B"  label="kite"    />
+         <element  key="SDN:L06:14:6C"  label="parachute"    />
+         <element  key="SDN:L06:14:6A"  label="glider"    />
+         <element  key="SDN:L06:14:6D"  label="unmanned aerial vehicle"    />
+         <element  key="SDN:L06:14:69"  label="autogyro"    />
+      </narrow>
+   </match>
+   <match>
+      <element  key="SDN:L06:14:16"  label="offshore structure"    />
+      <broad>
+         <element  key="SDN:L06:14:10"  label="land or seafloor"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:L06:14:65"  label="orbiting satellite"    />
+      <broad>
+         <element  key="SDN:L06:14:6Z"  label="spacecraft"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:L06:14:70"  label="organism"    />
+      <narrow>
+         <element  key="SDN:L06:14:71"  label="human"    />
+         <element  key="SDN:L06:14:72"  label="diver"    />
+         <element  key="SDN:L06:14:73"  label="flightless bird"    />
+         <element  key="SDN:L06:14:77"  label="land-sea mammals"    />
+         <element  key="SDN:L06:14:75"  label="cetacean"    />
+         <element  key="SDN:L06:14:76"  label="fish"    />
+         <element  key="SDN:L06:14:74"  label="seabird and duck"    />
+      </narrow>
+   </match>
+   <match>
+      <element  key="SDN:L06:14:93"  label="pack ice"    />
+      <broad>
+         <element  key="SDN:L06:14:90"  label="cryosphere"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:L06:14:6C"  label="parachute"    />
+      <broad>
+         <element  key="SDN:L06:14:60"  label="non-buoyant aircraft"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:L06:14:21"  label="propelled manned submersible"    />
+      <broad>
+         <element  key="SDN:L06:14:20"  label="submersible"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:L06:14:22"  label="propelled unmanned submersible"    />
+      <broad>
+         <element  key="SDN:L06:14:20"  label="submersible"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:L06:14:61"  label="research aeroplane"    />
+      <broad>
+         <element  key="SDN:L06:14:60"  label="non-buoyant aircraft"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:L06:14:31"  label="research vessel"    />
+      <broad>
+         <element  key="SDN:L06:14:3Z"  label="surface vessel"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:L06:14:18"  label="river station"    />
+      <broad>
+         <element  key="SDN:L06:14:10"  label="land or seafloor"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:L06:14:63"  label="rocket"    />
+      <broad>
+         <element  key="SDN:L06:14:60"  label="non-buoyant aircraft"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:L06:14:68"  label="satellite"    />
+      <broad>
+         <element  key="SDN:L06:14:6Z"  label="spacecraft"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:L06:14:12"  label="sea bed vehicle"    />
+      <broad>
+         <element  key="SDN:L06:14:10"  label="land or seafloor"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:L06:14:74"  label="seabird and duck"    />
+      <broad>
+         <element  key="SDN:L06:14:70"  label="organism"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:L06:14:37"  label="self-propelled boat"    />
+      <broad>
+         <element  key="SDN:L06:14:3Z"  label="surface vessel"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:L06:14:33"  label="self-propelled small boat"    />
+      <broad>
+         <element  key="SDN:L06:14:3Z"  label="surface vessel"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:L06:14:30"  label="ship"    />
+      <broad>
+         <element  key="SDN:L06:14:3Z"  label="surface vessel"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:L06:14:6Z"  label="spacecraft"    />
+      <narrow>
+         <element  key="SDN:L06:14:64"  label="geostationary orbiting satellite"    />
+         <element  key="SDN:L06:14:68"  label="satellite"    />
+         <element  key="SDN:L06:14:66"  label="manned spacecraft"    />
+         <element  key="SDN:L06:14:65"  label="orbiting satellite"    />
+      </narrow>
+   </match>
+   <match>
+      <element  key="SDN:L06:14:27"  label="sub-surface gliders"    />
+      <broad>
+         <element  key="SDN:L06:14:25"  label="autonomous underwater vehicle"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:L06:14:20"  label="submersible"    />
+      <narrow>
+         <element  key="SDN:L06:14:26"  label="lowered unmanned submersible"    />
+         <element  key="SDN:L06:14:21"  label="propelled manned submersible"    />
+         <element  key="SDN:L06:14:22"  label="propelled unmanned submersible"    />
+         <element  key="SDN:L06:14:23"  label="towed unmanned submersible"    />
+         <element  key="SDN:L06:14:24"  label="drifting manned submersible"    />
+         <element  key="SDN:L06:14:25"  label="autonomous underwater vehicle"    />
+      </narrow>
+   </match>
+   <match>
+      <element  key="SDN:L06:14:43"  label="subsurface mooring"    />
+      <broad>
+         <element  key="SDN:L06:14:48"  label="mooring"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:L06:14:3C"  label="surface gliders"    />
+      <broad>
+         <element  key="SDN:L06:14:3B"  label="autonomous surface water vehicle"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:L06:14:49"  label="surface ice buoy"    />
+      <broad>
+         <element  key="SDN:L06:14:42"  label="drifting surface float"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:L06:14:3Z"  label="surface vessel"    />
+      <narrow>
+         <element  key="SDN:L06:14:3B"  label="autonomous surface water vehicle"    />
+         <element  key="SDN:L06:14:30"  label="ship"    />
+         <element  key="SDN:L06:14:31"  label="research vessel"    />
+         <element  key="SDN:L06:14:32"  label="vessel of opportunity"    />
+         <element  key="SDN:L06:14:33"  label="self-propelled small boat"    />
+         <element  key="SDN:L06:14:34"  label="vessel at fixed position"    />
+         <element  key="SDN:L06:14:3D"  label="drillship"    />
+         <element  key="SDN:L06:14:36"  label="fishing vessel"    />
+         <element  key="SDN:L06:14:37"  label="self-propelled boat"    />
+         <element  key="SDN:L06:14:38"  label="man-powered boat"    />
+         <element  key="SDN:L06:14:39"  label="naval vessel"    />
+         <element  key="SDN:L06:14:3A"  label="man-powered small boat"    />
+         <element  key="SDN:L06:14:35"  label="vessel of opportunity on fixed route"    />
+      </narrow>
+   </match>
+   <match>
+      <element  key="SDN:L06:14:53"  label="tethered balloon"    />
+      <broad>
+         <element  key="SDN:L06:14:50"  label="buoyant aircraft"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:L06:14:23"  label="towed unmanned submersible"    />
+      <broad>
+         <element  key="SDN:L06:14:20"  label="submersible"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:L06:14:6D"  label="unmanned aerial vehicle"    />
+      <broad>
+         <element  key="SDN:L06:14:60"  label="non-buoyant aircraft"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:L06:14:34"  label="vessel at fixed position"    />
+      <broad>
+         <element  key="SDN:L06:14:3Z"  label="surface vessel"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:L06:14:32"  label="vessel of opportunity"    />
+      <broad>
+         <element  key="SDN:L06:14:3Z"  label="surface vessel"    />
+      </broad>
+   </match>
+   <match>
+      <element  key="SDN:L06:14:35"  label="vessel of opportunity on fixed route"    />
+      <broad>
+         <element  key="SDN:L06:14:3Z"  label="surface vessel"    />
+      </broad>
+   </match>
+</mapping>

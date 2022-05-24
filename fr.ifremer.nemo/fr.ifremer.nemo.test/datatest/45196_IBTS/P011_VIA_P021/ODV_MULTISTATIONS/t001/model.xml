@@ -1,0 +1,226 @@
+<InputModel version="1.7.0" isValid="true">
+  <MediaModel path="/home/sophie/Bureau/tmp/nemo/45196/IBTS/IBTS">
+    <processType multiStations="false">CRUISE_DIR</processType>
+    <separator>;</separator>
+    <inputType>TRAJECTORY</inputType>
+    <variant>PHYSICOCHEMICAL</variant>
+    <fileHeader>0</fileHeader>
+    <stationHeader pattern="" useSeparatorInStationHeader="true">1</stationHeader>
+    <colTitleInInputFile colTitleInInputFileCheck="true" colTitlesInInputFileLineNb="1" useTableForCsvData="true"/>
+    <endStation>0</endStation>
+    <endData pattern="" patternIsRegexp="false">EOF</endData>
+  </MediaModel>
+  <CruiseModel>
+    <reference>IBTS</reference>
+    <bshCsrReference></bshCsrReference>
+    <localCSRIdentifier></localCSRIdentifier>
+    <name></name>
+    <shipCode></shipCode>
+    <shipName></shipName>
+    <startDate>1569938349396</startDate>
+    <endDate>1569938349396</endDate>
+    <regionName></regionName>
+    <regionCode></regionCode>
+    <country></country>
+    <laboratories></laboratories>
+    <chiefScientist>UNKNOWN</chiefScientist>
+    <projectName></projectName>
+    <dataCentre></dataCentre>
+    <availability>publicly</availability>
+    <comment><![CDATA[]]></comment>
+    <dataTypes/>
+  </CruiseModel>
+  <StationModel>
+    <referenceProperty>
+      <PropertyModel property="" userProvided="true">
+        <userValue>1</userValue>
+      </PropertyModel>
+    </referenceProperty>
+    <properties>
+      <PropertyModel property="dcHistory1" userProvided="true">
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="dcHistory2" userProvided="true">
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="comment" userProvided="true">
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="surfaceSamples1" userProvided="true">
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="surfaceSamples2" userProvided="true">
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="offsetTU" userProvided="true">
+        <format>
+          <FloatFormat formatString="%4.1f"/>
+        </format>
+        <userValue>0.0</userValue>
+      </PropertyModel>
+      <PropertyModel property="time" userProvided="false">
+        <format>
+          <DateTimeFormat formatString="hh24:mm"/>
+        </format>
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>2</firstLine>
+          <lastLine>2</lastLine>
+          <firstCharOffset>22</firstCharOffset>
+          <lastCharOffset>26</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="date" userProvided="false">
+        <format>
+          <DateTimeFormat formatString="DD/MM/YYYY"/>
+        </format>
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>2</firstLine>
+          <lastLine>2</lastLine>
+          <firstCharOffset>11</firstCharOffset>
+          <lastCharOffset>20</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="latitude" userProvided="false">
+        <format>
+          <LatitudeFormat formatString="NDD MM.mm"/>
+        </format>
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>2</firstLine>
+          <lastLine>2</lastLine>
+          <firstCharOffset>28</firstCharOffset>
+          <lastCharOffset>37</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="longitude" userProvided="false">
+        <format>
+          <LongitudeFormat formatString="NDDD MM.mm"/>
+        </format>
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>2</firstLine>
+          <lastLine>2</lastLine>
+          <firstCharOffset>39</firstCharOffset>
+          <lastCharOffset>49</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="bottomDepth" userProvided="true">
+        <format>
+          <FloatFormat formatString="%4.0f"/>
+        </format>
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="sensorDepth" userProvided="true">
+        <format>
+          <FloatFormat formatString="%4.0f"/>
+        </format>
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="samplingRate" userProvided="true">
+        <format>
+          <FloatFormat formatString="%4.0f"/>
+        </format>
+        <conversionFormula>*1</conversionFormula>
+        <userValue>0</userValue>
+      </PropertyModel>
+      <PropertyModel property="endDate" userProvided="true">
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="endTime" userProvided="true">
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="endLatitude" userProvided="false"/>
+      <PropertyModel property="endLongitude" userProvided="false"/>
+      <PropertyModel property="endDepth" userProvided="false">
+        <format>
+          <FloatFormat formatString="%4.0f"/>
+        </format>
+      </PropertyModel>
+      <PropertyModel property="magneticDeclination" userProvided="true">
+        <format>
+          <FloatFormat formatString="%4.1f"/>
+        </format>
+        <userValue>-999</userValue>
+      </PropertyModel>
+    </properties>
+    <DataType code="P90">
+      <profiles>0</profiles>
+      <qc>false</qc>
+      <sensor>false</sensor>
+    </DataType>
+    <FlagTable code="C1" label="SeaDataNet">
+      <Flag local="0" SDN="0 - no quality control"/>
+      <Flag local="1" SDN="1 - good value"/>
+      <Flag local="2" SDN="2 - probably good value"/>
+      <Flag local="3" SDN="3 - probably bad value"/>
+      <Flag local="4" SDN="4 - bad value"/>
+      <Flag local="5" SDN="5 - changed value"/>
+      <Flag local="6" SDN="6 - value below detection"/>
+      <Flag local="7" SDN="7 - value in excess"/>
+      <Flag local="8" SDN="8 - interpolated value"/>
+      <Flag local="9" SDN="9 - missing value"/>
+      <Flag local="A" SDN="A - value phenomenon uncertain"/>
+      <Flag local="Q" SDN="Q - value below limit of quantification"/>
+    </FlagTable>
+  </StationModel>
+  <DataModel>
+    <dataListType>P011_VIA_P021</dataListType>
+    <mesureType>BSSURF</mesureType>
+    <fallrateCode></fallrateCode>
+    <fallrateLabel></fallrateLabel>
+    <verticalParametersList>
+      <p_depthBSBed></p_depthBSBed>
+      <p_depthBSSurf>ADEPZZ01</p_depthBSSurf>
+      <p_pressure></p_pressure>
+      <p_heightASLvl></p_heightASLvl>
+    </verticalParametersList>
+    <parameters>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault>NA</inputDefault>
+        <LineFragment firstCharOffset="8" lastCharOffset="8"/>
+        <Parameter code="AHGT">
+          <fullName>Vertical spatial coordinates</fullName>
+          <unit>Metres</unit>
+          <unitCode>ULAA</unitCode>
+          <default></default>
+          <format>%8.5f</format>
+          <CodeP011>ADEPZZ01</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011>Depth (spatial coordinate) relative to water surface in the water body</NameP011>
+          <IsP011>true</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault>NA</inputDefault>
+        <LineFragment firstCharOffset="10" lastCharOffset="10"/>
+        <Parameter code="PHOS">
+          <fullName>Phosphate concentration parameters in the water column</fullName>
+          <unit>Micromoles per litre</unit>
+          <unitCode>UPOX</unitCode>
+          <default></default>
+          <format>%7.5f</format>
+          <CodeP011>PHOSAA01</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011>Concentration of phosphate {PO43- CAS 14265-44-2} per unit volume of the water body [dissolved plus reactive particulate &lt;1um phase] by filtration and colorimetric autoanalysis</NameP011>
+          <IsP011>true</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+    </parameters>
+  </DataModel>
+  <ConversionModel>
+    <permissions>
+      <MEDATLAS enable="true"/>
+      <ODV_MULTISTATIONS enable="true"/>
+      <ODV_MONOSTATION enable="true"/>
+      <UNKNOWN enable="true"/>
+      <NETCDF_MONOSTATION enable="true"/>
+      <NETCDF_MULTISTATIONS enable="true"/>
+    </permissions>
+    <sortStations>false</sortStations>
+    <outputFormat>ODV_MULTISTATIONS</outputFormat>
+  </ConversionModel>
+</InputModel>

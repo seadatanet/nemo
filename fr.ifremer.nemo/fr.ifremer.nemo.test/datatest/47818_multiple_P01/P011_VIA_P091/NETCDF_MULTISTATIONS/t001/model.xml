@@ -1,0 +1,223 @@
+<InputModel version="1.7.0" isValid="true">
+  <MediaModel path="/home/sophie/git/nemo/fr.ifremer.nemo.test/datatest/47818_multiple_P01/PF_input">
+    <processType multiStations="false">CRUISE_FILE</processType>
+    <separator> </separator>
+    <inputType>TIMESERIES</inputType>
+    <variant>PHYSICOCHEMICAL</variant>
+    <fileHeader>0</fileHeader>
+    <stationHeader pattern="" useSeparatorInStationHeader="false">6</stationHeader>
+    <colTitleInInputFile colTitleInInputFileCheck="false" colTitlesInInputFileLineNb="0" useTableForCsvData="false"/>
+    <endStation>0</endStation>
+    <endData pattern="" patternIsRegexp="false">EOF</endData>
+  </MediaModel>
+  <CruiseModel>
+    <reference>ref</reference>
+    <bshCsrReference></bshCsrReference>
+    <localCSRIdentifier></localCSRIdentifier>
+    <name></name>
+    <shipCode>42BR</shipCode>
+    <shipName>Baruna Jaya IV</shipName>
+    <startDate>1294704000000</startDate>
+    <endDate>1294704000000</endDate>
+    <regionName></regionName>
+    <regionCode></regionCode>
+    <country></country>
+    <laboratories></laboratories>
+    <chiefScientist>UNKNOWN</chiefScientist>
+    <projectName></projectName>
+    <dataCentre></dataCentre>
+    <availability>publicly</availability>
+    <comment><![CDATA[]]></comment>
+    <dataTypes/>
+  </CruiseModel>
+  <StationModel>
+    <referenceProperty>
+      <PropertyModel property="" userProvided="true">
+        <userValue>1</userValue>
+      </PropertyModel>
+    </referenceProperty>
+    <properties>
+      <PropertyModel property="offsetTU" userProvided="true">
+        <format>
+          <FloatFormat formatString="%4.1f"/>
+        </format>
+        <userValue>0.0</userValue>
+      </PropertyModel>
+      <PropertyModel property="time" userProvided="false">
+        <format>
+          <DateTimeFormat formatString="hh24mmss"/>
+        </format>
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>7</firstLine>
+          <lastLine>7</lastLine>
+          <firstCharOffset>8</firstCharOffset>
+          <lastCharOffset>13</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="date" userProvided="false">
+        <format>
+          <DateTimeFormat formatString="DDMMYY"/>
+        </format>
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>7</firstLine>
+          <lastLine>7</lastLine>
+          <firstCharOffset>2</firstCharOffset>
+          <lastCharOffset>7</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="latitude" userProvided="true">
+        <format>
+          <LatitudeFormat formatString="+DD.dddd"/>
+        </format>
+        <userValue>+47.7151</userValue>
+      </PropertyModel>
+      <PropertyModel property="longitude" userProvided="true">
+        <format>
+          <LongitudeFormat formatString="+DDD.dddd"/>
+        </format>
+        <userValue>-004.0029</userValue>
+      </PropertyModel>
+      <PropertyModel property="bottomDepth" userProvided="true">
+        <format>
+          <FloatFormat formatString="%4.0f"/>
+        </format>
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="sensorDepth" userProvided="true">
+        <format>
+          <FloatFormat formatString="%4.0f"/>
+        </format>
+        <userValue>5</userValue>
+      </PropertyModel>
+      <PropertyModel property="samplingRate" userProvided="true">
+        <format>
+          <FloatFormat formatString="%4.0f"/>
+        </format>
+        <conversionFormula>*1</conversionFormula>
+        <userValue>0</userValue>
+      </PropertyModel>
+      <PropertyModel property="endDate" userProvided="true">
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="endTime" userProvided="true">
+        <userValue></userValue>
+      </PropertyModel>
+    </properties>
+    <DataType code="H10">
+      <profiles>0</profiles>
+      <qc>false</qc>
+      <sensor>false</sensor>
+    </DataType>
+    <FlagTable code="C1" label="SeaDataNet">
+      <Flag local="0" SDN="0 - no quality control"/>
+      <Flag local="1" SDN="1 - good value"/>
+      <Flag local="2" SDN="2 - probably good value"/>
+      <Flag local="3" SDN="3 - probably bad value"/>
+      <Flag local="4" SDN="4 - bad value"/>
+      <Flag local="5" SDN="5 - changed value"/>
+      <Flag local="6" SDN="6 - value below detection"/>
+      <Flag local="7" SDN="7 - value in excess"/>
+      <Flag local="8" SDN="8 - interpolated value"/>
+      <Flag local="9" SDN="9 - missing value"/>
+      <Flag local="A" SDN="A - value phenomenon uncertain"/>
+    </FlagTable>
+  </StationModel>
+  <DataModel>
+    <dataListType>P011_VIA_P091</dataListType>
+    <mesureType>BSSURF</mesureType>
+    <fallrateCode></fallrateCode>
+    <fallrateLabel></fallrateLabel>
+    <verticalParametersList>
+      <p_depthBSBed></p_depthBSBed>
+      <p_depthBSSurf>DEPHPM01</p_depthBSSurf>
+      <p_pressure></p_pressure>
+      <p_heightASLvl></p_heightASLvl>
+    </verticalParametersList>
+    <parameters>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="20" lastCharOffset="25"/>
+        <Parameter code="TEMP">
+          <fullName>Temperature of the water column</fullName>
+          <unit>Degrees Celsius</unit>
+          <unitCode>UPAA</unitCode>
+          <default></default>
+          <format>%6.3f</format>
+          <CodeP011>TEMPPR01</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011>Temperature of the water body</NameP011>
+          <IsP011>true</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*0.1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="27" lastCharOffset="32"/>
+        <Parameter code="CNDC">
+          <fullName>ELECTRICAL CONDUCTIVITY</fullName>
+          <unit>mho/meter</unit>
+          <unitCode></unitCode>
+          <default></default>
+          <format>%6.4f</format>
+          <CodeP011>CNDCST01</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011>Electrical conductivity of the water body by CTD</NameP011>
+          <IsP011>true</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="14" lastCharOffset="19"/>
+        <Parameter code="DEPH">
+          <fullName>DEPTH BELOW SEA SURFACE</fullName>
+          <unit>meter</unit>
+          <unitCode></unitCode>
+          <default></default>
+          <format>%6.3f</format>
+          <CodeP011>DEPHPM01</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011>Depth below surface of the water body by physical measurement</NameP011>
+          <IsP011>true</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="41" lastCharOffset="46"/>
+        <Parameter code="CNDC">
+          <fullName>ELECTRICAL CONDUCTIVITY</fullName>
+          <unit>mho/meter</unit>
+          <unitCode></unitCode>
+          <default></default>
+          <format>%5.3f</format>
+          <CodeP011>CNDCST01</CodeP011>
+          <IndexP011>2</IndexP011>
+          <NameP011>Electrical conductivity of the water body by CTD</NameP011>
+          <IsP011>true</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+    </parameters>
+  </DataModel>
+  <ConversionModel>
+    <permissions>
+      <MEDATLAS enable="true"/>
+      <ODV_MULTISTATIONS enable="true"/>
+      <ODV_MONOSTATION enable="true"/>
+      <UNKNOWN enable="true"/>
+      <NETCDF_MONOSTATION enable="true"/>
+      <NETCDF_MULTISTATIONS enable="true"/>
+    </permissions>
+    <sortStations>false</sortStations>
+    <outputFormat>NETCDF_MULTISTATIONS</outputFormat>
+  </ConversionModel>
+</InputModel>

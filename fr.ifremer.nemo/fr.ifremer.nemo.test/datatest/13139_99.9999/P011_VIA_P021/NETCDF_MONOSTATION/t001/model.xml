@@ -1,0 +1,223 @@
+<InputModel version="1.5" isValid="true">
+  <MediaModel path="D:\dev\dev\workspace\ifremer_datatest\13139_99.9999\input">
+    <processType multiStations="false">CRUISE_FILE</processType>
+    <separator></separator>
+    <inputType>PROFILE</inputType>
+    <fileHeader>0</fileHeader>
+    <stationHeader pattern="*END*">0</stationHeader>
+    <endStation>0</endStation>
+    <endData pattern="" patternIsRegexp="false">EOF</endData>
+  </MediaModel>
+  <CruiseModel>
+    <reference>F00000000001</reference>
+    <name>405_Wake</name>
+    <shipCode>35MV</shipCode>
+    <shipName>Marion Dufresne</shipName>
+    <startDate>1341100800000</startDate>
+    <endDate>1341100800000</endDate>
+    <regionName></regionName>
+    <country></country>
+    <laboratories></laboratories>
+    <chiefScientist>UNKNOWN</chiefScientist>
+    <projectName></projectName>
+    <dataCentre></dataCentre>
+    <availability>publicly</availability>
+    <comment><![CDATA[]]></comment>
+    <correspondingURL><![CDATA[]]></correspondingURL>
+    <dataTypes>
+      <DataType code="B01 - Primary productivity">
+        <profiles>1</profiles>
+        <qc>false</qc>
+        <sensor>true</sensor>
+      </DataType>
+    </dataTypes>
+  </CruiseModel>
+  <StationModel>
+    <referenceProperty>
+      <PropertyModel property="" userProvided="false">
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>12</firstLine>
+          <lastLine>12</lastLine>
+          <firstCharOffset>13</firstCharOffset>
+          <lastCharOffset>16</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+    </referenceProperty>
+    <properties>
+      <PropertyModel property="offsetTU" userProvided="true">
+        <format>
+          <FloatFormat formatString="%4.1f"/>
+        </format>
+        <userValue>0.0</userValue>
+      </PropertyModel>
+      <PropertyModel property="time" userProvided="false">
+        <format>
+          <DateTimeFormat formatString="hh24:mm:ss"/>
+        </format>
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>9</firstLine>
+          <lastLine>9</lastLine>
+          <firstCharOffset>36</firstCharOffset>
+          <lastCharOffset>43</lastCharOffset>
+          <isDefaultValueSelected>false</isDefaultValueSelected>
+          <defaultValue></defaultValue>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="date" userProvided="false">
+        <format>
+          <DateTimeFormat formatString="MMM DD YYYY"/>
+        </format>
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>9</firstLine>
+          <lastLine>9</lastLine>
+          <firstCharOffset>24</firstCharOffset>
+          <lastCharOffset>34</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="latitude" userProvided="false">
+        <format>
+          <LatitudeFormat formatString="NDD MM.mm"/>
+        </format>
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>13</firstLine>
+          <lastLine>13</lastLine>
+          <firstCharOffset>14</firstCharOffset>
+          <lastCharOffset>22</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="longitude" userProvided="false">
+        <format>
+          <LongitudeFormat formatString="NDDD MM.mm"/>
+        </format>
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>14</firstLine>
+          <lastLine>14</lastLine>
+          <firstCharOffset>15</firstCharOffset>
+          <lastCharOffset>24</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="bottomDepth" userProvided="true">
+        <format>
+          <FloatFormat formatString="%4.0f"/>
+        </format>
+        <userValue></userValue>
+      </PropertyModel>
+    </properties>
+    <DataType code="H10">
+      <profiles>0</profiles>
+      <qc>false</qc>
+      <sensor>false</sensor>
+    </DataType>
+    <FlagTable code="C1" label="SeaDataNet">
+      <Flag local="0" SDN="0 - no quality control"/>
+      <Flag local="1" SDN="1 - good value"/>
+      <Flag local="2" SDN="2 - probably good value"/>
+      <Flag local="3" SDN="3 - probably bad value"/>
+      <Flag local="4" SDN="4 - bad value"/>
+      <Flag local="5" SDN="5 - changed value"/>
+      <Flag local="6" SDN="6 - value below detection"/>
+      <Flag local="7" SDN="7 - value in excess"/>
+      <Flag local="8" SDN="8 - interpolated value"/>
+      <Flag local="9" SDN="9 - missing value"/>
+      <Flag local="A" SDN="A - value phenomenon uncertain"/>
+    </FlagTable>
+  </StationModel>
+  <DataModel>
+    <dataListType>P011_VIA_P021</dataListType>
+    <mesureType>BSSURF</mesureType>
+    <verticalParametersList>
+      <p_depthBSBed></p_depthBSBed>
+      <p_depthBSSurf>ADEPZZ01</p_depthBSSurf>
+      <p_pressure></p_pressure>
+    </verticalParametersList>
+    <parameters>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="4" lastCharOffset="9"/>
+        <Parameter code="AHGT">
+          <fullName>Vertical spatial coordinates</fullName>
+          <unit>Metres</unit>
+          <unitCode>ULAA</unitCode>
+          <default></default>
+          <format>%6.1f</format>
+          <CodeP011>ADEPZZ01</CodeP011>
+          <NameP011>Depth below surface of the water body</NameP011>
+          <IsP011>true</IsP011>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="16" lastCharOffset="22"/>
+        <Parameter code="TEMP">
+          <fullName>Temperature of the water column</fullName>
+          <unit>Degrees Celsius</unit>
+          <unitCode>UPAA</unitCode>
+          <default></default>
+          <format>%7.4f</format>
+          <CodeP011>TEMPPR01</CodeP011>
+          <NameP011>Temperature of the water body</NameP011>
+          <IsP011>true</IsP011>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="27" lastCharOffset="33"/>
+        <Parameter code="PSAL">
+          <fullName>Salinity of the water column</fullName>
+          <unit>Dimensionless</unit>
+          <unitCode>UUUU</unitCode>
+          <default></default>
+          <format>%7.4f</format>
+          <CodeP011>ODSDM021</CodeP011>
+          <NameP011>Salinity of the water body</NameP011>
+          <IsP011>true</IsP011>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault>99.9999</inputDefault>
+        <LineFragment firstCharOffset="35" lastCharOffset="44"/>
+        <Parameter code="FVLT">
+          <fullName>Raw fluorometer output</fullName>
+          <unit>Micrograms per litre</unit>
+          <unitCode>UGPL</unitCode>
+          <default></default>
+          <format>%7.4f</format>
+          <CodeP011>FLUOZZZZ</CodeP011>
+          <NameP011>Fluorescence of the water body</NameP011>
+          <IsP011>true</IsP011>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="48" lastCharOffset="55"/>
+        <Parameter code="DOXY">
+          <fullName>Dissolved oxygen parameters in the water column</fullName>
+          <unit>Milligrams per litre</unit>
+          <unitCode>UMGL</unitCode>
+          <default></default>
+          <format>%7.4f</format>
+          <CodeP011>DOXYZZ01</CodeP011>
+          <NameP011>Concentration of oxygen {O2} per unit volume of the water body [dissolved phase] by in-situ sensor</NameP011>
+          <IsP011>true</IsP011>
+        </Parameter>
+      </ParameterModel>
+    </parameters>
+  </DataModel>
+  <ConversionModel>
+    <permissions>
+      <MEDATLAS enable="true"/>
+      <ODV_MULTISTATIONS enable="true"/>
+      <ODV_MONOSTATION enable="true"/>
+      <UNKNOWN enable="true"/>
+      <NETCDF_MONOSTATION enable="true"/>
+      <NETCDF_MULTISTATIONS enable="true"/>
+    </permissions>
+    <sortStations>false</sortStations>
+    <outputFormat>NETCDF_MONOSTATION</outputFormat>
+  </ConversionModel>
+</InputModel>

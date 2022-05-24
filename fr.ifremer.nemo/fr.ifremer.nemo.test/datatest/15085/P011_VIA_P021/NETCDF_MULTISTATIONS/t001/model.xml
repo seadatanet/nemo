@@ -1,0 +1,240 @@
+<InputModel version="1.5.0" isValid="true">
+  <MediaModel path="C:\Michele\testNEMO1.5.0\Chacra ctd\Fic avec bottom depth">
+    <processType multiStations="false">CRUISE_DIR</processType>
+    <separator></separator>
+    <inputType>PROFILE</inputType>
+    <fileHeader>0</fileHeader>
+    <stationHeader pattern="">1</stationHeader>
+    <endStation>0</endStation>
+    <endData pattern="" patternIsRegexp="false">EOF</endData>
+  </MediaModel>
+  <CruiseModel>
+    <reference>FI35200945009</reference>
+    <name>CHACCRA-2009</name>
+    <shipCode>35TT</shipCode>
+    <shipName>Tethys II</shipName>
+    <startDate>1243123200000</startDate>
+    <endDate>1243209600000</endDate>
+    <regionName>Mediterranean Sea - Western basin</regionName>
+    <country>35</country>
+    <laboratories>CNRS, Universit&#233; Paris 6</laboratories>
+    <chiefScientist>NAUDIN Jean-Jacques</chiefScientist>
+    <projectName>CHACCRA</projectName>
+    <dataCentre>FI</dataCentre>
+    <availability>publicly</availability>
+    <comment><![CDATA[]]></comment>
+    <correspondingURL><![CDATA[]]></correspondingURL>
+    <dataTypes>
+      <DataType code="B02 - Phytoplankton pigments (eg chloroph">
+        <profiles>28</profiles>
+        <qc>false</qc>
+        <sensor>false</sensor>
+      </DataType>
+      <DataType code="H10 - CTD stations">
+        <profiles>28</profiles>
+        <qc>false</qc>
+        <sensor>true</sensor>
+      </DataType>
+      <DataType code="H17 - Optics (eg underwater light levels)">
+        <profiles>28</profiles>
+        <qc>false</qc>
+        <sensor>false</sensor>
+      </DataType>
+    </dataTypes>
+  </CruiseModel>
+  <StationModel>
+    <referenceProperty>
+      <PropertyModel property="" userProvided="false">
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>1</firstLine>
+          <lastLine>1</lastLine>
+          <firstCharOffset>61</firstCharOffset>
+          <lastCharOffset>64</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+    </referenceProperty>
+    <properties>
+      <PropertyModel property="offsetTU" userProvided="true">
+        <format>
+          <FloatFormat formatString="%4.1f"/>
+        </format>
+        <userValue>0.0</userValue>
+      </PropertyModel>
+      <PropertyModel property="time" userProvided="false">
+        <format>
+          <DateTimeFormat formatString="hh24    mm    ss"/>
+        </format>
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>1</firstLine>
+          <lastLine>1</lastLine>
+          <firstCharOffset>89</firstCharOffset>
+          <lastCharOffset>102</lastCharOffset>
+          <isDefaultValueSelected>false</isDefaultValueSelected>
+          <defaultValue></defaultValue>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="date" userProvided="false">
+        <format>
+          <DateTimeFormat formatString="YYYY    MM    DD"/>
+        </format>
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>1</firstLine>
+          <lastLine>1</lastLine>
+          <firstCharOffset>69</firstCharOffset>
+          <lastCharOffset>84</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="latitude" userProvided="false">
+        <format>
+          <LatitudeFormat formatString="+DDMM.mmm"/>
+        </format>
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>1</firstLine>
+          <lastLine>1</lastLine>
+          <firstCharOffset>106</firstCharOffset>
+          <lastCharOffset>114</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="longitude" userProvided="false">
+        <format>
+          <LongitudeFormat formatString="+DDDMM.mmm"/>
+        </format>
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>1</firstLine>
+          <lastLine>1</lastLine>
+          <firstCharOffset>117</firstCharOffset>
+          <lastCharOffset>126</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="bottomDepth" userProvided="false">
+        <format>
+          <FloatFormat formatString="%4.0f"/>
+        </format>
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>1</firstLine>
+          <lastLine>1</lastLine>
+          <firstCharOffset>1</firstCharOffset>
+          <lastCharOffset>5</lastCharOffset>
+          <isDefaultValueSelected>true</isDefaultValueSelected>
+          <defaultValue>-9999</defaultValue>
+        </HeaderFragment>
+      </PropertyModel>
+    </properties>
+    <DataType code="H10">
+      <profiles>0</profiles>
+      <qc>false</qc>
+      <sensor>false</sensor>
+    </DataType>
+    <FlagTable code="C1" label="SeaDataNet">
+      <Flag local="0" SDN="0 - no quality control"/>
+      <Flag local="1" SDN="1 - good value"/>
+      <Flag local="2" SDN="2 - probably good value"/>
+      <Flag local="3" SDN="3 - probably bad value"/>
+      <Flag local="4" SDN="4 - bad value"/>
+      <Flag local="5" SDN="5 - changed value"/>
+      <Flag local="6" SDN="6 - value below detection"/>
+      <Flag local="7" SDN="7 - value in excess"/>
+      <Flag local="8" SDN="8 - interpolated value"/>
+      <Flag local="9" SDN="9 - missing value"/>
+      <Flag local="A" SDN="A - value phenomenon uncertain"/>
+    </FlagTable>
+  </StationModel>
+  <DataModel>
+    <dataListType>P011_VIA_P021</dataListType>
+    <mesureType>BSSURF</mesureType>
+    <verticalParametersList>
+      <p_depthBSBed></p_depthBSBed>
+      <p_depthBSSurf>ADEPZZ01</p_depthBSSurf>
+      <p_pressure></p_pressure>
+    </verticalParametersList>
+    <parameters>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="5" lastCharOffset="10"/>
+        <Parameter code="AHGT">
+          <fullName>Vertical spatial coordinates</fullName>
+          <unit>Metres</unit>
+          <unitCode>ULAA</unitCode>
+          <default></default>
+          <format>%6.1f</format>
+          <CodeP011>ADEPZZ01</CodeP011>
+          <NameP011>Depth below surface of the water body</NameP011>
+          <IsP011>true</IsP011>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="14" lastCharOffset="20"/>
+        <Parameter code="TEMP">
+          <fullName>Temperature of the water column</fullName>
+          <unit>Degrees Celsius</unit>
+          <unitCode>UPAA</unitCode>
+          <default></default>
+          <format>%7.4f</format>
+          <CodeP011>PSSTZZ01</CodeP011>
+          <NameP011>Temperature of the water body</NameP011>
+          <IsP011>true</IsP011>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="24" lastCharOffset="30"/>
+        <Parameter code="PSAL">
+          <fullName>Salinity of the water column</fullName>
+          <unit>Dimensionless</unit>
+          <unitCode>UUUU</unitCode>
+          <default></default>
+          <format>%7.4f</format>
+          <CodeP011>PSLTZZ01</CodeP011>
+          <NameP011>Practical salinity of the water body</NameP011>
+          <IsP011>true</IsP011>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="44" lastCharOffset="50"/>
+        <Parameter code="ATTN">
+          <fullName>Transmittance and attenuance of the water column</fullName>
+          <unit>per metre</unit>
+          <unitCode>UPRM</unitCode>
+          <default></default>
+          <format>%7.4f</format>
+          <CodeP011>ATTNZZ01</CodeP011>
+          <NameP011>Attenuance (unspecified wavelength) per unit length of the water body by transmissometer</NameP011>
+          <IsP011>true</IsP011>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="34" lastCharOffset="40"/>
+        <Parameter code="CPWC">
+          <fullName>Chlorophyll pigment concentrations in the water column</fullName>
+          <unit>Milligrams per cubic metre</unit>
+          <unitCode>UMMC</unitCode>
+          <default></default>
+          <format>%7.4f</format>
+          <CodeP011>CPHLPM01</CodeP011>
+          <NameP011>Concentration of chlorophyll-a {chl-a} per unit volume of the water body [particulate phase] by in-situ chlorophyll fluorometer and manufacturer's calibration applied</NameP011>
+          <IsP011>true</IsP011>
+        </Parameter>
+      </ParameterModel>
+    </parameters>
+  </DataModel>
+  <ConversionModel>
+    <permissions>
+      <MEDATLAS enable="true"/>
+      <ODV_MULTISTATIONS enable="true"/>
+      <ODV_MONOSTATION enable="true"/>
+      <UNKNOWN enable="true"/>
+      <NETCDF_MONOSTATION enable="true"/>
+      <NETCDF_MULTISTATIONS enable="true"/>
+    </permissions>
+    <sortStations>false</sortStations>
+    <outputFormat>NETCDF_MULTISTATIONS</outputFormat>
+  </ConversionModel>
+</InputModel>

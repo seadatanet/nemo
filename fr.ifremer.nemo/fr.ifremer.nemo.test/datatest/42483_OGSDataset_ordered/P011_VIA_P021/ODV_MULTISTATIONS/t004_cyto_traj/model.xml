@@ -1,0 +1,378 @@
+<InputModel version="1.7.0" isValid="true">
+  <MediaModel path="/home/sophie/git/nemo/fr.ifremer.nemo.test/datatest/42483_OGSDataset_ordered/input">
+    <processType multiStations="false">CRUISE_FILE</processType>
+    <separator>,</separator>
+    <inputType>TRAJECTORY</inputType>
+    <variant>FLOWCYTO</variant>
+    <fileHeader>1</fileHeader>
+    <stationHeader pattern="" useSeparatorInStationHeader="false">0</stationHeader>
+    <colTitleInInputFile colTitleInInputFileCheck="true" colTitlesInInputFileLineNb="1" useTableForCsvData="true"/>
+    <endStation>0</endStation>
+    <endData pattern="x" patternIsRegexp="false">BEGIN_LINE_CHANGES</endData>
+  </MediaModel>
+  <CruiseModel>
+    <reference>testcytotraj</reference>
+    <bshCsrReference></bshCsrReference>
+    <localCSRIdentifier></localCSRIdentifier>
+    <name>test cyto traj</name>
+    <shipCode>35AY</shipCode>
+    <shipName>Alis</shipName>
+    <startDate>1007942400000</startDate>
+    <endDate>1008892800000</endDate>
+    <regionName>Coral Sea</regionName>
+    <regionCode>8_3</regionCode>
+    <country>35</country>
+    <laboratories>IRD pour la partie travail de terrain ;  IRD, CNRS, IUEM et Universit&#233; pour</laboratories>
+    <chiefScientist>LE BOUTEILLER Aubert</chiefScientist>
+    <projectName>JGOFS - FRANCE/PROOF</projectName>
+    <dataCentre>FI</dataCentre>
+    <availability>publicly</availability>
+    <comment><![CDATA[]]></comment>
+    <dataTypes>
+      <DataType code="B01 - Primary productivity">
+        <profiles>0</profiles>
+        <qc>false</qc>
+        <sensor>false</sensor>
+      </DataType>
+      <DataType code="B02 - Phytoplankton pigments (eg chloroph">
+        <profiles>13</profiles>
+        <qc>false</qc>
+        <sensor>false</sensor>
+      </DataType>
+      <DataType code="B06 - Dissolved organic matter (inc DOC)">
+        <profiles>8</profiles>
+        <qc>false</qc>
+        <sensor>false</sensor>
+      </DataType>
+      <DataType code="B07 - Pelagic bacteria/micro-organisms">
+        <profiles>7</profiles>
+        <qc>false</qc>
+        <sensor>false</sensor>
+      </DataType>
+      <DataType code="B08 - Phytoplankton">
+        <profiles>20</profiles>
+        <qc>false</qc>
+        <sensor>false</sensor>
+      </DataType>
+      <DataType code="B71 - Particulate organic matter (inc POC">
+        <profiles>8</profiles>
+        <qc>false</qc>
+        <sensor>false</sensor>
+      </DataType>
+      <DataType code="B73 - Sediment traps">
+        <profiles>0</profiles>
+        <qc>false</qc>
+        <sensor>true</sensor>
+      </DataType>
+      <DataType code="D71 - Current profiler (eg ADCP)">
+        <profiles>0</profiles>
+        <qc>false</qc>
+        <sensor>true</sensor>
+      </DataType>
+      <DataType code="H09 - Water bottle stations">
+        <profiles>13</profiles>
+        <qc>false</qc>
+        <sensor>true</sensor>
+      </DataType>
+      <DataType code="H10 - CTD stations">
+        <profiles>25</profiles>
+        <qc>false</qc>
+        <sensor>true</sensor>
+      </DataType>
+      <DataType code="H17 - Optics (eg underwater light levels)">
+        <profiles>25</profiles>
+        <qc>false</qc>
+        <sensor>false</sensor>
+      </DataType>
+      <DataType code="H22 - Phosphate">
+        <profiles>12</profiles>
+        <qc>false</qc>
+        <sensor>false</sensor>
+      </DataType>
+      <DataType code="H23 - Total - P">
+        <profiles>3</profiles>
+        <qc>false</qc>
+        <sensor>false</sensor>
+      </DataType>
+      <DataType code="H24 - Nitrate">
+        <profiles>11</profiles>
+        <qc>false</qc>
+        <sensor>false</sensor>
+      </DataType>
+      <DataType code="H25 - Nitrite">
+        <profiles>11</profiles>
+        <qc>false</qc>
+        <sensor>false</sensor>
+      </DataType>
+      <DataType code="H30 - Trace elements">
+        <profiles>6</profiles>
+        <qc>false</qc>
+        <sensor>false</sensor>
+      </DataType>
+      <DataType code="H32 - Isotopes">
+        <profiles>5</profiles>
+        <qc>false</qc>
+        <sensor>false</sensor>
+      </DataType>
+      <DataType code="H71 - Surface measurements underway (T,S)">
+        <profiles>0</profiles>
+        <qc>false</qc>
+        <sensor>true</sensor>
+      </DataType>
+      <DataType code="H76 - Ammonia">
+        <profiles>11</profiles>
+        <qc>false</qc>
+        <sensor>false</sensor>
+      </DataType>
+      <DataType code="M02 - Incident radiation">
+        <profiles>0</profiles>
+        <qc>false</qc>
+        <sensor>false</sensor>
+      </DataType>
+    </dataTypes>
+  </CruiseModel>
+  <StationModel>
+    <referenceProperty>
+      <PropertyModel property="" userProvided="true">
+        <userValue>1</userValue>
+      </PropertyModel>
+    </referenceProperty>
+    <properties>
+      <PropertyModel property="dcHistory1" userProvided="true">
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="dcHistory2" userProvided="true">
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="comment" userProvided="true">
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="surfaceSamples1" userProvided="true">
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="surfaceSamples2" userProvided="true">
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="offsetTU" userProvided="true">
+        <format>
+          <FloatFormat formatString="%4.1f"/>
+        </format>
+        <userValue>0.0</userValue>
+      </PropertyModel>
+      <PropertyModel property="time" userProvided="true">
+        <format>
+          <DateTimeFormat formatString="hh24:mm"/>
+        </format>
+        <userValue>15:25</userValue>
+      </PropertyModel>
+      <PropertyModel property="date" userProvided="false">
+        <format>
+          <DateTimeFormat formatString="YYYY-MM-DD"/>
+        </format>
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>1</firstLine>
+          <lastLine>1</lastLine>
+          <firstCharOffset>25</firstCharOffset>
+          <lastCharOffset>34</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="latitude" userProvided="false">
+        <format>
+          <LatitudeFormat formatString="decimal degrees for file with separators"/>
+        </format>
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>1</firstLine>
+          <lastLine>1</lastLine>
+          <firstCharOffset>3</firstCharOffset>
+          <lastCharOffset>12</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="longitude" userProvided="false">
+        <format>
+          <LongitudeFormat formatString="decimal degrees for file with separators"/>
+        </format>
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>1</firstLine>
+          <lastLine>1</lastLine>
+          <firstCharOffset>14</firstCharOffset>
+          <lastCharOffset>23</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="bottomDepth" userProvided="true">
+        <format>
+          <FloatFormat formatString="%4.0f"/>
+        </format>
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="sensorDepth" userProvided="true">
+        <format>
+          <FloatFormat formatString="%4.0f"/>
+        </format>
+        <userValue>5</userValue>
+      </PropertyModel>
+      <PropertyModel property="samplingRate" userProvided="true">
+        <format>
+          <FloatFormat formatString="%4.0f"/>
+        </format>
+        <conversionFormula>*1</conversionFormula>
+        <userValue>0</userValue>
+      </PropertyModel>
+      <PropertyModel property="endDate" userProvided="true">
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="endTime" userProvided="true">
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="endLatitude" userProvided="false"/>
+      <PropertyModel property="endLongitude" userProvided="false"/>
+      <PropertyModel property="endDepth" userProvided="false">
+        <format>
+          <FloatFormat formatString="%4.0f"/>
+        </format>
+      </PropertyModel>
+      <PropertyModel property="magneticDeclination" userProvided="true">
+        <format>
+          <FloatFormat formatString="%4.1f"/>
+        </format>
+        <userValue>-999</userValue>
+      </PropertyModel>
+    </properties>
+    <DataType code="D71">
+      <profiles>0</profiles>
+      <qc>false</qc>
+      <sensor>true</sensor>
+    </DataType>
+    <FlagTable code="C1" label="SeaDataNet">
+      <Flag local="0" SDN="0 - no quality control"/>
+      <Flag local="1" SDN="1 - good value"/>
+      <Flag local="2" SDN="2 - probably good value"/>
+      <Flag local="3" SDN="3 - probably bad value"/>
+      <Flag local="4" SDN="4 - bad value"/>
+      <Flag local="5" SDN="5 - changed value"/>
+      <Flag local="6" SDN="6 - value below detection"/>
+      <Flag local="7" SDN="7 - value in excess"/>
+      <Flag local="8" SDN="8 - interpolated value"/>
+      <Flag local="9" SDN="9 - missing value"/>
+      <Flag local="A" SDN="A - value phenomenon uncertain"/>
+      <Flag local="Q" SDN="Q - value below limit of quantification"/>
+    </FlagTable>
+  </StationModel>
+  <DataModel>
+    <dataListType>P011_VIA_P021</dataListType>
+    <mesureType>BSSURF</mesureType>
+    <fallrateCode></fallrateCode>
+    <fallrateLabel></fallrateLabel>
+    <verticalParametersList>
+      <p_depthBSBed></p_depthBSBed>
+      <p_depthBSSurf>ADEPZZ01</p_depthBSSurf>
+      <p_pressure></p_pressure>
+      <p_heightASLvl></p_heightASLvl>
+    </verticalParametersList>
+    <parameters>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="5" lastCharOffset="5"/>
+        <Parameter code="AHGT">
+          <fullName></fullName>
+          <unit>Metres</unit>
+          <unitCode>ULAA</unitCode>
+          <default></default>
+          <format>%3d</format>
+          <CodeP011>ADEPZZ01</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011>Depth (spatial coordinate) relative to water surface in the water body</NameP011>
+          <IsP011>true</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="12" lastCharOffset="12"/>
+        <Parameter code="SAMP">
+          <fullName></fullName>
+          <unit>Cubic metres</unit>
+          <unitCode>MCUB</unitCode>
+          <default></default>
+          <format>%3d</format>
+          <CodeP011>VOLWBSMP</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011>Volume sampled of the water body</NameP011>
+          <IsP011>true</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula></conversionFormula>
+        <isText>true</isText>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="9" lastCharOffset="9"/>
+        <Parameter code="TMES">
+          <fullName></fullName>
+          <unit></unit>
+          <unitCode>UUUU</unitCode>
+          <default></default>
+          <format></format>
+          <CodeP011>NMCLFL02</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011>Registered name of flow cytometry cluster by classification to a term from the NVS SeaDataCloud Flow Cytometry Standardised Cluster Names Vocabulary (SDN:F02::)</NameP011>
+          <IsP011>true</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula></conversionFormula>
+        <isText>true</isText>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="10" lastCharOffset="10"/>
+        <Parameter code="TMES">
+          <fullName></fullName>
+          <unit></unit>
+          <unitCode>UUUU</unitCode>
+          <default></default>
+          <format></format>
+          <CodeP011>IDCLFL02</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011>Registered name identifier of flow cytometry cluster by classification to a term from the NVS SeaDataCloud Flow Cytometry Standardised Cluster Names Vocabulary (SDN:F02::)</NameP011>
+          <IsP011>true</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="12" lastCharOffset="12"/>
+        <Parameter code="BPRP">
+          <fullName></fullName>
+          <unit>Number per cubic centimetre</unit>
+          <unitCode>NCM3</unitCode>
+          <default></default>
+          <format>%3d</format>
+          <CodeP011>SDBIOL01</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011>Abundance of biological entity specified elsewhere per unit volume of the water body</NameP011>
+          <IsP011>true</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+    </parameters>
+  </DataModel>
+  <ConversionModel>
+    <permissions>
+      <MEDATLAS enable="true"/>
+      <ODV_MULTISTATIONS enable="true"/>
+      <ODV_MONOSTATION enable="true"/>
+      <UNKNOWN enable="true"/>
+      <NETCDF_MONOSTATION enable="true"/>
+      <NETCDF_MULTISTATIONS enable="true"/>
+    </permissions>
+    <sortStations>false</sortStations>
+    <outputFormat>ODV_MULTISTATIONS</outputFormat>
+  </ConversionModel>
+</InputModel>

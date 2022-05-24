@@ -1,0 +1,43 @@
+"//<sdn_reference xlink:href=""http://seadatanet.maris2.nl/v_cdi_v3/print_xml.asp?edmo=3078&identifier=FA35042013_00001_H09"" xlink:role=""isDescribedBy"" xlink:type=""SDN:L23::CDI"" sdn:scope=""3078:FA35042013_00001_H09""/>"																								
+//																								
+//SDN_parameter_mapping																								
+//<subject>SDN:LOCAL:DEPH</subject><object>SDN:P01::ADEPZZ01</object><units>SDN:P06::ULAA</units>																								
+//<subject>SDN:LOCAL:time_ISO8601</subject><object>SDN:P01::DTUT8601</object><units>SDN:P06::TISO</units><instrument>SDN:L22::TOOL1114</instrument>																								
+//<subject>SDN:LOCAL:SamplingEffort</subject><object>SDN:P01::VOLWBSMP</object><units>SDN:P06::MCUB</units><instrument>SDN:L22::TOOL1114</instrument>																								
+//<subject>SDN:LOCAL:sdn_ClusterName</subject><object>SDN:P01::NMCLFL02</object><units>SDN:P06::UUUU</units><instrument>SDN:L22::TOOL1114</instrument>																								
+//<subject>SDN:LOCAL:sdn_ClusterNameID</subject><object>SDN:P01::IDCLFL02</object><units>SDN:P06::UUUU</units><instrument>SDN:L22::TOOL1114</instrument>																								
+//<subject>SDN:LOCAL:Abundance</subject><object>SDN:P01::SDBIOL01</object><units>SDN:P06::NCM3</units><instrument>SDN:L22::TOOL1114</instrument>																								
+//<subject>SDN:LOCAL:FLGMAXAA</subject><object>SDN:P01::FLGMAXAA</object><units>SDN:P06::USPC</units><instrument>SDN:L22::TOOL1114</instrument>																								
+//<subject>SDN:LOCAL:SWSMAXAA</subject><object>SDN:P01::SWSMAXAA</object><units>SDN:P06::USPC</units><instrument>SDN:L22::TOOL1114</instrument>																								
+//																								
+Cruise	Station	Type	yyyy-mm-ddThh:mm	Longitude [degrees_east]	Latitude [degrees_north]	LOCAL_CDI_ID	EDMO_code	Bot. Depth [m]	DEPH [m]	QV:SEADATANET	time_ISO8601 [YYYY-MM-DDThh:mm]	QV:SEADATANET	SamplingEffort [m^3]	QV:SEADATANET	sdn_ClusterName:INDEXED_TEXT	QV:SEADATANET	sdn_ClusterNameID:INDEXED_TEXT	QV:SEADATANET	Abundance [cell/cm^3]	QV:SEADATANET	FLGMAXAA [a.u./cell]	QV:SEADATANET	SWSMAXAA [a.u./cell]	QV:SEADATANET
+DEWEX LEG2_H09	1	*	2013-04-05T08:27	6.125	42.908	FA35042013_00001_H09	3078	0	12	1	2013-10-05T00:00:00.000	1	0.00895844	1	Standard beads	1	SDN:F02::F0200001	1	158956.3047	1	6869	1	8826	1
+									12	1	2013-10-05T00:00:00.000	1	0.00895844	1	Heterotrophic prokaryotes - HNA	1	SDN:F02::F0200010	1	205058	1	231	1	20.3	1
+									12	1	2013-10-05T00:00:00.000	1	0.00895844	1	Heterotrophic prokaryotes - LNA	1	SDN:F02::F0200011	1	661834	1	328.5	1	17.61	1
+									28	1	2013-10-05T00:00:00.000	1	0.00895844	1	Heterotrophic prokaryotes - HNA	1	SDN:F02::F0200010	1	199477	1	235	1	20.6	1
+									28	1	2013-10-05T00:00:00.000	1	0.00895844	1	Heterotrophic prokaryotes - LNA	1	SDN:F02::F0200011	1	653574	1	324.9	1	17.57	1
+									28	1	2013-10-05T00:00:00.000	1	0.00895844	1	Standard beads	1	SDN:F02::F0200001	1	156165.6016	1	6882	1	8828	1
+									50	1	2013-10-05T00:00:00.000	1	0.00895844	1	Heterotrophic prokaryotes - HNA	1	SDN:F02::F0200010	1	196463	1	233	1	20.4	1
+									50	1	2013-10-05T00:00:00.000	1	0.00895844	1	Heterotrophic prokaryotes - LNA	1	SDN:F02::F0200011	1	590393	1	329.5	1	17.35	1
+									50	1	2013-10-05T00:00:00.000	1	0.00895844	1	Standard beads	1	SDN:F02::F0200001	1	165988.6953	1	6882	1	8805	1
+									96	1	2013-10-05T00:00:00.000	1	0.00895844	1	Heterotrophic prokaryotes - HNA	1	SDN:F02::F0200010	1	175365	1	218	1	20.1	1
+									96	1	2013-10-05T00:00:00.000	1	0.00895844	1	Heterotrophic prokaryotes - LNA	1	SDN:F02::F0200011	1	814762	1	300.7	1	17.81	1
+									96	1	2013-10-05T00:00:00.000	1	0.00895844	1	Standard beads	1	SDN:F02::F0200001	1	156388.8047	1	6871	1	8776	1
+									150	1	2013-10-05T00:00:00.000	1	0.00895844	1	Heterotrophic prokaryotes - HNA	1	SDN:F02::F0200011	1	379529.8984	1	311.8	1	17.54	1
+									150	1	2013-10-05T00:00:00.000	1	0.00895844	1	Heterotrophic prokaryotes - LNA	1	SDN:F02::F0200011	1	523082.6016	1	340.5	1	17.32	1
+									150	1	2013-10-05T00:00:00.000	1	0.00895844	1	Standard beads	1	SDN:F02::F0200010	1	139868	1	227	1	21.2	1
+									206	1	2013-10-05T00:00:00.000	1	0.00895844	1	Heterotrophic prokaryotes - HNA	1	SDN:F02::F0200001	1	164314.2969	1	6870	1	8773	1
+									206	1	2013-10-05T00:00:00.000	1	0.00895844	1	Heterotrophic prokaryotes - LNA	1	SDN:F02::F0200001	1	164649.2031	1	6852	1	8799	1
+									206	1	2013-10-05T00:00:00.000	1	0.00895844	1	Standard beads	1	SDN:F02::F0200010	1	216667	1	255	1	20.5	1
+									317	1	2013-10-05T00:00:00.000	1	0.00895844	1	Heterotrophic prokaryotes - HNA	1	SDN:F02::F0200011	1	294359.8984	1	358.9	1	17.92	1
+									317	1	2013-10-05T00:00:00.000	1	0.00895844	1	Heterotrophic prokaryotes - LNA	1	SDN:F02::F0200001	1	155272.6016	1	6867	1	8835	1
+									317	1	2013-10-05T00:00:00.000	1	0.00895844	1	Standard beads	1	SDN:F02::F0200010	1	181840	1	264	1	21.7	1
+									522	1	2013-10-05T00:00:00.000	1	0.00895844	1	Heterotrophic prokaryotes - HNA	1	SDN:F02::F0200011	1	253504.2969	1	347.8	1	17.96	1
+									522	1	2013-10-05T00:00:00.000	1	0.00895844	1	Heterotrophic prokaryotes - LNA	1	SDN:F02::F0200001	1	167439.8984	1	6901	1	8824	1
+									522	1	2013-10-05T00:00:00.000	1	0.00895844	1	Standard beads	1	SDN:F02::F0200010	1	143217	1	241	1	21.5	1
+									999	1	2013-10-05T00:00:00.000	1	0.00895844	1	Heterotrophic prokaryotes - HNA	1	SDN:F02::F0200011	1	227606.502	1	356.7	1	18.27	1
+									999	1	2013-10-05T00:00:00.000	1	0.00895844	1	Heterotrophic prokaryotes - LNA	1	SDN:F02::F0200001	1	179160.6016	1	6886	1	8872	1
+									999	1	2013-10-05T00:00:00.000	1	0.00895844	1	Standard beads	1	SDN:F02::F0200010	1	156277	1	258	1	21.6	1
+									1385	1	2013-10-05T00:00:00.000	1	0.00895844	1	Heterotrophic prokaryotes - HNA	1	SDN:F02::F0200010	1	135403	1	239	1	21.5	1
+									1385	1	2013-10-05T00:00:00.000	1	0.00895844	1	Heterotrophic prokaryotes - LNA	1	SDN:F02::F0200011	1	190546.4961	1	355.1	1	18.09	1
+									1385	1	2013-10-05T00:00:00.000	1	0.00895844	1	Standard beads	1	SDN:F02::F0200001	1	179160.6016	1	6886	1	8872	1

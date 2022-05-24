@@ -1,0 +1,294 @@
+*azertyuiopaze name                             3171 A. E. Verrill            
+10/05/2011-10/05/2011 Alboran Sea                                       
+72 
+UNKNOWN                                  Project=
+Regional Archiving=                    Availability=P
+Data Type=B07 n=1    QC=N
+*azertyuiopaze00001 Data Type=B07
+*DATE=15012011 TIME=0133 LAT=N50 04.80 LON=W001 52.56 DEPTH=       QC=0000
+*NB PARAMETERS=03 RECORD LINES=00048
+*PRES SEA PRESSURE sea surface=0    (Decibars                    ) def.=-999.9
+*PSAL PRACTICAL SALINITY            (Dimensionless               ) def.=99.999
+*TEMP SEA TEMPERATURE               (Degrees Celsius             ) def.=99.999
+*GLOBAL PROFILE QUALITY FLAG=0 GLOBAL PARAMETERS QC FLAGS=000
+*DC HISTORY=
+*
+*DM HISTORY=
+*
+*COMMENT
+*
+*SDN_parameter_mapping
+*<subject>SDN:LOCAL:PRES</subject><object>SDN:P01::PRESPR01</object><units>SDN:P06::UPDB</units>
+*<subject>SDN:LOCAL:PSAL</subject><object>SDN:P01::PSLTZZ01</object><units>SDN:P06::UUUU</units>
+*<subject>SDN:LOCAL:TEMP</subject><object>SDN:P01::TEMPPR01</object><units>SDN:P06::UPAA</units>
+*EDMO_CODE=486
+*LOCAL_CDI_ID=azertyuiopaze_00001_B07
+*<sdn_reference xlink:href="http://vocab.nerc.ac.uk/collection/C17/current/3171" xlink:role="isObservedBy" xlink:type="SDN:L23::NVS2CON"/>
+*<sdn_reference xlink:href="http://seadatanet.maris2.nl/v_cdi_v3/print_xml.asp?edmo=486&identifier=azertyuiopaze_00001_B07" xlink:role="isDescribedBy" xlink:type="SDN:L23::CDI"/>
+*SURFACE SAMPLES=
+*
+*PRES   PSAL   TEMP   
+   1.0 34.930 10.070 000
+   2.0 34.930 10.070 000
+   3.0 34.940 10.060 000
+   4.0 34.940 10.050 000
+   5.0 34.950 10.050 000
+   6.0 34.950 10.050 000
+   7.0 34.950 10.050 000
+   8.0 34.960 10.040 000
+  10.0 34.970 10.040 000
+  11.0 34.970 10.030 000
+  12.0 34.980 10.030 000
+  13.0 34.980 10.030 000
+  15.0 34.980 10.020 000
+  16.0 34.990 10.020 000
+  18.0 34.990 10.010 000
+  19.0 34.990 10.010 000
+  20.0 34.990 10.010 000
+  21.0 35.000 10.000 000
+  22.0 35.000 10.000 000
+  23.0 35.010 10.000 000
+  24.0 35.010  9.990 000
+  25.0 35.020  9.990 000
+  26.0 35.030  9.980 000
+  28.0 35.030  9.970 000
+  29.0 35.040  9.970 000
+  30.0 35.040  9.970 000
+  31.0 35.050  9.960 000
+  33.0 35.060  9.950 000
+  35.0 35.060  9.950 000
+  36.0 35.070  9.930 000
+  37.0 35.080  9.930 000
+  38.0 35.080  9.930 000
+  40.0 35.080  9.920 000
+  41.0 35.090  9.910 000
+  42.0 35.100  9.910 000
+  43.0 35.100  9.910 000
+  45.0 35.100  9.900 000
+  46.0 35.110  9.900 000
+  47.0 35.110  9.890 000
+  48.0 35.120  9.890 000
+  49.0 35.130  9.880 000
+  51.0 35.140  9.860 000
+  53.0 35.160  9.840 000
+  54.0 35.180  9.810 000
+  55.0 35.190  9.810 000
+  56.0 35.190  9.800 000
+  58.0 35.170  9.800 000
+  59.0 35.180  9.810 000
+-999.9 99.999 99.999 999
+*azertyuiopaze00002 Data Type=B07
+*DATE=15012011 TIME=0407 LAT=N50 06.60 LON=W001 28.98 DEPTH=       QC=0000
+*NB PARAMETERS=03 RECORD LINES=00050
+*PRES SEA PRESSURE sea surface=0    (Decibars                    ) def.=-999.9
+*PSAL PRACTICAL SALINITY            (Dimensionless               ) def.=99.999
+*TEMP SEA TEMPERATURE               (Degrees Celsius             ) def.=99.999
+*GLOBAL PROFILE QUALITY FLAG=0 GLOBAL PARAMETERS QC FLAGS=000
+*DC HISTORY=
+*
+*DM HISTORY=
+*
+*COMMENT
+*
+*SDN_parameter_mapping
+*<subject>SDN:LOCAL:PRES</subject><object>SDN:P01::PRESPR01</object><units>SDN:P06::UPDB</units>
+*<subject>SDN:LOCAL:PSAL</subject><object>SDN:P01::PSLTZZ01</object><units>SDN:P06::UUUU</units>
+*<subject>SDN:LOCAL:TEMP</subject><object>SDN:P01::TEMPPR01</object><units>SDN:P06::UPAA</units>
+*EDMO_CODE=486
+*LOCAL_CDI_ID=azertyuiopaze_00002_B07
+*<sdn_reference xlink:href="http://vocab.nerc.ac.uk/collection/C17/current/3171" xlink:role="isObservedBy" xlink:type="SDN:L23::NVS2CON"/>
+*<sdn_reference xlink:href="http://seadatanet.maris2.nl/v_cdi_v3/print_xml.asp?edmo=486&identifier=azertyuiopaze_00002_B07" xlink:role="isDescribedBy" xlink:type="SDN:L23::CDI"/>
+*SURFACE SAMPLES=
+*
+*PRES   PSAL   TEMP   
+   0.0 35.980  9.630 000
+   1.0 35.980  9.630 000
+   2.0 35.980  9.630 000
+   4.0 35.980  9.630 000
+   5.0 35.990  9.620 000
+   6.0 35.990  9.620 000
+   7.0 35.990  9.620 000
+   8.0 35.990  9.620 000
+   9.0 35.990  9.620 000
+  10.0 35.990  9.620 000
+  12.0 35.990  9.620 000
+  13.0 35.990  9.620 000
+  14.0 35.400  9.620 000
+  15.0 35.400  9.620 000
+  16.0 35.400  9.620 000
+  17.0 35.400  9.610 000
+  18.0 35.400  9.610 000
+  19.0 35.400  9.610 000
+  20.0 35.410  9.610 000
+  21.0 35.410  9.610 000
+  22.0 35.410  9.610 000
+  23.0 35.410  9.600 000
+  25.0 35.410  9.600 000
+  26.0 35.410  9.600 000
+  27.0 35.410  9.600 000
+  28.0 35.420  9.600 000
+  29.0 35.420  9.600 000
+  30.0 35.420  9.590 000
+  31.0 35.430  9.590 000
+  32.0 35.430  9.580 000
+  33.0 35.440  9.580 000
+  34.0 35.440  9.580 000
+  35.0 35.440  9.570 000
+  37.0 35.440  9.570 000
+  38.0 35.440  9.570 000
+  39.0 35.450  9.570 000
+  42.0 35.450  9.570 000
+  43.0 35.450  9.560 000
+  44.0 35.460  9.560 000
+  45.0 35.460  9.560 000
+  46.0 35.460  9.560 000
+  47.0 35.460  9.560 000
+  48.0 35.460  9.560 000
+  49.0 35.460  9.560 000
+  50.0 35.460  9.560 000
+  51.0 35.460  9.560 000
+  52.0 35.460  9.560 000
+  53.0 35.460  9.560 000
+  55.0 35.460  9.560 000
+  56.0 35.460  9.560 000
+-999.9 99.999 99.999 999
+*azertyuiopaze00004 Data Type=B07
+*DATE=15012011 TIME=1215 LAT=N49 34.20 LON=W000 53.94 DEPTH=       QC=0000
+*NB PARAMETERS=03 RECORD LINES=00027
+*PRES SEA PRESSURE sea surface=0    (Decibars                    ) def.=-999.9
+*PSAL PRACTICAL SALINITY            (Dimensionless               ) def.=99.999
+*TEMP SEA TEMPERATURE               (Degrees Celsius             ) def.=99.999
+*GLOBAL PROFILE QUALITY FLAG=0 GLOBAL PARAMETERS QC FLAGS=000
+*DC HISTORY=
+*
+*DM HISTORY=
+*
+*COMMENT
+*
+*SDN_parameter_mapping
+*<subject>SDN:LOCAL:PRES</subject><object>SDN:P01::PRESPR01</object><units>SDN:P06::UPDB</units>
+*<subject>SDN:LOCAL:PSAL</subject><object>SDN:P01::PSLTZZ01</object><units>SDN:P06::UUUU</units>
+*<subject>SDN:LOCAL:TEMP</subject><object>SDN:P01::TEMPPR01</object><units>SDN:P06::UPAA</units>
+*EDMO_CODE=486
+*LOCAL_CDI_ID=azertyuiopaze_00004_B07
+*<sdn_reference xlink:href="http://vocab.nerc.ac.uk/collection/C17/current/3171" xlink:role="isObservedBy" xlink:type="SDN:L23::NVS2CON"/>
+*<sdn_reference xlink:href="http://seadatanet.maris2.nl/v_cdi_v3/print_xml.asp?edmo=486&identifier=azertyuiopaze_00004_B07" xlink:role="isDescribedBy" xlink:type="SDN:L23::CDI"/>
+*SURFACE SAMPLES=
+*
+*PRES   PSAL   TEMP   
+   1.0 34.770  7.840 000
+   2.0 34.770  7.840 000
+   3.0 34.770  7.850 000
+   4.0 34.770  7.860 000
+   5.0 34.760  7.860 000
+   6.0 34.770  7.860 000
+   7.0 34.770  7.860 000
+   8.0 34.770  7.870 000
+   9.0 34.770  7.870 000
+  10.0 34.770  7.870 000
+  11.0 34.770  7.860 000
+  12.0 34.770  7.860 000
+  13.0 34.780  7.860 000
+  14.0 34.780  7.860 000
+  15.0 34.780  7.860 000
+  16.0 34.780  7.860 000
+  17.0 34.780  7.860 000
+  18.0 34.780  7.860 000
+  19.0 34.780  7.860 000
+  20.0 34.780  7.860 000
+  21.0 34.780  7.860 000
+  22.0 34.790  7.860 000
+  23.0 34.790  7.860 000
+  24.0 34.790  7.860 000
+  25.0 34.790  7.860 000
+  27.0 34.790  7.860 000
+  28.0 34.820  7.850 000
+-999.9 99.999 99.999 999
+*azertyuiopaze00005 Data Type=B07
+*DATE=15012011 TIME=1416 LAT=N49 27.00 LON=W000 35.88 DEPTH=       QC=0000
+*NB PARAMETERS=03 RECORD LINES=00017
+*PRES SEA PRESSURE sea surface=0    (Decibars                    ) def.=-999.9
+*PSAL PRACTICAL SALINITY            (Dimensionless               ) def.=99.999
+*TEMP SEA TEMPERATURE               (Degrees Celsius             ) def.=99.999
+*GLOBAL PROFILE QUALITY FLAG=0 GLOBAL PARAMETERS QC FLAGS=000
+*DC HISTORY=
+*
+*DM HISTORY=
+*
+*COMMENT
+*
+*SDN_parameter_mapping
+*<subject>SDN:LOCAL:PRES</subject><object>SDN:P01::PRESPR01</object><units>SDN:P06::UPDB</units>
+*<subject>SDN:LOCAL:PSAL</subject><object>SDN:P01::PSLTZZ01</object><units>SDN:P06::UUUU</units>
+*<subject>SDN:LOCAL:TEMP</subject><object>SDN:P01::TEMPPR01</object><units>SDN:P06::UPAA</units>
+*EDMO_CODE=486
+*LOCAL_CDI_ID=azertyuiopaze_00005_B07
+*<sdn_reference xlink:href="http://vocab.nerc.ac.uk/collection/C17/current/3171" xlink:role="isObservedBy" xlink:type="SDN:L23::NVS2CON"/>
+*<sdn_reference xlink:href="http://seadatanet.maris2.nl/v_cdi_v3/print_xml.asp?edmo=486&identifier=azertyuiopaze_00005_B07" xlink:role="isDescribedBy" xlink:type="SDN:L23::CDI"/>
+*SURFACE SAMPLES=
+*
+*PRES   PSAL   TEMP   
+   2.0 34.810  7.960 000
+   3.0 34.820  7.960 000
+   4.0 34.840  7.960 000
+   5.0 34.840  7.960 000
+   6.0 34.860  7.970 000
+   7.0 34.860  7.970 000
+   8.0 34.880  7.980 000
+  10.0 34.930  8.000 000
+  12.0 34.980  8.040 000
+  13.0 35.030  8.070 000
+  14.0 35.040  8.080 000
+  15.0 35.110  8.110 000
+  16.0 35.130  8.110 000
+  17.0 35.160  8.120 000
+  18.0 35.170  8.120 000
+  20.0 35.170  8.120 000
+  21.0 35.170  8.120 000
+-999.9 99.999 99.999 999
+*azertyuiopaze00006 Data Type=B07
+*DATE=15012011 TIME=1620 LAT=N49 31.20 LON=W000 15.90 DEPTH=       QC=0000
+*NB PARAMETERS=03 RECORD LINES=00021
+*PRES SEA PRESSURE sea surface=0    (Decibars                    ) def.=-999.9
+*PSAL PRACTICAL SALINITY            (Dimensionless               ) def.=99.999
+*TEMP SEA TEMPERATURE               (Degrees Celsius             ) def.=99.999
+*GLOBAL PROFILE QUALITY FLAG=0 GLOBAL PARAMETERS QC FLAGS=000
+*DC HISTORY=
+*
+*DM HISTORY=
+*
+*COMMENT
+*
+*SDN_parameter_mapping
+*<subject>SDN:LOCAL:PRES</subject><object>SDN:P01::PRESPR01</object><units>SDN:P06::UPDB</units>
+*<subject>SDN:LOCAL:PSAL</subject><object>SDN:P01::PSLTZZ01</object><units>SDN:P06::UUUU</units>
+*<subject>SDN:LOCAL:TEMP</subject><object>SDN:P01::TEMPPR01</object><units>SDN:P06::UPAA</units>
+*EDMO_CODE=486
+*LOCAL_CDI_ID=azertyuiopaze_00006_B07
+*<sdn_reference xlink:href="http://vocab.nerc.ac.uk/collection/C17/current/3171" xlink:role="isObservedBy" xlink:type="SDN:L23::NVS2CON"/>
+*<sdn_reference xlink:href="http://seadatanet.maris2.nl/v_cdi_v3/print_xml.asp?edmo=486&identifier=azertyuiopaze_00006_B07" xlink:role="isDescribedBy" xlink:type="SDN:L23::CDI"/>
+*SURFACE SAMPLES=
+*
+*PRES   PSAL   TEMP   
+   1.0 29.950  7.770 000
+   2.0 34.760  7.770 000
+   3.0 34.770  7.770 000
+   4.0 34.780  7.770 000
+   5.0 34.780  7.780 000
+   6.0 34.790  7.780 000
+   7.0 34.800  7.780 000
+   9.0 34.830  7.790 000
+  10.0 34.840  7.790 000
+  11.0 34.850  7.800 000
+  12.0 34.870  7.800 000
+  13.0 34.880  7.800 000
+  14.0 34.890  7.800 000
+  15.0 34.890  7.800 000
+  16.0 34.890  7.800 000
+  17.0 34.890  7.800 000
+  18.0 34.890  7.800 000
+  20.0 34.900  7.800 000
+  21.0 34.890  7.800 000
+  23.0 34.890  7.800 000
+  24.0 34.890  7.800 000
+-999.9 99.999 99.999 999

@@ -1,0 +1,210 @@
+<InputModel version="1.5" isValid="true">
+  <MediaModel path="D:\dev\dev\workspace\ifremer_datatest\cruiseDir_timeseries_suva\input">
+    <processType multiStations="false">CRUISE_DIR</processType>
+    <separator></separator>
+    <inputType>TIMESERIES</inputType>
+    <fileHeader>0</fileHeader>
+    <stationHeader pattern="">3</stationHeader>
+    <endStation>0</endStation>
+    <endData pattern="" patternIsRegexp="false">EOF</endData>
+  </MediaModel>
+  <CruiseModel>
+    <reference>FI35199810007</reference>
+    <name>SUVA 1</name>
+    <shipCode>35AY</shipCode>
+    <shipName>Alis</shipName>
+    <startDate>900892800000</startDate>
+    <endDate>901843200000</endDate>
+    <regionName>South West Pacific Ocean (limit 140W)</regionName>
+    <country>35</country>
+    <laboratories>ORSTOM NOUMEA, University of the South Pacific (USP)</laboratories>
+    <chiefScientist>FICHEZ Renaud</chiefScientist>
+    <projectName></projectName>
+    <dataCentre>FI</dataCentre>
+    <availability>publicly</availability>
+    <comment><![CDATA[]]></comment>
+    <correspondingURL><![CDATA[http://seadata.bsh.de/csr/retrieve/sdn2_index.html]]></correspondingURL>
+    <dataTypes>
+      <DataType code="D09 - Sea level (inc. bot. press., inverted echosounder)">
+        <profiles>2</profiles>
+        <qc>false</qc>
+        <sensor>true</sensor>
+      </DataType>
+    </dataTypes>
+  </CruiseModel>
+  <StationModel>
+    <referenceProperty>
+      <PropertyModel property="" userProvided="true">
+        <userValue>1</userValue>
+      </PropertyModel>
+    </referenceProperty>
+    <properties>
+      <PropertyModel property="offsetTU" userProvided="true">
+        <format>
+          <FloatFormat formatString="%4.1f"/>
+        </format>
+        <userValue>0.0</userValue>
+      </PropertyModel>
+      <PropertyModel property="time" userProvided="false">
+        <format>
+          <DateTimeFormat formatString="hh24:mm"/>
+        </format>
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>4</firstLine>
+          <lastLine>4</lastLine>
+          <firstCharOffset>16</firstCharOffset>
+          <lastCharOffset>20</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="date" userProvided="false">
+        <format>
+          <DateTimeFormat formatString="DD/MM/YYYY"/>
+        </format>
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>4</firstLine>
+          <lastLine>4</lastLine>
+          <firstCharOffset>5</firstCharOffset>
+          <lastCharOffset>14</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="latitude" userProvided="false">
+        <format>
+          <LatitudeFormat formatString="+DD MM.mm"/>
+        </format>
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>1</firstLine>
+          <lastLine>1</lastLine>
+          <firstCharOffset>36</firstCharOffset>
+          <lastCharOffset>44</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="longitude" userProvided="false">
+        <format>
+          <LongitudeFormat formatString="+DDD MM.mm"/>
+        </format>
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>1</firstLine>
+          <lastLine>1</lastLine>
+          <firstCharOffset>20</firstCharOffset>
+          <lastCharOffset>29</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="bottomDepth" userProvided="true">
+        <format>
+          <FloatFormat formatString="%4.0f"/>
+        </format>
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="sensorDepth" userProvided="false">
+        <format>
+          <FloatFormat formatString="%4.0f"/>
+        </format>
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>1</firstLine>
+          <lastLine>1</lastLine>
+          <firstCharOffset>87</firstCharOffset>
+          <lastCharOffset>90</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="samplingRate" userProvided="true">
+        <format>
+          <FloatFormat formatString="%4.0f"/>
+        </format>
+        <conversionFormula>*1</conversionFormula>
+        <userValue>0</userValue>
+      </PropertyModel>
+      <PropertyModel property="endDate" userProvided="true">
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="endTime" userProvided="true">
+        <userValue></userValue>
+      </PropertyModel>
+    </properties>
+    <DataType code="D09">
+      <profiles>0</profiles>
+      <qc>false</qc>
+      <sensor>false</sensor>
+    </DataType>
+    <FlagTable code="C1" label="SeaDataNet">
+      <Flag local="0" SDN="0 - no quality control"/>
+      <Flag local="1" SDN="1 - good value"/>
+      <Flag local="2" SDN="2 - probably good value"/>
+      <Flag local="3" SDN="3 - probably bad value"/>
+      <Flag local="4" SDN="4 - bad value"/>
+      <Flag local="5" SDN="5 - changed value"/>
+      <Flag local="6" SDN="6 - value below detection"/>
+      <Flag local="7" SDN="7 - value in excess"/>
+      <Flag local="8" SDN="8 - interpolated value"/>
+      <Flag local="9" SDN="9 - missing value"/>
+      <Flag local="A" SDN="A - value phenomenon uncertain"/>
+    </FlagTable>
+  </StationModel>
+  <DataModel>
+    <dataListType>P011_VIA_P091</dataListType>
+    <mesureType>BSSURF</mesureType>
+    <verticalParametersList>
+      <p_depthBSBed></p_depthBSBed>
+      <p_depthBSSurf></p_depthBSSurf>
+      <p_pressure></p_pressure>
+    </verticalParametersList>
+    <parameters>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="43" lastCharOffset="50"/>
+        <Parameter code="PRES">
+          <fullName>SEA PRESSURE sea surface=0</fullName>
+          <unit>decibar=10000 pascals</unit>
+          <unitCode></unitCode>
+          <default></default>
+          <format>%8.3f</format>
+          <CodeP011>PRESPR01</CodeP011>
+          <NameP011>Pressure (spatial co-ordinate) exerted by the water body by profiling pressure sensor and corrected to read zero at sea level</NameP011>
+          <IsP011>true</IsP011>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="58" lastCharOffset="65"/>
+        <Parameter code="SLEV">
+          <fullName>OBSERVED SEA LEVEL</fullName>
+          <unit>meter</unit>
+          <unitCode></unitCode>
+          <default></default>
+          <format>%8.3f</format>
+          <CodeP011>ASLVMSZZ</CodeP011>
+          <NameP011>Surface elevation (Rijkswaterstaat Mean Sea Level) of the water body</NameP011>
+          <IsP011>true</IsP011>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="31" lastCharOffset="35"/>
+        <Parameter code="TEMP">
+          <fullName>SEA TEMPERATURE</fullName>
+          <unit>Celsius degree</unit>
+          <unitCode></unitCode>
+          <default></default>
+          <format>%5.2f</format>
+          <CodeP011>TEMPPR01</CodeP011>
+          <NameP011>Temperature of the water body</NameP011>
+          <IsP011>true</IsP011>
+        </Parameter>
+      </ParameterModel>
+    </parameters>
+  </DataModel>
+  <ConversionModel>
+    <permissions>
+      <MEDATLAS enable="true"/>
+      <ODV_MULTISTATIONS enable="true"/>
+      <ODV_MONOSTATION enable="true"/>
+      <UNKNOWN enable="true"/>
+      <NETCDF_MONOSTATION enable="true"/>
+      <NETCDF_MULTISTATIONS enable="true"/>
+    </permissions>
+    <sortStations>false</sortStations>
+    <outputFormat>NETCDF_MULTISTATIONS</outputFormat>
+  </ConversionModel>
+</InputModel>

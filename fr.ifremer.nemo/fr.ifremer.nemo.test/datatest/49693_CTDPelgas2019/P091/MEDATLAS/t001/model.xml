@@ -1,0 +1,324 @@
+<InputModel version="1.6.7" isValid="true">
+  <MediaModel path="R:\pelgas2019\travail\CTDPelgas2019">
+    <processType multiStations="false">CRUISE_DIR</processType>
+    <separator></separator>
+    <inputType>PROFILE</inputType>
+    <fileHeader>0</fileHeader>
+    <stationHeader pattern="">225</stationHeader>
+    <colTitleInInputFile colTitleInInputFileCheck="false" colTitlesInInputFileLineNb="0" useTableForCsvData="false"/>
+    <endStation>0</endStation>
+    <endData pattern="" patternIsRegexp="false">EOF</endData>
+  </MediaModel>
+  <CruiseModel>
+    <reference>FI35201911090</reference>
+    <bshCsrReference></bshCsrReference>
+    <localCSRIdentifier>18001109</localCSRIdentifier>
+    <name>PELGAS 2019</name>
+    <shipCode>35HT</shipCode>
+    <shipName>Thalassa</shipName>
+    <startDate>1556150400000</startDate>
+    <endDate>1558828800000</endDate>
+    <regionName>Bay of Biscay</regionName>
+    <regionCode>1_8</regionCode>
+    <country>35</country>
+    <laboratories>Ifremer, Universit&#233; de la Rochelle</laboratories>
+    <chiefScientist>DORAY Mathieu</chiefScientist>
+    <projectName>SYST&#200;ME D'INFORMATIONS HALIE</projectName>
+    <dataCentre>FI</dataCentre>
+    <availability>publicly</availability>
+    <comment><![CDATA[DOXY = DOX1 * 44.66]]></comment>
+    <dataTypes>
+      <DataType code="B02 - Phytoplankton pigments (eg chloroph">
+        <profiles>92</profiles>
+        <qc>false</qc>
+        <sensor>false</sensor>
+      </DataType>
+      <DataType code="H10 - CTD stations">
+        <profiles>92</profiles>
+        <qc>false</qc>
+        <sensor>true</sensor>
+      </DataType>
+      <DataType code="H21 - Oxygen">
+        <profiles>92</profiles>
+        <qc>false</qc>
+        <sensor>false</sensor>
+      </DataType>
+      <DataType code="H28 - pH">
+        <profiles>92</profiles>
+        <qc>false</qc>
+        <sensor>false</sensor>
+      </DataType>
+    </dataTypes>
+  </CruiseModel>
+  <StationModel>
+    <referenceProperty>
+      <PropertyModel property="" userProvided="false">
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>2</firstLine>
+          <lastLine>2</lastLine>
+          <firstCharOffset>39</firstCharOffset>
+          <lastCharOffset>43</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+    </referenceProperty>
+    <properties>
+      <PropertyModel property="dcHistory1" userProvided="false">
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>1</firstLine>
+          <lastLine>1</lastLine>
+          <firstCharOffset>3</firstCharOffset>
+          <lastCharOffset>21</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="dcHistory2" userProvided="false"/>
+      <PropertyModel property="comment" userProvided="true">
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="surfaceSamples1" userProvided="true">
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="surfaceSamples2" userProvided="true">
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="offsetTU" userProvided="true">
+        <format>
+          <FloatFormat formatString="%4.1f"/>
+        </format>
+        <userValue>0.0</userValue>
+      </PropertyModel>
+      <PropertyModel property="time" userProvided="false">
+        <format>
+          <DateTimeFormat formatString="hh24:mm:ss"/>
+        </format>
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>9</firstLine>
+          <lastLine>9</lastLine>
+          <firstCharOffset>33</firstCharOffset>
+          <lastCharOffset>40</lastCharOffset>
+          <isDefaultValueSelected>false</isDefaultValueSelected>
+          <defaultValue></defaultValue>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="date" userProvided="false">
+        <format>
+          <DateTimeFormat formatString="MMM DD YYYY"/>
+        </format>
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>9</firstLine>
+          <lastLine>9</lastLine>
+          <firstCharOffset>21</firstCharOffset>
+          <lastCharOffset>31</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="latitude" userProvided="false">
+        <format>
+          <LatitudeFormat formatString="DD MM.mm N"/>
+        </format>
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>7</firstLine>
+          <lastLine>7</lastLine>
+          <firstCharOffset>19</firstCharOffset>
+          <lastCharOffset>28</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="longitude" userProvided="false">
+        <format>
+          <LongitudeFormat formatString="DDD MM.mm N"/>
+        </format>
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>8</firstLine>
+          <lastLine>8</lastLine>
+          <firstCharOffset>20</firstCharOffset>
+          <lastCharOffset>30</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="bottomDepth" userProvided="true">
+        <format>
+          <FloatFormat formatString="%4.0f"/>
+        </format>
+        <userValue></userValue>
+      </PropertyModel>
+    </properties>
+    <DataType code="H10">
+      <profiles>92</profiles>
+      <qc>false</qc>
+      <sensor>true</sensor>
+    </DataType>
+    <FlagTable code="C1" label="SeaDataNet">
+      <Flag local="0" SDN="0 - no quality control"/>
+      <Flag local="1" SDN="1 - good value"/>
+      <Flag local="2" SDN="2 - probably good value"/>
+      <Flag local="3" SDN="3 - probably bad value"/>
+      <Flag local="4" SDN="4 - bad value"/>
+      <Flag local="5" SDN="5 - changed value"/>
+      <Flag local="6" SDN="6 - value below detection"/>
+      <Flag local="7" SDN="7 - value in excess"/>
+      <Flag local="8" SDN="8 - interpolated value"/>
+      <Flag local="9" SDN="9 - missing value"/>
+      <Flag local="A" SDN="A - value phenomenon uncertain"/>
+      <Flag local="Q" SDN="Q - value below limit of quantification"/>
+    </FlagTable>
+  </StationModel>
+  <DataModel>
+    <dataListType>P091</dataListType>
+    <mesureType>BSSURF</mesureType>
+    <fallrateCode></fallrateCode>
+    <fallrateLabel></fallrateLabel>
+    <verticalParametersList>
+      <p_depthBSBed></p_depthBSBed>
+      <p_depthBSSurf>DEPH</p_depthBSSurf>
+      <p_pressure>PRES</p_pressure>
+      <p_heightASLvl></p_heightASLvl>
+    </verticalParametersList>
+    <parameters>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="4" lastCharOffset="11"/>
+        <Parameter code="PRES">
+          <fullName>SEA PRESSURE sea surface=0</fullName>
+          <unit>decibar=10000 pascals</unit>
+          <unitCode></unitCode>
+          <default>-999.9</default>
+          <format>%6.1f</format>
+          <CodeP011></CodeP011>
+          <NameP011></NameP011>
+          <IsP011>false</IsP011>
+          <instrument>Sea-Bird SBE 911plus CTD</instrument>
+          <instrumentCode>TOOL0058</instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="157" lastCharOffset="165"/>
+        <Parameter code="DEPH">
+          <fullName>DEPTH BELOW SEA SURFACE</fullName>
+          <unit>meter</unit>
+          <unitCode></unitCode>
+          <default>-999.9</default>
+          <format>%6.1f</format>
+          <CodeP011></CodeP011>
+          <NameP011></NameP011>
+          <IsP011>false</IsP011>
+          <instrument>Sea-Bird SBE 911plus CTD</instrument>
+          <instrumentCode>TOOL0058</instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="13" lastCharOffset="22"/>
+        <Parameter code="TEMP">
+          <fullName>SEA TEMPERATURE</fullName>
+          <unit>Celsius degree</unit>
+          <unitCode></unitCode>
+          <default>99.999</default>
+          <format>%6.3f</format>
+          <CodeP011></CodeP011>
+          <NameP011></NameP011>
+          <IsP011>false</IsP011>
+          <instrument>Sea-Bird SBE 911plus CTD</instrument>
+          <instrumentCode>TOOL0058</instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="134" lastCharOffset="143"/>
+        <Parameter code="PSAL">
+          <fullName>PRACTICAL SALINITY</fullName>
+          <unit>P.S.U.</unit>
+          <unitCode></unitCode>
+          <default>99.999</default>
+          <format>%6.3f</format>
+          <CodeP011></CodeP011>
+          <NameP011></NameP011>
+          <IsP011>false</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="58" lastCharOffset="66"/>
+        <Parameter code="DOX1">
+          <fullName>DISSOLVED OXYGEN</fullName>
+          <unit>ml/l</unit>
+          <unitCode></unitCode>
+          <default>99.999</default>
+          <format>%6.3f</format>
+          <CodeP011></CodeP011>
+          <NameP011></NameP011>
+          <IsP011>false</IsP011>
+          <instrument>Sea-Bird SBE 911plus CTD</instrument>
+          <instrumentCode>TOOL0058</instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*44.66</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="58" lastCharOffset="66"/>
+        <Parameter code="DOXY">
+          <fullName>DISSOLVED OXYGEN</fullName>
+          <unit>millimole/m3</unit>
+          <unitCode></unitCode>
+          <default>999.999</default>
+          <format>%7.3f</format>
+          <CodeP011></CodeP011>
+          <NameP011></NameP011>
+          <IsP011>false</IsP011>
+          <instrument>Sea-Bird SBE 911plus CTD</instrument>
+          <instrumentCode>TOOL0058</instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="36" lastCharOffset="44"/>
+        <Parameter code="FLU2">
+          <fullName>FLUORESCENCE</fullName>
+          <unit>milligram/m3</unit>
+          <unitCode></unitCode>
+          <default>999.9999</default>
+          <format>%8.4f</format>
+          <CodeP011></CodeP011>
+          <NameP011></NameP011>
+          <IsP011>false</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="92" lastCharOffset="99"/>
+        <Parameter code="PHPH">
+          <fullName>PH</fullName>
+          <unit>pH unit</unit>
+          <unitCode></unitCode>
+          <default>9.999</default>
+          <format>%5.3f</format>
+          <CodeP011></CodeP011>
+          <NameP011></NameP011>
+          <IsP011>false</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+    </parameters>
+  </DataModel>
+  <ConversionModel>
+    <permissions>
+      <MEDATLAS enable="true"/>
+      <ODV_MULTISTATIONS enable="true"/>
+      <ODV_MONOSTATION enable="true"/>
+      <UNKNOWN enable="true"/>
+      <NETCDF_MONOSTATION enable="true"/>
+      <NETCDF_MULTISTATIONS enable="true"/>
+    </permissions>
+    <sortStations>false</sortStations>
+    <outputFormat>MEDATLAS</outputFormat>
+  </ConversionModel>
+</InputModel>

@@ -1,0 +1,212 @@
+<InputModel version="1.6.0" isValid="true">
+  <MediaModel path="/home/altran/workspaces/nemoAndCoIndigo/ifremer_datatest/examples_PV_XBT/input">
+    <processType multiStations="false">CRUISE_DIR</processType>
+    <separator></separator>
+    <inputType>PROFILE</inputType>
+    <fileHeader>0</fileHeader>
+    <stationHeader pattern="">41</stationHeader>
+    <endStation>0</endStation>
+    <endData pattern="" patternIsRegexp="false">EOF</endData>
+  </MediaModel>
+  <CruiseModel>
+    <reference>FI35201501006</reference>
+    <localCSRIdentifier>15010060</localCSRIdentifier>
+    <name>TEST XBT</name>
+    <shipCode>35A3</shipCode>
+    <shipName>L'Atalante</shipName>
+    <startDate>1433749497140</startDate>
+    <endDate>1433749497140</endDate>
+    <regionName></regionName>
+    <regionCode></regionCode>
+    <country></country>
+    <laboratories></laboratories>
+    <chiefScientist>UNKNOWN</chiefScientist>
+    <projectName></projectName>
+    <dataCentre></dataCentre>
+    <availability>publicly</availability>
+    <comment><![CDATA[]]></comment>
+    <dataTypes/>
+  </CruiseModel>
+  <StationModel>
+    <referenceProperty>
+      <PropertyModel property="" userProvided="false">
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>33</firstLine>
+          <lastLine>33</lastLine>
+          <firstCharOffset>40</firstCharOffset>
+          <lastCharOffset>44</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+    </referenceProperty>
+    <properties>
+      <PropertyModel property="dcHistory1" userProvided="true">
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="dcHistory2" userProvided="true">
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="comment" userProvided="true">
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="surfaceSamples1" userProvided="true">
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="surfaceSamples2" userProvided="true">
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="offsetTU" userProvided="true">
+        <format>
+          <FloatFormat formatString="%4.1f"/>
+        </format>
+        <userValue>0.0</userValue>
+      </PropertyModel>
+      <PropertyModel property="time" userProvided="false">
+        <format>
+          <DateTimeFormat formatString="hh24:mm:ss"/>
+        </format>
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>4</firstLine>
+          <lastLine>4</lastLine>
+          <firstCharOffset>18</firstCharOffset>
+          <lastCharOffset>25</lastCharOffset>
+          <isDefaultValueSelected>false</isDefaultValueSelected>
+          <defaultValue></defaultValue>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="date" userProvided="false">
+        <format>
+          <DateTimeFormat formatString="MM/DD/YYYY"/>
+        </format>
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>3</firstLine>
+          <lastLine>3</lastLine>
+          <firstCharOffset>18</firstCharOffset>
+          <lastCharOffset>27</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="latitude" userProvided="false">
+        <format>
+          <LatitudeFormat formatString="DD MM.mmmmmN" variable="true"/>
+        </format>
+        <HeaderFragment isSingleLine="true" isVariable="true">
+          <firstLine>6</firstLine>
+          <lastLine>6</lastLine>
+          <firstCharOffset>18</firstCharOffset>
+          <lastCharOffset>29</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="longitude" userProvided="false">
+        <format>
+          <LongitudeFormat formatString="DDD MM.mmmmmE" variable="true"/>
+        </format>
+        <HeaderFragment isSingleLine="true" isVariable="true">
+          <firstLine>7</firstLine>
+          <lastLine>7</lastLine>
+          <firstCharOffset>18</firstCharOffset>
+          <lastCharOffset>30</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="bottomDepth" userProvided="true">
+        <format>
+          <FloatFormat formatString="%4.0f"/>
+        </format>
+        <userValue></userValue>
+      </PropertyModel>
+    </properties>
+    <DataType code="H13">
+      <profiles>0</profiles>
+      <qc>false</qc>
+      <sensor>false</sensor>
+    </DataType>
+    <FlagTable code="C1" label="SeaDataNet">
+      <Flag local="0" SDN="0 - no quality control"/>
+      <Flag local="1" SDN="1 - good value"/>
+      <Flag local="2" SDN="2 - probably good value"/>
+      <Flag local="3" SDN="3 - probably bad value"/>
+      <Flag local="4" SDN="4 - bad value"/>
+      <Flag local="5" SDN="5 - changed value"/>
+      <Flag local="6" SDN="6 - value below detection"/>
+      <Flag local="7" SDN="7 - value in excess"/>
+      <Flag local="8" SDN="8 - interpolated value"/>
+      <Flag local="9" SDN="9 - missing value"/>
+      <Flag local="A" SDN="A - value phenomenon uncertain"/>
+    </FlagTable>
+  </StationModel>
+  <DataModel>
+    <dataListType>P011_VIA_P021</dataListType>
+    <mesureType>BSSURF</mesureType>
+    <fallrateCode></fallrateCode>
+    <fallrateLabel></fallrateLabel>
+    <verticalParametersList>
+      <p_depthBSBed></p_depthBSBed>
+      <p_depthBSSurf>ADEPZZ01</p_depthBSSurf>
+      <p_pressure></p_pressure>
+      <p_heightASLvl></p_heightASLvl>
+    </verticalParametersList>
+    <parameters>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="1" lastCharOffset="5"/>
+        <Parameter code="AHGT">
+          <fullName>Vertical spatial coordinates</fullName>
+          <unit>Metres</unit>
+          <unitCode>ULAA</unitCode>
+          <default></default>
+          <format>%6.1f</format>
+          <CodeP011>ADEPZZ01</CodeP011>
+          <NameP011>Depth below surface of the water body</NameP011>
+          <IsP011>true</IsP011>
+          <instrument>Lockheed Martin Sippican T-7 XBT probe</instrument>
+          <instrumentCode>TOOL0263</instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="7" lastCharOffset="11"/>
+        <Parameter code="TEMP">
+          <fullName>Temperature of the water column</fullName>
+          <unit>Degrees Celsius</unit>
+          <unitCode>UPAA</unitCode>
+          <default></default>
+          <format>%5.2f</format>
+          <CodeP011>TEMPET01</CodeP011>
+          <NameP011>Temperature of the water body by expendable bathythermograph (XBT)</NameP011>
+          <IsP011>true</IsP011>
+          <instrument>Lockheed Martin Sippican T-7 XBT probe</instrument>
+          <instrumentCode>TOOL0263</instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="13" lastCharOffset="19"/>
+        <Parameter code="SVEL">
+          <fullName>Sound velocity and travel time in the water column</fullName>
+          <unit>Metres per second</unit>
+          <unitCode>UVAA</unitCode>
+          <default></default>
+          <format>%7.2f</format>
+          <CodeP011>SVELXXXX</CodeP011>
+          <NameP011>Sound velocity in the water body</NameP011>
+          <IsP011>true</IsP011>
+          <instrument>Lockheed Martin Sippican T-7 XBT probe</instrument>
+          <instrumentCode>TOOL0263</instrumentCode>
+        </Parameter>
+      </ParameterModel>
+    </parameters>
+  </DataModel>
+  <ConversionModel>
+    <permissions>
+      <MEDATLAS enable="true"/>
+      <ODV_MULTISTATIONS enable="true"/>
+      <ODV_MONOSTATION enable="true"/>
+      <UNKNOWN enable="true"/>
+      <NETCDF_MONOSTATION enable="true"/>
+      <NETCDF_MULTISTATIONS enable="true"/>
+    </permissions>
+    <sortStations>false</sortStations>
+    <outputFormat>ODV_MULTISTATIONS</outputFormat>
+  </ConversionModel>
+</InputModel>

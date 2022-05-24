@@ -1,0 +1,308 @@
+<InputModel version="1.5" isValid="true">
+  <MediaModel path="D:\dev\dev\workspace\ifremer_datatest\15240\PF_input">
+    <processType multiStations="false">CRUISE_DIR</processType>
+    <separator>&#9;</separator>
+    <inputType>PROFILE</inputType>
+    <fileHeader>0</fileHeader>
+    <stationHeader pattern="">16</stationHeader>
+    <endStation>0</endStation>
+    <endData pattern="" patternIsRegexp="false">EOF</endData>
+  </MediaModel>
+  <CruiseModel>
+    <reference>HECLA_JASIN78</reference>
+    <name>HECLA_JASIN78</name>
+    <shipCode>95BP</shipCode>
+    <shipName>Predvodnik</shipName>
+    <startDate>1365552000000</startDate>
+    <endDate>1365552000000</endDate>
+    <regionName></regionName>
+    <country></country>
+    <laboratories></laboratories>
+    <chiefScientist>UNKNOWN</chiefScientist>
+    <projectName></projectName>
+    <dataCentre></dataCentre>
+    <availability>publicly</availability>
+    <comment><![CDATA[]]></comment>
+    <correspondingURL><![CDATA[]]></correspondingURL>
+    <dataTypes/>
+  </CruiseModel>
+  <StationModel>
+    <referenceProperty>
+      <PropertyModel property="" userProvided="false">
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>17</firstLine>
+          <lastLine>17</lastLine>
+          <firstCharOffset>17</firstCharOffset>
+          <lastCharOffset>23</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+    </referenceProperty>
+    <properties>
+      <PropertyModel property="offsetTU" userProvided="true">
+        <format>
+          <FloatFormat formatString="%4.1f"/>
+        </format>
+        <userValue>0.0</userValue>
+      </PropertyModel>
+      <PropertyModel property="time" userProvided="false">
+        <format>
+          <DateTimeFormat formatString="hh24:mm:ss"/>
+        </format>
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>17</firstLine>
+          <lastLine>17</lastLine>
+          <firstCharOffset>39</firstCharOffset>
+          <lastCharOffset>46</lastCharOffset>
+          <isDefaultValueSelected>false</isDefaultValueSelected>
+          <defaultValue></defaultValue>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="date" userProvided="false">
+        <format>
+          <DateTimeFormat formatString="YYYY-MM-DD"/>
+        </format>
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>17</firstLine>
+          <lastLine>17</lastLine>
+          <firstCharOffset>28</firstCharOffset>
+          <lastCharOffset>37</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="latitude" userProvided="false">
+        <format>
+          <LatitudeFormat formatString="+DD.dddd"/>
+        </format>
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>17</firstLine>
+          <lastLine>17</lastLine>
+          <firstCharOffset>60</firstCharOffset>
+          <lastCharOffset>67</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="longitude" userProvided="false">
+        <format>
+          <LongitudeFormat formatString="+DDD.dddd"/>
+        </format>
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>17</firstLine>
+          <lastLine>17</lastLine>
+          <firstCharOffset>51</firstCharOffset>
+          <lastCharOffset>59</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="bottomDepth" userProvided="true">
+        <format>
+          <FloatFormat formatString="%4.0f"/>
+        </format>
+        <userValue></userValue>
+      </PropertyModel>
+    </properties>
+    <DataType code="M01">
+      <profiles>0</profiles>
+      <qc>false</qc>
+      <sensor>false</sensor>
+    </DataType>
+    <FlagTable code="C1" label="SeaDataNet">
+      <Flag local="0" SDN="0 - no quality control"/>
+      <Flag local="1" SDN="1 - good value"/>
+      <Flag local="2" SDN="2 - probably good value"/>
+      <Flag local="3" SDN="3 - probably bad value"/>
+      <Flag local="4" SDN="4 - bad value"/>
+      <Flag local="5" SDN="5 - changed value"/>
+      <Flag local="6" SDN="6 - value below detection"/>
+      <Flag local="7" SDN="7 - value in excess"/>
+      <Flag local="8" SDN="8 - interpolated value"/>
+      <Flag local="9" SDN="9 - missing value"/>
+      <Flag local="A" SDN="A - value phenomenon uncertain"/>
+    </FlagTable>
+  </StationModel>
+  <DataModel>
+    <dataListType>P011_VIA_P021</dataListType>
+    <mesureType>ASLVL</mesureType>
+    <verticalParametersList>
+      <p_depthBSBed></p_depthBSBed>
+      <p_depthBSSurf></p_depthBSSurf>
+      <p_pressure></p_pressure>
+      <p_heightASLvl>AHSLZZ01</p_heightASLvl>
+    </verticalParametersList>
+    <parameters>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="102" lastCharOffset="108"/>
+        <Parameter code="AHGT">
+          <fullName>Vertical spatial coordinates</fullName>
+          <unit>Metres</unit>
+          <unitCode>ULAA</unitCode>
+          <default></default>
+          <format>%7.1f</format>
+          <CodeP011>AHSLZZ01</CodeP011>
+          <NameP011>Height above sea level</NameP011>
+          <IsP011>true</IsP011>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="84" lastCharOffset="97"/>
+        <Parameter code="AYMD">
+          <fullName>Date and time</fullName>
+          <unit>Days</unit>
+          <unitCode>UTAA</unitCode>
+          <default></default>
+          <format>%14.6f</format>
+          <CodeP011>CJDY1101</CodeP011>
+          <NameP011>Julian Date (chronological)</NameP011>
+          <IsP011>true</IsP011>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="113" lastCharOffset="118"/>
+        <Parameter code="CAPH">
+          <fullName>Air pressure</fullName>
+          <unit>Millibars</unit>
+          <unitCode>UPBB</unitCode>
+          <default></default>
+          <format>%6.1f</format>
+          <CodeP011>CAPASS01</CodeP011>
+          <NameP011>Pressure (measured variable) exerted by the atmosphere by barometer and correction to sea level</NameP011>
+          <IsP011>true</IsP011>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="123" lastCharOffset="130"/>
+        <Parameter code="CDTA">
+          <fullName>Air temperature</fullName>
+          <unit>Degrees Kelvin</unit>
+          <unitCode>UPKA</unitCode>
+          <default></default>
+          <format>%8.3f</format>
+          <CodeP011>CDTAPS01</CodeP011>
+          <NameP011>Temperature of the atmosphere by psychrometer dry bulb</NameP011>
+          <IsP011>true</IsP011>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="137" lastCharOffset="142"/>
+        <Parameter code="CDTA">
+          <fullName>Air temperature</fullName>
+          <unit>Degrees Kelvin</unit>
+          <unitCode>UPKA</unitCode>
+          <default></default>
+          <format>%6.3f</format>
+          <CodeP011>CDTSZZ01</CodeP011>
+          <NameP011>Temperature standard deviation of the atmosphere by dry bulb thermometer</NameP011>
+          <IsP011>true</IsP011>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="149" lastCharOffset="155"/>
+        <Parameter code="CHUM">
+          <fullName>Atmospheric humidity</fullName>
+          <unit>Grams per kilogram</unit>
+          <unitCode>UGKG</unitCode>
+          <default></default>
+          <format>%7.4f</format>
+          <CodeP011>CHMSZZ01</CodeP011>
+          <NameP011>Specific humidity standard deviation of the atmosphere</NameP011>
+          <IsP011>true</IsP011>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="162" lastCharOffset="168"/>
+        <Parameter code="CHUM">
+          <fullName>Atmospheric humidity</fullName>
+          <unit>Grams per kilogram</unit>
+          <unitCode>UGKG</unitCode>
+          <default></default>
+          <format>%7.4f</format>
+          <CodeP011>CHUMSS01</CodeP011>
+          <NameP011>Specific humidity of the atmosphere</NameP011>
+          <IsP011>true</IsP011>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="173" lastCharOffset="177"/>
+        <Parameter code="EWSB">
+          <fullName>Wind speed and direction</fullName>
+          <unit>Metres per second</unit>
+          <unitCode>UVAA</unitCode>
+          <default></default>
+          <format>%5.2f</format>
+          <CodeP011>ESEWZZ01</CodeP011>
+          <NameP011>Eastward wind velocity standard deviation in the atmosphere</NameP011>
+          <IsP011>true</IsP011>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="182" lastCharOffset="186"/>
+        <Parameter code="EWSB">
+          <fullName>Wind speed and direction</fullName>
+          <unit>Metres per second</unit>
+          <unitCode>UVAA</unitCode>
+          <default></default>
+          <format>%5.2f</format>
+          <CodeP011>ESNSZZ01</CodeP011>
+          <NameP011>Northward wind velocity standard deviation in the atmosphere</NameP011>
+          <IsP011>true</IsP011>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="191" lastCharOffset="197"/>
+        <Parameter code="EWSB">
+          <fullName>Wind speed and direction</fullName>
+          <unit>Metres per second</unit>
+          <unitCode>UVAA</unitCode>
+          <default></default>
+          <format>%7.2f</format>
+          <CodeP011>EWEWSS01</CodeP011>
+          <NameP011>Eastward wind velocity in the atmosphere by in-situ anemometer</NameP011>
+          <IsP011>true</IsP011>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="202" lastCharOffset="208"/>
+        <Parameter code="EWSB">
+          <fullName>Wind speed and direction</fullName>
+          <unit>Metres per second</unit>
+          <unitCode>UVAA</unitCode>
+          <default></default>
+          <format>%7.2f</format>
+          <CodeP011>EWNSSS01</CodeP011>
+          <NameP011>Northward wind velocity in the atmosphere by in-situ anemometer</NameP011>
+          <IsP011>true</IsP011>
+        </Parameter>
+      </ParameterModel>
+    </parameters>
+  </DataModel>
+  <ConversionModel>
+    <permissions>
+      <MEDATLAS enable="true"/>
+      <ODV_MULTISTATIONS enable="true"/>
+      <ODV_MONOSTATION enable="true"/>
+      <UNKNOWN enable="true"/>
+      <NETCDF_MONOSTATION enable="true"/>
+      <NETCDF_MULTISTATIONS enable="true"/>
+    </permissions>
+    <sortStations>false</sortStations>
+    <outputFormat>NETCDF_MULTISTATIONS</outputFormat>
+  </ConversionModel>
+</InputModel>

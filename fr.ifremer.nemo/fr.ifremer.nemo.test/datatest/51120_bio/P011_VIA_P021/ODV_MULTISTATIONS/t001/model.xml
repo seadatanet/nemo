@@ -1,0 +1,590 @@
+<InputModel version="1.7.0" isValid="true">
+  <MediaModel path="/home/sophie/Bureau/tmp/nemo/51120/input_BioODV_Demfish_monoCDI.txt">
+    <processType multiStations="false">CRUISE_FILE</processType>
+    <separator>&#9;</separator>
+    <inputType>UNKNOWN</inputType>
+    <variant>BIOLOGICAL</variant>
+    <fileHeader>26</fileHeader>
+    <stationHeader pattern="" useSeparatorInStationHeader="false">0</stationHeader>
+    <colTitleInInputFile colTitleInInputFileCheck="true" colTitlesInInputFileLineNb="26" useTableForCsvData="true"/>
+    <endStation>0</endStation>
+    <endData pattern="RV Pelagia" patternIsRegexp="false">NEXT_START_WITH</endData>
+  </MediaModel>
+  <CruiseModel>
+    <reference>VD</reference>
+    <bshCsrReference></bshCsrReference>
+    <localCSRIdentifier></localCSRIdentifier>
+    <name>RV Pelagia/199402</name>
+    <shipCode>64PE</shipCode>
+    <shipName>Pelagia</shipName>
+    <startDate>1582281946398</startDate>
+    <endDate>1582281946398</endDate>
+    <regionName></regionName>
+    <regionCode></regionCode>
+    <country></country>
+    <laboratories></laboratories>
+    <chiefScientist>UNKNOWN</chiefScientist>
+    <projectName></projectName>
+    <dataCentre></dataCentre>
+    <availability>publicly</availability>
+    <comment><![CDATA[]]></comment>
+    <dataTypes/>
+  </CruiseModel>
+  <StationModel>
+    <referenceProperty>
+      <PropertyModel property="" userProvided="false">
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>1</firstLine>
+          <lastLine>1</lastLine>
+          <firstCharOffset>19</firstCharOffset>
+          <lastCharOffset>29</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+    </referenceProperty>
+    <properties>
+      <PropertyModel property="USE_STATION_CODE_IN_LOCAL_CDI_ID_CHECKBOX" userProvided="true">
+        <userValue>false</userValue>
+      </PropertyModel>
+      <PropertyModel property="dcHistory1" userProvided="true">
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="dcHistory2" userProvided="true">
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="comment" userProvided="true">
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="surfaceSamples1" userProvided="true">
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="surfaceSamples2" userProvided="true">
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="offsetTU" userProvided="true">
+        <format>
+          <FloatFormat formatString="%4.1f"/>
+        </format>
+        <userValue>0.0</userValue>
+      </PropertyModel>
+      <PropertyModel property="time" userProvided="false">
+        <format>
+          <DateTimeFormat formatString="ISO8601"/>
+        </format>
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>1</firstLine>
+          <lastLine>1</lastLine>
+          <firstCharOffset>33</firstCharOffset>
+          <lastCharOffset>51</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="date" userProvided="false">
+        <format>
+          <DateTimeFormat formatString="ISO8601"/>
+        </format>
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>1</firstLine>
+          <lastLine>1</lastLine>
+          <firstCharOffset>33</firstCharOffset>
+          <lastCharOffset>51</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="latitude" userProvided="false">
+        <format>
+          <LatitudeFormat formatString="decimal degrees for file with separators"/>
+        </format>
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>1</firstLine>
+          <lastLine>1</lastLine>
+          <firstCharOffset>58</firstCharOffset>
+          <lastCharOffset>62</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="longitude" userProvided="false">
+        <format>
+          <LongitudeFormat formatString="decimal degrees for file with separators"/>
+        </format>
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>1</firstLine>
+          <lastLine>1</lastLine>
+          <firstCharOffset>53</firstCharOffset>
+          <lastCharOffset>56</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="bottomDepth" userProvided="false">
+        <format>
+          <FloatFormat formatString="%4.0f"/>
+        </format>
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>1</firstLine>
+          <lastLine>1</lastLine>
+          <firstCharOffset>76</firstCharOffset>
+          <lastCharOffset>77</lastCharOffset>
+          <isDefaultValueSelected>false</isDefaultValueSelected>
+          <defaultValue></defaultValue>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="sensorDepth" userProvided="true">
+        <format>
+          <FloatFormat formatString="%4.0f"/>
+        </format>
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="samplingRate" userProvided="true">
+        <format>
+          <FloatFormat formatString="%4.0f"/>
+        </format>
+        <conversionFormula>*1</conversionFormula>
+        <userValue>0</userValue>
+      </PropertyModel>
+    </properties>
+    <DataType code="1201">
+      <profiles>0</profiles>
+      <qc>false</qc>
+      <sensor>false</sensor>
+    </DataType>
+    <FlagTable code="C1" label="SeaDataNet">
+      <Flag local="0" SDN="0 - no quality control"/>
+      <Flag local="1" SDN="1 - good value"/>
+      <Flag local="2" SDN="2 - probably good value"/>
+      <Flag local="3" SDN="3 - probably bad value"/>
+      <Flag local="4" SDN="4 - bad value"/>
+      <Flag local="5" SDN="5 - changed value"/>
+      <Flag local="6" SDN="6 - value below detection"/>
+      <Flag local="7" SDN="7 - value in excess"/>
+      <Flag local="8" SDN="8 - interpolated value"/>
+      <Flag local="9" SDN="9 - missing value"/>
+      <Flag local="A" SDN="A - value phenomenon uncertain"/>
+      <Flag local="Q" SDN="Q - value below limit of quantification"/>
+    </FlagTable>
+  </StationModel>
+  <DataModel>
+    <dataListType>P011_VIA_P021</dataListType>
+    <mesureType>BSSURF</mesureType>
+    <fallrateCode></fallrateCode>
+    <fallrateLabel></fallrateLabel>
+    <verticalParametersList>
+      <p_depthBSBed></p_depthBSBed>
+      <p_depthBSSurf></p_depthBSSurf>
+      <p_pressure></p_pressure>
+      <p_heightASLvl></p_heightASLvl>
+    </verticalParametersList>
+    <parameters>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="10" lastCharOffset="10"/>
+        <Parameter code="AHGT">
+          <fullName></fullName>
+          <unit>Metres</unit>
+          <unitCode>ULAA</unitCode>
+          <default></default>
+          <format>%2d</format>
+          <CodeP011>MINWDIST</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011>Depth (spatial coordinate) minimum relative to water surface in the water body</NameP011>
+          <IsP011>true</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="12" lastCharOffset="12"/>
+        <Parameter code="AHGT">
+          <fullName></fullName>
+          <unit>Metres</unit>
+          <unitCode>ULAA</unitCode>
+          <default></default>
+          <format>%2d</format>
+          <CodeP011>MAXWDIST</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011>Depth (spatial coordinate) maximum relative to water surface in the water body</NameP011>
+          <IsP011>true</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula></conversionFormula>
+        <isText>true</isText>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="14" lastCharOffset="14"/>
+        <Parameter code="ACYC">
+          <fullName>Reference numbers</fullName>
+          <unit></unit>
+          <unitCode></unitCode>
+          <default></default>
+          <format></format>
+          <CodeP011>EVNTID01</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011>Event identifier</NameP011>
+          <IsP011>true</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="16" lastCharOffset="16"/>
+        <Parameter code="AYMD">
+          <fullName>Date and time</fullName>
+          <unit>ISO8601</unit>
+          <unitCode>TISO</unitCode>
+          <default></default>
+          <format>ISO8601</format>
+          <CodeP011>STRT8601</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011>Start date and time (UT in ISO8601 format to known precision)</NameP011>
+          <IsP011>true</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="18" lastCharOffset="18"/>
+        <Parameter code="AYMD">
+          <fullName>Date and time</fullName>
+          <unit>ISO8601</unit>
+          <unitCode>TISO</unitCode>
+          <default></default>
+          <format>ISO8601</format>
+          <CodeP011>ENDX8601</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011>End date and time (UT in ISO8601 format to known precision)</NameP011>
+          <IsP011>true</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="20" lastCharOffset="20"/>
+        <Parameter code="ALAT">
+          <fullName>Horizontal spatial co-ordinates</fullName>
+          <unit>Degrees east</unit>
+          <unitCode>DEGE</unitCode>
+          <default></default>
+          <format>%4.2f</format>
+          <CodeP011>STRTXLON</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011>Start longitude east</NameP011>
+          <IsP011>true</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="22" lastCharOffset="22"/>
+        <Parameter code="ALAT">
+          <fullName>Horizontal spatial co-ordinates</fullName>
+          <unit>Degrees east</unit>
+          <unitCode>DEGE</unitCode>
+          <default></default>
+          <format>%7.5f</format>
+          <CodeP011>ENDXXLON</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011>End longitude east</NameP011>
+          <IsP011>true</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="24" lastCharOffset="24"/>
+        <Parameter code="ALAT">
+          <fullName>Horizontal spatial co-ordinates</fullName>
+          <unit>Degrees north</unit>
+          <unitCode>DEGN</unitCode>
+          <default></default>
+          <format>%5.2f</format>
+          <CodeP011>STRTXLAT</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011>Start latitude north</NameP011>
+          <IsP011>true</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="26" lastCharOffset="26"/>
+        <Parameter code="ALAT">
+          <fullName>Horizontal spatial co-ordinates</fullName>
+          <unit>Degrees north</unit>
+          <unitCode>DEGN</unitCode>
+          <default></default>
+          <format>%5.2f</format>
+          <CodeP011>ENDXXLAT</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011>End latitude north</NameP011>
+          <IsP011>true</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula></conversionFormula>
+        <isText>true</isText>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="28" lastCharOffset="28"/>
+        <Parameter code="ACYC">
+          <fullName></fullName>
+          <unit></unit>
+          <unitCode>XXXX</unitCode>
+          <default></default>
+          <format></format>
+          <CodeP011>SAMPID01</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011>Sample identifier</NameP011>
+          <IsP011>true</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="30" lastCharOffset="30"/>
+        <Parameter code="SAMP">
+          <fullName>Sampling parameters</fullName>
+          <unit>Metres</unit>
+          <unitCode>ULAA</unitCode>
+          <default></default>
+          <format>%3d</format>
+          <CodeP011>LENTRACK</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011>Length of sampling track</NameP011>
+          <IsP011>true</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula></conversionFormula>
+        <isText>true</isText>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="32" lastCharOffset="32"/>
+        <Parameter code="BPRP">
+          <fullName>SeaDataNet biological format biotic parameters</fullName>
+          <unit></unit>
+          <unitCode></unitCode>
+          <default></default>
+          <format></format>
+          <CodeP011>SAMPPROT</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011>Sampling protocol</NameP011>
+          <IsP011>true</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula></conversionFormula>
+        <isText>true</isText>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="34" lastCharOffset="34"/>
+        <Parameter code="ACYC">
+          <fullName>Reference numbers</fullName>
+          <unit></unit>
+          <unitCode></unitCode>
+          <default></default>
+          <format></format>
+          <CodeP011>SSAMID01</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011>Subsample identifier</NameP011>
+          <IsP011>true</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="36" lastCharOffset="36"/>
+        <Parameter code="TMES">
+          <fullName>Metadata parameters</fullName>
+          <unit>Dimensionless</unit>
+          <unitCode>UUUU</unitCode>
+          <default></default>
+          <format>%3.1f</format>
+          <CodeP011>SSAMPC01</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011>Sub-sampling coefficient</NameP011>
+          <IsP011>true</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula></conversionFormula>
+        <isText>true</isText>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="38" lastCharOffset="38"/>
+        <Parameter code="BPRP">
+          <fullName></fullName>
+          <unit></unit>
+          <unitCode>XXXX</unitCode>
+          <default></default>
+          <format></format>
+          <CodeP011>SCNAME01</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011>Taxon of biological entity specified elsewhere</NameP011>
+          <IsP011>true</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula></conversionFormula>
+        <isText>true</isText>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="40" lastCharOffset="40"/>
+        <Parameter code="BPRP">
+          <fullName></fullName>
+          <unit></unit>
+          <unitCode>XXXX</unitCode>
+          <default></default>
+          <format></format>
+          <CodeP011>SNANID01</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011>Identifier (LSID) of biological entity specified elsewhere</NameP011>
+          <IsP011>true</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula></conversionFormula>
+        <isText>true</isText>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="42" lastCharOffset="42"/>
+        <Parameter code="BPRP">
+          <fullName></fullName>
+          <unit></unit>
+          <unitCode>XXXX</unitCode>
+          <default></default>
+          <format></format>
+          <CodeP011>ENTSEX01</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011>Gender of biological entity specified elsewhere</NameP011>
+          <IsP011>true</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula></conversionFormula>
+        <isText>true</isText>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="44" lastCharOffset="44"/>
+        <Parameter code="BPRP">
+          <fullName></fullName>
+          <unit></unit>
+          <unitCode>XXXX</unitCode>
+          <default></default>
+          <format></format>
+          <CodeP011>LSTAGE01</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011>Development stage of biological entity specified elsewhere</NameP011>
+          <IsP011>true</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="46" lastCharOffset="46"/>
+        <Parameter code="BPRP">
+          <fullName></fullName>
+          <unit>Dimensionless</unit>
+          <unitCode>UUUU</unitCode>
+          <default></default>
+          <format>%3d</format>
+          <CodeP011>OCOUNT01</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011>Count (in assayed sample) of biological entity specified elsewhere</NameP011>
+          <IsP011>true</IsP011>
+          <instrument>Unknown beam trawl</instrument>
+          <instrumentCode>TOOL0651</instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="48" lastCharOffset="48"/>
+        <Parameter code="SAMP">
+          <fullName>Sampling parameters</fullName>
+          <unit>Minutes</unit>
+          <unitCode>UMIN</unitCode>
+          <default></default>
+          <format>%3d</format>
+          <CodeP011>AZDRZZ01</CodeP011>
+          <IndexP011>2</IndexP011>
+          <NameP011>Sample duration</NameP011>
+          <IsP011>true</IsP011>
+          <instrument>Unknown beam trawl</instrument>
+          <instrumentCode>TOOL0651</instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="50" lastCharOffset="50"/>
+        <Parameter code="BPRP">
+          <fullName>SeaDataNet biological format biotic parameters</fullName>
+          <unit>Number per square metre</unit>
+          <unitCode>UPMS</unitCode>
+          <default></default>
+          <format>%6.1f</format>
+          <CodeP011>SDBIOL02</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011>Abundance of biological entity specified elsewhere per unit area of the bed</NameP011>
+          <IsP011>true</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="52" lastCharOffset="52"/>
+        <Parameter code="BPRP">
+          <fullName>SeaDataNet biological format biotic parameters</fullName>
+          <unit>Kilograms per square metre</unit>
+          <unitCode>KMP2</unitCode>
+          <default></default>
+          <format>%14.8f</format>
+          <CodeP011>SDBIOL05</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011>Wet weight biomass of biological entity specified elsewhere per unit area of the bed</NameP011>
+          <IsP011>true</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+    </parameters>
+  </DataModel>
+  <ConversionModel>
+    <permissions>
+      <MEDATLAS enable="true"/>
+      <ODV_MULTISTATIONS enable="true"/>
+      <ODV_MONOSTATION enable="true"/>
+      <UNKNOWN enable="true"/>
+      <NETCDF_MONOSTATION enable="true"/>
+      <NETCDF_MULTISTATIONS enable="true"/>
+    </permissions>
+    <sortStations>false</sortStations>
+    <outputFormat>ODV_MULTISTATIONS</outputFormat>
+  </ConversionModel>
+</InputModel>

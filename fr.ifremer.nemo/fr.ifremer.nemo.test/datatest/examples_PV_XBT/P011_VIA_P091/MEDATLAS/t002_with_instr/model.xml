@@ -1,0 +1,231 @@
+<InputModel version="1.6.0" isValid="true">
+  <MediaModel path="/home/altran/workspaces/nemoAndCoIndigo/ifremer_datatest/examples_PV_XBT/input">
+    <processType multiStations="false">CRUISE_DIR</processType>
+    <separator></separator>
+    <inputType>PROFILE</inputType>
+    <fileHeader>0</fileHeader>
+    <stationHeader pattern="">41</stationHeader>
+    <endStation>0</endStation>
+    <endData pattern="" patternIsRegexp="false">EOF</endData>
+  </MediaModel>
+  <CruiseModel>
+    <reference>FI35201501006</reference>
+    <localCSRIdentifier>15010060</localCSRIdentifier>
+    <name>TEST XBT</name>
+    <shipCode>35A3</shipCode>
+    <shipName>L'Atalante</shipName>
+    <startDate>1420070400000</startDate>
+    <endDate>1421712000000</endDate>
+    <regionName>Southwest Pacific Ocean (140W)</regionName>
+    <regionCode>SVX00024</regionCode>
+    <country>35</country>
+    <laboratories>IFREMER / GENAVIR BREST - IFREMER / GENAVIR BREST</laboratories>
+    <chiefScientist>VIOLLETTE Pascal</chiefScientist>
+    <projectName></projectName>
+    <dataCentre>FI</dataCentre>
+    <availability>publicly</availability>
+    <comment><![CDATA[Here is some probe information for this drop.
+Probe Type       :  T-7
+Terminal Depth   :  1000 m
+Depth Equation   :  Standard
+Depth Coeff. 1   :  0.0
+Depth Coeff. 2   :  6.691
+Depth Coeff. 3   :  -0.00225
+Depth Coeff. 4   :  0.0
+Pressure Pt Correction:  100.0%
+
+Raw Data Filename:  D:\Mission\2015\T7_00001.RDF
+Display Units    :  Metric
+This XBT export file has not been noise reduced or averaged.
+ Sound velocity derived with assumed salinity: 36.30 ppt]]></comment>
+    <dataTypes>
+      <DataType code="H13 - Bathythermograph">
+        <profiles>21</profiles>
+        <qc>false</qc>
+        <sensor>true</sensor>
+      </DataType>
+    </dataTypes>
+  </CruiseModel>
+  <StationModel>
+    <referenceProperty>
+      <PropertyModel property="" userProvided="false">
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>33</firstLine>
+          <lastLine>33</lastLine>
+          <firstCharOffset>40</firstCharOffset>
+          <lastCharOffset>44</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+    </referenceProperty>
+    <properties>
+      <PropertyModel property="dcHistory1" userProvided="true">
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="dcHistory2" userProvided="true">
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="comment" userProvided="true">
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="surfaceSamples1" userProvided="true">
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="surfaceSamples2" userProvided="true">
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="offsetTU" userProvided="true">
+        <format>
+          <FloatFormat formatString="%4.1f"/>
+        </format>
+        <userValue>0.0</userValue>
+      </PropertyModel>
+      <PropertyModel property="time" userProvided="false">
+        <format>
+          <DateTimeFormat formatString="hh24:mm:ss"/>
+        </format>
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>4</firstLine>
+          <lastLine>4</lastLine>
+          <firstCharOffset>18</firstCharOffset>
+          <lastCharOffset>25</lastCharOffset>
+          <isDefaultValueSelected>false</isDefaultValueSelected>
+          <defaultValue></defaultValue>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="date" userProvided="false">
+        <format>
+          <DateTimeFormat formatString="MM/DD/YYYY"/>
+        </format>
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>3</firstLine>
+          <lastLine>3</lastLine>
+          <firstCharOffset>18</firstCharOffset>
+          <lastCharOffset>27</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="latitude" userProvided="false">
+        <format>
+          <LatitudeFormat formatString="DD MM.mmmmmN" variable="true"/>
+        </format>
+        <HeaderFragment isSingleLine="true" isVariable="true">
+          <firstLine>6</firstLine>
+          <lastLine>6</lastLine>
+          <firstCharOffset>18</firstCharOffset>
+          <lastCharOffset>29</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="longitude" userProvided="false">
+        <format>
+          <LongitudeFormat formatString="DDD MM.mmmmmE" variable="true"/>
+        </format>
+        <HeaderFragment isSingleLine="true" isVariable="true">
+          <firstLine>7</firstLine>
+          <lastLine>7</lastLine>
+          <firstCharOffset>18</firstCharOffset>
+          <lastCharOffset>30</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="bottomDepth" userProvided="true">
+        <format>
+          <FloatFormat formatString="%4.0f"/>
+        </format>
+        <userValue></userValue>
+      </PropertyModel>
+    </properties>
+    <DataType code="H13">
+      <profiles>21</profiles>
+      <qc>false</qc>
+      <sensor>true</sensor>
+    </DataType>
+    <FlagTable code="C1" label="SeaDataNet">
+      <Flag local="0" SDN="0 - no quality control"/>
+      <Flag local="1" SDN="1 - good value"/>
+      <Flag local="2" SDN="2 - probably good value"/>
+      <Flag local="3" SDN="3 - probably bad value"/>
+      <Flag local="4" SDN="4 - bad value"/>
+      <Flag local="5" SDN="5 - changed value"/>
+      <Flag local="6" SDN="6 - value below detection"/>
+      <Flag local="7" SDN="7 - value in excess"/>
+      <Flag local="8" SDN="8 - interpolated value"/>
+      <Flag local="9" SDN="9 - missing value"/>
+      <Flag local="A" SDN="A - value phenomenon uncertain"/>
+    </FlagTable>
+  </StationModel>
+  <DataModel>
+    <dataListType>P011_VIA_P091</dataListType>
+    <mesureType>BSSURF</mesureType>
+    <fallrateCode></fallrateCode>
+    <fallrateLabel></fallrateLabel>
+    <verticalParametersList>
+      <p_depthBSBed></p_depthBSBed>
+      <p_depthBSSurf>ADEPZZ01</p_depthBSSurf>
+      <p_pressure></p_pressure>
+      <p_heightASLvl></p_heightASLvl>
+    </verticalParametersList>
+    <parameters>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="1" lastCharOffset="5"/>
+        <Parameter code="DEPH">
+          <fullName>DEPTH BELOW SEA SURFACE</fullName>
+          <unit>meter</unit>
+          <unitCode></unitCode>
+          <default>-999.9</default>
+          <format>%6.1f</format>
+          <CodeP011>ADEPZZ01</CodeP011>
+          <NameP011>Depth below surface of the water body</NameP011>
+          <IsP011>true</IsP011>
+          <instrument>Lockheed Martin Sippican T-7 XBT probe</instrument>
+          <instrumentCode>TOOL0263</instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="7" lastCharOffset="11"/>
+        <Parameter code="TEMP">
+          <fullName>SEA TEMPERATURE</fullName>
+          <unit>Celsius degree</unit>
+          <unitCode></unitCode>
+          <default>99.99</default>
+          <format>%5.2f</format>
+          <CodeP011>TEMPET01</CodeP011>
+          <NameP011>Temperature of the water body by expendable bathythermograph (XBT)</NameP011>
+          <IsP011>true</IsP011>
+          <instrument>Lockheed Martin Sippican T-7 XBT probe</instrument>
+          <instrumentCode>TOOL0263</instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="13" lastCharOffset="19"/>
+        <Parameter code="SVEL">
+          <fullName>SOUND VELOCITY</fullName>
+          <unit>meter/second</unit>
+          <unitCode></unitCode>
+          <default>9999.99</default>
+          <format>%7.2f</format>
+          <CodeP011>SVELXXXX</CodeP011>
+          <NameP011>Sound velocity in the water body</NameP011>
+          <IsP011>true</IsP011>
+          <instrument>Lockheed Martin Sippican T-7 XBT probe</instrument>
+          <instrumentCode>TOOL0263</instrumentCode>
+        </Parameter>
+      </ParameterModel>
+    </parameters>
+  </DataModel>
+  <ConversionModel>
+    <permissions>
+      <MEDATLAS enable="true"/>
+      <ODV_MULTISTATIONS enable="true"/>
+      <ODV_MONOSTATION enable="true"/>
+      <UNKNOWN enable="true"/>
+      <NETCDF_MONOSTATION enable="true"/>
+      <NETCDF_MULTISTATIONS enable="true"/>
+    </permissions>
+    <sortStations>false</sortStations>
+    <outputFormat>MEDATLAS</outputFormat>
+  </ConversionModel>
+</InputModel>

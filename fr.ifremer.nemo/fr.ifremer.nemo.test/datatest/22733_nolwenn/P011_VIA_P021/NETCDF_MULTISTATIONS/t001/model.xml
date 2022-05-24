@@ -1,0 +1,193 @@
+<InputModel version="1.6.4" isValid="true">
+  <MediaModel path="/home/sophie/Documents/workspaces/SISMER/nemoAndCoIndigo/ifremer_datatest/22733_nolwenn/input">
+    <processType multiStations="false">CRUISE_FILE</processType>
+    <separator></separator>
+    <inputType>PROFILE</inputType>
+    <fileHeader>2</fileHeader>
+    <stationHeader pattern="">0</stationHeader>
+    <colTitleInInputFile colTitleInInputFileCheck="false" colTitlesInInputFileLineNb="0" useTableForCsvData="false"/>
+    <endStation>0</endStation>
+    <endData pattern="xxxxxxxxxxxxxxxxxxxxxxxxxx" patternIsRegexp="false">BEGIN_LINE_CHANGES</endData>
+  </MediaModel>
+  <CruiseModel>
+    <reference>FI35200404005</reference>
+    <localCSRIdentifier>4040050</localCSRIdentifier>
+    <name>OVIDE 2</name>
+    <shipCode>35HT</shipCode>
+    <shipName>Thalassa</shipName>
+    <startDate>1086307200000</startDate>
+    <endDate>1089158400000</endDate>
+    <regionName>Northeast Atlantic Ocean (40W)</regionName>
+    <regionCode>SVX00015</regionCode>
+    <country>35</country>
+    <laboratories>IFREMER , CNRS/INSU, IIM Vigo, IUEM/Universit&#233; de Bretagne Occidentale</laboratories>
+    <chiefScientist>HUCK Thierry</chiefScientist>
+    <projectName>OVIDE</projectName>
+    <dataCentre>FI</dataCentre>
+    <availability>publicly</availability>
+    <comment><![CDATA[The cross-over analysis carried out at the carbon dioxide information analysis
+center (CDIAC) suggested that, for consistency with reference cruises, the
+nitrate, silicate and phosphate data measured during the OVIDE 2002, 2004,
+2006, 2008 and 2010 cruises should be multiplied by 0.96, 0.98 and 1.1
+respectively. See http://cdiac.ornl.gov/oceans/GLODAPv2/cruise_table.html for
+more information. This correction was not applied to this data set. ]]></comment>
+    <dataTypes/>
+  </CruiseModel>
+  <StationModel>
+    <referenceProperty>
+      <PropertyModel property="" userProvided="false">
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>1</firstLine>
+          <lastLine>1</lastLine>
+          <firstCharOffset>23</firstCharOffset>
+          <lastCharOffset>26</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+    </referenceProperty>
+    <properties>
+      <PropertyModel property="offsetTU" userProvided="true">
+        <format>
+          <FloatFormat formatString="%4.1f"/>
+        </format>
+        <userValue>0.0</userValue>
+      </PropertyModel>
+      <PropertyModel property="time" userProvided="false">
+        <format>
+          <DateTimeFormat formatString="hh24mm"/>
+        </format>
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>1</firstLine>
+          <lastLine>1</lastLine>
+          <firstCharOffset>45</firstCharOffset>
+          <lastCharOffset>48</lastCharOffset>
+          <isDefaultValueSelected>false</isDefaultValueSelected>
+          <defaultValue></defaultValue>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="date" userProvided="false">
+        <format>
+          <DateTimeFormat formatString="YYYYMMDD"/>
+        </format>
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>1</firstLine>
+          <lastLine>1</lastLine>
+          <firstCharOffset>31</firstCharOffset>
+          <lastCharOffset>38</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="latitude" userProvided="false">
+        <format>
+          <LatitudeFormat formatString="+DD.ddd"/>
+        </format>
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>1</firstLine>
+          <lastLine>1</lastLine>
+          <firstCharOffset>52</firstCharOffset>
+          <lastCharOffset>58</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="longitude" userProvided="false">
+        <format>
+          <LongitudeFormat formatString="+DD.ddd"/>
+        </format>
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>1</firstLine>
+          <lastLine>1</lastLine>
+          <firstCharOffset>62</firstCharOffset>
+          <lastCharOffset>68</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="bottomDepth" userProvided="false">
+        <format>
+          <FloatFormat formatString="%4.0f"/>
+        </format>
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>1</firstLine>
+          <lastLine>1</lastLine>
+          <firstCharOffset>74</firstCharOffset>
+          <lastCharOffset>78</lastCharOffset>
+          <isDefaultValueSelected>false</isDefaultValueSelected>
+          <defaultValue></defaultValue>
+        </HeaderFragment>
+      </PropertyModel>
+    </properties>
+    <DataType code="H09">
+      <profiles>0</profiles>
+      <qc>false</qc>
+      <sensor>false</sensor>
+    </DataType>
+    <FlagTable code="C1" label="SeaDataNet">
+      <Flag local="0" SDN="0 - no quality control"/>
+      <Flag local="1" SDN="1 - good value"/>
+      <Flag local="2" SDN="2 - probably good value"/>
+      <Flag local="3" SDN="3 - probably bad value"/>
+      <Flag local="4" SDN="4 - bad value"/>
+      <Flag local="5" SDN="5 - changed value"/>
+      <Flag local="6" SDN="6 - value below detection"/>
+      <Flag local="7" SDN="7 - value in excess"/>
+      <Flag local="8" SDN="8 - interpolated value"/>
+      <Flag local="9" SDN="9 - missing value"/>
+      <Flag local="A" SDN="A - value phenomenon uncertain"/>
+    </FlagTable>
+  </StationModel>
+  <DataModel>
+    <dataListType>P011_VIA_P021</dataListType>
+    <mesureType>BSSURF</mesureType>
+    <fallrateCode></fallrateCode>
+    <fallrateLabel></fallrateLabel>
+    <verticalParametersList>
+      <p_depthBSBed></p_depthBSBed>
+      <p_depthBSSurf>PRESPR01</p_depthBSSurf>
+      <p_pressure></p_pressure>
+      <p_heightASLvl></p_heightASLvl>
+    </verticalParametersList>
+    <parameters>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="84" lastCharOffset="88"/>
+        <Parameter code="AHGT">
+          <fullName>Vertical spatial coordinates</fullName>
+          <unit>Decibars</unit>
+          <unitCode>UPDB</unitCode>
+          <default>9999.9</default>
+          <format>%6.1f</format>
+          <CodeP011>PRESPR01</CodeP011>
+          <NameP011>Pressure (spatial co-ordinate) exerted by the water body by profiling pressure sensor and corrected to read zero at sea level</NameP011>
+          <IsP011>true</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="93" lastCharOffset="98"/>
+        <Parameter code="PSAL">
+          <fullName>Salinity of the water column</fullName>
+          <unit>Dimensionless</unit>
+          <unitCode>UUUU</unitCode>
+          <default>99.999</default>
+          <format>%6.3f</format>
+          <CodeP011>SSALST01</CodeP011>
+          <NameP011>Salinity of the water body by CTD</NameP011>
+          <IsP011>true</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+    </parameters>
+  </DataModel>
+  <ConversionModel>
+    <permissions>
+      <MEDATLAS enable="true"/>
+      <ODV_MULTISTATIONS enable="true"/>
+      <ODV_MONOSTATION enable="true"/>
+      <UNKNOWN enable="true"/>
+      <NETCDF_MONOSTATION enable="true"/>
+      <NETCDF_MULTISTATIONS enable="true"/>
+    </permissions>
+    <sortStations>true</sortStations>
+    <outputFormat>NETCDF_MULTISTATIONS</outputFormat>
+  </ConversionModel>
+</InputModel>

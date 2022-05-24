@@ -1,0 +1,270 @@
+<InputModel version="1.6.2" isValid="true">
+  <MediaModel path="C:\test_logiciels\NEMO\Tj_Minerve\input\2003210020_petit.prn">
+    <processType multiStations="false">CRUISE_FILE</processType>
+    <separator></separator>
+    <inputType>TRAJECTORY</inputType>
+    <fileHeader>0</fileHeader>
+    <stationHeader pattern="">1</stationHeader>
+    <endStation>0</endStation>
+    <endData pattern="" patternIsRegexp="false">EOF</endData>
+  </MediaModel>
+  <CruiseModel>
+    <reference>FI35200321002</reference>
+    <localCSRIdentifier>3210020</localCSRIdentifier>
+    <name>MINERVE 02-03 (R0,R2,R4)</name>
+    <shipCode>353L</shipCode>
+    <shipName>L'Astrolabe</shipName>
+    <startDate>1034640000000</startDate>
+    <endDate>1046822400000</endDate>
+    <regionName>Southern Ocean</regionName>
+    <regionCode>10</regionCode>
+    <country>35</country>
+    <laboratories>Universit&#233; Pierre et Marie Curie, Paris, CNRS, &#13;&#10;CSIRO, Australie</laboratories>
+    <chiefScientist>SCHAUER Bernard</chiefScientist>
+    <projectName>JGOFS - FRANCE/PROOF</projectName>
+    <dataCentre>FI</dataCentre>
+    <availability>publicly</availability>
+    <comment><![CDATA[]]></comment>
+    <dataTypes>
+      <DataType code="H27 - Alkalinity">
+        <profiles>1</profiles>
+        <qc>false</qc>
+        <sensor>false</sensor>
+      </DataType>
+      <DataType code="H71 - Surface measurements underway (T,S)">
+        <profiles>1</profiles>
+        <qc>false</qc>
+        <sensor>true</sensor>
+      </DataType>
+      <DataType code="H74 - Carbon dioxide">
+        <profiles>1</profiles>
+        <qc>false</qc>
+        <sensor>false</sensor>
+      </DataType>
+    </dataTypes>
+  </CruiseModel>
+  <StationModel>
+    <referenceProperty>
+      <PropertyModel property="" userProvided="true">
+        <userValue>1</userValue>
+      </PropertyModel>
+    </referenceProperty>
+    <properties>
+      <PropertyModel property="dcHistory1" userProvided="true">
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="dcHistory2" userProvided="true">
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="comment" userProvided="true">
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="surfaceSamples1" userProvided="true">
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="surfaceSamples2" userProvided="true">
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="offsetTU" userProvided="true">
+        <format>
+          <FloatFormat formatString="%4.1f"/>
+        </format>
+        <userValue>0.0</userValue>
+      </PropertyModel>
+      <PropertyModel property="time" userProvided="false">
+        <format>
+          <DateTimeFormat formatString="hh24:mm"/>
+        </format>
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>2</firstLine>
+          <lastLine>2</lastLine>
+          <firstCharOffset>20</firstCharOffset>
+          <lastCharOffset>24</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="date" userProvided="false">
+        <format>
+          <DateTimeFormat formatString="DD/MM/YYYY"/>
+        </format>
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>2</firstLine>
+          <lastLine>2</lastLine>
+          <firstCharOffset>1</firstCharOffset>
+          <lastCharOffset>10</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="latitude" userProvided="false">
+        <format>
+          <LatitudeFormat formatString="+DD.dd"/>
+        </format>
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>2</firstLine>
+          <lastLine>2</lastLine>
+          <firstCharOffset>33</firstCharOffset>
+          <lastCharOffset>38</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="longitude" userProvided="false">
+        <format>
+          <LongitudeFormat formatString="+DDD.dd"/>
+        </format>
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>2</firstLine>
+          <lastLine>2</lastLine>
+          <firstCharOffset>46</firstCharOffset>
+          <lastCharOffset>52</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="bottomDepth" userProvided="true">
+        <format>
+          <FloatFormat formatString="%4.0f"/>
+        </format>
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="sensorDepth" userProvided="true">
+        <format>
+          <FloatFormat formatString="%4.0f"/>
+        </format>
+        <userValue>5</userValue>
+      </PropertyModel>
+      <PropertyModel property="samplingRate" userProvided="true">
+        <format>
+          <FloatFormat formatString="%4.0f"/>
+        </format>
+        <conversionFormula>*1</conversionFormula>
+        <userValue>0</userValue>
+      </PropertyModel>
+      <PropertyModel property="endDate" userProvided="true">
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="endTime" userProvided="true">
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="endLatitude" userProvided="false"/>
+      <PropertyModel property="endLongitude" userProvided="false"/>
+      <PropertyModel property="endDepth" userProvided="false">
+        <format>
+          <FloatFormat formatString="%4.0f"/>
+        </format>
+      </PropertyModel>
+      <PropertyModel property="magneticDeclination" userProvided="true">
+        <format>
+          <FloatFormat formatString="%4.1f"/>
+        </format>
+        <userValue>-999</userValue>
+      </PropertyModel>
+    </properties>
+    <DataType code="H71">
+      <profiles>1</profiles>
+      <qc>false</qc>
+      <sensor>true</sensor>
+    </DataType>
+    <FlagTable code="C1" label="SeaDataNet">
+      <Flag local="0" SDN="0 - no quality control"/>
+      <Flag local="1" SDN="1 - good value"/>
+      <Flag local="2" SDN="2 - probably good value"/>
+      <Flag local="3" SDN="3 - probably bad value"/>
+      <Flag local="4" SDN="4 - bad value"/>
+      <Flag local="5" SDN="5 - changed value"/>
+      <Flag local="6" SDN="6 - value below detection"/>
+      <Flag local="7" SDN="7 - value in excess"/>
+      <Flag local="8" SDN="8 - interpolated value"/>
+      <Flag local="9" SDN="9 - missing value"/>
+      <Flag local="A" SDN="A - value phenomenon uncertain"/>
+    </FlagTable>
+  </StationModel>
+  <DataModel>
+    <dataListType>P091</dataListType>
+    <mesureType>BSSURF</mesureType>
+    <fallrateCode></fallrateCode>
+    <fallrateLabel></fallrateLabel>
+    <verticalParametersList>
+      <p_depthBSBed></p_depthBSBed>
+      <p_depthBSSurf></p_depthBSSurf>
+      <p_pressure></p_pressure>
+      <p_heightASLvl></p_heightASLvl>
+    </verticalParametersList>
+    <parameters>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="75" lastCharOffset="80"/>
+        <Parameter code="TEMP">
+          <fullName>SEA TEMPERATURE</fullName>
+          <unit>Celsius degree</unit>
+          <unitCode></unitCode>
+          <default>99.999</default>
+          <format>%6.3f</format>
+          <CodeP011></CodeP011>
+          <NameP011></NameP011>
+          <IsP011>false</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="89" lastCharOffset="94"/>
+        <Parameter code="PSAL">
+          <fullName>PRACTICAL SALINITY</fullName>
+          <unit>P.S.U.</unit>
+          <unitCode></unitCode>
+          <default>99.999</default>
+          <format>%6.3f</format>
+          <CodeP011></CodeP011>
+          <NameP011></NameP011>
+          <IsP011>false</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="103" lastCharOffset="108"/>
+        <Parameter code="ALKW">
+          <fullName>ALKALINITY</fullName>
+          <unit>micromole/kg</unit>
+          <unitCode></unitCode>
+          <default>9999.9</default>
+          <format>%6.1f</format>
+          <CodeP011></CodeP011>
+          <NameP011></NameP011>
+          <IsP011>false</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="117" lastCharOffset="122"/>
+        <Parameter code="TICW">
+          <fullName>TOTAL INORGANIC CARBON</fullName>
+          <unit>micromole/kg</unit>
+          <unitCode></unitCode>
+          <default>9999.9</default>
+          <format>%6.1f</format>
+          <CodeP011></CodeP011>
+          <NameP011></NameP011>
+          <IsP011>false</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+    </parameters>
+  </DataModel>
+  <ConversionModel>
+    <permissions>
+      <MEDATLAS enable="true"/>
+      <ODV_MULTISTATIONS enable="true"/>
+      <ODV_MONOSTATION enable="true"/>
+      <UNKNOWN enable="true"/>
+      <NETCDF_MONOSTATION enable="true"/>
+      <NETCDF_MULTISTATIONS enable="true"/>
+    </permissions>
+    <sortStations>false</sortStations>
+    <outputFormat>MEDATLAS</outputFormat>
+  </ConversionModel>
+</InputModel>

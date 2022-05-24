@@ -1,0 +1,508 @@
+<InputModel version="1.6.2" isValid="true">
+  <MediaModel path="M:\newdata\ALL_donnees_chargees\nectalis1\bot\travail\nectalis1_travail.prn">
+    <processType multiStations="false">CRUISE_FILE</processType>
+    <separator></separator>
+    <inputType>PROFILE</inputType>
+    <fileHeader>4</fileHeader>
+    <stationHeader pattern="">1</stationHeader>
+    <endStation>0</endStation>
+    <endData pattern="END" patternIsRegexp="false">END_WITH</endData>
+  </MediaModel>
+  <CruiseModel>
+    <reference>FI35201110005</reference>
+    <localCSRIdentifier>11100050</localCSRIdentifier>
+    <name>NECTALIS-1</name>
+    <shipCode>35AY</shipCode>
+    <shipName>Alis</shipName>
+    <startDate>1311897600000</startDate>
+    <endDate>1313452800000</endDate>
+    <regionName>Southwest Pacific Ocean (140W)</regionName>
+    <regionCode>SVX00024</regionCode>
+    <country>35</country>
+    <laboratories>CPS, IRD</laboratories>
+    <chiefScientist>ALLAIN Val&#233;rie</chiefScientist>
+    <projectName></projectName>
+    <dataCentre>FI</dataCentre>
+    <availability>publicly</availability>
+    <comment><![CDATA[]]></comment>
+    <dataTypes>
+      <DataType code="B02 - Phytoplankton pigments (eg chloroph">
+        <profiles>18</profiles>
+        <qc>false</qc>
+        <sensor>false</sensor>
+      </DataType>
+      <DataType code="H09 - Water bottle stations">
+        <profiles>18</profiles>
+        <qc>false</qc>
+        <sensor>true</sensor>
+      </DataType>
+      <DataType code="H22 - Phosphate">
+        <profiles>18</profiles>
+        <qc>false</qc>
+        <sensor>false</sensor>
+      </DataType>
+      <DataType code="H24 - Nitrate">
+        <profiles>18</profiles>
+        <qc>false</qc>
+        <sensor>false</sensor>
+      </DataType>
+      <DataType code="H25 - Nitrite">
+        <profiles>18</profiles>
+        <qc>false</qc>
+        <sensor>false</sensor>
+      </DataType>
+      <DataType code="H26 - Silicate">
+        <profiles>9</profiles>
+        <qc>false</qc>
+        <sensor>false</sensor>
+      </DataType>
+      <DataType code="H76 - Ammonia">
+        <profiles>18</profiles>
+        <qc>false</qc>
+        <sensor>false</sensor>
+      </DataType>
+      <DataType code="B08 - Phytoplankton">
+        <profiles>11</profiles>
+        <qc>false</qc>
+        <sensor>false</sensor>
+      </DataType>
+    </dataTypes>
+  </CruiseModel>
+  <StationModel>
+    <referenceProperty>
+      <PropertyModel property="" userProvided="false">
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>1</firstLine>
+          <lastLine>1</lastLine>
+          <firstCharOffset>181</firstCharOffset>
+          <lastCharOffset>182</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+    </referenceProperty>
+    <properties>
+      <PropertyModel property="dcHistory1" userProvided="true">
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="dcHistory2" userProvided="true">
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="comment" userProvided="true">
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="surfaceSamples1" userProvided="true">
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="surfaceSamples2" userProvided="true">
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="offsetTU" userProvided="true">
+        <format>
+          <FloatFormat formatString="%4.1f"/>
+        </format>
+        <userValue>0.0</userValue>
+      </PropertyModel>
+      <PropertyModel property="time" userProvided="false">
+        <format>
+          <DateTimeFormat formatString="hh24mm"/>
+        </format>
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>1</firstLine>
+          <lastLine>1</lastLine>
+          <firstCharOffset>193</firstCharOffset>
+          <lastCharOffset>196</lastCharOffset>
+          <isDefaultValueSelected>false</isDefaultValueSelected>
+          <defaultValue></defaultValue>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="date" userProvided="false">
+        <format>
+          <DateTimeFormat formatString="DDMMYYYY"/>
+        </format>
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>1</firstLine>
+          <lastLine>1</lastLine>
+          <firstCharOffset>184</firstCharOffset>
+          <lastCharOffset>191</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="latitude" userProvided="false">
+        <format>
+          <LatitudeFormat formatString="NDD MM.mm"/>
+        </format>
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>1</firstLine>
+          <lastLine>1</lastLine>
+          <firstCharOffset>198</firstCharOffset>
+          <lastCharOffset>206</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="longitude" userProvided="false">
+        <format>
+          <LongitudeFormat formatString="NDDD MM.mm"/>
+        </format>
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>1</firstLine>
+          <lastLine>1</lastLine>
+          <firstCharOffset>208</firstCharOffset>
+          <lastCharOffset>217</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="bottomDepth" userProvided="true">
+        <format>
+          <FloatFormat formatString="%4.0f"/>
+        </format>
+        <userValue></userValue>
+      </PropertyModel>
+    </properties>
+    <DataType code="H09">
+      <profiles>18</profiles>
+      <qc>false</qc>
+      <sensor>true</sensor>
+    </DataType>
+    <FlagTable code="C1" label="SeaDataNet">
+      <Flag local="0" SDN="1 - good value"/>
+      <Flag local="1" SDN="1 - good value"/>
+      <Flag local="2" SDN="2 - probably good value"/>
+      <Flag local="3" SDN="3 - probably bad value"/>
+      <Flag local="4" SDN="4 - bad value"/>
+      <Flag local="5" SDN="5 - changed value"/>
+      <Flag local="6" SDN="6 - value below detection"/>
+      <Flag local="7" SDN="7 - value in excess"/>
+      <Flag local="8" SDN="8 - interpolated value"/>
+      <Flag local="9" SDN="9 - missing value"/>
+      <Flag local="A" SDN="A - value phenomenon uncertain"/>
+    </FlagTable>
+  </StationModel>
+  <DataModel>
+    <dataListType>P091</dataListType>
+    <mesureType>BSSURF</mesureType>
+    <fallrateCode></fallrateCode>
+    <fallrateLabel></fallrateLabel>
+    <verticalParametersList>
+      <p_depthBSBed></p_depthBSBed>
+      <p_depthBSSurf>DEPH</p_depthBSSurf>
+      <p_pressure></p_pressure>
+      <p_heightASLvl></p_heightASLvl>
+    </verticalParametersList>
+    <parameters>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="3" lastCharOffset="10"/>
+        <Parameter code="DEPH">
+          <fullName>DEPTH BELOW SEA SURFACE</fullName>
+          <unit>meter</unit>
+          <unitCode></unitCode>
+          <default>-999.9</default>
+          <format>%6.1f</format>
+          <CodeP011></CodeP011>
+          <NameP011></NameP011>
+          <IsP011>false</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="30" lastCharOffset="37"/>
+        <Parameter code="PHOS">
+          <fullName>PHOSPHATE (PO4-P) CONTENT</fullName>
+          <unit>millimole/m3</unit>
+          <unitCode></unitCode>
+          <default>99.999</default>
+          <format>%6.3f</format>
+          <CodeP011></CodeP011>
+          <NameP011></NameP011>
+          <IsP011>false</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="21" lastCharOffset="28"/>
+        <Parameter code="NTRZ">
+          <fullName>NITRATE + NITRITE CONTENT</fullName>
+          <unit>millimole/m3</unit>
+          <unitCode></unitCode>
+          <default>999.999</default>
+          <format>%7.3f</format>
+          <CodeP011></CodeP011>
+          <NameP011></NameP011>
+          <IsP011>false</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="39" lastCharOffset="44"/>
+        <Parameter code="SLCA">
+          <fullName>SILICATE (SIO4-SI) CONTENT</fullName>
+          <unit>millimole/m3</unit>
+          <unitCode></unitCode>
+          <default>99.999</default>
+          <format>%6.3f</format>
+          <CodeP011></CodeP011>
+          <NameP011></NameP011>
+          <IsP011>false</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="46" lastCharOffset="53"/>
+        <Parameter code="CHLT">
+          <fullName>CHLOROPHYLL-TOTAL</fullName>
+          <unit>milligram/m3</unit>
+          <unitCode></unitCode>
+          <default>99.999</default>
+          <format>%6.3f</format>
+          <CodeP011></CodeP011>
+          <NameP011></NameP011>
+          <IsP011>false</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="55" lastCharOffset="63"/>
+        <Parameter code="TPHP">
+          <fullName>TOTAL PHAEOPIGMENTS</fullName>
+          <unit>milligram/m3</unit>
+          <unitCode></unitCode>
+          <default>99.999</default>
+          <format>%6.3f</format>
+          <CodeP011></CodeP011>
+          <NameP011></NameP011>
+          <IsP011>false</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="65" lastCharOffset="72"/>
+        <Parameter code="CPH4">
+          <fullName>CHLOROPHYLL-A &gt;10 MICRON</fullName>
+          <unit>milligram/m3</unit>
+          <unitCode></unitCode>
+          <default>99.999</default>
+          <format>%6.3f</format>
+          <CodeP011></CodeP011>
+          <NameP011></NameP011>
+          <IsP011>false</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="75" lastCharOffset="81"/>
+        <Parameter code="CPH7">
+          <fullName>CHLOROPHYLL-A &gt;3 &lt;10 MICRON</fullName>
+          <unit>milligram/m3</unit>
+          <unitCode></unitCode>
+          <default>99.999</default>
+          <format>%6.3f</format>
+          <CodeP011></CodeP011>
+          <NameP011></NameP011>
+          <IsP011>false</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="83" lastCharOffset="90"/>
+        <Parameter code="CPH6">
+          <fullName>CHLOROPHYLL-A &lt;3 MICRON</fullName>
+          <unit>milligram/m3</unit>
+          <unitCode></unitCode>
+          <default>99.999</default>
+          <format>%6.3f</format>
+          <CodeP011></CodeP011>
+          <NameP011></NameP011>
+          <IsP011>false</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="12" lastCharOffset="19"/>
+        <Parameter code="AMON">
+          <fullName>AMMONIUM (NH4-N) CONTENT</fullName>
+          <unit>millimole/m3</unit>
+          <unitCode></unitCode>
+          <default>99.999</default>
+          <format>%6.3f</format>
+          <CodeP011></CodeP011>
+          <NameP011></NameP011>
+          <IsP011>false</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="93" lastCharOffset="101"/>
+        <Parameter code="NPKF">
+          <fullName>NUMBER OF NANOPROKARYOTES</fullName>
+          <unit>10+6 cell/m3</unit>
+          <unitCode></unitCode>
+          <default>99999.99</default>
+          <format>%8.2f</format>
+          <CodeP011></CodeP011>
+          <NameP011></NameP011>
+          <IsP011>false</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="103" lastCharOffset="112"/>
+        <Parameter code="CYAF">
+          <fullName>NUMBER OF CYANOBACTERIA</fullName>
+          <unit>10+6 cell/m3</unit>
+          <unitCode></unitCode>
+          <default>99999.99</default>
+          <format>%8.2f</format>
+          <CodeP011></CodeP011>
+          <NameP011></NameP011>
+          <IsP011>false</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="114" lastCharOffset="123"/>
+        <Parameter code="NNEF">
+          <fullName>NUMBER OF NANOEUKARYOTES</fullName>
+          <unit>10+6 cell/m3</unit>
+          <unitCode></unitCode>
+          <default>9999.99</default>
+          <format>%7.2f</format>
+          <CodeP011></CodeP011>
+          <NameP011></NameP011>
+          <IsP011>false</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="125" lastCharOffset="134"/>
+        <Parameter code="PPKF">
+          <fullName>NUMBER OF PICOPROKARYOTES</fullName>
+          <unit>10+6 cell/m3</unit>
+          <unitCode></unitCode>
+          <default>888888.88</default>
+          <format>%9.2f</format>
+          <CodeP011></CodeP011>
+          <NameP011></NameP011>
+          <IsP011>false</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="136" lastCharOffset="144"/>
+        <Parameter code="PCEF">
+          <fullName>NUMBER OF PICOEUKARYOTES</fullName>
+          <unit>10+6 cell/m3</unit>
+          <unitCode></unitCode>
+          <default>9999.99</default>
+          <format>%7.2f</format>
+          <CodeP011></CodeP011>
+          <NameP011></NameP011>
+          <IsP011>false</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="146" lastCharOffset="155"/>
+        <Parameter code="PRCF">
+          <fullName>NUMBER OF PROCHLOROCOCCUS</fullName>
+          <unit>10+6 cell/m3</unit>
+          <unitCode></unitCode>
+          <default>888888.88</default>
+          <format>%9.2f</format>
+          <CodeP011></CodeP011>
+          <NameP011></NameP011>
+          <IsP011>false</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="158" lastCharOffset="168"/>
+        <Parameter code="SNCF">
+          <fullName>NUMBER OF SYNECHOCOCCUS</fullName>
+          <unit>10+6 cell/m3</unit>
+          <unitCode></unitCode>
+          <default>99999.99</default>
+          <format>%8.2f</format>
+          <CodeP011></CodeP011>
+          <NameP011></NameP011>
+          <IsP011>false</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x/1000</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="171" lastCharOffset="179"/>
+        <Parameter code="BCCW">
+          <fullName>NUMBER OF SW BACTERIA</fullName>
+          <unit>10+9 cell/m3</unit>
+          <unitCode></unitCode>
+          <default>9999.99</default>
+          <format>%7.2f</format>
+          <CodeP011></CodeP011>
+          <NameP011></NameP011>
+          <IsP011>false</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+    </parameters>
+  </DataModel>
+  <ConversionModel>
+    <permissions>
+      <MEDATLAS enable="true"/>
+      <ODV_MULTISTATIONS enable="true"/>
+      <ODV_MONOSTATION enable="true"/>
+      <UNKNOWN enable="true"/>
+      <NETCDF_MONOSTATION enable="true"/>
+      <NETCDF_MULTISTATIONS enable="true"/>
+    </permissions>
+    <sortStations>false</sortStations>
+    <outputFormat>MEDATLAS</outputFormat>
+  </ConversionModel>
+</InputModel>

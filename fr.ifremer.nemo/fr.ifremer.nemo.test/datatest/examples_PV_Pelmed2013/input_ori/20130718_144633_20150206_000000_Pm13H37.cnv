@@ -1,0 +1,85 @@
+* Sea-Bird SBE 19 Data File:
+* FileName = PM132119.HEX
+* Software Version 4.201
+* Temperature SN = 1178
+* Conductivity SN = 1178
+* System UpLoad Time = Jul 19 2013 15:50:26
+* Bateau: L'EUROPE  
+* Campagne:PELMED13  
+* Chalutage U0037  
+* Latitude:          4317.63  
+* Longitude:         0440.44
+* ds
+* SEACAT PROFILER V3.0c  1178   07/19/13  15:48:55.524
+* strain gauge pressure sensor: S/N = 156844,  range = 1000 psia,  tc = -122
+* clk = 32768.063   iop = 180   vmain = 7.8   vlith = 5.1
+* mode = PROFILE  ncasts = 23
+* sample rate = 1 scan every 0.5 seconds
+* samples = 16882   free = 4327   lwait = 0 msec
+* SW1 = 00   battery cutoff = 5.8 volts
+* number of voltages sampled = 0
+* logdata = NO
+* S>
+* cast 19  07/18  14:46:33   samples 13247 to 13816 sample rate = 1 scan every 0.5 seconds  stop = switch off
+# nquan = 6
+# nvalues = 32                          
+# units = metric
+# name 0 = pr: pressure [decibars]
+# name 1 = t068: temperature, IPTS-68 [deg C]
+# name 2 = c0S/m: Conductivity [S/m]
+# name 3 = sal00: salinity, PSS-78 [PSU]
+# name 4 = nbin: number of scans per bin
+# name 5 = flag: flag
+# span 0 =      1.000,     32.000       
+# span 1 =    15.5528,    24.4818       
+# span 2 =   4.675909,   5.349265       
+# span 3 =    34.2275,    38.0121       
+# span 4 =          2,        331       
+# span 5 = 0.0000e+00, 0.0000e+00       
+# interval = decibars: 1                
+# start_time = Jul 18 2013 14:46:33
+# bad_flag = -9.990e-29
+# datcnv_date = Jul 19 2013 16:03:35, 4.201
+# datcnv_in = PM132119.HEX PM041178.CON 1178 1178 1178
+# datcnv_skipover = 0
+# binavg_date = Feb 06 2015 10:20:02, 7.21k
+# binavg_in = M:\newdata\pelmed2013\ctd\travail\a_moyenner_entree\Pm13H37.cnv
+# binavg_bintype = decibars
+# binavg_binsize = 1
+# binavg_excl_bad_scans = yes
+# binavg_skipover = 0
+# binavg_surface_bin = no, min = 0.000, max = 0.000, value = 0.000
+# file_type = ascii
+*END*
+      1.000    24.0805   5.161932    34.6347        331 0.0000e+00
+      2.000    24.4818   5.149176    34.2275          3 0.0000e+00
+      3.000    22.8652   5.349265    37.0469          3 0.0000e+00
+      4.000    22.2683   5.313327    37.2808          3 0.0000e+00
+      5.000    21.4935   5.278501    37.6771          3 0.0000e+00
+      6.000    20.7883   5.213442    37.7720          3 0.0000e+00
+      7.000    19.9884   5.083295    37.4144          2 0.0000e+00
+      8.000    19.2133   5.044118    37.7849          3 0.0000e+00
+      9.000    19.3296   5.082072    37.9984          3 0.0000e+00
+     10.000    19.2341   5.059795    37.8973          2 0.0000e+00
+     11.000    18.7934   5.010671    37.8843          3 0.0000e+00
+     12.000    18.4492   4.977013    37.9139          2 0.0000e+00
+     13.000    18.3075   4.970973    37.9929          3 0.0000e+00
+     14.000    18.1677   4.945276    37.9008          3 0.0000e+00
+     15.000    17.8183   4.908315    37.9057          2 0.0000e+00
+     16.000    17.6242   4.898717    38.0032          3 0.0000e+00
+     17.000    17.4850   4.868508    37.8692          2 0.0000e+00
+     18.000    17.1434   4.835795    37.9025          3 0.0000e+00
+     19.000    16.8777   4.819830    38.0121          3 0.0000e+00
+     20.000    16.8295   4.812279    37.9904          2 0.0000e+00
+     21.000    16.8053   4.807156    37.9674          2 0.0000e+00
+     22.000    16.7393   4.802390    37.9873          3 0.0000e+00
+     23.000    16.5514   4.775082    37.9222          3 0.0000e+00
+     24.000    16.4300   4.768246    37.9763          2 0.0000e+00
+     25.000    16.3940   4.765355    37.9843          3 0.0000e+00
+     26.000    16.3860   4.762133    37.9626          2 0.0000e+00
+     27.000    16.3766   4.762294    37.9727          3 0.0000e+00
+     28.000    16.3496   4.755457    37.9367          3 0.0000e+00
+     29.000    16.2500   4.740413    37.8963          2 0.0000e+00
+     30.000    16.0169   4.718225    37.9190          3 0.0000e+00
+     31.000    15.7233   4.686400    37.9122          2 0.0000e+00
+     32.000    15.5528   4.675909    37.9807          4 0.0000e+00

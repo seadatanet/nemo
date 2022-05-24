@@ -1,0 +1,190 @@
+* Sea-Bird SBE 19plus V2 Data File:
+* FileName = C:\PELGAS13\ctd\HEX\R0229.hex
+* Software Version Seasave V 7.22.5
+* Temperature SN = 6213
+* Conductivity SN = 6213
+* System UpLoad Time = May 09 2013 19:51:23
+* NMEA Latitude = 46 23.75638 N
+* NMEA Longitude = 001 49.38628 W
+* NMEA UTC (Time) = May 09 2013 19:51:41
+* Store Lat/Lon Data = Append to Every Scan
+** Ship: Thalassa - golfe de Gascogne
+** campagne : Pelgas13  23 avril - 4 juin 2013
+* Real-Time Sample Interval = 0.2500 seconds
+* System UTC = May 09 2013 17:51:23
+# nquan = 12
+# nvalues = 21                          
+# units = specified
+# name 0 = prdM: Pressure, Strain Gauge [db]
+# name 1 = tv290C: Temperature [ITS-90, deg C]
+# name 2 = c0mS/cm: Conductivity [mS/cm]
+# name 3 = wetStar: Fluorescence, WET Labs WETstar [mg/m^3]
+# name 4 = obs3+: OBS, D & A 3plus [NTU]
+# name 5 = obs3+1: OBS, D & A 3plus, 2 [NTU]
+# name 6 = scan: Scan Count
+# name 7 = dz/dtM: Descent Rate [m/s]
+# name 8 = sal00: Salinity, Practical [PSU]
+# name 9 = sigma-é00: Density [sigma-theta, kg/m^3]
+# name 10 = nbin: number of scans per bin
+# name 11 = flag: flag
+# span 0 =      2.000,     22.000       
+# span 1 =    11.4682,    13.4610       
+# span 2 =  38.956895,  40.320466       
+# span 3 =     3.4608,    15.6463       
+# span 4 =     0.6024,     6.5544       
+# span 5 =     2.1169,     7.4710       
+# span 6 =       1129,       1353       
+# span 7 =     -0.181,      0.959       
+# span 8 =    33.9696,    34.4653       
+# span 9 =    25.5019,    26.2741       
+# span 10 =          4,        104      
+# span 11 = 0.0000e+00, 0.0000e+00      
+# interval = decibars: 1                
+# start_time = May 09 2013 19:51:41 [NMEA time, header]
+# bad_flag = -9.990e-29
+# <Sensors count="6" >
+#   <sensor Channel="1" >
+#     <!-- Count, Temperature -->
+#     <TemperatureSensor SensorID="58" >
+#       <SerialNumber>6213</SerialNumber>
+#       <CalibrationDate>13-Nov-08</CalibrationDate>
+#       <A0>1.29602400e-003</A0>
+#       <A1>2.57350100e-004</A1>
+#       <A2>4.85924300e-008</A2>
+#       <A3>1.37890800e-007</A3>
+#       <Slope>1.00000000</Slope>
+#       <Offset>0.0000</Offset>
+#     </TemperatureSensor>
+#   </sensor>
+#   <sensor Channel="2" >
+#     <!-- Frequency 0, Conductivity -->
+#     <ConductivitySensor SensorID="3" >
+#       <SerialNumber>6213</SerialNumber>
+#       <CalibrationDate>13-Nov-08</CalibrationDate>
+#       <UseG_J>1</UseG_J>
+#       <!-- Cell const and series R are applicable only for wide range sensors. -->
+#       <SeriesR>0.0000</SeriesR>
+#       <CellConst>2000.0000</CellConst>
+#       <ConductivityType>0</ConductivityType>
+#       <Coefficients equation="0" >
+#         <A>0.00000000e+000</A>
+#         <B>0.00000000e+000</B>
+#         <C>0.00000000e+000</C>
+#         <D>0.00000000e+000</D>
+#         <M>0.0</M>
+#         <CPcor>-9.57000000e-008</CPcor>
+#       </Coefficients>
+#       <Coefficients equation="1" >
+#         <G>-1.00010800e+000</G>
+#         <H>1.42652400e-001</H>
+#         <I>-4.56165300e-004</I>
+#         <J>5.46692000e-005</J>
+#         <CPcor>-9.57000000e-008</CPcor>
+#         <CTcor>3.2500e-006</CTcor>
+#         <!-- WBOTC not applicable unless ConductivityType = 1. -->
+#         <WBOTC>0.00000000e+000</WBOTC>
+#       </Coefficients>
+#       <Slope>1.00000000</Slope>
+#       <Offset>0.00000</Offset>
+#     </ConductivitySensor>
+#   </sensor>
+#   <sensor Channel="3" >
+#     <!-- Count, Pressure, Strain Gauge -->
+#     <PressureSensor SensorID="46" >
+#       <SerialNumber>6213</SerialNumber>
+#       <CalibrationDate>14-Nov-08 </CalibrationDate>
+#       <PA0>2.47534908e+000</PA0>
+#       <PA1>2.63850138e-003</PA1>
+#       <PA2>2.38402329e-011</PA2>
+#       <PTEMPA0>-5.93849723e+001</PTEMPA0>
+#       <PTEMPA1>5.38277996e+001</PTEMPA1>
+#       <PTEMPA2>-5.55654732e-001</PTEMPA2>
+#       <PTCA0>5.24330295e+005</PTCA0>
+#       <PTCA1>6.52021673e+001</PTCA1>
+#       <PTCA2>-8.74149204e-001</PTCA2>
+#       <PTCB0>2.50767500e+001</PTCB0>
+#       <PTCB1>1.95000000e-003</PTCB1>
+#       <PTCB2>0.00000000e+000</PTCB2>
+#       <Offset>0.000000</Offset>
+#     </PressureSensor>
+#   </sensor>
+#   <sensor Channel="4" >
+#     <!-- A/D voltage 0, Fluorometer, WET Labs WETstar -->
+#     <FluoroWetlabWetstarSensor SensorID="21" >
+#       <SerialNumber>WS3S-1295</SerialNumber>
+#       <CalibrationDate>19-Aug-08</CalibrationDate>
+#       <ScaleFactor>15.000</ScaleFactor>
+#       <!-- Blank output -->
+#       <Vblank>0.054</Vblank>
+#     </FluoroWetlabWetstarSensor>
+#   </sensor>
+#   <sensor Channel="5" >
+#     <!-- A/D voltage 1, OBS, D & A OBS 3+ -->
+#     <OBS_3plusSensor SensorID="63" >
+#       <SerialNumber>T8748</SerialNumber>
+#       <CalibrationDate>21 Nov 2011</CalibrationDate>
+#       <A0>5.12570000e-002</A0>
+#       <A1>5.05150000e-002</A1>
+#       <A2>3.60050000e-007</A2>
+#     </OBS_3plusSensor>
+#   </sensor>
+#   <sensor Channel="6" >
+#     <!-- A/D voltage 2, OBS, D & A OBS 3+, 2 -->
+#     <OBS_3plusSensor SensorID="63" >
+#       <SerialNumber>T8748</SerialNumber>
+#       <CalibrationDate>21 Nov 2011</CalibrationDate>
+#       <A0>1.59160000e+000</A0>
+#       <A1>1.81170000e-001</A1>
+#       <A2>2.43020000e-005</A2>
+#     </OBS_3plusSensor>
+#   </sensor>
+# </Sensors>
+# datcnv_date = May 11 2013 08:52:36, 7.22.5 [datcnv_vars = 8]
+# datcnv_in = C:\PELGAS13\ctd\HEX\R0229.hex C:\pelgas13\ctd\config\6213_pelgas13.CON
+# datcnv_skipover = 0
+# filter_date = May 11 2013 08:53:29, 7.22.5
+# filter_in = C:\PELGAS13\ctd\cnv\R0229.cnv
+# filter_low_pass_tc_A = 1.000
+# filter_low_pass_tc_B = 0.500
+# filter_low_pass_A_vars = prdM wetStar dz/dtM
+# filter_low_pass_B_vars = tv290C c0mS/cm
+# alignctd_date = May 11 2013 08:53:46, 7.22.5
+# alignctd_in = C:\PELGAS13\ctd\cnv_1_fllter\R0229.cnv
+# alignctd_adv = tv290C 0.500, wetStar 1.000                                                                                                                                                                                         
+# loopedit_date = May 11 2013 08:54:04, 7.22.5
+# loopedit_in = C:\PELGAS13\ctd\cnv_2_align\R0229.cnv
+# loopedit_minVelocity = 0.100                                                                                            
+# loopedit_surfaceSoak: do not remove                                                                                     
+# loopedit_excl_bad_scans = no
+# Derive_date = May 11 2013 08:54:28, 7.22.5 [derive_vars = 2]
+# Derive_in = C:\PELGAS13\ctd\cnv_3_loop\R0229.cnv C:\pelgas13\ctd\config\6213_pelgas13.CON
+# binavg_date = May 11 2013 09:15:31, 7.22.5
+# binavg_in = C:\PELGAS13\ctd\cnv_4_derive\R0229.cnv
+# binavg_bintype = decibars
+# binavg_binsize = 1
+# binavg_excl_bad_scans = no
+# binavg_skipover = 0
+# binavg_surface_bin = no, min = 1.000, max = 1.000, value = 0.000
+# file_type = ascii
+*END*
+      2.000    13.4610  40.319763     3.6669     0.6252     2.1404       1129     -0.074    33.9696    25.5019        104 0.0000e+00
+      3.000    13.4605  40.320466     3.5136     0.6328     2.1739       1199      0.307    33.9702    25.5026         12 0.0000e+00
+      4.000    13.4592  40.319705     3.4608     0.6312     2.1254       1214      0.390    33.9702    25.5028          8 0.0000e+00
+      5.000    13.4569  40.317586     3.5684     0.6299     2.1684       1221      0.631    33.9699    25.5030          6 0.0000e+00
+      6.000    13.4560  40.317921     3.6318     0.6964     2.1943       1227      0.708    33.9706    25.5038          6 0.0000e+00
+      7.000    13.4531  40.316795     3.7270     0.6170     2.1598       1232      0.802    33.9717    25.5053          5 0.0000e+00
+      8.000    13.4373  40.306307     3.6897     0.6024     2.1237       1237      0.848    33.9755    25.5115          4 0.0000e+00
+      9.000    13.2828  40.189152     3.7160     0.6117     2.1169       1242      0.776    34.0026    25.5637          6 0.0000e+00
+     10.000    12.8081  39.832865     3.6924     0.7388     2.2860       1247      0.731    34.0907    25.7267          5 0.0000e+00
+     11.000    12.2601  39.445155     3.6624     0.7208     2.2576       1252      0.806    34.2157    25.9305          5 0.0000e+00
+     12.000    11.9541  39.254179     3.5362     0.7637     2.2589       1257      0.891    34.3107    26.0627          4 0.0000e+00
+     13.000    11.8574  39.198673     3.6219     0.8070     2.3313       1261      0.941    34.3453    26.1079          4 0.0000e+00
+     14.000    11.8137  39.165343     3.9046     0.9815     2.4736       1265      0.959    34.3527    26.1219          5 0.0000e+00
+     15.000    11.7805  39.150492     4.0774     0.9265     2.3884       1269      0.958    34.3684    26.1404          4 0.0000e+00
+     16.000    11.7409  39.127830     4.3221     0.7846     2.2774       1274      0.919    34.3825    26.1588          4 0.0000e+00
+     17.000    11.6812  39.089425     5.2925     1.0264     2.5791       1278      0.840    34.3997    26.1834          5 0.0000e+00
+     18.000    11.5870  39.022641     7.6945     2.4761     3.8387       1284      0.759    34.4211    26.2176          6 0.0000e+00
+     19.000    11.5354  38.993452     9.7917     3.1618     4.4378       1289      0.764    34.4400    26.2419          5 0.0000e+00
+     20.000    11.5050  38.977387    11.4467     3.7782     4.9912       1294      0.828    34.4520    26.2569          5 0.0000e+00
+     21.000    11.4832  38.967493    12.8274     4.7351     5.8620       1299      0.733    34.4621    26.2688          6 0.0000e+00
+     22.000    11.4682  38.956895    15.6463     6.5544     7.4710       1353     -0.181    34.4653    26.2741         74 0.0000e+00

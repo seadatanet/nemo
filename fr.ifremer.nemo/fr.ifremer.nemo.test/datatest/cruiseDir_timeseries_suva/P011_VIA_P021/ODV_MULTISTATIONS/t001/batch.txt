@@ -1,0 +1,7 @@
+nemo_batch
+-i "C:\test_1_2_32\michele_suva_mareg_timeseries\input"
+-m "C:\test_1_2_32\michele_suva_mareg_timeseries\1_2_32_ok\P011_VIA_P021\ODV_MULTISTATIONS\model.xml"
+-o "C:\test_1_2_32\michele_suva_mareg_timeseries\1_2_32_ok\P011_VIA_P021\ODV_MULTISTATIONS\output_eclipse.txt"
+-c ODV
+ -multi
+-datasetRef FI35199810007

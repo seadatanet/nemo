@@ -1,0 +1,260 @@
+*FI35201102011 ESS_MVP200                       35LU Le Suroit                
+20/03/2011-23/03/2011 Mediterranean Sea - Western basin                 
+35 GENAVIR                                                                    
+FLOC'H Henri                             Project=
+Regional Archiving= FI                   Availability=P
+Data Type=B64 n=1    QC=N
+*FI3520110201100001 Data Type=B64
+*DATE=15012011 TIME=0133 LAT=N50 05.16 LON=W001 52.56 DEPTH=       QC=0000
+*NB PARAMETERS=01 RECORD LINES=00048
+*PRES SEA PRESSURE sea surface=0    (decibar=10000 pascals       ) def.=-999.9
+*GLOBAL PROFILE QUALITY FLAG=0 GLOBAL PARAMETERS QC FLAGS=0
+*DC HISTORY=
+*
+*DM HISTORY=
+*
+*COMMENT
+*
+*SDN_parameter_mapping
+*<subject>SDN:LOCAL:PRES</subject><object>SDN:P011::PRESPR01</object><units>SDN:P061::UPDB</units>
+*EDMO_CODE=486
+*LOCAL_CDI_ID=FI35201102011_00001_B64
+*SURFACE SAMPLES=
+*
+*PRES   
+   1.0 0
+   2.0 0
+   3.0 0
+   4.0 0
+   5.0 0
+   6.0 0
+   7.0 0
+   8.0 0
+  10.0 0
+  11.0 0
+  12.0 0
+  13.0 0
+  15.0 0
+  16.0 0
+  18.0 0
+  19.0 0
+  20.0 0
+  21.0 0
+  22.0 0
+  23.0 0
+  24.0 0
+  25.0 0
+  26.0 0
+  28.0 0
+  29.0 0
+  30.0 0
+  31.0 0
+  33.0 0
+  35.0 0
+  36.0 0
+  37.0 0
+  38.0 0
+  40.0 0
+  41.0 0
+  42.0 0
+  43.0 0
+  45.0 0
+  46.0 0
+  47.0 0
+  48.0 0
+  49.0 0
+  51.0 0
+  53.0 0
+  54.0 0
+  55.0 0
+  56.0 0
+  58.0 0
+  59.0 0
+-999.9 9
+*FI3520110201100002 Data Type=B64
+*DATE=15012011 TIME=0407 LAT=N50 06.96 LON=W001 28.98 DEPTH=       QC=0000
+*NB PARAMETERS=01 RECORD LINES=00049
+*PRES SEA PRESSURE sea surface=0    (decibar=10000 pascals       ) def.=-999.9
+*GLOBAL PROFILE QUALITY FLAG=0 GLOBAL PARAMETERS QC FLAGS=0
+*DC HISTORY=
+*
+*DM HISTORY=
+*
+*COMMENT
+*
+*SDN_parameter_mapping
+*<subject>SDN:LOCAL:PRES</subject><object>SDN:P011::PRESPR01</object><units>SDN:P061::UPDB</units>
+*EDMO_CODE=486
+*LOCAL_CDI_ID=FI35201102011_00002_B64
+*SURFACE SAMPLES=
+*
+*PRES   
+   1.0 0
+   2.0 0
+   4.0 0
+   5.0 0
+   6.0 0
+   7.0 0
+   8.0 0
+   9.0 0
+  10.0 0
+  12.0 0
+  13.0 0
+  14.0 0
+  15.0 0
+  16.0 0
+  17.0 0
+  18.0 0
+  19.0 0
+  20.0 0
+  21.0 0
+  22.0 0
+  23.0 0
+  25.0 0
+  26.0 0
+  27.0 0
+  28.0 0
+  29.0 0
+  30.0 0
+  31.0 0
+  32.0 0
+  33.0 0
+  34.0 0
+  35.0 0
+  37.0 0
+  38.0 0
+  39.0 0
+  42.0 0
+  43.0 0
+  44.0 0
+  45.0 0
+  46.0 0
+  47.0 0
+  48.0 0
+  49.0 0
+  50.0 0
+  51.0 0
+  52.0 0
+  53.0 0
+  55.0 0
+  56.0 0
+-999.9 9
+*FI3520110201100004 Data Type=B64
+*DATE=15012011 TIME=1215 LAT=N49 34.74 LON=W000 53.94 DEPTH=       QC=0000
+*NB PARAMETERS=01 RECORD LINES=00026
+*PRES SEA PRESSURE sea surface=0    (decibar=10000 pascals       ) def.=-999.9
+*GLOBAL PROFILE QUALITY FLAG=0 GLOBAL PARAMETERS QC FLAGS=0
+*DC HISTORY=
+*
+*DM HISTORY=
+*
+*COMMENT
+*
+*SDN_parameter_mapping
+*<subject>SDN:LOCAL:PRES</subject><object>SDN:P011::PRESPR01</object><units>SDN:P061::UPDB</units>
+*EDMO_CODE=486
+*LOCAL_CDI_ID=FI35201102011_00004_B64
+*SURFACE SAMPLES=
+*
+*PRES   
+   2.0 0
+   3.0 0
+   4.0 0
+   5.0 0
+   6.0 0
+   7.0 0
+   8.0 0
+   9.0 0
+  10.0 0
+  11.0 0
+  12.0 0
+  13.0 0
+  14.0 0
+  15.0 0
+  16.0 0
+  17.0 0
+  18.0 0
+  19.0 0
+  20.0 0
+  21.0 0
+  22.0 0
+  23.0 0
+  24.0 0
+  25.0 0
+  27.0 0
+  28.0 0
+-999.9 9
+*FI3520110201100005 Data Type=B64
+*DATE=15012011 TIME=1416 LAT=N49 27.06 LON=W000 35.88 DEPTH=       QC=0000
+*NB PARAMETERS=01 RECORD LINES=00016
+*PRES SEA PRESSURE sea surface=0    (decibar=10000 pascals       ) def.=-999.9
+*GLOBAL PROFILE QUALITY FLAG=0 GLOBAL PARAMETERS QC FLAGS=0
+*DC HISTORY=
+*
+*DM HISTORY=
+*
+*COMMENT
+*
+*SDN_parameter_mapping
+*<subject>SDN:LOCAL:PRES</subject><object>SDN:P011::PRESPR01</object><units>SDN:P061::UPDB</units>
+*EDMO_CODE=486
+*LOCAL_CDI_ID=FI35201102011_00005_B64
+*SURFACE SAMPLES=
+*
+*PRES   
+   3.0 0
+   4.0 0
+   5.0 0
+   6.0 0
+   7.0 0
+   8.0 0
+  10.0 0
+  12.0 0
+  13.0 0
+  14.0 0
+  15.0 0
+  16.0 0
+  17.0 0
+  18.0 0
+  20.0 0
+  21.0 0
+-999.9 9
+*FI3520110201100006 Data Type=B64
+*DATE=15012011 TIME=1620 LAT=N49 31.74 LON=W000 15.90 DEPTH=       QC=0000
+*NB PARAMETERS=01 RECORD LINES=00020
+*PRES SEA PRESSURE sea surface=0    (decibar=10000 pascals       ) def.=-999.9
+*GLOBAL PROFILE QUALITY FLAG=0 GLOBAL PARAMETERS QC FLAGS=0
+*DC HISTORY=
+*
+*DM HISTORY=
+*
+*COMMENT
+*
+*SDN_parameter_mapping
+*<subject>SDN:LOCAL:PRES</subject><object>SDN:P011::PRESPR01</object><units>SDN:P061::UPDB</units>
+*EDMO_CODE=486
+*LOCAL_CDI_ID=FI35201102011_00006_B64
+*SURFACE SAMPLES=
+*
+*PRES   
+   2.0 0
+   3.0 0
+   4.0 0
+   5.0 0
+   6.0 0
+   7.0 0
+   9.0 0
+  10.0 0
+  11.0 0
+  12.0 0
+  13.0 0
+  14.0 0
+  15.0 0
+  16.0 0
+  17.0 0
+  18.0 0
+  20.0 0
+  21.0 0
+  23.0 0
+  24.0 0
+-999.9 9

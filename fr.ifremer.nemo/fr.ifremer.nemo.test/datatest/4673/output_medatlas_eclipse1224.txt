@@ -1,0 +1,43 @@
+*rsealtest1aaa rsealtest1                       ZZ99 Unknown                  
+01/04/1995-01/04/1995 Gulf of Bothnia (Baltic Sea)                      
+77 
+XXX                                      Project=
+Regional Archiving= SM                   Availability=P
+Data Type=B26 n=1    QC=N
+*rsealtest1aaa00001 Data Type=B26
+*DATE=01041995 TIME=1909 LAT=N65 19.40 LON=E022 00.00 DEPTH=0      QC=0000
+*NB PARAMETERS=08 RECORD LINES=00003
+*YEAR YEAR                          (yyyy                        ) def.=9999
+*MNTH MONTH                         (mm                          ) def.=99
+*DAYX DAY WITHIN MONTH              (dd                          ) def.=99
+*TIME TIME WITHIN DAY               (hhmmss                      ) def.=999999
+*LATX LATITUDE                      (decimal degree              ) def.=+99.999999
+*LONX LONGITUDE                     (decimal degree              ) def.=+999.999999
+*BATH BATHYMETRIC DEPTH             (meter                       ) def.=-999.9
+*NAVG AVERAGED DATA CYCLE NUMBER    (number                      ) def.=9
+*GLOBAL PROFILE QUALITY FLAG=0 GLOBAL PARAMETERS QC FLAGS=00000000
+*DC HISTORY=
+*
+*DM HISTORY=
+*
+*COMMENT
+*
+*ADDITIONAL INFORMATION - TIME SERIES
+*EDATE=01041995 ETIME=1909 ELAT=N65 15.97 ELON=E022 00.00 EDEPTH=0      QC=0000
+*SENSOR DEPTH=0     (metre)            DISTANCE TO BOTTOM=0     (metre) QC=00
+*DURATION=0     (day)                                                   QC=0
+*SAMPLING RATE=0     (second)          MAGNETIC DECLINATION=-999 (degree)
+*SDN_parameter_mapping
+*<subject>SDN:LOCAL:YEAR</subject><object>SDN:P011::YEARXXXX</object><units>SDN:P061::UUUU</units>
+*<subject>SDN:LOCAL:MNTH</subject><object>SDN:P011::MNTHXXXX</object><units>SDN:P061::UUUU</units>
+*<subject>SDN:LOCAL:DAYX</subject><object>SDN:P011::DAYXXXXX</object><units>SDN:P061::UUUU</units>
+*<subject>SDN:LOCAL:TIME</subject><object>SDN:P011::AHMSAA01</object><units>SDN:P061::UHMS</units>
+*<subject>SDN:LOCAL:LATX</subject><object>SDN:P011::ALATZZ01</object><units>SDN:P061::UAAA</units>
+*<subject>SDN:LOCAL:LONX</subject><object>SDN:P011::ALONZZ01</object><units>SDN:P061::UAAA</units>
+*<subject>SDN:LOCAL:BATH</subject><object>SDN:P011::MBANZZZZ</object><units>SDN:P061::ULAA</units>
+*<subject>SDN:LOCAL:NAVG</subject><object>SDN:P011::NUMVALES</object><units>SDN:P061::UUUU</units>
+*EDMO_CODE=1
+*LOCAL_CDI_ID=rsealtest1aaa_00001_B26
+*SURFACE SAMPLES=
+*
+*YEAR MNTH DAYX TIME   LATX       LONX        BATH   NAVG 

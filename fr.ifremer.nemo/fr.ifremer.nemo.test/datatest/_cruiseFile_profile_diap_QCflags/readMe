@@ -1,0 +1,8 @@
+Mantis 24417
+
+MEDATLAS manual test:
+1/ open file and model in Nemo, and convert
+2/ add a new parameter in data tab (with last colupmn data and flags)
+3/ convert
+
+Expected result: no error, all flags and global flags ok

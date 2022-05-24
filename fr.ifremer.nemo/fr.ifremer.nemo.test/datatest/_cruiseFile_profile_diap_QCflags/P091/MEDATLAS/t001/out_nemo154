@@ -1,0 +1,40 @@
+*FI35200110014 DIAPALIS 2                       35AY Alis                     
+10/12/2001-21/12/2001 Coral Sea                                         
+35 IRD pour la partie travail de terrain ;  IRD, CNRS, IUEM et Université pour
+LE BOUTEILLER Aubert                     Project=JGOFS - FRANCE/PROOF        
+Regional Archiving= FI                   Availability=P
+Data Type=B02 n=13   QC=N
+Data Type=B08 n=20   QC=N
+Data Type=H09 n=13   QC=N
+Data Type=H10 n=25   QC=N
+Data Type=H17 n=25   QC=N
+*FI3520011001400001 Data Type=H10
+*DATE=10122001 TIME=1729 LAT=S21 57.10 LON=E166 44.82 DEPTH=0      QC=0000
+*NB PARAMETERS=03 RECORD LINES=00007
+*PRES SEA PRESSURE sea surface=0    (decibar=10000 pascals       ) def.=-999.9
+*NTRI NITRITE (NO2-N) CONTENT       (millimole/m3                ) def.=99.999
+*PP1P PART. ORGANIC PHOSPHORUS (P)  (millimole/m3                ) def.=99.999
+*GLOBAL PROFILE QUALITY FLAG=1 GLOBAL PARAMETERS QC FLAGS=111
+*DC HISTORY=
+*
+*DM HISTORY=
+*
+*COMMENT
+*
+*SDN_parameter_mapping
+*<subject>SDN:LOCAL:PRES</subject><object>SDN:P01::PRESPR01</object><units>SDN:P06::UPDB</units>
+*<subject>SDN:LOCAL:NTRI</subject><object>SDN:P01::NTRIZZXX</object><units>SDN:P06::UPOX</units>
+*<subject>SDN:LOCAL:PP1P</subject><object>SDN:P01::OPHSVLPT</object><units>SDN:P06::UPOX</units>
+*EDMO_CODE=486
+*LOCAL_CDI_ID=FI35200110014_00001_H10
+*SURFACE SAMPLES=
+*
+*PRES   NTRI   PP1P   
+   0.0  0.004  0.034 111
+   5.0  0.003 99.999 019
+  10.0  0.003 99.999 029
+  15.0  0.003 99.999 039
+  20.0  0.002 99.999 049
+  25.0  0.003 99.999 059
+  30.0  0.008 99.999 069
+-999.9 99.999 99.999 999

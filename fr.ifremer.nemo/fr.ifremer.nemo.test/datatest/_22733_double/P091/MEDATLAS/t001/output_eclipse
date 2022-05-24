@@ -1,0 +1,53 @@
+*IO48200808017 SESAME-IT1: Adriatic Sea         48UR Urania                   
+16/02/2008-26/02/2008 Adriatic Sea                                      
+48 OGS                                                                        
+Cabrini Marina                           Project=SESAME                      
+Regional Archiving= II                   Availability=L
+Data Type=H09 n=16   QC=N
+Data Type=B08 n=16   QC=N
+COMMENT
+Phytoplankton Adriatic-SESAME Project. Extracted
+from
+10.6092/d762b4ea-9b0e-4684-a7e1-3168d4d48eca, cruise of 02/2008.
+*IO4820080801700A02 Data Type=H09
+*DATE=16022008 TIME=0000 LAT=N44 58.49 LON=E012 57.96 DEPTH=       QC=0000
+*NB PARAMETERS=10 RECORD LINES=00282
+*DEPH DEPTH BELOW SEA SURFACE       (Metres                      ) def.=-999.9
+*MIND MIN. DEPTH BELOW SEA SURFACE  (Metres                      ) def.=9999.99
+*MAXD MAX. DEPTH BELOW SEA SURFACE  (Metres                      ) def.=9999.99
+*CE1W Taxon of biological entity    (Picomoles per kilogram      ) def.=99999
+*CE2W Identifier of biological enti (Picomoles per kilogram      ) def.=99999
+*PRAB PRESENCE OR ABSENCE OF ENTITY (Dimensionless               ) def.=9
+*ABB1 ABUNDANCE OF BIO PER VOLUME   (Number per millilitre       ) def.=9999999999
+*CE3W Sample identifier             (Picomoles per kilogram      ) def.=99999
+*OCNT COUNT OF BIOLOGICAL ENTITY    (Dimensionless               ) def.=9999999
+*VSAM VOLUME SAMPLED OF WATER BODY  (Cubic metres                ) def.=9.99999
+*GLOBAL PROFILE QUALITY FLAG=0 GLOBAL PARAMETERS QC FLAGS=0000000090
+*DC HISTORY=
+*
+*DM HISTORY=
+*
+*COMMENT
+*
+*SDN_parameter_mapping
+*<subject>SDN:LOCAL:DEPH</subject><object>SDN:P01::ADEPZZ01</object><units>SDN:P06::ULAA</units>
+*<subject>SDN:LOCAL:MIND</subject><object>SDN:P01::MINWDIST</object><units>SDN:P06::ULAA</units>
+*<subject>SDN:LOCAL:MAXD</subject><object>SDN:P01::MAXWDIST</object><units>SDN:P06::ULAA</units>
+*<subject>SDN:LOCAL:CE1W</subject><object>SDN:P01::MDMAPER1</object><units>SDN:P06::KGPM</units>
+*<subject>SDN:LOCAL:CE2W</subject><object>SDN:P01::MDMAPER2</object><units>SDN:P06::KGPM</units>
+*<subject>SDN:LOCAL:PRAB</subject><object>SDN:P01::PRESABS1</object><units>SDN:P06::UUUU</units>
+*<subject>SDN:LOCAL:ABB1</subject><object>SDN:P01::SDBIOL01</object><units>SDN:P06::UCML</units>
+*<subject>SDN:LOCAL:CE3W</subject><object>SDN:P01::MDMAPER3</object><units>SDN:P06::KGPM</units>
+*<subject>SDN:LOCAL:OCNT</subject><object>SDN:P01::OCOUNT01</object><units>SDN:P06::UUUU</units>
+*<subject>SDN:LOCAL:VSAM</subject><object>SDN:P01::VOLWBSMP</object><units>SDN:P06::MCUB</units>
+*EDMO_CODE=7
+*LOCAL_CDI_ID=IO48200808017_00A02_H09
+*<sdn_reference xlink:href="http://vocab.nerc.ac.uk/collection/C17/current/48UR" xlink:role="isObservedBy" xlink:type="SDN:L23::NVS2CON"/>
+*<sdn_reference xlink:href="http://seadatanet.maris2.nl/v_cdi_v3/print_xml.asp?edmo=7&identifier=IO48200808017_00A02_H09" xlink:role="isDescribedBy" xlink:type="SDN:L23::CDI"/>
+*SURFACE SAMPLES=
+*
+*DEPH   MIND    MAXD    CE1W  CE2W  PRAB ABB1       CE3W  OCNT    VSAM    
+   0.5    0.50    0.50   121  1909 1        280   748 9999999 0.00025 0000000090
+  15.0   15.00   15.00   268  1638 1         10   751 9999999 0.00025 0000000090
+  32.0   32.00   32.00   383  1878 0          0   763 9999999 0.00025 0000000090
+-999.9 9999.99 9999.99 99999 99999 9 9999999999 99999 9999999 9.99999 9999999999

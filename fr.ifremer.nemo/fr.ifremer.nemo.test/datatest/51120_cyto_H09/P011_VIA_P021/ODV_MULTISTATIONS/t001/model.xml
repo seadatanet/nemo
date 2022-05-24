@@ -1,0 +1,310 @@
+<InputModel version="1.7.0" isValid="true">
+  <MediaModel path="/home/sophie/Documents/workspaces/SISMER/Nemos/nemo/fr.ifremer.nemo.test/datatest/51120_cyto_H09/input">
+    <processType multiStations="false">CRUISE_FILE</processType>
+    <separator>&#9;</separator>
+    <inputType>PROFILE</inputType>
+    <variant>FLOWCYTO</variant>
+    <fileHeader>13</fileHeader>
+    <stationHeader pattern="" useSeparatorInStationHeader="true">0</stationHeader>
+    <colTitleInInputFile colTitleInInputFileCheck="true" colTitlesInInputFileLineNb="13" useTableForCsvData="true"/>
+    <endStation>0</endStation>
+    <endData pattern="" patternIsRegexp="false">EOF</endData>
+  </MediaModel>
+  <CruiseModel>
+    <reference>FA35042013</reference>
+    <bshCsrReference></bshCsrReference>
+    <localCSRIdentifier></localCSRIdentifier>
+    <name>DEWEX LEG2</name>
+    <shipCode></shipCode>
+    <shipName></shipName>
+    <startDate>1583933958200</startDate>
+    <endDate>1583933958200</endDate>
+    <regionName></regionName>
+    <regionCode></regionCode>
+    <country></country>
+    <laboratories></laboratories>
+    <chiefScientist>UNKNOWN</chiefScientist>
+    <projectName></projectName>
+    <dataCentre></dataCentre>
+    <availability>publicly</availability>
+    <comment><![CDATA[]]></comment>
+    <dataTypes/>
+  </CruiseModel>
+  <StationModel>
+    <referenceProperty>
+      <PropertyModel property="" userProvided="true">
+        <userValue>1</userValue>
+      </PropertyModel>
+    </referenceProperty>
+    <properties>
+      <PropertyModel property="USE_STATION_CODE_IN_LOCAL_CDI_ID_CHECKBOX" userProvided="true">
+        <userValue>true</userValue>
+      </PropertyModel>
+      <PropertyModel property="dcHistory1" userProvided="true">
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="dcHistory2" userProvided="true">
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="comment" userProvided="true">
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="surfaceSamples1" userProvided="true">
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="surfaceSamples2" userProvided="true">
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="offsetTU" userProvided="true">
+        <format>
+          <FloatFormat formatString="%4.1f"/>
+        </format>
+        <userValue>0.0</userValue>
+      </PropertyModel>
+      <PropertyModel property="time" userProvided="false">
+        <format>
+          <DateTimeFormat formatString="ISO8601"/>
+        </format>
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>1</firstLine>
+          <lastLine>1</lastLine>
+          <firstCharOffset>20</firstCharOffset>
+          <lastCharOffset>35</lastCharOffset>
+          <isDefaultValueSelected>false</isDefaultValueSelected>
+          <defaultValue></defaultValue>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="date" userProvided="false">
+        <format>
+          <DateTimeFormat formatString="ISO8601"/>
+        </format>
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>1</firstLine>
+          <lastLine>1</lastLine>
+          <firstCharOffset>20</firstCharOffset>
+          <lastCharOffset>35</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="latitude" userProvided="false">
+        <format>
+          <LatitudeFormat formatString="decimal degrees for file with separators"/>
+        </format>
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>1</firstLine>
+          <lastLine>1</lastLine>
+          <firstCharOffset>43</firstCharOffset>
+          <lastCharOffset>48</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="longitude" userProvided="false">
+        <format>
+          <LongitudeFormat formatString="decimal degrees for file with separators"/>
+        </format>
+        <HeaderFragment isSingleLine="true" isVariable="false">
+          <firstLine>1</firstLine>
+          <lastLine>1</lastLine>
+          <firstCharOffset>37</firstCharOffset>
+          <lastCharOffset>41</lastCharOffset>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="bottomDepth" userProvided="true">
+        <format>
+          <FloatFormat formatString="%4.0f"/>
+        </format>
+        <userValue></userValue>
+      </PropertyModel>
+    </properties>
+    <DataType code="H09">
+      <profiles>0</profiles>
+      <qc>false</qc>
+      <sensor>false</sensor>
+    </DataType>
+    <FlagTable code="C1" label="SeaDataNet">
+      <Flag local="0" SDN="0 - no quality control"/>
+      <Flag local="1" SDN="1 - good value"/>
+      <Flag local="2" SDN="2 - probably good value"/>
+      <Flag local="3" SDN="3 - probably bad value"/>
+      <Flag local="4" SDN="4 - bad value"/>
+      <Flag local="5" SDN="5 - changed value"/>
+      <Flag local="6" SDN="6 - value below detection"/>
+      <Flag local="7" SDN="7 - value in excess"/>
+      <Flag local="8" SDN="8 - interpolated value"/>
+      <Flag local="9" SDN="9 - missing value"/>
+      <Flag local="A" SDN="A - value phenomenon uncertain"/>
+      <Flag local="Q" SDN="Q - value below limit of quantification"/>
+    </FlagTable>
+  </StationModel>
+  <DataModel>
+    <dataListType>P011_VIA_P021</dataListType>
+    <mesureType>BSSURF</mesureType>
+    <fallrateCode></fallrateCode>
+    <fallrateLabel></fallrateLabel>
+    <verticalParametersList>
+      <p_depthBSBed></p_depthBSBed>
+      <p_depthBSSurf>ADEPZZ01</p_depthBSSurf>
+      <p_pressure></p_pressure>
+      <p_heightASLvl></p_heightASLvl>
+    </verticalParametersList>
+    <parameters>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="10" lastCharOffset="10"/>
+        <Parameter code="AHGT">
+          <fullName></fullName>
+          <unit>Metres</unit>
+          <unitCode>ULAA</unitCode>
+          <default></default>
+          <format>%4d</format>
+          <CodeP011>ADEPZZ01</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011>Depth (spatial coordinate) relative to water surface in the water body</NameP011>
+          <IsP011>true</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="12" lastCharOffset="12"/>
+        <Parameter code="AYMD">
+          <fullName>Date and time</fullName>
+          <unit>ISO8601</unit>
+          <unitCode>TISO</unitCode>
+          <default></default>
+          <format>ISO8601</format>
+          <CodeP011>DTUT8601</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011>Date and time (UT in ISO8601 format to known precision)</NameP011>
+          <IsP011>true</IsP011>
+          <instrument>BD Biosciences Accuri C6 Plus flow cytometer</instrument>
+          <instrumentCode>TOOL1114</instrumentCode>
+          <effectiveIsoDateFormat>YYYY-MM-DDThh:mm:ss.sss</effectiveIsoDateFormat>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="14" lastCharOffset="14"/>
+        <Parameter code="SAMP">
+          <fullName></fullName>
+          <unit>Cubic metres</unit>
+          <unitCode>MCUB</unitCode>
+          <default></default>
+          <format>%10.8f</format>
+          <CodeP011>VOLWBSMP</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011>Volume sampled of the water body</NameP011>
+          <IsP011>true</IsP011>
+          <instrument>BD Biosciences Accuri C6 Plus flow cytometer</instrument>
+          <instrumentCode>TOOL1114</instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula></conversionFormula>
+        <isText>true</isText>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="16" lastCharOffset="16"/>
+        <Parameter code="TMES">
+          <fullName></fullName>
+          <unit></unit>
+          <unitCode>XXXX</unitCode>
+          <default></default>
+          <format></format>
+          <CodeP011>NMCLFL02</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011>Registered name of flow cytometry cluster by classification to a term from the NVS SeaDataCloud Flow Cytometry Standardised Cluster Names Vocabulary (SDN:F02::)</NameP011>
+          <IsP011>true</IsP011>
+          <instrument>BD Biosciences Accuri C6 Plus flow cytometer</instrument>
+          <instrumentCode>TOOL1114</instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula></conversionFormula>
+        <isText>true</isText>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="18" lastCharOffset="18"/>
+        <Parameter code="TMES">
+          <fullName></fullName>
+          <unit></unit>
+          <unitCode>XXXX</unitCode>
+          <default></default>
+          <format></format>
+          <CodeP011>IDCLFL02</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011>Registered name identifier of flow cytometry cluster by classification to a term from the NVS SeaDataCloud Flow Cytometry Standardised Cluster Names Vocabulary (SDN:F02::)</NameP011>
+          <IsP011>true</IsP011>
+          <instrument>BD Biosciences Accuri C6 Plus flow cytometer</instrument>
+          <instrumentCode>TOOL1114</instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="20" lastCharOffset="20"/>
+        <Parameter code="BPRP">
+          <fullName></fullName>
+          <unit>Number per cubic centimetre</unit>
+          <unitCode>NCM3</unitCode>
+          <default></default>
+          <format>%11.4f</format>
+          <CodeP011>SDBIOL01</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011>Abundance of biological entity specified elsewhere per unit volume of the water body</NameP011>
+          <IsP011>true</IsP011>
+          <instrument>BD Biosciences Accuri C6 Plus flow cytometer</instrument>
+          <instrumentCode>TOOL1114</instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="22" lastCharOffset="22"/>
+        <Parameter code="FCMW">
+          <fullName>Flow cytometry parameters in water bodies</fullName>
+          <unit>Not specified</unit>
+          <unitCode>USPC</unitCode>
+          <default></default>
+          <format>%6.1f</format>
+          <CodeP011>FLGMAXAA</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011>Peak height mean of green fluorescence pulse per cluster from the water body by flow cytometry</NameP011>
+          <IsP011>true</IsP011>
+          <instrument>BD Biosciences Accuri C6 Plus flow cytometer</instrument>
+          <instrumentCode>TOOL1114</instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment firstCharOffset="24" lastCharOffset="24"/>
+        <Parameter code="FCMW">
+          <fullName>Flow cytometry parameters in water bodies</fullName>
+          <unit>Not specified</unit>
+          <unitCode>USPC</unitCode>
+          <default></default>
+          <format>%6.1f</format>
+          <CodeP011>SWSMAXAA</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011>Peak height mean of sideward light scatter pulse per cluster from the water body by flow cytometry</NameP011>
+          <IsP011>true</IsP011>
+          <instrument>BD Biosciences Accuri C6 Plus flow cytometer</instrument>
+          <instrumentCode>TOOL1114</instrumentCode>
+        </Parameter>
+      </ParameterModel>
+    </parameters>
+  </DataModel>
+  <ConversionModel>
+    <permissions>
+      <MEDATLAS enable="true"/>
+      <ODV_MULTISTATIONS enable="true"/>
+      <ODV_MONOSTATION enable="true"/>
+      <UNKNOWN enable="true"/>
+      <NETCDF_MONOSTATION enable="true"/>
+      <NETCDF_MULTISTATIONS enable="true"/>
+    </permissions>
+    <sortStations>false</sortStations>
+    <outputFormat>ODV_MULTISTATIONS</outputFormat>
+  </ConversionModel>
+</InputModel>

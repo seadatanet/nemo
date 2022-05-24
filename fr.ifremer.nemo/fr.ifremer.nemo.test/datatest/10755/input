@@ -1,0 +1,19 @@
+Cruise	Station	Type	yyyy-mm-ddThh:mm:ss.sss	Longitude [degrees_east]	Latitude [degrees_north]	Depth [m]	QF	Depth top [m]	QF	Depth bot [m]	QF	Lithology:TEXT:41	QF
+Loeddig_Lake_stratig	1	B		11.8500	53.433	0.075	1	0.000	1	0.150	1	mixture of peat and soil	1
+						0.370	1	0.150	1	0.590	1	poorly decomposed brown peat	1
+						0.795	1	0.590	1	1.000	1	dark peat	1
+						1.260	1	1.000	1	1.520	1	poorly decomposed dark peat	1
+						1.710	1	1.520	1	1.900	1	mixture of coarse detritus mud and peat	1
+						2.350	1	1.900	1	2.800	1	light brown calcareous mud	1
+						3.065	1	2.800	1	3.330	8	http://odv.awi.de	1
+						3.340	1	3.330	1	3.350	1	layer of mollusc shells	0
+						3.675	1		1	4.760	0	light grey calcareous mud	8
+						6.375	1	4.000	1	8.750	1	grey to brown calcareous mud	1
+						8.800	1	8.750	1	8.850	1	my comment	1
+						8.925	1	8.850	1	9.000	1	grey to brown calcareous mud	1
+						9.375	1	9.000	1	9.750	1	light grey calcareous mud...	1
+						9.800	1	9.750	1	9.850	1	grey to brown calcareous mud	1
+						9.970	1	9.850	1	10.090	1	brown calcareous mud	1
+						10.270	1	10.090	1	10.450	1	Laacher See tephra	1
+						10.605	1	10.450	1	10.760	1	light grey calcareous mud	1
+						11.030	1	10.760	1	11.300	1	sand	1
