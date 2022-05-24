@@ -1,0 +1,83 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>fr.ifremer.nemo</groupId>
+		<artifactId>fr.ifremer.nemo.parent</artifactId>
+		<version>1.7.4</version>
+		<relativePath>../fr.ifremer.nemo.parent/pom.xml</relativePath>
+
+	</parent>
+
+
+	<artifactId>fr.ifremer.nemo</artifactId>
+	<version>1.7.4</version> <!-- meme version que dans l'overview de plugin.xml -->
+	<packaging>eclipse-plugin</packaging>
+
+
+	<build>
+	<!-- TODO:
+	pour l'instant les librairies dont depend Nemo sont collees manuellement dans le repertoire lib.
+	Ci-dessous,  maven-clean-plugin et maven-dependency-plugin telechargent 2 libs  via maven dans un repertoire libtest, pour verifier le principe
+	TODO: 
+		1/ declarer TOUTES les dependances dans maven-dependency-plugin
+		2/ supprimer le rep lib actuel
+		3/ renommer le repertoire libtest en lib
+	-->
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-clean-plugin</artifactId>
+				<version>3.1.0</version>
+				<configuration>
+					<failOnError>false</failOnError>
+					<filesets>
+						<fileset>
+							<directory>libtest</directory>
+						</fileset>
+					</filesets>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>3.1.1</version>
+				<executions>
+					<execution>
+						<id>copyLib</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>copy</goal>
+						</goals>
+						<configuration>
+							<useBaseVersion>true</useBaseVersion>
+							<outputDirectory>libtest</outputDirectory>
+							<artifactItems>
+								<artifactItem>
+									<groupId>org.apache.logging.log4j</groupId>
+									<artifactId>log4j-api</artifactId>
+									<version>2.3</version>
+								</artifactItem>
+
+
+								<!-- https://mvnrepository.com/artifact/org.apache.axis2/axis2 -->
+								<artifactItem>
+									<groupId>org.apache.axis2</groupId>
+									<artifactId>axis2</artifactId>
+									<version>1.5.4</version>
+								</artifactItem>
+
+
+							</artifactItems>
+						</configuration>
+					</execution>
+
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+
+</project>

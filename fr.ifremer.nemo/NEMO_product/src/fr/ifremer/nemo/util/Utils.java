@@ -1,0 +1,283 @@
+/*
+ * ============================================================================
+ * Nom du fichier : Utils.java
+ * Auteur : sbregent
+ * Date : 4 févr. 11
+ * Copyright : Altran
+ * ============================================================================
+ */
+package fr.ifremer.nemo.util;
+
+import java.io.File;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+/**
+ * Description: TODO
+ * 
+ * @author sbregent
+ */
+public class Utils
+{
+	public static String extraitCode(String valeur)
+	{
+		if (valeur.indexOf(Global.SPACE) > -1)
+		{
+			return valeur.substring(0, valeur.indexOf(Global.SPACE));
+		} // else {
+		return valeur;
+		// }
+	}
+
+	public static String extraitCodeURN(String valeur)
+	{
+		if (valeur.lastIndexOf('/') > -1)
+		{
+			return valeur.substring(valeur.lastIndexOf('/') + 1);
+		} // else {
+		return valeur;
+		// }
+
+	}
+
+	public static String extraitValeur(String valeur)
+	{
+		if (valeur.indexOf(Global.SEP) > -1)
+		{
+			return valeur.substring(valeur.indexOf(Global.SEP) + 3);
+		} // else {
+		return valeur;
+		// }
+	}
+
+	public static String extraitFichierChemin(String chemin)
+	{
+		if (chemin.lastIndexOf(File.separator) > -1)
+		{
+			return chemin.substring(chemin.lastIndexOf(File.separator) + 1);
+		} // else {
+		return chemin;
+		// }
+	}
+
+	public static String extraitCheminFichier(String chemin)
+	{
+		if (chemin.lastIndexOf(File.separator) > -1)
+		{
+			return chemin.substring(0, chemin.lastIndexOf(File.separator));
+		} // else {
+		return chemin;
+		// }
+	}
+
+	public static String concat(String list1, String list2, String separator)
+	{
+		return list1 + separator + list2;
+	}
+
+	public static String validFileName(String value)
+	{
+		char newChar = '_';
+		value = value.replace(' ', newChar);
+		value = value.replace('/', newChar);
+		value = value.replace('\\', newChar);
+		value = value.replace(':', newChar);
+		value = value.replace('*', newChar);
+		value = value.replace('?', newChar);
+		value = value.replace('\"', newChar);
+		value = value.replace('<', newChar);
+		value = value.replace('>', newChar);
+		value = value.replace('|', newChar);
+		return value;
+	}
+
+	public static boolean isNumeric(String inputString)
+	{
+		boolean numeric = false;
+		try
+		{
+			Integer.parseInt(inputString);
+			numeric = true;
+		} catch (Exception e)
+		{
+			numeric = false;
+		}
+		return numeric;
+	}
+
+	public static String[] getFilesWithoutSVN(String[] listeFichiers)
+	{
+		if (listeFichiers != null && listeFichiers[0].toString().endsWith(Global.SVN_DIR))
+		{
+			String[] listeFichiersWithoutSVN = new String[listeFichiers.length - 1];
+			int cpt = 0;
+			for (int i = 0; i < listeFichiers.length; i++)
+			{
+				if (!listeFichiers[i].endsWith(Global.SVN_DIR))
+				{
+					listeFichiersWithoutSVN[cpt] = listeFichiers[i];
+					cpt++;
+				}
+			}
+			listeFichiers = listeFichiersWithoutSVN;
+		}
+		return listeFichiers;
+	}
+
+	public static File[] getFilesWithoutSVN(File[] subfiles)
+	{
+		// on enleve le repertoire .svn s'il existe
+		if (subfiles != null && subfiles[0].toString().endsWith(Global.SVN_DIR))
+		{
+			File[] listeFichiersWithoutSVN = new File[subfiles.length - 1];
+			int cpt = 0;
+			for (int i = 0; i < subfiles.length; i++)
+			{
+				if (!subfiles[i].toString().endsWith(Global.SVN_DIR))
+				{
+					listeFichiersWithoutSVN[cpt] = subfiles[i];
+					cpt++;
+				}
+			}
+			subfiles = listeFichiersWithoutSVN;
+		}
+		return subfiles;
+	}
+
+	public static boolean isreadedLineMatchesRegexp(String readedLine,
+			String regexp)
+	{
+		boolean res = false;
+		// pattern
+		Pattern p = Pattern.compile(regexp);
+		// création d’un moteur de recherche
+		Matcher m = p.matcher(readedLine);
+		// lancement de la recherche de toutes les occurrences
+		res = m.matches();
+		return res;
+	}
+	
+	/**
+	 * 
+	 * @param version1
+	 * @param version2
+	 * @return 0 if versions are equal, -1 if version1<version2, & if version1>version2
+	 */
+		public static Integer compareVersion(String version1, String version2) {
+			String[] vals1 = version1.split("\\.");
+			String[] vals2 = version2.split("\\.");
+			int i = 0;
+			while (i < vals1.length && i < vals2.length && vals1[i].equals(vals2[i])) {
+				i++;
+			}
+
+			if (i < vals1.length && i < vals2.length) {
+				int diff = Integer.valueOf(vals1[i]).compareTo(Integer.valueOf(vals2[i]));
+				return diff < 0 ? -1 : diff == 0 ? 0 : 1;
+			}
+
+			return vals1.length < vals2.length ? -1 : vals1.length == vals2.length ? 0 : 1;
+		}
+		
+
+		public static boolean deleteDir(File dir) {
+			if (dir.isDirectory()) {
+				String[] children = dir.list();
+				for (int i = 0; i < children.length; i++) {
+					boolean success = deleteDir(new File(dir, children[i]));
+					if (!success) {
+						return false;
+					}
+				}
+			}
+
+			// The directory is now empty so delete it
+			return dir.delete();
+		}
+		
+		/**
+		 * Extract a column value from a CSV-style line, indicated by a char position.
+		 * 
+		 * @param line a CSV-style line.
+		 * @param separator the separator used in the CSV-style line.
+		 * @param charPos The char position indicating the column to find.
+		 * 
+		 * @return the column value, or an empty string if not found.
+		 */
+		public static String getColumnFromCsvLine(String line, String separator, int charPos) {
+
+			// rolling index
+			int indexSearch = 1;
+			
+			boolean isColumnFound = false;
+			
+			String[] split = line.split(separator);
+			String returnValue = Global.EMPTY_STRING;
+			String foundData = Global.EMPTY_STRING;
+			
+			for (String colData : split) {
+
+				foundData = colData;
+
+				// indexSearch takes the index of the current column's last character
+				indexSearch = indexSearch + colData.length();
+				if (charPos < indexSearch) {
+					
+					// the column is found
+					isColumnFound = true;
+					break;
+				}
+				
+				indexSearch++; // add separator (1 char)
+			}
+			
+			if (isColumnFound) {
+				returnValue = foundData;
+			}
+
+			// The value has been found AND the line is clearly with a separator.
+			return returnValue;
+		}
+		
+		/**
+		 * Extract a column index from a CSV-style line, indicated by a char position.
+		 * 
+		 * @param line a CSV-style line.
+		 * @param separator the separator used in the CSV-style line.
+		 * @param charPos The char position indicating the column to find.
+		 * 
+		 * @return the column index, or an empty string if not found.
+		 */
+		public static int getColumnIndexFromCsvLine(String line, String separator, int charPos) {
+
+			// rolling index
+			int indexSearch = 1;
+			int res=-1;
+			
+			boolean isColumnFound = false;
+			
+			String[] split = line.split(separator);
+			int colIndex=0;
+			for (String colData : split) {
+
+				// indexSearch takes the index of the current column's last character
+				indexSearch = indexSearch + colData.length();
+				if (charPos < indexSearch) {
+					
+					// the column is found
+					isColumnFound = true;
+					break;
+				}
+				
+				indexSearch++; // add separator (1 char)
+				colIndex++;
+			}
+			
+			if (isColumnFound) {
+				res = colIndex;
+			}
+
+			// The value has been found AND the line is clearly with a separator.
+			return res;
+		}
+}

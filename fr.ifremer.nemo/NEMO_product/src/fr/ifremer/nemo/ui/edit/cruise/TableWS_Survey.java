@@ -1,0 +1,27 @@
+package fr.ifremer.nemo.ui.edit.cruise;
+
+import java.util.ArrayList;
+
+import org.eclipse.swt.widgets.Table;
+
+import fr.ifremer.nemo.ws.model.SurveyDescription;
+
+public class TableWS_Survey {
+
+	/**
+	 * @param args
+	 */
+
+	public static Table tableRefSurvey, filtreTable;
+
+	public static int ligneSelec, colonneSelec, debut, fin, ligneBidon;
+
+	public static ArrayList<String> refs, listeFiltree, refsWS;
+
+	public static SurveyDescription[] surveysWS;
+
+	public static void main(String[] args) {
+
+	}
+
+}

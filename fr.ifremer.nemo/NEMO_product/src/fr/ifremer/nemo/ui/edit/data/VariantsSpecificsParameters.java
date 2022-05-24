@@ -1,0 +1,192 @@
+package fr.ifremer.nemo.ui.edit.data;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map.Entry;
+
+import fr.ifremer.nemo.Nemo;
+import fr.ifremer.nemo.ui.RulesManager;
+import fr.ifremer.nemo.util.Global;
+import fr.ifremer.nemo.util.Intern;
+import fr.ifremer.seadatanet.odv.input.model.Parameter.ParameterType;
+import fr.ifremer.seadatanet.odv.input.validator.OdvSpecificValidator;
+import fr.ifremer.seadatanet.odv.input.validator.OdvSpecificValidator.PARAMETER_REQUIREMENT;
+import fr.ifremer.seadatanet.odv.input.validator.OdvSpecificValidatorBio;
+import fr.ifremer.seadatanet.odv.input.validator.OdvSpecificValidatorClassic;
+import fr.ifremer.seadatanet.odv.input.validator.OdvSpecificValidatorCyto;
+import fr.ifremer.seadatanet.odv.input.validator.OdvSpecificValidatorMicro;
+import fr.ifremer.seadatanet.odv.input.validator.OdvSpecificValidatorMicroInSed;
+import fr.ifremer.seadatanet.odv.input.validator.SpecificParameter;
+import fr.ifremer.sismer_tools.SismerToolsException;
+import fr.ifremer.sismer_tools.externalresources.ExternalResourcesManager;
+import fr.ifremer.sismer_tools.resources.ODVConstants.E_Variant;
+import fr.ifremer.sismer_tools.seadatanet.SdnVocabularyManager;
+
+public class VariantsSpecificsParameters {
+
+	private static VariantsSpecificsParameters instance ;
+
+
+	public static VariantsSpecificsParameters getInstance() {
+		if (instance==null) {
+			instance = new VariantsSpecificsParameters();
+		}
+		return instance;
+	}
+	public VariantsSpecificsParameters() {
+	}
+
+	public List<TypeData> getParameters() throws Exception{
+		return getParameters(Nemo.getInstance().getDomain().getMedia().getModel().getVariant());
+	}
+
+
+	public List<TypeData> getParameters(E_Variant variant) throws Exception{
+		List<TypeData> specificList=new ArrayList<>();
+		specificList = getSpecificParams(getValidator(variant));
+		return specificList;
+	}
+
+	private OdvSpecificValidator getValidator(E_Variant variant) {
+		switch (variant) {
+		case PHYSICOCHEMICAL:
+			return new OdvSpecificValidatorClassic(null, null, null);
+		case BIOLOGICAL:
+			return new OdvSpecificValidatorBio(null, null, null);
+		case MICROLITTER:
+			return new OdvSpecificValidatorMicro(null, null, null);
+		case MICROLITTERINSEDIMENTS:
+			return new OdvSpecificValidatorMicroInSed(null, null, null);
+		case FLOWCYTO:
+			return new OdvSpecificValidatorCyto(null, null, null);
+		default:
+			return null;
+		}
+
+	}
+	private List<TypeData> getSpecificParams(OdvSpecificValidator validator) throws Exception	{ 
+		HashMap<Integer, SpecificParameter> map = new HashMap<>();
+		List<TypeData>specificList=new ArrayList<>();
+		if (validator==null) {
+			return specificList;
+		}
+		HashMap<String[], PARAMETER_REQUIREMENT> expectedParams = validator.getExpectedParams();
+		for (Entry<String[], PARAMETER_REQUIREMENT> p : expectedParams.entrySet()) {
+			if (p.getValue()==PARAMETER_REQUIREMENT.MAND) {
+				String p01Code = p.getKey()[0];
+				SpecificParameter param = validator.getSpecificParams().get(p01Code);
+				map.put(param.getPosition(), param);
+			}
+			else  if (p.getKey()[0].equals(SdnVocabularyManager.P01_ADEPZZ01)){
+//				validator.getSpecificParams().get(p.getKey()[0]).setPosition(-1);
+//				// ADEPZZ01 mandatory for profiles and trajectories
+				if (RulesManager.getInstance().isProfile()||RulesManager.getInstance().isTrajectory()) {
+					map.put(-1, validator.getSpecificParams().get(p.getKey()[0]));
+				}
+			}
+		}
+		
+		for (int i=-1; i<map.size()+1; i++) {
+			if (map.get(i)!=null){
+				specificList.add(specificParam2TypeData(map.get(i)));
+					}
+		}
+		
+
+
+
+		return specificList;
+	}
+
+
+
+	/**
+	 * TODO
+	 * Check if specific parameters are still present when user validates
+	 * @param allParameters
+	 * @return
+	 */
+	public String checkSpecificParameters(List<TypeData> allParameters) {
+		String res="";
+		OdvSpecificValidator validator = getValidator(Nemo.getInstance().getDomain().getMedia().getModel().getVariant());
+		HashMap<String[], PARAMETER_REQUIREMENT> expected = validator.getExpectedParams();
+		boolean p01Found;
+		String p01Title="";
+
+		for (Entry<String[], PARAMETER_REQUIREMENT> entry : expected.entrySet()) {
+			p01Found=false;
+
+			for (String p01 : entry.getKey()) { // multiple choice possible
+				if (p01.equals(SdnVocabularyManager.P01_DTUT8601_ISODATE) || p01.equals(SdnVocabularyManager.P01_ADEPZZ01)){
+					p01Found=true;
+					break;
+				}
+				p01Title =  validator.getSpecificParams().get(p01).getCodeLocal();
+				for (TypeData td : allParameters) {
+					if (td.getEntryKeyP011().equals(p01)) {
+						p01Found=true;
+					}
+				}
+			}
+
+			if (!p01Found) {
+
+				res+= p01Title +" ("+Arrays.toString(entry.getKey())+") ";
+			}
+		}
+		if (!res.isEmpty()) {
+			res="Missing parameters for variant " +  Nemo.getInstance().getDomain().getMedia().getModel().getVariant()+": "+res;
+		}
+		return res;
+	}
+
+	private TypeData specificParam2TypeData(SpecificParameter p) throws Exception {
+		TypeData td = new TypeData();
+
+		String p02Code = ExternalResourcesManager.getInstance().getSdnVocabularyManager().getVocabMatch(
+				Intern.list_P011, Intern.list_P021,
+				p.getCodeP01()
+				);
+		if (p02Code==null) {
+			// TODO message
+			throw new Exception("P02 code not found for specific parameter " + p.getCodeP01());
+		}
+		td.setEntryKey(p02Code);
+		//		td.setEntryTerm(p.getCodeLocal());
+		td.setEntryKeyP011(p.getCodeP01());
+		td.setUniteCode(p.getCodeP06());
+		//		td.setUnite(p.getUnitLocalLabel());
+
+		//		td.setInstrumentCode();
+		//		td.setInstrument();
+		td.setIsP011(true);
+		td.setIsText(p.getParameterType()==ParameterType.TEXT);
+		td.setEntree("");
+		td.setSortie("");
+		td.setPosition(p.getPosition());
+		td.setFormat("");
+		
+		if (p.getCodeP01().equals(SdnVocabularyManager.P01_DTUT8601)) {
+			td.setFormat(Global.DATETIME_CHOICE_ISO);
+		}
+		try {
+			String labelP01=  ExternalResourcesManager.getInstance().getSdnVocabularyManager().getP01Label(p.getCodeP01());
+			td.setEntryTermP011(labelP01);
+			// we do not use unit labels as specified in the documentations, because Nemo fixes them if they are not official P06 labels
+			// we use directly the P06 labels
+			String labelP06="";
+			if (!td.isText()) {
+				labelP06= ExternalResourcesManager.getInstance().getSdnVocabularyManager().getP06UnitLabel(p.getCodeP06());
+			}
+			td.setP06Label(labelP06);
+		} catch (SismerToolsException e) {
+			// TODO message
+			throw new Exception("P01 label not found for specific parameter " + p.getCodeP01());
+		}
+
+
+		return td;
+	}
+}
