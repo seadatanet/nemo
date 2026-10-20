@@ -1,0 +1,1502 @@
+package fr.ifremer.nemo.ui.edit.file;
+
+import org.eclipse.jface.layout.GridDataFactory;
+import org.eclipse.jface.layout.GridLayoutFactory;
+import org.eclipse.jface.text.BadLocationException;
+import org.eclipse.jface.text.Document;
+import org.eclipse.jface.text.IRegion;
+import org.eclipse.jface.text.TextSelection;
+import org.eclipse.jface.text.source.AnnotationRulerColumn;
+import org.eclipse.jface.text.source.CompositeRuler;
+import org.eclipse.jface.text.source.LineNumberRulerColumn;
+import org.eclipse.jface.text.source.OverviewRuler;
+import org.eclipse.jface.text.source.SourceViewer;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.SashForm;
+import org.eclipse.swt.events.ModifyEvent;
+import org.eclipse.swt.events.ModifyListener;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.layout.FillLayout;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Group;
+import org.eclipse.swt.widgets.Text;
+import org.eclipse.ui.forms.widgets.FormToolkit;
+import org.eclipse.ui.forms.widgets.ScrolledForm;
+
+import fr.ifremer.nemo.Nemo;
+import fr.ifremer.nemo.input.MediaModel;
+import fr.ifremer.nemo.ui.RulesManager;
+import fr.ifremer.nemo.ui.Utils;
+import fr.ifremer.nemo.ui.edit.EditForm;
+import fr.ifremer.nemo.ui.edit.file.listeners.FileTypeSelectionListener;
+import fr.ifremer.nemo.ui.edit.file.listeners.InputFileBrowseListener;
+import fr.ifremer.nemo.ui.edit.file.listeners.InputFileCheckMultistationsListener;
+import fr.ifremer.nemo.ui.edit.file.listeners.InputFileRadioSelectionListener;
+import fr.ifremer.nemo.ui.edit.file.listeners.InputFileRealoadListener;
+import fr.ifremer.nemo.ui.edit.file.listeners.OutputFormatRadioSelectionListener;
+import fr.ifremer.nemo.ui.edit.file.listeners.variants.VariantBiologicalListener;
+import fr.ifremer.nemo.ui.edit.file.listeners.variants.VariantFlowcytometrylListener;
+import fr.ifremer.nemo.ui.edit.file.listeners.variants.VariantMicrolitterInSedimentListener;
+import fr.ifremer.nemo.ui.edit.file.listeners.variants.VariantMicrolitterListener;
+import fr.ifremer.nemo.ui.edit.file.listeners.variants.VariantPhysicochemicalListener;
+import fr.ifremer.nemo.ui.view.ViewLog;
+import fr.ifremer.nemo.ui.view.ViewMain;
+import fr.ifremer.nemo.util.Conversion;
+import fr.ifremer.nemo.util.Global;
+import fr.ifremer.nemo.util.Global.E_EndData;
+import fr.ifremer.nemo.util.Global.E_InputType;
+import fr.ifremer.nemo.util.Global.E_ProcessType;
+import fr.ifremer.nemo.util.Global.E_TypeConversion;
+import fr.ifremer.nemo.util.Intern;
+import fr.ifremer.nemo.util.Messages;
+import fr.ifremer.sismer_tools.resources.ODVConstants.E_Variant;
+
+/**
+ * Description: editeur de l'onglet File
+ * 
+ * @author sbregent
+ */
+public class EditFileForm extends EditForm {
+	// variables publiques **********************************************
+	public String nomFichier;
+	public String nomRepertoire;
+	// nom du repertoire choisi par le user (on le garde car le nomRepertoire
+	// peut être ecrasé par PF_nomRepertoire,
+	// et on a besoin du vrai nom pour ecrire la commande batch)
+	public String nomRepertoireOrigin;
+	public String nomFichierOrigin;
+
+	// sections
+	public FileSection sectionFileHeader;
+	public FileStationHeader sectionStationHeader;
+	public FileSection sectionEndOfStation;
+	public FileEndData sectionDataTerminator;
+	public FileDataColumnTitlesSection sectionDataColumnTitles;
+
+	// zone de texte pour l'affichage des données en entrée
+	protected SourceViewer fileSourceViewer;
+
+	// choix pour Cruise: fichier ou répertoire
+	protected Button radioFichier = null;
+	protected Button radioDossier = null;
+
+	// choix du type de collection
+	protected Button radioCollectGroupedByCruise = null; // cas 1 fichier
+	protected Button radioCollectNotGroupedByCruise = null;// cas N fichiers
+	protected Button chkMultiStations;
+	
+	
+	protected Button reloadButton = null;
+
+	// choix pour File type: profile, time series ou trajectory
+	private Button radProfilVertical, radSerieTempo, radTrajectoire;
+
+	// choix pour variante: physicochemical (historiquement gere par Nemo),
+	// biological, flowcytometry, microlitter, microlitter in sediment
+	private Button radPhysicochemical, radBiological, radFlowcytometry, radMicrolitter, radMicrolitterInSediment;
+
+	// choix du format d'export
+	private Button radMedatlas;
+	private Button radODV;
+	private Button radNetCDF;
+	// MonoFichier et MonoStation pour ODV et NETCDF
+	private Button radODVMonoFichier;
+	private Button radODVMonoStation;
+	private Button chkForcerTri = null;
+
+	// choix du séparateur
+	private Button radioTabulation, radioPointVirgule, radioVirgule, radioEspace, radioSeparateurAutre = null;
+	private Text textSeparateur = null;
+	private Button chkSeparateur = null;
+
+	// disposition IHM
+	protected Group grpODV;
+	protected Composite compositeSeparateur;
+	protected boolean fileLoaded;
+
+	// validation
+	private Button buttonValidateAll;
+
+	/**
+	 * constructeur
+	 */
+	public EditFileForm() {
+		super();
+		myValidator = new FileFormValidator();
+
+	}
+
+	/**
+	 * initialisation à partir des valeurs par défaut (fixes ou definies dans
+	 * les settings)
+	 */
+	public void init() {
+		fileLoaded = false;
+		setLoaded(false);
+		fileSourceViewer.getDocument().set(Global.EMPTY_STRING);
+		// separator
+		enableSeparatorChoice(true);
+		RulesManager.getInstance().resetFileForm();
+	}
+
+	public void reinitAllButProcess() {
+		setFileLoaded(false);
+		reinitTextArea();
+		Nemo.getInstance().getViewMain().setAffiche(0);
+		// RAZ global
+		Utils.razGlobal();
+		// reset de l'etape de conversion
+		Nemo.getInstance().getViewMain().setEtape(0);
+		// lancement du processus sur le premier onglet et
+		// effacement preventif
+		// si besoin
+		// fillDesc(true);
+		Nemo.getInstance().getViewMain().getEditFileForm().afficheEdition();
+		// reinitialisation du tableau input data si existant
+		Nemo.getInstance().getViewMain().getEditDataForm().reinitInputDataTable();
+		// reinitialisation du tableau de paramètres
+		Nemo.getInstance().getViewMain().getEditDataForm().reinitTableData();
+		Nemo.getInstance().getViewMain().getEditDataForm().reinitParameters();
+		ViewLog.styledTextLogErreurs.setText(Global.EMPTY_STRING);
+	}
+
+	public void resetDefaultEnableConversionTypes() {
+		RulesManager rulesMgr = RulesManager.getInstance();
+		radMedatlas.setEnabled(rulesMgr.DEFAULT_MEDATLAS_ENABLED);
+		radODV.setEnabled(rulesMgr.DEFAULT_ODVMULTISTATION_ENABLED || rulesMgr.DEFAULT_ODVMULTISTATION_ENABLED);
+		radNetCDF
+				.setEnabled(rulesMgr.DEFAULT_NETCDFMULTISTATION_ENABLED || rulesMgr.DEFAULT_NETCDFMULTISTATION_ENABLED);
+		radODVMonoFichier
+				.setEnabled(rulesMgr.DEFAULT_ODVMULTISTATION_ENABLED || rulesMgr.DEFAULT_ODVMULTISTATION_ENABLED);
+		radODVMonoStation
+				.setEnabled(rulesMgr.DEFAULT_ODVMONOSTATION_ENABLED || rulesMgr.DEFAULT_NETCDFMULTISTATION_ENABLED);
+	}
+
+	public void updateEnableConversionTypes() {
+		RulesManager rulesMgr = RulesManager.getInstance();
+		radMedatlas.setEnabled(rulesMgr.isMedatlasEnabled());
+		radODV.setEnabled(rulesMgr.isOdvMonostationEnabled() || rulesMgr.isOdvMultistationEnabled());
+		radNetCDF.setEnabled(rulesMgr.isNetCDFMonostationEnabled() || rulesMgr.isNetCDFMultistationEnabled());
+		radODVMonoFichier.setEnabled(rulesMgr.isOdvMultistationEnabled() || rulesMgr.isNetCDFMultistationEnabled());
+		radODVMonoStation.setEnabled(rulesMgr.isOdvMonostationEnabled() || rulesMgr.isNetCDFMonostationEnabled());
+
+	}
+
+	public void resetFileDataColumnTitles(boolean separatorChecked) {
+
+		sectionDataColumnTitles.setEnabled(separatorChecked);
+		sectionDataColumnTitles.setTableEnabledForCsv(separatorChecked);
+		sectionDataColumnTitles.setColTitlesInInputFile(false);
+		sectionDataColumnTitles.enableColumnTitlesSetter(false);
+		sectionDataColumnTitles.setP09CodeInInputFile(false);
+		sectionDataColumnTitles.enableP09CodeSetter(false);
+		sectionDataColumnTitles.setP01CodeInInputFile(false);
+		sectionDataColumnTitles.enableP01CodeSetter(false);
+	}
+
+	public void selectConversion(E_TypeConversion conversionType) {
+		radMedatlas.setSelection(false);
+		radODV.setSelection(false);
+		radNetCDF.setSelection(false);
+		radODVMonoFichier.setSelection(false);
+		radODVMonoStation.setSelection(false);
+		if (conversionType == E_TypeConversion.MEDATLAS) {
+			radMedatlas.setSelection(true);
+		} else if (conversionType == E_TypeConversion.ODV_MONOSTATION) {
+			radODV.setSelection(true);
+			radODVMonoStation.setSelection(true);
+		} else if (conversionType == E_TypeConversion.ODV_MULTISTATIONS) {
+			radODV.setSelection(true);
+			radODVMonoFichier.setSelection(true);
+		} else if (conversionType == E_TypeConversion.NETCDF_MONOSTATION) {
+			radNetCDF.setSelection(true);
+			radODVMonoStation.setSelection(true);
+		} else if (conversionType == E_TypeConversion.NETCDF_MULTISTATIONS) {
+			radNetCDF.setSelection(true);
+			radODVMonoFichier.setSelection(true);
+		}
+
+		// else, conversion=UNKNOWN
+		afficheGrpODV();
+	}
+
+	public void resetDefaultSelectionProcess() {
+		RulesManager rulesMgr = RulesManager.getInstance();
+		radioFichier.setSelection(RulesManager.DEFAULT_PROCESSTYPE == E_ProcessType.CRUISE_FILE);
+		radioDossier.setSelection(RulesManager.DEFAULT_PROCESSTYPE == E_ProcessType.CRUISE_DIR);
+		radioCollectGroupedByCruise.setSelection(RulesManager.DEFAULT_PROCESSTYPE == E_ProcessType.COLLECTION_DIR);
+		radioCollectNotGroupedByCruise.setSelection(RulesManager.DEFAULT_PROCESSTYPE == E_ProcessType.COLLECTION_FILES);
+	}
+
+	public void resetDefaultSelectionSeparator() {
+		// 6414 reinitialisation enable
+		chkSeparateur.setEnabled(true);
+		radioTabulation.setEnabled(true);
+		radioPointVirgule.setEnabled(true);
+		radioVirgule.setEnabled(true);
+		radioEspace.setEnabled(true);
+		radioSeparateurAutre.setEnabled(true);
+		textSeparateur.setEnabled(true);
+
+		// reinitialisation des selections
+		chkSeparateur.setSelection(false);
+		radioTabulation.setSelection(true);
+		radioPointVirgule.setSelection(false);
+		radioVirgule.setSelection(false);
+		radioEspace.setSelection(false);
+		radioSeparateurAutre.setSelection(false);
+		textSeparateur.setText(Global.EMPTY_STRING);
+		setSeparatorVisible();
+	}
+
+	public void resetDefaultSelectionFileType() {
+		enableFileTypeChoice(true);
+		radSerieTempo.setSelection(RulesManager.DEFAULT_FILETYPE == E_InputType.TIMESERIES);
+		radTrajectoire.setSelection(RulesManager.DEFAULT_FILETYPE == E_InputType.TRAJECTORY);
+		radProfilVertical.setSelection(RulesManager.DEFAULT_FILETYPE == E_InputType.PROFILE);
+	}
+
+	public void deselectAndDisableSelectionFileType() {
+		radSerieTempo.setSelection(false);
+		radTrajectoire.setSelection(false);
+		radProfilVertical.setSelection(false);
+		enableFileTypeChoice(false);
+	}
+
+	public void createLeftForm(Composite parent) {
+
+		// composant text (affichage du fichier en entrée)
+		Composite textFile = new Composite(parent, SWT.NONE);
+		textFile.setLayout(new FillLayout());
+
+		// LineNumber column
+		CompositeRuler lineNumRuler = new CompositeRuler();
+		LineNumberRulerColumn lineCol = new LineNumberRulerColumn();
+		lineNumRuler.addDecorator(0, lineCol);
+		OverviewRuler overviewRuler = new OverviewRuler(null, 10, null);
+		fileSourceViewer = new SourceViewer(textFile, lineNumRuler, overviewRuler, true,
+				SWT.MULTI | SWT.READ_ONLY | SWT.H_SCROLL | SWT.V_SCROLL);
+		// FileSourceViewer (contains TextArea)
+		AnnotationRulerColumn col = new AnnotationRulerColumn(10);
+		fileSourceViewer.addVerticalRulerColumn(col);
+		fileSourceViewer.setDocument(new Document(Global.EMPTY_STRING));
+		fileSourceViewer.getTextWidget().setFont(Utils.fontCourier);
+
+		FormToolkit toolkitViewFile = new FormToolkit(parent.getDisplay());
+		toolkitViewFile.setBackground(parent.getBackground());
+		ScrolledForm formViewFile = toolkitViewFile.createScrolledForm(parent);
+		formViewFile.setBackground(parent.getBackground());
+		formViewFile.getBody().setLayout(new GridLayout());
+
+		// input
+		createGroupInputParameters(formViewFile.getBody());
+
+		// output
+		createGroupOutputParameters(formViewFile.getBody());
+
+		// en pourcentage defini la taille de formViewFile
+		((SashForm) parent).setWeights(new int[] { 35, 65 });
+
+	}
+
+	@Override
+	public void createEditionForm(Composite parent) {
+		super.createEditionForm(parent);
+
+		formEdition.getBody().setLayout(new GridLayout());
+		formEdition.setText(Messages.edit_file_title);
+
+		// init des objets
+		initSections();
+
+		buttonValidateAll = new Button(formEdition.getBody(), SWT.PUSH);
+		buttonValidateAll.setBackground(Nemo.getInstance().getViewMain().getBackgroundEdit());
+		buttonValidateAll.setText(Messages.button_validateAllSteps);
+		buttonValidateAll.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+			@Override
+			public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
+
+				ViewMain theViewMain = Nemo.getInstance().getViewMain();
+
+				// validation de l'onglet FILE
+				// Etape.validationFile();
+				validate();
+
+				// Les onglets sont décalés si on on est en collection =>
+				// pas d'étape cruise
+				// FAE 3796
+				int offset = 0;
+				// if (isCollection())
+				if (!RulesManager.getInstance().isCruiseEnabled()) {
+					offset--;
+					// on efface les erreurs sur cruise car il peut en
+					// rester d'une precendente conversion
+					Nemo.getInstance().getViewMain().getEditConversionForm().setWarningCampagne(Global.EMPTY_STRING);
+				}
+
+				if (theViewMain.getEtape() == 1) {
+					// Sélection de l'onglet CRUISE
+					theViewMain.selectTabByIndex(1);
+					Utils.validationEtape(1);
+					// Validation de l'onglet CRUISE
+					// Etape.validationCruise();
+					Nemo.getInstance().getViewMain().getEditCruiseForm().validate();
+				}
+
+				if (theViewMain.getEtape() == 2) {
+					// Sélection de l'onglet STATION
+					theViewMain.selectTabByIndex(2 + offset);
+					Utils.validationEtape(2);
+					// Validation de l'onglet STATION
+					// Etape.validationStation();
+					Nemo.getInstance().getViewMain().getEditStationForm().validate();
+				}
+
+				if (theViewMain.getEtape() == 3) {
+					// Sélection de l'onglet DATA
+					theViewMain.selectTabByIndex(3 + offset);
+					Utils.validationEtape(3);
+					// Validation de l'onglet DATA
+					// Etape.validationData();
+					Nemo.getInstance().getViewMain().getEditDataForm().validate();
+				}
+
+				if (theViewMain.getEtape() == 4) {
+					// Sélection de l'onglet CONVERSION
+					theViewMain.selectTabByIndex(4 + offset);
+					Utils.validationEtape(4);
+				}
+			}
+		});
+		buttonValidateAll.setEnabled(false);
+
+		// bouton "valider etape"
+		createButtonValidate();
+		buttonValidate.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				// Etape.validationFile();
+				validate();
+			}
+		});
+
+		// bouton RAZ
+		createButtonRaz();
+
+		// boutons collapse all / expand all
+		createButtonExpand();
+
+		// Draw Station Sections
+		drawSections();
+	}
+
+	@Override
+	public void afficheEdition() {
+
+		if (fileLoaded) {
+			super.afficheEdition();
+
+			setLoaded(true);
+			Nemo.getInstance().getViewMain().setAffiche(0);
+
+			// remplissage de l'IHM par le modèle chargé
+			fillFromModel(false);
+			filled = true;
+			actualiseEdition();
+
+			formEdition.redraw();
+			formEdition.reflow(true);
+
+			// nom de l'application
+			Nemo.getInstance().refreshNomNemo();
+		}
+	}
+
+	@Override
+	public void drawingBack() {
+		if (isLoaded()) {
+			super.drawingBack();
+			Nemo.getInstance().getViewMain().setAffiche(0);
+			Nemo.getInstance().refreshNomNemo();
+		}
+	}
+
+	@Override
+	public void initSections() {
+		sectionFileHeader = new FileSection(Messages.edit_file_enteteFichier_title,
+				Messages.edit_file_enteteFichier_title, Messages.edit_file_enteteFichier, this);
+		sectionFileHeader.addSetter(null, Global.ZERO);
+		listeSections.add(sectionFileHeader);
+
+		sectionStationHeader = new FileStationHeader(Messages.edit_file_enteteStation_title,
+				Messages.edit_file_enteteStation_title, Messages.edit_file_enteteStation, this);
+		sectionStationHeader.addSetter(Messages.edit_file_enteteStation_setter, Global.ZERO);
+		listeSections.add(sectionStationHeader);
+
+		sectionEndOfStation = new FileSection(Messages.edit_file_finStation_title, Messages.edit_file_finStation_title,
+				Messages.edit_file_finStation, this);
+		sectionEndOfStation.addSetter(null, Global.ZERO);
+		listeSections.add(sectionEndOfStation);
+
+		sectionDataTerminator = new FileEndData(Messages.edit_file_indicFinDonnees_title,
+				Messages.edit_file_indicFinDonnees_title, Messages.edit_file_indicFinDonnees, this);
+		sectionDataTerminator.addSetter(Messages.edit_file_sectionRuptureDonnees_end_with, Global.EMPTY_STRING);
+		listeSections.add(sectionDataTerminator);
+
+		// 33278
+		sectionDataColumnTitles = new FileDataColumnTitlesSection(Messages.edit_file_columnTitlesSection_title,
+				Messages.edit_file_columnTitlesSection_title, Messages.edit_file_columnTitlesSection_desc, this);
+		sectionDataColumnTitles.addSetter(null, Global.ZERO);
+		listeSections.add(sectionDataColumnTitles);
+
+		defineMandatorySections();
+
+	}
+
+	@Override
+	protected void disposeElements() {
+		super.disposeElements();
+		buttonValidateAll.dispose();
+	}
+
+	@Override
+	public void actualiseEdition() {
+		// FAE 1810 - FileHeader accessible que pour un fichier campagne
+		// TODO BGT fonctionnement ok mais a deplacer dans rules
+		sectionFileHeader.setEnabled(radioFichier.getSelection() || isMultiStationFileChecked());
+		buttonValidateAll.setEnabled(!Nemo.getInstance().getNomModele().equals(Global.EMPTY_STRING));
+		sectionDataColumnTitles
+				.setEnabled(!Nemo.getInstance().getViewMain().getEditFileForm().getSeparateur().isEmpty());
+	}
+
+	/**
+	 * fill with current model values
+	 */
+	@Override
+	public void fillFromModel() {
+		fillFromModel(false);
+	}
+
+	/**
+	 * fill with current model values
+	 * 
+	 * @param raz : if true, release all domain values before filling
+	 */
+	public void fillFromModel(Boolean raz) {
+		if (raz) {
+			Nemo.getInstance().getDomain().release();
+		}
+
+		MediaModel mediaModel = Nemo.getInstance().getDomain().getMedia().getModel();
+		// Séparateur
+		setSeparateur(mediaModel.getSeparator());
+		RulesManager.getInstance().updateFromModel_separator(mediaModel.getSeparator());// 40216
+		chkMultiStations.setSelection(mediaModel.isMultiStations());
+		// Type de fichier
+		RulesManager.getInstance().updateFromModel(mediaModel.getInputType());
+		RulesManager.getInstance().updateFromModel(mediaModel.getVariant());
+
+		// --- remplissage du formulaire de droite (editFileForm)
+		// Entête Fichier
+		if (RulesManager.getInstance().isCruiseInADirectory() && !isMultiStationFileChecked()) {
+			sectionFileHeader.razValues();
+		} else {
+			sectionFileHeader.setValue(String.valueOf(mediaModel.getFileHeader()));
+		}
+
+		// Entête Station
+		sectionStationHeader.getUseSeparatorInStationHeader().setSelection(mediaModel.isUseSeparatorInStationHeader());
+		if (mediaModel.getStationHeaderPattern().equals(Global.EMPTY_STRING)) {
+			sectionStationHeader.selectNumber(true);
+			sectionStationHeader.setValue(String.valueOf(mediaModel.getStationHeader()));
+		} else {
+			sectionStationHeader.selectNumber(false);
+			sectionStationHeader.setIndicatorText(mediaModel.getStationHeaderPattern());
+			sectionStationHeader.setNbLinesBeforeData(String.valueOf(mediaModel.getStationHeader()));
+
+		}
+		sectionDataColumnTitles.setTableEnabledForCsv(mediaModel.getUseTableForCsvData());
+		sectionDataColumnTitles.setColTitlesInInputFile(mediaModel.isColTitlesInInputFile());
+		sectionDataColumnTitles.setValue(String.valueOf(mediaModel.getColTitlesInInputFilesLineNbConcatenated()));
+		sectionDataColumnTitles.enableColumnTitlesSetter(mediaModel.isColTitlesInInputFile());
+		sectionDataColumnTitles.setP09CodeInInputFile(mediaModel.isP09CodeInInputFile());
+		sectionDataColumnTitles.setP09CodeValue(String.valueOf(mediaModel.getP09CodeInInputFilesLineNb()));
+		sectionDataColumnTitles.enableP09CodeSetter(mediaModel.isP09CodeInInputFile());
+		sectionDataColumnTitles.setP01CodeInInputFile(mediaModel.isP01CodeInInputFile());
+		sectionDataColumnTitles.setP01CodeValue(String.valueOf(mediaModel.getP01CodeInInputFilesLineNb()));
+		sectionDataColumnTitles.enableP01CodeSetter(mediaModel.isP01CodeInInputFile());
+
+		// Fin de Station
+		sectionEndOfStation.setValue(String.valueOf(mediaModel.getEndStation()));
+
+		// Fin des données
+		sectionDataTerminator.setEndData(mediaModel.getEndData(), mediaModel.getEndDataPattern(),
+				mediaModel.getEndDataPatternIsRegexp());
+
+		// conversion:
+
+		// si un modele est ouvert, on affecte la valeur de ce modèle. Sinon on
+		// affecte la valeur choisie dans les settings
+		if (Nemo.getInstance().getNomModele().equals(Global.EMPTY_STRING)) {
+			RulesManager.getInstance().updateFromModel(Nemo.getInstance().getConfig().getDefaultConversionType());
+		} else {
+			RulesManager.getInstance()
+					.updateFromModel(Nemo.getInstance().getDomain().getConversion().getModel().getOutputFormat());
+
+		}
+		setSortForced(Nemo.getInstance().getDomain().getConversion().getModel().isSortStations());
+		// activation option serie tempo
+		enableSeparatorChoice(true);
+//		enableFileTypeChoice(true);
+	}
+
+	public void invalidEtape() {
+		super.invalidEtape(0);
+		Nemo.getInstance().getViewMain().tabFile.setText(Messages.onglet_file);
+	}
+
+	private void createGroupOutputParameters(Composite parent) {
+
+		// ****************************************************************************************
+		// principal composite
+		GridLayout mainBoxLayout = new GridLayout();
+		mainBoxLayout.numColumns = 1;
+		mainBoxLayout.marginHeight = 0;
+		GridData mainGridData = new GridData();
+		mainGridData.horizontalAlignment = GridData.FILL;
+		mainGridData.verticalAlignment = GridData.FILL;
+
+		Group mainBoxGroup = new Group(parent, SWT.NONE);
+		mainBoxGroup.setText(Messages.view_file_outputTitle);
+		mainBoxGroup.setLayout(mainBoxLayout);
+		mainBoxGroup.setLayoutData(mainGridData);
+
+		// ****************************************************************************************
+		// FORMAT
+		GridData gridData = new GridData();
+		gridData.grabExcessHorizontalSpace = true;
+		gridData.horizontalAlignment = GridData.FILL;
+
+		GridLayout mainFormatLayout = new GridLayout();
+		mainFormatLayout.numColumns = 2;
+		mainFormatLayout.marginHeight = 0;
+		mainFormatLayout.makeColumnsEqualWidth = true;
+		Composite mainFormatGroup = new Composite(mainBoxGroup, SWT.NONE);
+		mainFormatGroup.setLayout(mainFormatLayout);
+		mainFormatGroup.setLayoutData(gridData);
+
+		// ****************************************************************************************
+		// MEDATLAS/ODV/NETCDF
+
+		OutputFormatRadioSelectionListener outputFormatRadioSelectionListener = new OutputFormatRadioSelectionListener(
+				this);
+		GridData medOrOdvgridData = new GridData();
+		medOrOdvgridData.grabExcessHorizontalSpace = true;
+		medOrOdvgridData.horizontalAlignment = GridData.FILL;
+
+		GridLayout medOrOdvLayout = new GridLayout();
+		medOrOdvLayout.numColumns = 1;
+		medOrOdvLayout.marginHeight = 0;
+
+		Group medOrOdvGroup = new Group(mainFormatGroup, SWT.NONE);
+		medOrOdvGroup.setLayout(medOrOdvLayout);
+		medOrOdvGroup.setLayoutData(medOrOdvgridData);
+
+		radMedatlas = new Button(medOrOdvGroup, SWT.RADIO);
+		radMedatlas.setText(Conversion.MEDATLAS.getName());
+		radMedatlas.setSelection(false);
+		radMedatlas.addSelectionListener(outputFormatRadioSelectionListener);
+
+		radODV = new Button(medOrOdvGroup, SWT.RADIO);
+		radODV.setText(Conversion.ODV.getName());
+		radODV.setSelection(false);
+		radODV.addSelectionListener(outputFormatRadioSelectionListener);
+
+		radNetCDF = new Button(medOrOdvGroup, SWT.RADIO);
+		radNetCDF.setText(Conversion.NETCDF.getName());
+		radNetCDF.setSelection(false);
+		radNetCDF.addSelectionListener(outputFormatRadioSelectionListener);
+
+		// ****************************************************************************************
+		// ODV type
+		GridData odvTypegridData = new GridData();
+		odvTypegridData.grabExcessHorizontalSpace = true;
+		odvTypegridData.horizontalAlignment = GridData.FILL;
+
+		GridLayout odvTypeLayout = new GridLayout();
+		odvTypeLayout.numColumns = 1;
+		odvTypeLayout.marginHeight = 0;
+
+		grpODV = new Group(mainFormatGroup, SWT.NONE);
+		grpODV.setLayout(odvTypeLayout);
+		grpODV.setLayoutData(odvTypegridData);
+
+		radODVMonoStation = new Button(grpODV, SWT.RADIO);
+		radODVMonoStation.setText(Messages.view_convert_monoStation);
+		radODVMonoStation.setSelection(false);
+		radODVMonoStation.addSelectionListener(outputFormatRadioSelectionListener);
+
+		radODVMonoFichier = new Button(grpODV, SWT.RADIO);
+		radODVMonoFichier.setText(Messages.view_convert_monoFichier);
+		radODVMonoFichier.setSelection(false);
+		radODVMonoFichier.addSelectionListener(outputFormatRadioSelectionListener);
+
+		afficheGrpODV();
+
+		// ****************************************************************************************
+		// sort
+		chkForcerTri = new Button(mainBoxGroup, SWT.CHECK);
+		chkForcerTri.setFont(Utils.font08);
+		chkForcerTri.setText(Messages.view_convert_sort);
+
+	}
+
+	private Composite createSubGroupSeparatorAndFileType(Composite parent) {
+		// ****************************************************************************************
+		// principal composite
+		GridLayout mainBoxLayout = new GridLayout();
+		mainBoxLayout.numColumns = 3;
+		GridData mainGridData = new GridData();
+		mainGridData.horizontalAlignment = GridData.FILL;
+		mainGridData.verticalAlignment = GridData.FILL;
+
+		Composite box = new Composite(parent, SWT.NONE);
+		box.setLayout(mainBoxLayout);
+		box.setLayoutData(mainGridData);
+
+		return box;
+	}
+
+	private void createSubGroupSeparator(Composite parent) {
+		Group grpSeparateur = new Group(parent, SWT.NONE);
+		GridLayoutFactory.fillDefaults().applyTo(grpSeparateur);
+		GridDataFactory.fillDefaults().grab(false, false).applyTo(grpSeparateur);
+
+		chkSeparateur = new Button(grpSeparateur, SWT.CHECK);
+		chkSeparateur.setText(Messages.view_file_separator);
+		chkSeparateur.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent g) {
+				csvWidgetChanged();
+			}
+		});
+
+		compositeSeparateur = new Composite(grpSeparateur, SWT.NONE);
+		GridLayoutFactory.fillDefaults().numColumns(3).applyTo(compositeSeparateur);
+		GridDataFactory.fillDefaults().grab(false, false).applyTo(compositeSeparateur);
+
+		radioTabulation = new Button(compositeSeparateur, SWT.RADIO);
+		radioTabulation.setText(Messages.view_file_sepTab);
+		radioTabulation.setSelection(true);
+		radioTabulation.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent g) {
+				csvWidgetChanged();
+			}
+		});
+
+		radioPointVirgule = new Button(compositeSeparateur, SWT.RADIO);
+		radioPointVirgule.setText(Messages.view_file_sepSemi);
+		radioPointVirgule.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent g) {
+				csvWidgetChanged();
+			}
+		});
+
+		radioVirgule = new Button(compositeSeparateur, SWT.RADIO);
+		radioVirgule.setText(Messages.view_file_sepComma);
+		radioVirgule.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent g) {
+				csvWidgetChanged();
+			}
+		});
+
+		radioEspace = new Button(compositeSeparateur, SWT.RADIO);
+		radioEspace.setText(Messages.view_file_sepSpace);
+		radioEspace.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent g) {
+				csvWidgetChanged();
+			}
+		});
+
+		radioSeparateurAutre = new Button(compositeSeparateur, SWT.RADIO);
+		radioSeparateurAutre.setText(Messages.view_file_sepOther);
+		radioSeparateurAutre.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent g) {
+				csvWidgetChanged();
+			}
+		});
+		textSeparateur = new Text(compositeSeparateur, SWT.BORDER);
+		textSeparateur.addModifyListener(new ModifyListener() {
+			@Override
+			public void modifyText(ModifyEvent e) {
+				if (!(Nemo.getInstance().getViewMain().tabFile == null)) {
+					
+					csvWidgetChanged();
+				}
+			}
+		});
+
+		// Par defaut
+		compositeSeparateur.setVisible(false);
+
+	}
+	
+	/**
+	 * Common listener for separator choosers (checkbox, radiobuttons, ...)
+	 */
+	public void csvWidgetChanged() {
+		setSeparatorVisible();
+		Utils.invalidEtapes();
+		Utils.messageErreur(Global.EMPTY_STRING);
+		RulesManager.getInstance().updateFromIHMSeparatorChecked();
+	}
+
+
+	/**
+	 * This method initializes groupFichier
+	 */
+	private void createSubGroupFileType(Composite parent) {
+		Group grpFichier = new Group(parent, SWT.NONE);
+		grpFichier.setText(Messages.view_file_fileType);
+		GridLayoutFactory.fillDefaults().applyTo(grpFichier);
+		GridDataFactory.fillDefaults().grab(true, false).applyTo(grpFichier);
+
+		FileTypeSelectionListener fileTypeSelectionListener = new FileTypeSelectionListener(this);
+		radProfilVertical = new Button(grpFichier, SWT.RADIO);
+		radProfilVertical.setText(Messages.typeFile_profile);
+		radProfilVertical.addSelectionListener(fileTypeSelectionListener);
+
+		radSerieTempo = new Button(grpFichier, SWT.RADIO);
+		radSerieTempo.setText(Messages.typeFile_timeseries);
+		radSerieTempo.addSelectionListener(fileTypeSelectionListener);
+
+		radTrajectoire = new Button(grpFichier, SWT.RADIO);
+		radTrajectoire.setText(Messages.typeFile_trajectory);
+		radTrajectoire.addSelectionListener(fileTypeSelectionListener);
+
+		// Selection du type par defaut
+
+		resetDefaultSelectionFileType();
+	}
+
+	private void createSubGroupDataType(Composite parent) {
+		Group grpDatatype = new Group(parent, SWT.NONE);
+		grpDatatype.setText(Messages.view_file_variant);
+		GridLayoutFactory.fillDefaults().applyTo(grpDatatype);
+		GridDataFactory.fillDefaults().grab(true, false).applyTo(grpDatatype);
+
+		radPhysicochemical = new Button(grpDatatype, SWT.RADIO);
+		radPhysicochemical.setText(Messages.variant_physicochemical);
+		radPhysicochemical.addSelectionListener(new VariantPhysicochemicalListener(this));
+
+		radBiological = new Button(grpDatatype, SWT.RADIO);
+		radBiological.setText(Messages.variant_biological);
+		radBiological.addSelectionListener(new VariantBiologicalListener(this));
+
+		radFlowcytometry = new Button(grpDatatype, SWT.RADIO);
+		radFlowcytometry.setText(Messages.variant_flowcytometry);
+		radFlowcytometry.addSelectionListener(new VariantFlowcytometrylListener(this));
+
+		radMicrolitter = new Button(grpDatatype, SWT.RADIO);
+		radMicrolitter.setText(Messages.variant_microlitter);
+		radMicrolitter.addSelectionListener(new VariantMicrolitterListener(this));
+
+		radMicrolitterInSediment = new Button(grpDatatype, SWT.RADIO);
+		radMicrolitterInSediment.setText(Messages.variant_microlitter_in_sediment);
+		radMicrolitterInSediment.addSelectionListener(new VariantMicrolitterInSedimentListener(this));
+
+		// Selection du type par defaut
+
+		resetDefaultSelectionVariant();
+
+	}
+
+	public void resetDefaultSelectionVariant() {
+		enableFileTypeChoice(true);
+		radPhysicochemical.setSelection(RulesManager.DEFAULT_VARIANT == E_Variant.PHYSICOCHEMICAL);
+		radBiological.setSelection(RulesManager.DEFAULT_VARIANT == E_Variant.BIOLOGICAL);
+		radFlowcytometry.setSelection(RulesManager.DEFAULT_VARIANT == E_Variant.FLOWCYTO);
+		radMicrolitter.setSelection(RulesManager.DEFAULT_VARIANT == E_Variant.MICROLITTER);
+		radMicrolitterInSediment.setSelection(RulesManager.DEFAULT_VARIANT == E_Variant.MICROLITTERINSEDIMENTS);
+
+	}
+
+	private void createGroupInputParameters(Composite parent) {
+		InputFileRadioSelectionListener inputFileRadioSelectionListener = new InputFileRadioSelectionListener(this);
+
+		GridData subGridData = new GridData();
+		subGridData.grabExcessHorizontalSpace = true;
+		subGridData.horizontalAlignment = SWT.FILL;
+		GridLayout sublayout = new GridLayout();
+		sublayout.numColumns = 1;
+
+		// ****************************************************************************************
+		// principal composite
+		GridLayout mainBoxLayout = new GridLayout();
+		mainBoxLayout.numColumns = 1;
+		mainBoxLayout.marginHeight = 1;
+		mainBoxLayout.verticalSpacing = 1;
+		GridData mainGridData = new GridData();
+		mainGridData.horizontalAlignment = SWT.FILL;
+		mainGridData.verticalAlignment = SWT.FILL;
+		mainGridData.grabExcessHorizontalSpace = true;
+
+		Group mainBoxGroup = new Group(parent, SWT.NONE);
+		mainBoxGroup.setText(Messages.view_file_inputTitle);
+		mainBoxGroup.setLayout(mainBoxLayout);
+		mainBoxGroup.setLayoutData(mainGridData);
+
+		// ****************************************************************************************
+		// groupe process
+
+		GridData processGridData = new GridData();
+		processGridData.minimumWidth = 0;
+		processGridData.horizontalAlignment = SWT.FILL;
+		processGridData.verticalAlignment = SWT.FILL;
+		processGridData.grabExcessHorizontalSpace = true;
+
+		GridLayout processLayout = new GridLayout();
+		processLayout.numColumns = 3; // en realite 3 colonnes, mais bug si on
+		// met 3
+		processLayout.marginHeight = 1;
+
+		Group processGroup = new Group(mainBoxGroup, SWT.NONE);
+		processGroup.setLayout(processLayout);
+		processGroup.setLayoutData(processGridData);
+
+		// ****************************************************************************************
+		// process a cruise
+
+		Group inputFileCruiseGroup = new Group(processGroup, SWT.NONE);
+		inputFileCruiseGroup.setText(Messages.view_file_processCruise);
+		inputFileCruiseGroup.setLayout(sublayout);
+		inputFileCruiseGroup.setLayoutData(subGridData);
+
+		radioFichier = new Button(inputFileCruiseGroup, SWT.RADIO);
+		radioFichier.setSelection(true);
+		radioFichier.setText(Messages.view_file_cruiseFile);
+		radioFichier.addSelectionListener(inputFileRadioSelectionListener);
+
+		// TODO BGT: j'ai ajouté ici un faux bouton pour aligner correctement
+		// trouver une solution plus propre
+		radioDossier = new Button(inputFileCruiseGroup, SWT.RADIO);
+		radioDossier.setText(Messages.view_file_cruiseDir);
+		radioDossier.addSelectionListener(inputFileRadioSelectionListener);
+
+		Button test = new Button(inputFileCruiseGroup, SWT.CHECK);
+		test.setEnabled(false);
+		test.setText(Messages.view_file_multiStations);
+		test.setVisible(false);
+
+		// ****************************************************************************************
+		// process a collection
+
+		Group inputFileCollectionGroup = new Group(processGroup, SWT.NONE);
+		inputFileCollectionGroup.setText(Messages.view_file_processCollection);
+		inputFileCollectionGroup.setLayout(sublayout);
+		inputFileCollectionGroup.setLayoutData(subGridData);
+
+		radioCollectGroupedByCruise = new Button(inputFileCollectionGroup, SWT.RADIO);
+		radioCollectGroupedByCruise.setText(Messages.view_file_collectionCas1);
+		radioCollectGroupedByCruise.addSelectionListener(inputFileRadioSelectionListener);
+
+		radioCollectNotGroupedByCruise = new Button(inputFileCollectionGroup, SWT.RADIO);
+		radioCollectNotGroupedByCruise.setText(Messages.view_file_collectionCasN);
+		radioCollectNotGroupedByCruise.addSelectionListener(inputFileRadioSelectionListener);
+
+		chkMultiStations = new Button(inputFileCollectionGroup, SWT.CHECK);
+		chkMultiStations.setEnabled(false);
+		chkMultiStations.setText(Messages.view_file_multiStations);
+		// FAE 4181
+		InputFileCheckMultistationsListener inputFileCheckMultistationsListener = new InputFileCheckMultistationsListener(
+				this);
+		chkMultiStations.addSelectionListener(inputFileCheckMultistationsListener);
+
+		// ****************************************************************************************
+		
+		
+		Composite buttonComposite = new Composite(processGroup, SWT.NONE);
+		GridLayoutFactory.fillDefaults().applyTo(buttonComposite);
+		
+		// browse
+		Button buttonParcourir = new Button(buttonComposite, SWT.NONE);
+		buttonParcourir.setText(Messages.button_browse);
+		InputFileBrowseListener browseListener = new InputFileBrowseListener(this);
+		buttonParcourir.addSelectionListener(browseListener);
+		
+		// reload filee
+		reloadButton = new Button(buttonComposite, SWT.NONE);
+		reloadButton.setText(Messages.button_reload);
+		InputFileRealoadListener realoadListener = new InputFileRealoadListener(this);
+		reloadButton.addSelectionListener(realoadListener);
+		reloadButton.setEnabled(false);
+
+		// ****************************************************************************************
+		// separator & fileType
+		Composite separatorAndFileType = createSubGroupSeparatorAndFileType(mainBoxGroup);
+		createSubGroupSeparator(separatorAndFileType);
+		createSubGroupFileType(separatorAndFileType);
+		createSubGroupDataType(separatorAndFileType);
+	}
+
+	/**
+	 * initialise avec les valeurs du modèle par défaut {@inheritDoc}
+	 */
+	@Override
+	public void initFromNewModel() {
+		String nomFich;
+		// puis remplissage du modele avec les valeurs de l'IHM
+		if (radioFichier.getSelection()) {
+			nomFich = nomFichier;
+		} else {
+			nomFich = nomRepertoire;
+		}
+
+		MediaModel mediaModel = new MediaModel();
+
+		// --- enregistrement du nom du fichier en entrée
+		mediaModel.setSourcePath(nomFich);
+
+		// --- enregistrement du formulaire de gauche (ViewMain)
+		// Type de traitement
+		mediaModel.setProcessType(RulesManager.getInstance().getMyProcessType());
+
+		// Séparateur
+		mediaModel.setSeparator(getSeparateur());
+
+		// Type de fichier
+		mediaModel.setInputType(RulesManager.getInstance().getMyFileType());
+
+		// type de donnee
+		mediaModel.setVariant(RulesManager.getInstance().getMyInputVariant());
+
+		// Fichier multiStation ?
+		mediaModel.setMultiStations(isMultiStationFileChecked());
+
+		// --- enregistrement du formulaire de droite (editFileForm)
+		// Entête Fichier
+		int fileHeader = 0;
+		if (!RulesManager.getInstance().isCruiseInADirectory() || mediaModel.isMultiStations()) {
+			fileHeader = Integer.parseInt(getSectionFileHeader().getValue());
+		}
+
+		mediaModel.setFileHeader(fileHeader);
+
+		// Entête Station
+		mediaModel.setUseSeparatorInStationHeader(sectionStationHeader.getUseSeparatorInStationHeader().getSelection());
+		if (!sectionStationHeader.isSelectNumber()) {
+			mediaModel.setStationHeaderPattern(sectionStationHeader.getIndicatorText());
+			mediaModel.setStationHeader(sectionStationHeader.getNbLinesBeforeData());
+		} else {
+			mediaModel.setStationHeader(sectionStationHeader.getValue());
+		}
+
+		mediaModel.setUseTableForCsvData(sectionDataColumnTitles.isTableEnabledForCsv());
+		mediaModel.setColTitlesInInputFile(sectionDataColumnTitles.isColTitlesInStationHeader());
+
+		// Parse interval syntax
+		String[] splitSectionDataColumnTitles = sectionDataColumnTitles.getValue()
+				.split(Intern.separatorForColumnTitleLineNb);
+		mediaModel.setColTitlesInInputFilesLineNb(Integer.parseInt(splitSectionDataColumnTitles[0]));
+		if (splitSectionDataColumnTitles.length == 2) {
+			mediaModel.setColTitlesInInputFilesLastLineNb(Integer.parseInt(splitSectionDataColumnTitles[1]));
+		}
+		
+		// P09 & P01 Parameter Codes
+		mediaModel.setP09CodeInInputFile(sectionDataColumnTitles.isP09CodeInStationHeader());
+		if (sectionDataColumnTitles.isP09CodeInStationHeader()) {
+			mediaModel.setP09CodeInInputFilesLineNb(Integer.parseInt(sectionDataColumnTitles.getP09CodeValue()));
+		}
+		else {
+			mediaModel.setP09CodeInInputFilesLineNb(0);
+		}
+		mediaModel.setP01CodeInInputFile(sectionDataColumnTitles.isP01CodeInStationHeader());
+		if (sectionDataColumnTitles.isP01CodeInStationHeader()) {
+			mediaModel.setP01CodeInInputFilesLineNb(Integer.parseInt(sectionDataColumnTitles.getP01CodeValue()));
+		}
+		else {
+			mediaModel.setP01CodeInInputFilesLineNb(0);
+		}
+		
+		
+
+		// Fin de Station
+		mediaModel.setEndStation(getSectionEndOfStation().getValue());
+
+		// Fin des données
+		E_EndData end = sectionDataTerminator.getEndData();
+		mediaModel.setEndData(end);
+		if (end == E_EndData.END_WITH) {
+			mediaModel.setEndDataPattern(sectionDataTerminator.getValue());
+		} else if (end == E_EndData.NEXT_START_WITH) {
+			mediaModel.setEndDataPattern(sectionDataTerminator.getStartStationIndicator());
+			mediaModel.setEndDataPatternIsRegexp(sectionDataTerminator.getStartStationIndicatorRegexpCheckbox());
+		} else if (end == E_EndData.BEGIN_LINE_CHANGES) {
+			// TODO BGT
+			// ici on bricole avec un pattern qui ne sert qu'à donner une taille
+			// de string pour la suite - fonctionne mais moche
+			Character[] tmpChar = new Character[Integer.valueOf(sectionDataTerminator.getBeginLineChangeIndicator())];
+			String tmpString = "";
+			for (int i = 0; i < tmpChar.length; i++) {
+				tmpString += 'x';
+			}
+
+			mediaModel.setEndDataPattern(tmpString);
+			mediaModel.setEndDataPatternIsRegexp(false);
+		} else if (end == E_EndData.COLUMNCHANGE) {
+			mediaModel.setEndDataPattern(sectionDataTerminator.getColumnChangeIndicator());
+		}
+		Nemo.getInstance().getDomain().getConversion().setSortData(isSortForced());
+		Nemo.getInstance().getDomain().getConversion().getModel().setSortStations(isSortForced());
+		Nemo.getInstance().getDomain().getConversion()
+				.setCurrentConversion(RulesManager.getInstance().getMyConversionType());
+		Nemo.getInstance().getDomain().getConversion().getModel()
+				.setOutputFormat(RulesManager.getInstance().getMyConversionType());
+
+		// Mise à jour du model
+		Nemo.getInstance().getDomain().getMedia().updateMedia(mediaModel);
+
+	}
+
+	public void afficheGrpODV() {
+		grpODV.setVisible((radODV.getSelection() || radNetCDF.getSelection()));
+	}
+
+	public void enableSeparatorChoice(boolean enabled) {
+		if (chkSeparateur.getSelection()) {
+			chkSeparateur.setEnabled(enabled);
+			radioTabulation.setEnabled(enabled);
+			radioPointVirgule.setEnabled(enabled);
+			radioVirgule.setEnabled(enabled);
+			radioEspace.setEnabled(enabled);
+			radioSeparateurAutre.setEnabled(enabled);
+			textSeparateur.setEnabled(enabled);
+		}
+	}
+
+	public void enableFileTypeChoice(boolean enabled) {
+		radProfilVertical.setEnabled(enabled);
+		radSerieTempo.setEnabled(enabled);
+		radTrajectoire.setEnabled(enabled);
+	}
+
+	/**
+	 * select the appropriate radio choice depending on typeFile
+	 * 
+	 * @param typeFile
+	 */
+	public void selectTypeFile(E_InputType typeFile) {
+		switch (typeFile) {
+		case TRAJECTORY:
+			radProfilVertical.setSelection(false);
+			radSerieTempo.setSelection(false);
+			radTrajectoire.setSelection(true);
+			break;
+		case TIMESERIES:
+			radSerieTempo.setSelection(true);
+			radProfilVertical.setSelection(false);
+			radTrajectoire.setSelection(false);
+			break;
+		case PROFILE:
+			radProfilVertical.setSelection(true);
+			radSerieTempo.setSelection(false);
+			radTrajectoire.setSelection(false);
+			break;
+		default:
+			radProfilVertical.setSelection(false);
+			radSerieTempo.setSelection(false);
+			radTrajectoire.setSelection(false);
+			break;
+		}
+	}
+
+	/**
+	 * select the appropriate radio choice depending on dataType
+	 * (physicochemical, bio...)
+	 * 
+	 * @param dataType
+	 */
+	public void selectVariant(E_Variant variant) {
+		if (variant == null) {
+			return;
+		}
+		switch (variant) {
+		case PHYSICOCHEMICAL:
+			radPhysicochemical.setSelection(true);
+			radBiological.setSelection(false);
+			radFlowcytometry.setSelection(false);
+			radMicrolitter.setSelection(false);
+			radMicrolitterInSediment.setSelection(false);
+			break;
+		case BIOLOGICAL:
+			radPhysicochemical.setSelection(false);
+			radBiological.setSelection(true);
+			radFlowcytometry.setSelection(false);
+			radMicrolitter.setSelection(false);
+			radMicrolitterInSediment.setSelection(false);
+			break;
+		case FLOWCYTO:
+			radPhysicochemical.setSelection(false);
+			radBiological.setSelection(false);
+			radFlowcytometry.setSelection(true);
+			radMicrolitter.setSelection(false);
+			radMicrolitterInSediment.setSelection(false);
+			break;
+		case MICROLITTER:
+			radPhysicochemical.setSelection(false);
+			radBiological.setSelection(false);
+			radFlowcytometry.setSelection(false);
+			radMicrolitter.setSelection(true);
+			radMicrolitterInSediment.setSelection(false);
+			break;
+		case MICROLITTERINSEDIMENTS:
+			radPhysicochemical.setSelection(false);
+			radBiological.setSelection(false);
+			radFlowcytometry.setSelection(false);
+			radMicrolitter.setSelection(false);
+			radMicrolitterInSediment.setSelection(true);
+			break;
+		default:
+			radPhysicochemical.setSelection(false);
+			radBiological.setSelection(false);
+			radFlowcytometry.setSelection(false);
+			radMicrolitter.setSelection(false);
+			radMicrolitterInSediment.setSelection(false);
+			break;
+		}
+	}
+
+	/**
+	 * gets the separator choosen by the user in the file tab
+	 * 
+	 * @return the separator specified by the user
+	 */
+	public char getSeparatorAsChar() {
+		char separator = ' ';
+		if (radioTabulation.getSelection()) {
+			separator = '\t';
+		} else if (radioPointVirgule.getSelection()) {
+			separator = ';';
+		} else if (radioVirgule.getSelection()) {
+			separator = ',';
+		} else if (radioEspace.getSelection()) {
+			separator = ' ';
+		} else if (radioSeparateurAutre.getSelection()) {
+			separator = getTextSeparateur().getText().toCharArray()[0];
+		}
+		return separator;
+	}
+
+	public String getSeparateur() {
+		if (chkSeparateur.getSelection()) {
+			if (radioTabulation.getSelection()) {
+				// Tabulation
+				return Global.TAB;
+			} else if (radioPointVirgule.getSelection()) {
+				// Point-virgule
+				return Global.SEMICOLON;
+			} else if (radioVirgule.getSelection()) {
+				// Virgule
+				return Global.COMMA;
+			} else if (radioEspace.getSelection()) {
+				// Espace
+				return Global.SPACE;
+			} else if (radioSeparateurAutre.getSelection()) {
+				// Autre
+				return textSeparateur.getText();
+			}
+		}
+		return Global.EMPTY_STRING;
+	}
+
+	public void setSeparateur(String sep) {
+		if (sep.equals(Global.EMPTY_STRING)) {
+			// pas de séparateur
+			chkSeparateur.setSelection(false);
+		} else {
+			chkSeparateur.setSelection(true);
+
+			if (sep.equals(Global.TAB)) {
+				// Tabulation
+				radioTabulation.setSelection(true);
+				radioPointVirgule.setSelection(false);
+				radioVirgule.setSelection(false);
+				radioEspace.setSelection(false);
+				radioSeparateurAutre.setSelection(false);
+				textSeparateur.setText(Global.EMPTY_STRING);
+			} else if (sep.equals(Global.SEMICOLON)) {
+				// Point-virgule
+				radioTabulation.setSelection(false);
+				radioPointVirgule.setSelection(true);
+				radioVirgule.setSelection(false);
+				radioEspace.setSelection(false);
+				radioSeparateurAutre.setSelection(false);
+				textSeparateur.setText(Global.EMPTY_STRING);
+			} else if (sep.equals(Global.COMMA)) {
+				// Virgule
+				radioTabulation.setSelection(false);
+				radioPointVirgule.setSelection(false);
+				radioVirgule.setSelection(true);
+				radioEspace.setSelection(false);
+				radioSeparateurAutre.setSelection(false);
+				textSeparateur.setText(Global.EMPTY_STRING);
+			} else if (sep.equals(Global.SPACE)) {
+				// Espace
+				radioTabulation.setSelection(false);
+				radioPointVirgule.setSelection(false);
+				radioVirgule.setSelection(false);
+				radioEspace.setSelection(true);
+				radioSeparateurAutre.setSelection(false);
+				textSeparateur.setText(Global.EMPTY_STRING);
+			} else {
+				// Autre séparateur
+				radioTabulation.setSelection(false);
+				radioPointVirgule.setSelection(false);
+				radioVirgule.setSelection(false);
+				radioEspace.setSelection(false);
+				radioSeparateurAutre.setSelection(true);
+				textSeparateur.setText(sep);
+			}
+		}
+		setSeparatorVisible();
+	}
+
+	public void setSeparatorVisible() {
+		compositeSeparateur.setVisible(chkSeparateur.getSelection());
+	}
+
+	public String getCurrentSelectedLineText() {
+		String selectedText = null;
+		try {
+			IRegion selectedRegion = fileSourceViewer.getDocument()
+					.getLineInformationOfOffset(fileSourceViewer.getSelectedRange().x);
+			selectedText = fileSourceViewer.getDocument().get(selectedRegion.getOffset(), selectedRegion.getLength());
+		} catch (BadLocationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return selectedText;
+	}
+
+	public String getSelectedText() {
+		TextSelection textSelection = (TextSelection) fileSourceViewer.getSelection();
+		return textSelection.getText();
+	}
+
+	public int getSelectedTextStartPosition() {
+		return fileSourceViewer.getSelectedRange().x;
+	}
+
+	public int getSelectedTextStartPositionInCurrentLine() {
+		int selectedLineNB;
+		int selectedLineOffset = 0;
+		try {
+			selectedLineNB = fileSourceViewer.getDocument().getLineOfOffset(fileSourceViewer.getSelectedRange().x);
+			selectedLineOffset = fileSourceViewer.getDocument().getLineOffset(selectedLineNB);
+
+		} catch (BadLocationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return fileSourceViewer.getTextWidget().getSelection().x - selectedLineOffset;
+	}
+
+	public int getSelectedTextEndPosition() {
+		return fileSourceViewer.getTextWidget().getSelection().y;
+	}
+
+	public void reinitTextArea() {
+		fileSourceViewer.getDocument().set(Global.EMPTY_STRING);
+	}
+
+	public SourceViewer getFileSourceViewer() {
+		return fileSourceViewer;
+	}
+
+	public void addSpaceBeforeDataTerminator() {
+		sectionDataTerminator.addSpaceBeforeDataTerminator();
+	}
+
+	public boolean isFileLoaded() {
+		return fileLoaded;
+	}
+
+	public void setFileLoaded(boolean fileLoaded) {
+		this.fileLoaded = fileLoaded;
+		if (reloadButton != null && !reloadButton.isDisposed()) {
+			reloadButton.setEnabled(fileLoaded);
+		}
+	}
+
+	public FileSection getSectionFileHeader() {
+		return sectionFileHeader;
+	}
+
+	public FileStationHeader getSectionStationHeader() {
+		return sectionStationHeader;
+	}
+
+	public FileSection getSectionEndOfStation() {
+		return sectionEndOfStation;
+	}
+
+	public boolean isCollectionGroupedByCruise() {
+		return radioCollectGroupedByCruise.getSelection();
+	}
+
+	public boolean isCollectionNotGroupedByCruise() {
+		return radioCollectNotGroupedByCruise.getSelection();
+	}
+
+	public boolean isCruiseIsAFile() {
+		return radioFichier.getSelection();
+	}
+
+	public boolean isCruiseIsADir() {
+		return radioDossier.getSelection();
+	}
+
+	public Text getTextSeparateur() {
+		return textSeparateur;
+	}
+
+	public boolean isSeparatorChecked() {
+		return chkSeparateur.getSelection();
+	}
+
+	public boolean useTableForCsvData() {
+		return sectionDataColumnTitles.isTableEnabledForCsv();
+	}
+	
+	public boolean isUseSeparatorInStationHeader() {
+		return sectionStationHeader.isUseSeparatorInStationHeader();
+	}
+
+	public FileEndData getSectionDataTerminator() {
+		return sectionDataTerminator;
+	}
+
+	public boolean isSortForced() {
+		return chkForcerTri.getSelection();
+	}
+
+	public void setSortForced(boolean selected) {
+		chkForcerTri.setSelection(selected);
+	}
+
+	public boolean isMultiStationFileChecked() {
+		return chkMultiStations.getSelection();
+	}
+
+	public Button getRadioCollectGroupedByCruise() {
+		return radioCollectGroupedByCruise;
+	}
+
+	public Button getRadioCollectNotGroupedByCruise() {
+		return radioCollectNotGroupedByCruise;
+	}
+
+	public Button getRadioDossier() {
+		return radioDossier;
+	}
+
+	public Button getRadioFichier() {
+		return radioFichier;
+	}
+
+	public Button getChkMultiStations() {
+		return chkMultiStations;
+	}
+
+	public Button getRadMedatlas() {
+		return radMedatlas;
+	}
+
+	public Button getRadODV() {
+		return radODV;
+	}
+
+	public Button getRadNetCDF() {
+		return radNetCDF;
+	}
+
+	public Button getRadODVMonoFichier() {
+		return radODVMonoFichier;
+	}
+
+	public Button getRadODVMonoStation() {
+		return radODVMonoStation;
+	}
+
+	public Button getRadProfilVertical() {
+		return radProfilVertical;
+	}
+
+	public Button getRadSerieTempo() {
+		return radSerieTempo;
+	}
+
+	public Button getRadTrajectoire() {
+		return radTrajectoire;
+	}
+
+	public String getNomFichier() {
+		return nomFichier;
+	}
+
+	public void setNomFichier(String nomFichier) {
+		this.nomFichier = nomFichier;
+	}
+
+	public String getNomRepertoire() {
+		return nomRepertoire;
+	}
+
+	public void setNomRepertoire(String nomRepertoire) {
+		this.nomRepertoire = nomRepertoire;
+	}
+
+	private void defineMandatorySections() {
+		if (sectionFileHeader != null) {
+			sectionFileHeader.setMandatory(true);
+			sectionStationHeader.setMandatory(true);
+			sectionEndOfStation.setMandatory(true);
+			sectionDataTerminator.setMandatory(true);
+		}
+
+	}
+
+	public FileDataColumnTitlesSection getSectionDataColumnTitles() {
+		return sectionDataColumnTitles;
+	}
+
+	public Button getRadPhysicochemical() {
+		return radPhysicochemical;
+	}
+
+	public Button getRadBiological() {
+		return radBiological;
+	}
+
+	public Button getRadFlowcytometry() {
+		return radFlowcytometry;
+	}
+
+	public Button getRadMicrolitter() {
+		return radMicrolitter;
+	}
+
+	public Button getRadMicrolitterInSediment() {
+		return radMicrolitterInSediment;
+	}
+
+}

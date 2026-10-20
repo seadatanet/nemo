@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+
+<shortcuts>
+      <skipIfNotSupported/>
+
+      <programGroup defaultName="NEMO"
+                    location="applications"/>
+
+      <shortcut name="NEMO Uninstaller"
+                target="$INSTALL_PATH\Uninstaller\uninstaller.jar"
+                commandLine=""
+                description="This uninstalls NEMO"                
+                programGroup="yes"
+                desktop="no"
+                applications="no"
+                startMenu="no"
+                startup="no"
+                iconFile="$INSTALL_PATH\nemo_suppr.ico"
+                iconIndex="0">
+
+               <createForPack name="Base" />
+
+      </shortcut>
+
+      <shortcut name="NEMO"
+                target="$INSTALL_PATH\Nemo.exe"
+                commandLine=""
+                workingDirectory="$INSTALL_PATH"
+                description="NEMO application"
+                iconFile="$INSTALL_PATH\nemo.ico"
+                iconIndex="0"
+                initialState="noShow"
+                programGroup="yes"
+                desktop="yes"
+                applications="no"
+                startMenu="no"
+                startup="no">
+
+                <createForPack name="Base"/>
+
+      </shortcut>
+
+
+</shortcuts>

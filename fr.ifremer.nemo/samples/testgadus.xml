@@ -1,0 +1,711 @@
+<InputModel version="2.1.1" isValid="true">
+  <MediaModel path="C:\offline_kw\EK5_2023_2025\milj&#246;gifter\Miljogifter_EK5del2_Harvest_2\NEMO\input\test_Gadus morhua_NMO_2022_biota.csv">
+    <processType multiStations="false">CRUISE_FILE</processType>
+    <separator>;</separator>
+    <inputType>PROFILE</inputType>
+    <variant>PHYSICOCHEMICAL</variant>
+    <fileHeader>4</fileHeader>
+    <stationHeader pattern="" useSeparatorInStationHeader="false">0</stationHeader>
+    <colTitleInInputFile colTitleInInputFileCheck="true" colTitlesInInputFileLineNb="1-4" useTableForCsvData="true" p09CodeInInputFileCheck="false" p09CodeInInputFileLineNb="0" p01CodeInInputFileCheck="true" p01CodeInInputFileLineNb="2"/>
+    <endStation>0</endStation>
+    <endData pattern="2" patternIsRegexp="false">COLUMNCHANGE</endData>
+  </MediaModel>
+  <CruiseModel>
+    <reference>Gadus</reference>
+    <bshCsrReference></bshCsrReference>
+    <localCSRIdentifier></localCSRIdentifier>
+    <name>Gadus_Conta</name>
+    <shipCode></shipCode>
+    <shipName></shipName>
+    <startDate>1663372800000</startDate>
+    <endDate>1730898779855</endDate>
+    <regionName></regionName>
+    <regionCode></regionCode>
+    <country>77</country>
+    <laboratories></laboratories>
+    <chiefScientist>UNKNOWN</chiefScientist>
+    <edmerpCodes></edmerpCodes>
+    <dataCentre></dataCentre>
+    <availability>publicly</availability>
+    <comment><![CDATA[SeaDataNet file without vertical reference
+National environment monitoring ]]></comment>
+    <dataTypes/>
+  </CruiseModel>
+  <StationModel>
+    <referenceProperty>
+      <PropertyModel property="" userProvided="false">
+        <HeaderFragment isSingleLine="true">
+          <firstLine>1</firstLine>
+          <lastLine>1</lastLine>
+          <colNb>3</colNb>
+        </HeaderFragment>
+      </PropertyModel>
+    </referenceProperty>
+    <properties>
+      <PropertyModel property="USE_STATION_CODE_IN_LOCAL_CDI_ID_CHECKBOX" userProvided="true">
+        <userValue>true</userValue>
+      </PropertyModel>
+      <PropertyModel property="dcHistory1" userProvided="true">
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="dcHistory2" userProvided="true">
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="comment" userProvided="true">
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="surfaceSamples1" userProvided="true">
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="surfaceSamples2" userProvided="true">
+        <userValue></userValue>
+      </PropertyModel>
+      <PropertyModel property="offsetTU" userProvided="true">
+        <format>
+          <FloatFormat formatString="%4.1f"/>
+        </format>
+        <userValue>0.0</userValue>
+      </PropertyModel>
+      <PropertyModel property="time" userProvided="true">
+        <format>
+          <DateTimeFormat formatString="tt"/>
+        </format>
+        <userValue>00</userValue>
+      </PropertyModel>
+      <PropertyModel property="date" userProvided="false">
+        <format>
+          <DateTimeFormat formatString="YYYY-MM-DD"/>
+        </format>
+        <HeaderFragment isSingleLine="true">
+          <firstLine>1</firstLine>
+          <lastLine>1</lastLine>
+          <colNb>2</colNb>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="latitude" userProvided="false">
+        <format>
+          <LatitudeFormat formatString="decimal degrees for file with separators"/>
+        </format>
+        <HeaderFragment isSingleLine="true">
+          <firstLine>1</firstLine>
+          <lastLine>1</lastLine>
+          <colNb>5</colNb>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="longitude" userProvided="false">
+        <format>
+          <LongitudeFormat formatString="decimal degrees for file with separators"/>
+        </format>
+        <HeaderFragment isSingleLine="true">
+          <firstLine>1</firstLine>
+          <lastLine>1</lastLine>
+          <colNb>6</colNb>
+        </HeaderFragment>
+      </PropertyModel>
+      <PropertyModel property="bottomDepth" userProvided="true">
+        <format>
+          <FloatFormat formatString="%4.0f"/>
+        </format>
+        <userValue></userValue>
+      </PropertyModel>
+    </properties>
+    <DataType code="P13">
+      <profiles>0</profiles>
+      <qc>false</qc>
+      <sensor>false</sensor>
+    </DataType>
+    <FlagTable code="C1" label="SeaDataNet">
+      <Flag local="0" SDN="0 - no quality control"/>
+      <Flag local="1" SDN="1 - good value"/>
+      <Flag local="2" SDN="2 - probably good value"/>
+      <Flag local="3" SDN="3 - probably bad value"/>
+      <Flag local="4" SDN="4 - bad value"/>
+      <Flag local="5" SDN="5 - changed value"/>
+      <Flag local="6" SDN="6 - value below detection"/>
+      <Flag local="7" SDN="7 - value in excess"/>
+      <Flag local="8" SDN="8 - interpolated value"/>
+      <Flag local="9" SDN="9 - missing value"/>
+      <Flag local="A" SDN="A - value phenomenon uncertain"/>
+      <Flag local="B" SDN="B - nominal value"/>
+      <Flag local="Q" SDN="Q - value below limit of quantification"/>
+    </FlagTable>
+  </StationModel>
+  <DataModel>
+    <dataListType>P011_VIA_P021</dataListType>
+    <mesureType>BSSURF</mesureType>
+    <fallrateCode></fallrateCode>
+    <fallrateLabel></fallrateLabel>
+    <verticalParametersList>
+      <p_depthBSBed></p_depthBSBed>
+      <p_depthBSSurf>ADEPZZ01</p_depthBSSurf>
+      <p_pressure></p_pressure>
+      <p_heightASLvl></p_heightASLvl>
+    </verticalParametersList>
+    <parameters>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment colNb="7"/>
+        <Flag colNb="8"/>
+        <Parameter code="AHGT">
+          <fullName>Vertical spatial coordinates</fullName>
+          <unit>Metres</unit>
+          <unitCode>ULAA</unitCode>
+          <default></default>
+          <format>%6.1f</format>
+          <CodeP011>ADEPZZ01</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011>Depth (spatial coordinate) relative to water surface in the water body</NameP011>
+          <IsP011>true</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <isText>true</isText>
+        <inputDefault></inputDefault>
+        <LineFragment colNb="9"/>
+        <Flag colNb="10"/>
+        <Parameter code="ACYC">
+          <fullName>Reference numbers</fullName>
+          <unit>Not applicable</unit>
+          <unitCode>XXXX</unitCode>
+          <default></default>
+          <format>%3.0f</format>
+          <CodeP011>SAMPID01</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011>Sample identifier</NameP011>
+          <IsP011>true</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment colNb="11"/>
+        <Flag colNb="12"/>
+        <Parameter code="FATM">
+          <fullName>Fish morphology, age and physiology</fullName>
+          <unit>Millimetres</unit>
+          <unitCode>UXMM</unitCode>
+          <default>99999.99999</default>
+          <format>%11.5f</format>
+          <CodeP011>BLENOX26</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011>Length of Gadus morhua (ITIS: 164712: WoRMS 126436)</NameP011>
+          <IsP011>true</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment colNb="13"/>
+        <Flag colNb="14"/>
+        <Parameter code="BCMT">
+          <fullName>Metal concentrations in biota</fullName>
+          <unit>Milligrams per kilogram</unit>
+          <unitCode>UMKG</unitCode>
+          <default>99999.99999</default>
+          <format>%11.5f</format>
+          <CodeP011>CDDWCF30</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011>Concentration of cadmium {Cd CAS 7440-43-9} per unit dry weight of biota {Gadus morhua (ITIS: 164712: WoRMS 126436) [Subcomponent: liver]}</NameP011>
+          <IsP011>true</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment colNb="15"/>
+        <Flag colNb="16"/>
+        <Parameter code="BCMT">
+          <fullName>Metal concentrations in biota</fullName>
+          <unit>Milligrams per kilogram</unit>
+          <unitCode>UMKG</unitCode>
+          <default>99999.99999</default>
+          <format>%11.5f</format>
+          <CodeP011>CRDWCF30</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011>Concentration of chromium {Cr CAS 7440-47-3} per unit dry weight of biota {Gadus morhua (ITIS: 164712: WoRMS 126436) [Subcomponent: liver]}</NameP011>
+          <IsP011>true</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment colNb="17"/>
+        <Flag colNb="18"/>
+        <Parameter code="BCMT">
+          <fullName>Metal concentrations in biota</fullName>
+          <unit>Micrograms per kilogram</unit>
+          <unitCode>UUKG</unitCode>
+          <default>99999.99999</default>
+          <format>%11.5f</format>
+          <CodeP011>D2930126</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011>Concentration of copper {Cu CAS 7440-50-8} per unit dry weight of biota {Gadus morhua (ITIS: 164712: WoRMS 126436) [Subcomponent: liver]}</NameP011>
+          <IsP011>true</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment colNb="19"/>
+        <Flag colNb="20"/>
+        <Parameter code="MDBO">
+          <fullName>Trace metalloid and inorganic selenium concentrations in biota</fullName>
+          <unit>Micrograms per kilogram</unit>
+          <unitCode>UUKG</unitCode>
+          <default>99999.99999</default>
+          <format>%11.5f</format>
+          <CodeP011>D2930232</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011>Concentration of arsenic {As CAS 7440-38-2} per unit dry weight of biota {Gadus morhua (ITIS: 164712: WoRMS 126436) [Subcomponent: liver]}</NameP011>
+          <IsP011>true</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment colNb="21"/>
+        <Flag colNb="22"/>
+        <Parameter code="PEBI">
+          <fullName>Pesticide concentrations in biota</fullName>
+          <unit>Micrograms per kilogram</unit>
+          <unitCode>UUKG</unitCode>
+          <default>99999.99999</default>
+          <format>%11.5f</format>
+          <CodeP011>HCBLCF30</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011>Concentration of hexachlorobenzene {HCB CAS 118-74-1} per unit mass of lipids in the biota {Gadus morhua (ITIS: 164712: WoRMS 126436) [Subcomponent: liver]}</NameP011>
+          <IsP011>true</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment colNb="23"/>
+        <Flag colNb="24"/>
+        <Parameter code="BCOC">
+          <fullName>Concentration of other organic contaminants in biota</fullName>
+          <unit>Micrograms per kilogram</unit>
+          <unitCode>UUKG</unitCode>
+          <default>99999.99999</default>
+          <format>%11.5f</format>
+          <CodeP011>IC000317</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011>Concentration of 2,2',4,4',5-pentabromodiphenyl ether {BDE99 CAS 60348-60-9} per unit mass of lipids in the biota {Gadus morhua (ITIS: 164712: WoRMS 126436) [Subcomponent: liver]}</NameP011>
+          <IsP011>true</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment colNb="25"/>
+        <Flag colNb="26"/>
+        <Parameter code="BCOC">
+          <fullName>Concentration of other organic contaminants in biota</fullName>
+          <unit>Micrograms per kilogram</unit>
+          <unitCode>UUKG</unitCode>
+          <default>99999.99999</default>
+          <format>%11.5f</format>
+          <CodeP011>IC000347</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011>Concentration of 2,2',4,4',5,5'-hexabromodiphenyl ether {BDE153 CAS 68631-49-2} per unit mass of lipids in the biota {Gadus morhua (ITIS: 164712: WoRMS 126436) [Subcomponent: liver]}</NameP011>
+          <IsP011>true</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment colNb="27"/>
+        <Flag colNb="28"/>
+        <Parameter code="BCOC">
+          <fullName>Concentration of other organic contaminants in biota</fullName>
+          <unit>Micrograms per kilogram</unit>
+          <unitCode>UUKG</unitCode>
+          <default>99999.99999</default>
+          <format>%11.5f</format>
+          <CodeP011>IC001822</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011>Concentration of 2,2',4,4',6-pentabromodiphenyl ether {BDE100 CAS 189084-64-8} per unit mass of lipids in the biota {Gadus morhua (ITIS: 164712: WoRMS 126436) [Subcomponent: liver]}</NameP011>
+          <IsP011>true</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment colNb="29"/>
+        <Flag colNb="30"/>
+        <Parameter code="BCOC">
+          <fullName>Concentration of other organic contaminants in biota</fullName>
+          <unit>Micrograms per kilogram</unit>
+          <unitCode>UUKG</unitCode>
+          <default>99999.99999</default>
+          <format>%11.5f</format>
+          <CodeP011>IC001847</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011>Concentration of 2,2',4,4'-tetrabromodiphenyl ether {BDE47 CAS 5436-43-1} per unit mass of lipids in the biota {Gadus morhua (ITIS: 164712: WoRMS 126436) [Subcomponent: liver]}</NameP011>
+          <IsP011>true</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment colNb="31"/>
+        <Flag colNb="32"/>
+        <Parameter code="BCPB">
+          <fullName>Concentration of polychlorobiphenyls (PCBs) in biota</fullName>
+          <unit>Micrograms per kilogram</unit>
+          <unitCode>UUKG</unitCode>
+          <default>99999.99999</default>
+          <format>%11.5f</format>
+          <CodeP011>MUM13024</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011>Concentration of 2,2',4,5,5'-pentachlorobiphenyl {PCB101 CAS 37680-73-2} per unit mass of lipids in the biota {Gadus morhua (ITIS: 164712: WoRMS 126436) [Subcomponent: liver]}</NameP011>
+          <IsP011>true</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment colNb="33"/>
+        <Flag colNb="34"/>
+        <Parameter code="BCPB">
+          <fullName>Concentration of polychlorobiphenyls (PCBs) in biota</fullName>
+          <unit>Micrograms per kilogram</unit>
+          <unitCode>UUKG</unitCode>
+          <default>99999.99999</default>
+          <format>%11.5f</format>
+          <CodeP011>MUM13026</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011>Concentration of 2,3',4,4',5-pentachlorobiphenyl {PCB118 CAS 31508-00-6} per unit mass of lipids in the biota {Gadus morhua (ITIS: 164712: WoRMS 126436) [Subcomponent: liver]}</NameP011>
+          <IsP011>true</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment colNb="35"/>
+        <Flag colNb="36"/>
+        <Parameter code="BCPB">
+          <fullName>Concentration of polychlorobiphenyls (PCBs) in biota</fullName>
+          <unit>Micrograms per kilogram</unit>
+          <unitCode>UUKG</unitCode>
+          <default>99999.99999</default>
+          <format>%11.5f</format>
+          <CodeP011>MUM13060</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011>Concentration of 2,2',4,4',5,5'-hexachlorobiphenyl {PCB153 CAS 35065-27-1} per unit mass of lipids in the biota {Gadus morhua (ITIS: 164712: WoRMS 126436) [Subcomponent: liver]}</NameP011>
+          <IsP011>true</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment colNb="37"/>
+        <Flag colNb="38"/>
+        <Parameter code="BCPB">
+          <fullName>Concentration of polychlorobiphenyls (PCBs) in biota</fullName>
+          <unit>Micrograms per kilogram</unit>
+          <unitCode>UUKG</unitCode>
+          <default>99999.99999</default>
+          <format>%11.5f</format>
+          <CodeP011>MUM13080</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011>Concentration of 2,2',3,4,4',5,5'-heptachlorobiphenyl {PCB180 CAS 35065-29-3} per unit mass of lipids in the biota {Gadus morhua (ITIS: 164712: WoRMS 126436) [Subcomponent: liver]}</NameP011>
+          <IsP011>true</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment colNb="39"/>
+        <Flag colNb="40"/>
+        <Parameter code="BCPB">
+          <fullName>Concentration of polychlorobiphenyls (PCBs) in biota</fullName>
+          <unit>Micrograms per kilogram</unit>
+          <unitCode>UUKG</unitCode>
+          <default>99999.99999</default>
+          <format>%11.5f</format>
+          <CodeP011>MUM13090</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011>Concentration of 2,4,4'-trichlorobiphenyl {PCB28 CAS 7012-37-5} per unit mass of lipids in the biota {Gadus morhua (ITIS: 164712: WoRMS 126436) [Subcomponent: liver]}</NameP011>
+          <IsP011>true</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment colNb="41"/>
+        <Flag colNb="42"/>
+        <Parameter code="BCPB">
+          <fullName>Concentration of polychlorobiphenyls (PCBs) in biota</fullName>
+          <unit>Micrograms per kilogram</unit>
+          <unitCode>UUKG</unitCode>
+          <default>99999.99999</default>
+          <format>%11.5f</format>
+          <CodeP011>MUM13110</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011>Concentration of 2,2',5,5'-tetrachlorobiphenyl {PCB52 CAS 35693-99-3} per unit mass of lipids in the biota {Gadus morhua (ITIS: 164712: WoRMS 126436) [Subcomponent: liver]}</NameP011>
+          <IsP011>true</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment colNb="43"/>
+        <Flag colNb="44"/>
+        <Parameter code="PEBI">
+          <fullName>Pesticide concentrations in biota</fullName>
+          <unit>Micrograms per kilogram</unit>
+          <unitCode>UUKG</unitCode>
+          <default>99999.99999</default>
+          <format>%11.5f</format>
+          <CodeP011>MUM13162</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011>Concentration of alpha-hexachlorocyclohexane {alpha-HCH CAS 319-84-6} per unit mass of lipids in the biota {Gadus morhua (ITIS: 164712: WoRMS 126436) [Subcomponent: liver]}</NameP011>
+          <IsP011>true</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment colNb="45"/>
+        <Flag colNb="46"/>
+        <Parameter code="PEBI">
+          <fullName>Pesticide concentrations in biota</fullName>
+          <unit>Micrograms per kilogram</unit>
+          <unitCode>UUKG</unitCode>
+          <default>99999.99999</default>
+          <format>%11.5f</format>
+          <CodeP011>MUM13172</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011>Concentration of gamma-hexachlorocyclohexane {lindane gamma-HCH CAS 58-89-9} per unit mass of lipids in the biota {Gadus morhua (ITIS: 164712: WoRMS 126436) [Subcomponent: liver]}</NameP011>
+          <IsP011>true</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment colNb="47"/>
+        <Flag colNb="48"/>
+        <Parameter code="BCMT">
+          <fullName>Metal concentrations in biota</fullName>
+          <unit>Milligrams per kilogram</unit>
+          <unitCode>UMKG</unitCode>
+          <default>99999.99999</default>
+          <format>%11.5f</format>
+          <CodeP011>NIDWCF30</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011>Concentration of nickel {Ni CAS 7440-02-0} per unit dry weight of biota {Gadus morhua (ITIS: 164712: WoRMS 126436) [Subcomponent: liver]}</NameP011>
+          <IsP011>true</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment colNb="49"/>
+        <Flag colNb="50"/>
+        <Parameter code="BCMT">
+          <fullName>Metal concentrations in biota</fullName>
+          <unit>Milligrams per kilogram</unit>
+          <unitCode>UMKG</unitCode>
+          <default>99999.99999</default>
+          <format>%11.5f</format>
+          <CodeP011>PBDWCF30</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011>Concentration of lead {Pb CAS 7439-92-1} per unit dry weight of biota {Gadus morhua (ITIS: 164712: WoRMS 126436) [Subcomponent: liver]}</NameP011>
+          <IsP011>true</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment colNb="51"/>
+        <Flag colNb="52"/>
+        <Parameter code="PEBI">
+          <fullName>Pesticide concentrations in biota</fullName>
+          <unit>Micrograms per kilogram</unit>
+          <unitCode>UUKG</unitCode>
+          <default>99999.99999</default>
+          <format>%11.5f</format>
+          <CodeP011>PDDLCF30</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011>Concentration of 4,4'-dichlorodiphenyldichloroethane {p,p'-DDD CAS 72-54-8} per unit mass of lipids in the biota {Gadus morhua (ITIS: 164712: WoRMS 126436) [Subcomponent: liver]}</NameP011>
+          <IsP011>true</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment colNb="53"/>
+        <Flag colNb="54"/>
+        <Parameter code="PEBI">
+          <fullName>Pesticide concentrations in biota</fullName>
+          <unit>Micrograms per kilogram</unit>
+          <unitCode>UUKG</unitCode>
+          <default>99999.99999</default>
+          <format>%11.5f</format>
+          <CodeP011>PDELCF30</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011>Concentration of 4,4'-dichlorodiphenyldichloroethylene {p,p'-DDE CAS 72-55-9} per unit mass of lipids in the biota {Gadus morhua (ITIS: 164712: WoRMS 126436) [Subcomponent: liver]}</NameP011>
+          <IsP011>true</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment colNb="55"/>
+        <Flag colNb="56"/>
+        <Parameter code="PEBI">
+          <fullName>Pesticide concentrations in biota</fullName>
+          <unit>Micrograms per kilogram</unit>
+          <unitCode>UUKG</unitCode>
+          <default>99999.99999</default>
+          <format>%11.5f</format>
+          <CodeP011>PDTLCF30</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011>Concentration of 4,4'-dichlorodiphenyltrichloroethane {p,p'-DDT CAS 50-29-3} per unit mass of lipids in the biota {Gadus morhua (ITIS: 164712: WoRMS 126436) [Subcomponent: liver]}</NameP011>
+          <IsP011>true</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment colNb="57"/>
+        <Flag colNb="58"/>
+        <Parameter code="FATM">
+          <fullName>Fish morphology, age and physiology</fullName>
+          <unit>Years</unit>
+          <unitCode>UYRS</unitCode>
+          <default>99999.99999</default>
+          <format>%11.5f</format>
+          <CodeP011>SAGEOX26</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011>Specimen age of Gadus morhua (ITIS: 164712: WoRMS 126436)</NameP011>
+          <IsP011>true</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment colNb="59"/>
+        <Flag colNb="60"/>
+        <Parameter code="FATM">
+          <fullName>Fish morphology, age and physiology</fullName>
+          <unit>Kilograms</unit>
+          <unitCode>KGXX</unitCode>
+          <default>99999.99999</default>
+          <format>%11.5f</format>
+          <CodeP011>SPWTOX26</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011>Wet weight of Gadus morhua (ITIS: 164712: WoRMS 126436)</NameP011>
+          <IsP011>true</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment colNb="61"/>
+        <Flag colNb="62"/>
+        <Parameter code="BCMT">
+          <fullName>Metal concentrations in biota</fullName>
+          <unit>Milligrams per kilogram</unit>
+          <unitCode>UMKG</unitCode>
+          <default>99999.99999</default>
+          <format>%11.5f</format>
+          <CodeP011>W2930191</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011>Concentration of total mercury {total_Hg CAS 7439-97-6} per unit wet weight of biota {Gadus morhua (ITIS: 164712: WoRMS 126436) [Subcomponent: muscle tissue]}</NameP011>
+          <IsP011>true</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+      <ParameterModel>
+        <conversionFormula>x*1</conversionFormula>
+        <inputDefault></inputDefault>
+        <LineFragment colNb="63"/>
+        <Flag colNb="64"/>
+        <Parameter code="BCMT">
+          <fullName>Metal concentrations in biota</fullName>
+          <unit>Milligrams per kilogram</unit>
+          <unitCode>UMKG</unitCode>
+          <default>99999.99999</default>
+          <format>%11.5f</format>
+          <CodeP011>ZNDWCF30</CodeP011>
+          <IndexP011>1</IndexP011>
+          <NameP011>Concentration of zinc {Zn CAS 7440-66-6} per unit dry weight of biota {Gadus morhua (ITIS: 164712: WoRMS 126436) [Subcomponent: liver]}</NameP011>
+          <IsP011>true</IsP011>
+          <instrument></instrument>
+          <instrumentCode></instrumentCode>
+        </Parameter>
+      </ParameterModel>
+    </parameters>
+  </DataModel>
+  <ConversionModel>
+    <permissions>
+      <MEDATLAS enable="true"/>
+      <ODV_MULTISTATIONS enable="true"/>
+      <ODV_MONOSTATION enable="true"/>
+      <UNKNOWN enable="true"/>
+      <NETCDF_MONOSTATION enable="true"/>
+      <NETCDF_MULTISTATIONS enable="true"/>
+    </permissions>
+    <sortStations>false</sortStations>
+    <outputFormat>ODV_MULTISTATIONS</outputFormat>
+  </ConversionModel>
+</InputModel>

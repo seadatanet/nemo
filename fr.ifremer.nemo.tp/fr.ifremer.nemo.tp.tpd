@@ -1,0 +1,31 @@
+target "Nemo Photon" with source allEnvironments
+
+location "http://download.eclipse.org/releases/photon" {
+// org.eclipse.rcp.feature.group
+
+	org.eclipse.platform.feature.group
+	org.eclipse.e4.rcp.feature.group
+	org.eclipse.emf.sdk.feature.group
+//	org.eclipse.jdt.junit.runtime
+	org.eclipse.equinox.executable.feature.group
+	org.junit
+	org.hamcrest.core
+}
+
+//location "http://download.eclipse.org/e4/snapshots/org.eclipse.e4.tools/latest/" {
+//	org.eclipse.e4.tools.spies.feature.feature.group
+//}
+
+location "http://download.eclipse.org/tools/orbit/downloads/drops/R20180606145124/repository" {
+	//URL de photon
+	// usage possible pour les cots externes (recuperes sous forme de plugins a la place des jars tradi qui sont deposes dans lib a la main ou via maven)
+}
+
+
+// Add delta pack
+
+location "http://download.eclipse.org/eclipse/updates/4.8" {
+	org.eclipse.equinox.sdk.feature.group
+	org.eclipse.rcp
+}
+

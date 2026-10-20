@@ -1,0 +1,756 @@
+package fr.ifremer.nemo.ui.edit.conversion;
+
+import java.io.File;
+
+import org.eclipse.jface.dialogs.InputDialog;
+import org.eclipse.jface.window.Window;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.DirectoryDialog;
+import org.eclipse.swt.widgets.FileDialog;
+import org.eclipse.swt.widgets.MessageBox;
+import org.eclipse.swt.widgets.Text;
+
+import fr.ifremer.nemo.Nemo;
+import fr.ifremer.nemo.domain.ConversionDomain;
+import fr.ifremer.nemo.input.CruiseModel;
+import fr.ifremer.nemo.input.parameters.addedParameters.AP_CJDY;
+import fr.ifremer.nemo.input.parameters.addedParameters.AP_DTUT;
+import fr.ifremer.nemo.input.parameters.addedParameters.AddedParam;
+import fr.ifremer.nemo.output.ProgressNotification;
+import fr.ifremer.nemo.output.cdi_summary.CDIResumeWriter;
+import fr.ifremer.nemo.ui.RulesManager;
+import fr.ifremer.nemo.ui.SWTProgress;
+import fr.ifremer.nemo.ui.Utils;
+import fr.ifremer.nemo.ui.edit.EditForm;
+import fr.ifremer.nemo.ui.edit.conversion.listeners.ConversionSelectionListener;
+import fr.ifremer.nemo.ui.edit.file.EditFileForm;
+import fr.ifremer.nemo.util.Conversion;
+import fr.ifremer.nemo.util.Global;
+import fr.ifremer.nemo.util.Messages;
+
+public class EditConversionForm extends EditForm {
+	private Button buttonConversion;
+
+	public ProgressNotification notifier;
+
+	/**
+	 * Nom du fichier lu à retourner en cas d'erreur
+	 */
+	protected String _erreurFichier;
+
+	/**
+	 * Nombre de lignes lues à retourner en cas d'erreur
+	 */
+	protected int _erreurLigne;
+
+	/**
+	 * Chaine lue à retourner en cas d'erreur
+	 */
+	protected String _erreurChaine;
+
+	/**
+	 * Nombre de lignes du fichier lu
+	 */
+	protected int _totalLigne;
+
+	// Résumé des infos de conversion
+	private Text conversionSummary;
+
+	/**
+	 * messages d'avertissement de formats grisés car données non conformae
+	 */
+	private String warningFile = Global.EMPTY_STRING;
+	private String warningCampagne = Global.EMPTY_STRING;
+	private String warningStation = Global.EMPTY_STRING;
+	private String warningData = Global.EMPTY_STRING;
+	private String nomFichierSortie ;
+
+	/*
+	 * Methodes de création de l'onglet (héritées de EditForm)
+	 */
+
+	@Override
+	public void createEditionForm(Composite parent) {
+		super.createEditionForm(parent);
+		formEdition.getBody().setLayout(new GridLayout());
+		formEdition.setText(Messages.edit_convert_title);
+
+		createSummary();
+
+		// bouton conversion
+		buttonConversion = new Button(formEdition.getBody(), SWT.NONE);
+		buttonConversion.setBackground(Nemo.getInstance().getViewMain()
+				.getBackgroundEdit());
+		buttonConversion.setText(Messages.button_convert);
+
+		ConversionSelectionListener listener =
+				new ConversionSelectionListener();
+		buttonConversion.addSelectionListener(listener);
+
+	}
+
+	@Override
+	protected void initSections() {
+		// pas de section dans cet onglet
+	}
+
+	@Override
+	public void afficheEdition() {
+		super.afficheEdition();
+
+		// activation du bouton, par defaut
+		buttonConversion.setEnabled(true);
+
+		StringBuffer msg = new StringBuffer();
+		msg.append(Global.RN);
+		msg.append(warningFile);
+		msg.append(warningCampagne);
+		msg.append(warningStation);
+		msg.append(warningData);
+		Utils.messageErreur(msg.toString());
+
+		// FAE 1143 : déactivation MEDATLAS
+		// adaptation du code suite deplacement conversion dans 1er onglet (FAE
+		// 5683)
+//		if (RulesManager.getInstance()
+//				.isConversionToMedatlas()) {
+//			boolean medOK = true;
+//			if (!warningFile.equals(Global.EMPTY_STRING)
+//					|| !warningCampagne.equals(Global.EMPTY_STRING)
+//					|| !warningStation.equals(Global.EMPTY_STRING)
+//					|| !warningData.equals(Global.EMPTY_STRING)) {
+//				medOK = false;
+//			}
+//			buttonConversion.setEnabled(medOK);
+//		}
+		buttonConversion.setEnabled(Nemo.getInstance().getViewMain().getEtape()==4);
+		setLoaded(true);
+		Nemo.getInstance().getViewMain().setAffiche(4);
+
+		formEdition.reflow(true);
+		formEdition.redraw();
+	}
+
+	@Override
+	public void drawingBack() {
+
+		super.drawingBack();
+
+		Nemo.getInstance().getViewMain().setAffiche(4);
+	}
+
+	@Override
+	public void actualiseEdition() {
+		fillSummary();
+	}
+
+	@Override
+	public void disposeElements() {
+		if (buttonConversion != null)
+			buttonConversion.dispose();
+	}
+
+	public void invalidEtape() {
+		super.invalidEtape(4);
+	}
+
+	@Override
+	public void initFromNewModel() {
+	}
+
+	/*
+	 * Méthodes de traitement du lancement de la conversion
+	 */
+
+	public boolean choixFichierSortie() {
+
+		EditFileForm editFileForm =
+				Nemo.getInstance().getViewMain().getEditFileForm();
+		nomFichierSortie = null;
+
+		FileDialog dialog =
+				new FileDialog(Utils.getMainShell(), SWT.SAVE
+						| SWT.APPLICATION_MODAL);
+		dialog.setText(Messages.edit_convert_outputFilename);
+
+		// FAE090
+		if (RulesManager.getInstance().isConversionToODV()
+				|| RulesManager.getInstance().isConversionToNetCDF()) {
+			String[] extensions = new String[1];
+			String extenstionString = Global.EXT_TXT;
+			if (RulesManager.getInstance().isConversionToNetCDF())
+				extenstionString = Global.EXT_NC;
+			extensions[0] = Global.STAR + extenstionString;
+
+			dialog.setFilterExtensions(extensions);
+
+			CruiseModel cruiseModel =
+					Nemo.getInstance().getDomain().getCruise().getModel();
+			String fileName = cruiseModel.getReference().trim();
+			if (fileName.equals(Global.EMPTY_STRING)) {
+				fileName = cruiseModel.getName().trim();
+			}
+			fileName = fr.ifremer.nemo.util.Utils.validFileName(fileName);
+			dialog.setFileName(fileName);
+		}
+
+		// FAE45
+		if (editFileForm.isCruiseIsAFile()) {
+			// FAE 11171: setFilterPath attend un nom de repertoire
+			dialog.setFilterPath(editFileForm.nomRepertoire);
+		} else {
+			dialog.setFilterPath(editFileForm.nomRepertoire.substring(0,
+					editFileForm.nomRepertoire.lastIndexOf(File.separator)));
+		}
+
+		nomFichierSortie = dialog.open();
+
+		if (nomFichierSortie != null) {
+			checkNomFichierSortie(editFileForm);
+
+			File fich = new File(nomFichierSortie);
+			if (fich.exists()) {
+				// fichier existe
+				MessageBox mb =
+						new MessageBox(Utils.getMainShell(), SWT.ICON_WARNING
+								| SWT.YES | SWT.NO | SWT.APPLICATION_MODAL);
+				mb.setMessage(Messages.confirm_eraseFile);
+
+				int reponse = mb.open();
+				if (reponse == SWT.NO) {
+					// on n'écrase pas le fichier
+					nomFichierSortie=null;
+//					return false;
+					checkNomFichierSortie(editFileForm);
+				}
+			}
+			Nemo.getInstance().getDomain().getMedia().setOutputFileName(
+					nomFichierSortie);
+		} else {
+			return false;
+		}
+		return true;
+	}
+
+	private void checkNomFichierSortie(EditFileForm editFileForm) {
+		String nomDossierSortie =
+				fr.ifremer.nemo.util.Utils
+						.extraitCheminFichier(nomFichierSortie);
+
+		// Teste si le repertoire de sortie est different du repertoire
+		// d'entree
+		if (editFileForm.isCruiseIsAFile()) {
+			if (nomFichierSortie.equals(editFileForm.nomFichier)) {
+				MessageBox mb =
+						new MessageBox(Utils.getMainShell(), SWT.ICON_ERROR
+								| SWT.OK | SWT.APPLICATION_MODAL);
+				mb.setMessage(Messages.error_convert_outputFile);
+				nomFichierSortie=null;
+				mb.open();
+
+				choixFichierSortie();
+			}
+		} else {
+			if (nomDossierSortie.equals(editFileForm.nomRepertoire)) {
+				MessageBox mb =
+						new MessageBox(Utils.getMainShell(), SWT.ICON_ERROR
+								| SWT.OK | SWT.APPLICATION_MODAL);
+				mb.setMessage(Messages.error_convert_outputDir);
+				nomFichierSortie=null;
+				mb.open();
+
+				choixFichierSortie();
+			}
+		}
+	}
+
+	public boolean choixDossierSortie() {
+
+		EditFileForm editFileForm =
+				Nemo.getInstance().getViewMain().getEditFileForm();
+
+		// String nomFichierSortie = Global.EMPTY_STRING;
+		String nomDossierSortie = Global.EMPTY_STRING;
+
+		DirectoryDialog dialog =
+				new DirectoryDialog(Utils.getMainShell(), SWT.SAVE
+						| SWT.APPLICATION_MODAL);
+		dialog.setText(Messages.edit_convert_outputDir);
+
+		if (editFileForm.isCruiseIsAFile()) {
+			dialog.setFilterPath(editFileForm.nomRepertoire);
+		} else {
+			dialog.setFilterPath(editFileForm.nomRepertoire.substring(0,
+					editFileForm.nomRepertoire.lastIndexOf(File.separator)));
+		}
+
+		nomDossierSortie = dialog.open();
+
+		if (nomDossierSortie != null) {
+			// Teste si le répertoire de sortie est différent du répertoire
+			// d'entrée
+			if (!editFileForm.isCruiseIsAFile()
+					&& nomDossierSortie.equals(editFileForm.nomRepertoire)) {
+				MessageBox mb =
+						new MessageBox(Utils.getMainShell(), SWT.ICON_ERROR
+								| SWT.OK | SWT.APPLICATION_MODAL);
+				mb.setMessage(Messages.error_convert_outputDir);
+				mb.open();
+
+				choixDossierSortie();
+			}
+
+			File dir = new File(nomDossierSortie);
+			if (dir.exists() && dir.listFiles().length != 0) {
+				// fichier existe
+				MessageBox mb =
+						new MessageBox(Utils.getMainShell(), SWT.ICON_WARNING
+								| SWT.YES | SWT.NO | SWT.APPLICATION_MODAL);
+				mb.setMessage(Messages.confirm_useDir);
+
+				int reponse = mb.open();
+				if (reponse == SWT.NO) {
+					// on n'écrase pas le fichier
+					choixDossierSortie();
+				}
+			}
+			Nemo.getInstance().getDomain().getMedia().setOutputFileName(
+					nomDossierSortie);
+		} else {
+			return false;
+		}
+
+		return true;
+	}
+
+	public boolean runSWTProgress() {
+		Utils.messageErreur(Global.EMPTY_STRING);
+		try {
+			new SWTProgress().run();
+			return true;
+		} catch (Exception e) {
+			Utils.messageErreur(e.getMessage());
+			Utils.messageErreurAppend(Nemo.getInstance()
+					.getErrorMessageWithFileAndLineNumber());
+			return false;
+		}
+	}
+
+	public void afficheResultat(boolean resultOK) {
+		EditFileForm editFileForm =
+				Nemo.getInstance().getViewMain().getEditFileForm();
+		if (resultOK) {
+			if (RulesManager.getInstance()
+					.isConversionToODV()) {
+				Utils.messageOK(Messages.edit_convert_endODV);
+			} else if (RulesManager.getInstance()
+					.isConversionToNetCDF()) {
+				Utils.messageOK(Messages.edit_convert_endNETCDF);
+			} else {
+				Utils.messageOK(Messages.edit_convert_endMED);
+			}
+		} else {
+			Utils.messageErreurAppend(messageErreur());
+		}
+
+	}
+
+	public String getErreurFichier() {
+		return _erreurFichier;
+	}
+
+	public void setErreurFichier(String fichier) {
+		_erreurFichier = fichier;
+	}
+
+	public int getErreurLigne() {
+		return _erreurLigne;
+	}
+
+	public void setErreurLigne(int ligne) {
+		_erreurLigne = ligne;
+	}
+
+	public void incrementErreurLigne() {
+		_erreurLigne++;
+	}
+
+	public String getErreurChaine() {
+		return _erreurChaine;
+	}
+
+	public void setErreurChaine(String chaine) {
+		_erreurChaine = chaine;
+	}
+
+	public String messageErreur() {
+		String message = Global.EMPTY_STRING;
+
+		if (getErreurFichier() != null) {
+			if (!getErreurFichier().trim().equals(Global.EMPTY_STRING)) {
+				message += Messages.label_file + "\t : \t" //$NON-NLS-1$
+						+ getErreurFichier() + Global.RN;
+			}
+		}
+
+		if (getErreurLigne() != 0) {
+			if (getErreurLigne() <= Nemo.getInstance().getDomain().getMedia()
+					.getStationHeaderNumberLines()) {
+				// Si l'erreur se trouve dans l'en-tête de station, la ligne
+				// indiquée
+				// n'est pas forcément la bonne, il vaut mieux ne pas l'indiquer
+				return Global.EMPTY_STRING;
+			}
+			message += Messages.label_line + "\t : \t" //$NON-NLS-1$
+					+ getErreurLigne() + Global.RN;
+		}
+
+		if (getErreurChaine() != null) {
+			if (!getErreurChaine().trim().equals(Global.EMPTY_STRING)) {
+				message += Messages.label_string + "\t : \t" //$NON-NLS-1$
+						+ getErreurChaine();
+			}
+		}
+
+		if (!message.equals(Global.EMPTY_STRING)) {
+			message =
+					Global.RN + Messages.error_convert_position + Global.RN
+							+ message;
+		}
+		return message;
+	}
+
+
+	public void definePrefixDossier() {
+		if (Nemo.getInstance().getConfig().isWriteMapping()) {
+			
+			ConversionDomain convDomain = Nemo.getInstance().getDomain().getConversion();
+			
+			
+			String cheminComplet = convDomain.getOutputPath();
+
+			InputDialog inputPrefixDossier =
+					new InputDialog(Utils.getMainShell(),
+							Messages.InputPrefixDossier_idTitle,
+							Messages.InputPrefixDossier_idMessage, cheminComplet, null);
+			inputPrefixDossier.open();
+	
+			if (inputPrefixDossier.getReturnCode() == Window.OK) {
+				String couplingPrefix = convDomain.getValidPrefix(inputPrefixDossier.getValue(), cheminComplet);
+				if(couplingPrefix!=null){
+					convDomain.setCouplingTablePrefix(couplingPrefix);
+				}else{
+					definePrefixDossier();
+				}
+
+			}
+
+
+		}
+	}
+
+	
+
+	private void createSummary() {
+
+		conversionSummary =
+				new Text(formEdition.getBody(), SWT.READ_ONLY | SWT.WRAP);
+		conversionSummary.setBackground(Nemo.getInstance().getViewMain()
+				.getBackgroundEdit());
+		fillSummary();
+	}
+
+	public String calcBatchCommandLine() {
+		RulesManager rm = RulesManager.getInstance();
+		EditFileForm editFileForm =
+				Nemo.getInstance().getViewMain().getEditFileForm();
+		String command = Global.BATCH_NAME;
+		
+		command += Global.SPACE;
+
+		// input
+		command += Global.MOINS + Global.optInputFile;
+		command += Global.SPACE;
+		command += Global.QUOTE;
+		if (editFileForm.isCruiseIsAFile()) {
+			command += editFileForm.nomFichierOrigin;
+		}
+		if (rm.isCruiseInADirectory()) {
+			command += editFileForm.nomRepertoireOrigin;
+		}
+		command += Global.QUOTE;
+		
+		// model
+		command += Global.SPACE;
+		command += Global.MOINS + Global.optModelFile;
+		command += Global.SPACE;
+		command += Global.QUOTE;
+		command += Nemo.getInstance().getCurrentOpenModelPath();
+		command += Global.QUOTE;
+
+		// output
+		command += Global.SPACE;
+		command += Global.MOINS + Global.optOutputFile;
+		command += Global.SPACE;
+		command += Global.QUOTE;
+		command +=
+				Nemo.getInstance().getDomain().getMedia().getOutputFileName();
+		command += Global.QUOTE;
+
+		// conversion
+		command += Global.SPACE;
+		command += Global.MOINS + Global.optConv;
+		command += Global.SPACE;
+		if (rm.isConversionToMedatlas()) {
+			command += Conversion.MEDATLAS.toString();
+		}
+		if (rm.isConversionToODV()) {
+			command += Conversion.ODV.toString();
+		}
+		if (rm.isConversionToNetCDF()) {
+			command += Conversion.NETCDF.toString();
+		}
+
+		if (rm.isConversionToODVMultiStation() || rm.isConversionToNetCDFMultiStation()) {
+			command += Global.SPACE;
+			command += Global.SPACE;
+			command += Global.MOINS + Global.optOdvMulti;
+		}
+
+
+		// cdisummary
+		if (Nemo.getInstance().getConfig().isWriteCdi()) {
+			command += Global.SPACE;
+			command += Global.MOINS + Global.optCdiSummary;
+			command += Global.SPACE;
+			command += Global.QUOTE;
+			command += CDIResumeWriter.getInstance().getNomFichierSortie();
+			command += Global.QUOTE;
+		}
+
+		// coupling Table
+		if (Nemo.getInstance().getConfig().isWriteMapping()) {
+			command += Global.SPACE;
+			command += Global.MOINS + Global.optCouplingTableUpdate;
+			command += Global.SPACE;
+			command += Global.MOINS + Global.optCouplingTablePrefix;
+			command += Global.SPACE;
+			command += Global.QUOTE;
+			command += Nemo.getInstance().getDomain().getConversion().getCouplingTablePrefix();
+			command += Global.QUOTE;
+		}
+		//sort
+		if(editFileForm.isSortForced()){
+			command += Global.SPACE;
+			command += Global.MOINS + Global.optSortDatas;
+		}
+		
+		return command;
+	}
+
+	public void fillBatchCommandLine() {
+		// ajout onglet erreurs
+		Utils.messageOKAppend(Global.RN);
+		Utils.messageOKAppend(Messages.edit_convert_batchInfoTitle);
+		Utils.messageOKAppend(calcBatchCommandLine());
+
+	}
+
+	public void fillSummary() {
+		RulesManager rm = RulesManager.getInstance();
+		String summary = Global.EMPTY_STRING;
+
+		// titre
+		summary +=
+				Global.RN + Global.RN + Messages.view_convert_summary_title
+						+ Global.RN + Global.RN;
+
+		EditFileForm editFileForm =
+				Nemo.getInstance().getViewMain().getEditFileForm();
+
+		// dataType
+		summary +=
+				Messages.view_convert_summary_dataTypeLabel
+						+ Global.DBL_PT
+						+ Global.RN
+						+ RulesManager.getInstance()
+								.getMyDataListTypeString();
+		summary += Global.RN + Global.RN + Global.RN;
+
+		// inputType
+		summary +=
+				Messages.view_file_fileType
+						+ Global.DBL_PT
+						+ Global.RN
+						+ RulesManager.getInstance()
+								.getMyFileType().toString();
+		summary += Global.RN + Global.RN + Global.RN;
+
+		// input
+		if (editFileForm.isCruiseIsAFile()) {
+			summary +=
+					Messages.view_convert_summary_inputFileLabel + Global.DBL_PT
+							+ Global.RN + editFileForm.nomFichier;
+		}
+		if (rm.isCruiseInADirectory()) {
+			summary +=
+					Messages.view_convert_summary_inputDirectoryLabel
+							+ Global.DBL_PT + Global.RN
+							+ editFileForm.nomRepertoireOrigin;
+		}
+		summary += Global.RN + Global.RN + Global.RN;
+
+		// model
+		summary +=
+				Messages.view_convert_summary_modelFileLabel + Global.DBL_PT
+						+ Global.RN;
+		if (!Nemo.getInstance().getNomModele().equals(Global.EMPTY_STRING)) {
+			summary += Nemo.getInstance().getCurrentOpenModelPath();
+		} else {
+			summary += Messages.view_convert_summary_modelFileNotSaved;
+		}
+		summary += Global.RN + Global.RN + Global.RN;
+		// conversion
+		summary +=
+				Messages.view_convert_summary_outputFormatLabel + Global.DBL_PT
+						+ Global.RN + rm.getMyConversionType();
+		if (rm.isConversionToODV() || rm.isConversionToNetCDF()) {
+			summary += Global.COMMA + Global.SPACE;
+			if (rm.isConversionToODVMonoStation() || rm.isConversionToNetCDFMonoStation()) {
+				summary += Messages.view_convert_monoStation;
+			}
+			if (rm.isConversionToODVMultiStation() || rm.isConversionToNetCDFMultiStation()) {
+				summary += Messages.view_convert_monoFichier;
+			}
+		}
+		summary += Global.RN;
+
+		// CDI summary
+		if (Nemo.getInstance().getConfig().isWriteCdi()) {
+			summary +=
+					Global.RN + Messages.view_convert_summary_createCDISummaryInfo;
+		}
+
+		// coupling table
+		if (Nemo.getInstance().getConfig().isWriteMapping()) {
+			summary +=
+					Global.RN
+							+ Messages.view_convert_summary_updateCouplingTableInfo;
+		}
+
+		if (rm.isConversionToODV()) {
+			summary += Global.RN;
+			summary += Global.RN + Messages.settings_dateODV + Global.DBL_PT + Global.RN;
+			if (Nemo.getInstance().getConfig().isDateISO()) {
+				AddedParam dateISO = new AP_DTUT();
+
+				summary += dateISO.getFullName().replace(Global.UNDERSCORE, Global.SPACE)
+						+ " [" + dateISO.getUnit() + "]";
+			} else {
+				AddedParam dateJulian = new AP_CJDY();
+
+				summary += dateJulian.getFullName()
+						+ " [" + dateJulian.getUnit() + "]";
+			}
+		}
+
+		summary += Global.RN + Global.RN + Global.RN;
+		conversionSummary.setText(summary);
+
+	}
+
+	public int getTotalLigne() {
+		return _totalLigne;
+	}
+
+	public void setTotalLigne(int ligne) {
+		_totalLigne = ligne;
+	}
+
+	/**
+	 * Setter sur warningCampagne.
+	 * 
+	 * @param warningCampagne
+	 *            the warningCampagne to set
+	 */
+	public void setWarningCampagne(String warningCampagne) {
+		this.warningCampagne = warningCampagne;
+	}
+
+	/**
+	 * Setter sur warningStation.
+	 * 
+	 * @param warningStation
+	 *            the warningStation to set
+	 */
+	public void setWarningStation(String warningStation) {
+		this.warningStation = warningStation;
+	}
+
+	/**
+	 * Setter sur warningData.
+	 * 
+	 * @param warningData
+	 *            the warningData to set
+	 */
+	public void setWarningData(String warningData) {
+		this.warningData = warningData;
+	}
+
+	/**
+	 * Setter sur warningFile.
+	 * 
+	 * @param warningFile
+	 *            the warningFile to set
+	 */
+	public void setWarningFile(String warningFile) {
+		this.warningFile = warningFile;
+	}
+
+	/**
+	 * Getter sur warningCampagne.
+	 * 
+	 * @return the warningCampagne
+	 */
+	public String getWarningCampagne() {
+		return warningCampagne;
+	}
+
+	/**
+	 * Getter sur warningData.
+	 * 
+	 * @return the warningData
+	 */
+	public String getWarningData() {
+		return warningData;
+	}
+
+	/**
+	 * Getter sur warningFile.
+	 * 
+	 * @return the warningFile
+	 */
+	public String getWarningFile() {
+		return warningFile;
+	}
+
+	/**
+	 * Getter sur warningStation.
+	 * 
+	 * @return the warningStation
+	 */
+	public String getWarningStation() {
+		return warningStation;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void fillFromModel() {
+		throw new UnsupportedOperationException("Not Implemented yet !");
+	}
+}

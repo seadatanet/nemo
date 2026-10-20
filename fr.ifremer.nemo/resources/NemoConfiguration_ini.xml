@@ -1,0 +1,70 @@
+<NemoConfiguration lang="en_GB">
+  <dataCenter>FI</dataCenter>
+  <nemoWsURL>https://wsnemo.ifremer.fr/api/</nemoWsURL>
+  <nautilusWsURL>https://wsnautilus.ifremer.fr/api/</nautilusWsURL>
+  <showRule>true</showRule>
+  <contact></contact>
+  <modelsDirectory></modelsDirectory>
+  <cruisesDirectory></cruisesDirectory>
+  <outputDirectory></outputDirectory>
+  <writeCdi>false</writeCdi>
+  <idEdmoRespCdi></idEdmoRespCdi>
+    <idEdmoRespCsr></idEdmoRespCsr>
+  <codeEdmoDonnees></codeEdmoDonnees>
+  <idEdmoRespDonnees></idEdmoRespDonnees>
+  <idEdmoDistDonnees></idEdmoDistDonnees>
+  <cdiURL>http://www.sdn-taskmanager.org/</cdiURL>
+  <odvVersion>0.4</odvVersion>
+  <medatlasVersion>2.0</medatlasVersion>
+  <netCDFVersion>1.0</netCDFVersion>
+  <cdiMethod>CDIMTH02</cdiMethod>
+  <accesDonnees>CB</accesDonnees>
+  <typePlateforme></typePlateforme>
+  <writeMapping>false</writeMapping>
+  <fichierMapping>coupling.txt</fichierMapping>
+  <dateISO>true</dateISO>
+  <defaultConversionType>UNKNOWN</defaultConversionType>
+  <proxy use="false" address="" port="" login="" password=""/>
+  <edmoURL>https://edmo.seadatanet.org/ws/ws_edmo.asmx</edmoURL>
+  <edmerpURL>https://edmerp.seadatanet.org/ws_edmerp/edmerp.asmx</edmerpURL>
+  <defaultFlagTable>C1</defaultFlagTable>
+  <FlagTable code="C1" label="SeaDataNet">
+    <Flag local="0" SDN="0 - no quality control"/>
+    <Flag local="1" SDN="1 - good value"/>
+    <Flag local="2" SDN="2 - probably good value"/>
+    <Flag local="3" SDN="3 - probably bad value"/>
+    <Flag local="4" SDN="4 - bad value"/>
+    <Flag local="5" SDN="5 - changed value"/>
+    <Flag local="6" SDN="6 - value below detection"/>
+    <Flag local="7" SDN="7 - value in excess"/>
+    <Flag local="8" SDN="8 - interpolated value"/>
+    <Flag local="9" SDN="9 - missing value"/>
+    <Flag local="A" SDN="A - value phenomenon uncertain"/>
+    <Flag local="B" SDN="B - nominal value"/>
+    <Flag local="Q" SDN="Q - value below limit of quantification"/>
+  </FlagTable>
+  <FlagTable code="C2" label="MEDATLAS">
+    <Flag local="0" SDN="0 - no quality control"/>
+    <Flag local="1" SDN="1 - good value"/>
+    <Flag local="2" SDN="2 - probably good value"/>
+    <Flag local="3" SDN="3 - probably bad value"/>
+    <Flag local="4" SDN="4 - bad value"/>
+    <Flag local="5" SDN="5 - changed value"/>
+    <Flag local="6" SDN="6 - value below detection"/>
+    <Flag local="7" SDN="7 - value in excess"/>
+    <Flag local="8" SDN="8 - interpolated value"/>
+    <Flag local="9" SDN="9 - missing value"/>
+    <Flag local="A" SDN="A - value phenomenon uncertain"/>
+    <Flag local="B" SDN="B - nominal value"/>
+    <Flag local="Q" SDN="Q - value below limit of quantification"/>
+  </FlagTable>
+  <FlagTable code="C3" label="ODV">
+    <Flag local="0" SDN="1 - good value"/>
+    <Flag local="1" SDN="9 - missing value"/>
+    <Flag local="4" SDN="3 - probably bad value"/>
+    <Flag local="8" SDN="4 - bad value"/>
+    
+  </FlagTable>
+  
+  <defaultFlag>0</defaultFlag>
+</NemoConfiguration>

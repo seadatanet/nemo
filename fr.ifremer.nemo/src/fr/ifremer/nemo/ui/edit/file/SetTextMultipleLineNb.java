@@ -1,0 +1,214 @@
+/* ============================================================================
+ * Nom du fichier	: SetText.java
+ * Auteur			: dboulang
+ * Date				: 16 avr. 09
+ * Copyright		: Altran
+ * ============================================================================
+ */
+package fr.ifremer.nemo.ui.edit.file;
+
+import java.util.regex.Pattern;
+
+import org.eclipse.jface.layout.GridDataFactory;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.ModifyEvent;
+import org.eclipse.swt.events.ModifyListener;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Text;
+
+import fr.ifremer.nemo.Nemo;
+import fr.ifremer.nemo.ui.Utils;
+import fr.ifremer.nemo.util.Global;
+import fr.ifremer.nemo.util.Intern;
+import fr.ifremer.nemo.util.Messages;
+
+/**
+ * Description: objet graphique contenant l'injection d'un texte ou d'un nombre
+ * de lignes
+ * 
+ * @author dboulang
+ */
+public class SetTextMultipleLineNb extends SetText {
+
+	public SetTextMultipleLineNb(String stringLabel, String defaultValue, boolean inText) {
+		super(stringLabel, defaultValue, inText);
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	protected void injectText() {
+		EditFileForm editFileForm = Nemo.getInstance().getViewMain().getEditFileForm();
+		text.setText(editFileForm.getSelectedText());
+		text.pack();
+	}
+
+	@Override
+	protected void injectNumberLines() {
+		int deb, fi, lignDepart, lignFin, i;
+		EditFileForm editFileForm = Nemo.getInstance().getViewMain().getEditFileForm();
+		// on recupere les coordonnees de la selection
+		deb = editFileForm.getSelectedTextStartPosition();
+		fi = editFileForm.getSelectedTextEndPosition();
+
+		lignDepart = 1;
+		lignFin = 1;
+
+		// calcul de la ligne en fonction de la valeur de x
+		// parcours du tableau des tailles de lignes cumulees
+
+//        if (deb == fi)
+//        {
+//            Utils.messageErreurAppend(Messages.Utils_26);
+//
+//        }
+//        else
+//        {
+
+		// calcul ligne depart
+		for (i = 0; i < Utils.lignesBrutes.size(); i++) {
+			lignDepart = i + 1;
+			if (deb == Utils.taillesCumLignes[i]) {
+				lignDepart = i + 1;
+				break;
+			}
+			if (i == (Utils.lignesBrutes.size() - 1)) {
+				lignDepart = i + 1;
+				break;
+			}
+			if ((deb >= Utils.taillesCumLignes[i]) && (deb < Utils.taillesCumLignes[i + 1])) {
+				lignDepart = i + 1;
+				break;
+			}
+		}
+
+		// calcul ligne fin
+		for (i = 0; i < Utils.lignesBrutes.size(); i++) {
+
+			if (fi == Utils.taillesCumLignes[i]) {
+				lignFin = i + 1;
+				break;
+			}
+			if (i == (Utils.lignesBrutes.size() - 1)) {
+				lignFin = i + 1;
+				break;
+			}
+			if ((fi >= Utils.taillesCumLignes[i]) && (fi < Utils.taillesCumLignes[i + 1])) {
+				lignFin = i + 1;
+				break;
+			}
+		}
+
+		// remplissage nbreLignes dans interface
+		String textToSet = String.valueOf(lignDepart);
+		if (lignFin != lignDepart) {
+			textToSet += Intern.separatorForColumnTitleLineNb + String.valueOf(lignFin);
+		}
+		text.setText(textToSet);
+		text.pack();
+//        }
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void dispose() {
+		if (label != null)
+			label.dispose();
+		text.dispose();
+		buttonSet.dispose();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void draw(Composite compo, boolean filled) {
+		if (stringLabel != null) {
+			label = new Label(compo, SWT.WRAP);
+			label.setText(stringLabel);
+			label.setBackground(Nemo.getInstance().getViewMain().getBackgroundEdit());
+			GridDataFactory.fillDefaults().grab(false, false).hint(textSize, SWT.DEFAULT).applyTo(label);
+		}
+
+		text = new Text(compo, SWT.BORDER);
+		if (defaultValue != null && !filled)
+			text.setText(defaultValue);
+		text.addModifyListener(new ModifyListener() {
+			public void modifyText(ModifyEvent event) {
+				Utils.invalidEtapes();
+			}
+		});
+
+		GridDataFactory.fillDefaults().grab(false, false).hint(textSize, 12).applyTo(text);
+
+		buttonSet = new Button(compo, SWT.NONE);
+		buttonSet.setBackground(Nemo.getInstance().getViewMain().getBackgroundEdit());
+		buttonSet.setText(Messages.button_set);
+		buttonSet.addSelectionListener(new org.eclipse.swt.events.SelectionAdapter() {
+			@Override
+			public void widgetSelected(org.eclipse.swt.events.SelectionEvent g) {
+				if (inText) {
+					injectText();
+				} else {
+					injectNumberLines();
+				}
+
+			}
+		});
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void razValues() {
+		text.setText(defaultValue);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void setEnabled(boolean enabled) {
+		if (label != null)
+			label.setEnabled(enabled);
+		text.setEnabled(enabled);
+		buttonSet.setEnabled(enabled);
+	}
+
+	@Override
+	public boolean checkMandatoryValue() {
+		boolean ok = true;
+		if (inText) {
+			if (text.getText().trim().equals(Global.EMPTY_STRING)) {
+				ok = false;
+			}
+		} else {
+			ok = Pattern.matches("^([0-9])+(-([0-9])+)?$", text.getText()); //$NON-NLS-1$
+		}
+		return ok;
+	}
+
+	@Override
+	public String getValue() {
+		String value = text.getText();
+		if (!inText) {
+			value = value.trim();
+		}
+		return value;
+	}
+
+	@Override
+	public void setValue(String value) {
+		text.setText(value);
+	}
+
+	@Override
+	public void setTextSize(int textSize) {
+		this.textSize = textSize;
+	}
+
+}

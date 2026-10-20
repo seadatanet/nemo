@@ -1,0 +1,76 @@
+<project>
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>fr.ifremer.nemo</groupId>
+		<artifactId>ws</artifactId>
+		<version>1.2.5</version>
+		<relativePath>..</relativePath>
+	</parent>
+
+	<artifactId>ws_nemo</artifactId>
+
+	<packaging>war</packaging>
+
+	<description>nemo webservice</description>
+
+	<build>
+	
+		<finalName>nemo</finalName>
+
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>3.3.1</version>
+			</plugin>
+		</plugins>
+		
+	</build>
+	
+	<dependencies>
+
+		<dependency>
+			<groupId>fr.ifremer.nemo</groupId>
+			<artifactId>ws_common</artifactId>
+			<version>${project.parent.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.1.0</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- Test dependencies -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.13.2</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>4.3.30.RELEASE</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<!-- H2 1.4.200: last release supporting Java 8 -->
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>1.4.200</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<!-- Required by spring-test MockMvc jsonPath() -->
+			<groupId>com.jayway.jsonpath</groupId>
+			<artifactId>json-path</artifactId>
+			<version>2.4.0</version>
+			<scope>test</scope>
+		</dependency>
+
+	</dependencies>
+
+</project>

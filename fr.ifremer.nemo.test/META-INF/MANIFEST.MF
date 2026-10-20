@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Test
+Bundle-SymbolicName: fr.ifremer.nemo.test
+Bundle-Version: 2.2.0
+Fragment-Host: fr.ifremer.nemo;bundle-version="2.2.0"
+Automatic-Module-Name: fr.ifremer.nemo.test
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Require-Bundle: org.junit;bundle-version="4.12.0"

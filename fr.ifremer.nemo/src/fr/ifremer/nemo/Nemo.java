@@ -1,0 +1,638 @@
+/*
+ * ============================================================================
+ * Nom du fichier : Nemo.java
+ * Application : NEMO version 1.2.20
+ * Auteur : dboulang
+ * Date de création : 9 déc. 09
+ * Client : Ifremer
+ * Copyright : Altran
+ * ============================================================================
+ */
+package fr.ifremer.nemo;
+
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import javax.xml.transform.Result;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.sax.SAXResult;
+import javax.xml.transform.stream.StreamSource;
+
+import org.apache.logging.log4j.Logger;
+
+import com.ago.xml.XMLBootstrapParser;
+
+import fr.ifremer.nemo.config.Configuration;
+import fr.ifremer.nemo.config.ManageLists;
+import fr.ifremer.nemo.config.NemoExternalResourcesManager;
+import fr.ifremer.nemo.config.NemoLists;
+import fr.ifremer.nemo.config.UpdateStatusList;
+import fr.ifremer.nemo.domain.InputDomain;
+import fr.ifremer.nemo.input.CruiseModel;
+import fr.ifremer.nemo.input.InputModel;
+import fr.ifremer.nemo.input.PropertyModel;
+import fr.ifremer.nemo.input.parameters.addedParameters.AP_DEPH;
+import fr.ifremer.nemo.input.parameters.addedParameters.AP_HEIGHT;
+import fr.ifremer.nemo.input.parameters.addedParameters.AddedParam;
+import fr.ifremer.nemo.input.parameters.addedParameters.AddedParam.IdParameter;
+import fr.ifremer.nemo.input.parameters.addedParameters.AddedParamDepth;
+import fr.ifremer.nemo.input.parameters.addedParameters.AddedParamHeight;
+import fr.ifremer.nemo.input.parameters.addedParameters.AddedParamManager;
+import fr.ifremer.nemo.input.parameters.addedParameters.DynamicAddedParamBean;
+import fr.ifremer.nemo.ui.ApplicationWorkbenchWindowAdvisor;
+import fr.ifremer.nemo.ui.RulesManager;
+import fr.ifremer.nemo.ui.view.ViewMain;
+import fr.ifremer.nemo.util.Conversion;
+import fr.ifremer.nemo.util.Global;
+import fr.ifremer.nemo.util.Global.DataListTypeEnum;
+import fr.ifremer.nemo.util.Global.E_InputType;
+import fr.ifremer.nemo.util.Global.E_TypeConversion;
+import fr.ifremer.nemo.util.Intern;
+import fr.ifremer.nemo.util.Messages;
+import fr.ifremer.nemo.util.Utils;
+import fr.ifremer.nemo.ws.NemoService;
+import fr.ifremer.seadatanet.cfpoint.util.ParameterNames;
+import fr.ifremer.seadatanet.cfpoint.util.ParameterValues;
+import fr.ifremer.sismer_tools.externalresources.ExternalResourcesManager;
+import fr.ifremer.sismer_tools.resources.ODVConstants.E_Variant;
+import sdn.vocabulary.interfaces.VocabularyException;
+
+/**
+ * Class Nemo.java Description: Classe principale de l'application - utilisée en
+ * singleton
+ * 
+ * @author dboulang
+ */
+public class Nemo {
+	private static Nemo instance;
+
+	private static Logger logger;
+
+	private Configuration config;
+	private InputDomain domain;
+	private String nomModele;
+	// 4063
+	private String currentOpenModelPath;
+
+	private ViewMain myViewMain;
+
+	private boolean batchMode;
+	
+	/* Special P01 added parameters, set by configuration */
+	private LinkedHashMap<String, DynamicAddedParamBean> addedParams;
+
+	/**
+	 * informations stockées pour afficher dans la log en cas d'erreur
+	 */
+	private String log_currentInputFile;
+	private String log_currentInputLine;
+
+	/**
+	 * Getter pour instance.
+	 * 
+	 * @return Nemo
+	 * @see Nemo.java#instance
+	 */
+	public static Nemo getInstance() {
+		if (null == instance) { // Premier appel
+			instance = new Nemo();
+		}
+		return instance;
+	}
+
+	/**
+	 * constructeur
+	 */
+	private Nemo() {
+		config = new Configuration();
+		// InputModel model = new InputModel();
+		
+		try {
+			addedParams = AddedParamManager.loadConfiguration();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		domain = new InputDomain();
+		nomModele = Global.EMPTY_STRING;
+	}
+
+	public void resetInstance() {
+		instance = null;
+	}
+
+	public void restoreDefaultConfig() {
+		// Restoration de la configuration initiale
+		config.restoreDefault();
+		// Enregistrement de la configuration
+		config.save();
+	}
+
+	public void resetModel() {
+		nomModele = Global.EMPTY_STRING;
+		InputModel model = new InputModel();
+		domain.update(model);
+	}
+
+	/**
+	 * 
+	 * @param pathModel
+	 * @return warning messages
+	 * @throws FileNotFoundException
+	 * @throws TransformerException
+	 */
+	public List<String> openModel(String pathModel) throws FileNotFoundException,
+	TransformerException {
+		List<String> messages = new ArrayList<>();
+
+		// nom du model
+		nomModele = new File(pathModel).getName();
+
+		InputModel model = new InputModel();
+		XMLBootstrapParser parser = new XMLBootstrapParser(model);
+
+		FileInputStream stream = new FileInputStream(pathModel);
+		parser.parse(stream, false);
+		boolean isBeforeP011 = false;
+
+		if (Global.EMPTY_STRING.equals(model.getVersion())) {
+			isBeforeP011 = true;
+			// traduction des modèles antérieurs à la version 1.2.20 (P011
+			// introduits en version 1.2.20)
+			model = new InputModel();
+			parser = new XMLBootstrapParser(model);
+
+			StreamSource xmlSource = new StreamSource(new File(pathModel));
+			StreamSource xslSource = new StreamSource(new File(Intern.dir_resources + File.separator+ Intern.ModelXSL));
+			Result result = new SAXResult(parser);
+
+			TransformerFactory factory = TransformerFactory.newInstance();
+			Transformer transformer = factory.newTransformer(xslSource);
+			transformer.transform(xmlSource, result);
+		}
+
+		// FAE 16868
+		if (Utils.compareVersion(model.getVersion(), "1.5.1") == -1) { // older than 1.5.1
+			String regionName = model.getCruiseModel().getRegionName();
+			String C19RegionName="";
+			try {
+				C19RegionName = CruiseModel.getTranscodeRegionName(regionName);
+			} catch (VocabularyException e) {
+			}
+			model.getCruiseModel().setRegionName(C19RegionName);
+		}
+		if (Utils.compareVersion(model.getVersion(), "1.6.0") == -1) { // older than 1.6.0
+			// models for profiles, MEDATLAS are invalids if older than 1.6.0
+			// because DEPH is now allowed as Z parameter, but could be not the first param in olds models
+			// (rules data70, data75 and p3 deleted, new rule data 76)
+			if (model.getConversionModel().getOutputFormat() == E_TypeConversion.MEDATLAS
+					&& model.getMediaModel().getInputType() == E_InputType.PROFILE) {
+				logger.warn(Messages.warning_model_old);
+				model.setIsValid(false);
+			}
+
+		}
+
+		if (model.getMediaModel().getInputType() == E_InputType.TRAJECTORY) {
+			if (!model.getStationModel().getReferenceProperty().isUserProvided()) {
+				messages.add(Messages.warning_model_stationNumberFixedForTrajectory);
+				model.getStationModel().getReferenceProperty().setUserProvided(true);
+				model.getStationModel().getReferenceProperty().setUserValue("1");
+			}
+		}
+
+		//42483: old models without variants=physicochemical
+		if (model.getMediaModel().getVariant()==E_Variant.UNKNOWN) {
+			model.getMediaModel().setVariant(E_Variant.PHYSICOCHEMICAL);
+		}
+		//51120
+		if (model.getStationModel().getProperty(Intern.USE_STATION_CODE_IN_LOCAL_CDI_ID_CHECKBOX)==null) {
+			PropertyModel propertyModelUseStationCodeInLocalCdiId = new PropertyModel();
+			propertyModelUseStationCodeInLocalCdiId.setProperty(Intern.USE_STATION_CODE_IN_LOCAL_CDI_ID_CHECKBOX);
+			propertyModelUseStationCodeInLocalCdiId.fillUserValue(Boolean.TRUE.toString());
+			model.getStationModel().addProperty(propertyModelUseStationCodeInLocalCdiId);
+		}
+		completeDataList(model, isBeforeP011);
+		domain.update(model);
+		
+		RulesManager.getInstance().setModelVersion(model.getVersion());
+		if (!model.isValid()) {
+			messages.add(Messages.warning_unvalid_openModel);
+		}
+		return messages;
+	}
+
+	private void completeDataList(InputModel model, boolean isBeforeP011) {
+		DataListTypeEnum dataList = model.getDataModel().getDataListType();
+
+		// balise dataList inconnue -> version <1.2.33 (avant les P021 si on
+		// exclue les versions non distribuées de 1.2.29 à 1.2.32)
+		if (dataList == DataListTypeEnum.UNKNOWN) {
+			// si on est avant l'usage des P011 (introduits en 1.2.20), on est
+			// forcément en P091
+			if (isBeforeP011) {
+				dataList = DataListTypeEnum.P091;
+			}
+			// si on est apres l'introduction des P011 mais qu'on a pas de
+			// valeur de dataList, c'est qu'on est dans les version
+			// intermédiaires
+			// donc les listes possibles sont P091 ou P011viaP091
+			// on détecte le type à partir de l'attribut isP011 du premier
+			// paramètre
+			else {
+				if (model.getDataModel().getParameterModels().length != 0) {
+					if (model.getDataModel().getParameterModels()[0].getParameter().isP011()) {
+						dataList = DataListTypeEnum.P011_VIA_P091;
+					} else {
+						dataList = DataListTypeEnum.P091;
+					}
+				}
+			}
+		}
+
+		model.getDataModel().setDataListType(dataList);
+
+	}
+
+	public void saveModel(FileOutputStream a_Stream) {
+		InputModel inputModel = new InputModel(domain.getMedia().getModel(), domain.getCruise()
+				.getModel(), domain.getStation().getModel(),
+				domain.getData()
+				.getModel(),
+				domain.getConversion().getModel(), Nemo
+				.getInstance().getViewMain().getEditDataForm().isValidated());
+		inputModel.writeXMLOn(a_Stream);
+	}
+
+	/**
+	 * Getter pour config.
+	 * 
+	 * @return Configuration
+	 * @see Nemo.java#config
+	 */
+	public Configuration getConfig() {
+		return config;
+	}
+
+	/**
+	 * Setter pour config
+	 * 
+	 * @param config
+	 * : nouvelle valeur pour config
+	 * @see Nemo.java#config
+	 */
+	public void setConfig(Configuration config) {
+		this.config = config;
+	}
+
+	/**
+	 * Getter pour domain.
+	 * 
+	 * @return InputDomain
+	 * @see Nemo.java#domain
+	 */
+	public InputDomain getDomain() {
+		return domain;
+	}
+
+	/**
+	 * Setter pour domain
+	 * 
+	 * @param domain
+	 * : nouvelle valeur pour domain
+	 * @see Nemo.java#domain
+	 */
+	public void setDomain(InputDomain domain) {
+		this.domain = domain;
+	}
+
+	/**
+	 * Getter pour nomModele.
+	 * 
+	 * @return String
+	 * @see Nemo.java#nomModele
+	 */
+	public String getNomModele() {
+		return nomModele;
+	}
+
+	/**
+	 * Getter pour nomModele.
+	 * 
+	 * @return String
+	 * @see Nemo.java#nomModele
+	 */
+	public void setNomModele(String nomModel) {
+		nomModele = nomModel;
+	}
+
+	public void refreshNomNemo() {
+		// nom du model
+		String modelName = Nemo.getInstance().getNomModele();
+
+		// nom de l'application
+		if (RulesManager.getInstance().isCruiseInADirectory()) {
+			// dossier campagne
+			File fich = new File(myViewMain.getEditFileForm().nomRepertoire);
+			if (!Global.EMPTY_STRING.equals(modelName)) {
+				ApplicationWorkbenchWindowAdvisor.configurer_titre
+				.setTitle(Messages.application_directoryTitle
+						+ fich.getAbsolutePath()
+						+ Messages.application_modelTitle + modelName
+						+ " ]"); //$NON-NLS-1$
+
+			} else {
+				ApplicationWorkbenchWindowAdvisor.configurer_titre
+				.setTitle(Messages.application_directoryTitle
+						+ fich.getAbsolutePath() + " ]"); //$NON-NLS-1$
+			}
+
+		} else {
+			// fichier campagne
+			File fich;
+			fich = new File(myViewMain.getEditFileForm().nomFichier);
+
+			if (!Global.EMPTY_STRING.equals(modelName)) {
+				ApplicationWorkbenchWindowAdvisor.configurer_titre
+				.setTitle(Messages.application_fileTitle
+						+ fich.getAbsolutePath()
+						+ Messages.application_modelTitle + modelName
+						+ " ]"); //$NON-NLS-1$
+			} else {
+				ApplicationWorkbenchWindowAdvisor.configurer_titre
+				.setTitle(Messages.application_fileTitle
+						+ fich.getAbsolutePath() + " ]"); //$NON-NLS-1$
+			}
+		}
+	}
+
+	public String getCurrentOpenModelPath() {
+		return currentOpenModelPath;
+	}
+
+	public void setCurrentOpenModelPath(String currentOpenModelPath) {
+		this.currentOpenModelPath = currentOpenModelPath;
+	}
+
+	public void setViewMain(ViewMain viewMain) {
+		myViewMain = viewMain;
+	}
+
+	public ViewMain getViewMain() {
+		return myViewMain;
+	}
+
+	public boolean isBatchMode() {
+		return batchMode;
+	}
+
+	public void setBatchMode(boolean batchMode) {
+		this.batchMode = batchMode;
+	}
+
+	public String getLog_currentInputFile() {
+		return log_currentInputFile;
+	}
+
+	public void setLog_currentInputFile(String log_currentInputFile) {
+		this.log_currentInputFile = log_currentInputFile;
+	}
+
+	public String getLog_currentInputLine() {
+		return log_currentInputLine;
+	}
+
+	public void setLog_currentInputLine(String log_currentInputLine) {
+		this.log_currentInputLine = log_currentInputLine;
+	}
+
+	public String getErrorMessageWithFileAndLineNumber() {
+		return Messages.error_fileName_message + Global.DBL_PT + Global.SPACE
+				+ getLog_currentInputFile() + Global.SPACE
+				+ Messages.error_lineNumber_message + Global.DBL_PT
+				+ Global.SPACE + getLog_currentInputLine();
+	}
+
+	public String getVersion() {
+		// Strategy 1: classloader (works in installed RCP regardless of CWD)
+		try (java.io.InputStream stream = Nemo.class.getResourceAsStream("/resources/version.txt")) {
+			if (stream != null) {
+				String v = parseVersion(stream);
+				if (v != null) return v;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		// Strategy 2: relative path (works in Eclipse dev mode where CWD = project dir)
+		try (FileInputStream fstream = new FileInputStream("resources/version.txt")) {
+			String v = parseVersion(fstream);
+			if (v != null) return v;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "";
+	}
+
+	private String parseVersion(java.io.InputStream stream) throws java.io.IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(stream));
+		String strLine = br.readLine();
+		if (strLine == null) return null;
+		Pattern p = Pattern.compile("([a-zA-Z\\s])");
+		Matcher m = p.matcher(strLine);
+		return m.find() ? strLine.substring(0, m.start()) : strLine;
+	}
+
+	public Logger getLogger() {
+		return logger;
+	}
+
+	public void setLogger(Logger logger) {
+		Nemo.logger = logger;
+	}
+
+	/**
+	 * Call the WS to update the various parameter lists (EDMO codes, CSR, BODC, ...)
+	 * 
+	 * FIXME réactiver les monitor.subtask() sous une autre forme pour générer des messages. Logger ?
+	 * 
+	 * @return an error message if something went wrong, an empty string if OK.
+	 */
+	public String callListsUpdates() {
+
+		try {
+			// Reset the messages from the calls
+			ManageLists.resetUpdatedLists();
+
+			// Call NEMO WebService
+			Nemo.getInstance().getLogger().info(Messages.connect_nemo);
+			NemoService service = NemoLists.callNemoWS();
+			UpdateStatusList updateNemo = (UpdateStatusList) ManageLists.getUpdate(Intern.id_nemo);
+
+			// update CSR
+			
+			if (!ExternalResourcesManager.getInstance().getCsrListManager().isFileUpToDate()) {
+				ExternalResourcesManager.getInstance().getCsrListManager().reload();
+			}
+			
+			Nemo.getInstance().getLogger().info(Messages.connect_vocab);
+			Nemo.getInstance().getLogger().info(Messages.getString(Intern.id_lists));
+			NemoExternalResourcesManager.updateVocabLists(null);
+
+//			Nemo.getInstance().getLogger().info(Messages.getString(Intern.id_maps));
+//			VocabLists.updateMapLists(null);
+
+			ManageLists.updateDataTypes();
+
+			Nemo.getInstance().getLogger().info(Messages.connect_edmo);
+			NemoLists.updateEdmo(null);
+			
+			Nemo.getInstance().getLogger().info(Messages.connect_edmerp);
+			NemoLists.updateEdmerp(null);
+
+			Nemo.getInstance().getLogger().info(Messages.update_param);
+			NemoLists.updateParameters(null, service, updateNemo);
+
+			Nemo.getInstance().getLogger().info(Messages.update_survey);
+			NemoLists.updateSurveys(null, service, updateNemo);
+
+			Nemo.getInstance().getConfig().save();
+			Nemo.getInstance().getLogger().info("updates ended");
+			return "";
+
+		} catch (Exception e) {
+
+			// Something wrong has happened
+			return e.getMessage();
+		}
+
+	}
+	
+	/**
+	 * Retrieve an AddedParam by type.
+	 * @param type The type, based on IdParameter enum.
+	 * @param conv the type of conversion that is asked.
+	 * @return the matching AddedParam, null if nothing found.
+	 */
+	public static AddedParam getAddedParamByType(IdParameter type, Conversion conv) {
+		
+		Set<String> keys = Nemo.getInstance().addedParams.keySet();
+		
+		for (String key : keys) {
+			
+			DynamicAddedParamBean aParam = Nemo.getInstance().addedParams.get(key);
+			
+			if (aParam.getType() == type) {
+				
+				// convert into a real addedParameter and return
+				return addedParamBeanToAddedParam(aParam, conv);
+			}
+		}
+
+		return null;
+	}
+
+	/**
+	 * Convert an AddedParamBean (parsing product) to a real AddedParam.
+	 * @param aParam the DynamicAddedParamBean.
+	 * @param conv the type of conversion that is asked.
+	 * @return the matching AddedParam, null if nothing found.
+	 */
+	public static AddedParam addedParamBeanToAddedParam(DynamicAddedParamBean aParam, Conversion conv) {
+
+		
+		AddedParam outParam;
+		
+		switch (aParam.getType()) {
+		case generic_depthBSSurf_FromPressure:
+		case generic_depthBSSurf_FromSensor:
+			outParam = new AddedParamDepth(aParam, conv);
+			break;
+		case generic_heightASLvl_FromSensor:
+			outParam = new AddedParamHeight(aParam, conv);
+			break;
+		default:
+			return null;
+		}
+
+		return outParam;
+	}
+	
+	/**
+	 * Retrieve an AddedParam by P01 code.
+	 * @param code the P01 code
+	 * @param conv the type of conversion that is asked.
+	 * @return the matching AddedParam, null if nothing found.
+	 */
+	public static AddedParam getAddedParamByCode(String code, Conversion conv) {
+
+		Set<String> keys = Nemo.getInstance().addedParams.keySet();
+
+		for (String key : keys) {
+
+			DynamicAddedParamBean aParam = Nemo.getInstance().addedParams.get(key);
+
+			if (aParam.getCode().equals(code)) {
+
+				// convert into a real addedParameter and return
+				return addedParamBeanToAddedParam(aParam, conv);
+			}
+		}
+
+		return null;
+	}
+
+	/**
+	 * Get the corresponding ZVarName from an AddedParam defined by its P01 code.
+	 * @param code the P01 code.
+	 * @param conv the type of conversion that is asked.
+	 * @return the Z var name, null if not found.
+	 */
+	public static String getZVarNameFromAddedParamCode(String code, Conversion conv) {
+
+		AddedParam param = getAddedParamByCode(code, conv);
+
+		if (param != null) {
+			if (param instanceof AP_HEIGHT) {
+				return ParameterNames.HEIGHT;
+			}
+			else if (param instanceof AP_DEPH) {
+				return ParameterNames.DEPTH;
+			}
+		}
+		return null;
+	}
+	
+	/**
+	 * Get the corresponding ZVarValue from an AddedParam defined by its P01 code.
+	 * @param code the P01 code.
+	 * @param conv the type of conversion that is asked.
+	 * @return the Z var value, null if not found.
+	 */
+	public static String getZVarValueFromAddedParamCode(String code, Conversion conv) {
+
+		AddedParam param = getAddedParamByCode(code, conv);
+
+		if (param != null) {
+			if (param instanceof AP_HEIGHT) {
+				return ParameterValues.Z_HEIGHT;
+			}
+			else if (param instanceof AP_DEPH) {
+				return ParameterValues.Z_DEPTH;
+			}
+		}
+		return null;
+	}
+}

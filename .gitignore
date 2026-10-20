@@ -1,0 +1,57 @@
+# Dossiers de builds
+target/
+builds/
+dist/
+bin/
+**/bin/
+
+# Fichiers et dossiers generes a la compilation
+*.log
+*.versionsBackup
+.factorypath
+.classpath
+.settings/
+.metadata/
+**/.settings/
+.project
+**/.project
+logs/
+Logs/
+# Downloaded and extracted by maven-dependency-plugin + maven-antrun-plugin at build time.
+# Run 'mvn process-resources -s local-settings.xml' after a fresh checkout to populate.
+fr.ifremer.nemo/resources/externalResources/
+fr.ifremer.nemo/resources/Edmerp.xml
+fr.ifremer.nemo/resources/edmo.xml
+fr.ifremer.nemo/resources/Edmo.xml
+fr.ifremer.nemo/resources/Edmo_old.xml
+fr.ifremer.nemo.test/resources/externalResources/
+fr.ifremer.nemo.test/resources/Edmerp.xml
+fr.ifremer.nemo.test/resources/edmo.xml
+fr.ifremer.nemo.test/resources/Edmo.xml
+fr.ifremer.nemo.test/resources/Edmo_old.xml
+# **/PF_input
+NEMO_IzPack/ressources/resources/
+NEMO_IzPack/deleteDirectory/bin/
+fr.ifremer.nemo/libtest
+local-settings.xml
+
+# test output files
+fr.ifremer.nemo.test/**/PF_input/*
+fr.ifremer.nemo.test/**/PF_input
+fr.ifremer.nemo.test/**/output_junit/*
+fr.ifremer.nemo.test/**/output_junit
+fr.ifremer.nemo.test/**/cdiSummary_junit
+fr.ifremer.nemo.test/**/output_junitTMP
+fr.ifremer.nemo.test/results*.csv
+fr.ifremer.nemo.test/datatest/**/*.dump
+
+# Fichiers VS Code personnels (chemins et credentials locaux — ne pas commiter)
+../.vscode/tasks.json
+../.vscode/launch.json
+../.vscode/settings.json
+
+# Fichiers et dossiers des editeurs de code
+.vscode/
+
+# Fichiers de backup 
+*.back

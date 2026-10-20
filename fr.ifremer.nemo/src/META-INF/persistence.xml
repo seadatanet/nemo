@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- http://www.vogella.com/tutorials/JavaPersistenceAPI/article.html#installation_jpa -->
+<persistence xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+  version="2.0" xmlns="http://java.sun.com/xml/ns/persistence">
+  <!-- 
+<persistence version="1.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
+-->
+  <persistence-unit name="nemoPU" transaction-type="RESOURCE_LOCAL">
+<!--     <provider>oracle.toplink.essentials.PersistenceProvider</provider> -->
+    <class>fr.ifremer.nemo.mapping.Mapping</class>
+    <properties>
+    <!--  
+      <property name="toplink.jdbc.url" value="jdbc:hsqldb:file:db/nemo;hsqldb.write_delay=false"/>
+      <property name="toplink.jdbc.user" value="sa"/>
+      <property name="toplink.jdbc.driver" value="org.hsqldb.jdbcDriver"/>
+      <property name="toplink.jdbc.password" value=""/>
+      <property name="toplink.ddl-generation" value="create-tables"/>
+      <property name="hsqldb.write_delay" value="false"/>
+     -->
+     
+      <property name="javax.persistence.jdbc.driver" value="org.hsqldb.jdbcDriver"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:hsqldb:file:db/nemo;hsqldb.write_delay=false"/>
+      <property name="javax.persistence.jdbc.user" value="sa"/>
+      <property name="javax.persistence.jdbc.password" value=""/>
+<property name="eclipselink.ddl-generation" value="create-tables" />
+      <property name="eclipselink.ddl-generation.output-mode"
+        value="database" />
+     
+     
+    </properties>
+  </persistence-unit>
+</persistence>

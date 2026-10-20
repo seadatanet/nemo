@@ -1,0 +1,61 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>fr.ifremer.nemo</groupId>
+		<artifactId>fr.ifremer.nemo.parent</artifactId>
+		<version>2.2.0-SNAPSHOT</version>
+		<relativePath>../fr.ifremer.nemo.parent/pom.xml</relativePath>
+
+	</parent>
+
+	<properties>
+		<!-- SuiteClasse name to test -->
+		<runSuite>**/SuiteTests.class</runSuite>
+	</properties>
+
+	<artifactId>fr.ifremer.nemo.test</artifactId>
+	<version>2.2.0</version> <!-- meme version que dans l'overview de plugin.xml -->
+	<packaging>eclipse-test-plugin</packaging>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-surefire-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<configuration>
+					<includes>
+						<include>${runSuite}</include>
+					</includes>
+					<useUIHarness>false</useUIHarness>
+					<useUIThread>false</useUIThread>
+					<!-- GDK_BACKEND=offscreen: GTK3 renders in memory, no X11/Wayland display needed.
+					     Must be an environment variable (GTK reads getenv(), not JVM properties). -->
+					<environmentVariables>
+						<GDK_BACKEND>offscreen</GDK_BACKEND>
+					</environmentVariables>
+					<!-- javax.xml.ws (JAX-WS) and com.sun.* internal XML resolver classes
+					     are present in the JDK 8 boot classpath but are NOT exported as
+					     OSGi system packages by Equinox by default when running under Tycho.
+					     They must be declared explicitly so that OSGi bundles (including the
+					     SdnVocabularyManager and Axis-generated stubs) can load them.
+					     Note: no -Xbootclasspath/a: is needed on Java 8: the classes are
+					     already in the JDK; adding extra JARs would cause class conflicts.
+					     This argLine is transparent when tests are run from Eclipse IDE because
+					     the PDE/JUnit runner configures Equinox independently. -->
+					<argLine>-Djava.awt.headless=true
+						-Dhttps.protocols=TLSv1.2
+						-Dhttp.keepAlive=false
+						--add-exports=java.xml/com.sun.org.apache.xml.internal.resolver=ALL-UNNAMED
+						--add-exports=java.xml/com.sun.org.apache.xml.internal.resolver.tools=ALL-UNNAMED
+					</argLine>
+					<workingDirectory>${project.basedir}</workingDirectory>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>fr.ifremer.nemo</groupId>
+		<artifactId>fr.ifremer.nemo.parent</artifactId>
+		<version>2.2.0-SNAPSHOT</version>
+		<relativePath>../fr.ifremer.nemo.parent/pom.xml</relativePath>
+
+	</parent>
+
+	<artifactId>fr.ifremer.nemo.repository</artifactId>
+	<packaging>eclipse-repository</packaging>
+
+	<properties>
+		<!-- Set to 'none' to skip platform product assembly (e.g. in CI test jobs).
+		     Default is 'package' so that full builds assemble the products normally. -->
+		<assembly.phase>package</assembly.phase>
+	</properties>
+
+	<build>
+		<plugins>
+
+			<plugin>
+				<groupId>com.coderplus.maven.plugins</groupId>
+				<artifactId>copy-rename-maven-plugin</artifactId>
+				<version>1.0</version>
+				<executions>
+					<execution>
+						<id>copy-file</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>copy</goal>
+						</goals>
+						<configuration>
+						<sourceFile>${project.basedir}/nemo.p2.inf.default</sourceFile>
+						<destinationFile>${project.basedir}/nemo.p2.inf</destinationFile>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+
+			<plugin>
+				<groupId>com.google.code.maven-replacer-plugin</groupId>
+				<artifactId>replacer</artifactId>
+				<version>1.5.3</version>
+				<executions>
+					<execution>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>replace</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<file>${project.basedir}/nemo.p2.inf</file>
+					<replacements>
+						<replacement>
+							<token>@ProductVersion@</token>
+							<value>${version}</value>
+						</replacement>
+					</replacements>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-p2-director-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<executions>
+					<execution>
+						<id>materialize-products</id>
+						<!-- Use 'none' via -Dassembly.phase=none to skip in CI test jobs. -->
+						<phase>${assembly.phase}</phase>
+						<goals>
+							<goal>materialize-products</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>archive-products</id>
+						<phase>${assembly.phase}</phase>
+						<goals>
+							<goal>archive-products</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<products>
+						<product>
+							<id>nemo.product</id>
+							<attachId>nemo.product</attachId> <!-- ID defini dans le fichier product -->
+							<archiveFileName>nemoProduct-${project.version}</archiveFileName>
+							<rootFolder>nemo</rootFolder>
+							<!-- optional parameters (with default values) -->
+							<!-- <rootFolder></rootFolder>
+							<rootFolders>
+								<macosx></macosx>
+								<win32></win32>
+							</rootFolders> -->
+						</product>
+					</products>
+					<!--  global optional parameters (with default values) 
+					<installFeatures>true</installFeatures>
+					<profile>DefaultProfile</profile> -->
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+
+</project>

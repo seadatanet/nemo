@@ -1,0 +1,177 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>fr.ifremer.nemo</groupId>
+		<artifactId>fr.ifremer.nemo.parent</artifactId>
+		<version>2.2.0-SNAPSHOT</version>
+		<relativePath>../fr.ifremer.nemo.parent/pom.xml</relativePath>
+
+	</parent>
+
+
+	<artifactId>fr.ifremer.nemo</artifactId>
+	<version>2.2.0</version> <!-- meme version que dans l'overview de plugin.xml -->
+	<packaging>eclipse-plugin</packaging>
+
+
+	<build>
+	<!-- TODO:
+	pour l'instant les librairies dont depend Nemo sont collees manuellement dans le repertoire lib.
+	Ci-dessous,  maven-clean-plugin et maven-dependency-plugin telechargent 2 libs  via maven dans un repertoire libtest, pour verifier le principe
+	TODO: 
+		1/ declarer TOUTES les dependances dans maven-dependency-plugin
+		2/ supprimer le rep lib actuel
+		3/ renommer le repertoire libtest en lib
+	-->
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-clean-plugin</artifactId>
+				<version>3.1.0</version>
+				<configuration>
+					<failOnError>false</failOnError>
+					<filesets>
+						<fileset>
+							<directory>libtest</directory>
+						</fileset>
+					</filesets>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>3.1.1</version>
+				<executions>
+					<execution>
+						<id>copyLib</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>copy</goal>
+						</goals>
+						<configuration>
+							<useBaseVersion>true</useBaseVersion>
+							<outputDirectory>libtest</outputDirectory>
+							<artifactItems>
+								<artifactItem>
+									<groupId>org.apache.logging.log4j</groupId>
+									<artifactId>log4j-api</artifactId>
+									<version>2.3</version>
+								</artifactItem>
+
+
+								<!-- https://mvnrepository.com/artifact/org.apache.axis2/axis2 -->
+								<artifactItem>
+									<groupId>org.apache.axis2</groupId>
+									<artifactId>axis2</artifactId>
+									<version>1.5.4</version>
+								</artifactItem>
+
+
+							</artifactItems>
+						</configuration>
+					</execution>
+					<!-- Download the external resources archive from the externalresources project registry. -->
+					<execution>
+						<id>download-external-resources</id>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>copy</goal>
+						</goals>
+						<configuration>
+							<artifactItems>
+								<artifactItem>
+									<groupId>fr.ifremer.seadatanet</groupId>
+									<artifactId>externalresources</artifactId>
+									<version>1.0.0-SNAPSHOT</version>
+									<type>tar.gz</type>
+									<destFileName>externalresources.tar.gz</destFileName>
+								</artifactItem>
+							</artifactItems>
+							<outputDirectory>${project.build.directory}/external-resources-download</outputDirectory>
+						</configuration>
+					</execution>
+
+				</executions>
+			</plugin>
+			<!-- Extract SeaDataNet reference data from the downloaded archive into resources/.
+			     Only the specific files/directories are extracted — other resources/ content is untouched.
+			     The archive layout is: BODCVocabularies/, CSR/, Edmerp.xml, edmo.xml -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>3.1.0</version>
+				<executions>
+					<execution>
+						<id>extract-external-resources</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<target>
+								<echo message="Extracting SeaDataNet external resources into resources/"/>
+								<!-- BODCVocabularies/ and CSR/ go into resources/externalResources/ -->
+								<untar src="${project.build.directory}/external-resources-download/externalresources.tar.gz"
+									   dest="${project.basedir}/resources"
+									   compression="gzip"
+									   overwrite="true">
+									<patternset>
+										<include name="BODCVocabularies/**"/>
+										<include name="CSR/**"/>
+									</patternset>
+									<mapper type="glob" from="*" to="externalResources/*"/>
+								</untar>
+								<!-- Edmerp.xml and edmo.xml go directly into resources/ -->
+								<untar src="${project.build.directory}/external-resources-download/externalresources.tar.gz"
+									   dest="${project.basedir}/resources"
+									   compression="gzip"
+									   overwrite="true">
+									<patternset>
+										<include name="Edmerp.xml"/>
+										<include name="edmo.xml"/>
+									</patternset>
+								</untar>
+								<!-- Extract Edmo.xml with capital E for case-sensitive filesystems (Linux) -->
+								<untar src="${project.build.directory}/external-resources-download/externalresources.tar.gz"
+									   dest="${project.basedir}/resources"
+									   compression="gzip"
+									   overwrite="true">
+									<patternset>
+										<include name="edmo.xml"/>
+									</patternset>
+									<mapper type="glob" from="edmo.xml" to="Edmo.xml"/>
+								</untar>
+							</target>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- Update external resources -->
+<!-- 			<plugin> -->
+<!-- 				<groupId>org.codehaus.mojo</groupId> -->
+<!-- 				<artifactId>exec-maven-plugin</artifactId> -->
+<!-- 				<version>3.1.0</version> -->
+<!-- 				<executions> -->
+<!-- 					<execution> -->
+<!-- 						<id>update_resources</id> -->
+<!-- 						<phase>prepare-package</phase> -->
+<!-- 						<goals> -->
+<!-- 							<goal>java</goal> -->
+<!-- 						</goals> -->
+<!-- 					</execution> -->
+<!-- 				</executions> -->
+<!-- 				<configuration> -->
+<!-- 					<mainClass>fr.ifremer.nemo.ResourceUpdater</mainClass> -->
+<!-- 					<arguments> -->
+<!-- 						<argument>-classpath</argument> -->
+<!-- 					</arguments> -->
+<!-- 				</configuration> -->
+<!-- 			</plugin> -->
+		</plugins>
+	</build>
+
+
+</project>

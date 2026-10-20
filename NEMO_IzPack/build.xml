@@ -1,0 +1,270 @@
+<project name="nemo" default="all" basedir=".">
+
+<property file="ant.properties" />
+
+	<property name="product_dir" value="../fr.ifremer.nemo.repository/target/products"></property>
+	
+	<!-- Chemins absolus résolus par ANT (location) pour être passés correctement à IzPack via filterset -->
+	<property name="product_win32_win32_dir" location="../fr.ifremer.nemo.repository/target/products/nemo.product/win32/win32/x86/nemo"></property>
+	<property name="product_win32_win64_dir" location="../fr.ifremer.nemo.repository/target/products/nemo.product/win32/win32/x86_64/nemo"></property>
+	
+	<property name="product_linux_dir"     location="../fr.ifremer.nemo.repository/target/products/nemo.product/linux/gtk/x86/nemo"></property>
+	<property name="product_linux_x64_dir" location="../fr.ifremer.nemo.repository/target/products/nemo.product/linux/gtk/x86_64/nemo"></property>
+	
+
+	<!--
+	<property name="product_dir" value="${basedir}/src"></property>
+		<property name="product_win32_win32_dir" value="${product_dir}/win32.win32.x86/eclipse/"></property>
+	<property name="product_linux_x64_dir" value="${product_dir}/linux.gtk.x86_64/eclipse/"></property>
+	-->
+<!-- Mentionne a ANT d utiliser IzPack -->
+<taskdef name="izpack" classpath="${basedir}/lib/compiler.jar"
+         classname="com.izforge.izpack.ant.IzPackTask"/>
+	
+	<target name="setConfig" >
+	<!-- remplacement du no de version dans les configs izPack pour chaque OS
+	les fichiers install_<os>_tmp contiennent des tokens à remplacer pour le no de version -->
+	<copy file="${basedir}/install_windows.xml"  tofile="${basedir}/install_windows_filled.xml" overwrite="true">
+	  <filterset>
+	    <filter token="release.version" value="${version}"/>
+	  </filterset>
+	  <filterset begintoken="@{" endtoken="}">
+	    <filter token="product_win32_win32_dir" value="${product_win32_win32_dir}"/>
+	  </filterset>
+	</copy>
+		<copy file="${basedir}/install_windows64bits.xml"  tofile="${basedir}/install_windows64bits_filled.xml" overwrite="true">
+		  <filterset>
+		    <filter token="release.version" value="${version}"/>
+		  </filterset>
+		  <filterset begintoken="@{" endtoken="}">
+		    <filter token="product_win32_win64_dir" value="${product_win32_win64_dir}"/>
+		  </filterset>
+		</copy>
+		<copy file="${basedir}/install_solaris.xml"  tofile="${basedir}/install_solaris_filled.xml" overwrite="true">
+		  <filterset>
+		    <filter token="release.version" value="${version}"/>
+		  </filterset>
+		</copy>
+		<copy file="${basedir}/install_linux.xml"  tofile="${basedir}/install_linux_filled.xml" overwrite="true">
+		  <filterset>
+		    <filter token="release.version" value="${version}"/>
+		  </filterset>
+		  <filterset begintoken="@{" endtoken="}">
+		    <filter token="product_linux_dir" value="${product_linux_dir}"/>
+		  </filterset>
+		</copy>
+		<copy file="${basedir}/install_linux64bits.xml"  tofile="${basedir}/install_linux64bits_filled.xml" overwrite="true">
+			  <filterset>
+			    <filter token="release.version" value="${version}"/>
+			  </filterset>
+			  <filterset begintoken="@{" endtoken="}">
+			    <filter token="product_linux_x64_dir" value="${product_linux_x64_dir}"/>
+			  </filterset>
+		</copy>
+		<copy file="${basedir}/ressources/Licence_base.txt"  tofile="${basedir}/ressources/Licence.txt" overwrite="true">
+				<filterset>
+					<filter token="release.version.major" value="${versionMajor}"/>
+					<filter token="versionYear" value="${versionYear}"/>
+				</filterset>
+		</copy>
+		<copy file="${basedir}/ressources/Licence_uk_base.txt"  tofile="${basedir}/ressources/Licence_uk.txt" overwrite="true">
+				<filterset>
+					<filter token="release.version.major" value="${versionMajor}"/>
+					<filter token="versionYear" value="${versionYear}"/>
+				</filterset>
+		</copy>
+		
+</target>
+	
+	
+	<property name="IzPackDirectory" value="${basedir}/../IzPack" />
+
+
+	<target name="all" depends=" setConfig,windows, windows64, linux, linux64bits">
+	</target>
+	
+	<target name="resources" >
+		<mkdir dir="${basedir}/ressources/resources"/>
+		<delete>
+			<fileset dir="${basedir}/ressources/resources/" />
+		</delete>
+		<copy todir="${basedir}/ressources/resources" overwrite="true">   
+		  <fileset dir="${basedir}/../fr.ifremer.nemo/resources">     
+		    <exclude name="CVS/**,Vocab/CVS/**"/>   
+		  </fileset>   
+		</copy> 
+		<copy file="${basedir}/ressources/resources/NemoConfiguration_ini.xml" 
+			  tofile="${basedir}/ressources/resources/NemoConfiguration.xml"
+			  overwrite="true"/>
+	</target>
+	
+	<target name="windows" depends="resources">
+				
+		<!-- copie de l'executable pour le mode batch -->		
+		<copy file="${product_win32_win32_dir}/nemo.exe" 
+			  tofile="${product_win32_win32_dir}/nemo_batch.exe"
+			  overwrite="true"/>
+		
+		<mkdir dir="${prefixe.dir}_windows"/>
+		
+		<!-- copie le lanceur dans le répertoire -->
+		<copy file="${fixe.dir}/launcher_${product}.bat" todir="${prefixe.dir}_windows"/>
+
+		<!-- IzPack -->
+		<echo message="Installer IzPack"/>
+		<izpack input="${basedir}/install_windows_filled.xml"
+		        output="${prefixe.dir}_windows/install_${product}.jar"
+		        installerType="standard"
+		        basedir="${basedir}"
+		        izPackDir="${IzPackDirectory}">
+				<property name="product_win32_win32_dir" value="${product_win32_win32_dir}"/>
+
+			</izpack>
+		
+		<!-- zip le dossier correspondant à la livraison -->
+		<zip destfile="${prefixe.dir}_windows.zip" basedir="${prefixe.dir}_windows"/>
+		
+		<!-- <delete dir="${prefixe.dir}_windows"/>-->
+	
+	</target>
+	
+	<target name="windows64" depends="resources">
+					
+			<!-- copie de l'executable pour le mode batch -->		
+			<copy file="${product_win32_win64_dir}/nemo.exe" 
+				  tofile="${product_win32_win64_dir}/nemo_batch.exe"
+				  overwrite="true"/>
+			
+			<mkdir dir="${prefixe.dir}_windows64bits"/>
+			
+			<!-- copie le lanceur dans le répertoire -->
+			<copy file="${fixe.dir}/launcher_${product}.bat" todir="${prefixe.dir}_windows64bits"/>
+
+			<!-- IzPack -->
+			<echo message="Installer IzPack"/>
+			<izpack input="${basedir}/install_windows64bits_filled.xml"
+			        output="${prefixe.dir}_windows64bits/install_${product}.jar"
+			        installerType="standard"
+			        basedir="${basedir}"
+		        	izPackDir="${IzPackDirectory}">
+				<property name="product_win32_win64_dir" value="${product_win32_win64_dir}"/>
+				</izpack>
+			
+			<!-- zip le dossier correspondant à la livraison -->
+			<zip destfile="${prefixe.dir}_windows64.zip" basedir="${prefixe.dir}_windows64bits"/>
+			
+			<!-- <delete dir="${prefixe.dir}_windows"/>-->
+		
+		</target>
+	
+	<target name="solaris" depends="resources">
+		
+		<!-- copie de l'executable pour le mode batch -->		
+		<copy file="${basedir}/src/solaris.gtk.sparc/eclipse/nemo" 			                   
+			  tofile="${basedir}/src/solaris.gtk.sparc/eclipse/nemo_batch"
+			  overwrite="true"/>
+		
+		<mkdir dir="${prefixe.dir}_solaris"/>
+		
+	
+		<!-- IzPack -->
+		<echo message="Installer IzPack"/>
+		<izpack input="${basedir}/install_solaris_filled.xml"
+		        output="${prefixe.dir}_solaris/install_${product}.jar"
+		        installerType="standard"
+		        basedir="${basedir}"
+		        izPackDir="${IzPackDirectory}"/>
+		
+		<tar destfile="${prefixe.dir}_solaris.tar.gz" longfile="gnu" compression="gzip" >
+			<tarfileset dir="${fixe.dir}/" filemode="755">
+				<include name="launcher_${product}.sh" />
+			</tarfileset>
+			<tarfileset dir="${prefixe.dir}_solaris/" />
+		</tar>
+
+	</target>
+	
+	<target name="linux" depends="resources">
+		
+		<!-- copie de l'executable pour le mode batch -->		
+		<copy file="${product_linux_dir}/nemo" 
+			  tofile="${product_linux_dir}/nemo_batch"
+			  overwrite="true"/>
+			  	
+		<mkdir dir="${prefixe.dir}_linux"/>
+		
+		<!-- IzPack -->
+		<echo message="Installer IzPack"/>
+		<izpack input="${basedir}/install_linux_filled.xml"
+		        output="${prefixe.dir}_linux/install_${product}.jar"
+		        installerType="standard"
+		        basedir="${basedir}"
+		        izPackDir="${IzPackDirectory}">
+			<property name="product_linux_dir" value="${product_linux_dir}"/>
+			</izpack>
+		
+		<tar destfile="${prefixe.dir}_linux.tar.gz"  longfile="gnu"  compression="gzip" >
+			<tarfileset dir="${fixe.dir}/" filemode="755">
+				<include name="launcher_${product}.sh" />
+			</tarfileset>
+			<tarfileset dir="${prefixe.dir}_linux/" />
+		</tar>		
+	</target>
+	
+	<target name="linux64bits" depends="resources">
+		
+		<!-- copie de l'executable pour le mode batch -->		
+		<copy file="${product_linux_x64_dir}/nemo" 
+			  tofile="${product_linux_x64_dir}/nemo_batch"
+			  overwrite="true"/>
+		
+		<mkdir dir="${prefixe.dir}_linux64bits"/>
+		
+		<!-- IzPack -->
+		<echo message="Installer IzPack dans ${product_linux_x64_dir}"/>
+		<izpack input="${basedir}/install_linux64bits_filled.xml"
+		        output="${prefixe.dir}_linux64bits/install_${product}.jar"
+		        installerType="standard"
+		        basedir="${basedir}"
+		        izPackDir="${IzPackDirectory}">
+			<property name="product_linux_x64_dir" value="${product_linux_x64_dir}"/>
+			</izpack>
+		
+		<tar destfile="${prefixe.dir}_linux64bits.tar.gz"  longfile="gnu"  compression="gzip" >
+			<tarfileset dir="${fixe.dir}/" filemode="755">
+				<include name="launcher_${product}.sh" />
+			</tarfileset>
+			<tarfileset dir="${prefixe.dir}_linux64bits/" />
+				</tar>
+	</target>
+	
+	<target name="macos" depends="resources">
+			
+			<!-- copie de l'executable pour le mode batch -->		
+			<copy file="${product_linux_dir}/nemo" 
+				  tofile="${product_linux_dir}/nemo_batch"
+				  overwrite="true"/>
+				  	
+			<mkdir dir="${prefixe.dir}_macos"/>
+			
+			<!-- IzPack -->
+			<echo message="Installer IzPack"/>
+			<izpack input="${basedir}/install_macos_filled.xml"
+			        output="${prefixe.dir}_macos/install_${product}.jar"
+			        installerType="standard"
+			        basedir="${basedir}"
+			        izPackDir="${IzPackDirectory}">
+				<property name="product_macos_dir" value="${product_macos_dir}"/>
+				</izpack>
+			
+			<tar destfile="${prefixe.dir}_macos.tar.gz"  longfile="gnu"  compression="gzip" >
+				<tarfileset dir="${fixe.dir}/" filemode="755">
+					<include name="launcher_${product}.sh" />
+				</tarfileset>
+				<tarfileset dir="${prefixe.dir}_macos/" />
+			</tar>		
+		</target>
+	
+</project>
+	
+	

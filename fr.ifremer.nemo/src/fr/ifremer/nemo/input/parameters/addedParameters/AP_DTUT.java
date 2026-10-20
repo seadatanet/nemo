@@ -1,0 +1,71 @@
+/*
+ * ============================================================================
+ * Nom du fichier : AP_date.java
+ * Auteur : sbregent
+ * Date : 26 janv. 11
+ * Copyright : Altran
+ * ============================================================================
+ */
+package fr.ifremer.nemo.input.parameters.addedParameters;
+
+import java.io.UnsupportedEncodingException;
+import java.text.ParseException;
+
+import fr.ifremer.nemo.domain.Station;
+import fr.ifremer.nemo.domain.StationDomain;
+import fr.ifremer.nemo.util.Conversion;
+import fr.ifremer.nemo.util.Intern;
+
+/**
+ * Description: description du paramètre DTUT
+ * 
+ * @author sbregent
+ * 
+ */
+public class AP_DTUT extends AddedParam
+{
+
+	public AP_DTUT()
+	{
+		super();
+		_code = "DTUT";
+		_format = "YYYY-MM-DD'T'HH:mm:ss.SSS";
+		_fullName = "time_ISO8601";
+		_unit = "YYYY-MM-DDThh:mm:ss.sss";
+		cible = Conversion.ODV;
+		isMesured = false;
+	}
+
+	@Override
+	public String getValue(Station currentStation, String inputLine, long currentDate) throws ParseException, UnsupportedEncodingException
+	{
+		return StationDomain.getDateTimeStringWithCurrentPrecision(currentDate);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String getFlag(Station currentStation, String inputLine)
+	{
+		return currentStation.getMetaFlags().get(Intern.DATETIME);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String getLocalCode()
+	{
+		return _fullName;
+	}
+	
+	/**
+	 * rewrite to generate dynamically the unit, with precision.
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String getUnit() {
+		return StationDomain.getDateTimeSdnPatternWithCurrentPrecision();
+	}
+}

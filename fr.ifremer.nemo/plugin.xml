@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin
+   id="fr.ifremer.nemo"
+   name="Nemo Plug-in"
+   version="2.1.2"
+   provider-name="IFREMER">
+
+   <extension
+         id="nemoid"
+         point="org.eclipse.core.runtime.applications">
+      <application>
+         <run
+               class="fr.ifremer.nemo.ui.Application">
+         </run>
+      </application>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            name="Perspective"
+            class="fr.ifremer.nemo.ui.Perspective"
+            id="fr.ifremer.nemo.ui.perspective">
+      </perspective>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            class="fr.ifremer.nemo.ui.view.ViewLog"
+            id="fr.ifremer.nemo.ui.view.ViewLog"
+            name="fr.ifremer.nemo.ui.view.ViewLog"/>
+      <view
+            class="fr.ifremer.nemo.ui.view.ViewMain"
+            id="fr.ifremer.nemo.ui.view.ViewMain"
+            name="fr.ifremer.nemo.ui.view.ViewMain">
+      </view>
+   </extension>
+   <extension
+         id="productnemo"
+         point="org.eclipse.core.runtime.products">
+      <product
+            application="fr.ifremer.nemo.nemoid"
+            name="NEMO">
+         <property
+               name="windowImages"
+               value="nemo16.gif,nemo32.gif"/>
+         <property
+               name="aboutImage"
+               value="nemoAbout.png"/>
+         <property
+               name="aboutText"
+               value="%aboutText"/>
+         <property
+               name="appName"
+               value="NEMO">
+         </property>
+      </product>
+   </extension>
+</plugin>

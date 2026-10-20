@@ -1,0 +1,69 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: NEMO Software
+message: >-
+  NEMO supports the harmonisation and conversion of marine
+  observation data into interoperable SeaDataNet formats.
+type: software
+authors:
+  - name: Ifremer
+    address: 1625 route de Sainte-Anne
+    city: Plouzané
+    post-code: '29280'
+    country: FR
+    location: Bretagne
+    website: 'https://www.seadatanet.org/'
+    email: sdn-userdesk@seadatanet.org
+identifiers:
+  - type: doi
+    value: '10.12770/62112611-7ab2-4c10-9e46-c440663a55ac'
+  - type: url
+    value: 'https://sextant.ifremer.fr/record/62112611-7ab2-4c10-9e46-c440663a55ac/'
+repository-code: 'https://github.com/seadatanet/nemo'
+url: 'https://www.seadatanet.org/Software/NEMO'
+abstract: >-
+  NEMO is a SeaDataNet software tool written in Java and
+  designed to support marine data centres in the harmonisation
+  and conversion of heterogeneous marine data files into
+  SeaDataNet standard exchange formats.
+
+  As part of the SeaDataNet CDI data discovery and access
+  services, NEMO facilitates the preparation and integration
+  of marine datasets into SeaDataNet workflows by converting
+  heterogeneous ASCII formats into:
+
+  - SeaDataNet ODV format
+  - SeaDataNet MedAtlas ASCII format
+  - SeaDataNet NetCDF (CF) format
+
+  NEMO supports marine time series, profiles and trajectory
+  observations.
+
+  The software relies on SeaDataNet Common Vocabularies and
+  the EDMO directory, which can be synchronised through
+  dedicated online web services.
+
+  NEMO contributes to the interoperability, harmonisation
+  and FAIRification of marine observation data within the
+  SeaDataNet infrastructure.
+keywords:
+  - SeaDataNet
+  - NEMO
+  - marine data
+  - data harmonisation
+  - data conversion
+  - ODV
+  - MedAtlas
+  - NetCDF
+  - CDI
+  - EDMO
+  - Common Vocabularies
+  - FAIR
+  - interoperability
+  - time series
+  - profiles
+  - trajectories
+license: LGPL-3.0-only
+version: '2.2.0'

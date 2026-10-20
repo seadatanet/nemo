@@ -1,0 +1,211 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>fr.ifremer.nemo</groupId>
+	<artifactId>fr.ifremer.nemo.parent</artifactId>
+	<version>2.2.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<description>Parent project for the Nemo build</description>
+
+
+	<properties>
+		<tycho-version>2.7.5</tycho-version>
+	</properties>
+
+	<repositories>
+		<repository>
+			<id>maven-public-release</id>
+			<url>https://nexus.ifremer.fr/repository/maven-public-release/</url>
+		</repository>
+		<repository>
+			<id>maven-public-snapshot</id>
+			<url>https://nexus.ifremer.fr/repository/maven-public-snapshot/</url>
+		</repository>
+		<!-- Package registry of the externalresources project (tar.gz with SeaDataNet reference data). -->
+		<repository>
+			<id>gitlab-maven-externalresources</id>
+			<url>https://gitlab.ifremer.fr/api/v4/projects/2512/packages/maven</url>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+			</snapshots>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+		</repository>
+	</repositories>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>maven-public-release</id>
+			<url>https://nexus.ifremer.fr/repository/maven-public-release/</url>
+		</pluginRepository>
+		<pluginRepository>
+			<id>maven-public-snapshot</id>
+			<url>https://nexus.ifremer.fr/repository/maven-public-snapshot/</url>
+		</pluginRepository>
+	</pluginRepositories>
+
+
+	<distributionManagement>
+
+		<repository>
+			<id>publish-gitlab</id>
+			<url>https://gitlab.ifremer.fr/api/v4/projects/2603/packages/maven</url>
+		</repository>
+
+		<snapshotRepository>
+			<id>publish-gitlab</id>
+			<url>https://gitlab.ifremer.fr/api/v4/projects/2603/packages/maven</url>
+		</snapshotRepository>
+	</distributionManagement>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<!--
+					Silence M2E "Plugin execution not covered by lifecycle configuration" warnings.
+					This block is M2E-only metadata: it is completely ignored by Maven CLI / CI.
+				-->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.eclipse.tycho</groupId>
+										<artifactId>tycho-compiler-plugin</artifactId>
+										<versionRange>[1.0.0,)</versionRange>
+										<goals>
+											<goal>compile</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action><ignore/></action>
+								</pluginExecution>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.eclipse.tycho</groupId>
+										<artifactId>tycho-packaging-plugin</artifactId>
+										<versionRange>[1.0.0,)</versionRange>
+										<goals>
+											<goal>build-qualifier</goal>
+											<goal>build-qualifier-aggregator</goal>
+											<goal>validate-id</goal>
+											<goal>validate-version</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action><ignore/></action>
+								</pluginExecution>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.apache.maven.plugins</groupId>
+										<artifactId>maven-dependency-plugin</artifactId>
+										<versionRange>[1.0.0,)</versionRange>
+										<goals>
+											<goal>copy</goal>
+											<goal>get</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action><ignore/></action>
+								</pluginExecution>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.apache.maven.plugins</groupId>
+										<artifactId>maven-clean-plugin</artifactId>
+										<versionRange>[1.0.0,)</versionRange>
+										<goals>
+											<goal>clean</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action><ignore/></action>
+								</pluginExecution>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.apache.maven.plugins</groupId>
+										<artifactId>maven-antrun-plugin</artifactId>
+										<versionRange>[1.0.0,)</versionRange>
+										<goals>
+											<goal>run</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action><ignore/></action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+		<plugins>
+			<plugin>
+				<!-- enable tycho build extension -->
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-maven-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<extensions>true</extensions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>target-platform-configuration</artifactId>
+				<version>${tycho-version}</version>
+				<configuration>
+					<!--  <dependency-resolution>
+						<optionalDependencies>ignore</optionalDependencies>
+					</dependency-resolution>   -->
+					<target>
+						<artifact>
+							<groupId>fr.ifremer.nemo</groupId>
+							<artifactId>fr.ifremer.nemo.tp</artifactId>
+							<version>4.8.0-SNAPSHOT</version>
+						</artifact>
+					</target>
+					<environments>
+						<environment>
+							<os>macosx</os>
+							<ws>cocoa</ws>
+							<arch>x86_64</arch>
+						</environment>
+						<environment>
+							<os>win32</os>
+							<ws>win32</ws>
+							<arch>x86_64</arch>
+						</environment>
+						<environment>
+							<os>win32</os>
+							<ws>win32</ws>
+							<arch>x86</arch>
+						</environment>
+						<environment>
+							<os>linux</os>
+							<ws>gtk</ws>
+							<arch>x86_64</arch>
+						</environment>
+						<environment>
+							<os>linux</os>
+							<ws>gtk</ws>
+							<arch>x86</arch>
+						</environment>
+					</environments>
+				</configuration>
+			</plugin>
+
+
+		</plugins>
+	</build>
+
+	<!-- the modules that should be built together -->
+	<modules>
+		<module>../fr.ifremer.nemo.tp</module>
+		<module>../fr.ifremer.nemo.repository</module>
+		<module>../fr.ifremer.nemo.feature</module>
+		<module>../fr.ifremer.nemo</module>
+		<module>../fr.ifremer.nemo.test</module>
+		<module>../NEMO_IzPack</module>
+		<module>../NEMO_webservices</module>
+	</modules>
+
+
+</project>

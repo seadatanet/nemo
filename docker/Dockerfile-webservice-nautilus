@@ -1,0 +1,42 @@
+FROM gitlab-registry.ifremer.fr/dev-ops-public/docker-tomcat/ifremer-tomcat:9-jdk11
+
+ARG APP_CONTEXT=nautilus
+ARG APP_VERSION
+
+# Deploy the application WAR
+COPY NEMO_webservices/ws_nautilus/target/nautilus.war /tmp/app.war
+
+# Extract WAR into the webapp directory
+RUN mkdir /opt/tomcat/webapps/nautilus \
+    && cd /opt/tomcat/webapps/nautilus \
+    && jar -xf /tmp/app.war \
+    && rm -f /tmp/app.war
+
+# Apply IFREMER standard permissions
+RUN mkdir -p /opt/tomcat/pid/ \
+    && mkdir -p /opt/tomcat/conf/Catalina/localhost \
+    && chown -R root:gtomcat /opt/tomcat \
+    && chmod 550 /opt/tomcat \
+    && chmod 550 /opt/tomcat/* \
+    && chmod 550 /opt/tomcat/bin/*.sh \
+    && chmod 440 /opt/tomcat/conf/* \
+    && chmod 550 /opt/tomcat/conf/Catalina \
+    && chmod g+w /opt/tomcat/conf/Catalina/localhost \
+    && chmod g+w /opt/tomcat/logs/ \
+    && chmod g+w /opt/tomcat/pid/ \
+    && chmod g+w /opt/tomcat/temp/ \
+    && chmod g+w /opt/tomcat/work/ \
+    && chgrp -R gtomcat /opt/entrypoint.sh \
+    && chmod 550 /opt/entrypoint.sh \
+    && find /opt/tomcat/webapps/ -exec chown root:gtomcat '{}' \; \
+    && find /opt/tomcat/webapps/ -type d -exec chmod 770 '{}' \; \
+    && find /opt/tomcat/webapps/ -type f -exec chmod 440 '{}' \;
+
+# Required environment variables at runtime (shared with ws_nemo — same Oracle DB):
+#   NEMO_DB_URL      — e.g. jdbc:oracle:thin:@//host:1521/SERVICE
+#   NEMO_DB_USERNAME
+#   NEMO_DB_PASSWORD
+
+ENTRYPOINT ["/opt/entrypoint.sh"]
+EXPOSE 8009/tcp
+EXPOSE 8080/tcp

@@ -1,0 +1,65 @@
+######################################
+# NEMO - Added parameters description.
+######################################
+# This file describes P01 added parameters (mandatory parameters that NEMO adds to generated files)
+
+DEPHPR01:
+    parent: AP_DEPH
+    type: generic_depthBSSurf_FromPressure
+    byConversion:
+        ODV:
+            fullName: Depth below surface of the water body by profiling pressure sensor and converted to seawater depth using UNESCO algorithm
+            unit: m
+            cible: ODV
+            p011: true
+            codeP011: DEPHPR01
+            unitCode: ULAA
+        default:
+            fullName: Depth
+            unit: Metres
+            cible: ODV
+            p011: true
+            codeP011: DEPHPR01
+            nameP011: Depth below surface of the water body by profiling pressure sensor and converted to seawater depth using UNESCO algorithm
+            unitCode: ULAA
+            defaultValue: EMPTY_STRING
+ADEPZZ01:
+    parent: AP_DEPH
+    type: generic_depthBSSurf_FromSensor
+    byConversion:
+        ODV:
+            fullName: Depth below surface of the water body
+            unit: m
+            cible: ODV
+            p011: true
+            codeP011: ADEPZZ01
+            unitCode: ULAA
+        default:
+            fullName: Depth
+            unit: Metres
+            cible: ODV
+            p011: true
+            codeP011: ADEPZZ01
+            nameP011: Depth below surface of the water body
+            unitCode: ULAA
+            defaultValue: EMPTY_STRING
+AHSLZZ01:
+    parent: AP_HEIGHT
+    type: generic_heightASLvl_FromSensor
+    byConversion:
+        ODV:
+            fullName: Height above sea level
+            unit: m
+            cible: ODV
+            p011: true
+            codeP011: AHSLZZ01
+            unitCode: ULAA
+        default:
+            fullName: Height above sea level
+            unit: Metres
+            cible: ODV
+            p011: true
+            codeP011: AHSLZZ01
+            nameP011: Height (spatial coordinate) relative to sea level
+            unitCode: ULAA
+            defaultValue: EMPTY_STRING

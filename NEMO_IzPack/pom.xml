@@ -1,0 +1,120 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>fr.ifremer.nemo</groupId>
+		<artifactId>fr.ifremer.nemo.parent</artifactId>
+		<version>2.2.0-SNAPSHOT</version>
+		<relativePath>../fr.ifremer.nemo.parent/pom.xml</relativePath>
+
+	</parent>
+
+
+	<artifactId>NEMO_IzPack</artifactId>
+	<packaging>pom</packaging>
+
+	<properties>
+		<!-- Set to true to skip the IzPack installer build (e.g. in CI test jobs
+		     where Tycho product binaries are not yet assembled). -->
+		<skip.izpack>false</skip.izpack>
+	</properties>
+
+	<build>
+		<plugins>
+
+
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>3.1.0</version>
+				<executions>
+					<execution>
+						<id>copy-resources</id>
+						<!-- here the phase you need -->
+						<phase>validate</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${basedir}/ressources</outputDirectory>
+							<resources>
+								<resource>
+									<directory>../fr.ifremer.nemo/</directory>
+									<filtering>true</filtering>
+									<includes>
+										<!--Only those files will be included-->
+										<include>nemo.ini</include>
+										<include>nemo_batch.ini</include>
+										<include>splash.bmp</include>
+									</includes>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>1.8</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<configuration>
+							<skip>${skip.izpack}</skip>
+							<tasks>
+								<!-- Override ANT version before ant.properties is loaded (ANT properties
+								     are immutable: first definition wins), so the produced zip names
+								     match the Maven project version. -->
+								<property name="version" value="${project.version}" />
+								<ant antfile="build.xml" target="all" />
+							</tasks>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<version>1.12</version>
+				<executions>
+					<execution>
+						<id>attach-artifacts</id>
+						<phase>package</phase>
+						<goals>
+							<goal>attach-artifact</goal>
+						</goals>
+						<configuration>
+							<artifacts>
+								<artifact>
+									<file>dist/install_nemo_${project.version}_windows.zip</file>
+									<type>zip</type>
+									<classifier>win</classifier>
+								</artifact>
+								<artifact>
+									<file>dist/install_nemo_${project.version}_windows64.zip</file>
+									<type>zip</type>
+									<classifier>win64</classifier>
+								</artifact>
+								<artifact>
+									<file>dist/install_nemo_${project.version}_linux.tar.gz</file>
+									<type>tar.gz</type>
+									<classifier>linux</classifier>
+								</artifact>
+								<artifact>
+									<file>dist/install_nemo_${project.version}_linux64bits.tar.gz</file>
+									<type>tar.gz</type>
+									<classifier>linux64</classifier>
+								</artifact>
+							</artifacts>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+
+	</build>
+</project>
