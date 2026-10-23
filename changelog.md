@@ -5,7 +5,7 @@ The format is inspired by Keep a Changelog and Semantic Versioning.
 
 ---
 
-## 2.2.0 (2026-XX-XX)
+## 2.2.0 (2026-10-21)
 
 ### Enhancements / Évolutions
 

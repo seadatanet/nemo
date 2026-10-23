@@ -54,3 +54,8 @@ fr.ifremer.nemo.test/resources/Edmo*.xml export-ignore
 fr.ifremer.nemo.test/resources/Edmerp.xml export-ignore
 fr.ifremer.nemo/resources/Edmo_old.xml export-ignore
 
+# Fichiers de configuration IDE et résidus locaux
+.settings/** export-ignore
+*.log export-ignore
+
+

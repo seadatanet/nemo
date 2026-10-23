@@ -4,7 +4,7 @@
 
 [![DOI](https://img.shields.io/badge/DOI-10.12770%2F62112611--7ab2--4c10--9e46--c440663a55ac-blue)](https://doi.org/10.12770/62112611-7ab2-4c10-9e46-c440663a55ac)
 [![License: LGPL-3.0-only](https://img.shields.io/badge/License-LGPL--3.0--only-blue.svg)](https://spdx.org/licenses/LGPL-3.0-only.html)
-[![Current stable version](https://img.shields.io/badge/stable-2.1.1-blue)](https://www.seadatanet.org/Software/NEMO/)
+[![Current stable version](https://img.shields.io/badge/stable-2.2.0-blue)](https://www.seadatanet.org/Software/NEMO/)
 
 <!-- Enable this dynamic badge once GitHub Releases reliably reflects official stable releases:
 [![Latest stable release](https://img.shields.io/github/v/release/seadatanet/nemo?label=latest%20release)](https://github.com/seadatanet/nemo/releases/latest)
@@ -13,7 +13,7 @@
 ## Persistent identifiers
 
 - **DOI**: [10.12770/62112611-7ab2-4c10-9e46-c440663a55ac](https://doi.org/10.12770/62112611-7ab2-4c10-9e46-c440663a55ac) — persistent identifier for citing NEMO.
-- **SWHID**: a version-specific identifier for the source code archived in [Software Heritage](https://archive.softwareheritage.org/) will be added when the future NEMO `2.2.0` release has been tagged and archived. No SWHID for `2.2.0` is claimed yet.
+- **SWHID**: a version-specific identifier for the source code archived in [Software Heritage](https://archive.softwareheritage.org/) will be added when the NEMO `2.2.0` release has been tagged and archived. No SWHID for `2.2.0` is claimed yet.
 
 <!-- Once NEMO 2.2.0 has been released and archived, replace the SWHID line above with
      the verified swh:1:dir:... identifier and link to its Software Heritage permalink.
@@ -28,27 +28,26 @@ Detailed citation metadata are available in the [`CITATION.cff`](CITATION.cff) f
 
 ## Latest stable release
 
-**NEMO 2.1.1** is the latest version currently available for download.
+**NEMO 2.2.0** is the latest official release.
 
-- **[Download NEMO 2.1.1](https://www.seadatanet.org/Software/NEMO/)** — official SeaDataNet distribution packages.
-- **[Changelog](changelog.md)** — release history and changes planned for the next version.
+- **[Download NEMO](https://www.seadatanet.org/Software/NEMO/)** — official SeaDataNet distribution packages.
+- **[Changelog](changelog.md)** — release history and detailed changes.
 
-### Upcoming release — NEMO 2.2.0 (in development)
-
-Version **2.2.0** is being prepared on the `develop` branch and is **not yet an official downloadable release**. The planned changes include:
+Key evolutions in **2.2.0** include:
 
 - Migration of the NEMO client and related web services to **Java 11 (LTS)**.
 - Updated Eclipse RCP platform and build dependencies, including OCTOPUS 1.12.0 libraries.
 - Updated Windows and Linux installers for **64-bit** Java 11 environments.
 - Docker support for NEMO and Nautilus web services.
+- Dynamic consumption of SeaDataNet external resources at build time.
 - FAIR/open-science metadata and documentation improvements, with release-specific Software Heritage identification to be completed after archiving.
 - Fixes for remote update checks and build/packaging stability.
 
-See the [changelog](changelog.md) for details. Features and technical requirements of 2.2.0 should be considered provisional until release.
+See the [changelog](changelog.md) for full details.
 
 ## FAIR software status
 
-FAIR software assessment and metadata improvements are in progress for the upcoming 2.2.0 release. The presence of DOI and citation metadata does not imply that Software Heritage archival of 2.2.0 has already taken place.
+FAIR software assessment and metadata improvements are integrated into the 2.2.0 release. The presence of DOI and citation metadata does not imply that Software Heritage archival of 2.2.0 has already taken place (archival follows the official tag).
 
 ## Overview
 
@@ -138,18 +137,16 @@ Release history, including the forthcoming 2.2.0 changes, is documented in [`cha
 
 NEMO is written in Java.
 
-Requirements differ between the current stable version and the upcoming release:
+Requirements for current and legacy versions:
 
 | Version | Java requirement | Development/build environment |
 | --- | --- | --- |
-| **2.1.1** (current stable) | Java JDK **1.8** | Maven; Eclipse RCP Photon 2018-12 (4.10.0) |
-| **2.2.0** (in development) | Java **11 (LTS)** | Updated Eclipse RCP target platform and build system; exact setup to be confirmed at release |
-
-These requirements are version-specific: the Java 11 migration does not apply retroactively to the 2.1.1 download.
+| **2.2.0** (current stable) | Java **11 (LTS)** | Eclipse RCP with Java 11 target platform; Maven / GitLab CI |
+| **2.1.1** (legacy) | Java JDK **1.8** | Maven; Eclipse RCP Photon 2018-12 (4.10.0) |
 
 ### Supported Environments
 
-NEMO is primarily developed and used on Windows and Linux environments.
+NEMO is primarily developed and used on Windows and Linux environments (64-bit).
 
 The software supports the processing and conversion of marine observation datasets including:
 
@@ -163,9 +160,7 @@ Precompiled NEMO distributions are available from the SeaDataNet portal:
 
 [Download NEMO](https://www.seadatanet.org/Software/NEMO/).
 
-The download portal currently distributes **NEMO 2.1.1**. Choose the package appropriate for your system (Windows or Linux, and the supported architecture).
-
-The planned **NEMO 2.2.0** installers target **64-bit Windows and Linux with Java 11** and are not yet available from the portal.
+Choose the package appropriate for your system (Windows or Linux 64-bit with Java 11).
 
 ## Get started
 
